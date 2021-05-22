@@ -15,6 +15,6 @@ Cada vez que doy una mirada a Microsoft PowerApps encuentro cosas nuevas y mejor
 
 Si nos dirigimos a la pnatalla principal de PowerApps veremos este menú donde especifica los tipos de pantalla que tenemos disponibles:  
 
-![](/img/posts/migrated/2020/01/1.png)  
+![](/assets/img/posts/migrated/2020/01/1.png)  
 
 Tenemos más opciones y cada vez mejores.

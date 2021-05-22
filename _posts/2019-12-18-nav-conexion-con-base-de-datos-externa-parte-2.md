@@ -16,9 +16,9 @@ Para ello, debemos seguir estos pasos...
 <!--more-->
 
 Primero, se debe crear la página enlazándola con la tabla externa que hemos creado en Dynamics NAV:  
-![](/img/posts/migrated/2019/12/1-2.png)  
+![](/assets/img/posts/migrated/2019/12/1-2.png)  
 
-![](/img/posts/migrated/2019/12/2-2.png)  
+![](/assets/img/posts/migrated/2019/12/2-2.png)  
 
 Ahora debe escribir este código en la función OnInit() de la página:
 ```
@@ -31,6 +31,6 @@ REGISTERTABLECONNECTION(TABLECONNECTIONTYPE::ExternalSQL,'CMASBLOG','Server=TU\_
 SETDEFAULTTABLECONNECTION(TABLECONNECTIONTYPE::ExternalSQL,'CMASBLOG')
 ```
 Con este código, la página está lsita para la verificación de los datos:  
-![](/img/posts/migrated/2019/12/3-2.png)  
+![](/assets/img/posts/migrated/2019/12/3-2.png)  
 
 Con estos simples pasos logramos integrar una base de datos externa (de cualquier proveedor) con Microsoft Dynamics NAV 2018.

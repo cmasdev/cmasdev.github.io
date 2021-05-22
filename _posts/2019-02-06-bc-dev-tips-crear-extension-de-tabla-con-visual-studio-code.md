@@ -16,10 +16,10 @@ Aquí coloco el código necesario para crear la tabla extendida de "Company Info
 <!--more-->
 
 Antes de la extensión (vista SQL Server):  
-![](/img/posts/migrated/2019/02/1.png)
+![](/assets/img/posts/migrated/2019/02/1.png)
 
 Después de la extensión (vista SQL Server):  
-![](/img/posts/migrated/2019/02/2.png)
+![](/assets/img/posts/migrated/2019/02/2.png)
 
 Y por último aquí está la extensión de tabla con sus respectivos comentarios:
 ```

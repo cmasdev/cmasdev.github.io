@@ -16,7 +16,7 @@ En Dynamics NAV 2018 tenemos dos variables globales implícitas (variables propi
 <!--more-->
 
 1. En este caso vemos el valor del RUC:  
-![](/img/posts/migrated/2019/03/1-5.png)  
+![](/assets/img/posts/migrated/2019/03/1-5.png)  
 
 3. En la validación del "VAT Registration No." procedemos a imprimir el mensaje:
 ```
@@ -24,6 +24,6 @@ MESSAGE('El valor actual es: ' + Rec."VAT Registration No." +
     '. El valor anterior era: ' + xRec."VAT Registration No." + '.');
 ```
 5. El mensaje nos muestran ambos valores:  
-![](/img/posts/migrated/2019/03/2-5.png)  
+![](/assets/img/posts/migrated/2019/03/2-5.png)  
 
 Dynamics NAV 2018 nos permite tener el registro completo del nuevo campo así como el registro completo de todo el registro anterior.

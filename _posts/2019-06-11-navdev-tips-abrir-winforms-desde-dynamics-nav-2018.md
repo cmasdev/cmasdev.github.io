@@ -20,7 +20,7 @@ El dueño, sin embargo, no desea manejar dos aplicaciones. Quiere todo integrado
 Desde Microsoft Dynamics NAV, podemos realizar llamadas a librerías de .NET (que ya vienen integradas con Dynamics NAV), esto permite abrir cualquier programa instalado en nuestras máquinas.
 
 Tenemos como ejemplo el siguiente formulario (desarrollado en .NET Framework 4.7.2):  
-![](/img/posts/migrated/2020/06/1.png)  
+![](/assets/img/posts/migrated/2020/06/1.png)  
 
 Con un simple saludo escrito en C#:
 ```
@@ -44,13 +44,13 @@ namespace NAV AbrirWinForm
 }
 ```
 De modo a que lo entiendan, tenemos el siguiente resultado:  
-![](/img/posts/migrated/2020/06/2.png)  
+![](/assets/img/posts/migrated/2020/06/2.png)  
 
 Dentro de Dynamics NAV, para este ejemplo, en una Acción "Abrir Formulario" de la página "Información de la Compañía", disculpen pero tengo la versión Australiana por un tema de retenciones :) colocamos la llamada:  
-![](/img/posts/migrated/2020/06/3.png)  
+![](/assets/img/posts/migrated/2020/06/3.png)  
 
 Luego, procedemos a declarar las variables globales, invocando a librerías de .NET:  
-![](/img/posts/migrated/2020/06/4.png)  
+![](/assets/img/posts/migrated/2020/06/4.png)  
 
 Por último, escribimos el código correspondiente para efectuar la llamada:
 ```
@@ -64,6 +64,6 @@ Proceso.Start();
 CLEAR(Proceso);
 ```
 De este modo, el resultado final será:  
-![](/img/posts/migrated/2020/06/5.png)  
+![](/assets/img/posts/migrated/2020/06/5.png)  
 
 Así logramos invocar un programa externo desde Dynamics NAV 2018 sin perjudicar la operativa del usuario.

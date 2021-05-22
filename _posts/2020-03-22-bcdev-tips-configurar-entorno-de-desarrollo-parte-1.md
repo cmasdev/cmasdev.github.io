@@ -20,20 +20,20 @@ En esta serie de entradas quisiera detallar el proceso de configuración del ent
 Empecemos con las configuraciones generales.  
 
 Primero, debemos crear una cuenta de Azure DevOps (es gratuita) y creamos una organización (CmasBlog):  
-![](/img/posts/migrated/2020/03/1-5.png)  
+![](/assets/img/posts/migrated/2020/03/1-5.png)  
 
-![](/img/posts/migrated/2020/03/2-5.png)  
+![](/assets/img/posts/migrated/2020/03/2-5.png)  
 
 Una vez cumplidos los pasos anteriores, debemos crear un proyecto que llamaremos Blog\_Test:  
-![](/img/posts/migrated/2020/03/3-4.png)  
+![](/assets/img/posts/migrated/2020/03/3-4.png)  
 
-![](/img/posts/migrated/2020/03/4-4.png)  
+![](/assets/img/posts/migrated/2020/03/4-4.png)  
 Hay que tener en cuenta que en la opción **Version control** debe estar en **Git**.  
 
 Nos dirigimos a la sección **Repos** > **Files** e inicializamos con el archivo **README**:  
-![](/img/posts/migrated/2020/03/5-3.png)   
+![](/assets/img/posts/migrated/2020/03/5-3.png)   
 
-![](/img/posts/migrated/2020/03/6-3.png)  
+![](/assets/img/posts/migrated/2020/03/6-3.png)  
 
 De esa manera, hemos terminado de configurar el Azure DevOps Services para que sea nuestro repositorio de datos.  
 
@@ -49,7 +49,7 @@ Se deben instalar dos herramientas de Git y terminaremos esta parte.
 Descargamos Git desde [aquí](https://git-scm.com/download/win), luego ejecutamos el instalador y seguimos las indicaciones en pantalla.  
 
 Una vez terminado el proceso nos dirigimos al **cmd.exe** de Windows (buscar Símbolo de sistema en Windows), escribimos **git** y presionamos **Enter**:  
-![](/img/posts/migrated/2020/03/7-2.png)  
+![](/assets/img/posts/migrated/2020/03/7-2.png)  
 
 Por último debemos instalar una extensión de Git para el manejo de credenciales que se llama "**Microsoft Git Credential Manager for Windows**" y lo puedes descargar desde [aquí](https://github.com/Microsoft/Git-Credential-Manager-for-Windows/releases/latest).  
 

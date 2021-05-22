@@ -17,44 +17,44 @@ Ahora veremos los pasos para la instalación de este nuevo producto, en su versi
 
 1. Buscamos el instalador, hacemos doble clic en "setup.exe" y saldrá la ventana principal:
 
-![](/img/posts/migrated/2020/02/1-1.png)  
+![](/assets/img/posts/migrated/2020/02/1-1.png)  
 
 2. Leemos ;) y aceptamos los términos de licencia:
 
-![](/img/posts/migrated/2020/02/2-1.png)  
+![](/assets/img/posts/migrated/2020/02/2-1.png)  
 
 3. Procedemos a utilizar la última opción:
 
-![](/img/posts/migrated/2020/02/3-1.png)  
+![](/assets/img/posts/migrated/2020/02/3-1.png)  
 
 4. Seleccionamos la opción de instalación:
 
-![](/img/posts/migrated/2020/02/4-1.png)  
+![](/assets/img/posts/migrated/2020/02/4-1.png)  
 
 5. Debemos elegir "Personalizado":
 
-![](/img/posts/migrated/2020/02/5-1.png)  
+![](/assets/img/posts/migrated/2020/02/5-1.png)  
 
 6. Ejecutamos todo desde la PC:
 
-![](/img/posts/migrated/2020/02/6.png)  
+![](/assets/img/posts/migrated/2020/02/6.png)  
 
 7. Configuramos las opciones de desarrollo:
 
-![](/img/posts/migrated/2020/02/7.png)  
+![](/assets/img/posts/migrated/2020/02/7.png)  
 
 8. El avance de instalación aparece:
 
-![](/img/posts/migrated/2020/02/8.png)  
+![](/assets/img/posts/migrated/2020/02/8.png)  
 
-![](/img/posts/migrated/2020/02/9.png)  
+![](/assets/img/posts/migrated/2020/02/9.png)  
 
 9. Abrimos el programa "Business Central Web Client":
 
-![](/img/posts/migrated/2020/02/10.png)  
+![](/assets/img/posts/migrated/2020/02/10.png)  
 
 10. El ERP se ve de la siguiente manera:
 
-![](/img/posts/migrated/2020/02/11.png)  
+![](/assets/img/posts/migrated/2020/02/11.png)  
 
 Siguiendo los pasos anteriores hemos podido instalar Dynamics 365 Business Central Wave 2.

@@ -27,6 +27,6 @@ cd C:\\Program Files (x86)\\Microsoft Dynamics 365 Business Central\\150\\RoleTa
 
 Txt2al --Source="C:\\NAV" --Target="C:\\BC"
 ```
-De esta manera logramos hacer la migración del código **C/SIDE** a código **AL**: ![](/img/posts/businesscentral/bc_nav_to_bc.png)
+De esta manera logramos hacer la migración del código **C/SIDE** a código **AL**: ![](/assets/img/posts/businesscentral/bc_nav_to_bc.png)
 
 ¡Espero resulte útil!

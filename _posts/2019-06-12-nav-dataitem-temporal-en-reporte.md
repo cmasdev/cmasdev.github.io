@@ -16,18 +16,18 @@ En ese caso, debemos procesar lo necesario en un paso previo y pasar los datos t
 <!--more-->
 
 Para lograr el objetivo de esta entrada, debemos seguir los siguientes pasos: Creamos un reporte cuyo DataItem debería ser de tipo **Vendor** (Proveedor):  
-![](/img/posts/migrated/2019/06/1.png)  
+![](/assets/img/posts/migrated/2019/06/1.png)  
 
 En las propiedades, colocamos lo siguiente:  
-![](/img/posts/migrated/2019/06/2.png)  
+![](/assets/img/posts/migrated/2019/06/2.png)  
 
 Ahora, es momento de crear el **DataItem** para el recorrido de la tabla temporal:  
-![](/img/posts/migrated/2019/06/3.png)  
+![](/assets/img/posts/migrated/2019/06/3.png)  
 
 Las mismas variables utilizadas en el primer DataItem **Vendor**, pueden usarse dentro del DataItem **Integer**. La diferencia está en que los campos dentro del DataItem **Integer** corresponden a datos de la tabla temporal.
 
 En las propiedades del DataItem **Integer**, colocamos los siguiente:  
-![](/img/posts/migrated/2019/06/4.png)  
+![](/assets/img/posts/migrated/2019/06/4.png)  
 
 En lo que refiere al diseño, está listo. En el código debemos tener en cuenta una cosa en la función **Integer - OnAfterGetRecord()**, donde se coloca el siguiente código:
 ```

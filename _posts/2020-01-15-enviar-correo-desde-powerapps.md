@@ -20,52 +20,52 @@ En este caso crearemos un flujo que permita enviar correo y lo integraremos al P
 ## Microsoft PowerApps
 Creamos una aplicación en blanco y colocamos los controles básicos de ingreso de datos y un botón "Enviar correo" ([aquí puedes aprender a agregar controles](/2019/05/controles/)):  
 
-![](/img/posts/migrated/2020/01/1-1.png)  
+![](/assets/img/posts/migrated/2020/01/1-1.png)  
 
 Marcamos el botón "Enviar correo". Dentro de la aplicación, PowerApps, nos dirigimos a la pestaña **Action** y hacemos clic en el botón **Power automate**:  
 
-![](/img/posts/migrated/2020/01/2.png)  
+![](/assets/img/posts/migrated/2020/01/2.png)  
 
 En el nuevo cuadro de diálogo, hacemos clic en el boton **Create a new flow**:  
 
-![](/img/posts/migrated/2020/01/3.png)  
+![](/assets/img/posts/migrated/2020/01/3.png)  
 
 Ahora, nos redirige al sitio de Power Automate:  
 
-![](/img/posts/migrated/2020/01/4.png)  
+![](/assets/img/posts/migrated/2020/01/4.png)  
 
 Debemos seleccionar la plantilla **Click a button in PowerApps to send an email**:  
 
-![](/img/posts/migrated/2020/01/5.png)  
+![](/assets/img/posts/migrated/2020/01/5.png)  
 
-![](/img/posts/migrated/2020/01/6.png)  
+![](/assets/img/posts/migrated/2020/01/6.png)  
 
 Agregamos la cuenta de correo de la cuenta que enviará el correo al hacer clic en el botón:  
 
-![](/img/posts/migrated/2020/01/7.png)  
+![](/assets/img/posts/migrated/2020/01/7.png)  
 
 Hacemos clic en **Continuar**:  
 
-![](/img/posts/migrated/2020/01/8.png)  
+![](/assets/img/posts/migrated/2020/01/8.png)  
 
 Guardamos los cambios en Power Automate y luego seleccionamos nuestra plantilla en PowerApps:  
 
-![](/img/posts/migrated/2020/01/9.png)  
+![](/assets/img/posts/migrated/2020/01/9.png)  
 
 Completamos la barra de fórmula:  
 
-![](/img/posts/migrated/2020/01/10.png)  
+![](/assets/img/posts/migrated/2020/01/10.png)  
 
 Ejecutamos la aplicación y completamos los datos:  
 
-![](/img/posts/migrated/2020/01/11.png)  
+![](/assets/img/posts/migrated/2020/01/11.png)  
 
 Verificamos la bandeja de Entrada (o correo no deseado) del correo colocado en el punto anterior:  
 
-![](/img/posts/migrated/2020/01/12.png)  
+![](/assets/img/posts/migrated/2020/01/12.png)  
 
 Leemos el correo y listo:  
 
-![](/img/posts/migrated/2020/01/13.png)  
+![](/assets/img/posts/migrated/2020/01/13.png)  
 
 De esta manera hemos integrado una funcionalidad demasiado útil a nuestra aplicación creada en menos de 2 minutos.

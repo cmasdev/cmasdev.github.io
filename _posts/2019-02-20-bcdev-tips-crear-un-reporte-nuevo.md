@@ -47,7 +47,7 @@ dataset
 3. Debemos tener en cuenta, que debe compilar el código con Ctrl + Shift + B.
 
 4. Veremos que genera el archivo **.rdlc** con el mismo nombre que nuestro archivo AL:  
-![](/img/posts/migrated/2019/02/1-2.png)  
+![](/assets/img/posts/migrated/2019/02/1-2.png)  
 
 5. Abrimos el reporte .rdlc con Visual Studio o bien con SQL Server Report Designer.
 

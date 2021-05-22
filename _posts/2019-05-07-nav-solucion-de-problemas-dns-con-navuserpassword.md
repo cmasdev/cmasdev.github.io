@@ -10,7 +10,7 @@ thumbnail: nav.png
 ---
 
 Recibí la llamada de un cliente referente a una situación de conexión entre el Servidor NAV y su cliente, que en este caso utilizan las credenciales de tipo **NavUserPassword**. El problema se muestra en la siguiente imagen (CMASUS es el nombre de referencia del Servidor):  
-![](/img/posts/migrated/2018/07/7-1.png)  
+![](/assets/img/posts/migrated/2018/07/7-1.png)  
 
 <!--more-->
 

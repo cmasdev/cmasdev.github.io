@@ -16,20 +16,20 @@ En una [entrada anterior](/2019/04/valores-predeterminados-para-integracion/), v
 En este caso, veremos cómo crear/editar ambos filtros.
 
 Primeramente nos dirigimos a la página **Lista de asignaciones de tablas de integración**:  
-![](/img/posts/migrated/2019/12/1-7.png)  
+![](/assets/img/posts/migrated/2019/12/1-7.png)  
 
 Luego, seleccionamos Editar lista y hacemos clic en los puntos suspensivos:  
-![](/img/posts/migrated/2019/12/2-7.png)  
+![](/assets/img/posts/migrated/2019/12/2-7.png)  
 
 Modificamos los filtros necesarios:  
-![](/img/posts/migrated/2019/12/3-7.png)  
+![](/assets/img/posts/migrated/2019/12/3-7.png)  
 
 Con los pasos anteriores logramos filtros los datos del ERP Dynamics 365. Ahora, veremos cómo filtrar los datos del **CRM**.
 
 Seleccionamos **Editar lista** y hacemos clic en los puntos suspensivos:   
-![](/img/posts/migrated/2019/12/4-6.png)  
+![](/assets/img/posts/migrated/2019/12/4-6.png)  
 
 Modificamos los filtros necesarios:  
-![](/img/posts/migrated/2019/12/5-4.png)  
+![](/assets/img/posts/migrated/2019/12/5-4.png)  
 
 De est manera se aplican los filtros para la integración de tablas dentro de Dynamics 365 Business Central.

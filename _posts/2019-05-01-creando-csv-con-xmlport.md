@@ -16,10 +16,10 @@ Ahora que surgió la necesidad de exportación de una tabla a un archivo **.txt*
 <!--more-->
 
 Primero, debemos crear el objeto de tipo **XMLPort** y enlazarlo a uno o varios **DataItems** (como si fuera un reporte):  
-![](/img/posts/migrated/2019/05/1-5.png)  
+![](/assets/img/posts/migrated/2019/05/1-5.png)  
 
 En las propiedades del objeto principal hacemos las modificaciones correspondientes:  
-![](/img/posts/migrated/2019/05/2-4.png)  
+![](/assets/img/posts/migrated/2019/05/2-4.png)  
 
 Cada elemento tiene dos métodos asociados (uno para importación de datos y otro para exportación):
 ```
@@ -30,8 +30,8 @@ TipoReporte - Export::OnBeforePassVariable()
 TipoReporte := '1'
 ```
 Compilamos el **XMLPort** y lo ejecutamos:  
-![](/img/posts/migrated/2019/05/3-4.png)  
+![](/assets/img/posts/migrated/2019/05/3-4.png)  
 
-Si quieren ver el resultado real [aquí lo tienen](/img/posts/migrated/2019/05/Hechauka-Ventas.txt).
+Si quieren ver el resultado real [aquí lo tienen](/assets/img/posts/migrated/2019/05/Hechauka-Ventas.txt).
 
 ¡Espero les resulte útil!

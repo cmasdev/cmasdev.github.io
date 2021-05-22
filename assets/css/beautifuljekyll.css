@@ -557,7 +557,7 @@ footer .footer-custom-content {
 }
 
 .blog-tags a {
-  color: {{ site.text-col | default: "#404040" }};
+  color: {{ site.link-col | default: "#404040" }};
   text-decoration: none;
   padding: 0 0.3125rem;
   opacity: 0.8;
@@ -567,8 +567,9 @@ footer .footer-custom-content {
 
 .blog-tags a:hover {
   opacity: 1;
-  color: {{ site.text-col | default: "#404040" }};
-  border-color: {{ site.text-col | default: "#404040" }};
+  color: {{ site.link-col | default: "#404040" }};
+  border-color: {{ site.navbar-border-col | default: "#404040" }};
+  background-color: {{ site.navbar-border-col| default: "#404040" }};
 }
 
 .post-preview .blog-tags {

@@ -13,31 +13,31 @@ Resulta que el nuevo Business Central Wave 2 no trae consigo el entorno de desar
 
 <!--more-->
 
-Lo primero que debemos hacer es buscar PowerShell ISE y abrirlo: ![](/img/posts/migrated/2020/02/1-2.png)  
+Lo primero que debemos hacer es buscar PowerShell ISE y abrirlo: ![](/assets/img/posts/migrated/2020/02/1-2.png)  
 
 Importamos los módulos para powrshell:  
 ```
 Import-Module 'C:\\Program Files\\Microsoft Dynamics 365 Business Central\\150\\Service\\NavAdminTool.ps1'  
 ```
-![](/img/posts/migrated/2020/02/2-2.png)  
+![](/assets/img/posts/migrated/2020/02/2-2.png)  
 
 Verificamos la licencia que tenemos actualmente:  
 ```
 Export-NAVServerLicenseInformation -ServerInstance BC150  
 ```
-![](/img/posts/migrated/2020/02/3-2.png)  
+![](/assets/img/posts/migrated/2020/02/3-2.png)  
 
 Ahora cargamos nuestro propio archivo de licencia (con los objetos comprados/adquiridos/partner)  
 ```
 Import-NAVServerLicense -LicenseFile 'C:\\CMAS.flf' -ServerInstance BC150  
 ```
-![](/img/posts/migrated/2020/02/4-2.png)  
+![](/assets/img/posts/migrated/2020/02/4-2.png)  
 
 Reiniciamos el servicio solicitado:  
 ```
 Restart-NAVServerInstance -ServerInstance BC150  
 ```
-![](/img/posts/migrated/2020/02/5-2.png)  
+![](/assets/img/posts/migrated/2020/02/5-2.png)  
 
 Esto depende del servidor, puede tardar unos minutos.  
 
@@ -45,6 +45,6 @@ Por último, volvemos a verificar si la licencia fue aplicada correctamente:
 ```
 Export-NAVServerLicenseInformation -ServerInstance BC150  
 ```
-![](/img/posts/migrated/2020/02/6-1.png)  
+![](/assets/img/posts/migrated/2020/02/6-1.png)  
 
 De esta manera, hemos cargado el archivo de licencia en el servidor de Dynamics 365 Business Central Wave 2.

@@ -14,34 +14,34 @@ En esta oportunidad quiero mostrar cómo publicar una aplicación "desarrollada"
 <!--more-->
 
 Primeramente, debemos crear la aplicación (en este ejemplo, a partir de una plantilla):  
-![](/img/posts/migrated/2020/03/1-1.png)  
+![](/assets/img/posts/migrated/2020/03/1-1.png)  
 
 Colocamos un nombre y creamos la aplicación:  
-![](/img/posts/migrated/2020/03/2-1.png)  
+![](/assets/img/posts/migrated/2020/03/2-1.png)  
 
 Asignamos los permisos correspondientes:  
-![](/img/posts/migrated/2020/03/3-1.png)  
+![](/assets/img/posts/migrated/2020/03/3-1.png)  
 
 Al crear la aplicación, damos ejecutar para probarlo:  
-![](/img/posts/migrated/2020/03/4-1.png)  
+![](/assets/img/posts/migrated/2020/03/4-1.png)  
 
 Guardamos la aplicación:  
-![](/img/posts/migrated/2020/03/5.png)  
+![](/assets/img/posts/migrated/2020/03/5.png)  
 
 Lo guardamos en la nube:  
-![](/img/posts/migrated/2020/03/6.png)  
+![](/assets/img/posts/migrated/2020/03/6.png)  
 
 PowerApps nos muestra los detalles del guardado:  
-![](/img/posts/migrated/2020/03/7.png)  
+![](/assets/img/posts/migrated/2020/03/7.png)  
 
 Al hacer clic en Ver todas las versiones, nos aparecerá la grilla de versionado:  
-![](/img/posts/migrated/2020/03/8.png)  
+![](/assets/img/posts/migrated/2020/03/8.png)  
 
 Nos dirigimos a la pestaña **Detalles** y ahí vemos la dirección de publicación:  
-![](/img/posts/migrated/2020/03/9.png)  
+![](/assets/img/posts/migrated/2020/03/9.png)  
 
 Probamos en un dipositivo móvul o cualquier navegador:  
-![](/img/posts/migrated/2020/03/10.png)  
+![](/assets/img/posts/migrated/2020/03/10.png)  
 
 De esta manera, hemos publicado una aplicación funcional en la web sin demasiados pasos.  
 

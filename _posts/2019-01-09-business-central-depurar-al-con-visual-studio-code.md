@@ -15,12 +15,12 @@ Los pasos a seguir serían:
 
 <!--more-->
 1. Vamos al código donde necesitamos colocar el punto de interrupción y presionamos la tecla F9:  
-![](/img/posts/migrated/2019/03/1-9.png)  
+![](/assets/img/posts/migrated/2019/03/1-9.png)  
 
 2. Presionamos la combinación "Ctrl+Shift+P" para abrir "Command Palette" y escribimos "AL:  Publish"
-![](/img/posts/migrated/2019/03/1-8.png)  
+![](/assets/img/posts/migrated/2019/03/1-8.png)  
 
 3. Visual Studio Code se detiene en la línea indicada:  
-![](/img/posts/migrated/2019/03/2-9.png)  
+![](/assets/img/posts/migrated/2019/03/2-9.png)  
 
 Así de fácil logramos depurar. Resumen: Resulta más sencillo depurar en Business Central que [en Dynamics NAV](/2018/11/navdev-tips-depuracion-en-dynamics-nav-2018/).

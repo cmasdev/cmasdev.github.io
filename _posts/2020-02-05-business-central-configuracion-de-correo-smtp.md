@@ -15,22 +15,22 @@ Primeramente, debemos ingresar a la **Configuración correo SMTP**:
 
 <!--more-->
 
-![](/img/posts/migrated/2020/02/1.png)  
+![](/assets/img/posts/migrated/2020/02/1.png)  
 
 Configuramos los valores necesarios y probamos:  
 
-![](/img/posts/migrated/2020/02/2.png)  
+![](/assets/img/posts/migrated/2020/02/2.png)  
 
 Seleccionamos el correo a donde irá la prueba:  
 
-![](/img/posts/migrated/2020/02/3.png)  
+![](/assets/img/posts/migrated/2020/02/3.png)  
 
 Si todo sale bien el mensaje se verá similar a este:  
 
-![](/img/posts/migrated/2020/02/4.png)  
+![](/assets/img/posts/migrated/2020/02/4.png)  
 
 El correo se ve así:  
 
-![](/img/posts/migrated/2020/02/5.png)  
+![](/assets/img/posts/migrated/2020/02/5.png)  
 
 De esta manera hemos configurado el correo para que funcione desde el Dynamics 365 Business Central.

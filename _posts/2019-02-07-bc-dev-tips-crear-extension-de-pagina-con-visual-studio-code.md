@@ -16,17 +16,17 @@ Aquí coloco el código necesario para crear la página extendida de "Company In
 <!--more-->
 
 Antes de la extensión (vista Web):  
-![](/img/posts/migrated/2019/02/1-1.png)  
+![](/assets/img/posts/migrated/2019/02/1-1.png)  
 
 Después de la extensión (vista Web):  
-![](/img/posts/migrated/2019/02/2-1.png)  
+![](/assets/img/posts/migrated/2019/02/2-1.png)  
 
-![](/img/posts/migrated/2019/02/3.png)  
+![](/assets/img/posts/migrated/2019/02/3.png)  
 
-![](/img/posts/migrated/2019/02/3.5.png)  
+![](/assets/img/posts/migrated/2019/02/3.5.png)  
 
 Si la página está mal direccionada veremos un error como este:  
-![](/img/posts/migrated/2019/02/4.png)  
+![](/assets/img/posts/migrated/2019/02/4.png)  
 
 Se corrige cambiando la variable de inicio en _launch.json_
 

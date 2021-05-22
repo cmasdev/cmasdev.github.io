@@ -20,18 +20,18 @@ En una [entrada anterior](/2019/12/creacion-de-reglas-de-negocios/), vimos cómo
 > Use flujos de proceso de negocio para definir un conjunto de pasos para que la gente siga para obtener el resultado deseado. Estos pasos proporcionan un mensaje visual que indica a los usuarios dónde se encuentran en el proceso de negocio.
 
 Observemos el proceso actual de un proceso de venta:  
-![](/img/posts/migrated/2019/12/2-6.png)  
+![](/assets/img/posts/migrated/2019/12/2-6.png)  
 
 Nos dirigimos a **Opciones Avanzadas** > **Personalizaciones** > **Personalizar el sistema**:  
-![](/img/posts/migrated/2019/12/1-6.png)  
+![](/assets/img/posts/migrated/2019/12/1-6.png)  
 
 Buscamos el proceso y procedemos a modificarlo:  
-![](/img/posts/migrated/2019/12/3-6.png)  
+![](/assets/img/posts/migrated/2019/12/3-6.png)  
 
 Realizamos las modificaciones necesarias, hacemos clic en **Guardar** y **Validar**:  
-![](/img/posts/migrated/2019/12/4-5.png)  
+![](/assets/img/posts/migrated/2019/12/4-5.png)  
 
 Vemos el cambio realizado (eliminado un proceso completo, el de **Contrato**):  
-![](/img/posts/migrated/2019/12/5-3.png)  
+![](/assets/img/posts/migrated/2019/12/5-3.png)  
 
 De esta manera se puede crear y/o modificar el proceso necesario.

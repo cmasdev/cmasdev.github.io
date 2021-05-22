@@ -18,33 +18,33 @@ En un [artículo anterior](/2018/05/integracion-dynamics-nav-2018-con-dynamics-3
 También resulta importante ver [este artículo](/2018/10/roles-de-seguridad-para-integracion-con-d365-business-central/) sobre los roles de seguridad a ser aplicados para la integración.
 
 Primeramente, debemos enlazar el usuario Business Central con el usuario CRM (al que acabamos de asignar los permisos necesarios). Entonces, los datos del usuario quedarían de la siguiente manera: Debemos buscar la ruta con la Lupa   
-![](/img/posts/migrated/2019/04/1-2.png)  
+![](/assets/img/posts/migrated/2019/04/1-2.png)  
 
 1. Obtener el usuario (email) de inicio de sesion del usuario en Dynamics 365 for Sales  
-![](/img/posts/migrated/2019/04/2-2.png)
+![](/assets/img/posts/migrated/2019/04/2-2.png)
 
 3. En Dynamics Business Central, colocar dicho correo en el campo usuario de Office 365:  
-![](/img/posts/migrated/2019/04/3-2.png)
+![](/assets/img/posts/migrated/2019/04/3-2.png)
 
 5. En la misma ventana, colocar los permisos necesarios para D365 (en este caso le damos FULL ACCESS):  
-![](/img/posts/migrated/2019/04/4-2.png)
+![](/assets/img/posts/migrated/2019/04/4-2.png)
 
 Hemos culminado, con lo referente al usuario. Es decir, que el usuario de Dynamics Business Central esta enlazado con el usuario de Dynamics 365 for Sales.
 
 Ahora debemos configurar la conexión de Microsoft Dynamics Business Central con Microsoft Dynamics 365 for Sales. Para ello, seguimos estos pasos:
 1. Ingresamos al modulo necesario, colocando en el buscador la palabra "conexión"  
-![](/img/posts/migrated/2019/04/5-2.png)  
+![](/assets/img/posts/migrated/2019/04/5-2.png)  
 
 2. Completamos los datos de conexión y le damos clic en "Probar conexión"  
-![](/img/posts/migrated/2019/04/6-2.png)  
+![](/assets/img/posts/migrated/2019/04/6-2.png)  
 
 3. Si la conexión fue exitosa, veremos un mensaje como este:  
-![](/img/posts/migrated/2019/04/7-2.png)  
+![](/assets/img/posts/migrated/2019/04/7-2.png)  
 
 4. Hacemos clic en la opción "Activado". Si sale error debemos corregirlo:  
-![](/img/posts/migrated/2019/04/8-2.png)  
+![](/assets/img/posts/migrated/2019/04/8-2.png)  
 
 5. Si nos aceptan los cambios procedemos a completar los demás campos necesarios y listo.  
-![](/img/posts/migrated/2019/04/9-1.png)
+![](/assets/img/posts/migrated/2019/04/9-1.png)
 
 De esta manera, logramos la integración en esta nueva plataforma.

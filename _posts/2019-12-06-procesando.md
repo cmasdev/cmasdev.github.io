@@ -16,25 +16,25 @@ Aquí veremos cómo mostrar un control "Procesando..." (loading) mientras se pro
 <!--more-->
 
 Lo primero que tenemos que hacer es descargarnos una imagen .gif con fondo transparente que tenga la animación deseada. Por ejemplo:  
-![](/img/posts/migrated/2019/12/loading.gif)  
+![](/assets/img/posts/migrated/2019/12/loading.gif)  
 
 Luego colocamos dicho elemento en nuestra aplicación:  
-![](/img/posts/migrated/2019/12/1-4.png)  
+![](/assets/img/posts/migrated/2019/12/1-4.png)  
 
-![](/img/posts/migrated/2019/12/2-4.png)  
+![](/assets/img/posts/migrated/2019/12/2-4.png)  
 
-![](/img/posts/migrated/2019/12/3-4.png)  
+![](/assets/img/posts/migrated/2019/12/3-4.png)  
 
 Ahora, nos dirigimos a la accion **OnVisible** del objeto **Screen** donde agregaremos una variable:  
-![](/img/posts/migrated/2019/12/4-3.png)   
+![](/assets/img/posts/migrated/2019/12/4-3.png)   
 
 Al agregar a la funcion **UpdateContext**, la variable se crea automáticamente, en este caso con el valor **false**.
 
 A continuación, hacemos uso de la variable en la propiedad **Visible** de la imagen:  
-![](/img/posts/migrated/2019/12/5-1.png)  
+![](/assets/img/posts/migrated/2019/12/5-1.png)  
 
 Por último, cambiamos el valor de la variable en alguna acción deseada. En este caso lo quiero hacer en el botón que actualiza el conjunto de datos:  
-![](/img/posts/migrated/2019/12/6-1.png)  
+![](/assets/img/posts/migrated/2019/12/6-1.png)  
 ```
 UpdateContext({imagen:true});Refresh(\[@Cuentas\]);UpdateContext({imagen:false});
 ```

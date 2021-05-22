@@ -14,6 +14,6 @@ En este Tip, mostraré cómo crear extensiones de reportes en Dynamics 365 Busin
 <!--more-->
 
 Aquí coloco el código necesario para crear el reporte extendido para este ejemplo:  
-![](/img/posts/migrated/2019/03/noloserick.gif)  
+![](/assets/img/posts/migrated/2019/03/noloserick.gif)  
 
 Es que no se puede extender un reporte. Los reportes siempre se crean desde el inicio y no pueden ser extendidos como las [tablas](/2019/02/bc-dev-tips-crear-extension-de-tabla-con-visual-studio-code/) y las [páginas](/2019/02/bc-dev-tips-crear-extension-de-pagina-con-visual-studio-code/). De esta forma nos quedamos con las ganas de extender reportes, pero tampoco tendría sentido hacerlo.

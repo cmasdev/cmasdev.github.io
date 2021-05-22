@@ -15,12 +15,12 @@ Para eso debemos seguir los siguientes pasos:
 
 <!--more-->
 1. Vamos al menú Inicio de nuestro Windows y buscamos el icono "Dynamics NAV":  
-![](/img/posts/migrated/2019/03/1-10.png)  
+![](/assets/img/posts/migrated/2019/03/1-10.png)  
 
 2. Abrimos el Dynamics NAV normalmente y veremos:  
-![](/img/posts/migrated/2019/03/2-10.png)  
+![](/assets/img/posts/migrated/2019/03/2-10.png)  
 
 3. Volvimos a nuestro querido cliente windows de Dynamics NAV:  
-![](/img/posts/migrated/2019/03/3-7.png)  
+![](/assets/img/posts/migrated/2019/03/3-7.png)  
 
 El cliente Windows de Dynamics NAV sólo se podrá utilizar un corto lapso de tiempo hasta que Microsoft lo elimine.

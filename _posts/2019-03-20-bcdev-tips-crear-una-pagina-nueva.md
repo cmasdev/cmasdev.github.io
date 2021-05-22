@@ -49,6 +49,6 @@ page 50100 NuevaPagina
 ```
 3. Publicamos la página desde el Visual Studio Code.
 4. Veremos la página que apunta a la nueva página y tablas creadas:  
-![](/img/posts/migrated/2019/02/1-3.png)  
+![](/assets/img/posts/migrated/2019/02/1-3.png)  
 
 De esta manera, hemos creado una página nueva según la necesidad.

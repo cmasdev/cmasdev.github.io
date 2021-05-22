@@ -23,9 +23,9 @@ En la [entrada anterior](/2019/05/reglas/), vimos cómo crear reglas relacionada
 No voy a detenerme mucho aquí, pues en la [documentación de Microsoft](https://docs.microsoft.com/es-es/powerapps/maker/canvas-apps/formula-reference) habla perfectamente de ellas.
 
 En Microsoft PowerApps, las funciones las ingresamos aquí:  
-![](/img/posts/migrated/2019/05/1-3.png)  
+![](/assets/img/posts/migrated/2019/05/1-3.png)  
 
 ## Funciones personalizadas
-![](/img/posts/migrated/2019/05/noloserick.gif)  
+![](/assets/img/posts/migrated/2019/05/noloserick.gif)  
 
 Por el momento no se pueden crear funciones personalizadas dentro de Microsoft PowerApps. Si alguien encuentra una manera, sería genial compartir su conocimiento ;)

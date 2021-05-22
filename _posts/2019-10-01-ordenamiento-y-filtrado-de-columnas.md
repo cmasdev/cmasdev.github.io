@@ -15,16 +15,16 @@ Luego de algunos meses, con otros temas, aquí continúo con Microsoft PowerApps
 
 ## Ordenamiento
 Simplemente colocamos la función dentro de Microsoft PowerApps y este toma los datos necesarios y los ordena según los parámetros:  
-![](/img/posts/migrated/2019/10/1.png)  
+![](/assets/img/posts/migrated/2019/10/1.png)  
 ```
 UpdateContext({SortDescending1: !SortDescending1})
 ```
 ## Filtrado
 En este caso tenemos un cuadro de texto (con la imagen de la lupa) que servirá como filtro(**TextSearchBox1**):  
-![](/img/posts/migrated/2019/10/2.png)  
+![](/assets/img/posts/migrated/2019/10/2.png)  
 
 En el elemento que contiene los datos, colocaremos la fórmula necesaria para realizar el filtro según el punto anterior(**TextSearchBox1**):  
-![](/img/posts/migrated/2019/10/3.png)  
+![](/assets/img/posts/migrated/2019/10/3.png)  
 ```
 SortByColumns(Search(\[@Cuentas\], TextSearchBox1.Text, "emailaddress1","address1\_city","name"), "emailaddress1", If(SortDescending1, Descending, Ascending))
 ```

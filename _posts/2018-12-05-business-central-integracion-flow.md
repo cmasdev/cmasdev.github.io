@@ -15,35 +15,35 @@ Estos pasos deben seguirse para lograr la integración:
 
 <!--more-->
 1. Ingresamos al portal de Microsoft Flow y seleccionamos "Nuevo":
-![](/img/posts/migrated/2018/08/1-7.png)  
+![](/assets/img/posts/migrated/2018/08/1-7.png)  
 
 2. Elegimos la opción "Crear desde cero":
-![](/img/posts/migrated/2018/08/2-7.png)  
+![](/assets/img/posts/migrated/2018/08/2-7.png)  
 
 3. Nos dirigimos al buscador y hacemos clic allí:
-![](/img/posts/migrated/2018/08/3-7.png)  
+![](/assets/img/posts/migrated/2018/08/3-7.png)  
 
 4. Veremos un buscador similar al siguiente:
-![](/img/posts/migrated/2018/08/4-6.png)  
+![](/assets/img/posts/migrated/2018/08/4-6.png)  
 
 5. Escribimos la palabra "central" y aplicará el filtro:
-![](/img/posts/migrated/2018/08/5-7.png)
+![](/assets/img/posts/migrated/2018/08/5-7.png)
 
 Si seleccionamos la opción 1 (hablamos de la versión Cloud - Nube) y debemos seguir estos pasos:
 
 - Nos posicionamos en la pestaña "Desencadenadores" y seleccionamos la opción deseada:  
-![](/img/posts/migrated/2019/03/61.png)  
+![](/assets/img/posts/migrated/2019/03/61.png)  
 
 - En la pestaña "Acciones" tenemos todas las opciones habilitadas para Dynamics NAV 2018:  
-![](/img/posts/migrated/2019/03/71.png)  
+![](/assets/img/posts/migrated/2019/03/71.png)  
 
 Si seleccionamos la opción 2 (hablamos de la versión On-Premise) y debemos seguir estos pasos:
 
 - Nos posicionamos en la pestaña "Desencadenadores" pero no encontraremos nada allí :( (en otra entrada explicaré cómo hacer que aparezcan):  
-![](/img/posts/migrated/2019/03/6-7.png)  
+![](/assets/img/posts/migrated/2019/03/6-7.png)  
 
 - En la pestaña "Acciones" tenemos todas las opciones habilitadas para Dynamics 365 Business Central:  
-![](/img/posts/migrated/2019/03/7-5.png)  
+![](/assets/img/posts/migrated/2019/03/7-5.png)  
 
 En este producto tenemos dos opciones para utilizarlo con Microsoft Flow.
 

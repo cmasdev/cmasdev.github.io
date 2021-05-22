@@ -16,24 +16,24 @@ Aquí mostraré algunas configuraciones básicas:
 <!--more-->
 
 1. Hacemos clic en la configuración:  
-![](/img/posts/migrated/2019/01/1-1.png)  
+![](/assets/img/posts/migrated/2019/01/1-1.png)  
 
 2. Vamos a "Mi configuración":  
-![](/img/posts/migrated/2019/01/2-1.png)  
+![](/assets/img/posts/migrated/2019/01/2-1.png)  
 
 3. Editamos las configuraciones según la necesidad:  
-![](/img/posts/migrated/2019/01/3-1.png)  
+![](/assets/img/posts/migrated/2019/01/3-1.png)  
 
 4. En el símbolo siguiente, podemos realizar las búsquedas:  
-![](/img/posts/migrated/2019/01/4-1.png)  
+![](/assets/img/posts/migrated/2019/01/4-1.png)  
 
 5. Por ejemplo, "Usuarios":  
-![](/img/posts/migrated/2019/01/5-1.png)  
+![](/assets/img/posts/migrated/2019/01/5-1.png)  
 
 6. O bien, "Empresas":  
-![](/img/posts/migrated/2019/01/6-1.png)  
+![](/assets/img/posts/migrated/2019/01/6-1.png)  
 
 7. Aquí podemos realizar acciones con las empresas  
-![](/img/posts/migrated/2019/01/7-1.png)  
+![](/assets/img/posts/migrated/2019/01/7-1.png)  
 
 Hemos visto cómo tenemos disponibles algunas configuraciones en Dynamics 365 Business Central.

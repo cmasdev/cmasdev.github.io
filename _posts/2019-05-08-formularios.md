@@ -24,30 +24,30 @@ La unidad mas básica dentro de Microsoft PowerApps es un **lienzo**, el cual pe
 Entonces, ¿qué es un Formulario? Los formularios ofrecen la interfaz de usuario que emplean los usuarios para interactuar con los datos que necesitan para realizar su trabajo. Es decir, es la plantilla básica de representación de datos dentro de un lienzo.
 
 Veamos cómo crear un liezo primero, luego veremos cómo agregar un formulario: Nos dirigimos a nuestro [Portal Office 365](https://portal.office.com) y seleccionamos la aplicación Microsoft PowerApps:  
-![](/img/posts/migrated/2019/05/1.png)  
+![](/assets/img/posts/migrated/2019/05/1.png)  
 
 Marcamos la opción "Aplicación de lienzo en blanco", colocamos el nombre y hacemos clic en "Crear":  
-![](/img/posts/migrated/2019/05/2.png)  
+![](/assets/img/posts/migrated/2019/05/2.png)  
 
 En la siguiente pantalla (que aparece en inglés) seleccionamos "Create a Form":  
-![](/img/posts/migrated/2019/05/3.png)  
+![](/assets/img/posts/migrated/2019/05/3.png)  
 
-![](/img/posts/migrated/2019/05/4.png)  
+![](/assets/img/posts/migrated/2019/05/4.png)  
 
-![](/img/posts/migrated/2019/05/6.png)  
+![](/assets/img/posts/migrated/2019/05/6.png)  
 
-![](/img/posts/migrated/2019/05/5.png)  
+![](/assets/img/posts/migrated/2019/05/5.png)  
 
 Seleccionamos el "Origen de Datos (DataSource)", en este caso Oportunidades que provienen del "Dynamics 365 for Sales":  
-![](/img/posts/migrated/2019/05/7.png)  
+![](/assets/img/posts/migrated/2019/05/7.png)  
 
 Nos muestra el formulario predeterminado:  
-![](/img/posts/migrated/2019/05/8.png)  
+![](/assets/img/posts/migrated/2019/05/8.png)  
 
 Hacemos clic en ejecutar:  
-![](/img/posts/migrated/2019/05/9.png)  
+![](/assets/img/posts/migrated/2019/05/9.png)  
 
 Veremos el formulario listo para ingresar datos:  
-![](/img/posts/migrated/2019/05/9_1.png)  
+![](/assets/img/posts/migrated/2019/05/9_1.png)  
 
 De esta sencilla manera hemos creado un formulario que permite el ingreso de oportunidades dirigidas a Microsoft Dynamics 365 for Sales.

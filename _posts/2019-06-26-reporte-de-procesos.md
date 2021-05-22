@@ -20,6 +20,6 @@ En este caso tomaremos la opción 2 de la situación.
 Básicamente, lo único que se debe hacer es cambiar la propiedad de un reporte, guardarlo y compilarlo.
 
 En este ejemplo, tenemos un reporte que genera el [Hechauka Ventas](/2019/06/creando-csv-con-xmlport/) (que lo vimos como un XMLPort):  
-![](/img/posts/migrated/2019/06/1-2.png)  
+![](/assets/img/posts/migrated/2019/06/1-2.png)  
 
 Una vez terminado el proceso, el reporte hará lo que hayamos indicado. tal vez, llamar a otro reporte (visual) o bien mostrar un mensaje.

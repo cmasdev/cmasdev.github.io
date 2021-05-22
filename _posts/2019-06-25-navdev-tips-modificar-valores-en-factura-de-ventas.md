@@ -20,14 +20,14 @@ Cuando trabajamos con históricos no se pueden guardar cambios en dicha tabla, n
 Que las modificaciones se pueden realizar únicamente en los CodeUnits correspondientes al objeto que deseamos modificar, en este caso, el CodeUnit Sales-Post (80).
 
 Primeramente, observemos los permisos del CodeUnit:  
-![](/img/posts/migrated/2020/03/1.png)  
+![](/assets/img/posts/migrated/2020/03/1.png)  
 
 Creamos una función, externa, que modifique la tabla en cuestión (en este caso SalesInvoiceHeader):  
-![](/img/posts/migrated/2020/03/2.png)  
+![](/assets/img/posts/migrated/2020/03/2.png)  
 
-![](/img/posts/migrated/2020/03/3.png)  
+![](/assets/img/posts/migrated/2020/03/3.png)  
 
-![](/img/posts/migrated/2020/03/4.png)  
+![](/assets/img/posts/migrated/2020/03/4.png)  
 
 Agregamos el contenido de la función (en este caso modificación):
 ```

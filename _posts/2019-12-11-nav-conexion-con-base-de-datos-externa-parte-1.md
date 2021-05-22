@@ -16,16 +16,16 @@ Divido esta entrada en dos partes para que se entiendan bien los pasos que debem
 <!--more-->
 
 Empecemos creando una tabla dentro de la misma base de datos de nuestro entorno de prueba (tacho el nombre porque corresponde a un cliente de mi empresa):  
-![](/img/posts/migrated/2019/12/1-1.png)  
+![](/assets/img/posts/migrated/2019/12/1-1.png)  
 
 Cargamos datos en SQL Server y probamos los datos que se encuentran en nuestra tabla:  
-![](/img/posts/migrated/2019/12/2-1.png)  
+![](/assets/img/posts/migrated/2019/12/2-1.png)  
 
 Ahora, nos dirigimos al entorno de desarrollo de Dynamics NAV y creamos la tabla externa (con el mismo nombre que el objeto de SQL Server):  
-![](/img/posts/migrated/2019/12/3-1.png)  
+![](/assets/img/posts/migrated/2019/12/3-1.png)  
 
 En las propiedades de la tabla nueva debemos colocar lo siguiente:  
-![](/img/posts/migrated/2019/12/4-1.png)  
+![](/assets/img/posts/migrated/2019/12/4-1.png)  
 
 Compilamos el objeto y no deberíamos tener problemas.
 

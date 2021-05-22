@@ -20,9 +20,9 @@ En Dynamics 365 Business Central no se pueden modificar los CodeUnits de la apli
 ¿La solución? Se deben utilizar los eventos disponibles en los CodeUnits para poder realizar acciones que son necesarias en la lógica de nuestra aplicación. Mas información [aquí](https://docs.microsoft.com/es-es/dynamics365/business-central/dev-itpro/developer/devenv-events-in-al) (en inglés).  
 
 Como ya vimos en una entrada anterior, debemos hacer uso de la extensión de Visual Studio Code que se llama **AL Object Designer** y buscar el codeunit necesario:  
-![](/img/posts/migrated/2020/03/1-4.png)  
+![](/assets/img/posts/migrated/2020/03/1-4.png)  
 
-![](/img/posts/migrated/2020/03/2-4.png)  
+![](/assets/img/posts/migrated/2020/03/2-4.png)  
 
 Buscamos el lugar donde deberíamos ingresar nuestro código personalizado: Encontramos la línea 151 en adelante... Pero código no se puede escribir. Es ahí donde encontramos el publicador de eventos **OnBeforeFinancialVoidCheck(CheckLedgEntry);** y debemos suscribirnos a él.  
 
