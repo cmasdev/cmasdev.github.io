@@ -7,6 +7,7 @@ categories: [Aplicaciones de negocio]
 tags: [Dynamics NAV]
 subtitle: En este artículo muestro cómo filtrar campos en NAV.
 thumbnail-img: /assets/img/posts/thumbnails/nav.png
+cover-img: /assets/img/posts/thumbnails/nav.png
 ---
 
 Cuando desarrollamos dentro de Dynamics NAV 2018 nos encontramos con miles de objetos (tablas, páginas, reportes, consultas, XML Port) y muchas veces necesitamos encontrar los desarrollos que ya se han modificado y/o la fecha de modificación de los mismos.

@@ -7,6 +7,7 @@ categories: [Aplicaciones de negocio]
 tags: [Dynamics 365 Business Central,Visual Studio Code]
 subtitle: En este artículo muestro cómo crear extensiones para reportes.
 thumbnail-img: /assets/img/posts/thumbnails/businesscentral.png
+cover-img: /assets/img/posts/thumbnails/businesscentral.png
 ---
 
 En este Tip, mostraré cómo crear extensiones de reportes en Dynamics 365 Business Central, utilizando Visual Studio Code, como de costumbre. Este Tip sigue [la secuencia anterior](/2019/02/bc-dev-tips-crear-extension-de-pagina-con-visual-studio-code/).

@@ -7,6 +7,7 @@ categories: [Aplicaciones de negocio]
 tags: [PowerApps]
 subtitle: En este artículo muestro cómo trabajar con formularios.
 thumbnail-img: /assets/img/posts/thumbnails/powerapps.png
+cover-img: /assets/img/posts/thumbnails/powerapps.png
 ---
 
 En esta oportunidad, quisiera compartir con ustedes conceptos básicos de Microsoft PowerApps. Esta herramienta ya se viene utilizando hace tiempo (sobre todo para aquellas personas que desarrollamos/personalizamos cosas dentro de Microsoft Dynamics 365/CRM), tiene sus facilidades y también sus complejidades.

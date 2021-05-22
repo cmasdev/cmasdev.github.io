@@ -7,6 +7,7 @@ categories: [Aplicaciones de negocio]
 tags: [PowerApps]
 subtitle: En este artículo muestro cómo ordernar y filtrar datos de columnas.
 thumbnail-img: /assets/img/posts/thumbnails/powerapps.png
+cover-img: /assets/img/posts/thumbnails/powerapps.png
 ---
 
 Luego de algunos meses, con otros temas, aquí continúo con Microsoft PowerApps. En la [última entrada referente al tema](/2019/05/trabajando-con-tablas/) hemos vimos cómo crear una aplicación completa con datos de una manera sencilla. Me han preguntado ¿Cómo puedo ordenar y/o filtrar los datos? Para el caso del ejemplo, ya estaba ordenado y filtrado. Pero, me interesa explicar cómo hacerlo y que ustedes puedan aplicar según su necesidad.

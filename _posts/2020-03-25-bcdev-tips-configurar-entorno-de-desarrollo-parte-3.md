@@ -7,6 +7,7 @@ categories: [Aplicaciones de negocio]
 tags: [AL,Dynamics 365 Business Central,Visual Studio Code]
 subtitle: En este artículo muestro cómo clonar un repositorio y usarlo con Visual Studio Code.
 thumbnail-img: /assets/img/posts/thumbnails/businesscentral.png
+cover-img: /assets/img/posts/thumbnails/businesscentral.png
 ---
 
 En esta última parte del artículo veremos cómo clonar el repositorio y unirlo con Visual Studio Code. Por último publicaremos la extensión en Dynamics 365 Business Central Wave 2.  

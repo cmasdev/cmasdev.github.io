@@ -7,6 +7,7 @@ category: [Aplicaciones de negocio]
 tag: [AL, Dynamics 365 Business Central]
 subtitle: En este artículo verás cómo utilizar manejadores de eventos dentro de reportes...
 thumbnail-img: /assets/img/posts/thumbnails/businesscentral.png
+cover-img: /assets/img/posts/thumbnails/businesscentral.png
 ---
 
 En el [artículo anterior](http://cmas.dev/2020/04/business-central-utilizar-manejador-de-eventos/), hemos visto los conceptos relacionados a eventos dentro del Business Central. En esta ocasión veremos cómo utilizar manejador de eventos en reportes en Business Central. Este artículo es más rápido que el anterior porque sólo se deben tener en cuenta ciertas cosas.

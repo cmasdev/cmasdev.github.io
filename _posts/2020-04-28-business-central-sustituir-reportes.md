@@ -7,6 +7,7 @@ category: [Aplicaciones de negocio]
 tag: [AL, Dynamics 365 Business Central]
 subtitle: En este artículo verás cómo sustituir el diseño de reportes nativos...
 thumbnail-img: /assets/img/posts/thumbnails/businesscentral.png
+cover-img: /assets/img/posts/thumbnails/businesscentral.png
 ---
 
 En el [artículo anterior](http://cmas.dev/2020/04/business-central-utilizar-manejador-de-eventos-en-reportes/), vimos cómo suscribirnos a eventos de un reporte sin poder modificar diseño. En este artículo, veremos cómo sustituir reportes en Business Central.

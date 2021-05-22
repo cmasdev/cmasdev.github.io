@@ -7,6 +7,7 @@ categories: [Aplicaciones de negocio]
 tags: [C/SIDE,Dynamics NAV]
 subtitle: En este artículo muestro como modidicar valores en CU.
 thumbnail-img: /assets/img/posts/thumbnails/nav.png
+cover-img: /assets/img/posts/thumbnails/nav.png
 ---
 
 Microsoft Dynamics NAV es un sistema muy consistente y seguro cuando hablamos de transacciones. En ocasiones, podemos equivocarnos, como operadores, y olvidarnos de cargar ciertos datos o bien equivocarnos en cosas mínimas como olvidar colocar el vendedor, algún dato secundario que precisamos para tener toda la información relacionada con una factura.

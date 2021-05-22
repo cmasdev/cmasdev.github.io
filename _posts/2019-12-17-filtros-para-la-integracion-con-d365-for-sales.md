@@ -7,6 +7,7 @@ categories: [Aplicaciones de negocio]
 tags: [Dynamics 365 Business Central]
 subtitle: En este artículo muestro cómo preparar los filtros para la integración entre herramientas.
 thumbnail-img: /assets/img/posts/thumbnails/businesscentral.png
+cover-img: /assets/img/posts/thumbnails/businesscentral.png
 ---
 
 En una [entrada anterior](/2019/04/valores-predeterminados-para-integracion/), vimos cuáles eran los valores predeterminados de integración entre Dynamics 365 Business Central y Dynamics 365 for Sales. Dentro de nuestro ERP Dynamics 365 Business Central se pueden crear/editar filtros para la obtención de los datos desde y hacia el CRM de manera a saturar lo menos posible el ancho de banda de ambos servicios.

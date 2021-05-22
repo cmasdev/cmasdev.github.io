@@ -7,6 +7,7 @@ categories: [Aplicaciones de negocio]
 tags: [PowerApps]
 subtitle: En este artículo muestro cómo publicar una app para usuarios externos.
 thumbnail-img: /assets/img/posts/thumbnails/powerapps.png
+cover-img: /assets/img/posts/thumbnails/powerapps.png
 ---
 
 En la [entrada de ayer](/2020/03/publicar-aplicacion/) vimos cómo publicar una aplicación dentro del dominio de nuestra organización con usuarios propios de la empresa. Digamos que sirve para una aplicación interna que puede ser utilizada sin inconvenientes.

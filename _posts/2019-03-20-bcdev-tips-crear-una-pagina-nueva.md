@@ -7,6 +7,7 @@ categories: [Aplicaciones de negocio]
 tags: [Dynamics 365 Business Central,Visual Studio Code]
 subtitle: En este artículo muestro como crear una página en BC.
 thumbnail-img: /assets/img/posts/thumbnails/businesscentral.png
+cover-img: /assets/img/posts/thumbnails/businesscentral.png
 ---
 
 En esta entrada explicaré cómo crear una página para que utilice la tabla que hemos creado en la [entrada anterior](/2019/03/bcdev-tips-crear-una-tabla-nueva/). También, hemos visto en este blog una [entrada que trataba sobre la creación de una extensión de página](/2019/02/bc-dev-tips-crear-extension-de-pagina-con-visual-studio-code/).

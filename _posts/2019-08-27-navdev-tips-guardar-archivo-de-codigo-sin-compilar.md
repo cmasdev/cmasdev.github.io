@@ -7,6 +7,7 @@ categories: [Aplicaciones de negocio]
 tags: [C/SIDE,Dynamics NAV]
 subtitle: En este artículo muestro una buena práctica para guardar archivos antes de compiralos.
 thumbnail-img: /assets/img/posts/thumbnails/nav.png
+cover-img: /assets/img/posts/thumbnails/nav.png
 ---
 
 A muchos amigos desarrolladores de C/SIDE les habrá pasado que crearon variables globales, locales, modificar acciones y funciones, luego, al Guardar el archivo de código y seleccionar la opción compilar... BOOOM

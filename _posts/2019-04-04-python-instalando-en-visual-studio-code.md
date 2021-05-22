@@ -7,6 +7,7 @@ categories: [Desarrollo de software]
 tags: [Python,Visual Studio Code]
 subtitle: En este artículo muestro cómo usar Python con VS Code.
 thumbnail-img: /assets/img/posts/thumbnails/python.png
+cover-img: /assets/img/posts/thumbnails/python.png
 ---
 
 En esta entrada veremos cómo instalar Python para utilizarlo con nuestro IDE favorito, el Visual Studio Code. En una [entrada anterior](/2019/04/python-instalacion/), hemos visto cómo instalar Python en uestro Windows.

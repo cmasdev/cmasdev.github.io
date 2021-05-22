@@ -7,6 +7,7 @@ categories: [Aplicaciones de negocio]
 tags: [C/SIDE,Dynamics NAV]
 subtitle: En este artículo muestro como conectar Dynamics NAV 2018 con una base de datos externa.
 thumbnail-img: /assets/img/posts/thumbnails/nav.png
+cover-img: /assets/img/posts/thumbnails/nav.png
 ---
 
 En la entrada anterior, vimos cómo crear una tabla en SQL Server y agregarla en Dynamics NAV (sin consumir licencias). en esta ocasión veremos cómo utilizarla dentro de una página de Dynamics NAV para verificar si los datos son correctos.

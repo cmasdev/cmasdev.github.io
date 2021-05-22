@@ -7,6 +7,7 @@ categories: [Aplicaciones de negocio]
 tags: [Power Automate,PowerApps]
 subtitle: En este artículo muestro cómo integrar Power Automate con PowerApps.
 thumbnail-img: /assets/img/posts/thumbnails/powerautomate.png
+cover-img: /assets/img/posts/thumbnails/powerautomate.png
 ---
 
 En esta oportunidad me gustaría mostrar la integración entre dos aplicaciones disponibles en Office 365, en este caso, PowerApps y Power Automate (Flow).  

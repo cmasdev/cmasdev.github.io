@@ -7,6 +7,7 @@ categories: [Aplicaciones de negocio]
 tags: [Dynamics NAV]
 subtitle: En este artículo muestro cómo comparar registros.
 thumbnail-img: /assets/img/posts/thumbnails/nav.png
+cover-img: /assets/img/posts/thumbnails/nav.png
 ---
 
 Muchas veces necesitamos hacer comparaciones entre los valores nuevos y los valores anteriores para realizar ciertas acciones.

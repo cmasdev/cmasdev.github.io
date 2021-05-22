@@ -7,6 +7,7 @@ categories: [Aplicaciones de negocio]
 tags: [Dynamics 365 Business Central,Visual Studio Code]
 subtitle: En este artículo muestro cómo crear extensiones de tablas en BC.
 thumbnail-img: /assets/img/posts/thumbnails/businesscentral.png
+cover-img: /assets/img/posts/thumbnails/businesscentral.png
 ---
 
 En este Tip, mostraré cómo crear extensiones de tablas en Dynamics 365 Business Central, utilizando Visual Studio Code (que ya se ha convertido en mi principal herramienta de desarrollo).

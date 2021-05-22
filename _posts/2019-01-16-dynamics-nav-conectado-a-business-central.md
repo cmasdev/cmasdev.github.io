@@ -7,6 +7,7 @@ categories: [Aplicaciones de negocio]
 tags: [Dynamics 365 Business Central,Dynamics NAV]
 subtitle: En este artículo muestor cómo conectar NAV con BC.
 thumbnail-img: /assets/img/posts/thumbnails/businesscentral.png
+cover-img: /assets/img/posts/thumbnails/businesscentral.png
 ---
 
 Dynamics 365 Business Central, como ya hemos visto anteriormente posee su interfaz Web (que funciona en todos los dispositivos) pero por el momento tenemos la posibilidad e utilizarlo con el cliente de Dynamics NAV.

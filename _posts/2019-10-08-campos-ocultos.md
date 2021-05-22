@@ -7,6 +7,7 @@ categories: [Aplicaciones de negocio]
 tags: [PowerApps]
 subtitle: En este artículo muestro cómo manejar campos ocultos en PowerApps.
 thumbnail-img: /assets/img/posts/thumbnails/powerapps.png
+cover-img: /assets/img/posts/thumbnails/powerapps.png
 ---
 
 Este último fin de semana me han preguntado cómo puedo manejar campos ocultos en Microsoft PowerApps. La respuesta corta es No se puede. ¿Por qué no se puede?

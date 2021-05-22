@@ -7,6 +7,7 @@ categories: [Aplicaciones de negocio]
 tags: [CRM,Dynamics 365,Dynamics 365 Business Central]
 subtitle: En este artículo muestro cómo integrar BC a CRM.
 thumbnail-img: /assets/img/posts/thumbnails/dynamics365.png
+cover-img: /assets/img/posts/thumbnails/dynamics365.png
 ---
 
 Como todo producto Microsoft existe integraciones entre ellos que nos facilitan la vida. En este caso veremos cómo se integra Dynamics 365 Business Central (On-Premise) con Dynamics 365 for Sales (Cloud).

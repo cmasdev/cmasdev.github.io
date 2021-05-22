@@ -7,6 +7,7 @@ categories: [Aplicaciones de negocio]
 tags: [Dynamics 365 Business Central,Visual Studio Code]
 subtitle: En este artículo muestro cómo crear un nuevo reporte en BC.
 thumbnail-img: /assets/img/posts/thumbnails/businesscentral.png
+cover-img: /assets/img/posts/thumbnails/businesscentral.png
 ---
 
 En la entrada anterior vimos cómo crear una nueva página, aquí crearemos un nuevo reporte. Debemos tener en cuenta que en Dynamics 365 Business Central no se puede modificar un reporte, sólo pueden crearse reportes nuevos. Evidentemente, éstos consumen reportes disponibles en la licencia obtenida por el cliente.

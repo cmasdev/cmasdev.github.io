@@ -7,6 +7,7 @@ categories: [Aplicaciones de negocio]
 tags: [PowerApps]
 subtitle: En este artículo muestro cómo validar controles en PowerApps.
 thumbnail-img: /assets/img/posts/thumbnails/powerapps.png
+cover-img: /assets/img/posts/thumbnails/powerapps.png
 ---
 
 Esta entrada tiene relación con el trabajo con datos, en la entrada anterior vimos cómo ordenar y filtrar datos. Aquí veremos otro punto importante que se basa en las validaciones. Aquí me centraré en validar datos en la pantalla donde se insertan elementos.

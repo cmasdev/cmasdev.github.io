@@ -7,6 +7,7 @@ categories: [Aplicaciones de negocio]
 tags: [Dynamics 365 Business Central]
 subtitle: En este artículo doy un paseo por el nuevo entorno de desarrollo.
 thumbnail-img: /assets/img/posts/thumbnails/businesscentral.png
+cover-img: /assets/img/posts/thumbnails/businesscentral.png
 ---
 
 Luego de la instalación de Dynamics 365 Business Central, me encontré con el entorno de desarrollo del mismo y nada a cambiado...  

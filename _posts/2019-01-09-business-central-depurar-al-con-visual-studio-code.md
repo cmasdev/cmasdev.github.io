@@ -7,6 +7,7 @@ categories: [Aplicaciones de negocio]
 tags: [Dynamics 365 Business Central]
 subtitle: 
 thumbnail-img: /assets/img/posts/thumbnails/businesscentral.png
+cover-img: /assets/img/posts/thumbnails/businesscentral.png
 ---
 
 En la entrada anterior, vimos cómo publicar el desarrollo de extensiones con Visual Studio Code y mostramos un mensaje de bienvenida. En esta entrada, veremos como depurar dicha extensión desde el Visual Studio Code.

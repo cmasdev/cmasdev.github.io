@@ -7,6 +7,7 @@ categories: [Aplicaciones de negocio]
 tags: [C/SIDE,Dynamics NAV]
 subtitle: En este artículo muestro explico las diferencias conceptuales entre variables.
 thumbnail-img: /assets/img/posts/thumbnails/nav.png
+cover-img: /assets/img/posts/thumbnails/nav.png
 ---
 
 En esta oportunidad, quiero exponerles un punto de vista que al final de cuentas resultará en un buen consejo de desarrollo.

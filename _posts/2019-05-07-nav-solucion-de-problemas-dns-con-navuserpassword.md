@@ -7,6 +7,7 @@ categories: [Aplicaciones de negocio]
 tags: [Dynamics NAV]
 subtitle: En este artículo muestra una solución a problemas entre NAV y DNS.
 thumbnail-img: /assets/img/posts/thumbnails/nav.png
+cover-img: /assets/img/posts/thumbnails/nav.png
 ---
 
 Recibí la llamada de un cliente referente a una situación de conexión entre el Servidor NAV y su cliente, que en este caso utilizan las credenciales de tipo **NavUserPassword**. El problema se muestra en la siguiente imagen (CMASUS es el nombre de referencia del Servidor):  

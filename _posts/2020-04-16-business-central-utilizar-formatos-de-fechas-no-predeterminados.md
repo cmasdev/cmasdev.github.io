@@ -7,6 +7,7 @@ category: [Aplicaciones de negocio]
 tag: [AL, Dynamics 365 Business Central]
 subtitle: En este artículo verás cómo utilizar formatos de fechas no predeterminados...
 thumbnail-img: /assets/img/posts/thumbnails/businesscentral.png
+cover-img: /assets/img/posts/thumbnails/businesscentral.png
 ---
 
 En cualquier lenguaje de programación el tipo de dato más complejo es justamente la fecha. ¿Por qué? Porque las configuraciones regionales hacen que varíe el formato y ahí se presten a confusiones o errores. En este artículo veremos cómo utilizar formatos de fechas no predeterminados.

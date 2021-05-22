@@ -7,6 +7,7 @@ categories: [Aplicaciones de negocio]
 tags: [PowerApps]
 subtitle: En este artículo muestro cómo publicar una aplicación desarrollada con PowerApps.
 thumbnail-img: /assets/img/posts/thumbnails/powerapps.png
+cover-img: /assets/img/posts/thumbnails/powerapps.png
 ---
 
 En esta oportunidad quiero mostrar cómo publicar una aplicación "desarrollada" con PowerApps. La publicación es muy sencilla y en pocos pasos está disponible para ser utilizada sin inconveniente alguno.  

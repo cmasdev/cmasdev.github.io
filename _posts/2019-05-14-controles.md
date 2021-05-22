@@ -7,6 +7,7 @@ categories: [Aplicaciones de negocio]
 tags: [PowerApps]
 subtitle: En este artículo muestro cómo trabajar con controles.
 thumbnail-img: /assets/img/posts/thumbnails/powerapps.png
+cover-img: /assets/img/posts/thumbnails/powerapps.png
 ---
 
 Continuando la serie que empezamos en la [entrada anterior](/2019/05/formularios/), en esta ocasión hablaremos sobre los controles disponibles en Microsoft PowerApps.

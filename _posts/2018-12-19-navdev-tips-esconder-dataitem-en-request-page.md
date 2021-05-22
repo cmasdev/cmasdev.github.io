@@ -7,6 +7,7 @@ categories: [Aplicaciones de negocio]
 tags: [Dynamics NAV]
 subtitle: En este artículo muestro cómo esconder un Dataitem en la ventana de parámetros
 thumbnail-img: /assets/img/posts/thumbnails/nav.png
+cover-img: /assets/img/posts/thumbnails/nav.png
 ---
 
 De manera nativa, nos encontramos con la ventana de parámetros en Microsoft Dynamics NAV 2018. Muchas veces necesitamos esconder esa ventana de parámetros y ese es el tema central de esta entrada

@@ -7,6 +7,7 @@ categories: [Aplicaciones de negocio]
 tags: [AL,Dynamics 365 Business Central]
 subtitle: En este artículo muestro cómo modificar funciones en AL.
 thumbnail-img: /assets/img/posts/thumbnails/businesscentral.png
+cover-img: /assets/img/posts/thumbnails/businesscentral.png
 ---
 
 Supongamos que deseamos validar que un cheque no pueda ser anulado por algún motivo. Nativamente Business Central no tiene esta funcionalidad, entonces lo más lógico es agregar código al CodeUnit 367 "Check Management" para agregar toda la funcionalidad requerido.  

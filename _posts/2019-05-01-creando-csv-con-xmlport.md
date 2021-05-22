@@ -7,6 +7,7 @@ categories: [Aplicaciones de negocio]
 tags: [C/SIDE,Dynamics NAV]
 subtitle: En este artículo muestro cómo crear un archivo csv.
 thumbnail-img: /assets/img/posts/thumbnails/nav.png
+cover-img: /assets/img/posts/thumbnails/nav.png
 ---
 
 Hace tiempo veía una opción que se llamaba **XMLPort** y surgió el interés en saber a qué se refería. Pero entre el trabajo y otras actividades no tuve tiempo de darle una miradita.

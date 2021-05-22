@@ -7,6 +7,7 @@ categories: [Aplicaciones de negocio]
 tags: [Dynamics 365 Business Central]
 subtitle: En este artículo muestro cómo usar DataItem temporal en Business Central.
 thumbnail-img: /assets/img/posts/thumbnails/businesscentral.png
+cover-img: /assets/img/posts/thumbnails/businesscentral.png
 ---
 
 En una [entrada anterior](/2019/06/nav-dataitem-temporal-en-reporte/), hemos visto cómo realizar esta tarea desde Dynamics NAV 2018. Ahora toca el turno de verlo cómo se hace en Business Central.  

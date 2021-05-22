@@ -7,6 +7,7 @@ categories: [General]
 tags: [Microsoft MVP]
 subtitle: Agradecimiento a Microsoft y a la comunidad :D
 thumbnail-img: /assets/img/posts/thumbnails/mvp.png
+cover-img: /assets/img/posts/thumbnails/mvp.png
 ---
 
 [Llegó la renovación por otro año más](https://mvp.microsoft.com/en-us/PublicProfile/5001273):

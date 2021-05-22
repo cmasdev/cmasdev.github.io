@@ -7,6 +7,7 @@ categories: [Aplicaciones de negocio]
 tags: [PowerApps]
 subtitle: En este artículo muestro cómo crear una barra de progreso en PowerApps
 thumbnail-img: /assets/img/posts/thumbnails/powerapps.png
+cover-img: /assets/img/posts/thumbnails/powerapps.png
 ---
 
 Otra herramienta que se utiliza mucho a la hora de desarrollar aplicaciones es la barra de progreso, para mostrar algún avance en el proceso. En Microsoft PowerApps no tenemos un control especializado para realizar esa tarea, por lo tanto debemos crear algo que simule esa tarea.

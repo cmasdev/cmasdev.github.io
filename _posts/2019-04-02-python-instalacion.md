@@ -7,6 +7,7 @@ categories: [Desarrollo de software]
 tags: [Python]
 subtitle: En este artículo muestro cómo instalarlo.
 thumbnail-img: /assets/img/posts/thumbnails/python.png
+cover-img: /assets/img/posts/thumbnails/python.png
 ---
 
 A partir de hoy, volveré a escribir artículos referentes a desarrollo de software. Además de aplicaciones de negocios me apasiona lo referente al mundo del desarrollo. ¡Así que manos a la obra!

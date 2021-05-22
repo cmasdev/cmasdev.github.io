@@ -7,6 +7,7 @@ categories: [Aplicaciones de negocio]
 tags: [PowerApps]
 subtitle: En este artículo muestro como utilizar Tablas.
 thumbnail-img: /assets/img/posts/thumbnails/powerapps.png
+cover-img: /assets/img/posts/thumbnails/powerapps.png
 ---
 
 En una [entrada anterior](/2019/05/formularios/), dimos un adelanto sobre este tema debido a que trabajamos con formulario. En este caso mostraré las operaciones CRUD (Create, Read, Update y Delete) que se pueden realizar en una base de datos. Sin dar demasiadas vueltas, empecemos con las operaciones.
