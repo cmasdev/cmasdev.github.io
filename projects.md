@@ -1,6 +1,7 @@
 ---
-title = "Projects"
-slug = "projects"
+layout: page
+title: Projects
+subtitle: 
 ---
 
 Nothing here yet... Coming Soon!

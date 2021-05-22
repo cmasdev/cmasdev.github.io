@@ -1,6 +1,7 @@
 ---
-title = "Contact"
-slug = "contact"
+layout: page
+title: Contact
+subtitle: 
 ---
 
 # Contact
