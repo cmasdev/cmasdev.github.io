@@ -8,7 +8,7 @@ tag:
         - Flow
         - 'Power Automate'
 subtitle: En este artículo verás cómo enviar correo automáticamente luego de completar un formulario en línea. :P
-thumbnail: powerautomate.png
+thumbnail-img: /assets/img/posts/thumbnails/powerautomate.png
 ---
 
 En esta ocasión, quiero compartir con ustedes una funcionalidad muy buena de Power Automate. Imaginemos que necesitamos completar un formulario y que la respuesta sea enviada por correo electrónica a dicho usuario.

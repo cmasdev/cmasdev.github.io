@@ -6,7 +6,7 @@ date: 2020-03-24 12:41:47 -04:00
 categories: [Aplicaciones de negocio]
 tags: [AL,Dynamics 365 Business Central,Visual Studio Code]
 subtitle: En este artículo veremos cómo crear un repositorio en Azure DevOps Services.
-thumbnail: businesscentral.png
+thumbnail-img: /assets/img/posts/thumbnails/businesscentral.png
 ---
 
 En la [entrada anterior](/2020/03/bcdev-tips-configurar-entorno-de-desarrollo-parte-1/), vimos cómo crear un repositorio con Azure DevOps Services y cómo instalar Git en nuestro Windows.  

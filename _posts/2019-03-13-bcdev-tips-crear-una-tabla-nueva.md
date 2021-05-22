@@ -6,7 +6,7 @@ date: 2019-03-13 19:34:23 -04:00
 categories: [Aplicaciones de negocio]
 tags: [Dynamics 365 Business Central,Visual Studio Code]
 subtitle: En este artículo muestro como crear una tabla en BC.
-thumbnail: businesscentral.png
+thumbnail-img: /assets/img/posts/thumbnails/businesscentral.png
 ---
 
 En esta entrada veremos cómo crear una tabla en Dynamics 365 Business Central con Visual Studio Code. Hemos visto en una [entrada anterior](/2019/02/bc-dev-tips-crear-extension-de-tabla-con-visual-studio-code/), cómo crear una extensión de tabla. Aquí hablamos de crear una tabla, por lo tanto, la diferencia radica en el licenciamiento. Pues en el primer caso no se consumen las tablas de la licencia, en la segunda sí.

@@ -6,7 +6,7 @@ date: 2019-10-22 19:24:11 -04:00
 categories: [Aplicaciones de negocio]
 tags: [PowerApps]
 subtitle: En este artículo muestro cómo ver documentos PDF en PowerApps.
-thumbnail: powerapps.png
+thumbnail-img: /assets/img/posts/thumbnails/powerapps.png
 ---
 
 Muchas veces necesitamos, poder visualizar documentos en nuestras aplicaciones. A la fecha, uno de los documentos más utilizados es el formato PDF.

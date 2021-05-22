@@ -9,7 +9,7 @@ tag:
         - 'C/SIDE'
         - 'Dynamics 365 Business Central'
 subtitle: En este artículo verás cómo convertir código C/SIDE (Dynamics NAV) al código AL (nuevo en Dynamics 365 Business Central)...
-thumbnail: businesscentral.png
+thumbnail-img: /assets/img/posts/thumbnails/businesscentral.png
 ---
 
 La semana pasada me tocó realizar migración de Dynamics NAV 2018 a Dynamics 365 Business Central Wave 2 y me encontré con que debía hacerlo tabla por tabla. Va ser un proceso muy largo, cuanto más objetos tengas más código escribiremos. Es por eso que el propio **Dynamics 365 Business Central** trae una herramienta que hace ese trabajo por nosotros. Se llama **Txt2AL.exe** y es muy útil.

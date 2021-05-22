@@ -6,7 +6,7 @@ date: 2020-03-28 14:54:57 -04:00
 categories: [Aplicaciones de negocio]
 tags: [AL,Dynamics 365 Business Central,Visual Studio Code]
 subtitle: En este artículo verás cómo modificar código AL.
-thumbnail: businesscentral.png
+thumbnail-img: /assets/img/posts/thumbnails/businesscentral.png
 ---
 
 Dynamics 365 Business Central trajo consigo muchos cambios novedosos. En la empresa donde trabajo estamos implementando uno y nos encontramos con un tema no menor: ¡No podemos modificar el trigger de una tabla!  

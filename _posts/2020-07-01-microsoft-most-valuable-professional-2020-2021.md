@@ -6,7 +6,7 @@ date: 2020-07-01 08:30:00 -04:00
 categories: General
 tags: [Microsoft MVP]
 subtitle: Agradecimiento a Microsoft y a la comunidad :D
-thumbnail: mvp.png
+thumbnail-img: /assets/img/posts/thumbnails/mvp.png
 ---
 
 [Llegó la renovación por otro año más](https://mvp.microsoft.com/en-us/PublicProfile/5001273):

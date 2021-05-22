@@ -6,7 +6,7 @@ date: 2019-06-11 12:49:07 -04:00
 categories: [Aplicaciones de negocio]
 tags: [C/SIDE,Dynamics NAV]
 subtitle: En este artículo muestro como abrir .exe en NAV.
-thumbnail: nav.png
+thumbnail-img: /assets/img/posts/thumbnails/nav.png
 ---
 
 En esta ocasión quiero compartir con ustedes una información bastante útil referente al consumo de aplicaciones ya desarrolladas. Normalmente, es ley no reinventar la rueda en cuanto a trabajos de desarrollo se refiere. Vamos a un caso puntual...

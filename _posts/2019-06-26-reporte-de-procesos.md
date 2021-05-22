@@ -6,7 +6,7 @@ date: 2019-06-26 19:06:12 -04:00
 categories: [Aplicaciones de negocio]
 tags: [C/SIDE,Dynamics NAV]
 subtitle: En este artículo muestro cómo crear reprote de procesos.
-thumbnail: nav.png
+thumbnail-img: /assets/img/posts/thumbnails/nav.png
 ---
 
 En el mundo de Dynamics NAV el reporte tiene dos funciones:

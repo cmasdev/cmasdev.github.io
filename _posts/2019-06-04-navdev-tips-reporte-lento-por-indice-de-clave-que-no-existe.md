@@ -6,7 +6,7 @@ date: 2019-06-04 23:32:29 -04:00
 categories: [Aplicaciones de negocio]
 tags: [Dynamics NAV]
 subtitle: En este artículo vemos cómo solucionar un tema de índices.
-thumbnail: nav.png
+thumbnail-img: /assets/img/posts/thumbnails/nav.png
 ---
 
 Dependiendo de la cantidad de datos y de la manera en que se ha desarrollado un reporte éste puede ser lento en su carga. Para este caso consideremos culpable al equipo de desarrollo.

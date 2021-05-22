@@ -6,7 +6,7 @@ date: 2019-06-12 22:44:30 -04:00
 categories: [Aplicaciones de negocio]
 tags: [C/SIDE,Dynamics NAV]
 subtitle: En este artículo muestro como cargar un DataItem temporal.
-thumbnail: nav.png
+thumbnail-img: /assets/img/posts/thumbnails/nav.png
 ---
 
 Dentro del mundo de desarrollo de Microsoft Dynamics NAV 2018 existen limitaciones, por ejemplo, sólo se pueden crear hasta 10 tablas (luego se deben comprar más tablas si se desea seguir desarrollando). Es por eso, que muchas veces necesitamos procesar el resultado de una tabla existente dentro de la misma tabla, pero haciéndola temporal sólo para emitir un reporte.

@@ -6,7 +6,7 @@ date: 2019-12-05 23:11:50 -04:00
 categories: [Aplicaciones de negocio]
 tags: [PowerApps]
 subtitle: En este artículo muestro cómo colocar una imagen de procesamiento en PowerApps.
-thumbnail: powerapps.png
+thumbnail-img: /assets/img/posts/thumbnails/powerapps.png
 ---
 
 En una entrada anterior, habíamos visto cómo crear una barra de progreso dentro de PowerApps. Vimos que no existe un control como tal pero que podemos adaptar uno a las necesidades que vamos teniendo.

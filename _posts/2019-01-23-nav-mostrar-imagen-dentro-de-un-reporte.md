@@ -6,7 +6,7 @@ date: 2019-01-23 18:26:33 -04:00
 categories: [Aplicaciones de negocio]
 tags: [Dynamics NAV]
 subtitle: En este artículo muestro como cargar imagen en reporte
-thumbnail: nav.png
+thumbnail-img: /assets/img/posts/thumbnails/nav.png
 ---
 
 En esta entrada pretendo mostrar los pasos para poder cargar una imagen dentro de un reporte en Dynamics NAV 2018. No resulta complicado pero sí es un proceso largo para realizar una tarea tan simple.

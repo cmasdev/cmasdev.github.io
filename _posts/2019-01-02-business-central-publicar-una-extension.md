@@ -6,7 +6,7 @@ date: 2019-01-02 22:19:10 -04:00
 categories: [Aplicaciones de negocio]
 tags: [Dynamics 365 Business Central]
 subtitle: En este artículo muestro cómo publicar una extensión
-thumbnail: businesscentral.png
+thumbnail-img: /assets/img/posts/thumbnails/businesscentral.png
 ---
 
 En una [entrada anterior](/2018/12/business-central-entorno-de-desarrollo-con-visual-studio-code/), vimos cómo preparar un entorno de desarrollo de extensiones con Visual Studio Code y hemos intentado mostrar un mensaje de bienvenida. En esta entrada, veremos como publicar dicha extensión desde el Visual Studio Code y desde el "Business Central Web Client".

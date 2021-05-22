@@ -6,7 +6,7 @@ date: 2020-02-19 23:10:13 -04:00
 categories: [Aplicaciones de negocio]
 tags: [Dynamics 365 Business Central]
 subtitle: En este artículo muestro cómo cargar el archivo de licencia para Business Central.
-thumbnail: businesscentral.png
+thumbnail-img: /assets/img/posts/thumbnails/businesscentral.png
 ---
 
 Resulta que el nuevo Business Central Wave 2 no trae consigo el entorno de desarrollo de NAV y por ende no podemos cargar el archivo de licencia de manera visual. De hecho, casi nada se puede hacer de manera visual, todo por código. Encantador, para los desarrolladores.  

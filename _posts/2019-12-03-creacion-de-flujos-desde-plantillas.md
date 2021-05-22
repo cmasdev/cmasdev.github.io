@@ -6,7 +6,7 @@ date: 2019-12-03 13:50:53 -04:00
 categories: [Aplicaciones de negocio]
 tags: [Flow,Power Automate]
 subtitle: En este artículo muestro cómo crear flujos desde plantillas con Power Automate.
-thumbnail: powerautomate.png
+thumbnail-img: /assets/img/posts/thumbnails/powerautomate.png
 ---
 
 Alguna vez en el pasado [había escrito algo sobre los primeros pasos con Microsoft Flow](/2018/08/primeros-pasos-con-microsoft-flow/). Microsoft ha cambiado el nombre del producto y ahora se llama Microsoft Power Automate que tiene las mismas funcionalidades agregándoles nuevas.

@@ -6,7 +6,7 @@ date: 2019-12-26 13:47:18 -04:00
 categories: [Aplicaciones de negocio]
 tags: [CRM,Dynamics 365]
 subtitle: En este artículo explico que no se puede integrar WhatssApp con Dynamics 365.
-thumbnail: dynamics365.png
+thumbnail-img: /assets/img/posts/thumbnails/dynamics365.png
 ---
 
 Estamos cerrando el año y en casi todas las presentaciones de producto que hemos tenido en los últimos meses surgió una pregunta en común por parte de los potenciales clientes de mi empresa.

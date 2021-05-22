@@ -6,7 +6,7 @@ date: 2019-04-09 20:35:15 -04:00
 categories: [Aplicaciones de negocio]
 tags: [CRM,Dynamics 365,Dynamics 365 Business Central]
 subtitle: En este artículo muestro cómo establecer valores predeterminados en BC.
-thumbnail: dynamics365.png
+thumbnail-img: /assets/img/posts/thumbnails/dynamics365.png
 ---
 
 Siguiendo con el tema de la integración entre Dynamics 365 Business Central y Dynamics 365 for Sales es bueno entender cuáles son los valores predeterminados en una integración. Para eso debemos ingresar en la página correspondiente y ver cuales son sus valores iniciales. A la primera, ya podemos tener algo integrado. en esta entrada veremos cómo integrar las cuentas entre ambos productos.
