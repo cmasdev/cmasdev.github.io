@@ -15,7 +15,6 @@ author: Christian Amado
 
 navbar-links:
   About Me: "aboutme"
-  Blog: "/"
   Projects: "projects"
   Contact: "contact"
   Tags: "tags"
