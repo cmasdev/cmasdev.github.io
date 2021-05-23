@@ -6,8 +6,8 @@ date: 2018-11-14 23:33:02 -04:00
 categories: [Aplicaciones de negocio]
 tags: [Dynamics 365 Business Central]
 subtitle: 
-thumbnail-img: /assets/img/posts/thumbnails/general.png
-cover-img: /assets/img/posts/thumbnails/general.png
+thumbnail-img: /assets/img/posts/thumbnails/businesscentral.png
+cover-img: /assets/img/posts/thumbnails/businesscentral.png
 ---
 
 Cuando le estaba tomando mucho cariño a Microsoft Dynamics NAV 2018, me encuentro con este producto. Básicamente es la nueva versión de Dynamics NAV pero orientado a la nube y al uso de navegadores Web. Tal como acabas de leer, El cliente Windows se eliminará en las próximas versiones (por el momento sigue disponible).
