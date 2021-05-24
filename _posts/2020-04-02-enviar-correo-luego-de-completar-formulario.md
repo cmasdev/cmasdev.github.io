@@ -7,7 +7,6 @@ category: Aplicaciones de negocio
 tag:
         - Flow
         - 'Power Automate'
-subtitle: En este artículo verás cómo enviar correo automáticamente luego de completar un formulario en línea. :P
 thumbnail-img: /assets/img/posts/thumbnails/powerautomate.png
 cover-img: /assets/img/posts/thumbnails/powerautomate.png
 ---

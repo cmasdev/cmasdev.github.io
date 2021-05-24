@@ -5,7 +5,6 @@ author: "Christian Amado"
 date: 2020-03-26 12:17:18 -04:00
 categories: [Aplicaciones de negocio]
 tags: [Dynamics 365 Business Central]
-subtitle: En este artículo muestro cómo eliminar una extensión en Business Central.
 thumbnail-img: /assets/img/posts/thumbnails/businesscentral.png
 cover-img: /assets/img/posts/thumbnails/businesscentral.png
 ---

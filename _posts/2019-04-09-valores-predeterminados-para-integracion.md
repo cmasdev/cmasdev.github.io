@@ -5,7 +5,6 @@ author: "Christian Amado"
 date: 2019-04-09 20:35:15 -04:00
 categories: [Aplicaciones de negocio]
 tags: [CRM,Dynamics 365,Dynamics 365 Business Central]
-subtitle: En este artículo muestro cómo establecer valores predeterminados en BC.
 thumbnail-img: /assets/img/posts/thumbnails/dynamics365.png
 cover-img: /assets/img/posts/thumbnails/dynamics365.png
 ---

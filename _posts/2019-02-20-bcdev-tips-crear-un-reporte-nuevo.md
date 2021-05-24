@@ -5,7 +5,6 @@ author: "Christian Amado"
 date: 2019-02-20 22:51:59 -04:00
 categories: [Aplicaciones de negocio]
 tags: [Dynamics 365 Business Central,Visual Studio Code]
-subtitle: En este artículo muestro cómo crear un nuevo reporte en BC.
 thumbnail-img: /assets/img/posts/thumbnails/businesscentral.png
 cover-img: /assets/img/posts/thumbnails/businesscentral.png
 ---

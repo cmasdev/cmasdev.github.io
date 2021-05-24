@@ -5,7 +5,6 @@ author: "Christian Amado"
 date: 2019-01-02 22:19:10 -04:00
 categories: [Aplicaciones de negocio]
 tags: [Dynamics 365 Business Central]
-subtitle: En este artículo muestro cómo publicar una extensión
 thumbnail-img: /assets/img/posts/thumbnails/businesscentral.png
 cover-img: /assets/img/posts/thumbnails/businesscentral.png
 ---

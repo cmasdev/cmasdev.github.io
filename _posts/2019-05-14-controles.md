@@ -5,7 +5,6 @@ author: "Christian Amado"
 date: 2019-05-14 22:52:47 -04:00
 categories: [Aplicaciones de negocio]
 tags: [PowerApps]
-subtitle: En este artículo muestro cómo trabajar con controles.
 thumbnail-img: /assets/img/posts/thumbnails/powerapps.png
 cover-img: /assets/img/posts/thumbnails/powerapps.png
 ---

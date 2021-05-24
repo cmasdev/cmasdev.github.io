@@ -5,7 +5,6 @@ author: "Christian Amado"
 date: 2020-01-15 22:31:59 -04:00
 categories: [Aplicaciones de negocio]
 tags: [Power Automate,PowerApps]
-subtitle: En este artículo muestro cómo integrar Power Automate con PowerApps.
 thumbnail-img: /assets/img/posts/thumbnails/powerautomate.png
 cover-img: /assets/img/posts/thumbnails/powerautomate.png
 ---

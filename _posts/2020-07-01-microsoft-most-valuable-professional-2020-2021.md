@@ -5,7 +5,6 @@ author: "Christian Amado"
 date: 2020-07-01 08:30:00 -04:00
 categories: General
 tags: [Microsoft MVP]
-subtitle: Agradecimiento a Microsoft y a la comunidad :D
 thumbnail-img: /assets/img/posts/thumbnails/mvp.png
 cover-img: /assets/img/posts/thumbnails/mvp.png
 ---

@@ -5,7 +5,6 @@ author: "Christian Amado"
 date: 2019-01-16 20:02:53 -04:00
 categories: [Aplicaciones de negocio]
 tags: [Dynamics 365 Business Central,Dynamics NAV]
-subtitle: En este artículo muestor cómo conectar NAV con BC.
 thumbnail-img: /assets/img/posts/thumbnails/businesscentral.png
 cover-img: /assets/img/posts/thumbnails/businesscentral.png
 ---

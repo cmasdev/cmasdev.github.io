@@ -5,7 +5,6 @@ author: "Christian Amado"
 date: 2020-03-28 14:54:57 -04:00
 categories: [Aplicaciones de negocio]
 tags: [AL,Dynamics 365 Business Central,Visual Studio Code]
-subtitle: En este artículo verás cómo modificar código AL.
 thumbnail-img: /assets/img/posts/thumbnails/businesscentral.png
 cover-img: /assets/img/posts/thumbnails/businesscentral.png
 ---

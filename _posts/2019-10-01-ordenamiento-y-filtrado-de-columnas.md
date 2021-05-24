@@ -5,7 +5,6 @@ author: "Christian Amado"
 date: 2019-10-01 18:54:23 -04:00
 categories: [Aplicaciones de negocio]
 tags: [PowerApps]
-subtitle: En este artículo muestro cómo ordernar y filtrar datos de columnas.
 thumbnail-img: /assets/img/posts/thumbnails/powerapps.png
 cover-img: /assets/img/posts/thumbnails/powerapps.png
 ---

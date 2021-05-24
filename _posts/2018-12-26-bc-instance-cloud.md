@@ -5,7 +5,6 @@ author: "Christian Amado"
 date: 2018-12-26 19:01:04 -04:00
 categories: [Aplicaciones de negocio]
 tags: [Azure,Dynamics 365 Business Central]
-subtitle: En este artículo muestro cómo crear instancia de BC en nube.
 thumbnail-img: /assets/img/posts/thumbnails/businesscentral.png
 cover-img: /assets/img/posts/thumbnails/businesscentral.png
 ---

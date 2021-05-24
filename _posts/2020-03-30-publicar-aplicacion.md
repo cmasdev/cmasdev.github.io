@@ -5,7 +5,6 @@ author: "Christian Amado"
 date: 2020-03-30 18:09:32 -04:00
 categories: [Aplicaciones de negocio]
 tags: [PowerApps]
-subtitle: En este artículo muestro cómo publicar una aplicación desarrollada con PowerApps.
 thumbnail-img: /assets/img/posts/thumbnails/powerapps.png
 cover-img: /assets/img/posts/thumbnails/powerapps.png
 ---

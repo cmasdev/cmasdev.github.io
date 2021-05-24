@@ -5,7 +5,6 @@ author: "Christian Amado"
 date: 2018-11-21 23:34:36 -04:00
 categories: [Aplicaciones de negocio]
 tags: [Dynamics NAV]
-subtitle: En este artículo muestro cómo filtrar campos en NAV.
 thumbnail-img: /assets/img/posts/thumbnails/nav.png
 cover-img: /assets/img/posts/thumbnails/nav.png
 ---

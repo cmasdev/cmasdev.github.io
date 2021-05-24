@@ -5,7 +5,6 @@ author: "Christian Amado"
 date: 2019-01-09 20:48:33 -04:00
 categories: [Aplicaciones de negocio]
 tags: [Dynamics 365 Business Central]
-subtitle: 
 thumbnail-img: /assets/img/posts/thumbnails/businesscentral.png
 cover-img: /assets/img/posts/thumbnails/businesscentral.png
 ---

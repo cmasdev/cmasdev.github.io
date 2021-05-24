@@ -5,7 +5,6 @@ author: "Christian Amado"
 date: 2020-03-24 12:41:47 -04:00
 categories: [Aplicaciones de negocio]
 tags: [AL,Dynamics 365 Business Central,Visual Studio Code]
-subtitle: En este artículo veremos cómo crear un repositorio en Azure DevOps Services.
 thumbnail-img: /assets/img/posts/thumbnails/businesscentral.png
 cover-img: /assets/img/posts/thumbnails/businesscentral.png
 ---

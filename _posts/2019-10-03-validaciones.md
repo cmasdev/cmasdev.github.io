@@ -5,7 +5,6 @@ author: "Christian Amado"
 date: 2019-10-03 20:11:49 -04:00
 categories: [Aplicaciones de negocio]
 tags: [PowerApps]
-subtitle: En este artículo muestro cómo validar controles en PowerApps.
 thumbnail-img: /assets/img/posts/thumbnails/powerapps.png
 cover-img: /assets/img/posts/thumbnails/powerapps.png
 ---

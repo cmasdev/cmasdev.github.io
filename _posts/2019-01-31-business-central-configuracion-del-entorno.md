@@ -5,7 +5,6 @@ author: "Christian Amado"
 date: 2019-01-30 23:48:39 -04:00
 categories: [Aplicaciones de negocio]
 tags: [Dynamics 365 Business Central]
-subtitle: en este artículo muesro cómo configurar BC.
 thumbnail-img: /assets/img/posts/thumbnails/businesscentral.png
 cover-img: /assets/img/posts/thumbnails/businesscentral.png
 ---

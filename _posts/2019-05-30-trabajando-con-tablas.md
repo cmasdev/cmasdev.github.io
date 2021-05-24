@@ -5,7 +5,6 @@ author: "Christian Amado"
 date: 2019-05-30 20:59:02 -04:00
 categories: [Aplicaciones de negocio]
 tags: [PowerApps]
-subtitle: En este artículo muestro como utilizar Tablas.
 thumbnail-img: /assets/img/posts/thumbnails/powerapps.png
 cover-img: /assets/img/posts/thumbnails/powerapps.png
 ---

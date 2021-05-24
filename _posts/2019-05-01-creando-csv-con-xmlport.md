@@ -5,7 +5,6 @@ author: "Christian Amado"
 date: 2019-05-01 23:13:56 -04:00
 categories: [Aplicaciones de negocio]
 tags: [C/SIDE,Dynamics NAV]
-subtitle: En este artículo muestro cómo crear un archivo csv.
 thumbnail-img: /assets/img/posts/thumbnails/nav.png
 cover-img: /assets/img/posts/thumbnails/nav.png
 ---

@@ -5,7 +5,6 @@ author: "Christian Amado"
 date: 2020-01-22 20:55:38 -04:00
 categories: [Aplicaciones de negocio]
 tags: [PowerApps]
-subtitle: En este artículos muestro los tipos de pantallas disponibles en PowerApps.
 thumbnail-img: /assets/img/posts/thumbnails/powerapps.png
 cover-img: /assets/img/posts/thumbnails/powerapps.png
 ---

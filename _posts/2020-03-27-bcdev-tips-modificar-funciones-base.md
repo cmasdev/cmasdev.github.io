@@ -5,7 +5,6 @@ author: "Christian Amado"
 date: 2020-03-27 19:49:50 -04:00
 categories: [Aplicaciones de negocio]
 tags: [AL,Dynamics 365 Business Central]
-subtitle: En este artículo muestro cómo modificar funciones en AL.
 thumbnail-img: /assets/img/posts/thumbnails/businesscentral.png
 cover-img: /assets/img/posts/thumbnails/businesscentral.png
 ---

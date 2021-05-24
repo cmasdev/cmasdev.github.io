@@ -5,7 +5,6 @@ author: "Christian Amado"
 date: 2019-01-23 18:26:33 -04:00
 categories: [Aplicaciones de negocio]
 tags: [Dynamics NAV]
-subtitle: En este artículo muestro como cargar imagen en reporte
 thumbnail-img: /assets/img/posts/thumbnails/nav.png
 cover-img: /assets/img/posts/thumbnails/nav.png
 ---

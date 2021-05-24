@@ -5,7 +5,6 @@ author: "Christian Amado"
 date: 2019-12-18 22:36:06 -04:00
 categories: [Aplicaciones de negocio]
 tags: [C/SIDE,Dynamics NAV]
-subtitle: En este artículo muestro como conectar Dynamics NAV 2018 con una base de datos externa.
 thumbnail-img: /assets/img/posts/thumbnails/nav.png
 cover-img: /assets/img/posts/thumbnails/nav.png
 ---

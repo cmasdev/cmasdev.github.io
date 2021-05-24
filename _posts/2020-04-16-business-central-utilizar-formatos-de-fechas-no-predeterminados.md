@@ -5,7 +5,6 @@ author: Christian Amado
 date: 2020-04-16 19:43:00 -0400
 category: [Aplicaciones de negocio]
 tag: [AL, Dynamics 365 Business Central]
-subtitle: En este artículo verás cómo utilizar formatos de fechas no predeterminados...
 thumbnail-img: /assets/img/posts/thumbnails/businesscentral.png
 cover-img: /assets/img/posts/thumbnails/businesscentral.png
 ---

@@ -5,7 +5,6 @@ author: "Christian Amado"
 date: 2018-11-28 21:42:18 -04:00
 categories: [Aplicaciones de negocio]
 tags: [Dynamics NAV]
-subtitle: En este artículo muestro cómo comparar registros.
 thumbnail-img: /assets/img/posts/thumbnails/nav.png
 cover-img: /assets/img/posts/thumbnails/nav.png
 ---

@@ -5,7 +5,6 @@ author: "Christian Amado"
 date: 2018-12-12 20:25:24 -04:00
 categories: [Aplicaciones de negocio]
 tags: [Dynamics 365 Business Central]
-subtitle: En este artículo doy un paseo por el nuevo entorno de desarrollo.
 thumbnail-img: /assets/img/posts/thumbnails/businesscentral.png
 cover-img: /assets/img/posts/thumbnails/businesscentral.png
 ---

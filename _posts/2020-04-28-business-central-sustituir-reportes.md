@@ -5,7 +5,6 @@ author: Christian Amado
 date: 2020-04-28 22:53:00 -0400
 category: [Aplicaciones de negocio]
 tag: [AL, Dynamics 365 Business Central]
-subtitle: En este artículo verás cómo sustituir el diseño de reportes nativos...
 thumbnail-img: /assets/img/posts/thumbnails/businesscentral.png
 cover-img: /assets/img/posts/thumbnails/businesscentral.png
 ---

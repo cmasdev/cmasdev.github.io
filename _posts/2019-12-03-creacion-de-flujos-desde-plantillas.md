@@ -5,7 +5,6 @@ author: "Christian Amado"
 date: 2019-12-03 13:50:53 -04:00
 categories: [Aplicaciones de negocio]
 tags: [Flow,Power Automate]
-subtitle: En este artículo muestro cómo crear flujos desde plantillas con Power Automate.
 thumbnail-img: /assets/img/posts/thumbnails/powerautomate.png
 cover-img: /assets/img/posts/thumbnails/powerautomate.png
 ---

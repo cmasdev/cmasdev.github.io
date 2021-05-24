@@ -5,7 +5,6 @@ author: "Christian Amado"
 date: 2019-07-01 07:30:35 -04:00
 categories: [General]
 tags: [Microsoft MVP]
-subtitle: Agradecimiento a Microsoft y a la comunidad :D
 thumbnail-img: /assets/img/posts/thumbnails/mvp.png
 cover-img: /assets/img/posts/thumbnails/mvp.png
 ---

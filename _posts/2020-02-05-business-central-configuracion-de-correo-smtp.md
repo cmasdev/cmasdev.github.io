@@ -5,7 +5,6 @@ author: "Christian Amado"
 date: 2020-02-05 20:40:58 -04:00
 categories: [Aplicaciones de negocio]
 tags: [Dynamics 365 Business Central]
-subtitle: En este artículo muestro cómo configurar SMTP en Dynamics Business Central.
 thumbnail-img: /assets/img/posts/thumbnails/businesscentral.png
 cover-img: /assets/img/posts/thumbnails/businesscentral.png
 ---

@@ -5,7 +5,6 @@ author: "Christian Amado"
 date: 2019-08-13 18:10:11 -04:00
 categories: [Aplicaciones de negocio]
 tags: [Dynamics 365 Business Central]
-subtitle: Ene ste artículo muestro cómo solucionar un problema de instalación.
 thumbnail-img: /assets/img/posts/thumbnails/businesscentral.png
 cover-img: /assets/img/posts/thumbnails/businesscentral.png
 ---

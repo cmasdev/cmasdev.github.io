@@ -5,7 +5,6 @@ author: "Christian Amado"
 date: 2020-02-19 23:10:13 -04:00
 categories: [Aplicaciones de negocio]
 tags: [Dynamics 365 Business Central]
-subtitle: En este artículo muestro cómo cargar el archivo de licencia para Business Central.
 thumbnail-img: /assets/img/posts/thumbnails/businesscentral.png
 cover-img: /assets/img/posts/thumbnails/businesscentral.png
 ---

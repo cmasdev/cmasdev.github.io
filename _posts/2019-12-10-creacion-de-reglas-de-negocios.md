@@ -5,7 +5,6 @@ author: "Christian Amado"
 date: 2019-12-10 19:43:22 -04:00
 categories: [Aplicaciones de negocio]
 tags: [CRM,Dynamics 365]
-subtitle: En este artículo muestro cómo crear reglas de negocios con Dynamics 365 for Sales.
 thumbnail-img: /assets/img/posts/thumbnails/dynamics365.png
 cover-img: /assets/img/posts/thumbnails/dynamics365.png
 ---

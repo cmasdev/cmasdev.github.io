@@ -5,7 +5,6 @@ author: "Christian Amado"
 date: 2019-08-27 13:41:31 -04:00
 categories: [Aplicaciones de negocio]
 tags: [C/SIDE,Dynamics NAV]
-subtitle: En este artículo muestro una buena práctica para guardar archivos antes de compiralos.
 thumbnail-img: /assets/img/posts/thumbnails/nav.png
 cover-img: /assets/img/posts/thumbnails/nav.png
 ---

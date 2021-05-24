@@ -5,7 +5,6 @@ author: "Christian Amado"
 date: 2018-12-05 21:46:13 -04:00
 categories: [Aplicaciones de negocio]
 tags: [Dynamics 365 Business Central,Flow]
-subtitle: En este artículo muestro cómo integrar BC con Microsoft Flow.
 thumbnail-img: /assets/img/posts/thumbnails/businesscentral.png
 cover-img: /assets/img/posts/thumbnails/businesscentral.png
 ---

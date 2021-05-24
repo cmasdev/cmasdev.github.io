@@ -8,7 +8,6 @@ tag:
         - AL
         - 'C/SIDE'
         - 'Dynamics 365 Business Central'
-subtitle: En este artículo verás cómo convertir código C/SIDE (Dynamics NAV) al código AL (nuevo en Dynamics 365 Business Central)...
 thumbnail-img: /assets/img/posts/thumbnails/businesscentral.png
 cover-img: /assets/img/posts/thumbnails/businesscentral.png
 ---

@@ -5,7 +5,6 @@ author: "Christian Amado"
 date: 2019-04-04 20:19:30 -04:00
 categories: [Desarrollo de software]
 tags: [Python,Visual Studio Code]
-subtitle: En este artículo muestro cómo usar Python con VS Code.
 thumbnail-img: /assets/img/posts/thumbnails/python.png
 cover-img: /assets/img/posts/thumbnails/python.png
 ---

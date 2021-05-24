@@ -5,7 +5,6 @@ author: Christian Amado
 date: 2020-04-08 17:06:00 -0400
 category: [Aplicaciones de negocio]
 tag: [AL, C/SIDE, Dynamics 365 Business Central]
-subtitle: En este artículo verás cómo solucionar un problema que se presenta con la herramienta Txt2Al...
 thumbnail-img: /assets/img/posts/thumbnails/businesscentral.png
 cover-img: /assets/img/posts/thumbnails/businesscentral.png
 ---

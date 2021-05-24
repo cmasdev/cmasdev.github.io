@@ -5,7 +5,6 @@ author: "Christian Amado"
 date: 2019-05-08 19:46:10 -04:00
 categories: [Aplicaciones de negocio]
 tags: [PowerApps]
-subtitle: En este artículo muestro cómo trabajar con formularios.
 thumbnail-img: /assets/img/posts/thumbnails/powerapps.png
 cover-img: /assets/img/posts/thumbnails/powerapps.png
 ---

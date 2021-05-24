@@ -5,7 +5,6 @@ author: "Christian Amado"
 date: 2019-10-08 21:03:18 -04:00
 categories: [Aplicaciones de negocio]
 tags: [PowerApps]
-subtitle: En este artículo muestro cómo manejar campos ocultos en PowerApps.
 thumbnail-img: /assets/img/posts/thumbnails/powerapps.png
 cover-img: /assets/img/posts/thumbnails/powerapps.png
 ---

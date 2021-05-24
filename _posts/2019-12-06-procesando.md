@@ -5,7 +5,6 @@ author: "Christian Amado"
 date: 2019-12-05 23:11:50 -04:00
 categories: [Aplicaciones de negocio]
 tags: [PowerApps]
-subtitle: En este artículo muestro cómo colocar una imagen de procesamiento en PowerApps.
 thumbnail-img: /assets/img/posts/thumbnails/powerapps.png
 cover-img: /assets/img/posts/thumbnails/powerapps.png
 ---

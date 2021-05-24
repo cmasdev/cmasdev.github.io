@@ -5,7 +5,6 @@ author: "Christian Amado"
 date: 2020-03-31 12:32:20 -04:00
 categories: [Aplicaciones de negocio]
 tags: [PowerApps]
-subtitle: En este artículo muestro cómo publicar una app para usuarios externos.
 thumbnail-img: /assets/img/posts/thumbnails/powerapps.png
 cover-img: /assets/img/posts/thumbnails/powerapps.png
 ---

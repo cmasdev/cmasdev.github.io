@@ -5,7 +5,6 @@ author: "Christian Amado"
 date: 2019-02-28 18:54:31 -04:00
 categories: [Aplicaciones de negocio]
 tags: [Dynamics 365 Business Central,Visual Studio Code]
-subtitle: En este artículo explicaré las diferencias entre variables globales y locales.
 thumbnail-img: /assets/img/posts/thumbnails/businesscentral.png
 cover-img: /assets/img/posts/thumbnails/businesscentral.png
 ---
