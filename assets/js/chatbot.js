@@ -5,7 +5,7 @@ document.onreadystatechange = function (e) {
         //dom is ready, window.onload fires later
         console.log("hi, inside document.onreadystatechange function");
         if (!window.jQuery) {
-            loadScript("https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js", loadChatWindow);
+            loadScript("https://code.jquery.com/jquery-3.6.0.min.js", loadChatWindow);
 
         } else {
             //loadScript("//cdn.jsdelivr.net/npm/@fingerprintjs/fingerprintjs@3/dist/fp.min.js", loadChatWindow);
