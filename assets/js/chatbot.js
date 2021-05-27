@@ -11,14 +11,14 @@ document.onreadystatechange = function (e) {
             //loadScript("//cdn.jsdelivr.net/npm/@fingerprintjs/fingerprintjs@3/dist/fp.min.js", loadChatWindow);
         }
         loadScript("https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/3.1.7/signalr.min.js", loadChatWindow);
-        loadChatWindow();
+        //loadChatWindow();
     }
 }
 
 window.ready = function (e) { };
 
-var hubUrl = "http://201.217.4.234:83/PeerToPeerMessageHub";
-var apiUrl = "http://201.217.4.234:83/chat/sendmessage";
+var hubUrl = "https://201.217.4.234:83/PeerToPeerMessageHub";
+var apiUrl = "https://201.217.4.234:83/chat/sendmessage";
 
 var IdEmpresa = 1; /*evoxys*/
 var _idConversacion;
