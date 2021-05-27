@@ -3,22 +3,20 @@ document.onreadystatechange = function (e) {
     
     if (document.readyState === 'complete') {
         //dom is ready, window.onload fires later
-        console.log("hi, inside document.onreadystatechange function");
         if (!window.jQuery) {
-            loadScript("https://code.jquery.com/jquery-3.6.0.min.js", loadChatWindow);
+            loadScript("https://code.jquery.com/jquery-3.6.0.js", loadChatWindow);
 
         } else {
             //loadScript("//cdn.jsdelivr.net/npm/@fingerprintjs/fingerprintjs@3/dist/fp.min.js", loadChatWindow);
         }
         loadScript("https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/3.1.7/signalr.min.js", loadChatWindow);
-        //loadChatWindow();
     }
 }
 
 window.ready = function (e) { };
 
-var hubUrl = "https://201.217.4.234:83/PeerToPeerMessageHub";
-var apiUrl = "https://201.217.4.234:83/chat/sendmessage";
+var hubUrl = "http://201.217.4.234:83/PeerToPeerMessageHub";
+var apiUrl = "http://201.217.4.234:83/chat/sendmessage";
 
 var IdEmpresa = 1; /*evoxys*/
 var _idConversacion;
