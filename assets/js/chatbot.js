@@ -15,8 +15,8 @@ document.onreadystatechange = function (e) {
 
 window.ready = function (e) { };
 
-var hubUrl = "http://201.217.4.234:83/PeerToPeerMessageHub";
-var apiUrl = "http://201.217.4.234:83/chat/sendmessage";
+var hubUrl = "https://a260a09aa9b8.ngrok.io/PeerToPeerMessageHub";
+var apiUrl = "https://a260a09aa9b8.ngrok.io/chat/sendmessage";
 
 var IdEmpresa = 1; /*evoxys*/
 var _idConversacion;
