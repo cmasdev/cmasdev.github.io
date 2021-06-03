@@ -13,11 +13,11 @@ En la [entrada anterior](/2020/04/business-central-convertir-c-side-a-codigo-al/
 
 <!--more-->
 
-Primeramente necesitamos tener a mano la carpeta desde donde se instala el software Dynamics 365 Business Central y copiar archivos de un lugar a otro: ![](/assets/img/posts/businesscentral/bc_fix_txt2al_1.png)
+Primeramente necesitamos tener a mano la carpeta desde donde se instala el software Dynamics 365 Business Central y copiar archivos de un lugar a otro: ![](/assets/img/posts/migrated/2020/04/bc_fix_txt2al_1.png)
 
-Procedemos a **Pegar** los archivos en la ubicación donde tenemos instalado Dynamics 365 Business Central: ![](/assets/img/posts/businesscentral/bc_fix_txt2al_2.png)
+Procedemos a **Pegar** los archivos en la ubicación donde tenemos instalado Dynamics 365 Business Central: ![](/assets/img/posts/migrated/2020/04/bc_fix_txt2al_2.png)
 
-No olvidemos de marcar la opción "Omitir estos archivos", caso contrario, dañaremos nuestra instalación (la idea es agregar los archivos que faltan únicamente): ![](/assets/img/posts/businesscentral/bc_fix_txt2al_3.png)
+No olvidemos de marcar la opción "Omitir estos archivos", caso contrario, dañaremos nuestra instalación (la idea es agregar los archivos que faltan únicamente): ![](/assets/img/posts/migrated/2020/04/bc_fix_txt2al_3.png)
 
 De esta manera, tenemos el problema resuelto.
 

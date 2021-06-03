@@ -14,13 +14,13 @@ Mi equipo y yo nos encontramos desarrollando algunas funcionalidades extra para 
 <!--more-->
 
 1. Accedemos al menú de "Extensiones" dentro del **Microsoft Dynamics 365 Business Central**:  
-![](/assets/img/posts/businesscentral/bc_disable_download_source_1.png)  
+![](/assets/img/posts/migrated/2020/04/bc_disable_download_source_1.png)  
 
 2. Hacemos clic en el mini menú de la extensión en cuestión y hacemos clic en "Descarga origen":  
-![](/assets/img/posts/businesscentral/bc_disable_download_source_2.png)  
+![](/assets/img/posts/migrated/2020/04/bc_disable_download_source_2.png)  
 
 3. Verificamos la descarga (es un .zip), lo descomprimimos y veremos todo nuestro trabajo:  
-![](/assets/img/posts/businesscentral/bc_disable_download_source_3.png)  
+![](/assets/img/posts/migrated/2020/04/bc_disable_download_source_3.png)  
 
 ¿Cómo hacemos para no permitir la descarga?
 -------------------------------------------
@@ -33,7 +33,7 @@ No hay mucho secreto, es muy sencillo y lo explico a continuación:
 "target": "OnPrem"
 ```
 2. Volvemos al paso 1 y 2 del punto anterior; veremos un cambio en el menú contextual:  
-![](/assets/img/posts/businesscentral/bc_disable_download_source_4.png)  
+![](/assets/img/posts/migrated/2020/04/bc_disable_download_source_4.png)  
 
 De esta manera, hemos bloqueado la descarga del código fuente de nuestra extensión.
 
