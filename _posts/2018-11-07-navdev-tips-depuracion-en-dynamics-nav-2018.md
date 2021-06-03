@@ -6,7 +6,7 @@ date: 2018-11-07 03:17:28 -04:00
 categories: [Aplicaciones de negocio]
 tags: [Dynamics NAV]
 thumbnail-img: /assets/img/posts/thumbnails/nav.png
-cover-img: /assets/img/posts/thumbnails/nav.png
+cover-img: /assets/img/posts/cover/nav.svg
 ---
 
 NAV, como cualquier herramienta de desarrollo ofrece la posibilidad de depurar el programa, y lo permite de manera remota, sí, de manera remota depurando la sesión de cualquier usuario para poder realizar las pruebas necesarias.

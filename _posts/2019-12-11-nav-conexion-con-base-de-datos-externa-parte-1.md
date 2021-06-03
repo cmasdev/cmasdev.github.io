@@ -6,7 +6,7 @@ date: 2019-12-11 19:33:55 -04:00
 categories: [Aplicaciones de negocio]
 tags: [C/SIDE,Dynamics NAV]
 thumbnail-img: /assets/img/posts/thumbnails/nav.png
-cover-img: /assets/img/posts/thumbnails/nav.png
+cover-img: /assets/img/posts/cover/nav.svg
 ---
 
 Los desarrolladores de Dynamics NAV sabemos que tenemos limitaciones a nivel de tablas (normalmente con una licencia vienen 10 tablas) por eso tenemos esta oportunidad de integrar o crear tablas externas. Estas tablas externas permiten ser accedidas desde fuera de Dynamics NAV y poder trabajar con ellas sin mayores problemas.

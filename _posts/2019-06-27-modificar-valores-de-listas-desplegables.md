@@ -6,7 +6,7 @@ date: 2019-06-27 19:44:42 -04:00
 categories: [Aplicaciones de negocio]
 tags: [C/SIDE,Dynamics NAV]
 thumbnail-img: /assets/img/posts/thumbnails/nav.png
-cover-img: /assets/img/posts/thumbnails/nav.png
+cover-img: /assets/img/posts/cover/nav.svg
 ---
 
 El día de hoy tuve un pedido relacionado a cómo se visualizan los cambos en una lista desplegable dentro de una página en Dynamics NAV 2018. Básicamente, se debe hacer un cambio en la tabla de origen del elemento, pues es ahí donde se definen los campos de la lista desplegable.

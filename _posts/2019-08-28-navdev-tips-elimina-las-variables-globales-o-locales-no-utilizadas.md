@@ -6,7 +6,7 @@ date: 2019-08-28 12:10:56 -04:00
 categories: [Aplicaciones de negocio]
 tags: [C/SIDE,Dynamics NAV]
 thumbnail-img: /assets/img/posts/thumbnails/nav.png
-cover-img: /assets/img/posts/thumbnails/nav.png
+cover-img: /assets/img/posts/cover/nav.svg
 ---
 
 En esta oportunidad, quiero exponerles un punto de vista que al final de cuentas resultará en un buen consejo de desarrollo.

@@ -6,7 +6,7 @@ date: 2019-05-07 22:13:51 -04:00
 categories: [Aplicaciones de negocio]
 tags: [Dynamics NAV]
 thumbnail-img: /assets/img/posts/thumbnails/nav.png
-cover-img: /assets/img/posts/thumbnails/nav.png
+cover-img: /assets/img/posts/cover/nav.svg
 ---
 
 Recibí la llamada de un cliente referente a una situación de conexión entre el Servidor NAV y su cliente, que en este caso utilizan las credenciales de tipo **NavUserPassword**. El problema se muestra en la siguiente imagen (CMASUS es el nombre de referencia del Servidor):  

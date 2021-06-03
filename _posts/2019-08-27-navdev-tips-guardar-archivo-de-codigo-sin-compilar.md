@@ -6,7 +6,7 @@ date: 2019-08-27 13:41:31 -04:00
 categories: [Aplicaciones de negocio]
 tags: [C/SIDE,Dynamics NAV]
 thumbnail-img: /assets/img/posts/thumbnails/nav.png
-cover-img: /assets/img/posts/thumbnails/nav.png
+cover-img: /assets/img/posts/cover/nav.svg
 ---
 
 A muchos amigos desarrolladores de C/SIDE les habrá pasado que crearon variables globales, locales, modificar acciones y funciones, luego, al Guardar el archivo de código y seleccionar la opción compilar... BOOOM

@@ -6,7 +6,7 @@ date: 2019-06-04 23:32:29 -04:00
 categories: [Aplicaciones de negocio]
 tags: [Dynamics NAV]
 thumbnail-img: /assets/img/posts/thumbnails/nav.png
-cover-img: /assets/img/posts/thumbnails/nav.png
+cover-img: /assets/img/posts/cover/nav.svg
 ---
 
 Dependiendo de la cantidad de datos y de la manera en que se ha desarrollado un reporte éste puede ser lento en su carga. Para este caso consideremos culpable al equipo de desarrollo.

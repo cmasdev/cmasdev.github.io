@@ -6,7 +6,7 @@ date: 2019-12-18 22:36:06 -04:00
 categories: [Aplicaciones de negocio]
 tags: [C/SIDE,Dynamics NAV]
 thumbnail-img: /assets/img/posts/thumbnails/nav.png
-cover-img: /assets/img/posts/thumbnails/nav.png
+cover-img: /assets/img/posts/cover/nav.svg
 ---
 
 En la entrada anterior, vimos cómo crear una tabla en SQL Server y agregarla en Dynamics NAV (sin consumir licencias). en esta ocasión veremos cómo utilizarla dentro de una página de Dynamics NAV para verificar si los datos son correctos.
