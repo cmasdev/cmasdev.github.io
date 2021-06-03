@@ -6,7 +6,7 @@ date: 2020-04-21 20:13:00 -0400
 category: [Aplicaciones de negocio]
 tag: [AL, Dynamics 365 Business Central]
 thumbnail-img: /assets/img/posts/thumbnails/businesscentral.png
-cover-img: /assets/img/posts/thumbnails/businesscentral.png
+cover-img: /assets/img/posts/cover/dynamics-365-business-central.svg
 ---
 
 En Microsoft Business Central también encontraremos algo básico a la hora de programar y/o usar un sistema que consiste en los eventos, de hecho, los eventos están presentes durante la ejecución de cualquier programa informático sea Web, escritorio y/o móvil. Un evento básicamente se produce cuando realizamos una acción en particular dentro de dicho programa. Por ejemplo, hacer clic en un botón.

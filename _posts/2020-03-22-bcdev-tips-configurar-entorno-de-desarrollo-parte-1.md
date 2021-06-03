@@ -6,7 +6,7 @@ date: 2020-03-22 10:39:53 -04:00
 categories: [Aplicaciones de negocio]
 tags: [AL,Dynamics 365 Business Central,Visual Studio Code]
 thumbnail-img: /assets/img/posts/thumbnails/businesscentral.png
-cover-img: /assets/img/posts/thumbnails/businesscentral.png
+cover-img: /assets/img/posts/cover/dynamics-365-business-central.svg
 ---
 
 En esta serie de entradas quisiera detallar el proceso de configuración del entorno de desarrollo Visual Studio Code para Dynamics 365 Business Central. Las tres partes de esta serie contemplan:  

@@ -6,7 +6,7 @@ date: 2019-02-28 18:54:31 -04:00
 categories: [Aplicaciones de negocio]
 tags: [Dynamics 365 Business Central,Visual Studio Code]
 thumbnail-img: /assets/img/posts/thumbnails/businesscentral.png
-cover-img: /assets/img/posts/thumbnails/businesscentral.png
+cover-img: /assets/img/posts/cover/dynamics-365-business-central.svg
 ---
 
 En esta entrada quiero mostrar la diferencia entre las variables globales y las locales para el desarrollo de Dynamics 365 Business Central. Recordemos que a partir de esta versión ya no tendremos disponible el entorno de desarrollo que teníamos en Dynamics NAV.

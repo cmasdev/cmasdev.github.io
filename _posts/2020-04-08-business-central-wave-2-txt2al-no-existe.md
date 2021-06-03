@@ -6,7 +6,7 @@ date: 2020-04-08 17:06:00 -0400
 category: [Aplicaciones de negocio]
 tag: [AL, C/SIDE, Dynamics 365 Business Central]
 thumbnail-img: /assets/img/posts/thumbnails/businesscentral.png
-cover-img: /assets/img/posts/thumbnails/businesscentral.png
+cover-img: /assets/img/posts/cover/dynamics-365-business-central.svg
 ---
 
 En la [entrada anterior](/2020/04/business-central-convertir-c-side-a-codigo-al/) hemos visto cómo convertir código **C/SIDE** y código **AL**. Ahora veremos cómo disponibilizar esta herramienta en **Dynamics 365 Business Central Wave 2**, pues ya no está disponible directamente como antes.

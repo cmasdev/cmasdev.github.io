@@ -6,7 +6,7 @@ date: 2020-04-14 19:06:00 -0400
 category: [Aplicaciones de negocio]
 tag: [AL, Dynamics 365 Business Central]
 thumbnail-img: /assets/img/posts/thumbnails/businesscentral.png
-cover-img: /assets/img/posts/thumbnails/businesscentral.png
+cover-img: /assets/img/posts/cover/dynamics-365-business-central.svg
 ---
 
 Mi equipo y yo nos encontramos desarrollando algunas funcionalidades extra para el **Microsoft Dynamics 365 Business Central**, luego de realizar las pruebas nos dirigimos a Extensiones y vimos que se podía descargar el código fuente de todo el proyecto (código AL, reportes, etc).

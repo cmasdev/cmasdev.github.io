@@ -6,7 +6,7 @@ date: 2018-12-26 19:01:04 -04:00
 categories: [Aplicaciones de negocio]
 tags: [Azure,Dynamics 365 Business Central]
 thumbnail-img: /assets/img/posts/thumbnails/businesscentral.png
-cover-img: /assets/img/posts/thumbnails/businesscentral.png
+cover-img: /assets/img/posts/cover/dynamics-365-business-central.svg
 ---
 
 La idea central de esta entrada consistía en mostrar como crear una instancia de prueba de este excelente productoservicio, pero lastimosamente me encuentro en un país (Paraguay) donde el servicio (para las pruebas) no esta disponible. Sí esta disponible para su aprovisionamiento, es decir, para la venta a cualquier cliente que lo necesite.

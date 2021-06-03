@@ -6,7 +6,7 @@ date: 2019-01-30 23:48:39 -04:00
 categories: [Aplicaciones de negocio]
 tags: [Dynamics 365 Business Central]
 thumbnail-img: /assets/img/posts/thumbnails/businesscentral.png
-cover-img: /assets/img/posts/thumbnails/businesscentral.png
+cover-img: /assets/img/posts/cover/dynamics-365-business-central.svg
 ---
 
 En esta entrada veremos cómo se configura el entorno de Dynamics 365 Business Central. No hay mucho secreto en la configuración del entorno puesto que de manera predeterminada ya vienen configurados todos los parámetros necesarios dentro de la plataforma.

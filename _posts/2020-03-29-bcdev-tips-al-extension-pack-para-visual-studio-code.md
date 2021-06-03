@@ -6,7 +6,7 @@ date: 2020-03-29 16:03:22 -04:00
 categories: [Aplicaciones de negocio]
 tags: [AL,Dynamics 365 Business Central,Visual Studio Code]
 thumbnail-img: /assets/img/posts/thumbnails/businesscentral.png
-cover-img: /assets/img/posts/thumbnails/businesscentral.png
+cover-img: /assets/img/posts/cover/dynamics-365-business-central.svg
 ---
 
 El desarrollo de Dynmaics 365 Business Central sigue avanzando, las herramientas aún están en fase de desarrollo y es por eso que depende en gran medida de la comunidad de desarrolladores.  

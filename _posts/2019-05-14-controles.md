@@ -6,7 +6,7 @@ date: 2019-05-14 22:52:47 -04:00
 categories: [Aplicaciones de negocio]
 tags: [PowerApps]
 thumbnail-img: /assets/img/posts/thumbnails/powerapps.png
-cover-img: /assets/img/posts/thumbnails/powerapps.png
+cover-img: /assets/img/posts/cover/powerapps.svg
 ---
 
 Continuando la serie que empezamos en la [entrada anterior](/2019/05/formularios/), en esta ocasión hablaremos sobre los controles disponibles en Microsoft PowerApps.

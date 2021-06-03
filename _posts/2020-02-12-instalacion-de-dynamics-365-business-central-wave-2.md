@@ -6,7 +6,7 @@ date: 2020-02-12 21:34:18 -04:00
 categories: [Aplicaciones de negocio]
 tags: [Dynamics 365 Business Central]
 thumbnail-img: /assets/img/posts/thumbnails/businesscentral.png
-cover-img: /assets/img/posts/thumbnails/businesscentral.png
+cover-img: /assets/img/posts/cover/dynamics-365-business-central.svg
 ---
 
 En una [entrada anterior](/2018/11/instalacion-dynamics-365-business-central/), vimos cómo instalar el Dynamics 365 Business Central pero en esta nueva versión hubo algunos cambios, como por ejemplo, la no inclusión del entorno de desarrollo C/SIDE y el cliente Windows.  

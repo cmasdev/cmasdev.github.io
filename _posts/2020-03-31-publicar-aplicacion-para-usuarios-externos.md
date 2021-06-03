@@ -6,7 +6,7 @@ date: 2020-03-31 12:32:20 -04:00
 categories: [Aplicaciones de negocio]
 tags: [PowerApps]
 thumbnail-img: /assets/img/posts/thumbnails/powerapps.png
-cover-img: /assets/img/posts/thumbnails/powerapps.png
+cover-img: /assets/img/posts/cover/powerapps.svg
 ---
 
 En la [entrada de ayer](/2020/03/publicar-aplicacion/) vimos cómo publicar una aplicación dentro del dominio de nuestra organización con usuarios propios de la empresa. Digamos que sirve para una aplicación interna que puede ser utilizada sin inconvenientes.

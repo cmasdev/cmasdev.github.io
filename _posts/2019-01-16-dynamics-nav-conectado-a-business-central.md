@@ -6,7 +6,7 @@ date: 2019-01-16 20:02:53 -04:00
 categories: [Aplicaciones de negocio]
 tags: [Dynamics 365 Business Central,Dynamics NAV]
 thumbnail-img: /assets/img/posts/thumbnails/businesscentral.png
-cover-img: /assets/img/posts/thumbnails/businesscentral.png
+cover-img: /assets/img/posts/cover/dynamics-365-business-central.svg
 ---
 
 Dynamics 365 Business Central, como ya hemos visto anteriormente posee su interfaz Web (que funciona en todos los dispositivos) pero por el momento tenemos la posibilidad e utilizarlo con el cliente de Dynamics NAV.

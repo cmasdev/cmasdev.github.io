@@ -6,7 +6,7 @@ date: 2019-04-02 19:13:52 -04:00
 categories: [Desarrollo de software]
 tags: [Python]
 thumbnail-img: /assets/img/posts/thumbnails/python.png
-cover-img: /assets/img/posts/thumbnails/python.png
+cover-img: /assets/img/posts/cover/python.svg
 ---
 
 A partir de hoy, volveré a escribir artículos referentes a desarrollo de software. Además de aplicaciones de negocios me apasiona lo referente al mundo del desarrollo. ¡Así que manos a la obra!

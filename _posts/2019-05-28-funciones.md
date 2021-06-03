@@ -6,7 +6,7 @@ date: 2019-05-28 19:40:31 -04:00
 categories: [Aplicaciones de negocio]
 tags: [PowerApps]
 thumbnail-img: /assets/img/posts/thumbnails/powerapps.png
-cover-img: /assets/img/posts/thumbnails/powerapps.png
+cover-img: /assets/img/posts/cover/powerapps.svg
 ---
 
 En la [entrada anterior](/2019/05/reglas/), vimos cómo crear reglas relacionadas a un control. En esta entrada veremos cómo utilizar las funciones propias que están incluídas dentro de Microsoft PowerApps y veremos cómo crear nuestras propias funciones. Según wikipedia...

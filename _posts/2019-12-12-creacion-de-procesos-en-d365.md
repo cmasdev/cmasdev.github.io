@@ -6,7 +6,7 @@ date: 2019-12-12 20:43:07 -04:00
 categories: [Aplicaciones de negocio]
 tags: [CRM,Dynamics 365]
 thumbnail-img: /assets/img/posts/thumbnails/dynamics365.png
-cover-img: /assets/img/posts/thumbnails/dynamics365.png
+cover-img: /assets/img/posts/cover/dynamics-365-for-sales.svg
 ---
 
 En una [entrada anterior](/2019/12/creacion-de-reglas-de-negocios/), vimos cómo crear reglas de negocios para una entidad. En esta entrada mostraré cómo crear o modificar procesos de negocios existentes. Para este caso, tomaremos como ejemplo una Oportunidad y modificaremos el proceso predeterminado de un proceso de ventas.

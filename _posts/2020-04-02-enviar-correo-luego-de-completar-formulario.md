@@ -8,7 +8,7 @@ tag:
         - Flow
         - 'Power Automate'
 thumbnail-img: /assets/img/posts/thumbnails/powerautomate.png
-cover-img: /assets/img/posts/thumbnails/powerautomate.png
+cover-img: /assets/img/posts/cover/powerautomate.svg
 ---
 
 En esta ocasión, quiero compartir con ustedes una funcionalidad muy buena de Power Automate. Imaginemos que necesitamos completar un formulario y que la respuesta sea enviada por correo electrónica a dicho usuario.

@@ -6,7 +6,7 @@ date: 2020-04-30 20:31:00 -0400
 category: [Aplicaciones de negocio]
 tag: [AL, Dynamics 365 Business Central]
 thumbnail-img: /assets/img/posts/thumbnails/businesscentral.png
-cover-img: /assets/img/posts/thumbnails/businesscentral.png
+cover-img: /assets/img/posts/cover/dynamics-365-business-central.svg
 ---
 
 En versiones anteriores de Microsoft Dynamics, NAV específicamente se hacía complicado el versionado. De hecho no lo tenía, pero ahora el manejo de versiones publicadas en Business Central permite tener varias y utilizar la que estamos necesitando.

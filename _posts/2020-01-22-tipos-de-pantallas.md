@@ -6,7 +6,7 @@ date: 2020-01-22 20:55:38 -04:00
 categories: [Aplicaciones de negocio]
 tags: [PowerApps]
 thumbnail-img: /assets/img/posts/thumbnails/powerapps.png
-cover-img: /assets/img/posts/thumbnails/powerapps.png
+cover-img: /assets/img/posts/cover/powerapps.svg
 ---
 
 Cada vez que doy una mirada a Microsoft PowerApps encuentro cosas nuevas y mejoradas. en este caso vengo a explicar las posibles opciones que tenemos disponibles como plantillas para distintas formas de representar la forma de desplegar la información de nuestra aplicación.  

@@ -6,7 +6,7 @@ date: 2019-08-13 18:10:11 -04:00
 categories: [Aplicaciones de negocio]
 tags: [Dynamics 365 Business Central]
 thumbnail-img: /assets/img/posts/thumbnails/businesscentral.png
-cover-img: /assets/img/posts/thumbnails/businesscentral.png
+cover-img: /assets/img/posts/cover/dynamics-365-business-central.svg
 ---
 
 Desde ayer intento instalar el CU 10 de Dynamics 365 Business Central y no encuentro la manera. De hecho busqué mucha información y no la encontré.

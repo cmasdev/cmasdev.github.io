@@ -6,7 +6,7 @@ date: 2020-03-26 12:17:18 -04:00
 categories: [Aplicaciones de negocio]
 tags: [Dynamics 365 Business Central]
 thumbnail-img: /assets/img/posts/thumbnails/businesscentral.png
-cover-img: /assets/img/posts/thumbnails/businesscentral.png
+cover-img: /assets/img/posts/cover/dynamics-365-business-central.svg
 ---
 
 Dentro del producto Dynamics 365 Business Central se encuentra una sección donde podemos administrar las extensiones instaladas en el servidor.  

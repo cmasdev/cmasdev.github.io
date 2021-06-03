@@ -6,7 +6,7 @@ date: 2020-03-27 19:49:50 -04:00
 categories: [Aplicaciones de negocio]
 tags: [AL,Dynamics 365 Business Central]
 thumbnail-img: /assets/img/posts/thumbnails/businesscentral.png
-cover-img: /assets/img/posts/thumbnails/businesscentral.png
+cover-img: /assets/img/posts/cover/dynamics-365-business-central.svg
 ---
 
 Supongamos que deseamos validar que un cheque no pueda ser anulado por algún motivo. Nativamente Business Central no tiene esta funcionalidad, entonces lo más lógico es agregar código al CodeUnit 367 "Check Management" para agregar toda la funcionalidad requerido.  

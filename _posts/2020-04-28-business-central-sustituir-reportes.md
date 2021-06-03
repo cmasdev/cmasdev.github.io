@@ -6,7 +6,7 @@ date: 2020-04-28 22:53:00 -0400
 category: [Aplicaciones de negocio]
 tag: [AL, Dynamics 365 Business Central]
 thumbnail-img: /assets/img/posts/thumbnails/businesscentral.png
-cover-img: /assets/img/posts/thumbnails/businesscentral.png
+cover-img: /assets/img/posts/cover/dynamics-365-business-central.svg
 ---
 
 En el [artículo anterior](http://cmas.dev/2020/04/business-central-utilizar-manejador-de-eventos-en-reportes/), vimos cómo suscribirnos a eventos de un reporte sin poder modificar diseño. En este artículo, veremos cómo sustituir reportes en Business Central.

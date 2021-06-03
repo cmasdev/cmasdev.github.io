@@ -6,7 +6,7 @@ date: 2019-04-09 20:35:15 -04:00
 categories: [Aplicaciones de negocio]
 tags: [CRM,Dynamics 365,Dynamics 365 Business Central]
 thumbnail-img: /assets/img/posts/thumbnails/dynamics365.png
-cover-img: /assets/img/posts/thumbnails/dynamics365.png
+cover-img: /assets/img/posts/cover/dynamics-365-for-sales.svg
 ---
 
 Siguiendo con el tema de la integración entre Dynamics 365 Business Central y Dynamics 365 for Sales es bueno entender cuáles son los valores predeterminados en una integración. Para eso debemos ingresar en la página correspondiente y ver cuales son sus valores iniciales. A la primera, ya podemos tener algo integrado. en esta entrada veremos cómo integrar las cuentas entre ambos productos.

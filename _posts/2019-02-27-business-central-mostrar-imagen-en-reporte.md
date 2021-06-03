@@ -6,7 +6,7 @@ date: 2019-02-27 21:35:18 -04:00
 categories: [Aplicaciones de negocio]
 tags: [Dynamics 365 Business Central,Visual Studio Code]
 thumbnail-img: /assets/img/posts/thumbnails/businesscentral.png
-cover-img: /assets/img/posts/thumbnails/businesscentral.png
+cover-img: /assets/img/posts/cover/dynamics-365-business-central.svg
 ---
 
 En esta entrada mostraré cómo mostrar imagen en un reporte. En la [entrada anterior](/2019/02/bcdev-tips-crear-un-reporte-nuevo/), hemos visto cómo crear un nuevo reporte en Dynamics 365 Business Central.

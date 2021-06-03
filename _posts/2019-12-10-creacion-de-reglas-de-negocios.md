@@ -6,7 +6,7 @@ date: 2019-12-10 19:43:22 -04:00
 categories: [Aplicaciones de negocio]
 tags: [CRM,Dynamics 365]
 thumbnail-img: /assets/img/posts/thumbnails/dynamics365.png
-cover-img: /assets/img/posts/thumbnails/dynamics365.png
+cover-img: /assets/img/posts/cover/dynamics-365-for-sales.svg
 ---
 
 En esta ocasión quiero comentarles cómo poder crear reglas de negocio dentro de Dynamics 365 for Sales (al fin y al cabo utilizamos PowerApps de fondo :P).

@@ -6,7 +6,7 @@ date: 2019-12-26 13:47:18 -04:00
 categories: [Aplicaciones de negocio]
 tags: [CRM,Dynamics 365]
 thumbnail-img: /assets/img/posts/thumbnails/dynamics365.png
-cover-img: /assets/img/posts/thumbnails/dynamics365.png
+cover-img: /assets/img/posts/cover/dynamics-365-for-sales.svg
 ---
 
 Estamos cerrando el año y en casi todas las presentaciones de producto que hemos tenido en los últimos meses surgió una pregunta en común por parte de los potenciales clientes de mi empresa.

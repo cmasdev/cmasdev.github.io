@@ -6,7 +6,7 @@ date: 2018-12-05 21:46:13 -04:00
 categories: [Aplicaciones de negocio]
 tags: [Dynamics 365 Business Central,Flow]
 thumbnail-img: /assets/img/posts/thumbnails/businesscentral.png
-cover-img: /assets/img/posts/thumbnails/businesscentral.png
+cover-img: /assets/img/posts/cover/dynamics-365-business-central.svg
 ---
 
 En esta entrada, veremos como integrar Microsoft Flow con Dynamics 365 Business Central. De manera muy sencilla y rápida se puede lograr el objetivo. Si deseamos tener la versión On-Premise, necesitamos tener salida de Internet desde el servidor donde tenemos instalado el Dynamics 365 Business Central.
