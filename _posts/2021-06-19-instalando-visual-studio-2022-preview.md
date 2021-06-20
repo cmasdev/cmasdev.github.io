@@ -7,6 +7,7 @@ categories: [Desarrollo de software]
 tags: [Visual Studio, WinDev]
 thumbnail-img: /assets/img/posts/thumbnails/visual-studio.png
 cover-img: /assets/img/posts/cover/visual-studio.svg
+share-img: /assets/img/posts/cover/visual-studio.svg
 ---
 
 El pasado 17 de junio, Microsoft ha lanzado la versión Preview del nuevo Visual Studio 2022, el cual posee muchas mejoras en cuanto a productividad se refiere. En este artículo mostraré el proceso de instalación de Visual Studio 2022 Preview 1.  
