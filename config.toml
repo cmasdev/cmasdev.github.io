@@ -1,0 +1,127 @@
+baseurl = "https://cmas.dev"
+title = "Christian Amado's Blog"
+subtitle = "Software Engineering & Business Solutions"
+languageCode = "en"
+theme = "beautifulhugo"
+metaDataFormat = "yaml"
+pygmentsStyle = "trac"
+pygmentsUseClasses = true
+pygmentsCodeFences = true
+pygmentsCodefencesGuessSyntax = true
+enableGitInfo = true
+defaultContentLanguage = 'es'
+disqusShortname = "cmasblog"
+googleAnalytics = "UA-167429830-1"
+
+[Params]
+    mainSections = ["posts"]
+    intro = true
+    hometitle = "Christian Amado"
+    subtitle = "Software Engineering & Business Solutions"
+    github = "https://github.com/cmasdev/cmasdev.github.io"
+    twitter = "https://twitter.com/christianamado"
+    email = "biz@cmas.dev"
+    logo = "/img/avatar.jpg"
+    opengraph = true
+    shareTwitter = true
+    #dateFormat = "Mon, Jan 2, 2006"
+    #style = "dark"
+    commit = "https://github.com/cmasdev/cmasdev.github.io/tree/"
+    rss = true
+    comments = true
+    readingTime = true
+    wordCount = true
+    useHLJS = true
+    socialShare = true
+    delayDisqus = false
+    showRelatedPosts = true
+    gcse = "013131931956450466198:blhmkdpweyq"
+
+[Author]
+  name = "Christian Amado"
+  website = "cmas.dev"
+  email = "biz@cmas.dev"
+  github= "cmasdev"
+  twitter= "christianamado"
+  telegram= "cmasdev"
+  linkedin= "christianamado"
+  youtube= "channel/UCehbcF2wgg5TBGtaWlMEvyw"
+  medium= "cmasdev"
+  dev= "cmasdev"
+  stackoverflow= "users/2023202/christian-amado"
+  spotify= "christianamado"
+  facebook= "cmasdev"
+  instagram= "cmasdev"
+
+[Permalinks]
+    post = "/:year/:month/:day/:filename/"
+
+[languages]
+  [languages.en]
+    hometitle = "Christian Amado"
+    title = "Christian Amado's Blog"    
+    subtitle = "Software Engineering & Business Solutions"
+    languageName = "English"
+    weight = 1
+    [languages.en.menu]
+    [[languages.en.menu.main]]
+        url = "about"
+        name = "About"
+        weight = 2
+
+    [[languages.en.menu.main]]
+        url = "projects"
+        name = "Projects"
+        weight = 3
+
+    [[languages.en.menu.main]]
+        url = "contact"
+        name = "Contact"
+        weight = 4
+
+    [[languages.en.menu.main]]
+        url = "diabetes"
+        name = "Diabetes"
+        weight = 5
+
+    [[languages.en.menu.main]]
+        url = "tags"
+        name = "Tags"
+        weight = 6
+
+    #[[languages.en.menu.main]]
+        #url = "index.xml"
+        #name = "RSS"
+        #weight = 8
+
+  [languages.es]
+    hometitle = "Christian Amado"
+    title = "Blog de Christian Amado"
+    subtitle = "Ingeniería de Software y Aplicaciones de Negocios"
+    languageName = "Espanol"
+    weight = 2
+    [languages.es.menu]
+    [[languages.es.menu.main]]
+        url = "about"
+        name = "Biografía"
+        weight = 2
+
+    [[languages.es.menu.main]]
+        url = "projects"
+        name = "Proyectos"
+        weight = 3
+
+    [[languages.es.menu.main]]
+        url = "contact"
+        name = "Contacto"
+        weight = 4
+
+    [[languages.es.menu.main]]
+        url = "diabetes"
+        name = "Diabetes"
+        weight = 5
+
+    [[languages.es.menu.main]]
+        url = "tags"
+        name = "Etiquetas"
+        weight = 6
