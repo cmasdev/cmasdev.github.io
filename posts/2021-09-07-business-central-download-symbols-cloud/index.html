@@ -3,14 +3,20 @@
 <meta charset=utf-8>
 <meta http-equiv=x-ua-compatible content="IE=edge">
 <meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
-<title>Blog de Christian Amado - Blog de Christian Amado</title>
+<title>Business Central: Descargar simbolos desde Sandbox - Blog de Christian Amado</title>
+<meta name=description content="El día de hoy intenté hacer la descarga de los símbolos de Microsoft Dynamics 365 Business Central pero me encontraba con errores y no lograba hacerlo funcionar. Primeramente, tuve errores para descargar los símbolos como tal y luego para poder depurar la aplicación.
+Para evitar que otras personas tengan ese problema, les comparto mi experiencia solucionando el inconveniente en este pequeño manual al estilo How To? que es mi costumbre escribir.">
 <meta name=author content="Christian Amado"><script type=application/ld+json>{"@context":"http://schema.org","@type":"WebSite","name":"Blog de Christian Amado","url":"https:\/\/cmas.dev"}</script><script type=application/ld+json>{"@context":"http://schema.org","@type":"Organization","name":"","url":"https:\/\/cmas.dev"}</script>
-<meta property="og:title" content="Blog de Christian Amado">
+<script type=application/ld+json>{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"https:\/\/cmas.dev","name":"home"}},{"@type":"ListItem","position":3,"item":{"@id":"https:\/\/cmas.dev\/posts\/2021-09-07-business-central-download-symbols-cloud\/","name":"Business central descargar simbolos desde sandbox"}}]}</script><script type=application/ld+json>{"@context":"http://schema.org","@type":"Article","author":{"name":"Christian Amado"},"headline":"Business Central: Descargar simbolos desde Sandbox","description":"El día de hoy intenté hacer la descarga de los símbolos de Microsoft Dynamics 365 Business Central pero me encontraba con errores y no lograba hacerlo funcionar. Primeramente, tuve errores para descargar los símbolos como tal y luego para poder depurar la aplicación.\nPara evitar que otras personas tengan ese problema, les comparto mi experiencia solucionando el inconveniente en este pequeño manual al estilo How To? que es mi costumbre escribir.\n","inLanguage":"es","wordCount":312,"datePublished":"2021-09-07T23:55:00","dateModified":"2021-09-07T23:55:00","image":"https:\/\/cmas.dev\/img\/avatar.jpg","keywords":[""],"mainEntityOfPage":"https:\/\/cmas.dev\/posts\/2021-09-07-business-central-download-symbols-cloud\/","publisher":{"@type":"Organization","name":"https:\/\/cmas.dev","logo":{"@type":"ImageObject","url":"https:\/\/cmas.dev\/img\/avatar.jpg","height":60,"width":60}}}</script>
+<meta property="og:title" content="Business Central: Descargar simbolos desde Sandbox">
+<meta property="og:description" content="El día de hoy intenté hacer la descarga de los símbolos de Microsoft Dynamics 365 Business Central pero me encontraba con errores y no lograba hacerlo funcionar. Primeramente, tuve errores para descargar los símbolos como tal y luego para poder depurar la aplicación.
+Para evitar que otras personas tengan ese problema, les comparto mi experiencia solucionando el inconveniente en este pequeño manual al estilo How To? que es mi costumbre escribir.">
 <meta property="og:image" content="https://cmas.dev/img/avatar.jpg">
-<meta property="og:url" content="https://cmas.dev/">
+<meta property="og:url" content="https://cmas.dev/posts/2021-09-07-business-central-download-symbols-cloud/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Blog de Christian Amado">
-<meta name=twitter:title content="Blog de Christian Amado">
+<meta name=twitter:title content="Business Central: Descargar simbolos desde Sandbox">
+<meta name=twitter:description content="El día de hoy intenté hacer la descarga de los símbolos de Microsoft Dynamics 365 Business Central pero me encontraba con errores y no lograba hacerlo funcionar. Primeramente, tuve errores para …">
 <meta name=twitter:image content="https://cmas.dev/img/avatar.jpg">
 <meta name=twitter:card content="summary">
 <meta name=twitter:site content="@christianamado">
@@ -136,118 +142,99 @@
 <div class=container>
 <div class=row>
 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-<div class=page-heading>
-<h1>Christian Amado</h1>
+<div class=posts-heading>
+<h1>Business Central: Descargar simbolos desde Sandbox</h1>
 <hr class=small>
-<span class=page-subheading>Ingeniería de Software y Aplicaciones de Negocios</span>
 </div>
 </div>
 </div>
 </div>
 </div>
 </header>
-<div role=main class=container>
+<div class=container role=main>
 <div class=row>
 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-<div class=posts-list>
-<article class=post-preview>
-<a href=https://cmas.dev/posts/2018-11-22-navdev-tips-filtrar-campos-del-disenador-de-objetos/>
-<h2 class=post-title>NAVDEV Tips: Filtrar campos del diseñador de objetos</h2>
+<article role=main class=blog-post>
+<p>El día de hoy intenté hacer la descarga de los símbolos de Microsoft Dynamics 365 Business Central pero me encontraba con errores y no lograba hacerlo funcionar. Primeramente, tuve errores para descargar los símbolos como tal y luego para poder depurar la aplicación.</p>
+<p>Para evitar que otras personas tengan ese problema, les comparto mi experiencia solucionando el inconveniente en este pequeño manual al estilo How To? que es mi costumbre escribir.</p>
+<p>Manos a la obra&mldr;</p>
+<h2 id=cómo-descargo-los-símbolos>¿Cómo descargo los símbolos?</h2>
+<p>En Visual Studio, creamos un proyecto de tipo AL y luego procedemos a buscar el comando <strong>AL: Download symbols</strong> y hacemos clic sobre él:</p>
+<p><img src=/img/posts/2021/09/07/1.png alt></p>
+<p>En Visual Studio Code, nos aparecerá el registro de dispositivo. Por lo tanto, hacemos clic en el botón:</p>
+<p><img src=/img/posts/2021/09/07/2.png alt></p>
+<p>Seguimos los pasos, que se encuentran en pantalla hasta que aparezca la siguiente pantalla:</p>
+<p><img src=/img/posts/2021/09/07/3.png alt></p>
+<p>Ahora, veremos el siguiente error cuando intentamos compilarlo:</p>
+<p><img src=/img/posts/2021/09/07/4.png alt></p>
+<p>Tenemos dos posibles salidas para solucionar esto. Uno de ellos radica en utilizar el usuario y contraseña del administrador global, pero tendremos un problema posterior (no podremos depurar si el administrador global no posee una licencia activa de Business Central).</p>
+<p>De esta manera, la mejor solución es dar los permisos necesarios a un usuario para realizar las pruebas (aprovechando que estamos en un ambiente aislado). Así que, ingresamos al <a href=https://businesscentral.dynamics.com>Microsoft Dynamics 365 Business Central</a> y procedemos a ingresar las credenciales de un usuario con licencia <strong>Full</strong>, nos dirigimos a Usuarios > Sección de Permisos:</p>
+<p><img src=/img/posts/2021/09/07/5.png alt></p>
+<p>En la primera sección agregamos el grupo <strong>D365 Extension Management</strong> y quitamos toda relación con empresa:</p>
+<p><img src=/img/posts/2021/09/07/6.png alt></p>
+<p>Repetimos el proceso para la siguiente sección, y seleccionamos el conjunto de permisos <strong>D365 Extension Management ADMIN</strong>:</p>
+<p><img src=/img/posts/2021/09/07/7.png alt></p>
+<p>De esta manera, volvemos a ejecutar el comando que debíamos ejecutar:</p>
+<p><img src=/img/posts/2021/09/07/1.png alt></p>
+<p>Ahora todo saldrá como esperamos:</p>
+<p><img src=/img/posts/2021/09/07/8.png alt></p>
+<p>Luego, podremos hacer F5 (Depurar) nuestra extensión y obtendremos, también, el resultado esperado:</p>
+<p><img src=/img/posts/2021/09/07/9.png alt></p>
+<p><img src=/img/posts/2021/09/07/10.png alt></p>
+<p>De esta manera hemos logrado descargar los símbolos de Business Central Cloud ;)</p>
+<hr>
+<section id=social-share>
+<div class="list-inline footer-links">
+<div class=share-box aria-hidden=true>
+<ul class=share>
+<li>
+<a href="//twitter.com/share?url=https%3a%2f%2fcmas.dev%2fposts%2f2021-09-07-business-central-download-symbols-cloud%2f&text=Business%20Central%3a%20Descargar%20simbolos%20desde%20Sandbox&via=christianamado" target=_blank title="Share on Twitter">
+<i class="fab fa-twitter"></i>
 </a>
-<p class=post-meta>
-<span class=post-meta>
-<i class="fas fa-calendar"></i>&nbsp;Publicado el 21 de enero, 2018
-&nbsp;(Última modificación en 5 de enero, 2021)
-&nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;1&nbsp;minutos
-&nbsp;|&nbsp;<i class="fas fa-book"></i>&nbsp;171&nbsp;palabras
-&nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;Christian Amado
-</span>
-</p>
-<div class=post-entry>
-<p>Cuando desarrollamos dentro de Dynamics NAV 2018 nos encontramos con miles de objetos (tablas, páginas, reportes, consultas, XML Port) y muchas veces necesitamos encontrar los desarrollos que ya se han modificado y/o la fecha de modificación de los mismos.</p>
-<p>Como desventaja encontramos que en NAV 2018 no existe el control de versiones ni podemos saber que usuario realizó las modificaciones.</p>
-<a href=https://cmas.dev/posts/2018-11-22-navdev-tips-filtrar-campos-del-disenador-de-objetos/ class=post-read-more>[Leer más]</a>
-</div>
-<div class=blog-tags>
-<a href=https://cmas.dev/tags/dynamics-nav/>Dynamics NAV</a>&nbsp;
-</div>
-</article>
-<article class=post-preview>
-<a href=https://cmas.dev/posts/2018-11-16-fiuna-tech-day-2018/>
-<h2 class=post-title>FIUNA TECH DAY 2018</h2>
+</li>
+<li>
+<a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fcmas.dev%2fposts%2f2021-09-07-business-central-download-symbols-cloud%2f" target=_blank title="Share on Facebook">
+<i class="fab fa-facebook"></i>
 </a>
-<p class=post-meta>
-<span class=post-meta>
-<i class="fas fa-calendar"></i>&nbsp;Publicado el 16 de enero, 2018
-&nbsp;(Última modificación en 5 de enero, 2021)
-&nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;1&nbsp;minutos
-&nbsp;|&nbsp;<i class="fas fa-book"></i>&nbsp;38&nbsp;palabras
-&nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;Christian Amado
-</span>
-</p>
-<div class=post-entry>
-<p>La Universidad Nacional de Asunción ha realizado su ya conocido evento de tecnología donde fui amablemente invitado.</p>
-<p>Este año estuve con problemas en las fotos, pero agradezco el certificado expedido.</p>
-<a href=https://cmas.dev/posts/2018-11-16-fiuna-tech-day-2018/ class=post-read-more>[Leer más]</a>
-</div>
-<div class=blog-tags>
-<a href=https://cmas.dev/tags/dynamics-nav/>Dynamics NAV</a>&nbsp;
-</div>
-</article>
-<article class=post-preview>
-<a href=https://cmas.dev/posts/2018-11-15-instalacion-dynamics-365-business-central/>
-<h2 class=post-title>Instalación Dynamics 365 Business Central</h2>
+</li>
+<li>
+<a href="//reddit.com/submit?url=https%3a%2f%2fcmas.dev%2fposts%2f2021-09-07-business-central-download-symbols-cloud%2f&title=Business%20Central%3a%20Descargar%20simbolos%20desde%20Sandbox" target=_blank title="Share on Reddit">
+<i class="fab fa-reddit"></i>
 </a>
-<p class=post-meta>
-<span class=post-meta>
-<i class="fas fa-calendar"></i>&nbsp;Publicado el 14 de enero, 2018
-&nbsp;(Última modificación en 5 de enero, 2021)
-&nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;1&nbsp;minutos
-&nbsp;|&nbsp;<i class="fas fa-book"></i>&nbsp;148&nbsp;palabras
-&nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;Christian Amado
-</span>
-</p>
-<div class=post-entry>
-<p>Cuando le estaba tomando mucho cariño a Microsoft Dynamics NAV 2018, me encuentro con este producto. Básicamente es la nueva versión de Dynamics NAV pero orientado a la nube y al uso de navegadores Web. Tal como acabas de leer, El cliente Windows se eliminará en las próximas versiones (por el momento sigue disponible).</p>
-<p>En esta breve, pero completa guía mostraré como realizar la instalación paso a paso.</p>
-<a href=https://cmas.dev/posts/2018-11-15-instalacion-dynamics-365-business-central/ class=post-read-more>[Leer más]</a>
-</div>
-<div class=blog-tags>
-<a href=https://cmas.dev/tags/dynamics-365-business-central/>Dynamics 365 Business Central</a>&nbsp;
-</div>
-</article>
-<article class=post-preview>
-<a href=https://cmas.dev/posts/2018-11-07-navdev-tips-depuracion-en-dynamics-nav-2018/>
-<h2 class=post-title>NAVDEV Tips: Depuración en Dynamics NAV 2018</h2>
+</li>
+<li>
+<a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fcmas.dev%2fposts%2f2021-09-07-business-central-download-symbols-cloud%2f&title=Business%20Central%3a%20Descargar%20simbolos%20desde%20Sandbox" target=_blank title="Share on LinkedIn">
+<i class="fab fa-linkedin"></i>
 </a>
-<p class=post-meta>
-<span class=post-meta>
-<i class="fas fa-calendar"></i>&nbsp;Publicado el 7 de enero, 2018
-&nbsp;(Última modificación en 5 de enero, 2021)
-&nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;2&nbsp;minutos
-&nbsp;|&nbsp;<i class="fas fa-book"></i>&nbsp;215&nbsp;palabras
-&nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;Christian Amado
-</span>
-</p>
-<div class=post-entry>
-<p>NAV, como cualquier herramienta de desarrollo ofrece la posibilidad de depurar el programa, y lo permite de manera remota, sí, de manera remota depurando la sesión de cualquier usuario para poder realizar las pruebas necesarias.</p>
-<p>Esto es muy interesante y útil a la hora de encontrar cosas, que debido a la complejidad de la aplciación de negocio, están encapsuladas en Code Units o bien dentro de la misma tabla.</p>
-<a href=https://cmas.dev/posts/2018-11-07-navdev-tips-depuracion-en-dynamics-nav-2018/ class=post-read-more>[Leer más]</a>
-</div>
-<div class=blog-tags>
-<a href=https://cmas.dev/tags/dynamics-nav/>Dynamics NAV</a>&nbsp;
-</div>
-</article>
-</div>
-<ul class="pager main-pager">
-<li class=previous>
-<a href=https://cmas.dev/page/8/>&larr; Artículos siguientes</a>
+</li>
+<li>
+<a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fcmas.dev%2fposts%2f2021-09-07-business-central-download-symbols-cloud%2f&title=Business%20Central%3a%20Descargar%20simbolos%20desde%20Sandbox" target=_blank title="Share on StumbleUpon">
+<i class="fab fa-stumbleupon"></i>
+</a>
+</li>
+<li>
+<a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fcmas.dev%2fposts%2f2021-09-07-business-central-download-symbols-cloud%2f&description=Business%20Central%3a%20Descargar%20simbolos%20desde%20Sandbox" target=_blank title="Share on Pinterest">
+<i class="fab fa-pinterest"></i>
+</a>
 </li>
 </ul>
 </div>
 </div>
+</section>
+</article>
+<ul class="pager blog-pager">
+<li class=previous>
+<a href=https://cmas.dev/posts/2021-07-01-microsoft-most-valuable-professional-2021-2022/ data-toggle=tooltip data-placement=top title="Microsoft Most Valuable Professional 2021/2022">&larr; Artículo anterior</a>
+</li>
+</ul>
+<div class=disqus-comments>
+<div id=disqus_thread></div>
+<script type=application/javascript>var disqus_config=function(){};(function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById('disqus_thread').innerHTML='Disqus comments not available by default when the website is previewed locally.';return}var b=document,a=b.createElement('script');a.async=!0,a.src='//cmasblog.disqus.com/embed.js',a.setAttribute('data-timestamp',+new Date),(b.head||b.body).appendChild(a)})()</script>
+<noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript>
+<a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a>
 </div>
-<div class=page-meta>
+</div>
+</div>
 </div>
 <footer>
 <div class=container>
@@ -335,7 +322,7 @@
 </a>
 </li>
 <li>
-<a href=/index.xml title=RSS>
+<a href title=RSS>
 <span class="fa-stack fa-lg">
 <i class="fas fa-circle fa-stack-2x"></i>
 <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
@@ -352,6 +339,7 @@
 </p>
 <p class="credits theme-by text-muted">
 <a href=https://gohugo.io>Hugo v0.88.1</a> &nbsp;&bull;&nbsp; Tema <a href=https://github.com/halogenica/beautifulhugo>Beautiful Hugo</a> adaptado de <a href=https://deanattali.com/beautiful-jekyll/>Beautiful Jekyll</a>
+&nbsp;&bull;&nbsp;[<a href=https://github.com/cmasdev/cmasdev.github.io/tree/37d2d04ed2ea125e3d780a602a5c28ede66b9e8a>37d2d04e</a>]
 </p>
 </div>
 </div>

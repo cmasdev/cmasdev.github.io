@@ -3,14 +3,20 @@
 <meta charset=utf-8>
 <meta http-equiv=x-ua-compatible content="IE=edge">
 <meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
-<title>Posts - Christian Amado's Blog</title>
+<title>Business Central: Download symbols from Sandbox - Christian Amado's Blog</title>
+<meta name=description content="Today I tried to download the Microsoft Dynamics 365 Business Central symbols but ran into errors and couldn&rsquo;t get it to work. First, I had errors to download the symbols in order to be able to debug the application.
+To prevent other people from having this problem, I share my experience solving the problem in this small How To? manual. which is my habit to write.">
 <meta name=author content="Christian Amado"><script type=application/ld+json>{"@context":"http://schema.org","@type":"WebSite","name":"Christian Amado\u0027s Blog","url":"https:\/\/cmas.dev"}</script><script type=application/ld+json>{"@context":"http://schema.org","@type":"Organization","name":"","url":"https:\/\/cmas.dev"}</script>
-<meta property="og:title" content="Posts">
+<script type=application/ld+json>{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"https:\/\/cmas.dev","name":"home"}},{"@type":"ListItem","position":3,"item":{"@id":"https:\/\/cmas.dev\/en\/posts\/2021-09-07-business-central-download-symbols-cloud\/","name":"Business central download symbols from sandbox"}}]}</script><script type=application/ld+json>{"@context":"http://schema.org","@type":"Article","author":{"name":"Christian Amado"},"headline":"Business Central: Download symbols from Sandbox","description":"Today I tried to download the Microsoft Dynamics 365 Business Central symbols but ran into errors and couldn\u0026rsquo;t get it to work. First, I had errors to download the symbols in order to be able to debug the application.\nTo prevent other people from having this problem, I share my experience solving the problem in this small How To? manual. which is my habit to write.\n","inLanguage":"en","wordCount":332,"datePublished":"2021-09-07T23:55:00","dateModified":"2021-09-07T23:55:00","image":"https:\/\/cmas.dev\/img\/avatar.jpg","keywords":[""],"mainEntityOfPage":"https:\/\/cmas.dev\/en\/posts\/2021-09-07-business-central-download-symbols-cloud\/","publisher":{"@type":"Organization","name":"https:\/\/cmas.dev","logo":{"@type":"ImageObject","url":"https:\/\/cmas.dev\/img\/avatar.jpg","height":60,"width":60}}}</script>
+<meta property="og:title" content="Business Central: Download symbols from Sandbox">
+<meta property="og:description" content="Today I tried to download the Microsoft Dynamics 365 Business Central symbols but ran into errors and couldn&rsquo;t get it to work. First, I had errors to download the symbols in order to be able to debug the application.
+To prevent other people from having this problem, I share my experience solving the problem in this small How To? manual. which is my habit to write.">
 <meta property="og:image" content="https://cmas.dev/img/avatar.jpg">
-<meta property="og:url" content="https://cmas.dev/en/posts/">
+<meta property="og:url" content="https://cmas.dev/en/posts/2021-09-07-business-central-download-symbols-cloud/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Christian Amado's Blog">
-<meta name=twitter:title content="Posts">
+<meta name=twitter:title content="Business Central: Download symbols from Sandbox">
+<meta name=twitter:description content="Today I tried to download the Microsoft Dynamics 365 Business Central symbols but ran into errors and couldn&rsquo;t get it to work. First, I had errors to download the symbols in order to be able to …">
 <meta name=twitter:image content="https://cmas.dev/img/avatar.jpg">
 <meta name=twitter:card content="summary">
 <meta name=twitter:site content="@christianamado">
@@ -137,7 +143,7 @@
 <div class=row>
 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
 <div class=posts-heading>
-<h1>Posts</h1>
+<h1>Business Central: Download symbols from Sandbox</h1>
 <hr class=small>
 </div>
 </div>
@@ -148,48 +154,84 @@
 <div class=container role=main>
 <div class=row>
 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-<div class=posts-list>
-<article class=post-preview>
-<a href=https://cmas.dev/en/posts/2021-09-07-business-central-download-symbols-cloud/>
-<h2 class=post-title>Business Central: Download symbols from Sandbox</h2>
-</a>
-<p class=post-meta>
-<span class=post-meta>
-<i class="fas fa-calendar"></i>&nbsp;Posted on September 7, 2021
-&nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;2&nbsp;minutes
-&nbsp;|&nbsp;<i class="fas fa-book"></i>&nbsp;332&nbsp;words
-&nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;Christian Amado
-&nbsp;&bull;&nbsp;Other languages: <a href=https://cmas.dev/posts/2021-09-07-business-central-download-symbols-cloud/ lang=es>Espanol</a>
-</span>
-</p>
-<div class=post-entry>
+<article role=main class=blog-post>
 <p>Today I tried to download the Microsoft Dynamics 365 Business Central symbols but ran into errors and couldn&rsquo;t get it to work. First, I had errors to download the symbols in order to be able to debug the application.</p>
 <p>To prevent other people from having this problem, I share my experience solving the problem in this small How To? manual. which is my habit to write.</p>
-<a href=https://cmas.dev/en/posts/2021-09-07-business-central-download-symbols-cloud/ class=post-read-more>[Read More]</a>
-</div>
-</article>
-<article class=post-preview>
-<a href=https://cmas.dev/en/posts/2021-07-01-microsoft-most-valuable-professional-2021-2022/>
-<h2 class=post-title>Microsoft Most Valuable Professional 2021/2022</h2>
+<p>Let&rsquo;s do it&mldr;</p>
+<h2 id=cómo-descargo-los-símbolos>¿Cómo descargo los símbolos?</h2>
+<p>In Visual Studio, we create a project of type AL and then proceed to look for the command <strong>AL: Download symbols</strong> and click on it:</p>
+<p><img src=/img/posts/2021/09/07/1.png alt></p>
+<p>In Visual Studio Code, the device registration will appear. Therefore, we click the button:</p>
+<p><img src=/img/posts/2021/09/07/2.png alt></p>
+<p>We follow the steps on the screen until the following dialog appears:</p>
+<p><img src=/img/posts/2021/09/07/3.png alt></p>
+<p>Now, we will see the following error when we try to compile it:</p>
+<p><img src=/img/posts/2021/09/07/4.png alt></p>
+<p>We have two possible ways out to solve this. One of them is to use the username and password of the global administrator, but we will have a later problem (we will not be able to debug if the global administrator does not have an active Business Central license).</p>
+<p>In this way, the best solution is to give the necessary permissions to a user to carry out the tests (taking advantage of the fact that we are in an sandbox environment). So, we enter the [Microsoft Dynamics 365 Business Central] (<a href=https://businesscentral.dynamics.com>https://businesscentral.dynamics.com</a>) and proceed to enter the credentials of a user with <strong>Full</strong> license, we go to Users> Permissions Section:</p>
+<p><img src=/img/posts/2021/09/07/5.png alt></p>
+<p>In the first section we add the group <strong>D365 Extension Management</strong> and remove any relationship with the company:</p>
+<p><img src=/img/posts/2021/09/07/6.png alt></p>
+<p>We repeat the process for the next section, and select the set of permissions <strong>D365 Extension Management ADMIN</strong>:</p>
+<p><img src=/img/posts/2021/09/07/7.png alt></p>
+<p>In this way, we re-execute the command that we had to execute:</p>
+<p><img src=/img/posts/2021/09/07/1.png alt></p>
+<p>Now everything will turn out as we expect:</p>
+<p><img src=/img/posts/2021/09/07/8.png alt></p>
+<p>Then, we can do F5 (Debug) our extension and we will also obtain the expected result:</p>
+<p><img src=/img/posts/2021/09/07/9.png alt></p>
+<p><img src=/img/posts/2021/09/07/10.png alt></p>
+<p>In this way we have managed to download the Business Central Cloud symbols ;)</p>
+<hr>
+<section id=social-share>
+<div class="list-inline footer-links">
+<div class=share-box aria-hidden=true>
+<ul class=share>
+<li>
+<a href="//twitter.com/share?url=https%3a%2f%2fcmas.dev%2fen%2fposts%2f2021-09-07-business-central-download-symbols-cloud%2f&text=Business%20Central%3a%20Download%20symbols%20from%20Sandbox&via=christianamado" target=_blank title="Share on Twitter">
+<i class="fab fa-twitter"></i>
 </a>
-<p class=post-meta>
-<span class=post-meta>
-<i class="fas fa-calendar"></i>&nbsp;Posted on July 1, 2021
-&nbsp;(Last modified on September 5, 2021)
-&nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;1&nbsp;minutes
-&nbsp;|&nbsp;<i class="fas fa-book"></i>&nbsp;73&nbsp;words
-&nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;Christian Amado
-&nbsp;&bull;&nbsp;Other languages: <a href=https://cmas.dev/posts/2021-07-01-microsoft-most-valuable-professional-2021-2022/ lang=es>Espanol</a>
-</span>
-</p>
-<div class=post-entry>
-<p><a href=https://mvp.microsoft.com/en-us/PublicProfile/5001273>The renewal has arrived for another year(7 in a row)</a>:</p>
-<a href=https://cmas.dev/en/posts/2021-07-01-microsoft-most-valuable-professional-2021-2022/ class=post-read-more>[Read More]</a>
+</li>
+<li>
+<a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fcmas.dev%2fen%2fposts%2f2021-09-07-business-central-download-symbols-cloud%2f" target=_blank title="Share on Facebook">
+<i class="fab fa-facebook"></i>
+</a>
+</li>
+<li>
+<a href="//reddit.com/submit?url=https%3a%2f%2fcmas.dev%2fen%2fposts%2f2021-09-07-business-central-download-symbols-cloud%2f&title=Business%20Central%3a%20Download%20symbols%20from%20Sandbox" target=_blank title="Share on Reddit">
+<i class="fab fa-reddit"></i>
+</a>
+</li>
+<li>
+<a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fcmas.dev%2fen%2fposts%2f2021-09-07-business-central-download-symbols-cloud%2f&title=Business%20Central%3a%20Download%20symbols%20from%20Sandbox" target=_blank title="Share on LinkedIn">
+<i class="fab fa-linkedin"></i>
+</a>
+</li>
+<li>
+<a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fcmas.dev%2fen%2fposts%2f2021-09-07-business-central-download-symbols-cloud%2f&title=Business%20Central%3a%20Download%20symbols%20from%20Sandbox" target=_blank title="Share on StumbleUpon">
+<i class="fab fa-stumbleupon"></i>
+</a>
+</li>
+<li>
+<a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fcmas.dev%2fen%2fposts%2f2021-09-07-business-central-download-symbols-cloud%2f&description=Business%20Central%3a%20Download%20symbols%20from%20Sandbox" target=_blank title="Share on Pinterest">
+<i class="fab fa-pinterest"></i>
+</a>
+</li>
+</ul>
 </div>
-<div class=blog-tags>
-<a href=https://cmas.dev/en/tags/microsoft-mvp/>Microsoft MVP</a>&nbsp;
 </div>
+</section>
 </article>
+<ul class="pager blog-pager">
+<li class=previous>
+<a href=https://cmas.dev/en/posts/2021-07-01-microsoft-most-valuable-professional-2021-2022/ data-toggle=tooltip data-placement=top title="Microsoft Most Valuable Professional 2021/2022">&larr; Previous Post</a>
+</li>
+</ul>
+<div class=disqus-comments>
+<div id=disqus_thread></div>
+<script type=application/javascript>var disqus_config=function(){};(function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById('disqus_thread').innerHTML='Disqus comments not available by default when the website is previewed locally.';return}var b=document,a=b.createElement('script');a.async=!0,a.src='//cmasblog.disqus.com/embed.js',a.setAttribute('data-timestamp',+new Date),(b.head||b.body).appendChild(a)})()</script>
+<noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript>
+<a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a>
 </div>
 </div>
 </div>
@@ -280,7 +322,7 @@
 </a>
 </li>
 <li>
-<a href=/en/posts/index.xml title=RSS>
+<a href title=RSS>
 <span class="fa-stack fa-lg">
 <i class="fas fa-circle fa-stack-2x"></i>
 <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
@@ -297,6 +339,7 @@
 </p>
 <p class="credits theme-by text-muted">
 <a href=https://gohugo.io>Hugo v0.88.1</a> powered &nbsp;&bull;&nbsp; Theme <a href=https://github.com/halogenica/beautifulhugo>Beautiful Hugo</a> adapted from <a href=https://deanattali.com/beautiful-jekyll/>Beautiful Jekyll</a>
+&nbsp;&bull;&nbsp;[<a href=https://github.com/cmasdev/cmasdev.github.io/tree/37d2d04ed2ea125e3d780a602a5c28ede66b9e8a>37d2d04e</a>]
 </p>
 </div>
 </div>
