@@ -51,4 +51,4 @@ Para la instalación del nuevo Visual Studio debemos realizar las siguientes tar
 
 De esta manera, hemos visto cómo instalar Visual Studio 2022 Preview 1 y hemos dado un vistazo general en su primer uso.  
 
-Espero que lo puedan probar y dejen su feddback. ¡A disfrutarlo!
+Espero que lo puedan probar y dejen su feedback. ¡A disfrutarlo!
