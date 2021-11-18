@@ -1,4 +1,5 @@
 ---
+type: post
 title: "Business Central: Descargar simbolos desde Sandbox"
 author: Christian Amado
 date: 2021-09-07 23:55:00 -0400
