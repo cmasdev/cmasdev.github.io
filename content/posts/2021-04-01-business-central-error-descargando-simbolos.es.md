@@ -14,7 +14,7 @@ Procedí a instalar un nuevo CU (Cumulative Update) para Microsoft Dynamics 365 
 En este caso, debemos cambiar algo en el archivo de configuración y listo.
 
 <!--more-->
-*<span style="font-size: 8pt;">Versión: 2020 Wave 2 (KID: 5001735)</span>*  
+*<span style="font-size: 6pt;">Versión: 2020 Wave 2 (KID: 5001735)</span>*  
 
 Creamos el proyecto AL de manera estándar, el Visual Studio Code nos realiza las preguntas de rigor (para armar el archivo launch.json) y luego todo está listo para empezar a trabajar.  
 
