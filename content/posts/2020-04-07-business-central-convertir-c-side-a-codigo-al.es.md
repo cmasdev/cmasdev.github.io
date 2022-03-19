@@ -4,7 +4,7 @@ title: "Business Central: Convertir C/SIDE a código AL"
 author: Christian Amado
 date: '2020-04-07 12:24:00 -0400'
 category: Aplicaciones de negocio 
-tag:
+tags:
         - AL
         - 'C/SIDE'
         - 'Dynamics 365 Business Central'

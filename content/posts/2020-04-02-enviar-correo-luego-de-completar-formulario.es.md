@@ -4,7 +4,7 @@ title: "Enviar correo luego de completar formulario"
 author: Christian Amado
 date: '2020-04-02 17:00:00 -0400'
 category: Aplicaciones de negocio 
-tag:
+tags:
         - Flow
         - 'Power Automate'
 thumbnail-img: /img/posts/thumbnails/powerautomate.png

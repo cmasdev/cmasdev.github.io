@@ -3,7 +3,7 @@ title: "Business Central: Download symbols from Sandbox"
 author: Christian Amado
 date: 2021-09-07 23:55:00 -0400
 category: [Business Applications]
-tag: [AL, Dynamics 365 Business Central]
+tags: [AL, Dynamics 365 Business Central]
 thumbnail-img: /img/posts/thumbnails/businesscentral.png
 cover-img: /img/posts/cover/dynamics-365-business-central.svg
 ---

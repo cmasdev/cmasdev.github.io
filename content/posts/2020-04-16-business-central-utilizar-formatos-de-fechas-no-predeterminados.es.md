@@ -4,7 +4,7 @@ title: "Business Central: Utilizar formatos de fechas no predeterminados"
 author: Christian Amado
 date: 2020-04-16 19:43:00 -0400
 category: [Aplicaciones de negocio]
-tag: [AL, Dynamics 365 Business Central]
+tags: [AL, Dynamics 365 Business Central]
 thumbnail-img: /img/posts/thumbnails/businesscentral.png
 cover-img: /img/posts/cover/dynamics-365-business-central.svg
 ---

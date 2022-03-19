@@ -4,7 +4,7 @@ title: "Business Central: Utilizar manejador de eventos en reportes"
 author: Christian Amado
 date: 2020-04-23 21:12:00 -0400
 category: [Aplicaciones de negocio]
-tag: [AL, Dynamics 365 Business Central]
+tags: [AL, Dynamics 365 Business Central]
 thumbnail-img: /img/posts/thumbnails/businesscentral.png
 cover-img: /img/posts/cover/dynamics-365-business-central.svg
 ---
