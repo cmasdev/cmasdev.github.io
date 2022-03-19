@@ -12,6 +12,7 @@ cover-img: /img/posts/cover/dynamics-365-business-central.svg
 En este articulo deseo mostrar cómo revertir las versiones de las extensiones que creamos y cómo poder utilizarlas sin afectar las siguientes. Resulta que BC almacena todas las versiones, es decir, deshabilita las versiones anteriores pero no las elimina. eso permite volver a utilizarlas, aunque no es un proceso común.
 
 <!--more-->
+*<font size="2">Versión: 2020 Wave 2 (KID: 5001735)</font>*  
 
 Para que se entienda un poco, primero mostraré el archivo de configuración donde se establece la última versión:
 ```

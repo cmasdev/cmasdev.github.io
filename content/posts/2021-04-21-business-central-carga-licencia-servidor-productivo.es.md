@@ -12,6 +12,7 @@ cover-img: /img/posts/cover/dynamics-365-business-central.svg
 Este proceso es sencillo y necesitamos la línea de comandos para poder ejecutarla. Una vez realizado procedemos a reiniciar el servicio de Microsoft Dynamics 365 Business Central.
 
 <!--more-->
+*<font size="2">Versión: 2020 Wave 2 (KID: 5001735)</font>*  
 
 Primeramente, descargamos el archivo de licencias proveído por nuestro partner. Debe tener la extensión **.flf** y procedemos a cargarla en el servidor.  
 

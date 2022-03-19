@@ -14,7 +14,7 @@ En este artículo explico cómo se puede obtener la versión de la extensión qu
 El código es muy simple (y no es mío)...
 
 <!--more-->
-*<span style="font-size: 8pt;">Versión: 2020 Wave 2 (KID: 5001735)</span>*  
+*<font size="2">Versión: 2020 Wave 2 (KID: 5001735)</font>*   
 
 Básicamente escribimos la siguiente función:
 ```

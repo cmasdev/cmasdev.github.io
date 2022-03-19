@@ -12,6 +12,7 @@ cover-img: /img/posts/cover/dynamics-365-business-central.svg
 En esta ocasion quisiera mostrar cómo agregar un reporte en el buscador para que sea más sencillo encontrarlo. En un [artículo anterior](https://cmas.dev/posts/2019-02-20-bcdev-tips-crear-un-reporte-nuevo) vimos cómo crear un reporte nuevo (se me ocurre trabajar sobre ese mismo reporte). 
 
 <!--more-->
+*<font size="2">Versión: 2020 Wave 2 (KID: 5001735)</font>*  
 
 Aplicamos la definición del reporte de la siguiente manera:
 ```

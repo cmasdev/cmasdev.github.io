@@ -12,6 +12,7 @@ cover-img: /img/posts/cover/dynamics-365-business-central.svg
 Este artículo lo escribo porque en mi equipo de trabajo surgieron dudas en cuanto a esto debido a que se han borrado datos de un cliente (obviamente en su espacio Sandbox) pero esto consume tiempo y el motivo es muy sencillo. 
 
 <!--more-->
+*<font size="2">Versión: 2020 Wave 2 (KID: 5001735)</font>*  
 
 Básicamente existen tres tipos de sincronización en Microsoft Dynamics 365 Business Central (similares a Microsoft Dynamics NAV) los cuales son:  
 1. Syncronize.

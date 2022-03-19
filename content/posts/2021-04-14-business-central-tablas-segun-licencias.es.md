@@ -14,6 +14,7 @@ Este es un caso muy particular, porque se dá en Microsoft Dynamics 365 Business
 Esto es un tema de licenciamiento para versiones On-Premise.
 
 <!--more-->
+*<font size="2">Versión: 2020 Wave 2 (KID: 5001735)</font>*  
 
 En este artículo veremos cómo se definen las tablas. Básicamente todos los partners de Microsoft Dynamics tenemos acceso a un portal que se denomina [partnersource](https://businesscenter.mbs.microsoft.com/) donde accedemos a los datos de nuestros clientes.  
 
