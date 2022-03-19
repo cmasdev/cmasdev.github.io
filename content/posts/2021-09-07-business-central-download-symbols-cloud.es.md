@@ -1,4 +1,5 @@
 ---
+layout: post
 type: post
 title: "Business Central: Descargar simbolos desde Sandbox"
 author: Christian Amado

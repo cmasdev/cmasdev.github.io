@@ -1,4 +1,5 @@
 ---
+layout: post
 title: "Business Central: Download symbols from Sandbox"
 author: Christian Amado
 date: 2021-09-07 23:55:00 -0400

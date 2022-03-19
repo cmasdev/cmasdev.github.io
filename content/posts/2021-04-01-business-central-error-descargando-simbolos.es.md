@@ -1,5 +1,5 @@
 ---
-type: post
+layout: post
 title: "Business Central: Error descargando símbolos"
 author: Christian Amado
 date: 2021-04-01 15:15:35 -0400

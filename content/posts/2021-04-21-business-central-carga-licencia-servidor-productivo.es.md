@@ -1,5 +1,5 @@
 ---
-type: post
+layout: post
 title: "Business Central: Cargar licencia en servidor productivo"
 author: Christian Amado
 date: 2021-04-21 16:03:00 -0400

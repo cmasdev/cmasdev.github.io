@@ -1,5 +1,5 @@
 ---
-type: post
+layout: post
 title: "Business Central: Mostrar reporte en el buscador"
 author: Christian Amado
 date: 2021-04-28 14:15:00 -0400

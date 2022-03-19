@@ -1,5 +1,5 @@
 ---
-type: post
+layout: post
 title: "Business Central: Tablas según licencias"
 author: Christian Amado
 date: 2021-04-14 17:14:00 -0400

@@ -1,5 +1,5 @@
 ---
-type: post
+layout: post
 title: "Business Central: Obtener versión de extensión"
 author: Christian Amado
 date: 2021-04-02 10:28:14 -0400

@@ -1,4 +1,5 @@
 ---
+layout: post
 title: "Microsoft Most Valuable Professional 2021/2022"
 author: "Christian Amado"
 date: 2021-07-01 22:35:00 -04:00

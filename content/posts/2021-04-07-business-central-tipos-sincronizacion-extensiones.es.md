@@ -1,5 +1,5 @@
 ---
-type: post
+layout: post
 title: "Business Central: Tipos de sincronización en extensiones"
 author: Christian Amado
 date: 2021-04-07 22:47:00 -0400

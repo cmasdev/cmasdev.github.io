@@ -1,5 +1,5 @@
 ---
-type: post
+layout: post
 title: "Business Central: Revertir versiones de extensiones"
 author: Christian Amado
 date: 2021-04-01 16:38:12 -0400
