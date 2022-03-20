@@ -14,18 +14,18 @@
 </span></span><span class=line><span class=cl>    alert(&#39;Tu nombre es: &#39;+ nombre);
 </span></span><span class=line><span class=cl>}
 </span></span></code></pre></div><p>En la página de Microsoft Dynamics 365 Business Central haremos la llamada al script en cuestión:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>usercontrol(html; Html)
-</span></span><span class=line><span class=cl>                {
-</span></span><span class=line><span class=cl>                    ApplicationArea = All;
-</span></span><span class=line><span class=cl>                    trigger HacerAlgo()
-</span></span><span class=line><span class=cl>                    var
-</span></span><span class=line><span class=cl>                        htmlText: Text;
-</span></span><span class=line><span class=cl>                    begin
-</span></span><span class=line><span class=cl>                        htmlText := &#39;&lt;button type=&#34;button&#34; onclick=&#34;ClickMe()&#34;&gt;Click Me!&lt;/button&gt;&#39;;
+</span></span><span class=line><span class=cl>{
+</span></span><span class=line><span class=cl>    ApplicationArea = All;
+</span></span><span class=line><span class=cl>    trigger HacerAlgo()
+</span></span><span class=line><span class=cl>    var
+</span></span><span class=line><span class=cl>        htmlText: Text;
+</span></span><span class=line><span class=cl>    begin
+</span></span><span class=line><span class=cl>        htmlText := &#39;&lt;button type=&#34;button&#34; onclick=&#34;ClickMe()&#34;&gt;Click Me!&lt;/button&gt;&#39;;
 </span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>                        CurrPage.html.Render(htmlText);
+</span></span><span class=line><span class=cl>        CurrPage.html.Render(htmlText);
 </span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>                    end;
-</span></span><span class=line><span class=cl>                }
+</span></span><span class=line><span class=cl>    end;
+</span></span><span class=line><span class=cl>}
 </span></span></code></pre></div><p>De esta manera veremos el resultado según los siguientes pasos:<br><img src=/img/posts/2021/06/09/JS1.png alt></p><p><img src=/img/posts/2021/06/09/JS2.png alt></p><p><img src=/img/posts/2021/06/09/JS3.png alt></p><p>Así logramos realizar acciones con JavaScript desde una página en Microsoft Dynamics 365 Business Central. También podemos realizar tareas complejas como llamadas a APIs, AJAX, etc.</p><p>¡Espero resulte útil!</p><div class=blog-tags><a href=https://cmas.dev/tags/al/>AL</a>&nbsp;
 <a href=https://cmas.dev/tags/dynamics-365-business-central/>Dynamics 365 Business Central</a>&nbsp;
 <a href=https://cmas.dev/tags/html/>HTML</a>&nbsp;
