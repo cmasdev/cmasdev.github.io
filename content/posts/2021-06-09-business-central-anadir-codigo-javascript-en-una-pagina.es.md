@@ -9,7 +9,7 @@ thumbnail-img: /img/posts/thumbnails/businesscentral.png
 cover-img: /img/posts/cover/dynamics-365-business-central.svg
 ---
 
-La semana pasada vimos como inyectar HTML en una página dentro de Microsoft Dynamics 365 Business Central. Hoy veremos cómo agregar código Javascript que muestre una ventana de confirmación y luego muestre una alerta. Ya dá para empezar...
+La [semana pasada vimos](https://cmas.dev/posts/2021-06-02-business-central-anadir-html-en-una-pagina/) como inyectar HTML en una página dentro de Microsoft Dynamics 365 Business Central. Hoy veremos cómo agregar código Javascript que muestre una ventana de confirmación y luego muestre una alerta. Ya dá para empezar...
 
 <!--more-->
 *<font size="2">Versión: 2020 Wave 2 (KID: 5001735)</font>*
