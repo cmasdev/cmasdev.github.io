@@ -22,7 +22,7 @@ Primeramente, intentaremos filtrar todos los clientes que tengan importes pendie
 Importe pendiente: >=5000&<=10000
 ```
 Entonces, obtendremos el resultado siguiente:  
-![](/img/posts/2021/06/16/NumbreFilter1.png)  
+![](/img/posts/2021/06/16/NumberFilter1.png)  
 
 ## Filtrar fechas
 De la misma manera podemos realizar los filtros para fecha:
