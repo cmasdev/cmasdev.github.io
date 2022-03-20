@@ -436,7 +436,7 @@ footer .theme-by {
 }
 
 .blog-tags:before {
-  content: "Cuca: ";
+  content: "Tags: ";
 }
 
 .blog-tags a {
