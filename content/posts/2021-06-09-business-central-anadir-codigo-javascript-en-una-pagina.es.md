@@ -26,18 +26,18 @@ function ClickMe()
 En la página de Microsoft Dynamics 365 Business Central haremos la llamada al script en cuestión:
 ```
 usercontrol(html; Html)
-                {
-                    ApplicationArea = All;
-                    trigger HacerAlgo()
-                    var
-                        htmlText: Text;
-                    begin
-                        htmlText := '<button type="button" onclick="ClickMe()">Click Me!</button>';
+{
+    ApplicationArea = All;
+    trigger HacerAlgo()
+    var
+        htmlText: Text;
+    begin
+        htmlText := '<button type="button" onclick="ClickMe()">Click Me!</button>';
 
-                        CurrPage.html.Render(htmlText);
+        CurrPage.html.Render(htmlText);
 
-                    end;
-                }
+    end;
+}
 ```
 De esta manera veremos el resultado según los siguientes pasos:  
 ![](/img/posts/2021/06/09/JS1.png)  

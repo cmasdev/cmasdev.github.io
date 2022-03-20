@@ -37,7 +37,8 @@ usercontrol(html; Html)
     end;
 }
 ```
-2. Es obligatorio introducir 2 archivos JavaScript en nuestro proyecto AL, los cuales son:
+2. Es obligatorio introducir 2 archivos JavaScript en nuestro proyecto AL, los cuales son:  
+
     2.1 **StartupScript**: Especifica el script que se invoca cuando se carga la página web con el complemento de control.  
     **Archivo js/startup.js**
     ```
@@ -126,37 +127,6 @@ page 50101 SimpleCustomerCard
 
                     end;
                 }
-            }
-        }
-    }
-
-    actions
-    {
-        area(Navigation)
-        {
-            action(NewAction)
-            {
-                ApplicationArea = All;
-                Caption = 'Probar API';
-
-                trigger OnAction()
-                var
-                    clienteHttp: HttpClient;
-                    respuesta: HttpResponseMessage;
-                    resultado: Text;
-                    funciona: Boolean;
-                begin
-                    clienteHttp.Get('https://reqbin.com/echo', respuesta);
-
-                    //Leer el contenido de la respuesta desde la URL
-                    funciona := respuesta.Content().ReadAs(resultado);
-
-                    if not funciona then
-                        Error('No funciona la API');
-
-                    //Imprimimos el resultado si todo funciona correctamente
-                    Message(FORMAT(resultado));
-                end;
             }
         }
     }
