@@ -4,7 +4,7 @@ title: "BC Tip: Quitar elemento del área de tareas"
 author: Christian Amado
 date: 2021-07-07 19:17:00 -0400
 category: [Aplicaciones de negocio]
-tags: [AL, Dynamics 365 Business Central]
+tags: [Dynamics 365 Business Central]
 thumbnail-img: /img/posts/thumbnails/businesscentral.png
 cover-img: /img/posts/cover/dynamics-365-business-central.svg
 ---

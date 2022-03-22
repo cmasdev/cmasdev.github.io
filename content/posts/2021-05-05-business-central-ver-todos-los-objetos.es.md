@@ -4,7 +4,7 @@ title: "Business Central: Cómo ver todos los objetos"
 author: Christian Amado
 date: 2021-05-05 18:34:00 -0400
 category: [Aplicaciones de negocio]
-tags: [AL, Dynamics 365 Business Central]
+tags: [Dynamics 365 Business Central]
 thumbnail-img: /img/posts/thumbnails/businesscentral.png
 cover-img: /img/posts/cover/dynamics-365-business-central.svg
 ---

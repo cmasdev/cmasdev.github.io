@@ -4,7 +4,7 @@ title: "BC Tip: Ocultar y mover campos por usuario"
 author: Christian Amado
 date: 2021-07-29 22:05:19 -0400
 category: [Aplicaciones de negocio]
-tags: [AL, Dynamics 365 Business Central]
+tags: [Dynamics 365 Business Central]
 thumbnail-img: /img/posts/thumbnails/businesscentral.png
 cover-img: /img/posts/cover/dynamics-365-business-central.svg
 ---
