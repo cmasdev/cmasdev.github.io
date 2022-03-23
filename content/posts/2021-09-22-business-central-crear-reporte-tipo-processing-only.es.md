@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Business Central: Crear reporte de tipo OnlyProcess"
+title: "Business Central: Crear reporte de tipo ProcessingOnly"
 author: Christian Amado
 date: 2021-09-22 13:48:03 -0400
 category: [Aplicaciones de negocio]
