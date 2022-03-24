@@ -17,12 +17,12 @@ En este artículo mostraré cómo añadir campos que no están visibles en una p
 Las páginas dentro de Microsoft Dynamics 365 Business Central poseen varios campos para poder trabajar con ellos, pero muchas veces necesitamos otros campos, que de manera predeterminada, no están visibles.
 
 Para ello, debemos ir al menú de *Configuración (engranaje)*>*Personalice*:  
-![](/img/posts/2021/10/07/Campos1.png)  
+![](/img/posts/2021/10/07/Campo1.png)  
 
 Hacemos clic en **Campo** y arrastramos el campo que deseamos agregar (en este ejemplo, ):  
-![](/img/posts/2021/10/07/Campos2.png)  
+![](/img/posts/2021/10/07/Campo2.png)  
 
 Por último, verificamos que todo esté bien y hacemos clic en **Hecho**:  
-![](/img/posts/2021/10/07/Campos3.png)  
+![](/img/posts/2021/10/07/Campo3.png)  
 
 ¡Espero resulte útil!
