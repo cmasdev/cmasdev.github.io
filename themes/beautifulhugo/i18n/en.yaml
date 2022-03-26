@@ -23,6 +23,8 @@
   translation: "Next Post"
 - id: readTime
   translation: "minutes"
+  - id: readTimeSingular
+  translation: "minute"
 - id: words
   translation: "words"
 
