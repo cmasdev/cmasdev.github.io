@@ -9,12 +9,12 @@ thumbnail-img: /img/posts/thumbnails/businesscentral.png
 cover-img: /img/posts/cover/dynamics-365-business-central.svg
 ---
 
-En este artículo mostraré cómo adicionar archivos (muy parecido a la [adición de comentarios](https://cmas.dev/posts/2021-12-08-business-central-adicionar-notas/)) en las páginas dentro de Microsoft Dynamics 365 Business Central.
+En este artículo mostraré cómo adicionar archivos (muy parecido a la [adición de comentarios](https://cmas.dev/posts/2021-12-08-business-central-adicionar-comentarios/)) en las páginas dentro de Microsoft Dynamics 365 Business Central.
 
 <!--more-->
 *<font size="2">Versión: 2021 Wave 1 (KID: 5007779)</font>*
 
-Muchas veces, queremos agregar archivos de cualqueir tipo asociado a un elemento en particular. Funciona para todas las páginas.
+Muchas veces, queremos agregar archivos de cualquier tipo asociado a un elemento en particular. Funciona para todas las páginas.
 
 Por ejemplo, en **Factura de Venta**, de nuevo, nos dirigimos aquí:  
 ![](/img/posts/2021/12/15/Archivo1.png)  
