@@ -23,6 +23,8 @@
   translation: "Artículo siguiente"
 - id: readTime
   translation: "minutos"
+  - id: readTimeSingular
+  translation: "minuto"
 - id: words
   translation: "palabras"
 
