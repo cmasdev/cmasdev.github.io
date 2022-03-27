@@ -8,20 +8,20 @@
 <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
 <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
 <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><header class=header-section><div class="intro-header no-img"><div class=container><div class=row><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><div class=posts-heading><h1>Business Central: Try…Catch en AL</h1><hr class=small></div></div></div></div></div></header><div class=container role=main><div class=row><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><article role=main class=blog-post><p>En este artículo mostraré cómo emular un Try&mldr;Catch en Microsoft Dynamics 365 Business Central pues tal método no existe en AL y debemos emularlo.</p><p><em>Versión: 2021 Wave 1 (KID: 5007779)</em></p><p>Vamos a programar algo que sabemos que está mal:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>trigger OnOpenPage()
-</span></span><span class=line><span class=cl>    var numero1 : integer;
-</span></span><span class=line><span class=cl>        numero2 : integer;
-</span></span><span class=line><span class=cl>    begin
-</span></span><span class=line><span class=cl>        numero1 := 10;
-</span></span><span class=line><span class=cl>        numero2 := 0;
+</span></span><span class=line><span class=cl>var numero1 : integer;
+</span></span><span class=line><span class=cl>    numero2 : integer;
+</span></span><span class=line><span class=cl>begin
+</span></span><span class=line><span class=cl>    numero1 := 10;
+</span></span><span class=line><span class=cl>    numero2 := 0;
 </span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>        Message(Format(numero1/numero2);
-</span></span><span class=line><span class=cl>    end;
+</span></span><span class=line><span class=cl>    Message(Format(numero1/numero2);
+</span></span><span class=line><span class=cl>end;
 </span></span></code></pre></div><p>Evidentemente, esto produce un error del tipo <strong>No se puede dividir por cero</strong>:<br><img src=/img/posts/2022/02/23/Try1.png alt></p><p>Para evitar esto debemos agregar un método que realice la acción y adornar el método con el atributo <strong>TryFunction</strong>:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>[TryFunction]
-</span></span><span class=line><span class=cl>    local procedure ControlError(numero:integer)
-</span></span><span class=line><span class=cl>    begin
-</span></span><span class=line><span class=cl>        if (numero = 0) then
-</span></span><span class=line><span class=cl>            Error(&#39;la division por cero no esta permitida&#39;);
-</span></span><span class=line><span class=cl>    end;
+</span></span><span class=line><span class=cl>local procedure ControlError(numero:integer)
+</span></span><span class=line><span class=cl>begin
+</span></span><span class=line><span class=cl>    if (numero = 0) then
+</span></span><span class=line><span class=cl>        Error(&#39;la division por cero no esta permitida&#39;);
+</span></span><span class=line><span class=cl>end;
 </span></span></code></pre></div><p>Entonces, nuestro procedimiento quedaria así:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>pageextension 50102 CustomerListExt extends &#34;Customer List&#34;
 </span></span><span class=line><span class=cl>{
 </span></span><span class=line><span class=cl>    trigger OnOpenPage()
