@@ -17,14 +17,14 @@ En este artículo mostraré cómo emular un Try...Catch en Microsoft Dynamics 36
 Vamos a programar algo que sabemos que está mal:
 ```
 trigger OnOpenPage()
-    var numero1 : integer;
-        numero2 : integer;
-    begin
-        numero1 := 10;
-        numero2 := 0;
+var numero1 : integer;
+    numero2 : integer;
+begin
+    numero1 := 10;
+    numero2 := 0;
 
-        Message(Format(numero1/numero2);
-    end;
+    Message(Format(numero1/numero2);
+end;
 ```
 Evidentemente, esto produce un error del tipo **No se puede dividir por cero**:  
 ![](/img/posts/2022/02/23/Try1.png)  
@@ -32,11 +32,11 @@ Evidentemente, esto produce un error del tipo **No se puede dividir por cero**:
 Para evitar esto debemos agregar un método que realice la acción y adornar el método con el atributo **TryFunction**:
 ```
 [TryFunction]
-    local procedure ControlError(numero:integer)
-    begin
-        if (numero = 0) then
-            Error('la division por cero no esta permitida');
-    end;
+local procedure ControlError(numero:integer)
+begin
+    if (numero = 0) then
+        Error('la division por cero no esta permitida');
+end;
 ```
 
 Entonces, nuestro procedimiento quedaria así:
