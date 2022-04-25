@@ -7,6 +7,7 @@ category: [Aplicaciones de negocio]
 tags: [Dynamics 365 Business Central]
 thumbnail-img: /img/posts/thumbnails/businesscentral.png
 cover-img: /img/posts/cover/dynamics-365-business-central.svg
+featured: /img/posts/thumbnails/businesscentral.png
 ---
 
 En este artículo mostraré cómo extender reportes en Microsoft Dynamics 365 Business Central para faciltiarnos algunas cosas a la hora de crear reportes.
