@@ -25,9 +25,9 @@ We add the following file location:
 ```
 vmconnect.exe localhost "Ubuntu"
 ```
-    - The program name is **vmconnect.exe**  
-    - **localhost** because this is our local virtual machine
-    - **Ubuntu** is the name of the virtual machine
+- The program name is **vmconnect.exe**  
+- **localhost** because this is our local virtual machine
+- **Ubuntu** is the name of the virtual machine
 
 ![](/img/posts/2022/04/06/hyperv3.png)  
 

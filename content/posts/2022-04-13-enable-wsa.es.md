@@ -11,7 +11,7 @@ cover-img: /img/posts/cover/windows_11.svg
 
 En este artículo mostraré paso a paso como habilitar el **Windows Subsystem for Android** en nuestro sistema operativo favorito. Tener en cuenta que al momento de escribir este artículo no está disponible fuera de EEUU.  
 
-***Windows 11 Insider Preview Build 22593***
+***Windows 11 Insider Preview Build 22598***
 
 <!--more-->
 
