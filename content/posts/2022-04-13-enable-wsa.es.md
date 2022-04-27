@@ -5,9 +5,9 @@ author: Christian Amado
 date: 2022-04-13 13:41:27 -0400
 category: [Windows, Android]
 tags: [Windows 11, Windows Insider Preview, Android]
-images:
-- /img/posts/thumbnails/win11-thumbnail.jpg
-share_img: /img/posts/thumbnails/win11-thumbnail.jpg
+thumbnail-img: /img/posts/thumbnails/wsa.png
+cover-img: /img/posts/cover/wsa.png
+share_img: /img/posts/thumbnails/wsa.png
 ---
 
 En este artículo mostraré paso a paso como habilitar el **Windows Subsystem for Android** en nuestro sistema operativo favorito. Tener en cuenta que al momento de escribir este artículo no está disponible fuera de EEUU.  
