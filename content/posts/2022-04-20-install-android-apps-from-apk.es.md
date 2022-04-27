@@ -15,7 +15,7 @@ En este artículo mostraré cómo instalar aplicaciones Android en Windows 11 gr
 
 <!--more-->
 
-Debemos seguir algunos pasos para poder tener cualquier aplicación Android directamente en Windows 11, recordando que para habiltiar esto debemos tener la región indicada como Estados Unidos.
+Debemos seguir algunos pasos para poder tener cualquier aplicación Android directamente en Windows 11, recordando que para habilitar esto debemos tener la región indicada como Estados Unidos.
 
 # Preparar Windows Subsystem for Android
 Para preparar la plataforma debemos seguir estos pasos:
