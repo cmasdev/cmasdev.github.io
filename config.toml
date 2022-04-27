@@ -26,6 +26,7 @@ googleAnalytics = "UA-167429830-1"
     shareTwitter = true
     #style = "dark"
     commit = "https://github.com/cmasdev/cmasdev.github.io/tree/"
+    image = "/img/posts/thumbnails/general.jpg"
     rss = true
     comments = true
     readingTime = true
