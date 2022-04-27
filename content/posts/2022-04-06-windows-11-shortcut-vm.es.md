@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Windows 11: Crear acceso directo a máquina virtual"
+title: "Crear acceso directo a máquina virtual"
 author: Christian Amado
 date: 2022-04-06 19:21:43 -0400
 category: [Windows]

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Windows 11: Create shortcut to virtual machine"
+title: "Create shortcut to virtual machine"
 author: Christian Amado
 date: 2022-04-06 19:21:43 -0400
 category: [Windows]

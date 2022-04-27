@@ -1,13 +1,13 @@
 ---
 layout: post
-title: "Windows 11: Install Android Apps from APK"
+title: "Install Android Apps from APK in Windows 11"
 author: Christian Amado
 date: 2022-04-20 13:01:14 -0400
 category: [Windows]
 tags: [Windows 11, Windows Insider Preview, Android]
-thumbnail-img: /img/posts/thumbnails/wsa.png
-cover-img: /img/posts/cover/wsa.png
-share_img: /img/posts/thumbnails/wsa.png
+thumbnail-img: /img/posts/thumbnails/win11.png
+cover-img: /img/posts/cover/win11.png
+share_img: /img/posts/thumbnails/win11.png
 ---
 
 In this article I will show how to install Android applications on Windows 11 thanks to **Windows Subsystem for Android** using Android tools and enabling certain options. In a [previous article](/posts/2022-04-13-enable-wsa/) we have seen how to enable the platform from the **Microsoft Store**.
