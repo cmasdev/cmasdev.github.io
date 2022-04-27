@@ -5,9 +5,9 @@ author: Christian Amado
 date: 2022-04-06 19:21:43 -0400
 category: [Windows]
 tags: [Windows 11, Windows Insider Preview, Hyper-V]
-thumbnail-img: /img/posts/thumbnails/win11.jpg
-cover-img: /img/posts/cover/win11.jpg
-share_img: /img/posts/thumbnails/win11.jpg
+thumbnail-img: /img/posts/thumbnails/win11.png
+cover-img: /img/posts/cover/win11.png
+share_img: /img/posts/thumbnails/win11.png
 ---
 
 Lo más práctico y útil para un usuario es encontrar lo que busca de manera rápida y sencilla. Es por eso que mostraré los pasos a seguir para crear un acceso directo a una máquina virtual en Hyper-V.  
