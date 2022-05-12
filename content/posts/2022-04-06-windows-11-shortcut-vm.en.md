@@ -7,7 +7,7 @@ category: [Windows]
 tags: [Windows 11, Windows Insider Preview, Hyper-V]
 thumbnail-img: /img/posts/thumbnails/win11.png
 cover-img: /img/posts/cover/win11.png
-share_img: /img/posts/thumbnails/win11.png
+share_img: /img/posts/shared/windows.png
 ---
 
 The most practical and useful thing for a user is to find what they are looking for quickly and easily. That is why I will show the steps to create a shortcut to a virtual machine in Hyper-V.  

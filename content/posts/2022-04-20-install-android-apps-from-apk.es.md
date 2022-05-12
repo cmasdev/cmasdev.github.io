@@ -7,7 +7,7 @@ category: [Windows]
 tags: [Windows 11, Windows Insider Preview, Android]
 thumbnail-img: /img/posts/thumbnails/win11.png
 cover-img: /img/posts/cover/win11.png
-share_img: /img/posts/thumbnails/win11.png
+share_img: /img/posts/shared/windows.png
 ---
 
 En este artículo mostraré cómo instalar aplicaciones Android en Windows 11 gracias a **Windows Subsystem for Android** utilizando herramientas del propio Android y habilitando ciertas opciones. En un [artículo anterior](/posts/2022-04-13-enable-wsa/) hemos visto cómo habilitar la plataforma desde **Microsoft Store**.
