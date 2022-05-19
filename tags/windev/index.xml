@@ -1,2 +1,49 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>WinDev on Blog de Christian Amado</title><link>https://cmas.dev/tags/windev/</link><description>Recent content in WinDev on Blog de Christian Amado</description><generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>biz@cmas.dev (Christian Amado)</managingEditor><webMaster>biz@cmas.dev (Christian Amado)</webMaster><lastBuildDate>Sat, 19 Jun 2021 11:56:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/tags/windev/index.xml" rel="self" type="application/rss+xml"/><item><title>VS: Instalando Visual Studio 2022 Preview 1</title><link>https://cmas.dev/posts/2021-06-19-instalando-visual-studio-2022-preview/</link><pubDate>Sat, 19 Jun 2021 11:56:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2021-06-19-instalando-visual-studio-2022-preview/</guid><description>&lt;p>El pasado 17 de junio, Microsoft ha lanzado la versión Preview del nuevo Visual Studio 2022, el cual posee muchas mejoras en cuanto a productividad se refiere. En este artículo mostraré el proceso de instalación de Visual Studio 2022 Preview 1.&lt;/p>
-&lt;p>Para mayor detalle de las características del producto puedes ver &lt;a href="https://devblogs.microsoft.com/visualstudio/visual-studio-2022-preview-1-now-available/">aquí&lt;/a>&lt;/p></description></item></channel></rss>
+&lt;p>Para mayor detalle de las características del producto puedes ver &lt;a href="https://devblogs.microsoft.com/visualstudio/visual-studio-2022-preview-1-now-available/">aquí&lt;/a>&lt;/p>
+&lt;h1 id="instalación-de-visual-studio-2022-preview-1">Instalación de Visual Studio 2022 Preview 1&lt;/h1>
+&lt;p>Para la instalación del nuevo Visual Studio debemos realizar las siguientes tareas:
+0. En mi caso, procedí a desinstalar todas las versiones de Visual Studio que tenía instaladas:&lt;br>
+&lt;img src="https://cmas.dev/img/posts/visualstudio/visual-studio-2022-preview-1_1.png" alt="">&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>Seleccionar la versión de Visual Studio que necesitamos (siempre elijo Professional):&lt;br>
+&lt;img src="https://cmas.dev/img/posts/visualstudio/visual-studio-2022-preview-1_2.png" alt="">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Veremos la ventana principal del instalador y hacemos clic en &amp;ldquo;Continuar&amp;rdquo;:&lt;br>
+&lt;img src="https://cmas.dev/img/posts/visualstudio/visual-studio-2022-preview-1_3.png" alt="">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Seleccionamos los componentes necesarios para los desarrollos que haremos (como mi foco es Windows y WSL seleccioné estos):&lt;br>
+&lt;img src="https://cmas.dev/img/posts/visualstudio/visual-studio-2022-preview-1_4.png" alt="">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Leemos el &lt;a href="https://devblogs.microsoft.com/visualstudio/visual-studio-2022-preview-1-now-available/">blog&lt;/a> indicado más arriba mientras esperamos al instalador que termine su trabajo:&lt;br>
+&lt;img src="https://cmas.dev/img/posts/visualstudio/visual-studio-2022-preview-1_5.png" alt="">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Listo. Estamos listos para la primera experiencia Visual Studio 2022 Preview 1:&lt;br>
+&lt;img src="https://cmas.dev/img/posts/visualstudio/visual-studio-2022-preview-1_6.png" alt="">&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h1 id="primera-vez-con-visual-studio-2022-preview-1">Primera vez con Visual Studio 2022 Preview 1&lt;/h1>
+&lt;ol>
+&lt;li>
+&lt;p>Una vez instalado procedemos a iniciar el nuevo programa instalado:&lt;br>
+&lt;img src="https://cmas.dev/img/posts/visualstudio/visual-studio-2022-preview-1_7.png" alt="">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Pantalla principal del Visual Studio:&lt;br>
+&lt;img src="https://cmas.dev/img/posts/visualstudio/visual-studio-2022-preview-1_8.png" alt="">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Creación de un nuevo proyecto:&lt;br>
+&lt;img src="https://cmas.dev/img/posts/visualstudio/visual-studio-2022-preview-1_9.png" alt="">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Entorno de desarrollo UWP (Universal Windows Platform):&lt;br>
+&lt;img src="https://cmas.dev/img/posts/visualstudio/visual-studio-2022-preview-1_10.png" alt="">&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;p>De esta manera, hemos visto cómo instalar Visual Studio 2022 Preview 1 y hemos dado un vistazo general en su primer uso.&lt;/p>
+&lt;p>Espero que lo puedan probar y dejen su feedback. ¡A disfrutarlo!&lt;/p></description></item></channel></rss>

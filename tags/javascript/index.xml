@@ -1,1 +1,149 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>JavaScript on Blog de Christian Amado</title><link>https://cmas.dev/tags/javascript/</link><description>Recent content in JavaScript on Blog de Christian Amado</description><generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>biz@cmas.dev (Christian Amado)</managingEditor><webMaster>biz@cmas.dev (Christian Amado)</webMaster><lastBuildDate>Wed, 09 Jun 2021 15:12:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/tags/javascript/index.xml" rel="self" type="application/rss+xml"/><item><title>Business Central: Añadir código JavaScript en una página</title><link>https://cmas.dev/posts/2021-06-09-business-central-anadir-codigo-javascript-en-una-pagina/</link><pubDate>Wed, 09 Jun 2021 15:12:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2021-06-09-business-central-anadir-codigo-javascript-en-una-pagina/</guid><description>&lt;p>La &lt;a href="https://cmas.dev/posts/2021-06-02-business-central-anadir-html-en-una-pagina/">semana pasada vimos&lt;/a> como inyectar HTML en una página dentro de Microsoft Dynamics 365 Business Central. Hoy veremos cómo agregar código Javascript que muestre una ventana de confirmación y luego muestre una alerta. Ya dá para empezar&amp;hellip;&lt;/p></description></item><item><title>Business Central: Añadir HTML en una página</title><link>https://cmas.dev/posts/2021-06-02-business-central-anadir-html-en-una-pagina/</link><pubDate>Wed, 02 Jun 2021 18:17:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2021-06-02-business-central-anadir-html-en-una-pagina/</guid><description>&lt;p>En este artículo deseo mostrar cómo inyectar HTML en una página dentro de Microsoft Dynamics 365 Business Central. No es muy complejo realizar la tarea necesaria pero debemos entender su utilidad y qué podemos lograr haciéndolo. Así que espero lo disfruten&amp;hellip;&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>JavaScript on Blog de Christian Amado</title><link>https://cmas.dev/tags/javascript/</link><description>Recent content in JavaScript on Blog de Christian Amado</description><generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>biz@cmas.dev (Christian Amado)</managingEditor><webMaster>biz@cmas.dev (Christian Amado)</webMaster><lastBuildDate>Wed, 09 Jun 2021 15:12:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/tags/javascript/index.xml" rel="self" type="application/rss+xml"/><item><title>Business Central: Añadir código JavaScript en una página</title><link>https://cmas.dev/posts/2021-06-09-business-central-anadir-codigo-javascript-en-una-pagina/</link><pubDate>Wed, 09 Jun 2021 15:12:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2021-06-09-business-central-anadir-codigo-javascript-en-una-pagina/</guid><description>&lt;p>La &lt;a href="https://cmas.dev/posts/2021-06-02-business-central-anadir-html-en-una-pagina/">semana pasada vimos&lt;/a> como inyectar HTML en una página dentro de Microsoft Dynamics 365 Business Central. Hoy veremos cómo agregar código Javascript que muestre una ventana de confirmación y luego muestre una alerta. Ya dá para empezar&amp;hellip;&lt;/p>
+&lt;p>&lt;em>&lt;!-- raw HTML omitted -->Versión: 2020 Wave 2 (KID: 5001735)&lt;!-- raw HTML omitted -->&lt;/em>&lt;/p>
+&lt;p>Vamos a retomar el código que escribimos en el archivo &lt;strong>js/script.js&lt;/strong> para poder realizar la acción allí:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">function ClickMe()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> let nombre = prompt(&amp;#34;Por favor, ingresa tu nombre&amp;#34;, &amp;#34;&amp;#34;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> alert(&amp;#39;Tu nombre es: &amp;#39;+ nombre);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>En la página de Microsoft Dynamics 365 Business Central haremos la llamada al script en cuestión:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">usercontrol(html; Html)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ApplicationArea = All;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> trigger HacerAlgo()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> var
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> htmlText: Text;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> begin
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> htmlText := &amp;#39;&amp;lt;button type=&amp;#34;button&amp;#34; onclick=&amp;#34;ClickMe()&amp;#34;&amp;gt;Click Me!&amp;lt;/button&amp;gt;&amp;#39;;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> CurrPage.html.Render(htmlText);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> end;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>De esta manera veremos el resultado según los siguientes pasos:&lt;br>
+&lt;img src="https://cmas.dev/img/posts/2021/06/09/JS1.png" alt="">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/2021/06/09/JS2.png" alt="">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/2021/06/09/JS3.png" alt="">&lt;/p>
+&lt;p>Así logramos realizar acciones con JavaScript desde una página en Microsoft Dynamics 365 Business Central. También podemos realizar tareas complejas como llamadas a APIs, AJAX, etc.&lt;/p>
+&lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Business Central: Añadir HTML en una página</title><link>https://cmas.dev/posts/2021-06-02-business-central-anadir-html-en-una-pagina/</link><pubDate>Wed, 02 Jun 2021 18:17:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2021-06-02-business-central-anadir-html-en-una-pagina/</guid><description>&lt;p>En este artículo deseo mostrar cómo inyectar HTML en una página dentro de Microsoft Dynamics 365 Business Central. No es muy complejo realizar la tarea necesaria pero debemos entender su utilidad y qué podemos lograr haciéndolo. Así que espero lo disfruten&amp;hellip;&lt;/p>
+&lt;p>&lt;em>&lt;!-- raw HTML omitted -->Versión: 2020 Wave 2 (KID: 5001735)&lt;!-- raw HTML omitted -->&lt;/em>&lt;/p>
+&lt;p>Veremos a continuación que necesitamos una serie de pasos para poder generar un HTML. Para enteder esto debemos tener en claro que inyectar HTML en una página es idéntico a introducir un IFRAME dentro de cualquier sitio HTML.&lt;/p>
+&lt;p>Dicho esto, procedemos a realizar los pasos para la inserción de HTML dentro de una página en Microsoft Dynamics 365 Business Central.&lt;/p>
+&lt;ol>
+&lt;li>Debemos crear un objeto de tipo &lt;em>ControlAddIn&lt;/em> en nuestro proyecto AL:&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">usercontrol(html; Html)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ApplicationArea = All;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> trigger HacerAlgo()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> var
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> htmlText: Text;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> begin
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> //Cargamos los elementos HTML
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> htmlText := &amp;#39;&amp;lt;b&amp;gt;Soy un elemento HTML&amp;lt;/b&amp;gt; ¿No me crees? &amp;lt;br/&amp;gt;&amp;#39; +
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#39;&amp;lt;img alt=&amp;#34;&amp;#34; src=&amp;#34;https://pbs.twimg.com/profile_images/1177530173245317122/PVFFrjO9_400x400.png&amp;#34; /&amp;gt;&amp;#39;;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> //Llamamos al procedimiento para inyectar el codigo HTML
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> CurrPage.html.Render(htmlText);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> end;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="2">
+&lt;li>
+&lt;p>Es obligatorio introducir 2 archivos JavaScript en nuestro proyecto AL, los cuales son:&lt;/p>
+&lt;p>2.1 &lt;strong>StartupScript&lt;/strong>: Especifica el script que se invoca cuando se carga la página web con el complemento de control.&lt;br>
+&lt;strong>Archivo js/startup.js&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">Contenedor = document.getElementById(&amp;#39;controlAddIn&amp;#39;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Microsoft.Dynamics.NAV.InvokeExtensibilityMethod(&amp;#39;HacerAlgo&amp;#39;, [])
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>2.2 &lt;strong>Script&lt;/strong>: Especifica la lista de scripts que se van a incluir en el complemento de control. Los scripts pueden ser archivos locales en el paquete o referencias a archivos externos utilizando el protocolo http o https. Los valores pueden ir separados por comas.&lt;br>
+&lt;strong>Archivo js/script.js&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">function Render(html)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Contenedor.insertAdjacentHTML(&amp;#39;beforeend&amp;#39;,html);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>El código del ControlAddIn quedaría de la siguiente manera:&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">controladdin Html
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> StartupScript = &amp;#39;js/startup.js&amp;#39;;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Scripts = &amp;#39;js/script.js&amp;#39;;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> HorizontalStretch = true;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> VerticalStretch = true;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> RequestedHeight = 400;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> event HacerAlgo();
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> procedure Render(TextHtml: Text);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>El código completo de la página se vería así:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">page 50101 SimpleCustomerCard
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> CaptionML = ENU = &amp;#39;Blog page&amp;#39;, ESP = &amp;#39;Página de Blog&amp;#39;;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> PageType = Card;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> SourceTable = Customer;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> UsageCategory = Documents;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ApplicationArea = All;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> AdditionalSearchTerms = &amp;#39;cmasdev,blog&amp;#39;;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> layout
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> area(content)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> group(General)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> field(&amp;#34;No.&amp;#34;; &amp;#34;No.&amp;#34;)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ApplicationArea = All;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> CaptionML = ENU = &amp;#39;Code&amp;#39;, ESP = &amp;#39;Código&amp;#39;;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> trigger OnValidate()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> begin
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> if &amp;#34;No.&amp;#34; &amp;lt; &amp;#39;&amp;#39; then
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Message(&amp;#39;Invalido&amp;#39;)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> end;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> field(Name; Name)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ApplicationArea = All;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> field(Address; Address)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ApplicationArea = All;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> group(HTMLGroup)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Caption = &amp;#39;Elementos HTML&amp;#39;;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> usercontrol(html; Html)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ApplicationArea = All;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> trigger HacerAlgo()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> var
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> htmlText: Text;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> begin
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> //Cargamos los elementos HTML
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> htmlText := &amp;#39;&amp;lt;b&amp;gt;Soy un elemento HTML&amp;lt;/b&amp;gt; ¿No me crees? &amp;lt;br/&amp;gt;&amp;#39; +
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#39;&amp;lt;img alt=&amp;#34;&amp;#34; src=&amp;#34;https://pbs.twimg.com/profile_images/1177530173245317122/PVFFrjO9_400x400.png&amp;#34; /&amp;gt;&amp;#39;;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> //Llamamos al procedimiento para inyectar el codigo HTML
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> CurrPage.html.Render(htmlText);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> end;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="4">
+&lt;li>El resultado del codigo sería el siguiente:&lt;br>
+&lt;img src="https://cmas.dev/img/posts/2021/06/02/Html2.png" alt="">&lt;/li>
+&lt;/ol>
+&lt;p>Con esto logramos inyectar HTML dentro de una página Microsoft Dynamics 365 Business Central.&lt;/p>
+&lt;p>¡Espero resulte útil!&lt;/p></description></item></channel></rss>

@@ -1,2 +1,27 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>AL on Christian Amado's Blog</title><link>https://cmas.dev/en/tags/al/</link><description>Recent content in AL on Christian Amado's Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>biz@cmas.dev (Christian Amado)</managingEditor><webMaster>biz@cmas.dev (Christian Amado)</webMaster><lastBuildDate>Tue, 07 Sep 2021 23:55:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/en/tags/al/index.xml" rel="self" type="application/rss+xml"/><item><title>Business Central: Download symbols from Sandbox</title><link>https://cmas.dev/en/posts/2021-09-07-business-central-download-symbols-cloud/</link><pubDate>Tue, 07 Sep 2021 23:55:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/en/posts/2021-09-07-business-central-download-symbols-cloud/</guid><description>&lt;p>Today I tried to download the Microsoft Dynamics 365 Business Central symbols but ran into errors and couldn&amp;rsquo;t get it to work. First, I had errors to download the symbols in order to be able to debug the application.&lt;/p>
-&lt;p>To prevent other people from having this problem, I share my experience solving the problem in this small How To? manual. which is my habit to write.&lt;/p></description></item></channel></rss>
+&lt;p>To prevent other people from having this problem, I share my experience solving the problem in this small How To? manual. which is my habit to write.&lt;/p>
+&lt;p>Let&amp;rsquo;s do it&amp;hellip;&lt;/p>
+&lt;h2 id="cómo-descargo-los-símbolos">¿Cómo descargo los símbolos?&lt;/h2>
+&lt;p>In Visual Studio, we create a project of type AL and then proceed to look for the command &lt;strong>AL: Download symbols&lt;/strong> and click on it:&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/2021/09/07/1.png" alt="">&lt;/p>
+&lt;p>In Visual Studio Code, the device registration will appear. Therefore, we click the button:&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/2021/09/07/2.png" alt="">&lt;/p>
+&lt;p>We follow the steps on the screen until the following dialog appears:&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/2021/09/07/3.png" alt="">&lt;/p>
+&lt;p>Now, we will see the following error when we try to compile it:&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/2021/09/07/4.png" alt="">&lt;/p>
+&lt;p>We have two possible ways out to solve this. One of them is to use the username and password of the global administrator, but we will have a later problem (we will not be able to debug if the global administrator does not have an active Business Central license).&lt;/p>
+&lt;p>In this way, the best solution is to give the necessary permissions to a user to carry out the tests (taking advantage of the fact that we are in an sandbox environment). So, we enter the [Microsoft Dynamics 365 Business Central] (&lt;a href="https://businesscentral.dynamics.com">https://businesscentral.dynamics.com&lt;/a>) and proceed to enter the credentials of a user with &lt;strong>Full&lt;/strong> license, we go to Users&amp;gt; Permissions Section:&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/2021/09/07/5.png" alt="">&lt;/p>
+&lt;p>In the first section we add the group &lt;strong>D365 Extension Management&lt;/strong> and remove any relationship with the company:&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/2021/09/07/6.png" alt="">&lt;/p>
+&lt;p>We repeat the process for the next section, and select the set of permissions &lt;strong>D365 Extension Management ADMIN&lt;/strong>:&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/2021/09/07/7.png" alt="">&lt;/p>
+&lt;p>In this way, we re-execute the command that we had to execute:&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/2021/09/07/1.png" alt="">&lt;/p>
+&lt;p>Now everything will turn out as we expect:&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/2021/09/07/8.png" alt="">&lt;/p>
+&lt;p>Then, we can do F5 (Debug) our extension and we will also obtain the expected result:&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/2021/09/07/9.png" alt="">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/2021/09/07/10.png" alt="">&lt;/p>
+&lt;p>In this way we have managed to download the Business Central Cloud symbols ;)&lt;/p></description></item></channel></rss>
