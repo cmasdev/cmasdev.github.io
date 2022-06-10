@@ -102,7 +102,7 @@ googleAnalytics = "UA-167429830-1"
     title = "Blog de Christian Amado"
     subtitle = "Ingeniería de Software y Aplicaciones de Negocios"
     description = "Un blog dedicado a la ingeniería de software, programación y aplicaciones de negocios principalmente para tecnologías Microsoft"
-    languageName = "Espanol"
+    languageName = "Español"
     weight = 2
     [languages.es.menu]
     [[languages.es.menu.main]]
