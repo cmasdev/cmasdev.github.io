@@ -79,6 +79,6 @@
 - id: cookieMessage
   translation: "Este sitio web utiliza cookies para garantizar que obtengas la mejor experiencia en este sitio web."
 - id: cookieLink
-  translation: '<a href="https://ayudaleyprotecciondatos.es/cookies/activar-habilitar/" taget="_blank">Aprender Más</a>'
+  translation: '<a href="https://ayudaleyprotecciondatos.es/cookies/activar-habilitar/" target="_blank">Aprender Más</a>'
 - id: cookieButton
   translation: "Aceptar"
