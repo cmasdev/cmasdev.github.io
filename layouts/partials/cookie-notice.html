@@ -1,6 +1,6 @@
 <div class="cookie-container">
     <p>
-        {{ i18n "cookieMessage" . | safeHTML }} <a href="{{ i18n 'cookieLink' . | safeHTML }}" taget="_blank">{{ i18n "cookieLinkText" . | safeHTML }}</a>.
+        {{ i18n "cookieMessage" . | safeHTML }} {{ i18n "cookieLink" . | safeHTML }}
     </p>
     <button class="cookie-btn">
         {{ i18n "cookieButton" . | safeHTML }}

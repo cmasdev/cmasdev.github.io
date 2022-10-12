@@ -79,8 +79,6 @@
 - id: cookieMessage
   translation: "This website uses cookies to ensure you get the best experience on this website."
 - id: cookieLink
-  translation: "https://www.cookiesandyou.com/"
-  - id: cookieLinkText
-  translation: "Learn More"
+  translation: '<a href="https://www.cookiesandyou.com/" taget="_blank">Learn More</a>'
 - id: cookieButton
   translation: "OK"
