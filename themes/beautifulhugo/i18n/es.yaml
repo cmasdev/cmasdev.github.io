@@ -74,3 +74,13 @@
 # Related posts
 - id: seeAlso
   translation: "Ver también"
+
+# Cookies
+- id: cookieMessage
+  translation: "Este sitio web utiliza cookies para garantizar que obtengas la mejor experiencia en este sitio web."
+- id: cookieLink
+  translation: "https://ayudaleyprotecciondatos.es/cookies/activar-habilitar/"
+  - id: cookieLinkText
+  translation: "Aprender más"
+- id: cookieButton
+  translation: "Aceptar"

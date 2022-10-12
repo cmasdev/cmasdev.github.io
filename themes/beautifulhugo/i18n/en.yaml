@@ -74,3 +74,13 @@
 # Related posts
 - id: seeAlso
   translation: "See also"
+
+# Cookies
+- id: cookieMessage
+  translation: "This website uses cookies to ensure you get the best experience on this website."
+- id: cookieLink
+  translation: "https://www.cookiesandyou.com/"
+  - id: cookieLinkText
+  translation: "Learn More"
+- id: cookieButton
+  translation: "OK"
