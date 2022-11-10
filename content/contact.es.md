@@ -8,8 +8,8 @@ Puedes enviarme un correo a biz@cmas.dev, pero si deseas que te responda m√°s r√
 
 
 # En la red...
-- [Telegram](https://t.me/cmasdev)
 - [Twitter](https://twitter.com/christianamado/)
+- [Mastodon](https://dotnet.social/@christianamado)
 - [LinkedIn](https://www.linkedin.com/in/christianamado/)
 - [GitHub](https://github.com/cmasdev/)
 - [YouTube](https://www.youtube.com/channel/UCehbcF2wgg5TBGtaWlMEvyw)
