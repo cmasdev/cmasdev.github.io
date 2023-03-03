@@ -7,7 +7,7 @@
 &lt;p>Gracias a todas las personas que han colaborado conmigo y nos seguiremos viendo por aquí.&lt;/p></description></item><item><title>Instalar aplicaciones Android desde APK en Windows 11</title><link>https://cmas.dev/posts/2022-04-20-install-android-apps-from-apk/</link><pubDate>Wed, 20 Apr 2022 13:01:14 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-04-20-install-android-apps-from-apk/</guid><description>&lt;p>En este artículo mostraré cómo instalar aplicaciones Android en Windows 11 gracias a &lt;strong>Windows Subsystem for Android&lt;/strong> utilizando herramientas del propio Android y habilitando ciertas opciones. En un &lt;a href="https://cmas.dev/posts/2022-04-13-enable-wsa/">artículo anterior&lt;/a> hemos visto cómo habilitar la plataforma desde &lt;strong>Microsoft Store&lt;/strong>.&lt;/p>
 &lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 22598&lt;/strong>&lt;/em>&lt;/p>
 &lt;p>Debemos seguir algunos pasos para poder tener cualquier aplicación Android directamente en Windows 11, recordando que para habilitar esto debemos tener la región indicada como Estados Unidos.&lt;/p>
-&lt;h1 id="preparar-windows-subsystem-for-android">Preparar Windows Subsystem for Android&lt;/h1>
+&lt;h2 id="preparar-windows-subsystem-for-android">Preparar Windows Subsystem for Android&lt;/h2>
 &lt;p>Para preparar la plataforma debemos seguir estos pasos:&lt;/p>
 &lt;ol>
 &lt;li>Iniciar la aplicación &lt;strong>Windows Subsystem for Android&lt;/strong>&lt;/li>
@@ -18,13 +18,13 @@
 &lt;li>Habilitamos la opción de &lt;strong>Depuración USB&lt;/strong>:
 &lt;img src="https://cmas.dev/img/posts/2022/04/20/adb3.png" alt="">&lt;/li>
 &lt;/ol>
-&lt;h1 id="preparar-herramientas-de-android-sdk">Preparar herramientas de Android SDK&lt;/h1>
-&lt;h2 id="preparar-android-sdk-platform-tools">Preparar Android SDk Platform Tools&lt;/h2>
+&lt;h2 id="preparar-herramientas-de-android-sdk">Preparar herramientas de Android SDK&lt;/h2>
+&lt;h3 id="preparar-android-sdk-platform-tools">Preparar Android SDk Platform Tools&lt;/h3>
 &lt;blockquote>
 &lt;p>Las Herramientas de la plataforma del SDK de Android son un componente del SDK de Android. Se incluyen herramientas que interactúan con la plataforma de Android, principalmente, &lt;em>adb&lt;/em> y &lt;em>fastboot&lt;/em>. Si bien adb es obligatorio en el desarrollo de apps para Android, por lo general, los desarrolladores de apps solo usarán la copia que instala Studio. Esta descarga es útil si deseas usar adb directamente desde la línea de comandos, y no tienes instalado Studio. (Si tienes instalado Studio, recomendamos que uses la copia que se instaló, ya que Studio lo actualizará automáticamente). Se necesita fastboot si deseas desbloquear el bootloader de tu dispositivo y actualizarlo con una nueva imagen del sistema. Este paquete solía contener &lt;em>systrace&lt;/em>, pero quedó obsoleto y se reemplazó por el generador de perfiles de Android Studio, &lt;em>gpuinspector.dev&lt;/em>, o &lt;em>Perfetto&lt;/em>.&lt;/p>
 &lt;/blockquote>
 &lt;p>Para esto debemos descargar la última versión disponible para Windows desde &lt;a href="https://dl.google.com/android/repository/platform-tools-latest-windows.zip">aquí&lt;/a>&lt;/p>
-&lt;h2 id="ubicar-los-archivos">Ubicar los archivos&lt;/h2>
+&lt;h3 id="ubicar-los-archivos">Ubicar los archivos&lt;/h3>
 &lt;ol>
 &lt;li>Debemos crear una nueva carpeta en el directorio principal de Windows y copiar la carpeta descomprimida. Quedaría así:
 &lt;img src="https://cmas.dev/img/posts/2022/04/20/adb4.png" alt="">&lt;/li>
@@ -40,14 +40,14 @@
 &lt;/ol>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">adb devices
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb9.png" alt="">&lt;/p>
-&lt;h2 id="conexión-al-dispositivo">Conexión al dispositivo&lt;/h2>
+&lt;h3 id="conexión-al-dispositivo">Conexión al dispositivo&lt;/h3>
 &lt;ol>
 &lt;li>Verificamos la IP del dispositivo (en la configuración de &lt;strong>Windows Subsystem for Android&lt;/strong>):
 &lt;img src="https://cmas.dev/img/posts/2022/04/20/adb10.png" alt="">&lt;/li>
 &lt;li>Nos conectamos a la IP y al puerto correspondiente:&lt;/li>
 &lt;/ol>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">adb connect 172.18.136.138:5555
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="instalación-en-el-dispositivo">Instalación en el dispositivo&lt;/h2>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="instalación-en-el-dispositivo">Instalación en el dispositivo&lt;/h3>
 &lt;ol>
 &lt;li>Descargamos un archivo apk, en este caso la última versión de Angry Birds Dream Blast &lt;a href="https://www.apkmirror.com/apk/rovio-entertainment-corporation/angry-birds-dream-blast/angry-birds-dream-blast-1-40-1-release/angry-birds-dream-blast-1-40-1-android-apk-download/">aquí&lt;/a>&lt;/li>
 &lt;li>Instalamos el paquete descargado:&lt;/li>
@@ -60,15 +60,30 @@
 &lt;img src="https://cmas.dev/img/posts/2022/04/20/adb12.png" alt="">&lt;/li>
 &lt;/ol>
 &lt;p>Para cualquier aplicación que funcione para Android debemos repetir estos 4 pasos anteriores. Aprovecharé &lt;em>HBO Max&lt;/em> para ver el nuevo Batman&amp;hellip;&lt;/p>
+&lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Integración de Azure DevOps con GitHub</title><link>https://cmas.dev/posts/2022-04-18-azure-devops-integration-with-github/</link><pubDate>Mon, 18 Apr 2022 23:24:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-04-18-azure-devops-integration-with-github/</guid><description>&lt;p>En este artículo mostraré cómo integrar un repositorio GitHub, que lo hemos visto en &lt;a href="https://cmas.dev/posts/2022-04-04-create-repository-github">este artículo&lt;/a>, con Azure DevOps que lo hemos visto &lt;a href="https://cmas.dev/posts/2022-04-11-create-project-azure-devops/">aquí&lt;/a>.&lt;/p>
+&lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 22598&lt;/strong>&lt;/em>&lt;/p>
+&lt;p>Primeramente, debemos ingresar a la configuración del proyecto:
+&lt;img src="https://cmas.dev/img/posts/2022/04/18/1.png" alt="">&lt;/p>
+&lt;p>Nos dirigmos a la sección &lt;strong>Boards&lt;/strong> &amp;gt; &lt;strong>GitHub connections&lt;/strong> y hacemos clic en el botón correspondiente:
+&lt;img src="https://cmas.dev/img/posts/2022/04/18/2.png" alt="">&lt;/p>
+&lt;p>Como toda aplicación tercerizada, debemos autorizar su uso:
+&lt;img src="https://cmas.dev/img/posts/2022/04/18/3.png" alt="">&lt;/p>
+&lt;p>Agregamos los repositorios necesarios:
+&lt;img src="https://cmas.dev/img/posts/2022/04/18/4.png" alt="">&lt;/p>
+&lt;p>Autorizamos a Azure Boards para el acceso a GitHub:
+&lt;img src="https://cmas.dev/img/posts/2022/04/18/5.png" alt="">&lt;/p>
+&lt;p>Verificamos que la conexión esté activa y funcional:
+&lt;img src="https://cmas.dev/img/posts/2022/04/18/6.png" alt="">&lt;/p>
+&lt;p>Tenemos lista la integración entre Azure DevOps y GitHub para proceder con la automatización de procesos. En artículos posteriores iremos avanzando con el CI/CD para sacarle el jugo a esta configuración.&lt;/p>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Habilitar Windows Subsystem for Android™️</title><link>https://cmas.dev/posts/2022-04-13-enable-wsa/</link><pubDate>Wed, 13 Apr 2022 13:41:27 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-04-13-enable-wsa/</guid><description>&lt;p>En este artículo mostraré paso a paso como habilitar el &lt;strong>Windows Subsystem for Android&lt;/strong> en nuestro sistema operativo favorito. Tener en cuenta que al momento de escribir este artículo no está disponible fuera de EEUU.&lt;/p>
 &lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 22598&lt;/strong>&lt;/em>&lt;/p>
-&lt;h1 id="qué-es-wsa">¿Qué es WSA?&lt;/h1>
+&lt;h2 id="qué-es-wsa">¿Qué es WSA?&lt;/h2>
 &lt;p>Windows Subsystem for Android™ permite que un dispositivo con Windows 11 ejecute aplicaciones de Android que están disponibles en Amazon Appstore. Android es una marca comercial de Google LLC. Si es desarrollador y le interesa apuntar a dispositivos de escritorio Windows y optimizar para el sistema operativo Windows, esta guía es para usted.&lt;/p>
-&lt;h1 id="configuraciones-previas">Configuraciones previas&lt;/h1>
+&lt;h2 id="configuraciones-previas">Configuraciones previas&lt;/h2>
 &lt;p>En el momento que estoy escribiendo este artículo no funciona esto fuera de Estados Unidos, pero cambiando la región lo podemos lograr.&lt;/p>
 &lt;p>Para eso, debemos ir a &lt;em>Configuración&lt;/em> &amp;gt; &lt;em>Tiempo y Región&lt;/em>:
 &lt;img src="https://cmas.dev/img/posts/2022/04/13/wsa1.png" alt="">&lt;/p>
-&lt;h1 id="habilitación-de-windows-subsystem-for-android">Habilitación de Windows Subsystem for Android&lt;/h1>
+&lt;h2 id="habilitación-de-windows-subsystem-for-android">Habilitación de Windows Subsystem for Android&lt;/h2>
 &lt;p>Debemos dirigirnos a &lt;strong>Microsoft Store&lt;/strong>, buscar e instalar &lt;strong>Amazon Appstore&lt;/strong>:
 &lt;img src="https://cmas.dev/img/posts/2022/04/13/wsa2.png" alt="">&lt;/p>
 &lt;p>El sistema nos pedirá hacer clic en &lt;strong>Descargar&lt;/strong>:
@@ -80,6 +95,15 @@
 &lt;p>Se inicia el &lt;strong>Windows Subsystem for Android&lt;/strong>:
 &lt;img src="https://cmas.dev/img/posts/2022/04/13/wsa6.png" alt="">&lt;/p>
 &lt;p>Iniciamos sesión (o creamos una nueva cuenta) en Amazon y listo.&lt;/p>
+&lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Crear un proyecto en Azure DevOps</title><link>https://cmas.dev/posts/2022-04-11-create-project-azure-devops/</link><pubDate>Mon, 11 Apr 2022 18:01:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-04-11-create-project-azure-devops/</guid><description>&lt;p>En este artículo mostraré cómo crear un proyecto en Microsoft Azure DevOps para realizar todas las tareas relacionadas a CI/CD (Integración Contínua/Entrega Contíuna) con la plataforma Windows, sobre todo con UWP (Universal Windows Platform).&lt;/p>
+&lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 22598&lt;/strong>&lt;/em>&lt;/p>
+&lt;p>Debemos ingresar a la plataforma de Azure DevOps &lt;a href="https://dev.azure.com/">aquí&lt;/a> y accederá al perfil (sino tienes una cuenta creada, es el momento de hacerlo).&lt;/p>
+&lt;p>Procedemos a crear el proyecto:
+&lt;img src="https://cmas.dev/img/posts/2022/04/11/1.png" alt="">&lt;/p>
+&lt;p>Completamos los campos necesarios para la creación del proyecto y completamos las necesidades:
+&lt;img src="https://cmas.dev/img/posts/2022/04/11/2.png" alt="">&lt;/p>
+&lt;p>Una vez creado el proyecto veremos los accesos necesarios para la implementación de CI/CD:
+&lt;img src="https://cmas.dev/img/posts/2022/04/11/3.png" alt="">&lt;/p>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Crear acceso directo a máquina virtual</title><link>https://cmas.dev/posts/2022-04-06-windows-11-shortcut-vm/</link><pubDate>Wed, 06 Apr 2022 19:21:43 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-04-06-windows-11-shortcut-vm/</guid><description>&lt;p>Lo más práctico y útil para un usuario es encontrar lo que busca de manera rápida y sencilla. Es por eso que mostraré los pasos a seguir para crear un acceso directo a una máquina virtual en Hyper-V.&lt;/p>
 &lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 22593&lt;/strong>&lt;/em>&lt;/p>
 &lt;p>Primero debemos dirigirnos a nuestro gestor de máquinas virtuales de Hyper-V y obtener el nombre de la máquina virtual en cuestión (Ubuntu, en este caso):
@@ -100,6 +124,16 @@
 &lt;img src="https://cmas.dev/img/posts/2022/04/06/hyperv5.png" alt="">&lt;/p>
 &lt;p>Por último, hacemos la prueba del acceso directo:
 &lt;img src="https://cmas.dev/img/posts/2022/04/06/hyperv6.png" alt="">&lt;/p>
+&lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Crear un repositorio en GitHub</title><link>https://cmas.dev/posts/2022-04-04-create-repository-github/</link><pubDate>Mon, 04 Apr 2022 22:13:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-04-04-create-repository-github/</guid><description>&lt;p>En este artículo mostraré cómo crear un repositorio en GitHub para poder integrarlo en el futuro con Azure DevOps.&lt;/p>
+&lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 22598&lt;/strong>&lt;/em>&lt;/p>
+&lt;p>Crear un repositorio en GitHub es un proceso muy sencillo. La documentación es muy completa y se encuentra &lt;a href="https://docs.github.com/es/repositories">aquí&lt;/a>. Este artículo sólo busca acortar el proceso de creación de un repositorio que lo utilizaremos las próximas semanas.&lt;/p>
+&lt;h2 id="crear-nuevo-repositorio">Crear nuevo repositorio&lt;/h2>
+&lt;p>Para crear el nuevo repositorio buscamos el menú &lt;strong>New&lt;/strong>
+&lt;img src="https://cmas.dev/img/posts/2022/04/04/0.png" alt="">&lt;/p>
+&lt;p>Luego, procedemos a cargar los datos necesarios para la creación del repositorio:
+&lt;img src="https://cmas.dev/img/posts/2022/04/04/1.png" alt="">&lt;/p>
+&lt;p>Por último, verificamos el repositorio creado:
+&lt;img src="https://cmas.dev/img/posts/2022/04/04/2.png" alt="">&lt;/p>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Business Central: Extensión de reportes</title><link>https://cmas.dev/posts/2022-03-09-business-central-extension-en-reportes/</link><pubDate>Wed, 09 Mar 2022 22:12:07 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-03-09-business-central-extension-en-reportes/</guid><description>&lt;p>En este artículo mostraré cómo extender reportes en Microsoft Dynamics 365 Business Central para faciltiarnos algunas cosas a la hora de crear reportes.&lt;/p>
 &lt;p>&lt;em>&lt;!-- raw HTML omitted -->Versión: 2021 Wave 1 (KID: 5007779)&lt;!-- raw HTML omitted -->&lt;/em>&lt;/p>
 &lt;p>En un &lt;a href="https://cmas.dev/posts/2019-02-12-bc-dev-tips-crear-extension-de-reporte-con-visual-studio-code/">artículo anterior&lt;/a> mencionaba que esto no es factible, pero después de leer algunos artículos encontré que ya es factible realizar esto :) Aplica desde *Microsoft Dynamics 365 Business Central 2021 release wave 1 (v18.0) y superior.&lt;/p>
@@ -3076,7 +3110,7 @@ Hay que tener en cuenta que en la opción &lt;strong>Version control&lt;/strong>
 &lt;p>Apenas salimos de esa pantalla y ya deberíamos ver el nuevo cliente (si hay otras tareas programadas se ejecutarán esas en primer lugar):&lt;br>
 &lt;img src="https://cmas.dev/img/posts/migrated/2019/04/7-3.png" alt="">&lt;/p>
 &lt;p>¡Espero les resulte útil!&lt;/p></description></item><item><title>Python: Instalando en Visual Studio Code</title><link>https://cmas.dev/posts/2019-04-04-python-instalando-en-visual-studio-code/</link><pubDate>Thu, 04 Apr 2019 20:19:30 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2019-04-04-python-instalando-en-visual-studio-code/</guid><description>&lt;p>En esta entrada veremos cómo instalar Python para utilizarlo con nuestro IDE favorito, el Visual Studio Code. En una &lt;a href="https://cmas.dev/2019/04/python-instalacion/">entrada anterior&lt;/a>, hemos visto cómo instalar Python en uestro Windows.&lt;/p>
-&lt;h1 id="instalación-de-python">Instalación de Python&lt;/h1>
+&lt;h2 id="instalación-de-python">Instalación de Python&lt;/h2>
 &lt;p>Para la instalación de Python debemos realizar las siguientes tareas:&lt;/p>
 &lt;ol>
 &lt;li>

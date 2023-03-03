@@ -134,7 +134,7 @@ Hay que tener en cuenta que en la opción &lt;strong>Version control&lt;/strong>
 &lt;p>Por último debemos instalar una extensión de Git para el manejo de credenciales que se llama &amp;ldquo;&lt;strong>Microsoft Git Credential Manager for Windows&lt;/strong>&amp;rdquo; y lo puedes descargar desde &lt;a href="https://github.com/Microsoft/Git-Credential-Manager-for-Windows/releases/latest">aquí&lt;/a>.&lt;/p>
 &lt;p>Luego de ejecutarlo e instalarlo el sistema estará listo para utilizar Git sin inconvenientes.&lt;/p>
 &lt;p>¡No te piedas la Parte 2 de este artículo!&lt;/p></description></item><item><title>Python: Instalando en Visual Studio Code</title><link>https://cmas.dev/posts/2019-04-04-python-instalando-en-visual-studio-code/</link><pubDate>Thu, 04 Apr 2019 20:19:30 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2019-04-04-python-instalando-en-visual-studio-code/</guid><description>&lt;p>En esta entrada veremos cómo instalar Python para utilizarlo con nuestro IDE favorito, el Visual Studio Code. En una &lt;a href="https://cmas.dev/2019/04/python-instalacion/">entrada anterior&lt;/a>, hemos visto cómo instalar Python en uestro Windows.&lt;/p>
-&lt;h1 id="instalación-de-python">Instalación de Python&lt;/h1>
+&lt;h2 id="instalación-de-python">Instalación de Python&lt;/h2>
 &lt;p>Para la instalación de Python debemos realizar las siguientes tareas:&lt;/p>
 &lt;ol>
 &lt;li>

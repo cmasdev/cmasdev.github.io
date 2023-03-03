@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Android on Blog de Christian Amado</title><link>https://cmas.dev/tags/android/</link><description>Recent content in Android on Blog de Christian Amado</description><generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>biz@cmas.dev (Christian Amado)</managingEditor><webMaster>biz@cmas.dev (Christian Amado)</webMaster><lastBuildDate>Wed, 20 Apr 2022 13:01:14 -0400</lastBuildDate><atom:link href="https://cmas.dev/tags/android/index.xml" rel="self" type="application/rss+xml"/><item><title>Instalar aplicaciones Android desde APK en Windows 11</title><link>https://cmas.dev/posts/2022-04-20-install-android-apps-from-apk/</link><pubDate>Wed, 20 Apr 2022 13:01:14 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-04-20-install-android-apps-from-apk/</guid><description>&lt;p>En este artículo mostraré cómo instalar aplicaciones Android en Windows 11 gracias a &lt;strong>Windows Subsystem for Android&lt;/strong> utilizando herramientas del propio Android y habilitando ciertas opciones. En un &lt;a href="https://cmas.dev/posts/2022-04-13-enable-wsa/">artículo anterior&lt;/a> hemos visto cómo habilitar la plataforma desde &lt;strong>Microsoft Store&lt;/strong>.&lt;/p>
 &lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 22598&lt;/strong>&lt;/em>&lt;/p>
 &lt;p>Debemos seguir algunos pasos para poder tener cualquier aplicación Android directamente en Windows 11, recordando que para habilitar esto debemos tener la región indicada como Estados Unidos.&lt;/p>
-&lt;h1 id="preparar-windows-subsystem-for-android">Preparar Windows Subsystem for Android&lt;/h1>
+&lt;h2 id="preparar-windows-subsystem-for-android">Preparar Windows Subsystem for Android&lt;/h2>
 &lt;p>Para preparar la plataforma debemos seguir estos pasos:&lt;/p>
 &lt;ol>
 &lt;li>Iniciar la aplicación &lt;strong>Windows Subsystem for Android&lt;/strong>&lt;/li>
@@ -12,13 +12,13 @@
 &lt;li>Habilitamos la opción de &lt;strong>Depuración USB&lt;/strong>:
 &lt;img src="https://cmas.dev/img/posts/2022/04/20/adb3.png" alt="">&lt;/li>
 &lt;/ol>
-&lt;h1 id="preparar-herramientas-de-android-sdk">Preparar herramientas de Android SDK&lt;/h1>
-&lt;h2 id="preparar-android-sdk-platform-tools">Preparar Android SDk Platform Tools&lt;/h2>
+&lt;h2 id="preparar-herramientas-de-android-sdk">Preparar herramientas de Android SDK&lt;/h2>
+&lt;h3 id="preparar-android-sdk-platform-tools">Preparar Android SDk Platform Tools&lt;/h3>
 &lt;blockquote>
 &lt;p>Las Herramientas de la plataforma del SDK de Android son un componente del SDK de Android. Se incluyen herramientas que interactúan con la plataforma de Android, principalmente, &lt;em>adb&lt;/em> y &lt;em>fastboot&lt;/em>. Si bien adb es obligatorio en el desarrollo de apps para Android, por lo general, los desarrolladores de apps solo usarán la copia que instala Studio. Esta descarga es útil si deseas usar adb directamente desde la línea de comandos, y no tienes instalado Studio. (Si tienes instalado Studio, recomendamos que uses la copia que se instaló, ya que Studio lo actualizará automáticamente). Se necesita fastboot si deseas desbloquear el bootloader de tu dispositivo y actualizarlo con una nueva imagen del sistema. Este paquete solía contener &lt;em>systrace&lt;/em>, pero quedó obsoleto y se reemplazó por el generador de perfiles de Android Studio, &lt;em>gpuinspector.dev&lt;/em>, o &lt;em>Perfetto&lt;/em>.&lt;/p>
 &lt;/blockquote>
 &lt;p>Para esto debemos descargar la última versión disponible para Windows desde &lt;a href="https://dl.google.com/android/repository/platform-tools-latest-windows.zip">aquí&lt;/a>&lt;/p>
-&lt;h2 id="ubicar-los-archivos">Ubicar los archivos&lt;/h2>
+&lt;h3 id="ubicar-los-archivos">Ubicar los archivos&lt;/h3>
 &lt;ol>
 &lt;li>Debemos crear una nueva carpeta en el directorio principal de Windows y copiar la carpeta descomprimida. Quedaría así:
 &lt;img src="https://cmas.dev/img/posts/2022/04/20/adb4.png" alt="">&lt;/li>
@@ -34,14 +34,14 @@
 &lt;/ol>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">adb devices
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb9.png" alt="">&lt;/p>
-&lt;h2 id="conexión-al-dispositivo">Conexión al dispositivo&lt;/h2>
+&lt;h3 id="conexión-al-dispositivo">Conexión al dispositivo&lt;/h3>
 &lt;ol>
 &lt;li>Verificamos la IP del dispositivo (en la configuración de &lt;strong>Windows Subsystem for Android&lt;/strong>):
 &lt;img src="https://cmas.dev/img/posts/2022/04/20/adb10.png" alt="">&lt;/li>
 &lt;li>Nos conectamos a la IP y al puerto correspondiente:&lt;/li>
 &lt;/ol>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">adb connect 172.18.136.138:5555
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="instalación-en-el-dispositivo">Instalación en el dispositivo&lt;/h2>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="instalación-en-el-dispositivo">Instalación en el dispositivo&lt;/h3>
 &lt;ol>
 &lt;li>Descargamos un archivo apk, en este caso la última versión de Angry Birds Dream Blast &lt;a href="https://www.apkmirror.com/apk/rovio-entertainment-corporation/angry-birds-dream-blast/angry-birds-dream-blast-1-40-1-release/angry-birds-dream-blast-1-40-1-android-apk-download/">aquí&lt;/a>&lt;/li>
 &lt;li>Instalamos el paquete descargado:&lt;/li>
@@ -56,13 +56,13 @@
 &lt;p>Para cualquier aplicación que funcione para Android debemos repetir estos 4 pasos anteriores. Aprovecharé &lt;em>HBO Max&lt;/em> para ver el nuevo Batman&amp;hellip;&lt;/p>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Habilitar Windows Subsystem for Android™️</title><link>https://cmas.dev/posts/2022-04-13-enable-wsa/</link><pubDate>Wed, 13 Apr 2022 13:41:27 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-04-13-enable-wsa/</guid><description>&lt;p>En este artículo mostraré paso a paso como habilitar el &lt;strong>Windows Subsystem for Android&lt;/strong> en nuestro sistema operativo favorito. Tener en cuenta que al momento de escribir este artículo no está disponible fuera de EEUU.&lt;/p>
 &lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 22598&lt;/strong>&lt;/em>&lt;/p>
-&lt;h1 id="qué-es-wsa">¿Qué es WSA?&lt;/h1>
+&lt;h2 id="qué-es-wsa">¿Qué es WSA?&lt;/h2>
 &lt;p>Windows Subsystem for Android™ permite que un dispositivo con Windows 11 ejecute aplicaciones de Android que están disponibles en Amazon Appstore. Android es una marca comercial de Google LLC. Si es desarrollador y le interesa apuntar a dispositivos de escritorio Windows y optimizar para el sistema operativo Windows, esta guía es para usted.&lt;/p>
-&lt;h1 id="configuraciones-previas">Configuraciones previas&lt;/h1>
+&lt;h2 id="configuraciones-previas">Configuraciones previas&lt;/h2>
 &lt;p>En el momento que estoy escribiendo este artículo no funciona esto fuera de Estados Unidos, pero cambiando la región lo podemos lograr.&lt;/p>
 &lt;p>Para eso, debemos ir a &lt;em>Configuración&lt;/em> &amp;gt; &lt;em>Tiempo y Región&lt;/em>:
 &lt;img src="https://cmas.dev/img/posts/2022/04/13/wsa1.png" alt="">&lt;/p>
-&lt;h1 id="habilitación-de-windows-subsystem-for-android">Habilitación de Windows Subsystem for Android&lt;/h1>
+&lt;h2 id="habilitación-de-windows-subsystem-for-android">Habilitación de Windows Subsystem for Android&lt;/h2>
 &lt;p>Debemos dirigirnos a &lt;strong>Microsoft Store&lt;/strong>, buscar e instalar &lt;strong>Amazon Appstore&lt;/strong>:
 &lt;img src="https://cmas.dev/img/posts/2022/04/13/wsa2.png" alt="">&lt;/p>
 &lt;p>El sistema nos pedirá hacer clic en &lt;strong>Descargar&lt;/strong>:

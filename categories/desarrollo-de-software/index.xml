@@ -47,7 +47,7 @@
 &lt;/ol>
 &lt;p>De esta manera, hemos visto cómo instalar Visual Studio 2022 Preview 1 y hemos dado un vistazo general en su primer uso.&lt;/p>
 &lt;p>Espero que lo puedan probar y dejen su feedback. ¡A disfrutarlo!&lt;/p></description></item><item><title>Python: Instalando en Visual Studio Code</title><link>https://cmas.dev/posts/2019-04-04-python-instalando-en-visual-studio-code/</link><pubDate>Thu, 04 Apr 2019 20:19:30 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2019-04-04-python-instalando-en-visual-studio-code/</guid><description>&lt;p>En esta entrada veremos cómo instalar Python para utilizarlo con nuestro IDE favorito, el Visual Studio Code. En una &lt;a href="https://cmas.dev/2019/04/python-instalacion/">entrada anterior&lt;/a>, hemos visto cómo instalar Python en uestro Windows.&lt;/p>
-&lt;h1 id="instalación-de-python">Instalación de Python&lt;/h1>
+&lt;h2 id="instalación-de-python">Instalación de Python&lt;/h2>
 &lt;p>Para la instalación de Python debemos realizar las siguientes tareas:&lt;/p>
 &lt;ol>
 &lt;li>
