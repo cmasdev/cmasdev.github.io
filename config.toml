@@ -68,10 +68,10 @@ googleAnalytics = "UA-167429830-1"
         name = "About"
         weight = 2
 
-    [[languages.en.menu.main]]
-        url = "projects"
-        name = "Projects"
-        weight = 3
+    #[[languages.en.menu.main]]
+        #url = "projects"
+        #name = "Projects"
+        #weight = 3
 
     [[languages.en.menu.main]]
         url = "contact"
@@ -106,10 +106,10 @@ googleAnalytics = "UA-167429830-1"
         name = "Biografía"
         weight = 2
 
-    [[languages.es.menu.main]]
-        url = "projects"
-        name = "Proyectos"
-        weight = 3
+    #[[languages.es.menu.main]]
+        #url = "projects"
+        #name = "Proyectos"
+        #weight = 3
 
     [[languages.es.menu.main]]
         url = "contact"

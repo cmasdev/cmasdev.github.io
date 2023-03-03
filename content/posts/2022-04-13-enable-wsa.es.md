@@ -16,16 +16,16 @@ En este artículo mostraré paso a paso como habilitar el **Windows Subsystem fo
 
 <!--more-->
 
-# ¿Qué es WSA?
+## ¿Qué es WSA?
 Windows Subsystem for Android™ permite que un dispositivo con Windows 11 ejecute aplicaciones de Android que están disponibles en Amazon Appstore. Android es una marca comercial de Google LLC. Si es desarrollador y le interesa apuntar a dispositivos de escritorio Windows y optimizar para el sistema operativo Windows, esta guía es para usted.
 
-# Configuraciones previas
+## Configuraciones previas
 En el momento que estoy escribiendo este artículo no funciona esto fuera de Estados Unidos, pero cambiando la región lo podemos lograr.  
 
 Para eso, debemos ir a *Configuración* > *Tiempo y Región*:
 ![](/img/posts/2022/04/13/wsa1.png)  
 
-# Habilitación de Windows Subsystem for Android
+## Habilitación de Windows Subsystem for Android
 Debemos dirigirnos a **Microsoft Store**, buscar e instalar **Amazon Appstore**:
 ![](/img/posts/2022/04/13/wsa2.png)  
 

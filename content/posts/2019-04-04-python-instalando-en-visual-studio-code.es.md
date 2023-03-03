@@ -13,7 +13,7 @@ En esta entrada veremos cómo instalar Python para utilizarlo con nuestro IDE fa
 
 <!--more-->
 
-# Instalación de Python
+## Instalación de Python
 Para la instalación de Python debemos realizar las siguientes tareas:
 1. Luego de abrir Visual Studio Code, debemos hacer clic en "Open Folder":  
 ![](/img/posts/migrated/2019/04/1-1.png)  

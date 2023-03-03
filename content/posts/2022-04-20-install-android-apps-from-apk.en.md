@@ -18,7 +18,7 @@ In this article I will show how to install Android applications on Windows 11 th
 
 We must follow some steps to be able to have any Android application directly in Windows 11, remembering that to enable this we must have the region indicated as the United States.
 
-# Prepare Windows Subsystem for Android
+## Prepare Windows Subsystem for Android
 To prepare the platform we must follow these steps:
 1. Start the application **Windows Subsystem for Android**
 2. Set the **Developer Mode**:
@@ -28,13 +28,13 @@ To prepare the platform we must follow these steps:
 4. Enable the option **USB Debugging**:
 ![](/img/posts/2022/04/20/adb3.png)
 
-# Prepare the Android SDK tools
-## Prepare Android SDk Platform Tools
+## Prepare the Android SDK tools
+### Prepare Android SDk Platform Tools
 > Android SDK Platform-Tools is a component for the Android SDK. It includes tools that interface with the Android platform, primarily **adb** and **fastboot**. Although adb is required for Android app development, app developers will normally just use the copy Studio installs. This download is useful if you want to use adb directly from the command-line and don't have Studio installed. (If you do have Studio installed, you might want to just use the copy it installed because Studio will automatically update it.) fastboot is needed if you want to unlock your device bootloader and flash it with a new system image. This package used to contain **systrace**, but that has been obsoleted in favor of Studio Profiler, **gpuinspector.dev**, or **Perfetto**.
 
 For this we must download the latest version available for Windows from [here](https://dl.google.com/android/repository/platform-tools-latest-windows.zip)
 
-## Locate the files
+### Locate the files
 1. We must create a new folder in the main Windows directory and copy the unzipped folder. it would look like this:
 ![](/img/posts/2022/04/20/adb4.png)
 2. Right click on the Windows icon on the taskbar or **Win**+**i**:
@@ -51,14 +51,14 @@ adb devices
 ```
 ![](/img/posts/2022/04/20/adb9.png)
 
-## Connection to the device
+### Connection to the device
 1. We verify the IP of the device (in the settings of **Windows Subsystem for Android**):
 ![](/img/posts/2022/04/20/adb10.png)
 2. We connect to the IP and the corresponding port:
 ```
 adb connect 172.18.136.138:5555
 ```
-## Installation on the device
+### Installation on the device
 1. We download an apk file, in this case the latest version of Angry Birds Dream Blast [here](https://www.apkmirror.com/apk/rovio-entertainment-corporation/angry-birds-dream-blast/angry-birds-dream-blast-1-40-1-release/angry-birds-dream-blast-1-40-1-android-apk-download/)
 2. We install the downloaded package:
 ```
