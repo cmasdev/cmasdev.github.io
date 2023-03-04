@@ -14,7 +14,7 @@
 &lt;img src="https://cmas.dev/img/posts/2022/04/18/6.png" alt="">&lt;/p>
 &lt;p>Tenemos lista la integración entre Azure DevOps y GitHub para proceder con la automatización de procesos. En artículos posteriores iremos avanzando con el CI/CD para sacarle el jugo a esta configuración.&lt;/p>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Crear un proyecto en Azure DevOps</title><link>https://cmas.dev/posts/2022-04-11-create-project-azure-devops/</link><pubDate>Mon, 11 Apr 2022 18:01:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-04-11-create-project-azure-devops/</guid><description>&lt;p>En este artículo mostraré cómo crear un proyecto en Microsoft Azure DevOps para realizar todas las tareas relacionadas a CI/CD (Integración Contínua/Entrega Contíuna) con la plataforma Windows, sobre todo con UWP (Universal Windows Platform).&lt;/p>
-&lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 22598&lt;/strong>&lt;/em>&lt;/p>
+&lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 22593&lt;/strong>&lt;/em>&lt;/p>
 &lt;p>Debemos ingresar a la plataforma de Azure DevOps &lt;a href="https://dev.azure.com/">aquí&lt;/a> y accederá al perfil (sino tienes una cuenta creada, es el momento de hacerlo).&lt;/p>
 &lt;p>Procedemos a crear el proyecto:
 &lt;img src="https://cmas.dev/img/posts/2022/04/11/1.png" alt="">&lt;/p>
@@ -23,7 +23,7 @@
 &lt;p>Una vez creado el proyecto veremos los accesos necesarios para la implementación de CI/CD:
 &lt;img src="https://cmas.dev/img/posts/2022/04/11/3.png" alt="">&lt;/p>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Crear un repositorio en GitHub</title><link>https://cmas.dev/posts/2022-04-04-create-repository-github/</link><pubDate>Mon, 04 Apr 2022 22:13:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-04-04-create-repository-github/</guid><description>&lt;p>En este artículo mostraré cómo crear un repositorio en GitHub para poder integrarlo en el futuro con Azure DevOps.&lt;/p>
-&lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 22598&lt;/strong>&lt;/em>&lt;/p>
+&lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 22581&lt;/strong>&lt;/em>&lt;/p>
 &lt;p>Crear un repositorio en GitHub es un proceso muy sencillo. La documentación es muy completa y se encuentra &lt;a href="https://docs.github.com/es/repositories">aquí&lt;/a>. Este artículo sólo busca acortar el proceso de creación de un repositorio que lo utilizaremos las próximas semanas.&lt;/p>
 &lt;h2 id="crear-nuevo-repositorio">Crear nuevo repositorio&lt;/h2>
 &lt;p>Para crear el nuevo repositorio buscamos el menú &lt;strong>New&lt;/strong>

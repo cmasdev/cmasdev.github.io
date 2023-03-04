@@ -1,4 +1,58 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Windows Insider Preview on Blog de Christian Amado</title><link>https://cmas.dev/tags/windows-insider-preview/</link><description>Recent content in Windows Insider Preview on Blog de Christian Amado</description><generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>biz@cmas.dev (Christian Amado)</managingEditor><webMaster>biz@cmas.dev (Christian Amado)</webMaster><lastBuildDate>Wed, 20 Apr 2022 13:01:14 -0400</lastBuildDate><atom:link href="https://cmas.dev/tags/windows-insider-preview/index.xml" rel="self" type="application/rss+xml"/><item><title>Instalar aplicaciones Android desde APK en Windows 11</title><link>https://cmas.dev/posts/2022-04-20-install-android-apps-from-apk/</link><pubDate>Wed, 20 Apr 2022 13:01:14 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-04-20-install-android-apps-from-apk/</guid><description>&lt;p>En este artículo mostraré cómo instalar aplicaciones Android en Windows 11 gracias a &lt;strong>Windows Subsystem for Android&lt;/strong> utilizando herramientas del propio Android y habilitando ciertas opciones. En un &lt;a href="https://cmas.dev/posts/2022-04-13-enable-wsa/">artículo anterior&lt;/a> hemos visto cómo habilitar la plataforma desde &lt;strong>Microsoft Store&lt;/strong>.&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Windows Insider Preview on Blog de Christian Amado</title><link>https://cmas.dev/tags/windows-insider-preview/</link><description>Recent content in Windows Insider Preview on Blog de Christian Amado</description><generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>biz@cmas.dev (Christian Amado)</managingEditor><webMaster>biz@cmas.dev (Christian Amado)</webMaster><lastBuildDate>Wed, 27 Apr 2022 12:26:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/tags/windows-insider-preview/index.xml" rel="self" type="application/rss+xml"/><item><title>WSL sin internet</title><link>https://cmas.dev/posts/2022-04-27-wsl-no-internet/</link><pubDate>Wed, 27 Apr 2022 12:26:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-04-27-wsl-no-internet/</guid><description>&lt;p>En este artículo mostraré cómo conectar a internet en &lt;strong>Windows Subsystem for Linux&lt;/strong> para cualquier distro (pero aquí siempre con Ubuntu) utilizando &lt;strong>Windows Terminal&lt;/strong>.&lt;/p>
+&lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 22598&lt;/strong>&lt;/em>&lt;/p>
+&lt;p>Debemos seguir algunos pasos sencillos para poder habilitar internet de manera permanente en nuestra distro preferida.&lt;/p>
+&lt;h2 id="conexión-a-internet-en-windows-subsystem-for-linux">Conexión a internet en Windows Subsystem for Linux&lt;/h2>
+&lt;p>Primero, hacemos ping a algún DNS (que tenga salida a internet):
+&lt;img src="https://cmas.dev/img/posts/2022/04/27/wsl1.png" alt="">&lt;/p>
+&lt;p>Entonces, debemos abrirl el archivo &lt;strong>resolv.conf&lt;/strong> que se encuentra en nuestro distro WSL:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">nano /etc/resolv.conf
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Abrirá el editor y procedemos a verificar el dato presente allí:
+&lt;img src="https://cmas.dev/img/posts/2022/04/27/wsl3.png" alt="">&lt;/p>
+&lt;p>Esa IP es privada. ¡Quítala de allí! y usemos el DNS de Google:
+&lt;img src="https://cmas.dev/img/posts/2022/04/27/wsl4.png" alt="">&lt;/p>
+&lt;p>Probemos nuestro comando &lt;strong>ping&lt;/strong> a ver que ocurre:
+&lt;img src="https://cmas.dev/img/posts/2022/04/27/wsl5.png" alt="">&lt;/p>
+&lt;h2 id="configuración-permanente-para-acceso-a-internet">Configuración permanente para acceso a Internet&lt;/h2>
+&lt;p>Como paso de prueba podemos salir de Ubuntu (emular el apagado de equipo desde &lt;strong>Windows Terminal&lt;/strong>, no desde Ubuntu):
+&lt;img src="https://cmas.dev/img/posts/2022/04/27/wsl6.png" alt="">&lt;/p>
+&lt;p>Iniciamos Ubuntu nuevamente y probamos &lt;strong>ping&lt;/strong>:
+&lt;img src="https://cmas.dev/img/posts/2022/04/27/wsl1.png" alt="">&lt;/p>
+&lt;p>¡BOOM!&lt;/p>
+&lt;p>Corregimos esto al estilo Ubuntu, con &lt;strong>Terminal&lt;/strong>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">sudo bash -c &amp;#39;echo -e &amp;#34;[network]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">generateResolvConf = false&amp;#34; &amp;gt; /etc/wsl.conf
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">echo -e &amp;#34;options timeout:1 attempts:1 rotate
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">nameserver 8.8.8.8
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">nameserver 8.8.4.4&amp;#34; &amp;gt; /etc/resolv.conf
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">chattr -f +i /etc/resolv.conf&amp;#39;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Con esto, logramos que todo funcione correctamente&amp;gt;
+&lt;img src="https://cmas.dev/img/posts/2022/04/27/wsl5.png" alt="">&lt;/p>
+&lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Configurando mi ambiente WSL</title><link>https://cmas.dev/posts/2022-04-26-configuring-my-wsl-environment/</link><pubDate>Tue, 26 Apr 2022 20:41:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-04-26-configuring-my-wsl-environment/</guid><description>&lt;p>En este artículo mostraré cómo configurar un ambiente de desarrollo WSL (Windows Subsystem Linux) dentro de Windows para el desarrollo de aplicaciones en múltiples plataformas (que en el futuro iré asociando a este artículo). Para este artículo ya tenemos disponible la nueva distro de Ubuntu 22.04 (recientemente lanzada).&lt;/p>
+&lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 22598&lt;/strong>&lt;/em>&lt;/p>
+&lt;p>Debemos seguir algunos pasos para poder habilitar el WSL (Windows Subsystem for Linux) en Windows 11. Es excelente esto para probar todo tipo de aplicaciones sin salir de Windows. Especialmente preparado para .NET Core :)&lt;/p>
+&lt;h2 id="preparar-windows-subsystem-for-linux">Preparar Windows Subsystem for Linux&lt;/h2>
+&lt;p>Para preparar la plataforma debemos seguir estos pasos:&lt;/p>
+&lt;ol>
+&lt;li>Nos dirigimos a &lt;strong>Panel de Control&lt;/strong> &amp;gt; &lt;strong>Programas&lt;/strong> &amp;gt; &lt;strong>Habilitar funcionalidades de Windows&lt;/strong>.&lt;/li>
+&lt;li>Buscar la opción &lt;strong>Windows Subsystem for Linux&lt;/strong>, marcamos la opción y hacemos clic en &lt;strong>Aceptar&lt;/strong>:
+&lt;img src="https://cmas.dev/img/posts/2022/04/26/Wsl1.png" alt="">&lt;/li>
+&lt;li>Cuando termine la instalación debemos reiniciar el sistema operativo y veremos este nuevo enlace en el &lt;strong>Explorador de archivos&lt;/strong>:
+&lt;img src="https://cmas.dev/img/posts/2022/04/26/Wsl2.png" alt="">&lt;/li>
+&lt;/ol>
+&lt;h2 id="instalamos-la-distro-de-preferencia">Instalamos la distro de preferencia&lt;/h2>
+&lt;p>En mi caso selecciono Ubuntu, pero existen otras que se encuentran disponibles para su instalación. Aquí procedemos a instalar desde &lt;strong>Microsoft Store&lt;/strong>:
+&lt;img src="https://cmas.dev/img/posts/2022/04/26/Wsl3.png" alt="">&lt;/p>
+&lt;p>Una vez que haya culminado la instalación, procedemos a abrir la nueva App (sí, se encuentra como una App):
+&lt;img src="https://cmas.dev/img/posts/2022/04/26/Wsl4.png" alt="">&lt;/p>
+&lt;h2 id="windows-terminal">Windows Terminal&lt;/h2>
+&lt;p>Aquí es donde empezamos a disfrutar de nuestra distro de Linux favorita para empezar a jugar con ella.&lt;/p>
+&lt;p>Creamos un usuario para nuestro sistema operativo Ubuntu (puede o no ser igual al usuario de Windows):
+&lt;img src="https://cmas.dev/img/posts/2022/04/26/Wsl5.png" alt="">&lt;/p>
+&lt;p>Por último, accedemos a la terminal de Ubuntu y realizamos las tareas que queramos dentro de Ubuntu, que está dentro de Windows 11.
+&lt;img src="https://cmas.dev/img/posts/2022/04/26/Wsl6.png" alt="">&lt;/p>
+&lt;p>Podemos verificar que distro estamos ejecutando:
+&lt;img src="https://cmas.dev/img/posts/2022/04/26/Wsl7.png" alt="">&lt;/p>
+&lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Instalar aplicaciones Android desde APK en Windows 11</title><link>https://cmas.dev/posts/2022-04-20-install-android-apps-from-apk/</link><pubDate>Wed, 20 Apr 2022 13:01:14 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-04-20-install-android-apps-from-apk/</guid><description>&lt;p>En este artículo mostraré cómo instalar aplicaciones Android en Windows 11 gracias a &lt;strong>Windows Subsystem for Android&lt;/strong> utilizando herramientas del propio Android y habilitando ciertas opciones. En un &lt;a href="https://cmas.dev/posts/2022-04-13-enable-wsa/">artículo anterior&lt;/a> hemos visto cómo habilitar la plataforma desde &lt;strong>Microsoft Store&lt;/strong>.&lt;/p>
 &lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 22598&lt;/strong>&lt;/em>&lt;/p>
 &lt;p>Debemos seguir algunos pasos para poder tener cualquier aplicación Android directamente en Windows 11, recordando que para habilitar esto debemos tener la región indicada como Estados Unidos.&lt;/p>
 &lt;h2 id="preparar-windows-subsystem-for-android">Preparar Windows Subsystem for Android&lt;/h2>
