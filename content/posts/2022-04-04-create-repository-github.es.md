@@ -12,7 +12,7 @@ share_img: /img/posts/shared/github.png
 
 En este artículo mostraré cómo crear un repositorio en GitHub para poder integrarlo en el futuro con Azure DevOps.
 
-***Windows 11 Insider Preview Build 22598***
+***Windows 11 Insider Preview Build 22581***
 
 <!--more-->
 

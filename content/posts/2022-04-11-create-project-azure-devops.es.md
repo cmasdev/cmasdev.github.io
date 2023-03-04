@@ -12,7 +12,7 @@ share_img: /img/posts/shared/windev.jpg
 
 En este artículo mostraré cómo crear un proyecto en Microsoft Azure DevOps para realizar todas las tareas relacionadas a CI/CD (Integración Contínua/Entrega Contíuna) con la plataforma Windows, sobre todo con UWP (Universal Windows Platform).
 
-***Windows 11 Insider Preview Build 22598***
+***Windows 11 Insider Preview Build 22593***
 
 <!--more-->
 
