@@ -1,4 +1,46 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Windows 11 on Blog de Christian Amado</title><link>https://cmas.dev/tags/windows-11/</link><description>Recent content in Windows 11 on Blog de Christian Amado</description><generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>biz@cmas.dev (Christian Amado)</managingEditor><webMaster>biz@cmas.dev (Christian Amado)</webMaster><lastBuildDate>Wed, 27 Apr 2022 12:26:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/tags/windows-11/index.xml" rel="self" type="application/rss+xml"/><item><title>WSL sin internet</title><link>https://cmas.dev/posts/2022-04-27-wsl-no-internet/</link><pubDate>Wed, 27 Apr 2022 12:26:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-04-27-wsl-no-internet/</guid><description>&lt;p>En este artículo mostraré cómo conectar a internet en &lt;strong>Windows Subsystem for Linux&lt;/strong> para cualquier distro (pero aquí siempre con Ubuntu) utilizando &lt;strong>Windows Terminal&lt;/strong>.&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Windows 11 on Blog de Christian Amado</title><link>https://cmas.dev/tags/windows-11/</link><description>Recent content in Windows 11 on Blog de Christian Amado</description><generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>biz@cmas.dev (Christian Amado)</managingEditor><webMaster>biz@cmas.dev (Christian Amado)</webMaster><lastBuildDate>Wed, 11 May 2022 19:53:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/tags/windows-11/index.xml" rel="self" type="application/rss+xml"/><item><title>UWP en Windows 11</title><link>https://cmas.dev/posts/2022-05-11-uwp-in-windows-11/</link><pubDate>Wed, 11 May 2022 19:53:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-05-11-uwp-in-windows-11/</guid><description>&lt;p>En este artículo mostraré cómo crear una aplicación UWP (Universal Windows Platform) en Windows 11 (aunque ya debemos ir dejándola ;)).&lt;/p>
+&lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 22621&lt;/strong>&lt;/em>&lt;/p>
+&lt;p>Los prerrequisitos para poder crear son:&lt;/p>
+&lt;ol>
+&lt;li>Visual Studio 2022.&lt;/li>
+&lt;li>UWP habilitado para el desarrollo sobre Windows 11.&lt;/li>
+&lt;li>Windows 11 ;)&lt;/li>
+&lt;/ol>
+&lt;h2 id="crear-una-aplicación-uwp">Crear una aplicación UWP&lt;/h2>
+&lt;p>Para la creación del proyecto debemos seguir los siguientes pasos:&lt;/p>
+&lt;ol>
+&lt;li>Crear una nueva aplicación en Visual Studio:
+&lt;img src="https://cmas.dev/img/posts/2022/05/11/1.png" alt="">&lt;/li>
+&lt;li>Colocamos el nombre descriptivo para el nuevo proyecto:
+&lt;img src="https://cmas.dev/img/posts/2022/05/11/2.png" alt="">&lt;/li>
+&lt;li>Seleccionamos la versión del destino (En Windows 11):
+&lt;img src="https://cmas.dev/img/posts/2022/05/11/3.png" alt="">&lt;/li>
+&lt;li>Verificamos que el proyecto se haya creado correctamente:
+&lt;img src="https://cmas.dev/img/posts/2022/05/11/4.png" alt="">&lt;/li>
+&lt;li>Agregamos un control de prueba para poder ejecutarlo:&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">&amp;lt;Page
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> x:Class=&amp;#34;UWP_Blog.MainPage&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> xmlns=&amp;#34;http://schemas.microsoft.com/winfx/2006/xaml/presentation&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> xmlns:x=&amp;#34;http://schemas.microsoft.com/winfx/2006/xaml&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> xmlns:local=&amp;#34;using:UWP_Blog&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> xmlns:d=&amp;#34;http://schemas.microsoft.com/expression/blend/2008&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> xmlns:mc=&amp;#34;http://schemas.openxmlformats.org/markup-compatibility/2006&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> mc:Ignorable=&amp;#34;d&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Background=&amp;#34;{ThemeResource ApplicationPageBackgroundThemeBrush}&amp;#34;&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Grid&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;TextBlock Text=&amp;#34;Hola mundo, desde UWP y el Blog de Christian&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/Grid&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;/Page&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="6">
+&lt;li>Ejecutamos la aplicación:
+&lt;img src="https://cmas.dev/img/posts/2022/05/11/5.png" alt="">&lt;/li>
+&lt;li>Voilá, tenemos nuestra primera app UWP para Windows 11:
+&lt;img src="https://cmas.dev/img/posts/2022/05/11/6.png" alt="">&lt;/li>
+&lt;/ol>
+&lt;p>Si bien es cierto, se recomienda que las aplicaciones para Windows sean creadas con WinUI, aún es posible desarrollarlas con UWP (pero es recomendable hacer la migración correspondiente).&lt;/p>
+&lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>WSL sin internet</title><link>https://cmas.dev/posts/2022-04-27-wsl-no-internet/</link><pubDate>Wed, 27 Apr 2022 12:26:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-04-27-wsl-no-internet/</guid><description>&lt;p>En este artículo mostraré cómo conectar a internet en &lt;strong>Windows Subsystem for Linux&lt;/strong> para cualquier distro (pero aquí siempre con Ubuntu) utilizando &lt;strong>Windows Terminal&lt;/strong>.&lt;/p>
 &lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 22598&lt;/strong>&lt;/em>&lt;/p>
 &lt;p>Debemos seguir algunos pasos sencillos para poder habilitar internet de manera permanente en nuestra distro preferida.&lt;/p>
 &lt;h2 id="conexión-a-internet-en-windows-subsystem-for-linux">Conexión a internet en Windows Subsystem for Linux&lt;/h2>
