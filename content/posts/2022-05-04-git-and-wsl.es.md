@@ -29,7 +29,7 @@ git --version
 ```
 sudo apt install git
 ```
-3. Veremos la versión actual instalada(Ojo: no es lo mismo Git en Windows que Git en WSL, pueden ser versiones distintas):
+4. Veremos la versión actual instalada(Ojo: no es lo mismo Git en Windows que Git en WSL, pueden ser versiones distintas):
 ![](/img/posts/2022/05/04/1.png)  
 
 ## Actualizar Git en WSL
