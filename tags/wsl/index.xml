@@ -1,4 +1,29 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>WSL on Blog de Christian Amado</title><link>https://cmas.dev/tags/wsl/</link><description>Recent content in WSL on Blog de Christian Amado</description><generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>biz@cmas.dev (Christian Amado)</managingEditor><webMaster>biz@cmas.dev (Christian Amado)</webMaster><lastBuildDate>Wed, 04 May 2022 13:48:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/tags/wsl/index.xml" rel="self" type="application/rss+xml"/><item><title>Git y WSL</title><link>https://cmas.dev/posts/2022-05-04-git-and-wsl/</link><pubDate>Wed, 04 May 2022 13:48:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-05-04-git-and-wsl/</guid><description>&lt;p>En este artículo mostraré cómo instalar o actualizar git dentro de &lt;strong>Windows Subsystem for Linux&lt;/strong> de modo a poder clonar repositorio desde y hacia &lt;strong>GitHub&lt;/strong>. En un &lt;a href="https://cmas.dev/posts/2022-04-26-configuring-my-wsl-environment/">artículo anterior&lt;/a> hemos visto cómo habilitar la plataforma &lt;strong>Windows Subsystem for Linux&lt;/strong>.&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>WSL on Blog de Christian Amado</title><link>https://cmas.dev/tags/wsl/</link><description>Recent content in WSL on Blog de Christian Amado</description><generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>biz@cmas.dev (Christian Amado)</managingEditor><webMaster>biz@cmas.dev (Christian Amado)</webMaster><lastBuildDate>Wed, 01 Jun 2022 18:32:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/tags/wsl/index.xml" rel="self" type="application/rss+xml"/><item><title>WSL: Ejecutar aplicaciones con GUI Linux</title><link>https://cmas.dev/posts/2022-06-01-wsl-run-apps-gui-ubuntu/</link><pubDate>Wed, 01 Jun 2022 18:32:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-06-01-wsl-run-apps-gui-ubuntu/</guid><description>&lt;p>En este artículo mostraré cómo utilizar aplicaciones Linux (con interfaz de usuario) gracias a &lt;strong>Windows Subsystem for Linux&lt;/strong> .&lt;/p>
+&lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 22621&lt;/strong>&lt;/em>&lt;/p>
+&lt;p>Es cierto que &lt;strong>Windows&lt;/strong> posee muchas y muy buenas aplicaciones gráficas (de hecho está basado en eso), pero Ubuntu también tiene aplicaciones muy buenas y con performance mejorada.&lt;/p>
+&lt;h2 id="instalar-vlc">Instalar VLC&lt;/h2>
+&lt;p>En este caso instalaremos el reproductor multimedia VLC:&lt;/p>
+&lt;ol>
+&lt;li>Nos dirigimos a Ubuntu &lt;strong>Windows Subsystem for Linux&lt;/strong>
+&lt;img src="https://cmas.dev/img/posts/2022/06/01/1.png" alt="">&lt;/li>
+&lt;li>Colocamos el comando que instala la aplicación con &lt;strong>apt&lt;/strong>:&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">sudo apt install vlc -y
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="3">
+&lt;li>Procede a instalar y nos arroja el resultado:
+&lt;img src="https://cmas.dev/img/posts/2022/06/01/2.png" alt="">&lt;/li>
+&lt;li>Colocamos el comando que ejecuta la aplicación y&amp;hellip;&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">vlc
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="5">
+&lt;li>Veremos la aplicación ejecutada:
+&lt;img src="https://cmas.dev/img/posts/2022/06/01/3.png" alt="">&lt;/li>
+&lt;li>Si buscamos la App desde el Menú Inicio de &lt;strong>Windows&lt;/strong> la encontraremos:
+&lt;img src="https://cmas.dev/img/posts/2022/06/01/4.png" alt="">&lt;/li>
+&lt;li>La aplicación se ejecuta de manera nativa en &lt;strong>Windows&lt;/strong>:
+&lt;img src="https://cmas.dev/img/posts/2022/06/01/5.png" alt="">&lt;/li>
+&lt;/ol>
+&lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Git y WSL</title><link>https://cmas.dev/posts/2022-05-04-git-and-wsl/</link><pubDate>Wed, 04 May 2022 13:48:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-05-04-git-and-wsl/</guid><description>&lt;p>En este artículo mostraré cómo instalar o actualizar git dentro de &lt;strong>Windows Subsystem for Linux&lt;/strong> de modo a poder clonar repositorio desde y hacia &lt;strong>GitHub&lt;/strong>. En un &lt;a href="https://cmas.dev/posts/2022-04-26-configuring-my-wsl-environment/">artículo anterior&lt;/a> hemos visto cómo habilitar la plataforma &lt;strong>Windows Subsystem for Linux&lt;/strong>.&lt;/p>
 &lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 22610&lt;/strong>&lt;/em>&lt;/p>
 &lt;p>Debemos seguir algunos pasos para poder isntalar/actualizar &lt;em>Git&lt;/em> dentro de &lt;strong>WSL&lt;/strong> en &lt;em>Windows 11&lt;/em>.&lt;/p>
 &lt;h2 id="instalar-git-en-wsl">Instalar Git en WSL&lt;/h2>
@@ -12,7 +37,7 @@
 &lt;li>Asumimos que no tenemos instalado &lt;strong>Git&lt;/strong> (aunque es difícil), entonces procedemos a instalarlo con el comenado &lt;strong>apt-get&lt;/strong>:&lt;/li>
 &lt;/ol>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">sudo apt install git
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="3">
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="4">
 &lt;li>Veremos la versión actual instalada(Ojo: no es lo mismo Git en Windows que Git en WSL, pueden ser versiones distintas):
 &lt;img src="https://cmas.dev/img/posts/2022/05/04/1.png" alt="">&lt;/li>
 &lt;/ol>

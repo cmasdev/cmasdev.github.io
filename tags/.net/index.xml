@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>.NET on Blog de Christian Amado</title><link>https://cmas.dev/tags/.net/</link><description>Recent content in .NET on Blog de Christian Amado</description><generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>biz@cmas.dev (Christian Amado)</managingEditor><webMaster>biz@cmas.dev (Christian Amado)</webMaster><lastBuildDate>Wed, 18 May 2022 21:56:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/tags/.net/index.xml" rel="self" type="application/rss+xml"/><item><title>Desarrollo en Windows App SDK</title><link>https://cmas.dev/posts/2022-05-18-windows-app-sdk-development/</link><pubDate>Wed, 18 May 2022 21:56:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-05-18-windows-app-sdk-development/</guid><description>&lt;p>En este articulo, mostraré cómo empezar con el desarrollo con Windows App SDK especialmente diseñado para Widnows 11 y ciertas versiones de Windows 10 (superior a la versión 1809).&lt;/p>
+&lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 22621&lt;/strong>&lt;/em>&lt;/p>
+&lt;p>Entresacando un poco las definiciones desde la &lt;a href="https://learn.microsoft.com/es-es/windows/apps/windows-app-sdk/">página oficial de Microsoft&lt;/a> encontramos este resumen:&lt;/p>
+&lt;blockquote>
+&lt;p>Windows App SDK es un conjunto de nuevas herramientas y componentes para desarrolladores que representa la próxima evolución en la plataforma de desarrollo de aplicaciones de Windows. Windows App SDK proporciona un conjunto unificado de API y herramientas que cualquier aplicación de escritorio puede usar de forma coherente en Windows 11 y niveles inferiores hasta Windows 10, versión 1809.&lt;/p>
+&lt;/blockquote>
+&lt;blockquote>
+&lt;p>Windows App SDK complementa estas herramientas y tipos de aplicación existentes con un conjunto común de API que los desarrolladores pueden utilizar en estas plataformas.&lt;/p>
+&lt;/blockquote>
+&lt;p>Con todo esto podemos ver las &lt;a href="https://learn.microsoft.com/es-es/windows/apps/windows-app-sdk/#windows-app-sdk-features">&lt;strong>características de Windows App SDK&lt;/strong>&lt;/a>.&lt;/p>
+&lt;h1 id="creación-de-un-proyecto-winui">Creación de un proyecto WinUI&lt;/h1>
+&lt;p>Para empezar a utilizar Windows App SDK, debemos crear una interfaz de usuario y eso se explica en el sitio oficial de Microsoft:&lt;/p>
+&lt;blockquote>
+&lt;p>&lt;strong>WinUI 3&lt;/strong> es el componente de la plataforma de interfaz de usuario nativa que se incluye con el SDK de Aplicaciones para Windows (completamente desacoplado de los SDK de Windows). El SDK de Aplicaciones para Windows proporciona un conjunto unificado de API y herramientas que se pueden usar para crear aplicaciones de escritorio de producción destinadas a Windows 10 y versiones posteriores que se pueden publicar en Microsoft Store.&lt;/p>
+&lt;/blockquote>
+&lt;p>Para la creación del proyecto debemos realizar los siguientes pasos:&lt;/p>
+&lt;ol>
+&lt;li>Crear un proyecto de tipo &lt;strong>WinUI 3&lt;/strong>
+&lt;img src="https://cmas.dev/img/posts/2022/05/18/1.png" alt="">&lt;/li>
+&lt;li>Se coloca un nombre descriptivo para el proyecto:
+&lt;img src="https://cmas.dev/img/posts/2022/05/18/2.png" alt="">&lt;/li>
+&lt;li>Se crea el proyecto con los siguientes archivos:
+&lt;img src="https://cmas.dev/img/posts/2022/05/18/3.png" alt="">&lt;/li>
+&lt;li>Procedemos a ejecutar la aplicación (y se ejecutará en nuestro &lt;strong>Windows 11&lt;/strong> directamente):
+&lt;img src="https://cmas.dev/img/posts/2022/05/18/4.png" alt="">&lt;/li>
+&lt;li>Veremos la aplicación ejecutada:
+&lt;img src="https://cmas.dev/img/posts/2022/05/18/5.png" alt="">&lt;/li>
+&lt;/ol>
+&lt;p>Con esto logramos crear nuestra primera aplicación &lt;strong>WinUI 3&lt;/strong>.&lt;/p>
+&lt;p>¡Espero resulte útil!&lt;/p></description></item></channel></rss>
