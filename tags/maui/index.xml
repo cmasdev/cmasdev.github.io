@@ -49,7 +49,7 @@
 &lt;img src="https://cmas.dev/img/posts/2022/09/14/2.png" alt="">&lt;br>
 &lt;img src="https://cmas.dev/img/posts/2022/09/14/3.png" alt="">&lt;/p>
 &lt;p>Si realmente necesitas aprender &lt;strong>XAML&lt;/strong>, la documentación de Microsft &lt;a href="https://learn.microsoft.com/es-es/dotnet/maui/xaml/fundamentals/get-started?view=net-maui-7.0">aquí&lt;/a> está muy completa.&lt;/p>
-&lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>MAUI on WSA</title><link>https://cmas.dev/posts/2022-08-24-first-app-in-maui/</link><pubDate>Wed, 24 Aug 2022 21:04:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-08-24-first-app-in-maui/</guid><description>&lt;p>En este artículo mostraré cómo crear la primera aplicación &lt;strong>.NET MAUI&lt;/strong> preparada para Android y Windows 11.&lt;/p>
+&lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Mi Primera Aplicación MAUI</title><link>https://cmas.dev/posts/2022-08-24-first-app-in-maui/</link><pubDate>Wed, 24 Aug 2022 21:04:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-08-24-first-app-in-maui/</guid><description>&lt;p>En este artículo mostraré cómo crear la primera aplicación &lt;strong>.NET MAUI&lt;/strong> preparada para Android y Windows 11.&lt;/p>
 &lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 25188&lt;/strong>&lt;/em>&lt;/p>
 &lt;p>Para crear un proyecto .NET MAUI no se necesitan demasiados pasos para lograr el objetivo, basta con seguir estos sencillos pasos que se muestran a continuación.&lt;/p>
 &lt;ol>
