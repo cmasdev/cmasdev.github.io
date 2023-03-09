@@ -1,10 +1,10 @@
 ---
 layout: post
-title: "MAUI on WSA"
+title: "Primeros pasos con XAML en MAUI"
 author: Christian Amado
-date: 2022-07-27 19:16:00 -0400
-category: [Windows]
-tags: [WinDev, MAUI, Windows 11, Telerik]
+date: 2022-09-14 23:18:00 -0400
+category: [Desarrollo de software]
+tags: [WinDev, MAUI, Windows 11, Telerik, XAML]
 thumbnail-img: /img/posts/thumbnails/win11.png
 cover-img: /img/posts/cover/win11.png
 share_img: /img/posts/shared/win11.jpg
