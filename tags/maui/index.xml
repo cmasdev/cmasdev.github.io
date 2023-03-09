@@ -1,4 +1,55 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>MAUI on Blog de Christian Amado</title><link>https://cmas.dev/tags/maui/</link><description>Recent content in MAUI on Blog de Christian Amado</description><generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>biz@cmas.dev (Christian Amado)</managingEditor><webMaster>biz@cmas.dev (Christian Amado)</webMaster><lastBuildDate>Wed, 24 Aug 2022 21:04:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/tags/maui/index.xml" rel="self" type="application/rss+xml"/><item><title>MAUI on WSA</title><link>https://cmas.dev/posts/2022-08-24-first-app-in-maui/</link><pubDate>Wed, 24 Aug 2022 21:04:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-08-24-first-app-in-maui/</guid><description>&lt;p>En este artículo mostraré cómo crear la primera aplicación &lt;strong>.NET MAUI&lt;/strong> preparada para Android y Windows 11.&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>MAUI on Blog de Christian Amado</title><link>https://cmas.dev/tags/maui/</link><description>Recent content in MAUI on Blog de Christian Amado</description><generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>biz@cmas.dev (Christian Amado)</managingEditor><webMaster>biz@cmas.dev (Christian Amado)</webMaster><lastBuildDate>Wed, 14 Sep 2022 23:18:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/tags/maui/index.xml" rel="self" type="application/rss+xml"/><item><title>Primeros pasos con XAML en MAUI</title><link>https://cmas.dev/posts/2022-09-14-first-step-xaml-in-maui/</link><pubDate>Wed, 14 Sep 2022 23:18:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-09-14-first-step-xaml-in-maui/</guid><description>&lt;p>En este artículo mostraré cómo iniciar los pasos con el lenguaje &lt;strong>XAML&lt;/strong> en &lt;strong>.NET MAUI&lt;/strong>.&lt;/p>
+&lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 25201&lt;/strong>&lt;/em>&lt;/p>
+&lt;p>En este pequeño artículo vamos a utilizar controles de Telerik para &lt;strong>.NET MAUI&lt;/strong>. En un &lt;a href="">artículo anterior&lt;/a> vimos cómo crear una aplicación &lt;strong>.NET MAUI&lt;/strong> y aquí haremos otra basada en otra plantilla (&lt;a href="https://www.telerik.com/support/whats-new/maui-ui/release-history/telerik-ui-for-net-maui-(version-3-0-0)">Telerik&lt;/a>).
+&lt;img src="https://cmas.dev/img/posts/2022/09/14/1.png" alt="">&lt;/p>
+&lt;h2 id="telerik-sidedrawer">Telerik SideDrawer&lt;/h2>
+&lt;p>Este control (conocido como Menú Hamburguesa) se utiliza para hacer la navegación muy amigable debido a que el menú queda al costado de nuestro diseño y permite una visualización completa del mismo. En Windows 11 se refiere a &lt;a href="https://learn.microsoft.com/en-us/windows/apps/design/controls/navigationview">NavigationView&lt;/a>.&lt;/p>
+&lt;p>La definición del control, en lenguaje &lt;strong>XAML&lt;/strong>, sería:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">&amp;lt;ContentPage xmlns=&amp;#34;http://schemas.microsoft.com/dotnet/2021/maui&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> xmlns:x=&amp;#34;http://schemas.microsoft.com/winfx/2009/xaml&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> xmlns:telerik=&amp;#34;http://schemas.telerik.com/2022/xaml/maui&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> x:Class=&amp;#34;TelerikMauiApp1.MainPage&amp;#34;&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;ScrollView&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;telerik:RadSideDrawer x:Name=&amp;#34;drawer&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> DrawerLength=&amp;#34;200&amp;#34;&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;telerik:RadSideDrawer.MainContent&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Grid&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Label Text=&amp;#34;Main content on CMASDEV BLOG&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/Grid&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/telerik:RadSideDrawer.MainContent&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;telerik:RadSideDrawer.DrawerContent&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;VerticalStackLayout Spacing=&amp;#34;10&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Padding=&amp;#34;10, 10, 0, 0&amp;#34;&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;VerticalStackLayout.Resources&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Style x:Key=&amp;#34;DefaultButtonStyle&amp;#34; TargetType=&amp;#34;Button&amp;#34;&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Setter Property=&amp;#34;WidthRequest&amp;#34; Value=&amp;#34;180&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Setter Property=&amp;#34;HeightRequest&amp;#34; Value=&amp;#34;40&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Setter Property=&amp;#34;BackgroundColor&amp;#34; Value=&amp;#34;#b1b1b1&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Setter Property=&amp;#34;TextColor&amp;#34; Value=&amp;#34;Black&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/Style&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/VerticalStackLayout.Resources&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Button Text=&amp;#34;Mail&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Style=&amp;#34;{StaticResource DefaultButtonStyle}&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Button Text=&amp;#34;Calendar&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Style=&amp;#34;{StaticResource DefaultButtonStyle}&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Button Text=&amp;#34;People&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Style=&amp;#34;{StaticResource DefaultButtonStyle}&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Button Text=&amp;#34;Tasks&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Style=&amp;#34;{StaticResource DefaultButtonStyle}&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/VerticalStackLayout&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/telerik:RadSideDrawer.DrawerContent&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/telerik:RadSideDrawer&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/ScrollView&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;/ContentPage&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Con esta definición declarativa logramos que el control tenga todos los detalles necesarios para su funcionamiento.&lt;/p>
+&lt;p>Visualmente, el resultado del código XAML es:
+&lt;img src="https://cmas.dev/img/posts/2022/09/14/2.png" alt="">&lt;br>
+&lt;img src="https://cmas.dev/img/posts/2022/09/14/3.png" alt="">&lt;/p>
+&lt;p>Si realmente necesitas aprender &lt;strong>XAML&lt;/strong>, la documentación de Microsft &lt;a href="https://learn.microsoft.com/es-es/dotnet/maui/xaml/fundamentals/get-started?view=net-maui-7.0">aquí&lt;/a> está muy completa.&lt;/p>
+&lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>MAUI on WSA</title><link>https://cmas.dev/posts/2022-08-24-first-app-in-maui/</link><pubDate>Wed, 24 Aug 2022 21:04:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-08-24-first-app-in-maui/</guid><description>&lt;p>En este artículo mostraré cómo crear la primera aplicación &lt;strong>.NET MAUI&lt;/strong> preparada para Android y Windows 11.&lt;/p>
 &lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 25188&lt;/strong>&lt;/em>&lt;/p>
 &lt;p>Para crear un proyecto .NET MAUI no se necesitan demasiados pasos para lograr el objetivo, basta con seguir estos sencillos pasos que se muestran a continuación.&lt;/p>
 &lt;ol>
@@ -91,55 +142,4 @@
 &lt;li>Ejecutamos la aplicación y la veremos en &lt;strong>WSA&lt;/strong>:
 &lt;img src="https://cmas.dev/img/posts/2022/07/27/9.png" alt="">&lt;/li>
 &lt;/ol>
-&lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>MAUI on WSA</title><link>https://cmas.dev/posts/2022-09-14-first-step-xaml-in-maui/</link><pubDate>Wed, 27 Jul 2022 19:16:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-09-14-first-step-xaml-in-maui/</guid><description>&lt;p>En este artículo mostraré cómo iniciar los pasos con el lenguaje &lt;strong>XAML&lt;/strong> en &lt;strong>.NET MAUI&lt;/strong>.&lt;/p>
-&lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 25201&lt;/strong>&lt;/em>&lt;/p>
-&lt;p>En este pequeño artículo vamos a utilizar controles de Telerik para &lt;strong>.NET MAUI&lt;/strong>. En un &lt;a href="">artículo anterior&lt;/a> vimos cómo crear una aplicación &lt;strong>.NET MAUI&lt;/strong> y aquí haremos otra basada en otra plantilla (&lt;a href="https://www.telerik.com/support/whats-new/maui-ui/release-history/telerik-ui-for-net-maui-(version-3-0-0)">Telerik&lt;/a>).
-&lt;img src="https://cmas.dev/img/posts/2022/09/14/1.png" alt="">&lt;/p>
-&lt;h2 id="telerik-sidedrawer">Telerik SideDrawer&lt;/h2>
-&lt;p>Este control (conocido como Menú Hamburguesa) se utiliza para hacer la navegación muy amigable debido a que el menú queda al costado de nuestro diseño y permite una visualización completa del mismo. En Windows 11 se refiere a &lt;a href="https://learn.microsoft.com/en-us/windows/apps/design/controls/navigationview">NavigationView&lt;/a>.&lt;/p>
-&lt;p>La definición del control, en lenguaje &lt;strong>XAML&lt;/strong>, sería:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">&amp;lt;ContentPage xmlns=&amp;#34;http://schemas.microsoft.com/dotnet/2021/maui&amp;#34;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> xmlns:x=&amp;#34;http://schemas.microsoft.com/winfx/2009/xaml&amp;#34;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> xmlns:telerik=&amp;#34;http://schemas.telerik.com/2022/xaml/maui&amp;#34;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> x:Class=&amp;#34;TelerikMauiApp1.MainPage&amp;#34;&amp;gt;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;ScrollView&amp;gt;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;telerik:RadSideDrawer x:Name=&amp;#34;drawer&amp;#34;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> DrawerLength=&amp;#34;200&amp;#34;&amp;gt;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;telerik:RadSideDrawer.MainContent&amp;gt;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Grid&amp;gt;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Label Text=&amp;#34;Main content on CMASDEV BLOG&amp;#34; /&amp;gt;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/Grid&amp;gt;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/telerik:RadSideDrawer.MainContent&amp;gt;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;telerik:RadSideDrawer.DrawerContent&amp;gt;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;VerticalStackLayout Spacing=&amp;#34;10&amp;#34;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Padding=&amp;#34;10, 10, 0, 0&amp;#34;&amp;gt;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;VerticalStackLayout.Resources&amp;gt;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Style x:Key=&amp;#34;DefaultButtonStyle&amp;#34; TargetType=&amp;#34;Button&amp;#34;&amp;gt;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Setter Property=&amp;#34;WidthRequest&amp;#34; Value=&amp;#34;180&amp;#34; /&amp;gt;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Setter Property=&amp;#34;HeightRequest&amp;#34; Value=&amp;#34;40&amp;#34; /&amp;gt;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Setter Property=&amp;#34;BackgroundColor&amp;#34; Value=&amp;#34;#b1b1b1&amp;#34; /&amp;gt;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Setter Property=&amp;#34;TextColor&amp;#34; Value=&amp;#34;Black&amp;#34; /&amp;gt;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/Style&amp;gt;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/VerticalStackLayout.Resources&amp;gt;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Button Text=&amp;#34;Mail&amp;#34;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Style=&amp;#34;{StaticResource DefaultButtonStyle}&amp;#34; /&amp;gt;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Button Text=&amp;#34;Calendar&amp;#34;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Style=&amp;#34;{StaticResource DefaultButtonStyle}&amp;#34; /&amp;gt;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Button Text=&amp;#34;People&amp;#34;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Style=&amp;#34;{StaticResource DefaultButtonStyle}&amp;#34; /&amp;gt;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Button Text=&amp;#34;Tasks&amp;#34;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Style=&amp;#34;{StaticResource DefaultButtonStyle}&amp;#34; /&amp;gt;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/VerticalStackLayout&amp;gt;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/telerik:RadSideDrawer.DrawerContent&amp;gt;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/telerik:RadSideDrawer&amp;gt;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/ScrollView&amp;gt;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;/ContentPage&amp;gt;
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Con esta definición declarativa logramos que el control tenga todos los detalles necesarios para su funcionamiento.&lt;/p>
-&lt;p>Visualmente, el resultado del código XAML es:
-&lt;img src="https://cmas.dev/img/posts/2022/09/14/2.png" alt="">&lt;br>
-&lt;img src="https://cmas.dev/img/posts/2022/09/14/3.png" alt="">&lt;/p>
-&lt;p>Si realmente necesitas aprender &lt;strong>XAML&lt;/strong>, la documentación de Microsft &lt;a href="https://learn.microsoft.com/es-es/dotnet/maui/xaml/fundamentals/get-started?view=net-maui-7.0">aquí&lt;/a> está muy completa.&lt;/p>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item></channel></rss>
