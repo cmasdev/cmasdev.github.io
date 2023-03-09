@@ -1,4 +1,240 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>WinDev on Blog de Christian Amado</title><link>https://cmas.dev/tags/windev/</link><description>Recent content in WinDev on Blog de Christian Amado</description><generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>biz@cmas.dev (Christian Amado)</managingEditor><webMaster>biz@cmas.dev (Christian Amado)</webMaster><lastBuildDate>Wed, 01 Jun 2022 18:32:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/tags/windev/index.xml" rel="self" type="application/rss+xml"/><item><title>WSL: Ejecutar aplicaciones con GUI Linux</title><link>https://cmas.dev/posts/2022-06-01-wsl-run-apps-gui-ubuntu/</link><pubDate>Wed, 01 Jun 2022 18:32:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-06-01-wsl-run-apps-gui-ubuntu/</guid><description>&lt;p>En este artículo mostraré cómo utilizar aplicaciones Linux (con interfaz de usuario) gracias a &lt;strong>Windows Subsystem for Linux&lt;/strong> .&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>WinDev on Blog de Christian Amado</title><link>https://cmas.dev/tags/windev/</link><description>Recent content in WinDev on Blog de Christian Amado</description><generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>biz@cmas.dev (Christian Amado)</managingEditor><webMaster>biz@cmas.dev (Christian Amado)</webMaster><lastBuildDate>Wed, 07 Sep 2022 19:14:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/tags/windev/index.xml" rel="self" type="application/rss+xml"/><item><title>Mi primera aplicación con Windows App SDK</title><link>https://cmas.dev/posts/2022-09-07-first-windows-app-reactjs/</link><pubDate>Wed, 07 Sep 2022 19:14:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-09-07-first-windows-app-reactjs/</guid><description>&lt;p>En este artículo mostraré cómo crear una aplicación con &lt;strong>Windows App SDK&lt;/strong> en &lt;strong>React&lt;/strong>. &lt;em>Ojo&lt;/em>: Es mi primera prueba con React (nunca lo he usado).&lt;/p>
+&lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 25188&lt;/strong>&lt;/em>&lt;/p>
+&lt;p>Existen algunas opciones válidas para crear aplicaciones para Windows 11, entre ellas, las siguientes:&lt;/p>
+&lt;ul>
+&lt;li>WinUI (más adelante entraremos en detalle en esto).&lt;/li>
+&lt;li>.NET MAUI (que me agrada bastante)&lt;/li>
+&lt;li>PWA (Progressive WEb Applications)&lt;/li>
+&lt;li>React para Windows (que usaremos en este artículo)&lt;/li>
+&lt;/ul>
+&lt;p>Como es la primera vez que trabaremos con React, debemos preparar el entorno.&lt;/p>
+&lt;h2 id="instalación-de-react-native-for-windows">Instalación de React Native for Windows&lt;/h2>
+&lt;ol>
+&lt;li>Creamos la carpeta en el directorio de preferencia.&lt;/li>
+&lt;li>Accedemos a él desde Power Shell:&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">cd C:\Users\chris\source\repos\LocalOnly\ReactNativeWin
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">npx react-native init TestApp --template react-native@^0.70.0
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="3">
+&lt;li>La instalación quedará algo así:
+&lt;img src="https://cmas.dev/img/posts/2022/09/07/1.png" alt="">&lt;/li>
+&lt;li>Ir a la carpeta creada:&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">cd TestApp
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="5">
+&lt;li>Instalar la extensión de Windows:&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">npx react-native-windows-init --overwrite
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="6">
+&lt;li>Creamos el enlace con las dependencias:&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">npx react-native autolink-windows
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="7">
+&lt;li>Fin de la instalación&lt;/li>
+&lt;/ol>
+&lt;h2 id="creación-de-aplicación">Creación de aplicación&lt;/h2>
+&lt;ol>
+&lt;li>Abrir un proyecto existente desde Visual studoo 2022:
+&lt;img src="https://cmas.dev/img/posts/2022/09/07/2.png" alt="">&lt;/li>
+&lt;li>En Power Shell, escribir lo siguiente (para arrancar el servidorcillo):&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">npm start
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="3">
+&lt;li>Ejecutamos la aplicación desde Visual Studio 2022 (la compilación demora un poco dependiendo de la capacidad del equipo de desarrollo):
+&lt;img src="https://cmas.dev/img/posts/2022/09/07/3.png" alt="">&lt;/li>
+&lt;/ol>
+&lt;p>Y con esto tenemos nuestra primera aplciación &lt;strong>Windows App SDK&lt;/strong> con &lt;strong>React&lt;/strong>.&lt;/p>
+&lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Preparando entorno para desarrollo con Windows App SDK</title><link>https://cmas.dev/posts/2022-08-31-preparing-windows-app-sdk/</link><pubDate>Wed, 31 Aug 2022 22:36:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-08-31-preparing-windows-app-sdk/</guid><description>&lt;p>En este artículo mostraré cómo preparar el entorno para el desarrollo de aplicaciones con &lt;strong>Windows App SDK&lt;/strong>.&lt;/p>
+&lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 25188&lt;/strong>&lt;/em>&lt;/p>
+&lt;p>La preparación del entorno es simple para este caso, sólo debemos instalar el SDK como tal y la extensión para Visual Studio 2022 (para C# en este caso).&lt;/p>
+&lt;h2 id="pasos-para-la-instalación">Pasos para la instalación&lt;/h2>
+&lt;p>Primeramente, debemos instalar el SDK desde el sitio oficial de Microsoft:&lt;/p>
+&lt;ol>
+&lt;li>Descargamos el SDK (la versión actual es 1.1.5) desde &lt;a href="https://aka.ms/windowsappsdk/1.1/1.1.5/windowsappruntimeinstall-x64.exe">aquí&lt;/a>&lt;/li>
+&lt;li>Descargamos la extensión de C# para Visual Studio 2022 desde &lt;a href="https://aka.ms/windowsappsdk/1.1/1.1.5/WindowsAppSDK.Cs.Extension.Dev17.Standalone.vsix">aquí&lt;/a>&lt;/li>
+&lt;/ol>
+&lt;p>Con estos pasos hemos cumplido el objetivo, pero para asegurarnos debemos ir al instalador de Visual Studio 2022 y verificar que esté seleccionada la opción de .NET Desktop Applications:
+&lt;img src="https://cmas.dev/img/posts/2022/08/31/1.png" alt="">&lt;/p>
+&lt;p>Con esta opción podemos empezar a desarrollar aplicaciones para Windows 11 (10 también pero ya es obsoleto jaja)&lt;/p>
+&lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>MAUI on WSA</title><link>https://cmas.dev/posts/2022-08-24-first-app-in-maui/</link><pubDate>Wed, 24 Aug 2022 21:04:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-08-24-first-app-in-maui/</guid><description>&lt;p>En este artículo mostraré cómo crear la primera aplicación &lt;strong>.NET MAUI&lt;/strong> preparada para Android y Windows 11.&lt;/p>
+&lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 25188&lt;/strong>&lt;/em>&lt;/p>
+&lt;p>Para crear un proyecto .NET MAUI no se necesitan demasiados pasos para lograr el objetivo, basta con seguir estos sencillos pasos que se muestran a continuación.&lt;/p>
+&lt;ol>
+&lt;li>Crear un nuevo proyecto:
+&lt;img src="https://cmas.dev/img/posts/2022/08/24/1.png" alt="">&lt;/li>
+&lt;li>Colocar un nombre descriptivo:
+&lt;img src="https://cmas.dev/img/posts/2022/08/24/2.png" alt="">&lt;/li>
+&lt;li>Seleccionar el Framework y creamos el proyecto:
+&lt;img src="https://cmas.dev/img/posts/2022/08/24/3.png" alt="">&lt;/li>
+&lt;li>Verificamos la estructura del proyecto y las plataformas habilitadas:
+&lt;img src="https://cmas.dev/img/posts/2022/08/24/4.png" alt="">&lt;/li>
+&lt;li>Ejecutamos la aplicación en Windows (usa Windows App SDK):
+&lt;img src="https://cmas.dev/img/posts/2022/08/24/5.png" alt="">&lt;/li>
+&lt;li>Cambiamos el escenario a un emulador Android:
+&lt;img src="https://cmas.dev/img/posts/2022/08/24/6.png" alt="">&lt;/li>
+&lt;li>Lo ejecutamos para probar:
+&lt;img src="https://cmas.dev/img/posts/2022/08/24/7.png" alt="">&lt;/li>
+&lt;/ol>
+&lt;p>¡Listo! Así hemos creado nuestro proyecto &lt;strong>.NET MAUI&lt;/strong> sin demasiado esfuerzo.&lt;/p>
+&lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Estructura básica de un proyecto MAUI</title><link>https://cmas.dev/posts/2022-08-17-basic-struct-of-maui-project/</link><pubDate>Wed, 17 Aug 2022 18:07:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-08-17-basic-struct-of-maui-project/</guid><description>&lt;p>En este artículo mostraré cómo es la estructura básica de un proyecto &lt;strong>.NET MAUI&lt;/strong> .&lt;/p>
+&lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 25179&lt;/strong>&lt;/em>&lt;/p>
+&lt;p>Primeramente, debemos conocer la estructura en sí de &lt;strong>.NET MAUI&lt;/strong> que se encuentra en el sitio oficial de Microsoft. La documentación oficial se encuentra &lt;a href="https://learn.microsoft.com/es-es/dotnet/maui/what-is-maui?view=net-maui-7.0">aquí&lt;/a>&lt;/p>
+&lt;p>Funcionalmente, .NET MAUI opera de la siguiente manera:
+&lt;img src="https://cmas.dev/img/posts/2022/08/17/1.png" alt="">&lt;/p>
+&lt;h2 id="estructura-del-proyecto-net-maui">Estructura del proyecto .NET MAUI&lt;/h2>
+&lt;p>El proyecto que se crea en &lt;strong>.NET MAUI&lt;/strong> posee la siguiente estructura:
+&lt;img src="https://cmas.dev/img/posts/2022/08/17/2.png" alt="">&lt;/p>
+&lt;h3 id="dependencias-dependencies">Dependencias (Dependencies)&lt;/h3>
+&lt;p>Las dependencias son los paquetes (librerías) disponibles para cada plataforma soportada en &lt;strong>.NET MAUI&lt;/strong>.&lt;/p>
+&lt;p>En este caso serían:&lt;/p>
+&lt;ul>
+&lt;li>Android.&lt;/li>
+&lt;li>iOS.&lt;/li>
+&lt;li>Mac Catalyst.&lt;/li>
+&lt;li>Windows 10 (pues tiene en cuenta la versión mínima soportada).&lt;/li>
+&lt;/ul>
+&lt;h3 id="plataformas-platforms">Plataformas (Platforms)&lt;/h3>
+&lt;p>Esta carpeta indica las configuraciones específicas de cada plataforma. Cada una de ellas posee su propia configuración dependiendo de las necesidades de la aplicación.&lt;/p>
+&lt;h3 id="recursos-resources">Recursos (Resources)&lt;/h3>
+&lt;p>Son los recursos compartidos entre las plataformas, de esta manera se pueden reutilizar elementos en todas las plataformas sin repetirlos.)&lt;/p>
+&lt;p>Con esta estructura definida, creamos y desarrollamos las aplicaciones en &lt;strong>.NET MAUI&lt;/strong>&lt;/p>
+&lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Instalando .NET MAUI en Visual Studio 2022</title><link>https://cmas.dev/posts/2022-08-10-installing-maui-on-visual-studio-2022/</link><pubDate>Wed, 10 Aug 2022 19:19:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-08-10-installing-maui-on-visual-studio-2022/</guid><description>&lt;p>En este artículo mostraré cómo instalar los componentes necesarios para el desarrollo en &lt;strong>.NET MAUI&lt;/strong> para Windows 11 y Android.&lt;/p>
+&lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 25179&lt;/strong>&lt;/em>&lt;/p>
+&lt;p>La instalación de componentes en Visual Studio siempre ha sido sencilla y esta no es la excepción.&lt;/p>
+&lt;h2 id="desinstalar-visual-studio-2022-preview">Desinstalar Visual Studio 2022 Preview&lt;/h2>
+&lt;p>Ya estuvimos probando .NET MAUI desde hace rato así que es tiempo de eliminar la versión Preview e instalar la versión oficial. Para ellos debemos realizar dos pasos sencillos:&lt;/p>
+&lt;ol>
+&lt;li>Ir a &lt;strong>Panel de control&lt;/strong> &amp;gt; &lt;strong>Desinstalar programas&lt;/strong>.&lt;/li>
+&lt;li>Seleccionar &lt;strong>Microsoft Visual Studio 2022 Preview&lt;/strong> y listo.&lt;/li>
+&lt;/ol>
+&lt;h2 id="instalar-visual-studio-2022">Instalar Visual Studio 2022&lt;/h2>
+&lt;p>Instalar Visual Studio 2022 es bien sencillo.&lt;/p>
+&lt;ol>
+&lt;li>Descargar el instalador nuevo &lt;a href="https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=Professional&amp;amp;channel=Release&amp;amp;version=VS2022&amp;amp;source=VSLandingPage&amp;amp;cid=2030&amp;amp;passive=false">aquí&lt;/a>&lt;/li>
+&lt;li>Ejecutar el instalador y seguir los pasos en pantalla hasta la selección de componente, allí debemos seleccionar la opción correspondiente a &lt;strong>.NET MAUI&lt;/strong>:
+&lt;img src="https://cmas.dev/img/posts/2022/08/10/1.png" alt="">&lt;/li>
+&lt;li>Aguardamos que finalice la instalación y listo.&lt;/li>
+&lt;/ol>
+&lt;p>&lt;strong>.NET MAUI&lt;/strong> instalará la última API de Android disponible y preparará Windows 11 para que podamos ejecutar nuestra Applicación.&lt;/p>
+&lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>MAUI on WSA</title><link>https://cmas.dev/posts/2022-07-27-maui-in-wsa/</link><pubDate>Wed, 27 Jul 2022 19:16:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-07-27-maui-in-wsa/</guid><description>&lt;p>En este artículo mostraré cómo ejecutar una aplicación &lt;strong>.NET MAUI&lt;/strong> sobre &lt;strong>Windows Subsystem for Android&lt;/strong>.&lt;/p>
+&lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 22621&lt;/strong>&lt;/em>&lt;/p>
+&lt;p>Normalmente, utilizamos un emulador de Android para poder ejecutar y depurar nuestas aplicaciones para esta plataforma. En este caso, ejecutaremos nuestra aplicación en &lt;strong>WSA (Windows Subsystem for Android)&lt;/strong>.&lt;/p>
+&lt;h2 id="preparar-el-proyecto">Preparar el proyecto&lt;/h2>
+&lt;p>Primeramente, debemos crear el poryecto &lt;strong>.NET MAUI&lt;/strong> y tenerlo listo para la plataforma &lt;strong>Android&lt;/strong>:&lt;/p>
+&lt;ol>
+&lt;li>Creamos el proyecto en Visual Studio 2022:
+&lt;img src="https://cmas.dev/img/posts/2022/07/27/1.png" alt="">&lt;/li>
+&lt;li>Colocamos un nombre descriptivo al proyecto nuevo:
+&lt;img src="https://cmas.dev/img/posts/2022/07/27/2.png" alt="">&lt;/li>
+&lt;li>Seleccionamos el .NET Core que deseamos utilizar:
+&lt;img src="https://cmas.dev/img/posts/2022/07/27/3.png" alt="">&lt;/li>
+&lt;li>Verificamos las opciones habilitadas (nos interesa Android):
+&lt;img src="https://cmas.dev/img/posts/2022/07/27/4.png" alt="">&lt;/li>
+&lt;/ol>
+&lt;h2 id="configurar-wsa">Configurar WSA&lt;/h2>
+&lt;p>Procedemos a configurar la máquina virtual para poder utilizarla&lt;/p>
+&lt;ol>
+&lt;li>En la configuración de &lt;strong>WSA&lt;/strong>, verificamos la IP y puerto para conectarnos:
+&lt;img src="https://cmas.dev/img/posts/2022/07/27/5.png" alt="">&lt;/li>
+&lt;li>Ejecutamos la consola de Android desde Visual Studio:
+&lt;img src="https://cmas.dev/img/posts/2022/07/27/6.png" alt="">&lt;/li>
+&lt;li>Ejecutamos el siguiente comando:&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">adb connect 127.0.0.1:58526
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="4">
+&lt;li>Verificamos la conexión realizada:
+&lt;img src="https://cmas.dev/img/posts/2022/07/27/7.png" alt="">&lt;/li>
+&lt;li>En visual Studio, veremos el nuevo dispositivo:
+&lt;img src="https://cmas.dev/img/posts/2022/07/27/8.png" alt="">&lt;/li>
+&lt;li>Ejecutamos la aplicación y la veremos en &lt;strong>WSA&lt;/strong>:
+&lt;img src="https://cmas.dev/img/posts/2022/07/27/9.png" alt="">&lt;/li>
+&lt;/ol>
+&lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>MAUI on WSA</title><link>https://cmas.dev/posts/2022-09-14-first-step-xaml-in-maui/</link><pubDate>Wed, 27 Jul 2022 19:16:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-09-14-first-step-xaml-in-maui/</guid><description>&lt;p>En este artículo mostraré cómo iniciar los pasos con el lenguaje &lt;strong>XAML&lt;/strong> en &lt;strong>.NET MAUI&lt;/strong>.&lt;/p>
+&lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 25201&lt;/strong>&lt;/em>&lt;/p>
+&lt;p>En este pequeño artículo vamos a utilizar controles de Telerik para &lt;strong>.NET MAUI&lt;/strong>. En un &lt;a href="">artículo anterior&lt;/a> vimos cómo crear una aplicación &lt;strong>.NET MAUI&lt;/strong> y aquí haremos otra basada en otra plantilla (&lt;a href="https://www.telerik.com/support/whats-new/maui-ui/release-history/telerik-ui-for-net-maui-(version-3-0-0)">Telerik&lt;/a>).
+&lt;img src="https://cmas.dev/img/posts/2022/09/14/1.png" alt="">&lt;/p>
+&lt;h2 id="telerik-sidedrawer">Telerik SideDrawer&lt;/h2>
+&lt;p>Este control (conocido como Menú Hamburguesa) se utiliza para hacer la navegación muy amigable debido a que el menú queda al costado de nuestro diseño y permite una visualización completa del mismo. En Windows 11 se refiere a &lt;a href="https://learn.microsoft.com/en-us/windows/apps/design/controls/navigationview">NavigationView&lt;/a>.&lt;/p>
+&lt;p>La definición del control, en lenguaje &lt;strong>XAML&lt;/strong>, sería:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">&amp;lt;ContentPage xmlns=&amp;#34;http://schemas.microsoft.com/dotnet/2021/maui&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> xmlns:x=&amp;#34;http://schemas.microsoft.com/winfx/2009/xaml&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> xmlns:telerik=&amp;#34;http://schemas.telerik.com/2022/xaml/maui&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> x:Class=&amp;#34;TelerikMauiApp1.MainPage&amp;#34;&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;ScrollView&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;telerik:RadSideDrawer x:Name=&amp;#34;drawer&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> DrawerLength=&amp;#34;200&amp;#34;&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;telerik:RadSideDrawer.MainContent&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Grid&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Label Text=&amp;#34;Main content on CMASDEV BLOG&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/Grid&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/telerik:RadSideDrawer.MainContent&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;telerik:RadSideDrawer.DrawerContent&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;VerticalStackLayout Spacing=&amp;#34;10&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Padding=&amp;#34;10, 10, 0, 0&amp;#34;&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;VerticalStackLayout.Resources&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Style x:Key=&amp;#34;DefaultButtonStyle&amp;#34; TargetType=&amp;#34;Button&amp;#34;&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Setter Property=&amp;#34;WidthRequest&amp;#34; Value=&amp;#34;180&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Setter Property=&amp;#34;HeightRequest&amp;#34; Value=&amp;#34;40&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Setter Property=&amp;#34;BackgroundColor&amp;#34; Value=&amp;#34;#b1b1b1&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Setter Property=&amp;#34;TextColor&amp;#34; Value=&amp;#34;Black&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/Style&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/VerticalStackLayout.Resources&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Button Text=&amp;#34;Mail&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Style=&amp;#34;{StaticResource DefaultButtonStyle}&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Button Text=&amp;#34;Calendar&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Style=&amp;#34;{StaticResource DefaultButtonStyle}&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Button Text=&amp;#34;People&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Style=&amp;#34;{StaticResource DefaultButtonStyle}&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Button Text=&amp;#34;Tasks&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Style=&amp;#34;{StaticResource DefaultButtonStyle}&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/VerticalStackLayout&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/telerik:RadSideDrawer.DrawerContent&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/telerik:RadSideDrawer&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/ScrollView&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;/ContentPage&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Con esta definición declarativa logramos que el control tenga todos los detalles necesarios para su funcionamiento.&lt;/p>
+&lt;p>Visualmente, el resultado del código XAML es:
+&lt;img src="https://cmas.dev/img/posts/2022/09/14/2.png" alt="">&lt;br>
+&lt;img src="https://cmas.dev/img/posts/2022/09/14/3.png" alt="">&lt;/p>
+&lt;p>Si realmente necesitas aprender &lt;strong>XAML&lt;/strong>, la documentación de Microsft &lt;a href="https://learn.microsoft.com/es-es/dotnet/maui/xaml/fundamentals/get-started?view=net-maui-7.0">aquí&lt;/a> está muy completa.&lt;/p>
+&lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>ASP.NET Core en Ubuntu</title><link>https://cmas.dev/posts/2022-06-15-aspnet-core-on-ubuntu/</link><pubDate>Wed, 15 Jun 2022 12:08:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-06-15-aspnet-core-on-ubuntu/</guid><description>&lt;p>En este artículo mostraré cómo ejecutar una aplicación &lt;strong>ASP.NET Core&lt;/strong> sobre &lt;strong>Windows Subsystem for Linux&lt;/strong>, es decir, alojar un servidor web en Ubuntu para ejecutar nuestra aplicación web.&lt;/p>
+&lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 22621&lt;/strong>&lt;/em>&lt;/p>
+&lt;p>Se habla mucho respecto a que .NET Core puede ejecutar aplicaciones nativamente en Linux (Ubuntu, en este caso) y es hora de hacer la prueba. En este caso, alojaremos la aplicación en un &amp;ldquo;servidor&amp;rdquo; Ubuntu para verificar su funcionamiento.&lt;/p>
+&lt;h2 id="preparar-el-proyecto">Preparar el proyecto&lt;/h2>
+&lt;p>Primeramente, debemos crear el poryecto &lt;strong>ASP.NET Core&lt;/strong>:&lt;/p>
+&lt;ol>
+&lt;li>Creamos el proyecto en Visual Studio 2022:
+&lt;img src="https://cmas.dev/img/posts/2022/06/15/1.png" alt="">&lt;/li>
+&lt;li>Colocamos un nombre descriptivo al proyecto nuevo:
+&lt;img src="https://cmas.dev/img/posts/2022/06/15/2.png" alt="">&lt;/li>
+&lt;li>Seleccionamos el .NET Core que deseamos utilizar:
+&lt;img src="https://cmas.dev/img/posts/2022/06/15/3.png" alt="">&lt;/li>
+&lt;li>Verificamos las opciones habilitadas para la ejecución (nos interesa &lt;strong>WSL&lt;/strong>):
+&lt;img src="https://cmas.dev/img/posts/2022/06/15/4.png" alt="">&lt;/li>
+&lt;/ol>
+&lt;h2 id="ejecución-para-wsl">Ejecución para WSL&lt;/h2>
+&lt;p>Empezamos a realizar las tareas relacionadas con la ejecución&lt;/p>
+&lt;ol>
+&lt;li>Hacemos clic en el botón de ejecución o presionamos la tecla &lt;em>F5&lt;/em>, saldrá un mensaje de error como este (si es que no tenemos instalado el dotnet en WSL):
+&lt;img src="https://cmas.dev/img/posts/2022/06/15/5.png" alt="">&lt;/li>
+&lt;li>SEguimos los pasos en la consola de WSL (para que se instale el motor de ejecución) y en Visual Studio aceptamos el mensaje:
+&lt;img src="https://cmas.dev/img/posts/2022/06/15/6.png" alt="">&lt;/li>
+&lt;li>Volvemos a ejecutar la aplicación (en este punto funciona):
+&lt;img src="https://cmas.dev/img/posts/2022/06/15/7.png" alt="">&lt;/li>
+&lt;li>Debemos agregar un poco de código para identificar en qué plataforma estamos (en la página index.cshtml agregamos la siguiente línea de código):&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">&amp;lt;h2&amp;gt;@Environment.OsVersion&amp;lt;/h2&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="5">
+&lt;li>Ejecutamos de nuevo la aplicación, pero seleccionamos la opción que tiene el nombre de nuestro proyecto, para poder usar el Web Server de Windows:
+&lt;img src="https://cmas.dev/img/posts/2022/06/15/8.png" alt="">&lt;/li>
+&lt;li>Cambiamos la configuración a &lt;strong>WSL&lt;/strong> nuevamente y ejecutamos para ver el cambio:
+&lt;img src="https://cmas.dev/img/posts/2022/06/15/9.png" alt="">&lt;/li>
+&lt;/ol>
+&lt;p>De esta manera hemos montado el servidor web directamente en &lt;strong>Ubuntu&lt;/strong> con &lt;strong>WSL&lt;/strong>.&lt;/p>
+&lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>WSL: Ejecutar aplicaciones con GUI Linux</title><link>https://cmas.dev/posts/2022-06-01-wsl-run-apps-gui-ubuntu/</link><pubDate>Wed, 01 Jun 2022 18:32:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-06-01-wsl-run-apps-gui-ubuntu/</guid><description>&lt;p>En este artículo mostraré cómo utilizar aplicaciones Linux (con interfaz de usuario) gracias a &lt;strong>Windows Subsystem for Linux&lt;/strong> .&lt;/p>
 &lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 22621&lt;/strong>&lt;/em>&lt;/p>
 &lt;p>Es cierto que &lt;strong>Windows&lt;/strong> posee muchas y muy buenas aplicaciones gráficas (de hecho está basado en eso), pero Ubuntu también tiene aplicaciones muy buenas y con performance mejorada.&lt;/p>
 &lt;h2 id="instalar-vlc">Instalar VLC&lt;/h2>
