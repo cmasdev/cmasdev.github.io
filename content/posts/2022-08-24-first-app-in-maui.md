@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "MAUI on WSA"
+title: "Mi Primera Aplicación MAUI"
 author: Christian Amado
 date: 2022-08-24 21:04:00 -0400
 category: [Desarrollo de software]
