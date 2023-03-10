@@ -12,7 +12,7 @@ share_img: /img/posts/shared/android.jpg
 
 En este artículo mostraré cómo ejecutar una aplicación **ASP.NET Core** sobre **Windows Subsystem for Linux**, es decir, alojar un servidor web en Ubuntu para ejecutar nuestra aplicación web.
 
-***Windows 11 Insider Preview Build 22621***
+***Windows 11 Insider Preview Build 25140***
 
 <!--more-->
 

@@ -12,7 +12,7 @@ share_img: /img/posts/shared/android.jpg
 
 En este artículo mostraré cómo ejecutar una aplicación **.NET MAUI** sobre **Windows Subsystem for Android**.
 
-***Windows 11 Insider Preview Build 22621***
+***Windows 11 Insider Preview Build 25163***
 
 <!--more-->
 
