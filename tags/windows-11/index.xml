@@ -167,6 +167,72 @@
 &lt;li>Aguardamos que finalice la instalación y listo.&lt;/li>
 &lt;/ol>
 &lt;p>&lt;strong>.NET MAUI&lt;/strong> instalará la última API de Android disponible y preparará Windows 11 para que podamos ejecutar nuestra Applicación.&lt;/p>
+&lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Desarrollo de aplicaciones NodeJs en WSL</title><link>https://cmas.dev/posts/2022-06-08-app-nodejs-in-wsl/</link><pubDate>Wed, 08 Jun 2022 18:07:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-06-08-app-nodejs-in-wsl/</guid><description>&lt;p>En este artículo mostraré como instalar &lt;strong>Node.js&lt;/strong> en &lt;strong>WSL&lt;/strong>. También, veremos como escribir código, compilar y ejecutarlo en &lt;strong>WSL&lt;/strong> desde &lt;strong>Visual Studio Code&lt;/strong>.&lt;/p>
+&lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 25131&lt;/strong>&lt;/em>&lt;/p>
+&lt;p>En Windows 11, especificamente gracias a &lt;strong>WSL - Windows Subssytem for Linux&lt;/strong> podemos instalar y ejecutar aplicaciones desarrolladas con &lt;strong>Node.js&lt;/strong> de manera bastante sencilla y rápida.&lt;/p>
+&lt;h2 id="instalar-nodejs-en-wsl">Instalar Node.js en WSL&lt;/h2>
+&lt;p>Preparamos WSL para la instalación de Node.js&lt;/p>
+&lt;ol>
+&lt;li>Verificamos las versiones de Node.js y NVM que tenemos instaladas (se supone que no las tenemos):
+&lt;img src="https://cmas.dev/img/posts/2022/06/08/1.png" alt="">&lt;/li>
+&lt;li>Procedemos a instalar NVM (Node Version Manager):&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="3">
+&lt;li>Ahora, instalamos la última versión de Node.js:&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">nvm install node
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="4">
+&lt;li>Verificamos las versiones y listo:
+&lt;img src="https://cmas.dev/img/posts/2022/06/08/2.png" alt="">&lt;/li>
+&lt;/ol>
+&lt;h2 id="aplicacion-en-visual-studio-code">Aplicacion en Visual Studio Code&lt;/h2>
+&lt;p>Dentro del Visual Studio Code creamos la aplicación y procedemos a ejecutarla normalmente.&lt;/p>
+&lt;ol>
+&lt;li>Creamos un archivo &lt;strong>app.js&lt;/strong>&lt;/li>
+&lt;li>Escribimos las siguientes líneas de código:&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">var http = require(&amp;#39;http&amp;#39;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">http.createServer(function (req, res) {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> res.writeHead(200, {&amp;#39;Content-Type&amp;#39;: &amp;#39;text/plain&amp;#39;});
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> res.end(&amp;#39;Hola desde cmas.dev!&amp;#39;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}).listen(8080);
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="3">
+&lt;li>Presionamos la tecla &lt;em>F5&lt;/em> y seleccionamos la opción &lt;strong>Node.js&lt;/strong>:
+&lt;img src="https://cmas.dev/img/posts/2022/06/08/4.png" alt="">&lt;/li>
+&lt;li>Veremos los controles de depuración y en la consola veremos que ha creado la aplicación:
+&lt;img src="https://cmas.dev/img/posts/2022/06/08/5.png" alt="">&lt;/li>
+&lt;li>En el navegador de preferencia, colocamos la URL definida en el código y vermeos nuestro pequeña applicación:
+&lt;img src="https://cmas.dev/img/posts/2022/06/08/6.png" alt="">&lt;/li>
+&lt;/ol>
+&lt;h2 id="aplicacion-en-visual-studio-code-con-wsl">Aplicacion en Visual Studio Code con WSL&lt;/h2>
+&lt;p>Dentro del Visual Studio Code creamos la aplicación y procedemos a ejecutarla en WSL.&lt;/p>
+&lt;ol>
+&lt;li>Descargar la extensión para desarrollo remoto &lt;a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl">aquí&lt;/a>&lt;/li>
+&lt;li>Abrimos una nueva ventana de Visual Studio Code y hacemos clicn en el icono de acceso remoto:
+&lt;img src="https://cmas.dev/img/posts/2022/06/08/7.png" alt="">&lt;/li>
+&lt;li>Seleccionamos la opción de distro para WSL:
+&lt;img src="https://cmas.dev/img/posts/2022/06/08/8.png" alt="">&lt;/li>
+&lt;li>Marcamos la opción Ubuntu:
+&lt;img src="https://cmas.dev/img/posts/2022/06/08/9.png" alt="">&lt;/li>
+&lt;li>Abrimos la carpeta donde almacenaremos el proyecto (en Ubuntu):
+&lt;img src="https://cmas.dev/img/posts/2022/06/08/10.png" alt="">&lt;/li>
+&lt;li>Escribimos las siguientes líneas de código (con algunas diferencias del código anterior):&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">var http = require(&amp;#39;http&amp;#39;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">http.createServer(function (req, res) {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> res.writeHead(200, {&amp;#39;Content-Type&amp;#39;: &amp;#39;text/plain&amp;#39;});
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> res.end(&amp;#39;¡Hola desde cmas.dev y WSL!&amp;#39;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}).listen(8081);
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="7">
+&lt;li>Ejecutamos la aplicación desde la Terminal de &lt;strong>Ubuntu&lt;/strong>:
+&lt;img src="https://cmas.dev/img/posts/2022/06/08/12.png" alt="">&lt;/li>
+&lt;li>Abrimos el navegador y colocamos la dirección que especificamos en el código:
+&lt;img src="https://cmas.dev/img/posts/2022/06/08/12.png" alt="">&lt;/li>
+&lt;/ol>
+&lt;p>De esta manera hemos realizado una aplicación NodeJs en &lt;strong>Windows&lt;/strong> directamente así como en &lt;strong>WSL&lt;/strong>. Ambas opciones son válidas, nada más depende de la elección del desarrollador.&lt;/p>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>WSL: Ejecutar aplicaciones con GUI Linux</title><link>https://cmas.dev/posts/2022-06-01-wsl-run-apps-gui-ubuntu/</link><pubDate>Wed, 01 Jun 2022 18:32:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-06-01-wsl-run-apps-gui-ubuntu/</guid><description>&lt;p>En este artículo mostraré cómo utilizar aplicaciones Linux (con interfaz de usuario) gracias a &lt;strong>Windows Subsystem for Linux&lt;/strong> .&lt;/p>
 &lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 22621&lt;/strong>&lt;/em>&lt;/p>
 &lt;p>Es cierto que &lt;strong>Windows&lt;/strong> posee muchas y muy buenas aplicaciones gráficas (de hecho está basado en eso), pero Ubuntu también tiene aplicaciones muy buenas y con performance mejorada.&lt;/p>
