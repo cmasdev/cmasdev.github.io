@@ -59,7 +59,7 @@
 &lt;/ol>
 &lt;p>&lt;strong>.NET MAUI&lt;/strong> instalará la última API de Android disponible y preparará Windows 11 para que podamos ejecutar nuestra Applicación.&lt;/p>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>MAUI on WSA</title><link>https://cmas.dev/posts/2022-07-27-maui-in-wsa/</link><pubDate>Wed, 27 Jul 2022 19:16:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-07-27-maui-in-wsa/</guid><description>&lt;p>En este artículo mostraré cómo ejecutar una aplicación &lt;strong>.NET MAUI&lt;/strong> sobre &lt;strong>Windows Subsystem for Android&lt;/strong>.&lt;/p>
-&lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 22621&lt;/strong>&lt;/em>&lt;/p>
+&lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 25163&lt;/strong>&lt;/em>&lt;/p>
 &lt;p>Normalmente, utilizamos un emulador de Android para poder ejecutar y depurar nuestas aplicaciones para esta plataforma. En este caso, ejecutaremos nuestra aplicación en &lt;strong>WSA (Windows Subsystem for Android)&lt;/strong>.&lt;/p>
 &lt;h2 id="preparar-el-proyecto">Preparar el proyecto&lt;/h2>
 &lt;p>Primeramente, debemos crear el poryecto &lt;strong>.NET MAUI&lt;/strong> y tenerlo listo para la plataforma &lt;strong>Android&lt;/strong>:&lt;/p>

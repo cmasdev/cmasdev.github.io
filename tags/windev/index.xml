@@ -168,7 +168,7 @@
 &lt;/ol>
 &lt;p>&lt;strong>.NET MAUI&lt;/strong> instalará la última API de Android disponible y preparará Windows 11 para que podamos ejecutar nuestra Applicación.&lt;/p>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>MAUI on WSA</title><link>https://cmas.dev/posts/2022-07-27-maui-in-wsa/</link><pubDate>Wed, 27 Jul 2022 19:16:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-07-27-maui-in-wsa/</guid><description>&lt;p>En este artículo mostraré cómo ejecutar una aplicación &lt;strong>.NET MAUI&lt;/strong> sobre &lt;strong>Windows Subsystem for Android&lt;/strong>.&lt;/p>
-&lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 22621&lt;/strong>&lt;/em>&lt;/p>
+&lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 25163&lt;/strong>&lt;/em>&lt;/p>
 &lt;p>Normalmente, utilizamos un emulador de Android para poder ejecutar y depurar nuestas aplicaciones para esta plataforma. En este caso, ejecutaremos nuestra aplicación en &lt;strong>WSA (Windows Subsystem for Android)&lt;/strong>.&lt;/p>
 &lt;h2 id="preparar-el-proyecto">Preparar el proyecto&lt;/h2>
 &lt;p>Primeramente, debemos crear el poryecto &lt;strong>.NET MAUI&lt;/strong> y tenerlo listo para la plataforma &lt;strong>Android&lt;/strong>:&lt;/p>
@@ -201,7 +201,7 @@
 &lt;img src="https://cmas.dev/img/posts/2022/07/27/9.png" alt="">&lt;/li>
 &lt;/ol>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>ASP.NET Core en Ubuntu</title><link>https://cmas.dev/posts/2022-06-15-aspnet-core-on-ubuntu/</link><pubDate>Wed, 15 Jun 2022 12:08:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-06-15-aspnet-core-on-ubuntu/</guid><description>&lt;p>En este artículo mostraré cómo ejecutar una aplicación &lt;strong>ASP.NET Core&lt;/strong> sobre &lt;strong>Windows Subsystem for Linux&lt;/strong>, es decir, alojar un servidor web en Ubuntu para ejecutar nuestra aplicación web.&lt;/p>
-&lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 22621&lt;/strong>&lt;/em>&lt;/p>
+&lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 25140&lt;/strong>&lt;/em>&lt;/p>
 &lt;p>Se habla mucho respecto a que .NET Core puede ejecutar aplicaciones nativamente en Linux (Ubuntu, en este caso) y es hora de hacer la prueba. En este caso, alojaremos la aplicación en un &amp;ldquo;servidor&amp;rdquo; Ubuntu para verificar su funcionamiento.&lt;/p>
 &lt;h2 id="preparar-el-proyecto">Preparar el proyecto&lt;/h2>
 &lt;p>Primeramente, debemos crear el poryecto &lt;strong>ASP.NET Core&lt;/strong>:&lt;/p>
