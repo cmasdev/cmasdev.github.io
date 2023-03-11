@@ -77,7 +77,7 @@ http.createServer(function (req, res) {
 7. Ejecutamos la aplicación desde la Terminal de **Ubuntu**:
 ![](/img/posts/2022/06/08/12.png)  
 8. Abrimos el navegador y colocamos la dirección que especificamos en el código:
-![](/img/posts/2022/06/08/12.png)  
+![](/img/posts/2022/06/08/13.png)  
 
 De esta manera hemos realizado una aplicación NodeJs en **Windows** directamente así como en **WSL**. Ambas opciones son válidas, nada más depende de la elección del desarrollador.
 
