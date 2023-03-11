@@ -1,4 +1,436 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>WinDev on Blog de Christian Amado</title><link>https://cmas.dev/tags/windev/</link><description>Recent content in WinDev on Blog de Christian Amado</description><generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>biz@cmas.dev (Christian Amado)</managingEditor><webMaster>biz@cmas.dev (Christian Amado)</webMaster><lastBuildDate>Wed, 14 Sep 2022 23:18:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/tags/windev/index.xml" rel="self" type="application/rss+xml"/><item><title>Primeros pasos con XAML en MAUI</title><link>https://cmas.dev/posts/2022-09-14-first-step-xaml-in-maui/</link><pubDate>Wed, 14 Sep 2022 23:18:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-09-14-first-step-xaml-in-maui/</guid><description>&lt;p>En este artículo mostraré cómo iniciar los pasos con el lenguaje &lt;strong>XAML&lt;/strong> en &lt;strong>.NET MAUI&lt;/strong>.&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>WinDev on Blog de Christian Amado</title><link>https://cmas.dev/tags/windev/</link><description>Recent content in WinDev on Blog de Christian Amado</description><generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>biz@cmas.dev (Christian Amado)</managingEditor><webMaster>biz@cmas.dev (Christian Amado)</webMaster><lastBuildDate>Wed, 02 Nov 2022 23:42:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/tags/windev/index.xml" rel="self" type="application/rss+xml"/><item><title>Usando MAUI con Windows App SDK</title><link>https://cmas.dev/posts/2022-11-02-windows-app-using-maui/</link><pubDate>Wed, 02 Nov 2022 23:42:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-11-02-windows-app-using-maui/</guid><description>&lt;p>En este artículo veremos cómo &lt;strong>.NET MAUI&lt;/strong> interactúa con &lt;strong>Windows 11&lt;/strong> sin necesidad de funciones extras ni código para llegar a ese resultado.&lt;/p>
+&lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 25236&lt;/strong>&lt;/em>&lt;/p>
+&lt;p>Hemos visto en varios artículos anteriores, detalles sobre &lt;strong>.NET MAUI&lt;/strong>, pero aquí me surge la necesidad de saber qué pasa en el caso de Windows cuando, por ejemplo, necesitamos acceder al sistema de archivos. ¿Qué pasa? Comparando con &lt;strong>Android&lt;/strong> ¿Cómo se comporta? Seguí leyendo y veamos.&lt;/p>
+&lt;h2 id="abrir-imagen-en-windows-11">Abrir imagen en Windows 11&lt;/h2>
+&lt;p>Con estos pasos lograremos abrir un archivo y cargarlo en nuestro diseño.&lt;/p>
+&lt;ol>
+&lt;li>Creamos el método que permite abrir los archivos en el Windows:&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">private async Task&amp;lt;FileResult&amp;gt; PickAndShow(PickOptions options)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> try
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> var result = await FilePicker.Default.PickAsync(options);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> if (result != null)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> if (result.FileName.EndsWith(&amp;#34;jpg&amp;#34;, StringComparison.OrdinalIgnoreCase) ||
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> result.FileName.EndsWith(&amp;#34;png&amp;#34;, StringComparison.OrdinalIgnoreCase))
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> using var stream = await result.OpenReadAsync();
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> var image = ImageSource.FromStream(() =&amp;gt; stream);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> return result;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> catch (Exception ex)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> throw ex;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> return null;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="2">
+&lt;li>Hacemos la llamada al método y el resultado lo exponemos en la imagen principal:&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">private async void OnCounterClicked(object sender, EventArgs e)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> var resultado = await PickAndShow(PickOptions.Images);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> imgLogo.Source = (ImageSource) new ImageSourceConverter().ConvertFromString(resultado.FullPath);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="3">
+&lt;li>Hicimos un cambio en el XAML, colocamos un nombre a la imagen para poder reemplazar el &lt;em>Source&lt;/em> de dicha imagen:&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">&amp;lt;Image
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> x:Name=&amp;#34;imgLogo&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Source=&amp;#34;dotnet_bot.png&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> SemanticProperties.Description=&amp;#34;Cute dot net bot waving hi to you!&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> HeightRequest=&amp;#34;200&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> HorizontalOptions=&amp;#34;Center&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="4">
+&lt;li>Ejecutamos la aplicación y vemos los resultados:
+&lt;img src="https://cmas.dev/img/posts/2022/11/02/1.png" alt="">&lt;/li>
+&lt;/ol>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/2022/11/02/2.png" alt="">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/2022/11/02/3.png" alt="">&lt;/p>
+&lt;h2 id="abrir-imagen-en-windows-11-1">Abrir imagen en Windows 11&lt;/h2>
+&lt;p>Como todo esto lo hicimos con &lt;strong>.NET MAUI&lt;/strong>, debemos hacer ¡NADA!&lt;/p>
+&lt;ol>
+&lt;li>Ejecutamos en &lt;strong>Android&lt;/strong> y&amp;hellip;
+&lt;img src="https://cmas.dev/img/posts/2022/11/02/4.png" alt="">&lt;/li>
+&lt;/ol>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/2022/11/02/5.png" alt="">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/2022/11/02/6.png" alt="">&lt;/p>
+&lt;p>Con una única línea de código pudimos realizar esta tarea sencilla sin necesidad de solicitar permisos ni nada desde la aplicación. esa es una de las ventajas que me gusta de &lt;strong>.NET MAUI&lt;/strong>&lt;/p>
+&lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Aplicación multilingüe en MAUI</title><link>https://cmas.dev/posts/2022-10-05-multi-language-app-maui/</link><pubDate>Wed, 05 Oct 2022 17:48:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-10-05-multi-language-app-maui/</guid><description>&lt;p>En este artículo mostraré cómo crear una aplicación &lt;strong>.NET MAUI&lt;/strong> multilingüe sobre &lt;strong>Windows 11&lt;/strong> utilizando archivos de recursos.&lt;/p>
+&lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 22621&lt;/strong>&lt;/em>&lt;/p>
+&lt;p>En un &lt;a href="https://cmas.dev/posts/2022-09-21-data-binding-in-maui/">artículo anterior&lt;/a> hemos creado un proyecto donde vimos cómo utilizar la técnica de &lt;em>Data binding&lt;/em> (usaremos ese mismo proyecto).&lt;/p>
+&lt;p>Necesitamos crear archivos de recuros y enlazarlos al XAML para que éstos funcionen. Vamos a enfocarnos en el idioma inglés (ya que el proyecto viene así).&lt;/p>
+&lt;h2 id="crear-archivos-de-recursos">Crear archivos de recursos&lt;/h2>
+&lt;p>Para empezar con la localización,&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>Crear una carpeta con el nombre &lt;em>Localization&lt;/em> (puede tener cualquier nombre) y colocarla dentro de la carpeta &lt;em>Resources&lt;/em>:
+&lt;img src="https://cmas.dev/img/posts/2022/10/05/1.png" alt="">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Dentro de dicha carpeta, se crear el archivo de tipo Recurso(.resx):&lt;br>
+&lt;img src="https://cmas.dev/img/posts/2022/10/05/2.png" alt="">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Completamos las filas con los registros necesarios (deben ser nombres descriptivos sin espacios ni caracteres especiales):
+&lt;img src="https://cmas.dev/img/posts/2022/10/05/3.png" alt="">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Repetimos el paso 2, pero le colocamos las iniciales del idioma que queremos utilizar (en mi caso &lt;strong>es&lt;/strong>) y completamos las fials con las traducciones:
+&lt;img src="https://cmas.dev/img/posts/2022/10/05/4.png" alt="">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>¡Listo! Es hora de código &lt;strong>XAML&lt;/strong> y &lt;strong>C#&lt;/strong>&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="localizar-aplicaciones-net-maui">Localizar aplicaciones .NET MAUI&lt;/h2>
+&lt;p>Aquí es donde se realiza el trabajo, los cuatro(4) primeros pasos corresponden a configuraciones generales, es decir, que se realizan de la misma forma para todos los proyectos multilingüe que queramos. Luego, el código &lt;strong>XAML&lt;/strong> ya puede variar según cada caso.&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>Instalar el paquete &lt;strong>NuGet&lt;/strong> con el nombre &lt;strong>Microsoft.Extensions.Localization&lt;/strong> (lo puedes descargar &lt;a href="https://www.nuget.org/packages/Microsoft.Extensions.Localization">aquí&lt;/a>):&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Crear (en la raíz del proyecto) el archivo &lt;strong>ServiceHelper.cs&lt;/strong> que permite identificar cada plataforma y obtener el servicio (relacionado a la &lt;em>Dependency Injection&lt;/em>):&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">namespace Maui_DataBinding
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> public static class ServiceHelper
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> public static TService GetService&amp;lt;TService&amp;gt;() =&amp;gt; Current.GetService&amp;lt;TService&amp;gt;();
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> public static IServiceProvider Current =&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">#if WINDOWS
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> MauiWinUIApplication.Current.Services;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">#elif ANDROID
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> MauiApplication.Current.Services;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">#elif IOS || MACCATALYST
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> MauiUIApplicationDelegate.Current.Services;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">#else
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> null;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">#endif
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="3">
+&lt;li>Crear una extension de método para poder utilizarla en cualquier página &lt;strong>XAML&lt;/strong> que necesitemos:&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">using Maui_DataBinding.Resources.Localization;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">using Microsoft.Extensions.Localization;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">namespace Maui_DataBinding
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [ContentProperty(nameof(Key))]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> public class LocalizeExtension : IMarkupExtension
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> IStringLocalizer&amp;lt;AppLocalize&amp;gt; _localizer;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> public string Key { get; set; } = string.Empty;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> public LocalizeExtension()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> _localizer = ServiceHelper.GetService&amp;lt;IStringLocalizer&amp;lt;AppLocalize&amp;gt;&amp;gt;();
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> public object ProvideValue(IServiceProvider serviceProvider)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> string localizedText = _localizer[Key];
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> return localizedText;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> object IMarkupExtension.ProvideValue(IServiceProvider serviceProvider) =&amp;gt; ProvideValue(serviceProvider);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="4">
+&lt;li>Por último, el el archivo &lt;strong>MauiProgram.cs&lt;/strong> se agregar el servicio de Localización:&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">builder.Services.AddLocalization();
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>La clase completa, queda así:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">using Microsoft.Extensions.Logging;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">namespace Maui_DataBinding;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">public static class MauiProgram
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> public static MauiApp CreateMauiApp()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> var builder = MauiApp.CreateBuilder();
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> builder
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> .UseMauiApp&amp;lt;App&amp;gt;()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> .ConfigureFonts(fonts =&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> fonts.AddFont(&amp;#34;OpenSans-Regular.ttf&amp;#34;, &amp;#34;OpenSansRegular&amp;#34;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> fonts.AddFont(&amp;#34;OpenSans-Semibold.ttf&amp;#34;, &amp;#34;OpenSansSemibold&amp;#34;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> });
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> builder.Services.AddLocalization();
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">#if DEBUG
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> builder.Logging.AddDebug();
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">#endif
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> return builder.Build();
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="5">
+&lt;li>Modificamos nuestro código XAML, donde agregamos el espacio de nombre de nuestro proyecto y agregamos las extensiones en las propiedades de texto:&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">&amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;utf-8&amp;#34; ?&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;ContentPage xmlns=&amp;#34;http://schemas.microsoft.com/dotnet/2021/maui&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> xmlns:x=&amp;#34;http://schemas.microsoft.com/winfx/2009/xaml&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> xmlns:local=&amp;#34;clr-namespace:Maui_DataBinding&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> x:Class=&amp;#34;Maui_DataBinding.MainPage&amp;#34;&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;ScrollView&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;VerticalStackLayout
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Spacing=&amp;#34;25&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Padding=&amp;#34;30,0&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> VerticalOptions=&amp;#34;Center&amp;#34;&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Image
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Source=&amp;#34;dotnet_bot.png&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> SemanticProperties.Description=&amp;#34;{local:Localize Key=BotImage}&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> HeightRequest=&amp;#34;200&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> HorizontalOptions=&amp;#34;Center&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Label
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Text=&amp;#34;{local:Localize Key=HelloText}&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> SemanticProperties.HeadingLevel=&amp;#34;Level1&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> FontSize=&amp;#34;32&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> HorizontalOptions=&amp;#34;Center&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Label
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Text=&amp;#34;{local:Localize Key=WelcomeText}&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> SemanticProperties.HeadingLevel=&amp;#34;Level2&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> SemanticProperties.Description=&amp;#34;{local:Localize Key=WelcomeDescriptionText}&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> FontSize=&amp;#34;18&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> HorizontalOptions=&amp;#34;Center&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Button
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> x:Name=&amp;#34;CounterBtn&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Text=&amp;#34;{Binding CounterBtnText}&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> SemanticProperties.Hint=&amp;#34;{local:Localize Key=ButtonTextHint}&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Clicked=&amp;#34;OnCounterClicked&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> HorizontalOptions=&amp;#34;Center&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Button
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> x:Name=&amp;#34;LangBtn&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Text=&amp;#34;Change language&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Clicked=&amp;#34;OnLangBtnClicked&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> HorizontalOptions=&amp;#34;Center&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/VerticalStackLayout&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/ScrollView&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;/ContentPage&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="6">
+&lt;li>En vista, que hemos modificado el código &lt;strong>C#&lt;/strong> para la técnica de &lt;em>Data Binding&lt;/em>, debemos modificarla también:&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">public string CounterBtnText
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> get
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> if (Count == 0)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> return AppLocalize.ButtonTextInitial;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> if (Count == 1)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> return AppLocalize.ButtonTextSingular.Replace(&amp;#34;{Count}&amp;#34;, Count.ToString());
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> return AppLocalize.ButtonTextPlural.Replace(&amp;#34;{Count}&amp;#34;, Count.ToString());
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="7">
+&lt;li>&lt;strong>EXTRA&lt;/strong> aquí se muestra como cambiar el idioma sin reiniciar la aplicación:&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">private void OnLangBtnClicked(object sender, EventArgs e)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> (App.Current as App).MainPage.Dispatcher.Dispatch(() =&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo(&amp;#34;es-PY&amp;#34;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(&amp;#34;es-PY&amp;#34;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> (App.Current as App).MainPage = new AppShell();
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> });
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="8">
+&lt;li>
+&lt;p>Ejecutamos la aplicación presionando &lt;em>F5&lt;/em> y veremos en Inglés así:
+&lt;img src="https://cmas.dev/img/posts/2022/10/05/5.png" alt="">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Hacemo clic en el botón &amp;ldquo;Change language&amp;rdquo; y debemos ver el español:
+&lt;img src="https://cmas.dev/img/posts/2022/10/05/6.png" alt="">&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Data Binding en MAUI</title><link>https://cmas.dev/posts/2022-09-21-data-binding-in-maui/</link><pubDate>Wed, 21 Sep 2022 20:32:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-09-21-data-binding-in-maui/</guid><description>&lt;p>En este artículo mostraré cómo utilizar la técnica de &lt;em>Data Binding&lt;/em> en una aplicación &lt;strong>.NET MAUI&lt;/strong> sobre &lt;strong>Windows 11&lt;/strong>.&lt;/p>
+&lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 25206&lt;/strong>&lt;/em>&lt;/p>
+&lt;p>&lt;em>Data binding&lt;/em> en &lt;strong>XAML&lt;/strong> es un mecanismo que permite vincular propiedades de dos objetos dentro de una página, o entre objetos visuales y datos subyacentes. Se declara usando una extensión de marcado llamada &lt;strong>Binding&lt;/strong>. La declaración de &lt;em>data binding&lt;/em> consiste en una serie de cláusulas que siguen la palabra clave &lt;strong>Binding&lt;/strong> y se separan por comas (,). Las cláusulas pueden estar en cualquier orden y existen muchas combinaciones posibles.&lt;/p>
+&lt;h2 id="preparar-el-proyecto">Preparar el proyecto&lt;/h2>
+&lt;p>Primeramente, debemos crear el proyecto &lt;strong>.NET MAUI&lt;/strong> y tenerlo listo para la plataforma &lt;strong>Windows 11&lt;/strong>:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>Creamos el proyecto en Visual Studio 2022:
+&lt;img src="https://cmas.dev/img/posts/2022/09/21/1.png" alt="">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Colocamos un nombre descriptivo al proyecto nuevo:
+&lt;img src="https://cmas.dev/img/posts/2022/09/21/2.png" alt="">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Seleccionamos el .NET Core que deseamos utilizar:
+&lt;img src="https://cmas.dev/img/posts/2022/09/21/3.png" alt="">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>En el archivo &lt;strong>MainPage.xaml&lt;/strong> verificamos el código &lt;strong>XAML&lt;/strong>:&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">&amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;utf-8&amp;#34; ?&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;ContentPage xmlns=&amp;#34;http://schemas.microsoft.com/dotnet/2021/maui&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> xmlns:x=&amp;#34;http://schemas.microsoft.com/winfx/2009/xaml&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> x:Class=&amp;#34;Maui_DataBinding.MainPage&amp;#34;&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;ScrollView&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;VerticalStackLayout
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Spacing=&amp;#34;25&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Padding=&amp;#34;30,0&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> VerticalOptions=&amp;#34;Center&amp;#34;&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Image
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Source=&amp;#34;dotnet_bot.png&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> SemanticProperties.Description=&amp;#34;Cute dot net bot waving hi to you!&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> HeightRequest=&amp;#34;200&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> HorizontalOptions=&amp;#34;Center&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Label
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Text=&amp;#34;Hello, World!&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> SemanticProperties.HeadingLevel=&amp;#34;Level1&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> FontSize=&amp;#34;32&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> HorizontalOptions=&amp;#34;Center&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Label
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Text=&amp;#34;Welcome to .NET Multi-platform App UI&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> SemanticProperties.HeadingLevel=&amp;#34;Level2&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> SemanticProperties.Description=&amp;#34;Welcome to dot net Multi platform App U I&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> FontSize=&amp;#34;18&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> HorizontalOptions=&amp;#34;Center&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Button
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> x:Name=&amp;#34;CounterBtn&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Text=&amp;#34;Click me&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> SemanticProperties.Hint=&amp;#34;Counts the number of times you click&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Clicked=&amp;#34;OnCounterClicked&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> HorizontalOptions=&amp;#34;Center&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/VerticalStackLayout&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/ScrollView&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;/ContentPage&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="5">
+&lt;li>Prestemos atención al código del botón &lt;strong>XAML&lt;/strong>:&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">&amp;lt;Button
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> x:Name=&amp;#34;CounterBtn&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Text=&amp;#34;Click me&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> SemanticProperties.Hint=&amp;#34;Counts the number of times you click&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Clicked=&amp;#34;OnCounterClicked&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> HorizontalOptions=&amp;#34;Center&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="6">
+&lt;li>También verifiquemos al código del botón &lt;strong>C#&lt;/strong>:&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">namespace Maui_DataBinding;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">public partial class MainPage : ContentPage
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> int count = 0;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> public MainPage()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> InitializeComponent();
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> private void OnCounterClicked(object sender, EventArgs e)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> count++;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> if (count == 1)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> CounterBtn.Text = $&amp;#34;Clicked {count} time&amp;#34;;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> else
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> CounterBtn.Text = $&amp;#34;Clicked {count} times&amp;#34;;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> SemanticScreenReader.Announce(CounterBtn.Text);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="7">
+&lt;li>Ejecutamos el código con &lt;em>F5&lt;/em> y veremos la aplicación Windows:
+&lt;img src="https://cmas.dev/img/posts/2022/09/21/4.png" alt="">&lt;/li>
+&lt;/ol>
+&lt;p>Bien hasta aquí no hay nada extraño en ningún lado.&lt;/p>
+&lt;h2 id="databinding-en-net-maui">DataBinding en .NET MAUI&lt;/h2>
+&lt;p>&lt;strong>Data binding&lt;/strong> es una técnica que permite vincular dos propiedades entre dos objetos, al menos uno de los cuales suele ser un objeto de interfaz de usuario. Estos dos objetos se llaman el destino y la fuente. &lt;strong>Data binding&lt;/strong> facilita la actualización automática de los datos entre los objetos.&lt;/p>
+&lt;p>Ahora vamos a adaptar nuestro código para que nuestra técnica funcione.&lt;/p>
+&lt;ol>
+&lt;li>En el constructor de la clase (en MainPage.xaml.cs) colocaremos el contexto de enlace:&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">public MainPage()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> InitializeComponent();
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> BindingContext = this;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="2">
+&lt;li>Debemos crear una nueva propiedad (para hacer uso del atributo &lt;em>count&lt;/em>):&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">int count = 0;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> public int Count
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> get
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> return count;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> set
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> count = value;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> OnPropertyChanged();
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> OnPropertyChanged(&amp;#34;CounterBtnText&amp;#34;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="3">
+&lt;li>Ahora, debemos colocar la lógica en una propiedad para que se produzca el cambio (en este caso la propeidad será &lt;strong>CounterBtnText&lt;/strong>):&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">public string CounterBtnText
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> get
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> if (Count == 0)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> return &amp;#34;Click Here&amp;#34;;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> if (Count == 1)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> return $&amp;#34;Clicked {Count} time&amp;#34;;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> return $&amp;#34;Clicked {Count} times&amp;#34;;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="4">
+&lt;li>Nuestro evento &lt;strong>Click&lt;/strong> del botón sufre modificaciones debido a que la lógica está en la nueva propiedad:&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">private void OnCounterClicked(object sender, EventArgs e)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Count++;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="5">
+&lt;li>Por último modificamos nuestra definición del botón en el código &lt;strong>XAML&lt;/strong> dentro del archivo &lt;strong>MainPage.xaml&lt;/strong>:&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">&amp;lt;Button
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> x:Name=&amp;#34;CounterBtn&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Text=&amp;#34;{Binding CounterBtnText}&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> SemanticProperties.Hint=&amp;#34;Counts the number of times you click&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Clicked=&amp;#34;OnCounterClicked&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> HorizontalOptions=&amp;#34;Center&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="6">
+&lt;li>Ejecutamos la aplicación y nos queda así:
+&lt;img src="https://cmas.dev/img/posts/2022/09/21/5.png" alt="">&lt;/li>
+&lt;/ol>
+&lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Primeros pasos con XAML en MAUI</title><link>https://cmas.dev/posts/2022-09-14-first-step-xaml-in-maui/</link><pubDate>Wed, 14 Sep 2022 23:18:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-09-14-first-step-xaml-in-maui/</guid><description>&lt;p>En este artículo mostraré cómo iniciar los pasos con el lenguaje &lt;strong>XAML&lt;/strong> en &lt;strong>.NET MAUI&lt;/strong>.&lt;/p>
 &lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 25201&lt;/strong>&lt;/em>&lt;/p>
 &lt;p>En este pequeño artículo vamos a utilizar controles de Telerik para &lt;strong>.NET MAUI&lt;/strong>. En un &lt;a href="">artículo anterior&lt;/a> vimos cómo crear una aplicación &lt;strong>.NET MAUI&lt;/strong> y aquí haremos otra basada en otra plantilla (&lt;a href="https://www.telerik.com/support/whats-new/maui-ui/release-history/telerik-ui-for-net-maui-(version-3-0-0)">Telerik&lt;/a>).
 &lt;img src="https://cmas.dev/img/posts/2022/09/14/1.png" alt="">&lt;/p>
