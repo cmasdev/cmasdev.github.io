@@ -167,6 +167,88 @@
 &lt;li>Aguardamos que finalice la instalación y listo.&lt;/li>
 &lt;/ol>
 &lt;p>&lt;strong>.NET MAUI&lt;/strong> instalará la última API de Android disponible y preparará Windows 11 para que podamos ejecutar nuestra Applicación.&lt;/p>
+&lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>MAUI ¿Qué? ¿Por qué? ¿Para qué?</title><link>https://cmas.dev/posts/2022-08-03-maui-some-questions/</link><pubDate>Wed, 03 Aug 2022 22:12:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-08-03-maui-some-questions/</guid><description>&lt;p>En este artículo intentaré explicar o dar a entender que es &lt;strong>.NET MAUI&lt;/strong> y otras cuestiones relacionada a esta plaforma que básicamente reemplaza al viejo conocido de &lt;strong>Xamarin.Forms&lt;/strong>.&lt;/p>
+&lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 25174&lt;/strong>&lt;/em>&lt;/p>
+&lt;h2 id="qué-es-net-maui-flutter-es-mejor">¿Qué es .NET MAUI? Flutter es mejor&amp;hellip;&lt;/h2>
+&lt;p>&lt;strong>.NET MAUI&lt;/strong> es un marco de trabajo multiplataforma para crear aplicaciones nativas móviles y de escritorio con C# y XAML. Con &lt;strong>.NET MAUI&lt;/strong>, se puede desarrollar aplicaciones que pueden ejecutarse en &lt;em>&lt;strong>Android&lt;/strong>&lt;/em>, &lt;em>&lt;strong>iOS&lt;/strong>&lt;/em>, &lt;em>&lt;strong>macOS&lt;/strong>&lt;/em> y &lt;em>&lt;strong>Windows&lt;/strong>&lt;/em> desde un solo código compartido. Es la evolución de &lt;em>Xamarin.Forms&lt;/em> que amplía las capacidades más allá de los dispositivos móviles.&lt;/p>
+&lt;p>&lt;strong>.NET MAUI&lt;/strong> es para desarrolladores que quieren:&lt;/p>
+&lt;ol>
+&lt;li>Escribir aplicaciones multiplataforma en XAML y C#, desde un solo código compartido en Visual Studio.&lt;/li>
+&lt;li>Compartir el diseño y la disposición de la interfaz de usuario entre plataformas.&lt;/li>
+&lt;li>Compartir código, pruebas y lógica de negocio entre plataformas.&lt;/li>
+&lt;/ol>
+&lt;p>&lt;strong>.NET MAUI&lt;/strong> proporciona una colección de controles que se pueden usar para mostrar datos, iniciar acciones, indicar actividad, mostrar colecciones, elegir datos y más. Además de una colección de controles, &lt;strong>.NET MAUI&lt;/strong> también ofrece: Un motor de diseño elaborado para diseñar páginas. Un proyecto único compartido que puede apuntar a &lt;em>&lt;strong>Android&lt;/strong>&lt;/em>, &lt;em>&lt;strong>iOS&lt;/strong>&lt;/em>, &lt;em>&lt;strong>macOS&lt;/strong>&lt;/em> y &lt;em>&lt;strong>Windows&lt;/strong>&lt;/em>. Una selección simplificada del objetivo de depuración para ejecutar las aplicaciones &lt;strong>.NET MAUI&lt;/strong>.&lt;/p>
+&lt;p>Ya escuché comentarios sobre ¡&lt;em>Flutter&lt;/em> es mucho mejor!. Pero ¿Es realmente así?&lt;/p>
+&lt;p>No hay una respuesta definitiva a esta pregunta, ya que depende de las preferencias y necesidades de cada desarrollador y proyecto. Sin embargo, se pueden mencionar algunas diferencias y ventajas de cada plataforma:&lt;/p>
+&lt;ol>
+&lt;li>&lt;strong>Flutter&lt;/strong> usa &lt;strong>Dart&lt;/strong>, un lenguaje desarrollado por &lt;em>Google&lt;/em>, mientras que &lt;strong>.NET MAUI&lt;/strong> usa &lt;strong>C#&lt;/strong>, un lenguaje ampliamente usado en el ecosistema &lt;strong>.NET&lt;/strong>.&lt;/li>
+&lt;li>&lt;strong>Flutter&lt;/strong> ofrece una interfaz de usuario más rápida y fluida, gracias a su compilación anticipada que reduce el tamaño del código compilado. Además, &lt;strong>Flutter&lt;/strong> soporta &lt;em>Material Design&lt;/em> para &lt;em>&lt;strong>Android&lt;/strong>&lt;/em> y &lt;em>Cupertino&lt;/em> para &lt;em>&lt;strong>iOS&lt;/strong>&lt;/em>, lo que permite crear aplicaciones con aspecto nativo para cada plataforma.&lt;/li>
+&lt;li>&lt;strong>.NET MAUI&lt;/strong> es una buena opción para los desarrolladores que ya están familiarizados con la plataforma &lt;strong>.NET&lt;/strong> y quieren crear aplicaciones multiplataforma usando &lt;strong>C#&lt;/strong>. También ofrece una mayor integración con &lt;em>Visual Studio&lt;/em> y otras herramientas de desarrollo.&lt;/li>
+&lt;li>&lt;strong>Flutter&lt;/strong> soporta el desarrollo web y &lt;em>Linux&lt;/em>, mientras que &lt;strong>.NET MAUI&lt;/strong> no. Sin embargo, los desarrolladores de &lt;strong>.NET MAUI&lt;/strong> pueden utilizar el marco &lt;em>&lt;strong>Blazor&lt;/strong>&lt;/em> para proporcionar un puente para usar recursos de &lt;strong>MAUI&lt;/strong>.&lt;/li>
+&lt;/ol>
+&lt;p>En conclusión, ambas plataformas tienen sus pros y contras, y la elección dependerá de factores como el lenguaje de programación preferido, el tipo de aplicación que se quiere crear, el público objetivo y el presupuesto disponible.&lt;/p>
+&lt;h2 id="qué-puedo-hacer-con-esto">¿Qué puedo hacer con esto?&lt;/h2>
+&lt;p>Con &lt;strong>.NET MAUI&lt;/strong> se puede desarrollar aplicaciones nativas para &lt;strong>Windows&lt;/strong>, &lt;em>macOS&lt;/em>, &lt;em>iOS&lt;/em> y &lt;strong>Android&lt;/strong>, usando un solo código compartido en &lt;strong>C#&lt;/strong> y &lt;strong>XAML&lt;/strong>. Se puede crear aplicaciones que se adapten al aspecto y la funcionalidad de cada plataforma, aprovechando las últimas tecnologías de desarrollo.&lt;/p>
+&lt;p>Algunos ejemplos de tipos de aplicaciones que se pueden crear con &lt;strong>.NET MAUI&lt;/strong> son:&lt;/p>
+&lt;ul>
+&lt;li>Aplicaciones de productividad que permitan gestionar tareas, calendarios, correos electrónicos, etc.&lt;/li>
+&lt;li>Aplicaciones de entretenimiento que ofrezcan juegos, música, vídeos, etc.&lt;/li>
+&lt;li>Aplicaciones de educación que faciliten el aprendizaje interactivo y el acceso a recursos didácticos.&lt;/li>
+&lt;li>Aplicaciones de negocios que integren servicios web, bases de datos, análisis de datos, etc.&lt;/li>
+&lt;/ul>
+&lt;h2 id="un-poco-de-código">Un poco de código&lt;/h2>
+&lt;p>Primero, veamos el código &lt;strong>XAML&lt;/strong> que se utiliza para la visual:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">&amp;lt;ContentPage xmlns=&amp;#34;http://schemas.microsoft.com/dotnet/2021/maui&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> xmlns:x=&amp;#34;http://schemas.microsoft.com/winfx/2009/xaml&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> x:Class=&amp;#34;ButtonSample.MainPage&amp;#34;&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;StackLayout&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Button Text=&amp;#34;Click Me!&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Clicked=&amp;#34;OnCounterClicked&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Label x:Name=&amp;#34;CounterLabel&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Text=&amp;#34;Welcome to .NET MAUI!&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> HorizontalOptions=&amp;#34;Center&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> VerticalOptions=&amp;#34;CenterAndExpand&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/StackLayout&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;/ContentPage&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Luego, vemos el código &lt;strong>C#&lt;/strong> para poder realizar las acciones necesarias:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">using Microsoft.Maui;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">using Microsoft.Maui.Controls;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">using Microsoft.Maui.Essentials;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">namespace ButtonSample
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> public partial class MainPage : ContentPage
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> int count = 0;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> public MainPage()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> InitializeComponent();
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> void OnCounterClicked(object sender, EventArgs e)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> count++;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> CounterLabel.Text = $&amp;#34;Contador actual: {count}&amp;#34;;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> CounterLabel.FontSize = Device.GetNamedSize(NamedSize.Large, typeof(Label));
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> CounterLabel.TextColor = Color.FromHex(&amp;#34;#FF0000&amp;#34;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="conclusión">Conclusión&lt;/h2>
+&lt;p>&lt;strong>.NET MAUI&lt;/strong> es una plataforma multiplataforma que ofrece muchas ventajas para los desarrolladores que quieren crear aplicaciones nativas con un solo código compartido en &lt;strong>C#&lt;/strong> y &lt;strong>XAML&lt;/strong>. Sin embargo, también tiene algunos inconvenientes y limitaciones que se debe tener en cuenta.&lt;/p>
+&lt;p>En este contexto, se recomienda &lt;strong>.NET MAUI&lt;/strong> si:&lt;/p>
+&lt;ul>
+&lt;li>Ya se tiene experiencia con la plataforma &lt;strong>.NET&lt;/strong> y el lenguaje &lt;strong>C#&lt;/strong>.&lt;/li>
+&lt;li>Se quiere crear aplicaciones para &lt;strong>Windows&lt;/strong>, &lt;em>macOS&lt;/em>, &lt;em>iOS&lt;/em> y &lt;strong>Android&lt;/strong> con una interfaz de usuario consistente y personalizable.&lt;/li>
+&lt;li>Se quiere aprovechar las herramientas de desarrollo de &lt;em>Visual Studio&lt;/em> y otras librerías del ecosistema &lt;strong>.NET&lt;/strong>.&lt;/li>
+&lt;/ul>
+&lt;p>No se recomienda &lt;strong>.NET MAUI&lt;/strong> si:&lt;/p>
+&lt;ul>
+&lt;li>Se prefiere usar otro lenguaje de programación como &lt;em>Dart&lt;/em> o &lt;em>JavaScript&lt;/em>.&lt;/li>
+&lt;li>Se quiere crear aplicaciones web o para &lt;em>Linux&lt;/em> sin usar &lt;strong>Blazor&lt;/strong>.&lt;/li>
+&lt;li>Se quiere usar las últimas características y tecnologías de cada plataforma nativa.&lt;/li>
+&lt;/ul>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>MAUI on WSA</title><link>https://cmas.dev/posts/2022-07-27-maui-in-wsa/</link><pubDate>Wed, 27 Jul 2022 19:16:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-07-27-maui-in-wsa/</guid><description>&lt;p>En este artículo mostraré cómo ejecutar una aplicación &lt;strong>.NET MAUI&lt;/strong> sobre &lt;strong>Windows Subsystem for Android&lt;/strong>.&lt;/p>
 &lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 25163&lt;/strong>&lt;/em>&lt;/p>
 &lt;p>Normalmente, utilizamos un emulador de Android para poder ejecutar y depurar nuestas aplicaciones para esta plataforma. En este caso, ejecutaremos nuestra aplicación en &lt;strong>WSA (Windows Subsystem for Android)&lt;/strong>.&lt;/p>
@@ -200,6 +282,81 @@
 &lt;li>Ejecutamos la aplicación y la veremos en &lt;strong>WSA&lt;/strong>:
 &lt;img src="https://cmas.dev/img/posts/2022/07/27/9.png" alt="">&lt;/li>
 &lt;/ol>
+&lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Hospedar Web App en UWP</title><link>https://cmas.dev/posts/2022-07-20-host-web-app-in-uwp/</link><pubDate>Wed, 20 Jul 2022 23:01:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-07-20-host-web-app-in-uwp/</guid><description>&lt;p>En este artículo mostraré cómo hospedar/mostrar una aplicación &lt;strong>ASP.NET Core&lt;/strong> dentro de una aplicación &lt;strong>UWP&lt;/strong> en Windows.&lt;/p>
+&lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 25126&lt;/strong>&lt;/em>&lt;/p>
+&lt;p>Muchas veces ya tenemos una aplicación desarrollada utilizando todos los estándares posibles de su mundo (HTML, CSS, JavaScript, ASP.NET, etc.). Entonces, aquí veremos cómo reutilizar esto dentro de una app UWP (inclusive se podría publicar la app UWP con la URL publicada dentro).&lt;/p>
+&lt;h2 id="aplicación-aspnet-core">Aplicación ASP.NET Core&lt;/h2>
+&lt;p>Primeramente, crearemos la aplicación &lt;strong>ASP.NET Core&lt;/strong> básica y la ejecutaremos para verla en el navegador.&lt;/p>
+&lt;ol>
+&lt;li>Creamos un nuevo proyecto &lt;strong>ASP.NET Core&lt;/strong>:
+&lt;img src="https://cmas.dev/img/posts/2022/07/20/1.png" alt="">&lt;/li>
+&lt;li>Colocamos un nombre al proyecto:
+&lt;img src="https://cmas.dev/img/posts/2022/07/20/2.png" alt="">&lt;/li>
+&lt;li>Seleccionamos el Framework que se ajusta a nuestras necesidades:
+&lt;img src="https://cmas.dev/img/posts/2022/07/20/3.png" alt="">&lt;/li>
+&lt;li>Ejecutamos la aplicación (presionando la tecla &lt;em>F5&lt;/em>), veremos el servidor y la web funcionando:
+&lt;img src="https://cmas.dev/img/posts/2022/07/20/4.png" alt="">&lt;/li>
+&lt;/ol>
+&lt;p>Listo, ya tenemos nuestra aplicación Web.&lt;/p>
+&lt;h2 id="aplicación-uwp-univesal-windows-platform">Aplicación UWP (Univesal Windows Platform)&lt;/h2>
+&lt;p>Crearemos la aplicación &lt;strong>UWP&lt;/strong> apuntando a &lt;strong>Windows 11&lt;/strong> como Sistema operativo.&lt;/p>
+&lt;ol>
+&lt;li>Creamos un nuevo proyecto &lt;strong>Universal Windows&lt;/strong>:
+&lt;img src="https://cmas.dev/img/posts/2022/07/20/5.png" alt="">&lt;/li>
+&lt;li>Colocamos un nombre al proyecto:
+&lt;img src="https://cmas.dev/img/posts/2022/07/20/6.png" alt="">&lt;/li>
+&lt;li>Seleccionamos las versiones para Windows que estarán disponibles:
+&lt;img src="https://cmas.dev/img/posts/2022/07/20/7.png" alt="">&lt;/li>
+&lt;li>Escribimos el código necesario para que nuestra web app pueda verse:&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">&amp;lt;Page
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> x:Class=&amp;#34;UWP_Emb.MainPage&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> xmlns=&amp;#34;http://schemas.microsoft.com/winfx/2006/xaml/presentation&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> xmlns:x=&amp;#34;http://schemas.microsoft.com/winfx/2006/xaml&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> xmlns:local=&amp;#34;using:UWP_Emb&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> xmlns:d=&amp;#34;http://schemas.microsoft.com/expression/blend/2008&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> xmlns:mc=&amp;#34;http://schemas.openxmlformats.org/markup-compatibility/2006&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> mc:Ignorable=&amp;#34;d&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Background=&amp;#34;{ThemeResource ApplicationPageBackgroundThemeBrush}&amp;#34;&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Grid&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;WebView Source=&amp;#34;https://localhost:7106/&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/Grid&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;/Page&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="5">
+&lt;li>
+&lt;p>Ejecutamos la aplicación (presionando la tecla &lt;em>F5&lt;/em>), veremos&amp;hellip; nada:
+&lt;img src="https://cmas.dev/img/posts/2022/07/20/8.png" alt="">&lt;br>
+Esto debido a que la librería no está soportada y necesita la nueva versión (acaba de ser lanzada &lt;a href="https://www.nuget.org/packages/Microsoft.UI.Xaml/2.8.0">aquí&lt;/a>).&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Procedemos a cargar el nuevo paquete desde &lt;strong>Nuget&lt;/strong>, para ellos vamos a **** &amp;gt; &amp;gt; :
+&lt;img src="https://cmas.dev/img/posts/2022/07/20/9.png" alt="">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Colocamos el código nuevo para que esto nos funcione:&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">&amp;lt;Page
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> x:Class=&amp;#34;UWP_Emb.MainPage&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> xmlns=&amp;#34;http://schemas.microsoft.com/winfx/2006/xaml/presentation&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> xmlns:x=&amp;#34;http://schemas.microsoft.com/winfx/2006/xaml&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> xmlns:local=&amp;#34;using:UWP_Emb&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> xmlns:d=&amp;#34;http://schemas.microsoft.com/expression/blend/2008&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> xmlns:mc=&amp;#34;http://schemas.openxmlformats.org/markup-compatibility/2006&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> mc:Ignorable=&amp;#34;d&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> xmlns:controls=&amp;#34;using:Microsoft.UI.Xaml.Controls&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Background=&amp;#34;{ThemeResource ApplicationPageBackgroundThemeBrush}&amp;#34;&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Grid&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;controls:WebView2 Source=&amp;#34;https://localhost:7106/&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/Grid&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;/Page&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="7">
+&lt;li>Ejecutamos la aplicación (presionando la tecla &lt;em>F5&lt;/em>), veremos nuestra web app funcionando:
+&lt;img src="https://cmas.dev/img/posts/2022/07/20/10.png" alt="">&lt;/li>
+&lt;/ol>
+&lt;p>Parece algo muy sencillo, pero me tomó algunos días poder encontrar que el problema estaba en la actualización de la librería &lt;strong>Microsoft.UI&lt;/strong>&lt;/p>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Microsoft Most Valuable Professional 2022/2023</title><link>https://cmas.dev/posts/2022-07-01-microsoft-most-valuable-professional-2022-2023/</link><pubDate>Tue, 05 Jul 2022 11:28:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-07-01-microsoft-most-valuable-professional-2022-2023/</guid><description>&lt;p>&lt;a href="https://mvp.microsoft.com/en-us/PublicProfile/5001273">Llegó la renovación por otro año más (van 8)&lt;/a>:&lt;/p>
 &lt;blockquote>
 &lt;p>Dear Christian Amado,&lt;/p>
@@ -303,7 +460,7 @@
 &lt;li>Ejecutamos la aplicación desde la Terminal de &lt;strong>Ubuntu&lt;/strong>:
 &lt;img src="https://cmas.dev/img/posts/2022/06/08/12.png" alt="">&lt;/li>
 &lt;li>Abrimos el navegador y colocamos la dirección que especificamos en el código:
-&lt;img src="https://cmas.dev/img/posts/2022/06/08/12.png" alt="">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/06/08/13.png" alt="">&lt;/li>
 &lt;/ol>
 &lt;p>De esta manera hemos realizado una aplicación NodeJs en &lt;strong>Windows&lt;/strong> directamente así como en &lt;strong>WSL&lt;/strong>. Ambas opciones son válidas, nada más depende de la elección del desarrollador.&lt;/p>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>WSL: Ejecutar aplicaciones con GUI Linux</title><link>https://cmas.dev/posts/2022-06-01-wsl-run-apps-gui-ubuntu/</link><pubDate>Wed, 01 Jun 2022 18:32:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-06-01-wsl-run-apps-gui-ubuntu/</guid><description>&lt;p>En este artículo mostraré cómo utilizar aplicaciones Linux (con interfaz de usuario) gracias a &lt;strong>Windows Subsystem for Linux&lt;/strong> .&lt;/p>
@@ -331,6 +488,38 @@
 &lt;li>La aplicación se ejecuta de manera nativa en &lt;strong>Windows&lt;/strong>:
 &lt;img src="https://cmas.dev/img/posts/2022/06/01/5.png" alt="">&lt;/li>
 &lt;/ol>
+&lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Estructura básica de un proyecto con Windows App SDK</title><link>https://cmas.dev/posts/2022-05-25-basic-struct-of-windows-app-sdk-project/</link><pubDate>Wed, 25 May 2022 18:45:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-05-25-basic-struct-of-windows-app-sdk-project/</guid><description>&lt;p>En este artículo intentaré explicar lo que entiendo es la estructura básica de &lt;strong>Windows App SDK&lt;/strong>, pues resulta algo nuevo para mí (en el pasado desarrollaba con WPF y después con UWP en sus inicios). En un &lt;a href="https://cmas.dev/posts/2022-05-18-windows-app-sdk-development/">artículo anterior&lt;/a> hemos visto los primeros pasos en esta plataforma.&lt;/p>
+&lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 25126&lt;/strong>&lt;/em>&lt;/p>
+&lt;p>Según la definición tenemos que esta definición:&lt;/p>
+&lt;blockquote>
+&lt;p>Windows App SDK es un conjunto de nuevos componentes y herramientas para desarrolladores que representan la próxima evolución en la plataforma de desarrollo de aplicaciones de Windows. Windows App SDK proporciona un conjunto unificado de API y herramientas que se pueden usar de manera consistente por cualquier aplicación de escritorio en Windows 11 y versiones anteriores hasta Windows 10, versión 1809&lt;/p>
+&lt;/blockquote>
+&lt;p>Rápidamente podemos entender que su estructura básica se compone de:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Foundation&lt;/strong>: es la capa que ofrece las &lt;em>API&lt;/em> básicas para acceder a las características y servicios de &lt;em>Windows&lt;/em>, como la configuración del sistema, el almacenamiento de datos, la red y la seguridad.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>UI&lt;/strong>: es la capa que ofrece los controles y componentes de interfaz de usuario para crear aplicaciones modernas y atractivas en &lt;em>Windows&lt;/em>, como &lt;em>XAML Islands&lt;/em>, &lt;em>WinUI 3&lt;/em> y &lt;em>WebView2&lt;/em>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Frameworks&lt;/strong>: es la capa que ofrece los marcos de trabajo y patrones para facilitar el desarrollo de aplicaciones en &lt;em>Windows&lt;/em>, como &lt;em>App Lifecycle&lt;/em>, &lt;em>Push Notifications&lt;/em> y &lt;em>Reunion Windowing&lt;/em>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Tools&lt;/strong>: es la capa que ofrece las extensiones y plantillas para Visual Studio 2022 que permiten usar los componentes de &lt;strong>Windows App SDK&lt;/strong> en proyectos nuevos o existentes. También incluye un paquete &lt;em>NuGet&lt;/em> que contiene las bibliotecas de Windows App SDK.&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="diferencias-entre-win32-apis-y-uwp-apis">Diferencias entre Win32 APIs y UWP APIs&lt;/h2>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;strong>Win32 APIs&lt;/strong>: son las API de &lt;em>Windows&lt;/em> que se usan para crear aplicaciones de escritorio tradicionales en C++ o C#. Algunas de estas &lt;em>API&lt;/em> son: &lt;em>CreateWindowEx&lt;/em>, &lt;em>MessageBox&lt;/em>, &lt;em>ShellExecute&lt;/em>, etc.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>UWP APIs&lt;/strong>: son las API de &lt;em>Windows&lt;/em> que se usan para crear aplicaciones universales que pueden ejecutarse en diferentes dispositivos con &lt;strong>Windows 11&lt;/strong>. Algunas de estas API son: &lt;em>Windows.UI.Xaml.Controls&lt;/em>, &lt;em>Windows.Media.Capture&lt;/em>, &lt;em>Windows.Storage&lt;/em>, etc.&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;p>&lt;strong>Windows App SDK&lt;/strong> permite usar ambas API en una misma aplicación, lo que ofrece más flexibilidad y compatibilidad a los desarrolladores1.&lt;/p>
+&lt;p>Esta es una pequeña introducción (con sabor a trabajo práctico) sobre Windows App SDK. A partir de esto se vienen muchos artículos sobre este &lt;em>SDK&lt;/em>.&lt;/p>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Desarrollo en Windows App SDK</title><link>https://cmas.dev/posts/2022-05-18-windows-app-sdk-development/</link><pubDate>Wed, 18 May 2022 21:56:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-05-18-windows-app-sdk-development/</guid><description>&lt;p>En este articulo, mostraré cómo empezar con el desarrollo con Windows App SDK especialmente diseñado para Widnows 11 y ciertas versiones de Windows 10 (superior a la versión 1809).&lt;/p>
 &lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 22621&lt;/strong>&lt;/em>&lt;/p>
 &lt;p>Entresacando un poco las definiciones desde la &lt;a href="https://learn.microsoft.com/es-es/windows/apps/windows-app-sdk/">página oficial de Microsoft&lt;/a> encontramos este resumen:&lt;/p>

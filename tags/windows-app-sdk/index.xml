@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Windows App SDK on Blog de Christian Amado</title><link>https://cmas.dev/tags/windows-app-sdk/</link><description>Recent content in Windows App SDK on Blog de Christian Amado</description><generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>biz@cmas.dev (Christian Amado)</managingEditor><webMaster>biz@cmas.dev (Christian Amado)</webMaster><lastBuildDate>Wed, 25 May 2022 18:45:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/tags/windows-app-sdk/index.xml" rel="self" type="application/rss+xml"/><item><title>Estructura básica de un proyecto con Windows App SDK</title><link>https://cmas.dev/posts/2022-05-25-basic-struct-of-windows-app-sdk-project/</link><pubDate>Wed, 25 May 2022 18:45:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-05-25-basic-struct-of-windows-app-sdk-project/</guid><description>&lt;p>En este artículo intentaré explicar lo que entiendo es la estructura básica de &lt;strong>Windows App SDK&lt;/strong>, pues resulta algo nuevo para mí (en el pasado desarrollaba con WPF y después con UWP en sus inicios). En un &lt;a href="https://cmas.dev/posts/2022-05-18-windows-app-sdk-development/">artículo anterior&lt;/a> hemos visto los primeros pasos en esta plataforma.&lt;/p>
+&lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 25126&lt;/strong>&lt;/em>&lt;/p>
+&lt;p>Según la definición tenemos que esta definición:&lt;/p>
+&lt;blockquote>
+&lt;p>Windows App SDK es un conjunto de nuevos componentes y herramientas para desarrolladores que representan la próxima evolución en la plataforma de desarrollo de aplicaciones de Windows. Windows App SDK proporciona un conjunto unificado de API y herramientas que se pueden usar de manera consistente por cualquier aplicación de escritorio en Windows 11 y versiones anteriores hasta Windows 10, versión 1809&lt;/p>
+&lt;/blockquote>
+&lt;p>Rápidamente podemos entender que su estructura básica se compone de:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Foundation&lt;/strong>: es la capa que ofrece las &lt;em>API&lt;/em> básicas para acceder a las características y servicios de &lt;em>Windows&lt;/em>, como la configuración del sistema, el almacenamiento de datos, la red y la seguridad.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>UI&lt;/strong>: es la capa que ofrece los controles y componentes de interfaz de usuario para crear aplicaciones modernas y atractivas en &lt;em>Windows&lt;/em>, como &lt;em>XAML Islands&lt;/em>, &lt;em>WinUI 3&lt;/em> y &lt;em>WebView2&lt;/em>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Frameworks&lt;/strong>: es la capa que ofrece los marcos de trabajo y patrones para facilitar el desarrollo de aplicaciones en &lt;em>Windows&lt;/em>, como &lt;em>App Lifecycle&lt;/em>, &lt;em>Push Notifications&lt;/em> y &lt;em>Reunion Windowing&lt;/em>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Tools&lt;/strong>: es la capa que ofrece las extensiones y plantillas para Visual Studio 2022 que permiten usar los componentes de &lt;strong>Windows App SDK&lt;/strong> en proyectos nuevos o existentes. También incluye un paquete &lt;em>NuGet&lt;/em> que contiene las bibliotecas de Windows App SDK.&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="diferencias-entre-win32-apis-y-uwp-apis">Diferencias entre Win32 APIs y UWP APIs&lt;/h2>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;strong>Win32 APIs&lt;/strong>: son las API de &lt;em>Windows&lt;/em> que se usan para crear aplicaciones de escritorio tradicionales en C++ o C#. Algunas de estas &lt;em>API&lt;/em> son: &lt;em>CreateWindowEx&lt;/em>, &lt;em>MessageBox&lt;/em>, &lt;em>ShellExecute&lt;/em>, etc.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>UWP APIs&lt;/strong>: son las API de &lt;em>Windows&lt;/em> que se usan para crear aplicaciones universales que pueden ejecutarse en diferentes dispositivos con &lt;strong>Windows 11&lt;/strong>. Algunas de estas API son: &lt;em>Windows.UI.Xaml.Controls&lt;/em>, &lt;em>Windows.Media.Capture&lt;/em>, &lt;em>Windows.Storage&lt;/em>, etc.&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;p>&lt;strong>Windows App SDK&lt;/strong> permite usar ambas API en una misma aplicación, lo que ofrece más flexibilidad y compatibilidad a los desarrolladores1.&lt;/p>
+&lt;p>Esta es una pequeña introducción (con sabor a trabajo práctico) sobre Windows App SDK. A partir de esto se vienen muchos artículos sobre este &lt;em>SDK&lt;/em>.&lt;/p>
+&lt;p>¡Espero resulte útil!&lt;/p></description></item></channel></rss>

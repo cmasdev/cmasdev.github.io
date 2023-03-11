@@ -1,4 +1,79 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ASP.NET Core on Blog de Christian Amado</title><link>https://cmas.dev/tags/asp.net-core/</link><description>Recent content in ASP.NET Core on Blog de Christian Amado</description><generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>biz@cmas.dev (Christian Amado)</managingEditor><webMaster>biz@cmas.dev (Christian Amado)</webMaster><lastBuildDate>Wed, 15 Jun 2022 12:08:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/tags/asp.net-core/index.xml" rel="self" type="application/rss+xml"/><item><title>ASP.NET Core en Ubuntu</title><link>https://cmas.dev/posts/2022-06-15-aspnet-core-on-ubuntu/</link><pubDate>Wed, 15 Jun 2022 12:08:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-06-15-aspnet-core-on-ubuntu/</guid><description>&lt;p>En este artículo mostraré cómo ejecutar una aplicación &lt;strong>ASP.NET Core&lt;/strong> sobre &lt;strong>Windows Subsystem for Linux&lt;/strong>, es decir, alojar un servidor web en Ubuntu para ejecutar nuestra aplicación web.&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ASP.NET Core on Blog de Christian Amado</title><link>https://cmas.dev/tags/asp.net-core/</link><description>Recent content in ASP.NET Core on Blog de Christian Amado</description><generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>biz@cmas.dev (Christian Amado)</managingEditor><webMaster>biz@cmas.dev (Christian Amado)</webMaster><lastBuildDate>Wed, 20 Jul 2022 23:01:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/tags/asp.net-core/index.xml" rel="self" type="application/rss+xml"/><item><title>Hospedar Web App en UWP</title><link>https://cmas.dev/posts/2022-07-20-host-web-app-in-uwp/</link><pubDate>Wed, 20 Jul 2022 23:01:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-07-20-host-web-app-in-uwp/</guid><description>&lt;p>En este artículo mostraré cómo hospedar/mostrar una aplicación &lt;strong>ASP.NET Core&lt;/strong> dentro de una aplicación &lt;strong>UWP&lt;/strong> en Windows.&lt;/p>
+&lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 25126&lt;/strong>&lt;/em>&lt;/p>
+&lt;p>Muchas veces ya tenemos una aplicación desarrollada utilizando todos los estándares posibles de su mundo (HTML, CSS, JavaScript, ASP.NET, etc.). Entonces, aquí veremos cómo reutilizar esto dentro de una app UWP (inclusive se podría publicar la app UWP con la URL publicada dentro).&lt;/p>
+&lt;h2 id="aplicación-aspnet-core">Aplicación ASP.NET Core&lt;/h2>
+&lt;p>Primeramente, crearemos la aplicación &lt;strong>ASP.NET Core&lt;/strong> básica y la ejecutaremos para verla en el navegador.&lt;/p>
+&lt;ol>
+&lt;li>Creamos un nuevo proyecto &lt;strong>ASP.NET Core&lt;/strong>:
+&lt;img src="https://cmas.dev/img/posts/2022/07/20/1.png" alt="">&lt;/li>
+&lt;li>Colocamos un nombre al proyecto:
+&lt;img src="https://cmas.dev/img/posts/2022/07/20/2.png" alt="">&lt;/li>
+&lt;li>Seleccionamos el Framework que se ajusta a nuestras necesidades:
+&lt;img src="https://cmas.dev/img/posts/2022/07/20/3.png" alt="">&lt;/li>
+&lt;li>Ejecutamos la aplicación (presionando la tecla &lt;em>F5&lt;/em>), veremos el servidor y la web funcionando:
+&lt;img src="https://cmas.dev/img/posts/2022/07/20/4.png" alt="">&lt;/li>
+&lt;/ol>
+&lt;p>Listo, ya tenemos nuestra aplicación Web.&lt;/p>
+&lt;h2 id="aplicación-uwp-univesal-windows-platform">Aplicación UWP (Univesal Windows Platform)&lt;/h2>
+&lt;p>Crearemos la aplicación &lt;strong>UWP&lt;/strong> apuntando a &lt;strong>Windows 11&lt;/strong> como Sistema operativo.&lt;/p>
+&lt;ol>
+&lt;li>Creamos un nuevo proyecto &lt;strong>Universal Windows&lt;/strong>:
+&lt;img src="https://cmas.dev/img/posts/2022/07/20/5.png" alt="">&lt;/li>
+&lt;li>Colocamos un nombre al proyecto:
+&lt;img src="https://cmas.dev/img/posts/2022/07/20/6.png" alt="">&lt;/li>
+&lt;li>Seleccionamos las versiones para Windows que estarán disponibles:
+&lt;img src="https://cmas.dev/img/posts/2022/07/20/7.png" alt="">&lt;/li>
+&lt;li>Escribimos el código necesario para que nuestra web app pueda verse:&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">&amp;lt;Page
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> x:Class=&amp;#34;UWP_Emb.MainPage&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> xmlns=&amp;#34;http://schemas.microsoft.com/winfx/2006/xaml/presentation&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> xmlns:x=&amp;#34;http://schemas.microsoft.com/winfx/2006/xaml&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> xmlns:local=&amp;#34;using:UWP_Emb&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> xmlns:d=&amp;#34;http://schemas.microsoft.com/expression/blend/2008&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> xmlns:mc=&amp;#34;http://schemas.openxmlformats.org/markup-compatibility/2006&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> mc:Ignorable=&amp;#34;d&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Background=&amp;#34;{ThemeResource ApplicationPageBackgroundThemeBrush}&amp;#34;&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Grid&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;WebView Source=&amp;#34;https://localhost:7106/&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/Grid&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;/Page&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="5">
+&lt;li>
+&lt;p>Ejecutamos la aplicación (presionando la tecla &lt;em>F5&lt;/em>), veremos&amp;hellip; nada:
+&lt;img src="https://cmas.dev/img/posts/2022/07/20/8.png" alt="">&lt;br>
+Esto debido a que la librería no está soportada y necesita la nueva versión (acaba de ser lanzada &lt;a href="https://www.nuget.org/packages/Microsoft.UI.Xaml/2.8.0">aquí&lt;/a>).&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Procedemos a cargar el nuevo paquete desde &lt;strong>Nuget&lt;/strong>, para ellos vamos a **** &amp;gt; &amp;gt; :
+&lt;img src="https://cmas.dev/img/posts/2022/07/20/9.png" alt="">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Colocamos el código nuevo para que esto nos funcione:&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">&amp;lt;Page
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> x:Class=&amp;#34;UWP_Emb.MainPage&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> xmlns=&amp;#34;http://schemas.microsoft.com/winfx/2006/xaml/presentation&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> xmlns:x=&amp;#34;http://schemas.microsoft.com/winfx/2006/xaml&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> xmlns:local=&amp;#34;using:UWP_Emb&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> xmlns:d=&amp;#34;http://schemas.microsoft.com/expression/blend/2008&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> xmlns:mc=&amp;#34;http://schemas.openxmlformats.org/markup-compatibility/2006&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> mc:Ignorable=&amp;#34;d&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> xmlns:controls=&amp;#34;using:Microsoft.UI.Xaml.Controls&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Background=&amp;#34;{ThemeResource ApplicationPageBackgroundThemeBrush}&amp;#34;&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Grid&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;controls:WebView2 Source=&amp;#34;https://localhost:7106/&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/Grid&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;/Page&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="7">
+&lt;li>Ejecutamos la aplicación (presionando la tecla &lt;em>F5&lt;/em>), veremos nuestra web app funcionando:
+&lt;img src="https://cmas.dev/img/posts/2022/07/20/10.png" alt="">&lt;/li>
+&lt;/ol>
+&lt;p>Parece algo muy sencillo, pero me tomó algunos días poder encontrar que el problema estaba en la actualización de la librería &lt;strong>Microsoft.UI&lt;/strong>&lt;/p>
+&lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>ASP.NET Core en Ubuntu</title><link>https://cmas.dev/posts/2022-06-15-aspnet-core-on-ubuntu/</link><pubDate>Wed, 15 Jun 2022 12:08:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-06-15-aspnet-core-on-ubuntu/</guid><description>&lt;p>En este artículo mostraré cómo ejecutar una aplicación &lt;strong>ASP.NET Core&lt;/strong> sobre &lt;strong>Windows Subsystem for Linux&lt;/strong>, es decir, alojar un servidor web en Ubuntu para ejecutar nuestra aplicación web.&lt;/p>
 &lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 25140&lt;/strong>&lt;/em>&lt;/p>
 &lt;p>Se habla mucho respecto a que .NET Core puede ejecutar aplicaciones nativamente en Linux (Ubuntu, en este caso) y es hora de hacer la prueba. En este caso, alojaremos la aplicación en un &amp;ldquo;servidor&amp;rdquo; Ubuntu para verificar su funcionamiento.&lt;/p>
 &lt;h2 id="preparar-el-proyecto">Preparar el proyecto&lt;/h2>

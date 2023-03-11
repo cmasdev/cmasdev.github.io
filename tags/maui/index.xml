@@ -109,6 +109,88 @@
 &lt;li>Aguardamos que finalice la instalación y listo.&lt;/li>
 &lt;/ol>
 &lt;p>&lt;strong>.NET MAUI&lt;/strong> instalará la última API de Android disponible y preparará Windows 11 para que podamos ejecutar nuestra Applicación.&lt;/p>
+&lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>MAUI ¿Qué? ¿Por qué? ¿Para qué?</title><link>https://cmas.dev/posts/2022-08-03-maui-some-questions/</link><pubDate>Wed, 03 Aug 2022 22:12:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-08-03-maui-some-questions/</guid><description>&lt;p>En este artículo intentaré explicar o dar a entender que es &lt;strong>.NET MAUI&lt;/strong> y otras cuestiones relacionada a esta plaforma que básicamente reemplaza al viejo conocido de &lt;strong>Xamarin.Forms&lt;/strong>.&lt;/p>
+&lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 25174&lt;/strong>&lt;/em>&lt;/p>
+&lt;h2 id="qué-es-net-maui-flutter-es-mejor">¿Qué es .NET MAUI? Flutter es mejor&amp;hellip;&lt;/h2>
+&lt;p>&lt;strong>.NET MAUI&lt;/strong> es un marco de trabajo multiplataforma para crear aplicaciones nativas móviles y de escritorio con C# y XAML. Con &lt;strong>.NET MAUI&lt;/strong>, se puede desarrollar aplicaciones que pueden ejecutarse en &lt;em>&lt;strong>Android&lt;/strong>&lt;/em>, &lt;em>&lt;strong>iOS&lt;/strong>&lt;/em>, &lt;em>&lt;strong>macOS&lt;/strong>&lt;/em> y &lt;em>&lt;strong>Windows&lt;/strong>&lt;/em> desde un solo código compartido. Es la evolución de &lt;em>Xamarin.Forms&lt;/em> que amplía las capacidades más allá de los dispositivos móviles.&lt;/p>
+&lt;p>&lt;strong>.NET MAUI&lt;/strong> es para desarrolladores que quieren:&lt;/p>
+&lt;ol>
+&lt;li>Escribir aplicaciones multiplataforma en XAML y C#, desde un solo código compartido en Visual Studio.&lt;/li>
+&lt;li>Compartir el diseño y la disposición de la interfaz de usuario entre plataformas.&lt;/li>
+&lt;li>Compartir código, pruebas y lógica de negocio entre plataformas.&lt;/li>
+&lt;/ol>
+&lt;p>&lt;strong>.NET MAUI&lt;/strong> proporciona una colección de controles que se pueden usar para mostrar datos, iniciar acciones, indicar actividad, mostrar colecciones, elegir datos y más. Además de una colección de controles, &lt;strong>.NET MAUI&lt;/strong> también ofrece: Un motor de diseño elaborado para diseñar páginas. Un proyecto único compartido que puede apuntar a &lt;em>&lt;strong>Android&lt;/strong>&lt;/em>, &lt;em>&lt;strong>iOS&lt;/strong>&lt;/em>, &lt;em>&lt;strong>macOS&lt;/strong>&lt;/em> y &lt;em>&lt;strong>Windows&lt;/strong>&lt;/em>. Una selección simplificada del objetivo de depuración para ejecutar las aplicaciones &lt;strong>.NET MAUI&lt;/strong>.&lt;/p>
+&lt;p>Ya escuché comentarios sobre ¡&lt;em>Flutter&lt;/em> es mucho mejor!. Pero ¿Es realmente así?&lt;/p>
+&lt;p>No hay una respuesta definitiva a esta pregunta, ya que depende de las preferencias y necesidades de cada desarrollador y proyecto. Sin embargo, se pueden mencionar algunas diferencias y ventajas de cada plataforma:&lt;/p>
+&lt;ol>
+&lt;li>&lt;strong>Flutter&lt;/strong> usa &lt;strong>Dart&lt;/strong>, un lenguaje desarrollado por &lt;em>Google&lt;/em>, mientras que &lt;strong>.NET MAUI&lt;/strong> usa &lt;strong>C#&lt;/strong>, un lenguaje ampliamente usado en el ecosistema &lt;strong>.NET&lt;/strong>.&lt;/li>
+&lt;li>&lt;strong>Flutter&lt;/strong> ofrece una interfaz de usuario más rápida y fluida, gracias a su compilación anticipada que reduce el tamaño del código compilado. Además, &lt;strong>Flutter&lt;/strong> soporta &lt;em>Material Design&lt;/em> para &lt;em>&lt;strong>Android&lt;/strong>&lt;/em> y &lt;em>Cupertino&lt;/em> para &lt;em>&lt;strong>iOS&lt;/strong>&lt;/em>, lo que permite crear aplicaciones con aspecto nativo para cada plataforma.&lt;/li>
+&lt;li>&lt;strong>.NET MAUI&lt;/strong> es una buena opción para los desarrolladores que ya están familiarizados con la plataforma &lt;strong>.NET&lt;/strong> y quieren crear aplicaciones multiplataforma usando &lt;strong>C#&lt;/strong>. También ofrece una mayor integración con &lt;em>Visual Studio&lt;/em> y otras herramientas de desarrollo.&lt;/li>
+&lt;li>&lt;strong>Flutter&lt;/strong> soporta el desarrollo web y &lt;em>Linux&lt;/em>, mientras que &lt;strong>.NET MAUI&lt;/strong> no. Sin embargo, los desarrolladores de &lt;strong>.NET MAUI&lt;/strong> pueden utilizar el marco &lt;em>&lt;strong>Blazor&lt;/strong>&lt;/em> para proporcionar un puente para usar recursos de &lt;strong>MAUI&lt;/strong>.&lt;/li>
+&lt;/ol>
+&lt;p>En conclusión, ambas plataformas tienen sus pros y contras, y la elección dependerá de factores como el lenguaje de programación preferido, el tipo de aplicación que se quiere crear, el público objetivo y el presupuesto disponible.&lt;/p>
+&lt;h2 id="qué-puedo-hacer-con-esto">¿Qué puedo hacer con esto?&lt;/h2>
+&lt;p>Con &lt;strong>.NET MAUI&lt;/strong> se puede desarrollar aplicaciones nativas para &lt;strong>Windows&lt;/strong>, &lt;em>macOS&lt;/em>, &lt;em>iOS&lt;/em> y &lt;strong>Android&lt;/strong>, usando un solo código compartido en &lt;strong>C#&lt;/strong> y &lt;strong>XAML&lt;/strong>. Se puede crear aplicaciones que se adapten al aspecto y la funcionalidad de cada plataforma, aprovechando las últimas tecnologías de desarrollo.&lt;/p>
+&lt;p>Algunos ejemplos de tipos de aplicaciones que se pueden crear con &lt;strong>.NET MAUI&lt;/strong> son:&lt;/p>
+&lt;ul>
+&lt;li>Aplicaciones de productividad que permitan gestionar tareas, calendarios, correos electrónicos, etc.&lt;/li>
+&lt;li>Aplicaciones de entretenimiento que ofrezcan juegos, música, vídeos, etc.&lt;/li>
+&lt;li>Aplicaciones de educación que faciliten el aprendizaje interactivo y el acceso a recursos didácticos.&lt;/li>
+&lt;li>Aplicaciones de negocios que integren servicios web, bases de datos, análisis de datos, etc.&lt;/li>
+&lt;/ul>
+&lt;h2 id="un-poco-de-código">Un poco de código&lt;/h2>
+&lt;p>Primero, veamos el código &lt;strong>XAML&lt;/strong> que se utiliza para la visual:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">&amp;lt;ContentPage xmlns=&amp;#34;http://schemas.microsoft.com/dotnet/2021/maui&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> xmlns:x=&amp;#34;http://schemas.microsoft.com/winfx/2009/xaml&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> x:Class=&amp;#34;ButtonSample.MainPage&amp;#34;&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;StackLayout&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Button Text=&amp;#34;Click Me!&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Clicked=&amp;#34;OnCounterClicked&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Label x:Name=&amp;#34;CounterLabel&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Text=&amp;#34;Welcome to .NET MAUI!&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> HorizontalOptions=&amp;#34;Center&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> VerticalOptions=&amp;#34;CenterAndExpand&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/StackLayout&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;/ContentPage&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Luego, vemos el código &lt;strong>C#&lt;/strong> para poder realizar las acciones necesarias:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">using Microsoft.Maui;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">using Microsoft.Maui.Controls;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">using Microsoft.Maui.Essentials;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">namespace ButtonSample
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> public partial class MainPage : ContentPage
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> int count = 0;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> public MainPage()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> InitializeComponent();
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> void OnCounterClicked(object sender, EventArgs e)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> count++;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> CounterLabel.Text = $&amp;#34;Contador actual: {count}&amp;#34;;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> CounterLabel.FontSize = Device.GetNamedSize(NamedSize.Large, typeof(Label));
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> CounterLabel.TextColor = Color.FromHex(&amp;#34;#FF0000&amp;#34;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="conclusión">Conclusión&lt;/h2>
+&lt;p>&lt;strong>.NET MAUI&lt;/strong> es una plataforma multiplataforma que ofrece muchas ventajas para los desarrolladores que quieren crear aplicaciones nativas con un solo código compartido en &lt;strong>C#&lt;/strong> y &lt;strong>XAML&lt;/strong>. Sin embargo, también tiene algunos inconvenientes y limitaciones que se debe tener en cuenta.&lt;/p>
+&lt;p>En este contexto, se recomienda &lt;strong>.NET MAUI&lt;/strong> si:&lt;/p>
+&lt;ul>
+&lt;li>Ya se tiene experiencia con la plataforma &lt;strong>.NET&lt;/strong> y el lenguaje &lt;strong>C#&lt;/strong>.&lt;/li>
+&lt;li>Se quiere crear aplicaciones para &lt;strong>Windows&lt;/strong>, &lt;em>macOS&lt;/em>, &lt;em>iOS&lt;/em> y &lt;strong>Android&lt;/strong> con una interfaz de usuario consistente y personalizable.&lt;/li>
+&lt;li>Se quiere aprovechar las herramientas de desarrollo de &lt;em>Visual Studio&lt;/em> y otras librerías del ecosistema &lt;strong>.NET&lt;/strong>.&lt;/li>
+&lt;/ul>
+&lt;p>No se recomienda &lt;strong>.NET MAUI&lt;/strong> si:&lt;/p>
+&lt;ul>
+&lt;li>Se prefiere usar otro lenguaje de programación como &lt;em>Dart&lt;/em> o &lt;em>JavaScript&lt;/em>.&lt;/li>
+&lt;li>Se quiere crear aplicaciones web o para &lt;em>Linux&lt;/em> sin usar &lt;strong>Blazor&lt;/strong>.&lt;/li>
+&lt;li>Se quiere usar las últimas características y tecnologías de cada plataforma nativa.&lt;/li>
+&lt;/ul>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>MAUI on WSA</title><link>https://cmas.dev/posts/2022-07-27-maui-in-wsa/</link><pubDate>Wed, 27 Jul 2022 19:16:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-07-27-maui-in-wsa/</guid><description>&lt;p>En este artículo mostraré cómo ejecutar una aplicación &lt;strong>.NET MAUI&lt;/strong> sobre &lt;strong>Windows Subsystem for Android&lt;/strong>.&lt;/p>
 &lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 25163&lt;/strong>&lt;/em>&lt;/p>
 &lt;p>Normalmente, utilizamos un emulador de Android para poder ejecutar y depurar nuestas aplicaciones para esta plataforma. En este caso, ejecutaremos nuestra aplicación en &lt;strong>WSA (Windows Subsystem for Android)&lt;/strong>.&lt;/p>
