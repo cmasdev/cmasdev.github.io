@@ -34,6 +34,134 @@
 &lt;img src="https://cmas.dev/img/posts/2022/10/19/6.png" alt="">&lt;/p>
 &lt;/li>
 &lt;/ol>
+&lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Java con WSL parte 2</title><link>https://cmas.dev/posts/2022-06-29-java-with-wsl-part-2/</link><pubDate>Wed, 29 Jun 2022 20:47:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-06-29-java-with-wsl-part-2/</guid><description>&lt;p>En este artículo mostraré cómo desarrollar una pequeña aplicación web en &lt;strong>Java&lt;/strong> corriendo sobre &lt;strong>WSL (Windows Subsystem for Linux)&lt;/strong>. En el &lt;a href="https://cmas.dev/posts/2022-06-22-java-with-wsl-part-1/">artículo anterior&lt;/a> hemos visto como preparar &lt;strong>Visual Studio Code&lt;/strong> para &lt;strong>Java&lt;/strong> sobre &lt;strong>WSL (Windows Subsystem for Linux)&lt;/strong>.&lt;/p>
+&lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 25151&lt;/strong>&lt;/em>&lt;/p>
+&lt;p>Vamos a ponernos un poco creativos ahora y veremos cómo crear una aplicación web con Java. PAra ellos debemos utilizar el proyecto &lt;a href="https://maven.apache.org/">&lt;strong>Apache Maven&lt;/strong>&lt;/a> y lo utilizaremos desde &lt;strong>Visual Studio Code&lt;/strong> sobre la plataforma &lt;strong>WSL&lt;/strong>.&lt;/p>
+&lt;h2 id="instalar-apache-maven">Instalar Apache Maven&lt;/h2>
+&lt;ol>
+&lt;li>Descargar el instalador:&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">wget https://dlcdn.apache.org/maven/maven-3/3.9.0/binaries/apache-maven-3.9.0-bin.zip -P /tmp
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="2">
+&lt;li>Extraer los archivos a &lt;strong>/opt/gradle&lt;/strong>:&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">sudo unzip -d /opt/apache-maven /tmp/apache-maven-3.9.0-bin.zip
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="3">
+&lt;li>Configurar la variable de entorno creando &lt;strong>maven.sh&lt;/strong>&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">sudo vi /etc/profile.d/maven.sh
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="4">
+&lt;li>Agregamos lo siguiente a ese archivo:&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"># /etc/profile.d/maven.sh
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">export MAVEN_HOME=/opt/apache-maven/apache-maven-3.9.0/
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">export PATH=${MAVEN_HOME}/bin:${PATH}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="5">
+&lt;li>Convertir el archivo en ejecutable:&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">sudo chmod +x /etc/profile.d/maven.sh
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="6">
+&lt;li>Cargamos la variable de entorno&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">source /etc/profile.d/maven.sh
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="7">
+&lt;li>Verificamos que todo esté bien:&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">mvn -v
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://cmas.dev/img/posts/2022/06/29/1.png" alt="">&lt;/p>
+&lt;h2 id="crear-un-proyecto-java-spring-boot">Crear un proyecto Java Spring Boot&lt;/h2>
+&lt;p>No tenemos una plantilla como tal en Visual Studio Code, no es un IDE potente como otros que existen en el mercado para Java.&lt;/p>
+&lt;p>Entonces procedemos con los siguientes pasos:&lt;/p>
+&lt;ol>
+&lt;li>Clonamos el repositorio de GitHub &lt;a href="https://github.com/spring-guides/gs-spring-boot.git">https://github.com/spring-guides/gs-spring-boot.git&lt;/a>
+&lt;img src="https://cmas.dev/img/posts/2022/06/29/2.png" alt="">&lt;/li>
+&lt;li>Ejecutamos la applicación y veremos el texto predeterminado:
+&lt;img src="https://cmas.dev/img/posts/2022/06/29/3.png" alt="">&lt;/li>
+&lt;/ol>
+&lt;p>Con todo esto tenemos una aplicación Web desarrollada en &lt;strong>Java&lt;/strong> con el servidor corriendo en &lt;strong>Ubuntu&lt;/strong> gracias a &lt;strong>WSL&lt;/strong> sin salis de nuestro sistema operativo &lt;strong>Windows&lt;/strong>.&lt;/p>
+&lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Java con WSL parte 1</title><link>https://cmas.dev/posts/2022-06-22-java-with-wsl-part-1/</link><pubDate>Wed, 22 Jun 2022 18:19:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-06-22-java-with-wsl-part-1/</guid><description>&lt;p>En este artículo mostraré cómo instalar y preparar el entorno para el desarrollo de &lt;strong>Java&lt;/strong> sobre &lt;strong>Windows Subsystem for Linux (WSL)&lt;/strong>.&lt;/p>
+&lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 25145&lt;/strong>&lt;/em>&lt;/p>
+&lt;p>Personalmente no soy desarrollador Java, pero desde que lo estudié (obligado) en la Universidad siempre le seguí el rastro. El lenguaje, la plataforma en general, para mi gusto es lento y a veces frustrante. Pero esa es una opinión muy particular.&lt;/p>
+&lt;p>El foco aquí es ver como instalar todo el paquete y sacar una pequeña web. Según la encuesta anual de StackOverflow Java se posiciona entre uno de los primeros lenguajes. &lt;a href="https://survey.stackoverflow.co/2022/#section-most-popular-technologies-programming-scripting-and-markup-languages">Aquí&lt;/a> se encuentra la encuesta para quien esté interesado.&lt;/p>
+&lt;h2 id="instalar-java-desde-visual-studio-code-en-wsl">Instalar Java desde Visual Studio Code en WSL&lt;/h2>
+&lt;p>Existe el proceso manual (para las personas que quieren isntalarlo asegurando todos los pasos). Cómo sólo estoy investigando (y publicando la investigación) iremos por el camino más corto.&lt;/p>
+&lt;p>Para ello, haremos los siguientes pasos:&lt;/p>
+&lt;ol>
+&lt;li>En &lt;strong>WSL:Ubuntu&lt;/strong>, ingresaremos el comando:&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">code
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://cmas.dev/img/posts/2022/06/22/1.png" alt="">&lt;br>
+2. En Visual Studio Code (WSL) procedemos a instalar los objetos necesarios (esto debido a que toda la instalación estará en Ubuntu):
+&lt;img src="https://cmas.dev/img/posts/2022/06/22/2.png" alt="">&lt;br>
+3. Veamos que versión de Java tenemos&amp;hellip;
+&lt;img src="https://cmas.dev/img/posts/2022/06/22/3.png" alt="">&lt;br>
+4. Debemos instalar el &lt;strong>JVM (Java Virtual Machine)&lt;/strong> para que funcione:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">sudo apt install default-jdk
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://cmas.dev/img/posts/2022/06/22/4.png" alt="">&lt;br>
+5. Establecemos el &lt;strong>Java Home&lt;/strong>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">sudo vi ~/.bashrc
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="6">
+&lt;li>Verificamos la versión de &lt;strong>Java&lt;/strong>
+&lt;img src="https://cmas.dev/img/posts/2022/06/22/5.png" alt="">&lt;/li>
+&lt;/ol>
+&lt;h2 id="instalar-gradle-para-los-proyectos-java">Instalar Gradle para los proyectos Java&lt;/h2>
+&lt;ol>
+&lt;li>Descargar Gradle a una carpeta temporal:&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">wget https://services.gradle.org/distributions/gradle-7.3.3-bin.zip -P /tmp
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="2">
+&lt;li>Extraer los archivos a &lt;strong>/opt/gradle&lt;/strong>:&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">sudo apt install unzip
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo unzip -d /opt/gradle /tmp/gradle-*.zip
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="3">
+&lt;li>Verificar los archivos:&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">ls /opt/gradle/gradle-7.3.3/
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="4">
+&lt;li>Configurar la variable de entorno creando &lt;strong>gradle.sh&lt;/strong>&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">sudo vi /etc/profile.d/gradle.sh
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="5">
+&lt;li>Agregamos lo siguiente a ese archivo:&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"># /etc/profile.d/gradle.sh
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">export GRADLE_HOME=/opt/gradle/gradle-7.3.3
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">export PATH=${GRADLE_HOME}/bin:${PATH}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="6">
+&lt;li>Convertir el archivo en ejecutable:&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">sudo chmod +x /etc/profile.d/gradle.sh
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="7">
+&lt;li>Cargamos la variable de entorno&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">source /etc/profile.d/gradle.sh
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="8">
+&lt;li>Verificamos que todo esté bien:&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">gradle -v
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://cmas.dev/img/posts/2022/06/22/6.png" alt="">&lt;br>
+9. Instalar la extensión &lt;strong>Gradle for Java&lt;/strong>
+&lt;img src="https://cmas.dev/img/posts/2022/06/22/7.png" alt="">&lt;/p>
+&lt;h2 id="crear-un-proyecto-java">Crear un proyecto Java&lt;/h2>
+&lt;ol>
+&lt;li>Crear el proyecto Java:
+&lt;img src="https://cmas.dev/img/posts/2022/06/22/8.png" alt="">&lt;/li>
+&lt;li>Marcamos la opción de &amp;ldquo;No build tools&amp;rdquo;:
+&lt;img src="https://cmas.dev/img/posts/2022/06/22/9.png" alt="">&lt;/li>
+&lt;li>Seguimos las instrucciones en pantalla para la creación del proyecto.&lt;/li>
+&lt;li>Modificamos el archivo &lt;strong>App.java&lt;/strong>:&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">public class App {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> public static void main(String[] args) throws Exception {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> System.out.println(&amp;#34;Hello, World from cmasdev!&amp;#34;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="5">
+&lt;li>Ejecutamos la aplicación con &lt;em>F5&lt;/em>:
+&lt;img src="https://cmas.dev/img/posts/2022/06/22/10.png" alt="">&lt;/li>
+&lt;/ol>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>ASP.NET Core en Ubuntu</title><link>https://cmas.dev/posts/2022-06-15-aspnet-core-on-ubuntu/</link><pubDate>Wed, 15 Jun 2022 12:08:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-06-15-aspnet-core-on-ubuntu/</guid><description>&lt;p>En este artículo mostraré cómo ejecutar una aplicación &lt;strong>ASP.NET Core&lt;/strong> sobre &lt;strong>Windows Subsystem for Linux&lt;/strong>, es decir, alojar un servidor web en Ubuntu para ejecutar nuestra aplicación web.&lt;/p>
 &lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 25140&lt;/strong>&lt;/em>&lt;/p>
 &lt;p>Se habla mucho respecto a que .NET Core puede ejecutar aplicaciones nativamente en Linux (Ubuntu, en este caso) y es hora de hacer la prueba. En este caso, alojaremos la aplicación en un &amp;ldquo;servidor&amp;rdquo; Ubuntu para verificar su funcionamiento.&lt;/p>
