@@ -33,7 +33,9 @@ Dejo a cargo de los lectores la investigación de los temas relacionados a linea
 * Tiene un sistema de componentes y estilos que ayuda a crear interfaces consistentes y reutilizables.
 
 ### ¿Qué tiene que ver Figma con Windows App SDK?
-Con **Figma** se pueden crear diseños de interfaces para aplicaciones de escritorio de **Windows** usando el **Windows App SDK**, un conjunto de componentes y herramientas que te permiten usar las APIs y funcionalidades de **Windows 11** y versiones anteriores. Se puede descargar la aplicación de escritorio de **Figma** para **Windows** desde su [sitio web](https://www.figma.com/download/desktop/win) y usarla para diseñar, prototipar y colaborar en los proyectos. También se puede usar la plataforma de desarrolladores de **Figma** para crear plugins o integraciones con otras herramientas.
+Con **Figma** se pueden crear diseños de interfaces para aplicaciones de escritorio de **Windows** usando el **Windows App SDK**, un conjunto de componentes y herramientas que te permiten usar las APIs y funcionalidades de **Windows 11** y versiones anteriores. 
+
+Se puede descargar la aplicación de escritorio de **Figma** para **Windows** desde su [sitio web](https://www.figma.com/download/desktop/win) y usarla para diseñar, prototipar y colaborar en los proyectos. También se puede usar la plataforma de desarrolladores de **Figma** para crear plugins o integraciones con otras herramientas.
 
 ## Empezar a trabajar con Figma y Windows Fluent Design System
 Y nada, rápidamente debemos empezar en [esta página](https://learn.microsoft.com/es-es/windows/apps/design/downloads/) y ¡manos a la obra!

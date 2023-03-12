@@ -60,10 +60,21 @@ Las pestañas y los paneles son formas de organizar las diferentes shells o apli
 
 Aquí vemos detalles de lo que explicamos más arriba:
 1. Apertura de pestañas del mismo perfil o de otro perfil necesario (Todo desde el mimso terminal):
-![](/img/posts/2022/10/26/3.mp4)
+{{< raw >}}    
+<video width=100% controls autoplay>
+<source src="/img/posts/2022/10/26/3.mp4" type="video/mp4">
+Your browser does not support the video tag.  
+</video> 
+{{< /raw >}}
+![]()
 
 2. Apertura de paneles (en la misma pestaña) utilizando las teclas **Alt**+ hacer clic en el icono "+":
-![](/img/posts/2022/10/26/4.mp4)
+{{< raw >}}    
+<video width=100% controls autoplay>
+    <source src="/img/posts/2022/10/26/4.mp4" type="video/mp4">
+    Your browser does not support the video tag.  
+</video>  
+{{< /raw >}}
 
 ### Paleta de comandos
 La paleta de comandos permite visualizar y ejecutar las acciones que se puede hacer dentro de **Windows Terminal**. Se puede invocar la paleta de comandos con **Ctrl** + **Shift** + **P** o personalizar el atajo de teclado. También  se puede usar el modo de línea de comandos para escribir un comando ***wt*** directamente en la paleta. Además, se pueden agregar iconos, comandos anidados, comandos iterables y ocultar los comandos que no se quiera ver.
