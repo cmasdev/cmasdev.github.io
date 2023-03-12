@@ -1,4 +1,23 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Blog de Christian Amado</title><link>https://cmas.dev/</link><description>Recent content on Blog de Christian Amado</description><generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>biz@cmas.dev (Christian Amado)</managingEditor><webMaster>biz@cmas.dev (Christian Amado)</webMaster><lastBuildDate>Wed, 02 Nov 2022 23:42:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/index.xml" rel="self" type="application/rss+xml"/><item><title>Usando MAUI con Windows App SDK</title><link>https://cmas.dev/posts/2022-11-02-windows-app-using-maui/</link><pubDate>Wed, 02 Nov 2022 23:42:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-11-02-windows-app-using-maui/</guid><description>&lt;p>En este artículo veremos cómo &lt;strong>.NET MAUI&lt;/strong> interactúa con &lt;strong>Windows 11&lt;/strong> sin necesidad de funciones extras ni código para llegar a ese resultado.&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Blog de Christian Amado</title><link>https://cmas.dev/</link><description>Recent content on Blog de Christian Amado</description><generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>biz@cmas.dev (Christian Amado)</managingEditor><webMaster>biz@cmas.dev (Christian Amado)</webMaster><lastBuildDate>Wed, 07 Dec 2022 21:12:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/index.xml" rel="self" type="application/rss+xml"/><item><title>Figma y Windows Fluent Design System</title><link>https://cmas.dev/posts/2022-12-07-figma-and-windows-fluent-design-system/</link><pubDate>Wed, 07 Dec 2022 21:12:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-12-07-figma-and-windows-fluent-design-system/</guid><description>&lt;p>En este corto artículo trataremos de entender las directrices de diseño y analizaremos código de interfaz de usuario para crear experiencias de aplicaciones de &lt;strong>Windows&lt;/strong>.&lt;/p>
+&lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 25252&lt;/strong>&lt;/em>&lt;/p>
+&lt;p>En el título hay dos temas, uno de ellos lo hemos visto &lt;a href="https://cmas.dev/posts/2022-04-25-introduction-to-windows-fluent-system/">aquí&lt;/a> para tratar de entenderlo. Ahora que eso quedó claro, nos queda enteder que es &lt;strong>&lt;a href="https://www.figma.com/">Figma&lt;/a>&lt;/strong>.&lt;/p>
+&lt;p>Como he escrito varios artículos del tipo &amp;ldquo;HowTo&amp;rdquo; debemos tener en claro los lineamientos de diseño para la plataforma Windows, pues el próximo año nos enfocaremos en &lt;strong>WinUI&lt;/strong>&lt;/p>
+&lt;p>Dejo a cargo de los lectores la investigación de los temas relacionados a lineamientos de diseño (es bastante largo y completo por lo que no entraría en un solo artículo). A decir verdad, no me llevo bien con diseño de aplicaciones (para eso están los diseñadores). Puedes leer todo &lt;a href="https://learn.microsoft.com/es-es/windows/apps/design/">aquí&lt;/a>&lt;/p>
+&lt;h2 id="qué-es-figma">¿Qué es Figma?&lt;/h2>
+&lt;p>&lt;strong>Figma&lt;/strong> es una herramienta de diseño de interfaces que permite la colaboración en tiempo real entre equipos. Se pueden crear sitios web, gráficos y más.&lt;/p>
+&lt;p>&lt;strong>Figma&lt;/strong> tiene muchas características que la hacen una herramienta de diseño muy útil y versátil. Algunas de ellas son:&lt;/p>
+&lt;ul>
+&lt;li>Es una aplicación web, lo que significa que se puede acceder a ella desde cualquier navegador y dispositivo.&lt;/li>
+&lt;li>Permite la creación de prototipos interactivos y realistas, que se puede compartir y probar con tu equipo o clientes.&lt;/li>
+&lt;li>Facilita la colaboración entre diseñadores y desarrolladores, ya que se puede exportar el código CSS, SVG o React de tus diseños.&lt;/li>
+&lt;li>Tiene un sistema de componentes y estilos que ayuda a crear interfaces consistentes y reutilizables.&lt;/li>
+&lt;/ul>
+&lt;h3 id="qué-tiene-que-ver-figma-con-windows-app-sdk">¿Qué tiene que ver Figma con Windows App SDK?&lt;/h3>
+&lt;p>Con &lt;strong>Figma&lt;/strong> se pueden crear diseños de interfaces para aplicaciones de escritorio de &lt;strong>Windows&lt;/strong> usando el &lt;strong>Windows App SDK&lt;/strong>, un conjunto de componentes y herramientas que te permiten usar las APIs y funcionalidades de &lt;strong>Windows 11&lt;/strong> y versiones anteriores. Se puede descargar la aplicación de escritorio de &lt;strong>Figma&lt;/strong> para &lt;strong>Windows&lt;/strong> desde su &lt;a href="https://www.figma.com/download/desktop/win">sitio web&lt;/a> y usarla para diseñar, prototipar y colaborar en los proyectos. También se puede usar la plataforma de desarrolladores de &lt;strong>Figma&lt;/strong> para crear plugins o integraciones con otras herramientas.&lt;/p>
+&lt;h2 id="empezar-a-trabajar-con-figma-y-windows-fluent-design-system">Empezar a trabajar con Figma y Windows Fluent Design System&lt;/h2>
+&lt;p>Y nada, rápidamente debemos empezar en &lt;a href="https://learn.microsoft.com/es-es/windows/apps/design/downloads/">esta página&lt;/a> y ¡manos a la obra!&lt;/p>
+&lt;p>Deberías instalarlo desde Microsoft Store para probar.&lt;/p>
+&lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Usando MAUI con Windows App SDK</title><link>https://cmas.dev/posts/2022-11-02-windows-app-using-maui/</link><pubDate>Wed, 02 Nov 2022 23:42:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-11-02-windows-app-using-maui/</guid><description>&lt;p>En este artículo veremos cómo &lt;strong>.NET MAUI&lt;/strong> interactúa con &lt;strong>Windows 11&lt;/strong> sin necesidad de funciones extras ni código para llegar a ese resultado.&lt;/p>
 &lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 25236&lt;/strong>&lt;/em>&lt;/p>
 &lt;p>Hemos visto en varios artículos anteriores, detalles sobre &lt;strong>.NET MAUI&lt;/strong>, pero aquí me surge la necesidad de saber qué pasa en el caso de Windows cuando, por ejemplo, necesitamos acceder al sistema de archivos. ¿Qué pasa? Comparando con &lt;strong>Android&lt;/strong> ¿Cómo se comporta? Seguí leyendo y veamos.&lt;/p>
 &lt;h2 id="abrir-imagen-en-windows-11">Abrir imagen en Windows 11&lt;/h2>
@@ -63,6 +82,73 @@
 &lt;p>&lt;img src="https://cmas.dev/img/posts/2022/11/02/5.png" alt="">&lt;/p>
 &lt;p>&lt;img src="https://cmas.dev/img/posts/2022/11/02/6.png" alt="">&lt;/p>
 &lt;p>Con una única línea de código pudimos realizar esta tarea sencilla sin necesidad de solicitar permisos ni nada desde la aplicación. esa es una de las ventajas que me gusta de &lt;strong>.NET MAUI&lt;/strong>&lt;/p>
+&lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Windows Terminal en Windows 11</title><link>https://cmas.dev/posts/2022-10-26-windows-terminal-in-windows-11/</link><pubDate>Wed, 26 Oct 2022 13:01:14 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-10-26-windows-terminal-in-windows-11/</guid><description>&lt;p>En este artículo explicaré detalles sobre &lt;strong>Windows Terminal&lt;/strong> (que forma parte del sistema operativo &lt;strong>Windows 11&lt;/strong>).&lt;/p>
+&lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 25227&lt;/strong>&lt;/em>&lt;/p>
+&lt;p>&lt;strong>Windows Terminal&lt;/strong> es una nueva aplicación de terminal moderna, rápida, eficiente y productiva para usuarios de herramientas y shells de línea de comandos como el &lt;strong>símbolo del sistema&lt;/strong>, &lt;strong>PowerShell&lt;/strong> y &lt;strong>WSL&lt;/strong>. Tiene múltiples pestañas, soporte para caracteres &lt;em>Unicode&lt;/em> y &lt;em>UTF-8&lt;/em>, un motor de renderizado de texto acelerado por &lt;em>GPU&lt;/em> y temas personalizados.&lt;/p>
+&lt;h2 id="beneficios">Beneficios&lt;/h2>
+&lt;p>&lt;strong>Windows Terminal&lt;/strong> tiene muchos beneficios para los usuarios de &lt;strong>línea de comandos&lt;/strong> y &lt;strong>WSL&lt;/strong>. Algunos de ellos son:&lt;/p>
+&lt;ul>
+&lt;li>Modo de pantalla completa.&lt;/li>
+&lt;li>Interfaz con pestañas para abrir múltiples instancias de las herramientas.&lt;/li>
+&lt;li>Teclas de acceso rápido para abrir nuevas pestañas.&lt;/li>
+&lt;li>Zoom con el ratón.&lt;/li>
+&lt;li>Soporte para caracteres &lt;em>Unicode&lt;/em> y &lt;em>UTF-8&lt;/em>, como emoji y caracteres de diferentes idiomas.&lt;/li>
+&lt;li>Motor de renderizado de texto acelerado por &lt;em>GPU&lt;/em>.&lt;/li>
+&lt;li>Temas y estilos personalizados.&lt;/li>
+&lt;li>Soporte para stylus.&lt;/li>
+&lt;li>Acceso a sistemas remotos o ejecución de scripts en ellos.&lt;/li>
+&lt;/ul>
+&lt;p>&lt;strong>Windows Terminal&lt;/strong> también tiene algunas desventajas que debes tener en cuenta antes de instalarlo. Algunas de ellas son:&lt;/p>
+&lt;ul>
+&lt;li>Limitaciones en la reproducción de vídeo HD a través del terminal.&lt;/li>
+&lt;li>Falta de soporte para dispositivos USB como cámaras y almacenamiento externo.&lt;/li>
+&lt;li>No es ideal para requerimientos gráficos pesados.&lt;/li>
+&lt;/ul>
+&lt;h2 id="cómo-instalarlo">¿Cómo instalarlo?&lt;/h2>
+&lt;p>A partir de windows 11 22H2 no es necesario instalarlo, pues ya forma parte del sistema operativo. Aquí es donde se puede ver eso:
+&lt;img src="https://cmas.dev/img/posts/2022/10/26/1.png" alt="">&lt;/p>
+&lt;p>Pero, para versiones anteriores a la mencionada debemos seguir los siguientes pasos:&lt;/p>
+&lt;ul>
+&lt;li>Abrir *&lt;em>Microsoft Store&lt;/em> y buscar &lt;strong>Windows Terminal&lt;/strong>.&lt;/li>
+&lt;li>Seleccionar &lt;strong>Obtener&lt;/strong> o &lt;strong>Instalar&lt;/strong> para descargar e instalar la aplicación.&lt;/li>
+&lt;li>Una vez instalada, se puede abrir &lt;strong>Windows Terminal&lt;/strong> desde el menú Inicio o la barra de tareas.&lt;/li>
+&lt;li>También se puede configurar la terminal predeterminada en &lt;strong>Configuración&lt;/strong> &amp;gt; &lt;strong>Privacidad y seguridad&lt;/strong> &amp;gt; &lt;strong>Para desarrolladores&lt;/strong> &amp;gt; &lt;strong>Terminal&lt;/strong>.&lt;/li>
+&lt;/ul>
+&lt;h2 id="funciones">Funciones&lt;/h2>
+&lt;h3 id="perfiles">Perfiles&lt;/h3>
+&lt;p>Los perfiles en &lt;strong>Windows Terminal&lt;/strong> son configuraciones que determinan la apariencia y el comportamiento de cada shell o aplicación que se ejecuta en el terminal. Se pueden personalizar los perfiles para cambiar el color, la fuente, el icono y otras opciones de cada shell. También se pueden ocultar o deshabilitar los perfiles que se no quieran ver en el menú desplegable del terminal. Además, puedes agregar perfiles de terceros como &lt;strong>Git Bash&lt;/strong> o &lt;strong>Azure Cloud Shell&lt;/strong> (como tengo instalados los compnentede de desarrollo Azure de Visual Studio viene activado de manera predeterminada).&lt;/p>
+&lt;p>En mi máquina se ve así:
+&lt;img src="https://cmas.dev/img/posts/2022/10/26/2.png" alt="">&lt;/p>
+&lt;h3 id="pestañas-y-paneles">Pestañas y paneles&lt;/h3>
+&lt;p>Las pestañas y los paneles son formas de organizar las diferentes shells o aplicaciones que se ejecutan en el terminal. Se pueden abrir varias pestañas con diferentes perfiles y cambiar entre ellas con &lt;strong>Ctrl&lt;/strong> + &lt;strong>Tab&lt;/strong> o haciendo clic en el nombre de la pestaña. También se puede dividir una pestaña en varios paneles para ver varias shells al mismo tiempo. Se pueden crear, mover, cambiar el tamaño y cerrar los paneles con el teclado o el ratón.&lt;/p>
+&lt;p>Aquí vemos detalles de lo que explicamos más arriba:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>Apertura de pestañas del mismo perfil o de otro perfil necesario (Todo desde el mimso terminal):
+&lt;img src="https://cmas.dev/img/posts/2022/10/26/3.mp4" alt="">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Apertura de paneles (en la misma pestaña) utilizando las teclas &lt;strong>Alt&lt;/strong>+ hacer clic en el icono &amp;ldquo;+&amp;rdquo;:
+&lt;img src="https://cmas.dev/img/posts/2022/10/26/4.mp4" alt="">&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h3 id="paleta-de-comandos">Paleta de comandos&lt;/h3>
+&lt;p>La paleta de comandos permite visualizar y ejecutar las acciones que se puede hacer dentro de &lt;strong>Windows Terminal&lt;/strong>. Se puede invocar la paleta de comandos con &lt;strong>Ctrl&lt;/strong> + &lt;strong>Shift&lt;/strong> + &lt;strong>P&lt;/strong> o personalizar el atajo de teclado. También se puede usar el modo de línea de comandos para escribir un comando &lt;em>&lt;strong>wt&lt;/strong>&lt;/em> directamente en la paleta. Además, se pueden agregar iconos, comandos anidados, comandos iterables y ocultar los comandos que no se quiera ver.&lt;/p>
+&lt;p>Una vez presionadas las teclas mencionadas arriba veremos lo siguiente:
+&lt;img src="https://cmas.dev/img/posts/2022/10/26/5.png" alt="">&lt;/p>
+&lt;h3 id="personalización">Personalización&lt;/h3>
+&lt;p>&lt;strong>Windows Terminal&lt;/strong> permite personalizar muchos aspectos de su apariencia y funcionamiento. Se puede acceder a la configuración de &lt;strong>Windows Terminal&lt;/strong> desde el menú desplegable o con &lt;strong>Ctrl&lt;/strong> + &lt;strong>,&lt;/strong>. Algunas de las opciones de personalización que se pueden encontrar son:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>Idioma&lt;/strong>: se puede cambiar el idioma preferido de la aplicación.&lt;/li>
+&lt;li>&lt;strong>Tema&lt;/strong>: se puede elegir entre un tema claro, oscuro o basado en el sistema.&lt;/li>
+&lt;li>&lt;strong>Posición de las pestañas&lt;/strong>: se puede decidir si las nuevas pestañas se abren al principio o al final.&lt;/li>
+&lt;li>&lt;strong>Barra de título&lt;/strong>: se puede ocultar la barra de título para ahorrar espacio.&lt;/li>
+&lt;li>&lt;strong>Acrílico&lt;/strong>: se puede activar o desactivar el efecto acrílico en la fila de pestañas.&lt;/li>
+&lt;li>&lt;strong>Título de la aplicación&lt;/strong>: se puede usar el título del terminal activo como título de la aplicación.&lt;/li>
+&lt;li>&lt;strong>Siempre visible&lt;/strong>: se puede hacer que Windows Terminal permanezca siempre encima de otras ventanas.&lt;/li>
+&lt;li>&lt;strong>Modo de ancho de las pestañas&lt;/strong>: se puede ajustar el ancho de las pestañas según tu preferencia.&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/2022/10/26/6.png" alt="">&lt;/p>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Visual Studio Code Server WSL</title><link>https://cmas.dev/posts/2022-10-19-visual-studio-code-server-wsl/</link><pubDate>Wed, 19 Oct 2022 22:35:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-10-19-visual-studio-code-server-wsl/</guid><description>&lt;p>En este artículo corto, pero preciso, mostraré cómo utilizar &lt;strong>Visual Studio Code&lt;/strong> como servidor de &lt;strong>WSL&lt;/strong> para facilitarnos la vida en ciertas pruebas que tenemos como desarrolladores.&lt;/p>
 &lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 25227&lt;/strong>&lt;/em>&lt;/p>
 &lt;p>&lt;strong>Visual Studio Code Server&lt;/strong> es un servicio que se puede ejecutar en una máquina de desarrollo remota, como la PC de escritorio o una máquina virtual (VM). Permite conectar de forma segura a esa máquina remota desde cualquier lugar a través de un cliente local de &lt;strong>VS Code&lt;/strong>, sin la necesidad de &lt;strong>SSH&lt;/strong>. También se puede acceder al servidor a través del navegador usando &lt;strong>VS Code&lt;/strong> para la Web (también conocido como &lt;strong>vscode.dev&lt;/strong>).&lt;/p>
