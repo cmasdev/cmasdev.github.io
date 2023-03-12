@@ -1,4 +1,40 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Visual Studio Code on Blog de Christian Amado</title><link>https://cmas.dev/tags/visual-studio-code/</link><description>Recent content in Visual Studio Code on Blog de Christian Amado</description><generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>biz@cmas.dev (Christian Amado)</managingEditor><webMaster>biz@cmas.dev (Christian Amado)</webMaster><lastBuildDate>Sun, 29 Mar 2020 16:03:22 -0400</lastBuildDate><atom:link href="https://cmas.dev/tags/visual-studio-code/index.xml" rel="self" type="application/rss+xml"/><item><title>BCDEV Tips: AL Extension Pack para Visual Studio Code</title><link>https://cmas.dev/posts/2020-03-29-bcdev-tips-al-extension-pack-para-visual-studio-code/</link><pubDate>Sun, 29 Mar 2020 16:03:22 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2020-03-29-bcdev-tips-al-extension-pack-para-visual-studio-code/</guid><description>&lt;p>El desarrollo de Dynmaics 365 Business Central sigue avanzando, las herramientas aún están en fase de desarrollo y es por eso que depende en gran medida de la comunidad de desarrolladores.&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Visual Studio Code on Blog de Christian Amado</title><link>https://cmas.dev/tags/visual-studio-code/</link><description>Recent content in Visual Studio Code on Blog de Christian Amado</description><generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>biz@cmas.dev (Christian Amado)</managingEditor><webMaster>biz@cmas.dev (Christian Amado)</webMaster><lastBuildDate>Wed, 19 Oct 2022 22:35:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/tags/visual-studio-code/index.xml" rel="self" type="application/rss+xml"/><item><title>Visual Studio Code Server WSL</title><link>https://cmas.dev/posts/2022-10-19-visual-studio-code-server-wsl/</link><pubDate>Wed, 19 Oct 2022 22:35:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-10-19-visual-studio-code-server-wsl/</guid><description>&lt;p>En este artículo corto, pero preciso, mostraré cómo utilizar &lt;strong>Visual Studio Code&lt;/strong> como servidor de &lt;strong>WSL&lt;/strong> para facilitarnos la vida en ciertas pruebas que tenemos como desarrolladores.&lt;/p>
+&lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 25227&lt;/strong>&lt;/em>&lt;/p>
+&lt;p>&lt;strong>Visual Studio Code Server&lt;/strong> es un servicio que se puede ejecutar en una máquina de desarrollo remota, como la PC de escritorio o una máquina virtual (VM). Permite conectar de forma segura a esa máquina remota desde cualquier lugar a través de un cliente local de &lt;strong>VS Code&lt;/strong>, sin la necesidad de &lt;strong>SSH&lt;/strong>. También se puede acceder al servidor a través del navegador usando &lt;strong>VS Code&lt;/strong> para la Web (también conocido como &lt;strong>vscode.dev&lt;/strong>).&lt;/p>
+&lt;p>La arquitectura del servicio lo expone Microsoft en su web:
+&lt;img src="https://code.visualstudio.com/assets/docs/remote/vscode-server/server-arch-latest.png" alt="">&lt;/p>
+&lt;h2 id="configurar-acceso">Configurar acceso&lt;/h2>
+&lt;p>Para que esto funcione se debe enlazar con &lt;strong>GitHub&lt;/strong> para que nos cree el &lt;strong>CodeSpace&lt;/strong> necesario.&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>Se accede al entorno de &lt;strong>WSL:Ubuntu&lt;/strong> para hacer las gestiones:
+&lt;img src="https://cmas.dev/img/posts/2022/10/19/1.png" alt="">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Una vez allí se verifica que el Visual Studio Code corresponda a &lt;strong>Ubuntu&lt;/strong>:&lt;br>
+&lt;img src="https://cmas.dev/img/posts/2022/10/19/2.png" alt="">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Accedemos al menú contextual de &amp;ldquo;Turn on Remote Tunnel Access&amp;hellip;&amp;rdquo;:
+&lt;img src="https://cmas.dev/img/posts/2022/10/19/3.png" alt="">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Seguimos las instrucciones en pantalla para Iniciar sesión en &lt;strong>GitHub&lt;/strong>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Habilitar el Tunnel Remoto:
+&lt;img src="https://cmas.dev/img/posts/2022/10/19/4.png" alt="">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Copiar el enlace que se muestra en la ventana emergente:
+&lt;img src="https://cmas.dev/img/posts/2022/10/19/5.png" alt="">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Acceder al navegador de prefrencia y veremos nuestro Visual Studio remoto (que mantiene el enlace con nuestro Visual Studio WSL local):
+&lt;img src="https://cmas.dev/img/posts/2022/10/19/6.png" alt="">&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>BCDEV Tips: AL Extension Pack para Visual Studio Code</title><link>https://cmas.dev/posts/2020-03-29-bcdev-tips-al-extension-pack-para-visual-studio-code/</link><pubDate>Sun, 29 Mar 2020 16:03:22 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2020-03-29-bcdev-tips-al-extension-pack-para-visual-studio-code/</guid><description>&lt;p>El desarrollo de Dynmaics 365 Business Central sigue avanzando, las herramientas aún están en fase de desarrollo y es por eso que depende en gran medida de la comunidad de desarrolladores.&lt;/p>
 &lt;p>En esta ocasión les traigo una extensión para Visual Studio Code que me resulta demasiado útil. Se llama AL Extension Pack y básicamente es un conjunto de extensiones que se relacionan entre sí para ayudar al desarrollador AL a ser más productivo y rápido. Está más orientado a &lt;strong>Cloud&lt;/strong> que a &lt;strong>On Premise&lt;/strong> pero es demasiado útil.&lt;/p>
 &lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/1-8.png" alt="">&lt;/p>
 &lt;p>De esa manera mi Visual Studio Code se llenó de extensiones muy útil para el desarrollo sobre Dynamics 365 Business Central.&lt;/p>

@@ -1,4 +1,40 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>WSL on Blog de Christian Amado</title><link>https://cmas.dev/tags/wsl/</link><description>Recent content in WSL on Blog de Christian Amado</description><generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>biz@cmas.dev (Christian Amado)</managingEditor><webMaster>biz@cmas.dev (Christian Amado)</webMaster><lastBuildDate>Wed, 15 Jun 2022 12:08:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/tags/wsl/index.xml" rel="self" type="application/rss+xml"/><item><title>ASP.NET Core en Ubuntu</title><link>https://cmas.dev/posts/2022-06-15-aspnet-core-on-ubuntu/</link><pubDate>Wed, 15 Jun 2022 12:08:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-06-15-aspnet-core-on-ubuntu/</guid><description>&lt;p>En este artículo mostraré cómo ejecutar una aplicación &lt;strong>ASP.NET Core&lt;/strong> sobre &lt;strong>Windows Subsystem for Linux&lt;/strong>, es decir, alojar un servidor web en Ubuntu para ejecutar nuestra aplicación web.&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>WSL on Blog de Christian Amado</title><link>https://cmas.dev/tags/wsl/</link><description>Recent content in WSL on Blog de Christian Amado</description><generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>biz@cmas.dev (Christian Amado)</managingEditor><webMaster>biz@cmas.dev (Christian Amado)</webMaster><lastBuildDate>Wed, 19 Oct 2022 22:35:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/tags/wsl/index.xml" rel="self" type="application/rss+xml"/><item><title>Visual Studio Code Server WSL</title><link>https://cmas.dev/posts/2022-10-19-visual-studio-code-server-wsl/</link><pubDate>Wed, 19 Oct 2022 22:35:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-10-19-visual-studio-code-server-wsl/</guid><description>&lt;p>En este artículo corto, pero preciso, mostraré cómo utilizar &lt;strong>Visual Studio Code&lt;/strong> como servidor de &lt;strong>WSL&lt;/strong> para facilitarnos la vida en ciertas pruebas que tenemos como desarrolladores.&lt;/p>
+&lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 25227&lt;/strong>&lt;/em>&lt;/p>
+&lt;p>&lt;strong>Visual Studio Code Server&lt;/strong> es un servicio que se puede ejecutar en una máquina de desarrollo remota, como la PC de escritorio o una máquina virtual (VM). Permite conectar de forma segura a esa máquina remota desde cualquier lugar a través de un cliente local de &lt;strong>VS Code&lt;/strong>, sin la necesidad de &lt;strong>SSH&lt;/strong>. También se puede acceder al servidor a través del navegador usando &lt;strong>VS Code&lt;/strong> para la Web (también conocido como &lt;strong>vscode.dev&lt;/strong>).&lt;/p>
+&lt;p>La arquitectura del servicio lo expone Microsoft en su web:
+&lt;img src="https://code.visualstudio.com/assets/docs/remote/vscode-server/server-arch-latest.png" alt="">&lt;/p>
+&lt;h2 id="configurar-acceso">Configurar acceso&lt;/h2>
+&lt;p>Para que esto funcione se debe enlazar con &lt;strong>GitHub&lt;/strong> para que nos cree el &lt;strong>CodeSpace&lt;/strong> necesario.&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>Se accede al entorno de &lt;strong>WSL:Ubuntu&lt;/strong> para hacer las gestiones:
+&lt;img src="https://cmas.dev/img/posts/2022/10/19/1.png" alt="">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Una vez allí se verifica que el Visual Studio Code corresponda a &lt;strong>Ubuntu&lt;/strong>:&lt;br>
+&lt;img src="https://cmas.dev/img/posts/2022/10/19/2.png" alt="">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Accedemos al menú contextual de &amp;ldquo;Turn on Remote Tunnel Access&amp;hellip;&amp;rdquo;:
+&lt;img src="https://cmas.dev/img/posts/2022/10/19/3.png" alt="">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Seguimos las instrucciones en pantalla para Iniciar sesión en &lt;strong>GitHub&lt;/strong>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Habilitar el Tunnel Remoto:
+&lt;img src="https://cmas.dev/img/posts/2022/10/19/4.png" alt="">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Copiar el enlace que se muestra en la ventana emergente:
+&lt;img src="https://cmas.dev/img/posts/2022/10/19/5.png" alt="">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Acceder al navegador de prefrencia y veremos nuestro Visual Studio remoto (que mantiene el enlace con nuestro Visual Studio WSL local):
+&lt;img src="https://cmas.dev/img/posts/2022/10/19/6.png" alt="">&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>ASP.NET Core en Ubuntu</title><link>https://cmas.dev/posts/2022-06-15-aspnet-core-on-ubuntu/</link><pubDate>Wed, 15 Jun 2022 12:08:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-06-15-aspnet-core-on-ubuntu/</guid><description>&lt;p>En este artículo mostraré cómo ejecutar una aplicación &lt;strong>ASP.NET Core&lt;/strong> sobre &lt;strong>Windows Subsystem for Linux&lt;/strong>, es decir, alojar un servidor web en Ubuntu para ejecutar nuestra aplicación web.&lt;/p>
 &lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 25140&lt;/strong>&lt;/em>&lt;/p>
 &lt;p>Se habla mucho respecto a que .NET Core puede ejecutar aplicaciones nativamente en Linux (Ubuntu, en este caso) y es hora de hacer la prueba. En este caso, alojaremos la aplicación en un &amp;ldquo;servidor&amp;rdquo; Ubuntu para verificar su funcionamiento.&lt;/p>
 &lt;h2 id="preparar-el-proyecto">Preparar el proyecto&lt;/h2>

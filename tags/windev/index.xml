@@ -63,6 +63,42 @@
 &lt;p>&lt;img src="https://cmas.dev/img/posts/2022/11/02/5.png" alt="">&lt;/p>
 &lt;p>&lt;img src="https://cmas.dev/img/posts/2022/11/02/6.png" alt="">&lt;/p>
 &lt;p>Con una única línea de código pudimos realizar esta tarea sencilla sin necesidad de solicitar permisos ni nada desde la aplicación. esa es una de las ventajas que me gusta de &lt;strong>.NET MAUI&lt;/strong>&lt;/p>
+&lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Visual Studio Code Server WSL</title><link>https://cmas.dev/posts/2022-10-19-visual-studio-code-server-wsl/</link><pubDate>Wed, 19 Oct 2022 22:35:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-10-19-visual-studio-code-server-wsl/</guid><description>&lt;p>En este artículo corto, pero preciso, mostraré cómo utilizar &lt;strong>Visual Studio Code&lt;/strong> como servidor de &lt;strong>WSL&lt;/strong> para facilitarnos la vida en ciertas pruebas que tenemos como desarrolladores.&lt;/p>
+&lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 25227&lt;/strong>&lt;/em>&lt;/p>
+&lt;p>&lt;strong>Visual Studio Code Server&lt;/strong> es un servicio que se puede ejecutar en una máquina de desarrollo remota, como la PC de escritorio o una máquina virtual (VM). Permite conectar de forma segura a esa máquina remota desde cualquier lugar a través de un cliente local de &lt;strong>VS Code&lt;/strong>, sin la necesidad de &lt;strong>SSH&lt;/strong>. También se puede acceder al servidor a través del navegador usando &lt;strong>VS Code&lt;/strong> para la Web (también conocido como &lt;strong>vscode.dev&lt;/strong>).&lt;/p>
+&lt;p>La arquitectura del servicio lo expone Microsoft en su web:
+&lt;img src="https://code.visualstudio.com/assets/docs/remote/vscode-server/server-arch-latest.png" alt="">&lt;/p>
+&lt;h2 id="configurar-acceso">Configurar acceso&lt;/h2>
+&lt;p>Para que esto funcione se debe enlazar con &lt;strong>GitHub&lt;/strong> para que nos cree el &lt;strong>CodeSpace&lt;/strong> necesario.&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>Se accede al entorno de &lt;strong>WSL:Ubuntu&lt;/strong> para hacer las gestiones:
+&lt;img src="https://cmas.dev/img/posts/2022/10/19/1.png" alt="">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Una vez allí se verifica que el Visual Studio Code corresponda a &lt;strong>Ubuntu&lt;/strong>:&lt;br>
+&lt;img src="https://cmas.dev/img/posts/2022/10/19/2.png" alt="">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Accedemos al menú contextual de &amp;ldquo;Turn on Remote Tunnel Access&amp;hellip;&amp;rdquo;:
+&lt;img src="https://cmas.dev/img/posts/2022/10/19/3.png" alt="">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Seguimos las instrucciones en pantalla para Iniciar sesión en &lt;strong>GitHub&lt;/strong>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Habilitar el Tunnel Remoto:
+&lt;img src="https://cmas.dev/img/posts/2022/10/19/4.png" alt="">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Copiar el enlace que se muestra en la ventana emergente:
+&lt;img src="https://cmas.dev/img/posts/2022/10/19/5.png" alt="">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Acceder al navegador de prefrencia y veremos nuestro Visual Studio remoto (que mantiene el enlace con nuestro Visual Studio WSL local):
+&lt;img src="https://cmas.dev/img/posts/2022/10/19/6.png" alt="">&lt;/p>
+&lt;/li>
+&lt;/ol>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Aplicación multilingüe en MAUI</title><link>https://cmas.dev/posts/2022-10-05-multi-language-app-maui/</link><pubDate>Wed, 05 Oct 2022 17:48:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-10-05-multi-language-app-maui/</guid><description>&lt;p>En este artículo mostraré cómo crear una aplicación &lt;strong>.NET MAUI&lt;/strong> multilingüe sobre &lt;strong>Windows 11&lt;/strong> utilizando archivos de recursos.&lt;/p>
 &lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 22621&lt;/strong>&lt;/em>&lt;/p>
 &lt;p>En un &lt;a href="https://cmas.dev/posts/2022-09-21-data-binding-in-maui/">artículo anterior&lt;/a> hemos creado un proyecto donde vimos cómo utilizar la técnica de &lt;em>Data binding&lt;/em> (usaremos ese mismo proyecto).&lt;/p>
@@ -264,6 +300,113 @@
 &lt;img src="https://cmas.dev/img/posts/2022/10/05/6.png" alt="">&lt;/p>
 &lt;/li>
 &lt;/ol>
+&lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Aplicando modelo MVVM con MAUI</title><link>https://cmas.dev/posts/2022-09-28-mvvm-in-maui/</link><pubDate>Wed, 28 Sep 2022 21:06:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-09-28-mvvm-in-maui/</guid><description>&lt;p>En este artículo mostraré cómo aplicar el modelo MVVM en &lt;strong>.NET MAUI&lt;/strong> sobre &lt;strong>Windows 11&lt;/strong>.&lt;/p>
+&lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 25206&lt;/strong>&lt;/em>&lt;/p>
+&lt;p>&lt;strong>MVVM&lt;/strong> en &lt;strong>.NET MAUI&lt;/strong> para &lt;strong>Windows&lt;/strong> es un patrón que permite crear aplicaciones de escritorio con una interfaz de usuario basada en &lt;strong>XAML&lt;/strong> y una lógica de negocio separada en el modelo de vista. &lt;strong>MVVM&lt;/strong> es un patrón bien establecido en &lt;strong>.NET&lt;/strong> y hay muchos marcos que facilitan su desarrollo. Uno de ellos es el &lt;strong>MVVM Toolkit&lt;/strong>, que es parte del &lt;strong>.NET Community Toolkit&lt;/strong>.&lt;/p>
+&lt;p>Así que me puse a leer la documentación oficial (deberías hacer lo mismo) que se encuentra &lt;a href="https://learn.microsoft.com/es-es/dotnet/architecture/maui/mvvm">aquí&lt;/a>.&lt;/p>
+&lt;p>Para el ejemplo, crearemos una lista de &amp;ldquo;Alumnos&amp;rdquo; (Nombre y Apellido con fotos) que aplicaremos en un modelo &lt;em>MVVM&lt;/em>.&lt;/p>
+&lt;h2 id="creando-el-código">Creando el código&lt;/h2>
+&lt;ol>
+&lt;li>
+&lt;p>Descargamos el paquete &lt;strong>NuGet&lt;/strong> para &lt;em>MVVM&lt;/em> que se encuentra &lt;a href="https://www.nuget.org/packages/CommunityToolkit.Mvvm/">aquí&lt;/a>(obviamente es mejor hacerlo desde Visual Studio 2022) y lo instalamos.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Agregamos una nueva clase con el nombre &lt;strong>Alumno.cs&lt;/strong> y lo colocamos en la raiz del proyecto con el siguiente código:&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">namespace MauiMvvm
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> public class Alumno
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> public string FirstName { get; set; }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> public string LastName { get; set; }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> public string ImageUrl { get; set; }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="3">
+&lt;li>Agregamos una nueva clase con el nombre &lt;strong>AlumnoViewModel.cs&lt;/strong> y lo colocamos en la raiz del proyecto con el siguiente código:&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">using CommunityToolkit.Mvvm.ComponentModel;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">namespace MauiMvvm
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [INotifyPropertyChanged]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> public partial class AlumnoViewModel
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [ObservableProperty]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> public List&amp;lt;Alumno&amp;gt; alumnos = new List&amp;lt;Alumno&amp;gt;();
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> public AlumnoViewModel()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> alumnos.Add(new Alumno() { FirstName = &amp;#34;Eliseo&amp;#34;, LastName = &amp;#34;Ortega&amp;#34;, ImageUrl = &amp;#34;mugpy.jpg&amp;#34; });
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> alumnos.Add(new Alumno() { FirstName = &amp;#34;Dulce&amp;#34;, LastName = &amp;#34;Barrios&amp;#34;, ImageUrl = &amp;#34;profile.jpg&amp;#34; });
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> alumnos.Add(new Alumno() { FirstName = &amp;#34;Microsoft&amp;#34;, LastName = &amp;#34;DotNet&amp;#34;, ImageUrl = &amp;#34;dotnet_bot.png&amp;#34; });
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> alumnos.Add(new Alumno() { FirstName = &amp;#34;Christian&amp;#34;, LastName = &amp;#34;Amado&amp;#34;, ImageUrl = &amp;#34;amado.jpg&amp;#34; });
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="4">
+&lt;li>En la página principal &lt;strong>MainPage.xaml&lt;/strong> generamos una lista:&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">&amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;utf-8&amp;#34; ?&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;ContentPage xmlns=&amp;#34;http://schemas.microsoft.com/dotnet/2021/maui&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> xmlns:x=&amp;#34;http://schemas.microsoft.com/winfx/2009/xaml&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> x:Class=&amp;#34;MauiMvvm.MainPage&amp;#34;&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;ListView ItemsSource=&amp;#34;{Binding Alumnos}&amp;#34;&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;ListView.ItemTemplate&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;DataTemplate&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;ViewCell&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Grid Padding=&amp;#34;10&amp;#34;&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Grid.RowDefinitions&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;RowDefinition Height=&amp;#34;Auto&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;RowDefinition Height=&amp;#34;Auto&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/Grid.RowDefinitions&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Grid.ColumnDefinitions&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;ColumnDefinition Width=&amp;#34;Auto&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;ColumnDefinition Width=&amp;#34;Auto&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/Grid.ColumnDefinitions&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Image Grid.RowSpan=&amp;#34;2&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Source=&amp;#34;{Binding ImageUrl}&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Aspect=&amp;#34;AspectFill&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> HeightRequest=&amp;#34;60&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> WidthRequest=&amp;#34;60&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Label Grid.Column=&amp;#34;1&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Text=&amp;#34;{Binding FirstName}&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> FontAttributes=&amp;#34;Bold&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Label Grid.Row=&amp;#34;1&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Grid.Column=&amp;#34;1&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Text=&amp;#34;{Binding LastName}&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> FontAttributes=&amp;#34;Italic&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> VerticalOptions=&amp;#34;End&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/Grid&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/ViewCell&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/DataTemplate&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/ListView.ItemTemplate&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/ListView&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;/ContentPage&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="5">
+&lt;li>El código &lt;strong>C#&lt;/strong> que se encuentra en &lt;strong>MainPage.xaml.cs&lt;/strong> se encuentra aquí:&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">namespace MauiMvvm;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">public partial class MainPage : ContentPage
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> int count = 0;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> public MainPage()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> InitializeComponent();
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> BindingContext = new AlumnoViewModel();
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="6">
+&lt;li>Ejecutamos el código con &lt;em>F5&lt;/em> y&amp;hellip;
+&lt;img src="https://cmas.dev/img/posts/2022/09/28/1.png" alt="">&lt;/li>
+&lt;/ol>
+&lt;p>De esta manera implementamos el modelo MVVM de manera muy rápida y sencilla gracias al paquete &lt;strong>MVVM Toolkit&lt;/strong>.&lt;/p>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Data Binding en MAUI</title><link>https://cmas.dev/posts/2022-09-21-data-binding-in-maui/</link><pubDate>Wed, 21 Sep 2022 20:32:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-09-21-data-binding-in-maui/</guid><description>&lt;p>En este artículo mostraré cómo utilizar la técnica de &lt;em>Data Binding&lt;/em> en una aplicación &lt;strong>.NET MAUI&lt;/strong> sobre &lt;strong>Windows 11&lt;/strong>.&lt;/p>
 &lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 25206&lt;/strong>&lt;/em>&lt;/p>
 &lt;p>&lt;em>Data binding&lt;/em> en &lt;strong>XAML&lt;/strong> es un mecanismo que permite vincular propiedades de dos objetos dentro de una página, o entre objetos visuales y datos subyacentes. Se declara usando una extensión de marcado llamada &lt;strong>Binding&lt;/strong>. La declaración de &lt;em>data binding&lt;/em> consiste en una serie de cláusulas que siguen la palabra clave &lt;strong>Binding&lt;/strong> y se separan por comas (,). Las cláusulas pueden estar en cualquier orden y existen muchas combinaciones posibles.&lt;/p>
@@ -789,6 +932,25 @@ Esto debido a que la librería no está soportada y necesita la nueva versión (
 &lt;img src="https://cmas.dev/img/posts/2022/07/20/10.png" alt="">&lt;/li>
 &lt;/ol>
 &lt;p>Parece algo muy sencillo, pero me tomó algunos días poder encontrar que el problema estaba en la actualización de la librería &lt;strong>Microsoft.UI&lt;/strong>&lt;/p>
+&lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>¿Por qué elegir aplicaciones de escritorio en 2022?</title><link>https://cmas.dev/posts/2022-07-13-why-desktop-apps-in-2022/</link><pubDate>Wed, 13 Jul 2022 23:16:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-07-13-why-desktop-apps-in-2022/</guid><description>&lt;p>En este corto artículo intentaré convencerlos de por qué sigue siendo bueno y rentable crear aplicaciones de escritorio en 2022.&lt;/p>
+&lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 25158&lt;/strong>&lt;/em>&lt;/p>
+&lt;p>Pueden existir muchas razones por las cuales ya no es necesario desarrollar aplicaciones de escritorio en pleno siglo XXI, pero creo que es interesante por las siguientes razones:&lt;/p>
+&lt;ol>
+&lt;li>Las aplicaciones de escritorio interactúan mejor con el equipo del usuario.&lt;/li>
+&lt;li>El rendimiento de las aplicaciones de escritorio para cálculos complejos es mucho mayor que el de las aplicaciones web.&lt;/li>
+&lt;li>La ejecución de lógica personalizada en el lado cliente es posible, pero mucho más difícil, con una aplicación web.&lt;/li>
+&lt;/ol>
+&lt;p>Existen diferentes marcos y kits de herramientas para desarrollar aplicaciones de escritorio, dependiendo de tus preferencias y necesidades. Algunos de los más populares son:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>Electronjs&lt;/strong>: un marco que usa &lt;strong>HTML&lt;/strong>, &lt;strong>JavaScript&lt;/strong> y &lt;strong>CSS&lt;/strong> para crear aplicaciones nativas multiplataforma.&lt;/li>
+&lt;li>&lt;strong>Tauri&lt;/strong>: una opción ligera y segura que usa &lt;strong>Rust&lt;/strong> y webview para crear aplicaciones de escritorio para todos los principales sistemas operativos.&lt;/li>
+&lt;li>&lt;strong>Windows Forms&lt;/strong>, &lt;strong>WPF&lt;/strong>, &lt;strong>UWP&lt;/strong> y &lt;strong>WinUI3&lt;/strong>: las tecnologías más populares para crear aplicaciones de escritorio de &lt;em>Windows&lt;/em> con &lt;strong>C#&lt;/strong> o &lt;strong>Visual Basic&lt;/strong>.&lt;/li>
+&lt;/ul>
+&lt;h2 id="qué-es-winui-3">¿Qué es WinUI 3?&lt;/h2>
+&lt;p>&lt;strong>WinUI 3&lt;/strong> es la plataforma de interfaz de usuario nativa que se envía con el &lt;strong>Windows App SDK&lt;/strong>. &lt;strong>Windows App SDK&lt;/strong> proporciona un conjunto de &lt;strong>API&lt;/strong> y herramientas que se pueden usar para crear aplicaciones de escritorio que se ejecutan en &lt;em>Windows 10&lt;/em> o posterior. &lt;strong>WinUI 3&lt;/strong> ofrece un rendimiento óptimo, una larga duración de la batería y una interactividad receptiva.&lt;/p>
+&lt;h2 id="cuál-debería-elegir">¿Cuál debería elegir?&lt;/h2>
+&lt;p>Eso depende del público objetivo y de los requisitos de la aplicación. Si se desea crear una aplicación que funcione en diferentes sistemas operativos, se puede optar por &lt;strong>Electronjs&lt;/strong> o &lt;strong>Tauri&lt;/strong>. Si se quiere crear una aplicación que se integre con &lt;strong>Windows&lt;/strong> y se publique en &lt;strong>Microsoft Store&lt;/strong>, se puede optar por &lt;strong>UWP&lt;/strong> o &lt;strong>WinUI 3&lt;/strong>.&lt;/p>
+&lt;p>En mi caso quiero desarrollar una aplicación de escritorio para Windows 11, entonces puedo usar las mismas tecnologías que en &lt;strong>Windows 10&lt;/strong>: &lt;strong>Windows Forms&lt;/strong>, &lt;strong>WPF&lt;/strong>, &lt;strong>UWP&lt;/strong> o &lt;strong>WinUI 3&lt;/strong>. Estas aplicaciones se pueden adaptar al nuevo diseño y funcionalidades de &lt;strong>Windows 11&lt;/strong>. También se pueden usar los escritorios virtuales para organizar tus aplicaciones en diferentes contextos (como con &lt;strong>WSL&lt;/strong>).&lt;/p>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>ASP.NET Core en Ubuntu</title><link>https://cmas.dev/posts/2022-06-15-aspnet-core-on-ubuntu/</link><pubDate>Wed, 15 Jun 2022 12:08:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-06-15-aspnet-core-on-ubuntu/</guid><description>&lt;p>En este artículo mostraré cómo ejecutar una aplicación &lt;strong>ASP.NET Core&lt;/strong> sobre &lt;strong>Windows Subsystem for Linux&lt;/strong>, es decir, alojar un servidor web en Ubuntu para ejecutar nuestra aplicación web.&lt;/p>
 &lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 25140&lt;/strong>&lt;/em>&lt;/p>
 &lt;p>Se habla mucho respecto a que .NET Core puede ejecutar aplicaciones nativamente en Linux (Ubuntu, en este caso) y es hora de hacer la prueba. En este caso, alojaremos la aplicación en un &amp;ldquo;servidor&amp;rdquo; Ubuntu para verificar su funcionamiento.&lt;/p>
@@ -1102,6 +1264,69 @@ Esto debido a que la librería no está soportada y necesita la nueva versión (
 &lt;img src="https://cmas.dev/img/posts/2022/04/26/Wsl6.png" alt="">&lt;/p>
 &lt;p>Podemos verificar que distro estamos ejecutando:
 &lt;img src="https://cmas.dev/img/posts/2022/04/26/Wsl7.png" alt="">&lt;/p>
+&lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Introducción a Windows Fluent Design System</title><link>https://cmas.dev/posts/2022-04-25-introduction-to-windows-fluent-system/</link><pubDate>Mon, 25 Apr 2022 19:22:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-04-25-introduction-to-windows-fluent-system/</guid><description>&lt;p>En este artículo intentaré enteder y explicar qué es &lt;strong>Windows Fluent Design System&lt;/strong>, por qué es Open Source, para qué se utiliza y que se puede lograr con esto.&lt;/p>
+&lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 22598&lt;/strong>&lt;/em>&lt;/p>
+&lt;p>Personalmente tengo muchas dudas y consultas sobre este punto. Hace un tiempo que veo esto pero no he tenido el tiempo para detenerme a investigar. Así que hagámos juntos el recorrido. Las consultas que me surgen son:&lt;/p>
+&lt;ul>
+&lt;li>¿Qué es?&lt;/li>
+&lt;li>¿Para qué se utiliza?&lt;/li>
+&lt;li>¿Por qué Microsoft apostó a este proyecto &lt;strong>Open Source&lt;/strong>?&lt;/li>
+&lt;li>¿Qué beneficios tengo como desarrollador &lt;em>Windows&lt;/em>?&lt;/li>
+&lt;li>¿Qué puedo lograr con esto?&lt;/li>
+&lt;/ul>
+&lt;h2 id="qué-es-windows-fluent-design-system">¿Qué es &lt;strong>Windows Fluent Design System&lt;/strong>?&lt;/h2>
+&lt;p>&lt;strong>Fluent Design System&lt;/strong> es un sistema de diseño abierto y multiplataforma que ofrece a los diseñadores y desarrolladores los marcos que necesitan para crear experiencias de producto atractivas.&lt;/p>
+&lt;p>&lt;strong>Fluent Design System&lt;/strong> es el sistema de diseño en evolución de Microsoft que se basa en cinco principios: &lt;strong>luz&lt;/strong>, &lt;strong>profundidad&lt;/strong>, &lt;strong>movimiento&lt;/strong>, &lt;strong>material&lt;/strong> y &lt;strong>escala&lt;/strong>. El objetivo es crear experiencias de usuario fluidas y adaptables a diferentes contextos y dispositivos.&lt;/p>
+&lt;p>🤔&lt;/p>
+&lt;h2 id="para-qué-windows-fluent-design-system">¿Para qué &lt;strong>Windows Fluent Design System&lt;/strong>?&lt;/h2>
+&lt;p>Utilizaría &lt;strong>Fluent Design System&lt;/strong> para crear experiencias de producto atractivas y naturales en cada dispositivo. Algunos beneficios son:&lt;/p>
+&lt;ol>
+&lt;li>La accesibilidad se refiere a la capacidad de diseñar para todos los rangos de diversidad humana, reconociendo las exclusiones y usándolas como oportunidades para crear diseños inclusivos.&lt;/li>
+&lt;li>La internacionalización se refiere a la capacidad de adaptar el diseño a diferentes idiomas, culturas y contextos.&lt;/li>
+&lt;li>El rendimiento se refiere a la capacidad de optimizar el diseño para que funcione bien en diferentes dispositivos y plataformas.&lt;/li>
+&lt;li>La coherencia entre los equipos de diseño y desarrollo se refiere a la capacidad de crear una fuente única de verdad entre todos los equipos de desarrollo de productos, trabajando con los mismos componentes y limitaciones.&lt;/li>
+&lt;/ol>
+&lt;p>Algunas posibles desventajas de usar &lt;strong>Fluent Design System&lt;/strong> son:&lt;/p>
+&lt;ul>
+&lt;li>Puede ser percibido como una copia de otros sistemas de diseño como &lt;em>iOS&lt;/em> o &lt;em>Material Design&lt;/em>.&lt;/li>
+&lt;li>Puede ser incompleto y sin una fecha o hitos claros de lanzamiento.&lt;/li>
+&lt;li>Puede requerir un aprendizaje y una adaptación constantes a medida que evoluciona.&lt;/li>
+&lt;/ul>
+&lt;h2 id="por-qué-microsoft-apostó-a-este-proyecto-open-source">¿Por qué Microsoft apostó a este proyecto &lt;strong>Open Source&lt;/strong>?&lt;/h2>
+&lt;p>Microsoft posiblemente apostó a este proyecto &lt;strong>Open Source&lt;/strong> porque:&lt;/p>
+&lt;ul>
+&lt;li>Quería construir un sistema de diseño colectivo que aprovechara el impulso de las cosas geniales que ya estaban sucediendo en &lt;strong>Microsoft&lt;/strong>, sin pisar los pies a nadie.&lt;/li>
+&lt;li>Quería celebrar a quienes contribuyen a lo que hace colectivamente la comunidad, sin importar en qué equipo trabajen.&lt;/li>
+&lt;li>Quería crear experiencias de producto atractivas y adaptables a diferentes contextos y dispositivos.&lt;/li>
+&lt;/ul>
+&lt;h2 id="qué-beneficios-tengo-como-desarrollador-windows">¿Qué beneficios tengo como desarrollador &lt;em>Windows&lt;/em>?&lt;/h2>
+&lt;p>Algunos beneficios que se tiene como desarrollador al usar &lt;strong>Fluent Design System&lt;/strong> son:&lt;/p>
+&lt;ul>
+&lt;li>Se puede crear aplicaciones hermosas y expresivas con el lenguaje de diseño &lt;strong>Fluent&lt;/strong>, con animaciones, desenfoque y fluidez.&lt;/li>
+&lt;li>Se puede trabajar con los mismos componentes y limitaciones que los diseñadores, creando una fuente única de verdad entre todos los equipos de desarrollo de productos.&lt;/li>
+&lt;li>Se puede aprovechar los marcos de trabajo que ofrece &lt;strong>Fluent&lt;/strong> para crear experiencias de producto atractivas e inclusivas en diferentes plataformas y dispositivos.&lt;/li>
+&lt;/ul>
+&lt;p>La relación entre &lt;strong>Fluent Design System&lt;/strong> y el desarrollador de software es la siguiente:&lt;/p>
+&lt;ol>
+&lt;li>&lt;strong>Fluent&lt;/strong> es un sistema de diseño abierto y multiplataforma que ofrece al desarrollador los marcos de trabajo necesarios para crear experiencias de producto atractivas e inclusivas en diferentes plataformas y dispositivos.&lt;/li>
+&lt;li>&lt;strong>Fluent&lt;/strong> es independiente de cualquier tecnología de implementación particular, lo que permite al desarrollador elegir la que más convenga.&lt;/li>
+&lt;li>&lt;strong>Fluent&lt;/strong> le proporciona al desarrollador una serie de componentes web, sistemas de diseño y aplicaciones que puede usar para crear sus propios proyectos.&lt;/li>
+&lt;/ol>
+&lt;h2 id="qué-puedo-lograr-con-esto">¿Qué puedo lograr con esto?&lt;/h2>
+&lt;p>Con &lt;strong>Fluent&lt;/strong> se puede lograr lo siguiente:&lt;/p>
+&lt;ul>
+&lt;li>Crear experiencias de producto coherentes, de calidad y alineadas con la plataforma Microsoft.&lt;/li>
+&lt;li>Extender y personalizar sus proyectos con una base sólida y flexible.&lt;/li>
+&lt;li>Aplicar los principios de accesibilidad, internacionalización y rendimiento a sus diseños.&lt;/li>
+&lt;/ul>
+&lt;h2 id="conclusión">Conclusión&lt;/h2>
+&lt;p>Como conclusión podemos menciona que:&lt;/p>
+&lt;ul>
+&lt;li>Ayuda a crear experiencias naturales y productivas en cada dispositivo.&lt;/li>
+&lt;li>Ofrece recursos para diseñar interfaces de usuario en &lt;strong>Windows&lt;/strong>, &lt;strong>Web&lt;/strong>, &lt;strong>Móvil&lt;/strong> y &lt;strong>Multiplataforma&lt;/strong>.&lt;/li>
+&lt;li>Proporciona un sistema de diseño inclusivo y diverso que se adapta a las necesidades de los usuarios.&lt;/li>
+&lt;li>Facilita el trabajo en equipo con una fuente única de verdad para los componentes y herramientas de diseño.&lt;/li>
+&lt;/ul>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Integración de Azure DevOps con GitHub</title><link>https://cmas.dev/posts/2022-04-18-azure-devops-integration-with-github/</link><pubDate>Mon, 18 Apr 2022 23:24:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-04-18-azure-devops-integration-with-github/</guid><description>&lt;p>En este artículo mostraré cómo integrar un repositorio GitHub, que lo hemos visto en &lt;a href="https://cmas.dev/posts/2022-04-04-create-repository-github">este artículo&lt;/a>, con Azure DevOps que lo hemos visto &lt;a href="https://cmas.dev/posts/2022-04-11-create-project-azure-devops/">aquí&lt;/a>.&lt;/p>
 &lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 22598&lt;/strong>&lt;/em>&lt;/p>
 &lt;p>Primeramente, debemos ingresar a la configuración del proyecto:

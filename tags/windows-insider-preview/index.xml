@@ -214,6 +214,69 @@
 &lt;img src="https://cmas.dev/img/posts/2022/04/26/Wsl6.png" alt="">&lt;/p>
 &lt;p>Podemos verificar que distro estamos ejecutando:
 &lt;img src="https://cmas.dev/img/posts/2022/04/26/Wsl7.png" alt="">&lt;/p>
+&lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Introducción a Windows Fluent Design System</title><link>https://cmas.dev/posts/2022-04-25-introduction-to-windows-fluent-system/</link><pubDate>Mon, 25 Apr 2022 19:22:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-04-25-introduction-to-windows-fluent-system/</guid><description>&lt;p>En este artículo intentaré enteder y explicar qué es &lt;strong>Windows Fluent Design System&lt;/strong>, por qué es Open Source, para qué se utiliza y que se puede lograr con esto.&lt;/p>
+&lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 22598&lt;/strong>&lt;/em>&lt;/p>
+&lt;p>Personalmente tengo muchas dudas y consultas sobre este punto. Hace un tiempo que veo esto pero no he tenido el tiempo para detenerme a investigar. Así que hagámos juntos el recorrido. Las consultas que me surgen son:&lt;/p>
+&lt;ul>
+&lt;li>¿Qué es?&lt;/li>
+&lt;li>¿Para qué se utiliza?&lt;/li>
+&lt;li>¿Por qué Microsoft apostó a este proyecto &lt;strong>Open Source&lt;/strong>?&lt;/li>
+&lt;li>¿Qué beneficios tengo como desarrollador &lt;em>Windows&lt;/em>?&lt;/li>
+&lt;li>¿Qué puedo lograr con esto?&lt;/li>
+&lt;/ul>
+&lt;h2 id="qué-es-windows-fluent-design-system">¿Qué es &lt;strong>Windows Fluent Design System&lt;/strong>?&lt;/h2>
+&lt;p>&lt;strong>Fluent Design System&lt;/strong> es un sistema de diseño abierto y multiplataforma que ofrece a los diseñadores y desarrolladores los marcos que necesitan para crear experiencias de producto atractivas.&lt;/p>
+&lt;p>&lt;strong>Fluent Design System&lt;/strong> es el sistema de diseño en evolución de Microsoft que se basa en cinco principios: &lt;strong>luz&lt;/strong>, &lt;strong>profundidad&lt;/strong>, &lt;strong>movimiento&lt;/strong>, &lt;strong>material&lt;/strong> y &lt;strong>escala&lt;/strong>. El objetivo es crear experiencias de usuario fluidas y adaptables a diferentes contextos y dispositivos.&lt;/p>
+&lt;p>🤔&lt;/p>
+&lt;h2 id="para-qué-windows-fluent-design-system">¿Para qué &lt;strong>Windows Fluent Design System&lt;/strong>?&lt;/h2>
+&lt;p>Utilizaría &lt;strong>Fluent Design System&lt;/strong> para crear experiencias de producto atractivas y naturales en cada dispositivo. Algunos beneficios son:&lt;/p>
+&lt;ol>
+&lt;li>La accesibilidad se refiere a la capacidad de diseñar para todos los rangos de diversidad humana, reconociendo las exclusiones y usándolas como oportunidades para crear diseños inclusivos.&lt;/li>
+&lt;li>La internacionalización se refiere a la capacidad de adaptar el diseño a diferentes idiomas, culturas y contextos.&lt;/li>
+&lt;li>El rendimiento se refiere a la capacidad de optimizar el diseño para que funcione bien en diferentes dispositivos y plataformas.&lt;/li>
+&lt;li>La coherencia entre los equipos de diseño y desarrollo se refiere a la capacidad de crear una fuente única de verdad entre todos los equipos de desarrollo de productos, trabajando con los mismos componentes y limitaciones.&lt;/li>
+&lt;/ol>
+&lt;p>Algunas posibles desventajas de usar &lt;strong>Fluent Design System&lt;/strong> son:&lt;/p>
+&lt;ul>
+&lt;li>Puede ser percibido como una copia de otros sistemas de diseño como &lt;em>iOS&lt;/em> o &lt;em>Material Design&lt;/em>.&lt;/li>
+&lt;li>Puede ser incompleto y sin una fecha o hitos claros de lanzamiento.&lt;/li>
+&lt;li>Puede requerir un aprendizaje y una adaptación constantes a medida que evoluciona.&lt;/li>
+&lt;/ul>
+&lt;h2 id="por-qué-microsoft-apostó-a-este-proyecto-open-source">¿Por qué Microsoft apostó a este proyecto &lt;strong>Open Source&lt;/strong>?&lt;/h2>
+&lt;p>Microsoft posiblemente apostó a este proyecto &lt;strong>Open Source&lt;/strong> porque:&lt;/p>
+&lt;ul>
+&lt;li>Quería construir un sistema de diseño colectivo que aprovechara el impulso de las cosas geniales que ya estaban sucediendo en &lt;strong>Microsoft&lt;/strong>, sin pisar los pies a nadie.&lt;/li>
+&lt;li>Quería celebrar a quienes contribuyen a lo que hace colectivamente la comunidad, sin importar en qué equipo trabajen.&lt;/li>
+&lt;li>Quería crear experiencias de producto atractivas y adaptables a diferentes contextos y dispositivos.&lt;/li>
+&lt;/ul>
+&lt;h2 id="qué-beneficios-tengo-como-desarrollador-windows">¿Qué beneficios tengo como desarrollador &lt;em>Windows&lt;/em>?&lt;/h2>
+&lt;p>Algunos beneficios que se tiene como desarrollador al usar &lt;strong>Fluent Design System&lt;/strong> son:&lt;/p>
+&lt;ul>
+&lt;li>Se puede crear aplicaciones hermosas y expresivas con el lenguaje de diseño &lt;strong>Fluent&lt;/strong>, con animaciones, desenfoque y fluidez.&lt;/li>
+&lt;li>Se puede trabajar con los mismos componentes y limitaciones que los diseñadores, creando una fuente única de verdad entre todos los equipos de desarrollo de productos.&lt;/li>
+&lt;li>Se puede aprovechar los marcos de trabajo que ofrece &lt;strong>Fluent&lt;/strong> para crear experiencias de producto atractivas e inclusivas en diferentes plataformas y dispositivos.&lt;/li>
+&lt;/ul>
+&lt;p>La relación entre &lt;strong>Fluent Design System&lt;/strong> y el desarrollador de software es la siguiente:&lt;/p>
+&lt;ol>
+&lt;li>&lt;strong>Fluent&lt;/strong> es un sistema de diseño abierto y multiplataforma que ofrece al desarrollador los marcos de trabajo necesarios para crear experiencias de producto atractivas e inclusivas en diferentes plataformas y dispositivos.&lt;/li>
+&lt;li>&lt;strong>Fluent&lt;/strong> es independiente de cualquier tecnología de implementación particular, lo que permite al desarrollador elegir la que más convenga.&lt;/li>
+&lt;li>&lt;strong>Fluent&lt;/strong> le proporciona al desarrollador una serie de componentes web, sistemas de diseño y aplicaciones que puede usar para crear sus propios proyectos.&lt;/li>
+&lt;/ol>
+&lt;h2 id="qué-puedo-lograr-con-esto">¿Qué puedo lograr con esto?&lt;/h2>
+&lt;p>Con &lt;strong>Fluent&lt;/strong> se puede lograr lo siguiente:&lt;/p>
+&lt;ul>
+&lt;li>Crear experiencias de producto coherentes, de calidad y alineadas con la plataforma Microsoft.&lt;/li>
+&lt;li>Extender y personalizar sus proyectos con una base sólida y flexible.&lt;/li>
+&lt;li>Aplicar los principios de accesibilidad, internacionalización y rendimiento a sus diseños.&lt;/li>
+&lt;/ul>
+&lt;h2 id="conclusión">Conclusión&lt;/h2>
+&lt;p>Como conclusión podemos menciona que:&lt;/p>
+&lt;ul>
+&lt;li>Ayuda a crear experiencias naturales y productivas en cada dispositivo.&lt;/li>
+&lt;li>Ofrece recursos para diseñar interfaces de usuario en &lt;strong>Windows&lt;/strong>, &lt;strong>Web&lt;/strong>, &lt;strong>Móvil&lt;/strong> y &lt;strong>Multiplataforma&lt;/strong>.&lt;/li>
+&lt;li>Proporciona un sistema de diseño inclusivo y diverso que se adapta a las necesidades de los usuarios.&lt;/li>
+&lt;li>Facilita el trabajo en equipo con una fuente única de verdad para los componentes y herramientas de diseño.&lt;/li>
+&lt;/ul>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Instalar aplicaciones Android desde APK en Windows 11</title><link>https://cmas.dev/posts/2022-04-20-install-android-apps-from-apk/</link><pubDate>Wed, 20 Apr 2022 13:01:14 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-04-20-install-android-apps-from-apk/</guid><description>&lt;p>En este artículo mostraré cómo instalar aplicaciones Android en Windows 11 gracias a &lt;strong>Windows Subsystem for Android&lt;/strong> utilizando herramientas del propio Android y habilitando ciertas opciones. En un &lt;a href="https://cmas.dev/posts/2022-04-13-enable-wsa/">artículo anterior&lt;/a> hemos visto cómo habilitar la plataforma desde &lt;strong>Microsoft Store&lt;/strong>.&lt;/p>
 &lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 22598&lt;/strong>&lt;/em>&lt;/p>
 &lt;p>Debemos seguir algunos pasos para poder tener cualquier aplicación Android directamente en Windows 11, recordando que para habilitar esto debemos tener la región indicada como Estados Unidos.&lt;/p>

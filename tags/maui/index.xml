@@ -264,6 +264,113 @@
 &lt;img src="https://cmas.dev/img/posts/2022/10/05/6.png" alt="">&lt;/p>
 &lt;/li>
 &lt;/ol>
+&lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Aplicando modelo MVVM con MAUI</title><link>https://cmas.dev/posts/2022-09-28-mvvm-in-maui/</link><pubDate>Wed, 28 Sep 2022 21:06:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-09-28-mvvm-in-maui/</guid><description>&lt;p>En este artículo mostraré cómo aplicar el modelo MVVM en &lt;strong>.NET MAUI&lt;/strong> sobre &lt;strong>Windows 11&lt;/strong>.&lt;/p>
+&lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 25206&lt;/strong>&lt;/em>&lt;/p>
+&lt;p>&lt;strong>MVVM&lt;/strong> en &lt;strong>.NET MAUI&lt;/strong> para &lt;strong>Windows&lt;/strong> es un patrón que permite crear aplicaciones de escritorio con una interfaz de usuario basada en &lt;strong>XAML&lt;/strong> y una lógica de negocio separada en el modelo de vista. &lt;strong>MVVM&lt;/strong> es un patrón bien establecido en &lt;strong>.NET&lt;/strong> y hay muchos marcos que facilitan su desarrollo. Uno de ellos es el &lt;strong>MVVM Toolkit&lt;/strong>, que es parte del &lt;strong>.NET Community Toolkit&lt;/strong>.&lt;/p>
+&lt;p>Así que me puse a leer la documentación oficial (deberías hacer lo mismo) que se encuentra &lt;a href="https://learn.microsoft.com/es-es/dotnet/architecture/maui/mvvm">aquí&lt;/a>.&lt;/p>
+&lt;p>Para el ejemplo, crearemos una lista de &amp;ldquo;Alumnos&amp;rdquo; (Nombre y Apellido con fotos) que aplicaremos en un modelo &lt;em>MVVM&lt;/em>.&lt;/p>
+&lt;h2 id="creando-el-código">Creando el código&lt;/h2>
+&lt;ol>
+&lt;li>
+&lt;p>Descargamos el paquete &lt;strong>NuGet&lt;/strong> para &lt;em>MVVM&lt;/em> que se encuentra &lt;a href="https://www.nuget.org/packages/CommunityToolkit.Mvvm/">aquí&lt;/a>(obviamente es mejor hacerlo desde Visual Studio 2022) y lo instalamos.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Agregamos una nueva clase con el nombre &lt;strong>Alumno.cs&lt;/strong> y lo colocamos en la raiz del proyecto con el siguiente código:&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">namespace MauiMvvm
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> public class Alumno
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> public string FirstName { get; set; }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> public string LastName { get; set; }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> public string ImageUrl { get; set; }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="3">
+&lt;li>Agregamos una nueva clase con el nombre &lt;strong>AlumnoViewModel.cs&lt;/strong> y lo colocamos en la raiz del proyecto con el siguiente código:&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">using CommunityToolkit.Mvvm.ComponentModel;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">namespace MauiMvvm
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [INotifyPropertyChanged]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> public partial class AlumnoViewModel
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [ObservableProperty]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> public List&amp;lt;Alumno&amp;gt; alumnos = new List&amp;lt;Alumno&amp;gt;();
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> public AlumnoViewModel()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> alumnos.Add(new Alumno() { FirstName = &amp;#34;Eliseo&amp;#34;, LastName = &amp;#34;Ortega&amp;#34;, ImageUrl = &amp;#34;mugpy.jpg&amp;#34; });
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> alumnos.Add(new Alumno() { FirstName = &amp;#34;Dulce&amp;#34;, LastName = &amp;#34;Barrios&amp;#34;, ImageUrl = &amp;#34;profile.jpg&amp;#34; });
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> alumnos.Add(new Alumno() { FirstName = &amp;#34;Microsoft&amp;#34;, LastName = &amp;#34;DotNet&amp;#34;, ImageUrl = &amp;#34;dotnet_bot.png&amp;#34; });
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> alumnos.Add(new Alumno() { FirstName = &amp;#34;Christian&amp;#34;, LastName = &amp;#34;Amado&amp;#34;, ImageUrl = &amp;#34;amado.jpg&amp;#34; });
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="4">
+&lt;li>En la página principal &lt;strong>MainPage.xaml&lt;/strong> generamos una lista:&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">&amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;utf-8&amp;#34; ?&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;ContentPage xmlns=&amp;#34;http://schemas.microsoft.com/dotnet/2021/maui&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> xmlns:x=&amp;#34;http://schemas.microsoft.com/winfx/2009/xaml&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> x:Class=&amp;#34;MauiMvvm.MainPage&amp;#34;&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;ListView ItemsSource=&amp;#34;{Binding Alumnos}&amp;#34;&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;ListView.ItemTemplate&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;DataTemplate&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;ViewCell&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Grid Padding=&amp;#34;10&amp;#34;&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Grid.RowDefinitions&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;RowDefinition Height=&amp;#34;Auto&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;RowDefinition Height=&amp;#34;Auto&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/Grid.RowDefinitions&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Grid.ColumnDefinitions&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;ColumnDefinition Width=&amp;#34;Auto&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;ColumnDefinition Width=&amp;#34;Auto&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/Grid.ColumnDefinitions&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Image Grid.RowSpan=&amp;#34;2&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Source=&amp;#34;{Binding ImageUrl}&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Aspect=&amp;#34;AspectFill&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> HeightRequest=&amp;#34;60&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> WidthRequest=&amp;#34;60&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Label Grid.Column=&amp;#34;1&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Text=&amp;#34;{Binding FirstName}&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> FontAttributes=&amp;#34;Bold&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Label Grid.Row=&amp;#34;1&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Grid.Column=&amp;#34;1&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Text=&amp;#34;{Binding LastName}&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> FontAttributes=&amp;#34;Italic&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> VerticalOptions=&amp;#34;End&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/Grid&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/ViewCell&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/DataTemplate&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/ListView.ItemTemplate&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/ListView&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;/ContentPage&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="5">
+&lt;li>El código &lt;strong>C#&lt;/strong> que se encuentra en &lt;strong>MainPage.xaml.cs&lt;/strong> se encuentra aquí:&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">namespace MauiMvvm;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">public partial class MainPage : ContentPage
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> int count = 0;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> public MainPage()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> InitializeComponent();
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> BindingContext = new AlumnoViewModel();
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="6">
+&lt;li>Ejecutamos el código con &lt;em>F5&lt;/em> y&amp;hellip;
+&lt;img src="https://cmas.dev/img/posts/2022/09/28/1.png" alt="">&lt;/li>
+&lt;/ol>
+&lt;p>De esta manera implementamos el modelo MVVM de manera muy rápida y sencilla gracias al paquete &lt;strong>MVVM Toolkit&lt;/strong>.&lt;/p>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Data Binding en MAUI</title><link>https://cmas.dev/posts/2022-09-21-data-binding-in-maui/</link><pubDate>Wed, 21 Sep 2022 20:32:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-09-21-data-binding-in-maui/</guid><description>&lt;p>En este artículo mostraré cómo utilizar la técnica de &lt;em>Data Binding&lt;/em> en una aplicación &lt;strong>.NET MAUI&lt;/strong> sobre &lt;strong>Windows 11&lt;/strong>.&lt;/p>
 &lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 25206&lt;/strong>&lt;/em>&lt;/p>
 &lt;p>&lt;em>Data binding&lt;/em> en &lt;strong>XAML&lt;/strong> es un mecanismo que permite vincular propiedades de dos objetos dentro de una página, o entre objetos visuales y datos subyacentes. Se declara usando una extensión de marcado llamada &lt;strong>Binding&lt;/strong>. La declaración de &lt;em>data binding&lt;/em> consiste en una serie de cláusulas que siguen la palabra clave &lt;strong>Binding&lt;/strong> y se separan por comas (,). Las cláusulas pueden estar en cualquier orden y existen muchas combinaciones posibles.&lt;/p>
