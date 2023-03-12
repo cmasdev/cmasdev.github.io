@@ -54,7 +54,7 @@
 &lt;/ol>
 &lt;p>&lt;img src="https://cmas.dev/img/posts/2022/11/02/2.png" alt="">&lt;/p>
 &lt;p>&lt;img src="https://cmas.dev/img/posts/2022/11/02/3.png" alt="">&lt;/p>
-&lt;h2 id="abrir-imagen-en-windows-11-1">Abrir imagen en Windows 11&lt;/h2>
+&lt;h2 id="abrir-imagen-en-android">Abrir imagen en Android&lt;/h2>
 &lt;p>Como todo esto lo hicimos con &lt;strong>.NET MAUI&lt;/strong>, debemos hacer ¡NADA!&lt;/p>
 &lt;ol>
 &lt;li>Ejecutamos en &lt;strong>Android&lt;/strong> y&amp;hellip;
@@ -951,6 +951,135 @@ Esto debido a que la librería no está soportada y necesita la nueva versión (
 &lt;h2 id="cuál-debería-elegir">¿Cuál debería elegir?&lt;/h2>
 &lt;p>Eso depende del público objetivo y de los requisitos de la aplicación. Si se desea crear una aplicación que funcione en diferentes sistemas operativos, se puede optar por &lt;strong>Electronjs&lt;/strong> o &lt;strong>Tauri&lt;/strong>. Si se quiere crear una aplicación que se integre con &lt;strong>Windows&lt;/strong> y se publique en &lt;strong>Microsoft Store&lt;/strong>, se puede optar por &lt;strong>UWP&lt;/strong> o &lt;strong>WinUI 3&lt;/strong>.&lt;/p>
 &lt;p>En mi caso quiero desarrollar una aplicación de escritorio para Windows 11, entonces puedo usar las mismas tecnologías que en &lt;strong>Windows 10&lt;/strong>: &lt;strong>Windows Forms&lt;/strong>, &lt;strong>WPF&lt;/strong>, &lt;strong>UWP&lt;/strong> o &lt;strong>WinUI 3&lt;/strong>. Estas aplicaciones se pueden adaptar al nuevo diseño y funcionalidades de &lt;strong>Windows 11&lt;/strong>. También se pueden usar los escritorios virtuales para organizar tus aplicaciones en diferentes contextos (como con &lt;strong>WSL&lt;/strong>).&lt;/p>
+&lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Migración UWP a WinUI 3</title><link>https://cmas.dev/posts/2022-07-06-upgrade-uwp-to-winui3/</link><pubDate>Wed, 06 Jul 2022 00:12:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-07-06-upgrade-uwp-to-winui3/</guid><description>&lt;p>¡Feliz cumple para mí! Arranco mi día con un artículo (es día de festejo así que será complicado cumplir con la comunidad).&lt;/p>
+&lt;p>En este artículo haré una migración de &lt;strong>UWP&lt;/strong> a &lt;strong>WinUI 3&lt;/strong> sin que se complique demasiado.&lt;/p>
+&lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 25151&lt;/strong>&lt;/em>&lt;/p>
+&lt;p>Microsoft ha anunciado oficialmente la depreciación de &lt;strong>UWP&lt;/strong> (Plataforma Universal de Windows) y que no se actualizaría en el nuevo sistema &lt;strong>Windows 11&lt;/strong>. Sin embargo, todavía hay algunas formas de usar &lt;strong>UWP&lt;/strong> en proyectos existentes o nuevos.&lt;/p>
+&lt;blockquote>
+&lt;p>Microsoft continues to baby-step around the obvious, but it has officially deprecated the Universal Windows Platform (UWP) as it pushes the desktop-focused Windows App SDK (formerly called Project Reunion) and WinUI 3 as the future of Windows application development.&lt;/p>
+&lt;/blockquote>
+&lt;p>Esto lo expresó Paul Thurrott en su blog (&lt;a href="https://www.thurrott.com/paul">quién es él&lt;/a>) donde nos lleva al enlace de &lt;strong>GitHub&lt;/strong> del proyecto &lt;strong>Windows App SDK&lt;/strong>. Aunque esta noticia no es nueva ahora, en este momento abandono &lt;strong>UWP&lt;/strong> antes que me ocurra lo mismo que con mis desarrollos &lt;strong>Windows Phone&lt;/strong> 🫶&lt;/p>
+&lt;h2 id="cómo-proceder-con-la-migración">¿Cómo proceder con la migración?&lt;/h2>
+&lt;p>Como la ansiedad me gana, abrí un proyecto de &lt;strong>UWP&lt;/strong> que tenía (no lo puedo exponer porque es de la empresa donde trabajaba) y decidí crear un nuevo proyecto de tipo &lt;strong>WinUI3&lt;/strong> para adelantarme a los hechos &amp;hellip;&lt;/p>
+&lt;p>Me encontré con dos maneras de hacer la migración:&lt;/p>
+&lt;h3 id="la-migración-manual">La migración &amp;ldquo;manual&amp;rdquo;&lt;/h3>
+&lt;p>Al migrar, en la mayoría de los casos, el código de la interfaz de usuario solo necesita algunos cambios en el espacio de nombres. Gran parte del código de su plataforma seguirá siendo el mismo. Se tiene que modificar o cambiar algún código en función de las diferentes funcionalidades/disponibilidades de las aplicaciones de escritorio frente a las aplicaciones para &lt;strong>UWP&lt;/strong>.&lt;/p>
+&lt;p>A nivel general se deben realizar estas tareas:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>Crear un nuevo proyecto de escritorio empaquetado de &lt;strong>WinUI 3&lt;/strong> en la solución existente.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Copiar el código &lt;strong>XAML&lt;/strong> para la &lt;strong>UI&lt;/strong> (esto debido a cambios en los nombres de espacios de nombres).&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Copiar el código lógico de la aplicación (clases diferentes y/o diferencias de APIs).&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;p>Debemos seguir los pasos indicados &lt;a href="https://learn.microsoft.com/es-es/windows/apps/windows-app-sdk/migrate-to-windows-app-sdk/migrate-to-windows-app-sdk-ovw">aquí&lt;/a>&lt;/p>
+&lt;h3 id="la-migración-con-una-herramienta">La migración con una herramienta&lt;/h3>
+&lt;p>Para migrar una aplicación UWP a &lt;strong>WinUI 3&lt;/strong>, se puede usar el &lt;strong>.NET Upgrade Assistant&lt;/strong>, que es una herramienta que automatiza gran parte del proceso de migración. Antes de migrar, se recomienda revisar la siguiente lista de características que aún no son compatibles con &lt;strong>WinUI 3&lt;/strong>.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Característica de &lt;strong>UWP&lt;/strong>&lt;/th>
+&lt;th>Estado de &lt;strong>WinUI 3&lt;/strong>&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>Controles comunes de la interfaz de usuario&lt;/td>
+&lt;td>✅ Soportado&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>MSIX&lt;/td>
+&lt;td>✅ Soportado&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Notificaciones del sistema&lt;/td>
+&lt;td>✅ Soportado&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Iconos dinámicos (en Windows 10)&lt;/td>
+&lt;td>✅ Soportado&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Distribución a través de la Tienda&lt;/td>
+&lt;td>✅ Soportado&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Biblioteca MSAL&lt;/td>
+&lt;td>✅ Soportado&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Visual Studio App Center&lt;/td>
+&lt;td>✅ Soportado&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Creación de instancias únicas&lt;/td>
+&lt;td>✅ Soportado&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Tareas en segundo plano&lt;/td>
+&lt;td>✅ Compatible con C++ ⚠️ Compatible parcialmente con C# (se admiten tareas en segundo plano de OOP)&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>CameraCaptureUI&lt;/td>
+&lt;td>❌ No se admite en la versión 1.0&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>CoreTextServicesManager&lt;/td>
+&lt;td>⚠️ Solo se admite en Windows 11&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>InkCanvas&lt;/td>
+&lt;td>❌ No se admite en la versión 1.0&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>MapControl&lt;/td>
+&lt;td>❌ No se admite en la versión 1.0&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>MediaElement&lt;/td>
+&lt;td>❌ No se admite en la versión 1.0&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>PrintManager&lt;/td>
+&lt;td>❌ No se admite en la versión 1.0&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>WebAuthenticationBroker&lt;/td>
+&lt;td>❌ No se admite en la versión 1.0&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Acrílico en el fondo&lt;/td>
+&lt;td>❌ No se admite en la versión 1.0&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Quiosco de una sola aplicación&lt;/td>
+&lt;td>❌ No se admite en la versión 1.0&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>TaskbarManager API&lt;/td>
+&lt;td>❌ No se admite en la versión 1.0&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Contenedorización completa de la aplicación&lt;/td>
+&lt;td>❌ No se admite en la versión 1.0&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Mejor velocidad y rendimiento de lanzamiento&lt;/td>
+&lt;td>⚠️ Ligera desventaja, consulte consideraciones de rendimiento.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>Más información sobre la migración, se encuentra en la documentación oficial de &lt;strong>Microsoft&lt;/strong> &lt;a href="https://learn.microsoft.com/es-es/windows/apps/windows-app-sdk/migrate-to-windows-app-sdk/upgrade-assistant">aquí&lt;/a>&lt;/p>
+&lt;h2 id="conclusión">Conclusión&lt;/h2>
+&lt;p>En general, el proceso de migración es sencillo si se utiliza el &lt;strong>.NET Upgrade Assistant&lt;/strong>, que guía paso a paso y realiza los cambios necesarios en el código. Sin embargo, puede haber algunos casos en los que se tenga que hacer ajustes manuales o buscar alternativas a algunas características que no son compatibles con &lt;strong>WinUI 3&lt;/strong>.&lt;/p>
+&lt;p>En líneas generales seguí &lt;a href="https://learn.microsoft.com/es-es/dotnet/core/porting/upgrade-assistant-uwp-framework">el ejemplo de la documentación de Microsoft&lt;/a> y logramos terminar la migración sin problemas en 2 días (14 horas en total).&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">upgrade-assistant upgrade XX.sln
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>¡No modificamos nada!&lt;/p>
+&lt;p>Es hora de ir a tomar un poco de tequila 😋&lt;/p>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Microsoft Most Valuable Professional 2022/2023</title><link>https://cmas.dev/posts/2022-07-01-microsoft-most-valuable-professional-2022-2023/</link><pubDate>Tue, 05 Jul 2022 11:28:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-07-01-microsoft-most-valuable-professional-2022-2023/</guid><description>&lt;p>&lt;a href="https://mvp.microsoft.com/en-us/PublicProfile/5001273">Llegó la renovación por otro año más (van 8)&lt;/a>:&lt;/p>
 &lt;blockquote>
 &lt;p>Dear Christian Amado,&lt;/p>
