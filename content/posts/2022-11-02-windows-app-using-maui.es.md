@@ -76,7 +76,7 @@ private async void OnCounterClicked(object sender, EventArgs e)
 
 ![](/img/posts/2022/11/02/3.png)
 
-## Abrir imagen en Windows 11
+## Abrir imagen en Android
 Como todo esto lo hicimos con **.NET MAUI**, debemos hacer ¡NADA!
 
 1. Ejecutamos en **Android** y...
