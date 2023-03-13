@@ -1,4 +1,129 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Windows 11 on Blog de Christian Amado</title><link>https://cmas.dev/tags/windows-11/</link><description>Recent content in Windows 11 on Blog de Christian Amado</description><generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>biz@cmas.dev (Christian Amado)</managingEditor><webMaster>biz@cmas.dev (Christian Amado)</webMaster><lastBuildDate>Wed, 07 Dec 2022 21:12:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/tags/windows-11/index.xml" rel="self" type="application/rss+xml"/><item><title>Figma y Windows Fluent Design System</title><link>https://cmas.dev/posts/2022-12-07-figma-and-windows-fluent-design-system/</link><pubDate>Wed, 07 Dec 2022 21:12:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-12-07-figma-and-windows-fluent-design-system/</guid><description>&lt;p>En este corto artículo trataremos de entender las directrices de diseño y analizaremos código de interfaz de usuario para crear experiencias de aplicaciones de &lt;strong>Windows&lt;/strong>.&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Windows 11 on Blog de Christian Amado</title><link>https://cmas.dev/tags/windows-11/</link><description>Recent content in Windows 11 on Blog de Christian Amado</description><generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>biz@cmas.dev (Christian Amado)</managingEditor><webMaster>biz@cmas.dev (Christian Amado)</webMaster><lastBuildDate>Wed, 21 Dec 2022 19:39:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/tags/windows-11/index.xml" rel="self" type="application/rss+xml"/><item><title>Django sobre WSL</title><link>https://cmas.dev/posts/2022-12-21-developing-python-on-wsl/</link><pubDate>Wed, 21 Dec 2022 19:39:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-12-21-developing-python-on-wsl/</guid><description>&lt;p>En este corto artículo veremos cómo desarrollar sobre &lt;strong>WSL (Windows Subsystem for Linux)&lt;/strong> con &lt;strong>Python&lt;/strong> y &lt;strong>Django&lt;/strong>. Ya hemos visto que lo podemos hacer con &lt;a href="https://cmas.dev/posts/2022-06-29-java-with-wsl-part-2/">Java&lt;/a>&lt;/p>
+&lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 25267&lt;/strong>&lt;/em>&lt;/p>
+&lt;p>&lt;strong>WSL&lt;/strong> nos ofrece demasiadas ventajas a la hora de desarrollar software sobre el sistema operativo Linux, en este caso &lt;strong>Ubuntu&lt;/strong>. Hoy en día Python es un lenguaje demasiado difundido y muy utilizado en varios ámbitos, con sus ventajas y desventajas como todas las plataformas existentes. A eso le sumaron un Framework muy potente y completo &amp;ldquo;&lt;strong>Django&lt;/strong>&amp;rdquo;.&lt;/p>
+&lt;p>Aquí veremos como instalar y ejecutar una aplicación web &lt;strong>Django&lt;/strong> utilizando &lt;strong>Visual Studio Code&lt;/strong>.&lt;/p>
+&lt;h2 id="instalar-django-en-wslubuntu">Instalar Django en &lt;strong>WSL:Ubuntu&lt;/strong>&lt;/h2>
+&lt;ol>
+&lt;li>
+&lt;p>Abrimos &lt;strong>Windows Terminal&lt;/strong> con el perfil &lt;strong>Ubuntu&lt;/strong>:
+&lt;img src="https://cmas.dev/img/posts/2022/12/21/1.png" alt="">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Procedemos a instalar &lt;strong>Django&lt;/strong> con el siguiente comando:&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">sudo apt install python3-django
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="3">
+&lt;li>
+&lt;p>Seguimos las instrucciones en pantalla y listo.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Verificamos la instalación con el siguiente comando:&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">django-admin --version
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://cmas.dev/img/posts/2022/12/21/2.png" alt="">&lt;/p>
+&lt;h2 id="crear-proyecto-django-y-empezar-a-trabajar">Crear proyecto Django y empezar a trabajar&lt;/h2>
+&lt;ol>
+&lt;li>
+&lt;p>Ir a la carpeta donde debe estar nuestro proyecto:
+&lt;img src="https://cmas.dev/img/posts/2022/12/21/3.png" alt="">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Crear un ambiente virtual de &lt;strong>Python&lt;/strong>:&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$ python3 -m venv pythonTest
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="3">
+&lt;li>Activar el ambiente virtual:&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$ source pythonTest/bin/activate
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="4">
+&lt;li>Instalar &lt;strong>Django&lt;/strong> en el ambiente virtual:&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">(pythonTest) $ pip install django
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="5">
+&lt;li>Se crea el proyecto en la carpeta actual:&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">(pythonTest) $ django-admin startproject testproject .
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="6">
+&lt;li>Migramos la base de datos inicial:&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">(pythonTest) $ python manage.py migrate
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="7">
+&lt;li>Se crea la administracion de la Web:&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">(pythonTest) $ python manage.py createsuperuser
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="8">
+&lt;li>
+&lt;p>Completamos los datos y listo:
+&lt;img src="https://cmas.dev/img/posts/2022/12/21/4.png" alt="">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Abrimos la carpeta donde alojamos el proyecto y empezamos a desarrollar:
+&lt;img src="https://cmas.dev/img/posts/2022/12/21/5.png" alt="">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Activamos el ambiernte virtual de Python y ejecutamos el servidor de Django:
+&lt;img src="https://cmas.dev/img/posts/2022/12/21/6.png" alt="">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Veremos la página principal de Django:
+&lt;img src="https://cmas.dev/img/posts/2022/12/21/7.png" alt="">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Si accedemos a la URL con el contexto &lt;em>/admin&lt;/em> veremos lo siguiente:
+&lt;img src="https://cmas.dev/img/posts/2022/12/21/8.png" alt="">&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/2022/12/21/9.png" alt="">&lt;/p>
+&lt;p>Listo para desarrollar aplicaciones web con &lt;strong>Django&lt;/strong> y &lt;strong>Python&lt;/strong> sobre &lt;strong>Visual Studio Code&lt;/strong> y &lt;strong>WSL&lt;/strong>.&lt;/p>
+&lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Desarrollo con Python sobre WSL</title><link>https://cmas.dev/posts/2022-12-14-developing-python-on-wsl/</link><pubDate>Wed, 14 Dec 2022 21:12:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-12-14-developing-python-on-wsl/</guid><description>&lt;p>En este corto artículo veremos cómo desarrollar sobre &lt;strong>WSL (Windows Subsystem for Linux)&lt;/strong> con &lt;strong>Python&lt;/strong>. Ya hemos visto que lo podemos hacer con &lt;a href="https://cmas.dev/posts/2022-06-29-java-with-wsl-part-2/">Java&lt;/a>&lt;/p>
+&lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 25267&lt;/strong>&lt;/em>&lt;/p>
+&lt;p>&lt;strong>WSL&lt;/strong> nos ofrece demasiadas ventajas a la hora de desarrollar software sobre el sistema operativo Linux, en este caso &lt;strong>Ubuntu&lt;/strong>. Hoy en día Python es un lenguaje demasiado difundido y muy utilizado en varios ámbitos, con sus ventajas y desventajas como todas las plataformas existentes.&lt;/p>
+&lt;p>Aquí veremos como instalar y ejecutar un pequeño código utilizando &lt;strong>Visual Studio Code&lt;/strong>.&lt;/p>
+&lt;h2 id="python-en-wsl">Python en WSL&lt;/h2>
+&lt;ol>
+&lt;li>
+&lt;p>Abrimos Visual Studio Code (pero en WSL):
+&lt;img src="https://cmas.dev/img/posts/2022/12/14/1.png" alt="">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>En extensiones, buscamos &amp;ldquo;python&amp;rdquo; y lo instalamos (el fabricante debe ser Microsoft):
+&lt;img src="https://cmas.dev/img/posts/2022/12/14/2.png" alt="">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Luego de la instalación, procedemos a crear un nuevo archivo:
+&lt;img src="https://cmas.dev/img/posts/2022/12/14/3.png" alt="">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Seleccionamos el archivo de tipo Python, colocamos en el lugar de preferencia (dentro del WSL):
+&lt;img src="https://cmas.dev/img/posts/2022/12/14/4.png" alt="">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Crear un archivo nuevo &lt;strong>pythonTest.py&lt;/strong> (en mi caso) y escribir el siguiente código.&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">print(&amp;#34;Hello, World from VS Code and WSL&amp;#34;)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="6">
+&lt;li>
+&lt;p>Casi hacemos &lt;em>F5&lt;/em> pero notamos que falta algo:
+&lt;img src="https://cmas.dev/img/posts/2022/12/14/5.png" alt="">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Seleccionamos el Intérprete recomendado:
+&lt;img src="https://cmas.dev/img/posts/2022/12/14/6.png" alt="">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Seleccionamos la configuración del depurador (porque es un archivo suelto):
+&lt;img src="https://cmas.dev/img/posts/2022/12/14/7.png" alt="">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Ejecutamos nuestro archivo &lt;strong>.py&lt;/strong> y listo:
+&lt;img src="https://cmas.dev/img/posts/2022/12/14/8.png" alt="">&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Figma y Windows Fluent Design System</title><link>https://cmas.dev/posts/2022-12-07-figma-and-windows-fluent-design-system/</link><pubDate>Wed, 07 Dec 2022 21:12:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-12-07-figma-and-windows-fluent-design-system/</guid><description>&lt;p>En este corto artículo trataremos de entender las directrices de diseño y analizaremos código de interfaz de usuario para crear experiencias de aplicaciones de &lt;strong>Windows&lt;/strong>.&lt;/p>
 &lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 25252&lt;/strong>&lt;/em>&lt;/p>
 &lt;p>En el título hay dos temas, uno de ellos lo hemos visto &lt;a href="https://cmas.dev/posts/2022-04-25-introduction-to-windows-fluent-system/">aquí&lt;/a> para tratar de entenderlo. Ahora que eso quedó claro, nos queda enteder que es &lt;strong>&lt;a href="https://www.figma.com/">Figma&lt;/a>&lt;/strong>.&lt;/p>
 &lt;p>Como he escrito varios artículos del tipo &amp;ldquo;HowTo&amp;rdquo; debemos tener en claro los lineamientos de diseño para la plataforma Windows, pues el próximo año nos enfocaremos en &lt;strong>WinUI&lt;/strong>&lt;/p>
