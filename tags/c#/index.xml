@@ -1,4 +1,87 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>C# on Blog de Christian Amado</title><link>https://cmas.dev/tags/c#/</link><description>Recent content in C# on Blog de Christian Amado</description><generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>biz@cmas.dev (Christian Amado)</managingEditor><webMaster>biz@cmas.dev (Christian Amado)</webMaster><lastBuildDate>Wed, 03 Nov 2021 19:05:24 -0400</lastBuildDate><atom:link href="https://cmas.dev/tags/c#/index.xml" rel="self" type="application/rss+xml"/><item><title>Business Central: Consumir servicios web SOAP desde .NET</title><link>https://cmas.dev/posts/2021-11-03-business-central-consumir-servicios-soap-dotnet/</link><pubDate>Wed, 03 Nov 2021 19:05:24 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2021-11-03-business-central-consumir-servicios-soap-dotnet/</guid><description>&lt;p>En este artículo mostraré cómo consumir un servicio desde Microsoft Dynamics 365 Business Central con Microsoft .NET.&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>C# on Blog de Christian Amado</title><link>https://cmas.dev/tags/c#/</link><description>Recent content in C# on Blog de Christian Amado</description><generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>biz@cmas.dev (Christian Amado)</managingEditor><webMaster>biz@cmas.dev (Christian Amado)</webMaster><lastBuildDate>Wed, 15 Mar 2023 20:57:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/tags/c#/index.xml" rel="self" type="application/rss+xml"/><item><title>Creando una aplicación tipo Chat en WPF usando Telerik</title><link>https://cmas.dev/posts/2023-03-15-creating-chat-app-wpf-using-telerik/</link><pubDate>Wed, 15 Mar 2023 20:57:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2023-03-15-creating-chat-app-wpf-using-telerik/</guid><description>&lt;p>En este artículo veremos cómo crear una aplicación de Chat en &lt;strong>WPF&lt;/strong> con &lt;strong>Telerik&lt;/strong>. (Antesala de todo el tema de &lt;a href="https://openai.com/blog/chatgpt/">ChatGPT&lt;/a>)&lt;/p>
+&lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 25290&lt;/strong>&lt;/em>&lt;/p>
+&lt;p>Es raro, que después de tantos años vuelva a escribir un artículo sobre WPF (el último fue &lt;a href="https://cmasdevnet.blogspot.com/2016/03/wpf-how-to-notificaciones-en-bandeja-de.html">este&lt;/a>) pero amerita hacerlo pues encontré un botón muy práctico para todo lo relacionado con este nuevo ¡BOOM! que es el ChatGPT.&lt;/p>
+&lt;p>El control en cuestión es &lt;a href="https://docs.telerik.com/devtools/wpf/controls/radchat/overview">RadChat&lt;/a> que es parte del &lt;a href="https://www.telerik.com/conversational-ui">&lt;strong>ConversationalUI&lt;/strong>&lt;/a> de &lt;strong>Telerik&lt;/strong>. Esto representa un Chat agnóstico para casi todas sus plataformas (aún no disponible para &lt;strong>WinUI&lt;/strong> ni &lt;strong>Blazor&lt;/strong> que me interesan muchísimo).&lt;/p>
+&lt;h2 id="proyecto-wpf">Proyecto WPF&lt;/h2>
+&lt;ol>
+&lt;li>
+&lt;p>Vamos a crear un proyecto de tipo &lt;strong>WPF&lt;/strong>:
+&lt;img src="https://cmas.dev/img/posts/2023/03/15/1.png" alt="">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Colocamos un nombre descriptivo:
+&lt;img src="https://cmas.dev/img/posts/2023/03/15/2.png" alt="">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Seguimos los pasos en pantalla.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Agregamos las librerías necesarias:
+&lt;img src="https://cmas.dev/img/posts/2023/03/15/3.png" alt="">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Insertamos el control &lt;strong>XAML&lt;/strong>:&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">&amp;lt;Window x:Class=&amp;#34;TelerikWpfChat.MainWindow&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> xmlns=&amp;#34;http://schemas.microsoft.com/winfx/2006/xaml/presentation&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> xmlns:x=&amp;#34;http://schemas.microsoft.com/winfx/2006/xaml&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> xmlns:telerik=&amp;#34;http://schemas.telerik.com/2008/xaml/presentation&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Title=&amp;#34;MainWindow&amp;#34; Height=&amp;#34;350&amp;#34; Width=&amp;#34;525&amp;#34;&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Grid&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;telerik:RadChat Name=&amp;#34;chat&amp;#34; SendMessage=&amp;#34;chat_SendMessage&amp;#34; &amp;gt;&amp;lt;/telerik:RadChat&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/Grid&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;/Window&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="6">
+&lt;li>
+&lt;p>Probamos la aplicación:
+&lt;img src="https://cmas.dev/img/posts/2023/03/15/4.png" alt="">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Entonces, el código C# nos quedaría así:&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">using System.Windows;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">using Telerik.Windows.Controls.ConversationalUI;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">namespace TelerikWpfChat
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> /// &amp;lt;summary&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> /// Interaction logic for MainWindow.xaml
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> /// &amp;lt;/summary&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> public partial class MainWindow : Window
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> //Creamos los objetos que interactúan en el Chat
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> private Author currentAuthor;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> private Author externalAuthor;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> public MainWindow()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> InitializeComponent();
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> //Asignamos nombres
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> currentAuthor = new Author(&amp;#34;Christian&amp;#34;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> externalAuthor = new Author(&amp;#34;External&amp;#34;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> this.chat.CurrentAuthor = currentAuthor;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> private void chat_SendMessage(object sender, SendMessageEventArgs e)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> e.Handled = true;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> //El texto que escribimos en el chat
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> var updatedMessageText = (e.Message as TextMessage).Text;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> this.chat.AddMessage(this.chat.CurrentAuthor, updatedMessageText);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> //La respuesta que obtenemos acada interacción
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> this.chat.CurrentAuthor = externalAuthor;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> this.chat.AddMessage(this.chat.CurrentAuthor, &amp;#34;¡No tengo respuestas aún!&amp;#34;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Listo, de esta forma logramos hacer un pequeño Chat (que puede convertirse en ChatBot). Y nos queda algo así:
+&lt;img src="https://cmas.dev/img/posts/2023/03/15/5.png" alt="">&lt;/p>
+&lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Business Central: Consumir servicios web SOAP desde .NET</title><link>https://cmas.dev/posts/2021-11-03-business-central-consumir-servicios-soap-dotnet/</link><pubDate>Wed, 03 Nov 2021 19:05:24 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2021-11-03-business-central-consumir-servicios-soap-dotnet/</guid><description>&lt;p>En este artículo mostraré cómo consumir un servicio desde Microsoft Dynamics 365 Business Central con Microsoft .NET.&lt;/p>
 &lt;p>&lt;em>&lt;!-- raw HTML omitted -->Versión: 2021 Wave 1 (KID: 5007779)&lt;!-- raw HTML omitted -->&lt;/em>&lt;/p>
 &lt;h2 id="en-microsoft-dynamics-365-business-central">En Microsoft Dynamics 365 Business Central&lt;/h2>
 &lt;p>Primero, verificamos que el servicio de Microsoft Dynamics 365 esté habilitado para &lt;strong>SOAP&lt;/strong>:&lt;br>

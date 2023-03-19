@@ -1,4 +1,132 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Windows 11 on Blog de Christian Amado</title><link>https://cmas.dev/tags/windows-11/</link><description>Recent content in Windows 11 on Blog de Christian Amado</description><generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>biz@cmas.dev (Christian Amado)</managingEditor><webMaster>biz@cmas.dev (Christian Amado)</webMaster><lastBuildDate>Wed, 21 Dec 2022 19:39:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/tags/windows-11/index.xml" rel="self" type="application/rss+xml"/><item><title>Django sobre WSL</title><link>https://cmas.dev/posts/2022-12-21-developing-python-on-wsl/</link><pubDate>Wed, 21 Dec 2022 19:39:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-12-21-developing-python-on-wsl/</guid><description>&lt;p>En este corto artículo veremos cómo desarrollar sobre &lt;strong>WSL (Windows Subsystem for Linux)&lt;/strong> con &lt;strong>Python&lt;/strong> y &lt;strong>Django&lt;/strong>. Ya hemos visto que lo podemos hacer con &lt;a href="https://cmas.dev/posts/2022-06-29-java-with-wsl-part-2/">Java&lt;/a>&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Windows 11 on Blog de Christian Amado</title><link>https://cmas.dev/tags/windows-11/</link><description>Recent content in Windows 11 on Blog de Christian Amado</description><generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>biz@cmas.dev (Christian Amado)</managingEditor><webMaster>biz@cmas.dev (Christian Amado)</webMaster><lastBuildDate>Fri, 17 Mar 2023 21:25:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/tags/windows-11/index.xml" rel="self" type="application/rss+xml"/><item><title>Ingresando a ChatGPT desde Paraguay</title><link>https://cmas.dev/posts/2023-03-17-chatgpt-from-paraguay/</link><pubDate>Fri, 17 Mar 2023 21:25:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2023-03-17-chatgpt-from-paraguay/</guid><description>&lt;p>En este artículo veremos cómo crear una cuenta en OpenAI para utilizar su famoso producto &lt;strong>ChatGPT&lt;/strong> y obtener acceso a su API para usarlo en nuestros desarrollos de &lt;strong>Windows&lt;/strong>.&lt;/p>
+&lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 25314&lt;/strong>&lt;/em>&lt;/p>
+&lt;p>Debemos crear una cuenta en OpenAI para poder utilizar el ChatGPT que está revolucionando el mercado tecnológico en los últimos días. ¡El famoso chat que sabe todo!&lt;/p>
+&lt;h2 id="instalar-vpn">Instalar VPN&lt;/h2>
+&lt;ol>
+&lt;li>
+&lt;p>Buscamos la extensión para &lt;strong>Microsoft Edge&lt;/strong> con el nombre &lt;strong>Free VPN for Edge&lt;/strong>:
+&lt;img src="https://cmas.dev/img/posts/2023/03/17/1.png" alt="">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Agregamos la extensión:
+&lt;img src="https://cmas.dev/img/posts/2023/03/17/2.png" alt="">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Siguiente a toda la publicidad:
+&lt;img src="https://cmas.dev/img/posts/2023/03/17/3.png" alt="">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Seleccionamos un país como EEUU o Francia (en Paraguay) y hacemos clic en el botón de encendido:
+&lt;img src="https://cmas.dev/img/posts/2023/03/17/4.png" alt="">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Listo. Debemos ingresar al sitio oficial del chat sin problemas&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="chatgpt">ChatGPT&lt;/h2>
+&lt;ol>
+&lt;li>
+&lt;p>Ir al sitio oficial del &lt;a href="https://chat.openai.com/chat">chat&lt;/a> e iniciar sesión:
+&lt;img src="https://cmas.dev/img/posts/2023/03/17/5.png" alt="">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Colocar los datos personales:
+&lt;img src="https://cmas.dev/img/posts/2023/03/17/6.png" alt="">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Verificar el número de teléfono:
+&lt;img src="https://cmas.dev/img/posts/2023/03/17/7.png" alt="">&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;p>Para este caso no funciona un número de Paraguay, debe ser un número que corresponda a algunos de los &lt;a href="https://platform.openai.com/docs/supported-countries">países habilitados&lt;/a> pero lo podemos hacer con algunas herramientas que se encuentran gracias a &lt;strong>Microsoft Bing&lt;/strong>.&lt;/p>
+&lt;ol start="4">
+&lt;li>Luego de la verificación, podremos ingresar a la plataforma:
+&lt;img src="https://cmas.dev/img/posts/2023/03/17/78.png" alt="">&lt;/li>
+&lt;/ol>
+&lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Creando una aplicación tipo Chat en WPF usando Telerik</title><link>https://cmas.dev/posts/2023-03-15-creating-chat-app-wpf-using-telerik/</link><pubDate>Wed, 15 Mar 2023 20:57:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2023-03-15-creating-chat-app-wpf-using-telerik/</guid><description>&lt;p>En este artículo veremos cómo crear una aplicación de Chat en &lt;strong>WPF&lt;/strong> con &lt;strong>Telerik&lt;/strong>. (Antesala de todo el tema de &lt;a href="https://openai.com/blog/chatgpt/">ChatGPT&lt;/a>)&lt;/p>
+&lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 25290&lt;/strong>&lt;/em>&lt;/p>
+&lt;p>Es raro, que después de tantos años vuelva a escribir un artículo sobre WPF (el último fue &lt;a href="https://cmasdevnet.blogspot.com/2016/03/wpf-how-to-notificaciones-en-bandeja-de.html">este&lt;/a>) pero amerita hacerlo pues encontré un botón muy práctico para todo lo relacionado con este nuevo ¡BOOM! que es el ChatGPT.&lt;/p>
+&lt;p>El control en cuestión es &lt;a href="https://docs.telerik.com/devtools/wpf/controls/radchat/overview">RadChat&lt;/a> que es parte del &lt;a href="https://www.telerik.com/conversational-ui">&lt;strong>ConversationalUI&lt;/strong>&lt;/a> de &lt;strong>Telerik&lt;/strong>. Esto representa un Chat agnóstico para casi todas sus plataformas (aún no disponible para &lt;strong>WinUI&lt;/strong> ni &lt;strong>Blazor&lt;/strong> que me interesan muchísimo).&lt;/p>
+&lt;h2 id="proyecto-wpf">Proyecto WPF&lt;/h2>
+&lt;ol>
+&lt;li>
+&lt;p>Vamos a crear un proyecto de tipo &lt;strong>WPF&lt;/strong>:
+&lt;img src="https://cmas.dev/img/posts/2023/03/15/1.png" alt="">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Colocamos un nombre descriptivo:
+&lt;img src="https://cmas.dev/img/posts/2023/03/15/2.png" alt="">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Seguimos los pasos en pantalla.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Agregamos las librerías necesarias:
+&lt;img src="https://cmas.dev/img/posts/2023/03/15/3.png" alt="">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Insertamos el control &lt;strong>XAML&lt;/strong>:&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">&amp;lt;Window x:Class=&amp;#34;TelerikWpfChat.MainWindow&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> xmlns=&amp;#34;http://schemas.microsoft.com/winfx/2006/xaml/presentation&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> xmlns:x=&amp;#34;http://schemas.microsoft.com/winfx/2006/xaml&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> xmlns:telerik=&amp;#34;http://schemas.telerik.com/2008/xaml/presentation&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Title=&amp;#34;MainWindow&amp;#34; Height=&amp;#34;350&amp;#34; Width=&amp;#34;525&amp;#34;&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Grid&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;telerik:RadChat Name=&amp;#34;chat&amp;#34; SendMessage=&amp;#34;chat_SendMessage&amp;#34; &amp;gt;&amp;lt;/telerik:RadChat&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/Grid&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;/Window&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="6">
+&lt;li>
+&lt;p>Probamos la aplicación:
+&lt;img src="https://cmas.dev/img/posts/2023/03/15/4.png" alt="">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Entonces, el código C# nos quedaría así:&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">using System.Windows;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">using Telerik.Windows.Controls.ConversationalUI;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">namespace TelerikWpfChat
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> /// &amp;lt;summary&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> /// Interaction logic for MainWindow.xaml
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> /// &amp;lt;/summary&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> public partial class MainWindow : Window
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> //Creamos los objetos que interactúan en el Chat
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> private Author currentAuthor;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> private Author externalAuthor;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> public MainWindow()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> InitializeComponent();
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> //Asignamos nombres
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> currentAuthor = new Author(&amp;#34;Christian&amp;#34;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> externalAuthor = new Author(&amp;#34;External&amp;#34;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> this.chat.CurrentAuthor = currentAuthor;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> private void chat_SendMessage(object sender, SendMessageEventArgs e)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> e.Handled = true;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> //El texto que escribimos en el chat
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> var updatedMessageText = (e.Message as TextMessage).Text;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> this.chat.AddMessage(this.chat.CurrentAuthor, updatedMessageText);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> //La respuesta que obtenemos acada interacción
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> this.chat.CurrentAuthor = externalAuthor;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> this.chat.AddMessage(this.chat.CurrentAuthor, &amp;#34;¡No tengo respuestas aún!&amp;#34;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Listo, de esta forma logramos hacer un pequeño Chat (que puede convertirse en ChatBot). Y nos queda algo así:
+&lt;img src="https://cmas.dev/img/posts/2023/03/15/5.png" alt="">&lt;/p>
+&lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Django sobre WSL</title><link>https://cmas.dev/posts/2022-12-21-django-on-wsl/</link><pubDate>Wed, 21 Dec 2022 19:39:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-12-21-django-on-wsl/</guid><description>&lt;p>En este corto artículo veremos cómo desarrollar sobre &lt;strong>WSL (Windows Subsystem for Linux)&lt;/strong> con &lt;strong>Python&lt;/strong> y &lt;strong>Django&lt;/strong>. Ya hemos visto que lo podemos hacer con &lt;a href="https://cmas.dev/posts/2022-06-29-java-with-wsl-part-2/">Java&lt;/a>&lt;/p>
 &lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 25267&lt;/strong>&lt;/em>&lt;/p>
 &lt;p>&lt;strong>WSL&lt;/strong> nos ofrece demasiadas ventajas a la hora de desarrollar software sobre el sistema operativo Linux, en este caso &lt;strong>Ubuntu&lt;/strong>. Hoy en día Python es un lenguaje demasiado difundido y muy utilizado en varios ámbitos, con sus ventajas y desventajas como todas las plataformas existentes. A eso le sumaron un Framework muy potente y completo &amp;ldquo;&lt;strong>Django&lt;/strong>&amp;rdquo;.&lt;/p>
 &lt;p>Aquí veremos como instalar y ejecutar una aplicación web &lt;strong>Django&lt;/strong> utilizando &lt;strong>Visual Studio Code&lt;/strong>.&lt;/p>
