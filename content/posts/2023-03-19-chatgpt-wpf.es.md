@@ -10,7 +10,7 @@ cover-img: /img/posts/cover/win11.png
 share_img: /img/posts/shared/windows.jpg
 ---
 
-En este artículo veremos cómo crar un Chat con la API de **ChatGPT** y **WPF** con controles **Telerik**. 
+En este artículo veremos cómo crear un Chat con la API de **ChatGPT** y **WPF** con controles **Telerik**. 
 
 ***Windows 11 Insider Preview Build 25314***
 

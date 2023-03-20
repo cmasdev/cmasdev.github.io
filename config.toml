@@ -12,6 +12,7 @@ enableGitInfo = false
 defaultContentLanguage = 'es'
 disqusShortname = "cmasblog"
 googleAnalytics = "UA-167429830-1"
+timeZone = "America/Asuncion"
 
 [Params]
     mainSections = ["posts"]
