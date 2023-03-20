@@ -206,12 +206,8 @@
 &lt;li>Volvemos a ejecutar con &lt;em>F5&lt;/em> y disfrutamos del chat.&lt;/li>
 &lt;/ol>
 &lt;h2 id="cómo-interactúa">¿Cómo interactúa?&lt;/h2>
-&lt;p>Jugando un poco con la &lt;em>API&lt;/em> de &lt;strong>ChatGPT&lt;/strong> logramos esta funcionalidad:
-&lt;video width=100% controls autoplay>
-&lt;source src="https://1drv.ms/v/s!Aokqh6tEjCUHhctL22ttWQ4fDacu_g?e=mT7aeR" type="video/mp4">
-Your browser does not support the video tag.
-&lt;/video>
-&lt;/p>
+&lt;p>Jugando un poco con la &lt;em>API&lt;/em> de &lt;strong>ChatGPT&lt;/strong> logramos esta funcionalidad:&lt;/p>
+&lt;!-- raw HTML omitted -->
 &lt;p>El código fuente completo &lt;a href="https://github.com/cmasdev/TelerikWpfChatGPT">se encuentra en GitHub&lt;/a>.&lt;/p>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Ingresando a ChatGPT desde Paraguay</title><link>https://cmas.dev/posts/2023-03-17-chatgpt-from-paraguay/</link><pubDate>Fri, 17 Mar 2023 21:25:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2023-03-17-chatgpt-from-paraguay/</guid><description>&lt;p>En este artículo veremos cómo crear una cuenta en OpenAI para utilizar su famoso producto &lt;strong>ChatGPT&lt;/strong> y obtener acceso a su API para usarlo en nuestros desarrollos de &lt;strong>Windows&lt;/strong>.&lt;/p>
 &lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 25314&lt;/strong>&lt;/em>&lt;/p>
