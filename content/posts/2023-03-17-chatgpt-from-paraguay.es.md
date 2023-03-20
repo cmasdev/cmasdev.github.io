@@ -46,6 +46,6 @@ Debemos crear una cuenta en OpenAI para poder utilizar el ChatGPT que está revo
 Para este caso no funciona un número de Paraguay, debe ser un número que corresponda a algunos de los [países habilitados](https://platform.openai.com/docs/supported-countries) pero lo podemos hacer con algunas herramientas que se encuentran gracias a **Microsoft Bing**.
 
 4. Luego de la verificación, podremos ingresar a la plataforma:
-![](/img/posts/2023/03/17/78.png)
+![](/img/posts/2023/03/17/8.png)
 
 ¡Espero resulte útil!
