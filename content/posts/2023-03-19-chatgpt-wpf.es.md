@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Django sobre WSL"
+title: "ChatGPT en WPF"
 author: Christian Amado
 date: 2023-03-19 21:01:00 -0400
 category: [Desarrollo de software]
