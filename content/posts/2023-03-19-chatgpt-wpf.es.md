@@ -222,7 +222,7 @@ namespace TelerikWpfChat
 Jugando un poco con la *API* de **ChatGPT** logramos esta funcionalidad:
 {{< raw >}}    
 <video width=100% controls autoplay>
-<source src="/img/posts/2023/03/19/chatgptWPF.mp4" type="video/mp4">
+<source src="https://1drv.ms/v/s!Aokqh6tEjCUHhctL22ttWQ4fDacu_g?e=mT7aeR" type="video/mp4">
 Your browser does not support the video tag.  
 </video> 
 {{< /raw >}}
