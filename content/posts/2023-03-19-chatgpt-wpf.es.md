@@ -220,12 +220,7 @@ namespace TelerikWpfChat
 
 ## ¿Cómo interactúa?
 Jugando un poco con la *API* de **ChatGPT** logramos esta funcionalidad:
-{{< raw >}}    
-<video width=100% controls autoplay>
-<source src="https://1drv.ms/v/s!Aokqh6tEjCUHhctL22ttWQ4fDacu_g?e=mT7aeR" type="video/mp4">
-Your browser does not support the video tag.  
-</video> 
-{{< /raw >}}
+<iframe src="https://onedrive.live.com/embed?cid=07258C44AB872A89&resid=7258C44AB872A89%2191595&authkey=AI_DcH0T7mf6r-w" width="320" height="241" frameborder="0" scrolling="no" allowfullscreen></iframe>
 
 El código fuente completo [se encuentra en GitHub](https://github.com/cmasdev/TelerikWpfChatGPT).
 
