@@ -1,4 +1,219 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Blog de Christian Amado</title><link>https://cmas.dev/</link><description>Recent content on Blog de Christian Amado</description><generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>biz@cmas.dev (Christian Amado)</managingEditor><webMaster>biz@cmas.dev (Christian Amado)</webMaster><lastBuildDate>Fri, 17 Mar 2023 21:25:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/index.xml" rel="self" type="application/rss+xml"/><item><title>Ingresando a ChatGPT desde Paraguay</title><link>https://cmas.dev/posts/2023-03-17-chatgpt-from-paraguay/</link><pubDate>Fri, 17 Mar 2023 21:25:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2023-03-17-chatgpt-from-paraguay/</guid><description>&lt;p>En este artículo veremos cómo crear una cuenta en OpenAI para utilizar su famoso producto &lt;strong>ChatGPT&lt;/strong> y obtener acceso a su API para usarlo en nuestros desarrollos de &lt;strong>Windows&lt;/strong>.&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Blog de Christian Amado</title><link>https://cmas.dev/</link><description>Recent content on Blog de Christian Amado</description><generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>biz@cmas.dev (Christian Amado)</managingEditor><webMaster>biz@cmas.dev (Christian Amado)</webMaster><lastBuildDate>Sun, 19 Mar 2023 09:01:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/index.xml" rel="self" type="application/rss+xml"/><item><title>ChatGPT en WPF</title><link>https://cmas.dev/posts/2023-03-19-chatgpt-wpf/</link><pubDate>Sun, 19 Mar 2023 09:01:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2023-03-19-chatgpt-wpf/</guid><description>&lt;p>En este artículo veremos cómo crear un Chat con la API de &lt;strong>ChatGPT&lt;/strong> y &lt;strong>WPF&lt;/strong> con controles &lt;strong>Telerik&lt;/strong>.&lt;/p>
+&lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 25314&lt;/strong>&lt;/em>&lt;/p>
+&lt;p>En el articulo de &lt;a href="https://cmas.dev/posts/2023-03-15-creating-chat-app-wpf-using-telerik/">la semana pasada&lt;/a> hemos visto cómo crear una pequeña aplicación tipo Chat con &lt;strong>Telerik&lt;/strong>. El viernes, &lt;a href="https://cmas.dev/posts/2023-03-17-chatgpt-from-paraguay/">vimos cómo habilitar &lt;strong>ChatGPT&lt;/strong>&lt;/a> en Paraguay (teniendo en cuenta que no está habilitado oficialmente aún).&lt;/p>
+&lt;h2 id="creando-una-aplicación">Creando una aplicación&lt;/h2>
+&lt;ol>
+&lt;li>
+&lt;p>Abrimos &lt;strong>Visual Studio Professional 2022&lt;/strong> (va servir la edición &lt;strong>Community&lt;/strong>).&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Agregamos los paquetes &lt;strong>NuGet&lt;/strong> necesarios para nuestro proyecto:
+&lt;img src="https://cmas.dev/img/posts/2023/03/19/1.png" alt="">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Agregar configuraciones de la aplicación:
+&lt;img src="https://cmas.dev/img/posts/2023/03/19/2.png" alt="">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Adicionar las configuraciones en el archivo creado:
+&lt;img src="https://cmas.dev/img/posts/2023/03/19/3.png" alt="">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Vamos a trabajar con &lt;strong>RadChat&lt;/strong> de &lt;strong>Telerik for WPF&lt;/strong>, así que debemos agregar el modelo para &lt;strong>TextMessage&lt;/strong>. Entonces, agregamos la clase en cuestión:&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">using System;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">using Telerik.Windows.Controls.ConversationalUI;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">namespace TelerikWpfChat
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> public class TextMessageModel
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> public string Text { get; set; }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> public Author Author { get; set; }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> public DateTime CreationDate { get; set; }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="6">
+&lt;li>Dentro del &lt;em>Framework&lt;/em> que utiliza &lt;strong>Telerik Conversational UI&lt;/strong> y &lt;strong>WPF&lt;/strong> se hace muy común el uso de conversores para manipalutación de datos que se modifican a nivel visual. Entonces, aplicamos el conversor:&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">using Telerik.Windows.Controls.ConversationalUI;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">namespace TelerikWpfChat
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> public class MessageConverter : IMessageConverter
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> public MessageBase ConvertItem(object item)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> var messageModel = (TextMessageModel)item;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> return new TextMessage(messageModel.Author, messageModel.Text, messageModel.CreationDate);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> public object ConvertMessage(MessageBase message)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> var textMessage = (TextMessage)message;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> return new TextMessageModel()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Author = textMessage.Author,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Text = textMessage.Text,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> CreationDate = textMessage.CreationDate
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> };
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="4">
+&lt;li>Creamos el &lt;em>ViewModel&lt;/em> que va interactuar entre el &lt;strong>ChatGPT&lt;/strong> y &lt;strong>WPF&lt;/strong>. Tener en cuenta que aquí se encuentra la llamada a la API de &lt;strong>GPT&lt;/strong>:&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">using System;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">using System.Collections.ObjectModel;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">using Telerik.Windows.Controls.ConversationalUI;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">using System.Threading.Tasks;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">using System.Net.Http;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">using System.Windows.Threading;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">using System.Windows;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">using Newtonsoft.Json;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">namespace TelerikWpfChat
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> public class ChatViewModel
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> public ObservableCollection&amp;lt;TextMessageModel&amp;gt; Messages { get; set; }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> public Author CurrentAuthor { get; private set; }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> public Author OtherAuthor { get; private set; }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> public ChatViewModel()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> this.CurrentAuthor = new Author(&amp;#34;Christian&amp;#34;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> this.OtherAuthor = new Author(&amp;#34;GPT&amp;#34;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> if (this.Messages == null)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> this.Messages = new ObservableCollection&amp;lt;TextMessageModel&amp;gt;();
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> internal async Task SendCurrentMessage(string prompt)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> //Agregamos nuestra interacción
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> this.Messages.Add(new TextMessageModel() { Text = prompt, Author = CurrentAuthor, CreationDate = DateTime.Now });
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> //Llamamos a la API de GPT
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> var result = await sendToGpt(prompt);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> if (result == null)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> MessageBox.Show(&amp;#34;Error en la Matrix!&amp;#34;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> return;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> //Obtenemos los resultados y le pasamos a la interfaz en un hilo separado
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> await Dispatcher.CurrentDispatcher.BeginInvoke((Action)(() =&amp;gt; {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> this.Messages.Add(new TextMessageModel() { Text = result, Author = OtherAuthor, CreationDate = DateTime.Now });
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }));
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> private async Task&amp;lt;string&amp;gt; sendToGpt(string prompt)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> var apiKey = Properties.Settings.Default.ApiGPTChat;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> var model = Properties.Settings.Default.Model;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> var maxTokens = 500;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> using var client = new HttpClient();
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> client.DefaultRequestHeaders.Add(&amp;#34;Authorization&amp;#34;, $&amp;#34;Bearer {apiKey}&amp;#34;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> var url = &amp;#34;https://api.openai.com/v1/completions&amp;#34;;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> var requestBody = new
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> prompt = prompt,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> model = model,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> temperature = 0.5,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> max_tokens = maxTokens,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> n = 1
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> };
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> var postJson = System.Text.Json.JsonSerializer.Serialize(requestBody);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> var response = await client.PostAsync(url,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> new StringContent(postJson,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> System.Text.Encoding.UTF8, &amp;#34;application/json&amp;#34;));
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> var responseBody = await response.Content.ReadAsStringAsync();
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> dynamic responseData = JsonConvert.DeserializeObject&amp;lt;dynamic&amp;gt;(responseBody);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> int lastChoice = responseData.choices.Count - 1;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> return responseData.choices[lastChoice].text;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="5">
+&lt;li>Creamos el diseño de nuestro Chat inteligente:&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">&amp;lt;Window x:Class=&amp;#34;TelerikWpfChat.MainWindow&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> xmlns=&amp;#34;http://schemas.microsoft.com/winfx/2006/xaml/presentation&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> xmlns:x=&amp;#34;http://schemas.microsoft.com/winfx/2006/xaml&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> xmlns:telerik=&amp;#34;http://schemas.telerik.com/2008/xaml/presentation&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> xmlns:local=&amp;#34;clr-namespace:TelerikWpfChat&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Title=&amp;#34;ChatGPT on WPF&amp;#34; Height=&amp;#34;600&amp;#34; Width=&amp;#34;800&amp;#34;&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Grid&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;telerik:RadChat Margin=&amp;#34;10&amp;#34; CurrentAuthor=&amp;#34;{Binding CurrentAuthor}&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> DataSource=&amp;#34;{Binding Messages}&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> SendMessage=&amp;#34;chat_SendMessage&amp;#34;&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;telerik:RadChat.DataContext&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;local:ChatViewModel /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/telerik:RadChat.DataContext&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;telerik:RadChat.MessageConverter&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;local:MessageConverter /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/telerik:RadChat.MessageConverter&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/telerik:RadChat&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/Grid&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;/Window&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://cmas.dev/img/posts/2023/03/19/4.png" alt="">&lt;/p>
+&lt;ol start="6">
+&lt;li>Agregamos la llamada al evento que envía mensaje en nuestra página &lt;strong>WPF&lt;/strong> (incluye trabajo asíncronos y multihilo):&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">using System.Windows;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">using Telerik.Windows.Controls;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">using Telerik.Windows.Controls.ConversationalUI;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">namespace TelerikWpfChat
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> public partial class MainWindow : Window
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> public MainWindow()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> InitializeComponent();
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> private async void chat_SendMessage(object sender, SendMessageEventArgs e)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> e.Handled = true;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> var chat = sender as RadChat;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> var model = (ChatViewModel)chat.DataContext;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> var mensaje = e.Message as TextMessage;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> chat.TypingIndicatorVisibility = Visibility.Visible;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> chat.TypingIndicatorText = &amp;#34;Esperando respuesta de &amp;#34; + model.OtherAuthor.Name;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> await model.SendCurrentMessage(mensaje.Text);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> chat.TypingIndicatorVisibility = Visibility.Collapsed;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> chat.TypingIndicatorText =string.Empty;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="7">
+&lt;li>Volvemos a ejecutar con &lt;em>F5&lt;/em> y disfrutamos del chat.&lt;/li>
+&lt;/ol>
+&lt;h2 id="cómo-interactúa">¿Cómo interactúa?&lt;/h2>
+&lt;p>Jugando un poco con la &lt;em>API&lt;/em> de &lt;strong>ChatGPT&lt;/strong> logramos esta funcionalidad:
+&lt;video width=100% controls autoplay>
+&lt;source src="https://cmas.dev/img/posts/2023/03/19/chatgptWPF.mp4" type="video/mp4">
+Your browser does not support the video tag.
+&lt;/video>
+&lt;/p>
+&lt;p>El código fuente completo &lt;a href="https://github.com/cmasdev/TelerikWpfChatGPT">se encuentra en GitHub&lt;/a>.&lt;/p>
+&lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Ingresando a ChatGPT desde Paraguay</title><link>https://cmas.dev/posts/2023-03-17-chatgpt-from-paraguay/</link><pubDate>Fri, 17 Mar 2023 21:25:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2023-03-17-chatgpt-from-paraguay/</guid><description>&lt;p>En este artículo veremos cómo crear una cuenta en OpenAI para utilizar su famoso producto &lt;strong>ChatGPT&lt;/strong> y obtener acceso a su API para usarlo en nuestros desarrollos de &lt;strong>Windows&lt;/strong>.&lt;/p>
 &lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 25314&lt;/strong>&lt;/em>&lt;/p>
 &lt;p>Debemos crear una cuenta en OpenAI para poder utilizar el ChatGPT que está revolucionando el mercado tecnológico en los últimos días. ¡El famoso chat que sabe todo!&lt;/p>
 &lt;h2 id="instalar-vpn">Instalar VPN&lt;/h2>
