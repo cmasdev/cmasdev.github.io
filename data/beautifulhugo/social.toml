@@ -14,7 +14,7 @@ icon = "fab fa-github"
 id = "mastodon"
 url = "https://%s"
 title = "Mastodon"
-icon = "fa-brands fa-mastodon"
+icon = "fab fa-mastodon"
 
 [[social_icons]]
 id = "twitter"
