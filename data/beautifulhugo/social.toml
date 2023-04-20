@@ -11,6 +11,12 @@ title = "GitHub"
 icon = "fab fa-github"
 
 [[social_icons]]
+id = "mastodon"
+url = "https://%s"
+title = "Mastodon"
+icon = "fa-brands fa-mastodon"
+
+[[social_icons]]
 id = "twitter"
 url = "https://twitter.com/%s"
 title = "Twitter"
