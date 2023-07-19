@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Microsoft Most Valuable Professional 2022/2023"
+title: "Microsoft Most Valuable Professional 2023/2024"
 author: "Christian Amado"
 date: 2023-07-06 00:00:00 -04:00
 categories: General
