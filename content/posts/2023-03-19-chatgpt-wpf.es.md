@@ -22,13 +22,13 @@ En el articulo de [la semana pasada](/posts/2023-03-15-creating-chat-app-wpf-usi
 1. Abrimos **Visual Studio Professional 2022** (va servir la edición **Community**).
 
 2. Agregamos los paquetes **NuGet** necesarios para nuestro proyecto:
-![](/img/posts/2023/03/19/1.png)
+![](https://i.ibb.co/H7GLDJk/1.png)
 
 3. Agregar configuraciones de la aplicación:
-![](/img/posts/2023/03/19/2.png)
+![](https://i.ibb.co/F5pTW4J/2.png)
 
 4. Adicionar las configuraciones en el archivo creado:
-![](/img/posts/2023/03/19/3.png)
+![](https://i.ibb.co/XCPVnmR/3.png)
 
 5. Vamos a trabajar con **RadChat** de **Telerik for WPF**, así que debemos agregar el modelo para **TextMessage**. Entonces, agregamos la clase en cuestión:
 ```
@@ -180,7 +180,7 @@ namespace TelerikWpfChat
     </Grid>
 </Window>
 ```
-![](/img/posts/2023/03/19/4.png)
+![](https://i.ibb.co/HHMzpp3/4.png)
 
 6. Agregamos la llamada al evento que envía mensaje en nuestra página **WPF** (incluye trabajo asíncronos y multihilo):
 ```
