@@ -14,15 +14,15 @@
 &lt;/li>
 &lt;li>
 &lt;p>Agregamos los paquetes &lt;strong>NuGet&lt;/strong> necesarios para nuestro proyecto:
-&lt;img src="https://cmas.dev/img/posts/2023/03/19/1.png" alt="">&lt;/p>
+&lt;img src="https://i.ibb.co/H7GLDJk/1.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Agregar configuraciones de la aplicación:
-&lt;img src="https://cmas.dev/img/posts/2023/03/19/2.png" alt="">&lt;/p>
+&lt;img src="https://i.ibb.co/F5pTW4J/2.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Adicionar las configuraciones en el archivo creado:
-&lt;img src="https://cmas.dev/img/posts/2023/03/19/3.png" alt="">&lt;/p>
+&lt;img src="https://i.ibb.co/XCPVnmR/3.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Vamos a trabajar con &lt;strong>RadChat&lt;/strong> de &lt;strong>Telerik for WPF&lt;/strong>, así que debemos agregar el modelo para &lt;strong>TextMessage&lt;/strong>. Entonces, agregamos la clase en cuestión:&lt;/p>
@@ -173,7 +173,7 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/telerik:RadChat&amp;gt;
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/Grid&amp;gt;
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;/Window&amp;gt;
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://cmas.dev/img/posts/2023/03/19/4.png" alt="">&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://i.ibb.co/HHMzpp3/4.png" alt="">&lt;/p>
 &lt;ol start="6">
 &lt;li>Agregamos la llamada al evento que envía mensaje en nuestra página &lt;strong>WPF&lt;/strong> (incluye trabajo asíncronos y multihilo):&lt;/li>
 &lt;/ol>
