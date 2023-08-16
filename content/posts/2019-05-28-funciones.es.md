@@ -9,7 +9,7 @@ thumbnail-img: /img/posts/thumbnails/powerapps.png
 cover-img: /img/posts/cover/powerapps.svg
 ---
 
-En la [entrada anterior](/2019/05/reglas/), vimos cómo crear reglas relacionadas a un control. En esta entrada veremos cómo utilizar las funciones propias que están incluídas dentro de Microsoft PowerApps y veremos cómo crear nuestras propias funciones. Según wikipedia...
+En la [entrada anterior](/posts/2019-05-16-reglas/), vimos cómo crear reglas relacionadas a un control. En esta entrada veremos cómo utilizar las funciones propias que están incluídas dentro de Microsoft PowerApps y veremos cómo crear nuestras propias funciones. Según wikipedia...
 
 <!--more-->
 

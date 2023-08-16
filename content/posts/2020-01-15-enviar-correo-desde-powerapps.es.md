@@ -18,7 +18,7 @@ PowerApps nos permite crear una aplicación en segundos y Power Automate (Flow) 
 En este caso crearemos un flujo que permita enviar correo y lo integraremos al PowerApps para que desde allí podamos enviar un correo.  
 
 ## Microsoft PowerApps
-Creamos una aplicación en blanco y colocamos los controles básicos de ingreso de datos y un botón "Enviar correo" ([aquí puedes aprender a agregar controles](/2019/05/controles/)):  
+Creamos una aplicación en blanco y colocamos los controles básicos de ingreso de datos y un botón "Enviar correo" ([aquí puedes aprender a agregar controles](/posts/2019-05-14-controles/)):  
 
 ![](/img/posts/migrated/2020/01/1-1.png)  
 

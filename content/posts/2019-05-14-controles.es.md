@@ -9,7 +9,7 @@ thumbnail-img: /img/posts/thumbnails/powerapps.png
 cover-img: /img/posts/cover/powerapps.svg
 ---
 
-Continuando la serie que empezamos en la [entrada anterior](/2019/05/formularios/), en esta ocasión hablaremos sobre los controles disponibles en Microsoft PowerApps.
+Continuando la serie que empezamos en la [entrada anterior](/posts/2019-05-08-formularios/), en esta ocasión hablaremos sobre los controles disponibles en Microsoft PowerApps.
 
 Como toda aplicación se necesita que éstas muestren o permitan editar cierta información dentro de ellas. En este caso, los controles se utilizan para cumplir con esa simple pero imprescindible tarea.
 
