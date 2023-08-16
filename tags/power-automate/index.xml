@@ -32,7 +32,7 @@
 &lt;p>PowerApps nos permite crear una aplicación en segundos y Power Automate (Flow) nos permite utilizar muchos servicios para integrarlos a nuestra aplicación.&lt;/p>
 &lt;p>En este caso crearemos un flujo que permita enviar correo y lo integraremos al PowerApps para que desde allí podamos enviar un correo.&lt;/p>
 &lt;h2 id="microsoft-powerapps">Microsoft PowerApps&lt;/h2>
-&lt;p>Creamos una aplicación en blanco y colocamos los controles básicos de ingreso de datos y un botón &amp;ldquo;Enviar correo&amp;rdquo; (&lt;a href="https://cmas.dev/2019/05/controles/">aquí puedes aprender a agregar controles&lt;/a>):&lt;/p>
+&lt;p>Creamos una aplicación en blanco y colocamos los controles básicos de ingreso de datos y un botón &amp;ldquo;Enviar correo&amp;rdquo; (&lt;a href="https://cmas.dev/posts/2019-05-14-controles/">aquí puedes aprender a agregar controles&lt;/a>):&lt;/p>
 &lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2020/01/1-1.png" alt="">&lt;/p>
 &lt;p>Marcamos el botón &amp;ldquo;Enviar correo&amp;rdquo;. Dentro de la aplicación, PowerApps, nos dirigimos a la pestaña &lt;strong>Action&lt;/strong> y hacemos clic en el botón &lt;strong>Power automate&lt;/strong>:&lt;/p>
 &lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2020/01/2.png" alt="">&lt;/p>
