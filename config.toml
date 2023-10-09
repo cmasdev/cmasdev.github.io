@@ -11,7 +11,7 @@ pygmentsCodefencesGuessSyntax = true
 enableGitInfo = false
 defaultContentLanguage = 'es'
 disqusShortname = "cmasblog"
-googleAnalytics = "UA-167429830-1"
+googleAnalytics = "356375808"
 timeZone = "America/Asuncion"
 
 [Params]
