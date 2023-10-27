@@ -12,5 +12,5 @@ Puedes enviarme un correo a biz@cmas.dev, pero si deseas que te responda m√°s r√
 - [Mastodon](https://dotnet.social/@christianamado)
 - [LinkedIn](https://www.linkedin.com/in/christianamado/)
 - [GitHub](https://github.com/cmasdev/)
-- [YouTube](https://www.youtube.com/channel/UCehbcF2wgg5TBGtaWlMEvyw)
+- [YouTube](https://www.youtube.com/@cmasdev)
   
