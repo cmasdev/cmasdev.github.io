@@ -9,7 +9,7 @@ Email address is biz (at) this domain. Alternatively use one of the methods belo
 
 # On the web...
 - [Twitter](https://twitter.com/christianamado/)
-- [Mastodon](https://dotnet.social/@christianamado)
+- [Mastodon](https://mastodon.social/@cmasdev)
 - [LinkedIn](https://www.linkedin.com/in/christianamado/)
 - [GitHub](https://github.com/cmasdev/)
 - [YouTube](https://www.youtube.com/@cmasdev)
