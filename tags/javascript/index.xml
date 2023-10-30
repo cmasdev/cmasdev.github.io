@@ -8,19 +8,19 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> alert(&amp;#39;Tu nombre es: &amp;#39;+ nombre);
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>En la página de Microsoft Dynamics 365 Business Central haremos la llamada al script en cuestión:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">usercontrol(html; Html)
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ApplicationArea = All;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> trigger HacerAlgo()
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> var
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> htmlText: Text;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> begin
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> htmlText := &amp;#39;&amp;lt;button type=&amp;#34;button&amp;#34; onclick=&amp;#34;ClickMe()&amp;#34;&amp;gt;Click Me!&amp;lt;/button&amp;gt;&amp;#39;;
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">usercontrol&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">html&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">Html&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ApplicationArea&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">All&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">trigger&lt;/span> &lt;span class="n">HacerAlgo&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">var&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">htmlText&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">Text&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">begin&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">htmlText&lt;/span> &lt;span class="p">:&lt;/span>&lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;&amp;lt;button type=&amp;#34;button&amp;#34; onclick=&amp;#34;ClickMe()&amp;#34;&amp;gt;Click Me!&amp;lt;/button&amp;gt;&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> CurrPage.html.Render(htmlText);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">CurrPage&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">html&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Render&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">htmlText&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> end;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">end&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>De esta manera veremos el resultado según los siguientes pasos:&lt;br>
 &lt;img src="https://cmas.dev/img/posts/2021/06/09/JS1.png" alt="">&lt;/p>
 &lt;p>&lt;img src="https://cmas.dev/img/posts/2021/06/09/JS2.png" alt="">&lt;/p>
@@ -33,22 +33,22 @@
 &lt;ol>
 &lt;li>Debemos crear un objeto de tipo &lt;em>ControlAddIn&lt;/em> en nuestro proyecto AL:&lt;/li>
 &lt;/ol>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">usercontrol(html; Html)
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ApplicationArea = All;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> trigger HacerAlgo()
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> var
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> htmlText: Text;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> begin
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> //Cargamos los elementos HTML
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> htmlText := &amp;#39;&amp;lt;b&amp;gt;Soy un elemento HTML&amp;lt;/b&amp;gt; ¿No me crees? &amp;lt;br/&amp;gt;&amp;#39; +
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#39;&amp;lt;img alt=&amp;#34;&amp;#34; src=&amp;#34;https://pbs.twimg.com/profile_images/1177530173245317122/PVFFrjO9_400x400.png&amp;#34; /&amp;gt;&amp;#39;;
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">usercontrol&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">html&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">Html&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ApplicationArea&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">All&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">trigger&lt;/span> &lt;span class="n">HacerAlgo&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">var&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">htmlText&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">Text&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">begin&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span>&lt;span class="n">Cargamos&lt;/span> &lt;span class="n">los&lt;/span> &lt;span class="n">elementos&lt;/span> &lt;span class="n">HTML&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">htmlText&lt;/span> &lt;span class="p">:&lt;/span>&lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;&amp;lt;b&amp;gt;Soy un elemento HTML&amp;lt;/b&amp;gt; ¿No me crees? &amp;lt;br/&amp;gt;&amp;#39;&lt;/span> &lt;span class="o">+&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s1">&amp;#39;&amp;lt;img alt=&amp;#34;&amp;#34; src=&amp;#34;https://pbs.twimg.com/profile_images/1177530173245317122/PVFFrjO9_400x400.png&amp;#34; /&amp;gt;&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> //Llamamos al procedimiento para inyectar el codigo HTML
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> CurrPage.html.Render(htmlText);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span>&lt;span class="n">Llamamos&lt;/span> &lt;span class="n">al&lt;/span> &lt;span class="n">procedimiento&lt;/span> &lt;span class="n">para&lt;/span> &lt;span class="n">inyectar&lt;/span> &lt;span class="n">el&lt;/span> &lt;span class="n">codigo&lt;/span> &lt;span class="n">HTML&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">CurrPage&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">html&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Render&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">htmlText&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> end;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">end&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="2">
 &lt;li>
 &lt;p>Es obligatorio introducir 2 archivos JavaScript en nuestro proyecto AL, los cuales son:&lt;/p>
@@ -81,66 +81,66 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> procedure Render(TextHtml: Text);
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>El código completo de la página se vería así:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">page 50101 SimpleCustomerCard
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> CaptionML = ENU = &amp;#39;Blog page&amp;#39;, ESP = &amp;#39;Página de Blog&amp;#39;;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> PageType = Card;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> SourceTable = Customer;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> UsageCategory = Documents;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ApplicationArea = All;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> AdditionalSearchTerms = &amp;#39;cmasdev,blog&amp;#39;;
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">page&lt;/span> &lt;span class="mi">50101&lt;/span> &lt;span class="n">SimpleCustomerCard&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">CaptionML&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">ENU&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;Blog page&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">ESP&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;Página de Blog&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">PageType&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">Card&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">SourceTable&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">Customer&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">UsageCategory&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">Documents&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ApplicationArea&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">All&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">AdditionalSearchTerms&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;cmasdev,blog&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> layout
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> area(content)
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> group(General)
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> field(&amp;#34;No.&amp;#34;; &amp;#34;No.&amp;#34;)
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ApplicationArea = All;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> CaptionML = ENU = &amp;#39;Code&amp;#39;, ESP = &amp;#39;Código&amp;#39;;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">layout&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">area&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">content&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">group&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">General&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">field&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;No.&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="s2">&amp;#34;No.&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ApplicationArea&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">All&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">CaptionML&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">ENU&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;Code&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">ESP&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;Código&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> trigger OnValidate()
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> begin
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> if &amp;#34;No.&amp;#34; &amp;lt; &amp;#39;&amp;#39; then
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Message(&amp;#39;Invalido&amp;#39;)
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> end;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">trigger&lt;/span> &lt;span class="n">OnValidate&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">begin&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="s2">&amp;#34;No.&amp;#34;&lt;/span> &lt;span class="o">&amp;lt;&lt;/span> &lt;span class="s1">&amp;#39;&amp;#39;&lt;/span> &lt;span class="n">then&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Message&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;Invalido&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">end&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> field(Name; Name)
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ApplicationArea = All;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> field(Address; Address)
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ApplicationArea = All;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">field&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">Name&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">Name&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ApplicationArea&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">All&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">field&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">Address&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">Address&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ApplicationArea&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">All&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> group(HTMLGroup)
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Caption = &amp;#39;Elementos HTML&amp;#39;;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> usercontrol(html; Html)
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ApplicationArea = All;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> trigger HacerAlgo()
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> var
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> htmlText: Text;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> begin
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> //Cargamos los elementos HTML
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> htmlText := &amp;#39;&amp;lt;b&amp;gt;Soy un elemento HTML&amp;lt;/b&amp;gt; ¿No me crees? &amp;lt;br/&amp;gt;&amp;#39; +
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#39;&amp;lt;img alt=&amp;#34;&amp;#34; src=&amp;#34;https://pbs.twimg.com/profile_images/1177530173245317122/PVFFrjO9_400x400.png&amp;#34; /&amp;gt;&amp;#39;;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">group&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">HTMLGroup&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Caption&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;Elementos HTML&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">usercontrol&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">html&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">Html&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ApplicationArea&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">All&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">trigger&lt;/span> &lt;span class="n">HacerAlgo&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">var&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">htmlText&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">Text&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">begin&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span>&lt;span class="n">Cargamos&lt;/span> &lt;span class="n">los&lt;/span> &lt;span class="n">elementos&lt;/span> &lt;span class="n">HTML&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">htmlText&lt;/span> &lt;span class="p">:&lt;/span>&lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;&amp;lt;b&amp;gt;Soy un elemento HTML&amp;lt;/b&amp;gt; ¿No me crees? &amp;lt;br/&amp;gt;&amp;#39;&lt;/span> &lt;span class="o">+&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s1">&amp;#39;&amp;lt;img alt=&amp;#34;&amp;#34; src=&amp;#34;https://pbs.twimg.com/profile_images/1177530173245317122/PVFFrjO9_400x400.png&amp;#34; /&amp;gt;&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> //Llamamos al procedimiento para inyectar el codigo HTML
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> CurrPage.html.Render(htmlText);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span>&lt;span class="n">Llamamos&lt;/span> &lt;span class="n">al&lt;/span> &lt;span class="n">procedimiento&lt;/span> &lt;span class="n">para&lt;/span> &lt;span class="n">inyectar&lt;/span> &lt;span class="n">el&lt;/span> &lt;span class="n">codigo&lt;/span> &lt;span class="n">HTML&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">CurrPage&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">html&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Render&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">htmlText&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> end;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">end&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="4">
 &lt;li>El resultado del codigo sería el siguiente:&lt;br>
 &lt;img src="https://cmas.dev/img/posts/2021/06/02/Html2.png" alt="">&lt;/li>

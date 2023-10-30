@@ -178,9 +178,9 @@
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="4">
 &lt;li>Agregamos lo siguiente a ese archivo:&lt;/li>
 &lt;/ol>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"># /etc/profile.d/maven.sh
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">export MAVEN_HOME=/opt/apache-maven/apache-maven-3.9.0/
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">export PATH=${MAVEN_HOME}/bin:${PATH}
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># /etc/profile.d/maven.sh&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="n">MAVEN_HOME&lt;/span>&lt;span class="o">=/&lt;/span>&lt;span class="n">opt&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">apache&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">maven&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">apache&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">maven&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="mf">3.9&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="o">/&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="n">PATH&lt;/span>&lt;span class="o">=$&lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="n">MAVEN_HOME&lt;/span>&lt;span class="p">}&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">bin&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="n">PATH&lt;/span>&lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="5">
 &lt;li>Convertir el archivo en ejecutable:&lt;/li>
 &lt;/ol>
@@ -224,8 +224,8 @@
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">sudo apt install default-jdk
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://cmas.dev/img/posts/2022/06/22/4.png" alt="">&lt;br>
 5. Establecemos el &lt;strong>Java Home&lt;/strong>:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">sudo vi ~/.bashrc
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">sudo&lt;/span> &lt;span class="n">vi&lt;/span> &lt;span class="o">~/.&lt;/span>&lt;span class="n">bashrc&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">export&lt;/span> &lt;span class="n">JAVA_HOME&lt;/span>&lt;span class="o">=/&lt;/span>&lt;span class="n">usr&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">lib&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">jvm&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">java&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="mi">11&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">openjdk&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">amd64&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="6">
 &lt;li>Verificamos la versión de &lt;strong>Java&lt;/strong>
 &lt;img src="https://cmas.dev/img/posts/2022/06/22/5.png" alt="">&lt;/li>
@@ -251,9 +251,9 @@
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="5">
 &lt;li>Agregamos lo siguiente a ese archivo:&lt;/li>
 &lt;/ol>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"># /etc/profile.d/gradle.sh
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">export GRADLE_HOME=/opt/gradle/gradle-7.3.3
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">export PATH=${GRADLE_HOME}/bin:${PATH}
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># /etc/profile.d/gradle.sh&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="n">GRADLE_HOME&lt;/span>&lt;span class="o">=/&lt;/span>&lt;span class="n">opt&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">gradle&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">gradle&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="mf">7.3&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="mi">3&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="n">PATH&lt;/span>&lt;span class="o">=$&lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="n">GRADLE_HOME&lt;/span>&lt;span class="p">}&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">bin&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="n">PATH&lt;/span>&lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="6">
 &lt;li>Convertir el archivo en ejecutable:&lt;/li>
 &lt;/ol>
@@ -346,12 +346,12 @@
 &lt;li>Creamos un archivo &lt;strong>app.js&lt;/strong>&lt;/li>
 &lt;li>Escribimos las siguientes líneas de código:&lt;/li>
 &lt;/ol>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">var http = require(&amp;#39;http&amp;#39;);
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">var&lt;/span> &lt;span class="n">http&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">require&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;http&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">http.createServer(function (req, res) {
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> res.writeHead(200, {&amp;#39;Content-Type&amp;#39;: &amp;#39;text/plain&amp;#39;});
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> res.end(&amp;#39;Hola desde cmas.dev!&amp;#39;);
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}).listen(8080);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">http&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">createServer&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">function&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">req&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">res&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">res&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">writeHead&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">200&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">{&lt;/span>&lt;span class="s1">&amp;#39;Content-Type&amp;#39;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;text/plain&amp;#39;&lt;/span>&lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">res&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">end&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;Hola desde cmas.dev!&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">})&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">listen&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">8080&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="3">
 &lt;li>Presionamos la tecla &lt;em>F5&lt;/em> y seleccionamos la opción &lt;strong>Node.js&lt;/strong>:
 &lt;img src="https://cmas.dev/img/posts/2022/06/08/4.png" alt="">&lt;/li>
@@ -374,12 +374,12 @@
 &lt;img src="https://cmas.dev/img/posts/2022/06/08/10.png" alt="">&lt;/li>
 &lt;li>Escribimos las siguientes líneas de código (con algunas diferencias del código anterior):&lt;/li>
 &lt;/ol>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">var http = require(&amp;#39;http&amp;#39;);
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">var&lt;/span> &lt;span class="n">http&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">require&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;http&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">http.createServer(function (req, res) {
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> res.writeHead(200, {&amp;#39;Content-Type&amp;#39;: &amp;#39;text/plain&amp;#39;});
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> res.end(&amp;#39;¡Hola desde cmas.dev y WSL!&amp;#39;);
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}).listen(8081);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">http&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">createServer&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">function&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">req&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">res&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">res&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">writeHead&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">200&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">{&lt;/span>&lt;span class="s1">&amp;#39;Content-Type&amp;#39;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;text/plain&amp;#39;&lt;/span>&lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">res&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">end&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;¡Hola desde cmas.dev y WSL!&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">})&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">listen&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">8081&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="7">
 &lt;li>Ejecutamos la aplicación desde la Terminal de &lt;strong>Ubuntu&lt;/strong>:
 &lt;img src="https://cmas.dev/img/posts/2022/06/08/12.png" alt="">&lt;/li>

@@ -37,61 +37,61 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/Grid&amp;gt;
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;/Window&amp;gt;
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Enlazamos el DataGrid con el servicio SOAP que consumimos en la aplicacion WPF:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">using System;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">using System.Security.Cryptography.X509Certificates;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">using System.ServiceModel;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">using System.ServiceModel.Security;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">using System.Windows;
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">using&lt;/span> &lt;span class="n">System&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">using&lt;/span> &lt;span class="n">System&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Security&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Cryptography&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">X509Certificates&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">using&lt;/span> &lt;span class="n">System&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">ServiceModel&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">using&lt;/span> &lt;span class="n">System&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">ServiceModel&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Security&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">using&lt;/span> &lt;span class="n">System&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Windows&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">namespace WpfBC
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> /// &amp;lt;summary&amp;gt;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> /// Interaction logic for MainWindow.xaml
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> /// &amp;lt;/summary&amp;gt;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> public partial class MainWindow : Window
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> public MainWindow()
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> InitializeComponent();
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">namespace&lt;/span> &lt;span class="n">WpfBC&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">///&lt;/span> &lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">summary&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">///&lt;/span> &lt;span class="n">Interaction&lt;/span> &lt;span class="n">logic&lt;/span> &lt;span class="k">for&lt;/span> &lt;span class="n">MainWindow&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">xaml&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">///&lt;/span> &lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">summary&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">public&lt;/span> &lt;span class="n">partial&lt;/span> &lt;span class="k">class&lt;/span> &lt;span class="n">MainWindow&lt;/span> &lt;span class="p">:&lt;/span> &lt;span class="n">Window&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">public&lt;/span> &lt;span class="n">MainWindow&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">InitializeComponent&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> private void Window_Loaded(object sender, RoutedEventArgs e)
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> string WSURL = &amp;#34;https://cmasdev:7047/BC190/WS/CRONUS%20Mexico%20S.A./Page/Plan_de_cuentas&amp;#34;;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">private&lt;/span> &lt;span class="n">void&lt;/span> &lt;span class="n">Window_Loaded&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">object&lt;/span> &lt;span class="n">sender&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">RoutedEventArgs&lt;/span> &lt;span class="n">e&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">string&lt;/span> &lt;span class="n">WSURL&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;https://cmasdev:7047/BC190/WS/CRONUS%20Mexico%20S.A./Page/Plan_de_cuentas&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> //Creamos el enlace basico HTPPS
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> BasicHttpsBinding binding = new BasicHttpsBinding();
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> binding.Security.Mode = BasicHttpsSecurityMode.Transport;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> binding.Security.Transport.ClientCredentialType =
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> HttpClientCredentialType.Windows;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> binding.MaxReceivedMessageSize = int.MaxValue;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span>&lt;span class="n">Creamos&lt;/span> &lt;span class="n">el&lt;/span> &lt;span class="n">enlace&lt;/span> &lt;span class="n">basico&lt;/span> &lt;span class="n">HTPPS&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">BasicHttpsBinding&lt;/span> &lt;span class="n">binding&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">BasicHttpsBinding&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">binding&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Security&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Mode&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">BasicHttpsSecurityMode&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Transport&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">binding&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Security&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Transport&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">ClientCredentialType&lt;/span> &lt;span class="o">=&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">HttpClientCredentialType&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Windows&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">binding&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">MaxReceivedMessageSize&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="ne">int&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">MaxValue&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> //Hacemos la llamada al servicio y como prueba salteamos el control SSL del Servidor
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ServicioPrueba.Plan_de_cuentas_PortClient ws = new
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ServicioPrueba.Plan_de_cuentas_PortClient(binding, new EndpointAddress(WSURL));
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ws.ClientCredentials.ServiceCertificate.SslCertificateAuthentication =
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> new X509ServiceCertificateAuthentication()
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> CertificateValidationMode = X509CertificateValidationMode.None,
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> RevocationMode = X509RevocationMode.NoCheck
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> };
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span>&lt;span class="n">Hacemos&lt;/span> &lt;span class="n">la&lt;/span> &lt;span class="n">llamada&lt;/span> &lt;span class="n">al&lt;/span> &lt;span class="n">servicio&lt;/span> &lt;span class="n">y&lt;/span> &lt;span class="n">como&lt;/span> &lt;span class="n">prueba&lt;/span> &lt;span class="n">salteamos&lt;/span> &lt;span class="n">el&lt;/span> &lt;span class="n">control&lt;/span> &lt;span class="n">SSL&lt;/span> &lt;span class="n">del&lt;/span> &lt;span class="n">Servidor&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ServicioPrueba&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Plan_de_cuentas_PortClient&lt;/span> &lt;span class="n">ws&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">new&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ServicioPrueba&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Plan_de_cuentas_PortClient&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">binding&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">EndpointAddress&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">WSURL&lt;/span>&lt;span class="p">));&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ws&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">ClientCredentials&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">ServiceCertificate&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">SslCertificateAuthentication&lt;/span> &lt;span class="o">=&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">new&lt;/span> &lt;span class="n">X509ServiceCertificateAuthentication&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">CertificateValidationMode&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">X509CertificateValidationMode&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">None&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">RevocationMode&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">X509RevocationMode&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">NoCheck&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">};&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> try
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> //Obtenemos la lista de todos los registros. En este caso de prueba sin filtro.
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> var lista = ws.ReadMultipleAsync(null, &amp;#34;&amp;#34;, 0).Result;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> this.DG1.ItemsSource = lista.ReadMultiple_Result1;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">try&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span>&lt;span class="n">Obtenemos&lt;/span> &lt;span class="n">la&lt;/span> &lt;span class="n">lista&lt;/span> &lt;span class="n">de&lt;/span> &lt;span class="n">todos&lt;/span> &lt;span class="n">los&lt;/span> &lt;span class="n">registros&lt;/span>&lt;span class="o">.&lt;/span> &lt;span class="n">En&lt;/span> &lt;span class="n">este&lt;/span> &lt;span class="n">caso&lt;/span> &lt;span class="n">de&lt;/span> &lt;span class="n">prueba&lt;/span> &lt;span class="nb">sin&lt;/span> &lt;span class="n">filtro&lt;/span>&lt;span class="o">.&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">var&lt;/span> &lt;span class="n">lista&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">ws&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">ReadMultipleAsync&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">null&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Result&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">this&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">DG1&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">ItemsSource&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">lista&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">ReadMultiple_Result1&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> catch (Exception ex)
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> //Si hay error mostramos un mensaje
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> MessageBox.Show(ex.Message);
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">catch&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">Exception&lt;/span> &lt;span class="n">ex&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span>&lt;span class="n">Si&lt;/span> &lt;span class="n">hay&lt;/span> &lt;span class="n">error&lt;/span> &lt;span class="n">mostramos&lt;/span> &lt;span class="n">un&lt;/span> &lt;span class="n">mensaje&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">MessageBox&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Show&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">ex&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Message&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Ejecutamos y&amp;hellip;
 &lt;img src="https://cmas.dev/img/posts/2021/11/03/Soap11.png" alt="">&lt;/p>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>VS: Instalando Visual Studio 2022 Preview 1</title><link>https://cmas.dev/posts/2021-06-19-instalando-visual-studio-2022-preview/</link><pubDate>Sat, 19 Jun 2021 11:56:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2021-06-19-instalando-visual-studio-2022-preview/</guid><description>&lt;p>El pasado 17 de junio, Microsoft ha lanzado la versión Preview del nuevo Visual Studio 2022, el cual posee muchas mejoras en cuanto a productividad se refiere. En este artículo mostraré el proceso de instalación de Visual Studio 2022 Preview 1.&lt;/p>

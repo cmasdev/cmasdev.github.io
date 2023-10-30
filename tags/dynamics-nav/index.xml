@@ -154,11 +154,11 @@
 &lt;p>En las propiedades del objeto principal hacemos las modificaciones correspondientes:&lt;br>
 &lt;img src="https://cmas.dev/img/posts/migrated/2019/05/2-4.png" alt="">&lt;/p>
 &lt;p>Cada elemento tiene dos métodos asociados (uno para importación de datos y otro para exportación):&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">TipoReporte - Import::OnAfterAssignVariable()
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">TipoReporte&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="n">Import&lt;/span>&lt;span class="p">::&lt;/span>&lt;span class="n">OnAfterAssignVariable&lt;/span>&lt;span class="p">()&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">TipoReporte - Export::OnBeforePassVariable()
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">//Aquí forzamos a esta variable que debe ser 1 para la exportación.
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">TipoReporte := &amp;#39;1&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">TipoReporte&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="n">Export&lt;/span>&lt;span class="p">::&lt;/span>&lt;span class="n">OnBeforePassVariable&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">//&lt;/span>&lt;span class="n">Aquí&lt;/span> &lt;span class="n">forzamos&lt;/span> &lt;span class="n">a&lt;/span> &lt;span class="n">esta&lt;/span> &lt;span class="n">variable&lt;/span> &lt;span class="n">que&lt;/span> &lt;span class="n">debe&lt;/span> &lt;span class="n">ser&lt;/span> &lt;span class="mi">1&lt;/span> &lt;span class="n">para&lt;/span> &lt;span class="n">la&lt;/span> &lt;span class="n">exportación&lt;/span>&lt;span class="o">.&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">TipoReporte&lt;/span> &lt;span class="p">:&lt;/span>&lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;1&amp;#39;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Compilamos el &lt;strong>XMLPort&lt;/strong> y lo ejecutamos:&lt;br>
 &lt;img src="https://cmas.dev/img/posts/migrated/2019/05/3-4.png" alt="">&lt;/p>
 &lt;p>Si quieren ver el resultado real &lt;a href="https://cmas.dev/img/posts/migrated/2019/05/Hechauka-Ventas.txt">aquí lo tienen&lt;/a>.&lt;/p>

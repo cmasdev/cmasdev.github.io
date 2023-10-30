@@ -58,45 +58,45 @@ Nos dirigimos a la sección &lt;strong>Licencias&lt;/strong>:&lt;br>
 &lt;p>¡A investigar!&lt;/p></description></item><item><title>BCDEV Tips: Modificar campos y disparadores</title><link>https://cmas.dev/posts/2020-03-28-bcdev-tips-modificar-campos-y-disparadores/</link><pubDate>Sat, 28 Mar 2020 14:54:57 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2020-03-28-bcdev-tips-modificar-campos-y-disparadores/</guid><description>&lt;p>Dynamics 365 Business Central trajo consigo muchos cambios novedosos. En la empresa donde trabajo estamos implementando uno y nos encontramos con un tema no menor: ¡No podemos modificar el trigger de una tabla!&lt;/p>
 &lt;p>Es decir, no podemos modificar el código nativo de un objeto en Dynamics 365 Business Central ¿Por qué? Porque Microsoft quiere que utilicemos extensiones, no que modifiquemos el código nativo a placer poniendo en riesgo la seguridad y/o integridad del producto.&lt;/p>
 &lt;p>Primeramente debemos crear una extensión de tabla (por ejemplo, extensión de la tabla &lt;strong>CompanyInformation&lt;/strong>):&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">tableextension 50100 &amp;#34;Company Information Ext.&amp;#34; extends &amp;#34;Company Information&amp;#34;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> fields
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">tableextension&lt;/span> &lt;span class="mi">50100&lt;/span> &lt;span class="s2">&amp;#34;Company Information Ext.&amp;#34;&lt;/span> &lt;span class="k">extends&lt;/span> &lt;span class="s2">&amp;#34;Company Information&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">fields&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Luego agregamos las siguientes líneas de código:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">tableextension 50100 &amp;#34;Company Information Ext.&amp;#34; extends &amp;#34;Company Information&amp;#34;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> fields
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> modify(&amp;#34;VAT Registration No.&amp;#34;)
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Caption = &amp;#39;RUC&amp;#39;;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">tableextension&lt;/span> &lt;span class="mi">50100&lt;/span> &lt;span class="s2">&amp;#34;Company Information Ext.&amp;#34;&lt;/span> &lt;span class="k">extends&lt;/span> &lt;span class="s2">&amp;#34;Company Information&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">fields&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">modify&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;VAT Registration No.&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Caption&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;RUC&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Y ahora, agregaremos el trigger de validación del campo (debe ser antes o despues) en cuestión para hacerlo oblgatorio:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">tableextension 50100 &amp;#34;Company Information Ext.&amp;#34; extends &amp;#34;Company Information&amp;#34;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> fields
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> modify(&amp;#34;VAT Registration No.&amp;#34;)
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Caption=&amp;#39;RUC&amp;#39;;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> trigger OnAfterValidate()
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> //Si queremos realizar una acción después de la validación escribimos código aquí
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> if &amp;#34;VAT Registration No.&amp;#34; = &amp;#39;&amp;#39; then
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ERROR(&amp;#39;Debe ingresar el RUC de la empresa&amp;#39;);
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">tableextension&lt;/span> &lt;span class="mi">50100&lt;/span> &lt;span class="s2">&amp;#34;Company Information Ext.&amp;#34;&lt;/span> &lt;span class="k">extends&lt;/span> &lt;span class="s2">&amp;#34;Company Information&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">fields&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">modify&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;VAT Registration No.&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Caption&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s1">&amp;#39;RUC&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">trigger&lt;/span> &lt;span class="n">OnAfterValidate&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span>&lt;span class="n">Si&lt;/span> &lt;span class="n">queremos&lt;/span> &lt;span class="n">realizar&lt;/span> &lt;span class="n">una&lt;/span> &lt;span class="n">acción&lt;/span> &lt;span class="n">después&lt;/span> &lt;span class="n">de&lt;/span> &lt;span class="n">la&lt;/span> &lt;span class="n">validación&lt;/span> &lt;span class="n">escribimos&lt;/span> &lt;span class="n">código&lt;/span> &lt;span class="n">aquí&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="s2">&amp;#34;VAT Registration No.&amp;#34;&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;&amp;#39;&lt;/span> &lt;span class="n">then&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ERROR&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;Debe ingresar el RUC de la empresa&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> trigger OnBeforValidate()
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> //Si queremos realizar una acción antes de la validación escribimos código aquí
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">trigger&lt;/span> &lt;span class="n">OnBeforValidate&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span>&lt;span class="n">Si&lt;/span> &lt;span class="n">queremos&lt;/span> &lt;span class="n">realizar&lt;/span> &lt;span class="n">una&lt;/span> &lt;span class="n">acción&lt;/span> &lt;span class="n">antes&lt;/span> &lt;span class="n">de&lt;/span> &lt;span class="n">la&lt;/span> &lt;span class="n">validación&lt;/span> &lt;span class="n">escribimos&lt;/span> &lt;span class="n">código&lt;/span> &lt;span class="n">aquí&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>¡Espero que resulte útil!&lt;/p></description></item><item><title>BCDEV Tips: Modificar funciones base</title><link>https://cmas.dev/posts/2020-03-27-bcdev-tips-modificar-funciones-base/</link><pubDate>Fri, 27 Mar 2020 19:49:50 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2020-03-27-bcdev-tips-modificar-funciones-base/</guid><description>&lt;p>Supongamos que deseamos validar que un cheque no pueda ser anulado por algún motivo. Nativamente Business Central no tiene esta funcionalidad, entonces lo más lógico es agregar código al CodeUnit 367 &amp;ldquo;Check Management&amp;rdquo; para agregar toda la funcionalidad requerido.&lt;/p>
 &lt;h2 id="el-problema">¿El problema?&lt;/h2>
 &lt;p>En Dynamics 365 Business Central no se pueden modificar los CodeUnits de la aplicación base ni se pueden crear extensiones de CodeUnits.&lt;/p>
@@ -106,21 +106,21 @@ Nos dirigimos a la sección &lt;strong>Licencias&lt;/strong>:&lt;br>
 &lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/2-4.png" alt="">&lt;/p>
 &lt;p>Buscamos el lugar donde deberíamos ingresar nuestro código personalizado: Encontramos la línea 151 en adelante&amp;hellip; Pero código no se puede escribir. Es ahí donde encontramos el publicador de eventos &lt;strong>OnBeforeFinancialVoidCheck(CheckLedgEntry);&lt;/strong> y debemos suscribirnos a él.&lt;/p>
 &lt;p>Utilizaremos un codeunit creado por nosotros (donde irían todas las suscripciones de eventos) para luego ser utilizado:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">codeunit 50000 CmasDev
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [EventSubscriber(ObjectType::Codeunit, Codeunit::CheckManagement, &amp;#39;OnBeforeFinancialVoidCheck&amp;#39;, &amp;#39;&amp;#39;, true, true)]
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> procedure ValidarAnulacionCheque(var CheckLedgerEntry: Record &amp;#34;Check Ledger Entry&amp;#34;)
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> begin
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> if CheckLedgerEntry.&amp;#34;Check No.&amp;#34; = &amp;#39;&amp;#39; then
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Error(&amp;#39;Debe tener un número de cheque&amp;#39;);
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> end;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">codeunit&lt;/span> &lt;span class="mi">50000&lt;/span> &lt;span class="n">CmasDev&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">EventSubscriber&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">ObjectType&lt;/span>&lt;span class="p">::&lt;/span>&lt;span class="n">Codeunit&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">Codeunit&lt;/span>&lt;span class="p">::&lt;/span>&lt;span class="n">CheckManagement&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;OnBeforeFinancialVoidCheck&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="bp">true&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="bp">true&lt;/span>&lt;span class="p">)]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">procedure&lt;/span> &lt;span class="n">ValidarAnulacionCheque&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="k">var&lt;/span> &lt;span class="n">CheckLedgerEntry&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">Record&lt;/span> &lt;span class="s2">&amp;#34;Check Ledger Entry&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">begin&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="n">CheckLedgerEntry&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="s2">&amp;#34;Check No.&amp;#34;&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;&amp;#39;&lt;/span> &lt;span class="n">then&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Error&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;Debe tener un número de cheque&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">end&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Por último lanzamos el evento donde sea necesario utilizando el código:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">begin
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> codeun.ValidarAnulacionCheque(CheckLedgeEntry);
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">end;
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">begin&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">codeun&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">ValidarAnulacionCheque&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">CheckLedgeEntry&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">end&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">var codeun : Codeunit CmasDev;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">var&lt;/span> &lt;span class="n">codeun&lt;/span> &lt;span class="p">:&lt;/span> &lt;span class="n">Codeunit&lt;/span> &lt;span class="n">CmasDev&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Business Central: Eliminar una extensión publicada</title><link>https://cmas.dev/posts/2020-03-26-business-central-eliminar-una-extension-publicada/</link><pubDate>Thu, 26 Mar 2020 12:17:18 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2020-03-26-business-central-eliminar-una-extension-publicada/</guid><description>&lt;p>Dentro del producto Dynamics 365 Business Central se encuentra una sección donde podemos administrar las extensiones instaladas en el servidor.&lt;/p>
 &lt;p>De una manera muy sencilla se puede acceder a ella, desinstalar e inclusive anular una publicación:&lt;br>
 &lt;img src="https://cmas.dev/img/posts/migrated/2020/03/1-3.png" alt="">&lt;/p>
@@ -762,11 +762,11 @@ Hay que tener en cuenta que en la opción &lt;strong>Version control&lt;/strong>
 &lt;p>En las propiedades del objeto principal hacemos las modificaciones correspondientes:&lt;br>
 &lt;img src="https://cmas.dev/img/posts/migrated/2019/05/2-4.png" alt="">&lt;/p>
 &lt;p>Cada elemento tiene dos métodos asociados (uno para importación de datos y otro para exportación):&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">TipoReporte - Import::OnAfterAssignVariable()
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">TipoReporte&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="n">Import&lt;/span>&lt;span class="p">::&lt;/span>&lt;span class="n">OnAfterAssignVariable&lt;/span>&lt;span class="p">()&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">TipoReporte - Export::OnBeforePassVariable()
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">//Aquí forzamos a esta variable que debe ser 1 para la exportación.
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">TipoReporte := &amp;#39;1&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">TipoReporte&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="n">Export&lt;/span>&lt;span class="p">::&lt;/span>&lt;span class="n">OnBeforePassVariable&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">//&lt;/span>&lt;span class="n">Aquí&lt;/span> &lt;span class="n">forzamos&lt;/span> &lt;span class="n">a&lt;/span> &lt;span class="n">esta&lt;/span> &lt;span class="n">variable&lt;/span> &lt;span class="n">que&lt;/span> &lt;span class="n">debe&lt;/span> &lt;span class="n">ser&lt;/span> &lt;span class="mi">1&lt;/span> &lt;span class="n">para&lt;/span> &lt;span class="n">la&lt;/span> &lt;span class="n">exportación&lt;/span>&lt;span class="o">.&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">TipoReporte&lt;/span> &lt;span class="p">:&lt;/span>&lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;1&amp;#39;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Compilamos el &lt;strong>XMLPort&lt;/strong> y lo ejecutamos:&lt;br>
 &lt;img src="https://cmas.dev/img/posts/migrated/2019/05/3-4.png" alt="">&lt;/p>
 &lt;p>Si quieren ver el resultado real &lt;a href="https://cmas.dev/img/posts/migrated/2019/05/Hechauka-Ventas.txt">aquí lo tienen&lt;/a>.&lt;/p>
@@ -921,44 +921,44 @@ Hay que tener en cuenta que en la opción &lt;strong>Version control&lt;/strong>
 &lt;/ul>
 &lt;p>Empezamos con los ejemplos:&lt;/p>
 &lt;p>La variable &lt;strong>HabilitarCampo&lt;/strong> en este caso es Global porque se declara fuera de cualquier método:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">//Creamos la extensión de tabla
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">tableextension 50100 CompanyInformationExt extends &amp;#34;Company Information&amp;#34;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> //Creamos los campos de la tabla
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> fields
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> //Campo &amp;#34;Habilitar documentos legales Paraguay&amp;#34;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> field(50000; HabilitarDocumentosPY; Boolean)
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> //Agregamos el evento de validación.
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> //Aquí utilizamos una variable booleana para habilitar campos
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> //Name, es el campo nombre de empresa de la Tabla padre.
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> trigger OnValidate();
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> begin
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> HabilitarCampo := HabilitarDocumentosPY;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Message(&amp;#39;El nombre de la empresa es: &amp;#39; + Name);
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> end;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="o">//&lt;/span>&lt;span class="n">Creamos&lt;/span> &lt;span class="n">la&lt;/span> &lt;span class="n">extensión&lt;/span> &lt;span class="n">de&lt;/span> &lt;span class="n">tabla&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">tableextension&lt;/span> &lt;span class="mi">50100&lt;/span> &lt;span class="n">CompanyInformationExt&lt;/span> &lt;span class="k">extends&lt;/span> &lt;span class="s2">&amp;#34;Company Information&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span>&lt;span class="n">Creamos&lt;/span> &lt;span class="n">los&lt;/span> &lt;span class="n">campos&lt;/span> &lt;span class="n">de&lt;/span> &lt;span class="n">la&lt;/span> &lt;span class="n">tabla&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">fields&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span>&lt;span class="n">Campo&lt;/span> &lt;span class="s2">&amp;#34;Habilitar documentos legales Paraguay&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">field&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">50000&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">HabilitarDocumentosPY&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">Boolean&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span>&lt;span class="n">Agregamos&lt;/span> &lt;span class="n">el&lt;/span> &lt;span class="n">evento&lt;/span> &lt;span class="n">de&lt;/span> &lt;span class="n">validación&lt;/span>&lt;span class="o">.&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span>&lt;span class="n">Aquí&lt;/span> &lt;span class="n">utilizamos&lt;/span> &lt;span class="n">una&lt;/span> &lt;span class="n">variable&lt;/span> &lt;span class="n">booleana&lt;/span> &lt;span class="n">para&lt;/span> &lt;span class="n">habilitar&lt;/span> &lt;span class="n">campos&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span>&lt;span class="n">Name&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">es&lt;/span> &lt;span class="n">el&lt;/span> &lt;span class="n">campo&lt;/span> &lt;span class="n">nombre&lt;/span> &lt;span class="n">de&lt;/span> &lt;span class="n">empresa&lt;/span> &lt;span class="n">de&lt;/span> &lt;span class="n">la&lt;/span> &lt;span class="n">Tabla&lt;/span> &lt;span class="n">padre&lt;/span>&lt;span class="o">.&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">trigger&lt;/span> &lt;span class="n">OnValidate&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">begin&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">HabilitarCampo&lt;/span> &lt;span class="p">:&lt;/span>&lt;span class="o">=&lt;/span> &lt;span class="n">HabilitarDocumentosPY&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Message&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;El nombre de la empresa es: &amp;#39;&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="n">Name&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">end&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> //Esta es una variable Global, que puede utilizarse en las tablas
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> //&amp;#34;Company Information&amp;#34; y &amp;#34;Company Information Ext&amp;#34;.
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> var
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> HabilitarCampo: Boolean;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span>&lt;span class="n">Esta&lt;/span> &lt;span class="n">es&lt;/span> &lt;span class="n">una&lt;/span> &lt;span class="n">variable&lt;/span> &lt;span class="n">Global&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">que&lt;/span> &lt;span class="n">puede&lt;/span> &lt;span class="n">utilizarse&lt;/span> &lt;span class="n">en&lt;/span> &lt;span class="n">las&lt;/span> &lt;span class="n">tablas&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span>&lt;span class="s2">&amp;#34;Company Information&amp;#34;&lt;/span> &lt;span class="n">y&lt;/span> &lt;span class="s2">&amp;#34;Company Information Ext&amp;#34;&lt;/span>&lt;span class="o">.&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">var&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">HabilitarCampo&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">Boolean&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Bajo la variable declaramos el método o procedimiento para realizar alguna tarea:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">local procedure Saludar()
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">begin
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Message(&amp;#39;Hola desde metodo&amp;#39;);
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">end;
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Por último declaramos la variable local:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">local procedure Saludar()
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">begin
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> var
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> SoyLocal: Integer;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Message(&amp;#39;Hola desde metodo&amp;#39;);
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">end;
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">local&lt;/span> &lt;span class="n">procedure&lt;/span> &lt;span class="n">Saludar&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">begin&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">var&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">SoyLocal&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">Integer&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Message&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;Hola desde metodo&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">end&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>En este ejemplo creamos la variable local &amp;ldquo;SoyLocal&amp;rdquo; que únicamente se puede utilizar dentro del método &lt;em>Saludar()&lt;/em>&lt;/p>
 &lt;p>De manera similar que en Dynamics NAV, podemos crear ambos tipos de variables. Al fin y al cabo, todos los lenguajes de programación lo hacen. AL también debe hacerlo.&lt;/p></description></item><item><title>Business Central: Mostrar imagen en reporte</title><link>https://cmas.dev/posts/2019-02-27-business-central-mostrar-imagen-en-reporte/</link><pubDate>Wed, 27 Feb 2019 21:35:18 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2019-02-27-business-central-mostrar-imagen-en-reporte/</guid><description>&lt;p>En esta entrada mostraré cómo mostrar imagen en un reporte. En la &lt;a href="https://cmas.dev/2019/02/bcdev-tips-crear-un-reporte-nuevo/">entrada anterior&lt;/a>, hemos visto cómo crear un nuevo reporte en Dynamics 365 Business Central.&lt;/p>
 &lt;p>En esta parte, veremos cómo agregar una imagen en el reporte. De manera similar a &lt;a href="https://cmas.dev/2019/01/nav-mostrar-imagen-dentro-de-un-reporte/">esta entrada&lt;/a> donde mostrábamos cómo hacerlo en Dynamics NAV.&lt;/p>
@@ -966,65 +966,65 @@ Hay que tener en cuenta que en la opción &lt;strong>Version control&lt;/strong>
 &lt;ol>
 &lt;li>Agregar el campo de imagen desde la tabla &amp;ldquo;Company Information&amp;rdquo;:&lt;/li>
 &lt;/ol>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">report 50100 D365ReporteNuevo
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> DefaultLayout = RDLC;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> RDLCLayout = &amp;#39;ReporteNuevo.rdl&amp;#39;;
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">report&lt;/span> &lt;span class="mi">50100&lt;/span> &lt;span class="n">D365ReporteNuevo&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">DefaultLayout&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">RDLC&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">RDLCLayout&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;ReporteNuevo.rdl&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> dataset
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> dataitem(SalesInvoiceHeader; &amp;#34;Sales Invoice Header&amp;#34;)
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> column(Cliente; &amp;#34;Bill-to Customer No.&amp;#34;)
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">dataset&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">dataitem&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">SalesInvoiceHeader&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="s2">&amp;#34;Sales Invoice Header&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">column&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">Cliente&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="s2">&amp;#34;Bill-to Customer No.&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> column(Logo; CompanyInformation.Picture)
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">column&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">Logo&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">CompanyInformation&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Picture&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> var
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> CompanyInformation: Record &amp;#34;Company Information&amp;#34;;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">var&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">CompanyInformation&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">Record&lt;/span> &lt;span class="s2">&amp;#34;Company Information&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="3">
 &lt;li>Agregamos los triggers del reporte y del dataItem:&lt;/li>
 &lt;/ol>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">report 50100 D365ReporteNuevo
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> DefaultLayout = RDLC;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> RDLCLayout = &amp;#39;ReporteNuevo.rdl&amp;#39;;
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">report&lt;/span> &lt;span class="mi">50100&lt;/span> &lt;span class="n">D365ReporteNuevo&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">DefaultLayout&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">RDLC&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">RDLCLayout&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;ReporteNuevo.rdl&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> dataset
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> dataitem(SalesInvoiceHeader; &amp;#34;Sales Invoice Header&amp;#34;)
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> column(Cliente; &amp;#34;Bill-to Customer No.&amp;#34;)
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">dataset&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">dataitem&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">SalesInvoiceHeader&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="s2">&amp;#34;Sales Invoice Header&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">column&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">Cliente&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="s2">&amp;#34;Bill-to Customer No.&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> column(Logo; CompanyInformation.Picture)
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">column&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">Logo&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">CompanyInformation&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Picture&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> trigger OnAfterGetRecord()
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> begin
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> CompanyInformation.CalcFields(Picture);
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> end;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">trigger&lt;/span> &lt;span class="n">OnAfterGetRecord&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">begin&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">CompanyInformation&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">CalcFields&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">Picture&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">end&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> trigger OnPreReport()
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> begin
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> CompanyInformation.Get();
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> end;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">trigger&lt;/span> &lt;span class="n">OnPreReport&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">begin&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">CompanyInformation&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Get&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">end&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> var
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> CompanyInformation: Record &amp;#34;Company Information&amp;#34;;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">var&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">CompanyInformation&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">Record&lt;/span> &lt;span class="s2">&amp;#34;Company Information&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="5">
 &lt;li>Abrimos el reporte generado y agregamos el objeto imagen.&lt;/li>
 &lt;/ol>
@@ -1089,58 +1089,58 @@ Hay que tener en cuenta que en la opción &lt;strong>Version control&lt;/strong>
 &lt;img src="https://cmas.dev/img/posts/migrated/2019/02/4.png" alt="">&lt;/p>
 &lt;p>Se corrige cambiando la variable de inicio en &lt;em>launch.json&lt;/em>&lt;/p>
 &lt;p>Y por último aquí está la extensión de página con sus respectivos comentarios:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">//Creamos la extensión de página
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">pageextension 50110 PageCompanyInformationExt extends &amp;#34;Company Information&amp;#34;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> //Generamos el diseño...
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> layout
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> //Agregamos los campos necesarios al final de algún grupo existente
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> addlast(General)
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> //agregar el campo en cuestión
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> field(HabilitacionDocumentos; HabilitarDocumentosPY)
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> //Completar sus propiedades
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ApplicationArea = All;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Caption = &amp;#39;¿Documentos PY habilitados?&amp;#39;;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Enabled = true;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="o">//&lt;/span>&lt;span class="n">Creamos&lt;/span> &lt;span class="n">la&lt;/span> &lt;span class="n">extensión&lt;/span> &lt;span class="n">de&lt;/span> &lt;span class="n">página&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">pageextension&lt;/span> &lt;span class="mi">50110&lt;/span> &lt;span class="n">PageCompanyInformationExt&lt;/span> &lt;span class="k">extends&lt;/span> &lt;span class="s2">&amp;#34;Company Information&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span>&lt;span class="n">Generamos&lt;/span> &lt;span class="n">el&lt;/span> &lt;span class="n">diseño&lt;/span>&lt;span class="o">...&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">layout&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span>&lt;span class="n">Agregamos&lt;/span> &lt;span class="n">los&lt;/span> &lt;span class="n">campos&lt;/span> &lt;span class="n">necesarios&lt;/span> &lt;span class="n">al&lt;/span> &lt;span class="n">final&lt;/span> &lt;span class="n">de&lt;/span> &lt;span class="n">algún&lt;/span> &lt;span class="n">grupo&lt;/span> &lt;span class="n">existente&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">addlast&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">General&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span>&lt;span class="n">agregar&lt;/span> &lt;span class="n">el&lt;/span> &lt;span class="n">campo&lt;/span> &lt;span class="n">en&lt;/span> &lt;span class="n">cuestión&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">field&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">HabilitacionDocumentos&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">HabilitarDocumentosPY&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span>&lt;span class="n">Completar&lt;/span> &lt;span class="n">sus&lt;/span> &lt;span class="n">propiedades&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ApplicationArea&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">All&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Caption&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;¿Documentos PY habilitados?&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Enabled&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="bp">true&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> //Modificar algún campo existente
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> modify(&amp;#34;Address&amp;#34;)
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Caption = &amp;#39;Dirección de Paraguay&amp;#39;;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span>&lt;span class="n">Modificar&lt;/span> &lt;span class="n">algún&lt;/span> &lt;span class="n">campo&lt;/span> &lt;span class="n">existente&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">modify&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;Address&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Caption&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;Dirección de Paraguay&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> //Generar las acciones
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> actions
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> //Agregar la acción en alguna sección existente
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> addlast(Creation)
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> //Crear un grupo...
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> group(Paraguay)
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> //Agregar una acción dentro del grupo
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Action(Habilitar)
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> //Colocar sus propiedades
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ApplicationArea = All;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Caption = &amp;#39;Habilitar!&amp;#39;;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span>&lt;span class="n">Generar&lt;/span> &lt;span class="n">las&lt;/span> &lt;span class="n">acciones&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">actions&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span>&lt;span class="n">Agregar&lt;/span> &lt;span class="n">la&lt;/span> &lt;span class="n">acción&lt;/span> &lt;span class="n">en&lt;/span> &lt;span class="n">alguna&lt;/span> &lt;span class="n">sección&lt;/span> &lt;span class="n">existente&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">addlast&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">Creation&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span>&lt;span class="n">Crear&lt;/span> &lt;span class="n">un&lt;/span> &lt;span class="n">grupo&lt;/span>&lt;span class="o">...&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">group&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">Paraguay&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span>&lt;span class="n">Agregar&lt;/span> &lt;span class="n">una&lt;/span> &lt;span class="n">acción&lt;/span> &lt;span class="n">dentro&lt;/span> &lt;span class="n">del&lt;/span> &lt;span class="n">grupo&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Action&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">Habilitar&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span>&lt;span class="n">Colocar&lt;/span> &lt;span class="n">sus&lt;/span> &lt;span class="n">propiedades&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ApplicationArea&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">All&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Caption&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;Habilitar!&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> //Generar el código para la acción (clic o touch)
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> trigger OnAction();
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> begin
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Message(&amp;#39;Los documentos, ¿están habilitados? &amp;#39; + Format(HabilitarDocumentosPY));
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> end;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span>&lt;span class="n">Generar&lt;/span> &lt;span class="n">el&lt;/span> &lt;span class="n">código&lt;/span> &lt;span class="n">para&lt;/span> &lt;span class="n">la&lt;/span> &lt;span class="n">acción&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">clic&lt;/span> &lt;span class="n">o&lt;/span> &lt;span class="n">touch&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">trigger&lt;/span> &lt;span class="n">OnAction&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">begin&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Message&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;Los documentos, ¿están habilitados? &amp;#39;&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="n">Format&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">HabilitarDocumentosPY&lt;/span>&lt;span class="p">));&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">end&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>De esta manera, logramos agregar más campos a la página &amp;ldquo;Company Information&amp;rdquo; sin modificarla nativamente y mostrando/ocultando botones. Nos encargamos de desarrollar sobre los objetos extendidos, tal como lo hicimos con la &lt;a href="https://cmas.dev/2019/02/bc-dev-tips-crear-extension-de-tabla-con-visual-studio-code/">tabla extendida&lt;/a>.&lt;/p></description></item><item><title>BC DEV Tips: Crear extensión de tabla con Visual Studio Code</title><link>https://cmas.dev/posts/2019-02-06-bc-dev-tips-crear-extension-de-tabla-con-visual-studio-code/</link><pubDate>Tue, 05 Feb 2019 23:15:33 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2019-02-06-bc-dev-tips-crear-extension-de-tabla-con-visual-studio-code/</guid><description>&lt;p>En este Tip, mostraré cómo crear extensiones de tablas en Dynamics 365 Business Central, utilizando Visual Studio Code (que ya se ha convertido en mi principal herramienta de desarrollo).&lt;/p>
 &lt;p>Aquí coloco el código necesario para crear la tabla extendida de &amp;ldquo;Company Information&amp;rdquo;, para este ejemplo:&lt;/p>
 &lt;p>Antes de la extensión (vista SQL Server):&lt;br>
@@ -1148,30 +1148,30 @@ Hay que tener en cuenta que en la opción &lt;strong>Version control&lt;/strong>
 &lt;p>Después de la extensión (vista SQL Server):&lt;br>
 &lt;img src="https://cmas.dev/img/posts/migrated/2019/02/2.png" alt="">&lt;/p>
 &lt;p>Y por último aquí está la extensión de tabla con sus respectivos comentarios:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">//Creamos la extensión de tabla
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">tableextension 50100 CompanyInformationExt extends &amp;#34;Company Information&amp;#34;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> //Creamos los campos de la tabla
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> fields
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> //Campo &amp;#34;Habilitar documentos legales Paraguay&amp;#34;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> field(50000; HabilitarDocumentosPY; Boolean)
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> //Agregamos el evento de validación.
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> //Aquí utilizamos una variable booleana para habilitar campos
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> //Name, es el campo nombre de empresa de la Tabla padre.
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> trigger OnValidate();
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> begin
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> HabilitarCampo := HabilitarDocumentosPY;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Message(&amp;#39;El nombre de la empresa es: &amp;#39; + Name);
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> end;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="o">//&lt;/span>&lt;span class="n">Creamos&lt;/span> &lt;span class="n">la&lt;/span> &lt;span class="n">extensión&lt;/span> &lt;span class="n">de&lt;/span> &lt;span class="n">tabla&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">tableextension&lt;/span> &lt;span class="mi">50100&lt;/span> &lt;span class="n">CompanyInformationExt&lt;/span> &lt;span class="k">extends&lt;/span> &lt;span class="s2">&amp;#34;Company Information&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span>&lt;span class="n">Creamos&lt;/span> &lt;span class="n">los&lt;/span> &lt;span class="n">campos&lt;/span> &lt;span class="n">de&lt;/span> &lt;span class="n">la&lt;/span> &lt;span class="n">tabla&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">fields&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span>&lt;span class="n">Campo&lt;/span> &lt;span class="s2">&amp;#34;Habilitar documentos legales Paraguay&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">field&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">50000&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">HabilitarDocumentosPY&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">Boolean&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span>&lt;span class="n">Agregamos&lt;/span> &lt;span class="n">el&lt;/span> &lt;span class="n">evento&lt;/span> &lt;span class="n">de&lt;/span> &lt;span class="n">validación&lt;/span>&lt;span class="o">.&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span>&lt;span class="n">Aquí&lt;/span> &lt;span class="n">utilizamos&lt;/span> &lt;span class="n">una&lt;/span> &lt;span class="n">variable&lt;/span> &lt;span class="n">booleana&lt;/span> &lt;span class="n">para&lt;/span> &lt;span class="n">habilitar&lt;/span> &lt;span class="n">campos&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span>&lt;span class="n">Name&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">es&lt;/span> &lt;span class="n">el&lt;/span> &lt;span class="n">campo&lt;/span> &lt;span class="n">nombre&lt;/span> &lt;span class="n">de&lt;/span> &lt;span class="n">empresa&lt;/span> &lt;span class="n">de&lt;/span> &lt;span class="n">la&lt;/span> &lt;span class="n">Tabla&lt;/span> &lt;span class="n">padre&lt;/span>&lt;span class="o">.&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">trigger&lt;/span> &lt;span class="n">OnValidate&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">begin&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">HabilitarCampo&lt;/span> &lt;span class="p">:&lt;/span>&lt;span class="o">=&lt;/span> &lt;span class="n">HabilitarDocumentosPY&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Message&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;El nombre de la empresa es: &amp;#39;&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="n">Name&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">end&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> //Variable auxiliar para habilitar un campo.
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> var
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> HabilitarCampo: Boolean;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span>&lt;span class="n">Variable&lt;/span> &lt;span class="n">auxiliar&lt;/span> &lt;span class="n">para&lt;/span> &lt;span class="n">habilitar&lt;/span> &lt;span class="n">un&lt;/span> &lt;span class="n">campo&lt;/span>&lt;span class="o">.&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">var&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">HabilitarCampo&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">Boolean&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>De esta manera, logramos agregar más campos a la tabla &amp;ldquo;Company Information&amp;rdquo; sin modificarla nativamente. Nos encargamos de desarrollar sobre los objetos extendidos.&lt;/p></description></item><item><title>Business Central: Configuración del entorno</title><link>https://cmas.dev/posts/2019-01-31-business-central-configuracion-del-entorno/</link><pubDate>Wed, 30 Jan 2019 23:48:39 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2019-01-31-business-central-configuracion-del-entorno/</guid><description>&lt;p>En esta entrada veremos cómo se configura el entorno de Dynamics 365 Business Central. No hay mucho secreto en la configuración del entorno puesto que de manera predeterminada ya vienen configurados todos los parámetros necesarios dentro de la plataforma.&lt;/p>
 &lt;p>Aquí mostraré algunas configuraciones básicas:&lt;/p>
 &lt;ol>

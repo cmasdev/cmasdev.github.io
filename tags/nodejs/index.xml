@@ -23,12 +23,12 @@
 &lt;li>Creamos un archivo &lt;strong>app.js&lt;/strong>&lt;/li>
 &lt;li>Escribimos las siguientes líneas de código:&lt;/li>
 &lt;/ol>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">var http = require(&amp;#39;http&amp;#39;);
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">var&lt;/span> &lt;span class="n">http&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">require&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;http&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">http.createServer(function (req, res) {
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> res.writeHead(200, {&amp;#39;Content-Type&amp;#39;: &amp;#39;text/plain&amp;#39;});
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> res.end(&amp;#39;Hola desde cmas.dev!&amp;#39;);
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}).listen(8080);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">http&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">createServer&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">function&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">req&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">res&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">res&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">writeHead&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">200&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">{&lt;/span>&lt;span class="s1">&amp;#39;Content-Type&amp;#39;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;text/plain&amp;#39;&lt;/span>&lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">res&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">end&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;Hola desde cmas.dev!&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">})&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">listen&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">8080&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="3">
 &lt;li>Presionamos la tecla &lt;em>F5&lt;/em> y seleccionamos la opción &lt;strong>Node.js&lt;/strong>:
 &lt;img src="https://cmas.dev/img/posts/2022/06/08/4.png" alt="">&lt;/li>
@@ -51,12 +51,12 @@
 &lt;img src="https://cmas.dev/img/posts/2022/06/08/10.png" alt="">&lt;/li>
 &lt;li>Escribimos las siguientes líneas de código (con algunas diferencias del código anterior):&lt;/li>
 &lt;/ol>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">var http = require(&amp;#39;http&amp;#39;);
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">var&lt;/span> &lt;span class="n">http&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">require&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;http&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">http.createServer(function (req, res) {
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> res.writeHead(200, {&amp;#39;Content-Type&amp;#39;: &amp;#39;text/plain&amp;#39;});
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> res.end(&amp;#39;¡Hola desde cmas.dev y WSL!&amp;#39;);
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}).listen(8081);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">http&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">createServer&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">function&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">req&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">res&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">res&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">writeHead&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">200&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">{&lt;/span>&lt;span class="s1">&amp;#39;Content-Type&amp;#39;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;text/plain&amp;#39;&lt;/span>&lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">res&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">end&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;¡Hola desde cmas.dev y WSL!&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">})&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">listen&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">8081&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="7">
 &lt;li>Ejecutamos la aplicación desde la Terminal de &lt;strong>Ubuntu&lt;/strong>:
 &lt;img src="https://cmas.dev/img/posts/2022/06/08/12.png" alt="">&lt;/li>

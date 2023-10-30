@@ -221,7 +221,7 @@
 &lt;li>Descargamos un archivo apk, en este caso la última versión de Angry Birds Dream Blast &lt;a href="https://www.apkmirror.com/apk/rovio-entertainment-corporation/angry-birds-dream-blast/angry-birds-dream-blast-1-40-1-release/angry-birds-dream-blast-1-40-1-android-apk-download/">aquí&lt;/a>&lt;/li>
 &lt;li>Instalamos el paquete descargado:&lt;/li>
 &lt;/ol>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">adb install &amp;#34;C:\Users\chris\Downloads\andry.apk&amp;#34;
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">adb&lt;/span> &lt;span class="n">install&lt;/span> &lt;span class="s2">&amp;#34;C:\Users\chris\Downloads&lt;/span>&lt;span class="se">\a&lt;/span>&lt;span class="s2">ndry.apk&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="3">
 &lt;li>Veremos el icono anclado al menú inicio:
 &lt;img src="https://cmas.dev/img/posts/2022/04/20/adb11.png" alt="">&lt;/li>
