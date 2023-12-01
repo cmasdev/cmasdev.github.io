@@ -16,15 +16,17 @@ En este artículo mostraré algunas novedades de .NET 8 en **.NET MAUI**.
 
 <!--more-->
 
-.NET 8 se ha lanzado con muchas novedades y también han sufrido cambios (para bien) en la plataforma .NET MAUI, es muy fácili dirigirnos al [sitio oficial](https://learn.microsoft.com/es-es/dotnet/maui/whats-new/dotnet-8?view=net-maui-8.0) y leer ahí las novedades pero me interesa probarlas novedades y contarles un poco lo que se viene, pero en mayor detalle lo que voy probando, todo esto con Android. ¡Así que manos a la obra!
+**.NET 8** se ha lanzado con muchas novedades y también han sufrido cambios (para bien) en la plataforma **.NET MAUI**. Es muy fácili dirigirnos al [sitio oficial](https://learn.microsoft.com/es-es/dotnet/maui/whats-new/dotnet-8?view=net-maui-8.0) y leer ahí las novedades pero me interesa probarlas novedades y contarles un poco lo que se viene, pero en mayor detalle lo que voy probando. ¡Así que manos a la obra!
 
 ## Novedades generales
 1. **Diseño de derecha a izquierda**: Gracias a las mejoras de performance de .NET 8 se logra que los diseños para idiomas que van de derecha a izquierda ahora se vean correctamente además de responder en tiempo y forma.  
+
 2. **Comportamiento de teclado**: Se han mejorado las disposiciones de teclado, que responden más rápidamente al ingreso de texto por parte del usuario, además el scroll responde más rápido ante la aparición/desaparición del teclado.  
+
 3. **Gestión de memoria**: Esto viene atado a las mejoras introducidas en general dentro de .NET 8.
 
 ## ¿Cómo habilito .NET MAUI 8?
-Primero, debemos descargar e instalar el SDK de .NET 8, eso lo encontramos [aquí](https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/sdk-8.0.100-windows-x64-installer).  
+Primero, debemos descargar e instalar el **SDK** de **.NET 8**, eso lo encontramos [aquí](https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/sdk-8.0.100-windows-x64-installer).  
 
 Luego, debemos actualizar **Visual Studio 2022** a su versión **17.8.0** o superior (acabo de ver disponible la versión **17.8.2**) que se puede descargar desde [aquí](https://visualstudio.microsoft.com/downloads/).
 
@@ -110,6 +112,6 @@ Arrancamos la App y vemos el Menú:
 Hacemos clic o bien utilizamos el atajo **Ctrl**+**L** y veremos:
 ![](https://i.ibb.co/dGNdZDc/6.png)
 
-Estas son las novedades que quería compartir con ustedes en estas primeras pruebas que estoy realizando (de hecho estoy actualmente en un proyecto **.NET MAUI 8**). Iré avanzando en las novedades de .NET MAUI en todo este mes de Diciembre ya que nos encontramos en pleno **[Calendario de Adviento .NET MAUI](https://elcamino.dev/calendario-adviento-net-maui-espanol-23)**
+Estas son las novedades que quería compartir con ustedes en estas primeras pruebas que estoy realizando (de hecho estoy actualmente en un proyecto **.NET MAUI 8**). Iré avanzando en las novedades de **.NET MAUI** en todo este mes de Diciembre ya que nos encontramos en pleno **[Calendario de Adviento .NET MAUI](https://elcamino.dev/calendario-adviento-net-maui-espanol-23)**
 
 ¡Espero resulte útil!
