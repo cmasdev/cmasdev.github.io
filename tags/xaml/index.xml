@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>XAML on Blog de Christian Amado</title><link>https://cmas.dev/tags/xaml/</link><description>Recent content in XAML on Blog de Christian Amado</description><generator>Hugo -- gohugo.io</generator><language>es</language><managingEditor>biz@cmas.dev (Christian Amado)</managingEditor><webMaster>biz@cmas.dev (Christian Amado)</webMaster><lastBuildDate>Fri, 01 Dec 2023 00:00:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/tags/xaml/index.xml" rel="self" type="application/rss+xml"/><item><title>Novedades en .NET MAUI con .NET 8</title><link>https://cmas.dev/posts/2023-12-01-whats-new-in-maui-net-8/</link><pubDate>Fri, 01 Dec 2023 00:00:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2023-12-01-whats-new-in-maui-net-8/</guid><description>&lt;p>En este artículo mostraré algunas novedades de .NET 8 en &lt;strong>.NET MAUI&lt;/strong>.&lt;/p>
 &lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 22635.2776&lt;/strong>&lt;/em>&lt;/p>
-&lt;p>.NET 8 se ha lanzado con muchas novedades y también han sufrido cambios (para bien) en la plataforma .NET MAUI, es muy fácili dirigirnos al &lt;a href="https://learn.microsoft.com/es-es/dotnet/maui/whats-new/dotnet-8?view=net-maui-8.0">sitio oficial&lt;/a> y leer ahí las novedades pero me interesa probarlas novedades y contarles un poco lo que se viene, pero en mayor detalle lo que voy probando, todo esto con Android. ¡Así que manos a la obra!&lt;/p>
+&lt;p>&lt;strong>.NET 8&lt;/strong> se ha lanzado con muchas novedades y también han sufrido cambios (para bien) en la plataforma &lt;strong>.NET MAUI&lt;/strong>. Es muy fácili dirigirnos al &lt;a href="https://learn.microsoft.com/es-es/dotnet/maui/whats-new/dotnet-8?view=net-maui-8.0">sitio oficial&lt;/a> y leer ahí las novedades pero me interesa probarlas novedades y contarles un poco lo que se viene, pero en mayor detalle lo que voy probando. ¡Así que manos a la obra!&lt;/p>
 &lt;h2 id="novedades-generales">Novedades generales&lt;/h2>
 &lt;ol>
-&lt;li>&lt;strong>Diseño de derecha a izquierda&lt;/strong>: Gracias a las mejoras de performance de .NET 8 se logra que los diseños para idiomas que van de derecha a izquierda ahora se vean correctamente además de responder en tiempo y forma.&lt;/li>
-&lt;li>&lt;strong>Comportamiento de teclado&lt;/strong>: Se han mejorado las disposiciones de teclado, que responden más rápidamente al ingreso de texto por parte del usuario, además el scroll responde más rápido ante la aparición/desaparición del teclado.&lt;/li>
-&lt;li>&lt;strong>Gestión de memoria&lt;/strong>: Esto viene atado a las mejoras introducidas en general dentro de .NET 8.&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Diseño de derecha a izquierda&lt;/strong>: Gracias a las mejoras de performance de .NET 8 se logra que los diseños para idiomas que van de derecha a izquierda ahora se vean correctamente además de responder en tiempo y forma.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Comportamiento de teclado&lt;/strong>: Se han mejorado las disposiciones de teclado, que responden más rápidamente al ingreso de texto por parte del usuario, además el scroll responde más rápido ante la aparición/desaparición del teclado.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Gestión de memoria&lt;/strong>: Esto viene atado a las mejoras introducidas en general dentro de .NET 8.&lt;/p>
+&lt;/li>
 &lt;/ol>
 &lt;h2 id="cómo-habilito-net-maui-8">¿Cómo habilito .NET MAUI 8?&lt;/h2>
-&lt;p>Primero, debemos descargar e instalar el SDK de .NET 8, eso lo encontramos &lt;a href="https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/sdk-8.0.100-windows-x64-installer">aquí&lt;/a>.&lt;/p>
+&lt;p>Primero, debemos descargar e instalar el &lt;strong>SDK&lt;/strong> de &lt;strong>.NET 8&lt;/strong>, eso lo encontramos &lt;a href="https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/sdk-8.0.100-windows-x64-installer">aquí&lt;/a>.&lt;/p>
 &lt;p>Luego, debemos actualizar &lt;strong>Visual Studio 2022&lt;/strong> a su versión &lt;strong>17.8.0&lt;/strong> o superior (acabo de ver disponible la versión &lt;strong>17.8.2&lt;/strong>) que se puede descargar desde &lt;a href="https://visualstudio.microsoft.com/downloads/">aquí&lt;/a>.&lt;/p>
 &lt;p>Iniciamos el instalador de &lt;strong>Visual Studio&lt;/strong> e indicamos la opción de &lt;strong>.NET Multi-platform App UI development&lt;/strong>:
 &lt;img src="https://i.ibb.co/7bnx4RQ/1.png" alt="">&lt;/p>
@@ -78,7 +84,7 @@
 &lt;img src="https://i.ibb.co/FWRFggx/5.png" alt="">&lt;/p>
 &lt;p>Hacemos clic o bien utilizamos el atajo &lt;strong>Ctrl&lt;/strong>+&lt;strong>L&lt;/strong> y veremos:
 &lt;img src="https://i.ibb.co/dGNdZDc/6.png" alt="">&lt;/p>
-&lt;p>Estas son las novedades que quería compartir con ustedes en estas primeras pruebas que estoy realizando (de hecho estoy actualmente en un proyecto &lt;strong>.NET MAUI 8&lt;/strong>). Iré avanzando en las novedades de .NET MAUI en todo este mes de Diciembre ya que nos encontramos en pleno &lt;strong>&lt;a href="https://elcamino.dev/calendario-adviento-net-maui-espanol-23">Calendario de Adviento .NET MAUI&lt;/a>&lt;/strong>&lt;/p>
+&lt;p>Estas son las novedades que quería compartir con ustedes en estas primeras pruebas que estoy realizando (de hecho estoy actualmente en un proyecto &lt;strong>.NET MAUI 8&lt;/strong>). Iré avanzando en las novedades de &lt;strong>.NET MAUI&lt;/strong> en todo este mes de Diciembre ya que nos encontramos en pleno &lt;strong>&lt;a href="https://elcamino.dev/calendario-adviento-net-maui-espanol-23">Calendario de Adviento .NET MAUI&lt;/a>&lt;/strong>&lt;/p>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Primeros pasos con XAML en MAUI</title><link>https://cmas.dev/posts/2022-09-14-first-step-xaml-in-maui/</link><pubDate>Wed, 14 Sep 2022 23:18:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-09-14-first-step-xaml-in-maui/</guid><description>&lt;p>En este artículo mostraré cómo iniciar los pasos con el lenguaje &lt;strong>XAML&lt;/strong> en &lt;strong>.NET MAUI&lt;/strong>.&lt;/p>
 &lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 25201&lt;/strong>&lt;/em>&lt;/p>
 &lt;p>En este pequeño artículo vamos a utilizar controles de Telerik para &lt;strong>.NET MAUI&lt;/strong>. En un &lt;a href="">artículo anterior&lt;/a> vimos cómo crear una aplicación &lt;strong>.NET MAUI&lt;/strong> y aquí haremos otra basada en otra plantilla (&lt;a href="https://www.telerik.com/support/whats-new/maui-ui/release-history/telerik-ui-for-net-maui-(version-3-0-0)">Telerik&lt;/a>).
