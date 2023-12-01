@@ -1,4 +1,85 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Windows 11 on Blog de Christian Amado</title><link>https://cmas.dev/tags/windows-11/</link><description>Recent content in Windows 11 on Blog de Christian Amado</description><generator>Hugo -- gohugo.io</generator><language>es</language><managingEditor>biz@cmas.dev (Christian Amado)</managingEditor><webMaster>biz@cmas.dev (Christian Amado)</webMaster><lastBuildDate>Sun, 19 Mar 2023 09:01:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/tags/windows-11/index.xml" rel="self" type="application/rss+xml"/><item><title>ChatGPT en WPF</title><link>https://cmas.dev/posts/2023-03-19-chatgpt-wpf/</link><pubDate>Sun, 19 Mar 2023 09:01:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2023-03-19-chatgpt-wpf/</guid><description>&lt;p>En este artículo veremos cómo crear un Chat con la API de &lt;strong>ChatGPT&lt;/strong> y &lt;strong>WPF&lt;/strong> con controles &lt;strong>Telerik&lt;/strong>.&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Windows 11 on Blog de Christian Amado</title><link>https://cmas.dev/tags/windows-11/</link><description>Recent content in Windows 11 on Blog de Christian Amado</description><generator>Hugo -- gohugo.io</generator><language>es</language><managingEditor>biz@cmas.dev (Christian Amado)</managingEditor><webMaster>biz@cmas.dev (Christian Amado)</webMaster><lastBuildDate>Fri, 01 Dec 2023 00:00:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/tags/windows-11/index.xml" rel="self" type="application/rss+xml"/><item><title>Novedades en .NET MAUI con .NET 8</title><link>https://cmas.dev/posts/2023-12-01-whats-new-in-maui-net-8/</link><pubDate>Fri, 01 Dec 2023 00:00:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2023-12-01-whats-new-in-maui-net-8/</guid><description>&lt;p>En este artículo mostraré algunas novedades de .NET 8 en &lt;strong>.NET MAUI&lt;/strong>.&lt;/p>
+&lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 22635.2776&lt;/strong>&lt;/em>&lt;/p>
+&lt;p>.NET 8 se ha lanzado con muchas novedades y también han sufrido cambios (para bien) en la plataforma .NET MAUI, es muy fácili dirigirnos al &lt;a href="https://learn.microsoft.com/es-es/dotnet/maui/whats-new/dotnet-8?view=net-maui-8.0">sitio oficial&lt;/a> y leer ahí las novedades pero me interesa probarlas novedades y contarles un poco lo que se viene, pero en mayor detalle lo que voy probando, todo esto con Android. ¡Así que manos a la obra!&lt;/p>
+&lt;h2 id="novedades-generales">Novedades generales&lt;/h2>
+&lt;ol>
+&lt;li>&lt;strong>Diseño de derecha a izquierda&lt;/strong>: Gracias a las mejoras de performance de .NET 8 se logra que los diseños para idiomas que van de derecha a izquierda ahora se vean correctamente además de responder en tiempo y forma.&lt;/li>
+&lt;li>&lt;strong>Comportamiento de teclado&lt;/strong>: Se han mejorado las disposiciones de teclado, que responden más rápidamente al ingreso de texto por parte del usuario, además el scroll responde más rápido ante la aparición/desaparición del teclado.&lt;/li>
+&lt;li>&lt;strong>Gestión de memoria&lt;/strong>: Esto viene atado a las mejoras introducidas en general dentro de .NET 8.&lt;/li>
+&lt;/ol>
+&lt;h2 id="cómo-habilito-net-maui-8">¿Cómo habilito .NET MAUI 8?&lt;/h2>
+&lt;p>Primero, debemos descargar e instalar el SDK de .NET 8, eso lo encontramos &lt;a href="https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/sdk-8.0.100-windows-x64-installer">aquí&lt;/a>.&lt;/p>
+&lt;p>Luego, debemos actualizar &lt;strong>Visual Studio 2022&lt;/strong> a su versión &lt;strong>17.8.0&lt;/strong> o superior (acabo de ver disponible la versión &lt;strong>17.8.2&lt;/strong>) que se puede descargar desde &lt;a href="https://visualstudio.microsoft.com/downloads/">aquí&lt;/a>.&lt;/p>
+&lt;p>Iniciamos el instalador de &lt;strong>Visual Studio&lt;/strong> e indicamos la opción de &lt;strong>.NET Multi-platform App UI development&lt;/strong>:
+&lt;img src="https://i.ibb.co/7bnx4RQ/1.png" alt="">&lt;/p>
+&lt;h2 id="creando-un-proyecto-net-maui-8">Creando un proyecto .NET MAUI 8&lt;/h2>
+&lt;p>Al abrir &lt;strong>Visual Studio&lt;/strong> procedemos a crear un nuevo proyecto y definimos el &lt;em>Tipo&lt;/em> &lt;strong>MAUI&lt;/strong> (en mi caso tengo &lt;a href="https://www.telerik.com/maui-ui">Telerik UI for .NET MAUI&lt;/a> instalado):
+&lt;img src="https://i.ibb.co/QDyvX8v/2.png" alt="">&lt;/p>
+&lt;p>Seleccionamos la versión de .NET (en este caso ya seleccionamos el 8):
+&lt;img src="https://i.ibb.co/LCZv5vc/3.png" alt="">&lt;/p>
+&lt;p>Nos dirigimos a las &lt;strong>Propiedades&lt;/strong> del proyecto y verificamos que todo corresponda al &lt;strong>.NET 8&lt;/strong>:
+&lt;img src="https://i.ibb.co/L0NYJSx/4.png" alt="">&lt;/p>
+&lt;p>Con estos pasos tenemos un nuevo proyecto creado en &lt;strong>.NET MAUI 8&lt;/strong> ;)&lt;/p>
+&lt;h2 id="cambio-en-mauiprogramcs">Cambio en MauiProgram.cs&lt;/h2>
+&lt;p>En el archivo de arranque de un proyecto &lt;strong>.NET MAUI&lt;/strong> se ingresa una línea de código nueva:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">#if DEBUG
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">builder.Logging.AddDebug();
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">#endif
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>El código completo queda así:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">using&lt;/span> &lt;span class="n">Microsoft&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Extensions&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Logging&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">namespace&lt;/span> &lt;span class="n">MauiApp1&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">public&lt;/span> &lt;span class="k">static&lt;/span> &lt;span class="k">class&lt;/span> &lt;span class="n">MauiProgram&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">public&lt;/span> &lt;span class="k">static&lt;/span> &lt;span class="n">MauiApp&lt;/span> &lt;span class="n">CreateMauiApp&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">var&lt;/span> &lt;span class="n">builder&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">MauiApp&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">CreateBuilder&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">builder&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">.&lt;/span>&lt;span class="n">UseMauiApp&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">App&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">.&lt;/span>&lt;span class="n">ConfigureFonts&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">fonts&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">fonts&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">AddFont&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;OpenSans-Regular.ttf&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;OpenSansRegular&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">fonts&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">AddFont&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;OpenSans-Semibold.ttf&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;OpenSansSemibold&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">#if DEBUG&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">builder&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Logging&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">AddDebug&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">#endif&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">builder&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Build&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Básicamente, se registran los eventos y éstos se agregan a la ventana del depurar (pero sólo durante la depuración no así en Release).&lt;/p>
+&lt;h2 id="keyboard-acelerator">Keyboard Acelerator&lt;/h2>
+&lt;p>Para dar una explicación rápida, podemos decir que son atajos de teclado que nos permiten realiar una acción dentro de la aplicación:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">&amp;lt;ContentPage.MenuBarItems&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;MenuBarItem Text=&amp;#34;File&amp;#34;&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;MenuFlyoutItem Text=&amp;#34;Exit&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Clicked=&amp;#34;MenuFlyoutItem_Clicked&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/MenuBarItem&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;MenuBarItem Text=&amp;#34;Locations&amp;#34;&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;MenuFlyoutSeparator /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;MenuFlyoutItem Text=&amp;#34;Add Location&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Clicked=&amp;#34;MenuFlyoutItem_Clicked_1&amp;#34;&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;MenuFlyoutItem.KeyboardAccelerators&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;KeyboardAccelerator Modifiers=&amp;#34;Ctrl&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Key=&amp;#34;L&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/MenuFlyoutItem.KeyboardAccelerators&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/MenuFlyoutItem&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;MenuFlyoutItem Text=&amp;#34;Edit Location&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;MenuFlyoutItem Text=&amp;#34;Remove Location&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/MenuBarItem&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;/ContentPage.MenuBarItems&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Arrancamos la App y vemos el Menú:
+&lt;img src="https://i.ibb.co/FWRFggx/5.png" alt="">&lt;/p>
+&lt;p>Hacemos clic o bien utilizamos el atajo &lt;strong>Ctrl&lt;/strong>+&lt;strong>L&lt;/strong> y veremos:
+&lt;img src="https://i.ibb.co/dGNdZDc/6.png" alt="">&lt;/p>
+&lt;p>Estas son las novedades que quería compartir con ustedes en estas primeras pruebas que estoy realizando (de hecho estoy actualmente en un proyecto &lt;strong>.NET MAUI 8&lt;/strong>). Iré avanzando en las novedades de .NET MAUI en todo este mes de Diciembre ya que nos encontramos en pleno &lt;strong>&lt;a href="https://elcamino.dev/calendario-adviento-net-maui-espanol-23">Calendario de Adviento .NET MAUI&lt;/a>&lt;/strong>&lt;/p>
+&lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>ChatGPT en WPF</title><link>https://cmas.dev/posts/2023-03-19-chatgpt-wpf/</link><pubDate>Sun, 19 Mar 2023 09:01:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2023-03-19-chatgpt-wpf/</guid><description>&lt;p>En este artículo veremos cómo crear un Chat con la API de &lt;strong>ChatGPT&lt;/strong> y &lt;strong>WPF&lt;/strong> con controles &lt;strong>Telerik&lt;/strong>.&lt;/p>
 &lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 25314&lt;/strong>&lt;/em>&lt;/p>
 &lt;p>En el articulo de &lt;a href="https://cmas.dev/posts/2023-03-15-creating-chat-app-wpf-using-telerik/">la semana pasada&lt;/a> hemos visto cómo crear una pequeña aplicación tipo Chat con &lt;strong>Telerik&lt;/strong>. El viernes, &lt;a href="https://cmas.dev/posts/2023-03-17-chatgpt-from-paraguay/">vimos cómo habilitar &lt;strong>ChatGPT&lt;/strong>&lt;/a> en Paraguay (teniendo en cuenta que no está habilitado oficialmente aún).&lt;/p>
 &lt;h2 id="creando-una-aplicación">Creando una aplicación&lt;/h2>
