@@ -2,7 +2,7 @@
 layout: post
 title: "Novedades en .NET MAUI con .NET 8"
 author: Christian Amado
-date: 2022-09-14 00:00:00 -04:00
+date: 2023-12-01 00:00:00 -04:00
 category: [Desarrollo de software]
 tags: [WinDev, MAUI, Windows 11, XAML]
 thumbnail-img: /img/posts/thumbnails/dotnet.png
