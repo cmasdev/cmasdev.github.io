@@ -94,9 +94,9 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>El resultado Vertical es:
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>El resultado Horizontal es:
 &lt;img src="https://i.ibb.co/bKnfKs6/Orientation2.png" alt="">&lt;/p>
-&lt;p>El resultado Horizontal es:
+&lt;p>El resultado Vertical es:
 &lt;img src="https://i.ibb.co/3132hFy/Orientation3.png" alt="">&lt;/p>
 &lt;p>Me ha funcionado este método, pero hay algunos problemas reportados en GitHub sobre el tema &lt;a href="https://github.com/dotnet/maui/issues/9795">aquí&lt;/a>&lt;/p>
 &lt;h3 id="opción-2-extraída-de-otro-blog">Opción 2 (extraída de otro Blog)&lt;/h3>

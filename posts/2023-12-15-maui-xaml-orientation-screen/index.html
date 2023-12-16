@@ -94,8 +94,8 @@ Windows 11 Insider Preview Build 22635.2915"><meta name=twitter:image content="h
 </span></span><span class=line><span class=cl>        }
 </span></span><span class=line><span class=cl>    }
 </span></span><span class=line><span class=cl>}
-</span></span></code></pre></div><p>El resultado Vertical es:
-<img src=https://i.ibb.co/bKnfKs6/Orientation2.png alt></p><p>El resultado Horizontal es:
+</span></span></code></pre></div><p>El resultado Horizontal es:
+<img src=https://i.ibb.co/bKnfKs6/Orientation2.png alt></p><p>El resultado Vertical es:
 <img src=https://i.ibb.co/3132hFy/Orientation3.png alt></p><p>Me ha funcionado este método, pero hay algunos problemas reportados en GitHub sobre el tema <a href=https://github.com/dotnet/maui/issues/9795>aquí</a></p><h3 id=opción-2-extraída-de-otro-blog>Opción 2 (extraída de otro Blog)</h3><p>Definimos el <strong>XAML</strong> de la página agregando Manejadores de eventos visuales, en este caso, <strong>OrientationStateTrigger</strong>:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>&lt;ContentPage.Resources&gt;
 </span></span><span class=line><span class=cl>    &lt;ResourceDictionary&gt;
 </span></span><span class=line><span class=cl>        &lt;Style TargetType=&#34;Grid&#34; x:Key=&#34;grillaInternaStyle&#34;&gt;
