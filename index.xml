@@ -1,4 +1,202 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Blog de Christian Amado</title><link>https://cmas.dev/</link><description>Recent content on Blog de Christian Amado</description><generator>Hugo -- gohugo.io</generator><language>es</language><managingEditor>biz@cmas.dev (Christian Amado)</managingEditor><webMaster>biz@cmas.dev (Christian Amado)</webMaster><lastBuildDate>Fri, 01 Dec 2023 00:00:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/index.xml" rel="self" type="application/rss+xml"/><item><title>Novedades en .NET MAUI con .NET 8</title><link>https://cmas.dev/posts/2023-12-01-whats-new-in-maui-net-8/</link><pubDate>Fri, 01 Dec 2023 00:00:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2023-12-01-whats-new-in-maui-net-8/</guid><description>&lt;p>En este artículo mostraré algunas novedades de .NET 8 en &lt;strong>.NET MAUI&lt;/strong>.&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Blog de Christian Amado</title><link>https://cmas.dev/</link><description>Recent content on Blog de Christian Amado</description><generator>Hugo -- gohugo.io</generator><language>es</language><managingEditor>biz@cmas.dev (Christian Amado)</managingEditor><webMaster>biz@cmas.dev (Christian Amado)</webMaster><lastBuildDate>Fri, 15 Dec 2023 18:30:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/index.xml" rel="self" type="application/rss+xml"/><item><title>XAML para cambio de orientación de pantalla</title><link>https://cmas.dev/posts/2023-12-15-maui-xaml-orientation-screen/</link><pubDate>Fri, 15 Dec 2023 18:30:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2023-12-15-maui-xaml-orientation-screen/</guid><description>&lt;p>En este artículo veremos la posibilidad de crear un diseño que se adapte a la orientación de pantalla en &lt;strong>.NET MAUI&lt;/strong>.&lt;/p>
+&lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 22635.2915&lt;/strong>&lt;/em>&lt;/p>
+&lt;p>La idea central aquí es aprender a crear un diseño responsivo para brindar la mejor experiencia de usuario con controles que se adapten a la orientación de la pantalla (anteriormente se lograba esto haciendo cambios por plataforma), para ellos adaptaremos una solución presentada por un desarrollador experto en la materia.&lt;/p>
+&lt;h2 id="bloquear-orientación-de-pantalla">Bloquear orientación de pantalla&lt;/h2>
+&lt;p>Primeramente, debemos mencionar que tenemos la opción de bloquear el cambio de orientación de pantalla. Esto se da cuando, por ejemplo, queremos que nuestro diseño sólo quede en posición vertical. Para ello, debemos preparar código para cada plataforma (aquí veremos &lt;strong>Android&lt;/strong> y &lt;strong>Windows&lt;/strong>):&lt;/p>
+&lt;h3 id="windows">Windows&lt;/h3>
+&lt;p>Se realiza mediante el gestor de manifiesto &lt;strong>Package.appxmanifest&lt;/strong>:
+&lt;img src="https://i.ibb.co/0jQZXvN/Orientation1.png" alt="">&lt;/p>
+&lt;h3 id="android">Android&lt;/h3>
+&lt;p>En la clase &lt;strong>MainActivity&lt;/strong> de la plataforma &lt;strong>Android&lt;/strong> se agrega el decorado:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">ScreenOrientation = ScreenOrientation.Portrait
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>La clase quedaría así:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">using Android.App;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">using Android.Content.PM;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">namespace MauiApp1
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [Activity(Theme = &amp;#34;@style/Maui.SplashTheme&amp;#34;, MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation | ConfigChanges.UiMode | ConfigChanges.ScreenLayout | ConfigChanges.SmallestScreenSize | ConfigChanges.Density, ScreenOrientation = ScreenOrientation.Portrait)]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> public class MainActivity : MauiAppCompatActivity
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="diseño-responsivo">Diseño responsivo&lt;/h2>
+&lt;p>En &lt;strong>.NET MAUI&lt;/strong> esto se logra utilziando de manera criteriosa alguno de los elementos (controles) &lt;strong>Layout&lt;/strong> nativos que nos presenta la plataforma. En este caso nos enfocaremos en en control &lt;strong>Grid&lt;/strong> (disculpen pero soy un fanático de este control).&lt;/p>
+&lt;h3 id="opción-1">Opción 1&lt;/h3>
+&lt;p>En esta opción adaptaremos los controles utilizando el Grid y utilizando código &lt;strong>C#&lt;/strong> para reorientar los objetos (básicamente se cambian filas por columnas, por describirlo de una manera). Entonces, el XAML quedaría así:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">&amp;lt;ContentPage xmlns=&amp;#34;http://schemas.microsoft.com/dotnet/2021/maui&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> xmlns:x=&amp;#34;http://schemas.microsoft.com/winfx/2009/xaml&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> x:Class=&amp;#34;MauiApp1.MainPage&amp;#34;&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;ScrollView&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Grid x:Name=&amp;#34;grillaCompleta&amp;#34;&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Grid.RowDefinitions&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;RowDefinition Height=&amp;#34;*&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/Grid.RowDefinitions&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Grid x:Name=&amp;#34;grillaInterna&amp;#34; Grid.Row=&amp;#34;0&amp;#34; Padding=&amp;#34;10&amp;#34;&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Grid.RowDefinitions&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;RowDefinition Height=&amp;#34;*&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/Grid.RowDefinitions&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Grid.ColumnDefinitions&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;ColumnDefinition Width=&amp;#34;Auto&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;ColumnDefinition Width=&amp;#34;*&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/Grid.ColumnDefinitions&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Image Source=&amp;#34;dotnet_bot.png&amp;#34; Grid.Row=&amp;#34;0&amp;#34; Grid.Column=&amp;#34;0&amp;#34; HeightRequest=&amp;#34;100&amp;#34; WidthRequest=&amp;#34;100&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Grid x:Name=&amp;#34;grillaControles&amp;#34; Grid.Row=&amp;#34;0&amp;#34; Grid.Column=&amp;#34;1&amp;#34; &amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Grid.RowDefinitions&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;RowDefinition Height=&amp;#34;Auto&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;RowDefinition Height=&amp;#34;Auto&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;RowDefinition Height=&amp;#34;Auto&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/Grid.RowDefinitions&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Grid.ColumnDefinitions&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;ColumnDefinition Width=&amp;#34;Auto&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;ColumnDefinition Width=&amp;#34;*&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/Grid.ColumnDefinitions&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Label Text=&amp;#34;Nombre:&amp;#34; Grid.Row=&amp;#34;0&amp;#34; Grid.Column=&amp;#34;0&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Label Text=&amp;#34;Fecha:&amp;#34; Grid.Row=&amp;#34;1&amp;#34; Grid.Column=&amp;#34;0&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Label Text=&amp;#34;Etiquetas:&amp;#34; Grid.Row=&amp;#34;2&amp;#34; Grid.Column=&amp;#34;0&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Entry Grid.Row=&amp;#34;0&amp;#34; Grid.Column=&amp;#34;1&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Entry Grid.Row=&amp;#34;1&amp;#34; Grid.Column=&amp;#34;1&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Entry Grid.Row=&amp;#34;2&amp;#34; Grid.Column=&amp;#34;1&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/Grid&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/Grid&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/Grid&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/ScrollView&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;/ContentPage&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Sobre-escribimos el método &lt;strong>OnSizeAllocated&lt;/strong> en el código C# que presta atención al cambio (de tamaño del contenedor de página, orientación, de alguna forma) quedaría así:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">protected override void OnSizeAllocated(double width, double height)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> base.OnSizeAllocated(width, height);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> if (width != this.width || height != this.height)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> this.width = width;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> this.height = height;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> if (width &amp;gt; height)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> grillaInterna.RowDefinitions.Clear();
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> grillaInterna.ColumnDefinitions.Clear();
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> grillaInterna.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> grillaInterna.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> grillaInterna.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> grillaInterna.Children.Remove(grillaControles);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> grillaInterna.Add(grillaControles, 1, 0);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> else
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> grillaInterna.RowDefinitions.Clear();
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> grillaInterna.ColumnDefinitions.Clear();
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> grillaInterna.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> grillaInterna.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Auto) });
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> grillaInterna.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> grillaInterna.Children.Remove(grillaControles);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> grillaInterna.Add(grillaControles, 0, 1);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>El resultado Vertical es:
+&lt;img src="https://i.ibb.co/bKnfKs6/Orientation2.png" alt="">&lt;/p>
+&lt;p>El resultado Horizontal es:
+&lt;img src="https://i.ibb.co/3132hFy/Orientation3.png" alt="">&lt;/p>
+&lt;p>Me ha funcionado este método, pero hay algunos problemas reportados en GitHub sobre el tema &lt;a href="https://github.com/dotnet/maui/issues/9795">aquí&lt;/a>&lt;/p>
+&lt;h3 id="opción-2-extraída-de-otro-blog">Opción 2 (extraída de otro Blog)&lt;/h3>
+&lt;p>Definimos el &lt;strong>XAML&lt;/strong> de la página agregando Manejadores de eventos visuales, en este caso, &lt;strong>OrientationStateTrigger&lt;/strong>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">&amp;lt;ContentPage.Resources&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;ResourceDictionary&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Style TargetType=&amp;#34;Grid&amp;#34; x:Key=&amp;#34;grillaInternaStyle&amp;#34;&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Setter Property=&amp;#34;VisualStateManager.VisualStateGroups&amp;#34;&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;VisualStateGroupList&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;VisualStateGroup&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;VisualState x:Name=&amp;#34;Portrait&amp;#34;&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;VisualState.StateTriggers&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;OrientationStateTrigger Orientation=&amp;#34;Portrait&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/VisualState.StateTriggers&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;VisualState.Setters&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Setter Property=&amp;#34;RowDefinitions&amp;#34; Value=&amp;#34;*&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Setter Property=&amp;#34;ColumnDefinitions&amp;#34; Value=&amp;#34;*,*&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/VisualState.Setters&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/VisualState&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;VisualState x:Name=&amp;#34;Landscape&amp;#34;&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;VisualState.StateTriggers&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;OrientationStateTrigger Orientation=&amp;#34;Landscape&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/VisualState.StateTriggers&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;VisualState.Setters&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Setter Property=&amp;#34;RowDefinitions&amp;#34; Value=&amp;#34;Auto,*&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Setter Property=&amp;#34;ColumnDefinitions&amp;#34; Value=&amp;#34;*&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/VisualState.Setters&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/VisualState&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/VisualStateGroup&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/VisualStateGroupList&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/Setter&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/Style&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/ResourceDictionary&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;/ContentPage.Resources&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>De esta manera, el código completo quedaría así:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">&amp;lt;ContentPage xmlns=&amp;#34;http://schemas.microsoft.com/dotnet/2021/maui&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> xmlns:x=&amp;#34;http://schemas.microsoft.com/winfx/2009/xaml&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> x:Class=&amp;#34;MauiApp1.MainPage&amp;#34;&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;ContentPage.Resources&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;ResourceDictionary&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Style TargetType=&amp;#34;Grid&amp;#34; x:Key=&amp;#34;grillaInternaStyle&amp;#34;&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Setter Property=&amp;#34;VisualStateManager.VisualStateGroups&amp;#34;&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;VisualStateGroupList&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;VisualStateGroup&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;VisualState x:Name=&amp;#34;Portrait&amp;#34;&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;VisualState.StateTriggers&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;OrientationStateTrigger Orientation=&amp;#34;Portrait&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/VisualState.StateTriggers&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;VisualState.Setters&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Setter Property=&amp;#34;RowDefinitions&amp;#34; Value=&amp;#34;*&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Setter Property=&amp;#34;ColumnDefinitions&amp;#34; Value=&amp;#34;*,*&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/VisualState.Setters&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/VisualState&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;VisualState x:Name=&amp;#34;Landscape&amp;#34;&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;VisualState.StateTriggers&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;OrientationStateTrigger Orientation=&amp;#34;Landscape&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/VisualState.StateTriggers&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;VisualState.Setters&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Setter Property=&amp;#34;RowDefinitions&amp;#34; Value=&amp;#34;Auto,*&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Setter Property=&amp;#34;ColumnDefinitions&amp;#34; Value=&amp;#34;*&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/VisualState.Setters&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/VisualState&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/VisualStateGroup&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/VisualStateGroupList&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/Setter&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/Style&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/ResourceDictionary&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/ContentPage.Resources&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Grid x:Name=&amp;#34;grillaCompleta&amp;#34;&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Grid.RowDefinitions&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;RowDefinition Height=&amp;#34;*&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/Grid.RowDefinitions&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Grid x:Name=&amp;#34;grillaInterna&amp;#34; Grid.Row=&amp;#34;0&amp;#34; Padding=&amp;#34;10&amp;#34; Style=&amp;#34;{StaticResource grillaInternaStyle}&amp;#34;&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Image Source=&amp;#34;dotnet_bot.png&amp;#34; Grid.Row=&amp;#34;0&amp;#34; Grid.Column=&amp;#34;0&amp;#34; HeightRequest=&amp;#34;100&amp;#34; WidthRequest=&amp;#34;100&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Grid x:Name=&amp;#34;grillaControles&amp;#34; Grid.Row=&amp;#34;0&amp;#34; Grid.Column=&amp;#34;1&amp;#34; &amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Grid.RowDefinitions&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;RowDefinition Height=&amp;#34;Auto&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;RowDefinition Height=&amp;#34;Auto&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;RowDefinition Height=&amp;#34;Auto&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/Grid.RowDefinitions&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Grid.ColumnDefinitions&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;ColumnDefinition Width=&amp;#34;Auto&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;ColumnDefinition Width=&amp;#34;*&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/Grid.ColumnDefinitions&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Label Text=&amp;#34;Nombre:&amp;#34; Grid.Row=&amp;#34;0&amp;#34; Grid.Column=&amp;#34;0&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Label Text=&amp;#34;Fecha:&amp;#34; Grid.Row=&amp;#34;1&amp;#34; Grid.Column=&amp;#34;0&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Label Text=&amp;#34;Etiquetas:&amp;#34; Grid.Row=&amp;#34;2&amp;#34; Grid.Column=&amp;#34;0&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Entry Grid.Row=&amp;#34;0&amp;#34; Grid.Column=&amp;#34;1&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Entry Grid.Row=&amp;#34;1&amp;#34; Grid.Column=&amp;#34;1&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Entry Grid.Row=&amp;#34;2&amp;#34; Grid.Column=&amp;#34;1&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/Grid&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/Grid&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/Grid&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;/ContentPage&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Logrando así el mismo efecto que la Opción 1 (con la diferencia que esta solución me funcionó en &lt;strong>Android&lt;/strong> y &lt;strong>Windows&lt;/strong>).&lt;/p>
+&lt;p>La opción 2 se encuentra perfectamente explicada en &lt;a href="https://blog.ewers-peters.de/add-responsive-layouts-to-your-maui-app">este blog&lt;/a> gracias a &lt;a href="https://github.com/ewerspej">Julian Ewers-Peters&lt;/a>&lt;/p>
+&lt;p>Recuerden que durante todo este mes de Diciembre estamos en el &lt;strong>&lt;a href="https://elcamino.dev/calendario-adviento-net-maui-espanol-23">Calendario de Adviento .NET MAUI&lt;/a>&lt;/strong>&lt;/p>
+&lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Novedades en .NET MAUI con .NET 8</title><link>https://cmas.dev/posts/2023-12-01-whats-new-in-maui-net-8/</link><pubDate>Fri, 01 Dec 2023 00:00:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2023-12-01-whats-new-in-maui-net-8/</guid><description>&lt;p>En este artículo mostraré algunas novedades de .NET 8 en &lt;strong>.NET MAUI&lt;/strong>.&lt;/p>
 &lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 22635.2776&lt;/strong>&lt;/em>&lt;/p>
 &lt;p>&lt;strong>.NET 8&lt;/strong> se ha lanzado con muchas novedades y también han sufrido cambios (para bien) en la plataforma &lt;strong>.NET MAUI&lt;/strong>. Es muy fácili dirigirnos al &lt;a href="https://learn.microsoft.com/es-es/dotnet/maui/whats-new/dotnet-8?view=net-maui-8.0">sitio oficial&lt;/a> y leer ahí las novedades pero me interesa probarlas novedades y contarles un poco lo que se viene, pero en mayor detalle lo que voy probando. ¡Así que manos a la obra!&lt;/p>
 &lt;h2 id="novedades-generales">Novedades generales&lt;/h2>
