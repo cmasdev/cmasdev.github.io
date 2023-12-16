@@ -124,10 +124,10 @@ protected override void OnSizeAllocated(double width, double height)
 }
 ```
 
-El resultado Vertical es:
+El resultado Horizontal es:
 ![](https://i.ibb.co/bKnfKs6/Orientation2.png)
 
-El resultado Horizontal es:
+El resultado Vertical es:
 ![](https://i.ibb.co/3132hFy/Orientation3.png)
 
 Me ha funcionado este método, pero hay algunos problemas reportados en GitHub sobre el tema [aquí](https://github.com/dotnet/maui/issues/9795)
