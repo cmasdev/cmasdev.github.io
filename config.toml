@@ -31,7 +31,7 @@ timeZone = "America/Asuncion"
     commit = "https://github.com/cmasdev/cmasdev.github.io/tree/"
     image = "/img/posts/thumbnails/general.jpg"
     rss = true
-    comments = true
+    comments = false
     readingTime = true
     wordCount = false
     useHLJS = true
@@ -39,6 +39,7 @@ timeZone = "America/Asuncion"
     delayDisqus = false
     showRelatedPosts = true
     gcse = "013131931956450466198:blhmkdpweyq"
+    since=2018
 
 [Author]
   name = "Christian Amado"
@@ -46,7 +47,7 @@ timeZone = "America/Asuncion"
   email = "biz@cmas.dev"
   github= "cmasdev"
   twitter= "christianamado"
-  mastodon= "mastodon.social/@cmasdev"
+  #mastodon= "mastodon.social/@cmasdev"
   youtube= "channel/cmasdev"
   #telegram= "cmasdev"
   linkedin= "christianamado"
@@ -97,8 +98,8 @@ timeZone = "America/Asuncion"
   [languages.es]
     hometitle = "Christian Amado"
     title = "Blog de Christian Amado"
-    subtitle = "Ingeniería de Software y Aplicaciones de Negocios"
-    description = "Un blog dedicado a la ingeniería de software, programación y aplicaciones de negocios principalmente para tecnologías Microsoft"
+    subtitle = "Ingeniería de Software y Soluciones de Negocios"
+    description = "Un blog dedicado a la ingeniería de software, programación y soluciones de negocios principalmente para tecnologías Microsoft"
     languageName = "Español"
     weight = 2
     [languages.es.menu]
