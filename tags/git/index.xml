@@ -14,7 +14,7 @@
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">sudo apt install git
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="4">
 &lt;li>Veremos la versión actual instalada(Ojo: no es lo mismo Git en Windows que Git en WSL, pueden ser versiones distintas):
-&lt;img src="https://cmas.dev/img/posts/2022/05/04/1.png" alt="">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/05/04/1.png">&lt;/li>
 &lt;/ol>
 &lt;h2 id="actualizar-git-en-wsl">Actualizar Git en WSL&lt;/h2>
 &lt;p>Debemos seguir algunos pasos sencillos para lograrlos. Estos serían:&lt;/p>

@@ -1,183 +1,254 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>PowerApps on Blog de Christian Amado</title><link>https://cmas.dev/tags/powerapps/</link><description>Recent content in PowerApps on Blog de Christian Amado</description><generator>Hugo -- gohugo.io</generator><language>es</language><managingEditor>biz@cmas.dev (Christian Amado)</managingEditor><webMaster>biz@cmas.dev (Christian Amado)</webMaster><lastBuildDate>Tue, 31 Mar 2020 12:32:20 -0400</lastBuildDate><atom:link href="https://cmas.dev/tags/powerapps/index.xml" rel="self" type="application/rss+xml"/><item><title>Publicar aplicación para usuarios externos</title><link>https://cmas.dev/posts/2020-03-31-publicar-aplicacion-para-usuarios-externos/</link><pubDate>Tue, 31 Mar 2020 12:32:20 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2020-03-31-publicar-aplicacion-para-usuarios-externos/</guid><description>&lt;p>En la &lt;a href="https://cmas.dev/2020/03/publicar-aplicacion/">entrada de ayer&lt;/a> vimos cómo publicar una aplicación dentro del dominio de nuestra organización con usuarios propios de la empresa. Digamos que sirve para una aplicación interna que puede ser utilizada sin inconvenientes.&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>PowerApps on Blog de Christian Amado</title><link>https://cmas.dev/tags/powerapps/</link><description>Recent content in PowerApps on Blog de Christian Amado</description><generator>Hugo -- gohugo.io</generator><language>es</language><managingEditor>biz@cmas.dev (Christian Amado)</managingEditor><webMaster>biz@cmas.dev (Christian Amado)</webMaster><lastBuildDate>Wed, 24 May 2023 00:00:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/tags/powerapps/index.xml" rel="self" type="application/rss+xml"/><item><title>Galería Ecommerce en Power Apps</title><link>https://cmas.dev/posts/2023-05-24-ecommerce-gallery-in-power-apps/</link><pubDate>Wed, 24 May 2023 00:00:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2023-05-24-ecommerce-gallery-in-power-apps/</guid><description>&lt;p>En este artículo veremos cómo crear empezar con un sitio Ecommerce en &lt;strong>Microsoft Power Apps&lt;/strong>.&lt;/p>
+&lt;p>En &lt;strong>Power Apps&lt;/strong> ya tenemos plantillas que se pueden reutilizar para crear hermosas galerías. Me han pedido una pequeña aplicación Ecommerce que se conecte con una entidad bancaria de manera rápida y funcional.&lt;/p>
+&lt;p>La forma más fácil de crear el sitio es utilizando una plantilla e ir cambiando la plantilla según las necesidades.&lt;/p>
+&lt;p>Primero, creamos la plantilla en cuestión:
+&lt;img src="https://i.ibb.co/MNcGcqK/power-apps-ecommerce-1.png">
+&lt;img src="https://i.ibb.co/mTVxXSs/power-apps-ecommerce-2.png">&lt;/p>
+&lt;p>Luego, agregamos los controles que cremos convenientes:
+&lt;img src="https://i.ibb.co/5kH5d1M/power-apps-ecommerce-3.png">&lt;/p>
+&lt;p>Por último, probamos la aplicación :)
+&lt;img src="https://i.ibb.co/gwYF7Ww/power-apps-ecommerce-4.png">&lt;/p>
+&lt;p>De esta manera, hemos visto como iniciar un sitio de Ecommerce en &lt;strong>Microsoft Power Apps&lt;/strong>&lt;/p>
+&lt;p>¡Espero resulte de utilidad!&lt;/p></description></item><item><title>Mostrar foto de perfil desde Microsoft 365 en Power Apps</title><link>https://cmas.dev/posts/2023-05-17-display-profile-photo-from-m365-in-power-apps/</link><pubDate>Wed, 17 May 2023 00:00:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2023-05-17-display-profile-photo-from-m365-in-power-apps/</guid><description>&lt;p>En este artículo veremos cómo agregar una foto de perfil desde &lt;strong>Microsoft 365&lt;/strong> en &lt;strong>Microsoft Power Apps&lt;/strong> de modo a reutilizarlo y manejar un mismo perfil dentro de las aplicaciones.&lt;/p>
+&lt;p>Primeramente, creamos una nueva aplicación vacía:
+&lt;img src="https://i.ibb.co/2q4Sxxv/profile-photo-power-apps-1.png">&lt;/p>
+&lt;p>Luego, le colocamos el nombre y hacemos clic en el botón &lt;em>Crear&lt;/em>:
+&lt;img src="https://i.ibb.co/cwmTBcr/profile-photo-power-apps-2.png">&lt;/p>
+&lt;p>En el nuevo lienzo agregamos los siguientes controles:&lt;/p>
+&lt;ul>
+&lt;li>Container&lt;/li>
+&lt;li>Image (para la foto de perfil)&lt;/li>
+&lt;li>2 Text Label (para el nombre y para el correo)&lt;/li>
+&lt;/ul>
+&lt;p>Quedaría algo así:
+&lt;img src="https://i.ibb.co/kD3F3wh/profile-photo-power-apps-3.png">&lt;/p>
+&lt;p>Hacemos clic en la imagen y colocamos la siguiente fórmula:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">Microsoft365Users.UserPhoto(Microsoft365Users.MyProfile().Id)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Esto nos dará un error, porque no encontrará la variable &lt;em>Microsoft365Users&lt;/em>&lt;/p>
+&lt;p>Procedemos a agregar un nuevo conector a nuestro &lt;strong>Power Apps&lt;/strong>:
+&lt;img src="https://i.ibb.co/56B6dgD/profile-photo-power-apps-4.png">&lt;/p>
+&lt;p>Cambiamos el nombre al conector:
+&lt;img src="https://i.ibb.co/0yv6P4T/profile-photo-power-apps-5.png">&lt;/p>
+&lt;p>Adicionamos las fórmulas a los objetos que hemos agregado:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">Microsoft365Users.MyProfile().DisplayName
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">Microsoft365Users.MyProfile().Mail
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Veremos los cambios en tiempo real:
+&lt;img src="https://i.ibb.co/yXwngsM/profile-photo-power-apps-6.png">&lt;/p>
+&lt;p>Por último, probamos la aplicación para ver los cambios:
+&lt;img src="https://i.ibb.co/JvtNQfB/profile-photo-power-apps-7.png">&lt;/p>
+&lt;p>De esta manera, hemos visto como mostrar la foto de perfil desde &lt;strong>Microsoft 365&lt;/strong> en &lt;strong>Microsoft Power Apps&lt;/strong>&lt;/p>
+&lt;p>¡Espero resulte de utilidad!&lt;/p></description></item><item><title>Formularios Dinámicos en Power Apps</title><link>https://cmas.dev/posts/2023-05-10-dynamics-forms-in-power-apps/</link><pubDate>Wed, 10 May 2023 00:00:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2023-05-10-dynamics-forms-in-power-apps/</guid><description>&lt;p>En este artículo veremos cómo crear formularios dinámicos en &lt;strong>Microsoft Power Apps&lt;/strong> debido a que es un escenario bastante útil en el día a día. tengamos en cuenta que no todo es estático en este mundo de la transformación digital.&lt;/p>
+&lt;p>Este artículo es sólo una referencia al artículo original que me sirvió para implementar en mi propio Tenant.&lt;/p>
+&lt;p>&lt;em>Articulo original &lt;a href="https://powerusers.microsoft.com/t5/Power-Apps-Community-Blog/Build-a-Dynamic-Form-in-Power-Apps/ba-p/1440257">aquí&lt;/a>&lt;/em>&lt;/p>
+&lt;p>De esta manera, hemos visto una excelente manera de implementar formulario dinámicos en &lt;strong>Microsoft Power Apps&lt;/strong>&lt;/p>
+&lt;p>¡Espero resulte de utilidad!&lt;/p></description></item><item><title>Manejo de errores en Power Apps</title><link>https://cmas.dev/posts/2023-05-03-error-handling-in-power-apps/</link><pubDate>Wed, 03 May 2023 00:00:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2023-05-03-error-handling-in-power-apps/</guid><description>&lt;p>En este artículo veremos cómo manejar errores en &lt;strong>Microsoft Power Apps&lt;/strong> pues no es algo netamente de lenguajes de programación sino que es un tema real que debe ser cubierto también por aplciaciones de tipo &lt;em>Low Code&lt;/em>.&lt;/p>
+&lt;p>La semana pasada se presentó un problema en una de las aplicaciones &lt;strong>Power Apps&lt;/strong> y justamente ha ocurrido por no haber manejado los errores correspondientes. A continuación, explicaré manejo de errores en distintos niveles.&lt;/p>
+&lt;h1 id="manejo-de-errores-preventivos">Manejo de errores (Preventivos)&lt;/h1>
+&lt;p>Llamaremos a estos preventivos, ya que son errores que se pueden prever y están relacionados a controles dentro de la aplicación, por ejemplo que se ingrese correctamente un correo, que un campo permita sólo datos numéricos, etc.&lt;/p>
+&lt;p>Aquí es donde existen funciones para el manejo de errores:&lt;/p>
+&lt;h2 id="iferror">IfError&lt;/h2>
+&lt;blockquote>
+&lt;p>La función IfError prueba valores hasta que encuentra un error. Si la función descubre un error, la función evalúa y devuelve un valor de reemplazo correspondiente y detiene la evaluación adicional.&lt;/p>
+&lt;/blockquote>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">IfError( 1/0, 0 )
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Aquí tenemos el popular caso de división por cero. En este caso no mostrará mensaje ni nada simplemente asumirá que en caso de producirse ese error coloca el valor en cero.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">IfError(1/0, Notify(&amp;#34;No se puede dividir por cero&amp;#34;))
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Aquí en caso de producirse el error notifica (muestra en pantalla el mensaje como tal). En este caso no asume valores como el ejemplo anterior.&lt;/p>
+&lt;h2 id="iserror">IsError&lt;/h2>
+&lt;p>Esta función prueba un valor de error. El valor devuelto es un valor booleano &lt;em>true&lt;/em> o &lt;em>false&lt;/em>.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">IsError(1/0)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Es función retornará el valor &lt;em>true&lt;/em>.&lt;/p>
+&lt;h2 id="isblankorerror">IsBlankOrError&lt;/h2>
+&lt;p>Esta función prueba un valor en blanco o un valor de error.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">IsBlankOrError(1)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Retorna &lt;em>false&lt;/em> pues no es un error.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">IsBlankOrError(1/0)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Retorna &lt;em>true&lt;/em> pues es un error (de división por cero).&lt;/p>
+&lt;h1 id="manejo-de-errores-globales-inesperados">Manejo de errores globales inesperados&lt;/h1>
+&lt;p>Esto se dá cuando los errores no son controlados o simplemente no los podemos controlas, por ejemplo, tenemos la llamada a una API y esta falla por algún motivo. Es ahí donde podemos utilizar esta función para capturar los errores que puedan suceder:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">Notify(&amp;#34;Concatenate(&amp;#34;Ocurrió un error general &amp;#34;, FirstError.Source), NotificationType.Error);
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Con esto notificamos que hubo un error y especificamos donde se produjo.&lt;/p>
+&lt;p>De esta manera, hemos visto algunas maneras de manejar errores en &lt;strong>Microsoft Power Apps&lt;/strong>&lt;/p>
+&lt;p>¡Espero resulte de utilidad!&lt;/p></description></item><item><title>Publicar aplicación para usuarios externos</title><link>https://cmas.dev/posts/2020-03-31-publicar-aplicacion-para-usuarios-externos/</link><pubDate>Tue, 31 Mar 2020 12:32:20 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2020-03-31-publicar-aplicacion-para-usuarios-externos/</guid><description>&lt;p>En la &lt;a href="https://cmas.dev/2020/03/publicar-aplicacion/">entrada de ayer&lt;/a> vimos cómo publicar una aplicación dentro del dominio de nuestra organización con usuarios propios de la empresa. Digamos que sirve para una aplicación interna que puede ser utilizada sin inconvenientes.&lt;/p>
 &lt;p>En este caso, habilitaremos la misma aplicación pero para usuarios externos a nuestra organización. Para eso necesitamos un poco de Microsoft Azure.&lt;/p>
 &lt;p>Nos dirigimos al &lt;a href="https://portal.azure.com">portal de Microsoft Azure&lt;/a> y seleccionamos la opción para Administrar &lt;strong>Active Directory&lt;/strong>:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/1-2.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/1-2.png">&lt;/p>
 &lt;p>Seleccionamos la opción &lt;strong>Usuarios&lt;/strong>:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/2-2.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/2-2.png">&lt;/p>
 &lt;p>Agregamos un &lt;strong>Usuario invitado&lt;/strong>:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/3-2.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/3-2.png">&lt;/p>
 &lt;p>Agregamos el correo de la persona a la cual deseamos invitar:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/4-2.png" alt="">&lt;br>
+&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/4-2.png">&lt;br>
 Nos dirigimos a la sección &lt;strong>Licencias&lt;/strong>:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/5-1.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/5-1.png">&lt;/p>
 &lt;p>Asignamos la licencia correspondiente:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/6-1.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/6-1.png">&lt;/p>
 &lt;p>Agregamos el usuario y los permisos a productos:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/7-1.png" alt="">&lt;/p>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/8-1.png" alt="">&lt;/p>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/9-1.png" alt="">&lt;/p>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/10-1.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/7-1.png">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/8-1.png">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/9-1.png">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/10-1.png">&lt;/p>
 &lt;p>Ahora, en PowerApps, procedemos a &lt;strong>Compartir la aplicación&lt;/strong>:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/11.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/11.png">&lt;/p>
 &lt;p>Seleccionamos al usuario y hacemos clic en &lt;strong>Compartir&lt;/strong>:&lt;br>
 &lt;a href="https://cmas.dev/img/posts/migrated/2020/03/12.png">&lt;/a>&lt;/p>
 &lt;p>El usuario que acepta la invitación deberá otorgar permisos para su propio usuario:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/13.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/13.png">&lt;/p>
 &lt;p>La aplicación se ejecuta normalmente:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/14.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/14.png">&lt;/p>
 &lt;p>De esta forma, hemos compartido una aplicación externa con un usuario. Debemos tener en cuenta que realizar esta acción consume las licencias de la organización que la comparte.&lt;/p>
 &lt;p>¡Espero resulte de utilidad!&lt;/p></description></item><item><title>Publicar aplicación</title><link>https://cmas.dev/posts/2020-03-30-publicar-aplicacion/</link><pubDate>Mon, 30 Mar 2020 18:09:32 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2020-03-30-publicar-aplicacion/</guid><description>&lt;p>En esta oportunidad quiero mostrar cómo publicar una aplicación &amp;ldquo;desarrollada&amp;rdquo; con PowerApps. La publicación es muy sencilla y en pocos pasos está disponible para ser utilizada sin inconveniente alguno.&lt;/p>
 &lt;p>Primeramente, debemos crear la aplicación (en este ejemplo, a partir de una plantilla):&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/1-1.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/1-1.png">&lt;/p>
 &lt;p>Colocamos un nombre y creamos la aplicación:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/2-1.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/2-1.png">&lt;/p>
 &lt;p>Asignamos los permisos correspondientes:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/3-1.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/3-1.png">&lt;/p>
 &lt;p>Al crear la aplicación, damos ejecutar para probarlo:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/4-1.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/4-1.png">&lt;/p>
 &lt;p>Guardamos la aplicación:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/5.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/5.png">&lt;/p>
 &lt;p>Lo guardamos en la nube:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/6.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/6.png">&lt;/p>
 &lt;p>PowerApps nos muestra los detalles del guardado:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/7.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/7.png">&lt;/p>
 &lt;p>Al hacer clic en Ver todas las versiones, nos aparecerá la grilla de versionado:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/8.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/8.png">&lt;/p>
 &lt;p>Nos dirigimos a la pestaña &lt;strong>Detalles&lt;/strong> y ahí vemos la dirección de publicación:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/9.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/9.png">&lt;/p>
 &lt;p>Probamos en un dipositivo móvul o cualquier navegador:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/10.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/10.png">&lt;/p>
 &lt;p>De esta manera, hemos publicado una aplicación funcional en la web sin demasiados pasos.&lt;/p>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Tipos de pantallas</title><link>https://cmas.dev/posts/2020-01-22-tipos-de-pantallas/</link><pubDate>Wed, 22 Jan 2020 20:55:38 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2020-01-22-tipos-de-pantallas/</guid><description>&lt;p>Cada vez que doy una mirada a Microsoft PowerApps encuentro cosas nuevas y mejoradas. en este caso vengo a explicar las posibles opciones que tenemos disponibles como plantillas para distintas formas de representar la forma de desplegar la información de nuestra aplicación.&lt;/p>
 &lt;p>Si nos dirigimos a la pnatalla principal de PowerApps veremos este menú donde especifica los tipos de pantalla que tenemos disponibles:&lt;/p>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2020/01/1.png" alt="">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2020/01/1.png">&lt;/p>
 &lt;p>Tenemos más opciones y cada vez mejores.&lt;/p></description></item><item><title>Enviar correo desde PowerApps</title><link>https://cmas.dev/posts/2020-01-15-enviar-correo-desde-powerapps/</link><pubDate>Wed, 15 Jan 2020 22:31:59 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2020-01-15-enviar-correo-desde-powerapps/</guid><description>&lt;p>En esta oportunidad me gustaría mostrar la integración entre dos aplicaciones disponibles en Office 365, en este caso, PowerApps y Power Automate (Flow).&lt;/p>
 &lt;p>PowerApps nos permite crear una aplicación en segundos y Power Automate (Flow) nos permite utilizar muchos servicios para integrarlos a nuestra aplicación.&lt;/p>
 &lt;p>En este caso crearemos un flujo que permita enviar correo y lo integraremos al PowerApps para que desde allí podamos enviar un correo.&lt;/p>
 &lt;h2 id="microsoft-powerapps">Microsoft PowerApps&lt;/h2>
 &lt;p>Creamos una aplicación en blanco y colocamos los controles básicos de ingreso de datos y un botón &amp;ldquo;Enviar correo&amp;rdquo; (&lt;a href="https://cmas.dev/posts/2019-05-14-controles/">aquí puedes aprender a agregar controles&lt;/a>):&lt;/p>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2020/01/1-1.png" alt="">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2020/01/1-1.png">&lt;/p>
 &lt;p>Marcamos el botón &amp;ldquo;Enviar correo&amp;rdquo;. Dentro de la aplicación, PowerApps, nos dirigimos a la pestaña &lt;strong>Action&lt;/strong> y hacemos clic en el botón &lt;strong>Power automate&lt;/strong>:&lt;/p>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2020/01/2.png" alt="">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2020/01/2.png">&lt;/p>
 &lt;p>En el nuevo cuadro de diálogo, hacemos clic en el boton &lt;strong>Create a new flow&lt;/strong>:&lt;/p>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2020/01/3.png" alt="">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2020/01/3.png">&lt;/p>
 &lt;p>Ahora, nos redirige al sitio de Power Automate:&lt;/p>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2020/01/4.png" alt="">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2020/01/4.png">&lt;/p>
 &lt;p>Debemos seleccionar la plantilla &lt;strong>Click a button in PowerApps to send an email&lt;/strong>:&lt;/p>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2020/01/5.png" alt="">&lt;/p>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2020/01/6.png" alt="">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2020/01/5.png">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2020/01/6.png">&lt;/p>
 &lt;p>Agregamos la cuenta de correo de la cuenta que enviará el correo al hacer clic en el botón:&lt;/p>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2020/01/7.png" alt="">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2020/01/7.png">&lt;/p>
 &lt;p>Hacemos clic en &lt;strong>Continuar&lt;/strong>:&lt;/p>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2020/01/8.png" alt="">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2020/01/8.png">&lt;/p>
 &lt;p>Guardamos los cambios en Power Automate y luego seleccionamos nuestra plantilla en PowerApps:&lt;/p>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2020/01/9.png" alt="">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2020/01/9.png">&lt;/p>
 &lt;p>Completamos la barra de fórmula:&lt;/p>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2020/01/10.png" alt="">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2020/01/10.png">&lt;/p>
 &lt;p>Ejecutamos la aplicación y completamos los datos:&lt;/p>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2020/01/11.png" alt="">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2020/01/11.png">&lt;/p>
 &lt;p>Verificamos la bandeja de Entrada (o correo no deseado) del correo colocado en el punto anterior:&lt;/p>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2020/01/12.png" alt="">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2020/01/12.png">&lt;/p>
 &lt;p>Leemos el correo y listo:&lt;/p>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2020/01/13.png" alt="">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2020/01/13.png">&lt;/p>
 &lt;p>De esta manera hemos integrado una funcionalidad demasiado útil a nuestra aplicación creada en menos de 2 minutos.&lt;/p></description></item><item><title>Procesando…</title><link>https://cmas.dev/posts/2019-12-06-procesando/</link><pubDate>Thu, 05 Dec 2019 23:11:50 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2019-12-06-procesando/</guid><description>&lt;p>En una entrada anterior, habíamos visto cómo crear una barra de progreso dentro de PowerApps. Vimos que no existe un control como tal pero que podemos adaptar uno a las necesidades que vamos teniendo.&lt;/p>
 &lt;p>Aquí veremos cómo mostrar un control &amp;ldquo;Procesando&amp;hellip;&amp;rdquo; (loading) mientras se procesa algo, tomando como ejemplo el origen de datos &lt;strong>Cuentas&lt;/strong> desde Dynamics 365 for Sales.&lt;/p>
 &lt;p>Lo primero que tenemos que hacer es descargarnos una imagen .gif con fondo transparente que tenga la animación deseada. Por ejemplo:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/12/loading.gif" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/12/loading.gif">&lt;/p>
 &lt;p>Luego colocamos dicho elemento en nuestra aplicación:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/12/1-4.png" alt="">&lt;/p>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2019/12/2-4.png" alt="">&lt;/p>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2019/12/3-4.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/12/1-4.png">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2019/12/2-4.png">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2019/12/3-4.png">&lt;/p>
 &lt;p>Ahora, nos dirigimos a la accion &lt;strong>OnVisible&lt;/strong> del objeto &lt;strong>Screen&lt;/strong> donde agregaremos una variable:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/12/4-3.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/12/4-3.png">&lt;/p>
 &lt;p>Al agregar a la funcion &lt;strong>UpdateContext&lt;/strong>, la variable se crea automáticamente, en este caso con el valor &lt;strong>false&lt;/strong>.&lt;/p>
 &lt;p>A continuación, hacemos uso de la variable en la propiedad &lt;strong>Visible&lt;/strong> de la imagen:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/12/5-1.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/12/5-1.png">&lt;/p>
 &lt;p>Por último, cambiamos el valor de la variable en alguna acción deseada. En este caso lo quiero hacer en el botón que actualiza el conjunto de datos:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/12/6-1.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/12/6-1.png">&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">UpdateContext({imagen:true});Refresh(\[@Cuentas\]);UpdateContext({imagen:false});
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>De esta manera tenemos disponible la opción de mostrar una imagen de proceso para que no se quede congelada la aplicación.&lt;/p>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>PDF Viewer</title><link>https://cmas.dev/posts/2019-10-22-pdf-viewer/</link><pubDate>Tue, 22 Oct 2019 19:24:11 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2019-10-22-pdf-viewer/</guid><description>&lt;p>Muchas veces necesitamos, poder visualizar documentos en nuestras aplicaciones. A la fecha, uno de los documentos más utilizados es el formato PDF.&lt;/p>
 &lt;p>Por eso, Microsoft PowerApps provee un visor de documentos PDF. Con estos sencillos pasos logramos ver estos documentos rápidamente.&lt;/p>
 &lt;p>Primero, debemos agregar el control &amp;ldquo;PDF Viewer(experimental)&amp;rdquo;:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/10/1-3.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/10/1-3.png">&lt;/p>
 &lt;p>Luego se procede a colocar la ubicación del archivo PDF (sólo permite HTTPS):&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/10/2-3.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/10/2-3.png">&lt;/p>
 &lt;p>Por último veremos el documento de esta manera:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/10/3-3.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/10/3-3.png">&lt;/p>
 &lt;p>De esta sencilla forma, logramos ver los documentos en el visor.&lt;/p></description></item><item><title>Barra de progreso</title><link>https://cmas.dev/posts/2019-10-11-barra-de-progreso/</link><pubDate>Thu, 10 Oct 2019 23:14:41 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2019-10-11-barra-de-progreso/</guid><description>&lt;p>Otra herramienta que se utiliza mucho a la hora de desarrollar aplicaciones es la barra de progreso, para mostrar algún avance en el proceso. En Microsoft PowerApps no tenemos un control especializado para realizar esa tarea, por lo tanto debemos crear algo que simule esa tarea.&lt;/p>
 &lt;p>Para ello utilizaremos dos controles de tipo &lt;strong>Rectángulo&lt;/strong> y un control &lt;strong>Slider&lt;/strong> que permitirá mostrar el proceso deseado.&lt;/p>
 &lt;p>Primero, creamos un rectángulo con bordes azules y sin relleno (relleno en blanco):&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/10/1-2.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/10/1-2.png">&lt;/p>
 &lt;p>Creamos otro rectángulo con las mismas dimensiones que el primero:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/10/2-2.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/10/2-2.png">&lt;/p>
 &lt;p>Agregamos un control de tipo &lt;strong>Slider&lt;/strong> que utilizaremos para cambiar los valores del segundo rectángulo:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/10/3-2.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/10/3-2.png">&lt;/p>
 &lt;p>Colocamos la fórmula que necesitamos para la barra de progreso en la propiedad Width del segundo rectángulo:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/10/4-1.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/10/4-1.png">&lt;/p>
 &lt;p>Ubicamos el segundo rectángulo sobre el primer rectángulo:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/10/5-1.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/10/5-1.png">&lt;/p>
 &lt;p>Agregamos una &lt;strong>etiqueta&lt;/strong> para mostrar el valor del &lt;strong>Slider&lt;/strong>:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/10/6-1.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/10/6-1.png">&lt;/p>
 &lt;p>Realizamos las pruebas con el &lt;strong>Slider&lt;/strong>:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/10/7.png" alt="">&lt;/p>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2019/10/8.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/10/7.png">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2019/10/8.png">&lt;/p>
 &lt;p>De esta manera logramos simular una barra de progreso que podemos utilizar donde sea necesario.&lt;/p></description></item><item><title>Campos ocultos</title><link>https://cmas.dev/posts/2019-10-08-campos-ocultos/</link><pubDate>Tue, 08 Oct 2019 21:03:18 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2019-10-08-campos-ocultos/</guid><description>&lt;p>Este último fin de semana me han preguntado cómo puedo manejar campos ocultos en Microsoft PowerApps. La respuesta corta es No se puede. ¿Por qué no se puede?&lt;/p>
 &lt;p>Porque no existe un control o campo oculto como tal. En HTML, por ejemplo, tenemos un control de ese tipo que lo podemos utilizar como un campo auxiliar para almacenar algo que necesitamos utilizar. Más información &lt;a href="https://developer.mozilla.org/es/docs/Web/HTML/Elemento/input/hidden">aquí&lt;/a>.&lt;/p>
 &lt;p>Mientras tanto, en Microsoft PowerApps, se puede crear un campo &lt;strong>label&lt;/strong> y aplicarle &lt;strong>false&lt;/strong> en la propiedad &lt;strong>Visible&lt;/strong>. De esa manera se puede ocultar el control y utilizarlo con el mismo fin que el campo de HTML (con la diferencia que éste no será visible de ninguna manera).&lt;/p></description></item><item><title>Validaciones</title><link>https://cmas.dev/posts/2019-10-03-validaciones/</link><pubDate>Thu, 03 Oct 2019 20:11:49 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2019-10-03-validaciones/</guid><description>&lt;p>Esta entrada tiene relación con el trabajo con datos, en la entrada anterior vimos cómo ordenar y filtrar datos. Aquí veremos otro punto importante que se basa en las validaciones. Aquí me centraré en validar datos en la pantalla donde se insertan elementos.&lt;/p>
 &lt;p>De esta manera, los datos validados terminarán en el Dynamics 365 for Sales. Vamos a ver cómo podemos hacerlo.&lt;/p>
 &lt;p>Primero, necesitamos posicionarnos en la pantalla correspondiente a la inserción de objetos (cuentas, en este caso) y desbloquear el diseño de controles:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/10/1-1.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/10/1-1.png">&lt;/p>
 &lt;p>Posteriormente, procedemos a marcar como requerido (cambiamos &lt;strong>false&lt;/strong> por &lt;strong>true&lt;/strong>) el campo deseado (en este caso el nombre de la cuenta):&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/10/2-1.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/10/2-1.png">&lt;/p>
 &lt;p>Tenemos en cuenta los siguientes controles, que ya existen en nuestra plantilla:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/10/3-1.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/10/3-1.png">&lt;/p>
 &lt;p>En el control &lt;strong>ErrorMessage5&lt;/strong>, colocamos el texto que deseamos mostrar cuando se produzca el error:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/10/3_1.png" alt="">&lt;/p>
-&lt;p>Seguidamente aplicamos la fórmula necesaria en la propiedad &lt;strong>Visible&lt;/strong> del control &lt;strong>ErrorMessage5&lt;/strong>: &lt;img src="https://cmas.dev/img/posts/migrated/2019/10/4.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/10/3_1.png">&lt;/p>
+&lt;p>Seguidamente aplicamos la fórmula necesaria en la propiedad &lt;strong>Visible&lt;/strong> del control &lt;strong>ErrorMessage5&lt;/strong>: &lt;img src="https://cmas.dev/img/posts/migrated/2019/10/4.png">&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">If(IsNumeric(DataCardValue14.Text),true,false)
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Ejecutamos la aplicación y verificamos los resultados (primero el erróneo):&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/10/5.png" alt="">&lt;/p>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2019/10/6.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/10/5.png">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2019/10/6.png">&lt;/p>
 &lt;p>De esta manera, hemos procedido a validar el control según la necesidad planteada.&lt;/p></description></item><item><title>Ordenamiento y filtrado de columnas</title><link>https://cmas.dev/posts/2019-10-01-ordenamiento-y-filtrado-de-columnas/</link><pubDate>Tue, 01 Oct 2019 18:54:23 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2019-10-01-ordenamiento-y-filtrado-de-columnas/</guid><description>&lt;p>Luego de algunos meses, con otros temas, aquí continúo con Microsoft PowerApps. En la &lt;a href="https://cmas.dev/2019/05/trabajando-con-tablas/">última entrada referente al tema&lt;/a> hemos vimos cómo crear una aplicación completa con datos de una manera sencilla. Me han preguntado ¿Cómo puedo ordenar y/o filtrar los datos? Para el caso del ejemplo, ya estaba ordenado y filtrado. Pero, me interesa explicar cómo hacerlo y que ustedes puedan aplicar según su necesidad.&lt;/p>
 &lt;h2 id="ordenamiento">Ordenamiento&lt;/h2>
 &lt;p>Simplemente colocamos la función dentro de Microsoft PowerApps y este toma los datos necesarios y los ordena según los parámetros:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/10/1.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/10/1.png">&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">UpdateContext({SortDescending1: !SortDescending1})
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="filtrado">Filtrado&lt;/h2>
 &lt;p>En este caso tenemos un cuadro de texto (con la imagen de la lupa) que servirá como filtro(&lt;strong>TextSearchBox1&lt;/strong>):&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/10/2.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/10/2.png">&lt;/p>
 &lt;p>En el elemento que contiene los datos, colocaremos la fórmula necesaria para realizar el filtro según el punto anterior(&lt;strong>TextSearchBox1&lt;/strong>):&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/10/3.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/10/3.png">&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">SortByColumns(Search(\[@Cuentas\], TextSearchBox1.Text, &amp;#34;emailaddress1&amp;#34;,&amp;#34;address1\_city&amp;#34;,&amp;#34;name&amp;#34;), &amp;#34;emailaddress1&amp;#34;, If(SortDescending1, Descending, Ascending))
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>De esta manera logramos ordenar y filtrar datos de nuestros elementos de datos.&lt;/p></description></item><item><title>Trabajando con tablas</title><link>https://cmas.dev/posts/2019-05-30-trabajando-con-tablas/</link><pubDate>Thu, 30 May 2019 20:59:02 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2019-05-30-trabajando-con-tablas/</guid><description>&lt;p>En una &lt;a href="https://cmas.dev/2019/05/formularios/">entrada anterior&lt;/a>, dimos un adelanto sobre este tema debido a que trabajamos con formulario. En este caso mostraré las operaciones CRUD (Create, Read, Update y Delete) que se pueden realizar en una base de datos. Sin dar demasiadas vueltas, empecemos con las operaciones.&lt;/p>
 &lt;p>En cualquier otra herramienta tomaría muchos pasos hacer esta tarea, pero con Microsoft PowerApps no es el caso pues con algunos clics ya tenemos todas las operaciones necesarias, utilizando cualquier conector disponible.&lt;/p>
 &lt;h2 id="creando-la-aplicación">Creando la aplicación&lt;/h2>
 &lt;p>Primero, creamos una nueva aplicación utilizando la plantilla de datos:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/1-4.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/1-4.png">&lt;/p>
 &lt;p>Seleccionamos el conector que utilizaremos (en este caso, el conector de Dynamics 365 for Sales):&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/2-3.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/2-3.png">&lt;/p>
 &lt;p>¡Listo! Esperamos unos segundos a que se creen las plantillas necesarias:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/3-3.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/3-3.png">&lt;/p>
 &lt;p>A la izquierda, podemos verificar los objetos creados para la aplicación:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/4-2.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/4-2.png">&lt;/p>
 &lt;h2 id="utilizando-la-aplicación">Utilizando la aplicación&lt;/h2>
 &lt;h3 id="pantalla-principal">Pantalla principal&lt;/h3>
 &lt;p>Aquí nos muestra los datos en forma de grilla (tal como lo hace el Microsoft Excel):&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/5-2.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/5-2.png">&lt;/p>
 &lt;p>Al hacer clic, navega hacia el detalle de la cuenta seleccionada:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/6-2.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/6-2.png">&lt;/p>
 &lt;h3 id="editar">Editar&lt;/h3>
 &lt;p>En esta pantalla podemos editar los datos ya existentes:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/7-1.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/7-1.png">&lt;/p>
 &lt;h3 id="eliminar">Eliminar&lt;/h3>
 &lt;p>En la misma pantalla podemos eliminar los datos del registro seleccionado:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/8-1.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/8-1.png">&lt;/p>
 &lt;h3 id="nuevo">Nuevo&lt;/h3>
 &lt;p>Agregamos los datos necesarios en la pantalla actual:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/9-1.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/9-1.png">&lt;/p>
 &lt;p>Por último, para verificar que todo fuera correcto lo verifiqué en Dynamics 365 for Sales y el resultado es:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/10.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/10.png">&lt;/p>
 &lt;p>De esta manera, hemos creado una aplicación completa que involucra todas las operaciones que puede tener la administración de datos.&lt;/p></description></item><item><title>Funciones</title><link>https://cmas.dev/posts/2019-05-28-funciones/</link><pubDate>Tue, 28 May 2019 19:40:31 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2019-05-28-funciones/</guid><description>&lt;p>En la &lt;a href="https://cmas.dev/posts/2019-05-16-reglas/">entrada anterior&lt;/a>, vimos cómo crear reglas relacionadas a un control. En esta entrada veremos cómo utilizar las funciones propias que están incluídas dentro de Microsoft PowerApps y veremos cómo crear nuestras propias funciones. Según wikipedia&amp;hellip;&lt;/p>
 &lt;blockquote>
 &lt;p>En informática, una subrutina o subprograma (también llamada procedimiento, función , rutina o método), como idea general, se presenta como un subalgoritmo que forma parte del algoritmo principal, el cual permite resolver una tarea específica. Algunos lenguajes de programación, como Visual Basic .NET o Fortran, utilizan el nombre función para referirse a subrutinas que devuelven un valor.&lt;/p>
@@ -187,9 +258,9 @@ Nos dirigimos a la sección &lt;strong>Licencias&lt;/strong>:&lt;br>
 &lt;h2 id="funciones-incluidas">Funciones incluidas&lt;/h2>
 &lt;p>No voy a detenerme mucho aquí, pues en la &lt;a href="https://docs.microsoft.com/es-es/powerapps/maker/canvas-apps/formula-reference">documentación de Microsoft&lt;/a> habla perfectamente de ellas.&lt;/p>
 &lt;p>En Microsoft PowerApps, las funciones las ingresamos aquí:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/1-3.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/1-3.png">&lt;/p>
 &lt;h2 id="funciones-personalizadas">Funciones personalizadas&lt;/h2>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/noloserick.gif" alt="">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/noloserick.gif">&lt;/p>
 &lt;p>Por el momento no se pueden crear funciones personalizadas dentro de Microsoft PowerApps. Si alguien encuentra una manera, sería genial compartir su conocimiento ;)&lt;/p></description></item><item><title>Reglas</title><link>https://cmas.dev/posts/2019-05-16-reglas/</link><pubDate>Thu, 16 May 2019 20:36:02 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2019-05-16-reglas/</guid><description>&lt;p>Siguiendo con el tema de &lt;a href="https://cmas.dev/posts/2019-05-14-controles/">la entrada anterior&lt;/a>, ahora vamos a ver cómo utilizar reglas dentro de Microsoft PowerApps. Según Microsoft Docs&amp;hellip;&lt;/p>
 &lt;blockquote>
 &lt;p>Las reglas se crean para modificar automáticamente una aplicación en función de los criterios que se especifiquen. Por ejemplo, mostrar los elementos de cada lista en rojo, amarillo o verde según su estado, o bien mostrar un botón de aprobación sólo a determinados usuarios (por ejemplo, los administradores). Las reglas se pueden agregar a varios controles.&lt;/p>
@@ -201,25 +272,25 @@ Nos dirigimos a la sección &lt;strong>Licencias&lt;/strong>:&lt;br>
 &lt;/ol>
 &lt;p>&lt;strong>EDIT (14/10/2019)&lt;/strong>: A partir de hoy, ya no se pueden crear reglas dentro de Microsoft PowerApps, se puede habilitar la opción para ver las reglas que ya fueron creadas.&lt;/p>
 &lt;p>Para habilitar las reglas, debemos ir al menú Archivo &amp;gt; Configuración &amp;gt; Configuración avanzada:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/1-2.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/1-2.png">&lt;/p>
 &lt;p>Marcamos la opción correspondiente a &amp;ldquo;Habilitar Reglas&amp;rdquo;:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/2-2.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/2-2.png">&lt;/p>
 &lt;p>En las propiedades de PowerApps, veremos la opción de Reglas (Es recomendable eliminarlas):&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/3-2.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/3-2.png">&lt;/p>
 &lt;p>De esta manera, las reglas han quedado obsoletas (por eso decidí remover la entrada en vista que han quitado esta funcionalidad).&lt;/p></description></item><item><title>Controles</title><link>https://cmas.dev/posts/2019-05-14-controles/</link><pubDate>Tue, 14 May 2019 22:52:47 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2019-05-14-controles/</guid><description>&lt;p>Continuando la serie que empezamos en la &lt;a href="https://cmas.dev/posts/2019-05-08-formularios/">entrada anterior&lt;/a>, en esta ocasión hablaremos sobre los controles disponibles en Microsoft PowerApps.&lt;/p>
 &lt;p>Como toda aplicación se necesita que éstas muestren o permitan editar cierta información dentro de ellas. En este caso, los controles se utilizan para cumplir con esa simple pero imprescindible tarea.&lt;/p>
 &lt;p>Para crear controles, simplemente se deben arrastrar y soltar desde el menú insertar (en la parte superior de Microsoft PowerApps):&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/1-1.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/1-1.png">&lt;/p>
 &lt;p>Colocamos una etiqueta(Label):&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/2-1.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/2-1.png">&lt;/p>
 &lt;p>Insertamos un cuadro de texto (TextInput):&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/3-1.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/3-1.png">&lt;/p>
 &lt;p>Agregamos un botón (Button) con una fórmula para capturar el texto ingresado:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/4-1.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/4-1.png">&lt;/p>
 &lt;p>Ejecutamos y vemos los controles:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/5-1.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/5-1.png">&lt;/p>
 &lt;p>Al hacer clic en el botón &amp;ldquo;Saludar&amp;rdquo; se ve el mensaje:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/6-1.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/6-1.png">&lt;/p>
 &lt;p>De esta forma, logramos agregar controles y una pequeña funcionalidad al botón.&lt;/p></description></item><item><title>Formularios</title><link>https://cmas.dev/posts/2019-05-08-formularios/</link><pubDate>Wed, 08 May 2019 19:46:10 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2019-05-08-formularios/</guid><description>&lt;p>En esta oportunidad, quisiera compartir con ustedes conceptos básicos de Microsoft PowerApps. Esta herramienta ya se viene utilizando hace tiempo (sobre todo para aquellas personas que desarrollamos/personalizamos cosas dentro de Microsoft Dynamics 365/CRM), tiene sus facilidades y también sus complejidades.&lt;/p>
 &lt;p>Lo positivo de esta herramienta es que todo es visual y muy fácil de aprender para personas que no están sumergidas en el mundo de la programación pero quieren realizar tareas necesarias para cumplir con sus labores.&lt;/p>
 &lt;p>Estaré publicando una serie de 5 artículos para este mes de manera a compreder los conceptos más básicos de esta herramienta incluída en Microsoft Office 365.&lt;/p>
@@ -227,20 +298,20 @@ Nos dirigimos a la sección &lt;strong>Licencias&lt;/strong>:&lt;br>
 &lt;p>La unidad mas básica dentro de Microsoft PowerApps es un &lt;strong>lienzo&lt;/strong>, el cual permite colocar todos los controles dentro de sí para la ejecución básica de un programa.&lt;/p>
 &lt;p>Entonces, ¿qué es un Formulario? Los formularios ofrecen la interfaz de usuario que emplean los usuarios para interactuar con los datos que necesitan para realizar su trabajo. Es decir, es la plantilla básica de representación de datos dentro de un lienzo.&lt;/p>
 &lt;p>Veamos cómo crear un liezo primero, luego veremos cómo agregar un formulario: Nos dirigimos a nuestro &lt;a href="https://portal.office.com">Portal Office 365&lt;/a> y seleccionamos la aplicación Microsoft PowerApps:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/1.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/1.png">&lt;/p>
 &lt;p>Marcamos la opción &amp;ldquo;Aplicación de lienzo en blanco&amp;rdquo;, colocamos el nombre y hacemos clic en &amp;ldquo;Crear&amp;rdquo;:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/2.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/2.png">&lt;/p>
 &lt;p>En la siguiente pantalla (que aparece en inglés) seleccionamos &amp;ldquo;Create a Form&amp;rdquo;:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/3.png" alt="">&lt;/p>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/4.png" alt="">&lt;/p>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/6.png" alt="">&lt;/p>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/5.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/3.png">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/4.png">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/6.png">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/5.png">&lt;/p>
 &lt;p>Seleccionamos el &amp;ldquo;Origen de Datos (DataSource)&amp;rdquo;, en este caso Oportunidades que provienen del &amp;ldquo;Dynamics 365 for Sales&amp;rdquo;:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/7.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/7.png">&lt;/p>
 &lt;p>Nos muestra el formulario predeterminado:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/8.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/8.png">&lt;/p>
 &lt;p>Hacemos clic en ejecutar:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/9.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/9.png">&lt;/p>
 &lt;p>Veremos el formulario listo para ingresar datos:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/9_1.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/9_1.png">&lt;/p>
 &lt;p>De esta sencilla manera hemos creado un formulario que permite el ingreso de oportunidades dirigidas a Microsoft Dynamics 365 for Sales.&lt;/p></description></item></channel></rss>

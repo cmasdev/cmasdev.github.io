@@ -22,9 +22,9 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">end&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>De esta manera veremos el resultado según los siguientes pasos:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/2021/06/09/JS1.png" alt="">&lt;/p>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/2021/06/09/JS2.png" alt="">&lt;/p>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/2021/06/09/JS3.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2021/06/09/JS1.png">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/2021/06/09/JS2.png">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/2021/06/09/JS3.png">&lt;/p>
 &lt;p>Así logramos realizar acciones con JavaScript desde una página en Microsoft Dynamics 365 Business Central. También podemos realizar tareas complejas como llamadas a APIs, AJAX, etc.&lt;/p>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Business Central: Añadir HTML en una página</title><link>https://cmas.dev/posts/2021-06-02-business-central-anadir-html-en-una-pagina/</link><pubDate>Wed, 02 Jun 2021 18:17:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2021-06-02-business-central-anadir-html-en-una-pagina/</guid><description>&lt;p>En este artículo deseo mostrar cómo inyectar HTML en una página dentro de Microsoft Dynamics 365 Business Central. No es muy complejo realizar la tarea necesaria pero debemos entender su utilidad y qué podemos lograr haciéndolo. Así que espero lo disfruten&amp;hellip;&lt;/p>
 &lt;p>&lt;em>&lt;!-- raw HTML omitted -->Versión: 2020 Wave 2 (KID: 5001735)&lt;!-- raw HTML omitted -->&lt;/em>&lt;/p>
@@ -143,7 +143,7 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="4">
 &lt;li>El resultado del codigo sería el siguiente:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/2021/06/02/Html2.png" alt="">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2021/06/02/Html2.png">&lt;/li>
 &lt;/ol>
 &lt;p>Con esto logramos inyectar HTML dentro de una página Microsoft Dynamics 365 Business Central.&lt;/p>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item></channel></rss>

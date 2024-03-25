@@ -16,15 +16,15 @@
 &lt;p>Para la creación del proyecto debemos realizar los siguientes pasos:&lt;/p>
 &lt;ol>
 &lt;li>Crear un proyecto de tipo &lt;strong>WinUI 3&lt;/strong>
-&lt;img src="https://cmas.dev/img/posts/2022/05/18/1.png" alt="">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/05/18/1.png">&lt;/li>
 &lt;li>Se coloca un nombre descriptivo para el proyecto:
-&lt;img src="https://cmas.dev/img/posts/2022/05/18/2.png" alt="">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/05/18/2.png">&lt;/li>
 &lt;li>Se crea el proyecto con los siguientes archivos:
-&lt;img src="https://cmas.dev/img/posts/2022/05/18/3.png" alt="">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/05/18/3.png">&lt;/li>
 &lt;li>Procedemos a ejecutar la aplicación (y se ejecutará en nuestro &lt;strong>Windows 11&lt;/strong> directamente):
-&lt;img src="https://cmas.dev/img/posts/2022/05/18/4.png" alt="">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/05/18/4.png">&lt;/li>
 &lt;li>Veremos la aplicación ejecutada:
-&lt;img src="https://cmas.dev/img/posts/2022/05/18/5.png" alt="">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/05/18/5.png">&lt;/li>
 &lt;/ol>
 &lt;p>Con esto logramos crear nuestra primera aplicación &lt;strong>WinUI 3&lt;/strong>.&lt;/p>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item></channel></rss>

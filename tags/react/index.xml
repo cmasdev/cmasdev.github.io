@@ -17,7 +17,7 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">npx react-native init TestApp --template react-native@^0.70.0
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="3">
 &lt;li>La instalación quedará algo así:
-&lt;img src="https://cmas.dev/img/posts/2022/09/07/1.png" alt="">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/09/07/1.png">&lt;/li>
 &lt;li>Ir a la carpeta creada:&lt;/li>
 &lt;/ol>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">cd TestApp
@@ -35,13 +35,13 @@
 &lt;h2 id="creación-de-aplicación">Creación de aplicación&lt;/h2>
 &lt;ol>
 &lt;li>Abrir un proyecto existente desde Visual studoo 2022:
-&lt;img src="https://cmas.dev/img/posts/2022/09/07/2.png" alt="">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/09/07/2.png">&lt;/li>
 &lt;li>En Power Shell, escribir lo siguiente (para arrancar el servidorcillo):&lt;/li>
 &lt;/ol>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">npm start
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="3">
 &lt;li>Ejecutamos la aplicación desde Visual Studio 2022 (la compilación demora un poco dependiendo de la capacidad del equipo de desarrollo):
-&lt;img src="https://cmas.dev/img/posts/2022/09/07/3.png" alt="">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/09/07/3.png">&lt;/li>
 &lt;/ol>
 &lt;p>Y con esto tenemos nuestra primera aplciación &lt;strong>Windows App SDK&lt;/strong> con &lt;strong>React&lt;/strong>.&lt;/p>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item></channel></rss>

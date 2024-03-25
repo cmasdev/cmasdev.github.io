@@ -1,70 +1,70 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Power Automate on Blog de Christian Amado</title><link>https://cmas.dev/tags/power-automate/</link><description>Recent content in Power Automate on Blog de Christian Amado</description><generator>Hugo -- gohugo.io</generator><language>es</language><managingEditor>biz@cmas.dev (Christian Amado)</managingEditor><webMaster>biz@cmas.dev (Christian Amado)</webMaster><lastBuildDate>Thu, 02 Apr 2020 17:00:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/tags/power-automate/index.xml" rel="self" type="application/rss+xml"/><item><title>Enviar correo luego de completar formulario</title><link>https://cmas.dev/posts/2020-04-02-enviar-correo-luego-de-completar-formulario/</link><pubDate>Thu, 02 Apr 2020 17:00:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2020-04-02-enviar-correo-luego-de-completar-formulario/</guid><description>&lt;p>En esta ocasión, quiero compartir con ustedes una funcionalidad muy buena de Power Automate. Imaginemos que necesitamos completar un formulario y que la respuesta sea enviada por correo electrónica a dicho usuario.&lt;/p>
 &lt;h2 id="microsoft-forms">Microsoft Forms&lt;/h2>
-&lt;p>Primero, debemos ingresar a la aplicación en cuestión: &lt;img src="https://cmas.dev/img/posts/powerautomate/1.png" alt="">&lt;/p>
-&lt;p>Cerramos la ventana de bienvenida: &lt;img src="https://cmas.dev/img/posts/powerautomate/2.png" alt="">&lt;/p>
-&lt;p>Empezamos a crear el formulario colando un título y descripción (opcional): &lt;img src="https://cmas.dev/img/posts/powerautomate/3.png" alt="">&lt;/p>
-&lt;p>Agregamos el primer campo, en este caso, de tipo &lt;strong>Opción&lt;/strong>: &lt;img src="https://cmas.dev/img/posts/powerautomate/4.png" alt="">&lt;/p>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/powerautomate/5.png" alt="">&lt;/p>
-&lt;p>Adicionamos un campo &lt;strong>Texto&lt;/strong> (que será el Correo): &lt;img src="https://cmas.dev/img/posts/powerautomate/6.png" alt="">&lt;/p>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/powerautomate/7.png" alt="">&lt;/p>
-&lt;p>Compartimos el formulario para que todos lo completen: &lt;img src="https://cmas.dev/img/posts/powerautomate/8.png" alt="">&lt;/p>
+&lt;p>Primero, debemos ingresar a la aplicación en cuestión: &lt;img src="https://cmas.dev/img/posts/powerautomate/1.png">&lt;/p>
+&lt;p>Cerramos la ventana de bienvenida: &lt;img src="https://cmas.dev/img/posts/powerautomate/2.png">&lt;/p>
+&lt;p>Empezamos a crear el formulario colando un título y descripción (opcional): &lt;img src="https://cmas.dev/img/posts/powerautomate/3.png">&lt;/p>
+&lt;p>Agregamos el primer campo, en este caso, de tipo &lt;strong>Opción&lt;/strong>: &lt;img src="https://cmas.dev/img/posts/powerautomate/4.png">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/powerautomate/5.png">&lt;/p>
+&lt;p>Adicionamos un campo &lt;strong>Texto&lt;/strong> (que será el Correo): &lt;img src="https://cmas.dev/img/posts/powerautomate/6.png">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/powerautomate/7.png">&lt;/p>
+&lt;p>Compartimos el formulario para que todos lo completen: &lt;img src="https://cmas.dev/img/posts/powerautomate/8.png">&lt;/p>
 &lt;p>El formulario funcionando se encuentra &lt;a href="https://forms.office.com/Pages/ResponsePage.aspx?id=oyz5wYqX-k2vzGA7tMRPtifqEP96lF1FjwTx_PmlcGZUMlVJOE1TNzczVlNBRkxON0pITVM2OFdFQy4u">AQUÍ&lt;/a>.&lt;/p>
 &lt;h2 id="microsoft-power-automate">Microsoft Power Automate&lt;/h2>
 &lt;p>Aquí es donde manejaremos el flujo de envío de correo. Debemos de tener en cuenta que Power Automate maneja Desencadenadores y Acciones, es decir, a cada desencadenador una o varias acciones asociadas a él.&lt;/p>
-&lt;p>Ingresam a la aplicación en cuestión: &lt;img src="https://cmas.dev/img/posts/powerautomate/9.png" alt="">&lt;/p>
-&lt;p>Se crea un nuevo flujo y se elige una plantilla vacía: &lt;img src="https://cmas.dev/img/posts/powerautomate/10.png" alt="">&lt;/p>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/powerautomate/11.png" alt="">&lt;/p>
-&lt;p>Se completan los datos descriptivos y se selecciona la plantilla predeterminada para nuestra acción: &lt;img src="https://cmas.dev/img/posts/powerautomate/12.png" alt="">&lt;/p>
-&lt;p>Armamos el flujo siguiendo los siguientes pasos: &lt;img src="https://cmas.dev/img/posts/powerautomate/13.png" alt="">&lt;/p>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/powerautomate/14.png" alt="">&lt;/p>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/powerautomate/15.png" alt="">&lt;/p>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/powerautomate/16.png" alt="">&lt;/p>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/powerautomate/17.png" alt="">&lt;/p>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/powerautomate/18.png" alt="">&lt;/p>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/powerautomate/19.png" alt="">&lt;/p>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/powerautomate/20.png" alt="">&lt;/p>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/powerautomate/21.png" alt="">&lt;/p>
+&lt;p>Ingresam a la aplicación en cuestión: &lt;img src="https://cmas.dev/img/posts/powerautomate/9.png">&lt;/p>
+&lt;p>Se crea un nuevo flujo y se elige una plantilla vacía: &lt;img src="https://cmas.dev/img/posts/powerautomate/10.png">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/powerautomate/11.png">&lt;/p>
+&lt;p>Se completan los datos descriptivos y se selecciona la plantilla predeterminada para nuestra acción: &lt;img src="https://cmas.dev/img/posts/powerautomate/12.png">&lt;/p>
+&lt;p>Armamos el flujo siguiendo los siguientes pasos: &lt;img src="https://cmas.dev/img/posts/powerautomate/13.png">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/powerautomate/14.png">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/powerautomate/15.png">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/powerautomate/16.png">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/powerautomate/17.png">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/powerautomate/18.png">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/powerautomate/19.png">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/powerautomate/20.png">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/powerautomate/21.png">&lt;/p>
 &lt;p>¡Hemos terminado las tareas! Es hora de completar el formulario y ver si nos llega el correo:&lt;/p>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/powerautomate/22.png" alt="">&lt;/p>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/powerautomate/23.png" alt="">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/powerautomate/22.png">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/powerautomate/23.png">&lt;/p>
 &lt;p>De esta manera hemos automatizado una tarea que no es muy sencilla en el día a día, pero con esta herramienta logramos que sí lo sea.&lt;/p>
 &lt;p>¡Espero les resulte de utilidad!&lt;/p></description></item><item><title>Enviar correo desde PowerApps</title><link>https://cmas.dev/posts/2020-01-15-enviar-correo-desde-powerapps/</link><pubDate>Wed, 15 Jan 2020 22:31:59 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2020-01-15-enviar-correo-desde-powerapps/</guid><description>&lt;p>En esta oportunidad me gustaría mostrar la integración entre dos aplicaciones disponibles en Office 365, en este caso, PowerApps y Power Automate (Flow).&lt;/p>
 &lt;p>PowerApps nos permite crear una aplicación en segundos y Power Automate (Flow) nos permite utilizar muchos servicios para integrarlos a nuestra aplicación.&lt;/p>
 &lt;p>En este caso crearemos un flujo que permita enviar correo y lo integraremos al PowerApps para que desde allí podamos enviar un correo.&lt;/p>
 &lt;h2 id="microsoft-powerapps">Microsoft PowerApps&lt;/h2>
 &lt;p>Creamos una aplicación en blanco y colocamos los controles básicos de ingreso de datos y un botón &amp;ldquo;Enviar correo&amp;rdquo; (&lt;a href="https://cmas.dev/posts/2019-05-14-controles/">aquí puedes aprender a agregar controles&lt;/a>):&lt;/p>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2020/01/1-1.png" alt="">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2020/01/1-1.png">&lt;/p>
 &lt;p>Marcamos el botón &amp;ldquo;Enviar correo&amp;rdquo;. Dentro de la aplicación, PowerApps, nos dirigimos a la pestaña &lt;strong>Action&lt;/strong> y hacemos clic en el botón &lt;strong>Power automate&lt;/strong>:&lt;/p>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2020/01/2.png" alt="">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2020/01/2.png">&lt;/p>
 &lt;p>En el nuevo cuadro de diálogo, hacemos clic en el boton &lt;strong>Create a new flow&lt;/strong>:&lt;/p>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2020/01/3.png" alt="">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2020/01/3.png">&lt;/p>
 &lt;p>Ahora, nos redirige al sitio de Power Automate:&lt;/p>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2020/01/4.png" alt="">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2020/01/4.png">&lt;/p>
 &lt;p>Debemos seleccionar la plantilla &lt;strong>Click a button in PowerApps to send an email&lt;/strong>:&lt;/p>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2020/01/5.png" alt="">&lt;/p>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2020/01/6.png" alt="">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2020/01/5.png">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2020/01/6.png">&lt;/p>
 &lt;p>Agregamos la cuenta de correo de la cuenta que enviará el correo al hacer clic en el botón:&lt;/p>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2020/01/7.png" alt="">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2020/01/7.png">&lt;/p>
 &lt;p>Hacemos clic en &lt;strong>Continuar&lt;/strong>:&lt;/p>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2020/01/8.png" alt="">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2020/01/8.png">&lt;/p>
 &lt;p>Guardamos los cambios en Power Automate y luego seleccionamos nuestra plantilla en PowerApps:&lt;/p>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2020/01/9.png" alt="">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2020/01/9.png">&lt;/p>
 &lt;p>Completamos la barra de fórmula:&lt;/p>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2020/01/10.png" alt="">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2020/01/10.png">&lt;/p>
 &lt;p>Ejecutamos la aplicación y completamos los datos:&lt;/p>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2020/01/11.png" alt="">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2020/01/11.png">&lt;/p>
 &lt;p>Verificamos la bandeja de Entrada (o correo no deseado) del correo colocado en el punto anterior:&lt;/p>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2020/01/12.png" alt="">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2020/01/12.png">&lt;/p>
 &lt;p>Leemos el correo y listo:&lt;/p>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2020/01/13.png" alt="">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2020/01/13.png">&lt;/p>
 &lt;p>De esta manera hemos integrado una funcionalidad demasiado útil a nuestra aplicación creada en menos de 2 minutos.&lt;/p></description></item><item><title>Creación de flujos desde plantillas</title><link>https://cmas.dev/posts/2019-12-03-creacion-de-flujos-desde-plantillas/</link><pubDate>Tue, 03 Dec 2019 13:50:53 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2019-12-03-creacion-de-flujos-desde-plantillas/</guid><description>&lt;p>Alguna vez en el pasado &lt;a href="https://cmas.dev/2018/08/primeros-pasos-con-microsoft-flow/">había escrito algo sobre los primeros pasos con Microsoft Flow&lt;/a>. Microsoft ha cambiado el nombre del producto y ahora se llama Microsoft Power Automate que tiene las mismas funcionalidades agregándoles nuevas.&lt;/p>
 &lt;p>Así que aquí empezaremos el camino de &lt;strong>Power Automate&lt;/strong> (me gustan sus bondades e integración con otros productos de Microsoft).&lt;/p>
 &lt;p>Primeramente debemos ingresas a nuestro &lt;a href="https://portal.office.com/">portal Office&lt;/a>:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/12/1-3.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/12/1-3.png">&lt;/p>
 &lt;p>Ingresamos al producto y veremos su pantalla principal:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/12/2-3.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/12/2-3.png">&lt;/p>
 &lt;p>A nuestra izquierda, veremos el menú Plantillas (Templates):&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/12/3-3.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/12/3-3.png">&lt;/p>
 &lt;p>Ahí nos encontramos con todas las plantillas disponibles para su uso dentro de la herramienta:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/12/4-2.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/12/4-2.png">&lt;/p>
 &lt;p>De esta manera, logramos crear flujos que podemos utilizarlo en donde sea dentro de los productos Microsoft.&lt;/p></description></item></channel></rss>

@@ -5,7 +5,7 @@
 &lt;p>Primeramente, debemos mencionar que tenemos la opción de bloquear el cambio de orientación de pantalla. Esto se da cuando, por ejemplo, queremos que nuestro diseño sólo quede en posición vertical. Para ello, debemos preparar código para cada plataforma (aquí veremos &lt;strong>Android&lt;/strong> y &lt;strong>Windows&lt;/strong>):&lt;/p>
 &lt;h3 id="windows">Windows&lt;/h3>
 &lt;p>Se realiza mediante el gestor de manifiesto &lt;strong>Package.appxmanifest&lt;/strong>:
-&lt;img src="https://i.ibb.co/0jQZXvN/Orientation1.png" alt="">&lt;/p>
+&lt;img src="https://i.ibb.co/0jQZXvN/Orientation1.png">&lt;/p>
 &lt;h3 id="android">Android&lt;/h3>
 &lt;p>En la clase &lt;strong>MainActivity&lt;/strong> de la plataforma &lt;strong>Android&lt;/strong> se agrega el decorado:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">ScreenOrientation = ScreenOrientation.Portrait
@@ -95,9 +95,9 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>El resultado Horizontal es:
-&lt;img src="https://i.ibb.co/bKnfKs6/Orientation2.png" alt="">&lt;/p>
+&lt;img src="https://i.ibb.co/bKnfKs6/Orientation2.png">&lt;/p>
 &lt;p>El resultado Vertical es:
-&lt;img src="https://i.ibb.co/3132hFy/Orientation3.png" alt="">&lt;/p>
+&lt;img src="https://i.ibb.co/3132hFy/Orientation3.png">&lt;/p>
 &lt;p>Me ha funcionado este método, pero hay algunos problemas reportados en GitHub sobre el tema &lt;a href="https://github.com/dotnet/maui/issues/9795">aquí&lt;/a>&lt;/p>
 &lt;h3 id="opción-2-extraída-de-otro-blog">Opción 2 (extraída de otro Blog)&lt;/h3>
 &lt;p>Definimos el &lt;strong>XAML&lt;/strong> de la página agregando Manejadores de eventos visuales, en este caso, &lt;strong>OrientationStateTrigger&lt;/strong>:&lt;/p>
@@ -215,14 +215,14 @@
 &lt;p>Primero, debemos descargar e instalar el &lt;strong>SDK&lt;/strong> de &lt;strong>.NET 8&lt;/strong>, eso lo encontramos &lt;a href="https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/sdk-8.0.100-windows-x64-installer">aquí&lt;/a>.&lt;/p>
 &lt;p>Luego, debemos actualizar &lt;strong>Visual Studio 2022&lt;/strong> a su versión &lt;strong>17.8.0&lt;/strong> o superior (acabo de ver disponible la versión &lt;strong>17.8.2&lt;/strong>) que se puede descargar desde &lt;a href="https://visualstudio.microsoft.com/downloads/">aquí&lt;/a>.&lt;/p>
 &lt;p>Iniciamos el instalador de &lt;strong>Visual Studio&lt;/strong> e indicamos la opción de &lt;strong>.NET Multi-platform App UI development&lt;/strong>:
-&lt;img src="https://i.ibb.co/7bnx4RQ/1.png" alt="">&lt;/p>
+&lt;img src="https://i.ibb.co/7bnx4RQ/1.png">&lt;/p>
 &lt;h2 id="creando-un-proyecto-net-maui-8">Creando un proyecto .NET MAUI 8&lt;/h2>
 &lt;p>Al abrir &lt;strong>Visual Studio&lt;/strong> procedemos a crear un nuevo proyecto y definimos el &lt;em>Tipo&lt;/em> &lt;strong>MAUI&lt;/strong> (en mi caso tengo &lt;a href="https://www.telerik.com/maui-ui">Telerik UI for .NET MAUI&lt;/a> instalado):
-&lt;img src="https://i.ibb.co/QDyvX8v/2.png" alt="">&lt;/p>
+&lt;img src="https://i.ibb.co/QDyvX8v/2.png">&lt;/p>
 &lt;p>Seleccionamos la versión de .NET (en este caso ya seleccionamos el 8):
-&lt;img src="https://i.ibb.co/LCZv5vc/3.png" alt="">&lt;/p>
+&lt;img src="https://i.ibb.co/LCZv5vc/3.png">&lt;/p>
 &lt;p>Nos dirigimos a las &lt;strong>Propiedades&lt;/strong> del proyecto y verificamos que todo corresponda al &lt;strong>.NET 8&lt;/strong>:
-&lt;img src="https://i.ibb.co/L0NYJSx/4.png" alt="">&lt;/p>
+&lt;img src="https://i.ibb.co/L0NYJSx/4.png">&lt;/p>
 &lt;p>Con estos pasos tenemos un nuevo proyecto creado en &lt;strong>.NET MAUI 8&lt;/strong> ;)&lt;/p>
 &lt;h2 id="cambio-en-mauiprogramcs">Cambio en MauiProgram.cs&lt;/h2>
 &lt;p>En el archivo de arranque de un proyecto &lt;strong>.NET MAUI&lt;/strong> se ingresa una línea de código nueva:&lt;/p>
@@ -279,9 +279,9 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/MenuBarItem&amp;gt;
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;/ContentPage.MenuBarItems&amp;gt;
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Arrancamos la App y vemos el Menú:
-&lt;img src="https://i.ibb.co/FWRFggx/5.png" alt="">&lt;/p>
+&lt;img src="https://i.ibb.co/FWRFggx/5.png">&lt;/p>
 &lt;p>Hacemos clic o bien utilizamos el atajo &lt;strong>Ctrl&lt;/strong>+&lt;strong>L&lt;/strong> y veremos:
-&lt;img src="https://i.ibb.co/dGNdZDc/6.png" alt="">&lt;/p>
+&lt;img src="https://i.ibb.co/dGNdZDc/6.png">&lt;/p>
 &lt;p>Estas son las novedades que quería compartir con ustedes en estas primeras pruebas que estoy realizando (de hecho estoy actualmente en un proyecto &lt;strong>.NET MAUI 8&lt;/strong>). Iré avanzando en las novedades de &lt;strong>.NET MAUI&lt;/strong> en todo este mes de Diciembre ya que nos encontramos en pleno &lt;strong>&lt;a href="https://elcamino.dev/calendario-adviento-net-maui-espanol-23">Calendario de Adviento .NET MAUI&lt;/a>&lt;/strong>&lt;/p>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Usando MAUI con Windows App SDK</title><link>https://cmas.dev/posts/2022-11-02-windows-app-using-maui/</link><pubDate>Wed, 02 Nov 2022 23:42:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-11-02-windows-app-using-maui/</guid><description>&lt;p>En este artículo veremos cómo &lt;strong>.NET MAUI&lt;/strong> interactúa con &lt;strong>Windows 11&lt;/strong> sin necesidad de funciones extras ni código para llegar a ese resultado.&lt;/p>
 &lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 25236&lt;/strong>&lt;/em>&lt;/p>
@@ -335,18 +335,18 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> HorizontalOptions=&amp;#34;Center&amp;#34; /&amp;gt;
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="4">
 &lt;li>Ejecutamos la aplicación y vemos los resultados:
-&lt;img src="https://cmas.dev/img/posts/2022/11/02/1.png" alt="">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/11/02/1.png">&lt;/li>
 &lt;/ol>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/2022/11/02/2.png" alt="">&lt;/p>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/2022/11/02/3.png" alt="">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/2022/11/02/2.png">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/2022/11/02/3.png">&lt;/p>
 &lt;h2 id="abrir-imagen-en-android">Abrir imagen en Android&lt;/h2>
 &lt;p>Como todo esto lo hicimos con &lt;strong>.NET MAUI&lt;/strong>, debemos hacer ¡NADA!&lt;/p>
 &lt;ol>
 &lt;li>Ejecutamos en &lt;strong>Android&lt;/strong> y&amp;hellip;
-&lt;img src="https://cmas.dev/img/posts/2022/11/02/4.png" alt="">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/11/02/4.png">&lt;/li>
 &lt;/ol>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/2022/11/02/5.png" alt="">&lt;/p>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/2022/11/02/6.png" alt="">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/2022/11/02/5.png">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/2022/11/02/6.png">&lt;/p>
 &lt;p>Con una única línea de código pudimos realizar esta tarea sencilla sin necesidad de solicitar permisos ni nada desde la aplicación. esa es una de las ventajas que me gusta de &lt;strong>.NET MAUI&lt;/strong>&lt;/p>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Aplicación multilingüe en MAUI</title><link>https://cmas.dev/posts/2022-10-05-multi-language-app-maui/</link><pubDate>Wed, 05 Oct 2022 17:48:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-10-05-multi-language-app-maui/</guid><description>&lt;p>En este artículo mostraré cómo crear una aplicación &lt;strong>.NET MAUI&lt;/strong> multilingüe sobre &lt;strong>Windows 11&lt;/strong> utilizando archivos de recursos.&lt;/p>
 &lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 22621&lt;/strong>&lt;/em>&lt;/p>
@@ -357,19 +357,19 @@
 &lt;ol>
 &lt;li>
 &lt;p>Crear una carpeta con el nombre &lt;em>Localization&lt;/em> (puede tener cualquier nombre) y colocarla dentro de la carpeta &lt;em>Resources&lt;/em>:
-&lt;img src="https://cmas.dev/img/posts/2022/10/05/1.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/10/05/1.png">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Dentro de dicha carpeta, se crear el archivo de tipo Recurso(.resx):&lt;br>
-&lt;img src="https://cmas.dev/img/posts/2022/10/05/2.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/10/05/2.png">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Completamos las filas con los registros necesarios (deben ser nombres descriptivos sin espacios ni caracteres especiales):
-&lt;img src="https://cmas.dev/img/posts/2022/10/05/3.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/10/05/3.png">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Repetimos el paso 2, pero le colocamos las iniciales del idioma que queremos utilizar (en mi caso &lt;strong>es&lt;/strong>) y completamos las fials con las traducciones:
-&lt;img src="https://cmas.dev/img/posts/2022/10/05/4.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/10/05/4.png">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>¡Listo! Es hora de código &lt;strong>XAML&lt;/strong> y &lt;strong>C#&lt;/strong>&lt;/p>
@@ -542,11 +542,11 @@
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="8">
 &lt;li>
 &lt;p>Ejecutamos la aplicación presionando &lt;em>F5&lt;/em> y veremos en Inglés así:
-&lt;img src="https://cmas.dev/img/posts/2022/10/05/5.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/10/05/5.png">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Hacemo clic en el botón &amp;ldquo;Change language&amp;rdquo; y debemos ver el español:
-&lt;img src="https://cmas.dev/img/posts/2022/10/05/6.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/10/05/6.png">&lt;/p>
 &lt;/li>
 &lt;/ol>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Aplicando modelo MVVM con MAUI</title><link>https://cmas.dev/posts/2022-09-28-mvvm-in-maui/</link><pubDate>Wed, 28 Sep 2022 21:06:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-09-28-mvvm-in-maui/</guid><description>&lt;p>En este artículo mostraré cómo aplicar el modelo MVVM en &lt;strong>.NET MAUI&lt;/strong> sobre &lt;strong>Windows 11&lt;/strong>.&lt;/p>
@@ -653,7 +653,7 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="6">
 &lt;li>Ejecutamos el código con &lt;em>F5&lt;/em> y&amp;hellip;
-&lt;img src="https://cmas.dev/img/posts/2022/09/28/1.png" alt="">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/09/28/1.png">&lt;/li>
 &lt;/ol>
 &lt;p>De esta manera implementamos el modelo MVVM de manera muy rápida y sencilla gracias al paquete &lt;strong>MVVM Toolkit&lt;/strong>.&lt;/p>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Data Binding en MAUI</title><link>https://cmas.dev/posts/2022-09-21-data-binding-in-maui/</link><pubDate>Wed, 21 Sep 2022 20:32:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-09-21-data-binding-in-maui/</guid><description>&lt;p>En este artículo mostraré cómo utilizar la técnica de &lt;em>Data Binding&lt;/em> en una aplicación &lt;strong>.NET MAUI&lt;/strong> sobre &lt;strong>Windows 11&lt;/strong>.&lt;/p>
@@ -664,15 +664,15 @@
 &lt;ol>
 &lt;li>
 &lt;p>Creamos el proyecto en Visual Studio 2022:
-&lt;img src="https://cmas.dev/img/posts/2022/09/21/1.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/09/21/1.png">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Colocamos un nombre descriptivo al proyecto nuevo:
-&lt;img src="https://cmas.dev/img/posts/2022/09/21/2.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/09/21/2.png">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Seleccionamos el .NET Core que deseamos utilizar:
-&lt;img src="https://cmas.dev/img/posts/2022/09/21/3.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/09/21/3.png">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>En el archivo &lt;strong>MainPage.xaml&lt;/strong> verificamos el código &lt;strong>XAML&lt;/strong>:&lt;/p>
@@ -756,7 +756,7 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="7">
 &lt;li>Ejecutamos el código con &lt;em>F5&lt;/em> y veremos la aplicación Windows:
-&lt;img src="https://cmas.dev/img/posts/2022/09/21/4.png" alt="">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/09/21/4.png">&lt;/li>
 &lt;/ol>
 &lt;p>Bien hasta aquí no hay nada extraño en ningún lado.&lt;/p>
 &lt;h2 id="databinding-en-net-maui">DataBinding en .NET MAUI&lt;/h2>
@@ -820,12 +820,12 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> HorizontalOptions=&amp;#34;Center&amp;#34; /&amp;gt;
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="6">
 &lt;li>Ejecutamos la aplicación y nos queda así:
-&lt;img src="https://cmas.dev/img/posts/2022/09/21/5.png" alt="">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/09/21/5.png">&lt;/li>
 &lt;/ol>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Primeros pasos con XAML en MAUI</title><link>https://cmas.dev/posts/2022-09-14-first-step-xaml-in-maui/</link><pubDate>Wed, 14 Sep 2022 23:18:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-09-14-first-step-xaml-in-maui/</guid><description>&lt;p>En este artículo mostraré cómo iniciar los pasos con el lenguaje &lt;strong>XAML&lt;/strong> en &lt;strong>.NET MAUI&lt;/strong>.&lt;/p>
 &lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 25201&lt;/strong>&lt;/em>&lt;/p>
-&lt;p>En este pequeño artículo vamos a utilizar controles de Telerik para &lt;strong>.NET MAUI&lt;/strong>. En un &lt;a href="">artículo anterior&lt;/a> vimos cómo crear una aplicación &lt;strong>.NET MAUI&lt;/strong> y aquí haremos otra basada en otra plantilla (&lt;a href="https://www.telerik.com/support/whats-new/maui-ui/release-history/telerik-ui-for-net-maui-(version-3-0-0)">Telerik&lt;/a>).
-&lt;img src="https://cmas.dev/img/posts/2022/09/14/1.png" alt="">&lt;/p>
+&lt;p>En este pequeño artículo vamos a utilizar controles de Telerik para &lt;strong>.NET MAUI&lt;/strong>. En un &lt;a href="https://cmas.dev/">artículo anterior&lt;/a> vimos cómo crear una aplicación &lt;strong>.NET MAUI&lt;/strong> y aquí haremos otra basada en otra plantilla (&lt;a href="https://www.telerik.com/support/whats-new/maui-ui/release-history/telerik-ui-for-net-maui-(version-3-0-0)">Telerik&lt;/a>).
+&lt;img src="https://cmas.dev/img/posts/2022/09/14/1.png">&lt;/p>
 &lt;h2 id="telerik-sidedrawer">Telerik SideDrawer&lt;/h2>
 &lt;p>Este control (conocido como Menú Hamburguesa) se utiliza para hacer la navegación muy amigable debido a que el menú queda al costado de nuestro diseño y permite una visualización completa del mismo. En Windows 11 se refiere a &lt;a href="https://learn.microsoft.com/en-us/windows/apps/design/controls/navigationview">NavigationView&lt;/a>.&lt;/p>
 &lt;p>La definición del control, en lenguaje &lt;strong>XAML&lt;/strong>, sería:&lt;/p>
@@ -870,37 +870,37 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;/ContentPage&amp;gt;
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Con esta definición declarativa logramos que el control tenga todos los detalles necesarios para su funcionamiento.&lt;/p>
 &lt;p>Visualmente, el resultado del código XAML es:
-&lt;img src="https://cmas.dev/img/posts/2022/09/14/2.png" alt="">&lt;br>
-&lt;img src="https://cmas.dev/img/posts/2022/09/14/3.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/09/14/2.png">&lt;br>
+&lt;img src="https://cmas.dev/img/posts/2022/09/14/3.png">&lt;/p>
 &lt;p>Si realmente necesitas aprender &lt;strong>XAML&lt;/strong>, la documentación de Microsft &lt;a href="https://learn.microsoft.com/es-es/dotnet/maui/xaml/fundamentals/get-started?view=net-maui-7.0">aquí&lt;/a> está muy completa.&lt;/p>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Mi Primera Aplicación MAUI</title><link>https://cmas.dev/posts/2022-08-24-first-app-in-maui/</link><pubDate>Wed, 24 Aug 2022 21:04:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-08-24-first-app-in-maui/</guid><description>&lt;p>En este artículo mostraré cómo crear la primera aplicación &lt;strong>.NET MAUI&lt;/strong> preparada para Android y Windows 11.&lt;/p>
 &lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 25188&lt;/strong>&lt;/em>&lt;/p>
 &lt;p>Para crear un proyecto .NET MAUI no se necesitan demasiados pasos para lograr el objetivo, basta con seguir estos sencillos pasos que se muestran a continuación.&lt;/p>
 &lt;ol>
 &lt;li>Crear un nuevo proyecto:
-&lt;img src="https://cmas.dev/img/posts/2022/08/24/1.png" alt="">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/08/24/1.png">&lt;/li>
 &lt;li>Colocar un nombre descriptivo:
-&lt;img src="https://cmas.dev/img/posts/2022/08/24/2.png" alt="">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/08/24/2.png">&lt;/li>
 &lt;li>Seleccionar el Framework y creamos el proyecto:
-&lt;img src="https://cmas.dev/img/posts/2022/08/24/3.png" alt="">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/08/24/3.png">&lt;/li>
 &lt;li>Verificamos la estructura del proyecto y las plataformas habilitadas:
-&lt;img src="https://cmas.dev/img/posts/2022/08/24/4.png" alt="">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/08/24/4.png">&lt;/li>
 &lt;li>Ejecutamos la aplicación en Windows (usa Windows App SDK):
-&lt;img src="https://cmas.dev/img/posts/2022/08/24/5.png" alt="">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/08/24/5.png">&lt;/li>
 &lt;li>Cambiamos el escenario a un emulador Android:
-&lt;img src="https://cmas.dev/img/posts/2022/08/24/6.png" alt="">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/08/24/6.png">&lt;/li>
 &lt;li>Lo ejecutamos para probar:
-&lt;img src="https://cmas.dev/img/posts/2022/08/24/7.png" alt="">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/08/24/7.png">&lt;/li>
 &lt;/ol>
 &lt;p>¡Listo! Así hemos creado nuestro proyecto &lt;strong>.NET MAUI&lt;/strong> sin demasiado esfuerzo.&lt;/p>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Estructura básica de un proyecto MAUI</title><link>https://cmas.dev/posts/2022-08-17-basic-struct-of-maui-project/</link><pubDate>Wed, 17 Aug 2022 18:07:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-08-17-basic-struct-of-maui-project/</guid><description>&lt;p>En este artículo mostraré cómo es la estructura básica de un proyecto &lt;strong>.NET MAUI&lt;/strong> .&lt;/p>
 &lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 25179&lt;/strong>&lt;/em>&lt;/p>
 &lt;p>Primeramente, debemos conocer la estructura en sí de &lt;strong>.NET MAUI&lt;/strong> que se encuentra en el sitio oficial de Microsoft. La documentación oficial se encuentra &lt;a href="https://learn.microsoft.com/es-es/dotnet/maui/what-is-maui?view=net-maui-7.0">aquí&lt;/a>&lt;/p>
 &lt;p>Funcionalmente, .NET MAUI opera de la siguiente manera:
-&lt;img src="https://cmas.dev/img/posts/2022/08/17/1.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/08/17/1.png">&lt;/p>
 &lt;h2 id="estructura-del-proyecto-net-maui">Estructura del proyecto .NET MAUI&lt;/h2>
 &lt;p>El proyecto que se crea en &lt;strong>.NET MAUI&lt;/strong> posee la siguiente estructura:
-&lt;img src="https://cmas.dev/img/posts/2022/08/17/2.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/08/17/2.png">&lt;/p>
 &lt;h3 id="dependencias-dependencies">Dependencias (Dependencies)&lt;/h3>
 &lt;p>Las dependencias son los paquetes (librerías) disponibles para cada plataforma soportada en &lt;strong>.NET MAUI&lt;/strong>.&lt;/p>
 &lt;p>En este caso serían:&lt;/p>
@@ -927,9 +927,9 @@
 &lt;h2 id="instalar-visual-studio-2022">Instalar Visual Studio 2022&lt;/h2>
 &lt;p>Instalar Visual Studio 2022 es bien sencillo.&lt;/p>
 &lt;ol>
-&lt;li>Descargar el instalador nuevo &lt;a href="https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=Professional&amp;amp;channel=Release&amp;amp;version=VS2022&amp;amp;source=VSLandingPage&amp;amp;cid=2030&amp;amp;passive=false">aquí&lt;/a>&lt;/li>
+&lt;li>Descargar el instalador nuevo &lt;a href="https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=Professional&amp;channel=Release&amp;version=VS2022&amp;source=VSLandingPage&amp;cid=2030&amp;passive=false">aquí&lt;/a>&lt;/li>
 &lt;li>Ejecutar el instalador y seguir los pasos en pantalla hasta la selección de componente, allí debemos seleccionar la opción correspondiente a &lt;strong>.NET MAUI&lt;/strong>:
-&lt;img src="https://cmas.dev/img/posts/2022/08/10/1.png" alt="">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/08/10/1.png">&lt;/li>
 &lt;li>Aguardamos que finalice la instalación y listo.&lt;/li>
 &lt;/ol>
 &lt;p>&lt;strong>.NET MAUI&lt;/strong> instalará la última API de Android disponible y preparará Windows 11 para que podamos ejecutar nuestra Applicación.&lt;/p>
@@ -1022,30 +1022,30 @@
 &lt;p>Primeramente, debemos crear el poryecto &lt;strong>.NET MAUI&lt;/strong> y tenerlo listo para la plataforma &lt;strong>Android&lt;/strong>:&lt;/p>
 &lt;ol>
 &lt;li>Creamos el proyecto en Visual Studio 2022:
-&lt;img src="https://cmas.dev/img/posts/2022/07/27/1.png" alt="">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/07/27/1.png">&lt;/li>
 &lt;li>Colocamos un nombre descriptivo al proyecto nuevo:
-&lt;img src="https://cmas.dev/img/posts/2022/07/27/2.png" alt="">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/07/27/2.png">&lt;/li>
 &lt;li>Seleccionamos el .NET Core que deseamos utilizar:
-&lt;img src="https://cmas.dev/img/posts/2022/07/27/3.png" alt="">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/07/27/3.png">&lt;/li>
 &lt;li>Verificamos las opciones habilitadas (nos interesa Android):
-&lt;img src="https://cmas.dev/img/posts/2022/07/27/4.png" alt="">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/07/27/4.png">&lt;/li>
 &lt;/ol>
 &lt;h2 id="configurar-wsa">Configurar WSA&lt;/h2>
 &lt;p>Procedemos a configurar la máquina virtual para poder utilizarla&lt;/p>
 &lt;ol>
 &lt;li>En la configuración de &lt;strong>WSA&lt;/strong>, verificamos la IP y puerto para conectarnos:
-&lt;img src="https://cmas.dev/img/posts/2022/07/27/5.png" alt="">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/07/27/5.png">&lt;/li>
 &lt;li>Ejecutamos la consola de Android desde Visual Studio:
-&lt;img src="https://cmas.dev/img/posts/2022/07/27/6.png" alt="">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/07/27/6.png">&lt;/li>
 &lt;li>Ejecutamos el siguiente comando:&lt;/li>
 &lt;/ol>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">adb connect 127.0.0.1:58526
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="4">
 &lt;li>Verificamos la conexión realizada:
-&lt;img src="https://cmas.dev/img/posts/2022/07/27/7.png" alt="">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/07/27/7.png">&lt;/li>
 &lt;li>En visual Studio, veremos el nuevo dispositivo:
-&lt;img src="https://cmas.dev/img/posts/2022/07/27/8.png" alt="">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/07/27/8.png">&lt;/li>
 &lt;li>Ejecutamos la aplicación y la veremos en &lt;strong>WSA&lt;/strong>:
-&lt;img src="https://cmas.dev/img/posts/2022/07/27/9.png" alt="">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/07/27/9.png">&lt;/li>
 &lt;/ol>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item></channel></rss>

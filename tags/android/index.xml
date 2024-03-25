@@ -3,29 +3,29 @@
 &lt;p>Para crear un proyecto .NET MAUI no se necesitan demasiados pasos para lograr el objetivo, basta con seguir estos sencillos pasos que se muestran a continuación.&lt;/p>
 &lt;ol>
 &lt;li>Crear un nuevo proyecto:
-&lt;img src="https://cmas.dev/img/posts/2022/08/24/1.png" alt="">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/08/24/1.png">&lt;/li>
 &lt;li>Colocar un nombre descriptivo:
-&lt;img src="https://cmas.dev/img/posts/2022/08/24/2.png" alt="">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/08/24/2.png">&lt;/li>
 &lt;li>Seleccionar el Framework y creamos el proyecto:
-&lt;img src="https://cmas.dev/img/posts/2022/08/24/3.png" alt="">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/08/24/3.png">&lt;/li>
 &lt;li>Verificamos la estructura del proyecto y las plataformas habilitadas:
-&lt;img src="https://cmas.dev/img/posts/2022/08/24/4.png" alt="">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/08/24/4.png">&lt;/li>
 &lt;li>Ejecutamos la aplicación en Windows (usa Windows App SDK):
-&lt;img src="https://cmas.dev/img/posts/2022/08/24/5.png" alt="">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/08/24/5.png">&lt;/li>
 &lt;li>Cambiamos el escenario a un emulador Android:
-&lt;img src="https://cmas.dev/img/posts/2022/08/24/6.png" alt="">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/08/24/6.png">&lt;/li>
 &lt;li>Lo ejecutamos para probar:
-&lt;img src="https://cmas.dev/img/posts/2022/08/24/7.png" alt="">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/08/24/7.png">&lt;/li>
 &lt;/ol>
 &lt;p>¡Listo! Así hemos creado nuestro proyecto &lt;strong>.NET MAUI&lt;/strong> sin demasiado esfuerzo.&lt;/p>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Estructura básica de un proyecto MAUI</title><link>https://cmas.dev/posts/2022-08-17-basic-struct-of-maui-project/</link><pubDate>Wed, 17 Aug 2022 18:07:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-08-17-basic-struct-of-maui-project/</guid><description>&lt;p>En este artículo mostraré cómo es la estructura básica de un proyecto &lt;strong>.NET MAUI&lt;/strong> .&lt;/p>
 &lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 25179&lt;/strong>&lt;/em>&lt;/p>
 &lt;p>Primeramente, debemos conocer la estructura en sí de &lt;strong>.NET MAUI&lt;/strong> que se encuentra en el sitio oficial de Microsoft. La documentación oficial se encuentra &lt;a href="https://learn.microsoft.com/es-es/dotnet/maui/what-is-maui?view=net-maui-7.0">aquí&lt;/a>&lt;/p>
 &lt;p>Funcionalmente, .NET MAUI opera de la siguiente manera:
-&lt;img src="https://cmas.dev/img/posts/2022/08/17/1.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/08/17/1.png">&lt;/p>
 &lt;h2 id="estructura-del-proyecto-net-maui">Estructura del proyecto .NET MAUI&lt;/h2>
 &lt;p>El proyecto que se crea en &lt;strong>.NET MAUI&lt;/strong> posee la siguiente estructura:
-&lt;img src="https://cmas.dev/img/posts/2022/08/17/2.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/08/17/2.png">&lt;/p>
 &lt;h3 id="dependencias-dependencies">Dependencias (Dependencies)&lt;/h3>
 &lt;p>Las dependencias son los paquetes (librerías) disponibles para cada plataforma soportada en &lt;strong>.NET MAUI&lt;/strong>.&lt;/p>
 &lt;p>En este caso serían:&lt;/p>
@@ -52,9 +52,9 @@
 &lt;h2 id="instalar-visual-studio-2022">Instalar Visual Studio 2022&lt;/h2>
 &lt;p>Instalar Visual Studio 2022 es bien sencillo.&lt;/p>
 &lt;ol>
-&lt;li>Descargar el instalador nuevo &lt;a href="https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=Professional&amp;amp;channel=Release&amp;amp;version=VS2022&amp;amp;source=VSLandingPage&amp;amp;cid=2030&amp;amp;passive=false">aquí&lt;/a>&lt;/li>
+&lt;li>Descargar el instalador nuevo &lt;a href="https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=Professional&amp;channel=Release&amp;version=VS2022&amp;source=VSLandingPage&amp;cid=2030&amp;passive=false">aquí&lt;/a>&lt;/li>
 &lt;li>Ejecutar el instalador y seguir los pasos en pantalla hasta la selección de componente, allí debemos seleccionar la opción correspondiente a &lt;strong>.NET MAUI&lt;/strong>:
-&lt;img src="https://cmas.dev/img/posts/2022/08/10/1.png" alt="">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/08/10/1.png">&lt;/li>
 &lt;li>Aguardamos que finalice la instalación y listo.&lt;/li>
 &lt;/ol>
 &lt;p>&lt;strong>.NET MAUI&lt;/strong> instalará la última API de Android disponible y preparará Windows 11 para que podamos ejecutar nuestra Applicación.&lt;/p>
@@ -147,31 +147,31 @@
 &lt;p>Primeramente, debemos crear el poryecto &lt;strong>.NET MAUI&lt;/strong> y tenerlo listo para la plataforma &lt;strong>Android&lt;/strong>:&lt;/p>
 &lt;ol>
 &lt;li>Creamos el proyecto en Visual Studio 2022:
-&lt;img src="https://cmas.dev/img/posts/2022/07/27/1.png" alt="">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/07/27/1.png">&lt;/li>
 &lt;li>Colocamos un nombre descriptivo al proyecto nuevo:
-&lt;img src="https://cmas.dev/img/posts/2022/07/27/2.png" alt="">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/07/27/2.png">&lt;/li>
 &lt;li>Seleccionamos el .NET Core que deseamos utilizar:
-&lt;img src="https://cmas.dev/img/posts/2022/07/27/3.png" alt="">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/07/27/3.png">&lt;/li>
 &lt;li>Verificamos las opciones habilitadas (nos interesa Android):
-&lt;img src="https://cmas.dev/img/posts/2022/07/27/4.png" alt="">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/07/27/4.png">&lt;/li>
 &lt;/ol>
 &lt;h2 id="configurar-wsa">Configurar WSA&lt;/h2>
 &lt;p>Procedemos a configurar la máquina virtual para poder utilizarla&lt;/p>
 &lt;ol>
 &lt;li>En la configuración de &lt;strong>WSA&lt;/strong>, verificamos la IP y puerto para conectarnos:
-&lt;img src="https://cmas.dev/img/posts/2022/07/27/5.png" alt="">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/07/27/5.png">&lt;/li>
 &lt;li>Ejecutamos la consola de Android desde Visual Studio:
-&lt;img src="https://cmas.dev/img/posts/2022/07/27/6.png" alt="">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/07/27/6.png">&lt;/li>
 &lt;li>Ejecutamos el siguiente comando:&lt;/li>
 &lt;/ol>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">adb connect 127.0.0.1:58526
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="4">
 &lt;li>Verificamos la conexión realizada:
-&lt;img src="https://cmas.dev/img/posts/2022/07/27/7.png" alt="">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/07/27/7.png">&lt;/li>
 &lt;li>En visual Studio, veremos el nuevo dispositivo:
-&lt;img src="https://cmas.dev/img/posts/2022/07/27/8.png" alt="">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/07/27/8.png">&lt;/li>
 &lt;li>Ejecutamos la aplicación y la veremos en &lt;strong>WSA&lt;/strong>:
-&lt;img src="https://cmas.dev/img/posts/2022/07/27/9.png" alt="">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/07/27/9.png">&lt;/li>
 &lt;/ol>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Instalar aplicaciones Android desde APK en Windows 11</title><link>https://cmas.dev/posts/2022-04-20-install-android-apps-from-apk/</link><pubDate>Wed, 20 Apr 2022 13:01:14 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-04-20-install-android-apps-from-apk/</guid><description>&lt;p>En este artículo mostraré cómo instalar aplicaciones Android en Windows 11 gracias a &lt;strong>Windows Subsystem for Android&lt;/strong> utilizando herramientas del propio Android y habilitando ciertas opciones. En un &lt;a href="https://cmas.dev/posts/2022-04-13-enable-wsa/">artículo anterior&lt;/a> hemos visto cómo habilitar la plataforma desde &lt;strong>Microsoft Store&lt;/strong>.&lt;/p>
 &lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 22598&lt;/strong>&lt;/em>&lt;/p>
@@ -181,11 +181,11 @@
 &lt;ol>
 &lt;li>Iniciar la aplicación &lt;strong>Windows Subsystem for Android&lt;/strong>&lt;/li>
 &lt;li>Establecer el &lt;strong>Modo desarrollador&lt;/strong>:
-&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb1.png" alt="">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb1.png">&lt;/li>
 &lt;li>Hacemos clic en la opción &lt;strong>Gestionar configuración de desarrollador&lt;/strong>:
-&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb2.png" alt="">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb2.png">&lt;/li>
 &lt;li>Habilitamos la opción de &lt;strong>Depuración USB&lt;/strong>:
-&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb3.png" alt="">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb3.png">&lt;/li>
 &lt;/ol>
 &lt;h2 id="preparar-herramientas-de-android-sdk">Preparar herramientas de Android SDK&lt;/h2>
 &lt;h3 id="preparar-android-sdk-platform-tools">Preparar Android SDk Platform Tools&lt;/h3>
@@ -196,23 +196,23 @@
 &lt;h3 id="ubicar-los-archivos">Ubicar los archivos&lt;/h3>
 &lt;ol>
 &lt;li>Debemos crear una nueva carpeta en el directorio principal de Windows y copiar la carpeta descomprimida. Quedaría así:
-&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb4.png" alt="">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb4.png">&lt;/li>
 &lt;li>Hacemos clic derecho en el icono de Windows en la barra de tareas o &lt;strong>Win&lt;/strong>+&lt;strong>i&lt;/strong>:
-&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb5.png" alt="">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb5.png">&lt;/li>
 &lt;li>Seleccionamos &lt;strong>Variables de entorno&lt;/strong>:
-&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb6.png" alt="">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb6.png">&lt;/li>
 &lt;li>Seleccionamos la variable &lt;strong>Path&lt;/strong> y agregamos un nuevo registro:
-&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb7.png" alt="">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb7.png">&lt;/li>
 &lt;li>Agregamos la ubicación del ejecutable que queremos agregar a la variable:
-&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb8.png" alt="">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb8.png">&lt;/li>
 &lt;li>Abrimos el comando de windows &lt;strong>CMD&lt;/strong> o &lt;strong>PowerShell&lt;/strong> y probamos el comando &lt;strong>adb&lt;/strong>:&lt;/li>
 &lt;/ol>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">adb devices
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb9.png" alt="">&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb9.png">&lt;/p>
 &lt;h3 id="conexión-al-dispositivo">Conexión al dispositivo&lt;/h3>
 &lt;ol>
 &lt;li>Verificamos la IP del dispositivo (en la configuración de &lt;strong>Windows Subsystem for Android&lt;/strong>):
-&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb10.png" alt="">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb10.png">&lt;/li>
 &lt;li>Nos conectamos a la IP y al puerto correspondiente:&lt;/li>
 &lt;/ol>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">adb connect 172.18.136.138:5555
@@ -224,9 +224,9 @@
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">adb&lt;/span> &lt;span class="n">install&lt;/span> &lt;span class="s2">&amp;#34;C:\Users\chris\Downloads&lt;/span>&lt;span class="se">\a&lt;/span>&lt;span class="s2">ndry.apk&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="3">
 &lt;li>Veremos el icono anclado al menú inicio:
-&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb11.png" alt="">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb11.png">&lt;/li>
 &lt;li>La aplicación se verá así:
-&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb12.png" alt="">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb12.png">&lt;/li>
 &lt;/ol>
 &lt;p>Para cualquier aplicación que funcione para Android debemos repetir estos 4 pasos anteriores. Aprovecharé &lt;em>HBO Max&lt;/em> para ver el nuevo Batman&amp;hellip;&lt;/p>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Habilitar Windows Subsystem for Android™️</title><link>https://cmas.dev/posts/2022-04-13-enable-wsa/</link><pubDate>Wed, 13 Apr 2022 13:41:27 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-04-13-enable-wsa/</guid><description>&lt;p>En este artículo mostraré paso a paso como habilitar el &lt;strong>Windows Subsystem for Android&lt;/strong> en nuestro sistema operativo favorito. Tener en cuenta que al momento de escribir este artículo no está disponible fuera de EEUU.&lt;/p>
@@ -236,17 +236,17 @@
 &lt;h2 id="configuraciones-previas">Configuraciones previas&lt;/h2>
 &lt;p>En el momento que estoy escribiendo este artículo no funciona esto fuera de Estados Unidos, pero cambiando la región lo podemos lograr.&lt;/p>
 &lt;p>Para eso, debemos ir a &lt;em>Configuración&lt;/em> &amp;gt; &lt;em>Tiempo y Región&lt;/em>:
-&lt;img src="https://cmas.dev/img/posts/2022/04/13/wsa1.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/04/13/wsa1.png">&lt;/p>
 &lt;h2 id="habilitación-de-windows-subsystem-for-android">Habilitación de Windows Subsystem for Android&lt;/h2>
 &lt;p>Debemos dirigirnos a &lt;strong>Microsoft Store&lt;/strong>, buscar e instalar &lt;strong>Amazon Appstore&lt;/strong>:
-&lt;img src="https://cmas.dev/img/posts/2022/04/13/wsa2.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/04/13/wsa2.png">&lt;/p>
 &lt;p>El sistema nos pedirá hacer clic en &lt;strong>Descargar&lt;/strong>:
-&lt;img src="https://cmas.dev/img/posts/2022/04/13/wsa3.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/04/13/wsa3.png">&lt;/p>
 &lt;p>Veremos el progreso de descarga:
-&lt;img src="https://cmas.dev/img/posts/2022/04/13/wsa4.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/04/13/wsa4.png">&lt;/p>
 &lt;p>Abrimos la nueva aplicación:
-&lt;img src="https://cmas.dev/img/posts/2022/04/13/wsa5.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/04/13/wsa5.png">&lt;/p>
 &lt;p>Se inicia el &lt;strong>Windows Subsystem for Android&lt;/strong>:
-&lt;img src="https://cmas.dev/img/posts/2022/04/13/wsa6.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/04/13/wsa6.png">&lt;/p>
 &lt;p>Iniciamos sesión (o creamos una nueva cuenta) en Amazon y listo.&lt;/p>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item></channel></rss>

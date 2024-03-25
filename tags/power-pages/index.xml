@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Power Pages on Blog de Christian Amado</title><link>https://cmas.dev/tags/power-pages/</link><description>Recent content in Power Pages on Blog de Christian Amado</description><generator>Hugo -- gohugo.io</generator><language>es</language><managingEditor>biz@cmas.dev (Christian Amado)</managingEditor><webMaster>biz@cmas.dev (Christian Amado)</webMaster><lastBuildDate>Wed, 25 Oct 2023 00:00:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/tags/power-pages/index.xml" rel="self" type="application/rss+xml"/><item><title>Crear un sitio completo en Power Pages</title><link>https://cmas.dev/posts/2023-10-25-create-complete-site-in-power-pages/</link><pubDate>Wed, 25 Oct 2023 00:00:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2023-10-25-create-complete-site-in-power-pages/</guid><description>&lt;p>En este artículo veremos como crear una página completa en &lt;strong>Microsoft Power Pages&lt;/strong> para poder verificar las distintas opciones que tenemos con la herramienta.&lt;/p>
+&lt;p>Para lograr el objetivo dividiremos este artículo en dos partes. La primera utilizando plantillas y la otra haciéndola desde cero.&lt;/p>
+&lt;h1 id="con-plantilla">Con Plantilla&lt;/h1>
+&lt;p>&lt;img>&lt;/p>
+&lt;h1 id="sin-plantila">Sin Plantila&lt;/h1>
+&lt;p>De esta manera, hemos culminado la creación de una página con &lt;strong>Microsoft Power Pages&lt;/strong>.&lt;/p>
+&lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Habilitar Usuarios Anónimos en Power Pages</title><link>https://cmas.dev/posts/2023-10-18-enable-anonymous-user-power-pages/</link><pubDate>Wed, 18 Oct 2023 00:00:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2023-10-18-enable-anonymous-user-power-pages/</guid><description>&lt;p>En este artículo mostraré cómo habilitar un sitio de &lt;strong>Power Pages&lt;/strong> para usuarios anónimos, es decir, que cualquier usuario puedo ingresar al sitio que hemos creado. Normalmente, esto está relacionado con el entorno Productivo.&lt;/p>
+&lt;p>Para lograr esto, debemos seguir los siguientes pasos:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>Ingresamos a nuestro sitio en modo &lt;em>Edición&lt;/em> y hacemos clic en &lt;em>Vista Previa&lt;/em> :
+&lt;img src="https://i.ibb.co/gVVzCYG/anonymous-PP-1.png">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Verificamos como sale el sitio web:
+&lt;img src="https://i.ibb.co/L5mFqLd/anonymous-PP-2.png">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>En el navegador (donde no estamos autenticados) probamos el sitio y vemos que tiene restricciones de acceso:
+&lt;img src="https://i.ibb.co/DVHtYSF/anonymous-PP-3.png">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>En la sección &lt;em>&lt;strong>Configuración&lt;/strong>&lt;/em> del &lt;strong>Design Studio&lt;/strong> nos dirigimos a &lt;em>Visibilidad de Sitio&lt;/em> y lo convertimos en &lt;em>Público&lt;/em>. Guardamos y sincronizamos los cambios:
+&lt;img src="https://i.ibb.co/q7L6CfF/anonymous-PP-4.png">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>En el navegador (que no está autenticado) probamos el sitio y veremos que ya tenemos acceso al mismo:
+&lt;img src="https://i.ibb.co/xhGhgBs/anonymous-PP-5.png">&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;p>De esta sencilla manera hemos dado permisos públicos a todos los usuarios de nuestro sitio con &lt;strong>Power Pages&lt;/strong>.&lt;/p>
+&lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Primeros pasos en Power Pages</title><link>https://cmas.dev/posts/2023-10-11-power-pages-first-steps/</link><pubDate>Wed, 11 Oct 2023 00:00:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2023-10-11-power-pages-first-steps/</guid><description>&lt;p>En este artículo, veremos cómo crear un primer sitio utilizando &lt;strong>Power Pages&lt;/strong> con una visión general de los distintos grupos de funcionalidades que posee la herramienta.&lt;/p>
+&lt;p>En el &lt;a href="https://cmas.dev/posts/2023-10-11-power-pages-first-steps/">artículo anterior&lt;/a> hemos visto cómo se habilita el servicio, aquí veremos cómo utilizar ese servicio habilitado.&lt;/p>
+&lt;h1 id="creación">Creación&lt;/h1>
+&lt;p>Para poder crear un sitio debemos seguir los siguientes pasos:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>Crear el sitio desde la página principal
+&lt;img src="https://i.ibb.co/mSQ5BQN/enable-PP-3.png">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Seleccionar la plantilla que necesitamos (en caso que en la opción anterior hayamos seleccionado la opción de elegir plantilla)
+&lt;img src="https://i.ibb.co/PmBcmKM/new-site-PP-1.png">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Colocar las propiedades principales del nuevo sitio
+&lt;img src="https://i.ibb.co/2K0hWhp/new-site-PP-2.png">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Esperar un tiempo para la creación (recomiendo que tomes un vaso de agua mientras)
+&lt;img src="https://i.ibb.co/gTV3RBm/new-site-PP-3.png">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Veremos el sitio nuevo y nos presenta la ayuda en pantalla
+&lt;img src="https://i.ibb.co/GJg61QB/new-site-PP-4.png">&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h1 id="configuración-general">Configuración General&lt;/h1>
+&lt;p>Luego de crear el sitio nuevo, en la sección izquierda de la pantalla veremos las opciones disponibles para cada sitio, estas serían las configuraciones generales del mismo.&lt;/p>
+&lt;p>Todo esto lo hacemos en el &lt;em>&lt;strong>Design Studio&lt;/strong>&lt;/em> que nos presenta &lt;strong>Power Pages&lt;/strong>.&lt;/p>
+&lt;h2 id="páginas">Páginas&lt;/h2>
+&lt;p>En esta sección se modifican todos los detalles de las páginas y subpáginas que se tenga en el nuevo sitio. Aquí es donde se arma la estructura del sitio.&lt;/p>
+&lt;p>&lt;img src="https://i.ibb.co/VJNDntV/new-site-PP-5.png">&lt;/p>
+&lt;h2 id="estilos">Estilos&lt;/h2>
+&lt;p>En esta sección se modifican los detalles visuales como ser colores, tonos, tipografía, etc.&lt;/p>
+&lt;p>&lt;img src="https://i.ibb.co/2g5yp6x/new-site-PP-6.png">&lt;/p>
+&lt;h2 id="datos">Datos&lt;/h2>
+&lt;p>En esta sección se relacionan los componentes de las páginas con los datos existentes en &lt;strong>Dataverse&lt;/strong>. Las tablas creadas aquí serán visibles en el &lt;strong>Dataverse&lt;/strong>&lt;/p>
+&lt;p>&lt;img src="https://i.ibb.co/B6gD2vh/new-site-PP-7.png">&lt;/p>
+&lt;h2 id="configuración">Configuración&lt;/h2>
+&lt;p>En esta sección se configuran los detalles del sitio como ser permisos, visibilidiad, flujos de &lt;strong>Power Automate&lt;/strong> y otras configuraciones generales.&lt;/p>
+&lt;p>&lt;img src="https://i.ibb.co/fQgZQLz/new-site-PP-8.png">&lt;/p>
+&lt;p>De esta manera hemos visto detalles iniciales de &lt;strong>Power Pages&lt;/strong>.&lt;/p>
+&lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Habilitar Power Pages</title><link>https://cmas.dev/posts/2023-10-04-enable-power-pages/</link><pubDate>Wed, 04 Oct 2023 00:00:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2023-10-04-enable-power-pages/</guid><description>&lt;p>En este artículo, veremos cómo habilitar &lt;strong>Power Pages&lt;/strong> en nuestro tenant de &lt;strong>Microsoft 365&lt;/strong> (esto sólo se realiza la primera vez que ingresamos). Me estoy dando cuenta que es volver al &lt;strong>Microsoft FrontPage&lt;/strong> o al &lt;strong>Microsoft Expression Web&lt;/strong> de hace algunos años ;)&lt;/p>
+&lt;p>Los pasos son muy sencillos de seguir:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>Se ingresa al portal de &lt;strong>Microsoft 365&lt;/strong> &lt;a href="https://www.microsoft365.com">aquí&lt;/a> e iniciar sesión:
+&lt;img src="https://i.ibb.co/yqZdLf3/enable-PP-0.png">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Nos dirigimos a la sección &lt;em>Aplicaciones&lt;/em> y seleccionamos allí &lt;strong>Power Pages&lt;/strong>:
+&lt;img src="https://i.ibb.co/yYmfpb2/enable-PP-1.png">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Al ingresar a &lt;strong>Power Pages&lt;/strong> Nos aparece un botón para empezar, hacemos clic y estaría listo:
+&lt;img src="https://i.ibb.co/3mJSphN/enable-PP-2.png">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Una vez terminado este paso el &lt;strong>Power Pages&lt;/strong> queda activado y las sucesivas veces ya no nos preguntará para habilitar el servicio:
+&lt;img src="https://i.ibb.co/mSQ5BQN/enable-PP-3.png">&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;p>Con esto, hemos habilitado el servicio para utilizar &lt;strong>Power Pages&lt;/strong>.&lt;/p>
+&lt;p>¡Espero resulte útil!&lt;/p></description></item></channel></rss>

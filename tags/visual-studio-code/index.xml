@@ -2,43 +2,43 @@
 &lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 25227&lt;/strong>&lt;/em>&lt;/p>
 &lt;p>&lt;strong>Visual Studio Code Server&lt;/strong> es un servicio que se puede ejecutar en una máquina de desarrollo remota, como la PC de escritorio o una máquina virtual (VM). Permite conectar de forma segura a esa máquina remota desde cualquier lugar a través de un cliente local de &lt;strong>VS Code&lt;/strong>, sin la necesidad de &lt;strong>SSH&lt;/strong>. También se puede acceder al servidor a través del navegador usando &lt;strong>VS Code&lt;/strong> para la Web (también conocido como &lt;strong>vscode.dev&lt;/strong>).&lt;/p>
 &lt;p>La arquitectura del servicio lo expone Microsoft en su web:
-&lt;img src="https://code.visualstudio.com/assets/docs/remote/vscode-server/server-arch-latest.png" alt="">&lt;/p>
+&lt;img src="https://code.visualstudio.com/assets/docs/remote/vscode-server/server-arch-latest.png">&lt;/p>
 &lt;h2 id="configurar-acceso">Configurar acceso&lt;/h2>
 &lt;p>Para que esto funcione se debe enlazar con &lt;strong>GitHub&lt;/strong> para que nos cree el &lt;strong>CodeSpace&lt;/strong> necesario.&lt;/p>
 &lt;ol>
 &lt;li>
 &lt;p>Se accede al entorno de &lt;strong>WSL:Ubuntu&lt;/strong> para hacer las gestiones:
-&lt;img src="https://cmas.dev/img/posts/2022/10/19/1.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/10/19/1.png">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Una vez allí se verifica que el Visual Studio Code corresponda a &lt;strong>Ubuntu&lt;/strong>:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/2022/10/19/2.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/10/19/2.png">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Accedemos al menú contextual de &amp;ldquo;Turn on Remote Tunnel Access&amp;hellip;&amp;rdquo;:
-&lt;img src="https://cmas.dev/img/posts/2022/10/19/3.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/10/19/3.png">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Seguimos las instrucciones en pantalla para Iniciar sesión en &lt;strong>GitHub&lt;/strong>.&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Habilitar el Tunnel Remoto:
-&lt;img src="https://cmas.dev/img/posts/2022/10/19/4.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/10/19/4.png">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Copiar el enlace que se muestra en la ventana emergente:
-&lt;img src="https://cmas.dev/img/posts/2022/10/19/5.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/10/19/5.png">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Acceder al navegador de prefrencia y veremos nuestro Visual Studio remoto (que mantiene el enlace con nuestro Visual Studio WSL local):
-&lt;img src="https://cmas.dev/img/posts/2022/10/19/6.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/10/19/6.png">&lt;/p>
 &lt;/li>
 &lt;/ol>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>BCDEV Tips: AL Extension Pack para Visual Studio Code</title><link>https://cmas.dev/posts/2020-03-29-bcdev-tips-al-extension-pack-para-visual-studio-code/</link><pubDate>Sun, 29 Mar 2020 16:03:22 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2020-03-29-bcdev-tips-al-extension-pack-para-visual-studio-code/</guid><description>&lt;p>El desarrollo de Dynmaics 365 Business Central sigue avanzando, las herramientas aún están en fase de desarrollo y es por eso que depende en gran medida de la comunidad de desarrolladores.&lt;/p>
 &lt;p>En esta ocasión les traigo una extensión para Visual Studio Code que me resulta demasiado útil. Se llama AL Extension Pack y básicamente es un conjunto de extensiones que se relacionan entre sí para ayudar al desarrollador AL a ser más productivo y rápido. Está más orientado a &lt;strong>Cloud&lt;/strong> que a &lt;strong>On Premise&lt;/strong> pero es demasiado útil.&lt;/p>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/1-8.png" alt="">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/1-8.png">&lt;/p>
 &lt;p>De esa manera mi Visual Studio Code se llenó de extensiones muy útil para el desarrollo sobre Dynamics 365 Business Central.&lt;/p>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/2-8.png" alt="">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/2-8.png">&lt;/p>
 &lt;p>&lt;a href="https://marketplace.visualstudio.com/items?itemName=waldo.al-extension-pack">Aquí&lt;/a> están los detalles de la extensión.&lt;/p>
 &lt;p>Y &lt;a href="https://marketplace.visualstudio.com/publishers/waldo">aquí&lt;/a> el perfil del desarrollador que lo hizo. ¡Gracias waldo!&lt;/p>
 &lt;p>¡A investigar!&lt;/p></description></item><item><title>BCDEV Tips: Modificar campos y disparadores</title><link>https://cmas.dev/posts/2020-03-28-bcdev-tips-modificar-campos-y-disparadores/</link><pubDate>Sat, 28 Mar 2020 14:54:57 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2020-03-28-bcdev-tips-modificar-campos-y-disparadores/</guid><description>&lt;p>Dynamics 365 Business Central trajo consigo muchos cambios novedosos. En la empresa donde trabajo estamos implementando uno y nos encontramos con un tema no menor: ¡No podemos modificar el trigger de una tabla!&lt;/p>
@@ -85,59 +85,59 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>¡Espero que resulte útil!&lt;/p></description></item><item><title>BCDEV Tips: Configurar entorno de desarrollo - Parte 3</title><link>https://cmas.dev/posts/2020-03-25-bcdev-tips-configurar-entorno-de-desarrollo-parte-3/</link><pubDate>Wed, 25 Mar 2020 20:44:03 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2020-03-25-bcdev-tips-configurar-entorno-de-desarrollo-parte-3/</guid><description>&lt;p>En esta última parte del artículo veremos cómo clonar el repositorio y unirlo con Visual Studio Code. Por último publicaremos la extensión en Dynamics 365 Business Central Wave 2.&lt;/p>
 &lt;p>Para ello, debemos ubicarnos en la sección de repositorios del Visual Studio Code y clonar el repositorio:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/1-7.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/1-7.png">&lt;/p>
 &lt;p>Obtenemos la URL del reporitorio de archivos ubicado en Azure DevOps Services:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/2-7.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/2-7.png">&lt;/p>
 &lt;p>Seleccionamos la carpeta donde se colocará localmente el proyecto:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/3-6.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/3-6.png">&lt;/p>
 &lt;p>Debemos autenticarnos al servicio y listo:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/4-6.png" alt="">&lt;/p>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/5-5.png" alt="">&lt;/p>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/6-5.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/4-6.png">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/5-5.png">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/6-5.png">&lt;/p>
 &lt;p>Ahora, debemos autenticarnos al repositorio para ver/editar los cambios:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/7-4.png" alt="">&lt;/p>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/8-3.png" alt="">&lt;/p>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/9-3.png" alt="">&lt;/p>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/10-3.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/7-4.png">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/8-3.png">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/9-3.png">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/10-3.png">&lt;/p>
 &lt;p>Una vez terminado este paso nos lleva de nuevo al Visual Studio Code y seguimos&amp;hellip;&lt;/p>
 &lt;p>Verificamos que estén sincronizados los repositorios:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/11-2.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/11-2.png">&lt;/p>
 &lt;p>Creamos el proyecto AL, dentro del mismo proyecto del repositorio y nos vamos al control de código fuente:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/12-2.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/12-2.png">&lt;/p>
 &lt;p>Escribimos un mensaje relacionado y le damos &lt;strong>Commit&lt;/strong>:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/13-1.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/13-1.png">&lt;/p>
 &lt;p>Aceptamos la sugerencia:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/14-1.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/14-1.png">&lt;/p>
 &lt;p>Procedemos a Sincronizar los cambios para que se refleje en el servidor:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/15.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/15.png">&lt;/p>
 &lt;p>En Azure DevOps Services, verificamos si está todo correcto:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/16.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/16.png">&lt;/p>
 &lt;p>De esta manera, tenemos configurado y lsito nuestro entorno de desarrollo &lt;strong>Dynamics 365 Business Central Wave 2&lt;/strong> con &lt;strong>Azure DevOps Services&lt;/strong>.&lt;/p>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>BCDEV Tips: Configurar entorno de desarrollo - Parte 2</title><link>https://cmas.dev/posts/2020-03-24-bcdev-tips-configurar-entorno-de-desarrollo-parte-2/</link><pubDate>Tue, 24 Mar 2020 12:41:47 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2020-03-24-bcdev-tips-configurar-entorno-de-desarrollo-parte-2/</guid><description>&lt;p>En la &lt;a href="https://cmas.dev/2020/03/bcdev-tips-configurar-entorno-de-desarrollo-parte-1/">entrada anterior&lt;/a>, vimos cómo crear un repositorio con Azure DevOps Services y cómo instalar Git en nuestro Windows.&lt;/p>
 &lt;p>Ahora procederemos a instalar Visual Studio Code en nuestro Windows.&lt;/p>
 &lt;p>&lt;a href="https://cmas.dev/2018/12/business-central-entorno-de-desarrollo-con-visual-studio-code/">Aquí&lt;/a> tenemos como instalar. Debemos descargarlo desde aquí, ejecutarlo y seguir las instrucciones en pantalla para su instalación. Una vez instalado lo abrimos:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/1-6.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/1-6.png">&lt;/p>
 &lt;p>Nos dirigimos a las extensiones y empezamos a agregarlas:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/2-6.png" alt="">&lt;/p>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/3-5.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/2-6.png">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/3-5.png">&lt;/p>
 &lt;p>En mi caso tengo agregadas sólo estas para el desarrollo de mis extensiones dentro Dynamics 365 Business Central.&lt;/p>
 &lt;h2 id="cómo-crear-un-nuevo-proyecto-de-tipo-al">¿Cómo crear un nuevo proyecto de tipo AL?&lt;/h2>
 &lt;p>Presionamos las teclas &lt;strong>Ctrl + Shift + P&lt;/strong> y colocamos la frase &amp;ldquo;&lt;strong>AL: Go!&lt;/strong>&amp;rdquo;&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/4-5.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/4-5.png">&lt;/p>
 &lt;p>Completamos el campo con la ubicación del proyecto:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/5-4.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/5-4.png">&lt;/p>
 &lt;p>Seleccionamos la versión de Business Central que utilizaremos:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/6-4.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/6-4.png">&lt;/p>
 &lt;p>(En Paraguay, no tenemos disponible aún la versión Cloud) elegimos el servidor propio:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/7-3.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/7-3.png">&lt;/p>
 &lt;p>El proyecto creado se ve de la siguiente manera:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/8-2.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/8-2.png">&lt;/p>
 &lt;p>Descargamos la aplicación base con este coando:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/9-2.png" alt="">&lt;/p>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/10-2.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/9-2.png">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/10-2.png">&lt;/p>
 &lt;p>En cuanto a la extensión &lt;strong>AL Object Designer&lt;/strong> se utiliza para ver todos objetos que existen dentro de la aplicación base de &lt;strong>Dynamics 365 Business Central&lt;/strong>:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/11-1.png" alt="">&lt;/p>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/12-1.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/11-1.png">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/12-1.png">&lt;/p>
 &lt;p>Esto nos permite visualizar de manera porecisa los objetos ya existentes dentro de Dynamics 365 Business Central Wave 2.&lt;/p>
 &lt;p>¡No te piedas la última parte de este artículo!&lt;/p></description></item><item><title>BCDEV Tips: Configurar entorno de desarrollo - Parte 1</title><link>https://cmas.dev/posts/2020-03-22-bcdev-tips-configurar-entorno-de-desarrollo-parte-1/</link><pubDate>Sun, 22 Mar 2020 10:39:53 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2020-03-22-bcdev-tips-configurar-entorno-de-desarrollo-parte-1/</guid><description>&lt;p>En esta serie de entradas quisiera detallar el proceso de configuración del entorno de desarrollo Visual Studio Code para Dynamics 365 Business Central. Las tres partes de esta serie contemplan:&lt;/p>
 &lt;ol>
@@ -147,17 +147,17 @@
 &lt;/ol>
 &lt;p>Empecemos con las configuraciones generales.&lt;/p>
 &lt;p>Primero, debemos crear una cuenta de Azure DevOps (es gratuita) y creamos una organización (CmasBlog):&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/1-5.png" alt="">&lt;/p>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/2-5.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/1-5.png">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/2-5.png">&lt;/p>
 &lt;p>Una vez cumplidos los pasos anteriores, debemos crear un proyecto que llamaremos Blog_Test:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/3-4.png" alt="">&lt;/p>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/4-4.png" alt="">&lt;br>
+&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/3-4.png">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/4-4.png">&lt;br>
 Hay que tener en cuenta que en la opción &lt;strong>Version control&lt;/strong> debe estar en &lt;strong>Git&lt;/strong>.&lt;/p>
 &lt;p>Nos dirigimos a la sección &lt;strong>Repos&lt;/strong> &amp;gt; &lt;strong>Files&lt;/strong> e inicializamos con el archivo &lt;strong>README&lt;/strong>:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/5-3.png" alt="">&lt;/p>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/6-3.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/5-3.png">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/6-3.png">&lt;/p>
 &lt;p>De esa manera, hemos terminado de configurar el Azure DevOps Services para que sea nuestro repositorio de datos.&lt;/p>
-&lt;p>En vista de que Visual Studio Code no administra ni gestiona herramientas debemos instalar Visual Studio 2019, por lo menos en su versión &lt;strong>Community&lt;/strong> (lo puedes descargar &lt;a href="https://visualstudio.microsoft.com/es/thank-you-downloading-visual-studio/?sku=Community&amp;amp;rel=16">aquí&lt;/a>) para poder utilizar la herramienta &lt;strong>TF.exe&lt;/strong>, este archivo es el ejecutable que manipula los controles de versión en Visual Studio y será utilizado por Visual Studio Code para hacer la misma tarea. Por favor, instala lo mínimo de Visual Studio (por ejemplo, .NET Desktop y listo).&lt;/p>
+&lt;p>En vista de que Visual Studio Code no administra ni gestiona herramientas debemos instalar Visual Studio 2019, por lo menos en su versión &lt;strong>Community&lt;/strong> (lo puedes descargar &lt;a href="https://visualstudio.microsoft.com/es/thank-you-downloading-visual-studio/?sku=Community&amp;rel=16">aquí&lt;/a>) para poder utilizar la herramienta &lt;strong>TF.exe&lt;/strong>, este archivo es el ejecutable que manipula los controles de versión en Visual Studio y será utilizado por Visual Studio Code para hacer la misma tarea. Por favor, instala lo mínimo de Visual Studio (por ejemplo, .NET Desktop y listo).&lt;/p>
 &lt;p>Una vez realizada la instalación de Visual Studio, nos dirigimos a la ubicación &amp;ldquo;&lt;strong>C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer&lt;/strong>&amp;rdquo; y realiza dos tareas:&lt;/p>
 &lt;ol>
 &lt;li>Renombra la carpeta &lt;strong>es&lt;/strong> a &lt;strong>_es&lt;/strong>.&lt;/li>
@@ -166,7 +166,7 @@ Hay que tener en cuenta que en la opción &lt;strong>Version control&lt;/strong>
 &lt;p>Se deben instalar dos herramientas de Git y terminaremos esta parte.&lt;/p>
 &lt;p>Descargamos Git desde &lt;a href="https://git-scm.com/download/win">aquí&lt;/a>, luego ejecutamos el instalador y seguimos las indicaciones en pantalla.&lt;/p>
 &lt;p>Una vez terminado el proceso nos dirigimos al &lt;strong>cmd.exe&lt;/strong> de Windows (buscar Símbolo de sistema en Windows), escribimos &lt;strong>git&lt;/strong> y presionamos &lt;strong>Enter&lt;/strong>:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/7-2.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/7-2.png">&lt;/p>
 &lt;p>Por último debemos instalar una extensión de Git para el manejo de credenciales que se llama &amp;ldquo;&lt;strong>Microsoft Git Credential Manager for Windows&lt;/strong>&amp;rdquo; y lo puedes descargar desde &lt;a href="https://github.com/Microsoft/Git-Credential-Manager-for-Windows/releases/latest">aquí&lt;/a>.&lt;/p>
 &lt;p>Luego de ejecutarlo e instalarlo el sistema estará listo para utilizar Git sin inconvenientes.&lt;/p>
 &lt;p>¡No te piedas la Parte 2 de este artículo!&lt;/p></description></item><item><title>Python: Instalando en Visual Studio Code</title><link>https://cmas.dev/posts/2019-04-04-python-instalando-en-visual-studio-code/</link><pubDate>Thu, 04 Apr 2019 20:19:30 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2019-04-04-python-instalando-en-visual-studio-code/</guid><description>&lt;p>En esta entrada veremos cómo instalar Python para utilizarlo con nuestro IDE favorito, el Visual Studio Code. En una &lt;a href="https://cmas.dev/2019/04/python-instalacion/">entrada anterior&lt;/a>, hemos visto cómo instalar Python en uestro Windows.&lt;/p>
@@ -175,58 +175,58 @@ Hay que tener en cuenta que en la opción &lt;strong>Version control&lt;/strong>
 &lt;ol>
 &lt;li>
 &lt;p>Luego de abrir Visual Studio Code, debemos hacer clic en &amp;ldquo;Open Folder&amp;rdquo;:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/04/1-1.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/04/1-1.png">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Seleccionamos la carpeta donde generaremos los archivos necesarios (VS en este caso):&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/04/2-1.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/04/2-1.png">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Nos dirigimos al área de &lt;strong>Extensiones&lt;/strong> y nos posicionamos en el cuadro de búsqueda:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/04/3-1.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/04/3-1.png">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Buscamos &amp;ldquo;python&amp;rdquo; y hacemos clic en &amp;ldquo;Instalar&amp;rdquo;:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/04/4-1.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/04/4-1.png">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Nos mostrará el mensaje de &amp;ldquo;Instalando&amp;rdquo;:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/04/5-1.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/04/5-1.png">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Si todo va bien, mostrará que ya está &amp;ldquo;Instalado&amp;rdquo;:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/04/6-1.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/04/6-1.png">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>En el menú &amp;ldquo;Ver&amp;rdquo; buscamos la &amp;ldquo;Paleta de comando&amp;rdquo;:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/04/7-1.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/04/7-1.png">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Buscamos la opción &amp;ldquo;Python: Seleccionar intérprete&amp;rdquo;:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/04/8-1.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/04/8-1.png">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Hacemos clic en le botón correspondiente:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/04/9.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/04/9.png">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Seleccionamos el intérprete instalado:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/04/10.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/04/10.png">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>En la &amp;ldquo;Paleta de comando&amp;rdquo; seleccionamos &amp;ldquo;Python: Seleccionar Linker&amp;rdquo;&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Seleccionamos la opción &amp;ldquo;pylint&amp;rdquo;:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/04/12.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/04/12.png">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>En el explorador de archivos creamos un nuevo archivo:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/04/13.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/04/13.png">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Le llamamos &lt;strong>prueba.py&lt;/strong>:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/04/14.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/04/14.png">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Colocamos un código python de prueba:&lt;/p>
@@ -237,11 +237,11 @@ Hay que tener en cuenta que en la opción &lt;strong>Version control&lt;/strong>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="30">
 &lt;li>
 &lt;p>Hacemos clic derecho en cualquier lugar del archivo y seleccionamos la siguiente opción:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/04/15.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/04/15.png">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Nos mostrará la ejecución del programa en la terminal del Visual Studio Code:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/04/16.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/04/16.png">&lt;/p>
 &lt;/li>
 &lt;/ol>
 &lt;p>De esta manera, tenemos instalada la extensión de Python dentro de Visual Studio Code haciendo mucho más sencillo el desarrollo y la depuración del programa que estemos realizando.&lt;/p></description></item><item><title>BCDEV Tips: Crear una página nueva</title><link>https://cmas.dev/posts/2019-03-20-bcdev-tips-crear-una-pagina-nueva/</link><pubDate>Wed, 20 Mar 2019 20:50:54 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2019-03-20-bcdev-tips-crear-una-pagina-nueva/</guid><description>&lt;p>En esta entrada explicaré cómo crear una página para que utilice la tabla que hemos creado en la &lt;a href="https://cmas.dev/2019/03/bcdev-tips-crear-una-tabla-nueva/">entrada anterior&lt;/a>. También, hemos visto en este blog una &lt;a href="https://cmas.dev/2019/02/bc-dev-tips-crear-extension-de-pagina-con-visual-studio-code/">entrada que trataba sobre la creación de una extensión de página&lt;/a>.&lt;/p>
@@ -282,7 +282,7 @@ Hay que tener en cuenta que en la opción &lt;strong>Version control&lt;/strong>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="3">
 &lt;li>Publicamos la página desde el Visual Studio Code.&lt;/li>
 &lt;li>Veremos la página que apunta a la nueva página y tablas creadas:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/02/1-3.png" alt="">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/02/1-3.png">&lt;/li>
 &lt;/ol>
 &lt;p>De esta manera, hemos creado una página nueva según la necesidad.&lt;/p></description></item><item><title>BCDEV Tips: Crear una tabla nueva</title><link>https://cmas.dev/posts/2019-03-13-bcdev-tips-crear-una-tabla-nueva/</link><pubDate>Wed, 13 Mar 2019 19:34:23 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2019-03-13-bcdev-tips-crear-una-tabla-nueva/</guid><description>&lt;p>En esta entrada veremos cómo crear una tabla en Dynamics 365 Business Central con Visual Studio Code. Hemos visto en una &lt;a href="https://cmas.dev/2019/02/bc-dev-tips-crear-extension-de-tabla-con-visual-studio-code/">entrada anterior&lt;/a>, cómo crear una extensión de tabla. Aquí hablamos de crear una tabla, por lo tanto, la diferencia radica en el licenciamiento. Pues en el primer caso no se consumen las tablas de la licencia, en la segunda sí.&lt;/p>
 &lt;p>Aquí mostraremos los pasos para crear la tabla.&lt;/p>
@@ -480,7 +480,7 @@ Hay que tener en cuenta que en la opción &lt;strong>Version control&lt;/strong>
 &lt;/li>
 &lt;li>
 &lt;p>Veremos que genera el archivo &lt;strong>.rdlc&lt;/strong> con el mismo nombre que nuestro archivo AL:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/02/1-2.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/02/1-2.png">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Abrimos el reporte .rdlc con Visual Studio o bien con SQL Server Report Designer.&lt;/p>
@@ -491,17 +491,17 @@ Hay que tener en cuenta que en la opción &lt;strong>Version control&lt;/strong>
 &lt;/ol>
 &lt;p>Como hemos visto, crear un reporte en Dynamics 365 Business Central es sencillo.&lt;/p></description></item><item><title>BC DEV Tips: Crear extensión de reporte con Visual Studio Code</title><link>https://cmas.dev/posts/2019-02-12-bc-dev-tips-crear-extension-de-reporte-con-visual-studio-code/</link><pubDate>Tue, 12 Feb 2019 00:43:40 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2019-02-12-bc-dev-tips-crear-extension-de-reporte-con-visual-studio-code/</guid><description>&lt;p>En este Tip, mostraré cómo crear extensiones de reportes en Dynamics 365 Business Central, utilizando Visual Studio Code, como de costumbre. Este Tip sigue &lt;a href="https://cmas.dev/2019/02/bc-dev-tips-crear-extension-de-pagina-con-visual-studio-code/">la secuencia anterior&lt;/a>.&lt;/p>
 &lt;p>Aquí coloco el código necesario para crear el reporte extendido para este ejemplo:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/03/noloserick.gif" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/03/noloserick.gif">&lt;/p>
 &lt;p>Es que no se puede extender un reporte. Los reportes siempre se crean desde el inicio y no pueden ser extendidos como las &lt;a href="https://cmas.dev/2019/02/bc-dev-tips-crear-extension-de-tabla-con-visual-studio-code/">tablas&lt;/a> y las &lt;a href="https://cmas.dev/2019/02/bc-dev-tips-crear-extension-de-pagina-con-visual-studio-code/">páginas&lt;/a>. De esta forma nos quedamos con las ganas de extender reportes, pero tampoco tendría sentido hacerlo.&lt;/p></description></item><item><title>BC DEV Tips: Crear extensión de página con Visual Studio Code</title><link>https://cmas.dev/posts/2019-02-07-bc-dev-tips-crear-extension-de-pagina-con-visual-studio-code/</link><pubDate>Thu, 07 Feb 2019 18:10:20 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2019-02-07-bc-dev-tips-crear-extension-de-pagina-con-visual-studio-code/</guid><description>&lt;p>En este Tip, mostraré cómo crear extensiones de página en Dynamics 365 Business Central, utilizando Visual Studio Code, como de costumbre. Este Tip sigue la &lt;a href="https://cmas.dev/2019/02/bc-dev-tips-crear-extension-de-tabla-con-visual-studio-code/">secuencia anterior.&lt;/a>&lt;/p>
 &lt;p>Aquí coloco el código necesario para crear la página extendida de &amp;ldquo;Company Information&amp;rdquo;, para este ejemplo:&lt;/p>
 &lt;p>Antes de la extensión (vista Web):&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/02/1-1.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/02/1-1.png">&lt;/p>
 &lt;p>Después de la extensión (vista Web):&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/02/2-1.png" alt="">&lt;/p>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2019/02/3.png" alt="">&lt;/p>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2019/02/3.5.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/02/2-1.png">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2019/02/3.png">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2019/02/3.5.png">&lt;/p>
 &lt;p>Si la página está mal direccionada veremos un error como este:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/02/4.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/02/4.png">&lt;/p>
 &lt;p>Se corrige cambiando la variable de inicio en &lt;em>launch.json&lt;/em>&lt;/p>
 &lt;p>Y por último aquí está la extensión de página con sus respectivos comentarios:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="o">//&lt;/span>&lt;span class="n">Creamos&lt;/span> &lt;span class="n">la&lt;/span> &lt;span class="n">extensión&lt;/span> &lt;span class="n">de&lt;/span> &lt;span class="n">página&lt;/span>
@@ -559,9 +559,9 @@ Hay que tener en cuenta que en la opción &lt;strong>Version control&lt;/strong>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>De esta manera, logramos agregar más campos a la página &amp;ldquo;Company Information&amp;rdquo; sin modificarla nativamente y mostrando/ocultando botones. Nos encargamos de desarrollar sobre los objetos extendidos, tal como lo hicimos con la &lt;a href="https://cmas.dev/2019/02/bc-dev-tips-crear-extension-de-tabla-con-visual-studio-code/">tabla extendida&lt;/a>.&lt;/p></description></item><item><title>BC DEV Tips: Crear extensión de tabla con Visual Studio Code</title><link>https://cmas.dev/posts/2019-02-06-bc-dev-tips-crear-extension-de-tabla-con-visual-studio-code/</link><pubDate>Tue, 05 Feb 2019 23:15:33 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2019-02-06-bc-dev-tips-crear-extension-de-tabla-con-visual-studio-code/</guid><description>&lt;p>En este Tip, mostraré cómo crear extensiones de tablas en Dynamics 365 Business Central, utilizando Visual Studio Code (que ya se ha convertido en mi principal herramienta de desarrollo).&lt;/p>
 &lt;p>Aquí coloco el código necesario para crear la tabla extendida de &amp;ldquo;Company Information&amp;rdquo;, para este ejemplo:&lt;/p>
 &lt;p>Antes de la extensión (vista SQL Server):&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/02/1.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/02/1.png">&lt;/p>
 &lt;p>Después de la extensión (vista SQL Server):&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/02/2.png" alt="">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/02/2.png">&lt;/p>
 &lt;p>Y por último aquí está la extensión de tabla con sus respectivos comentarios:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="o">//&lt;/span>&lt;span class="n">Creamos&lt;/span> &lt;span class="n">la&lt;/span> &lt;span class="n">extensión&lt;/span> &lt;span class="n">de&lt;/span> &lt;span class="n">tabla&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">tableextension&lt;/span> &lt;span class="mi">50100&lt;/span> &lt;span class="n">CompanyInformationExt&lt;/span> &lt;span class="k">extends&lt;/span> &lt;span class="s2">&amp;#34;Company Information&amp;#34;&lt;/span>
