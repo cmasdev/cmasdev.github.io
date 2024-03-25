@@ -1,4 +1,52 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Power Automate on Blog de Christian Amado</title><link>https://cmas.dev/tags/power-automate/</link><description>Recent content in Power Automate on Blog de Christian Amado</description><generator>Hugo -- gohugo.io</generator><language>es</language><managingEditor>biz@cmas.dev (Christian Amado)</managingEditor><webMaster>biz@cmas.dev (Christian Amado)</webMaster><lastBuildDate>Thu, 02 Apr 2020 17:00:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/tags/power-automate/index.xml" rel="self" type="application/rss+xml"/><item><title>Enviar correo luego de completar formulario</title><link>https://cmas.dev/posts/2020-04-02-enviar-correo-luego-de-completar-formulario/</link><pubDate>Thu, 02 Apr 2020 17:00:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2020-04-02-enviar-correo-luego-de-completar-formulario/</guid><description>&lt;p>En esta ocasión, quiero compartir con ustedes una funcionalidad muy buena de Power Automate. Imaginemos que necesitamos completar un formulario y que la respuesta sea enviada por correo electrónica a dicho usuario.&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Power Automate on Blog de Christian Amado</title><link>https://cmas.dev/tags/power-automate/</link><description>Recent content in Power Automate on Blog de Christian Amado</description><generator>Hugo -- gohugo.io</generator><language>es</language><managingEditor>biz@cmas.dev (Christian Amado)</managingEditor><webMaster>biz@cmas.dev (Christian Amado)</webMaster><lastBuildDate>Wed, 06 Dec 2023 00:00:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/tags/power-automate/index.xml" rel="self" type="application/rss+xml"/><item><title>Disparar flujos de Power Automate desde Power Pages</title><link>https://cmas.dev/posts/2023-12-06-trigger-power-pages-flow/</link><pubDate>Wed, 06 Dec 2023 00:00:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2023-12-06-trigger-power-pages-flow/</guid><description>&lt;p>En esta oportunidad, quisiera compartir con ustedes conceptos básicos de Microsoft PowerApps. Esta herramienta ya se viene utilizando hace tiempo (sobre todo para aquellas personas que desarrollamos/personalizamos cosas dentro de Microsoft Dynamics 365/CRM), tiene sus facilidades y también sus complejidades.&lt;/p>
+&lt;p>Lo positivo de esta herramienta es que todo es visual y muy fácil de aprender para personas que no están sumergidas en el mundo de la programación pero quieren realizar tareas necesarias para cumplir con sus labores.&lt;/p>
+&lt;p>Estaré publicando una serie de 5 artículos para este mes de manera a compreder los conceptos más básicos de esta herramienta incluída en Microsoft Office 365.&lt;/p>
+&lt;p>Empezaremos hablando de los formularios, que conceptualmente nos traslada a pensar en que es la unidad mas básica donde se colocarán todos los controles necesarios para el funcionamiento de nuestra aplicación. El concepto no es ese.&lt;/p>
+&lt;p>La unidad mas básica dentro de Microsoft PowerApps es un &lt;strong>lienzo&lt;/strong>, el cual permite colocar todos los controles dentro de sí para la ejecución básica de un programa.&lt;/p>
+&lt;p>Entonces, ¿qué es un Formulario? Los formularios ofrecen la interfaz de usuario que emplean los usuarios para interactuar con los datos que necesitan para realizar su trabajo. Es decir, es la plantilla básica de representación de datos dentro de un lienzo.&lt;/p>
+&lt;p>Veamos cómo crear un liezo primero, luego veremos cómo agregar un formulario: Nos dirigimos a nuestro &lt;a href="https://portal.office.com">Portal Office 365&lt;/a> y seleccionamos la aplicación Microsoft PowerApps:&lt;br>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/1.png">&lt;/p>
+&lt;p>Marcamos la opción &amp;ldquo;Aplicación de lienzo en blanco&amp;rdquo;, colocamos el nombre y hacemos clic en &amp;ldquo;Crear&amp;rdquo;:&lt;br>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/2.png">&lt;/p>
+&lt;p>En la siguiente pantalla (que aparece en inglés) seleccionamos &amp;ldquo;Create a Form&amp;rdquo;:&lt;br>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/3.png">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/4.png">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/6.png">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/5.png">&lt;/p>
+&lt;p>Seleccionamos el &amp;ldquo;Origen de Datos (DataSource)&amp;rdquo;, en este caso Oportunidades que provienen del &amp;ldquo;Dynamics 365 for Sales&amp;rdquo;:&lt;br>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/7.png">&lt;/p>
+&lt;p>Nos muestra el formulario predeterminado:&lt;br>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/8.png">&lt;/p>
+&lt;p>Hacemos clic en ejecutar:&lt;br>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/9.png">&lt;/p>
+&lt;p>Veremos el formulario listo para ingresar datos:&lt;br>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/9_1.png">&lt;/p>
+&lt;p>De esta sencilla manera hemos creado un formulario que permite el ingreso de oportunidades dirigidas a Microsoft Dynamics 365 for Sales.&lt;/p></description></item><item><title>Integrar Power Pages con Power Automate</title><link>https://cmas.dev/posts/2023-11-29-integrate-power-pages-with-power-automate/</link><pubDate>Wed, 29 Nov 2023 00:00:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2023-11-29-integrate-power-pages-with-power-automate/</guid><description>&lt;p>En este artículo mostraré cómo iniciar con la integración de &lt;strong>Microsoft Power Pages&lt;/strong> y &lt;strong>Microsoft Power Automate&lt;/strong> para el manejo de flujos.&lt;/p>
+&lt;p>Para cubrir el objetivo del artículos debemos seguir los siguientes pasos:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>Dentro de &lt;em>Design Studio&lt;/em> procedemos a ingresar a la &lt;em>Configuración&lt;/em>:
+&lt;img src="https://i.ibb.co/6Zw4S59/pp-pa-1.png">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Allí nos dirigimos a &lt;em>Flujos de Nube&lt;/em>:
+&lt;img src="https://i.ibb.co/7VXMCxR/pp-pa-2.png">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Agregamos un flujo existente o creamos uno nuevo (cualquiera de las opciones marcadas):
+&lt;img src="https://i.ibb.co/ThTDH6F/pp-pa-3.png">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Seleccionamos &lt;strong>Power Pages&lt;/strong>:
+&lt;img src="https://i.ibb.co/T8LZ10k/pp-pa-4.png">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Creamos el flujo que necesitamos que sea disparado (ejecutado) desde &lt;strong>Power Pages&lt;/strong>:
+&lt;img src="https://i.ibb.co/6JqBYZR/pp-pa-5.png">&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;p>De esta manera sencilla hemos podido crear flujos que se disparan desde &lt;strong>Microsoft Power Pages&lt;/strong>.&lt;/p>
+&lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Enviar correo luego de completar formulario</title><link>https://cmas.dev/posts/2020-04-02-enviar-correo-luego-de-completar-formulario/</link><pubDate>Thu, 02 Apr 2020 17:00:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2020-04-02-enviar-correo-luego-de-completar-formulario/</guid><description>&lt;p>En esta ocasión, quiero compartir con ustedes una funcionalidad muy buena de Power Automate. Imaginemos que necesitamos completar un formulario y que la respuesta sea enviada por correo electrónica a dicho usuario.&lt;/p>
 &lt;h2 id="microsoft-forms">Microsoft Forms&lt;/h2>
 &lt;p>Primero, debemos ingresar a la aplicación en cuestión: &lt;img src="https://cmas.dev/img/posts/powerautomate/1.png">&lt;/p>
 &lt;p>Cerramos la ventana de bienvenida: &lt;img src="https://cmas.dev/img/posts/powerautomate/2.png">&lt;/p>

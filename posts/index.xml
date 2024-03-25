@@ -196,7 +196,30 @@
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Logrando así el mismo efecto que la Opción 1 (con la diferencia que esta solución me funcionó en &lt;strong>Android&lt;/strong> y &lt;strong>Windows&lt;/strong>).&lt;/p>
 &lt;p>La opción 2 se encuentra perfectamente explicada en &lt;a href="https://blog.ewers-peters.de/add-responsive-layouts-to-your-maui-app">este blog&lt;/a> gracias a &lt;a href="https://github.com/ewerspej">Julian Ewers-Peters&lt;/a>&lt;/p>
 &lt;p>Recuerden que durante todo este mes de Diciembre estamos en el &lt;strong>&lt;a href="https://elcamino.dev/calendario-adviento-net-maui-espanol-23">Calendario de Adviento .NET MAUI&lt;/a>&lt;/strong>&lt;/p>
-&lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Novedades en .NET MAUI con .NET 8</title><link>https://cmas.dev/posts/2023-12-01-whats-new-in-maui-net-8/</link><pubDate>Fri, 01 Dec 2023 00:00:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2023-12-01-whats-new-in-maui-net-8/</guid><description>&lt;p>En este artículo mostraré algunas novedades de .NET 8 en &lt;strong>.NET MAUI&lt;/strong>.&lt;/p>
+&lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Disparar flujos de Power Automate desde Power Pages</title><link>https://cmas.dev/posts/2023-12-06-trigger-power-pages-flow/</link><pubDate>Wed, 06 Dec 2023 00:00:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2023-12-06-trigger-power-pages-flow/</guid><description>&lt;p>En esta oportunidad, quisiera compartir con ustedes conceptos básicos de Microsoft PowerApps. Esta herramienta ya se viene utilizando hace tiempo (sobre todo para aquellas personas que desarrollamos/personalizamos cosas dentro de Microsoft Dynamics 365/CRM), tiene sus facilidades y también sus complejidades.&lt;/p>
+&lt;p>Lo positivo de esta herramienta es que todo es visual y muy fácil de aprender para personas que no están sumergidas en el mundo de la programación pero quieren realizar tareas necesarias para cumplir con sus labores.&lt;/p>
+&lt;p>Estaré publicando una serie de 5 artículos para este mes de manera a compreder los conceptos más básicos de esta herramienta incluída en Microsoft Office 365.&lt;/p>
+&lt;p>Empezaremos hablando de los formularios, que conceptualmente nos traslada a pensar en que es la unidad mas básica donde se colocarán todos los controles necesarios para el funcionamiento de nuestra aplicación. El concepto no es ese.&lt;/p>
+&lt;p>La unidad mas básica dentro de Microsoft PowerApps es un &lt;strong>lienzo&lt;/strong>, el cual permite colocar todos los controles dentro de sí para la ejecución básica de un programa.&lt;/p>
+&lt;p>Entonces, ¿qué es un Formulario? Los formularios ofrecen la interfaz de usuario que emplean los usuarios para interactuar con los datos que necesitan para realizar su trabajo. Es decir, es la plantilla básica de representación de datos dentro de un lienzo.&lt;/p>
+&lt;p>Veamos cómo crear un liezo primero, luego veremos cómo agregar un formulario: Nos dirigimos a nuestro &lt;a href="https://portal.office.com">Portal Office 365&lt;/a> y seleccionamos la aplicación Microsoft PowerApps:&lt;br>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/1.png">&lt;/p>
+&lt;p>Marcamos la opción &amp;ldquo;Aplicación de lienzo en blanco&amp;rdquo;, colocamos el nombre y hacemos clic en &amp;ldquo;Crear&amp;rdquo;:&lt;br>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/2.png">&lt;/p>
+&lt;p>En la siguiente pantalla (que aparece en inglés) seleccionamos &amp;ldquo;Create a Form&amp;rdquo;:&lt;br>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/3.png">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/4.png">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/6.png">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/5.png">&lt;/p>
+&lt;p>Seleccionamos el &amp;ldquo;Origen de Datos (DataSource)&amp;rdquo;, en este caso Oportunidades que provienen del &amp;ldquo;Dynamics 365 for Sales&amp;rdquo;:&lt;br>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/7.png">&lt;/p>
+&lt;p>Nos muestra el formulario predeterminado:&lt;br>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/8.png">&lt;/p>
+&lt;p>Hacemos clic en ejecutar:&lt;br>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/9.png">&lt;/p>
+&lt;p>Veremos el formulario listo para ingresar datos:&lt;br>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/9_1.png">&lt;/p>
+&lt;p>De esta sencilla manera hemos creado un formulario que permite el ingreso de oportunidades dirigidas a Microsoft Dynamics 365 for Sales.&lt;/p></description></item><item><title>Novedades en .NET MAUI con .NET 8</title><link>https://cmas.dev/posts/2023-12-01-whats-new-in-maui-net-8/</link><pubDate>Fri, 01 Dec 2023 00:00:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2023-12-01-whats-new-in-maui-net-8/</guid><description>&lt;p>En este artículo mostraré algunas novedades de .NET 8 en &lt;strong>.NET MAUI&lt;/strong>.&lt;/p>
 &lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 22635.2776&lt;/strong>&lt;/em>&lt;/p>
 &lt;p>&lt;strong>.NET 8&lt;/strong> se ha lanzado con muchas novedades y también han sufrido cambios (para bien) en la plataforma &lt;strong>.NET MAUI&lt;/strong>. Es muy fácili dirigirnos al &lt;a href="https://learn.microsoft.com/es-es/dotnet/maui/whats-new/dotnet-8?view=net-maui-8.0">sitio oficial&lt;/a> y leer ahí las novedades pero me interesa probarlas novedades y contarles un poco lo que se viene, pero en mayor detalle lo que voy probando. ¡Así que manos a la obra!&lt;/p>
 &lt;h2 id="novedades-generales">Novedades generales&lt;/h2>
@@ -283,6 +306,148 @@
 &lt;p>Hacemos clic o bien utilizamos el atajo &lt;strong>Ctrl&lt;/strong>+&lt;strong>L&lt;/strong> y veremos:
 &lt;img src="https://i.ibb.co/dGNdZDc/6.png">&lt;/p>
 &lt;p>Estas son las novedades que quería compartir con ustedes en estas primeras pruebas que estoy realizando (de hecho estoy actualmente en un proyecto &lt;strong>.NET MAUI 8&lt;/strong>). Iré avanzando en las novedades de &lt;strong>.NET MAUI&lt;/strong> en todo este mes de Diciembre ya que nos encontramos en pleno &lt;strong>&lt;a href="https://elcamino.dev/calendario-adviento-net-maui-espanol-23">Calendario de Adviento .NET MAUI&lt;/a>&lt;/strong>&lt;/p>
+&lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Integrar Power Pages con Power Automate</title><link>https://cmas.dev/posts/2023-11-29-integrate-power-pages-with-power-automate/</link><pubDate>Wed, 29 Nov 2023 00:00:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2023-11-29-integrate-power-pages-with-power-automate/</guid><description>&lt;p>En este artículo mostraré cómo iniciar con la integración de &lt;strong>Microsoft Power Pages&lt;/strong> y &lt;strong>Microsoft Power Automate&lt;/strong> para el manejo de flujos.&lt;/p>
+&lt;p>Para cubrir el objetivo del artículos debemos seguir los siguientes pasos:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>Dentro de &lt;em>Design Studio&lt;/em> procedemos a ingresar a la &lt;em>Configuración&lt;/em>:
+&lt;img src="https://i.ibb.co/6Zw4S59/pp-pa-1.png">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Allí nos dirigimos a &lt;em>Flujos de Nube&lt;/em>:
+&lt;img src="https://i.ibb.co/7VXMCxR/pp-pa-2.png">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Agregamos un flujo existente o creamos uno nuevo (cualquiera de las opciones marcadas):
+&lt;img src="https://i.ibb.co/ThTDH6F/pp-pa-3.png">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Seleccionamos &lt;strong>Power Pages&lt;/strong>:
+&lt;img src="https://i.ibb.co/T8LZ10k/pp-pa-4.png">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Creamos el flujo que necesitamos que sea disparado (ejecutado) desde &lt;strong>Power Pages&lt;/strong>:
+&lt;img src="https://i.ibb.co/6JqBYZR/pp-pa-5.png">&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;p>De esta manera sencilla hemos podido crear flujos que se disparan desde &lt;strong>Microsoft Power Pages&lt;/strong>.&lt;/p>
+&lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Utilizando Visual Studio Code con Power Pages</title><link>https://cmas.dev/posts/2023-11-22-using-visual-studio-code-with-power-pages/</link><pubDate>Wed, 22 Nov 2023 00:00:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2023-11-22-using-visual-studio-code-with-power-pages/</guid><description>&lt;p>En es artículo, mostraré como utilizar &lt;strong>Visual Studio Code&lt;/strong> con &lt;strong>Microsoft Power Pages&lt;/strong> para modificar ciertas funcionalidades.&lt;/p>
+&lt;p>En &lt;em>Design Studio&lt;/em> de &lt;strong>Power Pages&lt;/strong> procedemos a hacer clic en el siguiente botón:
+&lt;img src="https://i.ibb.co/hZywvtj/pp-vs-1.png">&lt;/p>
+&lt;p>En el siguiente cuadro de diálogo procedemos a abrir la herramienta:
+&lt;img src="https://i.ibb.co/qgQ93bL/pp-vs-2.png">&lt;/p>
+&lt;p>Eso nos permitirá abrir el &lt;strong>Visual Studio Code&lt;/strong> versión web asociado a nuestro tennant:
+&lt;img src="https://i.ibb.co/M5fXrNg/pp-vs-3.png">&lt;/p>
+&lt;p>Allí procedemos a crear las rutinas y código necesarios para lo que necesitemos:
+&lt;img src="https://i.ibb.co/0ngFNKR/pp-vs-4.png">&lt;/p>
+&lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Configuración de Búsqueda en Power Pages</title><link>https://cmas.dev/posts/2023-11-15-search-configuration-in-power-pages/</link><pubDate>Wed, 15 Nov 2023 00:00:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2023-11-15-search-configuration-in-power-pages/</guid><description>&lt;p>En este artículo explicaré cómo habilitar búsquedas en &lt;strong>Power Pages&lt;/strong>, por ende, en &lt;strong>Dataverse&lt;/strong> para todos sus registros.&lt;/p>
+&lt;h1 id="habilitar-funcionalidad-en-dataverse">Habilitar funcionalidad en Dataverse&lt;/h1>
+&lt;p>Para habilitar la búsqueda en &lt;strong>Power Pages&lt;/strong>, primero, debemos habilitarlo para todo el &lt;strong>Dataverse&lt;/strong>. Para eso debemos seguir estos pasos:&lt;/p>
+&lt;ol>
+&lt;li>Ir al sitio de &lt;a href="https://admin.powerplatform.microsoft.com/home">Microsoft Power Platform Admin Center&lt;/a>, seleccionar el &lt;em>Entorno&lt;/em> que deseamos cambiar y seleccionar el menú &lt;em>Configuración&lt;/em>:
+&lt;img src="https://i.ibb.co/86CB1bz/multilanguaje-1.png">&lt;/li>
+&lt;/ol>
+&lt;p>&lt;img src="https://i.ibb.co/gVNjhhv/multilanguaje-2.png">&lt;/p>
+&lt;ol start="2">
+&lt;li>
+&lt;p>Luego, se debe ir al apartado &lt;em>Producto&lt;/em> &amp;gt; &lt;em>Funcionalidades&lt;/em>:
+&lt;img src="https://i.ibb.co/dcfgv5c/pp-search-1.png">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Por último, habilitamos la opción de búsqueda:
+&lt;img src="https://i.ibb.co/W0k4JKL/pp-search-2.png">&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h1 id="búsqueda-en-power-pages">Búsqueda en Power Pages&lt;/h1>
+&lt;p>Con la búsqueda habilitada para el &lt;strong>Dataverese&lt;/strong> ya estamos listos para poder utilizar la funcionalidad de búsqueda dentro de la base de datos.&lt;/p>
+&lt;p>La indexación de todos los registros puede tardar un tiempo (dependiendo del tamaño de la base de datos y cantidad de registros), pero una vez finalizada ya se puede utilizar.&lt;/p>
+&lt;p>En este ejemplo, ya está indexado pero no tengo ninguna tabla entonces aparece un mensaje similar a este:
+&lt;img src="https://i.ibb.co/r0FqrRH/pp-search-3.png">&lt;/p>
+&lt;p>De esta manera hemos habilitado la funcionalidad de búsqueda en un sitio &lt;strong>Microsoft Power Pages&lt;/strong>.&lt;/p>
+&lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Habilitar soporte multi-idioma en Power Pages</title><link>https://cmas.dev/posts/2023-11-08-enable-multilanguage-in-power-pages/</link><pubDate>Wed, 08 Nov 2023 00:00:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2023-11-08-enable-multilanguage-in-power-pages/</guid><description>&lt;p>En este artículo, mostraré cómo habilitar un sitio multi idioma con &lt;strong>Power Pages&lt;/strong>.&lt;/p>
+&lt;p>Para realizar esto debemos configurar dos cosas que se agrupan a continuación:&lt;/p>
+&lt;h1 id="configuración-microsoft-power-platform">Configuración Microsoft Power Platform&lt;/h1>
+&lt;p>Primero, se deben habilitar los idiomas que se desean integrar con las soluciones, para ello debemos seguir los siguientes pasos:&lt;/p>
+&lt;ol>
+&lt;li>Ir al sitio de &lt;a href="https://admin.powerplatform.microsoft.com/home">Microsoft Power Platform Admin Center&lt;/a>, seleccionar el &lt;em>Entorno&lt;/em> que deseamos cambiar y seleccionar el menú &lt;em>Configuración&lt;/em>:
+&lt;img src="https://i.ibb.co/86CB1bz/multilanguaje-1.png">&lt;/li>
+&lt;/ol>
+&lt;p>&lt;img src="https://i.ibb.co/gVNjhhv/multilanguaje-2.png">&lt;/p>
+&lt;ol start="2">
+&lt;li>
+&lt;p>Luego, se debe ir al apartado &lt;em>Producto&lt;/em> &amp;gt; &lt;em>Idiomas&lt;/em>:
+&lt;img src="https://i.ibb.co/YffyTG3/multilanguaje-3.png">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Habilitamos los idiomas que deseamos (en este caso Español):
+&lt;img src="https://i.ibb.co/bKgnstB/multilanguaje-4.png">&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;p>&lt;img src="https://i.ibb.co/Xkngvtm/multilanguaje-5.png">&lt;/p>
+&lt;ol start="4">
+&lt;li>Aguardamos un tiempo para que las configuraciones surtan efecto (me funcionó en 10 minutos).&lt;/li>
+&lt;/ol>
+&lt;h1 id="configuración-de-microsoft-power-pages">Configuración de Microsoft Power Pages&lt;/h1>
+&lt;p>Ahora que tenemos los lenguajes que deseamos habilitados podemos utilziarlos dentro de nuestros sitios en la plataforma &lt;strong>Microsoft Power Pages&lt;/strong>. Para eso, debemos seguir estos pasos:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>Nos dirigimos a nuestro portal de &lt;strong>Power Pages&lt;/strong>, sección &lt;strong>Administración de Power Pages&lt;/strong>:
+&lt;img src="https://i.ibb.co/MDJjY77/multilanguaje-6.png">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Ingresamos a la sección &lt;em>Sitio Web&lt;/em> &amp;gt; &lt;em>Sitios Web&lt;/em> &amp;gt; &lt;em>TU SITIO&lt;/em>:
+&lt;img src="https://i.ibb.co/P96rZt1/multilanguaje-7.png">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Se debe agregar una nueva sección a la vista:
+&lt;img src="https://i.ibb.co/nRfyL84/multilanguaje-8.png">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Buscamos la opción &lt;em>Idiomas de Sitio Web&lt;/em>:
+&lt;img src="https://i.ibb.co/KrnSNvY/multilanguaje-9.png">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Seleccionamos la opción &lt;em>Nuevo idioma de Sitio Web&lt;/em>:
+&lt;img src="https://i.ibb.co/j5xk8DP/multilanguaje-10.png">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Verificamos el sitio web y veremos en el menú principal las opciones de idioma seleccionados:
+&lt;img src="https://i.ibb.co/bm9R1k6/multilanguaje-11.png">&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;p>De esta manera hemos aprendido cómo habilitar un sitio multi idioma con &lt;strong>Microsoft Power Pages&lt;/strong>.&lt;/p>
+&lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Agregar JavaScript en Power Pages</title><link>https://cmas.dev/posts/2023-11-01-add-javascript-in-power-pages/</link><pubDate>Wed, 01 Nov 2023 00:00:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2023-11-01-add-javascript-in-power-pages/</guid><description>&lt;p>En estos días me habían solicitado agregar un poco de &lt;strong>Javascript&lt;/strong> a un sitio desarrollado en &lt;strong>Power Pages&lt;/strong>, pero el generador de sitios no lo permite por seguridad. El único ámbito donde se puede utilizar &lt;strong>Javascript&lt;/strong> es dentro de un formulario, es una funcionalidad limitada de la herramienta para evitar ataques desde código &lt;strong>Javascript&lt;/strong>.&lt;/p>
+&lt;p>En este caso, modificaremos la página &lt;em>Contacto&lt;/em> para realizar algunos cambios en el formulario y agregar código &lt;strong>Javascript&lt;/strong> personalizado.&lt;/p>
+&lt;p>Debemos seguir los siguientes pasos:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>En el &lt;em>Design Studio&lt;/em> nos dirigimos a &lt;em>Administración de Power Pages&lt;/em>:
+&lt;img src="https://i.ibb.co/MDJjY77/multilanguaje-6.png">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Seleccionamos en el menú de la izquierda &lt;em>Formularios Básicos&lt;/em>:
+&lt;img src="https://i.ibb.co/7p6mLXq/JS-1.png">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Ir a la página en cuestión (en este caso, &lt;em>Contacto&lt;/em>):
+&lt;img src="https://i.ibb.co/dBGjCmf/JS-2.png">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Buscamos el sub menú &lt;em>Configuración Adicional&lt;/em> y nos bajamos hasta la ubicación de &lt;em>Javascript personalizado&lt;/em>:
+&lt;img src="https://i.ibb.co/NNGNR19/JS-3.png">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Agregamos el código &lt;em>Javascript&lt;/em> que necesitamos y listo:&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$(document).ready(function() {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> alert(&amp;#39;Hola desde Power Pages!&amp;#39;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">});
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="6">
+&lt;li>Debería verse algo así:
+&lt;img src="https://i.ibb.co/kD7Qd7c/JS-4.png">&lt;/li>
+&lt;/ol>
+&lt;p>De esta sencilla manera hemos código &lt;strong>Javascript&lt;/strong> a un formulario en &lt;strong>Microsoft Power Pages&lt;/strong>.&lt;/p>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Crear un sitio completo en Power Pages</title><link>https://cmas.dev/posts/2023-10-25-create-complete-site-in-power-pages/</link><pubDate>Wed, 25 Oct 2023 00:00:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2023-10-25-create-complete-site-in-power-pages/</guid><description>&lt;p>En este artículo veremos como crear una página completa en &lt;strong>Microsoft Power Pages&lt;/strong> para poder verificar las distintas opciones que tenemos con la herramienta.&lt;/p>
 &lt;p>Para lograr el objetivo dividiremos este artículo en dos partes. La primera utilizando plantillas y la otra haciéndola desde cero.&lt;/p>
 &lt;h1 id="con-plantilla">Con Plantilla&lt;/h1>
