@@ -548,7 +548,95 @@
 &lt;p>We’re once again pleased to present you with the 2023-2024 Microsoft Most Valuable Professional (MVP) award in recognition of your exceptional technical community leadership. We appreciate your outstanding contributions in the following technical communities during the past year:&lt;/p>
 &lt;p>· &lt;strong>Windows Development&lt;/strong>&lt;/p>
 &lt;/blockquote>
-&lt;p>Gracias a todas las personas que han colaborado conmigo y nos seguiremos viendo por aquí.&lt;/p></description></item><item><title>Galería Ecommerce en Power Apps</title><link>https://cmas.dev/posts/2023-05-24-ecommerce-gallery-in-power-apps/</link><pubDate>Wed, 24 May 2023 00:00:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2023-05-24-ecommerce-gallery-in-power-apps/</guid><description>&lt;p>En este artículo veremos cómo crear empezar con un sitio Ecommerce en &lt;strong>Microsoft Power Apps&lt;/strong>.&lt;/p>
+&lt;p>Gracias a todas las personas que han colaborado conmigo y nos seguiremos viendo por aquí.&lt;/p></description></item><item><title>Seguridad basada en Roles en Power Apps</title><link>https://cmas.dev/posts/2023-06-21-role-based-security-in-power-apps/</link><pubDate>Wed, 21 Jun 2023 00:00:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2023-06-21-role-based-security-in-power-apps/</guid><description>&lt;p>En este artículo veremos cómo bloquear elementos con la seguridad basada en roles en &lt;strong>Microsoft Power Apps&lt;/strong> para permitir incrementar la seguridad de nuestras aplicaciones.&lt;/p>
+&lt;p>En ocasiones necesitamos habilitar páginas y/o elementos (botones, paneles, controles en general) según políticas de seguridad. Por ejemplo, el control de &lt;em>Agregar Clientes&lt;/em> o &lt;em>Modificar Límite de crédito&lt;/em> sólo debe ser visible para Adminsitradores y/o gerentes.&lt;/p>
+&lt;p>Es ahí donde entra en juego esta funcionalidad que se divide en dos grandes configuraciones. La primera, en el portal de Azure y, la otra, en &lt;strong>Power Apps&lt;/strong>.&lt;/p>
+&lt;h1 id="configuración-en-azure">Configuración en Azure&lt;/h1>
+&lt;ol>
+&lt;li>
+&lt;p>En el portal de Azure, nos dirigimos a &lt;strong>Grupos de Seguridad&lt;/strong> dentro de &lt;strong>Microsoft Entra (antes llamado Azure Active Directory)&lt;/strong>:
+&lt;img src="https://i.ibb.co/LJT6KPs/role-security-pa-1.png">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Selecionamos la opción &lt;strong>Grupo&lt;/strong>:
+&lt;img src="https://i.ibb.co/dL1RJH5/role-security-pa-2.png">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Creamos un nuevo grupo:
+&lt;img src="https://i.ibb.co/R7DRZpw/role-security-pa-3.png">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Colocamos los valores necesarios:
+&lt;img src="https://i.ibb.co/rcf8gWk/role-security-pa-4.png">
+Tener en cuenta que los propietarios y miembros son opcionales pero uno de ellos debe tener miembros para poder funcionar,&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Copiamos el elemento &lt;em>Object Id&lt;/em>
+&lt;img src="https://i.ibb.co/sWJN5CW/role-security-pa-5.png">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Listo, hemos terminado la configuración de &lt;strong>Microsoft Azure&lt;/strong>&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h1 id="desarrollo-en-power-apps">Desarrollo en Power Apps&lt;/h1>
+&lt;ol>
+&lt;li>
+&lt;p>Agregar los conectores necesarios para el funcionamiento:
+&lt;img src="https://i.ibb.co/nbDnZsx/role-security-pa-6.png">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Crear dos botones para las pruebas:
+&lt;img src="https://i.ibb.co/yhHvthQ/role-security-pa-7.png">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>En el Evento &lt;strong>OnStart&lt;/strong> de la aplicación Canvas de &lt;strong>Power Apps&lt;/strong> colocar el sigueinte código:&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">ClearCollect(AdminUsers,Office365Groups.ListGroupMembers(&amp;#34;41474cce-cb2c-41f8-b66c-7c2d683c0dba&amp;#34;).value);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">If(User().Email in AdminUsers.mail ,Set(VerAdmin,true), Set(VerAdmin, false));
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>La clave &lt;em>guid&lt;/em> dentro de &lt;em>CrearCollect&lt;/em> es el &lt;em>Object Id&lt;/em> que se copió del item 5 de la &lt;strong>configuración de Azure&lt;/strong>&lt;/p>
+&lt;ol start="4">
+&lt;li>
+&lt;p>En el paso anterior, se creó la variable &lt;em>VerAdmin&lt;/em> entonces colocamos eso como la propiedad &lt;em>Visible&lt;/em> del &lt;strong>Button 2&lt;/strong>:
+&lt;img src="https://i.ibb.co/fXgGf3W/role-security-pa-8.png">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Publicamos y probamos la App (con mi cuenta administrador):
+&lt;img src="https://i.ibb.co/Qr5PSg9/role-security-pa-9.png">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Probamos la misma aplicación con un usuario:
+&lt;img src="https://i.ibb.co/tbLQprT/role-security-pa-10.png">&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;p>De esta manera, hemos visto cómo aplicar seguridad basada en roles en &lt;strong>Microsoft Power Apps&lt;/strong>&lt;/p>
+&lt;p>¡Espero resulte de utilidad!&lt;/p></description></item><item><title>Opciones de filtros en Power Apps</title><link>https://cmas.dev/posts/2023-06-14-filtering-options-in-power-apps/</link><pubDate>Wed, 14 Jun 2023 00:00:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2023-06-14-filtering-options-in-power-apps/</guid><description>&lt;p>En este artículo veremos cómo implementar algunas opciones de filtros en &lt;strong>Microsoft Power Apps&lt;/strong> con el objetivo de econtrar rápidamente ciertos valores según la necesidad que surga en el momento.&lt;/p>
+&lt;p>Cuando hablamos de filtros encontramos varias opciones y conceptos sobre el mismo, pero aquí me enfocaré en tres funciones que son las más utilizadas (y las he utilizado en estos días) para facilitar las tareas de búsqueda.&lt;/p>
+&lt;h1 id="filter">Filter&lt;/h1>
+&lt;p>Esta función busca registros en una tabla que satisfacen una fórmula. Se utiliza esta función para buscar un conjunto de registros que coincidan con uno o varios criterios y descartar los que no lo hagan.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">Filter(Accounts, &amp;#39;Relationship Type&amp;#39; = ComboBox1.Selected.&amp;#39;Relationship Type&amp;#39;)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>En este caso se filtrarán las &lt;em>Cuentas&lt;/em> pro el campo Tipo de relación que se seleccione en el filtro.&lt;/p>
+&lt;h1 id="search">Search&lt;/h1>
+&lt;p>Esta función busca registros en una tabla que contienen una cadena en una de sus columnas. La cadena puede aparecer en cualquier lugar dentro de la columna en cuestión.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">Search(Accounts, SearchInput.Text, &amp;#34;Account Name&amp;#34;)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>En este caso buscará los valores dentro de la columna &amp;ldquo;Account Name&amp;rdquo; para verificar que se cumple con una parte del criterio.&lt;/p>
+&lt;h1 id="lookup">LookUp&lt;/h1>
+&lt;p>Esta función busca el primer registro de una tabla que satisface una fórmula. Se utiliza esta función para buscar un único registro que coincida con uno o varios criterios.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">LookUp(Accounts, &amp;#39;Relationship Type&amp;#39; = &amp;#34;Customer&amp;#34;, &amp;#34;Account Number&amp;#34;)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>En este caso retorna el primer elemento (Número de cuenta) que cumple con la condición&lt;/p>
+&lt;p>De esta manera, hemos visto algunas opciones de filtros de registros en &lt;strong>Microsoft Power Apps&lt;/strong>&lt;/p>
+&lt;p>¡Espero resulte de utilidad!&lt;/p></description></item><item><title>Confirmación de cierre en Power Apps</title><link>https://cmas.dev/posts/2023-06-07-close-confirmation-in-power-apps/</link><pubDate>Wed, 07 Jun 2023 00:00:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2023-06-07-close-confirmation-in-power-apps/</guid><description>&lt;p>En este artículo veremos cómo Confirmar una ventana en &lt;strong>Microsoft Power Apps&lt;/strong> antes de cerrarla.&lt;/p>
+&lt;p>Como el título indica veremos cómo confirmar el cierre de uina ventana en &lt;strong>Power Apps&lt;/strong> para permitir que el usuario decida qué acciones tomar y nuestra lógica permita realizar ciertas gestiones según sea necesario.&lt;/p>
+&lt;p>Esta función sólo sirve para aplicaciones orientadas a modelos.&lt;/p>
+&lt;p>Luego, tendremos la opción de &lt;em>Cancelar&lt;/em>, que evitará el cierre de la ventana:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">If( Not Confirm(&amp;#34;¿Seguro que deseas cerrar la aplicación?&amp;#34;), Remove( ThisItem ) )
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Esto remueve el cuadro de confirmación y no realiza ninguna acción&lt;/p>
+&lt;p>Por otro lado, tendrá la opción de &lt;em>Aceptar&lt;/em>, que procede con el cierre total de la aplicación:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">If(Confirm(&amp;#34;¿Seguro que deseas cerrar la aplicación?&amp;#34;), Exit(true) ,Remove( ThisItem ) )
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Si acepta la confirmación, sale y cierra la sesión de la aplicación&lt;/p>
+&lt;p>De esta manera, confirmamos la acción a realizar sin demasiados pasos en &lt;strong>Microsoft Power Apps&lt;/strong>&lt;/p>
+&lt;p>¡Espero resulte de utilidad!&lt;/p></description></item><item><title>Galería Ecommerce en Power Apps</title><link>https://cmas.dev/posts/2023-05-24-ecommerce-gallery-in-power-apps/</link><pubDate>Wed, 24 May 2023 00:00:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2023-05-24-ecommerce-gallery-in-power-apps/</guid><description>&lt;p>En este artículo veremos cómo crear empezar con un sitio Ecommerce en &lt;strong>Microsoft Power Apps&lt;/strong>.&lt;/p>
 &lt;p>En &lt;strong>Power Apps&lt;/strong> ya tenemos plantillas que se pueden reutilizar para crear hermosas galerías. Me han pedido una pequeña aplicación Ecommerce que se conecte con una entidad bancaria de manera rápida y funcional.&lt;/p>
 &lt;p>La forma más fácil de crear el sitio es utilizando una plantilla e ir cambiando la plantilla según las necesidades.&lt;/p>
 &lt;p>Primero, creamos la plantilla en cuestión:
