@@ -163,12 +163,6 @@
 &lt;img src="https://i.ibb.co/kD7Qd7c/JS-4.png">&lt;/li>
 &lt;/ol>
 &lt;p>De esta sencilla manera hemos código &lt;strong>Javascript&lt;/strong> a un formulario en &lt;strong>Microsoft Power Pages&lt;/strong>.&lt;/p>
-&lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Crear un sitio completo en Power Pages</title><link>https://cmas.dev/posts/2023-10-25-create-complete-site-in-power-pages/</link><pubDate>Wed, 25 Oct 2023 00:00:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2023-10-25-create-complete-site-in-power-pages/</guid><description>&lt;p>En este artículo veremos como crear una página completa en &lt;strong>Microsoft Power Pages&lt;/strong> para poder verificar las distintas opciones que tenemos con la herramienta.&lt;/p>
-&lt;p>Para lograr el objetivo dividiremos este artículo en dos partes. La primera utilizando plantillas y la otra haciéndola desde cero.&lt;/p>
-&lt;h1 id="con-plantilla">Con Plantilla&lt;/h1>
-&lt;p>&lt;img>&lt;/p>
-&lt;h1 id="sin-plantila">Sin Plantila&lt;/h1>
-&lt;p>De esta manera, hemos culminado la creación de una página con &lt;strong>Microsoft Power Pages&lt;/strong>.&lt;/p>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Habilitar Usuarios Anónimos en Power Pages</title><link>https://cmas.dev/posts/2023-10-18-enable-anonymous-user-power-pages/</link><pubDate>Wed, 18 Oct 2023 00:00:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2023-10-18-enable-anonymous-user-power-pages/</guid><description>&lt;p>En este artículo mostraré cómo habilitar un sitio de &lt;strong>Power Pages&lt;/strong> para usuarios anónimos, es decir, que cualquier usuario puedo ingresar al sitio que hemos creado. Normalmente, esto está relacionado con el entorno Productivo.&lt;/p>
 &lt;p>Para lograr esto, debemos seguir los siguientes pasos:&lt;/p>
 &lt;ol>

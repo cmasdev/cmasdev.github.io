@@ -1,4 +1,141 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Aplicaciones De Negocio on Blog de Christian Amado</title><link>https://cmas.dev/categories/aplicaciones-de-negocio/</link><description>Recent content in Aplicaciones De Negocio on Blog de Christian Amado</description><generator>Hugo -- gohugo.io</generator><language>es</language><managingEditor>biz@cmas.dev (Christian Amado)</managingEditor><webMaster>biz@cmas.dev (Christian Amado)</webMaster><lastBuildDate>Wed, 06 Dec 2023 00:00:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/categories/aplicaciones-de-negocio/index.xml" rel="self" type="application/rss+xml"/><item><title>Disparar flujos de Power Automate desde Power Pages</title><link>https://cmas.dev/posts/2023-12-06-trigger-power-pages-flow/</link><pubDate>Wed, 06 Dec 2023 00:00:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2023-12-06-trigger-power-pages-flow/</guid><description>&lt;p>En esta oportunidad, quisiera compartir con ustedes conceptos básicos de Microsoft PowerApps. Esta herramienta ya se viene utilizando hace tiempo (sobre todo para aquellas personas que desarrollamos/personalizamos cosas dentro de Microsoft Dynamics 365/CRM), tiene sus facilidades y también sus complejidades.&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Aplicaciones De Negocio on Blog de Christian Amado</title><link>https://cmas.dev/categories/aplicaciones-de-negocio/</link><description>Recent content in Aplicaciones De Negocio on Blog de Christian Amado</description><generator>Hugo -- gohugo.io</generator><language>es</language><managingEditor>biz@cmas.dev (Christian Amado)</managingEditor><webMaster>biz@cmas.dev (Christian Amado)</webMaster><lastBuildDate>Wed, 07 Feb 2024 00:00:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/categories/aplicaciones-de-negocio/index.xml" rel="self" type="application/rss+xml"/><item><title>Invocar servicios REST API desde Power Automate</title><link>https://cmas.dev/posts/2024-02-07-invoke-rest-api-from-power-automate/</link><pubDate>Wed, 07 Feb 2024 00:00:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2024-02-07-invoke-rest-api-from-power-automate/</guid><description>&lt;p>En este artículo mostraré cómo invocar a un servicio REST API con &lt;strong>Microsoft Power Automate&lt;/strong>.&lt;/p>
+&lt;p>Para cubrir el objetivo del artículo debemos seguir los siguientes pasos:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>Crear un flujo de nbe instantáneo:
+&lt;img src="https://i.ibb.co/4pt831R/pa-rest-1.png">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Agregar la acción que corresponde a &lt;strong>HTTP&lt;/strong>:
+&lt;img src="https://i.ibb.co/WpYZMZL/pa-rest-2.png">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Adicionamos los parámetros necesarios para el funcionamiento de la &lt;em>API REST&lt;/em>:
+&lt;img src="https://i.ibb.co/c3jgSgJ/pa-rest-3.png">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>En este caso, agregamos laopción de &lt;em>Envío de correo electrónico&lt;/em>:
+&lt;img src="https://i.ibb.co/CwVFvcG/pa-rest-4.png">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Probamos la ejecución:
+&lt;img src="https://i.ibb.co/0FvQvTY/pa-rest-5.png">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Revisamos el correo para verificar cómo llega el resultado de la consulta a la &lt;em>API&lt;/em>:
+&lt;img src="https://i.ibb.co/4Vq9Bvj/pa-rest-6.png">&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;p>De esta manera sencilla hemos podido invocar servicios REST API desde &lt;strong>Microsoft Power Automate&lt;/strong>.&lt;/p>
+&lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Simular un click de botón con Power Automate Desktop</title><link>https://cmas.dev/posts/2024-01-31-simulate-click-button-power-automate-desktop/</link><pubDate>Wed, 31 Jan 2024 00:00:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2024-01-31-simulate-click-button-power-automate-desktop/</guid><description>&lt;p>En este artículo mostraré cómo simular un botón clic en un sitio web utilizando &lt;strong>Microsoft Power Automate Desktop&lt;/strong> para el manejo de flujos.&lt;/p>
+&lt;p>Para cubrir el objetivo del artículo debemos seguir los siguientes pasos:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>Crearemos un flujo dentro de &lt;strong>Power Automate Desktop&lt;/strong>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>La primera acción, consiste en abrir el navegador (&lt;strong>Microsoft Edge&lt;/strong>, claro):
+&lt;img src="https://i.ibb.co/j8HrJ8B/pad-boton-1.png">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Seleccionamos una página de inicio, en este caso una de mozilla para la prueba:
+&lt;img src="https://i.ibb.co/j67vD8g/pad-boton-2.png">&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;p>La idea es hacer clic en este botón:
+&lt;img src="https://i.ibb.co/bKMqxL8/pad-boton-3.png">&lt;/p>
+&lt;ol start="4">
+&lt;li>
+&lt;p>Buscamos la acción correspondiente al botón:
+&lt;img src="https://i.ibb.co/hWFtSR5/pad-boton-4.png">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Agregamos el elemento de la interfaz de usuario dentro de nuestro flujo:
+&lt;img src="https://i.ibb.co/PcK9Fk6/pad-boton-5.png">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Vemos el mensaje que nos ayuda a capturar los elementos:
+&lt;img src="https://i.ibb.co/5hYhDF2/pad-boton-6.png">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Luego de capturar los elementos, lo veremos insertado:
+&lt;img src="https://i.ibb.co/VqW23jc/pad-boton-7.png">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Ejecutamos el flujo y&amp;hellip;
+&lt;img src="https://i.ibb.co/QQP0tDd/pad-boton-8.png">&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;p>De esta manera sencilla hemos visto como ajecutar acciones automatizadas con &lt;strong>Microsoft Power Automate Desktop&lt;/strong>.&lt;/p>
+&lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Invocar servicios SOAP desde Power Automate Desktop</title><link>https://cmas.dev/posts/2024-01-24-invoke-soap-services-in-power-automate-desktop/</link><pubDate>Wed, 24 Jan 2024 00:00:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2024-01-24-invoke-soap-services-in-power-automate-desktop/</guid><description>&lt;p>En este artículo mostraré cómo consumir un Servicio Web SOAP desde &lt;strong>Microsoft Power Automate Desktop&lt;/strong>.&lt;/p>
+&lt;p>En el &lt;a href="https://cmas.dev/posts/2024-01-17-first-steps-in-power-automate-desktop/">artículo anterior&lt;/a>, hemos visto los primeros pasos para utilizar &lt;strong>Microsoft Power Automate Desktop&lt;/strong>&lt;/p>
+&lt;p>Para cubrir el objetivo del artículo debemos seguir los siguientes pasos:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>Verificar el servicio web que se va utilizar (en este caso, utilizaremos servicios gratuitos de POSTMAN):
+&lt;a href="https://documenter.getpostman.com/view/8854915/Szf26WHn#b10f59a4-1b0e-4883-bbda-9a9aac7bd81a">Postman Web Services&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>En &lt;strong>Power Automate Desktop&lt;/strong>, crear un nuevo flujo:
+&lt;img src="https://i.ibb.co/SX3nPTW/desktop-pa-6.png">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Buscar la opción de &lt;em>Invocar servicio web SOAP&lt;/em>:
+&lt;img src="https://i.ibb.co/6F0Cf6N/pad-soap-1.png">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Completamos los detalles del servicio web SOAP:
+&lt;img src="https://i.ibb.co/TbLnPqS/pad-soap-2.png">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Ejecutamos la acción:
+&lt;img src="https://i.ibb.co/pwzwDB4/pad-soap-3.png">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Verificamos las variables retornadas por el flujo:
+&lt;img src="https://i.ibb.co/6rwDdHp/pad-soap-4.png">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Doble clic en la variable &lt;em>SoapServiceResponse&lt;/em> y veremos el resultado del servicio web:
+&lt;img src="https://i.ibb.co/8bDtsPn/pad-soap-5.png">&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;p>De esta manera sencilla hemos podido invocar a un servicio web SOAP desde &lt;strong>Microsoft Power Automate Desktop&lt;/strong>.&lt;/p>
+&lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Primeros pasos con Power Automate Desktop</title><link>https://cmas.dev/posts/2024-01-17-first-steps-in-power-automate-desktop/</link><pubDate>Wed, 17 Jan 2024 00:00:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2024-01-17-first-steps-in-power-automate-desktop/</guid><description>&lt;p>En este artículo mostraré cómo dar los primeros pasos con &lt;strong>Microsoft Power Automate Desktop&lt;/strong> para procesos locales y consumos externos.&lt;/p>
+&lt;p>En el sitio oficial de Microsoft menciona esto como:&lt;/p>
+&lt;blockquote>
+&lt;p>Los flujos de escritorio amplían las capacidades existentes de automatización de procesos robóticos (RPA) en Power Automate y le permiten automatizar todos los procesos repetitivos del escritorio. La automatización es más rápida y sencilla que nunca con el nuevo e intuitivo diseñador de flujos de escritorio de Power Automate usando las acciones de arrastrar y colocar predefinidas o grabe flujos de escritorio propios para ejecutarlos más tarde.&lt;/p>
+&lt;/blockquote>
+&lt;p>Se debe tener en cuenta que para esto se necesita licencias Premium (caso contrario esto no será habilitado).&lt;/p>
+&lt;p>Para iniciar con &lt;strong>Power Automate Desktop&lt;/strong> debemos seguir estos sencillos pasos:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>Instalar la aplicación directamente desde el portal de &lt;strong>Power Automate&lt;/strong>:
+&lt;img src="https://i.ibb.co/3rW3QFv/desktop-pa-1.png">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Ejecutamos el instalador:
+&lt;img src="https://i.ibb.co/j4DSrqz/desktop-pa-2.png">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Indicamos las opciones:
+&lt;img src="https://i.ibb.co/RjHCd4p/desktop-pa-3.png">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Una vez finalizada la instalación, abrimos la aplicación e iniciamos sesión:
+&lt;img src="https://i.ibb.co/PQ9N7HL/desktop-pa-4.png">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Al iniciar sesión, todo estará listo para su utilización.
+&lt;img src="https://i.ibb.co/fFk4qHv/desktop-pa-5.png">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Creamos un nuevo Flujo y listo
+&lt;img src="https://i.ibb.co/SX3nPTW/desktop-pa-6.png">&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;p>De esta manera sencilla hemos iniciado el camino de &lt;strong>Microsoft Power Automate Desktop&lt;/strong>.&lt;/p>
+&lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Disparar flujos de Power Automate desde Power Pages</title><link>https://cmas.dev/posts/2023-12-06-trigger-power-pages-flow/</link><pubDate>Wed, 06 Dec 2023 00:00:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2023-12-06-trigger-power-pages-flow/</guid><description>&lt;p>En esta oportunidad, quisiera compartir con ustedes conceptos básicos de Microsoft PowerApps. Esta herramienta ya se viene utilizando hace tiempo (sobre todo para aquellas personas que desarrollamos/personalizamos cosas dentro de Microsoft Dynamics 365/CRM), tiene sus facilidades y también sus complejidades.&lt;/p>
 &lt;p>Lo positivo de esta herramienta es que todo es visual y muy fácil de aprender para personas que no están sumergidas en el mundo de la programación pero quieren realizar tareas necesarias para cumplir con sus labores.&lt;/p>
 &lt;p>Estaré publicando una serie de 5 artículos para este mes de manera a compreder los conceptos más básicos de esta herramienta incluída en Microsoft Office 365.&lt;/p>
 &lt;p>Empezaremos hablando de los formularios, que conceptualmente nos traslada a pensar en que es la unidad mas básica donde se colocarán todos los controles necesarios para el funcionamiento de nuestra aplicación. El concepto no es ese.&lt;/p>
@@ -163,12 +300,6 @@
 &lt;img src="https://i.ibb.co/kD7Qd7c/JS-4.png">&lt;/li>
 &lt;/ol>
 &lt;p>De esta sencilla manera hemos código &lt;strong>Javascript&lt;/strong> a un formulario en &lt;strong>Microsoft Power Pages&lt;/strong>.&lt;/p>
-&lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Crear un sitio completo en Power Pages</title><link>https://cmas.dev/posts/2023-10-25-create-complete-site-in-power-pages/</link><pubDate>Wed, 25 Oct 2023 00:00:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2023-10-25-create-complete-site-in-power-pages/</guid><description>&lt;p>En este artículo veremos como crear una página completa en &lt;strong>Microsoft Power Pages&lt;/strong> para poder verificar las distintas opciones que tenemos con la herramienta.&lt;/p>
-&lt;p>Para lograr el objetivo dividiremos este artículo en dos partes. La primera utilizando plantillas y la otra haciéndola desde cero.&lt;/p>
-&lt;h1 id="con-plantilla">Con Plantilla&lt;/h1>
-&lt;p>&lt;img>&lt;/p>
-&lt;h1 id="sin-plantila">Sin Plantila&lt;/h1>
-&lt;p>De esta manera, hemos culminado la creación de una página con &lt;strong>Microsoft Power Pages&lt;/strong>.&lt;/p>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Habilitar Usuarios Anónimos en Power Pages</title><link>https://cmas.dev/posts/2023-10-18-enable-anonymous-user-power-pages/</link><pubDate>Wed, 18 Oct 2023 00:00:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2023-10-18-enable-anonymous-user-power-pages/</guid><description>&lt;p>En este artículo mostraré cómo habilitar un sitio de &lt;strong>Power Pages&lt;/strong> para usuarios anónimos, es decir, que cualquier usuario puedo ingresar al sitio que hemos creado. Normalmente, esto está relacionado con el entorno Productivo.&lt;/p>
 &lt;p>Para lograr esto, debemos seguir los siguientes pasos:&lt;/p>
 &lt;ol>
