@@ -257,7 +257,202 @@
 &lt;/li>
 &lt;/ol>
 &lt;p>Con esto, hemos habilitado el servicio para utilizar &lt;strong>Power Pages&lt;/strong>.&lt;/p>
-&lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Seguridad basada en Roles en Power Apps</title><link>https://cmas.dev/posts/2023-06-21-role-based-security-in-power-apps/</link><pubDate>Wed, 21 Jun 2023 00:00:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2023-06-21-role-based-security-in-power-apps/</guid><description>&lt;p>En este artículo veremos cómo bloquear elementos con la seguridad basada en roles en &lt;strong>Microsoft Power Apps&lt;/strong> para permitir incrementar la seguridad de nuestras aplicaciones.&lt;/p>
+&lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Utilizando Visual Studio Code para modificar objetos Power Apps</title><link>https://cmas.dev/posts/2023-09-27-using-vs-code-for-changing-objects-in-power-apps/</link><pubDate>Wed, 27 Sep 2023 00:00:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2023-09-27-using-vs-code-for-changing-objects-in-power-apps/</guid><description>&lt;p>En este artículo veremos cómo desarrollar aplicaciones &lt;strong>Microsoft Power Apps&lt;/strong> directamente en &lt;strong>Visual Studio Code&lt;/strong> para realizar tareas mas complejas de diseño o de código mismo.&lt;/p>
+&lt;p>El desarrollo de aplicaciones para &lt;strong>Power Apps&lt;/strong> fácilmente puede ser desarrollada desde su propio diseñador y gestor, el &lt;strong>Power Apps Studio&lt;/strong>, que es la herramienta base para el desarrollo de sus aplicaciones.&lt;/p>
+&lt;p>Pero cuando necesitamos introducir ciertas complejidades necesitamos un entorno más potente y versátil. Es ahí donde entra en juego el &lt;strong>Visual Studio Code&lt;/strong> que nos permite modificar diseño y código de &lt;strong>Power Apps&lt;/strong>.&lt;/p>
+&lt;h1 id="trabajando-en-visual-studio-code">Trabajando en Visual Studio Code&lt;/h1>
+&lt;ol>
+&lt;li>
+&lt;p>Instalamos la extensión correspondiente &lt;strong>Power Platform Tools&lt;/strong>:
+&lt;img src="https://i.ibb.co/Sfr7y6x/vscode-pa-1.png">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Buscamos nuestro &lt;strong>Dataverse URL&lt;/strong> que se encuentra dentro de los detalles de nuestro &lt;strong>Entorno&lt;/strong>:
+&lt;img src="https://i.ibb.co/2536SLN/vscode-pa-2.png">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Dentro de &lt;strong>Visual Studio Code&lt;/strong>, abrimos la &lt;strong>Terminal&lt;/strong> y nos autenticamos al tenant que utilizaremos:&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">pac auth create -u https://orgXXXXXXXX.crm.dynamics.com/
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Debes cambiar las X por el nombre de tu propio Tenant.&lt;/p>
+&lt;ol start="4">
+&lt;li>
+&lt;p>Seguir los pasos en pantalla para el inicio de sesión. Saldrá un mensaje satisfactorio.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Listar las aplicaciones disponibles para descarga:&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">pac paportal list
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="6">
+&lt;li>Descargar la aplicación para poder utilizarla:&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">pac&lt;/span> &lt;span class="n">paportal&lt;/span> &lt;span class="n">download&lt;/span> &lt;span class="o">--&lt;/span>&lt;span class="n">path&lt;/span> &lt;span class="n">c&lt;/span>&lt;span class="p">:&lt;/span>\&lt;span class="n">PA&lt;/span>\&lt;span class="n">pac&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">id&lt;/span> &lt;span class="n">f46b70cc&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">XXXX&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">XXXX&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">XXXX&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="mi">41&lt;/span>&lt;span class="n">deb48eb90d&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="7">
+&lt;li>
+&lt;p>Utilizar &lt;strong>Visual Studio Code&lt;/strong> para modificar le código a placer.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Para subir los cambios, debemos escribir el siguiente comando:&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">pac&lt;/span> &lt;span class="n">paportal&lt;/span> &lt;span class="n">upload&lt;/span> &lt;span class="o">--&lt;/span>&lt;span class="n">path&lt;/span> &lt;span class="n">c&lt;/span>&lt;span class="p">:&lt;/span>\&lt;span class="n">PA&lt;/span>\&lt;span class="n">pac&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>De esta manera, hemos visto cómo utilizar &lt;strong>Visual Studio Code&lt;/strong> para modificar aplicaciones en &lt;strong>Microsoft Power Apps&lt;/strong>.&lt;/p>
+&lt;p>¡Espero resulte de utilidad!&lt;/p></description></item><item><title>Incrustar página web externa en Power Apps</title><link>https://cmas.dev/posts/2023-09-20-embed-external-page-in-power-apps/</link><pubDate>Wed, 20 Sep 2023 00:00:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2023-09-20-embed-external-page-in-power-apps/</guid><description>&lt;p>En este artículo veremos cómo incrustar oáginas web externas en &lt;strong>Microsoft Power Apps&lt;/strong> como si incluyeramos un IFrame dentro de nuestra App.&lt;/p>
+&lt;p>Un cliente me ha solicitado hace poco que le incluya un sitio web dentro de su aplicación &lt;strong>Power Apps&lt;/strong> y no sabía cómo hacerlos, de hecho tenía entendido que no se podía hacerlo.&lt;/p>
+&lt;p>Pero he encontrado una forma y el cliente quedó contento.&lt;/p>
+&lt;h1 id="windows-y-powershell">Windows y PowerShell&lt;/h1>
+&lt;ol>
+&lt;li>
+&lt;p>Descargar los componentes de ejemplo desde aquí:
+&lt;img src="https://i.ibb.co/3vjKfwD/external-web-pa-1.png">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Descargar el &lt;strong>Power Platform CLI&lt;/strong> desde &lt;a href="https://aka.ms/PowerAppsCLI">aquí&lt;/a> (en mi caso instalé la versión MSI).&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Descomprimir el archivo descargado desde &lt;strong>GitHub&lt;/strong>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>En &lt;strong>PowerShell&lt;/strong> empezar a jugar un poco con los comandos (siguiendo las instrucciones de &lt;a href="https://github.com/microsoft/PowerApps-Samples/blob/master/component-framework/README.md">aqui&lt;/a>):&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">cd C:\A\PowerApps-Samples-master\PowerApps-Samples-master\component-framework\IFrameControl\
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">mkdir IFrameSolution
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">cd C:\A\PowerApps-Samples-master\PowerApps-Samples-master\component-framework\IFrameControl\IFrameSolution
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">pac solution init --publisher-name powerapps_samples --publisher-prefix sample
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">pac solution add-reference --path ../../IFrameControl
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">pac solution add-reference --path ../../IFrameControl/IFrameControl.pcfproj
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">msbuild /t:restore
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">msbuild /t:rebuild /restore /p:Configuration=Release
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">msbuild
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Con todo esto se debe crear un archivo &lt;strong>IFrameSolution.zip&lt;/strong> dentro de la carpeta &lt;em>bin/Release/&lt;/em>, el cual, llevaremos a &lt;strong>Power Apps&lt;/strong>.&lt;/p>
+&lt;h1 id="power-apps">Power Apps&lt;/h1>
+&lt;ol>
+&lt;li>
+&lt;p>Procedemos a importar la solución generada en los pasos anteriores:
+&lt;img src="https://i.ibb.co/gw2D1Pw/external-web-pa-2.png">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Verificamos si la importación fue correcta:
+&lt;img src="https://i.ibb.co/RS07pgJ/external-web-pa-3.png">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Importamos el componente (en este caso, es un componente de tipo Código):
+&lt;img src="https://i.ibb.co/D9TPFHL/external-web-pa-4.png">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Utilizamos el IFRAME&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;p>Debemos tener en cuenta que el control de ejemplo sólo es un Mapa de Bing que permite latitud y longitud. Como en mi caso, se pueden agregar y/o modificar los parametros y volver a generar el control para cubrir nuestras necesidades.&lt;/p>
+&lt;p>Se debe tener cuidado con ingresas &lt;strong>JavaScript&lt;/strong> pues el componente puede ser bloqueado por considerarse araque de &lt;strong>Cross-Site Scripting (XSS)&lt;/strong>.&lt;/p>
+&lt;p>De esta manera, hemos visto como incrustar una página web dentro de &lt;strong>Microsoft Power Apps&lt;/strong>&lt;/p>
+&lt;p>¡Espero resulte de utilidad!&lt;/p></description></item><item><title>¿Qué es Power Apps Creator Kit?</title><link>https://cmas.dev/posts/2023-09-13-what-is-power-apps-creator-kit/</link><pubDate>Wed, 13 Sep 2023 00:00:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2023-09-13-what-is-power-apps-creator-kit/</guid><description>&lt;p>En este artículo veremos qué es &lt;strong>Microsoft Power Apps Creator Kit&lt;/strong> y para qué nos resultaría útil.&lt;/p>
+&lt;h1 id="qué-es-creator-kit">¿Qué es Creator Kit?&lt;/h1>
+&lt;p>Según el sitio oficial de Microsoft es:&lt;/p>
+&lt;blockquote>
+&lt;p>El &lt;strong>Creator Kit&lt;/strong> ayuda a crear experiencias de &lt;strong>Power Apps&lt;/strong> en la web y plataformas móviles con componentes prácticos que son omnipresentes en el software moderno. El kit contiene una biblioteca de componentes, varios controles de marco de componentes de &lt;strong>Power Apps&lt;/strong> de uso común, un conjunto de plantillas y otras utilidades que aumentan la productividad de los desarrolladores.&lt;/p>
+&lt;/blockquote>
+&lt;blockquote>
+&lt;p>Todos los controles y componentes incluidos en el kit usan el marco de &lt;strong>Fluent UI&lt;/strong> para ayudarle a crear fácilmente experiencias de usuario coherentes, atractivas y eficaces para aplicaciones empresariales personalizadas.&lt;/p>
+&lt;/blockquote>
+&lt;h1 id="pre-requisitos">Pre requisitos&lt;/h1>
+&lt;p>Para comenzar, debemos habilitar los componentes necesarios para utilizar el &lt;strong>Creator Kit&lt;/strong>. Para ello debemos ir al &lt;strong>Centro de administración de Power Platform&lt;/strong> y gestionarlos desde allí.&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>Dirigirse al apartado &lt;strong>Ambientes&lt;/strong>:
+&lt;img src="https://i.ibb.co/xjwRBVj/creator-kit-1.png">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Ir a &lt;strong>Configuración&lt;/strong>:
+&lt;img src="https://i.ibb.co/WgJZJns/creator-kit-2.png">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Expandir &lt;strong>Producto&lt;/strong> y seleccionar &lt;strong>Funcionalidades&lt;/strong>
+&lt;img src="https://i.ibb.co/2FjhHkB/creator-kit-3.png">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Habilitar &lt;strong>Componentes de Power Apps framework para Apps Canvas&lt;/strong>:
+&lt;img src="https://i.ibb.co/zXpqknH/creator-kit-4.png">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Guardamos y listo!&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h1 id="descarga-e-instalación">Descarga e instalación&lt;/h1>
+&lt;ol>
+&lt;li>
+&lt;p>Descargamos el paquete de Lienzo (porque ese utilizaremos para este artículo) desde &lt;a href="https://aka.ms/creatorkitreferencecanvas">aquí&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>En &lt;strong>Power Apps&lt;/strong> nos dirigimos al apartado &lt;strong>Soluciones&lt;/strong>:
+&lt;img src="https://i.ibb.co/8Nm5670/creator-kit-5.png">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>En la lista de &lt;strong>Soluciones&lt;/strong> hacemos clic en &lt;strong>Importar solución&lt;/strong>:
+&lt;img src="https://i.ibb.co/dbCpRZv/creator-kit-6.png">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Procedemos a importar la solución descargada:
+&lt;img src="https://i.ibb.co/Rg115W9/creator-kit-7.png">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Verificamos que la solución fue importada y está lista para usarse:
+&lt;img src="https://i.ibb.co/KD9htMZ/creator-kit-8.png">&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h1 id="uso-de-los-componentes">Uso de los componentes&lt;/h1>
+&lt;ol>
+&lt;li>
+&lt;p>Se deben importar los componentes agregados:
+&lt;img src="https://i.ibb.co/D9pPBwZ/creator-kit-9.png">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Seleccionamos los componentes que necesitamos de la listas de componentes disponibles y hacemos clic en &lt;strong>Importar&lt;/strong>:
+&lt;img src="https://i.ibb.co/dMW24kP/creator-kit-10.png">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Veremos la lista de componentes:
+&lt;img src="https://i.ibb.co/yYcQxz7/creator-kit-11.png">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>¡Hora de utilizar los componentes necesarios y listo!&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;p>Básicamente esto es el &lt;strong>Power Apps Creator Kit&lt;/strong> y la manera de empezar a utilizarlo (lo vi hace 2 días y me parece una opción muy interesante).&lt;/p>
+&lt;p>¡Espero resulte de utilidad!&lt;/p></description></item><item><title>Utilizando Power Apps Monitor</title><link>https://cmas.dev/posts/2023-09-06-using-monitor-in-power-apps/</link><pubDate>Wed, 06 Sep 2023 00:00:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2023-09-06-using-monitor-in-power-apps/</guid><description>&lt;p>En este artículo veremos cómo utilizar esta herramienta para monitorear aplicaciones desarrolladas en &lt;strong>Microsoft Power Apps&lt;/strong>.&lt;/p>
+&lt;p>Básicamente se pueden revisar las actividades de una aplicación en &lt;strong>Power Apps Monitor&lt;/strong> donde también se pueden depurar las aplicaciones (he encontrado algunas fallas en producción gracias a esto).&lt;/p>
+&lt;h1 id="power-apps-monitor">Power Apps Monitor&lt;/h1>
+&lt;p>Los pasos para poder habilitar el Monitor son muy sencillos y prácticos:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>Se debe a ingresar a la aplicación en cuestión:
+&lt;img src="https://i.ibb.co/YhTFXLs/pa-monitor-1.png">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Se selecciona la opción de &lt;strong>Abrir Monitor&lt;/strong>:
+&lt;img src="https://i.ibb.co/r027nLL/pa-monitor-2.png">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Verificamos el &lt;em>Monitor&lt;/em> (en este caso no hay actividades en el Monitor de ejemplo):
+&lt;img src="https://i.ibb.co/MRb9ZSY/pa-monitor-3.png">&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h1 id="depurar-aplicación-canvas">Depurar aplicación Canvas&lt;/h1>
+&lt;ol>
+&lt;li>
+&lt;p>Nos dirigimos a la opción &lt;strong>Configuración&lt;/strong>:
+&lt;img src="https://i.ibb.co/WGQh8xM/pa-monitor-4.png">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Buscamos la opción &lt;strong>Depuración de app publicada&lt;/strong>:
+&lt;img src="https://i.ibb.co/XDf2JhX/pa-monitor-5.png">&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;p>De esta manera, hemos visto cómo habilitar la depuración y el Monitor de aplicaciones en &lt;strong>Microsoft Power Apps&lt;/strong>&lt;/p>
+&lt;p>¡Espero resulte de utilidad!&lt;/p></description></item><item><title>Seguridad basada en Roles en Power Apps</title><link>https://cmas.dev/posts/2023-06-21-role-based-security-in-power-apps/</link><pubDate>Wed, 21 Jun 2023 00:00:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2023-06-21-role-based-security-in-power-apps/</guid><description>&lt;p>En este artículo veremos cómo bloquear elementos con la seguridad basada en roles en &lt;strong>Microsoft Power Apps&lt;/strong> para permitir incrementar la seguridad de nuestras aplicaciones.&lt;/p>
 &lt;p>En ocasiones necesitamos habilitar páginas y/o elementos (botones, paneles, controles en general) según políticas de seguridad. Por ejemplo, el control de &lt;em>Agregar Clientes&lt;/em> o &lt;em>Modificar Límite de crédito&lt;/em> sólo debe ser visible para Adminsitradores y/o gerentes.&lt;/p>
 &lt;p>Es ahí donde entra en juego esta funcionalidad que se divide en dos grandes configuraciones. La primera, en el portal de Azure y, la otra, en &lt;strong>Power Apps&lt;/strong>.&lt;/p>
 &lt;h1 id="configuración-en-azure">Configuración en Azure&lt;/h1>

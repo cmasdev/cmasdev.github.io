@@ -1,4 +1,54 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>.NET on Blog de Christian Amado</title><link>https://cmas.dev/tags/.net/</link><description>Recent content in .NET on Blog de Christian Amado</description><generator>Hugo -- gohugo.io</generator><language>es</language><managingEditor>biz@cmas.dev (Christian Amado)</managingEditor><webMaster>biz@cmas.dev (Christian Amado)</webMaster><lastBuildDate>Wed, 18 May 2022 21:56:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/tags/.net/index.xml" rel="self" type="application/rss+xml"/><item><title>Desarrollo en Windows App SDK</title><link>https://cmas.dev/posts/2022-05-18-windows-app-sdk-development/</link><pubDate>Wed, 18 May 2022 21:56:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-05-18-windows-app-sdk-development/</guid><description>&lt;p>En este articulo, mostraré cómo empezar con el desarrollo con Windows App SDK especialmente diseñado para Widnows 11 y ciertas versiones de Windows 10 (superior a la versión 1809).&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>.NET on Blog de Christian Amado</title><link>https://cmas.dev/tags/.net/</link><description>Recent content in .NET on Blog de Christian Amado</description><generator>Hugo -- gohugo.io</generator><language>es</language><managingEditor>biz@cmas.dev (Christian Amado)</managingEditor><webMaster>biz@cmas.dev (Christian Amado)</webMaster><lastBuildDate>Wed, 20 Sep 2023 00:00:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/tags/.net/index.xml" rel="self" type="application/rss+xml"/><item><title>Incrustar página web externa en Power Apps</title><link>https://cmas.dev/posts/2023-09-20-embed-external-page-in-power-apps/</link><pubDate>Wed, 20 Sep 2023 00:00:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2023-09-20-embed-external-page-in-power-apps/</guid><description>&lt;p>En este artículo veremos cómo incrustar oáginas web externas en &lt;strong>Microsoft Power Apps&lt;/strong> como si incluyeramos un IFrame dentro de nuestra App.&lt;/p>
+&lt;p>Un cliente me ha solicitado hace poco que le incluya un sitio web dentro de su aplicación &lt;strong>Power Apps&lt;/strong> y no sabía cómo hacerlos, de hecho tenía entendido que no se podía hacerlo.&lt;/p>
+&lt;p>Pero he encontrado una forma y el cliente quedó contento.&lt;/p>
+&lt;h1 id="windows-y-powershell">Windows y PowerShell&lt;/h1>
+&lt;ol>
+&lt;li>
+&lt;p>Descargar los componentes de ejemplo desde aquí:
+&lt;img src="https://i.ibb.co/3vjKfwD/external-web-pa-1.png">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Descargar el &lt;strong>Power Platform CLI&lt;/strong> desde &lt;a href="https://aka.ms/PowerAppsCLI">aquí&lt;/a> (en mi caso instalé la versión MSI).&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Descomprimir el archivo descargado desde &lt;strong>GitHub&lt;/strong>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>En &lt;strong>PowerShell&lt;/strong> empezar a jugar un poco con los comandos (siguiendo las instrucciones de &lt;a href="https://github.com/microsoft/PowerApps-Samples/blob/master/component-framework/README.md">aqui&lt;/a>):&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">cd C:\A\PowerApps-Samples-master\PowerApps-Samples-master\component-framework\IFrameControl\
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">mkdir IFrameSolution
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">cd C:\A\PowerApps-Samples-master\PowerApps-Samples-master\component-framework\IFrameControl\IFrameSolution
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">pac solution init --publisher-name powerapps_samples --publisher-prefix sample
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">pac solution add-reference --path ../../IFrameControl
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">pac solution add-reference --path ../../IFrameControl/IFrameControl.pcfproj
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">msbuild /t:restore
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">msbuild /t:rebuild /restore /p:Configuration=Release
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">msbuild
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Con todo esto se debe crear un archivo &lt;strong>IFrameSolution.zip&lt;/strong> dentro de la carpeta &lt;em>bin/Release/&lt;/em>, el cual, llevaremos a &lt;strong>Power Apps&lt;/strong>.&lt;/p>
+&lt;h1 id="power-apps">Power Apps&lt;/h1>
+&lt;ol>
+&lt;li>
+&lt;p>Procedemos a importar la solución generada en los pasos anteriores:
+&lt;img src="https://i.ibb.co/gw2D1Pw/external-web-pa-2.png">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Verificamos si la importación fue correcta:
+&lt;img src="https://i.ibb.co/RS07pgJ/external-web-pa-3.png">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Importamos el componente (en este caso, es un componente de tipo Código):
+&lt;img src="https://i.ibb.co/D9TPFHL/external-web-pa-4.png">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Utilizamos el IFRAME&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;p>Debemos tener en cuenta que el control de ejemplo sólo es un Mapa de Bing que permite latitud y longitud. Como en mi caso, se pueden agregar y/o modificar los parametros y volver a generar el control para cubrir nuestras necesidades.&lt;/p>
+&lt;p>Se debe tener cuidado con ingresas &lt;strong>JavaScript&lt;/strong> pues el componente puede ser bloqueado por considerarse araque de &lt;strong>Cross-Site Scripting (XSS)&lt;/strong>.&lt;/p>
+&lt;p>De esta manera, hemos visto como incrustar una página web dentro de &lt;strong>Microsoft Power Apps&lt;/strong>&lt;/p>
+&lt;p>¡Espero resulte de utilidad!&lt;/p></description></item><item><title>Desarrollo en Windows App SDK</title><link>https://cmas.dev/posts/2022-05-18-windows-app-sdk-development/</link><pubDate>Wed, 18 May 2022 21:56:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2022-05-18-windows-app-sdk-development/</guid><description>&lt;p>En este articulo, mostraré cómo empezar con el desarrollo con Windows App SDK especialmente diseñado para Widnows 11 y ciertas versiones de Windows 10 (superior a la versión 1809).&lt;/p>
 &lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 22621&lt;/strong>&lt;/em>&lt;/p>
 &lt;p>Entresacando un poco las definiciones desde la &lt;a href="https://learn.microsoft.com/es-es/windows/apps/windows-app-sdk/">página oficial de Microsoft&lt;/a> encontramos este resumen:&lt;/p>
 &lt;blockquote>
