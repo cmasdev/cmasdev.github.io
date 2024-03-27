@@ -333,30 +333,7 @@
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Logrando así el mismo efecto que la Opción 1 (con la diferencia que esta solución me funcionó en &lt;strong>Android&lt;/strong> y &lt;strong>Windows&lt;/strong>).&lt;/p>
 &lt;p>La opción 2 se encuentra perfectamente explicada en &lt;a href="https://blog.ewers-peters.de/add-responsive-layouts-to-your-maui-app">este blog&lt;/a> gracias a &lt;a href="https://github.com/ewerspej">Julian Ewers-Peters&lt;/a>&lt;/p>
 &lt;p>Recuerden que durante todo este mes de Diciembre estamos en el &lt;strong>&lt;a href="https://elcamino.dev/calendario-adviento-net-maui-espanol-23">Calendario de Adviento .NET MAUI&lt;/a>&lt;/strong>&lt;/p>
-&lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Disparar flujos de Power Automate desde Power Pages</title><link>https://cmas.dev/posts/2023-12-06-trigger-power-pages-flow/</link><pubDate>Wed, 06 Dec 2023 00:00:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2023-12-06-trigger-power-pages-flow/</guid><description>&lt;p>En esta oportunidad, quisiera compartir con ustedes conceptos básicos de Microsoft PowerApps. Esta herramienta ya se viene utilizando hace tiempo (sobre todo para aquellas personas que desarrollamos/personalizamos cosas dentro de Microsoft Dynamics 365/CRM), tiene sus facilidades y también sus complejidades.&lt;/p>
-&lt;p>Lo positivo de esta herramienta es que todo es visual y muy fácil de aprender para personas que no están sumergidas en el mundo de la programación pero quieren realizar tareas necesarias para cumplir con sus labores.&lt;/p>
-&lt;p>Estaré publicando una serie de 5 artículos para este mes de manera a compreder los conceptos más básicos de esta herramienta incluída en Microsoft Office 365.&lt;/p>
-&lt;p>Empezaremos hablando de los formularios, que conceptualmente nos traslada a pensar en que es la unidad mas básica donde se colocarán todos los controles necesarios para el funcionamiento de nuestra aplicación. El concepto no es ese.&lt;/p>
-&lt;p>La unidad mas básica dentro de Microsoft PowerApps es un &lt;strong>lienzo&lt;/strong>, el cual permite colocar todos los controles dentro de sí para la ejecución básica de un programa.&lt;/p>
-&lt;p>Entonces, ¿qué es un Formulario? Los formularios ofrecen la interfaz de usuario que emplean los usuarios para interactuar con los datos que necesitan para realizar su trabajo. Es decir, es la plantilla básica de representación de datos dentro de un lienzo.&lt;/p>
-&lt;p>Veamos cómo crear un liezo primero, luego veremos cómo agregar un formulario: Nos dirigimos a nuestro &lt;a href="https://portal.office.com">Portal Office 365&lt;/a> y seleccionamos la aplicación Microsoft PowerApps:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/1.png">&lt;/p>
-&lt;p>Marcamos la opción &amp;ldquo;Aplicación de lienzo en blanco&amp;rdquo;, colocamos el nombre y hacemos clic en &amp;ldquo;Crear&amp;rdquo;:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/2.png">&lt;/p>
-&lt;p>En la siguiente pantalla (que aparece en inglés) seleccionamos &amp;ldquo;Create a Form&amp;rdquo;:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/3.png">&lt;/p>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/4.png">&lt;/p>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/6.png">&lt;/p>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/5.png">&lt;/p>
-&lt;p>Seleccionamos el &amp;ldquo;Origen de Datos (DataSource)&amp;rdquo;, en este caso Oportunidades que provienen del &amp;ldquo;Dynamics 365 for Sales&amp;rdquo;:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/7.png">&lt;/p>
-&lt;p>Nos muestra el formulario predeterminado:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/8.png">&lt;/p>
-&lt;p>Hacemos clic en ejecutar:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/9.png">&lt;/p>
-&lt;p>Veremos el formulario listo para ingresar datos:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/9_1.png">&lt;/p>
-&lt;p>De esta sencilla manera hemos creado un formulario que permite el ingreso de oportunidades dirigidas a Microsoft Dynamics 365 for Sales.&lt;/p></description></item><item><title>Novedades en .NET MAUI con .NET 8</title><link>https://cmas.dev/posts/2023-12-01-whats-new-in-maui-net-8/</link><pubDate>Fri, 01 Dec 2023 00:00:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2023-12-01-whats-new-in-maui-net-8/</guid><description>&lt;p>En este artículo mostraré algunas novedades de .NET 8 en &lt;strong>.NET MAUI&lt;/strong>.&lt;/p>
+&lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Novedades en .NET MAUI con .NET 8</title><link>https://cmas.dev/posts/2023-12-01-whats-new-in-maui-net-8/</link><pubDate>Fri, 01 Dec 2023 00:00:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2023-12-01-whats-new-in-maui-net-8/</guid><description>&lt;p>En este artículo mostraré algunas novedades de .NET 8 en &lt;strong>.NET MAUI&lt;/strong>.&lt;/p>
 &lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 22635.2776&lt;/strong>&lt;/em>&lt;/p>
 &lt;p>&lt;strong>.NET 8&lt;/strong> se ha lanzado con muchas novedades y también han sufrido cambios (para bien) en la plataforma &lt;strong>.NET MAUI&lt;/strong>. Es muy fácili dirigirnos al &lt;a href="https://learn.microsoft.com/es-es/dotnet/maui/whats-new/dotnet-8?view=net-maui-8.0">sitio oficial&lt;/a> y leer ahí las novedades pero me interesa probarlas novedades y contarles un poco lo que se viene, pero en mayor detalle lo que voy probando. ¡Así que manos a la obra!&lt;/p>
 &lt;h2 id="novedades-generales">Novedades generales&lt;/h2>
