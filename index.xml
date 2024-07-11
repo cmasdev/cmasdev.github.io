@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Blog de Christian Amado</title><link>https://cmas.dev/</link><description>Recent content on Blog de Christian Amado</description><generator>Hugo -- gohugo.io</generator><language>es</language><managingEditor>biz@cmas.dev (Christian Amado)</managingEditor><webMaster>biz@cmas.dev (Christian Amado)</webMaster><lastBuildDate>Wed, 07 Feb 2024 00:00:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/index.xml" rel="self" type="application/rss+xml"/><item><title>Invocar servicios REST API desde Power Automate</title><link>https://cmas.dev/posts/2024-02-07-invoke-rest-api-from-power-automate/</link><pubDate>Wed, 07 Feb 2024 00:00:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2024-02-07-invoke-rest-api-from-power-automate/</guid><description>&lt;p>En este artículo mostraré cómo invocar a un servicio REST API con &lt;strong>Microsoft Power Automate&lt;/strong>.&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Christian Amado's Blog</title><link>https://cmas.dev/</link><description>Recent content on Christian Amado's Blog</description><generator>Hugo -- gohugo.io</generator><language>es</language><managingEditor>biz@cmas.dev (Christian Amado)</managingEditor><webMaster>biz@cmas.dev (Christian Amado)</webMaster><lastBuildDate>Wed, 07 Feb 2024 00:00:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/index.xml" rel="self" type="application/rss+xml"/><item><title>Invocar servicios REST API desde Power Automate</title><link>https://cmas.dev/posts/2024-02-07-invoke-rest-api-from-power-automate/</link><pubDate>Wed, 07 Feb 2024 00:00:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2024-02-07-invoke-rest-api-from-power-automate/</guid><description>&lt;p>En este artículo mostraré cómo invocar a un servicio REST API con &lt;strong>Microsoft Power Automate&lt;/strong>.&lt;/p>
 &lt;p>Para cubrir el objetivo del artículo debemos seguir los siguientes pasos:&lt;/p>
 &lt;ol>
 &lt;li>
@@ -7199,8 +7199,8 @@ The request for path /DynamicsNAV130/dev/metadata failed with code InternalServe
 &lt;p>Puedes enviarme un correo a &lt;a href="mailto:biz@cmas.dev">biz@cmas.dev&lt;/a>, pero si deseas que te responda más rápido puedes utilizar los siguiente métodos:&lt;/p>
 &lt;h1 id="en-la-red">En la red&amp;hellip;&lt;/h1>
 &lt;ul>
-&lt;li>&lt;a href="https://twitter.com/christianamado/">Twitter&lt;/a>&lt;/li>
-&lt;li>&lt;a href="mastodon.social/@cmasdev">Mastodon&lt;/a>&lt;/li>
+&lt;li>&lt;input checked="" disabled="" type="checkbox"> (&lt;a href="https://x.com/christianamado/">https://x.com/christianamado/&lt;/a>)&lt;/li>
+&lt;li>&lt;a href="https://mastodon.social/@cmasdev">Mastodon&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://www.linkedin.com/in/christianamado/">LinkedIn&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://github.com/cmasdev/">GitHub&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://www.youtube.com/@cmasdev">YouTube&lt;/a>&lt;/li>
