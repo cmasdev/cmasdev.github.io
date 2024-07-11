@@ -57,73 +57,75 @@ timeZone = "America/Asuncion"
     post = "/:year/:month/:day/:filename/"
 
 [languages]
-  [languages.en]
-    hometitle = "Christian Amado"
-    title = "Christian Amado's Blog"    
-    subtitle = "Software Engineering & Business Solutions"
-    description = "A blog dedicated to software engineering, programming and business applications mainly based on Microsoft technologies"
-    languageName = "English"
-    weight = 1
-    [languages.en.menu]
-    [[languages.en.menu.main]]
-        url = "about"
-        name = "About"
-        weight = 2
+  [languages.en]  
+    [languages.es.params]
+        hometitle = "Christian Amado"
+        title = "Christian Amado's Blog"    
+        subtitle = "Software Engineering & Business Solutions"
+        description = "A blog dedicated to software engineering, programming and business applications mainly based on Microsoft technologies"
+        languageName = "English"
+        weight = 1
+        [languages.en.menu]
+        [[languages.en.menu.main]]
+            url = "about"
+            name = "About"
+            weight = 2
 
-    #[[languages.en.menu.main]]
-        #url = "projects"
-        #name = "Projects"
-        #weight = 3
+        #[[languages.en.menu.main]]
+            #url = "projects"
+            #name = "Projects"
+            #weight = 3
 
-    [[languages.en.menu.main]]
-        url = "contact"
-        name = "Contact"
-        weight = 4
+        [[languages.en.menu.main]]
+            url = "contact"
+            name = "Contact"
+            weight = 4
 
-    [[languages.en.menu.main]]
-        url = "diabetes"
-        name = "Diabetes"
-        weight = 5
+        [[languages.en.menu.main]]
+            url = "diabetes"
+            name = "Diabetes"
+            weight = 5
 
-    [[languages.en.menu.main]]
-        url = "tags"
-        name = "Tags"
-        weight = 6
+        [[languages.en.menu.main]]
+            url = "tags"
+            name = "Tags"
+            weight = 6
 
-    #[[languages.en.menu.main]]
-        #url = "index.xml"
-        #name = "RSS"
-        #weight = 8
+        #[[languages.en.menu.main]]
+            #url = "index.xml"
+            #name = "RSS"
+            #weight = 8
 
   [languages.es]
-    hometitle = "Christian Amado"
-    title = "Blog de Christian Amado"
-    subtitle = "Ingeniería de Software y Soluciones de Negocios"
-    description = "Un blog dedicado a la ingeniería de software, programación y soluciones de negocios principalmente para tecnologías Microsoft"
-    languageName = "Español"
-    weight = 2
-    [languages.es.menu]
-    [[languages.es.menu.main]]
-        url = "about"
-        name = "Biografía"
+    [languages.es.params]
+        hometitle = "Christian Amado"
+        title = "Blog de Christian Amado"
+        subtitle = "Ingeniería de Software y Soluciones de Negocios"
+        description = "Un blog dedicado a la ingeniería de software, programación y soluciones de negocios principalmente para tecnologías Microsoft"
+        languageName = "Español"
         weight = 2
+        [languages.es.menu]
+        [[languages.es.menu.main]]
+            url = "about"
+            name = "Biografía"
+            weight = 2
 
-    #[[languages.es.menu.main]]
-        #url = "projects"
-        #name = "Proyectos"
-        #weight = 3
+        #[[languages.es.menu.main]]
+            #url = "projects"
+            #name = "Proyectos"
+            #weight = 3
 
-    [[languages.es.menu.main]]
-        url = "contact"
-        name = "Contacto"
-        weight = 4
+        [[languages.es.menu.main]]
+            url = "contact"
+            name = "Contacto"
+            weight = 4
 
-    [[languages.es.menu.main]]
-        url = "diabetes"
-        name = "Diabetes"
-        weight = 5
+        [[languages.es.menu.main]]
+            url = "diabetes"
+            name = "Diabetes"
+            weight = 5
 
-    [[languages.es.menu.main]]
-        url = "tags"
-        name = "Etiquetas"
-        weight = 6
+        [[languages.es.menu.main]]
+            url = "tags"
+            name = "Etiquetas"
+            weight = 6
