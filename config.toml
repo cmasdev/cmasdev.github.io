@@ -58,7 +58,7 @@ timeZone = "America/Asuncion"
 
 [languages]
   [languages.en]  
-    [languages.es.params]
+    [languages.en.params]
         hometitle = "Christian Amado"
         title = "Christian Amado's Blog"    
         subtitle = "Software Engineering & Business Solutions"
