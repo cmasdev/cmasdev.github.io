@@ -3616,7 +3616,7 @@ readers do not read off random characters that represent icons */
 .fa-tachometer-alt:before {
   content: "\f3fd"; }
 
-.fa-tags:before {
+.fa-tag:before {
   content: "\f02b"; }
 
 .fa-tags:before {
@@ -3970,7 +3970,7 @@ readers do not read off random characters that represent icons */
 .fa-user-slash:before {
   content: "\f506"; }
 
-.fa-user-tags:before {
+.fa-user-tag:before {
   content: "\f507"; }
 
 .fa-user-tie:before {
