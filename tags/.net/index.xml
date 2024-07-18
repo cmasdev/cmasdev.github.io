@@ -1,4 +1,51 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>.NET on Christian Amado's Blog</title><link>https://cmas.dev/tags/.net/</link><description>Recent content in .NET on Christian Amado's Blog</description><generator>Hugo -- gohugo.io</generator><language>es</language><managingEditor>biz@cmas.dev (Christian Amado)</managingEditor><webMaster>biz@cmas.dev (Christian Amado)</webMaster><lastBuildDate>Wed, 20 Sep 2023 00:00:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/tags/.net/index.xml" rel="self" type="application/rss+xml"/><item><title>Incrustar página web externa en Power Apps</title><link>https://cmas.dev/posts/2023-09-20-embed-external-page-in-power-apps/</link><pubDate>Wed, 20 Sep 2023 00:00:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2023-09-20-embed-external-page-in-power-apps/</guid><description>&lt;p>En este artículo veremos cómo incrustar oáginas web externas en &lt;strong>Microsoft Power Apps&lt;/strong> como si incluyeramos un IFrame dentro de nuestra App.&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>.NET on Christian Amado's Blog</title><link>https://cmas.dev/tags/.net/</link><description>Recent content in .NET on Christian Amado's Blog</description><generator>Hugo -- gohugo.io</generator><language>es</language><managingEditor>biz@cmas.dev (Christian Amado)</managingEditor><webMaster>biz@cmas.dev (Christian Amado)</webMaster><lastBuildDate>Wed, 17 Jul 2024 00:00:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/tags/.net/index.xml" rel="self" type="application/rss+xml"/><item><title>.NET Web API con Proyecto IDX</title><link>https://cmas.dev/posts/2024-07-17-dotnet-project-idx/</link><pubDate>Wed, 17 Jul 2024 00:00:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2024-07-17-dotnet-project-idx/</guid><description>&lt;p>En este artículo veremos cómo crear una Web API básica con el nuevo &lt;strong>Proyecto IDX&lt;/strong> de &lt;strong>Google&lt;/strong>, totalmente desde el navegador sin la necesidad de instalar absolutamente nada en él.&lt;/p>
+&lt;p>El &lt;strong>Proyecto IDX&lt;/strong>, según &lt;strong>Google&lt;/strong> es:&lt;/p>
+&lt;blockquote>
+&lt;p>Project IDX es un espacio de trabajo asistido por IA para el desarrollo de aplicaciones multiplataforma y de pila completa en la nube.
+Con soporte para una amplia gama de marcos, lenguajes y servicios, además de integraciones con sus productos favoritos de Google, IDX optimiza su flujo de trabajo de desarrollo para que pueda crear y enviar aplicaciones entre plataformas con velocidad, facilidad y calidad.&lt;/p>
+&lt;/blockquote>
+&lt;p>Más info &lt;a href="https://idx.dev/">aquí&lt;/a>&lt;/p>
+&lt;p>En este artículo veremos cómo crear una app backend con .NET, bien sencilla a modo de demostración. Para ello, seguiremos los siguientes pasos:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>Ingresamos al IDE (web) &lt;a href="https://idx.google.com/?pli=1">aquí&lt;/a>. Se necesita iniciar sesión con una cuenta &lt;strong>Google&lt;/strong>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Buscamos más plantillas (la idea es encontrar a .NET):
+&lt;img src="https://i.ibb.co/ZWH4KVc/idx-1.png">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>En la sección &lt;strong>Backend&lt;/strong>, buscamos a &lt;strong>.NET&lt;/strong> y la seleccionamos:
+&lt;img src="https://i.ibb.co/w0WTPFy/idx-2.png">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Colocamos un nombre descriptivo, seleccionamos el ambiente ideal y creamos el proyecto:
+&lt;img src="https://i.ibb.co/WcJ8hx2/idx-3.png">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Nos mostrará el indicador de creación del proyecto:
+&lt;img src="https://i.ibb.co/Stb8CYR/idx-4.png">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Nos abre el IDX (hasta ahora vi que es un Visual Studio Code en la nube, tal como GitHub Codespace) y miramos el código de ejemplo:
+&lt;img src="https://i.ibb.co/zQjNKYp/idx-5.png">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Procedemos a ejecutar al aplicación en cuestión:
+&lt;img src="https://i.ibb.co/r6CNSTQ/idx-6.png">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Nos ofrece opciones para abrir la web:
+&lt;img src="https://i.ibb.co/yFQkkGD/idx-7.png">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>En una nueva pestaña, nos muestra la web App.
+&lt;img src="https://i.ibb.co/ngHNgCv/idx-8.png">&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;p>Algo que noté es que la plantilla figura en &lt;strong>Backend&lt;/strong>, pero tranquilamente podemos crear una aplicación Full Stack con .NET de base para cubrir nuestras necesidades.&lt;/p>
+&lt;p>Al momento de escribir este artículo noto que &lt;strong>Proyecto IDX&lt;/strong> = &lt;strong>GitHub Codespace&lt;/strong>. La base es Visual Studio Code.&lt;/p>
+&lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Incrustar página web externa en Power Apps</title><link>https://cmas.dev/posts/2023-09-20-embed-external-page-in-power-apps/</link><pubDate>Wed, 20 Sep 2023 00:00:00 -0400</pubDate><author>biz@cmas.dev (Christian Amado)</author><guid>https://cmas.dev/posts/2023-09-20-embed-external-page-in-power-apps/</guid><description>&lt;p>En este artículo veremos cómo incrustar oáginas web externas en &lt;strong>Microsoft Power Apps&lt;/strong> como si incluyeramos un IFrame dentro de nuestra App.&lt;/p>
 &lt;p>Un cliente me ha solicitado hace poco que le incluya un sitio web dentro de su aplicación &lt;strong>Power Apps&lt;/strong> y no sabía cómo hacerlos, de hecho tenía entendido que no se podía hacerlo.&lt;/p>
 &lt;p>Pero he encontrado una forma y el cliente quedó contento.&lt;/p>
 &lt;h1 id="windows-y-powershell">Windows y PowerShell&lt;/h1>
