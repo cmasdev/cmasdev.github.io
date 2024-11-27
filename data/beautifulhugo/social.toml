@@ -13,7 +13,7 @@ icon = "fab fa-github"
 [[social_icons]]
 id = "bluesky"
 url = "https://bsky.app/profile/%s"
-title = "BlueSky"
+title = "Bluesky"
 icon = "fab fa-bluesky"
 
 [[social_icons]]
