@@ -11,7 +11,7 @@ title = "GitHub"
 icon = "fab fa-github"
 
 [[social_icons]]
-id = "twitter"
+id = "bluesky"
 url = "https://bsky.app/profile/%s"
 title = "BlueSky"
 icon = "fab fa-bluesky"

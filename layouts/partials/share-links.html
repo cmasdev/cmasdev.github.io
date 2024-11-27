@@ -11,11 +11,15 @@
       </li>
   
       <!-- Bluesky -->
+      {{ if $bluesky }}
+      {{ $author := printf "%s" " " | printf "%s%s" site.Params.bluesky | printf "%s%s" " by " }}
+      {{ $text := printf "%s" $url | printf "%s%s" $author | printf "%s%s" $text }}
       <li>
-        <a href="//bsky.app/intent/compose?text=I%27m%20reading%20through%20the%20Bluesky%20API%20docs%21%20%F0%9F%A6%8B%0Ahttps%3A//docs.bsky.app" target="_blank" title="Share on Mastodon">
+        <a href="//bsky.app/intent/compose?text={{ $text | urlquery }}" target="_blank" title="Share on BlueSky">
           <i class="fab fa-bluesky"></i>
         </a>
       </li>
+      {{ end }}
   
       <!-- Mastodon -->
       <li>
