@@ -11,10 +11,8 @@
       </li>
   
       <!-- Bluesky -->
-      {{ $author := printf "%s" " " | printf "%s%s" site.Params.bluesky | printf "%s%s" " by " }}
-      {{ $text := printf "%s" $url | printf "%s%s" $author | printf "%s%s" $text }}
       <li>
-        <a href="//bsky.app/intent/compose?text={{ $text | urlquery }}" target="_blank" title="Share on Bluesky">
+        <a href="//bsky.app/intent/compose?text={{ .Title }}&amp;via={{ .Site.Params.Author.bluesky }}" target="_blank" title="Share on Bluesky">
           <i class="fab fa-bluesky"></i>
         </a>
       </li>
