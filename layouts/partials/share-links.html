@@ -5,7 +5,7 @@
     <ul class="share">
       <!-- Twitter -->
       <li>
-        <a href="//x.com/share?url={{ .Permalink }}&amp;text={{ .Title }}&amp;via={{ .Site.Author.twitter }}" target="_blank" title="Share on X">
+        <a href="//x.com/share?url={{ .Permalink }}&amp;text={{ .Title }}&amp;via={{ .Site.Params.Author.twitter }}" target="_blank" title="Share on X">
           <i class="fab fa-x-twitter"></i>
         </a>
       </li>
@@ -19,7 +19,7 @@
   
       <!-- Mastodon -->
       <li>
-        <a href="//mastodon.social/share?url={{ .Permalink }}&amp;text={{ .Title }}&amp;via={{ .Site.Author.mastodon }}" target="_blank" title="Share on Mastodon">
+        <a href="//mastodon.social/share?url={{ .Permalink }}&amp;text={{ .Title }}&amp;via={{ .Site.Params.Author.mastodon }}" target="_blank" title="Share on Mastodon">
           <i class="fab fa-mastodon"></i>
         </a>
       </li>
