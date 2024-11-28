@@ -45,7 +45,279 @@ Con soporte para una amplia gama de marcos, lenguajes y servicios, además de in
 &lt;/ol>
 &lt;p>Algo que noté es que la plantilla figura en &lt;strong>Backend&lt;/strong>, pero tranquilamente podemos crear una aplicación Full Stack con .NET de base para cubrir nuestras necesidades.&lt;/p>
 &lt;p>Al momento de escribir este artículo noto que &lt;strong>Proyecto IDX&lt;/strong> = &lt;strong>GitHub Codespace&lt;/strong>. La base es Visual Studio Code.&lt;/p>
-&lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Introducción a Blazor: Cambiando el paradigma del desarrollo web</title><link>https://cmas.dev/posts/2024-04-03-intro-blazor/</link><pubDate>Wed, 03 Apr 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-04-03-intro-blazor/</guid><description>&lt;p>El framework de Microsoft, está transformando el desarrollo web al permitir crear aplicaciones interactivas con C# y .NET, eliminando la necesidad de JavaScript. Con las mejoras de .NET 8, ofrece mayor rendimiento y flexibilidad, facilitando la creación de aplicaciones tanto en el cliente como en el servidor. Este artículo explora cómo Blazor redefine el desarrollo web y muestra cómo empezar a usarlo.&lt;/p>
+&lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Despliegue de aplicaciones Blazor en Azure App Services</title><link>https://cmas.dev/posts/2024-04-17-deploy-blazor-apps-azure/</link><pubDate>Wed, 17 Apr 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-04-17-deploy-blazor-apps-azure/</guid><description>&lt;p>El despliegue de aplicaciones Blazor en Azure App Services ofrece una forma rápida y eficiente de llevar tus proyectos al entorno de producción. Azure proporciona escalabilidad, seguridad y opciones flexibles para automatizar el flujo de trabajo de despliegue. En este artículo, exploramos tres métodos clave: usando Visual Studio, la CLI de Azure, y GitHub Actions, con pasos prácticos y ejemplos detallados. Con las mejoras de .NET 8, las aplicaciones Blazor ahora son más rápidas y optimizadas para la nube, lo que facilita la entrega de soluciones web escalables y modernas.&lt;/p>
+&lt;h2 id="introducción">Introducción&lt;/h2>
+&lt;p>Desplegar aplicaciones Blazor en &lt;strong>Azure App Services&lt;/strong> es una solución sencilla y eficiente para llevar tus aplicaciones web al entorno de producción. Azure proporciona escalabilidad, seguridad y herramientas integradas para un despliegue rápido. En este artículo, exploraremos cómo configurar y desplegar una aplicación Blazor, incluyendo pasos prácticos y ejemplos detallados. Con &lt;strong>.NET 8&lt;/strong>, el rendimiento y la optimización de aplicaciones Blazor han mejorado significativamente, facilitando el despliegue en la nube.&lt;/p>
+&lt;hr>
+&lt;h2 id="prerrequisitos">Prerrequisitos&lt;/h2>
+&lt;p>Antes de comenzar, asegúrate de contar con lo siguiente:&lt;/p>
+&lt;ol>
+&lt;li>&lt;strong>.NET SDK 8&lt;/strong> instalado en tu máquina.&lt;/li>
+&lt;li>Una cuenta de &lt;strong>Azure&lt;/strong>.&lt;/li>
+&lt;li>Azure CLI instalada y configurada.&lt;/li>
+&lt;li>Una aplicación Blazor lista para ser desplegada.&lt;/li>
+&lt;/ol>
+&lt;hr>
+&lt;h2 id="paso-1-crear-una-aplicación-blazor">Paso 1: Crear una aplicación Blazor&lt;/h2>
+&lt;p>Primero, crea una aplicación Blazor WebAssembly básica si no tienes una ya:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">dotnet new blazorwasm -o BlazorApp
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">cd&lt;/span> BlazorApp
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">dotnet build
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Ejecuta el proyecto para verificar que funciona correctamente:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">dotnet run
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Accede a &lt;code>http://localhost:5000&lt;/code> para comprobar que la aplicación se ejecuta correctamente.&lt;/p>
+&lt;hr>
+&lt;h2 id="paso-2-configurar-azure-app-service">Paso 2: Configurar Azure App Service&lt;/h2>
+&lt;h3 id="21-acceder-al-portal-de-azure">&lt;strong>2.1 Acceder al portal de Azure&lt;/strong>&lt;/h3>
+&lt;ol>
+&lt;li>Ve al &lt;a href="https://portal.azure.com">Portal de Azure&lt;/a> e inicia sesión con tu cuenta.&lt;/li>
+&lt;li>En la barra de búsqueda superior, escribe &amp;ldquo;App Services&amp;rdquo; y selecciona la opción &lt;strong>App Services&lt;/strong>.&lt;/li>
+&lt;/ol>
+&lt;h3 id="22-crear-un-nuevo-app-service">&lt;strong>2.2 Crear un nuevo App Service&lt;/strong>&lt;/h3>
+&lt;ol>
+&lt;li>
+&lt;p>Haz clic en el botón &lt;strong>Crear&lt;/strong> en la parte superior.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Aparecerá un formulario de configuración donde debes proporcionar la siguiente información:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>Suscripción&lt;/strong>: Selecciona tu suscripción activa.&lt;/li>
+&lt;li>&lt;strong>Grupo de recursos&lt;/strong>: Crea uno nuevo o elige un grupo existente.&lt;/li>
+&lt;li>&lt;strong>Nombre de la aplicación&lt;/strong>: Introduce un nombre único, por ejemplo, &lt;code>blazor-app-deploy&lt;/code>.&lt;/li>
+&lt;li>&lt;strong>Publicación&lt;/strong>: Selecciona &lt;strong>Código&lt;/strong>.&lt;/li>
+&lt;li>&lt;strong>Pila de ejecución&lt;/strong>: Elige &lt;strong>.NET 8&lt;/strong>.&lt;/li>
+&lt;li>&lt;strong>Sistema operativo&lt;/strong>: Selecciona &lt;strong>Windows&lt;/strong> o &lt;strong>Linux&lt;/strong> según tu preferencia.&lt;/li>
+&lt;li>&lt;strong>Plan de App Service&lt;/strong>: Crea uno nuevo o selecciona un plan existente.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>Haz clic en &lt;strong>Revisar + Crear&lt;/strong> y luego en &lt;strong>Crear&lt;/strong> para iniciar la implementación del App Service.&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h3 id="23-validar-la-creación-del-app-service">&lt;strong>2.3 Validar la creación del App Service&lt;/strong>&lt;/h3>
+&lt;ol>
+&lt;li>Una vez creada, verás un mensaje de confirmación en la parte superior del portal.&lt;/li>
+&lt;li>Haz clic en &lt;strong>Ir al recurso&lt;/strong> para acceder al panel del App Service.&lt;/li>
+&lt;/ol>
+&lt;h3 id="24-configurar-las-opciones-del-app-service">&lt;strong>2.4 Configurar las opciones del App Service&lt;/strong>&lt;/h3>
+&lt;ol>
+&lt;li>En el panel del App Service, selecciona &lt;strong>Configuración&lt;/strong> en el menú lateral.&lt;/li>
+&lt;li>Verifica que la versión de .NET sea la correcta (&lt;strong>.NET 8&lt;/strong>).&lt;/li>
+&lt;li>Configura las variables de entorno necesarias para tu aplicación (si aplica) en la pestaña &lt;strong>Configuración de aplicaciones&lt;/strong>.&lt;/li>
+&lt;/ol>
+&lt;h3 id="25-obtener-la-url-del-app-service">&lt;strong>2.5 Obtener la URL del App Service&lt;/strong>&lt;/h3>
+&lt;ol>
+&lt;li>En el panel principal del App Service, encuentra el enlace de &lt;strong>URL predeterminada&lt;/strong>.&lt;/li>
+&lt;li>Esta será la dirección donde se alojará tu aplicación una vez desplegada.&lt;/li>
+&lt;/ol>
+&lt;hr>
+&lt;h2 id="paso-3-publicar-la-aplicación-desde-visual-studio">Paso 3: Publicar la aplicación desde Visual Studio&lt;/h2>
+&lt;ol>
+&lt;li>Abre tu proyecto Blazor en &lt;strong>Visual Studio&lt;/strong>.&lt;/li>
+&lt;li>Haz clic derecho en el proyecto y selecciona &lt;strong>Publicar&lt;/strong>.&lt;/li>
+&lt;li>Selecciona &lt;strong>App Service (Windows)&lt;/strong> o &lt;strong>App Service (Linux)&lt;/strong> según tu configuración.&lt;/li>
+&lt;li>Inicia sesión en tu cuenta de Azure.&lt;/li>
+&lt;li>Selecciona el App Service creado previamente.&lt;/li>
+&lt;li>Haz clic en &lt;strong>Publicar&lt;/strong> y espera a que finalice el proceso.&lt;/li>
+&lt;/ol>
+&lt;hr>
+&lt;h2 id="paso-4-usar-azure-cli-para-el-despliegue">Paso 4: Usar Azure CLI para el despliegue&lt;/h2>
+&lt;p>Si prefieres usar la CLI, sigue estos pasos:&lt;/p>
+&lt;ol>
+&lt;li>Publica la aplicación localmente:&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">dotnet publish -c Release
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="2">
+&lt;li>Crea un recurso de App Service en Azure si aún no lo has hecho:&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">az webapp create --name blazor-app-deploy --resource-group &amp;lt;tu-grupo&amp;gt; --plan &amp;lt;tu-plan&amp;gt; --runtime &lt;span class="s2">&amp;#34;DOTNET-8.0&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="3">
+&lt;li>Despliega la aplicación:&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">az webapp deploy --resource-group &amp;lt;tu-grupo&amp;gt; --name blazor-app-deploy --src-path ./bin/Release/net8.0/publish
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="4">
+&lt;li>Accede a la URL proporcionada por Azure para ver tu aplicación.&lt;/li>
+&lt;/ol>
+&lt;hr>
+&lt;h2 id="paso-5-configurar-cicd-con-github-actions">Paso 5: Configurar CI/CD con GitHub Actions&lt;/h2>
+&lt;p>Automatiza el despliegue utilizando GitHub Actions:&lt;/p>
+&lt;ol>
+&lt;li>Crea un archivo llamado &lt;code>.github/workflows/azure-webapp.yml&lt;/code> en tu repositorio.&lt;/li>
+&lt;li>Añade la siguiente configuración:&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-yaml" data-lang="yaml">&lt;span class="line">&lt;span class="cl">&lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">Deploy Blazor App to Azure&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="nt">on&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">push&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">branches&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>- &lt;span class="l">main&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="nt">jobs&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">build-and-deploy&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">runs-on&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">ubuntu-latest&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">steps&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>- &lt;span class="nt">uses&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">actions/checkout@v3&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>- &lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">Setup .NET&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">uses&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">actions/setup-dotnet@v3&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">with&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">dotnet-version&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;8.0&amp;#39;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>- &lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">Build Project&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">run&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">dotnet build --configuration Release&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>- &lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">Deploy to Azure&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">uses&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">azure/webapps-deploy@v2&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">with&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">app-name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">blazor-app-deploy&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">slot-name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">production&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">publish-profile&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="3">
+&lt;li>Configura el secreto &lt;code>AZURE_WEBAPP_PUBLISH_PROFILE&lt;/code> en los ajustes de tu repositorio.&lt;/li>
+&lt;/ol>
+&lt;hr>
+&lt;h2 id="conclusión">Conclusión&lt;/h2>
+&lt;p>Desplegar aplicaciones Blazor en Azure App Services es un proceso flexible y eficiente. Ya sea utilizando Visual Studio, la CLI de Azure o GitHub Actions, Azure ofrece las herramientas necesarias para simplificar el flujo de trabajo de desarrollo y despliegue. Con las mejoras de &lt;strong>.NET 8&lt;/strong>, tus aplicaciones serán más rápidas y escalables que nunca. ¡Empieza hoy mismo a aprovechar el poder de Blazor en la nube!&lt;/p></description></item><item><title>Creación de componentes reutilizables en Blazor para aplicaciones escalables</title><link>https://cmas.dev/posts/2024-04-10-blazor-reusable-components/</link><pubDate>Wed, 10 Apr 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-04-10-blazor-reusable-components/</guid><description>&lt;p>Los componentes reutilizables son esenciales para construir aplicaciones Blazor escalables y mantenibles. Este artículo explora cómo aprovechar las capacidades de .NET 8 para crear componentes modulares que mejoren la eficiencia y la reutilización en proyectos de cualquier tamaño. Además, aprenderás las mejores prácticas y técnicas clave para optimizar la construcción de interfaces dinámicas con Blazor.&lt;/p>
+&lt;h2 id="introducción">Introducción&lt;/h2>
+&lt;p>Blazor permite a los desarrolladores de .NET construir aplicaciones web interactivas con componentes reutilizables, un enfoque que no solo mejora la eficiencia del desarrollo, sino que también facilita la escalabilidad de las aplicaciones. Con &lt;strong>.NET 8&lt;/strong>, Blazor incluye mejoras significativas en el rendimiento y capacidades avanzadas para la creación de componentes, lo que lo convierte en una herramienta ideal para construir aplicaciones mantenibles y modulares.&lt;/p>
+&lt;p>En este artículo, exploraremos cómo crear componentes reutilizables en Blazor y cómo organizarlos de manera eficiente para aplicaciones escalables.&lt;/p>
+&lt;hr>
+&lt;h2 id="qué-son-los-componentes-en-blazor">¿Qué son los componentes en Blazor?&lt;/h2>
+&lt;p>Un componente en Blazor es una unidad modular de interfaz de usuario (UI) que encapsula lógica, datos y presentación. Los componentes son la base de cualquier aplicación Blazor y permiten construir UI dinámicas de forma sencilla.&lt;/p>
+&lt;p>Un componente puede incluir:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>HTML y Razor&lt;/strong>: Para definir la estructura y el diseño.&lt;/li>
+&lt;li>&lt;strong>C#&lt;/strong>: Para la lógica y el manejo de eventos.&lt;/li>
+&lt;li>&lt;strong>CSS&lt;/strong>: Para el estilo.&lt;/li>
+&lt;/ul>
+&lt;p>Estos componentes son reutilizables, lo que significa que pueden ser compartidos en diferentes partes de la aplicación o incluso entre diferentes proyectos.&lt;/p>
+&lt;hr>
+&lt;h2 id="beneficios-de-los-componentes-reutilizables">Beneficios de los componentes reutilizables&lt;/h2>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Eficiencia en el desarrollo&lt;/strong>:&lt;br>
+Reduce la duplicación de código al centralizar funcionalidades comunes en un único componente.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Facilidad de mantenimiento&lt;/strong>:&lt;br>
+Los cambios realizados en un componente se reflejan automáticamente donde sea utilizado.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Escalabilidad&lt;/strong>:&lt;br>
+Una arquitectura basada en componentes facilita la expansión de la aplicación.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Reutilización entre proyectos&lt;/strong>:&lt;br>
+Los componentes pueden empaquetarse como bibliotecas para su uso en múltiples aplicaciones.&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;hr>
+&lt;h2 id="creación-de-un-componente-reutilizable-ejemplo-práctico">Creación de un componente reutilizable: Ejemplo práctico&lt;/h2>
+&lt;h3 id="escenario-botón-genérico-reutilizable">&lt;strong>Escenario: Botón genérico reutilizable&lt;/strong>&lt;/h3>
+&lt;p>Vamos a crear un botón genérico que se pueda reutilizar en diferentes partes de la aplicación. Este botón incluirá propiedades configurables para el texto, el estilo y la acción que ejecuta al ser clicado.&lt;/p>
+&lt;h3 id="paso-1-crear-el-componente">Paso 1: Crear el componente&lt;/h3>
+&lt;p>Crea un archivo llamado &lt;code>ReusableButton.razor&lt;/code> en tu proyecto Blazor:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">&amp;lt;button class=&amp;#34;@ButtonClass&amp;#34; @onclick=&amp;#34;HandleClick&amp;#34;&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> @ButtonText
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;/button&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">@code {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [Parameter]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> public string ButtonText { get; set; } = &amp;#34;Click me&amp;#34;;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [Parameter]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> public string ButtonClass { get; set; } = &amp;#34;btn btn-primary&amp;#34;;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [Parameter]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> public EventCallback OnClick { get; set; }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> private async Task HandleClick()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> if (OnClick.HasDelegate)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> await OnClick.InvokeAsync();
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="paso-2-explicación-del-código">Paso 2: Explicación del código&lt;/h3>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;strong>[Parameter]&lt;/strong>:&lt;br>
+Los parámetros permiten que las propiedades del componente sean configurables desde su punto de uso.&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>ButtonText&lt;/code>: El texto que aparecerá en el botón.&lt;/li>
+&lt;li>&lt;code>ButtonClass&lt;/code>: Las clases CSS para personalizar el estilo.&lt;/li>
+&lt;li>&lt;code>OnClick&lt;/code>: Un delegado para manejar la acción al hacer clic en el botón.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>EventCallback&lt;/strong>:&lt;br>
+Es la forma recomendada en Blazor para manejar eventos como clics de botón.&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;h3 id="paso-3-uso-del-componente">Paso 3: Uso del componente&lt;/h3>
+&lt;p>Ahora puedes utilizar este componente en cualquier parte de tu aplicación:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">&amp;lt;ReusableButton
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ButtonText=&amp;#34;Guardar&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ButtonClass=&amp;#34;btn btn-success&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> OnClick=&amp;#34;GuardarCambios&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;ReusableButton
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ButtonText=&amp;#34;Eliminar&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ButtonClass=&amp;#34;btn btn-danger&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> OnClick=&amp;#34;EliminarRegistro&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">@code {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> private void GuardarCambios()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Console.WriteLine(&amp;#34;Cambios guardados&amp;#34;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> private void EliminarRegistro()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Console.WriteLine(&amp;#34;Registro eliminado&amp;#34;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="resultado">Resultado&lt;/h3>
+&lt;p>Los dos botones tendrán textos y estilos diferentes, pero comparten la misma lógica de interacción encapsulada en el componente &lt;code>ReusableButton&lt;/code>.&lt;/p>
+&lt;hr>
+&lt;h2 id="buenas-prácticas-para-componentes-reutilizables">Buenas prácticas para componentes reutilizables&lt;/h2>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Modularidad&lt;/strong>:&lt;br>
+Divide los componentes en unidades pequeñas y específicas que puedan ser fácilmente combinadas.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Evita la lógica excesiva&lt;/strong>:&lt;br>
+Mantén los componentes centrados en la UI y delega la lógica compleja a servicios o clases separadas.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Uso de bibliotecas compartidas&lt;/strong>:&lt;br>
+Empaqueta componentes comunes en una &lt;strong>librería Razor Class Library (RCL)&lt;/strong> para su reutilización entre proyectos.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Documentación clara&lt;/strong>:&lt;br>
+Proporciona ejemplos de uso y documentación para que otros desarrolladores puedan integrarlos fácilmente.&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;hr>
+&lt;h2 id="blazor-en-net-8-mejoras-para-componentes">Blazor en .NET 8: Mejoras para componentes&lt;/h2>
+&lt;p>Con &lt;strong>.NET 8&lt;/strong>, Blazor introduce mejoras clave para el desarrollo basado en componentes:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;strong>Renderización condicional optimizada&lt;/strong>:&lt;br>
+Reduce el impacto de cambios frecuentes en la UI.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Soporte para componentes híbridos (Blazor United)&lt;/strong>:&lt;br>
+Combina los beneficios de Blazor Server y WebAssembly, facilitando la creación de componentes reutilizables en cualquier modelo.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Mejoras en la interoperabilidad con JavaScript&lt;/strong>:&lt;br>
+Permite integrar bibliotecas externas en componentes Blazor de manera más eficiente.&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="conclusión">Conclusión&lt;/h2>
+&lt;p>Los componentes reutilizables son fundamentales para construir aplicaciones Blazor escalables y mantenibles. Al encapsular la lógica y la presentación en módulos independientes, puedes reducir la duplicación de código, mejorar la eficiencia y facilitar la expansión de tu aplicación.&lt;/p>
+&lt;p>Con las mejoras introducidas en &lt;strong>.NET 8&lt;/strong>, crear componentes en Blazor es más poderoso que nunca. Ya sea que estés desarrollando una aplicación pequeña o un sistema complejo, el enfoque modular de Blazor te ayudará a mantener tu proyecto organizado y fácil de escalar.&lt;/p></description></item><item><title>Introducción a Blazor: Cambiando el paradigma del desarrollo web</title><link>https://cmas.dev/posts/2024-04-03-intro-blazor/</link><pubDate>Wed, 03 Apr 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-04-03-intro-blazor/</guid><description>&lt;p>El framework de Microsoft, está transformando el desarrollo web al permitir crear aplicaciones interactivas con C# y .NET, eliminando la necesidad de JavaScript. Con las mejoras de .NET 8, ofrece mayor rendimiento y flexibilidad, facilitando la creación de aplicaciones tanto en el cliente como en el servidor. Este artículo explora cómo Blazor redefine el desarrollo web y muestra cómo empezar a usarlo.&lt;/p>
 &lt;h2 id="qué-es-blazor">¿Qué es Blazor?&lt;/h2>
 &lt;p>Blazor es un framework de desarrollo web de &lt;strong>Microsoft&lt;/strong> que permite construir aplicaciones web interactivas utilizando &lt;strong>C# y .NET&lt;/strong> en lugar de depender exclusivamente de &lt;strong>JavaScript&lt;/strong>. Lanzado inicialmente como una alternativa a frameworks como Angular o React, Blazor ha evolucionado significativamente, y con la llegada de &lt;strong>.NET 8&lt;/strong>, sus capacidades y rendimiento han alcanzado nuevos niveles.&lt;/p>
 &lt;h3 id="por-qué-blazor-es-revolucionario">¿Por qué Blazor es revolucionario?&lt;/h3>

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>GitHub Actions on Christian Amado's Blog</title><link>https://cmas.dev/tags/github-actions/</link><description>Recent content in GitHub Actions on Christian Amado's Blog</description><generator>Hugo -- gohugo.io</generator><language>es</language><lastBuildDate>Wed, 17 Apr 2024 00:00:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/tags/github-actions/index.xml" rel="self" type="application/rss+xml"/><item><title>Despliegue de aplicaciones Blazor en Azure App Services</title><link>https://cmas.dev/posts/2024-04-17-deploy-blazor-apps-azure/</link><pubDate>Wed, 17 Apr 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-04-17-deploy-blazor-apps-azure/</guid><description>&lt;p>El despliegue de aplicaciones Blazor en Azure App Services ofrece una forma rápida y eficiente de llevar tus proyectos al entorno de producción. Azure proporciona escalabilidad, seguridad y opciones flexibles para automatizar el flujo de trabajo de despliegue. En este artículo, exploramos tres métodos clave: usando Visual Studio, la CLI de Azure, y GitHub Actions, con pasos prácticos y ejemplos detallados. Con las mejoras de .NET 8, las aplicaciones Blazor ahora son más rápidas y optimizadas para la nube, lo que facilita la entrega de soluciones web escalables y modernas.&lt;/p>
+&lt;h2 id="introducción">Introducción&lt;/h2>
+&lt;p>Desplegar aplicaciones Blazor en &lt;strong>Azure App Services&lt;/strong> es una solución sencilla y eficiente para llevar tus aplicaciones web al entorno de producción. Azure proporciona escalabilidad, seguridad y herramientas integradas para un despliegue rápido. En este artículo, exploraremos cómo configurar y desplegar una aplicación Blazor, incluyendo pasos prácticos y ejemplos detallados. Con &lt;strong>.NET 8&lt;/strong>, el rendimiento y la optimización de aplicaciones Blazor han mejorado significativamente, facilitando el despliegue en la nube.&lt;/p>
+&lt;hr>
+&lt;h2 id="prerrequisitos">Prerrequisitos&lt;/h2>
+&lt;p>Antes de comenzar, asegúrate de contar con lo siguiente:&lt;/p>
+&lt;ol>
+&lt;li>&lt;strong>.NET SDK 8&lt;/strong> instalado en tu máquina.&lt;/li>
+&lt;li>Una cuenta de &lt;strong>Azure&lt;/strong>.&lt;/li>
+&lt;li>Azure CLI instalada y configurada.&lt;/li>
+&lt;li>Una aplicación Blazor lista para ser desplegada.&lt;/li>
+&lt;/ol>
+&lt;hr>
+&lt;h2 id="paso-1-crear-una-aplicación-blazor">Paso 1: Crear una aplicación Blazor&lt;/h2>
+&lt;p>Primero, crea una aplicación Blazor WebAssembly básica si no tienes una ya:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">dotnet new blazorwasm -o BlazorApp
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">cd&lt;/span> BlazorApp
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">dotnet build
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Ejecuta el proyecto para verificar que funciona correctamente:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">dotnet run
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Accede a &lt;code>http://localhost:5000&lt;/code> para comprobar que la aplicación se ejecuta correctamente.&lt;/p>
+&lt;hr>
+&lt;h2 id="paso-2-configurar-azure-app-service">Paso 2: Configurar Azure App Service&lt;/h2>
+&lt;h3 id="21-acceder-al-portal-de-azure">&lt;strong>2.1 Acceder al portal de Azure&lt;/strong>&lt;/h3>
+&lt;ol>
+&lt;li>Ve al &lt;a href="https://portal.azure.com">Portal de Azure&lt;/a> e inicia sesión con tu cuenta.&lt;/li>
+&lt;li>En la barra de búsqueda superior, escribe &amp;ldquo;App Services&amp;rdquo; y selecciona la opción &lt;strong>App Services&lt;/strong>.&lt;/li>
+&lt;/ol>
+&lt;h3 id="22-crear-un-nuevo-app-service">&lt;strong>2.2 Crear un nuevo App Service&lt;/strong>&lt;/h3>
+&lt;ol>
+&lt;li>
+&lt;p>Haz clic en el botón &lt;strong>Crear&lt;/strong> en la parte superior.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Aparecerá un formulario de configuración donde debes proporcionar la siguiente información:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>Suscripción&lt;/strong>: Selecciona tu suscripción activa.&lt;/li>
+&lt;li>&lt;strong>Grupo de recursos&lt;/strong>: Crea uno nuevo o elige un grupo existente.&lt;/li>
+&lt;li>&lt;strong>Nombre de la aplicación&lt;/strong>: Introduce un nombre único, por ejemplo, &lt;code>blazor-app-deploy&lt;/code>.&lt;/li>
+&lt;li>&lt;strong>Publicación&lt;/strong>: Selecciona &lt;strong>Código&lt;/strong>.&lt;/li>
+&lt;li>&lt;strong>Pila de ejecución&lt;/strong>: Elige &lt;strong>.NET 8&lt;/strong>.&lt;/li>
+&lt;li>&lt;strong>Sistema operativo&lt;/strong>: Selecciona &lt;strong>Windows&lt;/strong> o &lt;strong>Linux&lt;/strong> según tu preferencia.&lt;/li>
+&lt;li>&lt;strong>Plan de App Service&lt;/strong>: Crea uno nuevo o selecciona un plan existente.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>Haz clic en &lt;strong>Revisar + Crear&lt;/strong> y luego en &lt;strong>Crear&lt;/strong> para iniciar la implementación del App Service.&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h3 id="23-validar-la-creación-del-app-service">&lt;strong>2.3 Validar la creación del App Service&lt;/strong>&lt;/h3>
+&lt;ol>
+&lt;li>Una vez creada, verás un mensaje de confirmación en la parte superior del portal.&lt;/li>
+&lt;li>Haz clic en &lt;strong>Ir al recurso&lt;/strong> para acceder al panel del App Service.&lt;/li>
+&lt;/ol>
+&lt;h3 id="24-configurar-las-opciones-del-app-service">&lt;strong>2.4 Configurar las opciones del App Service&lt;/strong>&lt;/h3>
+&lt;ol>
+&lt;li>En el panel del App Service, selecciona &lt;strong>Configuración&lt;/strong> en el menú lateral.&lt;/li>
+&lt;li>Verifica que la versión de .NET sea la correcta (&lt;strong>.NET 8&lt;/strong>).&lt;/li>
+&lt;li>Configura las variables de entorno necesarias para tu aplicación (si aplica) en la pestaña &lt;strong>Configuración de aplicaciones&lt;/strong>.&lt;/li>
+&lt;/ol>
+&lt;h3 id="25-obtener-la-url-del-app-service">&lt;strong>2.5 Obtener la URL del App Service&lt;/strong>&lt;/h3>
+&lt;ol>
+&lt;li>En el panel principal del App Service, encuentra el enlace de &lt;strong>URL predeterminada&lt;/strong>.&lt;/li>
+&lt;li>Esta será la dirección donde se alojará tu aplicación una vez desplegada.&lt;/li>
+&lt;/ol>
+&lt;hr>
+&lt;h2 id="paso-3-publicar-la-aplicación-desde-visual-studio">Paso 3: Publicar la aplicación desde Visual Studio&lt;/h2>
+&lt;ol>
+&lt;li>Abre tu proyecto Blazor en &lt;strong>Visual Studio&lt;/strong>.&lt;/li>
+&lt;li>Haz clic derecho en el proyecto y selecciona &lt;strong>Publicar&lt;/strong>.&lt;/li>
+&lt;li>Selecciona &lt;strong>App Service (Windows)&lt;/strong> o &lt;strong>App Service (Linux)&lt;/strong> según tu configuración.&lt;/li>
+&lt;li>Inicia sesión en tu cuenta de Azure.&lt;/li>
+&lt;li>Selecciona el App Service creado previamente.&lt;/li>
+&lt;li>Haz clic en &lt;strong>Publicar&lt;/strong> y espera a que finalice el proceso.&lt;/li>
+&lt;/ol>
+&lt;hr>
+&lt;h2 id="paso-4-usar-azure-cli-para-el-despliegue">Paso 4: Usar Azure CLI para el despliegue&lt;/h2>
+&lt;p>Si prefieres usar la CLI, sigue estos pasos:&lt;/p>
+&lt;ol>
+&lt;li>Publica la aplicación localmente:&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">dotnet publish -c Release
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="2">
+&lt;li>Crea un recurso de App Service en Azure si aún no lo has hecho:&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">az webapp create --name blazor-app-deploy --resource-group &amp;lt;tu-grupo&amp;gt; --plan &amp;lt;tu-plan&amp;gt; --runtime &lt;span class="s2">&amp;#34;DOTNET-8.0&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="3">
+&lt;li>Despliega la aplicación:&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">az webapp deploy --resource-group &amp;lt;tu-grupo&amp;gt; --name blazor-app-deploy --src-path ./bin/Release/net8.0/publish
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="4">
+&lt;li>Accede a la URL proporcionada por Azure para ver tu aplicación.&lt;/li>
+&lt;/ol>
+&lt;hr>
+&lt;h2 id="paso-5-configurar-cicd-con-github-actions">Paso 5: Configurar CI/CD con GitHub Actions&lt;/h2>
+&lt;p>Automatiza el despliegue utilizando GitHub Actions:&lt;/p>
+&lt;ol>
+&lt;li>Crea un archivo llamado &lt;code>.github/workflows/azure-webapp.yml&lt;/code> en tu repositorio.&lt;/li>
+&lt;li>Añade la siguiente configuración:&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-yaml" data-lang="yaml">&lt;span class="line">&lt;span class="cl">&lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">Deploy Blazor App to Azure&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="nt">on&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">push&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">branches&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>- &lt;span class="l">main&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="nt">jobs&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">build-and-deploy&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">runs-on&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">ubuntu-latest&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">steps&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>- &lt;span class="nt">uses&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">actions/checkout@v3&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>- &lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">Setup .NET&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">uses&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">actions/setup-dotnet@v3&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">with&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">dotnet-version&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;8.0&amp;#39;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>- &lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">Build Project&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">run&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">dotnet build --configuration Release&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>- &lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">Deploy to Azure&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">uses&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">azure/webapps-deploy@v2&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">with&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">app-name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">blazor-app-deploy&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">slot-name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">production&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">publish-profile&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="3">
+&lt;li>Configura el secreto &lt;code>AZURE_WEBAPP_PUBLISH_PROFILE&lt;/code> en los ajustes de tu repositorio.&lt;/li>
+&lt;/ol>
+&lt;hr>
+&lt;h2 id="conclusión">Conclusión&lt;/h2>
+&lt;p>Desplegar aplicaciones Blazor en Azure App Services es un proceso flexible y eficiente. Ya sea utilizando Visual Studio, la CLI de Azure o GitHub Actions, Azure ofrece las herramientas necesarias para simplificar el flujo de trabajo de desarrollo y despliegue. Con las mejoras de &lt;strong>.NET 8&lt;/strong>, tus aplicaciones serán más rápidas y escalables que nunca. ¡Empieza hoy mismo a aprovechar el poder de Blazor en la nube!&lt;/p></description></item></channel></rss>

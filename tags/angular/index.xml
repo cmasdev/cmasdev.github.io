@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Angular on Christian Amado's Blog</title><link>https://cmas.dev/tags/angular/</link><description>Recent content in Angular on Christian Amado's Blog</description><generator>Hugo -- gohugo.io</generator><language>es</language><lastBuildDate>Tue, 23 Apr 2024 00:00:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/tags/angular/index.xml" rel="self" type="application/rss+xml"/><item><title>Introducción a Angular 17: Características clave y mejoras</title><link>https://cmas.dev/posts/2024-04-24-angular-17-characteristics/</link><pubDate>Tue, 23 Apr 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-04-24-angular-17-characteristics/</guid><description>&lt;p>Angular 17, la última versión del popular framework de desarrollo web, introduce mejoras significativas para desarrolladores y equipos técnicos. Con un enfoque en el rendimiento, herramientas optimizadas y simplificación de procesos, esta actualización trae nuevas características como las Signals API, mejoras en el manejo de estados y optimizaciones para el desarrollo y pruebas. En este artículo, exploramos las características clave de Angular 17, su impacto en el desarrollo de aplicaciones modernas y cómo empezar a usar estas innovaciones en tus proyectos. Descubre cómo esta versión refuerza la posición de Angular como un pilar en el ecosistema de desarrollo web.&lt;/p>
+&lt;h2 id="introducción">Introducción&lt;/h2>
+&lt;p>Angular es uno de los frameworks de desarrollo web más populares, y su última versión, &lt;strong>Angular 17&lt;/strong>, continúa evolucionando para satisfacer las demandas de los desarrolladores modernos. Con mejoras enfocadas en el rendimiento, herramientas simplificadas y nuevas funcionalidades, Angular 17 consolida su posición como una solución robusta para aplicaciones de todos los tamaños.&lt;/p>
+&lt;p>En este artículo, exploraremos las &lt;strong>características clave y mejoras&lt;/strong> de Angular 17, destacando cómo estas actualizaciones impactan en el flujo de trabajo de los desarrolladores y cómo puedes aprovecharlas para optimizar tus proyectos.&lt;/p>
+&lt;hr>
+&lt;h2 id="novedades-principales-en-angular-17">Novedades principales en Angular 17&lt;/h2>
+&lt;h3 id="1-signals-api-un-nuevo-enfoque-para-el-manejo-de-estados">1. &lt;strong>Signals API: Un nuevo enfoque para el manejo de estados&lt;/strong>&lt;/h3>
+&lt;p>La introducción de las &lt;strong>Signals API&lt;/strong> marca un cambio importante en Angular. Este sistema proporciona una forma más eficiente y reactiva de gestionar estados dentro de las aplicaciones, eliminando la necesidad de bibliotecas adicionales como NgRx en casos simples.&lt;/p>
+&lt;p>&lt;strong>Ejemplo básico de Signals API:&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-typescript" data-lang="typescript">&lt;span class="line">&lt;span class="cl">&lt;span class="kr">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">signal&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">computed&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">effect&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="kr">from&lt;/span> &lt;span class="s1">&amp;#39;@angular/core&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// Crear un signal para el estado
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">const&lt;/span> &lt;span class="nx">contador&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">signal&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// Computar un valor basado en el estado
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">const&lt;/span> &lt;span class="nx">doble&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">computed&lt;/span>&lt;span class="p">(()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="nx">contador&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="o">*&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// Efecto que reacciona a cambios en el estado
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="nx">effect&lt;/span>&lt;span class="p">(()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="sb">`El contador ahora es &lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nx">contador&lt;/span>&lt;span class="p">()&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="sb"> y el doble es &lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nx">doble&lt;/span>&lt;span class="p">()&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="sb">`&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// Actualizar el estado
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="nx">contador&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="kr">set&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">5&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="beneficios">Beneficios:&lt;/h3>
+&lt;ul>
+&lt;li>Mejor rendimiento al actualizar solo las partes necesarias de la UI.&lt;/li>
+&lt;li>Reducción en la complejidad del manejo de estados.&lt;/li>
+&lt;li>Compatibilidad nativa con el ecosistema Angular.&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h3 id="2-mejoras-en-la-compilación-y-el-rendimiento">2. &lt;strong>Mejoras en la compilación y el rendimiento&lt;/strong>&lt;/h3>
+&lt;p>Angular 17 introduce optimizaciones en el &lt;strong>motor de compilación&lt;/strong> (Ivy), reduciendo significativamente los tiempos de construcción y carga. Esto es especialmente útil en aplicaciones grandes con múltiples módulos.&lt;/p>
+&lt;h4 id="cambios-destacados">Cambios destacados:&lt;/h4>
+&lt;ul>
+&lt;li>&lt;strong>Incremental Builds&lt;/strong> más rápidos: Solo recompila los módulos afectados por los cambios.&lt;/li>
+&lt;li>Reducción en el tamaño de los bundles generados.&lt;/li>
+&lt;li>Mejoras en el árbol de dependencias para eliminar código no utilizado.&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h3 id="3-mejoras-en-angular-cli">3. &lt;strong>Mejoras en Angular CLI&lt;/strong>&lt;/h3>
+&lt;p>La &lt;strong>CLI de Angular&lt;/strong> en esta versión ha sido mejorada para ofrecer una experiencia más fluida. Algunas de las nuevas funcionalidades incluyen:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>Comandos simplificados&lt;/strong>:
+&lt;ul>
+&lt;li>&lt;code>ng update&lt;/code>: Detecta automáticamente dependencias obsoletas y las actualiza.&lt;/li>
+&lt;li>&lt;code>ng serve&lt;/code>: Más rápido con menos uso de recursos.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>Soporte para configuraciones avanzadas de Webpack&lt;/strong> sin necesidad de extender los archivos de configuración.&lt;/li>
+&lt;/ul>
+&lt;p>&lt;strong>Ejemplo: Uso de &lt;code>ng add&lt;/code> para integrar Signals API fácilmente:&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">ng add @angular/signals
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;hr>
+&lt;h3 id="4-mejor-experiencia-de-desarrollo">4. &lt;strong>Mejor experiencia de desarrollo&lt;/strong>&lt;/h3>
+&lt;p>Angular 17 introduce herramientas que hacen que el desarrollo sea más eficiente:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>Depuración mejorada con Angular DevTools&lt;/strong>: Compatible con las nuevas Signals API y el motor Ivy.&lt;/li>
+&lt;li>&lt;strong>Soporte para Tailwind CSS mejorado&lt;/strong>: Simplificación de la configuración inicial para estilos modernos.&lt;/li>
+&lt;li>&lt;strong>Documentación interactiva&lt;/strong>: Ejemplos más claros y herramientas para probar código en línea.&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h3 id="5-soporte-extendido-para-typescript-5">5. &lt;strong>Soporte extendido para TypeScript 5&lt;/strong>&lt;/h3>
+&lt;p>Angular 17 es completamente compatible con &lt;strong>TypeScript 5&lt;/strong>, lo que permite aprovechar características avanzadas como:&lt;/p>
+&lt;ul>
+&lt;li>Modificadores &lt;code>satisfies&lt;/code> para validaciones más estrictas.&lt;/li>
+&lt;li>Optimizaciones en la inferencia de tipos.&lt;/li>
+&lt;li>Mejoras en la interoperabilidad con bibliotecas externas.&lt;/li>
+&lt;/ul>
+&lt;p>&lt;strong>Ejemplo práctico:&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-typescript" data-lang="typescript">&lt;span class="line">&lt;span class="cl">&lt;span class="kr">type&lt;/span> &lt;span class="nx">Usuario&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">nombre&lt;/span>: &lt;span class="kt">string&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">edad&lt;/span>: &lt;span class="kt">number&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">const&lt;/span> &lt;span class="nx">usuario&lt;/span>: &lt;span class="kt">Usuario&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">nombre&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;Juan&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">edad&lt;/span>: &lt;span class="kt">30&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span> &lt;span class="nx">satisfies&lt;/span> &lt;span class="nx">Usuario&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;hr>
+&lt;h2 id="cómo-empezar-con-angular-17">¿Cómo empezar con Angular 17?&lt;/h2>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Actualizar tu proyecto existente&lt;/strong>:
+Usa el comando &lt;code>ng update&lt;/code> para migrar tu aplicación a Angular 17.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">ng update @angular/core@17 @angular/cli@17
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Crear un nuevo proyecto&lt;/strong>:
+Si deseas comenzar desde cero, ejecuta:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">ng new mi-proyecto-angular17
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Explora las Signals API&lt;/strong>:
+Asegúrate de instalar el paquete &lt;code>@angular/signals&lt;/code> y experimenta con la nueva forma de manejar estados.&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;hr>
+&lt;h2 id="conclusión">Conclusión&lt;/h2>
+&lt;p>Angular 17 trae un conjunto robusto de herramientas y mejoras que hacen que el desarrollo web sea más eficiente y escalable. Con características como las Signals API, optimizaciones en la compilación y soporte mejorado para TypeScript 5, esta versión está diseñada para facilitar tanto el desarrollo como el mantenimiento de aplicaciones modernas. Si aún no has probado Angular 17, ahora es el momento perfecto para actualizar y aprovechar estas innovaciones.&lt;/p>
+&lt;hr></description></item></channel></rss>
