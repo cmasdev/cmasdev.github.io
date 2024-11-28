@@ -45,7 +45,108 @@ Con soporte para una amplia gama de marcos, lenguajes y servicios, además de in
 &lt;/ol>
 &lt;p>Algo que noté es que la plantilla figura en &lt;strong>Backend&lt;/strong>, pero tranquilamente podemos crear una aplicación Full Stack con .NET de base para cubrir nuestras necesidades.&lt;/p>
 &lt;p>Al momento de escribir este artículo noto que &lt;strong>Proyecto IDX&lt;/strong> = &lt;strong>GitHub Codespace&lt;/strong>. La base es Visual Studio Code.&lt;/p>
-&lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Incrustar página web externa en Power Apps</title><link>https://cmas.dev/posts/2023-09-20-embed-external-page-in-power-apps/</link><pubDate>Wed, 20 Sep 2023 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2023-09-20-embed-external-page-in-power-apps/</guid><description>&lt;p>En este artículo veremos cómo incrustar oáginas web externas en &lt;strong>Microsoft Power Apps&lt;/strong> como si incluyeramos un IFrame dentro de nuestra App.&lt;/p>
+&lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Introducción a Blazor: Cambiando el paradigma del desarrollo web</title><link>https://cmas.dev/posts/2024-04-03-intro-blazor/</link><pubDate>Wed, 03 Apr 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-04-03-intro-blazor/</guid><description>&lt;p>El framework de Microsoft, está transformando el desarrollo web al permitir crear aplicaciones interactivas con C# y .NET, eliminando la necesidad de JavaScript. Con las mejoras de .NET 8, ofrece mayor rendimiento y flexibilidad, facilitando la creación de aplicaciones tanto en el cliente como en el servidor. Este artículo explora cómo Blazor redefine el desarrollo web y muestra cómo empezar a usarlo.&lt;/p>
+&lt;h2 id="qué-es-blazor">¿Qué es Blazor?&lt;/h2>
+&lt;p>Blazor es un framework de desarrollo web de &lt;strong>Microsoft&lt;/strong> que permite construir aplicaciones web interactivas utilizando &lt;strong>C# y .NET&lt;/strong> en lugar de depender exclusivamente de &lt;strong>JavaScript&lt;/strong>. Lanzado inicialmente como una alternativa a frameworks como Angular o React, Blazor ha evolucionado significativamente, y con la llegada de &lt;strong>.NET 8&lt;/strong>, sus capacidades y rendimiento han alcanzado nuevos niveles.&lt;/p>
+&lt;h3 id="por-qué-blazor-es-revolucionario">¿Por qué Blazor es revolucionario?&lt;/h3>
+&lt;p>Blazor introduce un cambio importante al permitir que los desarrolladores trabajen en aplicaciones web sin salir del ecosistema .NET. Esto reduce la necesidad de manejar múltiples lenguajes y frameworks en un solo proyecto. Además, Blazor está diseñado para cubrir diversos escenarios:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>Blazor Server:&lt;/strong> Renderiza componentes en el servidor y envía actualizaciones al cliente a través de SignalR.&lt;/li>
+&lt;li>&lt;strong>Blazor WebAssembly (WASM):&lt;/strong> Ejecuta la aplicación directamente en el navegador, utilizando WebAssembly para una experiencia completamente client-side.&lt;/li>
+&lt;li>&lt;strong>Blazor en .NET MAUI:&lt;/strong> Permite usar Blazor para construir aplicaciones de escritorio y móviles.&lt;/li>
+&lt;/ul>
+&lt;p>Con &lt;strong>.NET 8&lt;/strong>, estas capacidades han sido optimizadas para ofrecer un mejor rendimiento y una experiencia de desarrollo más fluida.&lt;/p>
+&lt;hr>
+&lt;h2 id="ventajas-de-usar-blazor-en-net-8">Ventajas de usar Blazor en .NET 8&lt;/h2>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Un único lenguaje para todo:&lt;/strong>&lt;br>
+Con Blazor, puedes desarrollar aplicaciones completas utilizando &lt;strong>C#&lt;/strong>, eliminando la necesidad de escribir código en JavaScript para el frontend.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Rendimiento mejorado en WebAssembly:&lt;/strong>&lt;br>
+La llegada de .NET 8 ha reducido los tiempos de carga inicial en Blazor WebAssembly, gracias a la optimización de su tamaño y mejor manejo de caché.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Integración con el ecosistema .NET:&lt;/strong>&lt;br>
+Blazor se integra perfectamente con APIs .NET, Entity Framework, Azure, y bibliotecas de terceros.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Componentes reutilizables:&lt;/strong>&lt;br>
+Blazor permite crear componentes UI que son reutilizables en distintas partes de una aplicación, similar a otros frameworks modernos como React.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Compatibilidad con JavaScript:&lt;/strong>&lt;br>
+Aunque elimina la dependencia de JavaScript, Blazor permite interactuar con librerías JavaScript cuando sea necesario.&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;hr>
+&lt;h2 id="blazor-en-acción-un-ejemplo-práctico">Blazor en acción: Un ejemplo práctico&lt;/h2>
+&lt;h3 id="paso-1-creación-de-un-proyecto-blazor">Paso 1: Creación de un proyecto Blazor&lt;/h3>
+&lt;p>Primero, asegúrate de tener instalada la última versión de .NET 8. Luego, crea un nuevo proyecto Blazor WebAssembly desde la CLI de .NET:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">dotnet new blazorwasm -o BlazorApp
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">cd&lt;/span> BlazorApp
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">dotnet run
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Este comando genera una aplicación Blazor básica. Accede a &lt;code>http://localhost:5000&lt;/code> para verla en funcionamiento.&lt;/p>
+&lt;h3 id="paso-2-crear-un-componente-de-contador">Paso 2: Crear un componente de contador&lt;/h3>
+&lt;p>Edita el archivo &lt;code>Counter.razor&lt;/code> para personalizar el contador:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">@page &amp;#34;/counter&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;h3&amp;gt;Contador&amp;lt;/h3&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;p&amp;gt;Contador actual: @count&amp;lt;/p&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;button class=&amp;#34;btn btn-primary&amp;#34; @onclick=&amp;#34;IncrementarContador&amp;#34;&amp;gt;Incrementar&amp;lt;/button&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">@code {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> private int count = 0;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> private void IncrementarContador()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> count++;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="paso-3-agregar-estilos-personalizados">Paso 3: Agregar estilos personalizados&lt;/h3>
+&lt;p>Puedes personalizar los estilos en el archivo &lt;code>wwwroot/css/app.css&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-css" data-lang="css">&lt;span class="line">&lt;span class="cl">&lt;span class="nt">button&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">font-size&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mf">1.2&lt;/span>&lt;span class="kt">rem&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">padding&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">10&lt;/span>&lt;span class="kt">px&lt;/span> &lt;span class="mi">20&lt;/span>&lt;span class="kt">px&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">margin-top&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">10&lt;/span>&lt;span class="kt">px&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Este simple ejemplo muestra cómo Blazor permite crear componentes interactivos utilizando únicamente C#.&lt;/p>
+&lt;hr>
+&lt;h2 id="blazor-y-el-futuro-del-desarrollo-web">Blazor y el futuro del desarrollo web&lt;/h2>
+&lt;p>Con la llegada de &lt;strong>.NET 8&lt;/strong>, Microsoft ha reforzado su compromiso con Blazor como una herramienta clave para el desarrollo web. Algunas de las mejoras que destacan en esta versión incluyen:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;strong>Mejoras en el soporte de WebAssembly:&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>Reducción del tiempo de carga inicial.&lt;/li>
+&lt;li>Implementación de AOT (Ahead-of-Time Compilation) para optimizar el rendimiento.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Blazor United:&lt;/strong>&lt;br>
+Introducción de un enfoque híbrido que combina las ventajas de Blazor Server y WebAssembly, permitiendo cambiar dinámicamente entre ambos modelos según las necesidades de la aplicación.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Integración con .NET MAUI:&lt;/strong>&lt;br>
+Blazor ahora puede usarse para desarrollar aplicaciones de escritorio y móviles con un solo código base.&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="cuándo-elegir-blazor-para-tu-proyecto">Cuándo elegir Blazor para tu proyecto&lt;/h2>
+&lt;p>Blazor es una excelente opción si:&lt;/p>
+&lt;ol>
+&lt;li>Tu equipo ya está familiarizado con el ecosistema .NET.&lt;/li>
+&lt;li>Necesitas desarrollar aplicaciones web rápidamente sin aprender un nuevo lenguaje como JavaScript.&lt;/li>
+&lt;li>Quieres aprovechar las capacidades de WebAssembly para mejorar la experiencia del cliente.&lt;/li>
+&lt;li>Planeas integrar tu aplicación con otros servicios en Azure o APIs basadas en .NET.&lt;/li>
+&lt;/ol>
+&lt;hr>
+&lt;h2 id="conclusión">Conclusión&lt;/h2>
+&lt;p>Blazor está cambiando el paradigma del desarrollo web al eliminar la necesidad de separar el frontend y backend en lenguajes diferentes. Gracias a .NET 8, las aplicaciones Blazor son más rápidas, ligeras y fáciles de desarrollar que nunca.&lt;/p>
+&lt;p>Si todavía no has probado Blazor, ahora es el momento perfecto para sumergirte en esta tecnología y descubrir cómo puede transformar tus proyectos web. Con un lenguaje unificado y un ecosistema robusto, Blazor está listo para liderar el futuro del desarrollo web.&lt;/p></description></item><item><title>Incrustar página web externa en Power Apps</title><link>https://cmas.dev/posts/2023-09-20-embed-external-page-in-power-apps/</link><pubDate>Wed, 20 Sep 2023 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2023-09-20-embed-external-page-in-power-apps/</guid><description>&lt;p>En este artículo veremos cómo incrustar oáginas web externas en &lt;strong>Microsoft Power Apps&lt;/strong> como si incluyeramos un IFrame dentro de nuestra App.&lt;/p>
 &lt;p>Un cliente me ha solicitado hace poco que le incluya un sitio web dentro de su aplicación &lt;strong>Power Apps&lt;/strong> y no sabía cómo hacerlos, de hecho tenía entendido que no se podía hacerlo.&lt;/p>
 &lt;p>Pero he encontrado una forma y el cliente quedó contento.&lt;/p>
 &lt;h1 id="windows-y-powershell">Windows y PowerShell&lt;/h1>
