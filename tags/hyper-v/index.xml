@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Hyper-V on Christian Amado's Blog</title><link>https://cmas.dev/tags/hyper-v/</link><description>Recent content in Hyper-V on Christian Amado's Blog</description><generator>Hugo -- gohugo.io</generator><language>es</language><lastBuildDate>Wed, 06 Apr 2022 19:21:43 -0400</lastBuildDate><atom:link href="https://cmas.dev/tags/hyper-v/index.xml" rel="self" type="application/rss+xml"/><item><title>Crear acceso directo a máquina virtual</title><link>https://cmas.dev/posts/2022-04-06-windows-11-shortcut-vm/</link><pubDate>Wed, 06 Apr 2022 19:21:43 -0400</pubDate><guid>https://cmas.dev/posts/2022-04-06-windows-11-shortcut-vm/</guid><description>&lt;p>Lo más práctico y útil para un usuario es encontrar lo que busca de manera rápida y sencilla. Es por eso que mostraré los pasos a seguir para crear un acceso directo a una máquina virtual en Hyper-V.&lt;/p>
 &lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 22593&lt;/strong>&lt;/em>&lt;/p>
 &lt;p>Primero debemos dirigirnos a nuestro gestor de máquinas virtuales de Hyper-V y obtener el nombre de la máquina virtual en cuestión (Ubuntu, en este caso):
-&lt;img src="https://cmas.dev/img/posts/2022/04/06/hyperv1.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/04/06/hyperv1.png" alt="">&lt;/p>
 &lt;p>Nos dirigimos al escritorio de Windows, &lt;em>clic derecho&lt;/em> &amp;gt; &lt;em>Nuevo&lt;/em> &amp;gt; &lt;em>Crear acceso directo&lt;/em>:
-&lt;img src="https://cmas.dev/img/posts/2022/04/06/hyperv2.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/04/06/hyperv2.png" alt="">&lt;/p>
 &lt;p>Agregamos la siguiente ubicación de archivo:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">vmconnect.exe localhost &amp;#34;Ubuntu&amp;#34;
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
@@ -11,11 +11,11 @@
 &lt;li>&lt;strong>localhost&lt;/strong> porque se trata de nuestra máquina virtual local&lt;/li>
 &lt;li>&lt;strong>Ubuntu&lt;/strong> es el nombre de la máquina virtual&lt;/li>
 &lt;/ul>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/2022/04/06/hyperv3.png">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/2022/04/06/hyperv3.png" alt="">&lt;/p>
 &lt;p>Colocamos un nombre descriptivo a nuestro acceso directo:
-&lt;img src="https://cmas.dev/img/posts/2022/04/06/hyperv4.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/04/06/hyperv4.png" alt="">&lt;/p>
 &lt;p>Veremos en el escritorio el acceso directo creado:
-&lt;img src="https://cmas.dev/img/posts/2022/04/06/hyperv5.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/04/06/hyperv5.png" alt="">&lt;/p>
 &lt;p>Por último, hacemos la prueba del acceso directo:
-&lt;img src="https://cmas.dev/img/posts/2022/04/06/hyperv6.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/04/06/hyperv6.png" alt="">&lt;/p>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item></channel></rss>

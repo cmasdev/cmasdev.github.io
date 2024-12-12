@@ -6,11 +6,11 @@
 &lt;ol>
 &lt;li>Start the application &lt;strong>Windows Subsystem for Android&lt;/strong>&lt;/li>
 &lt;li>Set the &lt;strong>Developer Mode&lt;/strong>:
-&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb1.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb1.png" alt="">&lt;/li>
 &lt;li>Click on the option &lt;strong>Manage developr Settings&lt;/strong>:
-&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb2.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb2.png" alt="">&lt;/li>
 &lt;li>Enable the option &lt;strong>USB Debugging&lt;/strong>:
-&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb3.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb3.png" alt="">&lt;/li>
 &lt;/ol>
 &lt;h2 id="prepare-the-android-sdk-tools">Prepare the Android SDK tools&lt;/h2>
 &lt;h3 id="prepare-android-sdk-platform-tools">Prepare Android SDk Platform Tools&lt;/h3>
@@ -21,23 +21,23 @@
 &lt;h3 id="locate-the-files">Locate the files&lt;/h3>
 &lt;ol>
 &lt;li>We must create a new folder in the main Windows directory and copy the unzipped folder. it would look like this:
-&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb4.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb4.png" alt="">&lt;/li>
 &lt;li>Right click on the Windows icon on the taskbar or &lt;strong>Win&lt;/strong>+&lt;strong>i&lt;/strong>:
-&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb5.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb5.png" alt="">&lt;/li>
 &lt;li>Select &lt;strong>Environment variables&lt;/strong>:
-&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb6.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb6.png" alt="">&lt;/li>
 &lt;li>Select &lt;strong>Path&lt;/strong> variable and add a new record:
-&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb7.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb7.png" alt="">&lt;/li>
 &lt;li>We add the location of the executable that we want to add to the variable:
-&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb8.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb8.png" alt="">&lt;/li>
 &lt;li>We open the Windows command &lt;strong>CMD&lt;/strong> or &lt;strong>PowerShell&lt;/strong> and test &lt;strong>adb&lt;/strong> command:&lt;/li>
 &lt;/ol>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">adb devices
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb9.png">&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb9.png" alt="">&lt;/p>
 &lt;h3 id="connection-to-the-device">Connection to the device&lt;/h3>
 &lt;ol>
 &lt;li>We verify the IP of the device (in the settings of &lt;strong>Windows Subsystem for Android&lt;/strong>):
-&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb10.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb10.png" alt="">&lt;/li>
 &lt;li>We connect to the IP and the corresponding port:&lt;/li>
 &lt;/ol>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">adb connect 172.18.136.138:5555
@@ -49,9 +49,9 @@
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">adb&lt;/span> &lt;span class="n">install&lt;/span> &lt;span class="s2">&amp;#34;C:\Users\chris\Downloads&lt;/span>&lt;span class="se">\a&lt;/span>&lt;span class="s2">ndry.apk&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="3">
 &lt;li>We will see the icon attached to the start menu:
-&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb11.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb11.png" alt="">&lt;/li>
 &lt;li>The app will look like this:
-&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb12.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb12.png" alt="">&lt;/li>
 &lt;/ol>
 &lt;p>For every application that works for Android we must repeat these 4 previous steps. I&amp;rsquo;ll take advantage of &lt;em>HBO Max&lt;/em> to see the new Batman&amp;hellip;&lt;/p>
 &lt;p>¡Enjoy it!&lt;/p></description></item><item><title>Enable Windows Subsystem for Android™️</title><link>https://cmas.dev/en/posts/2022-04-13-enable-wsa/</link><pubDate>Wed, 13 Apr 2022 13:41:27 -0400</pubDate><guid>https://cmas.dev/en/posts/2022-04-13-enable-wsa/</guid><description>&lt;p>In this article I will show step by step how to enable the &lt;strong>Windows Subsystem for Android&lt;/strong> in our favorite operating system. Please note that at the time of writing this article it is not available outside of the US.&lt;/p>
@@ -61,17 +61,17 @@
 &lt;h2 id="previous-configurations">Previous configurations&lt;/h2>
 &lt;p>At the time I am writing this article this does not work outside the United States, but by changing the region we can achieve it.&lt;/p>
 &lt;p>For that, we must go to &lt;em>Settings&lt;/em> &amp;gt; &lt;em>Time and Language&lt;/em>:
-&lt;img src="https://cmas.dev/img/posts/2022/04/13/wsa1.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/04/13/wsa1.png" alt="">&lt;/p>
 &lt;h2 id="enable-windows-subsystem-for-android">Enable Windows Subsystem for Android&lt;/h2>
 &lt;p>We must go to &lt;strong>Microsoft Store&lt;/strong>, search and install &lt;strong>Amazon Appstore&lt;/strong>:
-&lt;img src="https://cmas.dev/img/posts/2022/04/13/wsa2.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/04/13/wsa2.png" alt="">&lt;/p>
 &lt;p>The system will ask us to click &lt;strong>Download&lt;/strong>:
-&lt;img src="https://cmas.dev/img/posts/2022/04/13/wsa3.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/04/13/wsa3.png" alt="">&lt;/p>
 &lt;p>We will see the download progress:
-&lt;img src="https://cmas.dev/img/posts/2022/04/13/wsa4.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/04/13/wsa4.png" alt="">&lt;/p>
 &lt;p>We open the new application:
-&lt;img src="https://cmas.dev/img/posts/2022/04/13/wsa5.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/04/13/wsa5.png" alt="">&lt;/p>
 &lt;p>The &lt;strong>Windows Subsystem for Android&lt;/strong> starts:
-&lt;img src="https://cmas.dev/img/posts/2022/04/13/wsa6.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/04/13/wsa6.png" alt="">&lt;/p>
 &lt;p>We log in (or create a new account) on Amazon and that&amp;rsquo;s it.&lt;/p>
 &lt;p>¡Enjoy it!&lt;/p></description></item></channel></rss>

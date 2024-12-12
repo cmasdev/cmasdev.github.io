@@ -14,7 +14,7 @@
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">sudo apt install git
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="4">
 &lt;li>Veremos la versión actual instalada(Ojo: no es lo mismo Git en Windows que Git en WSL, pueden ser versiones distintas):
-&lt;img src="https://cmas.dev/img/posts/2022/05/04/1.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/05/04/1.png" alt="">&lt;/li>
 &lt;/ol>
 &lt;h2 id="actualizar-git-en-wsl">Actualizar Git en WSL&lt;/h2>
 &lt;p>Debemos seguir algunos pasos sencillos para lograrlos. Estos serían:&lt;/p>
@@ -32,26 +32,26 @@
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Integración de Azure DevOps con GitHub</title><link>https://cmas.dev/posts/2022-04-18-azure-devops-integration-with-github/</link><pubDate>Mon, 18 Apr 2022 23:24:00 -0400</pubDate><guid>https://cmas.dev/posts/2022-04-18-azure-devops-integration-with-github/</guid><description>&lt;p>En este artículo mostraré cómo integrar un repositorio GitHub, que lo hemos visto en &lt;a href="https://cmas.dev/posts/2022-04-04-create-repository-github/">este artículo&lt;/a>, con Azure DevOps que lo hemos visto &lt;a href="https://cmas.dev/posts/2022-04-11-create-project-azure-devops/">aquí&lt;/a>.&lt;/p>
 &lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 22598&lt;/strong>&lt;/em>&lt;/p>
 &lt;p>Primeramente, debemos ingresar a la configuración del proyecto:
-&lt;img src="https://cmas.dev/img/posts/2022/04/18/1.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/04/18/1.png" alt="">&lt;/p>
 &lt;p>Nos dirigmos a la sección &lt;strong>Boards&lt;/strong> &amp;gt; &lt;strong>GitHub connections&lt;/strong> y hacemos clic en el botón correspondiente:
-&lt;img src="https://cmas.dev/img/posts/2022/04/18/2.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/04/18/2.png" alt="">&lt;/p>
 &lt;p>Como toda aplicación tercerizada, debemos autorizar su uso:
-&lt;img src="https://cmas.dev/img/posts/2022/04/18/3.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/04/18/3.png" alt="">&lt;/p>
 &lt;p>Agregamos los repositorios necesarios:
-&lt;img src="https://cmas.dev/img/posts/2022/04/18/4.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/04/18/4.png" alt="">&lt;/p>
 &lt;p>Autorizamos a Azure Boards para el acceso a GitHub:
-&lt;img src="https://cmas.dev/img/posts/2022/04/18/5.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/04/18/5.png" alt="">&lt;/p>
 &lt;p>Verificamos que la conexión esté activa y funcional:
-&lt;img src="https://cmas.dev/img/posts/2022/04/18/6.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/04/18/6.png" alt="">&lt;/p>
 &lt;p>Tenemos lista la integración entre Azure DevOps y GitHub para proceder con la automatización de procesos. En artículos posteriores iremos avanzando con el CI/CD para sacarle el jugo a esta configuración.&lt;/p>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Crear un repositorio en GitHub</title><link>https://cmas.dev/posts/2022-04-04-create-repository-github/</link><pubDate>Mon, 04 Apr 2022 22:13:00 -0400</pubDate><guid>https://cmas.dev/posts/2022-04-04-create-repository-github/</guid><description>&lt;p>En este artículo mostraré cómo crear un repositorio en GitHub para poder integrarlo en el futuro con Azure DevOps.&lt;/p>
 &lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 22581&lt;/strong>&lt;/em>&lt;/p>
 &lt;p>Crear un repositorio en GitHub es un proceso muy sencillo. La documentación es muy completa y se encuentra &lt;a href="https://docs.github.com/es/repositories">aquí&lt;/a>. Este artículo sólo busca acortar el proceso de creación de un repositorio que lo utilizaremos las próximas semanas.&lt;/p>
 &lt;h2 id="crear-nuevo-repositorio">Crear nuevo repositorio&lt;/h2>
 &lt;p>Para crear el nuevo repositorio buscamos el menú &lt;strong>New&lt;/strong>
-&lt;img src="https://cmas.dev/img/posts/2022/04/04/0.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/04/04/0.png" alt="">&lt;/p>
 &lt;p>Luego, procedemos a cargar los datos necesarios para la creación del repositorio:
-&lt;img src="https://cmas.dev/img/posts/2022/04/04/1.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/04/04/1.png" alt="">&lt;/p>
 &lt;p>Por último, verificamos el repositorio creado:
-&lt;img src="https://cmas.dev/img/posts/2022/04/04/2.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/04/04/2.png" alt="">&lt;/p>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item></channel></rss>

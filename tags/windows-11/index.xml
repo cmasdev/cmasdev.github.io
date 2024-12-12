@@ -5,7 +5,7 @@
 &lt;p>Primeramente, debemos mencionar que tenemos la opción de bloquear el cambio de orientación de pantalla. Esto se da cuando, por ejemplo, queremos que nuestro diseño sólo quede en posición vertical. Para ello, debemos preparar código para cada plataforma (aquí veremos &lt;strong>Android&lt;/strong> y &lt;strong>Windows&lt;/strong>):&lt;/p>
 &lt;h3 id="windows">Windows&lt;/h3>
 &lt;p>Se realiza mediante el gestor de manifiesto &lt;strong>Package.appxmanifest&lt;/strong>:
-&lt;img src="https://i.ibb.co/0jQZXvN/Orientation1.png">&lt;/p>
+&lt;img src="https://i.ibb.co/0jQZXvN/Orientation1.png" alt="">&lt;/p>
 &lt;h3 id="android">Android&lt;/h3>
 &lt;p>En la clase &lt;strong>MainActivity&lt;/strong> de la plataforma &lt;strong>Android&lt;/strong> se agrega el decorado:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">ScreenOrientation = ScreenOrientation.Portrait
@@ -95,9 +95,9 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>El resultado Horizontal es:
-&lt;img src="https://i.ibb.co/bKnfKs6/Orientation2.png">&lt;/p>
+&lt;img src="https://i.ibb.co/bKnfKs6/Orientation2.png" alt="">&lt;/p>
 &lt;p>El resultado Vertical es:
-&lt;img src="https://i.ibb.co/3132hFy/Orientation3.png">&lt;/p>
+&lt;img src="https://i.ibb.co/3132hFy/Orientation3.png" alt="">&lt;/p>
 &lt;p>Me ha funcionado este método, pero hay algunos problemas reportados en GitHub sobre el tema &lt;a href="https://github.com/dotnet/maui/issues/9795">aquí&lt;/a>&lt;/p>
 &lt;h3 id="opción-2-extraída-de-otro-blog">Opción 2 (extraída de otro Blog)&lt;/h3>
 &lt;p>Definimos el &lt;strong>XAML&lt;/strong> de la página agregando Manejadores de eventos visuales, en este caso, &lt;strong>OrientationStateTrigger&lt;/strong>:&lt;/p>
@@ -215,14 +215,14 @@
 &lt;p>Primero, debemos descargar e instalar el &lt;strong>SDK&lt;/strong> de &lt;strong>.NET 8&lt;/strong>, eso lo encontramos &lt;a href="https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/sdk-8.0.100-windows-x64-installer">aquí&lt;/a>.&lt;/p>
 &lt;p>Luego, debemos actualizar &lt;strong>Visual Studio 2022&lt;/strong> a su versión &lt;strong>17.8.0&lt;/strong> o superior (acabo de ver disponible la versión &lt;strong>17.8.2&lt;/strong>) que se puede descargar desde &lt;a href="https://visualstudio.microsoft.com/downloads/">aquí&lt;/a>.&lt;/p>
 &lt;p>Iniciamos el instalador de &lt;strong>Visual Studio&lt;/strong> e indicamos la opción de &lt;strong>.NET Multi-platform App UI development&lt;/strong>:
-&lt;img src="https://i.ibb.co/7bnx4RQ/1.png">&lt;/p>
+&lt;img src="https://i.ibb.co/7bnx4RQ/1.png" alt="">&lt;/p>
 &lt;h2 id="creando-un-proyecto-net-maui-8">Creando un proyecto .NET MAUI 8&lt;/h2>
 &lt;p>Al abrir &lt;strong>Visual Studio&lt;/strong> procedemos a crear un nuevo proyecto y definimos el &lt;em>Tipo&lt;/em> &lt;strong>MAUI&lt;/strong> (en mi caso tengo &lt;a href="https://www.telerik.com/maui-ui">Telerik UI for .NET MAUI&lt;/a> instalado):
-&lt;img src="https://i.ibb.co/QDyvX8v/2.png">&lt;/p>
+&lt;img src="https://i.ibb.co/QDyvX8v/2.png" alt="">&lt;/p>
 &lt;p>Seleccionamos la versión de .NET (en este caso ya seleccionamos el 8):
-&lt;img src="https://i.ibb.co/LCZv5vc/3.png">&lt;/p>
+&lt;img src="https://i.ibb.co/LCZv5vc/3.png" alt="">&lt;/p>
 &lt;p>Nos dirigimos a las &lt;strong>Propiedades&lt;/strong> del proyecto y verificamos que todo corresponda al &lt;strong>.NET 8&lt;/strong>:
-&lt;img src="https://i.ibb.co/L0NYJSx/4.png">&lt;/p>
+&lt;img src="https://i.ibb.co/L0NYJSx/4.png" alt="">&lt;/p>
 &lt;p>Con estos pasos tenemos un nuevo proyecto creado en &lt;strong>.NET MAUI 8&lt;/strong> ;)&lt;/p>
 &lt;h2 id="cambio-en-mauiprogramcs">Cambio en MauiProgram.cs&lt;/h2>
 &lt;p>En el archivo de arranque de un proyecto &lt;strong>.NET MAUI&lt;/strong> se ingresa una línea de código nueva:&lt;/p>
@@ -279,9 +279,9 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/MenuBarItem&amp;gt;
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;/ContentPage.MenuBarItems&amp;gt;
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Arrancamos la App y vemos el Menú:
-&lt;img src="https://i.ibb.co/FWRFggx/5.png">&lt;/p>
+&lt;img src="https://i.ibb.co/FWRFggx/5.png" alt="">&lt;/p>
 &lt;p>Hacemos clic o bien utilizamos el atajo &lt;strong>Ctrl&lt;/strong>+&lt;strong>L&lt;/strong> y veremos:
-&lt;img src="https://i.ibb.co/dGNdZDc/6.png">&lt;/p>
+&lt;img src="https://i.ibb.co/dGNdZDc/6.png" alt="">&lt;/p>
 &lt;p>Estas son las novedades que quería compartir con ustedes en estas primeras pruebas que estoy realizando (de hecho estoy actualmente en un proyecto &lt;strong>.NET MAUI 8&lt;/strong>). Iré avanzando en las novedades de &lt;strong>.NET MAUI&lt;/strong> en todo este mes de Diciembre ya que nos encontramos en pleno &lt;strong>&lt;a href="https://elcamino.dev/calendario-adviento-net-maui-espanol-23">Calendario de Adviento .NET MAUI&lt;/a>&lt;/strong>&lt;/p>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>ChatGPT en WPF</title><link>https://cmas.dev/posts/2023-03-19-chatgpt-wpf/</link><pubDate>Sun, 19 Mar 2023 09:01:00 -0400</pubDate><guid>https://cmas.dev/posts/2023-03-19-chatgpt-wpf/</guid><description>&lt;p>En este artículo veremos cómo crear un Chat con la API de &lt;strong>ChatGPT&lt;/strong> y &lt;strong>WPF&lt;/strong> con controles &lt;strong>Telerik&lt;/strong>.&lt;/p>
 &lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 25314&lt;/strong>&lt;/em>&lt;/p>
@@ -293,15 +293,15 @@
 &lt;/li>
 &lt;li>
 &lt;p>Agregamos los paquetes &lt;strong>NuGet&lt;/strong> necesarios para nuestro proyecto:
-&lt;img src="https://i.ibb.co/H7GLDJk/1.png">&lt;/p>
+&lt;img src="https://i.ibb.co/H7GLDJk/1.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Agregar configuraciones de la aplicación:
-&lt;img src="https://i.ibb.co/F5pTW4J/2.png">&lt;/p>
+&lt;img src="https://i.ibb.co/F5pTW4J/2.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Adicionar las configuraciones en el archivo creado:
-&lt;img src="https://i.ibb.co/XCPVnmR/3.png">&lt;/p>
+&lt;img src="https://i.ibb.co/XCPVnmR/3.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Vamos a trabajar con &lt;strong>RadChat&lt;/strong> de &lt;strong>Telerik for WPF&lt;/strong>, así que debemos agregar el modelo para &lt;strong>TextMessage&lt;/strong>. Entonces, agregamos la clase en cuestión:&lt;/p>
@@ -452,7 +452,7 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/telerik:RadChat&amp;gt;
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/Grid&amp;gt;
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;/Window&amp;gt;
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://i.ibb.co/HHMzpp3/4.png">&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://i.ibb.co/HHMzpp3/4.png" alt="">&lt;/p>
 &lt;ol start="6">
 &lt;li>Agregamos la llamada al evento que envía mensaje en nuestra página &lt;strong>WPF&lt;/strong> (incluye trabajo asíncronos y multihilo):&lt;/li>
 &lt;/ol>
@@ -501,19 +501,19 @@
 &lt;ol>
 &lt;li>
 &lt;p>Buscamos la extensión para &lt;strong>Microsoft Edge&lt;/strong> con el nombre &lt;strong>Free VPN for Edge&lt;/strong>:
-&lt;img src="https://cmas.dev/img/posts/2023/03/17/1.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2023/03/17/1.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Agregamos la extensión:
-&lt;img src="https://cmas.dev/img/posts/2023/03/17/2.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2023/03/17/2.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Siguiente a toda la publicidad:
-&lt;img src="https://cmas.dev/img/posts/2023/03/17/3.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2023/03/17/3.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Seleccionamos un país como EEUU o Francia (en Paraguay) y hacemos clic en el botón de encendido:
-&lt;img src="https://cmas.dev/img/posts/2023/03/17/4.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2023/03/17/4.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Listo. Debemos ingresar al sitio oficial del chat sin problemas&lt;/p>
@@ -523,21 +523,21 @@
 &lt;ol>
 &lt;li>
 &lt;p>Ir al sitio oficial del &lt;a href="https://chat.openai.com/chat">chat&lt;/a> e iniciar sesión:
-&lt;img src="https://cmas.dev/img/posts/2023/03/17/5.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2023/03/17/5.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Colocar los datos personales:
-&lt;img src="https://cmas.dev/img/posts/2023/03/17/6.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2023/03/17/6.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Verificar el número de teléfono:
-&lt;img src="https://cmas.dev/img/posts/2023/03/17/7.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2023/03/17/7.png" alt="">&lt;/p>
 &lt;/li>
 &lt;/ol>
 &lt;p>Para este caso no funciona un número de Paraguay, debe ser un número que corresponda a algunos de los &lt;a href="https://platform.openai.com/docs/supported-countries">países habilitados&lt;/a> pero lo podemos hacer con algunas herramientas que se encuentran gracias a &lt;strong>Microsoft Bing&lt;/strong>.&lt;/p>
 &lt;ol start="4">
 &lt;li>Luego de la verificación, podremos ingresar a la plataforma:
-&lt;img src="https://cmas.dev/img/posts/2023/03/17/8.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2023/03/17/8.png" alt="">&lt;/li>
 &lt;/ol>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Creando una aplicación tipo Chat en WPF usando Telerik</title><link>https://cmas.dev/posts/2023-03-15-creating-chat-app-wpf-using-telerik/</link><pubDate>Wed, 15 Mar 2023 20:57:00 -0400</pubDate><guid>https://cmas.dev/posts/2023-03-15-creating-chat-app-wpf-using-telerik/</guid><description>&lt;p>En este artículo veremos cómo crear una aplicación de Chat en &lt;strong>WPF&lt;/strong> con &lt;strong>Telerik&lt;/strong>. (Antesala de todo el tema de &lt;a href="https://openai.com/blog/chatgpt/">ChatGPT&lt;/a>)&lt;/p>
 &lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 25290&lt;/strong>&lt;/em>&lt;/p>
@@ -547,18 +547,18 @@
 &lt;ol>
 &lt;li>
 &lt;p>Vamos a crear un proyecto de tipo &lt;strong>WPF&lt;/strong>:
-&lt;img src="https://cmas.dev/img/posts/2023/03/15/1.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2023/03/15/1.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Colocamos un nombre descriptivo:
-&lt;img src="https://cmas.dev/img/posts/2023/03/15/2.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2023/03/15/2.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Seguimos los pasos en pantalla.&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Agregamos las librerías necesarias:
-&lt;img src="https://cmas.dev/img/posts/2023/03/15/3.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2023/03/15/3.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Insertamos el control &lt;strong>XAML&lt;/strong>:&lt;/p>
@@ -576,7 +576,7 @@
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="6">
 &lt;li>
 &lt;p>Probamos la aplicación:
-&lt;img src="https://cmas.dev/img/posts/2023/03/15/4.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2023/03/15/4.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Entonces, el código C# nos quedaría así:&lt;/p>
@@ -621,7 +621,7 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Listo, de esta forma logramos hacer un pequeño Chat (que puede convertirse en ChatBot). Y nos queda algo así:
-&lt;img src="https://cmas.dev/img/posts/2023/03/15/5.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2023/03/15/5.png" alt="">&lt;/p>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Django sobre WSL</title><link>https://cmas.dev/posts/2022-12-21-django-on-wsl/</link><pubDate>Wed, 21 Dec 2022 19:39:00 -0400</pubDate><guid>https://cmas.dev/posts/2022-12-21-django-on-wsl/</guid><description>&lt;p>En este corto artículo veremos cómo desarrollar sobre &lt;strong>WSL (Windows Subsystem for Linux)&lt;/strong> con &lt;strong>Python&lt;/strong> y &lt;strong>Django&lt;/strong>. Ya hemos visto que lo podemos hacer con &lt;a href="https://cmas.dev/posts/2022-06-29-java-with-wsl-part-2/">Java&lt;/a>&lt;/p>
 &lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 25267&lt;/strong>&lt;/em>&lt;/p>
 &lt;p>&lt;strong>WSL&lt;/strong> nos ofrece demasiadas ventajas a la hora de desarrollar software sobre el sistema operativo Linux, en este caso &lt;strong>Ubuntu&lt;/strong>. Hoy en día Python es un lenguaje demasiado difundido y muy utilizado en varios ámbitos, con sus ventajas y desventajas como todas las plataformas existentes. A eso le sumaron un Framework muy potente y completo &amp;ldquo;&lt;strong>Django&lt;/strong>&amp;rdquo;.&lt;/p>
@@ -630,7 +630,7 @@
 &lt;ol>
 &lt;li>
 &lt;p>Abrimos &lt;strong>Windows Terminal&lt;/strong> con el perfil &lt;strong>Ubuntu&lt;/strong>:
-&lt;img src="https://cmas.dev/img/posts/2022/12/21/1.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/12/21/1.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Procedemos a instalar &lt;strong>Django&lt;/strong> con el siguiente comando:&lt;/p>
@@ -646,12 +646,12 @@
 &lt;/li>
 &lt;/ol>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">django-admin --version
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://cmas.dev/img/posts/2022/12/21/2.png">&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://cmas.dev/img/posts/2022/12/21/2.png" alt="">&lt;/p>
 &lt;h2 id="crear-proyecto-django-y-empezar-a-trabajar">Crear proyecto Django y empezar a trabajar&lt;/h2>
 &lt;ol>
 &lt;li>
 &lt;p>Ir a la carpeta donde debe estar nuestro proyecto:
-&lt;img src="https://cmas.dev/img/posts/2022/12/21/3.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/12/21/3.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Crear un ambiente virtual de &lt;strong>Python&lt;/strong>:&lt;/p>
@@ -681,26 +681,26 @@
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="8">
 &lt;li>
 &lt;p>Completamos los datos y listo:
-&lt;img src="https://cmas.dev/img/posts/2022/12/21/4.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/12/21/4.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Abrimos la carpeta donde alojamos el proyecto y empezamos a desarrollar:
-&lt;img src="https://cmas.dev/img/posts/2022/12/21/5.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/12/21/5.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Activamos el ambiernte virtual de Python y ejecutamos el servidor de Django:
-&lt;img src="https://cmas.dev/img/posts/2022/12/21/6.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/12/21/6.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Veremos la página principal de Django:
-&lt;img src="https://cmas.dev/img/posts/2022/12/21/7.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/12/21/7.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Si accedemos a la URL con el contexto &lt;em>/admin&lt;/em> veremos lo siguiente:
-&lt;img src="https://cmas.dev/img/posts/2022/12/21/8.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/12/21/8.png" alt="">&lt;/p>
 &lt;/li>
 &lt;/ol>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/2022/12/21/9.png">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/2022/12/21/9.png" alt="">&lt;/p>
 &lt;p>Listo para desarrollar aplicaciones web con &lt;strong>Django&lt;/strong> y &lt;strong>Python&lt;/strong> sobre &lt;strong>Visual Studio Code&lt;/strong> y &lt;strong>WSL&lt;/strong>.&lt;/p>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Desarrollo con Python sobre WSL</title><link>https://cmas.dev/posts/2022-12-14-developing-python-on-wsl/</link><pubDate>Wed, 14 Dec 2022 21:12:00 -0400</pubDate><guid>https://cmas.dev/posts/2022-12-14-developing-python-on-wsl/</guid><description>&lt;p>En este corto artículo veremos cómo desarrollar sobre &lt;strong>WSL (Windows Subsystem for Linux)&lt;/strong> con &lt;strong>Python&lt;/strong>. Ya hemos visto que lo podemos hacer con &lt;a href="https://cmas.dev/posts/2022-06-29-java-with-wsl-part-2/">Java&lt;/a>&lt;/p>
 &lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 25267&lt;/strong>&lt;/em>&lt;/p>
@@ -710,19 +710,19 @@
 &lt;ol>
 &lt;li>
 &lt;p>Abrimos Visual Studio Code (pero en WSL):
-&lt;img src="https://cmas.dev/img/posts/2022/12/14/1.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/12/14/1.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>En extensiones, buscamos &amp;ldquo;python&amp;rdquo; y lo instalamos (el fabricante debe ser Microsoft):
-&lt;img src="https://cmas.dev/img/posts/2022/12/14/2.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/12/14/2.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Luego de la instalación, procedemos a crear un nuevo archivo:
-&lt;img src="https://cmas.dev/img/posts/2022/12/14/3.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/12/14/3.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Seleccionamos el archivo de tipo Python, colocamos en el lugar de preferencia (dentro del WSL):
-&lt;img src="https://cmas.dev/img/posts/2022/12/14/4.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/12/14/4.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Crear un archivo nuevo &lt;strong>pythonTest.py&lt;/strong> (en mi caso) y escribir el siguiente código.&lt;/p>
@@ -732,19 +732,19 @@
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="6">
 &lt;li>
 &lt;p>Casi hacemos &lt;em>F5&lt;/em> pero notamos que falta algo:
-&lt;img src="https://cmas.dev/img/posts/2022/12/14/5.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/12/14/5.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Seleccionamos el Intérprete recomendado:
-&lt;img src="https://cmas.dev/img/posts/2022/12/14/6.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/12/14/6.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Seleccionamos la configuración del depurador (porque es un archivo suelto):
-&lt;img src="https://cmas.dev/img/posts/2022/12/14/7.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/12/14/7.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Ejecutamos nuestro archivo &lt;strong>.py&lt;/strong> y listo:
-&lt;img src="https://cmas.dev/img/posts/2022/12/14/8.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/12/14/8.png" alt="">&lt;/p>
 &lt;/li>
 &lt;/ol>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Figma y Windows Fluent Design System</title><link>https://cmas.dev/posts/2022-12-07-figma-and-windows-fluent-design-system/</link><pubDate>Wed, 07 Dec 2022 21:12:00 -0400</pubDate><guid>https://cmas.dev/posts/2022-12-07-figma-and-windows-fluent-design-system/</guid><description>&lt;p>En este corto artículo trataremos de entender las directrices de diseño y analizaremos código de interfaz de usuario para crear experiencias de aplicaciones de &lt;strong>Windows&lt;/strong>.&lt;/p>
@@ -819,18 +819,18 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> HorizontalOptions=&amp;#34;Center&amp;#34; /&amp;gt;
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="4">
 &lt;li>Ejecutamos la aplicación y vemos los resultados:
-&lt;img src="https://cmas.dev/img/posts/2022/11/02/1.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/11/02/1.png" alt="">&lt;/li>
 &lt;/ol>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/2022/11/02/2.png">&lt;/p>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/2022/11/02/3.png">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/2022/11/02/2.png" alt="">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/2022/11/02/3.png" alt="">&lt;/p>
 &lt;h2 id="abrir-imagen-en-android">Abrir imagen en Android&lt;/h2>
 &lt;p>Como todo esto lo hicimos con &lt;strong>.NET MAUI&lt;/strong>, debemos hacer ¡NADA!&lt;/p>
 &lt;ol>
 &lt;li>Ejecutamos en &lt;strong>Android&lt;/strong> y&amp;hellip;
-&lt;img src="https://cmas.dev/img/posts/2022/11/02/4.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/11/02/4.png" alt="">&lt;/li>
 &lt;/ol>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/2022/11/02/5.png">&lt;/p>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/2022/11/02/6.png">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/2022/11/02/5.png" alt="">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/2022/11/02/6.png" alt="">&lt;/p>
 &lt;p>Con una única línea de código pudimos realizar esta tarea sencilla sin necesidad de solicitar permisos ni nada desde la aplicación. esa es una de las ventajas que me gusta de &lt;strong>.NET MAUI&lt;/strong>&lt;/p>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Windows Terminal en Windows 11</title><link>https://cmas.dev/posts/2022-10-26-windows-terminal-in-windows-11/</link><pubDate>Wed, 26 Oct 2022 13:01:14 -0400</pubDate><guid>https://cmas.dev/posts/2022-10-26-windows-terminal-in-windows-11/</guid><description>&lt;p>En este artículo explicaré detalles sobre &lt;strong>Windows Terminal&lt;/strong> (que forma parte del sistema operativo &lt;strong>Windows 11&lt;/strong>).&lt;/p>
 &lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 25227&lt;/strong>&lt;/em>&lt;/p>
@@ -856,7 +856,7 @@
 &lt;/ul>
 &lt;h2 id="cómo-instalarlo">¿Cómo instalarlo?&lt;/h2>
 &lt;p>A partir de windows 11 22H2 no es necesario instalarlo, pues ya forma parte del sistema operativo. Aquí es donde se puede ver eso:
-&lt;img src="https://cmas.dev/img/posts/2022/10/26/1.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/10/26/1.png" alt="">&lt;/p>
 &lt;p>Pero, para versiones anteriores a la mencionada debemos seguir los siguientes pasos:&lt;/p>
 &lt;ul>
 &lt;li>Abrir *&lt;em>Microsoft Store&lt;/em> y buscar &lt;strong>Windows Terminal&lt;/strong>.&lt;/li>
@@ -868,7 +868,7 @@
 &lt;h3 id="perfiles">Perfiles&lt;/h3>
 &lt;p>Los perfiles en &lt;strong>Windows Terminal&lt;/strong> son configuraciones que determinan la apariencia y el comportamiento de cada shell o aplicación que se ejecuta en el terminal. Se pueden personalizar los perfiles para cambiar el color, la fuente, el icono y otras opciones de cada shell. También se pueden ocultar o deshabilitar los perfiles que se no quieran ver en el menú desplegable del terminal. Además, puedes agregar perfiles de terceros como &lt;strong>Git Bash&lt;/strong> o &lt;strong>Azure Cloud Shell&lt;/strong> (como tengo instalados los compnentede de desarrollo Azure de Visual Studio viene activado de manera predeterminada).&lt;/p>
 &lt;p>En mi máquina se ve así:
-&lt;img src="https://cmas.dev/img/posts/2022/10/26/2.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/10/26/2.png" alt="">&lt;/p>
 &lt;h3 id="pestañas-y-paneles">Pestañas y paneles&lt;/h3>
 &lt;p>Las pestañas y los paneles son formas de organizar las diferentes shells o aplicaciones que se ejecutan en el terminal. Se pueden abrir varias pestañas con diferentes perfiles y cambiar entre ellas con &lt;strong>Ctrl&lt;/strong> + &lt;strong>Tab&lt;/strong> o haciendo clic en el nombre de la pestaña. También se puede dividir una pestaña en varios paneles para ver varias shells al mismo tiempo. Se pueden crear, mover, cambiar el tamaño y cerrar los paneles con el teclado o el ratón.&lt;/p>
 &lt;p>Aquí vemos detalles de lo que explicamos más arriba:&lt;/p>
@@ -879,7 +879,7 @@
 &lt;source src="https://cmas.dev/img/posts/2022/10/26/3.mp4" type="video/mp4">
 Your browser does not support the video tag.
 &lt;/video>
-&lt;img>&lt;/p>
+&lt;img src="" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Apertura de paneles (en la misma pestaña) utilizando las teclas &lt;strong>Alt&lt;/strong>+ hacer clic en el icono &amp;ldquo;+&amp;rdquo;:
@@ -893,7 +893,7 @@ Your browser does not support the video tag.
 &lt;h3 id="paleta-de-comandos">Paleta de comandos&lt;/h3>
 &lt;p>La paleta de comandos permite visualizar y ejecutar las acciones que se puede hacer dentro de &lt;strong>Windows Terminal&lt;/strong>. Se puede invocar la paleta de comandos con &lt;strong>Ctrl&lt;/strong> + &lt;strong>Shift&lt;/strong> + &lt;strong>P&lt;/strong> o personalizar el atajo de teclado. También se puede usar el modo de línea de comandos para escribir un comando &lt;em>&lt;strong>wt&lt;/strong>&lt;/em> directamente en la paleta. Además, se pueden agregar iconos, comandos anidados, comandos iterables y ocultar los comandos que no se quiera ver.&lt;/p>
 &lt;p>Una vez presionadas las teclas mencionadas arriba veremos lo siguiente:
-&lt;img src="https://cmas.dev/img/posts/2022/10/26/5.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/10/26/5.png" alt="">&lt;/p>
 &lt;h3 id="personalización">Personalización&lt;/h3>
 &lt;p>&lt;strong>Windows Terminal&lt;/strong> permite personalizar muchos aspectos de su apariencia y funcionamiento. Se puede acceder a la configuración de &lt;strong>Windows Terminal&lt;/strong> desde el menú desplegable o con &lt;strong>Ctrl&lt;/strong> + &lt;strong>,&lt;/strong>. Algunas de las opciones de personalización que se pueden encontrar son:&lt;/p>
 &lt;ul>
@@ -906,41 +906,41 @@ Your browser does not support the video tag.
 &lt;li>&lt;strong>Siempre visible&lt;/strong>: se puede hacer que Windows Terminal permanezca siempre encima de otras ventanas.&lt;/li>
 &lt;li>&lt;strong>Modo de ancho de las pestañas&lt;/strong>: se puede ajustar el ancho de las pestañas según tu preferencia.&lt;/li>
 &lt;/ul>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/2022/10/26/6.png">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/2022/10/26/6.png" alt="">&lt;/p>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Visual Studio Code Server WSL</title><link>https://cmas.dev/posts/2022-10-19-visual-studio-code-server-wsl/</link><pubDate>Wed, 19 Oct 2022 22:35:00 -0400</pubDate><guid>https://cmas.dev/posts/2022-10-19-visual-studio-code-server-wsl/</guid><description>&lt;p>En este artículo corto, pero preciso, mostraré cómo utilizar &lt;strong>Visual Studio Code&lt;/strong> como servidor de &lt;strong>WSL&lt;/strong> para facilitarnos la vida en ciertas pruebas que tenemos como desarrolladores.&lt;/p>
 &lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 25227&lt;/strong>&lt;/em>&lt;/p>
 &lt;p>&lt;strong>Visual Studio Code Server&lt;/strong> es un servicio que se puede ejecutar en una máquina de desarrollo remota, como la PC de escritorio o una máquina virtual (VM). Permite conectar de forma segura a esa máquina remota desde cualquier lugar a través de un cliente local de &lt;strong>VS Code&lt;/strong>, sin la necesidad de &lt;strong>SSH&lt;/strong>. También se puede acceder al servidor a través del navegador usando &lt;strong>VS Code&lt;/strong> para la Web (también conocido como &lt;strong>vscode.dev&lt;/strong>).&lt;/p>
 &lt;p>La arquitectura del servicio lo expone Microsoft en su web:
-&lt;img src="https://code.visualstudio.com/assets/docs/remote/vscode-server/server-arch-latest.png">&lt;/p>
+&lt;img src="https://code.visualstudio.com/assets/docs/remote/vscode-server/server-arch-latest.png" alt="">&lt;/p>
 &lt;h2 id="configurar-acceso">Configurar acceso&lt;/h2>
 &lt;p>Para que esto funcione se debe enlazar con &lt;strong>GitHub&lt;/strong> para que nos cree el &lt;strong>CodeSpace&lt;/strong> necesario.&lt;/p>
 &lt;ol>
 &lt;li>
 &lt;p>Se accede al entorno de &lt;strong>WSL:Ubuntu&lt;/strong> para hacer las gestiones:
-&lt;img src="https://cmas.dev/img/posts/2022/10/19/1.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/10/19/1.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Una vez allí se verifica que el Visual Studio Code corresponda a &lt;strong>Ubuntu&lt;/strong>:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/2022/10/19/2.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/10/19/2.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Accedemos al menú contextual de &amp;ldquo;Turn on Remote Tunnel Access&amp;hellip;&amp;rdquo;:
-&lt;img src="https://cmas.dev/img/posts/2022/10/19/3.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/10/19/3.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Seguimos las instrucciones en pantalla para Iniciar sesión en &lt;strong>GitHub&lt;/strong>.&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Habilitar el Tunnel Remoto:
-&lt;img src="https://cmas.dev/img/posts/2022/10/19/4.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/10/19/4.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Copiar el enlace que se muestra en la ventana emergente:
-&lt;img src="https://cmas.dev/img/posts/2022/10/19/5.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/10/19/5.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Acceder al navegador de prefrencia y veremos nuestro Visual Studio remoto (que mantiene el enlace con nuestro Visual Studio WSL local):
-&lt;img src="https://cmas.dev/img/posts/2022/10/19/6.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/10/19/6.png" alt="">&lt;/p>
 &lt;/li>
 &lt;/ol>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Aplicación multilingüe en MAUI</title><link>https://cmas.dev/posts/2022-10-05-multi-language-app-maui/</link><pubDate>Wed, 05 Oct 2022 17:48:00 -0400</pubDate><guid>https://cmas.dev/posts/2022-10-05-multi-language-app-maui/</guid><description>&lt;p>En este artículo mostraré cómo crear una aplicación &lt;strong>.NET MAUI&lt;/strong> multilingüe sobre &lt;strong>Windows 11&lt;/strong> utilizando archivos de recursos.&lt;/p>
@@ -952,19 +952,19 @@ Your browser does not support the video tag.
 &lt;ol>
 &lt;li>
 &lt;p>Crear una carpeta con el nombre &lt;em>Localization&lt;/em> (puede tener cualquier nombre) y colocarla dentro de la carpeta &lt;em>Resources&lt;/em>:
-&lt;img src="https://cmas.dev/img/posts/2022/10/05/1.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/10/05/1.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Dentro de dicha carpeta, se crear el archivo de tipo Recurso(.resx):&lt;br>
-&lt;img src="https://cmas.dev/img/posts/2022/10/05/2.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/10/05/2.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Completamos las filas con los registros necesarios (deben ser nombres descriptivos sin espacios ni caracteres especiales):
-&lt;img src="https://cmas.dev/img/posts/2022/10/05/3.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/10/05/3.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Repetimos el paso 2, pero le colocamos las iniciales del idioma que queremos utilizar (en mi caso &lt;strong>es&lt;/strong>) y completamos las fials con las traducciones:
-&lt;img src="https://cmas.dev/img/posts/2022/10/05/4.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/10/05/4.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>¡Listo! Es hora de código &lt;strong>XAML&lt;/strong> y &lt;strong>C#&lt;/strong>&lt;/p>
@@ -1137,11 +1137,11 @@ Your browser does not support the video tag.
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="8">
 &lt;li>
 &lt;p>Ejecutamos la aplicación presionando &lt;em>F5&lt;/em> y veremos en Inglés así:
-&lt;img src="https://cmas.dev/img/posts/2022/10/05/5.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/10/05/5.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Hacemo clic en el botón &amp;ldquo;Change language&amp;rdquo; y debemos ver el español:
-&lt;img src="https://cmas.dev/img/posts/2022/10/05/6.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/10/05/6.png" alt="">&lt;/p>
 &lt;/li>
 &lt;/ol>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Aplicando modelo MVVM con MAUI</title><link>https://cmas.dev/posts/2022-09-28-mvvm-in-maui/</link><pubDate>Wed, 28 Sep 2022 21:06:00 -0400</pubDate><guid>https://cmas.dev/posts/2022-09-28-mvvm-in-maui/</guid><description>&lt;p>En este artículo mostraré cómo aplicar el modelo MVVM en &lt;strong>.NET MAUI&lt;/strong> sobre &lt;strong>Windows 11&lt;/strong>.&lt;/p>
@@ -1248,7 +1248,7 @@ Your browser does not support the video tag.
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="6">
 &lt;li>Ejecutamos el código con &lt;em>F5&lt;/em> y&amp;hellip;
-&lt;img src="https://cmas.dev/img/posts/2022/09/28/1.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/09/28/1.png" alt="">&lt;/li>
 &lt;/ol>
 &lt;p>De esta manera implementamos el modelo MVVM de manera muy rápida y sencilla gracias al paquete &lt;strong>MVVM Toolkit&lt;/strong>.&lt;/p>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Data Binding en MAUI</title><link>https://cmas.dev/posts/2022-09-21-data-binding-in-maui/</link><pubDate>Wed, 21 Sep 2022 20:32:00 -0400</pubDate><guid>https://cmas.dev/posts/2022-09-21-data-binding-in-maui/</guid><description>&lt;p>En este artículo mostraré cómo utilizar la técnica de &lt;em>Data Binding&lt;/em> en una aplicación &lt;strong>.NET MAUI&lt;/strong> sobre &lt;strong>Windows 11&lt;/strong>.&lt;/p>
@@ -1259,15 +1259,15 @@ Your browser does not support the video tag.
 &lt;ol>
 &lt;li>
 &lt;p>Creamos el proyecto en Visual Studio 2022:
-&lt;img src="https://cmas.dev/img/posts/2022/09/21/1.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/09/21/1.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Colocamos un nombre descriptivo al proyecto nuevo:
-&lt;img src="https://cmas.dev/img/posts/2022/09/21/2.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/09/21/2.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Seleccionamos el .NET Core que deseamos utilizar:
-&lt;img src="https://cmas.dev/img/posts/2022/09/21/3.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/09/21/3.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>En el archivo &lt;strong>MainPage.xaml&lt;/strong> verificamos el código &lt;strong>XAML&lt;/strong>:&lt;/p>
@@ -1351,7 +1351,7 @@ Your browser does not support the video tag.
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="7">
 &lt;li>Ejecutamos el código con &lt;em>F5&lt;/em> y veremos la aplicación Windows:
-&lt;img src="https://cmas.dev/img/posts/2022/09/21/4.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/09/21/4.png" alt="">&lt;/li>
 &lt;/ol>
 &lt;p>Bien hasta aquí no hay nada extraño en ningún lado.&lt;/p>
 &lt;h2 id="databinding-en-net-maui">DataBinding en .NET MAUI&lt;/h2>
@@ -1415,12 +1415,12 @@ Your browser does not support the video tag.
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> HorizontalOptions=&amp;#34;Center&amp;#34; /&amp;gt;
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="6">
 &lt;li>Ejecutamos la aplicación y nos queda así:
-&lt;img src="https://cmas.dev/img/posts/2022/09/21/5.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/09/21/5.png" alt="">&lt;/li>
 &lt;/ol>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Primeros pasos con XAML en MAUI</title><link>https://cmas.dev/posts/2022-09-14-first-step-xaml-in-maui/</link><pubDate>Wed, 14 Sep 2022 23:18:00 -0400</pubDate><guid>https://cmas.dev/posts/2022-09-14-first-step-xaml-in-maui/</guid><description>&lt;p>En este artículo mostraré cómo iniciar los pasos con el lenguaje &lt;strong>XAML&lt;/strong> en &lt;strong>.NET MAUI&lt;/strong>.&lt;/p>
 &lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 25201&lt;/strong>&lt;/em>&lt;/p>
-&lt;p>En este pequeño artículo vamos a utilizar controles de Telerik para &lt;strong>.NET MAUI&lt;/strong>. En un &lt;a href="https://cmas.dev/">artículo anterior&lt;/a> vimos cómo crear una aplicación &lt;strong>.NET MAUI&lt;/strong> y aquí haremos otra basada en otra plantilla (&lt;a href="https://www.telerik.com/support/whats-new/maui-ui/release-history/telerik-ui-for-net-maui-(version-3-0-0)">Telerik&lt;/a>).
-&lt;img src="https://cmas.dev/img/posts/2022/09/14/1.png">&lt;/p>
+&lt;p>En este pequeño artículo vamos a utilizar controles de Telerik para &lt;strong>.NET MAUI&lt;/strong>. En un &lt;a href="">artículo anterior&lt;/a> vimos cómo crear una aplicación &lt;strong>.NET MAUI&lt;/strong> y aquí haremos otra basada en otra plantilla (&lt;a href="https://www.telerik.com/support/whats-new/maui-ui/release-history/telerik-ui-for-net-maui-%28version-3-0-0%29">Telerik&lt;/a>).
+&lt;img src="https://cmas.dev/img/posts/2022/09/14/1.png" alt="">&lt;/p>
 &lt;h2 id="telerik-sidedrawer">Telerik SideDrawer&lt;/h2>
 &lt;p>Este control (conocido como Menú Hamburguesa) se utiliza para hacer la navegación muy amigable debido a que el menú queda al costado de nuestro diseño y permite una visualización completa del mismo. En Windows 11 se refiere a &lt;a href="https://learn.microsoft.com/en-us/windows/apps/design/controls/navigationview">NavigationView&lt;/a>.&lt;/p>
 &lt;p>La definición del control, en lenguaje &lt;strong>XAML&lt;/strong>, sería:&lt;/p>
@@ -1465,8 +1465,8 @@ Your browser does not support the video tag.
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;/ContentPage&amp;gt;
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Con esta definición declarativa logramos que el control tenga todos los detalles necesarios para su funcionamiento.&lt;/p>
 &lt;p>Visualmente, el resultado del código XAML es:
-&lt;img src="https://cmas.dev/img/posts/2022/09/14/2.png">&lt;br>
-&lt;img src="https://cmas.dev/img/posts/2022/09/14/3.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/09/14/2.png" alt="">&lt;br>
+&lt;img src="https://cmas.dev/img/posts/2022/09/14/3.png" alt="">&lt;/p>
 &lt;p>Si realmente necesitas aprender &lt;strong>XAML&lt;/strong>, la documentación de Microsft &lt;a href="https://learn.microsoft.com/es-es/dotnet/maui/xaml/fundamentals/get-started?view=net-maui-7.0">aquí&lt;/a> está muy completa.&lt;/p>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Mi primera aplicación con Windows App SDK</title><link>https://cmas.dev/posts/2022-09-07-first-windows-app-reactjs/</link><pubDate>Wed, 07 Sep 2022 19:14:00 -0400</pubDate><guid>https://cmas.dev/posts/2022-09-07-first-windows-app-reactjs/</guid><description>&lt;p>En este artículo mostraré cómo crear una aplicación con &lt;strong>Windows App SDK&lt;/strong> en &lt;strong>React&lt;/strong>. &lt;em>Ojo&lt;/em>: Es mi primera prueba con React (nunca lo he usado).&lt;/p>
 &lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 25188&lt;/strong>&lt;/em>&lt;/p>
@@ -1487,7 +1487,7 @@ Your browser does not support the video tag.
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">npx react-native init TestApp --template react-native@^0.70.0
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="3">
 &lt;li>La instalación quedará algo así:
-&lt;img src="https://cmas.dev/img/posts/2022/09/07/1.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/09/07/1.png" alt="">&lt;/li>
 &lt;li>Ir a la carpeta creada:&lt;/li>
 &lt;/ol>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">cd TestApp
@@ -1505,13 +1505,13 @@ Your browser does not support the video tag.
 &lt;h2 id="creación-de-aplicación">Creación de aplicación&lt;/h2>
 &lt;ol>
 &lt;li>Abrir un proyecto existente desde Visual studoo 2022:
-&lt;img src="https://cmas.dev/img/posts/2022/09/07/2.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/09/07/2.png" alt="">&lt;/li>
 &lt;li>En Power Shell, escribir lo siguiente (para arrancar el servidorcillo):&lt;/li>
 &lt;/ol>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">npm start
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="3">
 &lt;li>Ejecutamos la aplicación desde Visual Studio 2022 (la compilación demora un poco dependiendo de la capacidad del equipo de desarrollo):
-&lt;img src="https://cmas.dev/img/posts/2022/09/07/3.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/09/07/3.png" alt="">&lt;/li>
 &lt;/ol>
 &lt;p>Y con esto tenemos nuestra primera aplciación &lt;strong>Windows App SDK&lt;/strong> con &lt;strong>React&lt;/strong>.&lt;/p>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Preparando entorno para desarrollo con Windows App SDK</title><link>https://cmas.dev/posts/2022-08-31-preparing-windows-app-sdk/</link><pubDate>Wed, 31 Aug 2022 22:36:00 -0400</pubDate><guid>https://cmas.dev/posts/2022-08-31-preparing-windows-app-sdk/</guid><description>&lt;p>En este artículo mostraré cómo preparar el entorno para el desarrollo de aplicaciones con &lt;strong>Windows App SDK&lt;/strong>.&lt;/p>
@@ -1524,36 +1524,36 @@ Your browser does not support the video tag.
 &lt;li>Descargamos la extensión de C# para Visual Studio 2022 desde &lt;a href="https://aka.ms/windowsappsdk/1.1/1.1.5/WindowsAppSDK.Cs.Extension.Dev17.Standalone.vsix">aquí&lt;/a>&lt;/li>
 &lt;/ol>
 &lt;p>Con estos pasos hemos cumplido el objetivo, pero para asegurarnos debemos ir al instalador de Visual Studio 2022 y verificar que esté seleccionada la opción de .NET Desktop Applications:
-&lt;img src="https://cmas.dev/img/posts/2022/08/31/1.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/08/31/1.png" alt="">&lt;/p>
 &lt;p>Con esta opción podemos empezar a desarrollar aplicaciones para Windows 11 (10 también pero ya es obsoleto jaja)&lt;/p>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Mi Primera Aplicación MAUI</title><link>https://cmas.dev/posts/2022-08-24-first-app-in-maui/</link><pubDate>Wed, 24 Aug 2022 21:04:00 -0400</pubDate><guid>https://cmas.dev/posts/2022-08-24-first-app-in-maui/</guid><description>&lt;p>En este artículo mostraré cómo crear la primera aplicación &lt;strong>.NET MAUI&lt;/strong> preparada para Android y Windows 11.&lt;/p>
 &lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 25188&lt;/strong>&lt;/em>&lt;/p>
 &lt;p>Para crear un proyecto .NET MAUI no se necesitan demasiados pasos para lograr el objetivo, basta con seguir estos sencillos pasos que se muestran a continuación.&lt;/p>
 &lt;ol>
 &lt;li>Crear un nuevo proyecto:
-&lt;img src="https://cmas.dev/img/posts/2022/08/24/1.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/08/24/1.png" alt="">&lt;/li>
 &lt;li>Colocar un nombre descriptivo:
-&lt;img src="https://cmas.dev/img/posts/2022/08/24/2.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/08/24/2.png" alt="">&lt;/li>
 &lt;li>Seleccionar el Framework y creamos el proyecto:
-&lt;img src="https://cmas.dev/img/posts/2022/08/24/3.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/08/24/3.png" alt="">&lt;/li>
 &lt;li>Verificamos la estructura del proyecto y las plataformas habilitadas:
-&lt;img src="https://cmas.dev/img/posts/2022/08/24/4.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/08/24/4.png" alt="">&lt;/li>
 &lt;li>Ejecutamos la aplicación en Windows (usa Windows App SDK):
-&lt;img src="https://cmas.dev/img/posts/2022/08/24/5.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/08/24/5.png" alt="">&lt;/li>
 &lt;li>Cambiamos el escenario a un emulador Android:
-&lt;img src="https://cmas.dev/img/posts/2022/08/24/6.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/08/24/6.png" alt="">&lt;/li>
 &lt;li>Lo ejecutamos para probar:
-&lt;img src="https://cmas.dev/img/posts/2022/08/24/7.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/08/24/7.png" alt="">&lt;/li>
 &lt;/ol>
 &lt;p>¡Listo! Así hemos creado nuestro proyecto &lt;strong>.NET MAUI&lt;/strong> sin demasiado esfuerzo.&lt;/p>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Estructura básica de un proyecto MAUI</title><link>https://cmas.dev/posts/2022-08-17-basic-struct-of-maui-project/</link><pubDate>Wed, 17 Aug 2022 18:07:00 -0400</pubDate><guid>https://cmas.dev/posts/2022-08-17-basic-struct-of-maui-project/</guid><description>&lt;p>En este artículo mostraré cómo es la estructura básica de un proyecto &lt;strong>.NET MAUI&lt;/strong> .&lt;/p>
 &lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 25179&lt;/strong>&lt;/em>&lt;/p>
 &lt;p>Primeramente, debemos conocer la estructura en sí de &lt;strong>.NET MAUI&lt;/strong> que se encuentra en el sitio oficial de Microsoft. La documentación oficial se encuentra &lt;a href="https://learn.microsoft.com/es-es/dotnet/maui/what-is-maui?view=net-maui-7.0">aquí&lt;/a>&lt;/p>
 &lt;p>Funcionalmente, .NET MAUI opera de la siguiente manera:
-&lt;img src="https://cmas.dev/img/posts/2022/08/17/1.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/08/17/1.png" alt="">&lt;/p>
 &lt;h2 id="estructura-del-proyecto-net-maui">Estructura del proyecto .NET MAUI&lt;/h2>
 &lt;p>El proyecto que se crea en &lt;strong>.NET MAUI&lt;/strong> posee la siguiente estructura:
-&lt;img src="https://cmas.dev/img/posts/2022/08/17/2.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/08/17/2.png" alt="">&lt;/p>
 &lt;h3 id="dependencias-dependencies">Dependencias (Dependencies)&lt;/h3>
 &lt;p>Las dependencias son los paquetes (librerías) disponibles para cada plataforma soportada en &lt;strong>.NET MAUI&lt;/strong>.&lt;/p>
 &lt;p>En este caso serían:&lt;/p>
@@ -1580,9 +1580,9 @@ Your browser does not support the video tag.
 &lt;h2 id="instalar-visual-studio-2022">Instalar Visual Studio 2022&lt;/h2>
 &lt;p>Instalar Visual Studio 2022 es bien sencillo.&lt;/p>
 &lt;ol>
-&lt;li>Descargar el instalador nuevo &lt;a href="https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=Professional&amp;channel=Release&amp;version=VS2022&amp;source=VSLandingPage&amp;cid=2030&amp;passive=false">aquí&lt;/a>&lt;/li>
+&lt;li>Descargar el instalador nuevo &lt;a href="https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=Professional&amp;amp;channel=Release&amp;amp;version=VS2022&amp;amp;source=VSLandingPage&amp;amp;cid=2030&amp;amp;passive=false">aquí&lt;/a>&lt;/li>
 &lt;li>Ejecutar el instalador y seguir los pasos en pantalla hasta la selección de componente, allí debemos seleccionar la opción correspondiente a &lt;strong>.NET MAUI&lt;/strong>:
-&lt;img src="https://cmas.dev/img/posts/2022/08/10/1.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/08/10/1.png" alt="">&lt;/li>
 &lt;li>Aguardamos que finalice la instalación y listo.&lt;/li>
 &lt;/ol>
 &lt;p>&lt;strong>.NET MAUI&lt;/strong> instalará la última API de Android disponible y preparará Windows 11 para que podamos ejecutar nuestra Applicación.&lt;/p>
@@ -1675,24 +1675,24 @@ Your browser does not support the video tag.
 &lt;p>Primeramente, crearemos la aplicación &lt;strong>ASP.NET Core&lt;/strong> básica y la ejecutaremos para verla en el navegador.&lt;/p>
 &lt;ol>
 &lt;li>Creamos un nuevo proyecto &lt;strong>ASP.NET Core&lt;/strong>:
-&lt;img src="https://cmas.dev/img/posts/2022/07/20/1.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/07/20/1.png" alt="">&lt;/li>
 &lt;li>Colocamos un nombre al proyecto:
-&lt;img src="https://cmas.dev/img/posts/2022/07/20/2.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/07/20/2.png" alt="">&lt;/li>
 &lt;li>Seleccionamos el Framework que se ajusta a nuestras necesidades:
-&lt;img src="https://cmas.dev/img/posts/2022/07/20/3.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/07/20/3.png" alt="">&lt;/li>
 &lt;li>Ejecutamos la aplicación (presionando la tecla &lt;em>F5&lt;/em>), veremos el servidor y la web funcionando:
-&lt;img src="https://cmas.dev/img/posts/2022/07/20/4.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/07/20/4.png" alt="">&lt;/li>
 &lt;/ol>
 &lt;p>Listo, ya tenemos nuestra aplicación Web.&lt;/p>
 &lt;h2 id="aplicación-uwp-univesal-windows-platform">Aplicación UWP (Univesal Windows Platform)&lt;/h2>
 &lt;p>Crearemos la aplicación &lt;strong>UWP&lt;/strong> apuntando a &lt;strong>Windows 11&lt;/strong> como Sistema operativo.&lt;/p>
 &lt;ol>
 &lt;li>Creamos un nuevo proyecto &lt;strong>Universal Windows&lt;/strong>:
-&lt;img src="https://cmas.dev/img/posts/2022/07/20/5.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/07/20/5.png" alt="">&lt;/li>
 &lt;li>Colocamos un nombre al proyecto:
-&lt;img src="https://cmas.dev/img/posts/2022/07/20/6.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/07/20/6.png" alt="">&lt;/li>
 &lt;li>Seleccionamos las versiones para Windows que estarán disponibles:
-&lt;img src="https://cmas.dev/img/posts/2022/07/20/7.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/07/20/7.png" alt="">&lt;/li>
 &lt;li>Escribimos el código necesario para que nuestra web app pueda verse:&lt;/li>
 &lt;/ol>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">&amp;lt;Page
@@ -1712,12 +1712,12 @@ Your browser does not support the video tag.
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="5">
 &lt;li>
 &lt;p>Ejecutamos la aplicación (presionando la tecla &lt;em>F5&lt;/em>), veremos&amp;hellip; nada:
-&lt;img src="https://cmas.dev/img/posts/2022/07/20/8.png">&lt;br>
+&lt;img src="https://cmas.dev/img/posts/2022/07/20/8.png" alt="">&lt;br>
 Esto debido a que la librería no está soportada y necesita la nueva versión (acaba de ser lanzada &lt;a href="https://www.nuget.org/packages/Microsoft.UI.Xaml/2.8.0">aquí&lt;/a>).&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Procedemos a cargar el nuevo paquete desde &lt;strong>Nuget&lt;/strong>, para ellos vamos a **** &amp;gt; &amp;gt; :
-&lt;img src="https://cmas.dev/img/posts/2022/07/20/9.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/07/20/9.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Colocamos el código nuevo para que esto nos funcione:&lt;/p>
@@ -1740,7 +1740,7 @@ Esto debido a que la librería no está soportada y necesita la nueva versión (
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;/Page&amp;gt;
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="7">
 &lt;li>Ejecutamos la aplicación (presionando la tecla &lt;em>F5&lt;/em>), veremos nuestra web app funcionando:
-&lt;img src="https://cmas.dev/img/posts/2022/07/20/10.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/07/20/10.png" alt="">&lt;/li>
 &lt;/ol>
 &lt;p>Parece algo muy sencillo, pero me tomó algunos días poder encontrar que el problema estaba en la actualización de la librería &lt;strong>Microsoft.UI&lt;/strong>&lt;/p>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>¿Por qué elegir aplicaciones de escritorio en 2022?</title><link>https://cmas.dev/posts/2022-07-13-why-desktop-apps-in-2022/</link><pubDate>Wed, 13 Jul 2022 23:16:00 -0400</pubDate><guid>https://cmas.dev/posts/2022-07-13-why-desktop-apps-in-2022/</guid><description>&lt;p>En este corto artículo intentaré convencerlos de por qué sigue siendo bueno y rentable crear aplicaciones de escritorio en 2022.&lt;/p>
@@ -1898,7 +1898,7 @@ Esto debido a que la librería no está soportada y necesita la nueva versión (
 &lt;p>Preparamos WSL para la instalación de Node.js&lt;/p>
 &lt;ol>
 &lt;li>Verificamos las versiones de Node.js y NVM que tenemos instaladas (se supone que no las tenemos):
-&lt;img src="https://cmas.dev/img/posts/2022/06/08/1.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/06/08/1.png" alt="">&lt;/li>
 &lt;li>Procedemos a instalar NVM (Node Version Manager):&lt;/li>
 &lt;/ol>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
@@ -1908,7 +1908,7 @@ Esto debido a que la librería no está soportada y necesita la nueva versión (
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">nvm install node
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="4">
 &lt;li>Verificamos las versiones y listo:
-&lt;img src="https://cmas.dev/img/posts/2022/06/08/2.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/06/08/2.png" alt="">&lt;/li>
 &lt;/ol>
 &lt;h2 id="aplicacion-en-visual-studio-code">Aplicacion en Visual Studio Code&lt;/h2>
 &lt;p>Dentro del Visual Studio Code creamos la aplicación y procedemos a ejecutarla normalmente.&lt;/p>
@@ -1924,24 +1924,24 @@ Esto debido a que la librería no está soportada y necesita la nueva versión (
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">})&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">listen&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">8080&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="3">
 &lt;li>Presionamos la tecla &lt;em>F5&lt;/em> y seleccionamos la opción &lt;strong>Node.js&lt;/strong>:
-&lt;img src="https://cmas.dev/img/posts/2022/06/08/4.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/06/08/4.png" alt="">&lt;/li>
 &lt;li>Veremos los controles de depuración y en la consola veremos que ha creado la aplicación:
-&lt;img src="https://cmas.dev/img/posts/2022/06/08/5.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/06/08/5.png" alt="">&lt;/li>
 &lt;li>En el navegador de preferencia, colocamos la URL definida en el código y vermeos nuestro pequeña applicación:
-&lt;img src="https://cmas.dev/img/posts/2022/06/08/6.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/06/08/6.png" alt="">&lt;/li>
 &lt;/ol>
 &lt;h2 id="aplicacion-en-visual-studio-code-con-wsl">Aplicacion en Visual Studio Code con WSL&lt;/h2>
 &lt;p>Dentro del Visual Studio Code creamos la aplicación y procedemos a ejecutarla en WSL.&lt;/p>
 &lt;ol>
 &lt;li>Descargar la extensión para desarrollo remoto &lt;a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl">aquí&lt;/a>&lt;/li>
 &lt;li>Abrimos una nueva ventana de Visual Studio Code y hacemos clicn en el icono de acceso remoto:
-&lt;img src="https://cmas.dev/img/posts/2022/06/08/7.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/06/08/7.png" alt="">&lt;/li>
 &lt;li>Seleccionamos la opción de distro para WSL:
-&lt;img src="https://cmas.dev/img/posts/2022/06/08/8.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/06/08/8.png" alt="">&lt;/li>
 &lt;li>Marcamos la opción Ubuntu:
-&lt;img src="https://cmas.dev/img/posts/2022/06/08/9.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/06/08/9.png" alt="">&lt;/li>
 &lt;li>Abrimos la carpeta donde almacenaremos el proyecto (en Ubuntu):
-&lt;img src="https://cmas.dev/img/posts/2022/06/08/10.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/06/08/10.png" alt="">&lt;/li>
 &lt;li>Escribimos las siguientes líneas de código (con algunas diferencias del código anterior):&lt;/li>
 &lt;/ol>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">var&lt;/span> &lt;span class="n">http&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">require&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;http&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
@@ -1952,9 +1952,9 @@ Esto debido a que la librería no está soportada y necesita la nueva versión (
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">})&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">listen&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">8081&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="7">
 &lt;li>Ejecutamos la aplicación desde la Terminal de &lt;strong>Ubuntu&lt;/strong>:
-&lt;img src="https://cmas.dev/img/posts/2022/06/08/12.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/06/08/12.png" alt="">&lt;/li>
 &lt;li>Abrimos el navegador y colocamos la dirección que especificamos en el código:
-&lt;img src="https://cmas.dev/img/posts/2022/06/08/13.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/06/08/13.png" alt="">&lt;/li>
 &lt;/ol>
 &lt;p>De esta manera hemos realizado una aplicación NodeJs en &lt;strong>Windows&lt;/strong> directamente así como en &lt;strong>WSL&lt;/strong>. Ambas opciones son válidas, nada más depende de la elección del desarrollador.&lt;/p>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>WSL: Ejecutar aplicaciones con GUI Linux</title><link>https://cmas.dev/posts/2022-06-01-wsl-run-apps-gui-ubuntu/</link><pubDate>Wed, 01 Jun 2022 18:32:00 -0400</pubDate><guid>https://cmas.dev/posts/2022-06-01-wsl-run-apps-gui-ubuntu/</guid><description>&lt;p>En este artículo mostraré cómo utilizar aplicaciones Linux (con interfaz de usuario) gracias a &lt;strong>Windows Subsystem for Linux&lt;/strong> .&lt;/p>
@@ -1964,23 +1964,23 @@ Esto debido a que la librería no está soportada y necesita la nueva versión (
 &lt;p>En este caso instalaremos el reproductor multimedia VLC:&lt;/p>
 &lt;ol>
 &lt;li>Nos dirigimos a Ubuntu &lt;strong>Windows Subsystem for Linux&lt;/strong>
-&lt;img src="https://cmas.dev/img/posts/2022/06/01/1.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/06/01/1.png" alt="">&lt;/li>
 &lt;li>Colocamos el comando que instala la aplicación con &lt;strong>apt&lt;/strong>:&lt;/li>
 &lt;/ol>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">sudo apt install vlc -y
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="3">
 &lt;li>Procede a instalar y nos arroja el resultado:
-&lt;img src="https://cmas.dev/img/posts/2022/06/01/2.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/06/01/2.png" alt="">&lt;/li>
 &lt;li>Colocamos el comando que ejecuta la aplicación y&amp;hellip;&lt;/li>
 &lt;/ol>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">vlc
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="5">
 &lt;li>Veremos la aplicación ejecutada:
-&lt;img src="https://cmas.dev/img/posts/2022/06/01/3.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/06/01/3.png" alt="">&lt;/li>
 &lt;li>Si buscamos la App desde el Menú Inicio de &lt;strong>Windows&lt;/strong> la encontraremos:
-&lt;img src="https://cmas.dev/img/posts/2022/06/01/4.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/06/01/4.png" alt="">&lt;/li>
 &lt;li>La aplicación se ejecuta de manera nativa en &lt;strong>Windows&lt;/strong>:
-&lt;img src="https://cmas.dev/img/posts/2022/06/01/5.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/06/01/5.png" alt="">&lt;/li>
 &lt;/ol>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Estructura básica de un proyecto con Windows App SDK</title><link>https://cmas.dev/posts/2022-05-25-basic-struct-of-windows-app-sdk-project/</link><pubDate>Wed, 25 May 2022 18:45:00 -0400</pubDate><guid>https://cmas.dev/posts/2022-05-25-basic-struct-of-windows-app-sdk-project/</guid><description>&lt;p>En este artículo intentaré explicar lo que entiendo es la estructura básica de &lt;strong>Windows App SDK&lt;/strong>, pues resulta algo nuevo para mí (en el pasado desarrollaba con WPF y después con UWP en sus inicios). En un &lt;a href="https://cmas.dev/posts/2022-05-18-windows-app-sdk-development/">artículo anterior&lt;/a> hemos visto los primeros pasos en esta plataforma.&lt;/p>
 &lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 25126&lt;/strong>&lt;/em>&lt;/p>
@@ -2032,15 +2032,15 @@ Esto debido a que la librería no está soportada y necesita la nueva versión (
 &lt;p>Para la creación del proyecto debemos realizar los siguientes pasos:&lt;/p>
 &lt;ol>
 &lt;li>Crear un proyecto de tipo &lt;strong>WinUI 3&lt;/strong>
-&lt;img src="https://cmas.dev/img/posts/2022/05/18/1.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/05/18/1.png" alt="">&lt;/li>
 &lt;li>Se coloca un nombre descriptivo para el proyecto:
-&lt;img src="https://cmas.dev/img/posts/2022/05/18/2.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/05/18/2.png" alt="">&lt;/li>
 &lt;li>Se crea el proyecto con los siguientes archivos:
-&lt;img src="https://cmas.dev/img/posts/2022/05/18/3.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/05/18/3.png" alt="">&lt;/li>
 &lt;li>Procedemos a ejecutar la aplicación (y se ejecutará en nuestro &lt;strong>Windows 11&lt;/strong> directamente):
-&lt;img src="https://cmas.dev/img/posts/2022/05/18/4.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/05/18/4.png" alt="">&lt;/li>
 &lt;li>Veremos la aplicación ejecutada:
-&lt;img src="https://cmas.dev/img/posts/2022/05/18/5.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/05/18/5.png" alt="">&lt;/li>
 &lt;/ol>
 &lt;p>Con esto logramos crear nuestra primera aplicación &lt;strong>WinUI 3&lt;/strong>.&lt;/p>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>UWP en Windows 11</title><link>https://cmas.dev/posts/2022-05-11-uwp-in-windows-11/</link><pubDate>Wed, 11 May 2022 19:53:00 -0400</pubDate><guid>https://cmas.dev/posts/2022-05-11-uwp-in-windows-11/</guid><description>&lt;p>En este artículo mostraré cómo crear una aplicación UWP (Universal Windows Platform) en Windows 11 (aunque ya debemos ir dejándola ;)).&lt;/p>
@@ -2055,13 +2055,13 @@ Esto debido a que la librería no está soportada y necesita la nueva versión (
 &lt;p>Para la creación del proyecto debemos seguir los siguientes pasos:&lt;/p>
 &lt;ol>
 &lt;li>Crear una nueva aplicación en Visual Studio:
-&lt;img src="https://cmas.dev/img/posts/2022/05/11/1.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/05/11/1.png" alt="">&lt;/li>
 &lt;li>Colocamos el nombre descriptivo para el nuevo proyecto:
-&lt;img src="https://cmas.dev/img/posts/2022/05/11/2.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/05/11/2.png" alt="">&lt;/li>
 &lt;li>Seleccionamos la versión del destino (En Windows 11):
-&lt;img src="https://cmas.dev/img/posts/2022/05/11/3.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/05/11/3.png" alt="">&lt;/li>
 &lt;li>Verificamos que el proyecto se haya creado correctamente:
-&lt;img src="https://cmas.dev/img/posts/2022/05/11/4.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/05/11/4.png" alt="">&lt;/li>
 &lt;li>Agregamos un control de prueba para poder ejecutarlo:&lt;/li>
 &lt;/ol>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">&amp;lt;Page
@@ -2080,9 +2080,9 @@ Esto debido a que la librería no está soportada y necesita la nueva versión (
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;/Page&amp;gt;
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="6">
 &lt;li>Ejecutamos la aplicación:
-&lt;img src="https://cmas.dev/img/posts/2022/05/11/5.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/05/11/5.png" alt="">&lt;/li>
 &lt;li>Voilá, tenemos nuestra primera app UWP para Windows 11:
-&lt;img src="https://cmas.dev/img/posts/2022/05/11/6.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/05/11/6.png" alt="">&lt;/li>
 &lt;/ol>
 &lt;p>Si bien es cierto, se recomienda que las aplicaciones para Windows sean creadas con WinUI, aún es posible desarrollarlas con UWP (pero es recomendable hacer la migración correspondiente).&lt;/p>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>WSL sin internet</title><link>https://cmas.dev/posts/2022-04-27-wsl-no-internet/</link><pubDate>Wed, 27 Apr 2022 12:26:00 -0400</pubDate><guid>https://cmas.dev/posts/2022-04-27-wsl-no-internet/</guid><description>&lt;p>En este artículo mostraré cómo conectar a internet en &lt;strong>Windows Subsystem for Linux&lt;/strong> para cualquier distro (pero aquí siempre con Ubuntu) utilizando &lt;strong>Windows Terminal&lt;/strong>.&lt;/p>
@@ -2090,20 +2090,20 @@ Esto debido a que la librería no está soportada y necesita la nueva versión (
 &lt;p>Debemos seguir algunos pasos sencillos para poder habilitar internet de manera permanente en nuestra distro preferida.&lt;/p>
 &lt;h2 id="conexión-a-internet-en-windows-subsystem-for-linux">Conexión a internet en Windows Subsystem for Linux&lt;/h2>
 &lt;p>Primero, hacemos ping a algún DNS (que tenga salida a internet):
-&lt;img src="https://cmas.dev/img/posts/2022/04/27/wsl1.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/04/27/wsl1.png" alt="">&lt;/p>
 &lt;p>Entonces, debemos abrirl el archivo &lt;strong>resolv.conf&lt;/strong> que se encuentra en nuestro distro WSL:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">nano /etc/resolv.conf
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Abrirá el editor y procedemos a verificar el dato presente allí:
-&lt;img src="https://cmas.dev/img/posts/2022/04/27/wsl3.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/04/27/wsl3.png" alt="">&lt;/p>
 &lt;p>Esa IP es privada. ¡Quítala de allí! y usemos el DNS de Google:
-&lt;img src="https://cmas.dev/img/posts/2022/04/27/wsl4.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/04/27/wsl4.png" alt="">&lt;/p>
 &lt;p>Probemos nuestro comando &lt;strong>ping&lt;/strong> a ver que ocurre:
-&lt;img src="https://cmas.dev/img/posts/2022/04/27/wsl5.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/04/27/wsl5.png" alt="">&lt;/p>
 &lt;h2 id="configuración-permanente-para-acceso-a-internet">Configuración permanente para acceso a Internet&lt;/h2>
 &lt;p>Como paso de prueba podemos salir de Ubuntu (emular el apagado de equipo desde &lt;strong>Windows Terminal&lt;/strong>, no desde Ubuntu):
-&lt;img src="https://cmas.dev/img/posts/2022/04/27/wsl6.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/04/27/wsl6.png" alt="">&lt;/p>
 &lt;p>Iniciamos Ubuntu nuevamente y probamos &lt;strong>ping&lt;/strong>:
-&lt;img src="https://cmas.dev/img/posts/2022/04/27/wsl1.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/04/27/wsl1.png" alt="">&lt;/p>
 &lt;p>¡BOOM!&lt;/p>
 &lt;p>Corregimos esto al estilo Ubuntu, con &lt;strong>Terminal&lt;/strong>:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">sudo bash -c &amp;#39;echo -e &amp;#34;[network]
@@ -2113,7 +2113,7 @@ Esto debido a que la librería no está soportada y necesita la nueva versión (
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">nameserver 8.8.4.4&amp;#34; &amp;gt; /etc/resolv.conf
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">chattr -f +i /etc/resolv.conf&amp;#39;
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Con esto, logramos que todo funcione correctamente&amp;gt;
-&lt;img src="https://cmas.dev/img/posts/2022/04/27/wsl5.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/04/27/wsl5.png" alt="">&lt;/p>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Configurando mi ambiente WSL</title><link>https://cmas.dev/posts/2022-04-26-configuring-my-wsl-environment/</link><pubDate>Tue, 26 Apr 2022 20:41:00 -0400</pubDate><guid>https://cmas.dev/posts/2022-04-26-configuring-my-wsl-environment/</guid><description>&lt;p>En este artículo mostraré cómo configurar un ambiente de desarrollo WSL (Windows Subsystem Linux) dentro de Windows para el desarrollo de aplicaciones en múltiples plataformas (que en el futuro iré asociando a este artículo). Para este artículo ya tenemos disponible la nueva distro de Ubuntu 22.04 (recientemente lanzada).&lt;/p>
 &lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 22598&lt;/strong>&lt;/em>&lt;/p>
 &lt;p>Debemos seguir algunos pasos para poder habilitar el WSL (Windows Subsystem for Linux) en Windows 11. Es excelente esto para probar todo tipo de aplicaciones sin salir de Windows. Especialmente preparado para .NET Core :)&lt;/p>
@@ -2122,23 +2122,23 @@ Esto debido a que la librería no está soportada y necesita la nueva versión (
 &lt;ol>
 &lt;li>Nos dirigimos a &lt;strong>Panel de Control&lt;/strong> &amp;gt; &lt;strong>Programas&lt;/strong> &amp;gt; &lt;strong>Habilitar funcionalidades de Windows&lt;/strong>.&lt;/li>
 &lt;li>Buscar la opción &lt;strong>Windows Subsystem for Linux&lt;/strong>, marcamos la opción y hacemos clic en &lt;strong>Aceptar&lt;/strong>:
-&lt;img src="https://cmas.dev/img/posts/2022/04/26/Wsl1.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/04/26/Wsl1.png" alt="">&lt;/li>
 &lt;li>Cuando termine la instalación debemos reiniciar el sistema operativo y veremos este nuevo enlace en el &lt;strong>Explorador de archivos&lt;/strong>:
-&lt;img src="https://cmas.dev/img/posts/2022/04/26/Wsl2.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/04/26/Wsl2.png" alt="">&lt;/li>
 &lt;/ol>
 &lt;h2 id="instalamos-la-distro-de-preferencia">Instalamos la distro de preferencia&lt;/h2>
 &lt;p>En mi caso selecciono Ubuntu, pero existen otras que se encuentran disponibles para su instalación. Aquí procedemos a instalar desde &lt;strong>Microsoft Store&lt;/strong>:
-&lt;img src="https://cmas.dev/img/posts/2022/04/26/Wsl3.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/04/26/Wsl3.png" alt="">&lt;/p>
 &lt;p>Una vez que haya culminado la instalación, procedemos a abrir la nueva App (sí, se encuentra como una App):
-&lt;img src="https://cmas.dev/img/posts/2022/04/26/Wsl4.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/04/26/Wsl4.png" alt="">&lt;/p>
 &lt;h2 id="windows-terminal">Windows Terminal&lt;/h2>
 &lt;p>Aquí es donde empezamos a disfrutar de nuestra distro de Linux favorita para empezar a jugar con ella.&lt;/p>
 &lt;p>Creamos un usuario para nuestro sistema operativo Ubuntu (puede o no ser igual al usuario de Windows):
-&lt;img src="https://cmas.dev/img/posts/2022/04/26/Wsl5.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/04/26/Wsl5.png" alt="">&lt;/p>
 &lt;p>Por último, accedemos a la terminal de Ubuntu y realizamos las tareas que queramos dentro de Ubuntu, que está dentro de Windows 11.
-&lt;img src="https://cmas.dev/img/posts/2022/04/26/Wsl6.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/04/26/Wsl6.png" alt="">&lt;/p>
 &lt;p>Podemos verificar que distro estamos ejecutando:
-&lt;img src="https://cmas.dev/img/posts/2022/04/26/Wsl7.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/04/26/Wsl7.png" alt="">&lt;/p>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Introducción a Windows Fluent Design System</title><link>https://cmas.dev/posts/2022-04-25-introduction-to-windows-fluent-system/</link><pubDate>Mon, 25 Apr 2022 19:22:00 -0400</pubDate><guid>https://cmas.dev/posts/2022-04-25-introduction-to-windows-fluent-system/</guid><description>&lt;p>En este artículo intentaré enteder y explicar qué es &lt;strong>Windows Fluent Design System&lt;/strong>, por qué es Open Source, para qué se utiliza y que se puede lograr con esto.&lt;/p>
 &lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 22598&lt;/strong>&lt;/em>&lt;/p>
 &lt;p>Personalmente tengo muchas dudas y consultas sobre este punto. Hace un tiempo que veo esto pero no he tenido el tiempo para detenerme a investigar. Así que hagámos juntos el recorrido. Las consultas que me surgen son:&lt;/p>
@@ -2210,11 +2210,11 @@ Esto debido a que la librería no está soportada y necesita la nueva versión (
 &lt;ol>
 &lt;li>Iniciar la aplicación &lt;strong>Windows Subsystem for Android&lt;/strong>&lt;/li>
 &lt;li>Establecer el &lt;strong>Modo desarrollador&lt;/strong>:
-&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb1.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb1.png" alt="">&lt;/li>
 &lt;li>Hacemos clic en la opción &lt;strong>Gestionar configuración de desarrollador&lt;/strong>:
-&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb2.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb2.png" alt="">&lt;/li>
 &lt;li>Habilitamos la opción de &lt;strong>Depuración USB&lt;/strong>:
-&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb3.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb3.png" alt="">&lt;/li>
 &lt;/ol>
 &lt;h2 id="preparar-herramientas-de-android-sdk">Preparar herramientas de Android SDK&lt;/h2>
 &lt;h3 id="preparar-android-sdk-platform-tools">Preparar Android SDk Platform Tools&lt;/h3>
@@ -2225,23 +2225,23 @@ Esto debido a que la librería no está soportada y necesita la nueva versión (
 &lt;h3 id="ubicar-los-archivos">Ubicar los archivos&lt;/h3>
 &lt;ol>
 &lt;li>Debemos crear una nueva carpeta en el directorio principal de Windows y copiar la carpeta descomprimida. Quedaría así:
-&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb4.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb4.png" alt="">&lt;/li>
 &lt;li>Hacemos clic derecho en el icono de Windows en la barra de tareas o &lt;strong>Win&lt;/strong>+&lt;strong>i&lt;/strong>:
-&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb5.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb5.png" alt="">&lt;/li>
 &lt;li>Seleccionamos &lt;strong>Variables de entorno&lt;/strong>:
-&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb6.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb6.png" alt="">&lt;/li>
 &lt;li>Seleccionamos la variable &lt;strong>Path&lt;/strong> y agregamos un nuevo registro:
-&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb7.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb7.png" alt="">&lt;/li>
 &lt;li>Agregamos la ubicación del ejecutable que queremos agregar a la variable:
-&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb8.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb8.png" alt="">&lt;/li>
 &lt;li>Abrimos el comando de windows &lt;strong>CMD&lt;/strong> o &lt;strong>PowerShell&lt;/strong> y probamos el comando &lt;strong>adb&lt;/strong>:&lt;/li>
 &lt;/ol>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">adb devices
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb9.png">&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb9.png" alt="">&lt;/p>
 &lt;h3 id="conexión-al-dispositivo">Conexión al dispositivo&lt;/h3>
 &lt;ol>
 &lt;li>Verificamos la IP del dispositivo (en la configuración de &lt;strong>Windows Subsystem for Android&lt;/strong>):
-&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb10.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb10.png" alt="">&lt;/li>
 &lt;li>Nos conectamos a la IP y al puerto correspondiente:&lt;/li>
 &lt;/ol>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">adb connect 172.18.136.138:5555
@@ -2253,9 +2253,9 @@ Esto debido a que la librería no está soportada y necesita la nueva versión (
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">adb&lt;/span> &lt;span class="n">install&lt;/span> &lt;span class="s2">&amp;#34;C:\Users\chris\Downloads&lt;/span>&lt;span class="se">\a&lt;/span>&lt;span class="s2">ndry.apk&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="3">
 &lt;li>Veremos el icono anclado al menú inicio:
-&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb11.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb11.png" alt="">&lt;/li>
 &lt;li>La aplicación se verá así:
-&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb12.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb12.png" alt="">&lt;/li>
 &lt;/ol>
 &lt;p>Para cualquier aplicación que funcione para Android debemos repetir estos 4 pasos anteriores. Aprovecharé &lt;em>HBO Max&lt;/em> para ver el nuevo Batman&amp;hellip;&lt;/p>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Habilitar Windows Subsystem for Android™️</title><link>https://cmas.dev/posts/2022-04-13-enable-wsa/</link><pubDate>Wed, 13 Apr 2022 13:41:27 -0400</pubDate><guid>https://cmas.dev/posts/2022-04-13-enable-wsa/</guid><description>&lt;p>En este artículo mostraré paso a paso como habilitar el &lt;strong>Windows Subsystem for Android&lt;/strong> en nuestro sistema operativo favorito. Tener en cuenta que al momento de escribir este artículo no está disponible fuera de EEUU.&lt;/p>
@@ -2265,25 +2265,25 @@ Esto debido a que la librería no está soportada y necesita la nueva versión (
 &lt;h2 id="configuraciones-previas">Configuraciones previas&lt;/h2>
 &lt;p>En el momento que estoy escribiendo este artículo no funciona esto fuera de Estados Unidos, pero cambiando la región lo podemos lograr.&lt;/p>
 &lt;p>Para eso, debemos ir a &lt;em>Configuración&lt;/em> &amp;gt; &lt;em>Tiempo y Región&lt;/em>:
-&lt;img src="https://cmas.dev/img/posts/2022/04/13/wsa1.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/04/13/wsa1.png" alt="">&lt;/p>
 &lt;h2 id="habilitación-de-windows-subsystem-for-android">Habilitación de Windows Subsystem for Android&lt;/h2>
 &lt;p>Debemos dirigirnos a &lt;strong>Microsoft Store&lt;/strong>, buscar e instalar &lt;strong>Amazon Appstore&lt;/strong>:
-&lt;img src="https://cmas.dev/img/posts/2022/04/13/wsa2.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/04/13/wsa2.png" alt="">&lt;/p>
 &lt;p>El sistema nos pedirá hacer clic en &lt;strong>Descargar&lt;/strong>:
-&lt;img src="https://cmas.dev/img/posts/2022/04/13/wsa3.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/04/13/wsa3.png" alt="">&lt;/p>
 &lt;p>Veremos el progreso de descarga:
-&lt;img src="https://cmas.dev/img/posts/2022/04/13/wsa4.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/04/13/wsa4.png" alt="">&lt;/p>
 &lt;p>Abrimos la nueva aplicación:
-&lt;img src="https://cmas.dev/img/posts/2022/04/13/wsa5.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/04/13/wsa5.png" alt="">&lt;/p>
 &lt;p>Se inicia el &lt;strong>Windows Subsystem for Android&lt;/strong>:
-&lt;img src="https://cmas.dev/img/posts/2022/04/13/wsa6.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/04/13/wsa6.png" alt="">&lt;/p>
 &lt;p>Iniciamos sesión (o creamos una nueva cuenta) en Amazon y listo.&lt;/p>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Crear acceso directo a máquina virtual</title><link>https://cmas.dev/posts/2022-04-06-windows-11-shortcut-vm/</link><pubDate>Wed, 06 Apr 2022 19:21:43 -0400</pubDate><guid>https://cmas.dev/posts/2022-04-06-windows-11-shortcut-vm/</guid><description>&lt;p>Lo más práctico y útil para un usuario es encontrar lo que busca de manera rápida y sencilla. Es por eso que mostraré los pasos a seguir para crear un acceso directo a una máquina virtual en Hyper-V.&lt;/p>
 &lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 22593&lt;/strong>&lt;/em>&lt;/p>
 &lt;p>Primero debemos dirigirnos a nuestro gestor de máquinas virtuales de Hyper-V y obtener el nombre de la máquina virtual en cuestión (Ubuntu, en este caso):
-&lt;img src="https://cmas.dev/img/posts/2022/04/06/hyperv1.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/04/06/hyperv1.png" alt="">&lt;/p>
 &lt;p>Nos dirigimos al escritorio de Windows, &lt;em>clic derecho&lt;/em> &amp;gt; &lt;em>Nuevo&lt;/em> &amp;gt; &lt;em>Crear acceso directo&lt;/em>:
-&lt;img src="https://cmas.dev/img/posts/2022/04/06/hyperv2.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/04/06/hyperv2.png" alt="">&lt;/p>
 &lt;p>Agregamos la siguiente ubicación de archivo:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">vmconnect.exe localhost &amp;#34;Ubuntu&amp;#34;
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
@@ -2291,11 +2291,11 @@ Esto debido a que la librería no está soportada y necesita la nueva versión (
 &lt;li>&lt;strong>localhost&lt;/strong> porque se trata de nuestra máquina virtual local&lt;/li>
 &lt;li>&lt;strong>Ubuntu&lt;/strong> es el nombre de la máquina virtual&lt;/li>
 &lt;/ul>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/2022/04/06/hyperv3.png">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/2022/04/06/hyperv3.png" alt="">&lt;/p>
 &lt;p>Colocamos un nombre descriptivo a nuestro acceso directo:
-&lt;img src="https://cmas.dev/img/posts/2022/04/06/hyperv4.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/04/06/hyperv4.png" alt="">&lt;/p>
 &lt;p>Veremos en el escritorio el acceso directo creado:
-&lt;img src="https://cmas.dev/img/posts/2022/04/06/hyperv5.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/04/06/hyperv5.png" alt="">&lt;/p>
 &lt;p>Por último, hacemos la prueba del acceso directo:
-&lt;img src="https://cmas.dev/img/posts/2022/04/06/hyperv6.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/04/06/hyperv6.png" alt="">&lt;/p>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item></channel></rss>

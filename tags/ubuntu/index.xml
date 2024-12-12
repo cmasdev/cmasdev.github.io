@@ -32,15 +32,15 @@
 &lt;li>Verificamos que todo esté bien:&lt;/li>
 &lt;/ol>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">mvn -v
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://cmas.dev/img/posts/2022/06/29/1.png">&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://cmas.dev/img/posts/2022/06/29/1.png" alt="">&lt;/p>
 &lt;h2 id="crear-un-proyecto-java-spring-boot">Crear un proyecto Java Spring Boot&lt;/h2>
 &lt;p>No tenemos una plantilla como tal en Visual Studio Code, no es un IDE potente como otros que existen en el mercado para Java.&lt;/p>
 &lt;p>Entonces procedemos con los siguientes pasos:&lt;/p>
 &lt;ol>
 &lt;li>Clonamos el repositorio de GitHub &lt;a href="https://github.com/spring-guides/gs-spring-boot.git">https://github.com/spring-guides/gs-spring-boot.git&lt;/a>
-&lt;img src="https://cmas.dev/img/posts/2022/06/29/2.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/06/29/2.png" alt="">&lt;/li>
 &lt;li>Ejecutamos la applicación y veremos el texto predeterminado:
-&lt;img src="https://cmas.dev/img/posts/2022/06/29/3.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/06/29/3.png" alt="">&lt;/li>
 &lt;/ol>
 &lt;p>Con todo esto tenemos una aplicación Web desarrollada en &lt;strong>Java&lt;/strong> con el servidor corriendo en &lt;strong>Ubuntu&lt;/strong> gracias a &lt;strong>WSL&lt;/strong> sin salis de nuestro sistema operativo &lt;strong>Windows&lt;/strong>.&lt;/p>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Java con WSL parte 1</title><link>https://cmas.dev/posts/2022-06-22-java-with-wsl-part-1/</link><pubDate>Wed, 22 Jun 2022 18:19:00 -0400</pubDate><guid>https://cmas.dev/posts/2022-06-22-java-with-wsl-part-1/</guid><description>&lt;p>En este artículo mostraré cómo instalar y preparar el entorno para el desarrollo de &lt;strong>Java&lt;/strong> sobre &lt;strong>Windows Subsystem for Linux (WSL)&lt;/strong>.&lt;/p>
@@ -54,20 +54,20 @@
 &lt;li>En &lt;strong>WSL:Ubuntu&lt;/strong>, ingresaremos el comando:&lt;/li>
 &lt;/ol>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">code
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://cmas.dev/img/posts/2022/06/22/1.png">&lt;br>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://cmas.dev/img/posts/2022/06/22/1.png" alt="">&lt;br>
 2. En Visual Studio Code (WSL) procedemos a instalar los objetos necesarios (esto debido a que toda la instalación estará en Ubuntu):
-&lt;img src="https://cmas.dev/img/posts/2022/06/22/2.png">&lt;br>
+&lt;img src="https://cmas.dev/img/posts/2022/06/22/2.png" alt="">&lt;br>
 3. Veamos que versión de Java tenemos&amp;hellip;
-&lt;img src="https://cmas.dev/img/posts/2022/06/22/3.png">&lt;br>
+&lt;img src="https://cmas.dev/img/posts/2022/06/22/3.png" alt="">&lt;br>
 4. Debemos instalar el &lt;strong>JVM (Java Virtual Machine)&lt;/strong> para que funcione:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">sudo apt install default-jdk
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://cmas.dev/img/posts/2022/06/22/4.png">&lt;br>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://cmas.dev/img/posts/2022/06/22/4.png" alt="">&lt;br>
 5. Establecemos el &lt;strong>Java Home&lt;/strong>:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">sudo&lt;/span> &lt;span class="n">vi&lt;/span> &lt;span class="o">~/.&lt;/span>&lt;span class="n">bashrc&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">export&lt;/span> &lt;span class="n">JAVA_HOME&lt;/span>&lt;span class="o">=/&lt;/span>&lt;span class="n">usr&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">lib&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">jvm&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">java&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="mi">11&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">openjdk&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">amd64&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="6">
 &lt;li>Verificamos la versión de &lt;strong>Java&lt;/strong>
-&lt;img src="https://cmas.dev/img/posts/2022/06/22/5.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/06/22/5.png" alt="">&lt;/li>
 &lt;/ol>
 &lt;h2 id="instalar-gradle-para-los-proyectos-java">Instalar Gradle para los proyectos Java&lt;/h2>
 &lt;ol>
@@ -105,15 +105,15 @@
 &lt;li>Verificamos que todo esté bien:&lt;/li>
 &lt;/ol>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">gradle -v
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://cmas.dev/img/posts/2022/06/22/6.png">&lt;br>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://cmas.dev/img/posts/2022/06/22/6.png" alt="">&lt;br>
 9. Instalar la extensión &lt;strong>Gradle for Java&lt;/strong>
-&lt;img src="https://cmas.dev/img/posts/2022/06/22/7.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/06/22/7.png" alt="">&lt;/p>
 &lt;h2 id="crear-un-proyecto-java">Crear un proyecto Java&lt;/h2>
 &lt;ol>
 &lt;li>Crear el proyecto Java:
-&lt;img src="https://cmas.dev/img/posts/2022/06/22/8.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/06/22/8.png" alt="">&lt;/li>
 &lt;li>Marcamos la opción de &amp;ldquo;No build tools&amp;rdquo;:
-&lt;img src="https://cmas.dev/img/posts/2022/06/22/9.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/06/22/9.png" alt="">&lt;/li>
 &lt;li>Seguimos las instrucciones en pantalla para la creación del proyecto.&lt;/li>
 &lt;li>Modificamos el archivo &lt;strong>App.java&lt;/strong>:&lt;/li>
 &lt;/ol>
@@ -124,7 +124,7 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="5">
 &lt;li>Ejecutamos la aplicación con &lt;em>F5&lt;/em>:
-&lt;img src="https://cmas.dev/img/posts/2022/06/22/10.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/06/22/10.png" alt="">&lt;/li>
 &lt;/ol>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>ASP.NET Core en Ubuntu</title><link>https://cmas.dev/posts/2022-06-15-aspnet-core-on-ubuntu/</link><pubDate>Wed, 15 Jun 2022 12:08:00 -0400</pubDate><guid>https://cmas.dev/posts/2022-06-15-aspnet-core-on-ubuntu/</guid><description>&lt;p>En este artículo mostraré cómo ejecutar una aplicación &lt;strong>ASP.NET Core&lt;/strong> sobre &lt;strong>Windows Subsystem for Linux&lt;/strong>, es decir, alojar un servidor web en Ubuntu para ejecutar nuestra aplicación web.&lt;/p>
 &lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 25140&lt;/strong>&lt;/em>&lt;/p>
@@ -133,31 +133,31 @@
 &lt;p>Primeramente, debemos crear el poryecto &lt;strong>ASP.NET Core&lt;/strong>:&lt;/p>
 &lt;ol>
 &lt;li>Creamos el proyecto en Visual Studio 2022:
-&lt;img src="https://cmas.dev/img/posts/2022/06/15/1.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/06/15/1.png" alt="">&lt;/li>
 &lt;li>Colocamos un nombre descriptivo al proyecto nuevo:
-&lt;img src="https://cmas.dev/img/posts/2022/06/15/2.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/06/15/2.png" alt="">&lt;/li>
 &lt;li>Seleccionamos el .NET Core que deseamos utilizar:
-&lt;img src="https://cmas.dev/img/posts/2022/06/15/3.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/06/15/3.png" alt="">&lt;/li>
 &lt;li>Verificamos las opciones habilitadas para la ejecución (nos interesa &lt;strong>WSL&lt;/strong>):
-&lt;img src="https://cmas.dev/img/posts/2022/06/15/4.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/06/15/4.png" alt="">&lt;/li>
 &lt;/ol>
 &lt;h2 id="ejecución-para-wsl">Ejecución para WSL&lt;/h2>
 &lt;p>Empezamos a realizar las tareas relacionadas con la ejecución&lt;/p>
 &lt;ol>
 &lt;li>Hacemos clic en el botón de ejecución o presionamos la tecla &lt;em>F5&lt;/em>, saldrá un mensaje de error como este (si es que no tenemos instalado el dotnet en WSL):
-&lt;img src="https://cmas.dev/img/posts/2022/06/15/5.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/06/15/5.png" alt="">&lt;/li>
 &lt;li>SEguimos los pasos en la consola de WSL (para que se instale el motor de ejecución) y en Visual Studio aceptamos el mensaje:
-&lt;img src="https://cmas.dev/img/posts/2022/06/15/6.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/06/15/6.png" alt="">&lt;/li>
 &lt;li>Volvemos a ejecutar la aplicación (en este punto funciona):
-&lt;img src="https://cmas.dev/img/posts/2022/06/15/7.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/06/15/7.png" alt="">&lt;/li>
 &lt;li>Debemos agregar un poco de código para identificar en qué plataforma estamos (en la página index.cshtml agregamos la siguiente línea de código):&lt;/li>
 &lt;/ol>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">&amp;lt;h2&amp;gt;@Environment.OsVersion&amp;lt;/h2&amp;gt;
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="5">
 &lt;li>Ejecutamos de nuevo la aplicación, pero seleccionamos la opción que tiene el nombre de nuestro proyecto, para poder usar el Web Server de Windows:
-&lt;img src="https://cmas.dev/img/posts/2022/06/15/8.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/06/15/8.png" alt="">&lt;/li>
 &lt;li>Cambiamos la configuración a &lt;strong>WSL&lt;/strong> nuevamente y ejecutamos para ver el cambio:
-&lt;img src="https://cmas.dev/img/posts/2022/06/15/9.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/06/15/9.png" alt="">&lt;/li>
 &lt;/ol>
 &lt;p>De esta manera hemos montado el servidor web directamente en &lt;strong>Ubuntu&lt;/strong> con &lt;strong>WSL&lt;/strong>.&lt;/p>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Git y WSL</title><link>https://cmas.dev/posts/2022-05-04-git-and-wsl/</link><pubDate>Wed, 04 May 2022 13:48:00 -0400</pubDate><guid>https://cmas.dev/posts/2022-05-04-git-and-wsl/</guid><description>&lt;p>En este artículo mostraré cómo instalar o actualizar git dentro de &lt;strong>Windows Subsystem for Linux&lt;/strong> de modo a poder clonar repositorio desde y hacia &lt;strong>GitHub&lt;/strong>. En un &lt;a href="https://cmas.dev/posts/2022-04-26-configuring-my-wsl-environment/">artículo anterior&lt;/a> hemos visto cómo habilitar la plataforma &lt;strong>Windows Subsystem for Linux&lt;/strong>.&lt;/p>
@@ -176,7 +176,7 @@
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">sudo apt install git
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="4">
 &lt;li>Veremos la versión actual instalada(Ojo: no es lo mismo Git en Windows que Git en WSL, pueden ser versiones distintas):
-&lt;img src="https://cmas.dev/img/posts/2022/05/04/1.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/05/04/1.png" alt="">&lt;/li>
 &lt;/ol>
 &lt;h2 id="actualizar-git-en-wsl">Actualizar Git en WSL&lt;/h2>
 &lt;p>Debemos seguir algunos pasos sencillos para lograrlos. Estos serían:&lt;/p>

@@ -6,35 +6,35 @@
 &lt;/li>
 &lt;li>
 &lt;p>La primera acción, consiste en abrir el navegador (&lt;strong>Microsoft Edge&lt;/strong>, claro):
-&lt;img src="https://i.ibb.co/j8HrJ8B/pad-boton-1.png">&lt;/p>
+&lt;img src="https://i.ibb.co/j8HrJ8B/pad-boton-1.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Seleccionamos una página de inicio, en este caso una de mozilla para la prueba:
-&lt;img src="https://i.ibb.co/j67vD8g/pad-boton-2.png">&lt;/p>
+&lt;img src="https://i.ibb.co/j67vD8g/pad-boton-2.png" alt="">&lt;/p>
 &lt;/li>
 &lt;/ol>
 &lt;p>La idea es hacer clic en este botón:
-&lt;img src="https://i.ibb.co/bKMqxL8/pad-boton-3.png">&lt;/p>
+&lt;img src="https://i.ibb.co/bKMqxL8/pad-boton-3.png" alt="">&lt;/p>
 &lt;ol start="4">
 &lt;li>
 &lt;p>Buscamos la acción correspondiente al botón:
-&lt;img src="https://i.ibb.co/hWFtSR5/pad-boton-4.png">&lt;/p>
+&lt;img src="https://i.ibb.co/hWFtSR5/pad-boton-4.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Agregamos el elemento de la interfaz de usuario dentro de nuestro flujo:
-&lt;img src="https://i.ibb.co/PcK9Fk6/pad-boton-5.png">&lt;/p>
+&lt;img src="https://i.ibb.co/PcK9Fk6/pad-boton-5.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Vemos el mensaje que nos ayuda a capturar los elementos:
-&lt;img src="https://i.ibb.co/5hYhDF2/pad-boton-6.png">&lt;/p>
+&lt;img src="https://i.ibb.co/5hYhDF2/pad-boton-6.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Luego de capturar los elementos, lo veremos insertado:
-&lt;img src="https://i.ibb.co/VqW23jc/pad-boton-7.png">&lt;/p>
+&lt;img src="https://i.ibb.co/VqW23jc/pad-boton-7.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Ejecutamos el flujo y&amp;hellip;
-&lt;img src="https://i.ibb.co/QQP0tDd/pad-boton-8.png">&lt;/p>
+&lt;img src="https://i.ibb.co/QQP0tDd/pad-boton-8.png" alt="">&lt;/p>
 &lt;/li>
 &lt;/ol>
 &lt;p>De esta manera sencilla hemos visto como ajecutar acciones automatizadas con &lt;strong>Microsoft Power Automate Desktop&lt;/strong>.&lt;/p>
@@ -48,27 +48,27 @@
 &lt;/li>
 &lt;li>
 &lt;p>En &lt;strong>Power Automate Desktop&lt;/strong>, crear un nuevo flujo:
-&lt;img src="https://i.ibb.co/SX3nPTW/desktop-pa-6.png">&lt;/p>
+&lt;img src="https://i.ibb.co/SX3nPTW/desktop-pa-6.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Buscar la opción de &lt;em>Invocar servicio web SOAP&lt;/em>:
-&lt;img src="https://i.ibb.co/6F0Cf6N/pad-soap-1.png">&lt;/p>
+&lt;img src="https://i.ibb.co/6F0Cf6N/pad-soap-1.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Completamos los detalles del servicio web SOAP:
-&lt;img src="https://i.ibb.co/TbLnPqS/pad-soap-2.png">&lt;/p>
+&lt;img src="https://i.ibb.co/TbLnPqS/pad-soap-2.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Ejecutamos la acción:
-&lt;img src="https://i.ibb.co/pwzwDB4/pad-soap-3.png">&lt;/p>
+&lt;img src="https://i.ibb.co/pwzwDB4/pad-soap-3.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Verificamos las variables retornadas por el flujo:
-&lt;img src="https://i.ibb.co/6rwDdHp/pad-soap-4.png">&lt;/p>
+&lt;img src="https://i.ibb.co/6rwDdHp/pad-soap-4.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Doble clic en la variable &lt;em>SoapServiceResponse&lt;/em> y veremos el resultado del servicio web:
-&lt;img src="https://i.ibb.co/8bDtsPn/pad-soap-5.png">&lt;/p>
+&lt;img src="https://i.ibb.co/8bDtsPn/pad-soap-5.png" alt="">&lt;/p>
 &lt;/li>
 &lt;/ol>
 &lt;p>De esta manera sencilla hemos podido invocar a un servicio web SOAP desde &lt;strong>Microsoft Power Automate Desktop&lt;/strong>.&lt;/p>
@@ -82,27 +82,27 @@
 &lt;ol>
 &lt;li>
 &lt;p>Instalar la aplicación directamente desde el portal de &lt;strong>Power Automate&lt;/strong>:
-&lt;img src="https://i.ibb.co/3rW3QFv/desktop-pa-1.png">&lt;/p>
+&lt;img src="https://i.ibb.co/3rW3QFv/desktop-pa-1.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Ejecutamos el instalador:
-&lt;img src="https://i.ibb.co/j4DSrqz/desktop-pa-2.png">&lt;/p>
+&lt;img src="https://i.ibb.co/j4DSrqz/desktop-pa-2.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Indicamos las opciones:
-&lt;img src="https://i.ibb.co/RjHCd4p/desktop-pa-3.png">&lt;/p>
+&lt;img src="https://i.ibb.co/RjHCd4p/desktop-pa-3.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Una vez finalizada la instalación, abrimos la aplicación e iniciamos sesión:
-&lt;img src="https://i.ibb.co/PQ9N7HL/desktop-pa-4.png">&lt;/p>
+&lt;img src="https://i.ibb.co/PQ9N7HL/desktop-pa-4.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Al iniciar sesión, todo estará listo para su utilización.
-&lt;img src="https://i.ibb.co/fFk4qHv/desktop-pa-5.png">&lt;/p>
+&lt;img src="https://i.ibb.co/fFk4qHv/desktop-pa-5.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Creamos un nuevo Flujo y listo
-&lt;img src="https://i.ibb.co/SX3nPTW/desktop-pa-6.png">&lt;/p>
+&lt;img src="https://i.ibb.co/SX3nPTW/desktop-pa-6.png" alt="">&lt;/p>
 &lt;/li>
 &lt;/ol>
 &lt;p>De esta manera sencilla hemos iniciado el camino de &lt;strong>Microsoft Power Automate Desktop&lt;/strong>.&lt;/p>

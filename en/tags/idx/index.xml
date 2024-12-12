@@ -12,35 +12,35 @@ With support for a broad range of frameworks, languages, and services, alongside
 &lt;/li>
 &lt;li>
 &lt;p>We are looking for more templates (the idea is to find .NET):
-&lt;img src="https://i.ibb.co/ZWH4KVc/idx-1.png">&lt;/p>
+&lt;img src="https://i.ibb.co/ZWH4KVc/idx-1.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>In the &lt;strong>Backend&lt;/strong> section, we look for &lt;strong>.NET&lt;/strong> and select it:
-&lt;img src="https://i.ibb.co/w0WTPFy/idx-2.png">&lt;/p>
+&lt;img src="https://i.ibb.co/w0WTPFy/idx-2.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>We put a descriptive name, select the ideal environment and create the project:
-&lt;img src="https://i.ibb.co/WcJ8hx2/idx-3.png">&lt;/p>
+&lt;img src="https://i.ibb.co/WcJ8hx2/idx-3.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>It will show us the project creation indicator:
-&lt;img src="https://i.ibb.co/Stb8CYR/idx-4.png">&lt;/p>
+&lt;img src="https://i.ibb.co/Stb8CYR/idx-4.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>It opens the IDX (until now I saw that it is a Visual Studio Code in the cloud, just like GitHub Codespace) and we look at the example code:
-&lt;img src="https://i.ibb.co/zQjNKYp/idx-5.png">&lt;/p>
+&lt;img src="https://i.ibb.co/zQjNKYp/idx-5.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>We proceed to execute the application in question:
-&lt;img src="https://i.ibb.co/r6CNSTQ/idx-6.png">&lt;/p>
+&lt;img src="https://i.ibb.co/r6CNSTQ/idx-6.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>It offers us options to open the website:
-&lt;img src="https://i.ibb.co/yFQkkGD/idx-7.png">&lt;/p>
+&lt;img src="https://i.ibb.co/yFQkkGD/idx-7.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>In a new tab, it shows us the web App.
-&lt;img src="https://i.ibb.co/ngHNgCv/idx-8.png">&lt;/p>
+&lt;img src="https://i.ibb.co/ngHNgCv/idx-8.png" alt="">&lt;/p>
 &lt;/li>
 &lt;/ol>
 &lt;p>Something I noticed is that the template appears in &lt;strong>Backend&lt;/strong>, but we can easily create a Full Stack application with .NET as a base to meet our needs.&lt;/p>

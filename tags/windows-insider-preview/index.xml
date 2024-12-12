@@ -5,7 +5,7 @@
 &lt;p>Preparamos WSL para la instalación de Node.js&lt;/p>
 &lt;ol>
 &lt;li>Verificamos las versiones de Node.js y NVM que tenemos instaladas (se supone que no las tenemos):
-&lt;img src="https://cmas.dev/img/posts/2022/06/08/1.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/06/08/1.png" alt="">&lt;/li>
 &lt;li>Procedemos a instalar NVM (Node Version Manager):&lt;/li>
 &lt;/ol>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
@@ -15,7 +15,7 @@
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">nvm install node
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="4">
 &lt;li>Verificamos las versiones y listo:
-&lt;img src="https://cmas.dev/img/posts/2022/06/08/2.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/06/08/2.png" alt="">&lt;/li>
 &lt;/ol>
 &lt;h2 id="aplicacion-en-visual-studio-code">Aplicacion en Visual Studio Code&lt;/h2>
 &lt;p>Dentro del Visual Studio Code creamos la aplicación y procedemos a ejecutarla normalmente.&lt;/p>
@@ -31,24 +31,24 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">})&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">listen&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">8080&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="3">
 &lt;li>Presionamos la tecla &lt;em>F5&lt;/em> y seleccionamos la opción &lt;strong>Node.js&lt;/strong>:
-&lt;img src="https://cmas.dev/img/posts/2022/06/08/4.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/06/08/4.png" alt="">&lt;/li>
 &lt;li>Veremos los controles de depuración y en la consola veremos que ha creado la aplicación:
-&lt;img src="https://cmas.dev/img/posts/2022/06/08/5.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/06/08/5.png" alt="">&lt;/li>
 &lt;li>En el navegador de preferencia, colocamos la URL definida en el código y vermeos nuestro pequeña applicación:
-&lt;img src="https://cmas.dev/img/posts/2022/06/08/6.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/06/08/6.png" alt="">&lt;/li>
 &lt;/ol>
 &lt;h2 id="aplicacion-en-visual-studio-code-con-wsl">Aplicacion en Visual Studio Code con WSL&lt;/h2>
 &lt;p>Dentro del Visual Studio Code creamos la aplicación y procedemos a ejecutarla en WSL.&lt;/p>
 &lt;ol>
 &lt;li>Descargar la extensión para desarrollo remoto &lt;a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl">aquí&lt;/a>&lt;/li>
 &lt;li>Abrimos una nueva ventana de Visual Studio Code y hacemos clicn en el icono de acceso remoto:
-&lt;img src="https://cmas.dev/img/posts/2022/06/08/7.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/06/08/7.png" alt="">&lt;/li>
 &lt;li>Seleccionamos la opción de distro para WSL:
-&lt;img src="https://cmas.dev/img/posts/2022/06/08/8.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/06/08/8.png" alt="">&lt;/li>
 &lt;li>Marcamos la opción Ubuntu:
-&lt;img src="https://cmas.dev/img/posts/2022/06/08/9.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/06/08/9.png" alt="">&lt;/li>
 &lt;li>Abrimos la carpeta donde almacenaremos el proyecto (en Ubuntu):
-&lt;img src="https://cmas.dev/img/posts/2022/06/08/10.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/06/08/10.png" alt="">&lt;/li>
 &lt;li>Escribimos las siguientes líneas de código (con algunas diferencias del código anterior):&lt;/li>
 &lt;/ol>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">var&lt;/span> &lt;span class="n">http&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">require&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;http&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
@@ -59,9 +59,9 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">})&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">listen&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">8081&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="7">
 &lt;li>Ejecutamos la aplicación desde la Terminal de &lt;strong>Ubuntu&lt;/strong>:
-&lt;img src="https://cmas.dev/img/posts/2022/06/08/12.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/06/08/12.png" alt="">&lt;/li>
 &lt;li>Abrimos el navegador y colocamos la dirección que especificamos en el código:
-&lt;img src="https://cmas.dev/img/posts/2022/06/08/13.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/06/08/13.png" alt="">&lt;/li>
 &lt;/ol>
 &lt;p>De esta manera hemos realizado una aplicación NodeJs en &lt;strong>Windows&lt;/strong> directamente así como en &lt;strong>WSL&lt;/strong>. Ambas opciones son válidas, nada más depende de la elección del desarrollador.&lt;/p>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>WSL: Ejecutar aplicaciones con GUI Linux</title><link>https://cmas.dev/posts/2022-06-01-wsl-run-apps-gui-ubuntu/</link><pubDate>Wed, 01 Jun 2022 18:32:00 -0400</pubDate><guid>https://cmas.dev/posts/2022-06-01-wsl-run-apps-gui-ubuntu/</guid><description>&lt;p>En este artículo mostraré cómo utilizar aplicaciones Linux (con interfaz de usuario) gracias a &lt;strong>Windows Subsystem for Linux&lt;/strong> .&lt;/p>
@@ -71,23 +71,23 @@
 &lt;p>En este caso instalaremos el reproductor multimedia VLC:&lt;/p>
 &lt;ol>
 &lt;li>Nos dirigimos a Ubuntu &lt;strong>Windows Subsystem for Linux&lt;/strong>
-&lt;img src="https://cmas.dev/img/posts/2022/06/01/1.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/06/01/1.png" alt="">&lt;/li>
 &lt;li>Colocamos el comando que instala la aplicación con &lt;strong>apt&lt;/strong>:&lt;/li>
 &lt;/ol>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">sudo apt install vlc -y
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="3">
 &lt;li>Procede a instalar y nos arroja el resultado:
-&lt;img src="https://cmas.dev/img/posts/2022/06/01/2.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/06/01/2.png" alt="">&lt;/li>
 &lt;li>Colocamos el comando que ejecuta la aplicación y&amp;hellip;&lt;/li>
 &lt;/ol>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">vlc
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="5">
 &lt;li>Veremos la aplicación ejecutada:
-&lt;img src="https://cmas.dev/img/posts/2022/06/01/3.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/06/01/3.png" alt="">&lt;/li>
 &lt;li>Si buscamos la App desde el Menú Inicio de &lt;strong>Windows&lt;/strong> la encontraremos:
-&lt;img src="https://cmas.dev/img/posts/2022/06/01/4.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/06/01/4.png" alt="">&lt;/li>
 &lt;li>La aplicación se ejecuta de manera nativa en &lt;strong>Windows&lt;/strong>:
-&lt;img src="https://cmas.dev/img/posts/2022/06/01/5.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/06/01/5.png" alt="">&lt;/li>
 &lt;/ol>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Desarrollo en Windows App SDK</title><link>https://cmas.dev/posts/2022-05-18-windows-app-sdk-development/</link><pubDate>Wed, 18 May 2022 21:56:00 -0400</pubDate><guid>https://cmas.dev/posts/2022-05-18-windows-app-sdk-development/</guid><description>&lt;p>En este articulo, mostraré cómo empezar con el desarrollo con Windows App SDK especialmente diseñado para Widnows 11 y ciertas versiones de Windows 10 (superior a la versión 1809).&lt;/p>
 &lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 22621&lt;/strong>&lt;/em>&lt;/p>
@@ -107,15 +107,15 @@
 &lt;p>Para la creación del proyecto debemos realizar los siguientes pasos:&lt;/p>
 &lt;ol>
 &lt;li>Crear un proyecto de tipo &lt;strong>WinUI 3&lt;/strong>
-&lt;img src="https://cmas.dev/img/posts/2022/05/18/1.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/05/18/1.png" alt="">&lt;/li>
 &lt;li>Se coloca un nombre descriptivo para el proyecto:
-&lt;img src="https://cmas.dev/img/posts/2022/05/18/2.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/05/18/2.png" alt="">&lt;/li>
 &lt;li>Se crea el proyecto con los siguientes archivos:
-&lt;img src="https://cmas.dev/img/posts/2022/05/18/3.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/05/18/3.png" alt="">&lt;/li>
 &lt;li>Procedemos a ejecutar la aplicación (y se ejecutará en nuestro &lt;strong>Windows 11&lt;/strong> directamente):
-&lt;img src="https://cmas.dev/img/posts/2022/05/18/4.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/05/18/4.png" alt="">&lt;/li>
 &lt;li>Veremos la aplicación ejecutada:
-&lt;img src="https://cmas.dev/img/posts/2022/05/18/5.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/05/18/5.png" alt="">&lt;/li>
 &lt;/ol>
 &lt;p>Con esto logramos crear nuestra primera aplicación &lt;strong>WinUI 3&lt;/strong>.&lt;/p>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>UWP en Windows 11</title><link>https://cmas.dev/posts/2022-05-11-uwp-in-windows-11/</link><pubDate>Wed, 11 May 2022 19:53:00 -0400</pubDate><guid>https://cmas.dev/posts/2022-05-11-uwp-in-windows-11/</guid><description>&lt;p>En este artículo mostraré cómo crear una aplicación UWP (Universal Windows Platform) en Windows 11 (aunque ya debemos ir dejándola ;)).&lt;/p>
@@ -130,13 +130,13 @@
 &lt;p>Para la creación del proyecto debemos seguir los siguientes pasos:&lt;/p>
 &lt;ol>
 &lt;li>Crear una nueva aplicación en Visual Studio:
-&lt;img src="https://cmas.dev/img/posts/2022/05/11/1.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/05/11/1.png" alt="">&lt;/li>
 &lt;li>Colocamos el nombre descriptivo para el nuevo proyecto:
-&lt;img src="https://cmas.dev/img/posts/2022/05/11/2.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/05/11/2.png" alt="">&lt;/li>
 &lt;li>Seleccionamos la versión del destino (En Windows 11):
-&lt;img src="https://cmas.dev/img/posts/2022/05/11/3.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/05/11/3.png" alt="">&lt;/li>
 &lt;li>Verificamos que el proyecto se haya creado correctamente:
-&lt;img src="https://cmas.dev/img/posts/2022/05/11/4.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/05/11/4.png" alt="">&lt;/li>
 &lt;li>Agregamos un control de prueba para poder ejecutarlo:&lt;/li>
 &lt;/ol>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">&amp;lt;Page
@@ -155,9 +155,9 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;/Page&amp;gt;
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="6">
 &lt;li>Ejecutamos la aplicación:
-&lt;img src="https://cmas.dev/img/posts/2022/05/11/5.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/05/11/5.png" alt="">&lt;/li>
 &lt;li>Voilá, tenemos nuestra primera app UWP para Windows 11:
-&lt;img src="https://cmas.dev/img/posts/2022/05/11/6.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/05/11/6.png" alt="">&lt;/li>
 &lt;/ol>
 &lt;p>Si bien es cierto, se recomienda que las aplicaciones para Windows sean creadas con WinUI, aún es posible desarrollarlas con UWP (pero es recomendable hacer la migración correspondiente).&lt;/p>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>WSL sin internet</title><link>https://cmas.dev/posts/2022-04-27-wsl-no-internet/</link><pubDate>Wed, 27 Apr 2022 12:26:00 -0400</pubDate><guid>https://cmas.dev/posts/2022-04-27-wsl-no-internet/</guid><description>&lt;p>En este artículo mostraré cómo conectar a internet en &lt;strong>Windows Subsystem for Linux&lt;/strong> para cualquier distro (pero aquí siempre con Ubuntu) utilizando &lt;strong>Windows Terminal&lt;/strong>.&lt;/p>
@@ -165,20 +165,20 @@
 &lt;p>Debemos seguir algunos pasos sencillos para poder habilitar internet de manera permanente en nuestra distro preferida.&lt;/p>
 &lt;h2 id="conexión-a-internet-en-windows-subsystem-for-linux">Conexión a internet en Windows Subsystem for Linux&lt;/h2>
 &lt;p>Primero, hacemos ping a algún DNS (que tenga salida a internet):
-&lt;img src="https://cmas.dev/img/posts/2022/04/27/wsl1.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/04/27/wsl1.png" alt="">&lt;/p>
 &lt;p>Entonces, debemos abrirl el archivo &lt;strong>resolv.conf&lt;/strong> que se encuentra en nuestro distro WSL:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">nano /etc/resolv.conf
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Abrirá el editor y procedemos a verificar el dato presente allí:
-&lt;img src="https://cmas.dev/img/posts/2022/04/27/wsl3.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/04/27/wsl3.png" alt="">&lt;/p>
 &lt;p>Esa IP es privada. ¡Quítala de allí! y usemos el DNS de Google:
-&lt;img src="https://cmas.dev/img/posts/2022/04/27/wsl4.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/04/27/wsl4.png" alt="">&lt;/p>
 &lt;p>Probemos nuestro comando &lt;strong>ping&lt;/strong> a ver que ocurre:
-&lt;img src="https://cmas.dev/img/posts/2022/04/27/wsl5.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/04/27/wsl5.png" alt="">&lt;/p>
 &lt;h2 id="configuración-permanente-para-acceso-a-internet">Configuración permanente para acceso a Internet&lt;/h2>
 &lt;p>Como paso de prueba podemos salir de Ubuntu (emular el apagado de equipo desde &lt;strong>Windows Terminal&lt;/strong>, no desde Ubuntu):
-&lt;img src="https://cmas.dev/img/posts/2022/04/27/wsl6.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/04/27/wsl6.png" alt="">&lt;/p>
 &lt;p>Iniciamos Ubuntu nuevamente y probamos &lt;strong>ping&lt;/strong>:
-&lt;img src="https://cmas.dev/img/posts/2022/04/27/wsl1.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/04/27/wsl1.png" alt="">&lt;/p>
 &lt;p>¡BOOM!&lt;/p>
 &lt;p>Corregimos esto al estilo Ubuntu, con &lt;strong>Terminal&lt;/strong>:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">sudo bash -c &amp;#39;echo -e &amp;#34;[network]
@@ -188,7 +188,7 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">nameserver 8.8.4.4&amp;#34; &amp;gt; /etc/resolv.conf
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">chattr -f +i /etc/resolv.conf&amp;#39;
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Con esto, logramos que todo funcione correctamente&amp;gt;
-&lt;img src="https://cmas.dev/img/posts/2022/04/27/wsl5.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/04/27/wsl5.png" alt="">&lt;/p>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Configurando mi ambiente WSL</title><link>https://cmas.dev/posts/2022-04-26-configuring-my-wsl-environment/</link><pubDate>Tue, 26 Apr 2022 20:41:00 -0400</pubDate><guid>https://cmas.dev/posts/2022-04-26-configuring-my-wsl-environment/</guid><description>&lt;p>En este artículo mostraré cómo configurar un ambiente de desarrollo WSL (Windows Subsystem Linux) dentro de Windows para el desarrollo de aplicaciones en múltiples plataformas (que en el futuro iré asociando a este artículo). Para este artículo ya tenemos disponible la nueva distro de Ubuntu 22.04 (recientemente lanzada).&lt;/p>
 &lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 22598&lt;/strong>&lt;/em>&lt;/p>
 &lt;p>Debemos seguir algunos pasos para poder habilitar el WSL (Windows Subsystem for Linux) en Windows 11. Es excelente esto para probar todo tipo de aplicaciones sin salir de Windows. Especialmente preparado para .NET Core :)&lt;/p>
@@ -197,23 +197,23 @@
 &lt;ol>
 &lt;li>Nos dirigimos a &lt;strong>Panel de Control&lt;/strong> &amp;gt; &lt;strong>Programas&lt;/strong> &amp;gt; &lt;strong>Habilitar funcionalidades de Windows&lt;/strong>.&lt;/li>
 &lt;li>Buscar la opción &lt;strong>Windows Subsystem for Linux&lt;/strong>, marcamos la opción y hacemos clic en &lt;strong>Aceptar&lt;/strong>:
-&lt;img src="https://cmas.dev/img/posts/2022/04/26/Wsl1.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/04/26/Wsl1.png" alt="">&lt;/li>
 &lt;li>Cuando termine la instalación debemos reiniciar el sistema operativo y veremos este nuevo enlace en el &lt;strong>Explorador de archivos&lt;/strong>:
-&lt;img src="https://cmas.dev/img/posts/2022/04/26/Wsl2.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/04/26/Wsl2.png" alt="">&lt;/li>
 &lt;/ol>
 &lt;h2 id="instalamos-la-distro-de-preferencia">Instalamos la distro de preferencia&lt;/h2>
 &lt;p>En mi caso selecciono Ubuntu, pero existen otras que se encuentran disponibles para su instalación. Aquí procedemos a instalar desde &lt;strong>Microsoft Store&lt;/strong>:
-&lt;img src="https://cmas.dev/img/posts/2022/04/26/Wsl3.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/04/26/Wsl3.png" alt="">&lt;/p>
 &lt;p>Una vez que haya culminado la instalación, procedemos a abrir la nueva App (sí, se encuentra como una App):
-&lt;img src="https://cmas.dev/img/posts/2022/04/26/Wsl4.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/04/26/Wsl4.png" alt="">&lt;/p>
 &lt;h2 id="windows-terminal">Windows Terminal&lt;/h2>
 &lt;p>Aquí es donde empezamos a disfrutar de nuestra distro de Linux favorita para empezar a jugar con ella.&lt;/p>
 &lt;p>Creamos un usuario para nuestro sistema operativo Ubuntu (puede o no ser igual al usuario de Windows):
-&lt;img src="https://cmas.dev/img/posts/2022/04/26/Wsl5.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/04/26/Wsl5.png" alt="">&lt;/p>
 &lt;p>Por último, accedemos a la terminal de Ubuntu y realizamos las tareas que queramos dentro de Ubuntu, que está dentro de Windows 11.
-&lt;img src="https://cmas.dev/img/posts/2022/04/26/Wsl6.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/04/26/Wsl6.png" alt="">&lt;/p>
 &lt;p>Podemos verificar que distro estamos ejecutando:
-&lt;img src="https://cmas.dev/img/posts/2022/04/26/Wsl7.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/04/26/Wsl7.png" alt="">&lt;/p>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Introducción a Windows Fluent Design System</title><link>https://cmas.dev/posts/2022-04-25-introduction-to-windows-fluent-system/</link><pubDate>Mon, 25 Apr 2022 19:22:00 -0400</pubDate><guid>https://cmas.dev/posts/2022-04-25-introduction-to-windows-fluent-system/</guid><description>&lt;p>En este artículo intentaré enteder y explicar qué es &lt;strong>Windows Fluent Design System&lt;/strong>, por qué es Open Source, para qué se utiliza y que se puede lograr con esto.&lt;/p>
 &lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 22598&lt;/strong>&lt;/em>&lt;/p>
 &lt;p>Personalmente tengo muchas dudas y consultas sobre este punto. Hace un tiempo que veo esto pero no he tenido el tiempo para detenerme a investigar. Así que hagámos juntos el recorrido. Las consultas que me surgen son:&lt;/p>
@@ -285,11 +285,11 @@
 &lt;ol>
 &lt;li>Iniciar la aplicación &lt;strong>Windows Subsystem for Android&lt;/strong>&lt;/li>
 &lt;li>Establecer el &lt;strong>Modo desarrollador&lt;/strong>:
-&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb1.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb1.png" alt="">&lt;/li>
 &lt;li>Hacemos clic en la opción &lt;strong>Gestionar configuración de desarrollador&lt;/strong>:
-&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb2.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb2.png" alt="">&lt;/li>
 &lt;li>Habilitamos la opción de &lt;strong>Depuración USB&lt;/strong>:
-&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb3.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb3.png" alt="">&lt;/li>
 &lt;/ol>
 &lt;h2 id="preparar-herramientas-de-android-sdk">Preparar herramientas de Android SDK&lt;/h2>
 &lt;h3 id="preparar-android-sdk-platform-tools">Preparar Android SDk Platform Tools&lt;/h3>
@@ -300,23 +300,23 @@
 &lt;h3 id="ubicar-los-archivos">Ubicar los archivos&lt;/h3>
 &lt;ol>
 &lt;li>Debemos crear una nueva carpeta en el directorio principal de Windows y copiar la carpeta descomprimida. Quedaría así:
-&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb4.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb4.png" alt="">&lt;/li>
 &lt;li>Hacemos clic derecho en el icono de Windows en la barra de tareas o &lt;strong>Win&lt;/strong>+&lt;strong>i&lt;/strong>:
-&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb5.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb5.png" alt="">&lt;/li>
 &lt;li>Seleccionamos &lt;strong>Variables de entorno&lt;/strong>:
-&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb6.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb6.png" alt="">&lt;/li>
 &lt;li>Seleccionamos la variable &lt;strong>Path&lt;/strong> y agregamos un nuevo registro:
-&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb7.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb7.png" alt="">&lt;/li>
 &lt;li>Agregamos la ubicación del ejecutable que queremos agregar a la variable:
-&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb8.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb8.png" alt="">&lt;/li>
 &lt;li>Abrimos el comando de windows &lt;strong>CMD&lt;/strong> o &lt;strong>PowerShell&lt;/strong> y probamos el comando &lt;strong>adb&lt;/strong>:&lt;/li>
 &lt;/ol>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">adb devices
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb9.png">&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb9.png" alt="">&lt;/p>
 &lt;h3 id="conexión-al-dispositivo">Conexión al dispositivo&lt;/h3>
 &lt;ol>
 &lt;li>Verificamos la IP del dispositivo (en la configuración de &lt;strong>Windows Subsystem for Android&lt;/strong>):
-&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb10.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb10.png" alt="">&lt;/li>
 &lt;li>Nos conectamos a la IP y al puerto correspondiente:&lt;/li>
 &lt;/ol>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">adb connect 172.18.136.138:5555
@@ -328,9 +328,9 @@
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">adb&lt;/span> &lt;span class="n">install&lt;/span> &lt;span class="s2">&amp;#34;C:\Users\chris\Downloads&lt;/span>&lt;span class="se">\a&lt;/span>&lt;span class="s2">ndry.apk&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="3">
 &lt;li>Veremos el icono anclado al menú inicio:
-&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb11.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb11.png" alt="">&lt;/li>
 &lt;li>La aplicación se verá así:
-&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb12.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/04/20/adb12.png" alt="">&lt;/li>
 &lt;/ol>
 &lt;p>Para cualquier aplicación que funcione para Android debemos repetir estos 4 pasos anteriores. Aprovecharé &lt;em>HBO Max&lt;/em> para ver el nuevo Batman&amp;hellip;&lt;/p>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Habilitar Windows Subsystem for Android™️</title><link>https://cmas.dev/posts/2022-04-13-enable-wsa/</link><pubDate>Wed, 13 Apr 2022 13:41:27 -0400</pubDate><guid>https://cmas.dev/posts/2022-04-13-enable-wsa/</guid><description>&lt;p>En este artículo mostraré paso a paso como habilitar el &lt;strong>Windows Subsystem for Android&lt;/strong> en nuestro sistema operativo favorito. Tener en cuenta que al momento de escribir este artículo no está disponible fuera de EEUU.&lt;/p>
@@ -340,25 +340,25 @@
 &lt;h2 id="configuraciones-previas">Configuraciones previas&lt;/h2>
 &lt;p>En el momento que estoy escribiendo este artículo no funciona esto fuera de Estados Unidos, pero cambiando la región lo podemos lograr.&lt;/p>
 &lt;p>Para eso, debemos ir a &lt;em>Configuración&lt;/em> &amp;gt; &lt;em>Tiempo y Región&lt;/em>:
-&lt;img src="https://cmas.dev/img/posts/2022/04/13/wsa1.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/04/13/wsa1.png" alt="">&lt;/p>
 &lt;h2 id="habilitación-de-windows-subsystem-for-android">Habilitación de Windows Subsystem for Android&lt;/h2>
 &lt;p>Debemos dirigirnos a &lt;strong>Microsoft Store&lt;/strong>, buscar e instalar &lt;strong>Amazon Appstore&lt;/strong>:
-&lt;img src="https://cmas.dev/img/posts/2022/04/13/wsa2.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/04/13/wsa2.png" alt="">&lt;/p>
 &lt;p>El sistema nos pedirá hacer clic en &lt;strong>Descargar&lt;/strong>:
-&lt;img src="https://cmas.dev/img/posts/2022/04/13/wsa3.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/04/13/wsa3.png" alt="">&lt;/p>
 &lt;p>Veremos el progreso de descarga:
-&lt;img src="https://cmas.dev/img/posts/2022/04/13/wsa4.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/04/13/wsa4.png" alt="">&lt;/p>
 &lt;p>Abrimos la nueva aplicación:
-&lt;img src="https://cmas.dev/img/posts/2022/04/13/wsa5.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/04/13/wsa5.png" alt="">&lt;/p>
 &lt;p>Se inicia el &lt;strong>Windows Subsystem for Android&lt;/strong>:
-&lt;img src="https://cmas.dev/img/posts/2022/04/13/wsa6.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/04/13/wsa6.png" alt="">&lt;/p>
 &lt;p>Iniciamos sesión (o creamos una nueva cuenta) en Amazon y listo.&lt;/p>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Crear acceso directo a máquina virtual</title><link>https://cmas.dev/posts/2022-04-06-windows-11-shortcut-vm/</link><pubDate>Wed, 06 Apr 2022 19:21:43 -0400</pubDate><guid>https://cmas.dev/posts/2022-04-06-windows-11-shortcut-vm/</guid><description>&lt;p>Lo más práctico y útil para un usuario es encontrar lo que busca de manera rápida y sencilla. Es por eso que mostraré los pasos a seguir para crear un acceso directo a una máquina virtual en Hyper-V.&lt;/p>
 &lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 22593&lt;/strong>&lt;/em>&lt;/p>
 &lt;p>Primero debemos dirigirnos a nuestro gestor de máquinas virtuales de Hyper-V y obtener el nombre de la máquina virtual en cuestión (Ubuntu, en este caso):
-&lt;img src="https://cmas.dev/img/posts/2022/04/06/hyperv1.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/04/06/hyperv1.png" alt="">&lt;/p>
 &lt;p>Nos dirigimos al escritorio de Windows, &lt;em>clic derecho&lt;/em> &amp;gt; &lt;em>Nuevo&lt;/em> &amp;gt; &lt;em>Crear acceso directo&lt;/em>:
-&lt;img src="https://cmas.dev/img/posts/2022/04/06/hyperv2.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/04/06/hyperv2.png" alt="">&lt;/p>
 &lt;p>Agregamos la siguiente ubicación de archivo:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">vmconnect.exe localhost &amp;#34;Ubuntu&amp;#34;
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
@@ -366,11 +366,11 @@
 &lt;li>&lt;strong>localhost&lt;/strong> porque se trata de nuestra máquina virtual local&lt;/li>
 &lt;li>&lt;strong>Ubuntu&lt;/strong> es el nombre de la máquina virtual&lt;/li>
 &lt;/ul>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/2022/04/06/hyperv3.png">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/2022/04/06/hyperv3.png" alt="">&lt;/p>
 &lt;p>Colocamos un nombre descriptivo a nuestro acceso directo:
-&lt;img src="https://cmas.dev/img/posts/2022/04/06/hyperv4.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/04/06/hyperv4.png" alt="">&lt;/p>
 &lt;p>Veremos en el escritorio el acceso directo creado:
-&lt;img src="https://cmas.dev/img/posts/2022/04/06/hyperv5.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/04/06/hyperv5.png" alt="">&lt;/p>
 &lt;p>Por último, hacemos la prueba del acceso directo:
-&lt;img src="https://cmas.dev/img/posts/2022/04/06/hyperv6.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/04/06/hyperv6.png" alt="">&lt;/p>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item></channel></rss>

@@ -6,7 +6,7 @@
 &lt;ol>
 &lt;li>
 &lt;p>Abrimos &lt;strong>Windows Terminal&lt;/strong> con el perfil &lt;strong>Ubuntu&lt;/strong>:
-&lt;img src="https://cmas.dev/img/posts/2022/12/21/1.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/12/21/1.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Procedemos a instalar &lt;strong>Django&lt;/strong> con el siguiente comando:&lt;/p>
@@ -22,12 +22,12 @@
 &lt;/li>
 &lt;/ol>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">django-admin --version
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://cmas.dev/img/posts/2022/12/21/2.png">&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://cmas.dev/img/posts/2022/12/21/2.png" alt="">&lt;/p>
 &lt;h2 id="crear-proyecto-django-y-empezar-a-trabajar">Crear proyecto Django y empezar a trabajar&lt;/h2>
 &lt;ol>
 &lt;li>
 &lt;p>Ir a la carpeta donde debe estar nuestro proyecto:
-&lt;img src="https://cmas.dev/img/posts/2022/12/21/3.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/12/21/3.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Crear un ambiente virtual de &lt;strong>Python&lt;/strong>:&lt;/p>
@@ -57,25 +57,25 @@
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="8">
 &lt;li>
 &lt;p>Completamos los datos y listo:
-&lt;img src="https://cmas.dev/img/posts/2022/12/21/4.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/12/21/4.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Abrimos la carpeta donde alojamos el proyecto y empezamos a desarrollar:
-&lt;img src="https://cmas.dev/img/posts/2022/12/21/5.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/12/21/5.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Activamos el ambiernte virtual de Python y ejecutamos el servidor de Django:
-&lt;img src="https://cmas.dev/img/posts/2022/12/21/6.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/12/21/6.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Veremos la página principal de Django:
-&lt;img src="https://cmas.dev/img/posts/2022/12/21/7.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/12/21/7.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Si accedemos a la URL con el contexto &lt;em>/admin&lt;/em> veremos lo siguiente:
-&lt;img src="https://cmas.dev/img/posts/2022/12/21/8.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/12/21/8.png" alt="">&lt;/p>
 &lt;/li>
 &lt;/ol>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/2022/12/21/9.png">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/2022/12/21/9.png" alt="">&lt;/p>
 &lt;p>Listo para desarrollar aplicaciones web con &lt;strong>Django&lt;/strong> y &lt;strong>Python&lt;/strong> sobre &lt;strong>Visual Studio Code&lt;/strong> y &lt;strong>WSL&lt;/strong>.&lt;/p>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item></channel></rss>

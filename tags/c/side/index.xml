@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>C/SIDE on Christian Amado's Blog</title><link>https://cmas.dev/tags/c/side/</link><description>Recent content in C/SIDE on Christian Amado's Blog</description><generator>Hugo -- gohugo.io</generator><language>es</language><lastBuildDate>Wed, 08 Apr 2020 17:06:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/tags/c/side/index.xml" rel="self" type="application/rss+xml"/><item><title>Business Central: Wave 2 Txt2AL no existe</title><link>https://cmas.dev/posts/2020-04-08-business-central-wave-2-txt2al-no-existe/</link><pubDate>Wed, 08 Apr 2020 17:06:00 -0400</pubDate><guid>https://cmas.dev/posts/2020-04-08-business-central-wave-2-txt2al-no-existe/</guid><description>&lt;p>En la &lt;a href="https://cmas.dev/2020/04/business-central-convertir-c-side-a-codigo-al/">entrada anterior&lt;/a> hemos visto cómo convertir código &lt;strong>C/SIDE&lt;/strong> y código &lt;strong>AL&lt;/strong>. Ahora veremos cómo disponibilizar esta herramienta en &lt;strong>Dynamics 365 Business Central Wave 2&lt;/strong>, pues ya no está disponible directamente como antes.&lt;/p>
-&lt;p>Primeramente necesitamos tener a mano la carpeta desde donde se instala el software Dynamics 365 Business Central y copiar archivos de un lugar a otro: &lt;img src="https://cmas.dev/img/posts/migrated/2020/04/bc_fix_txt2al_1.png">&lt;/p>
-&lt;p>Procedemos a &lt;strong>Pegar&lt;/strong> los archivos en la ubicación donde tenemos instalado Dynamics 365 Business Central: &lt;img src="https://cmas.dev/img/posts/migrated/2020/04/bc_fix_txt2al_2.png">&lt;/p>
-&lt;p>No olvidemos de marcar la opción &amp;ldquo;Omitir estos archivos&amp;rdquo;, caso contrario, dañaremos nuestra instalación (la idea es agregar los archivos que faltan únicamente): &lt;img src="https://cmas.dev/img/posts/migrated/2020/04/bc_fix_txt2al_3.png">&lt;/p>
+&lt;p>Primeramente necesitamos tener a mano la carpeta desde donde se instala el software Dynamics 365 Business Central y copiar archivos de un lugar a otro: &lt;img src="https://cmas.dev/img/posts/migrated/2020/04/bc_fix_txt2al_1.png" alt="">&lt;/p>
+&lt;p>Procedemos a &lt;strong>Pegar&lt;/strong> los archivos en la ubicación donde tenemos instalado Dynamics 365 Business Central: &lt;img src="https://cmas.dev/img/posts/migrated/2020/04/bc_fix_txt2al_2.png" alt="">&lt;/p>
+&lt;p>No olvidemos de marcar la opción &amp;ldquo;Omitir estos archivos&amp;rdquo;, caso contrario, dañaremos nuestra instalación (la idea es agregar los archivos que faltan únicamente): &lt;img src="https://cmas.dev/img/posts/migrated/2020/04/bc_fix_txt2al_3.png" alt="">&lt;/p>
 &lt;p>De esta manera, tenemos el problema resuelto.&lt;/p>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Business Central: Convertir C/SIDE a código AL</title><link>https://cmas.dev/posts/2020-04-07-business-central-convertir-c-side-a-codigo-al/</link><pubDate>Tue, 07 Apr 2020 12:24:00 -0400</pubDate><guid>https://cmas.dev/posts/2020-04-07-business-central-convertir-c-side-a-codigo-al/</guid><description>&lt;p>La semana pasada me tocó realizar migración de Dynamics NAV 2018 a Dynamics 365 Business Central Wave 2 y me encontré con que debía hacerlo tabla por tabla. Va ser un proceso muy largo, cuanto más objetos tengas más código escribiremos. Es por eso que el propio &lt;strong>Dynamics 365 Business Central&lt;/strong> trae una herramienta que hace ese trabajo por nosotros. Se llama &lt;strong>Txt2AL.exe&lt;/strong> y es muy útil.&lt;/p>
 &lt;p>Primeramente, debemos crear dos carpetas:&lt;/p>
@@ -13,12 +13,12 @@
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">cd C:\\Program Files (x86)\\Microsoft Dynamics 365 Business Central\\150\\RoleTailored Client
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Txt2al --Source=&amp;#34;C:\\NAV&amp;#34; --Target=&amp;#34;C:\\BC&amp;#34;
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>De esta manera logramos hacer la migración del código &lt;strong>C/SIDE&lt;/strong> a código &lt;strong>AL&lt;/strong>: &lt;img src="https://cmas.dev/img/posts/businesscentral/bc_nav_to_bc.png">&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>De esta manera logramos hacer la migración del código &lt;strong>C/SIDE&lt;/strong> a código &lt;strong>AL&lt;/strong>: &lt;img src="https://cmas.dev/img/posts/businesscentral/bc_nav_to_bc.png" alt="">&lt;/p>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>NAV: Conexión con base de datos externa - Parte 2</title><link>https://cmas.dev/posts/2019-12-18-nav-conexion-con-base-de-datos-externa-parte-2/</link><pubDate>Wed, 18 Dec 2019 22:36:06 -0400</pubDate><guid>https://cmas.dev/posts/2019-12-18-nav-conexion-con-base-de-datos-externa-parte-2/</guid><description>&lt;p>En la entrada anterior, vimos cómo crear una tabla en SQL Server y agregarla en Dynamics NAV (sin consumir licencias). en esta ocasión veremos cómo utilizarla dentro de una página de Dynamics NAV para verificar si los datos son correctos.&lt;/p>
 &lt;p>Para ello, debemos seguir estos pasos&amp;hellip;&lt;/p>
 &lt;p>Primero, se debe crear la página enlazándola con la tabla externa que hemos creado en Dynamics NAV:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/12/1-2.png">&lt;/p>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2019/12/2-2.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/12/1-2.png" alt="">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2019/12/2-2.png" alt="">&lt;/p>
 &lt;p>Ahora debe escribir este código en la función OnInit() de la página:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">OnInit()
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">//CADENA DE CONEXION
@@ -28,17 +28,17 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">REGISTERTABLECONNECTION(TABLECONNECTIONTYPE::ExternalSQL,&amp;#39;CMASBLOG&amp;#39;,&amp;#39;Server=TU\_SERVIDOR\\TU\_INSTANCIA;Initial Catalog=TU\_BASE\_DE\_DATOS;Integrated Security=SSPI;&amp;#39;);
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">SETDEFAULTTABLECONNECTION(TABLECONNECTIONTYPE::ExternalSQL,&amp;#39;CMASBLOG&amp;#39;)
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Con este código, la página está lsita para la verificación de los datos:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/12/3-2.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/12/3-2.png" alt="">&lt;/p>
 &lt;p>Con estos simples pasos logramos integrar una base de datos externa (de cualquier proveedor) con Microsoft Dynamics NAV 2018.&lt;/p></description></item><item><title>NAV: Conexión con base de datos externa - Parte 1</title><link>https://cmas.dev/posts/2019-12-11-nav-conexion-con-base-de-datos-externa-parte-1/</link><pubDate>Wed, 11 Dec 2019 19:33:55 -0400</pubDate><guid>https://cmas.dev/posts/2019-12-11-nav-conexion-con-base-de-datos-externa-parte-1/</guid><description>&lt;p>Los desarrolladores de Dynamics NAV sabemos que tenemos limitaciones a nivel de tablas (normalmente con una licencia vienen 10 tablas) por eso tenemos esta oportunidad de integrar o crear tablas externas. Estas tablas externas permiten ser accedidas desde fuera de Dynamics NAV y poder trabajar con ellas sin mayores problemas.&lt;/p>
 &lt;p>Divido esta entrada en dos partes para que se entiendan bien los pasos que debemos realizar para que todo esto funcione como esperamos que lo haga. En la primera parte, veremos lo relacionado a una base de datos externa a Dynamics NAV y cómo crear la misma tabla dentro de Dynamics NAV. No te preocupes, las tablas externas NO consumen licencias de tablas. En la segunda parte, veremos lo relacionado a Dynamics NAV para crear una página que lea los datos de esa tabla externa.&lt;/p>
 &lt;p>Empecemos creando una tabla dentro de la misma base de datos de nuestro entorno de prueba (tacho el nombre porque corresponde a un cliente de mi empresa):&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/12/1-1.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/12/1-1.png" alt="">&lt;/p>
 &lt;p>Cargamos datos en SQL Server y probamos los datos que se encuentran en nuestra tabla:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/12/2-1.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/12/2-1.png" alt="">&lt;/p>
 &lt;p>Ahora, nos dirigimos al entorno de desarrollo de Dynamics NAV y creamos la tabla externa (con el mismo nombre que el objeto de SQL Server):&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/12/3-1.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/12/3-1.png" alt="">&lt;/p>
 &lt;p>En las propiedades de la tabla nueva debemos colocar lo siguiente:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/12/4-1.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/12/4-1.png" alt="">&lt;/p>
 &lt;p>Compilamos el objeto y no deberíamos tener problemas.&lt;/p>
 &lt;p>De esa manera hemos creado una tabla externa que nos permite trabajar con datos fuera de la base de datos de Dynamics NAV.&lt;/p></description></item><item><title>NAVDEV Tips: Elimina las variables globales o locales no utilizadas</title><link>https://cmas.dev/posts/2019-08-28-navdev-tips-elimina-las-variables-globales-o-locales-no-utilizadas/</link><pubDate>Wed, 28 Aug 2019 12:10:56 -0400</pubDate><guid>https://cmas.dev/posts/2019-08-28-navdev-tips-elimina-las-variables-globales-o-locales-no-utilizadas/</guid><description>&lt;p>En esta oportunidad, quiero exponerles un punto de vista que al final de cuentas resultará en un buen consejo de desarrollo.&lt;/p>
 &lt;p>En Dynamics NAV declaramos variables globales y locales según el ámbito de ejecución:&lt;/p>
@@ -53,17 +53,17 @@
 &lt;p>Acto seguido, se debe cerrar y volver a abrir el archivo en cuestión y seleccionar la opción &amp;ldquo;Compilar&amp;rdquo;. En caso, que se cierre el entorno de desarrollo no se perderá el código escrito.&lt;/p>
 &lt;p>¡Espero resulte de utilidad!&lt;/p></description></item><item><title>Modificar valores de listas desplegables</title><link>https://cmas.dev/posts/2019-06-27-modificar-valores-de-listas-desplegables/</link><pubDate>Thu, 27 Jun 2019 19:44:42 -0400</pubDate><guid>https://cmas.dev/posts/2019-06-27-modificar-valores-de-listas-desplegables/</guid><description>&lt;p>El día de hoy tuve un pedido relacionado a cómo se visualizan los cambos en una lista desplegable dentro de una página en Dynamics NAV 2018. Básicamente, se debe hacer un cambio en la tabla de origen del elemento, pues es ahí donde se definen los campos de la lista desplegable.&lt;/p>
 &lt;p>Primeramente, veamos cómo se ve actualmente la lista desplegable dentro de la página en cuestión:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/06/1-1.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/06/1-1.png" alt="">&lt;/p>
 &lt;p>Nos dirigimos a la tabla &lt;strong>Customer&lt;/strong>, en este caso:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/06/2-1.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/06/2-1.png" alt="">&lt;/p>
 &lt;p>En el menú ver, del entorno de desarrollo de &lt;strong>Dynamics NAV&lt;/strong>, seleccionamos &lt;strong>Field Groups&lt;/strong>:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/06/3-1.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/06/3-1.png" alt="">&lt;/p>
 &lt;p>Buscamos la opción &lt;strong>DropDown&lt;/strong> (si no existe lo agregamos):&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/06/4-1.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/06/4-1.png" alt="">&lt;/p>
 &lt;p>En la lista de campos, podemos agregarlos o eliminarlos:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/06/5.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/06/5.png" alt="">&lt;/p>
 &lt;p>Guardamos y compilamos. Por último, volvemos a la página inicial y vemos el cambio:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/06/6.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/06/6.png" alt="">&lt;/p>
 &lt;p>De esta manera, eliminamos un campo de la lista desplegable. Se debe tener en cuenta, que este cambio afecta a todas las listas desplegables que tienen acceso a la tabla &lt;strong>Customer&lt;/strong>.&lt;/p></description></item><item><title>Reporte de procesos</title><link>https://cmas.dev/posts/2019-06-26-reporte-de-procesos/</link><pubDate>Wed, 26 Jun 2019 19:06:12 -0400</pubDate><guid>https://cmas.dev/posts/2019-06-26-reporte-de-procesos/</guid><description>&lt;p>En el mundo de Dynamics NAV el reporte tiene dos funciones:&lt;/p>
 &lt;ol>
 &lt;li>Mostrar un reporte como tal con muchos datos ordenados según requerimientos estándares.&lt;/li>
@@ -72,17 +72,17 @@
 &lt;p>En este caso tomaremos la opción 2 de la situación.&lt;/p>
 &lt;p>Básicamente, lo único que se debe hacer es cambiar la propiedad de un reporte, guardarlo y compilarlo.&lt;/p>
 &lt;p>En este ejemplo, tenemos un reporte que genera el &lt;a href="https://cmas.dev/2019/06/creando-csv-con-xmlport/">Hechauka Ventas&lt;/a> (que lo vimos como un XMLPort):&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/06/1-2.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/06/1-2.png" alt="">&lt;/p>
 &lt;p>Una vez terminado el proceso, el reporte hará lo que hayamos indicado. tal vez, llamar a otro reporte (visual) o bien mostrar un mensaje.&lt;/p></description></item><item><title>NAVDEV Tips: Modificar valores en Factura de Ventas</title><link>https://cmas.dev/posts/2019-06-25-navdev-tips-modificar-valores-en-factura-de-ventas/</link><pubDate>Tue, 25 Jun 2019 21:06:19 -0400</pubDate><guid>https://cmas.dev/posts/2019-06-25-navdev-tips-modificar-valores-en-factura-de-ventas/</guid><description>&lt;p>Microsoft Dynamics NAV es un sistema muy consistente y seguro cuando hablamos de transacciones. En ocasiones, podemos equivocarnos, como operadores, y olvidarnos de cargar ciertos datos o bien equivocarnos en cosas mínimas como olvidar colocar el vendedor, algún dato secundario que precisamos para tener toda la información relacionada con una factura.&lt;/p>
 &lt;p>En esta entrada, menciono exclusivamente el ejemplo de Factura de Ventas, pero esto sería útil para cualquier tabla relacionada con Históricos de documentos (facturas, movimientos, etc).&lt;/p>
 &lt;p>Cuando trabajamos con históricos no se pueden guardar cambios en dicha tabla, no importa que coloquemos todos los permisos dentro del objeto, de todos modos no se podrán modificar los datos históricos. Entonces, ¿Qué tiene de especial el título?&lt;/p>
 &lt;p>Que las modificaciones se pueden realizar únicamente en los CodeUnits correspondientes al objeto que deseamos modificar, en este caso, el CodeUnit Sales-Post (80).&lt;/p>
 &lt;p>Primeramente, observemos los permisos del CodeUnit:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/1.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/1.png" alt="">&lt;/p>
 &lt;p>Creamos una función, externa, que modifique la tabla en cuestión (en este caso SalesInvoiceHeader):&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/2.png">&lt;/p>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/3.png">&lt;/p>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/4.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/2.png" alt="">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/3.png" alt="">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2020/03/4.png" alt="">&lt;/p>
 &lt;p>Agregamos el contenido de la función (en este caso modificación):&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">[External] CmasDevSalesHeader(SIH : Record &amp;#34;Sales Invoice Header&amp;#34;)
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">SIH.LOCKTABLE;
@@ -91,14 +91,14 @@
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Espero resulte útil esta funcionalidad de Microsoft Dynamics NAV.&lt;/p></description></item><item><title>NAV: DataItem Temporal en Reporte</title><link>https://cmas.dev/posts/2019-06-12-nav-dataitem-temporal-en-reporte/</link><pubDate>Wed, 12 Jun 2019 22:44:30 -0400</pubDate><guid>https://cmas.dev/posts/2019-06-12-nav-dataitem-temporal-en-reporte/</guid><description>&lt;p>Dentro del mundo de desarrollo de Microsoft Dynamics NAV 2018 existen limitaciones, por ejemplo, sólo se pueden crear hasta 10 tablas (luego se deben comprar más tablas si se desea seguir desarrollando). Es por eso, que muchas veces necesitamos procesar el resultado de una tabla existente dentro de la misma tabla, pero haciéndola temporal sólo para emitir un reporte.&lt;/p>
 &lt;p>En ese caso, debemos procesar lo necesario en un paso previo y pasar los datos temporales al reporte que posee como DataItem una tabla temporal. En este ejemplo intentaremos hacer un &amp;ldquo;análisis de saldo por proveedor&amp;rdquo;.&lt;/p>
 &lt;p>Para lograr el objetivo de esta entrada, debemos seguir los siguientes pasos: Creamos un reporte cuyo DataItem debería ser de tipo &lt;strong>Vendor&lt;/strong> (Proveedor):&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/06/1.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/06/1.png" alt="">&lt;/p>
 &lt;p>En las propiedades, colocamos lo siguiente:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/06/2.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/06/2.png" alt="">&lt;/p>
 &lt;p>Ahora, es momento de crear el &lt;strong>DataItem&lt;/strong> para el recorrido de la tabla temporal:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/06/3.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/06/3.png" alt="">&lt;/p>
 &lt;p>Las mismas variables utilizadas en el primer DataItem &lt;strong>Vendor&lt;/strong>, pueden usarse dentro del DataItem &lt;strong>Integer&lt;/strong>. La diferencia está en que los campos dentro del DataItem &lt;strong>Integer&lt;/strong> corresponden a datos de la tabla temporal.&lt;/p>
 &lt;p>En las propiedades del DataItem &lt;strong>Integer&lt;/strong>, colocamos los siguiente:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/06/4.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/06/4.png" alt="">&lt;/p>
 &lt;p>En lo que refiere al diseño, está listo. En el código debemos tener en cuenta una cosa en la función &lt;strong>Integer - OnAfterGetRecord()&lt;/strong>, donde se coloca el siguiente código:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">IF Number = 1 THEN
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> //Esto hace que recorra los elementos de la tabla temporal
@@ -113,7 +113,7 @@
 &lt;p>El dueño, sin embargo, no desea manejar dos aplicaciones. Quiere todo integrado (ya que esa es la idea del Dynamics NAV). Ahí es donde surge esta solución:&lt;/p>
 &lt;p>Desde Microsoft Dynamics NAV, podemos realizar llamadas a librerías de .NET (que ya vienen integradas con Dynamics NAV), esto permite abrir cualquier programa instalado en nuestras máquinas.&lt;/p>
 &lt;p>Tenemos como ejemplo el siguiente formulario (desarrollado en .NET Framework 4.7.2):&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2020/06/1.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2020/06/1.png" alt="">&lt;/p>
 &lt;p>Con un simple saludo escrito en C#:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">using System;
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">using System.Windows.Forms;
@@ -134,11 +134,11 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>De modo a que lo entiendan, tenemos el siguiente resultado:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2020/06/2.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2020/06/2.png" alt="">&lt;/p>
 &lt;p>Dentro de Dynamics NAV, para este ejemplo, en una Acción &amp;ldquo;Abrir Formulario&amp;rdquo; de la página &amp;ldquo;Información de la Compañía&amp;rdquo;, disculpen pero tengo la versión Australiana por un tema de retenciones :) colocamos la llamada:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2020/06/3.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2020/06/3.png" alt="">&lt;/p>
 &lt;p>Luego, procedemos a declarar las variables globales, invocando a librerías de .NET:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2020/06/4.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2020/06/4.png" alt="">&lt;/p>
 &lt;p>Por último, escribimos el código correspondiente para efectuar la llamada:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">Abrir Formulario - OnAction()
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Proceso := Proceso.Process;
@@ -149,13 +149,13 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Proceso.Start();
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">CLEAR(Proceso);
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>De este modo, el resultado final será:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2020/06/5.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2020/06/5.png" alt="">&lt;/p>
 &lt;p>Así logramos invocar un programa externo desde Dynamics NAV 2018 sin perjudicar la operativa del usuario.&lt;/p></description></item><item><title>Creando csv con XMLPort</title><link>https://cmas.dev/posts/2019-05-01-creando-csv-con-xmlport/</link><pubDate>Wed, 01 May 2019 23:13:56 -0400</pubDate><guid>https://cmas.dev/posts/2019-05-01-creando-csv-con-xmlport/</guid><description>&lt;p>Hace tiempo veía una opción que se llamaba &lt;strong>XMLPort&lt;/strong> y surgió el interés en saber a qué se refería. Pero entre el trabajo y otras actividades no tuve tiempo de darle una miradita.&lt;/p>
 &lt;p>Ahora que surgió la necesidad de exportación de una tabla a un archivo &lt;strong>.txt&lt;/strong> es útil escribir esta entrada. &lt;strong>XMLPort&lt;/strong> realiza la exportación a un archivo &lt;strong>XML&lt;/strong> o &lt;strong>csv&lt;/strong> según la necesidad. Es por eso que decidí plasmarlo en esta entrada.&lt;/p>
 &lt;p>Primero, debemos crear el objeto de tipo &lt;strong>XMLPort&lt;/strong> y enlazarlo a uno o varios &lt;strong>DataItems&lt;/strong> (como si fuera un reporte):&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/1-5.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/1-5.png" alt="">&lt;/p>
 &lt;p>En las propiedades del objeto principal hacemos las modificaciones correspondientes:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/2-4.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/2-4.png" alt="">&lt;/p>
 &lt;p>Cada elemento tiene dos métodos asociados (uno para importación de datos y otro para exportación):&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">TipoReporte&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="n">Import&lt;/span>&lt;span class="p">::&lt;/span>&lt;span class="n">OnAfterAssignVariable&lt;/span>&lt;span class="p">()&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
@@ -163,6 +163,6 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">//&lt;/span>&lt;span class="n">Aquí&lt;/span> &lt;span class="n">forzamos&lt;/span> &lt;span class="n">a&lt;/span> &lt;span class="n">esta&lt;/span> &lt;span class="n">variable&lt;/span> &lt;span class="n">que&lt;/span> &lt;span class="n">debe&lt;/span> &lt;span class="n">ser&lt;/span> &lt;span class="mi">1&lt;/span> &lt;span class="n">para&lt;/span> &lt;span class="n">la&lt;/span> &lt;span class="n">exportación&lt;/span>&lt;span class="o">.&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">TipoReporte&lt;/span> &lt;span class="p">:&lt;/span>&lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;1&amp;#39;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Compilamos el &lt;strong>XMLPort&lt;/strong> y lo ejecutamos:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/3-4.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/05/3-4.png" alt="">&lt;/p>
 &lt;p>Si quieren ver el resultado real &lt;a href="https://cmas.dev/img/posts/migrated/2019/05/Hechauka-Ventas.txt">aquí lo tienen&lt;/a>.&lt;/p>
 &lt;p>¡Espero les resulte útil!&lt;/p></description></item></channel></rss>

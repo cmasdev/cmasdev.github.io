@@ -12,35 +12,35 @@ Con soporte para una amplia gama de marcos, lenguajes y servicios, además de in
 &lt;/li>
 &lt;li>
 &lt;p>Buscamos más plantillas (la idea es encontrar a .NET):
-&lt;img src="https://i.ibb.co/ZWH4KVc/idx-1.png">&lt;/p>
+&lt;img src="https://i.ibb.co/ZWH4KVc/idx-1.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>En la sección &lt;strong>Backend&lt;/strong>, buscamos a &lt;strong>.NET&lt;/strong> y la seleccionamos:
-&lt;img src="https://i.ibb.co/w0WTPFy/idx-2.png">&lt;/p>
+&lt;img src="https://i.ibb.co/w0WTPFy/idx-2.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Colocamos un nombre descriptivo, seleccionamos el ambiente ideal y creamos el proyecto:
-&lt;img src="https://i.ibb.co/WcJ8hx2/idx-3.png">&lt;/p>
+&lt;img src="https://i.ibb.co/WcJ8hx2/idx-3.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Nos mostrará el indicador de creación del proyecto:
-&lt;img src="https://i.ibb.co/Stb8CYR/idx-4.png">&lt;/p>
+&lt;img src="https://i.ibb.co/Stb8CYR/idx-4.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Nos abre el IDX (hasta ahora vi que es un Visual Studio Code en la nube, tal como GitHub Codespace) y miramos el código de ejemplo:
-&lt;img src="https://i.ibb.co/zQjNKYp/idx-5.png">&lt;/p>
+&lt;img src="https://i.ibb.co/zQjNKYp/idx-5.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Procedemos a ejecutar al aplicación en cuestión:
-&lt;img src="https://i.ibb.co/r6CNSTQ/idx-6.png">&lt;/p>
+&lt;img src="https://i.ibb.co/r6CNSTQ/idx-6.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Nos ofrece opciones para abrir la web:
-&lt;img src="https://i.ibb.co/yFQkkGD/idx-7.png">&lt;/p>
+&lt;img src="https://i.ibb.co/yFQkkGD/idx-7.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>En una nueva pestaña, nos muestra la web App.
-&lt;img src="https://i.ibb.co/ngHNgCv/idx-8.png">&lt;/p>
+&lt;img src="https://i.ibb.co/ngHNgCv/idx-8.png" alt="">&lt;/p>
 &lt;/li>
 &lt;/ol>
 &lt;p>Algo que noté es que la plantilla figura en &lt;strong>Backend&lt;/strong>, pero tranquilamente podemos crear una aplicación Full Stack con .NET de base para cubrir nuestras necesidades.&lt;/p>
@@ -425,7 +425,7 @@ Blazor ahora puede usarse para desarrollar aplicaciones de escritorio y móviles
 &lt;ol>
 &lt;li>
 &lt;p>Descargar los componentes de ejemplo desde aquí:
-&lt;img src="https://i.ibb.co/3vjKfwD/external-web-pa-1.png">&lt;/p>
+&lt;img src="https://i.ibb.co/3vjKfwD/external-web-pa-1.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Descargar el &lt;strong>Power Platform CLI&lt;/strong> desde &lt;a href="https://aka.ms/PowerAppsCLI">aquí&lt;/a> (en mi caso instalé la versión MSI).&lt;/p>
@@ -451,15 +451,15 @@ Blazor ahora puede usarse para desarrollar aplicaciones de escritorio y móviles
 &lt;ol>
 &lt;li>
 &lt;p>Procedemos a importar la solución generada en los pasos anteriores:
-&lt;img src="https://i.ibb.co/gw2D1Pw/external-web-pa-2.png">&lt;/p>
+&lt;img src="https://i.ibb.co/gw2D1Pw/external-web-pa-2.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Verificamos si la importación fue correcta:
-&lt;img src="https://i.ibb.co/RS07pgJ/external-web-pa-3.png">&lt;/p>
+&lt;img src="https://i.ibb.co/RS07pgJ/external-web-pa-3.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Importamos el componente (en este caso, es un componente de tipo Código):
-&lt;img src="https://i.ibb.co/D9TPFHL/external-web-pa-4.png">&lt;/p>
+&lt;img src="https://i.ibb.co/D9TPFHL/external-web-pa-4.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Utilizamos el IFRAME&lt;/p>
@@ -486,15 +486,15 @@ Blazor ahora puede usarse para desarrollar aplicaciones de escritorio y móviles
 &lt;p>Para la creación del proyecto debemos realizar los siguientes pasos:&lt;/p>
 &lt;ol>
 &lt;li>Crear un proyecto de tipo &lt;strong>WinUI 3&lt;/strong>
-&lt;img src="https://cmas.dev/img/posts/2022/05/18/1.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/05/18/1.png" alt="">&lt;/li>
 &lt;li>Se coloca un nombre descriptivo para el proyecto:
-&lt;img src="https://cmas.dev/img/posts/2022/05/18/2.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/05/18/2.png" alt="">&lt;/li>
 &lt;li>Se crea el proyecto con los siguientes archivos:
-&lt;img src="https://cmas.dev/img/posts/2022/05/18/3.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/05/18/3.png" alt="">&lt;/li>
 &lt;li>Procedemos a ejecutar la aplicación (y se ejecutará en nuestro &lt;strong>Windows 11&lt;/strong> directamente):
-&lt;img src="https://cmas.dev/img/posts/2022/05/18/4.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/05/18/4.png" alt="">&lt;/li>
 &lt;li>Veremos la aplicación ejecutada:
-&lt;img src="https://cmas.dev/img/posts/2022/05/18/5.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/05/18/5.png" alt="">&lt;/li>
 &lt;/ol>
 &lt;p>Con esto logramos crear nuestra primera aplicación &lt;strong>WinUI 3&lt;/strong>.&lt;/p>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item></channel></rss>

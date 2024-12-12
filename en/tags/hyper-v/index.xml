@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Hyper-V on Christian Amado's Blog</title><link>https://cmas.dev/en/tags/hyper-v/</link><description>Recent content in Hyper-V on Christian Amado's Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 06 Apr 2022 19:21:43 -0400</lastBuildDate><atom:link href="https://cmas.dev/en/tags/hyper-v/index.xml" rel="self" type="application/rss+xml"/><item><title>Create shortcut to virtual machine</title><link>https://cmas.dev/en/posts/2022-04-06-windows-11-shortcut-vm/</link><pubDate>Wed, 06 Apr 2022 19:21:43 -0400</pubDate><guid>https://cmas.dev/en/posts/2022-04-06-windows-11-shortcut-vm/</guid><description>&lt;p>The most practical and useful thing for a user is to find what they are looking for quickly and easily. That is why I will show the steps to create a shortcut to a virtual machine in Hyper-V.&lt;/p>
 &lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 22593&lt;/strong>&lt;/em>&lt;/p>
 &lt;p>First we must go to our Hyper-V virtual machine manager and obtain the name of the desired virtual machine (Ubuntu, in this case):
-&lt;img src="https://cmas.dev/img/posts/2022/04/06/hyperv1.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/04/06/hyperv1.png" alt="">&lt;/p>
 &lt;p>We go to the Windows desktop, &lt;em>right click&lt;/em> &amp;gt; &lt;em>New&lt;/em> &amp;gt; &lt;em>Create shortcut&lt;/em>:
-&lt;img src="https://cmas.dev/img/posts/2022/04/06/hyperv2.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/04/06/hyperv2.png" alt="">&lt;/p>
 &lt;p>We add the following file location:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">vmconnect.exe localhost &amp;#34;Ubuntu&amp;#34;
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
@@ -11,11 +11,11 @@
 &lt;li>&lt;strong>localhost&lt;/strong> because this is our local virtual machine&lt;/li>
 &lt;li>&lt;strong>Ubuntu&lt;/strong> is the name of the virtual machine&lt;/li>
 &lt;/ul>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/2022/04/06/hyperv3.png">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/2022/04/06/hyperv3.png" alt="">&lt;/p>
 &lt;p>We put a descriptive name to our shortcut:
-&lt;img src="https://cmas.dev/img/posts/2022/04/06/hyperv4.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/04/06/hyperv4.png" alt="">&lt;/p>
 &lt;p>We will see the shortcut created on the desktop:
-&lt;img src="https://cmas.dev/img/posts/2022/04/06/hyperv5.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/04/06/hyperv5.png" alt="">&lt;/p>
 &lt;p>Finally, we test the shortcut:
-&lt;img src="https://cmas.dev/img/posts/2022/04/06/hyperv6.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/04/06/hyperv6.png" alt="">&lt;/p>
 &lt;p>Happy virtualization!&lt;/p></description></item></channel></rss>

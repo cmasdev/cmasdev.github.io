@@ -12,40 +12,96 @@ Con soporte para una amplia gama de marcos, lenguajes y servicios, además de in
 &lt;/li>
 &lt;li>
 &lt;p>Buscamos más plantillas (la idea es encontrar a .NET):
-&lt;img src="https://i.ibb.co/ZWH4KVc/idx-1.png">&lt;/p>
+&lt;img src="https://i.ibb.co/ZWH4KVc/idx-1.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>En la sección &lt;strong>Backend&lt;/strong>, buscamos a &lt;strong>.NET&lt;/strong> y la seleccionamos:
-&lt;img src="https://i.ibb.co/w0WTPFy/idx-2.png">&lt;/p>
+&lt;img src="https://i.ibb.co/w0WTPFy/idx-2.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Colocamos un nombre descriptivo, seleccionamos el ambiente ideal y creamos el proyecto:
-&lt;img src="https://i.ibb.co/WcJ8hx2/idx-3.png">&lt;/p>
+&lt;img src="https://i.ibb.co/WcJ8hx2/idx-3.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Nos mostrará el indicador de creación del proyecto:
-&lt;img src="https://i.ibb.co/Stb8CYR/idx-4.png">&lt;/p>
+&lt;img src="https://i.ibb.co/Stb8CYR/idx-4.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Nos abre el IDX (hasta ahora vi que es un Visual Studio Code en la nube, tal como GitHub Codespace) y miramos el código de ejemplo:
-&lt;img src="https://i.ibb.co/zQjNKYp/idx-5.png">&lt;/p>
+&lt;img src="https://i.ibb.co/zQjNKYp/idx-5.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Procedemos a ejecutar al aplicación en cuestión:
-&lt;img src="https://i.ibb.co/r6CNSTQ/idx-6.png">&lt;/p>
+&lt;img src="https://i.ibb.co/r6CNSTQ/idx-6.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Nos ofrece opciones para abrir la web:
-&lt;img src="https://i.ibb.co/yFQkkGD/idx-7.png">&lt;/p>
+&lt;img src="https://i.ibb.co/yFQkkGD/idx-7.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>En una nueva pestaña, nos muestra la web App.
-&lt;img src="https://i.ibb.co/ngHNgCv/idx-8.png">&lt;/p>
+&lt;img src="https://i.ibb.co/ngHNgCv/idx-8.png" alt="">&lt;/p>
 &lt;/li>
 &lt;/ol>
 &lt;p>Algo que noté es que la plantilla figura en &lt;strong>Backend&lt;/strong>, pero tranquilamente podemos crear una aplicación Full Stack con .NET de base para cubrir nuestras necesidades.&lt;/p>
 &lt;p>Al momento de escribir este artículo noto que &lt;strong>Proyecto IDX&lt;/strong> = &lt;strong>GitHub Codespace&lt;/strong>. La base es Visual Studio Code.&lt;/p>
-&lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Introducción a Angular 17: Características clave y mejoras</title><link>https://cmas.dev/posts/2024-04-24-angular-17-characteristics/</link><pubDate>Tue, 23 Apr 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-04-24-angular-17-characteristics/</guid><description>&lt;p>Angular 17, la última versión del popular framework de desarrollo web, introduce mejoras significativas para desarrolladores y equipos técnicos. Con un enfoque en el rendimiento, herramientas optimizadas y simplificación de procesos, esta actualización trae nuevas características como las Signals API, mejoras en el manejo de estados y optimizaciones para el desarrollo y pruebas. En este artículo, exploramos las características clave de Angular 17, su impacto en el desarrollo de aplicaciones modernas y cómo empezar a usar estas innovaciones en tus proyectos. Descubre cómo esta versión refuerza la posición de Angular como un pilar en el ecosistema de desarrollo web.&lt;/p>
+&lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>¿Cómo configurar un proyecto TypeScript moderno con Deno?</title><link>https://cmas.dev/posts/2024-05-01-typescript-project-with-deno/</link><pubDate>Wed, 01 May 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-05-01-typescript-project-with-deno/</guid><description>&lt;h1 id="cómo-configurar-un-proyecto-typescript-moderno-con-deno">Cómo configurar un proyecto TypeScript moderno con Deno&lt;/h1>
+&lt;h2 id="introducción">Introducción&lt;/h2>
+&lt;p>Configurar un proyecto moderno en &lt;strong>TypeScript&lt;/strong> con &lt;strong>Deno&lt;/strong> permitirá aprovechar un entorno de desarrollo optimizado, seguro y compatible con los estándares más recientes, como &lt;strong>ES2024&lt;/strong>. Este artículo mostrará cómo realizar esta configuración tanto en &lt;strong>Visual Studio Code&lt;/strong> como en &lt;strong>JetBrains Rider&lt;/strong>, destacando buenas prácticas, incluyendo &lt;strong>testing&lt;/strong> con TypeScript, y proporcionando ejemplos prácticos de código.&lt;/p>
+&lt;h2 id="prerrequisitos">Prerrequisitos&lt;/h2>
+&lt;ul>
+&lt;li>Instalar &lt;strong>Deno&lt;/strong> desde &lt;a href="https://deno.land">https://deno.land&lt;/a>:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">curl -fsSL https://deno.land/x/install/install.sh &lt;span class="p">|&lt;/span> sh
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">- Tener instalado Visual Studio Code o JetBrains Rider.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">- Conocer los fundamentos de TypeScript.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">## Crear la configuración del proyecto
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">### 1. Crear un directorio base
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Crear un directorio para el proyecto:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">```bash
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">mkdir modern-typescript-deno
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">cd modern-typescript-deno
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="2-configurar-el-archivo-denojson">2. Configurar el archivo deno.json&lt;/h3>
+&lt;p>Crear un archivo deno.json con configuraciones básicas para ES2024 y definir tareas útiles:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-json" data-lang="json">&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;compilerOptions&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;target&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;ES2024&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;strict&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">true&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;lib&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="s2">&amp;#34;deno.ns&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;deno.unstable&amp;#34;&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;tasks&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;start&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;deno run --allow-net --allow-read src/index.ts&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;test&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;deno test&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;importMap&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;./import_map.json&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Esto permite:&lt;/p>
+&lt;ul>
+&lt;li>Establecer ES2024 como objetivo del compilador.&lt;/li>
+&lt;li>Definir tareas como start y test.&lt;/li>
+&lt;li>Utilizar un archivo import_map.json para gestionar rutas.&lt;/li>
+&lt;/ul>
+&lt;h2 id="configuración-en-visual-studio-code">Configuración en Visual Studio Code&lt;/h2>
+&lt;h3 id="instalar-la-extensión-de-deno">Instalar la extensión de Deno&lt;/h3>
+&lt;ul>
+&lt;li>Abrir Visual Studio Code.&lt;/li>
+&lt;li>Buscar e instalar la extensión &lt;strong>Deno&lt;/strong> desarrollada por Justjavac.&lt;/li>
+&lt;/ul>
+&lt;h3 id="configurar-deno-en-el-entorno">Configurar Deno en el entorno&lt;/h3>
+&lt;p>Crear un archivo &lt;strong>.vscode/settings.json&lt;/strong> para habilitar Deno:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-json" data-lang="json">&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;deno.enable&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">true&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;deno.unstable&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">true&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;editor.defaultFormatter&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;denoland.vscode-deno&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;[typescript]&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;editor.defaultFormatter&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;denoland.vscode-deno&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="conclusión">Conclusión&lt;/h2>
+&lt;p>Configurar un proyecto TypeScript moderno con Deno utilizando &lt;strong>ES2024&lt;/strong> ofrece un entorno potente y seguro. Tanto Visual Studio Code como JetBrains Rider proporcionan herramientas avanzadas para aprovechar las capacidades de Deno al máximo. Implementar estas configuraciones, buenas prácticas y pruebas garantiza un desarrollo eficiente y confiable.&lt;/p></description></item><item><title>Introducción a Angular 17: Características clave y mejoras</title><link>https://cmas.dev/posts/2024-04-24-angular-17-characteristics/</link><pubDate>Tue, 23 Apr 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-04-24-angular-17-characteristics/</guid><description>&lt;p>Angular 17, la última versión del popular framework de desarrollo web, introduce mejoras significativas para desarrolladores y equipos técnicos. Con un enfoque en el rendimiento, herramientas optimizadas y simplificación de procesos, esta actualización trae nuevas características como las Signals API, mejoras en el manejo de estados y optimizaciones para el desarrollo y pruebas. En este artículo, exploramos las características clave de Angular 17, su impacto en el desarrollo de aplicaciones modernas y cómo empezar a usar estas innovaciones en tus proyectos. Descubre cómo esta versión refuerza la posición de Angular como un pilar en el ecosistema de desarrollo web.&lt;/p>
 &lt;h2 id="introducción">Introducción&lt;/h2>
 &lt;p>Angular es uno de los frameworks de desarrollo web más populares, y su última versión, &lt;strong>Angular 17&lt;/strong>, continúa evolucionando para satisfacer las demandas de los desarrolladores modernos. Con mejoras enfocadas en el rendimiento, herramientas simplificadas y nuevas funcionalidades, Angular 17 consolida su posición como una solución robusta para aplicaciones de todos los tamaños.&lt;/p>
 &lt;p>En este artículo, exploraremos las &lt;strong>características clave y mejoras&lt;/strong> de Angular 17, destacando cómo estas actualizaciones impactan en el flujo de trabajo de los desarrolladores y cómo puedes aprovecharlas para optimizar tus proyectos.&lt;/p>

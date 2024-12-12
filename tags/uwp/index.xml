@@ -5,24 +5,24 @@
 &lt;p>Primeramente, crearemos la aplicación &lt;strong>ASP.NET Core&lt;/strong> básica y la ejecutaremos para verla en el navegador.&lt;/p>
 &lt;ol>
 &lt;li>Creamos un nuevo proyecto &lt;strong>ASP.NET Core&lt;/strong>:
-&lt;img src="https://cmas.dev/img/posts/2022/07/20/1.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/07/20/1.png" alt="">&lt;/li>
 &lt;li>Colocamos un nombre al proyecto:
-&lt;img src="https://cmas.dev/img/posts/2022/07/20/2.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/07/20/2.png" alt="">&lt;/li>
 &lt;li>Seleccionamos el Framework que se ajusta a nuestras necesidades:
-&lt;img src="https://cmas.dev/img/posts/2022/07/20/3.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/07/20/3.png" alt="">&lt;/li>
 &lt;li>Ejecutamos la aplicación (presionando la tecla &lt;em>F5&lt;/em>), veremos el servidor y la web funcionando:
-&lt;img src="https://cmas.dev/img/posts/2022/07/20/4.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/07/20/4.png" alt="">&lt;/li>
 &lt;/ol>
 &lt;p>Listo, ya tenemos nuestra aplicación Web.&lt;/p>
 &lt;h2 id="aplicación-uwp-univesal-windows-platform">Aplicación UWP (Univesal Windows Platform)&lt;/h2>
 &lt;p>Crearemos la aplicación &lt;strong>UWP&lt;/strong> apuntando a &lt;strong>Windows 11&lt;/strong> como Sistema operativo.&lt;/p>
 &lt;ol>
 &lt;li>Creamos un nuevo proyecto &lt;strong>Universal Windows&lt;/strong>:
-&lt;img src="https://cmas.dev/img/posts/2022/07/20/5.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/07/20/5.png" alt="">&lt;/li>
 &lt;li>Colocamos un nombre al proyecto:
-&lt;img src="https://cmas.dev/img/posts/2022/07/20/6.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/07/20/6.png" alt="">&lt;/li>
 &lt;li>Seleccionamos las versiones para Windows que estarán disponibles:
-&lt;img src="https://cmas.dev/img/posts/2022/07/20/7.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/07/20/7.png" alt="">&lt;/li>
 &lt;li>Escribimos el código necesario para que nuestra web app pueda verse:&lt;/li>
 &lt;/ol>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">&amp;lt;Page
@@ -42,12 +42,12 @@
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="5">
 &lt;li>
 &lt;p>Ejecutamos la aplicación (presionando la tecla &lt;em>F5&lt;/em>), veremos&amp;hellip; nada:
-&lt;img src="https://cmas.dev/img/posts/2022/07/20/8.png">&lt;br>
+&lt;img src="https://cmas.dev/img/posts/2022/07/20/8.png" alt="">&lt;br>
 Esto debido a que la librería no está soportada y necesita la nueva versión (acaba de ser lanzada &lt;a href="https://www.nuget.org/packages/Microsoft.UI.Xaml/2.8.0">aquí&lt;/a>).&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Procedemos a cargar el nuevo paquete desde &lt;strong>Nuget&lt;/strong>, para ellos vamos a **** &amp;gt; &amp;gt; :
-&lt;img src="https://cmas.dev/img/posts/2022/07/20/9.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/07/20/9.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Colocamos el código nuevo para que esto nos funcione:&lt;/p>
@@ -70,7 +70,7 @@ Esto debido a que la librería no está soportada y necesita la nueva versión (
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;/Page&amp;gt;
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="7">
 &lt;li>Ejecutamos la aplicación (presionando la tecla &lt;em>F5&lt;/em>), veremos nuestra web app funcionando:
-&lt;img src="https://cmas.dev/img/posts/2022/07/20/10.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/07/20/10.png" alt="">&lt;/li>
 &lt;/ol>
 &lt;p>Parece algo muy sencillo, pero me tomó algunos días poder encontrar que el problema estaba en la actualización de la librería &lt;strong>Microsoft.UI&lt;/strong>&lt;/p>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Migración UWP a WinUI 3</title><link>https://cmas.dev/posts/2022-07-06-upgrade-uwp-to-winui3/</link><pubDate>Wed, 06 Jul 2022 00:12:00 -0400</pubDate><guid>https://cmas.dev/posts/2022-07-06-upgrade-uwp-to-winui3/</guid><description>&lt;p>¡Feliz cumple para mí! Arranco mi día con un artículo (es día de festejo así que será complicado cumplir con la comunidad).&lt;/p>
@@ -214,13 +214,13 @@ Esto debido a que la librería no está soportada y necesita la nueva versión (
 &lt;p>Para la creación del proyecto debemos seguir los siguientes pasos:&lt;/p>
 &lt;ol>
 &lt;li>Crear una nueva aplicación en Visual Studio:
-&lt;img src="https://cmas.dev/img/posts/2022/05/11/1.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/05/11/1.png" alt="">&lt;/li>
 &lt;li>Colocamos el nombre descriptivo para el nuevo proyecto:
-&lt;img src="https://cmas.dev/img/posts/2022/05/11/2.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/05/11/2.png" alt="">&lt;/li>
 &lt;li>Seleccionamos la versión del destino (En Windows 11):
-&lt;img src="https://cmas.dev/img/posts/2022/05/11/3.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/05/11/3.png" alt="">&lt;/li>
 &lt;li>Verificamos que el proyecto se haya creado correctamente:
-&lt;img src="https://cmas.dev/img/posts/2022/05/11/4.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/05/11/4.png" alt="">&lt;/li>
 &lt;li>Agregamos un control de prueba para poder ejecutarlo:&lt;/li>
 &lt;/ol>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">&amp;lt;Page
@@ -239,9 +239,9 @@ Esto debido a que la librería no está soportada y necesita la nueva versión (
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;/Page&amp;gt;
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="6">
 &lt;li>Ejecutamos la aplicación:
-&lt;img src="https://cmas.dev/img/posts/2022/05/11/5.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/05/11/5.png" alt="">&lt;/li>
 &lt;li>Voilá, tenemos nuestra primera app UWP para Windows 11:
-&lt;img src="https://cmas.dev/img/posts/2022/05/11/6.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/05/11/6.png" alt="">&lt;/li>
 &lt;/ol>
 &lt;p>Si bien es cierto, se recomienda que las aplicaciones para Windows sean creadas con WinUI, aún es posible desarrollarlas con UWP (pero es recomendable hacer la migración correspondiente).&lt;/p>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item></channel></rss>

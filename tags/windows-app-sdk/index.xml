@@ -50,18 +50,18 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> HorizontalOptions=&amp;#34;Center&amp;#34; /&amp;gt;
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="4">
 &lt;li>Ejecutamos la aplicación y vemos los resultados:
-&lt;img src="https://cmas.dev/img/posts/2022/11/02/1.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/11/02/1.png" alt="">&lt;/li>
 &lt;/ol>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/2022/11/02/2.png">&lt;/p>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/2022/11/02/3.png">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/2022/11/02/2.png" alt="">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/2022/11/02/3.png" alt="">&lt;/p>
 &lt;h2 id="abrir-imagen-en-android">Abrir imagen en Android&lt;/h2>
 &lt;p>Como todo esto lo hicimos con &lt;strong>.NET MAUI&lt;/strong>, debemos hacer ¡NADA!&lt;/p>
 &lt;ol>
 &lt;li>Ejecutamos en &lt;strong>Android&lt;/strong> y&amp;hellip;
-&lt;img src="https://cmas.dev/img/posts/2022/11/02/4.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/11/02/4.png" alt="">&lt;/li>
 &lt;/ol>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/2022/11/02/5.png">&lt;/p>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/2022/11/02/6.png">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/2022/11/02/5.png" alt="">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/2022/11/02/6.png" alt="">&lt;/p>
 &lt;p>Con una única línea de código pudimos realizar esta tarea sencilla sin necesidad de solicitar permisos ni nada desde la aplicación. esa es una de las ventajas que me gusta de &lt;strong>.NET MAUI&lt;/strong>&lt;/p>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Estructura básica de un proyecto con Windows App SDK</title><link>https://cmas.dev/posts/2022-05-25-basic-struct-of-windows-app-sdk-project/</link><pubDate>Wed, 25 May 2022 18:45:00 -0400</pubDate><guid>https://cmas.dev/posts/2022-05-25-basic-struct-of-windows-app-sdk-project/</guid><description>&lt;p>En este artículo intentaré explicar lo que entiendo es la estructura básica de &lt;strong>Windows App SDK&lt;/strong>, pues resulta algo nuevo para mí (en el pasado desarrollaba con WPF y después con UWP en sus inicios). En un &lt;a href="https://cmas.dev/posts/2022-05-18-windows-app-sdk-development/">artículo anterior&lt;/a> hemos visto los primeros pasos en esta plataforma.&lt;/p>
 &lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 25126&lt;/strong>&lt;/em>&lt;/p>

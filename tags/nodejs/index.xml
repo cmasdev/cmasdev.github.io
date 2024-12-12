@@ -5,7 +5,7 @@
 &lt;p>Preparamos WSL para la instalación de Node.js&lt;/p>
 &lt;ol>
 &lt;li>Verificamos las versiones de Node.js y NVM que tenemos instaladas (se supone que no las tenemos):
-&lt;img src="https://cmas.dev/img/posts/2022/06/08/1.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/06/08/1.png" alt="">&lt;/li>
 &lt;li>Procedemos a instalar NVM (Node Version Manager):&lt;/li>
 &lt;/ol>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
@@ -15,7 +15,7 @@
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">nvm install node
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="4">
 &lt;li>Verificamos las versiones y listo:
-&lt;img src="https://cmas.dev/img/posts/2022/06/08/2.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/06/08/2.png" alt="">&lt;/li>
 &lt;/ol>
 &lt;h2 id="aplicacion-en-visual-studio-code">Aplicacion en Visual Studio Code&lt;/h2>
 &lt;p>Dentro del Visual Studio Code creamos la aplicación y procedemos a ejecutarla normalmente.&lt;/p>
@@ -31,24 +31,24 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">})&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">listen&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">8080&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="3">
 &lt;li>Presionamos la tecla &lt;em>F5&lt;/em> y seleccionamos la opción &lt;strong>Node.js&lt;/strong>:
-&lt;img src="https://cmas.dev/img/posts/2022/06/08/4.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/06/08/4.png" alt="">&lt;/li>
 &lt;li>Veremos los controles de depuración y en la consola veremos que ha creado la aplicación:
-&lt;img src="https://cmas.dev/img/posts/2022/06/08/5.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/06/08/5.png" alt="">&lt;/li>
 &lt;li>En el navegador de preferencia, colocamos la URL definida en el código y vermeos nuestro pequeña applicación:
-&lt;img src="https://cmas.dev/img/posts/2022/06/08/6.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/06/08/6.png" alt="">&lt;/li>
 &lt;/ol>
 &lt;h2 id="aplicacion-en-visual-studio-code-con-wsl">Aplicacion en Visual Studio Code con WSL&lt;/h2>
 &lt;p>Dentro del Visual Studio Code creamos la aplicación y procedemos a ejecutarla en WSL.&lt;/p>
 &lt;ol>
 &lt;li>Descargar la extensión para desarrollo remoto &lt;a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl">aquí&lt;/a>&lt;/li>
 &lt;li>Abrimos una nueva ventana de Visual Studio Code y hacemos clicn en el icono de acceso remoto:
-&lt;img src="https://cmas.dev/img/posts/2022/06/08/7.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/06/08/7.png" alt="">&lt;/li>
 &lt;li>Seleccionamos la opción de distro para WSL:
-&lt;img src="https://cmas.dev/img/posts/2022/06/08/8.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/06/08/8.png" alt="">&lt;/li>
 &lt;li>Marcamos la opción Ubuntu:
-&lt;img src="https://cmas.dev/img/posts/2022/06/08/9.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/06/08/9.png" alt="">&lt;/li>
 &lt;li>Abrimos la carpeta donde almacenaremos el proyecto (en Ubuntu):
-&lt;img src="https://cmas.dev/img/posts/2022/06/08/10.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/06/08/10.png" alt="">&lt;/li>
 &lt;li>Escribimos las siguientes líneas de código (con algunas diferencias del código anterior):&lt;/li>
 &lt;/ol>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">var&lt;/span> &lt;span class="n">http&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">require&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;http&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
@@ -59,9 +59,9 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">})&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">listen&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">8081&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="7">
 &lt;li>Ejecutamos la aplicación desde la Terminal de &lt;strong>Ubuntu&lt;/strong>:
-&lt;img src="https://cmas.dev/img/posts/2022/06/08/12.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/06/08/12.png" alt="">&lt;/li>
 &lt;li>Abrimos el navegador y colocamos la dirección que especificamos en el código:
-&lt;img src="https://cmas.dev/img/posts/2022/06/08/13.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/06/08/13.png" alt="">&lt;/li>
 &lt;/ol>
 &lt;p>De esta manera hemos realizado una aplicación NodeJs en &lt;strong>Windows&lt;/strong> directamente así como en &lt;strong>WSL&lt;/strong>. Ambas opciones son válidas, nada más depende de la elección del desarrollador.&lt;/p>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item></channel></rss>

@@ -2,26 +2,26 @@
 &lt;p>&lt;em>&lt;!-- raw HTML omitted -->Versión: 2021 Wave 1 (KID: 5007779)&lt;!-- raw HTML omitted -->&lt;/em>&lt;/p>
 &lt;h2 id="en-microsoft-dynamics-365-business-central">En Microsoft Dynamics 365 Business Central&lt;/h2>
 &lt;p>Primero, verificamos que el servicio de Microsoft Dynamics 365 esté habilitado para &lt;strong>SOAP&lt;/strong>:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/2021/11/03/Soap1.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2021/11/03/Soap1.png" alt="">&lt;/p>
 &lt;p>Copiamos la dirección &lt;strong>URL de SOAP&lt;/strong>, por la utilizaremos después:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/2021/11/03/Soap2.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2021/11/03/Soap2.png" alt="">&lt;/p>
 &lt;h2 id="en-visual-studio">En Visual Studio&lt;/h2>
 &lt;p>Creamos una aplicación &lt;strong>WPF&lt;/strong> o la que les facilite la vida:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/2021/11/03/Soap3.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2021/11/03/Soap3.png" alt="">&lt;/p>
 &lt;p>Configuramos el nuevo proyecto:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/2021/11/03/Soap4.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2021/11/03/Soap4.png" alt="">&lt;/p>
 &lt;p>Elegimos el &lt;em>Framework a ser utilizado&lt;/em>:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/2021/11/03/Soap5.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2021/11/03/Soap5.png" alt="">&lt;/p>
 &lt;p>Agregamos el servicio al proyecto:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/2021/11/03/Soap6.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2021/11/03/Soap6.png" alt="">&lt;/p>
 &lt;p>Seleccionamos el tipo &lt;strong>WCF Web Service&lt;/strong>:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/2021/11/03/Soap7.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2021/11/03/Soap7.png" alt="">&lt;/p>
 &lt;p>Agregamos la referencia (que copiamos más arriba):&lt;br>
-&lt;img src="https://cmas.dev/img/posts/2021/11/03/Soap8.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2021/11/03/Soap8.png" alt="">&lt;/p>
 &lt;p>Configuramos la referencia al servicio y listo:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/2021/11/03/Soap9.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2021/11/03/Soap9.png" alt="">&lt;/p>
 &lt;p>Verificamos que en el proyecto se haya agregado todo:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/2021/11/03/Soap10.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2021/11/03/Soap10.png" alt="">&lt;/p>
 &lt;p>El codigo XAML visual es algo así&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">&amp;lt;Window x:Class=&amp;#34;WpfBC.MainWindow&amp;#34;
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> xmlns=&amp;#34;http://schemas.microsoft.com/winfx/2006/xaml/presentation&amp;#34;
@@ -93,52 +93,52 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Ejecutamos y&amp;hellip;
-&lt;img src="https://cmas.dev/img/posts/2021/11/03/Soap11.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2021/11/03/Soap11.png" alt="">&lt;/p>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>VS: Instalando Visual Studio 2022 Preview 1</title><link>https://cmas.dev/posts/2021-06-19-instalando-visual-studio-2022-preview/</link><pubDate>Sat, 19 Jun 2021 11:56:00 -0400</pubDate><guid>https://cmas.dev/posts/2021-06-19-instalando-visual-studio-2022-preview/</guid><description>&lt;p>El pasado 17 de junio, Microsoft ha lanzado la versión Preview del nuevo Visual Studio 2022, el cual posee muchas mejoras en cuanto a productividad se refiere. En este artículo mostraré el proceso de instalación de Visual Studio 2022 Preview 1.&lt;/p>
 &lt;p>Para mayor detalle de las características del producto puedes ver &lt;a href="https://devblogs.microsoft.com/visualstudio/visual-studio-2022-preview-1-now-available/">aquí&lt;/a>&lt;/p>
 &lt;h1 id="instalación-de-visual-studio-2022-preview-1">Instalación de Visual Studio 2022 Preview 1&lt;/h1>
 &lt;p>Para la instalación del nuevo Visual Studio debemos realizar las siguientes tareas:
 0. En mi caso, procedí a desinstalar todas las versiones de Visual Studio que tenía instaladas:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/visualstudio/visual-studio-2022-preview-1_1.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/visualstudio/visual-studio-2022-preview-1_1.png" alt="">&lt;/p>
 &lt;ol>
 &lt;li>
 &lt;p>Seleccionar la versión de Visual Studio que necesitamos (siempre elijo Professional):&lt;br>
-&lt;img src="https://cmas.dev/img/posts/visualstudio/visual-studio-2022-preview-1_2.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/visualstudio/visual-studio-2022-preview-1_2.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Veremos la ventana principal del instalador y hacemos clic en &amp;ldquo;Continuar&amp;rdquo;:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/visualstudio/visual-studio-2022-preview-1_3.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/visualstudio/visual-studio-2022-preview-1_3.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Seleccionamos los componentes necesarios para los desarrollos que haremos (como mi foco es Windows y WSL seleccioné estos):&lt;br>
-&lt;img src="https://cmas.dev/img/posts/visualstudio/visual-studio-2022-preview-1_4.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/visualstudio/visual-studio-2022-preview-1_4.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Leemos el &lt;a href="https://devblogs.microsoft.com/visualstudio/visual-studio-2022-preview-1-now-available/">blog&lt;/a> indicado más arriba mientras esperamos al instalador que termine su trabajo:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/visualstudio/visual-studio-2022-preview-1_5.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/visualstudio/visual-studio-2022-preview-1_5.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Listo. Estamos listos para la primera experiencia Visual Studio 2022 Preview 1:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/visualstudio/visual-studio-2022-preview-1_6.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/visualstudio/visual-studio-2022-preview-1_6.png" alt="">&lt;/p>
 &lt;/li>
 &lt;/ol>
 &lt;h1 id="primera-vez-con-visual-studio-2022-preview-1">Primera vez con Visual Studio 2022 Preview 1&lt;/h1>
 &lt;ol>
 &lt;li>
 &lt;p>Una vez instalado procedemos a iniciar el nuevo programa instalado:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/visualstudio/visual-studio-2022-preview-1_7.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/visualstudio/visual-studio-2022-preview-1_7.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Pantalla principal del Visual Studio:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/visualstudio/visual-studio-2022-preview-1_8.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/visualstudio/visual-studio-2022-preview-1_8.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Creación de un nuevo proyecto:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/visualstudio/visual-studio-2022-preview-1_9.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/visualstudio/visual-studio-2022-preview-1_9.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Entorno de desarrollo UWP (Universal Windows Platform):&lt;br>
-&lt;img src="https://cmas.dev/img/posts/visualstudio/visual-studio-2022-preview-1_10.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/visualstudio/visual-studio-2022-preview-1_10.png" alt="">&lt;/p>
 &lt;/li>
 &lt;/ol>
 &lt;p>De esta manera, hemos visto cómo instalar Visual Studio 2022 Preview 1 y hemos dado un vistazo general en su primer uso.&lt;/p>

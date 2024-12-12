@@ -5,30 +5,30 @@
 &lt;p>Primeramente, debemos crear el poryecto &lt;strong>.NET MAUI&lt;/strong> y tenerlo listo para la plataforma &lt;strong>Android&lt;/strong>:&lt;/p>
 &lt;ol>
 &lt;li>Creamos el proyecto en Visual Studio 2022:
-&lt;img src="https://cmas.dev/img/posts/2022/07/27/1.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/07/27/1.png" alt="">&lt;/li>
 &lt;li>Colocamos un nombre descriptivo al proyecto nuevo:
-&lt;img src="https://cmas.dev/img/posts/2022/07/27/2.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/07/27/2.png" alt="">&lt;/li>
 &lt;li>Seleccionamos el .NET Core que deseamos utilizar:
-&lt;img src="https://cmas.dev/img/posts/2022/07/27/3.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/07/27/3.png" alt="">&lt;/li>
 &lt;li>Verificamos las opciones habilitadas (nos interesa Android):
-&lt;img src="https://cmas.dev/img/posts/2022/07/27/4.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/07/27/4.png" alt="">&lt;/li>
 &lt;/ol>
 &lt;h2 id="configurar-wsa">Configurar WSA&lt;/h2>
 &lt;p>Procedemos a configurar la máquina virtual para poder utilizarla&lt;/p>
 &lt;ol>
 &lt;li>En la configuración de &lt;strong>WSA&lt;/strong>, verificamos la IP y puerto para conectarnos:
-&lt;img src="https://cmas.dev/img/posts/2022/07/27/5.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/07/27/5.png" alt="">&lt;/li>
 &lt;li>Ejecutamos la consola de Android desde Visual Studio:
-&lt;img src="https://cmas.dev/img/posts/2022/07/27/6.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/07/27/6.png" alt="">&lt;/li>
 &lt;li>Ejecutamos el siguiente comando:&lt;/li>
 &lt;/ol>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">adb connect 127.0.0.1:58526
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="4">
 &lt;li>Verificamos la conexión realizada:
-&lt;img src="https://cmas.dev/img/posts/2022/07/27/7.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/07/27/7.png" alt="">&lt;/li>
 &lt;li>En visual Studio, veremos el nuevo dispositivo:
-&lt;img src="https://cmas.dev/img/posts/2022/07/27/8.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/07/27/8.png" alt="">&lt;/li>
 &lt;li>Ejecutamos la aplicación y la veremos en &lt;strong>WSA&lt;/strong>:
-&lt;img src="https://cmas.dev/img/posts/2022/07/27/9.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/07/27/9.png" alt="">&lt;/li>
 &lt;/ol>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item></channel></rss>

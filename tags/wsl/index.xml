@@ -6,7 +6,7 @@
 &lt;ol>
 &lt;li>
 &lt;p>Abrimos &lt;strong>Windows Terminal&lt;/strong> con el perfil &lt;strong>Ubuntu&lt;/strong>:
-&lt;img src="https://cmas.dev/img/posts/2022/12/21/1.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/12/21/1.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Procedemos a instalar &lt;strong>Django&lt;/strong> con el siguiente comando:&lt;/p>
@@ -22,12 +22,12 @@
 &lt;/li>
 &lt;/ol>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">django-admin --version
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://cmas.dev/img/posts/2022/12/21/2.png">&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://cmas.dev/img/posts/2022/12/21/2.png" alt="">&lt;/p>
 &lt;h2 id="crear-proyecto-django-y-empezar-a-trabajar">Crear proyecto Django y empezar a trabajar&lt;/h2>
 &lt;ol>
 &lt;li>
 &lt;p>Ir a la carpeta donde debe estar nuestro proyecto:
-&lt;img src="https://cmas.dev/img/posts/2022/12/21/3.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/12/21/3.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Crear un ambiente virtual de &lt;strong>Python&lt;/strong>:&lt;/p>
@@ -57,26 +57,26 @@
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="8">
 &lt;li>
 &lt;p>Completamos los datos y listo:
-&lt;img src="https://cmas.dev/img/posts/2022/12/21/4.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/12/21/4.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Abrimos la carpeta donde alojamos el proyecto y empezamos a desarrollar:
-&lt;img src="https://cmas.dev/img/posts/2022/12/21/5.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/12/21/5.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Activamos el ambiernte virtual de Python y ejecutamos el servidor de Django:
-&lt;img src="https://cmas.dev/img/posts/2022/12/21/6.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/12/21/6.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Veremos la página principal de Django:
-&lt;img src="https://cmas.dev/img/posts/2022/12/21/7.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/12/21/7.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Si accedemos a la URL con el contexto &lt;em>/admin&lt;/em> veremos lo siguiente:
-&lt;img src="https://cmas.dev/img/posts/2022/12/21/8.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/12/21/8.png" alt="">&lt;/p>
 &lt;/li>
 &lt;/ol>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/2022/12/21/9.png">&lt;/p>
+&lt;p>&lt;img src="https://cmas.dev/img/posts/2022/12/21/9.png" alt="">&lt;/p>
 &lt;p>Listo para desarrollar aplicaciones web con &lt;strong>Django&lt;/strong> y &lt;strong>Python&lt;/strong> sobre &lt;strong>Visual Studio Code&lt;/strong> y &lt;strong>WSL&lt;/strong>.&lt;/p>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Desarrollo con Python sobre WSL</title><link>https://cmas.dev/posts/2022-12-14-developing-python-on-wsl/</link><pubDate>Wed, 14 Dec 2022 21:12:00 -0400</pubDate><guid>https://cmas.dev/posts/2022-12-14-developing-python-on-wsl/</guid><description>&lt;p>En este corto artículo veremos cómo desarrollar sobre &lt;strong>WSL (Windows Subsystem for Linux)&lt;/strong> con &lt;strong>Python&lt;/strong>. Ya hemos visto que lo podemos hacer con &lt;a href="https://cmas.dev/posts/2022-06-29-java-with-wsl-part-2/">Java&lt;/a>&lt;/p>
 &lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 25267&lt;/strong>&lt;/em>&lt;/p>
@@ -86,19 +86,19 @@
 &lt;ol>
 &lt;li>
 &lt;p>Abrimos Visual Studio Code (pero en WSL):
-&lt;img src="https://cmas.dev/img/posts/2022/12/14/1.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/12/14/1.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>En extensiones, buscamos &amp;ldquo;python&amp;rdquo; y lo instalamos (el fabricante debe ser Microsoft):
-&lt;img src="https://cmas.dev/img/posts/2022/12/14/2.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/12/14/2.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Luego de la instalación, procedemos a crear un nuevo archivo:
-&lt;img src="https://cmas.dev/img/posts/2022/12/14/3.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/12/14/3.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Seleccionamos el archivo de tipo Python, colocamos en el lugar de preferencia (dentro del WSL):
-&lt;img src="https://cmas.dev/img/posts/2022/12/14/4.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/12/14/4.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Crear un archivo nuevo &lt;strong>pythonTest.py&lt;/strong> (en mi caso) y escribir el siguiente código.&lt;/p>
@@ -108,55 +108,55 @@
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="6">
 &lt;li>
 &lt;p>Casi hacemos &lt;em>F5&lt;/em> pero notamos que falta algo:
-&lt;img src="https://cmas.dev/img/posts/2022/12/14/5.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/12/14/5.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Seleccionamos el Intérprete recomendado:
-&lt;img src="https://cmas.dev/img/posts/2022/12/14/6.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/12/14/6.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Seleccionamos la configuración del depurador (porque es un archivo suelto):
-&lt;img src="https://cmas.dev/img/posts/2022/12/14/7.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/12/14/7.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Ejecutamos nuestro archivo &lt;strong>.py&lt;/strong> y listo:
-&lt;img src="https://cmas.dev/img/posts/2022/12/14/8.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/12/14/8.png" alt="">&lt;/p>
 &lt;/li>
 &lt;/ol>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Visual Studio Code Server WSL</title><link>https://cmas.dev/posts/2022-10-19-visual-studio-code-server-wsl/</link><pubDate>Wed, 19 Oct 2022 22:35:00 -0400</pubDate><guid>https://cmas.dev/posts/2022-10-19-visual-studio-code-server-wsl/</guid><description>&lt;p>En este artículo corto, pero preciso, mostraré cómo utilizar &lt;strong>Visual Studio Code&lt;/strong> como servidor de &lt;strong>WSL&lt;/strong> para facilitarnos la vida en ciertas pruebas que tenemos como desarrolladores.&lt;/p>
 &lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 25227&lt;/strong>&lt;/em>&lt;/p>
 &lt;p>&lt;strong>Visual Studio Code Server&lt;/strong> es un servicio que se puede ejecutar en una máquina de desarrollo remota, como la PC de escritorio o una máquina virtual (VM). Permite conectar de forma segura a esa máquina remota desde cualquier lugar a través de un cliente local de &lt;strong>VS Code&lt;/strong>, sin la necesidad de &lt;strong>SSH&lt;/strong>. También se puede acceder al servidor a través del navegador usando &lt;strong>VS Code&lt;/strong> para la Web (también conocido como &lt;strong>vscode.dev&lt;/strong>).&lt;/p>
 &lt;p>La arquitectura del servicio lo expone Microsoft en su web:
-&lt;img src="https://code.visualstudio.com/assets/docs/remote/vscode-server/server-arch-latest.png">&lt;/p>
+&lt;img src="https://code.visualstudio.com/assets/docs/remote/vscode-server/server-arch-latest.png" alt="">&lt;/p>
 &lt;h2 id="configurar-acceso">Configurar acceso&lt;/h2>
 &lt;p>Para que esto funcione se debe enlazar con &lt;strong>GitHub&lt;/strong> para que nos cree el &lt;strong>CodeSpace&lt;/strong> necesario.&lt;/p>
 &lt;ol>
 &lt;li>
 &lt;p>Se accede al entorno de &lt;strong>WSL:Ubuntu&lt;/strong> para hacer las gestiones:
-&lt;img src="https://cmas.dev/img/posts/2022/10/19/1.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/10/19/1.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Una vez allí se verifica que el Visual Studio Code corresponda a &lt;strong>Ubuntu&lt;/strong>:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/2022/10/19/2.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/10/19/2.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Accedemos al menú contextual de &amp;ldquo;Turn on Remote Tunnel Access&amp;hellip;&amp;rdquo;:
-&lt;img src="https://cmas.dev/img/posts/2022/10/19/3.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/10/19/3.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Seguimos las instrucciones en pantalla para Iniciar sesión en &lt;strong>GitHub&lt;/strong>.&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Habilitar el Tunnel Remoto:
-&lt;img src="https://cmas.dev/img/posts/2022/10/19/4.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/10/19/4.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Copiar el enlace que se muestra en la ventana emergente:
-&lt;img src="https://cmas.dev/img/posts/2022/10/19/5.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/10/19/5.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Acceder al navegador de prefrencia y veremos nuestro Visual Studio remoto (que mantiene el enlace con nuestro Visual Studio WSL local):
-&lt;img src="https://cmas.dev/img/posts/2022/10/19/6.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/10/19/6.png" alt="">&lt;/p>
 &lt;/li>
 &lt;/ol>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Java con WSL parte 2</title><link>https://cmas.dev/posts/2022-06-29-java-with-wsl-part-2/</link><pubDate>Wed, 29 Jun 2022 20:47:00 -0400</pubDate><guid>https://cmas.dev/posts/2022-06-29-java-with-wsl-part-2/</guid><description>&lt;p>En este artículo mostraré cómo desarrollar una pequeña aplicación web en &lt;strong>Java&lt;/strong> corriendo sobre &lt;strong>WSL (Windows Subsystem for Linux)&lt;/strong>. En el &lt;a href="https://cmas.dev/posts/2022-06-22-java-with-wsl-part-1/">artículo anterior&lt;/a> hemos visto como preparar &lt;strong>Visual Studio Code&lt;/strong> para &lt;strong>Java&lt;/strong> sobre &lt;strong>WSL (Windows Subsystem for Linux)&lt;/strong>.&lt;/p>
@@ -193,15 +193,15 @@
 &lt;li>Verificamos que todo esté bien:&lt;/li>
 &lt;/ol>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">mvn -v
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://cmas.dev/img/posts/2022/06/29/1.png">&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://cmas.dev/img/posts/2022/06/29/1.png" alt="">&lt;/p>
 &lt;h2 id="crear-un-proyecto-java-spring-boot">Crear un proyecto Java Spring Boot&lt;/h2>
 &lt;p>No tenemos una plantilla como tal en Visual Studio Code, no es un IDE potente como otros que existen en el mercado para Java.&lt;/p>
 &lt;p>Entonces procedemos con los siguientes pasos:&lt;/p>
 &lt;ol>
 &lt;li>Clonamos el repositorio de GitHub &lt;a href="https://github.com/spring-guides/gs-spring-boot.git">https://github.com/spring-guides/gs-spring-boot.git&lt;/a>
-&lt;img src="https://cmas.dev/img/posts/2022/06/29/2.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/06/29/2.png" alt="">&lt;/li>
 &lt;li>Ejecutamos la applicación y veremos el texto predeterminado:
-&lt;img src="https://cmas.dev/img/posts/2022/06/29/3.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/06/29/3.png" alt="">&lt;/li>
 &lt;/ol>
 &lt;p>Con todo esto tenemos una aplicación Web desarrollada en &lt;strong>Java&lt;/strong> con el servidor corriendo en &lt;strong>Ubuntu&lt;/strong> gracias a &lt;strong>WSL&lt;/strong> sin salis de nuestro sistema operativo &lt;strong>Windows&lt;/strong>.&lt;/p>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Java con WSL parte 1</title><link>https://cmas.dev/posts/2022-06-22-java-with-wsl-part-1/</link><pubDate>Wed, 22 Jun 2022 18:19:00 -0400</pubDate><guid>https://cmas.dev/posts/2022-06-22-java-with-wsl-part-1/</guid><description>&lt;p>En este artículo mostraré cómo instalar y preparar el entorno para el desarrollo de &lt;strong>Java&lt;/strong> sobre &lt;strong>Windows Subsystem for Linux (WSL)&lt;/strong>.&lt;/p>
@@ -215,20 +215,20 @@
 &lt;li>En &lt;strong>WSL:Ubuntu&lt;/strong>, ingresaremos el comando:&lt;/li>
 &lt;/ol>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">code
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://cmas.dev/img/posts/2022/06/22/1.png">&lt;br>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://cmas.dev/img/posts/2022/06/22/1.png" alt="">&lt;br>
 2. En Visual Studio Code (WSL) procedemos a instalar los objetos necesarios (esto debido a que toda la instalación estará en Ubuntu):
-&lt;img src="https://cmas.dev/img/posts/2022/06/22/2.png">&lt;br>
+&lt;img src="https://cmas.dev/img/posts/2022/06/22/2.png" alt="">&lt;br>
 3. Veamos que versión de Java tenemos&amp;hellip;
-&lt;img src="https://cmas.dev/img/posts/2022/06/22/3.png">&lt;br>
+&lt;img src="https://cmas.dev/img/posts/2022/06/22/3.png" alt="">&lt;br>
 4. Debemos instalar el &lt;strong>JVM (Java Virtual Machine)&lt;/strong> para que funcione:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">sudo apt install default-jdk
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://cmas.dev/img/posts/2022/06/22/4.png">&lt;br>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://cmas.dev/img/posts/2022/06/22/4.png" alt="">&lt;br>
 5. Establecemos el &lt;strong>Java Home&lt;/strong>:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">sudo&lt;/span> &lt;span class="n">vi&lt;/span> &lt;span class="o">~/.&lt;/span>&lt;span class="n">bashrc&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">export&lt;/span> &lt;span class="n">JAVA_HOME&lt;/span>&lt;span class="o">=/&lt;/span>&lt;span class="n">usr&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">lib&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">jvm&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">java&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="mi">11&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">openjdk&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">amd64&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="6">
 &lt;li>Verificamos la versión de &lt;strong>Java&lt;/strong>
-&lt;img src="https://cmas.dev/img/posts/2022/06/22/5.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/06/22/5.png" alt="">&lt;/li>
 &lt;/ol>
 &lt;h2 id="instalar-gradle-para-los-proyectos-java">Instalar Gradle para los proyectos Java&lt;/h2>
 &lt;ol>
@@ -266,15 +266,15 @@
 &lt;li>Verificamos que todo esté bien:&lt;/li>
 &lt;/ol>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">gradle -v
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://cmas.dev/img/posts/2022/06/22/6.png">&lt;br>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://cmas.dev/img/posts/2022/06/22/6.png" alt="">&lt;br>
 9. Instalar la extensión &lt;strong>Gradle for Java&lt;/strong>
-&lt;img src="https://cmas.dev/img/posts/2022/06/22/7.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/06/22/7.png" alt="">&lt;/p>
 &lt;h2 id="crear-un-proyecto-java">Crear un proyecto Java&lt;/h2>
 &lt;ol>
 &lt;li>Crear el proyecto Java:
-&lt;img src="https://cmas.dev/img/posts/2022/06/22/8.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/06/22/8.png" alt="">&lt;/li>
 &lt;li>Marcamos la opción de &amp;ldquo;No build tools&amp;rdquo;:
-&lt;img src="https://cmas.dev/img/posts/2022/06/22/9.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/06/22/9.png" alt="">&lt;/li>
 &lt;li>Seguimos las instrucciones en pantalla para la creación del proyecto.&lt;/li>
 &lt;li>Modificamos el archivo &lt;strong>App.java&lt;/strong>:&lt;/li>
 &lt;/ol>
@@ -285,7 +285,7 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="5">
 &lt;li>Ejecutamos la aplicación con &lt;em>F5&lt;/em>:
-&lt;img src="https://cmas.dev/img/posts/2022/06/22/10.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/06/22/10.png" alt="">&lt;/li>
 &lt;/ol>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>ASP.NET Core en Ubuntu</title><link>https://cmas.dev/posts/2022-06-15-aspnet-core-on-ubuntu/</link><pubDate>Wed, 15 Jun 2022 12:08:00 -0400</pubDate><guid>https://cmas.dev/posts/2022-06-15-aspnet-core-on-ubuntu/</guid><description>&lt;p>En este artículo mostraré cómo ejecutar una aplicación &lt;strong>ASP.NET Core&lt;/strong> sobre &lt;strong>Windows Subsystem for Linux&lt;/strong>, es decir, alojar un servidor web en Ubuntu para ejecutar nuestra aplicación web.&lt;/p>
 &lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 25140&lt;/strong>&lt;/em>&lt;/p>
@@ -294,31 +294,31 @@
 &lt;p>Primeramente, debemos crear el poryecto &lt;strong>ASP.NET Core&lt;/strong>:&lt;/p>
 &lt;ol>
 &lt;li>Creamos el proyecto en Visual Studio 2022:
-&lt;img src="https://cmas.dev/img/posts/2022/06/15/1.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/06/15/1.png" alt="">&lt;/li>
 &lt;li>Colocamos un nombre descriptivo al proyecto nuevo:
-&lt;img src="https://cmas.dev/img/posts/2022/06/15/2.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/06/15/2.png" alt="">&lt;/li>
 &lt;li>Seleccionamos el .NET Core que deseamos utilizar:
-&lt;img src="https://cmas.dev/img/posts/2022/06/15/3.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/06/15/3.png" alt="">&lt;/li>
 &lt;li>Verificamos las opciones habilitadas para la ejecución (nos interesa &lt;strong>WSL&lt;/strong>):
-&lt;img src="https://cmas.dev/img/posts/2022/06/15/4.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/06/15/4.png" alt="">&lt;/li>
 &lt;/ol>
 &lt;h2 id="ejecución-para-wsl">Ejecución para WSL&lt;/h2>
 &lt;p>Empezamos a realizar las tareas relacionadas con la ejecución&lt;/p>
 &lt;ol>
 &lt;li>Hacemos clic en el botón de ejecución o presionamos la tecla &lt;em>F5&lt;/em>, saldrá un mensaje de error como este (si es que no tenemos instalado el dotnet en WSL):
-&lt;img src="https://cmas.dev/img/posts/2022/06/15/5.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/06/15/5.png" alt="">&lt;/li>
 &lt;li>SEguimos los pasos en la consola de WSL (para que se instale el motor de ejecución) y en Visual Studio aceptamos el mensaje:
-&lt;img src="https://cmas.dev/img/posts/2022/06/15/6.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/06/15/6.png" alt="">&lt;/li>
 &lt;li>Volvemos a ejecutar la aplicación (en este punto funciona):
-&lt;img src="https://cmas.dev/img/posts/2022/06/15/7.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/06/15/7.png" alt="">&lt;/li>
 &lt;li>Debemos agregar un poco de código para identificar en qué plataforma estamos (en la página index.cshtml agregamos la siguiente línea de código):&lt;/li>
 &lt;/ol>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">&amp;lt;h2&amp;gt;@Environment.OsVersion&amp;lt;/h2&amp;gt;
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="5">
 &lt;li>Ejecutamos de nuevo la aplicación, pero seleccionamos la opción que tiene el nombre de nuestro proyecto, para poder usar el Web Server de Windows:
-&lt;img src="https://cmas.dev/img/posts/2022/06/15/8.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/06/15/8.png" alt="">&lt;/li>
 &lt;li>Cambiamos la configuración a &lt;strong>WSL&lt;/strong> nuevamente y ejecutamos para ver el cambio:
-&lt;img src="https://cmas.dev/img/posts/2022/06/15/9.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/06/15/9.png" alt="">&lt;/li>
 &lt;/ol>
 &lt;p>De esta manera hemos montado el servidor web directamente en &lt;strong>Ubuntu&lt;/strong> con &lt;strong>WSL&lt;/strong>.&lt;/p>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Desarrollo de aplicaciones NodeJs en WSL</title><link>https://cmas.dev/posts/2022-06-08-app-nodejs-in-wsl/</link><pubDate>Wed, 08 Jun 2022 18:07:00 -0400</pubDate><guid>https://cmas.dev/posts/2022-06-08-app-nodejs-in-wsl/</guid><description>&lt;p>En este artículo mostraré como instalar &lt;strong>Node.js&lt;/strong> en &lt;strong>WSL&lt;/strong>. También, veremos como escribir código, compilar y ejecutarlo en &lt;strong>WSL&lt;/strong> desde &lt;strong>Visual Studio Code&lt;/strong>.&lt;/p>
@@ -328,7 +328,7 @@
 &lt;p>Preparamos WSL para la instalación de Node.js&lt;/p>
 &lt;ol>
 &lt;li>Verificamos las versiones de Node.js y NVM que tenemos instaladas (se supone que no las tenemos):
-&lt;img src="https://cmas.dev/img/posts/2022/06/08/1.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/06/08/1.png" alt="">&lt;/li>
 &lt;li>Procedemos a instalar NVM (Node Version Manager):&lt;/li>
 &lt;/ol>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
@@ -338,7 +338,7 @@
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">nvm install node
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="4">
 &lt;li>Verificamos las versiones y listo:
-&lt;img src="https://cmas.dev/img/posts/2022/06/08/2.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/06/08/2.png" alt="">&lt;/li>
 &lt;/ol>
 &lt;h2 id="aplicacion-en-visual-studio-code">Aplicacion en Visual Studio Code&lt;/h2>
 &lt;p>Dentro del Visual Studio Code creamos la aplicación y procedemos a ejecutarla normalmente.&lt;/p>
@@ -354,24 +354,24 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">})&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">listen&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">8080&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="3">
 &lt;li>Presionamos la tecla &lt;em>F5&lt;/em> y seleccionamos la opción &lt;strong>Node.js&lt;/strong>:
-&lt;img src="https://cmas.dev/img/posts/2022/06/08/4.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/06/08/4.png" alt="">&lt;/li>
 &lt;li>Veremos los controles de depuración y en la consola veremos que ha creado la aplicación:
-&lt;img src="https://cmas.dev/img/posts/2022/06/08/5.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/06/08/5.png" alt="">&lt;/li>
 &lt;li>En el navegador de preferencia, colocamos la URL definida en el código y vermeos nuestro pequeña applicación:
-&lt;img src="https://cmas.dev/img/posts/2022/06/08/6.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/06/08/6.png" alt="">&lt;/li>
 &lt;/ol>
 &lt;h2 id="aplicacion-en-visual-studio-code-con-wsl">Aplicacion en Visual Studio Code con WSL&lt;/h2>
 &lt;p>Dentro del Visual Studio Code creamos la aplicación y procedemos a ejecutarla en WSL.&lt;/p>
 &lt;ol>
 &lt;li>Descargar la extensión para desarrollo remoto &lt;a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl">aquí&lt;/a>&lt;/li>
 &lt;li>Abrimos una nueva ventana de Visual Studio Code y hacemos clicn en el icono de acceso remoto:
-&lt;img src="https://cmas.dev/img/posts/2022/06/08/7.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/06/08/7.png" alt="">&lt;/li>
 &lt;li>Seleccionamos la opción de distro para WSL:
-&lt;img src="https://cmas.dev/img/posts/2022/06/08/8.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/06/08/8.png" alt="">&lt;/li>
 &lt;li>Marcamos la opción Ubuntu:
-&lt;img src="https://cmas.dev/img/posts/2022/06/08/9.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/06/08/9.png" alt="">&lt;/li>
 &lt;li>Abrimos la carpeta donde almacenaremos el proyecto (en Ubuntu):
-&lt;img src="https://cmas.dev/img/posts/2022/06/08/10.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/06/08/10.png" alt="">&lt;/li>
 &lt;li>Escribimos las siguientes líneas de código (con algunas diferencias del código anterior):&lt;/li>
 &lt;/ol>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">var&lt;/span> &lt;span class="n">http&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">require&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;http&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
@@ -382,9 +382,9 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">})&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">listen&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">8081&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="7">
 &lt;li>Ejecutamos la aplicación desde la Terminal de &lt;strong>Ubuntu&lt;/strong>:
-&lt;img src="https://cmas.dev/img/posts/2022/06/08/12.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/06/08/12.png" alt="">&lt;/li>
 &lt;li>Abrimos el navegador y colocamos la dirección que especificamos en el código:
-&lt;img src="https://cmas.dev/img/posts/2022/06/08/13.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/06/08/13.png" alt="">&lt;/li>
 &lt;/ol>
 &lt;p>De esta manera hemos realizado una aplicación NodeJs en &lt;strong>Windows&lt;/strong> directamente así como en &lt;strong>WSL&lt;/strong>. Ambas opciones son válidas, nada más depende de la elección del desarrollador.&lt;/p>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>WSL: Ejecutar aplicaciones con GUI Linux</title><link>https://cmas.dev/posts/2022-06-01-wsl-run-apps-gui-ubuntu/</link><pubDate>Wed, 01 Jun 2022 18:32:00 -0400</pubDate><guid>https://cmas.dev/posts/2022-06-01-wsl-run-apps-gui-ubuntu/</guid><description>&lt;p>En este artículo mostraré cómo utilizar aplicaciones Linux (con interfaz de usuario) gracias a &lt;strong>Windows Subsystem for Linux&lt;/strong> .&lt;/p>
@@ -394,23 +394,23 @@
 &lt;p>En este caso instalaremos el reproductor multimedia VLC:&lt;/p>
 &lt;ol>
 &lt;li>Nos dirigimos a Ubuntu &lt;strong>Windows Subsystem for Linux&lt;/strong>
-&lt;img src="https://cmas.dev/img/posts/2022/06/01/1.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/06/01/1.png" alt="">&lt;/li>
 &lt;li>Colocamos el comando que instala la aplicación con &lt;strong>apt&lt;/strong>:&lt;/li>
 &lt;/ol>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">sudo apt install vlc -y
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="3">
 &lt;li>Procede a instalar y nos arroja el resultado:
-&lt;img src="https://cmas.dev/img/posts/2022/06/01/2.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/06/01/2.png" alt="">&lt;/li>
 &lt;li>Colocamos el comando que ejecuta la aplicación y&amp;hellip;&lt;/li>
 &lt;/ol>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">vlc
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="5">
 &lt;li>Veremos la aplicación ejecutada:
-&lt;img src="https://cmas.dev/img/posts/2022/06/01/3.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/06/01/3.png" alt="">&lt;/li>
 &lt;li>Si buscamos la App desde el Menú Inicio de &lt;strong>Windows&lt;/strong> la encontraremos:
-&lt;img src="https://cmas.dev/img/posts/2022/06/01/4.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/06/01/4.png" alt="">&lt;/li>
 &lt;li>La aplicación se ejecuta de manera nativa en &lt;strong>Windows&lt;/strong>:
-&lt;img src="https://cmas.dev/img/posts/2022/06/01/5.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/06/01/5.png" alt="">&lt;/li>
 &lt;/ol>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Git y WSL</title><link>https://cmas.dev/posts/2022-05-04-git-and-wsl/</link><pubDate>Wed, 04 May 2022 13:48:00 -0400</pubDate><guid>https://cmas.dev/posts/2022-05-04-git-and-wsl/</guid><description>&lt;p>En este artículo mostraré cómo instalar o actualizar git dentro de &lt;strong>Windows Subsystem for Linux&lt;/strong> de modo a poder clonar repositorio desde y hacia &lt;strong>GitHub&lt;/strong>. En un &lt;a href="https://cmas.dev/posts/2022-04-26-configuring-my-wsl-environment/">artículo anterior&lt;/a> hemos visto cómo habilitar la plataforma &lt;strong>Windows Subsystem for Linux&lt;/strong>.&lt;/p>
 &lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 22610&lt;/strong>&lt;/em>&lt;/p>
@@ -428,7 +428,7 @@
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">sudo apt install git
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="4">
 &lt;li>Veremos la versión actual instalada(Ojo: no es lo mismo Git en Windows que Git en WSL, pueden ser versiones distintas):
-&lt;img src="https://cmas.dev/img/posts/2022/05/04/1.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/05/04/1.png" alt="">&lt;/li>
 &lt;/ol>
 &lt;h2 id="actualizar-git-en-wsl">Actualizar Git en WSL&lt;/h2>
 &lt;p>Debemos seguir algunos pasos sencillos para lograrlos. Estos serían:&lt;/p>
@@ -448,20 +448,20 @@
 &lt;p>Debemos seguir algunos pasos sencillos para poder habilitar internet de manera permanente en nuestra distro preferida.&lt;/p>
 &lt;h2 id="conexión-a-internet-en-windows-subsystem-for-linux">Conexión a internet en Windows Subsystem for Linux&lt;/h2>
 &lt;p>Primero, hacemos ping a algún DNS (que tenga salida a internet):
-&lt;img src="https://cmas.dev/img/posts/2022/04/27/wsl1.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/04/27/wsl1.png" alt="">&lt;/p>
 &lt;p>Entonces, debemos abrirl el archivo &lt;strong>resolv.conf&lt;/strong> que se encuentra en nuestro distro WSL:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">nano /etc/resolv.conf
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Abrirá el editor y procedemos a verificar el dato presente allí:
-&lt;img src="https://cmas.dev/img/posts/2022/04/27/wsl3.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/04/27/wsl3.png" alt="">&lt;/p>
 &lt;p>Esa IP es privada. ¡Quítala de allí! y usemos el DNS de Google:
-&lt;img src="https://cmas.dev/img/posts/2022/04/27/wsl4.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/04/27/wsl4.png" alt="">&lt;/p>
 &lt;p>Probemos nuestro comando &lt;strong>ping&lt;/strong> a ver que ocurre:
-&lt;img src="https://cmas.dev/img/posts/2022/04/27/wsl5.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/04/27/wsl5.png" alt="">&lt;/p>
 &lt;h2 id="configuración-permanente-para-acceso-a-internet">Configuración permanente para acceso a Internet&lt;/h2>
 &lt;p>Como paso de prueba podemos salir de Ubuntu (emular el apagado de equipo desde &lt;strong>Windows Terminal&lt;/strong>, no desde Ubuntu):
-&lt;img src="https://cmas.dev/img/posts/2022/04/27/wsl6.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/04/27/wsl6.png" alt="">&lt;/p>
 &lt;p>Iniciamos Ubuntu nuevamente y probamos &lt;strong>ping&lt;/strong>:
-&lt;img src="https://cmas.dev/img/posts/2022/04/27/wsl1.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/04/27/wsl1.png" alt="">&lt;/p>
 &lt;p>¡BOOM!&lt;/p>
 &lt;p>Corregimos esto al estilo Ubuntu, con &lt;strong>Terminal&lt;/strong>:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">sudo bash -c &amp;#39;echo -e &amp;#34;[network]
@@ -471,7 +471,7 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">nameserver 8.8.4.4&amp;#34; &amp;gt; /etc/resolv.conf
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">chattr -f +i /etc/resolv.conf&amp;#39;
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Con esto, logramos que todo funcione correctamente&amp;gt;
-&lt;img src="https://cmas.dev/img/posts/2022/04/27/wsl5.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/04/27/wsl5.png" alt="">&lt;/p>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Configurando mi ambiente WSL</title><link>https://cmas.dev/posts/2022-04-26-configuring-my-wsl-environment/</link><pubDate>Tue, 26 Apr 2022 20:41:00 -0400</pubDate><guid>https://cmas.dev/posts/2022-04-26-configuring-my-wsl-environment/</guid><description>&lt;p>En este artículo mostraré cómo configurar un ambiente de desarrollo WSL (Windows Subsystem Linux) dentro de Windows para el desarrollo de aplicaciones en múltiples plataformas (que en el futuro iré asociando a este artículo). Para este artículo ya tenemos disponible la nueva distro de Ubuntu 22.04 (recientemente lanzada).&lt;/p>
 &lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 22598&lt;/strong>&lt;/em>&lt;/p>
 &lt;p>Debemos seguir algunos pasos para poder habilitar el WSL (Windows Subsystem for Linux) en Windows 11. Es excelente esto para probar todo tipo de aplicaciones sin salir de Windows. Especialmente preparado para .NET Core :)&lt;/p>
@@ -480,21 +480,21 @@
 &lt;ol>
 &lt;li>Nos dirigimos a &lt;strong>Panel de Control&lt;/strong> &amp;gt; &lt;strong>Programas&lt;/strong> &amp;gt; &lt;strong>Habilitar funcionalidades de Windows&lt;/strong>.&lt;/li>
 &lt;li>Buscar la opción &lt;strong>Windows Subsystem for Linux&lt;/strong>, marcamos la opción y hacemos clic en &lt;strong>Aceptar&lt;/strong>:
-&lt;img src="https://cmas.dev/img/posts/2022/04/26/Wsl1.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/04/26/Wsl1.png" alt="">&lt;/li>
 &lt;li>Cuando termine la instalación debemos reiniciar el sistema operativo y veremos este nuevo enlace en el &lt;strong>Explorador de archivos&lt;/strong>:
-&lt;img src="https://cmas.dev/img/posts/2022/04/26/Wsl2.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/2022/04/26/Wsl2.png" alt="">&lt;/li>
 &lt;/ol>
 &lt;h2 id="instalamos-la-distro-de-preferencia">Instalamos la distro de preferencia&lt;/h2>
 &lt;p>En mi caso selecciono Ubuntu, pero existen otras que se encuentran disponibles para su instalación. Aquí procedemos a instalar desde &lt;strong>Microsoft Store&lt;/strong>:
-&lt;img src="https://cmas.dev/img/posts/2022/04/26/Wsl3.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/04/26/Wsl3.png" alt="">&lt;/p>
 &lt;p>Una vez que haya culminado la instalación, procedemos a abrir la nueva App (sí, se encuentra como una App):
-&lt;img src="https://cmas.dev/img/posts/2022/04/26/Wsl4.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/04/26/Wsl4.png" alt="">&lt;/p>
 &lt;h2 id="windows-terminal">Windows Terminal&lt;/h2>
 &lt;p>Aquí es donde empezamos a disfrutar de nuestra distro de Linux favorita para empezar a jugar con ella.&lt;/p>
 &lt;p>Creamos un usuario para nuestro sistema operativo Ubuntu (puede o no ser igual al usuario de Windows):
-&lt;img src="https://cmas.dev/img/posts/2022/04/26/Wsl5.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/04/26/Wsl5.png" alt="">&lt;/p>
 &lt;p>Por último, accedemos a la terminal de Ubuntu y realizamos las tareas que queramos dentro de Ubuntu, que está dentro de Windows 11.
-&lt;img src="https://cmas.dev/img/posts/2022/04/26/Wsl6.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/04/26/Wsl6.png" alt="">&lt;/p>
 &lt;p>Podemos verificar que distro estamos ejecutando:
-&lt;img src="https://cmas.dev/img/posts/2022/04/26/Wsl7.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/04/26/Wsl7.png" alt="">&lt;/p>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item></channel></rss>

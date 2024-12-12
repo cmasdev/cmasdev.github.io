@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Microsoft 365 on Christian Amado's Blog</title><link>https://cmas.dev/tags/microsoft-365/</link><description>Recent content in Microsoft 365 on Christian Amado's Blog</description><generator>Hugo -- gohugo.io</generator><language>es</language><lastBuildDate>Wed, 17 May 2023 00:00:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/tags/microsoft-365/index.xml" rel="self" type="application/rss+xml"/><item><title>Mostrar foto de perfil desde Microsoft 365 en Power Apps</title><link>https://cmas.dev/posts/2023-05-17-display-profile-photo-from-m365-in-power-apps/</link><pubDate>Wed, 17 May 2023 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2023-05-17-display-profile-photo-from-m365-in-power-apps/</guid><description>&lt;p>En este artículo veremos cómo agregar una foto de perfil desde &lt;strong>Microsoft 365&lt;/strong> en &lt;strong>Microsoft Power Apps&lt;/strong> de modo a reutilizarlo y manejar un mismo perfil dentro de las aplicaciones.&lt;/p>
 &lt;p>Primeramente, creamos una nueva aplicación vacía:
-&lt;img src="https://i.ibb.co/2q4Sxxv/profile-photo-power-apps-1.png">&lt;/p>
+&lt;img src="https://i.ibb.co/2q4Sxxv/profile-photo-power-apps-1.png" alt="">&lt;/p>
 &lt;p>Luego, le colocamos el nombre y hacemos clic en el botón &lt;em>Crear&lt;/em>:
-&lt;img src="https://i.ibb.co/cwmTBcr/profile-photo-power-apps-2.png">&lt;/p>
+&lt;img src="https://i.ibb.co/cwmTBcr/profile-photo-power-apps-2.png" alt="">&lt;/p>
 &lt;p>En el nuevo lienzo agregamos los siguientes controles:&lt;/p>
 &lt;ul>
 &lt;li>Container&lt;/li>
@@ -10,20 +10,20 @@
 &lt;li>2 Text Label (para el nombre y para el correo)&lt;/li>
 &lt;/ul>
 &lt;p>Quedaría algo así:
-&lt;img src="https://i.ibb.co/kD3F3wh/profile-photo-power-apps-3.png">&lt;/p>
+&lt;img src="https://i.ibb.co/kD3F3wh/profile-photo-power-apps-3.png" alt="">&lt;/p>
 &lt;p>Hacemos clic en la imagen y colocamos la siguiente fórmula:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">Microsoft365Users.UserPhoto(Microsoft365Users.MyProfile().Id)
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Esto nos dará un error, porque no encontrará la variable &lt;em>Microsoft365Users&lt;/em>&lt;/p>
 &lt;p>Procedemos a agregar un nuevo conector a nuestro &lt;strong>Power Apps&lt;/strong>:
-&lt;img src="https://i.ibb.co/56B6dgD/profile-photo-power-apps-4.png">&lt;/p>
+&lt;img src="https://i.ibb.co/56B6dgD/profile-photo-power-apps-4.png" alt="">&lt;/p>
 &lt;p>Cambiamos el nombre al conector:
-&lt;img src="https://i.ibb.co/0yv6P4T/profile-photo-power-apps-5.png">&lt;/p>
+&lt;img src="https://i.ibb.co/0yv6P4T/profile-photo-power-apps-5.png" alt="">&lt;/p>
 &lt;p>Adicionamos las fórmulas a los objetos que hemos agregado:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">Microsoft365Users.MyProfile().DisplayName
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">Microsoft365Users.MyProfile().Mail
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Veremos los cambios en tiempo real:
-&lt;img src="https://i.ibb.co/yXwngsM/profile-photo-power-apps-6.png">&lt;/p>
+&lt;img src="https://i.ibb.co/yXwngsM/profile-photo-power-apps-6.png" alt="">&lt;/p>
 &lt;p>Por último, probamos la aplicación para ver los cambios:
-&lt;img src="https://i.ibb.co/JvtNQfB/profile-photo-power-apps-7.png">&lt;/p>
+&lt;img src="https://i.ibb.co/JvtNQfB/profile-photo-power-apps-7.png" alt="">&lt;/p>
 &lt;p>De esta manera, hemos visto como mostrar la foto de perfil desde &lt;strong>Microsoft 365&lt;/strong> en &lt;strong>Microsoft Power Apps&lt;/strong>&lt;/p>
 &lt;p>¡Espero resulte de utilidad!&lt;/p></description></item></channel></rss>

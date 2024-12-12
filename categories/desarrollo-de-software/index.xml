@@ -3,46 +3,46 @@
 &lt;h1 id="instalación-de-visual-studio-2022-preview-1">Instalación de Visual Studio 2022 Preview 1&lt;/h1>
 &lt;p>Para la instalación del nuevo Visual Studio debemos realizar las siguientes tareas:
 0. En mi caso, procedí a desinstalar todas las versiones de Visual Studio que tenía instaladas:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/visualstudio/visual-studio-2022-preview-1_1.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/visualstudio/visual-studio-2022-preview-1_1.png" alt="">&lt;/p>
 &lt;ol>
 &lt;li>
 &lt;p>Seleccionar la versión de Visual Studio que necesitamos (siempre elijo Professional):&lt;br>
-&lt;img src="https://cmas.dev/img/posts/visualstudio/visual-studio-2022-preview-1_2.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/visualstudio/visual-studio-2022-preview-1_2.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Veremos la ventana principal del instalador y hacemos clic en &amp;ldquo;Continuar&amp;rdquo;:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/visualstudio/visual-studio-2022-preview-1_3.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/visualstudio/visual-studio-2022-preview-1_3.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Seleccionamos los componentes necesarios para los desarrollos que haremos (como mi foco es Windows y WSL seleccioné estos):&lt;br>
-&lt;img src="https://cmas.dev/img/posts/visualstudio/visual-studio-2022-preview-1_4.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/visualstudio/visual-studio-2022-preview-1_4.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Leemos el &lt;a href="https://devblogs.microsoft.com/visualstudio/visual-studio-2022-preview-1-now-available/">blog&lt;/a> indicado más arriba mientras esperamos al instalador que termine su trabajo:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/visualstudio/visual-studio-2022-preview-1_5.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/visualstudio/visual-studio-2022-preview-1_5.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Listo. Estamos listos para la primera experiencia Visual Studio 2022 Preview 1:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/visualstudio/visual-studio-2022-preview-1_6.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/visualstudio/visual-studio-2022-preview-1_6.png" alt="">&lt;/p>
 &lt;/li>
 &lt;/ol>
 &lt;h1 id="primera-vez-con-visual-studio-2022-preview-1">Primera vez con Visual Studio 2022 Preview 1&lt;/h1>
 &lt;ol>
 &lt;li>
 &lt;p>Una vez instalado procedemos a iniciar el nuevo programa instalado:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/visualstudio/visual-studio-2022-preview-1_7.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/visualstudio/visual-studio-2022-preview-1_7.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Pantalla principal del Visual Studio:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/visualstudio/visual-studio-2022-preview-1_8.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/visualstudio/visual-studio-2022-preview-1_8.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Creación de un nuevo proyecto:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/visualstudio/visual-studio-2022-preview-1_9.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/visualstudio/visual-studio-2022-preview-1_9.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Entorno de desarrollo UWP (Universal Windows Platform):&lt;br>
-&lt;img src="https://cmas.dev/img/posts/visualstudio/visual-studio-2022-preview-1_10.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/visualstudio/visual-studio-2022-preview-1_10.png" alt="">&lt;/p>
 &lt;/li>
 &lt;/ol>
 &lt;p>De esta manera, hemos visto cómo instalar Visual Studio 2022 Preview 1 y hemos dado un vistazo general en su primer uso.&lt;/p>
@@ -52,58 +52,58 @@
 &lt;ol>
 &lt;li>
 &lt;p>Luego de abrir Visual Studio Code, debemos hacer clic en &amp;ldquo;Open Folder&amp;rdquo;:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/04/1-1.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/04/1-1.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Seleccionamos la carpeta donde generaremos los archivos necesarios (VS en este caso):&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/04/2-1.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/04/2-1.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Nos dirigimos al área de &lt;strong>Extensiones&lt;/strong> y nos posicionamos en el cuadro de búsqueda:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/04/3-1.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/04/3-1.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Buscamos &amp;ldquo;python&amp;rdquo; y hacemos clic en &amp;ldquo;Instalar&amp;rdquo;:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/04/4-1.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/04/4-1.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Nos mostrará el mensaje de &amp;ldquo;Instalando&amp;rdquo;:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/04/5-1.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/04/5-1.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Si todo va bien, mostrará que ya está &amp;ldquo;Instalado&amp;rdquo;:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/04/6-1.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/04/6-1.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>En el menú &amp;ldquo;Ver&amp;rdquo; buscamos la &amp;ldquo;Paleta de comando&amp;rdquo;:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/04/7-1.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/04/7-1.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Buscamos la opción &amp;ldquo;Python: Seleccionar intérprete&amp;rdquo;:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/04/8-1.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/04/8-1.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Hacemos clic en le botón correspondiente:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/04/9.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/04/9.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Seleccionamos el intérprete instalado:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/04/10.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/04/10.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>En la &amp;ldquo;Paleta de comando&amp;rdquo; seleccionamos &amp;ldquo;Python: Seleccionar Linker&amp;rdquo;&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Seleccionamos la opción &amp;ldquo;pylint&amp;rdquo;:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/04/12.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/04/12.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>En el explorador de archivos creamos un nuevo archivo:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/04/13.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/04/13.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Le llamamos &lt;strong>prueba.py&lt;/strong>:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/04/14.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/04/14.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Colocamos un código python de prueba:&lt;/p>
@@ -114,11 +114,11 @@
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="30">
 &lt;li>
 &lt;p>Hacemos clic derecho en cualquier lugar del archivo y seleccionamos la siguiente opción:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/04/15.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/04/15.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Nos mostrará la ejecución del programa en la terminal del Visual Studio Code:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/04/16.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/04/16.png" alt="">&lt;/p>
 &lt;/li>
 &lt;/ol>
 &lt;p>De esta manera, tenemos instalada la extensión de Python dentro de Visual Studio Code haciendo mucho más sencillo el desarrollo y la depuración del programa que estemos realizando.&lt;/p></description></item><item><title>Python: Instalación</title><link>https://cmas.dev/posts/2019-04-02-python-instalacion/</link><pubDate>Tue, 02 Apr 2019 19:13:52 -0400</pubDate><guid>https://cmas.dev/posts/2019-04-02-python-instalacion/</guid><description>&lt;p>A partir de hoy, volveré a escribir artículos referentes a desarrollo de software. Además de aplicaciones de negocios me apasiona lo referente al mundo del desarrollo. ¡Así que manos a la obra!&lt;/p>
@@ -132,23 +132,23 @@
 &lt;/li>
 &lt;li>
 &lt;p>Procedemos con la instalación del archivo descargado. Debemos seleccionar ambas opciones para que Python sea reconocido de manera nativa en el &lt;strong>cmd (línea de comandos) de Windows&lt;/strong>:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/04/1.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/04/1.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Seleccionamos las opciones que deseamos habilitar (para mí es mejor seleccionar todas):&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/04/2.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/04/2.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Seleccionar los parámetros avanzados que deseamos (también seleccionaría todos):&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/04/3.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/04/3.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>La instalación muestra el avance:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/04/4.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/04/4.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Por último, se muestra el mensaje de instalación exitosa (o fallida si pasó algo por el camino):&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/04/5.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/04/5.png" alt="">&lt;/p>
 &lt;/li>
 &lt;/ol>
 &lt;h2 id="probando-el-entorno">Probando el entorno&lt;/h2>
@@ -156,16 +156,16 @@
 &lt;ol>
 &lt;li>
 &lt;p>Abriendo el programa:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/04/6.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/04/6.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Una vez abierto el programa, escribimos el código:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/04/7.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/04/7.png" alt="">&lt;/p>
 &lt;/li>
 &lt;/ol>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">print(&amp;#39;Hola mundo&amp;#39;)
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="3">
 &lt;li>Al presionar la tecla &amp;ldquo;Enter&amp;rdquo; mostrará el mensaje:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/04/8.png">&lt;/li>
+&lt;img src="https://cmas.dev/img/posts/migrated/2019/04/8.png" alt="">&lt;/li>
 &lt;/ol>
 &lt;p>De esta manera, muy sencilla y rápida, hemos instalado y probado Python en Windows&lt;/p></description></item></channel></rss>

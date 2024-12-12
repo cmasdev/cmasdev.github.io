@@ -8,15 +8,15 @@
 &lt;/li>
 &lt;li>
 &lt;p>Agregamos los paquetes &lt;strong>NuGet&lt;/strong> necesarios para nuestro proyecto:
-&lt;img src="https://i.ibb.co/H7GLDJk/1.png">&lt;/p>
+&lt;img src="https://i.ibb.co/H7GLDJk/1.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Agregar configuraciones de la aplicación:
-&lt;img src="https://i.ibb.co/F5pTW4J/2.png">&lt;/p>
+&lt;img src="https://i.ibb.co/F5pTW4J/2.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Adicionar las configuraciones en el archivo creado:
-&lt;img src="https://i.ibb.co/XCPVnmR/3.png">&lt;/p>
+&lt;img src="https://i.ibb.co/XCPVnmR/3.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Vamos a trabajar con &lt;strong>RadChat&lt;/strong> de &lt;strong>Telerik for WPF&lt;/strong>, así que debemos agregar el modelo para &lt;strong>TextMessage&lt;/strong>. Entonces, agregamos la clase en cuestión:&lt;/p>
@@ -167,7 +167,7 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/telerik:RadChat&amp;gt;
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/Grid&amp;gt;
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;/Window&amp;gt;
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://i.ibb.co/HHMzpp3/4.png">&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://i.ibb.co/HHMzpp3/4.png" alt="">&lt;/p>
 &lt;ol start="6">
 &lt;li>Agregamos la llamada al evento que envía mensaje en nuestra página &lt;strong>WPF&lt;/strong> (incluye trabajo asíncronos y multihilo):&lt;/li>
 &lt;/ol>
@@ -217,18 +217,18 @@
 &lt;ol>
 &lt;li>
 &lt;p>Vamos a crear un proyecto de tipo &lt;strong>WPF&lt;/strong>:
-&lt;img src="https://cmas.dev/img/posts/2023/03/15/1.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2023/03/15/1.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Colocamos un nombre descriptivo:
-&lt;img src="https://cmas.dev/img/posts/2023/03/15/2.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2023/03/15/2.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Seguimos los pasos en pantalla.&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Agregamos las librerías necesarias:
-&lt;img src="https://cmas.dev/img/posts/2023/03/15/3.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2023/03/15/3.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Insertamos el control &lt;strong>XAML&lt;/strong>:&lt;/p>
@@ -246,7 +246,7 @@
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="6">
 &lt;li>
 &lt;p>Probamos la aplicación:
-&lt;img src="https://cmas.dev/img/posts/2023/03/15/4.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2023/03/15/4.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Entonces, el código C# nos quedaría así:&lt;/p>
@@ -291,11 +291,11 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Listo, de esta forma logramos hacer un pequeño Chat (que puede convertirse en ChatBot). Y nos queda algo así:
-&lt;img src="https://cmas.dev/img/posts/2023/03/15/5.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2023/03/15/5.png" alt="">&lt;/p>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Primeros pasos con XAML en MAUI</title><link>https://cmas.dev/posts/2022-09-14-first-step-xaml-in-maui/</link><pubDate>Wed, 14 Sep 2022 23:18:00 -0400</pubDate><guid>https://cmas.dev/posts/2022-09-14-first-step-xaml-in-maui/</guid><description>&lt;p>En este artículo mostraré cómo iniciar los pasos con el lenguaje &lt;strong>XAML&lt;/strong> en &lt;strong>.NET MAUI&lt;/strong>.&lt;/p>
 &lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 25201&lt;/strong>&lt;/em>&lt;/p>
-&lt;p>En este pequeño artículo vamos a utilizar controles de Telerik para &lt;strong>.NET MAUI&lt;/strong>. En un &lt;a href="https://cmas.dev/">artículo anterior&lt;/a> vimos cómo crear una aplicación &lt;strong>.NET MAUI&lt;/strong> y aquí haremos otra basada en otra plantilla (&lt;a href="https://www.telerik.com/support/whats-new/maui-ui/release-history/telerik-ui-for-net-maui-(version-3-0-0)">Telerik&lt;/a>).
-&lt;img src="https://cmas.dev/img/posts/2022/09/14/1.png">&lt;/p>
+&lt;p>En este pequeño artículo vamos a utilizar controles de Telerik para &lt;strong>.NET MAUI&lt;/strong>. En un &lt;a href="">artículo anterior&lt;/a> vimos cómo crear una aplicación &lt;strong>.NET MAUI&lt;/strong> y aquí haremos otra basada en otra plantilla (&lt;a href="https://www.telerik.com/support/whats-new/maui-ui/release-history/telerik-ui-for-net-maui-%28version-3-0-0%29">Telerik&lt;/a>).
+&lt;img src="https://cmas.dev/img/posts/2022/09/14/1.png" alt="">&lt;/p>
 &lt;h2 id="telerik-sidedrawer">Telerik SideDrawer&lt;/h2>
 &lt;p>Este control (conocido como Menú Hamburguesa) se utiliza para hacer la navegación muy amigable debido a que el menú queda al costado de nuestro diseño y permite una visualización completa del mismo. En Windows 11 se refiere a &lt;a href="https://learn.microsoft.com/en-us/windows/apps/design/controls/navigationview">NavigationView&lt;/a>.&lt;/p>
 &lt;p>La definición del control, en lenguaje &lt;strong>XAML&lt;/strong>, sería:&lt;/p>
@@ -340,7 +340,7 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;/ContentPage&amp;gt;
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Con esta definición declarativa logramos que el control tenga todos los detalles necesarios para su funcionamiento.&lt;/p>
 &lt;p>Visualmente, el resultado del código XAML es:
-&lt;img src="https://cmas.dev/img/posts/2022/09/14/2.png">&lt;br>
-&lt;img src="https://cmas.dev/img/posts/2022/09/14/3.png">&lt;/p>
+&lt;img src="https://cmas.dev/img/posts/2022/09/14/2.png" alt="">&lt;br>
+&lt;img src="https://cmas.dev/img/posts/2022/09/14/3.png" alt="">&lt;/p>
 &lt;p>Si realmente necesitas aprender &lt;strong>XAML&lt;/strong>, la documentación de Microsft &lt;a href="https://learn.microsoft.com/es-es/dotnet/maui/xaml/fundamentals/get-started?view=net-maui-7.0">aquí&lt;/a> está muy completa.&lt;/p>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item></channel></rss>

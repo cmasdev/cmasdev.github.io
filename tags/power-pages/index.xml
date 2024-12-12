@@ -3,58 +3,58 @@
 &lt;ol>
 &lt;li>
 &lt;p>Dentro de &lt;em>Design Studio&lt;/em> procedemos a ingresar a la &lt;em>Configuración&lt;/em>:
-&lt;img src="https://i.ibb.co/6Zw4S59/pp-pa-1.png">&lt;/p>
+&lt;img src="https://i.ibb.co/6Zw4S59/pp-pa-1.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Allí nos dirigimos a &lt;em>Flujos de Nube&lt;/em>:
-&lt;img src="https://i.ibb.co/7VXMCxR/pp-pa-2.png">&lt;/p>
+&lt;img src="https://i.ibb.co/7VXMCxR/pp-pa-2.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Agregamos un flujo existente o creamos uno nuevo (cualquiera de las opciones marcadas):
-&lt;img src="https://i.ibb.co/ThTDH6F/pp-pa-3.png">&lt;/p>
+&lt;img src="https://i.ibb.co/ThTDH6F/pp-pa-3.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Seleccionamos &lt;strong>Power Pages&lt;/strong>:
-&lt;img src="https://i.ibb.co/T8LZ10k/pp-pa-4.png">&lt;/p>
+&lt;img src="https://i.ibb.co/T8LZ10k/pp-pa-4.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Creamos el flujo que necesitamos que sea disparado (ejecutado) desde &lt;strong>Power Pages&lt;/strong>:
-&lt;img src="https://i.ibb.co/6JqBYZR/pp-pa-5.png">&lt;/p>
+&lt;img src="https://i.ibb.co/6JqBYZR/pp-pa-5.png" alt="">&lt;/p>
 &lt;/li>
 &lt;/ol>
 &lt;p>De esta manera sencilla hemos podido crear flujos que se disparan desde &lt;strong>Microsoft Power Pages&lt;/strong>.&lt;/p>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Utilizando Visual Studio Code con Power Pages</title><link>https://cmas.dev/posts/2023-11-22-using-visual-studio-code-with-power-pages/</link><pubDate>Wed, 22 Nov 2023 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2023-11-22-using-visual-studio-code-with-power-pages/</guid><description>&lt;p>En es artículo, mostraré como utilizar &lt;strong>Visual Studio Code&lt;/strong> con &lt;strong>Microsoft Power Pages&lt;/strong> para modificar ciertas funcionalidades.&lt;/p>
 &lt;p>En &lt;em>Design Studio&lt;/em> de &lt;strong>Power Pages&lt;/strong> procedemos a hacer clic en el siguiente botón:
-&lt;img src="https://i.ibb.co/hZywvtj/pp-vs-1.png">&lt;/p>
+&lt;img src="https://i.ibb.co/hZywvtj/pp-vs-1.png" alt="">&lt;/p>
 &lt;p>En el siguiente cuadro de diálogo procedemos a abrir la herramienta:
-&lt;img src="https://i.ibb.co/qgQ93bL/pp-vs-2.png">&lt;/p>
+&lt;img src="https://i.ibb.co/qgQ93bL/pp-vs-2.png" alt="">&lt;/p>
 &lt;p>Eso nos permitirá abrir el &lt;strong>Visual Studio Code&lt;/strong> versión web asociado a nuestro tennant:
-&lt;img src="https://i.ibb.co/M5fXrNg/pp-vs-3.png">&lt;/p>
+&lt;img src="https://i.ibb.co/M5fXrNg/pp-vs-3.png" alt="">&lt;/p>
 &lt;p>Allí procedemos a crear las rutinas y código necesarios para lo que necesitemos:
-&lt;img src="https://i.ibb.co/0ngFNKR/pp-vs-4.png">&lt;/p>
+&lt;img src="https://i.ibb.co/0ngFNKR/pp-vs-4.png" alt="">&lt;/p>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Configuración de Búsqueda en Power Pages</title><link>https://cmas.dev/posts/2023-11-15-search-configuration-in-power-pages/</link><pubDate>Wed, 15 Nov 2023 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2023-11-15-search-configuration-in-power-pages/</guid><description>&lt;p>En este artículo explicaré cómo habilitar búsquedas en &lt;strong>Power Pages&lt;/strong>, por ende, en &lt;strong>Dataverse&lt;/strong> para todos sus registros.&lt;/p>
 &lt;h1 id="habilitar-funcionalidad-en-dataverse">Habilitar funcionalidad en Dataverse&lt;/h1>
 &lt;p>Para habilitar la búsqueda en &lt;strong>Power Pages&lt;/strong>, primero, debemos habilitarlo para todo el &lt;strong>Dataverse&lt;/strong>. Para eso debemos seguir estos pasos:&lt;/p>
 &lt;ol>
 &lt;li>Ir al sitio de &lt;a href="https://admin.powerplatform.microsoft.com/home">Microsoft Power Platform Admin Center&lt;/a>, seleccionar el &lt;em>Entorno&lt;/em> que deseamos cambiar y seleccionar el menú &lt;em>Configuración&lt;/em>:
-&lt;img src="https://i.ibb.co/86CB1bz/multilanguaje-1.png">&lt;/li>
+&lt;img src="https://i.ibb.co/86CB1bz/multilanguaje-1.png" alt="">&lt;/li>
 &lt;/ol>
-&lt;p>&lt;img src="https://i.ibb.co/gVNjhhv/multilanguaje-2.png">&lt;/p>
+&lt;p>&lt;img src="https://i.ibb.co/gVNjhhv/multilanguaje-2.png" alt="">&lt;/p>
 &lt;ol start="2">
 &lt;li>
 &lt;p>Luego, se debe ir al apartado &lt;em>Producto&lt;/em> &amp;gt; &lt;em>Funcionalidades&lt;/em>:
-&lt;img src="https://i.ibb.co/dcfgv5c/pp-search-1.png">&lt;/p>
+&lt;img src="https://i.ibb.co/dcfgv5c/pp-search-1.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Por último, habilitamos la opción de búsqueda:
-&lt;img src="https://i.ibb.co/W0k4JKL/pp-search-2.png">&lt;/p>
+&lt;img src="https://i.ibb.co/W0k4JKL/pp-search-2.png" alt="">&lt;/p>
 &lt;/li>
 &lt;/ol>
 &lt;h1 id="búsqueda-en-power-pages">Búsqueda en Power Pages&lt;/h1>
 &lt;p>Con la búsqueda habilitada para el &lt;strong>Dataverese&lt;/strong> ya estamos listos para poder utilizar la funcionalidad de búsqueda dentro de la base de datos.&lt;/p>
 &lt;p>La indexación de todos los registros puede tardar un tiempo (dependiendo del tamaño de la base de datos y cantidad de registros), pero una vez finalizada ya se puede utilizar.&lt;/p>
 &lt;p>En este ejemplo, ya está indexado pero no tengo ninguna tabla entonces aparece un mensaje similar a este:
-&lt;img src="https://i.ibb.co/r0FqrRH/pp-search-3.png">&lt;/p>
+&lt;img src="https://i.ibb.co/r0FqrRH/pp-search-3.png" alt="">&lt;/p>
 &lt;p>De esta manera hemos habilitado la funcionalidad de búsqueda en un sitio &lt;strong>Microsoft Power Pages&lt;/strong>.&lt;/p>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Habilitar soporte multi-idioma en Power Pages</title><link>https://cmas.dev/posts/2023-11-08-enable-multilanguage-in-power-pages/</link><pubDate>Wed, 08 Nov 2023 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2023-11-08-enable-multilanguage-in-power-pages/</guid><description>&lt;p>En este artículo, mostraré cómo habilitar un sitio multi idioma con &lt;strong>Power Pages&lt;/strong>.&lt;/p>
 &lt;p>Para realizar esto debemos configurar dos cosas que se agrupan a continuación:&lt;/p>
@@ -62,20 +62,20 @@
 &lt;p>Primero, se deben habilitar los idiomas que se desean integrar con las soluciones, para ello debemos seguir los siguientes pasos:&lt;/p>
 &lt;ol>
 &lt;li>Ir al sitio de &lt;a href="https://admin.powerplatform.microsoft.com/home">Microsoft Power Platform Admin Center&lt;/a>, seleccionar el &lt;em>Entorno&lt;/em> que deseamos cambiar y seleccionar el menú &lt;em>Configuración&lt;/em>:
-&lt;img src="https://i.ibb.co/86CB1bz/multilanguaje-1.png">&lt;/li>
+&lt;img src="https://i.ibb.co/86CB1bz/multilanguaje-1.png" alt="">&lt;/li>
 &lt;/ol>
-&lt;p>&lt;img src="https://i.ibb.co/gVNjhhv/multilanguaje-2.png">&lt;/p>
+&lt;p>&lt;img src="https://i.ibb.co/gVNjhhv/multilanguaje-2.png" alt="">&lt;/p>
 &lt;ol start="2">
 &lt;li>
 &lt;p>Luego, se debe ir al apartado &lt;em>Producto&lt;/em> &amp;gt; &lt;em>Idiomas&lt;/em>:
-&lt;img src="https://i.ibb.co/YffyTG3/multilanguaje-3.png">&lt;/p>
+&lt;img src="https://i.ibb.co/YffyTG3/multilanguaje-3.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Habilitamos los idiomas que deseamos (en este caso Español):
-&lt;img src="https://i.ibb.co/bKgnstB/multilanguaje-4.png">&lt;/p>
+&lt;img src="https://i.ibb.co/bKgnstB/multilanguaje-4.png" alt="">&lt;/p>
 &lt;/li>
 &lt;/ol>
-&lt;p>&lt;img src="https://i.ibb.co/Xkngvtm/multilanguaje-5.png">&lt;/p>
+&lt;p>&lt;img src="https://i.ibb.co/Xkngvtm/multilanguaje-5.png" alt="">&lt;/p>
 &lt;ol start="4">
 &lt;li>Aguardamos un tiempo para que las configuraciones surtan efecto (me funcionó en 10 minutos).&lt;/li>
 &lt;/ol>
@@ -84,27 +84,27 @@
 &lt;ol>
 &lt;li>
 &lt;p>Nos dirigimos a nuestro portal de &lt;strong>Power Pages&lt;/strong>, sección &lt;strong>Administración de Power Pages&lt;/strong>:
-&lt;img src="https://i.ibb.co/MDJjY77/multilanguaje-6.png">&lt;/p>
+&lt;img src="https://i.ibb.co/MDJjY77/multilanguaje-6.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Ingresamos a la sección &lt;em>Sitio Web&lt;/em> &amp;gt; &lt;em>Sitios Web&lt;/em> &amp;gt; &lt;em>TU SITIO&lt;/em>:
-&lt;img src="https://i.ibb.co/P96rZt1/multilanguaje-7.png">&lt;/p>
+&lt;img src="https://i.ibb.co/P96rZt1/multilanguaje-7.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Se debe agregar una nueva sección a la vista:
-&lt;img src="https://i.ibb.co/nRfyL84/multilanguaje-8.png">&lt;/p>
+&lt;img src="https://i.ibb.co/nRfyL84/multilanguaje-8.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Buscamos la opción &lt;em>Idiomas de Sitio Web&lt;/em>:
-&lt;img src="https://i.ibb.co/KrnSNvY/multilanguaje-9.png">&lt;/p>
+&lt;img src="https://i.ibb.co/KrnSNvY/multilanguaje-9.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Seleccionamos la opción &lt;em>Nuevo idioma de Sitio Web&lt;/em>:
-&lt;img src="https://i.ibb.co/j5xk8DP/multilanguaje-10.png">&lt;/p>
+&lt;img src="https://i.ibb.co/j5xk8DP/multilanguaje-10.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Verificamos el sitio web y veremos en el menú principal las opciones de idioma seleccionados:
-&lt;img src="https://i.ibb.co/bm9R1k6/multilanguaje-11.png">&lt;/p>
+&lt;img src="https://i.ibb.co/bm9R1k6/multilanguaje-11.png" alt="">&lt;/p>
 &lt;/li>
 &lt;/ol>
 &lt;p>De esta manera hemos aprendido cómo habilitar un sitio multi idioma con &lt;strong>Microsoft Power Pages&lt;/strong>.&lt;/p>
@@ -114,19 +114,19 @@
 &lt;ol>
 &lt;li>
 &lt;p>En el &lt;em>Design Studio&lt;/em> nos dirigimos a &lt;em>Administración de Power Pages&lt;/em>:
-&lt;img src="https://i.ibb.co/MDJjY77/multilanguaje-6.png">&lt;/p>
+&lt;img src="https://i.ibb.co/MDJjY77/multilanguaje-6.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Seleccionamos en el menú de la izquierda &lt;em>Formularios Básicos&lt;/em>:
-&lt;img src="https://i.ibb.co/7p6mLXq/JS-1.png">&lt;/p>
+&lt;img src="https://i.ibb.co/7p6mLXq/JS-1.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Ir a la página en cuestión (en este caso, &lt;em>Contacto&lt;/em>):
-&lt;img src="https://i.ibb.co/dBGjCmf/JS-2.png">&lt;/p>
+&lt;img src="https://i.ibb.co/dBGjCmf/JS-2.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Buscamos el sub menú &lt;em>Configuración Adicional&lt;/em> y nos bajamos hasta la ubicación de &lt;em>Javascript personalizado&lt;/em>:
-&lt;img src="https://i.ibb.co/NNGNR19/JS-3.png">&lt;/p>
+&lt;img src="https://i.ibb.co/NNGNR19/JS-3.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Agregamos el código &lt;em>Javascript&lt;/em> que necesitamos y listo:&lt;/p>
@@ -137,7 +137,7 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">});
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="6">
 &lt;li>Debería verse algo así:
-&lt;img src="https://i.ibb.co/kD7Qd7c/JS-4.png">&lt;/li>
+&lt;img src="https://i.ibb.co/kD7Qd7c/JS-4.png" alt="">&lt;/li>
 &lt;/ol>
 &lt;p>De esta sencilla manera hemos código &lt;strong>Javascript&lt;/strong> a un formulario en &lt;strong>Microsoft Power Pages&lt;/strong>.&lt;/p>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Habilitar Usuarios Anónimos en Power Pages</title><link>https://cmas.dev/posts/2023-10-18-enable-anonymous-user-power-pages/</link><pubDate>Wed, 18 Oct 2023 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2023-10-18-enable-anonymous-user-power-pages/</guid><description>&lt;p>En este artículo mostraré cómo habilitar un sitio de &lt;strong>Power Pages&lt;/strong> para usuarios anónimos, es decir, que cualquier usuario puedo ingresar al sitio que hemos creado. Normalmente, esto está relacionado con el entorno Productivo.&lt;/p>
@@ -145,23 +145,23 @@
 &lt;ol>
 &lt;li>
 &lt;p>Ingresamos a nuestro sitio en modo &lt;em>Edición&lt;/em> y hacemos clic en &lt;em>Vista Previa&lt;/em> :
-&lt;img src="https://i.ibb.co/gVVzCYG/anonymous-PP-1.png">&lt;/p>
+&lt;img src="https://i.ibb.co/gVVzCYG/anonymous-PP-1.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Verificamos como sale el sitio web:
-&lt;img src="https://i.ibb.co/L5mFqLd/anonymous-PP-2.png">&lt;/p>
+&lt;img src="https://i.ibb.co/L5mFqLd/anonymous-PP-2.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>En el navegador (donde no estamos autenticados) probamos el sitio y vemos que tiene restricciones de acceso:
-&lt;img src="https://i.ibb.co/DVHtYSF/anonymous-PP-3.png">&lt;/p>
+&lt;img src="https://i.ibb.co/DVHtYSF/anonymous-PP-3.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>En la sección &lt;em>&lt;strong>Configuración&lt;/strong>&lt;/em> del &lt;strong>Design Studio&lt;/strong> nos dirigimos a &lt;em>Visibilidad de Sitio&lt;/em> y lo convertimos en &lt;em>Público&lt;/em>. Guardamos y sincronizamos los cambios:
-&lt;img src="https://i.ibb.co/q7L6CfF/anonymous-PP-4.png">&lt;/p>
+&lt;img src="https://i.ibb.co/q7L6CfF/anonymous-PP-4.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>En el navegador (que no está autenticado) probamos el sitio y veremos que ya tenemos acceso al mismo:
-&lt;img src="https://i.ibb.co/xhGhgBs/anonymous-PP-5.png">&lt;/p>
+&lt;img src="https://i.ibb.co/xhGhgBs/anonymous-PP-5.png" alt="">&lt;/p>
 &lt;/li>
 &lt;/ol>
 &lt;p>De esta sencilla manera hemos dado permisos públicos a todos los usuarios de nuestro sitio con &lt;strong>Power Pages&lt;/strong>.&lt;/p>
@@ -172,23 +172,23 @@
 &lt;ol>
 &lt;li>
 &lt;p>Crear el sitio desde la página principal
-&lt;img src="https://i.ibb.co/mSQ5BQN/enable-PP-3.png">&lt;/p>
+&lt;img src="https://i.ibb.co/mSQ5BQN/enable-PP-3.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Seleccionar la plantilla que necesitamos (en caso que en la opción anterior hayamos seleccionado la opción de elegir plantilla)
-&lt;img src="https://i.ibb.co/PmBcmKM/new-site-PP-1.png">&lt;/p>
+&lt;img src="https://i.ibb.co/PmBcmKM/new-site-PP-1.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Colocar las propiedades principales del nuevo sitio
-&lt;img src="https://i.ibb.co/2K0hWhp/new-site-PP-2.png">&lt;/p>
+&lt;img src="https://i.ibb.co/2K0hWhp/new-site-PP-2.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Esperar un tiempo para la creación (recomiendo que tomes un vaso de agua mientras)
-&lt;img src="https://i.ibb.co/gTV3RBm/new-site-PP-3.png">&lt;/p>
+&lt;img src="https://i.ibb.co/gTV3RBm/new-site-PP-3.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Veremos el sitio nuevo y nos presenta la ayuda en pantalla
-&lt;img src="https://i.ibb.co/GJg61QB/new-site-PP-4.png">&lt;/p>
+&lt;img src="https://i.ibb.co/GJg61QB/new-site-PP-4.png" alt="">&lt;/p>
 &lt;/li>
 &lt;/ol>
 &lt;h1 id="configuración-general">Configuración General&lt;/h1>
@@ -196,35 +196,35 @@
 &lt;p>Todo esto lo hacemos en el &lt;em>&lt;strong>Design Studio&lt;/strong>&lt;/em> que nos presenta &lt;strong>Power Pages&lt;/strong>.&lt;/p>
 &lt;h2 id="páginas">Páginas&lt;/h2>
 &lt;p>En esta sección se modifican todos los detalles de las páginas y subpáginas que se tenga en el nuevo sitio. Aquí es donde se arma la estructura del sitio.&lt;/p>
-&lt;p>&lt;img src="https://i.ibb.co/VJNDntV/new-site-PP-5.png">&lt;/p>
+&lt;p>&lt;img src="https://i.ibb.co/VJNDntV/new-site-PP-5.png" alt="">&lt;/p>
 &lt;h2 id="estilos">Estilos&lt;/h2>
 &lt;p>En esta sección se modifican los detalles visuales como ser colores, tonos, tipografía, etc.&lt;/p>
-&lt;p>&lt;img src="https://i.ibb.co/2g5yp6x/new-site-PP-6.png">&lt;/p>
+&lt;p>&lt;img src="https://i.ibb.co/2g5yp6x/new-site-PP-6.png" alt="">&lt;/p>
 &lt;h2 id="datos">Datos&lt;/h2>
 &lt;p>En esta sección se relacionan los componentes de las páginas con los datos existentes en &lt;strong>Dataverse&lt;/strong>. Las tablas creadas aquí serán visibles en el &lt;strong>Dataverse&lt;/strong>&lt;/p>
-&lt;p>&lt;img src="https://i.ibb.co/B6gD2vh/new-site-PP-7.png">&lt;/p>
+&lt;p>&lt;img src="https://i.ibb.co/B6gD2vh/new-site-PP-7.png" alt="">&lt;/p>
 &lt;h2 id="configuración">Configuración&lt;/h2>
 &lt;p>En esta sección se configuran los detalles del sitio como ser permisos, visibilidiad, flujos de &lt;strong>Power Automate&lt;/strong> y otras configuraciones generales.&lt;/p>
-&lt;p>&lt;img src="https://i.ibb.co/fQgZQLz/new-site-PP-8.png">&lt;/p>
+&lt;p>&lt;img src="https://i.ibb.co/fQgZQLz/new-site-PP-8.png" alt="">&lt;/p>
 &lt;p>De esta manera hemos visto detalles iniciales de &lt;strong>Power Pages&lt;/strong>.&lt;/p>
 &lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Habilitar Power Pages</title><link>https://cmas.dev/posts/2023-10-04-enable-power-pages/</link><pubDate>Wed, 04 Oct 2023 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2023-10-04-enable-power-pages/</guid><description>&lt;p>En este artículo, veremos cómo habilitar &lt;strong>Power Pages&lt;/strong> en nuestro tenant de &lt;strong>Microsoft 365&lt;/strong> (esto sólo se realiza la primera vez que ingresamos). Me estoy dando cuenta que es volver al &lt;strong>Microsoft FrontPage&lt;/strong> o al &lt;strong>Microsoft Expression Web&lt;/strong> de hace algunos años ;)&lt;/p>
 &lt;p>Los pasos son muy sencillos de seguir:&lt;/p>
 &lt;ol>
 &lt;li>
 &lt;p>Se ingresa al portal de &lt;strong>Microsoft 365&lt;/strong> &lt;a href="https://www.microsoft365.com">aquí&lt;/a> e iniciar sesión:
-&lt;img src="https://i.ibb.co/yqZdLf3/enable-PP-0.png">&lt;/p>
+&lt;img src="https://i.ibb.co/yqZdLf3/enable-PP-0.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Nos dirigimos a la sección &lt;em>Aplicaciones&lt;/em> y seleccionamos allí &lt;strong>Power Pages&lt;/strong>:
-&lt;img src="https://i.ibb.co/yYmfpb2/enable-PP-1.png">&lt;/p>
+&lt;img src="https://i.ibb.co/yYmfpb2/enable-PP-1.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Al ingresar a &lt;strong>Power Pages&lt;/strong> Nos aparece un botón para empezar, hacemos clic y estaría listo:
-&lt;img src="https://i.ibb.co/3mJSphN/enable-PP-2.png">&lt;/p>
+&lt;img src="https://i.ibb.co/3mJSphN/enable-PP-2.png" alt="">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Una vez terminado este paso el &lt;strong>Power Pages&lt;/strong> queda activado y las sucesivas veces ya no nos preguntará para habilitar el servicio:
-&lt;img src="https://i.ibb.co/mSQ5BQN/enable-PP-3.png">&lt;/p>
+&lt;img src="https://i.ibb.co/mSQ5BQN/enable-PP-3.png" alt="">&lt;/p>
 &lt;/li>
 &lt;/ol>
 &lt;p>Con esto, hemos habilitado el servicio para utilizar &lt;strong>Power Pages&lt;/strong>.&lt;/p>
