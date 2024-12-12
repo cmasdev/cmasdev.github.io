@@ -1,36 +1,33 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Deno on Christian Amado's Blog</title><link>https://cmas.dev/tags/deno/</link><description>Recent content in Deno on Christian Amado's Blog</description><generator>Hugo -- gohugo.io</generator><language>es</language><lastBuildDate>Wed, 01 May 2024 00:00:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/tags/deno/index.xml" rel="self" type="application/rss+xml"/><item><title>¿Cómo configurar un proyecto TypeScript moderno con Deno?</title><link>https://cmas.dev/posts/2024-05-01-typescript-project-with-deno/</link><pubDate>Wed, 01 May 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-05-01-typescript-project-with-deno/</guid><description>&lt;h1 id="cómo-configurar-un-proyecto-typescript-moderno-con-deno">Cómo configurar un proyecto TypeScript moderno con Deno&lt;/h1>
-&lt;h2 id="introducción">Introducción&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Deno on Christian Amado's Blog</title><link>https://cmas.dev/tags/deno/</link><description>Recent content in Deno on Christian Amado's Blog</description><generator>Hugo -- gohugo.io</generator><language>es</language><lastBuildDate>Wed, 01 May 2024 00:00:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/tags/deno/index.xml" rel="self" type="application/rss+xml"/><item><title>¿Cómo configurar un proyecto TypeScript moderno con Deno?</title><link>https://cmas.dev/posts/2024-05-01-typescript-project-with-deno/</link><pubDate>Wed, 01 May 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-05-01-typescript-project-with-deno/</guid><description>&lt;h2 id="introducción">Introducción&lt;/h2>
 &lt;p>Configurar un proyecto moderno en &lt;strong>TypeScript&lt;/strong> con &lt;strong>Deno&lt;/strong> permitirá aprovechar un entorno de desarrollo optimizado, seguro y compatible con los estándares más recientes, como &lt;strong>ES2024&lt;/strong>. Este artículo mostrará cómo realizar esta configuración tanto en &lt;strong>Visual Studio Code&lt;/strong> como en &lt;strong>JetBrains Rider&lt;/strong>, destacando buenas prácticas, incluyendo &lt;strong>testing&lt;/strong> con TypeScript, y proporcionando ejemplos prácticos de código.&lt;/p>
 &lt;h2 id="prerrequisitos">Prerrequisitos&lt;/h2>
 &lt;ul>
-&lt;li>Instalar &lt;strong>Deno&lt;/strong> desde &lt;a href="https://deno.land">https://deno.land&lt;/a>:
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">curl -fsSL https://deno.land/x/install/install.sh &lt;span class="p">|&lt;/span> sh
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>Instalar &lt;strong>Deno&lt;/strong> desde &lt;a href="https://deno.land">https://deno.land&lt;/a>:&lt;/li>
 &lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">- Tener instalado Visual Studio Code o JetBrains Rider.
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">- Conocer los fundamentos de TypeScript.
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">## Crear la configuración del proyecto
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">### 1. Crear un directorio base
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Crear un directorio para el proyecto:
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">```bash
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">mkdir modern-typescript-deno
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"> curl -fsSL https://deno.land/x/install/install.sh | sh
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>Tener instalado Visual Studio Code o JetBrains Rider.&lt;/li>
+&lt;li>Conocer los fundamentos de TypeScript.&lt;/li>
+&lt;/ul>
+&lt;h2 id="crear-la-configuración-del-proyecto">Crear la configuración del proyecto&lt;/h2>
+&lt;h3 id="1-crear-un-directorio-base">1. Crear un directorio base&lt;/h3>
+&lt;p>Crear un directorio para el proyecto:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">mkdir modern-typescript-deno
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">cd modern-typescript-deno
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="2-configurar-el-archivo-denojson">2. Configurar el archivo deno.json&lt;/h3>
 &lt;p>Crear un archivo deno.json con configuraciones básicas para ES2024 y definir tareas útiles:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-json" data-lang="json">&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;compilerOptions&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;target&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;ES2024&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;strict&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">true&lt;/span>&lt;span class="p">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;lib&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="s2">&amp;#34;deno.ns&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;deno.unstable&amp;#34;&lt;/span>&lt;span class="p">]&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">},&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;tasks&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;start&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;deno run --allow-net --allow-read src/index.ts&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;test&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;deno test&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">},&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;importMap&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;./import_map.json&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;compilerOptions&amp;#34;: {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;target&amp;#34;: &amp;#34;ES2024&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;strict&amp;#34;: true,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;lib&amp;#34;: [&amp;#34;deno.ns&amp;#34;, &amp;#34;deno.unstable&amp;#34;]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> },
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;tasks&amp;#34;: {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;start&amp;#34;: &amp;#34;deno run --allow-net --allow-read src/index.ts&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;test&amp;#34;: &amp;#34;deno test&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> },
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;importMap&amp;#34;: &amp;#34;./import_map.json&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Esto permite:&lt;/p>
 &lt;ul>
 &lt;li>Establecer ES2024 como objetivo del compilador.&lt;/li>
@@ -45,13 +42,13 @@
 &lt;/ul>
 &lt;h3 id="configurar-deno-en-el-entorno">Configurar Deno en el entorno&lt;/h3>
 &lt;p>Crear un archivo &lt;strong>.vscode/settings.json&lt;/strong> para habilitar Deno:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-json" data-lang="json">&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;deno.enable&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">true&lt;/span>&lt;span class="p">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;deno.unstable&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">true&lt;/span>&lt;span class="p">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;editor.defaultFormatter&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;denoland.vscode-deno&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;[typescript]&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;editor.defaultFormatter&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;denoland.vscode-deno&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;deno.enable&amp;#34;: true,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;deno.unstable&amp;#34;: true,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;editor.defaultFormatter&amp;#34;: &amp;#34;denoland.vscode-deno&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;[typescript]&amp;#34;: {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;editor.defaultFormatter&amp;#34;: &amp;#34;denoland.vscode-deno&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="conclusión">Conclusión&lt;/h2>
 &lt;p>Configurar un proyecto TypeScript moderno con Deno utilizando &lt;strong>ES2024&lt;/strong> ofrece un entorno potente y seguro. Tanto Visual Studio Code como JetBrains Rider proporcionan herramientas avanzadas para aprovechar las capacidades de Deno al máximo. Implementar estas configuraciones, buenas prácticas y pruebas garantiza un desarrollo eficiente y confiable.&lt;/p></description></item></channel></rss>
