@@ -10,8 +10,6 @@ cover-img: /img/posts/cover/deno.png
 share_img: /img/posts/shared/deno.png
 ---
 
-# Cómo configurar un proyecto TypeScript moderno con Deno
-
 ## Introducción
 
 Configurar un proyecto moderno en **TypeScript** con **Deno** permitirá aprovechar un entorno de desarrollo optimizado, seguro y compatible con los estándares más recientes, como **ES2024**. Este artículo mostrará cómo realizar esta configuración tanto en **Visual Studio Code** como en **JetBrains Rider**, destacando buenas prácticas, incluyendo **testing** con TypeScript, y proporcionando ejemplos prácticos de código.
@@ -21,9 +19,11 @@ Configurar un proyecto moderno en **TypeScript** con **Deno** permitirá aprovec
 ## Prerrequisitos
 
 - Instalar **Deno** desde [https://deno.land](https://deno.land):
-  ```bash
+  
+```
   curl -fsSL https://deno.land/x/install/install.sh | sh
 ```
+
 - Tener instalado Visual Studio Code o JetBrains Rider.
 - Conocer los fundamentos de TypeScript.
 
@@ -31,7 +31,7 @@ Configurar un proyecto moderno en **TypeScript** con **Deno** permitirá aprovec
 ### 1. Crear un directorio base
 Crear un directorio para el proyecto:
 
-```bash
+```
 mkdir modern-typescript-deno
 cd modern-typescript-deno
 ```
@@ -39,7 +39,7 @@ cd modern-typescript-deno
 ### 2. Configurar el archivo deno.json
 Crear un archivo deno.json con configuraciones básicas para ES2024 y definir tareas útiles:
 
-```json
+```
 {
   "compilerOptions": {
     "target": "ES2024",
@@ -68,7 +68,7 @@ Esto permite:
 ### Configurar Deno en el entorno
 Crear un archivo **.vscode/settings.json** para habilitar Deno:
 
-```json
+```
 {
   "deno.enable": true,
   "deno.unstable": true,
