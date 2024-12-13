@@ -2,7 +2,7 @@
 layout: post
 title: "Microsoft Most Valuable Professional 2024/2025"
 author: "Christian Amado"
-date: 2023-07-10 00:00:00 -04:00
+date: 2024-07-10 00:00:00 -04:00
 categories: General
 tags: [Microsoft MVP]
 thumbnail-img: /img/posts/thumbnails/mvp.png
