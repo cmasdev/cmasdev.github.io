@@ -53,8 +53,8 @@ Con soporte para una amplia gama de marcos, lenguajes y servicios, además de in
 &lt;/ul>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"> curl -fsSL https://deno.land/x/install/install.sh | sh
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
-&lt;li>Tener instalado Visual Studio Code o JetBrains Rider.&lt;/li>
-&lt;li>Conocer los fundamentos de TypeScript.&lt;/li>
+&lt;li>Tener instalado &lt;strong>Visual Studio Code&lt;/strong> o &lt;strong>JetBrains Rider&lt;/strong>.&lt;/li>
+&lt;li>Conocer los fundamentos de &lt;strong>TypeScript&lt;/strong>.&lt;/li>
 &lt;/ul>
 &lt;h2 id="crear-la-configuración-del-proyecto">Crear la configuración del proyecto&lt;/h2>
 &lt;h3 id="1-crear-un-directorio-base">1. Crear un directorio base&lt;/h3>
@@ -62,7 +62,7 @@ Con soporte para una amplia gama de marcos, lenguajes y servicios, además de in
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">mkdir modern-typescript-deno
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">cd modern-typescript-deno
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="2-configurar-el-archivo-denojson">2. Configurar el archivo deno.json&lt;/h3>
-&lt;p>Crear un archivo deno.json con configuraciones básicas para ES2024 y definir tareas útiles:&lt;/p>
+&lt;p>Crear un archivo &lt;em>deno.json&lt;/em> con configuraciones básicas para &lt;strong>ES2024&lt;/strong> y definir tareas útiles:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">{
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;compilerOptions&amp;#34;: {
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;target&amp;#34;: &amp;#34;ES2024&amp;#34;,
@@ -77,9 +77,9 @@ Con soporte para una amplia gama de marcos, lenguajes y servicios, además de in
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Esto permite:&lt;/p>
 &lt;ul>
-&lt;li>Establecer ES2024 como objetivo del compilador.&lt;/li>
-&lt;li>Definir tareas como start y test.&lt;/li>
-&lt;li>Utilizar un archivo import_map.json para gestionar rutas.&lt;/li>
+&lt;li>Establecer &lt;strong>ES2024&lt;/strong> como objetivo del compilador.&lt;/li>
+&lt;li>Definir tareas como &lt;em>start&lt;/em> y &lt;em>test&lt;/em>.&lt;/li>
+&lt;li>Utilizar un archivo &lt;em>import_map.json&lt;/em> para gestionar rutas.&lt;/li>
 &lt;/ul>
 &lt;h2 id="configuración-en-visual-studio-code">Configuración en Visual Studio Code&lt;/h2>
 &lt;h3 id="instalar-la-extensión-de-deno">Instalar la extensión de Deno&lt;/h3>
@@ -97,8 +97,33 @@ Con soporte para una amplia gama de marcos, lenguajes y servicios, además de in
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;editor.defaultFormatter&amp;#34;: &amp;#34;denoland.vscode-deno&amp;#34;
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="conclusión">Conclusión&lt;/h2>
-&lt;p>Configurar un proyecto TypeScript moderno con Deno utilizando &lt;strong>ES2024&lt;/strong> ofrece un entorno potente y seguro. Tanto Visual Studio Code como JetBrains Rider proporcionan herramientas avanzadas para aprovechar las capacidades de Deno al máximo. Implementar estas configuraciones, buenas prácticas y pruebas garantiza un desarrollo eficiente y confiable.&lt;/p></description></item><item><title>Introducción a Angular 17: Características clave y mejoras</title><link>https://cmas.dev/posts/2024-04-24-angular-17-characteristics/</link><pubDate>Tue, 23 Apr 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-04-24-angular-17-characteristics/</guid><description>&lt;p>Angular 17, la última versión del popular framework de desarrollo web, introduce mejoras significativas para desarrolladores y equipos técnicos. Con un enfoque en el rendimiento, herramientas optimizadas y simplificación de procesos, esta actualización trae nuevas características como las Signals API, mejoras en el manejo de estados y optimizaciones para el desarrollo y pruebas. En este artículo, exploramos las características clave de Angular 17, su impacto en el desarrollo de aplicaciones modernas y cómo empezar a usar estas innovaciones en tus proyectos. Descubre cómo esta versión refuerza la posición de Angular como un pilar en el ecosistema de desarrollo web.&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="configuración-en-jetbrains-rider">Configuración en JetBrains Rider&lt;/h2>
+&lt;h3 id="instalar-el-plugin-de-deno">Instalar el plugin de Deno&lt;/h3>
+&lt;ol>
+&lt;li>Abrir &lt;strong>JetBrains Rider&lt;/strong> e ir a &lt;em>File&lt;/em> &amp;gt; &lt;em>Settings&lt;/em> &amp;gt; &lt;em>Plugins&lt;/em>.&lt;/li>
+&lt;li>Busca e instala el plugin llamado &lt;strong>Deno&lt;/strong>.&lt;/li>
+&lt;/ol>
+&lt;h3 id="configurar-deno-en-el-proyecto">Configurar Deno en el proyecto&lt;/h3>
+&lt;ol>
+&lt;li>Ir a &lt;em>File&lt;/em> &amp;gt; &lt;em>Settings&lt;/em> &amp;gt; &lt;em>Languages &amp;amp; Frameworks&lt;/em> &amp;gt; &lt;em>Deno&lt;/em>.&lt;/li>
+&lt;li>Activar la opción &lt;em>Enable Deno for this project&lt;/em>.&lt;/li>
+&lt;li>Especificar la ruta al binario de Deno (se puede encontrar con &lt;em>which deno&lt;/em> en Linux/macOS o &lt;em>where deno&lt;/em> en Windows).&lt;/li>
+&lt;/ol>
+&lt;h3 id="crear-una-configuración-de-ejecución">Crear una configuración de ejecución&lt;/h3>
+&lt;ol>
+&lt;li>Ir a &lt;em>Run&lt;/em> &amp;gt; &lt;em>Edit Configurations&lt;/em>.&lt;/li>
+&lt;li>Crear una nueva configuración del tipo Deno:&lt;/li>
+&lt;/ol>
+&lt;ul>
+&lt;li>Nombre: &lt;em>Run Deno Server&lt;/em>.&lt;/li>
+&lt;li>Archivo: &lt;em>src/index.ts&lt;/em>.&lt;/li>
+&lt;li>Argumentos: &lt;em>&amp;ndash;allow-net&lt;/em>.&lt;/li>
+&lt;/ul>
+&lt;ol start="3">
+&lt;li>Guardar la configuración y hacer clic en &lt;em>Run&lt;/em> para ejecutar el servidor.&lt;/li>
+&lt;/ol>
+&lt;h2 id="conclusión">Conclusión&lt;/h2>
+&lt;p>Configurar un proyecto &lt;strong>TypeScript&lt;/strong> moderno con &lt;strong>Deno&lt;/strong> utilizando &lt;strong>ES2024&lt;/strong> ofrece un entorno potente y seguro. Tanto &lt;strong>Visual Studio Code&lt;/strong> como &lt;strong>JetBrains Rider&lt;/strong> proporcionan herramientas avanzadas para aprovechar las capacidades de Deno al máximo. Implementar estas configuraciones, buenas prácticas y pruebas garantiza un desarrollo eficiente y confiable.&lt;/p></description></item><item><title>Introducción a Angular 17: Características clave y mejoras</title><link>https://cmas.dev/posts/2024-04-24-angular-17-characteristics/</link><pubDate>Tue, 23 Apr 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-04-24-angular-17-characteristics/</guid><description>&lt;p>Angular 17, la última versión del popular framework de desarrollo web, introduce mejoras significativas para desarrolladores y equipos técnicos. Con un enfoque en el rendimiento, herramientas optimizadas y simplificación de procesos, esta actualización trae nuevas características como las Signals API, mejoras en el manejo de estados y optimizaciones para el desarrollo y pruebas. En este artículo, exploramos las características clave de Angular 17, su impacto en el desarrollo de aplicaciones modernas y cómo empezar a usar estas innovaciones en tus proyectos. Descubre cómo esta versión refuerza la posición de Angular como un pilar en el ecosistema de desarrollo web.&lt;/p>
 &lt;h2 id="introducción">Introducción&lt;/h2>
 &lt;p>Angular es uno de los frameworks de desarrollo web más populares, y su última versión, &lt;strong>Angular 17&lt;/strong>, continúa evolucionando para satisfacer las demandas de los desarrolladores modernos. Con mejoras enfocadas en el rendimiento, herramientas simplificadas y nuevas funcionalidades, Angular 17 consolida su posición como una solución robusta para aplicaciones de todos los tamaños.&lt;/p>
 &lt;p>En este artículo, exploraremos las &lt;strong>características clave y mejoras&lt;/strong> de Angular 17, destacando cómo estas actualizaciones impactan en el flujo de trabajo de los desarrolladores y cómo puedes aprovecharlas para optimizar tus proyectos.&lt;/p>
