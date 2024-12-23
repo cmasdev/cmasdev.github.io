@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Jest on Christian Amado's Blog</title><link>https://cmas.dev/tags/jest/</link><description>Recent content in Jest on Christian Amado's Blog</description><generator>Hugo -- gohugo.io</generator><language>es</language><lastBuildDate>Wed, 12 Jun 2024 00:00:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/tags/jest/index.xml" rel="self" type="application/rss+xml"/><item><title>Testing avanzado en Angular con Jest: Mejores prácticas</title><link>https://cmas.dev/posts/2024-06-12-testing-angular-jest/</link><pubDate>Wed, 12 Jun 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-06-12-testing-angular-jest/</guid><description>&lt;p>Las pruebas en aplicaciones &lt;strong>Angular&lt;/strong> son esenciales para garantizar la calidad, confiabilidad y mantenibilidad del código. En este artículo, exploraremos el uso avanzado de &lt;strong>Jest&lt;/strong> como framework de pruebas en &lt;strong>Angular&lt;/strong>, cubriendo configuración inicial, estrategias de pruebas unitarias y de integración, así como buenas prácticas para lograr un enfoque moderno, eficiente y seguro.&lt;/p>
+&lt;h2 id="por-qué-usar-jest-en-angular">¿Por qué usar Jest en Angular?&lt;/h2>
+&lt;h3 id="ventajas-de-jest">Ventajas de Jest&lt;/h3>
+&lt;ol>
+&lt;li>&lt;strong>Rápido y eficiente&lt;/strong>: Jest paraleliza la ejecución de pruebas, lo que mejora significativamente los tiempos.&lt;/li>
+&lt;li>&lt;strong>API intuitiva&lt;/strong>: Proporciona una sintaxis clara y fácil de aprender.&lt;/li>
+&lt;li>&lt;strong>Mocks y espías integrados&lt;/strong>: Simplifica la simulación de dependencias.&lt;/li>
+&lt;li>&lt;strong>Informes detallados&lt;/strong>: Ofrece feedback claro sobre las pruebas fallidas.&lt;/li>
+&lt;li>&lt;strong>Snapshot testing&lt;/strong>: Permite capturar estados de componentes para detectar cambios inesperados.&lt;/li>
+&lt;/ol>
+&lt;h2 id="configuración-inicial-de-jest-en-un-proyecto-angular">Configuración inicial de Jest en un proyecto Angular&lt;/h2>
+&lt;h3 id="requisitos-previos">Requisitos previos&lt;/h3>
+&lt;ol>
+&lt;li>Tener Angular CLI instalado:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">npm install -g @angular/cli
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>Crear un nuevo proyecto Angular o usar uno existente:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">ng new angular-jest-demo --routing --style css
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;h3 id="instalar-jest-y-dependencias">Instalar Jest y dependencias&lt;/h3>
+&lt;p>Reemplaza el entorno de pruebas predeterminado de Angular (Karma) con Jest:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">npm install jest @types/jest jest-preset-angular --save-dev
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="configurar-jest">Configurar Jest&lt;/h3>
+&lt;ol>
+&lt;li>
+&lt;p>Agrega un archivo de configuración &lt;code>jest.config.js&lt;/code> en la raíz del proyecto:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">module&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">exports&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">preset&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;jest-preset-angular&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">setupFilesAfterEnv&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;&amp;lt;rootDir&amp;gt;/setup-jest.ts&amp;#39;&lt;/span>&lt;span class="p">],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">testEnvironment&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;jsdom&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">testMatch&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;**/+(*.)+(spec).+(ts|js)&amp;#39;&lt;/span>&lt;span class="p">],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">transform&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s1">&amp;#39;^.+\.(ts|html)$&amp;#39;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;jest-preset-angular&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">moduleFileExtensions&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;ts&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;html&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;js&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;json&amp;#39;&lt;/span>&lt;span class="p">],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">collectCoverage&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="bp">true&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">coverageReporters&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;html&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;text&amp;#39;&lt;/span>&lt;span class="p">],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">coverageDirectory&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;coverage/jest&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>Crea el archivo &lt;code>setup-jest.ts&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">import &amp;#39;jest-preset-angular/setup-jest&amp;#39;;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>Modifica &lt;code>tsconfig.spec.json&lt;/code> para incluir Jest:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;compilerOptions&amp;#34;: {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;types&amp;#34;: [&amp;#34;jest&amp;#34;]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>Actualiza los scripts de &lt;code>package.json&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;scripts&amp;#34;: {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;test&amp;#34;: &amp;#34;jest&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;test:watch&amp;#34;: &amp;#34;jest --watch&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;h2 id="escribir-pruebas-unitarias-avanzadas">Escribir pruebas unitarias avanzadas&lt;/h2>
+&lt;h3 id="pruebas-de-componentes">Pruebas de componentes&lt;/h3>
+&lt;h4 id="configurar-pruebas-básicas">Configurar pruebas básicas&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">ComponentFixture&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">TestBed&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;@angular/core/testing&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">MyComponent&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;./my.component&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">describe&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;MyComponent&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">let&lt;/span> &lt;span class="n">component&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">MyComponent&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">let&lt;/span> &lt;span class="n">fixture&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">ComponentFixture&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">MyComponent&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">beforeEach&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">async&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">await&lt;/span> &lt;span class="n">TestBed&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">configureTestingModule&lt;/span>&lt;span class="p">({&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">declarations&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">MyComponent&lt;/span>&lt;span class="p">],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">})&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">compileComponents&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">fixture&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">TestBed&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">createComponent&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">MyComponent&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">component&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">fixture&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">componentInstance&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">fixture&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">detectChanges&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">it&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;debería crear el componente&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">expect&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">component&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">toBeTruthy&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">it&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;debería renderizar el título&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="n">compiled&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">fixture&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">nativeElement&lt;/span> &lt;span class="n">as&lt;/span> &lt;span class="n">HTMLElement&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">expect&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">compiled&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">querySelector&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;h1&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="err">?&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">textContent&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">toContain&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;Bienvenido a MyComponent!&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="pruebas-de-servicios">Pruebas de servicios&lt;/h3>
+&lt;h4 id="mocking-de-dependencias">Mocking de dependencias&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">TestBed&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;@angular/core/testing&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">HttpClientTestingModule&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">HttpTestingController&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;@angular/common/http/testing&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">MyService&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;./my.service&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">describe&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;MyService&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">let&lt;/span> &lt;span class="n">service&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">MyService&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">let&lt;/span> &lt;span class="n">httpMock&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">HttpTestingController&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">beforeEach&lt;/span>&lt;span class="p">(()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">TestBed&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">configureTestingModule&lt;/span>&lt;span class="p">({&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">imports&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">HttpClientTestingModule&lt;/span>&lt;span class="p">],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">providers&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">MyService&lt;/span>&lt;span class="p">],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">service&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">TestBed&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">inject&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">MyService&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">httpMock&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">TestBed&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">inject&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">HttpTestingController&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">afterEach&lt;/span>&lt;span class="p">(()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">httpMock&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">verify&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">it&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;debería obtener datos correctamente&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="n">mockData&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">id&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">name&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;Test&amp;#39;&lt;/span> &lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">service&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">getData&lt;/span>&lt;span class="p">()&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">subscribe&lt;/span>&lt;span class="p">((&lt;/span>&lt;span class="n">data&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">expect&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">data&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">toEqual&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">mockData&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="n">req&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">httpMock&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">expectOne&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;/api/data&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">expect&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">req&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">request&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">method&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">toBe&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;GET&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">req&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">flush&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">mockData&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="snapshot-testing-en-angular">Snapshot Testing en Angular&lt;/h2>
+&lt;p>Los snapshots permiten capturar el estado de un componente y compararlo con versiones futuras para detectar cambios inesperados.&lt;/p>
+&lt;h3 id="crear-un-snapshot">Crear un snapshot&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">render&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;@testing-library/angular&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">MyComponent&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;./my.component&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">describe&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;MyComponent&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">it&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;debería coincidir con el snapshot&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">async&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">container&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">await&lt;/span> &lt;span class="n">render&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">MyComponent&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">expect&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">container&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">toMatchSnapshot&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="actualizar-snapshots">Actualizar snapshots&lt;/h3>
+&lt;p>Si los cambios son intencionales, actualiza los snapshots:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">jest --updateSnapshot
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="buenas-prácticas-para-pruebas-avanzadas">Buenas prácticas para pruebas avanzadas&lt;/h2>
+&lt;ol>
+&lt;li>&lt;strong>Configurar CI/CD&lt;/strong>: Automatiza las pruebas en plataformas como GitHub Actions o Azure DevOps.&lt;/li>
+&lt;li>&lt;strong>Cobertura de código&lt;/strong>: Asegúrate de alcanzar al menos el 80% de cobertura.&lt;/li>
+&lt;li>&lt;strong>Separar pruebas unitarias e integradas&lt;/strong>: Mantén un enfoque claro entre las pruebas locales y las de sistema.&lt;/li>
+&lt;li>&lt;strong>Mocking eficiente&lt;/strong>: Usa herramientas como &lt;code>jest.mock&lt;/code> para simular dependencias externas.&lt;/li>
+&lt;li>&lt;strong>Documentar las pruebas&lt;/strong>: Incluye descripciones claras sobre los objetivos de cada caso de prueba.&lt;/li>
+&lt;/ol>
+&lt;h2 id="conclusión">Conclusión&lt;/h2>
+&lt;p>Implementar pruebas avanzadas con &lt;strong>Jest&lt;/strong> en &lt;strong>Angular&lt;/strong> mejora la calidad del software y reduce riesgos en el desarrollo. Al seguir buenas prácticas y adoptar herramientas modernas, los equipos pueden garantizar que sus aplicaciones sean robustas, seguras y fáciles de mantener. ¡Empieza hoy mismo a implementar Jest en tus proyectos &lt;strong>Angular&lt;/strong>!&lt;/p></description></item></channel></rss>

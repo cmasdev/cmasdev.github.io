@@ -45,7 +45,242 @@ Con soporte para una amplia gama de marcos, lenguajes y servicios, además de in
 &lt;/ol>
 &lt;p>Algo que noté es que la plantilla figura en &lt;strong>Backend&lt;/strong>, pero tranquilamente podemos crear una aplicación Full Stack con .NET de base para cubrir nuestras necesidades.&lt;/p>
 &lt;p>Al momento de escribir este artículo noto que &lt;strong>Proyecto IDX&lt;/strong> = &lt;strong>GitHub Codespace&lt;/strong>. La base es Visual Studio Code.&lt;/p>
-&lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Despliegue de aplicaciones Blazor en Azure App Services</title><link>https://cmas.dev/posts/2024-04-17-deploy-blazor-apps-azure/</link><pubDate>Wed, 17 Apr 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-04-17-deploy-blazor-apps-azure/</guid><description>&lt;p>El despliegue de aplicaciones Blazor en Azure App Services ofrece una forma rápida y eficiente de llevar tus proyectos al entorno de producción. Azure proporciona escalabilidad, seguridad y opciones flexibles para automatizar el flujo de trabajo de despliegue. En este artículo, exploramos tres métodos clave: usando Visual Studio, la CLI de Azure, y GitHub Actions, con pasos prácticos y ejemplos detallados. Con las mejoras de .NET 8, las aplicaciones Blazor ahora son más rápidas y optimizadas para la nube, lo que facilita la entrega de soluciones web escalables y modernas.&lt;/p>
+&lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Creación de componentes reutilizables en Blazor para aplicaciones escalables</title><link>https://cmas.dev/posts/2024-07-03-components-blazor/</link><pubDate>Wed, 03 Jul 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-07-03-components-blazor/</guid><description>&lt;p>&lt;strong>Blazor&lt;/strong> es un framework poderoso que permite a los desarrolladores construir aplicaciones web modernas utilizando &lt;strong>C#&lt;/strong>. Una de sus características clave es la capacidad de crear componentes reutilizables que promueven la modularidad, escalabilidad y mantenibilidad de las aplicaciones. En este artículo, exploraremos cómo diseñar y desarrollar componentes reutilizables en Blazor, acompañado de ejemplos prácticos y mejores prácticas.&lt;/p>
+&lt;h2 id="qué-son-los-componentes-en-blazor">¿Qué son los componentes en Blazor?&lt;/h2>
+&lt;p>Los componentes en Blazor son unidades reutilizables de la interfaz de usuario que combinan lógica y presentación. Cada componente se define en un archivo &lt;code>.razor&lt;/code> y puede incluir código C#, HTML y CSS.&lt;/p>
+&lt;h3 id="características-principales">Características principales&lt;/h3>
+&lt;ol>
+&lt;li>&lt;strong>Encapsulación&lt;/strong>: Los componentes encapsulan la lógica y el diseño, promoviendo la reutilización.&lt;/li>
+&lt;li>&lt;strong>Reactividad&lt;/strong>: Pueden responder a eventos y actualizarse dinámicamente.&lt;/li>
+&lt;li>&lt;strong>Comunicación entre componentes&lt;/strong>: Soportan la transferencia de datos a través de propiedades y eventos.&lt;/li>
+&lt;li>&lt;strong>Renderizado eficiente&lt;/strong>: Blazor optimiza el renderizado para minimizar los cambios en el DOM.&lt;/li>
+&lt;/ol>
+&lt;h2 id="crear-un-componente-básico">Crear un componente básico&lt;/h2>
+&lt;h3 id="ejemplo-componente-de-botón">Ejemplo: Componente de Botón&lt;/h3>
+&lt;p>Archivo: &lt;code>ButtonComponent.razor&lt;/code>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">&amp;lt;button class=&amp;#34;btn btn-primary&amp;#34; @onclick=&amp;#34;OnClick&amp;#34;&amp;gt;@Label&amp;lt;/button&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">@code {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [Parameter]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> public string Label { get; set; } = &amp;#34;Click Me&amp;#34;;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [Parameter]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> public EventCallback OnClick { get; set; }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="uso-del-componente">Uso del componente&lt;/h4>
+&lt;p>Archivo: &lt;code>MainLayout.razor&lt;/code>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">&amp;lt;ButtonComponent Label=&amp;#34;Guardar&amp;#34; OnClick=&amp;#34;SaveData&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">@code {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> private void SaveData()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Console.WriteLine(&amp;#34;Datos guardados correctamente.&amp;#34;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="componentes-parametrizables">Componentes parametrizables&lt;/h2>
+&lt;h3 id="paso-1-definir-propiedades-con-parameter">Paso 1: Definir propiedades con &lt;code>[Parameter]&lt;/code>&lt;/h3>
+&lt;p>Las propiedades con el atributo &lt;code>[Parameter]&lt;/code> permiten a los componentes recibir datos externos.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">&amp;lt;h3&amp;gt;@Title&amp;lt;/h3&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;p&amp;gt;@Description&amp;lt;/p&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">@code {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [Parameter]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> public string Title { get; set; }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [Parameter]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> public string Description { get; set; }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="paso-2-render-fragment">Paso 2: Render Fragment&lt;/h3>
+&lt;p>Render Fragment permite pasar bloques de contenido al componente.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">&amp;lt;div class=&amp;#34;card&amp;#34;&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;div class=&amp;#34;card-header&amp;#34;&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> @Header
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/div&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;div class=&amp;#34;card-body&amp;#34;&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> @Body
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/div&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;/div&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">@code {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [Parameter]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> public RenderFragment Header { get; set; }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [Parameter]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> public RenderFragment Body { get; set; }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="ejemplo-de-uso">Ejemplo de uso&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">&amp;lt;CardComponent&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Header&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;h3&amp;gt;Mi Título&amp;lt;/h3&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/Header&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Body&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;p&amp;gt;Este es el contenido del cuerpo.&amp;lt;/p&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/Body&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;/CardComponent&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="mejores-prácticas-para-componentes-reutilizables">Mejores prácticas para componentes reutilizables&lt;/h2>
+&lt;ol>
+&lt;li>&lt;strong>Evitar lógica compleja&lt;/strong>:
+&lt;ul>
+&lt;li>Divide la funcionalidad compleja en varios componentes más simples.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>Documentar parámetros&lt;/strong>:
+&lt;ul>
+&lt;li>Proporciona descripciones claras de los parámetros y su uso.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>Usar estilos modulares&lt;/strong>:
+&lt;ul>
+&lt;li>Utiliza CSS aislado para evitar conflictos de estilos.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>Validar entradas&lt;/strong>:
+&lt;ul>
+&lt;li>Asegúrate de validar los datos recibidos a través de los parámetros.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>Seguir el principio DRY (Don&amp;rsquo;t Repeat Yourself)&lt;/strong>:
+&lt;ul>
+&lt;li>Reutiliza componentes siempre que sea posible.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="componentes-avanzados">Componentes avanzados&lt;/h2>
+&lt;h3 id="componentes-genéricos">Componentes genéricos&lt;/h3>
+&lt;p>Blazor soporta componentes genéricos que permiten trabajar con diferentes tipos de datos.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">div&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="err">@&lt;/span>&lt;span class="n">foreach&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="k">var&lt;/span> &lt;span class="n">item&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">Items&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">p&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="err">@&lt;/span>&lt;span class="n">item&lt;/span>&lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">p&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">div&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">@&lt;/span>&lt;span class="n">code&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">Parameter&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">public&lt;/span> &lt;span class="n">IEnumerable&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">T&lt;/span>&lt;span class="o">&amp;gt;&lt;/span> &lt;span class="n">Items&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">get&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">set&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="uso-del-componente-genérico">Uso del componente genérico&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">&amp;lt;GenericComponent Items=&amp;#34;new List&amp;lt;int&amp;gt; { 1, 2, 3 }&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="componentes-dinámicos">Componentes dinámicos&lt;/h3>
+&lt;p>Permiten renderizar diferentes componentes basados en datos o estados.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="err">@&lt;/span>&lt;span class="n">foreach&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="k">var&lt;/span> &lt;span class="n">component&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">Components&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">DynamicComponent&lt;/span> &lt;span class="n">Type&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;component&amp;#34;&lt;/span> &lt;span class="o">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">@&lt;/span>&lt;span class="n">code&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">Parameter&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">public&lt;/span> &lt;span class="n">List&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">Type&lt;/span>&lt;span class="o">&amp;gt;&lt;/span> &lt;span class="n">Components&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">get&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">set&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">List&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">Type&lt;/span>&lt;span class="o">&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nb">typeof&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">ButtonComponent&lt;/span>&lt;span class="p">),&lt;/span> &lt;span class="nb">typeof&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">CardComponent&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="pruebas-de-componentes">Pruebas de componentes&lt;/h2>
+&lt;h3 id="framework-recomendado-bunit">Framework recomendado: &lt;code>bUnit&lt;/code>&lt;/h3>
+&lt;h4 id="configurar-bunit">Configurar &lt;code>bUnit&lt;/code>&lt;/h4>
+&lt;ol>
+&lt;li>Instalar la biblioteca:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-go" data-lang="go">&lt;span class="line">&lt;span class="cl">&lt;span class="nx">dotnet&lt;/span> &lt;span class="nx">add&lt;/span> &lt;span class="kn">package&lt;/span> &lt;span class="nx">Bunit&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>Escribir pruebas:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="p">[&lt;/span>&lt;span class="n">Fact&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">public&lt;/span> &lt;span class="n">void&lt;/span> &lt;span class="n">ButtonComponent_DisplaysCorrectLabel&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">using&lt;/span> &lt;span class="k">var&lt;/span> &lt;span class="n">ctx&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">TestContext&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">var&lt;/span> &lt;span class="n">cut&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">ctx&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">RenderComponent&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">ButtonComponent&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">parameters&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">parameters&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">.&lt;/span>&lt;span class="n">Add&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">p&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">p&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Label&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;Test Button&amp;#34;&lt;/span>&lt;span class="p">));&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Assert&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Contains&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;Test Button&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">cut&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Markup&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;h2 id="conclusión">Conclusión&lt;/h2>
+&lt;p>La creación de componentes reutilizables en &lt;strong>Blazor&lt;/strong> es clave para construir aplicaciones escalables y mantenibles. Siguiendo las buenas prácticas y aprovechando las características avanzadas del framework, los desarrolladores pueden maximizar la productividad y garantizar la calidad de sus aplicaciones. ¡Empieza a diseñar tus propios componentes reutilizables hoy mismo y lleva tus habilidades de desarrollo web al siguiente nivel!&lt;/p></description></item><item><title>Introducción a Blazor: Cambiando el paradigma del desarrollo web</title><link>https://cmas.dev/posts/2024-06-26-intro-blazor/</link><pubDate>Wed, 26 Jun 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-06-26-intro-blazor/</guid><description>&lt;p>&lt;strong>Blazor&lt;/strong> es una tecnología desarrollada por &lt;strong>Microsoft&lt;/strong> que está transformando la forma en que se crean aplicaciones web modernas. Basado en &lt;strong>.NET&lt;/strong>, &lt;strong>Blazor&lt;/strong> permite a los desarrolladores escribir aplicaciones web interactivas utilizando &lt;strong>C#&lt;/strong> en lugar de &lt;strong>JavaScript&lt;/strong>, ofreciendo una solución innovadora para quienes buscan aprovechar las ventajas del ecosistema &lt;strong>.NET&lt;/strong> en el desarrollo web. En este artículo, exploraremos las bases de Blazor, sus ventajas, desventajas y cómo empezar a utilizarlo, acompañado de ejemplos y buenas prácticas.&lt;/p>
+&lt;h2 id="qué-es-blazor">¿Qué es Blazor?&lt;/h2>
+&lt;p>Blazor es un framework de desarrollo web que permite construir aplicaciones interactivas del lado del cliente y del servidor utilizando C#. Se basa en WebAssembly para ejecutar código .NET directamente en el navegador, eliminando la necesidad de JavaScript para muchas funcionalidades.&lt;/p>
+&lt;h3 id="tipos-de-blazor">Tipos de Blazor&lt;/h3>
+&lt;ol>
+&lt;li>&lt;strong>Blazor Server&lt;/strong>: La aplicación se ejecuta en el servidor y utiliza SignalR para comunicarse con el cliente. Ideal para aplicaciones con requisitos de tiempo real o cuando se desea un inicio rápido.&lt;/li>
+&lt;li>&lt;strong>Blazor WebAssembly&lt;/strong>: Ejecuta el código directamente en el navegador utilizando WebAssembly. Ofrece una experiencia completamente del lado del cliente.&lt;/li>
+&lt;li>&lt;strong>Blazor Hybrid&lt;/strong>: Integra Blazor con plataformas como MAUI para crear aplicaciones multiplataforma.&lt;/li>
+&lt;/ol>
+&lt;h2 id="ventajas-de-blazor">Ventajas de Blazor&lt;/h2>
+&lt;ol>
+&lt;li>&lt;strong>Reutilización de código&lt;/strong>: Usa el mismo lenguaje, C#, tanto para el cliente como para el servidor.&lt;/li>
+&lt;li>&lt;strong>Ecosistema unificado&lt;/strong>: Aprovecha las herramientas y bibliotecas de .NET.&lt;/li>
+&lt;li>&lt;strong>Soporte a largo plazo&lt;/strong>: Microsoft ofrece soporte continuo para Blazor como parte del ecosistema .NET.&lt;/li>
+&lt;li>&lt;strong>Sin JavaScript adicional&lt;/strong>: Aunque puedes integrarlo, no es necesario para funciones comunes.&lt;/li>
+&lt;li>&lt;strong>Componentes reutilizables&lt;/strong>: Facilita la modularidad y la organización del código.&lt;/li>
+&lt;/ol>
+&lt;h2 id="desventajas-de-blazor">Desventajas de Blazor&lt;/h2>
+&lt;ol>
+&lt;li>&lt;strong>Tamaño inicial&lt;/strong>: En Blazor WebAssembly, el tamaño de descarga inicial puede ser considerable.&lt;/li>
+&lt;li>&lt;strong>Soporte limitado en navegadores antiguos&lt;/strong>: Requiere navegadores modernos con soporte para WebAssembly.&lt;/li>
+&lt;li>&lt;strong>Latencia en Blazor Server&lt;/strong>: La comunicación constante con el servidor puede introducir latencia.&lt;/li>
+&lt;li>&lt;strong>Curva de aprendizaje&lt;/strong>: Aunque es similar a .NET, puede ser desafiante para desarrolladores sin experiencia previa en el ecosistema.&lt;/li>
+&lt;/ol>
+&lt;h2 id="configuración-inicial">Configuración inicial&lt;/h2>
+&lt;h3 id="requisitos-previos">Requisitos previos&lt;/h3>
+&lt;ol>
+&lt;li>Tener instalado .NET SDK:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">dotnet --version
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>Instalar un editor de código, como Visual Studio o Visual Studio Code.&lt;/li>
+&lt;/ol>
+&lt;h3 id="crear-un-proyecto-blazor-server">Crear un proyecto Blazor Server&lt;/h3>
+&lt;ol>
+&lt;li>Ejecutar el comando para crear un proyecto:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">dotnet new blazorserver -o BlazorServerApp
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>Navegar al directorio del proyecto:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">cd BlazorServerApp
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>Ejecutar la aplicación:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">dotnet run
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;h3 id="crear-un-proyecto-blazor-webassembly">Crear un proyecto Blazor WebAssembly&lt;/h3>
+&lt;ol>
+&lt;li>Crear un proyecto WebAssembly:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">dotnet new blazorwasm -o BlazorWebAssemblyApp
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>Navegar al directorio del proyecto y ejecutarlo:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">cd BlazorWebAssemblyApp
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">dotnet run
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;h2 id="conceptos-fundamentales">Conceptos fundamentales&lt;/h2>
+&lt;h3 id="componentes">Componentes&lt;/h3>
+&lt;p>Los componentes son la unidad básica en Blazor. Se crean utilizando archivos &lt;code>.razor&lt;/code> y combinan C# con HTML.&lt;/p>
+&lt;h4 id="ejemplo-básico">Ejemplo básico&lt;/h4>
+&lt;p>Archivo: &lt;code>Counter.razor&lt;/code>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">@page &amp;#34;/counter&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;h3&amp;gt;Contador&amp;lt;/h3&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;p&amp;gt;Valor actual: @currentCount&amp;lt;/p&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;button @onclick=&amp;#34;IncrementCount&amp;#34;&amp;gt;Incrementar&amp;lt;/button&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">@code {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> private int currentCount = 0;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> private void IncrementCount()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> currentCount++;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="inyección-de-dependencias">Inyección de dependencias&lt;/h3>
+&lt;p>Blazor soporta inyección de dependencias a través del contenedor de servicios.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">@inject WeatherService WeatherService
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;h3&amp;gt;Clima actual&amp;lt;/h3&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;p&amp;gt;@WeatherService.GetCurrentWeather()&amp;lt;/p&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="buenas-prácticas">Buenas prácticas&lt;/h2>
+&lt;ol>
+&lt;li>&lt;strong>Organización del proyecto&lt;/strong>: Divide la aplicación en módulos y componentes reutilizables.&lt;/li>
+&lt;li>&lt;strong>Manejo de estado&lt;/strong>: Usa librerías como &lt;code>Fluxor&lt;/code> o servicios para manejar el estado de la aplicación.&lt;/li>
+&lt;li>&lt;strong>Optimizar el tamaño&lt;/strong>: Para Blazor WebAssembly, minimiza los recursos y activa la compresión.&lt;/li>
+&lt;li>&lt;strong>Seguridad&lt;/strong>: Implementa protección contra ataques XSS y valida todas las entradas de usuario.&lt;/li>
+&lt;li>&lt;strong>Pruebas&lt;/strong>: Usa frameworks como &lt;code>bUnit&lt;/code> para pruebas unitarias de componentes.&lt;/li>
+&lt;/ol>
+&lt;h2 id="conclusión">Conclusión&lt;/h2>
+&lt;p>&lt;strong>Blazor&lt;/strong> representa un cambio significativo en el desarrollo web al permitir que los desarrolladores utilicen C# para crear aplicaciones interactivas. Su capacidad para aprovechar el ecosistema de .NET lo hace una opción atractiva para equipos que ya trabajan con esta tecnología. Aunque tiene limitaciones, las ventajas que ofrece son significativas, especialmente en proyectos donde la reutilización de código y la integración con .NET son esenciales. ¡Explora Blazor y lleva tus habilidades de desarrollo web al siguiente nivel!&lt;/p></description></item><item><title>Despliegue de aplicaciones Blazor en Azure App Services</title><link>https://cmas.dev/posts/2024-04-17-deploy-blazor-apps-azure/</link><pubDate>Wed, 17 Apr 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-04-17-deploy-blazor-apps-azure/</guid><description>&lt;p>El despliegue de aplicaciones Blazor en Azure App Services ofrece una forma rápida y eficiente de llevar tus proyectos al entorno de producción. Azure proporciona escalabilidad, seguridad y opciones flexibles para automatizar el flujo de trabajo de despliegue. En este artículo, exploramos tres métodos clave: usando Visual Studio, la CLI de Azure, y GitHub Actions, con pasos prácticos y ejemplos detallados. Con las mejoras de .NET 8, las aplicaciones Blazor ahora son más rápidas y optimizadas para la nube, lo que facilita la entrega de soluciones web escalables y modernas.&lt;/p>
 &lt;h2 id="introducción">Introducción&lt;/h2>
 &lt;p>Desplegar aplicaciones Blazor en &lt;strong>Azure App Services&lt;/strong> es una solución sencilla y eficiente para llevar tus aplicaciones web al entorno de producción. Azure proporciona escalabilidad, seguridad y herramientas integradas para un despliegue rápido. En este artículo, exploraremos cómo configurar y desplegar una aplicación Blazor, incluyendo pasos prácticos y ejemplos detallados. Con &lt;strong>.NET 8&lt;/strong>, el rendimiento y la optimización de aplicaciones Blazor han mejorado significativamente, facilitando el despliegue en la nube.&lt;/p>
 &lt;hr>

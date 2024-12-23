@@ -45,7 +45,837 @@ Con soporte para una amplia gama de marcos, lenguajes y servicios, además de in
 &lt;/ol>
 &lt;p>Algo que noté es que la plantilla figura en &lt;strong>Backend&lt;/strong>, pero tranquilamente podemos crear una aplicación Full Stack con .NET de base para cubrir nuestras necesidades.&lt;/p>
 &lt;p>Al momento de escribir este artículo noto que &lt;strong>Proyecto IDX&lt;/strong> = &lt;strong>GitHub Codespace&lt;/strong>. La base es Visual Studio Code.&lt;/p>
-&lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Introducción a los Signals en Angular: Casos prácticos</title><link>https://cmas.dev/posts/2024-05-22-intro-signals-angular/</link><pubDate>Wed, 22 May 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-05-22-intro-signals-angular/</guid><description>&lt;p>Angular es un framework robusto y evolutivo que continuamente introduce nuevas características para mejorar el desarrollo de aplicaciones web modernas. Una de estas innovaciones son los &lt;strong>Signals&lt;/strong>, una herramienta que permite manejar cambios de estado de manera reactiva, clara y eficiente. Este artículo ofrece una introducción detallada a los Signals en Angular, explicando cómo utilizarlos, sus ventajas comparativas frente a otras soluciones reactivas y sus aplicaciones en el desarrollo real, acompañado de casos prácticos ampliados, buenas prácticas y un enfoque moderno en seguridad.&lt;/p>
+&lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Creación de componentes reutilizables en Blazor para aplicaciones escalables</title><link>https://cmas.dev/posts/2024-07-03-components-blazor/</link><pubDate>Wed, 03 Jul 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-07-03-components-blazor/</guid><description>&lt;p>&lt;strong>Blazor&lt;/strong> es un framework poderoso que permite a los desarrolladores construir aplicaciones web modernas utilizando &lt;strong>C#&lt;/strong>. Una de sus características clave es la capacidad de crear componentes reutilizables que promueven la modularidad, escalabilidad y mantenibilidad de las aplicaciones. En este artículo, exploraremos cómo diseñar y desarrollar componentes reutilizables en Blazor, acompañado de ejemplos prácticos y mejores prácticas.&lt;/p>
+&lt;h2 id="qué-son-los-componentes-en-blazor">¿Qué son los componentes en Blazor?&lt;/h2>
+&lt;p>Los componentes en Blazor son unidades reutilizables de la interfaz de usuario que combinan lógica y presentación. Cada componente se define en un archivo &lt;code>.razor&lt;/code> y puede incluir código C#, HTML y CSS.&lt;/p>
+&lt;h3 id="características-principales">Características principales&lt;/h3>
+&lt;ol>
+&lt;li>&lt;strong>Encapsulación&lt;/strong>: Los componentes encapsulan la lógica y el diseño, promoviendo la reutilización.&lt;/li>
+&lt;li>&lt;strong>Reactividad&lt;/strong>: Pueden responder a eventos y actualizarse dinámicamente.&lt;/li>
+&lt;li>&lt;strong>Comunicación entre componentes&lt;/strong>: Soportan la transferencia de datos a través de propiedades y eventos.&lt;/li>
+&lt;li>&lt;strong>Renderizado eficiente&lt;/strong>: Blazor optimiza el renderizado para minimizar los cambios en el DOM.&lt;/li>
+&lt;/ol>
+&lt;h2 id="crear-un-componente-básico">Crear un componente básico&lt;/h2>
+&lt;h3 id="ejemplo-componente-de-botón">Ejemplo: Componente de Botón&lt;/h3>
+&lt;p>Archivo: &lt;code>ButtonComponent.razor&lt;/code>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">&amp;lt;button class=&amp;#34;btn btn-primary&amp;#34; @onclick=&amp;#34;OnClick&amp;#34;&amp;gt;@Label&amp;lt;/button&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">@code {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [Parameter]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> public string Label { get; set; } = &amp;#34;Click Me&amp;#34;;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [Parameter]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> public EventCallback OnClick { get; set; }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="uso-del-componente">Uso del componente&lt;/h4>
+&lt;p>Archivo: &lt;code>MainLayout.razor&lt;/code>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">&amp;lt;ButtonComponent Label=&amp;#34;Guardar&amp;#34; OnClick=&amp;#34;SaveData&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">@code {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> private void SaveData()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Console.WriteLine(&amp;#34;Datos guardados correctamente.&amp;#34;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="componentes-parametrizables">Componentes parametrizables&lt;/h2>
+&lt;h3 id="paso-1-definir-propiedades-con-parameter">Paso 1: Definir propiedades con &lt;code>[Parameter]&lt;/code>&lt;/h3>
+&lt;p>Las propiedades con el atributo &lt;code>[Parameter]&lt;/code> permiten a los componentes recibir datos externos.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">&amp;lt;h3&amp;gt;@Title&amp;lt;/h3&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;p&amp;gt;@Description&amp;lt;/p&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">@code {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [Parameter]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> public string Title { get; set; }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [Parameter]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> public string Description { get; set; }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="paso-2-render-fragment">Paso 2: Render Fragment&lt;/h3>
+&lt;p>Render Fragment permite pasar bloques de contenido al componente.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">&amp;lt;div class=&amp;#34;card&amp;#34;&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;div class=&amp;#34;card-header&amp;#34;&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> @Header
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/div&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;div class=&amp;#34;card-body&amp;#34;&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> @Body
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/div&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;/div&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">@code {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [Parameter]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> public RenderFragment Header { get; set; }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [Parameter]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> public RenderFragment Body { get; set; }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="ejemplo-de-uso">Ejemplo de uso&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">&amp;lt;CardComponent&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Header&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;h3&amp;gt;Mi Título&amp;lt;/h3&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/Header&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Body&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;p&amp;gt;Este es el contenido del cuerpo.&amp;lt;/p&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/Body&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;/CardComponent&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="mejores-prácticas-para-componentes-reutilizables">Mejores prácticas para componentes reutilizables&lt;/h2>
+&lt;ol>
+&lt;li>&lt;strong>Evitar lógica compleja&lt;/strong>:
+&lt;ul>
+&lt;li>Divide la funcionalidad compleja en varios componentes más simples.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>Documentar parámetros&lt;/strong>:
+&lt;ul>
+&lt;li>Proporciona descripciones claras de los parámetros y su uso.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>Usar estilos modulares&lt;/strong>:
+&lt;ul>
+&lt;li>Utiliza CSS aislado para evitar conflictos de estilos.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>Validar entradas&lt;/strong>:
+&lt;ul>
+&lt;li>Asegúrate de validar los datos recibidos a través de los parámetros.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>Seguir el principio DRY (Don&amp;rsquo;t Repeat Yourself)&lt;/strong>:
+&lt;ul>
+&lt;li>Reutiliza componentes siempre que sea posible.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="componentes-avanzados">Componentes avanzados&lt;/h2>
+&lt;h3 id="componentes-genéricos">Componentes genéricos&lt;/h3>
+&lt;p>Blazor soporta componentes genéricos que permiten trabajar con diferentes tipos de datos.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">div&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="err">@&lt;/span>&lt;span class="n">foreach&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="k">var&lt;/span> &lt;span class="n">item&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">Items&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">p&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="err">@&lt;/span>&lt;span class="n">item&lt;/span>&lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">p&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">div&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">@&lt;/span>&lt;span class="n">code&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">Parameter&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">public&lt;/span> &lt;span class="n">IEnumerable&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">T&lt;/span>&lt;span class="o">&amp;gt;&lt;/span> &lt;span class="n">Items&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">get&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">set&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="uso-del-componente-genérico">Uso del componente genérico&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">&amp;lt;GenericComponent Items=&amp;#34;new List&amp;lt;int&amp;gt; { 1, 2, 3 }&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="componentes-dinámicos">Componentes dinámicos&lt;/h3>
+&lt;p>Permiten renderizar diferentes componentes basados en datos o estados.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="err">@&lt;/span>&lt;span class="n">foreach&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="k">var&lt;/span> &lt;span class="n">component&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">Components&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">DynamicComponent&lt;/span> &lt;span class="n">Type&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;component&amp;#34;&lt;/span> &lt;span class="o">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">@&lt;/span>&lt;span class="n">code&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">Parameter&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">public&lt;/span> &lt;span class="n">List&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">Type&lt;/span>&lt;span class="o">&amp;gt;&lt;/span> &lt;span class="n">Components&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">get&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">set&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">List&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">Type&lt;/span>&lt;span class="o">&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nb">typeof&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">ButtonComponent&lt;/span>&lt;span class="p">),&lt;/span> &lt;span class="nb">typeof&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">CardComponent&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="pruebas-de-componentes">Pruebas de componentes&lt;/h2>
+&lt;h3 id="framework-recomendado-bunit">Framework recomendado: &lt;code>bUnit&lt;/code>&lt;/h3>
+&lt;h4 id="configurar-bunit">Configurar &lt;code>bUnit&lt;/code>&lt;/h4>
+&lt;ol>
+&lt;li>Instalar la biblioteca:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-go" data-lang="go">&lt;span class="line">&lt;span class="cl">&lt;span class="nx">dotnet&lt;/span> &lt;span class="nx">add&lt;/span> &lt;span class="kn">package&lt;/span> &lt;span class="nx">Bunit&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>Escribir pruebas:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="p">[&lt;/span>&lt;span class="n">Fact&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">public&lt;/span> &lt;span class="n">void&lt;/span> &lt;span class="n">ButtonComponent_DisplaysCorrectLabel&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">using&lt;/span> &lt;span class="k">var&lt;/span> &lt;span class="n">ctx&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">TestContext&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">var&lt;/span> &lt;span class="n">cut&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">ctx&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">RenderComponent&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">ButtonComponent&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">parameters&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">parameters&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">.&lt;/span>&lt;span class="n">Add&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">p&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">p&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Label&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;Test Button&amp;#34;&lt;/span>&lt;span class="p">));&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Assert&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Contains&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;Test Button&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">cut&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Markup&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;h2 id="conclusión">Conclusión&lt;/h2>
+&lt;p>La creación de componentes reutilizables en &lt;strong>Blazor&lt;/strong> es clave para construir aplicaciones escalables y mantenibles. Siguiendo las buenas prácticas y aprovechando las características avanzadas del framework, los desarrolladores pueden maximizar la productividad y garantizar la calidad de sus aplicaciones. ¡Empieza a diseñar tus propios componentes reutilizables hoy mismo y lleva tus habilidades de desarrollo web al siguiente nivel!&lt;/p></description></item><item><title>Introducción a Blazor: Cambiando el paradigma del desarrollo web</title><link>https://cmas.dev/posts/2024-06-26-intro-blazor/</link><pubDate>Wed, 26 Jun 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-06-26-intro-blazor/</guid><description>&lt;p>&lt;strong>Blazor&lt;/strong> es una tecnología desarrollada por &lt;strong>Microsoft&lt;/strong> que está transformando la forma en que se crean aplicaciones web modernas. Basado en &lt;strong>.NET&lt;/strong>, &lt;strong>Blazor&lt;/strong> permite a los desarrolladores escribir aplicaciones web interactivas utilizando &lt;strong>C#&lt;/strong> en lugar de &lt;strong>JavaScript&lt;/strong>, ofreciendo una solución innovadora para quienes buscan aprovechar las ventajas del ecosistema &lt;strong>.NET&lt;/strong> en el desarrollo web. En este artículo, exploraremos las bases de Blazor, sus ventajas, desventajas y cómo empezar a utilizarlo, acompañado de ejemplos y buenas prácticas.&lt;/p>
+&lt;h2 id="qué-es-blazor">¿Qué es Blazor?&lt;/h2>
+&lt;p>Blazor es un framework de desarrollo web que permite construir aplicaciones interactivas del lado del cliente y del servidor utilizando C#. Se basa en WebAssembly para ejecutar código .NET directamente en el navegador, eliminando la necesidad de JavaScript para muchas funcionalidades.&lt;/p>
+&lt;h3 id="tipos-de-blazor">Tipos de Blazor&lt;/h3>
+&lt;ol>
+&lt;li>&lt;strong>Blazor Server&lt;/strong>: La aplicación se ejecuta en el servidor y utiliza SignalR para comunicarse con el cliente. Ideal para aplicaciones con requisitos de tiempo real o cuando se desea un inicio rápido.&lt;/li>
+&lt;li>&lt;strong>Blazor WebAssembly&lt;/strong>: Ejecuta el código directamente en el navegador utilizando WebAssembly. Ofrece una experiencia completamente del lado del cliente.&lt;/li>
+&lt;li>&lt;strong>Blazor Hybrid&lt;/strong>: Integra Blazor con plataformas como MAUI para crear aplicaciones multiplataforma.&lt;/li>
+&lt;/ol>
+&lt;h2 id="ventajas-de-blazor">Ventajas de Blazor&lt;/h2>
+&lt;ol>
+&lt;li>&lt;strong>Reutilización de código&lt;/strong>: Usa el mismo lenguaje, C#, tanto para el cliente como para el servidor.&lt;/li>
+&lt;li>&lt;strong>Ecosistema unificado&lt;/strong>: Aprovecha las herramientas y bibliotecas de .NET.&lt;/li>
+&lt;li>&lt;strong>Soporte a largo plazo&lt;/strong>: Microsoft ofrece soporte continuo para Blazor como parte del ecosistema .NET.&lt;/li>
+&lt;li>&lt;strong>Sin JavaScript adicional&lt;/strong>: Aunque puedes integrarlo, no es necesario para funciones comunes.&lt;/li>
+&lt;li>&lt;strong>Componentes reutilizables&lt;/strong>: Facilita la modularidad y la organización del código.&lt;/li>
+&lt;/ol>
+&lt;h2 id="desventajas-de-blazor">Desventajas de Blazor&lt;/h2>
+&lt;ol>
+&lt;li>&lt;strong>Tamaño inicial&lt;/strong>: En Blazor WebAssembly, el tamaño de descarga inicial puede ser considerable.&lt;/li>
+&lt;li>&lt;strong>Soporte limitado en navegadores antiguos&lt;/strong>: Requiere navegadores modernos con soporte para WebAssembly.&lt;/li>
+&lt;li>&lt;strong>Latencia en Blazor Server&lt;/strong>: La comunicación constante con el servidor puede introducir latencia.&lt;/li>
+&lt;li>&lt;strong>Curva de aprendizaje&lt;/strong>: Aunque es similar a .NET, puede ser desafiante para desarrolladores sin experiencia previa en el ecosistema.&lt;/li>
+&lt;/ol>
+&lt;h2 id="configuración-inicial">Configuración inicial&lt;/h2>
+&lt;h3 id="requisitos-previos">Requisitos previos&lt;/h3>
+&lt;ol>
+&lt;li>Tener instalado .NET SDK:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">dotnet --version
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>Instalar un editor de código, como Visual Studio o Visual Studio Code.&lt;/li>
+&lt;/ol>
+&lt;h3 id="crear-un-proyecto-blazor-server">Crear un proyecto Blazor Server&lt;/h3>
+&lt;ol>
+&lt;li>Ejecutar el comando para crear un proyecto:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">dotnet new blazorserver -o BlazorServerApp
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>Navegar al directorio del proyecto:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">cd BlazorServerApp
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>Ejecutar la aplicación:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">dotnet run
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;h3 id="crear-un-proyecto-blazor-webassembly">Crear un proyecto Blazor WebAssembly&lt;/h3>
+&lt;ol>
+&lt;li>Crear un proyecto WebAssembly:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">dotnet new blazorwasm -o BlazorWebAssemblyApp
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>Navegar al directorio del proyecto y ejecutarlo:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">cd BlazorWebAssemblyApp
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">dotnet run
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;h2 id="conceptos-fundamentales">Conceptos fundamentales&lt;/h2>
+&lt;h3 id="componentes">Componentes&lt;/h3>
+&lt;p>Los componentes son la unidad básica en Blazor. Se crean utilizando archivos &lt;code>.razor&lt;/code> y combinan C# con HTML.&lt;/p>
+&lt;h4 id="ejemplo-básico">Ejemplo básico&lt;/h4>
+&lt;p>Archivo: &lt;code>Counter.razor&lt;/code>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">@page &amp;#34;/counter&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;h3&amp;gt;Contador&amp;lt;/h3&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;p&amp;gt;Valor actual: @currentCount&amp;lt;/p&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;button @onclick=&amp;#34;IncrementCount&amp;#34;&amp;gt;Incrementar&amp;lt;/button&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">@code {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> private int currentCount = 0;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> private void IncrementCount()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> currentCount++;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="inyección-de-dependencias">Inyección de dependencias&lt;/h3>
+&lt;p>Blazor soporta inyección de dependencias a través del contenedor de servicios.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">@inject WeatherService WeatherService
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;h3&amp;gt;Clima actual&amp;lt;/h3&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;p&amp;gt;@WeatherService.GetCurrentWeather()&amp;lt;/p&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="buenas-prácticas">Buenas prácticas&lt;/h2>
+&lt;ol>
+&lt;li>&lt;strong>Organización del proyecto&lt;/strong>: Divide la aplicación en módulos y componentes reutilizables.&lt;/li>
+&lt;li>&lt;strong>Manejo de estado&lt;/strong>: Usa librerías como &lt;code>Fluxor&lt;/code> o servicios para manejar el estado de la aplicación.&lt;/li>
+&lt;li>&lt;strong>Optimizar el tamaño&lt;/strong>: Para Blazor WebAssembly, minimiza los recursos y activa la compresión.&lt;/li>
+&lt;li>&lt;strong>Seguridad&lt;/strong>: Implementa protección contra ataques XSS y valida todas las entradas de usuario.&lt;/li>
+&lt;li>&lt;strong>Pruebas&lt;/strong>: Usa frameworks como &lt;code>bUnit&lt;/code> para pruebas unitarias de componentes.&lt;/li>
+&lt;/ol>
+&lt;h2 id="conclusión">Conclusión&lt;/h2>
+&lt;p>&lt;strong>Blazor&lt;/strong> representa un cambio significativo en el desarrollo web al permitir que los desarrolladores utilicen C# para crear aplicaciones interactivas. Su capacidad para aprovechar el ecosistema de .NET lo hace una opción atractiva para equipos que ya trabajan con esta tecnología. Aunque tiene limitaciones, las ventajas que ofrece son significativas, especialmente en proyectos donde la reutilización de código y la integración con .NET son esenciales. ¡Explora Blazor y lleva tus habilidades de desarrollo web al siguiente nivel!&lt;/p></description></item><item><title>Creación de librerías compartidas en TypeScript</title><link>https://cmas.dev/posts/2024-06-19-share-libraries-typescript/</link><pubDate>Wed, 19 Jun 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-06-19-share-libraries-typescript/</guid><description>&lt;p>La creación de librerías compartidas en &lt;strong>TypeScript&lt;/strong> permite a los desarrolladores encapsular funcionalidad reutilizable y mejorar la mantenibilidad del código. Este artículo explorará el proceso completo de desarrollo de librerías en &lt;strong>TypeScript&lt;/strong>, desde la configuración inicial hasta el despliegue, con un enfoque moderno, ejemplos prácticos y consideraciones de seguridad.&lt;/p>
+&lt;h2 id="por-qué-crear-librerías-compartidas-en-typescript">¿Por qué crear librerías compartidas en TypeScript?&lt;/h2>
+&lt;h3 id="beneficios-principales">Beneficios principales&lt;/h3>
+&lt;ol>
+&lt;li>&lt;strong>Reutilización de código&lt;/strong>: Evita la duplicación en diferentes proyectos.&lt;/li>
+&lt;li>&lt;strong>Mantenibilidad&lt;/strong>: Centraliza la gestión de funcionalidades comunes.&lt;/li>
+&lt;li>&lt;strong>Escalabilidad&lt;/strong>: Facilita la integración con nuevos proyectos.&lt;/li>
+&lt;li>&lt;strong>Colaboración&lt;/strong>: Permite a los equipos trabajar en conjunto sobre componentes centrales.&lt;/li>
+&lt;/ol>
+&lt;h2 id="configuración-inicial">Configuración inicial&lt;/h2>
+&lt;h3 id="requisitos-previos">Requisitos previos&lt;/h3>
+&lt;ul>
+&lt;li>Tener Node.js y npm instalados.&lt;/li>
+&lt;li>Familiaridad con TypeScript.&lt;/li>
+&lt;/ul>
+&lt;h3 id="crear-un-nuevo-proyecto-de-librería">Crear un nuevo proyecto de librería&lt;/h3>
+&lt;ol>
+&lt;li>Crea un directorio para la librería:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">mkdir my-shared-library
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">cd my-shared-library
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>Inicializa un proyecto Node.js:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">npm init -y
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>Instala TypeScript y otras dependencias necesarias:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">npm install typescript --save-dev
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">npm install tslib
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>Crea una configuración base de TypeScript:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">npx tsc --init
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;h3 id="configurar-tsconfigjson">Configurar &lt;code>tsconfig.json&lt;/code>&lt;/h3>
+&lt;p>Configura el archivo para soportar módulos comunes y optimizar la compilación:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;compilerOptions&amp;#34;: {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;outDir&amp;#34;: &amp;#34;dist&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;rootDir&amp;#34;: &amp;#34;src&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;target&amp;#34;: &amp;#34;ES2020&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;module&amp;#34;: &amp;#34;CommonJS&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;declaration&amp;#34;: true,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;sourceMap&amp;#34;: true,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;strict&amp;#34;: true
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> },
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;include&amp;#34;: [&amp;#34;src/**/*&amp;#34;],
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;exclude&amp;#34;: [&amp;#34;node_modules&amp;#34;, &amp;#34;dist&amp;#34;]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="estructura-del-proyecto">Estructura del proyecto&lt;/h2>
+&lt;p>Organiza los archivos de tu proyecto:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">my-shared-library/
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">├── src/
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ ├── index.ts
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ ├── utils/
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ │ └── math.ts
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">├── dist/
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">├── package.json
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">├── tsconfig.json
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">└── README.md
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="desarrollo-de-la-librería">Desarrollo de la librería&lt;/h2>
+&lt;h3 id="crear-funcionalidades">Crear funcionalidades&lt;/h3>
+&lt;h4 id="ejemplo-operaciones-matemáticas">Ejemplo: Operaciones matemáticas&lt;/h4>
+&lt;p>Archivo: &lt;code>src/utils/math.ts&lt;/code>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="n">function&lt;/span> &lt;span class="n">add&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">a&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">number&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">b&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">number&lt;/span>&lt;span class="p">):&lt;/span> &lt;span class="n">number&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">a&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="n">b&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="n">function&lt;/span> &lt;span class="n">subtract&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">a&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">number&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">b&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">number&lt;/span>&lt;span class="p">):&lt;/span> &lt;span class="n">number&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">a&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="n">b&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="archivo-de-entrada-principal">Archivo de entrada principal&lt;/h4>
+&lt;p>Archivo: &lt;code>src/index.ts&lt;/code>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="o">*&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;./utils/math&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="compilación-de-la-librería">Compilación de la librería&lt;/h2>
+&lt;ol>
+&lt;li>Compila el código:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">npx tsc
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>Verifica que los archivos se generaron en el directorio &lt;code>dist/&lt;/code>.&lt;/li>
+&lt;/ol>
+&lt;h2 id="publicación-de-la-librería">Publicación de la librería&lt;/h2>
+&lt;h3 id="configurar-packagejson">Configurar &lt;code>package.json&lt;/code>&lt;/h3>
+&lt;p>Asegúrate de incluir los campos necesarios para npm:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;name&amp;#34;: &amp;#34;my-shared-library&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;version&amp;#34;: &amp;#34;1.0.0&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;main&amp;#34;: &amp;#34;dist/index.js&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;types&amp;#34;: &amp;#34;dist/index.d.ts&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;files&amp;#34;: [&amp;#34;dist&amp;#34;],
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;scripts&amp;#34;: {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;build&amp;#34;: &amp;#34;tsc&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;prepublishOnly&amp;#34;: &amp;#34;npm run build&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> },
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;dependencies&amp;#34;: {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;tslib&amp;#34;: &amp;#34;^2.0.0&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> },
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;devDependencies&amp;#34;: {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;typescript&amp;#34;: &amp;#34;^4.0.0&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="publicar-en-npm">Publicar en npm&lt;/h3>
+&lt;ol>
+&lt;li>Inicia sesión en npm:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">npm login
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>Publica la librería:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">npm publish
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;h2 id="uso-de-la-librería-en-otros-proyectos">Uso de la librería en otros proyectos&lt;/h2>
+&lt;ol>
+&lt;li>
+&lt;p>Instala la librería:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">npm install my-shared-library
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>Usa las funciones en tu código:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">import { add, subtract } from &amp;#39;my-shared-library&amp;#39;;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">console.log(add(2, 3)); // 5
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">console.log(subtract(5, 2)); // 3
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;h2 id="buenas-prácticas">Buenas prácticas&lt;/h2>
+&lt;ol>
+&lt;li>&lt;strong>Documentación&lt;/strong>:
+&lt;ul>
+&lt;li>Usa &lt;code>README.md&lt;/code> para describir la instalación, uso y ejemplos.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>Pruebas unitarias&lt;/strong>:
+&lt;ul>
+&lt;li>Configura un framework como Jest para validar el comportamiento de la librería.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>Versionado semántico&lt;/strong>:
+&lt;ul>
+&lt;li>Sigue el esquema &lt;code>MAJOR.MINOR.PATCH&lt;/code> para gestionar cambios.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>Optimizar el tamaño&lt;/strong>:
+&lt;ul>
+&lt;li>Excluye archivos innecesarios en el campo &lt;code>files&lt;/code> de &lt;code>package.json&lt;/code>.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>Seguridad&lt;/strong>:
+&lt;ul>
+&lt;li>Actualiza dependencias regularmente y realiza auditorías con:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">npm audit
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="conclusión">Conclusión&lt;/h2>
+&lt;p>Crear librerías compartidas en TypeScript es una estrategia efectiva para mejorar la reutilización de código y aumentar la productividad del equipo. Siguiendo las mejores prácticas y adoptando herramientas modernas, puedes garantizar que tus librerías sean seguras, eficientes y fáciles de usar. ¡Empieza a construir tu próxima librería hoy mismo!&lt;/p></description></item><item><title>Testing avanzado en Angular con Jest: Mejores prácticas</title><link>https://cmas.dev/posts/2024-06-12-testing-angular-jest/</link><pubDate>Wed, 12 Jun 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-06-12-testing-angular-jest/</guid><description>&lt;p>Las pruebas en aplicaciones &lt;strong>Angular&lt;/strong> son esenciales para garantizar la calidad, confiabilidad y mantenibilidad del código. En este artículo, exploraremos el uso avanzado de &lt;strong>Jest&lt;/strong> como framework de pruebas en &lt;strong>Angular&lt;/strong>, cubriendo configuración inicial, estrategias de pruebas unitarias y de integración, así como buenas prácticas para lograr un enfoque moderno, eficiente y seguro.&lt;/p>
+&lt;h2 id="por-qué-usar-jest-en-angular">¿Por qué usar Jest en Angular?&lt;/h2>
+&lt;h3 id="ventajas-de-jest">Ventajas de Jest&lt;/h3>
+&lt;ol>
+&lt;li>&lt;strong>Rápido y eficiente&lt;/strong>: Jest paraleliza la ejecución de pruebas, lo que mejora significativamente los tiempos.&lt;/li>
+&lt;li>&lt;strong>API intuitiva&lt;/strong>: Proporciona una sintaxis clara y fácil de aprender.&lt;/li>
+&lt;li>&lt;strong>Mocks y espías integrados&lt;/strong>: Simplifica la simulación de dependencias.&lt;/li>
+&lt;li>&lt;strong>Informes detallados&lt;/strong>: Ofrece feedback claro sobre las pruebas fallidas.&lt;/li>
+&lt;li>&lt;strong>Snapshot testing&lt;/strong>: Permite capturar estados de componentes para detectar cambios inesperados.&lt;/li>
+&lt;/ol>
+&lt;h2 id="configuración-inicial-de-jest-en-un-proyecto-angular">Configuración inicial de Jest en un proyecto Angular&lt;/h2>
+&lt;h3 id="requisitos-previos">Requisitos previos&lt;/h3>
+&lt;ol>
+&lt;li>Tener Angular CLI instalado:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">npm install -g @angular/cli
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>Crear un nuevo proyecto Angular o usar uno existente:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">ng new angular-jest-demo --routing --style css
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;h3 id="instalar-jest-y-dependencias">Instalar Jest y dependencias&lt;/h3>
+&lt;p>Reemplaza el entorno de pruebas predeterminado de Angular (Karma) con Jest:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">npm install jest @types/jest jest-preset-angular --save-dev
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="configurar-jest">Configurar Jest&lt;/h3>
+&lt;ol>
+&lt;li>
+&lt;p>Agrega un archivo de configuración &lt;code>jest.config.js&lt;/code> en la raíz del proyecto:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">module&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">exports&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">preset&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;jest-preset-angular&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">setupFilesAfterEnv&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;&amp;lt;rootDir&amp;gt;/setup-jest.ts&amp;#39;&lt;/span>&lt;span class="p">],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">testEnvironment&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;jsdom&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">testMatch&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;**/+(*.)+(spec).+(ts|js)&amp;#39;&lt;/span>&lt;span class="p">],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">transform&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s1">&amp;#39;^.+\.(ts|html)$&amp;#39;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;jest-preset-angular&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">moduleFileExtensions&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;ts&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;html&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;js&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;json&amp;#39;&lt;/span>&lt;span class="p">],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">collectCoverage&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="bp">true&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">coverageReporters&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;html&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;text&amp;#39;&lt;/span>&lt;span class="p">],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">coverageDirectory&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;coverage/jest&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>Crea el archivo &lt;code>setup-jest.ts&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">import &amp;#39;jest-preset-angular/setup-jest&amp;#39;;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>Modifica &lt;code>tsconfig.spec.json&lt;/code> para incluir Jest:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;compilerOptions&amp;#34;: {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;types&amp;#34;: [&amp;#34;jest&amp;#34;]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>Actualiza los scripts de &lt;code>package.json&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;scripts&amp;#34;: {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;test&amp;#34;: &amp;#34;jest&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;test:watch&amp;#34;: &amp;#34;jest --watch&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;h2 id="escribir-pruebas-unitarias-avanzadas">Escribir pruebas unitarias avanzadas&lt;/h2>
+&lt;h3 id="pruebas-de-componentes">Pruebas de componentes&lt;/h3>
+&lt;h4 id="configurar-pruebas-básicas">Configurar pruebas básicas&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">ComponentFixture&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">TestBed&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;@angular/core/testing&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">MyComponent&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;./my.component&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">describe&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;MyComponent&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">let&lt;/span> &lt;span class="n">component&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">MyComponent&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">let&lt;/span> &lt;span class="n">fixture&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">ComponentFixture&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">MyComponent&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">beforeEach&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">async&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">await&lt;/span> &lt;span class="n">TestBed&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">configureTestingModule&lt;/span>&lt;span class="p">({&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">declarations&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">MyComponent&lt;/span>&lt;span class="p">],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">})&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">compileComponents&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">fixture&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">TestBed&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">createComponent&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">MyComponent&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">component&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">fixture&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">componentInstance&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">fixture&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">detectChanges&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">it&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;debería crear el componente&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">expect&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">component&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">toBeTruthy&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">it&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;debería renderizar el título&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="n">compiled&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">fixture&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">nativeElement&lt;/span> &lt;span class="n">as&lt;/span> &lt;span class="n">HTMLElement&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">expect&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">compiled&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">querySelector&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;h1&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="err">?&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">textContent&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">toContain&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;Bienvenido a MyComponent!&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="pruebas-de-servicios">Pruebas de servicios&lt;/h3>
+&lt;h4 id="mocking-de-dependencias">Mocking de dependencias&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">TestBed&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;@angular/core/testing&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">HttpClientTestingModule&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">HttpTestingController&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;@angular/common/http/testing&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">MyService&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;./my.service&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">describe&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;MyService&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">let&lt;/span> &lt;span class="n">service&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">MyService&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">let&lt;/span> &lt;span class="n">httpMock&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">HttpTestingController&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">beforeEach&lt;/span>&lt;span class="p">(()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">TestBed&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">configureTestingModule&lt;/span>&lt;span class="p">({&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">imports&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">HttpClientTestingModule&lt;/span>&lt;span class="p">],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">providers&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">MyService&lt;/span>&lt;span class="p">],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">service&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">TestBed&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">inject&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">MyService&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">httpMock&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">TestBed&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">inject&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">HttpTestingController&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">afterEach&lt;/span>&lt;span class="p">(()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">httpMock&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">verify&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">it&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;debería obtener datos correctamente&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="n">mockData&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">id&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">name&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;Test&amp;#39;&lt;/span> &lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">service&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">getData&lt;/span>&lt;span class="p">()&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">subscribe&lt;/span>&lt;span class="p">((&lt;/span>&lt;span class="n">data&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">expect&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">data&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">toEqual&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">mockData&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="n">req&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">httpMock&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">expectOne&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;/api/data&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">expect&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">req&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">request&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">method&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">toBe&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;GET&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">req&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">flush&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">mockData&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="snapshot-testing-en-angular">Snapshot Testing en Angular&lt;/h2>
+&lt;p>Los snapshots permiten capturar el estado de un componente y compararlo con versiones futuras para detectar cambios inesperados.&lt;/p>
+&lt;h3 id="crear-un-snapshot">Crear un snapshot&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">render&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;@testing-library/angular&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">MyComponent&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;./my.component&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">describe&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;MyComponent&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">it&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;debería coincidir con el snapshot&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">async&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">container&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">await&lt;/span> &lt;span class="n">render&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">MyComponent&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">expect&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">container&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">toMatchSnapshot&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="actualizar-snapshots">Actualizar snapshots&lt;/h3>
+&lt;p>Si los cambios son intencionales, actualiza los snapshots:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">jest --updateSnapshot
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="buenas-prácticas-para-pruebas-avanzadas">Buenas prácticas para pruebas avanzadas&lt;/h2>
+&lt;ol>
+&lt;li>&lt;strong>Configurar CI/CD&lt;/strong>: Automatiza las pruebas en plataformas como GitHub Actions o Azure DevOps.&lt;/li>
+&lt;li>&lt;strong>Cobertura de código&lt;/strong>: Asegúrate de alcanzar al menos el 80% de cobertura.&lt;/li>
+&lt;li>&lt;strong>Separar pruebas unitarias e integradas&lt;/strong>: Mantén un enfoque claro entre las pruebas locales y las de sistema.&lt;/li>
+&lt;li>&lt;strong>Mocking eficiente&lt;/strong>: Usa herramientas como &lt;code>jest.mock&lt;/code> para simular dependencias externas.&lt;/li>
+&lt;li>&lt;strong>Documentar las pruebas&lt;/strong>: Incluye descripciones claras sobre los objetivos de cada caso de prueba.&lt;/li>
+&lt;/ol>
+&lt;h2 id="conclusión">Conclusión&lt;/h2>
+&lt;p>Implementar pruebas avanzadas con &lt;strong>Jest&lt;/strong> en &lt;strong>Angular&lt;/strong> mejora la calidad del software y reduce riesgos en el desarrollo. Al seguir buenas prácticas y adoptar herramientas modernas, los equipos pueden garantizar que sus aplicaciones sean robustas, seguras y fáciles de mantener. ¡Empieza hoy mismo a implementar Jest en tus proyectos &lt;strong>Angular&lt;/strong>!&lt;/p></description></item><item><title>Integración de Angular con Azure Static Web Apps: Un caso práctico</title><link>https://cmas.dev/posts/2024-06-05-angular-integration-azure-static-web/</link><pubDate>Wed, 05 Jun 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-06-05-angular-integration-azure-static-web/</guid><description>&lt;p>En la era moderna del desarrollo web, la combinación de frameworks frontend como &lt;strong>Angular&lt;/strong> y servicios en la nube como &lt;strong>Azure Static Web Apps&lt;/strong> proporciona una solución eficiente y escalable para crear y desplegar aplicaciones. Este artículo explora cómo integrar &lt;strong>Angular&lt;/strong> con &lt;strong>Azure Static Web Apps&lt;/strong>, mostrando ejemplos prácticos, buenas prácticas y enfoques modernos y seguros para garantizar el éxito en tus proyectos.&lt;/p>
+&lt;h2 id="por-qué-elegir-angular-y-azure-static-web-apps">¿Por qué elegir Angular y Azure Static Web Apps?&lt;/h2>
+&lt;h3 id="ventajas-de-angular">Ventajas de Angular&lt;/h3>
+&lt;ol>
+&lt;li>&lt;strong>Ecosistema robusto&lt;/strong>: Angular es un framework completo con herramientas integradas para el desarrollo de aplicaciones escalables.&lt;/li>
+&lt;li>&lt;strong>TypeScript nativo&lt;/strong>: Mejora la calidad del código y la experiencia del desarrollador.&lt;/li>
+&lt;li>&lt;strong>Componentes reusables&lt;/strong>: Facilitan la organización y el mantenimiento del código.&lt;/li>
+&lt;/ol>
+&lt;h3 id="beneficios-de-azure-static-web-apps">Beneficios de Azure Static Web Apps&lt;/h3>
+&lt;ol>
+&lt;li>&lt;strong>Despliegue sencillo&lt;/strong>: Automatiza el despliegue directo desde repositorios como GitHub.&lt;/li>
+&lt;li>&lt;strong>Distribución global&lt;/strong>: Servidores edge para un rendimiento óptimo.&lt;/li>
+&lt;li>&lt;strong>Soporte para APIs&lt;/strong>: Integración con Azure Functions para lógica backend.&lt;/li>
+&lt;li>&lt;strong>Certificados SSL automáticos&lt;/strong>: Garantiza conexiones seguras sin configuraciones adicionales.&lt;/li>
+&lt;/ol>
+&lt;h2 id="configuración-inicial">Configuración inicial&lt;/h2>
+&lt;h3 id="requisitos-previos">Requisitos previos&lt;/h3>
+&lt;ul>
+&lt;li>Node.js y Angular CLI instalados:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">npm install -g @angular/cli
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>Cuenta de Azure activa.&lt;/li>
+&lt;li>Repositorio en GitHub (opcional pero recomendado).&lt;/li>
+&lt;/ul>
+&lt;h3 id="crear-una-aplicación-angular">Crear una aplicación Angular&lt;/h3>
+&lt;ol>
+&lt;li>Generar un nuevo proyecto:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">ng new angular-azure-demo --routing --style css
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>Navegar al directorio del proyecto:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">cd angular-azure-demo
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>Ejecutar el servidor de desarrollo:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">ng serve
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;h2 id="preparar-la-aplicación-para-despliegue">Preparar la aplicación para despliegue&lt;/h2>
+&lt;h3 id="generar-los-archivos-de-producción">Generar los archivos de producción&lt;/h3>
+&lt;ol>
+&lt;li>Ejecutar el comando de construcción:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">ng build --prod
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>Los archivos generados se encontrarán en el directorio &lt;code>dist/angular-azure-demo&lt;/code>.&lt;/li>
+&lt;/ol>
+&lt;h3 id="configurar-un-archivo-staticwebappconfigjson">Configurar un archivo &lt;code>staticwebapp.config.json&lt;/code>&lt;/h3>
+&lt;p>Este archivo define rutas y configuraciones personalizadas para Azure Static Web Apps:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;routes&amp;#34;: [
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;route&amp;#34;: &amp;#34;/api/*&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;method&amp;#34;: &amp;#34;GET&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;allowedRoles&amp;#34;: [&amp;#34;anonymous&amp;#34;]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> },
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;route&amp;#34;: &amp;#34;/*&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;rewrite&amp;#34;: &amp;#34;/index.html&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Guarda este archivo en el directorio &lt;code>dist/angular-azure-demo&lt;/code>.&lt;/p>
+&lt;h2 id="crear-y-configurar-azure-static-web-app">Crear y configurar Azure Static Web App&lt;/h2>
+&lt;h3 id="paso-1-crear-un-recurso-en-azure">Paso 1: Crear un recurso en Azure&lt;/h3>
+&lt;ol>
+&lt;li>Inicia sesión en el &lt;a href="https://portal.azure.com">portal de Azure&lt;/a>.&lt;/li>
+&lt;li>Selecciona &lt;strong>Crear un recurso&lt;/strong> y busca &lt;strong>Static Web Apps&lt;/strong>.&lt;/li>
+&lt;li>Completa los detalles del recurso:
+&lt;ul>
+&lt;li>&lt;strong>Nombre&lt;/strong>: &lt;code>angular-static-web&lt;/code>.&lt;/li>
+&lt;li>&lt;strong>Plan&lt;/strong>: Gratis (Free).&lt;/li>
+&lt;li>&lt;strong>Región&lt;/strong>: Elige la más cercana a tus usuarios.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h3 id="paso-2-vincular-el-repositorio">Paso 2: Vincular el repositorio&lt;/h3>
+&lt;ol>
+&lt;li>Conecta el recurso con tu repositorio de GitHub.&lt;/li>
+&lt;li>Selecciona la rama principal y el directorio de la aplicación (&lt;code>/dist/angular-azure-demo&lt;/code>).&lt;/li>
+&lt;/ol>
+&lt;h3 id="paso-3-despliegue-automático">Paso 3: Despliegue automático&lt;/h3>
+&lt;p>Cada vez que actualices la rama principal, Azure redeployará la aplicación automáticamente.&lt;/p>
+&lt;h2 id="integrar-una-api-con-azure-functions">Integrar una API con Azure Functions&lt;/h2>
+&lt;h3 id="crear-una-azure-function">Crear una Azure Function&lt;/h3>
+&lt;ol>
+&lt;li>Instalar las herramientas necesarias:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">npm&lt;/span> &lt;span class="n">install&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">g&lt;/span> &lt;span class="n">azure&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">functions&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">core&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">tools&lt;/span>&lt;span class="err">@&lt;/span>&lt;span class="mi">4&lt;/span> &lt;span class="o">--&lt;/span>&lt;span class="n">unsafe&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">perm&lt;/span> &lt;span class="bp">true&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>Crear un proyecto de funciones:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">func&lt;/span> &lt;span class="n">init&lt;/span> &lt;span class="n">api&lt;/span> &lt;span class="o">--&lt;/span>&lt;span class="n">typescript&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>Crear una nueva función HTTP:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">cd&lt;/span> &lt;span class="n">api&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">func&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="o">--&lt;/span>&lt;span class="n">template&lt;/span> &lt;span class="s2">&amp;#34;HTTP trigger&amp;#34;&lt;/span> &lt;span class="o">--&lt;/span>&lt;span class="n">name&lt;/span> &lt;span class="n">GetMessage&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;h3 id="conectar-la-api-con-la-aplicación-angular">Conectar la API con la aplicación Angular&lt;/h3>
+&lt;ol>
+&lt;li>Modificar el código de la función:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="n">async&lt;/span> &lt;span class="n">function&lt;/span> &lt;span class="n">run&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">context&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">Context&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">req&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">HttpRequest&lt;/span>&lt;span class="p">):&lt;/span> &lt;span class="n">Promise&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">void&lt;/span>&lt;span class="o">&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">context&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">res&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">body&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">message&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;Hola desde Azure Functions&amp;#34;&lt;/span> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>Agregar un servicio Angular para consumir la API:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">HttpClient&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;@angular/common/http&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">Injectable&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;@angular/core&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">@&lt;/span>&lt;span class="n">Injectable&lt;/span>&lt;span class="p">({&lt;/span> &lt;span class="n">providedIn&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;root&amp;#39;&lt;/span> &lt;span class="p">})&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="k">class&lt;/span> &lt;span class="n">ApiService&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">constructor&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">private&lt;/span> &lt;span class="n">http&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">HttpClient&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">getMessage&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">this&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">http&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">get&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;/api/GetMessage&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>Usar el servicio en un componente:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">Component&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">OnInit&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;@angular/core&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">ApiService&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;./api.service&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">@&lt;/span>&lt;span class="n">Component&lt;/span>&lt;span class="p">({&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">selector&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;app-root&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">template&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="err">`&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">h1&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">{{&lt;/span> &lt;span class="n">message&lt;/span> &lt;span class="p">}}&lt;/span>&lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">h1&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="err">`&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">})&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="k">class&lt;/span> &lt;span class="n">AppComponent&lt;/span> &lt;span class="n">implements&lt;/span> &lt;span class="n">OnInit&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">message&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">constructor&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">private&lt;/span> &lt;span class="n">api&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">ApiService&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ngOnInit&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">this&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">api&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">getMessage&lt;/span>&lt;span class="p">()&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">subscribe&lt;/span>&lt;span class="p">((&lt;/span>&lt;span class="n">data&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">any&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">this&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">message&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">data&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">message&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;h2 id="buenas-prácticas">Buenas prácticas&lt;/h2>
+&lt;ol>
+&lt;li>&lt;strong>Usar HTTPS&lt;/strong>: Siempre habilita HTTPS en el entorno de producción.&lt;/li>
+&lt;li>&lt;strong>Monitorear el rendimiento&lt;/strong>: Utiliza Azure Monitor para detectar cuellos de botella.&lt;/li>
+&lt;li>&lt;strong>Validar entradas&lt;/strong>: Implementa validaciones en la API para evitar vulnerabilidades como inyecciones.&lt;/li>
+&lt;li>&lt;strong>Minimizar y optimizar recursos&lt;/strong>: Usa herramientas como &lt;code>ng build --prod&lt;/code> para reducir el tamaño de los archivos.&lt;/li>
+&lt;li>&lt;strong>Seguridad&lt;/strong>: Configura roles y permisos en el archivo &lt;code>staticwebapp.config.json&lt;/code> para proteger rutas sensibles.&lt;/li>
+&lt;/ol>
+&lt;h2 id="conclusión">Conclusión&lt;/h2>
+&lt;p>La integración de Angular con &lt;strong>Azure Static Web Apps&lt;/strong> ofrece una solución moderna, escalable y eficiente para desplegar aplicaciones web. Siguiendo las mejores prácticas y aprovechando herramientas como Azure Functions, puedes construir sistemas completos y seguros que se adapten a las necesidades de tus usuarios. ¡Empieza hoy mismo a aprovechar estas tecnologías y lleva tus proyectos al siguiente nivel!&lt;/p></description></item><item><title>API RESTful con TypeScript y Deno: Guía completa</title><link>https://cmas.dev/posts/2024-05-29-api-restful-typescript-deno/</link><pubDate>Wed, 29 May 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-05-29-api-restful-typescript-deno/</guid><description>&lt;p>Deno, el moderno entorno de ejecución para JavaScript y TypeScript creado por Ryan Dahl, está transformando la manera en que se desarrollan aplicaciones backend. A diferencia de Node.js, Deno se centra en la seguridad, el rendimiento y una experiencia de desarrollo simplificada. En este artículo, exploraremos cómo construir una API RESTful utilizando &lt;strong>TypeScript&lt;/strong> y &lt;strong>Deno&lt;/strong> desde cero, cubriendo todas las operaciones CRUD (&lt;strong>POST, GET, PUT, DELETE&lt;/strong>) junto con buenas prácticas, seguridad y optimización&amp;hellip;&lt;/p>
+&lt;h2 id="qué-es-deno-y-por-qué-usarlo">¿Qué es Deno y por qué usarlo?&lt;/h2>
+&lt;p>Deno es un entorno de ejecución seguro para JavaScript y TypeScript que se ejecuta en el motor V8 de Google. Fue diseñado para abordar algunas limitaciones de Node.js y proporcionar:&lt;/p>
+&lt;ol>
+&lt;li>&lt;strong>Seguridad por defecto&lt;/strong>: No se permite acceso al sistema de archivos, red o variables de entorno sin permisos explícitos.&lt;/li>
+&lt;li>&lt;strong>Soporte nativo para TypeScript&lt;/strong>: No es necesario usar compilers externos como &lt;code>tsc&lt;/code>.&lt;/li>
+&lt;li>&lt;strong>Manejo de módulos con URL&lt;/strong>: No hay &lt;code>node_modules&lt;/code>, los módulos se cargan desde URLs.&lt;/li>
+&lt;li>&lt;strong>Ecosistema moderno&lt;/strong>: Incluye un test runner, formateador y otras herramientas integradas.&lt;/li>
+&lt;/ol>
+&lt;h2 id="configuración-inicial-del-entorno-de-desarrollo">Configuración inicial del entorno de desarrollo&lt;/h2>
+&lt;h3 id="instalación-de-deno">Instalación de Deno&lt;/h3>
+&lt;p>Primero, instala Deno en tu sistema operativo siguiendo los comandos oficiales:&lt;/p>
+&lt;p>&lt;strong>Windows (PowerShell):&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">iwr https://deno.land/x/install/install.ps1 -useb | iex
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>macOS/Linux:&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">curl -fsSL https://deno.land/x/install/install.sh | sh
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Verifica la instalación:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">deno --version
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="creación-de-la-estructura-del-proyecto">Creación de la estructura del proyecto&lt;/h3>
+&lt;p>Crea un directorio para tu API y estructura el proyecto de la siguiente manera:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">api-restful-deno/
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">├── controllers/
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">├── models/
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">├── routes/
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">├── server.ts
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">├── deps.ts
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">└── utils/
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="paso-1-configurar-el-servidor-http-con-deno">Paso 1: Configurar el servidor HTTP con Deno&lt;/h2>
+&lt;p>Deno utiliza bibliotecas como &lt;code>oak&lt;/code> para manejar solicitudes HTTP. Agrega las dependencias en un archivo &lt;code>deps.ts&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="o">//&lt;/span> &lt;span class="n">deps&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">ts&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">Application&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">Router&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">Context&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s2">&amp;#34;https://deno.land/x/oak/mod.ts&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">v4&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s2">&amp;#34;https://deno.land/std@0.197.0/uuid/mod.ts&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Ahora, configura el servidor en &lt;code>server.ts&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="o">//&lt;/span> &lt;span class="n">server&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">ts&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">Application&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">Router&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s2">&amp;#34;./deps.ts&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="n">router&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s2">&amp;#34;./routes/index.ts&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">app&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">Application&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">port&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">8000&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">//&lt;/span> &lt;span class="n">Middleware&lt;/span> &lt;span class="n">para&lt;/span> &lt;span class="n">registrar&lt;/span> &lt;span class="n">las&lt;/span> &lt;span class="n">solicitudes&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">app&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">use&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">async&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">ctx&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">next&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">console&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="err">`&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="n">ctx&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">request&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">method&lt;/span>&lt;span class="p">}&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="n">ctx&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">request&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">url&lt;/span>&lt;span class="p">}&lt;/span>&lt;span class="err">`&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">await&lt;/span> &lt;span class="n">next&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">//&lt;/span> &lt;span class="n">Rutas&lt;/span> &lt;span class="n">principales&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">app&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">use&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">router&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">routes&lt;/span>&lt;span class="p">());&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">app&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">use&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">router&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">allowedMethods&lt;/span>&lt;span class="p">());&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">console&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="err">`&lt;/span>&lt;span class="n">Servidor&lt;/span> &lt;span class="n">escuchando&lt;/span> &lt;span class="n">en&lt;/span> &lt;span class="n">http&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="o">//&lt;/span>&lt;span class="n">localhost&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="n">port&lt;/span>&lt;span class="p">}&lt;/span>&lt;span class="err">`&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">await&lt;/span> &lt;span class="n">app&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">listen&lt;/span>&lt;span class="p">({&lt;/span> &lt;span class="n">port&lt;/span> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Ejecuta el servidor:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">deno run --allow-net server.ts
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="paso-2-crear-rutas-y-controladores">Paso 2: Crear rutas y controladores&lt;/h2>
+&lt;h3 id="crear-rutas-base">Crear rutas base&lt;/h3>
+&lt;p>Crea un archivo &lt;code>routes/index.ts&lt;/code> para definir las rutas principales de la API:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="o">//&lt;/span> &lt;span class="n">routes&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">index&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">ts&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">Router&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s2">&amp;#34;../deps.ts&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">getAllUsers&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">getUserById&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">createUser&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">updateUser&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">deleteUser&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s2">&amp;#34;../controllers/userController.ts&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">router&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">Router&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">router&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">.&lt;/span>&lt;span class="n">get&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;/api/users&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">getAllUsers&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">.&lt;/span>&lt;span class="n">get&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;/api/users/:id&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">getUserById&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">.&lt;/span>&lt;span class="n">post&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;/api/users&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">createUser&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">.&lt;/span>&lt;span class="n">put&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;/api/users/:id&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">updateUser&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">.&lt;/span>&lt;span class="n">delete&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;/api/users/:id&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">deleteUser&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="n">default&lt;/span> &lt;span class="n">router&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="crear-controladores-crud">Crear controladores CRUD&lt;/h3>
+&lt;p>En &lt;code>controllers/userController.ts&lt;/code>, define la lógica para cada operación CRUD:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="o">//&lt;/span> &lt;span class="n">controllers&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">userController&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">ts&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">Context&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s2">&amp;#34;../deps.ts&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">v4&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s2">&amp;#34;../deps.ts&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">interface&lt;/span> &lt;span class="n">User&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">id&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">string&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">name&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">string&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">email&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">string&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">let&lt;/span> &lt;span class="n">users&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">User&lt;/span>&lt;span class="p">[]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">//&lt;/span> &lt;span class="n">Obtener&lt;/span> &lt;span class="n">todos&lt;/span> &lt;span class="n">los&lt;/span> &lt;span class="n">usuarios&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="k">const&lt;/span> &lt;span class="n">getAllUsers&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">ctx&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">Context&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ctx&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">response&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">body&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">users&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">//&lt;/span> &lt;span class="n">Obtener&lt;/span> &lt;span class="n">un&lt;/span> &lt;span class="n">usuario&lt;/span> &lt;span class="n">por&lt;/span> &lt;span class="n">ID&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="k">const&lt;/span> &lt;span class="n">getUserById&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">ctx&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">Context&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">id&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">ctx&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">params&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="n">user&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">users&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">find&lt;/span>&lt;span class="p">((&lt;/span>&lt;span class="n">u&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">u&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">id&lt;/span> &lt;span class="o">===&lt;/span> &lt;span class="n">id&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">user&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ctx&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">response&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">body&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">user&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span> &lt;span class="k">else&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ctx&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">response&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">status&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">404&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ctx&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">response&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">body&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">message&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;Usuario no encontrado&amp;#34;&lt;/span> &lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">//&lt;/span> &lt;span class="n">Crear&lt;/span> &lt;span class="n">un&lt;/span> &lt;span class="n">nuevo&lt;/span> &lt;span class="n">usuario&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="k">const&lt;/span> &lt;span class="n">createUser&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">async&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">ctx&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">Context&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">name&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">email&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">await&lt;/span> &lt;span class="n">ctx&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">request&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">body&lt;/span>&lt;span class="p">({&lt;/span> &lt;span class="n">type&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;json&amp;#34;&lt;/span> &lt;span class="p">})&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">value&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="n">newUser&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">User&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">id&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">v4&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">generate&lt;/span>&lt;span class="p">(),&lt;/span> &lt;span class="n">name&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">email&lt;/span> &lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">users&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">push&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">newUser&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ctx&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">response&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">status&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">201&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ctx&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">response&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">body&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">newUser&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">//&lt;/span> &lt;span class="n">Actualizar&lt;/span> &lt;span class="n">un&lt;/span> &lt;span class="n">usuario&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="k">const&lt;/span> &lt;span class="n">updateUser&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">async&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">ctx&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">Context&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">id&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">ctx&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">params&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">name&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">email&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">await&lt;/span> &lt;span class="n">ctx&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">request&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">body&lt;/span>&lt;span class="p">({&lt;/span> &lt;span class="n">type&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;json&amp;#34;&lt;/span> &lt;span class="p">})&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">value&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="n">user&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">users&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">find&lt;/span>&lt;span class="p">((&lt;/span>&lt;span class="n">u&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">u&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">id&lt;/span> &lt;span class="o">===&lt;/span> &lt;span class="n">id&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">user&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">user&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">name&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">name&lt;/span> &lt;span class="o">||&lt;/span> &lt;span class="n">user&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">name&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">user&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">email&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">email&lt;/span> &lt;span class="o">||&lt;/span> &lt;span class="n">user&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">email&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ctx&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">response&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">body&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">user&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span> &lt;span class="k">else&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ctx&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">response&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">status&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">404&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ctx&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">response&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">body&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">message&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;Usuario no encontrado&amp;#34;&lt;/span> &lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">//&lt;/span> &lt;span class="n">Eliminar&lt;/span> &lt;span class="n">un&lt;/span> &lt;span class="n">usuario&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="k">const&lt;/span> &lt;span class="n">deleteUser&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">ctx&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">Context&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">id&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">ctx&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">params&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="n">index&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">users&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">findIndex&lt;/span>&lt;span class="p">((&lt;/span>&lt;span class="n">u&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">u&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">id&lt;/span> &lt;span class="o">===&lt;/span> &lt;span class="n">id&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">index&lt;/span> &lt;span class="o">!==&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">users&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">splice&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">index&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ctx&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">response&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">status&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">204&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span> &lt;span class="k">else&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ctx&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">response&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">status&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">404&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ctx&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">response&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">body&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">message&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;Usuario no encontrado&amp;#34;&lt;/span> &lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="conclusión">Conclusión&lt;/h2>
+&lt;p>Construir una API RESTful con TypeScript y Deno no solo es sencillo, sino que ofrece ventajas en términos de seguridad y rendimiento. Siguiendo las buenas prácticas y utilizando las herramientas modernas que Deno proporciona, puedes crear APIs escalables y fáciles de mantener.&lt;/p></description></item><item><title>Introducción a los Signals en Angular: Casos prácticos</title><link>https://cmas.dev/posts/2024-05-22-intro-signals-angular/</link><pubDate>Wed, 22 May 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-05-22-intro-signals-angular/</guid><description>&lt;p>Angular es un framework robusto y evolutivo que continuamente introduce nuevas características para mejorar el desarrollo de aplicaciones web modernas. Una de estas innovaciones son los &lt;strong>Signals&lt;/strong>, una herramienta que permite manejar cambios de estado de manera reactiva, clara y eficiente. Este artículo ofrece una introducción detallada a los Signals en Angular, explicando cómo utilizarlos, sus ventajas comparativas frente a otras soluciones reactivas y sus aplicaciones en el desarrollo real, acompañado de casos prácticos ampliados, buenas prácticas y un enfoque moderno en seguridad.&lt;/p>
 &lt;h2 id="qué-son-los-signals-en-angular">¿Qué son los Signals en Angular?&lt;/h2>
 &lt;p>Los Signals son una forma reactiva de manejar cambios de estado dentro de una aplicación Angular. A diferencia de las propiedades tradicionales o las soluciones basadas en &lt;em>Observables&lt;/em> de &lt;em>RxJS&lt;/em>, los Signals proporcionan un enfoque más directo para gestionar actualizaciones en la interfaz de usuario. Esta simplicidad es particularmente útil para escenarios donde se necesita un manejo del estado local claro y eficiente, reduciendo la complejidad general del código.&lt;/p>
 &lt;h3 id="características-clave-de-los-signals">Características clave de los Signals&lt;/h3>

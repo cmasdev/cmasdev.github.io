@@ -45,7 +45,304 @@ Con soporte para una amplia gama de marcos, lenguajes y servicios, además de in
 &lt;/ol>
 &lt;p>Algo que noté es que la plantilla figura en &lt;strong>Backend&lt;/strong>, pero tranquilamente podemos crear una aplicación Full Stack con .NET de base para cubrir nuestras necesidades.&lt;/p>
 &lt;p>Al momento de escribir este artículo noto que &lt;strong>Proyecto IDX&lt;/strong> = &lt;strong>GitHub Codespace&lt;/strong>. La base es Visual Studio Code.&lt;/p>
-&lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Introducción a los Signals en Angular: Casos prácticos</title><link>https://cmas.dev/posts/2024-05-22-intro-signals-angular/</link><pubDate>Wed, 22 May 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-05-22-intro-signals-angular/</guid><description>&lt;p>Angular es un framework robusto y evolutivo que continuamente introduce nuevas características para mejorar el desarrollo de aplicaciones web modernas. Una de estas innovaciones son los &lt;strong>Signals&lt;/strong>, una herramienta que permite manejar cambios de estado de manera reactiva, clara y eficiente. Este artículo ofrece una introducción detallada a los Signals en Angular, explicando cómo utilizarlos, sus ventajas comparativas frente a otras soluciones reactivas y sus aplicaciones en el desarrollo real, acompañado de casos prácticos ampliados, buenas prácticas y un enfoque moderno en seguridad.&lt;/p>
+&lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Testing avanzado en Angular con Jest: Mejores prácticas</title><link>https://cmas.dev/posts/2024-06-12-testing-angular-jest/</link><pubDate>Wed, 12 Jun 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-06-12-testing-angular-jest/</guid><description>&lt;p>Las pruebas en aplicaciones &lt;strong>Angular&lt;/strong> son esenciales para garantizar la calidad, confiabilidad y mantenibilidad del código. En este artículo, exploraremos el uso avanzado de &lt;strong>Jest&lt;/strong> como framework de pruebas en &lt;strong>Angular&lt;/strong>, cubriendo configuración inicial, estrategias de pruebas unitarias y de integración, así como buenas prácticas para lograr un enfoque moderno, eficiente y seguro.&lt;/p>
+&lt;h2 id="por-qué-usar-jest-en-angular">¿Por qué usar Jest en Angular?&lt;/h2>
+&lt;h3 id="ventajas-de-jest">Ventajas de Jest&lt;/h3>
+&lt;ol>
+&lt;li>&lt;strong>Rápido y eficiente&lt;/strong>: Jest paraleliza la ejecución de pruebas, lo que mejora significativamente los tiempos.&lt;/li>
+&lt;li>&lt;strong>API intuitiva&lt;/strong>: Proporciona una sintaxis clara y fácil de aprender.&lt;/li>
+&lt;li>&lt;strong>Mocks y espías integrados&lt;/strong>: Simplifica la simulación de dependencias.&lt;/li>
+&lt;li>&lt;strong>Informes detallados&lt;/strong>: Ofrece feedback claro sobre las pruebas fallidas.&lt;/li>
+&lt;li>&lt;strong>Snapshot testing&lt;/strong>: Permite capturar estados de componentes para detectar cambios inesperados.&lt;/li>
+&lt;/ol>
+&lt;h2 id="configuración-inicial-de-jest-en-un-proyecto-angular">Configuración inicial de Jest en un proyecto Angular&lt;/h2>
+&lt;h3 id="requisitos-previos">Requisitos previos&lt;/h3>
+&lt;ol>
+&lt;li>Tener Angular CLI instalado:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">npm install -g @angular/cli
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>Crear un nuevo proyecto Angular o usar uno existente:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">ng new angular-jest-demo --routing --style css
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;h3 id="instalar-jest-y-dependencias">Instalar Jest y dependencias&lt;/h3>
+&lt;p>Reemplaza el entorno de pruebas predeterminado de Angular (Karma) con Jest:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">npm install jest @types/jest jest-preset-angular --save-dev
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="configurar-jest">Configurar Jest&lt;/h3>
+&lt;ol>
+&lt;li>
+&lt;p>Agrega un archivo de configuración &lt;code>jest.config.js&lt;/code> en la raíz del proyecto:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">module&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">exports&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">preset&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;jest-preset-angular&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">setupFilesAfterEnv&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;&amp;lt;rootDir&amp;gt;/setup-jest.ts&amp;#39;&lt;/span>&lt;span class="p">],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">testEnvironment&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;jsdom&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">testMatch&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;**/+(*.)+(spec).+(ts|js)&amp;#39;&lt;/span>&lt;span class="p">],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">transform&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s1">&amp;#39;^.+\.(ts|html)$&amp;#39;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;jest-preset-angular&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">moduleFileExtensions&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;ts&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;html&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;js&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;json&amp;#39;&lt;/span>&lt;span class="p">],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">collectCoverage&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="bp">true&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">coverageReporters&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;html&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;text&amp;#39;&lt;/span>&lt;span class="p">],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">coverageDirectory&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;coverage/jest&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>Crea el archivo &lt;code>setup-jest.ts&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">import &amp;#39;jest-preset-angular/setup-jest&amp;#39;;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>Modifica &lt;code>tsconfig.spec.json&lt;/code> para incluir Jest:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;compilerOptions&amp;#34;: {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;types&amp;#34;: [&amp;#34;jest&amp;#34;]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>Actualiza los scripts de &lt;code>package.json&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;scripts&amp;#34;: {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;test&amp;#34;: &amp;#34;jest&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;test:watch&amp;#34;: &amp;#34;jest --watch&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;h2 id="escribir-pruebas-unitarias-avanzadas">Escribir pruebas unitarias avanzadas&lt;/h2>
+&lt;h3 id="pruebas-de-componentes">Pruebas de componentes&lt;/h3>
+&lt;h4 id="configurar-pruebas-básicas">Configurar pruebas básicas&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">ComponentFixture&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">TestBed&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;@angular/core/testing&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">MyComponent&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;./my.component&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">describe&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;MyComponent&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">let&lt;/span> &lt;span class="n">component&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">MyComponent&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">let&lt;/span> &lt;span class="n">fixture&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">ComponentFixture&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">MyComponent&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">beforeEach&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">async&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">await&lt;/span> &lt;span class="n">TestBed&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">configureTestingModule&lt;/span>&lt;span class="p">({&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">declarations&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">MyComponent&lt;/span>&lt;span class="p">],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">})&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">compileComponents&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">fixture&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">TestBed&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">createComponent&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">MyComponent&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">component&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">fixture&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">componentInstance&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">fixture&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">detectChanges&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">it&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;debería crear el componente&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">expect&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">component&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">toBeTruthy&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">it&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;debería renderizar el título&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="n">compiled&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">fixture&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">nativeElement&lt;/span> &lt;span class="n">as&lt;/span> &lt;span class="n">HTMLElement&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">expect&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">compiled&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">querySelector&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;h1&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="err">?&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">textContent&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">toContain&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;Bienvenido a MyComponent!&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="pruebas-de-servicios">Pruebas de servicios&lt;/h3>
+&lt;h4 id="mocking-de-dependencias">Mocking de dependencias&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">TestBed&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;@angular/core/testing&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">HttpClientTestingModule&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">HttpTestingController&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;@angular/common/http/testing&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">MyService&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;./my.service&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">describe&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;MyService&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">let&lt;/span> &lt;span class="n">service&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">MyService&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">let&lt;/span> &lt;span class="n">httpMock&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">HttpTestingController&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">beforeEach&lt;/span>&lt;span class="p">(()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">TestBed&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">configureTestingModule&lt;/span>&lt;span class="p">({&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">imports&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">HttpClientTestingModule&lt;/span>&lt;span class="p">],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">providers&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">MyService&lt;/span>&lt;span class="p">],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">service&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">TestBed&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">inject&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">MyService&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">httpMock&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">TestBed&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">inject&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">HttpTestingController&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">afterEach&lt;/span>&lt;span class="p">(()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">httpMock&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">verify&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">it&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;debería obtener datos correctamente&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="n">mockData&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">id&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">name&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;Test&amp;#39;&lt;/span> &lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">service&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">getData&lt;/span>&lt;span class="p">()&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">subscribe&lt;/span>&lt;span class="p">((&lt;/span>&lt;span class="n">data&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">expect&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">data&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">toEqual&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">mockData&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="n">req&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">httpMock&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">expectOne&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;/api/data&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">expect&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">req&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">request&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">method&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">toBe&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;GET&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">req&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">flush&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">mockData&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="snapshot-testing-en-angular">Snapshot Testing en Angular&lt;/h2>
+&lt;p>Los snapshots permiten capturar el estado de un componente y compararlo con versiones futuras para detectar cambios inesperados.&lt;/p>
+&lt;h3 id="crear-un-snapshot">Crear un snapshot&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">render&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;@testing-library/angular&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">MyComponent&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;./my.component&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">describe&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;MyComponent&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">it&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;debería coincidir con el snapshot&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">async&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">container&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">await&lt;/span> &lt;span class="n">render&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">MyComponent&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">expect&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">container&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">toMatchSnapshot&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="actualizar-snapshots">Actualizar snapshots&lt;/h3>
+&lt;p>Si los cambios son intencionales, actualiza los snapshots:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">jest --updateSnapshot
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="buenas-prácticas-para-pruebas-avanzadas">Buenas prácticas para pruebas avanzadas&lt;/h2>
+&lt;ol>
+&lt;li>&lt;strong>Configurar CI/CD&lt;/strong>: Automatiza las pruebas en plataformas como GitHub Actions o Azure DevOps.&lt;/li>
+&lt;li>&lt;strong>Cobertura de código&lt;/strong>: Asegúrate de alcanzar al menos el 80% de cobertura.&lt;/li>
+&lt;li>&lt;strong>Separar pruebas unitarias e integradas&lt;/strong>: Mantén un enfoque claro entre las pruebas locales y las de sistema.&lt;/li>
+&lt;li>&lt;strong>Mocking eficiente&lt;/strong>: Usa herramientas como &lt;code>jest.mock&lt;/code> para simular dependencias externas.&lt;/li>
+&lt;li>&lt;strong>Documentar las pruebas&lt;/strong>: Incluye descripciones claras sobre los objetivos de cada caso de prueba.&lt;/li>
+&lt;/ol>
+&lt;h2 id="conclusión">Conclusión&lt;/h2>
+&lt;p>Implementar pruebas avanzadas con &lt;strong>Jest&lt;/strong> en &lt;strong>Angular&lt;/strong> mejora la calidad del software y reduce riesgos en el desarrollo. Al seguir buenas prácticas y adoptar herramientas modernas, los equipos pueden garantizar que sus aplicaciones sean robustas, seguras y fáciles de mantener. ¡Empieza hoy mismo a implementar Jest en tus proyectos &lt;strong>Angular&lt;/strong>!&lt;/p></description></item><item><title>Integración de Angular con Azure Static Web Apps: Un caso práctico</title><link>https://cmas.dev/posts/2024-06-05-angular-integration-azure-static-web/</link><pubDate>Wed, 05 Jun 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-06-05-angular-integration-azure-static-web/</guid><description>&lt;p>En la era moderna del desarrollo web, la combinación de frameworks frontend como &lt;strong>Angular&lt;/strong> y servicios en la nube como &lt;strong>Azure Static Web Apps&lt;/strong> proporciona una solución eficiente y escalable para crear y desplegar aplicaciones. Este artículo explora cómo integrar &lt;strong>Angular&lt;/strong> con &lt;strong>Azure Static Web Apps&lt;/strong>, mostrando ejemplos prácticos, buenas prácticas y enfoques modernos y seguros para garantizar el éxito en tus proyectos.&lt;/p>
+&lt;h2 id="por-qué-elegir-angular-y-azure-static-web-apps">¿Por qué elegir Angular y Azure Static Web Apps?&lt;/h2>
+&lt;h3 id="ventajas-de-angular">Ventajas de Angular&lt;/h3>
+&lt;ol>
+&lt;li>&lt;strong>Ecosistema robusto&lt;/strong>: Angular es un framework completo con herramientas integradas para el desarrollo de aplicaciones escalables.&lt;/li>
+&lt;li>&lt;strong>TypeScript nativo&lt;/strong>: Mejora la calidad del código y la experiencia del desarrollador.&lt;/li>
+&lt;li>&lt;strong>Componentes reusables&lt;/strong>: Facilitan la organización y el mantenimiento del código.&lt;/li>
+&lt;/ol>
+&lt;h3 id="beneficios-de-azure-static-web-apps">Beneficios de Azure Static Web Apps&lt;/h3>
+&lt;ol>
+&lt;li>&lt;strong>Despliegue sencillo&lt;/strong>: Automatiza el despliegue directo desde repositorios como GitHub.&lt;/li>
+&lt;li>&lt;strong>Distribución global&lt;/strong>: Servidores edge para un rendimiento óptimo.&lt;/li>
+&lt;li>&lt;strong>Soporte para APIs&lt;/strong>: Integración con Azure Functions para lógica backend.&lt;/li>
+&lt;li>&lt;strong>Certificados SSL automáticos&lt;/strong>: Garantiza conexiones seguras sin configuraciones adicionales.&lt;/li>
+&lt;/ol>
+&lt;h2 id="configuración-inicial">Configuración inicial&lt;/h2>
+&lt;h3 id="requisitos-previos">Requisitos previos&lt;/h3>
+&lt;ul>
+&lt;li>Node.js y Angular CLI instalados:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">npm install -g @angular/cli
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>Cuenta de Azure activa.&lt;/li>
+&lt;li>Repositorio en GitHub (opcional pero recomendado).&lt;/li>
+&lt;/ul>
+&lt;h3 id="crear-una-aplicación-angular">Crear una aplicación Angular&lt;/h3>
+&lt;ol>
+&lt;li>Generar un nuevo proyecto:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">ng new angular-azure-demo --routing --style css
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>Navegar al directorio del proyecto:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">cd angular-azure-demo
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>Ejecutar el servidor de desarrollo:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">ng serve
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;h2 id="preparar-la-aplicación-para-despliegue">Preparar la aplicación para despliegue&lt;/h2>
+&lt;h3 id="generar-los-archivos-de-producción">Generar los archivos de producción&lt;/h3>
+&lt;ol>
+&lt;li>Ejecutar el comando de construcción:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">ng build --prod
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>Los archivos generados se encontrarán en el directorio &lt;code>dist/angular-azure-demo&lt;/code>.&lt;/li>
+&lt;/ol>
+&lt;h3 id="configurar-un-archivo-staticwebappconfigjson">Configurar un archivo &lt;code>staticwebapp.config.json&lt;/code>&lt;/h3>
+&lt;p>Este archivo define rutas y configuraciones personalizadas para Azure Static Web Apps:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;routes&amp;#34;: [
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;route&amp;#34;: &amp;#34;/api/*&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;method&amp;#34;: &amp;#34;GET&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;allowedRoles&amp;#34;: [&amp;#34;anonymous&amp;#34;]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> },
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;route&amp;#34;: &amp;#34;/*&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;rewrite&amp;#34;: &amp;#34;/index.html&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Guarda este archivo en el directorio &lt;code>dist/angular-azure-demo&lt;/code>.&lt;/p>
+&lt;h2 id="crear-y-configurar-azure-static-web-app">Crear y configurar Azure Static Web App&lt;/h2>
+&lt;h3 id="paso-1-crear-un-recurso-en-azure">Paso 1: Crear un recurso en Azure&lt;/h3>
+&lt;ol>
+&lt;li>Inicia sesión en el &lt;a href="https://portal.azure.com">portal de Azure&lt;/a>.&lt;/li>
+&lt;li>Selecciona &lt;strong>Crear un recurso&lt;/strong> y busca &lt;strong>Static Web Apps&lt;/strong>.&lt;/li>
+&lt;li>Completa los detalles del recurso:
+&lt;ul>
+&lt;li>&lt;strong>Nombre&lt;/strong>: &lt;code>angular-static-web&lt;/code>.&lt;/li>
+&lt;li>&lt;strong>Plan&lt;/strong>: Gratis (Free).&lt;/li>
+&lt;li>&lt;strong>Región&lt;/strong>: Elige la más cercana a tus usuarios.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h3 id="paso-2-vincular-el-repositorio">Paso 2: Vincular el repositorio&lt;/h3>
+&lt;ol>
+&lt;li>Conecta el recurso con tu repositorio de GitHub.&lt;/li>
+&lt;li>Selecciona la rama principal y el directorio de la aplicación (&lt;code>/dist/angular-azure-demo&lt;/code>).&lt;/li>
+&lt;/ol>
+&lt;h3 id="paso-3-despliegue-automático">Paso 3: Despliegue automático&lt;/h3>
+&lt;p>Cada vez que actualices la rama principal, Azure redeployará la aplicación automáticamente.&lt;/p>
+&lt;h2 id="integrar-una-api-con-azure-functions">Integrar una API con Azure Functions&lt;/h2>
+&lt;h3 id="crear-una-azure-function">Crear una Azure Function&lt;/h3>
+&lt;ol>
+&lt;li>Instalar las herramientas necesarias:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">npm&lt;/span> &lt;span class="n">install&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">g&lt;/span> &lt;span class="n">azure&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">functions&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">core&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">tools&lt;/span>&lt;span class="err">@&lt;/span>&lt;span class="mi">4&lt;/span> &lt;span class="o">--&lt;/span>&lt;span class="n">unsafe&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">perm&lt;/span> &lt;span class="bp">true&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>Crear un proyecto de funciones:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">func&lt;/span> &lt;span class="n">init&lt;/span> &lt;span class="n">api&lt;/span> &lt;span class="o">--&lt;/span>&lt;span class="n">typescript&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>Crear una nueva función HTTP:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">cd&lt;/span> &lt;span class="n">api&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">func&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="o">--&lt;/span>&lt;span class="n">template&lt;/span> &lt;span class="s2">&amp;#34;HTTP trigger&amp;#34;&lt;/span> &lt;span class="o">--&lt;/span>&lt;span class="n">name&lt;/span> &lt;span class="n">GetMessage&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;h3 id="conectar-la-api-con-la-aplicación-angular">Conectar la API con la aplicación Angular&lt;/h3>
+&lt;ol>
+&lt;li>Modificar el código de la función:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="n">async&lt;/span> &lt;span class="n">function&lt;/span> &lt;span class="n">run&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">context&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">Context&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">req&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">HttpRequest&lt;/span>&lt;span class="p">):&lt;/span> &lt;span class="n">Promise&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">void&lt;/span>&lt;span class="o">&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">context&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">res&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">body&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">message&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;Hola desde Azure Functions&amp;#34;&lt;/span> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>Agregar un servicio Angular para consumir la API:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">HttpClient&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;@angular/common/http&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">Injectable&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;@angular/core&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">@&lt;/span>&lt;span class="n">Injectable&lt;/span>&lt;span class="p">({&lt;/span> &lt;span class="n">providedIn&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;root&amp;#39;&lt;/span> &lt;span class="p">})&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="k">class&lt;/span> &lt;span class="n">ApiService&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">constructor&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">private&lt;/span> &lt;span class="n">http&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">HttpClient&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">getMessage&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">this&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">http&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">get&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;/api/GetMessage&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>Usar el servicio en un componente:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">Component&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">OnInit&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;@angular/core&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">ApiService&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;./api.service&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">@&lt;/span>&lt;span class="n">Component&lt;/span>&lt;span class="p">({&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">selector&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;app-root&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">template&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="err">`&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">h1&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">{{&lt;/span> &lt;span class="n">message&lt;/span> &lt;span class="p">}}&lt;/span>&lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">h1&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="err">`&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">})&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="k">class&lt;/span> &lt;span class="n">AppComponent&lt;/span> &lt;span class="n">implements&lt;/span> &lt;span class="n">OnInit&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">message&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">constructor&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">private&lt;/span> &lt;span class="n">api&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">ApiService&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ngOnInit&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">this&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">api&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">getMessage&lt;/span>&lt;span class="p">()&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">subscribe&lt;/span>&lt;span class="p">((&lt;/span>&lt;span class="n">data&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">any&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">this&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">message&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">data&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">message&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;h2 id="buenas-prácticas">Buenas prácticas&lt;/h2>
+&lt;ol>
+&lt;li>&lt;strong>Usar HTTPS&lt;/strong>: Siempre habilita HTTPS en el entorno de producción.&lt;/li>
+&lt;li>&lt;strong>Monitorear el rendimiento&lt;/strong>: Utiliza Azure Monitor para detectar cuellos de botella.&lt;/li>
+&lt;li>&lt;strong>Validar entradas&lt;/strong>: Implementa validaciones en la API para evitar vulnerabilidades como inyecciones.&lt;/li>
+&lt;li>&lt;strong>Minimizar y optimizar recursos&lt;/strong>: Usa herramientas como &lt;code>ng build --prod&lt;/code> para reducir el tamaño de los archivos.&lt;/li>
+&lt;li>&lt;strong>Seguridad&lt;/strong>: Configura roles y permisos en el archivo &lt;code>staticwebapp.config.json&lt;/code> para proteger rutas sensibles.&lt;/li>
+&lt;/ol>
+&lt;h2 id="conclusión">Conclusión&lt;/h2>
+&lt;p>La integración de Angular con &lt;strong>Azure Static Web Apps&lt;/strong> ofrece una solución moderna, escalable y eficiente para desplegar aplicaciones web. Siguiendo las mejores prácticas y aprovechando herramientas como Azure Functions, puedes construir sistemas completos y seguros que se adapten a las necesidades de tus usuarios. ¡Empieza hoy mismo a aprovechar estas tecnologías y lleva tus proyectos al siguiente nivel!&lt;/p></description></item><item><title>Introducción a los Signals en Angular: Casos prácticos</title><link>https://cmas.dev/posts/2024-05-22-intro-signals-angular/</link><pubDate>Wed, 22 May 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-05-22-intro-signals-angular/</guid><description>&lt;p>Angular es un framework robusto y evolutivo que continuamente introduce nuevas características para mejorar el desarrollo de aplicaciones web modernas. Una de estas innovaciones son los &lt;strong>Signals&lt;/strong>, una herramienta que permite manejar cambios de estado de manera reactiva, clara y eficiente. Este artículo ofrece una introducción detallada a los Signals en Angular, explicando cómo utilizarlos, sus ventajas comparativas frente a otras soluciones reactivas y sus aplicaciones en el desarrollo real, acompañado de casos prácticos ampliados, buenas prácticas y un enfoque moderno en seguridad.&lt;/p>
 &lt;h2 id="qué-son-los-signals-en-angular">¿Qué son los Signals en Angular?&lt;/h2>
 &lt;p>Los Signals son una forma reactiva de manejar cambios de estado dentro de una aplicación Angular. A diferencia de las propiedades tradicionales o las soluciones basadas en &lt;em>Observables&lt;/em> de &lt;em>RxJS&lt;/em>, los Signals proporcionan un enfoque más directo para gestionar actualizaciones en la interfaz de usuario. Esta simplicidad es particularmente útil para escenarios donde se necesita un manejo del estado local claro y eficiente, reduciendo la complejidad general del código.&lt;/p>
 &lt;h3 id="características-clave-de-los-signals">Características clave de los Signals&lt;/h3>
