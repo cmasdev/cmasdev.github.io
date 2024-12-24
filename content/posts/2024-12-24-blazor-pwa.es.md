@@ -7,7 +7,7 @@ category: [Desarrollo de software]
 tags: [Web Development,Blazor,.NET]
 thumbnail-img: /img/posts/thumbnails/dotnet.png
 cover-img: /img/posts/cover/dotnet.png
-share_img: /img/posts/shared/dotnet.png
+share_img: /img/posts/shared/dotnet.jpg
 ---
 
 **Blazor**, el framework moderno basado en **.NET**, ha demostrado ser una herramienta poderosa para el desarrollo de aplicaciones web interactivas. Combinado con las capacidades de **Progressive Web Apps (PWA)**, ofrece una forma innovadora de construir aplicaciones que funcionan offline. Se pueden instalar en dispositivos y ofrecen una experiencia similar a las aplicaciones nativas. En este artículo, exploraremos cómo usar **Blazor** para crear **PWAs**, centrándonos en las nuevas capacidades introducidas con **.NET 9**, buenas prácticas y ejemplos detallados.
