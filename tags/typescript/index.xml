@@ -1,4 +1,160 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Typescript on Christian Amado's Blog</title><link>https://cmas.dev/tags/typescript/</link><description>Recent content in Typescript on Christian Amado's Blog</description><generator>Hugo -- gohugo.io</generator><language>es</language><lastBuildDate>Wed, 19 Jun 2024 00:00:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/tags/typescript/index.xml" rel="self" type="application/rss+xml"/><item><title>Creación de librerías compartidas en TypeScript</title><link>https://cmas.dev/posts/2024-06-19-share-libraries-typescript/</link><pubDate>Wed, 19 Jun 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-06-19-share-libraries-typescript/</guid><description>&lt;p>La creación de librerías compartidas en &lt;strong>TypeScript&lt;/strong> permite a los desarrolladores encapsular funcionalidad reutilizable y mejorar la mantenibilidad del código. Este artículo explorará el proceso completo de desarrollo de librerías en &lt;strong>TypeScript&lt;/strong>, desde la configuración inicial hasta el despliegue, con un enfoque moderno, ejemplos prácticos y consideraciones de seguridad.&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Typescript on Christian Amado's Blog</title><link>https://cmas.dev/tags/typescript/</link><description>Recent content in Typescript on Christian Amado's Blog</description><generator>Hugo -- gohugo.io</generator><language>es</language><lastBuildDate>Wed, 14 Aug 2024 00:00:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/tags/typescript/index.xml" rel="self" type="application/rss+xml"/><item><title>Decoradores avanzados en TypeScript: Mejora tu código</title><link>https://cmas.dev/posts/2024-08-14-decorators-typescript/</link><pubDate>Wed, 14 Aug 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-08-14-decorators-typescript/</guid><description>&lt;p>Los decoradores son una característica poderosa y avanzada de &lt;strong>TypeScript&lt;/strong> que permiten modificar el comportamiento de clases, métodos, propiedades y parámetros de una forma declarativa. Son ampliamente utilizados en frameworks como Angular, pero también pueden emplearse en proyectos personalizados para mejorar la reutilización y la claridad del código. En este artículo exploraremos los decoradores avanzados en &lt;strong>TypeScript&lt;/strong>, sus usos más comunes, cómo crearlos desde cero, y las mejores prácticas para implementarlos.&lt;/p>
+&lt;h2 id="introducción-a-los-decoradores">Introducción a los decoradores&lt;/h2>
+&lt;h3 id="qué-son-los-decoradores">¿Qué son los decoradores?&lt;/h3>
+&lt;p>Un decorador es una función especial que puede adjuntarse a una clase, método, accesor, propiedad o parámetro. Proporcionan una forma de agregar meta-programación a tu código, es decir, modificar su comportamiento sin cambiar su estructura básica.&lt;/p>
+&lt;h3 id="tipos-de-decoradores-en-typescript">Tipos de decoradores en TypeScript&lt;/h3>
+&lt;ol>
+&lt;li>&lt;strong>Decoradores de clases&lt;/strong>:
+&lt;ul>
+&lt;li>Aplicados a clases completas para modificar su estructura o comportamiento.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>Decoradores de métodos&lt;/strong>:
+&lt;ul>
+&lt;li>Aplicados a métodos de clase para interceptar, modificar o registrar su ejecución.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>Decoradores de propiedades&lt;/strong>:
+&lt;ul>
+&lt;li>Aplicados a propiedades de clase para añadir lógica adicional al acceso o modificación del valor.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>Decoradores de parámetros&lt;/strong>:
+&lt;ul>
+&lt;li>Aplicados a parámetros de métodos para realizar validaciones o registrar su uso.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h3 id="habilitar-decoradores-en-typescript">Habilitar decoradores en TypeScript&lt;/h3>
+&lt;p>Para usar decoradores, es necesario habilitar la opción &lt;code>experimentalDecorators&lt;/code> en el archivo &lt;code>tsconfig.json&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;compilerOptions&amp;#34;: {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;experimentalDecorators&amp;#34;: true
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="decoradores-de-clases">Decoradores de clases&lt;/h2>
+&lt;p>Un decorador de clase se aplica a la definición de una clase completa. Es ideal para añadir funcionalidades transversales como registros o validaciones.&lt;/p>
+&lt;h3 id="ejemplo-básico">Ejemplo básico&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">function&lt;/span> &lt;span class="n">LogClass&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">target&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">Function&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">console&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="err">`&lt;/span>&lt;span class="n">Clase&lt;/span> &lt;span class="n">decorada&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="n">target&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">name&lt;/span>&lt;span class="p">}&lt;/span>&lt;span class="err">`&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">@&lt;/span>&lt;span class="n">LogClass&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">class&lt;/span> &lt;span class="n">MyClass&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">constructor&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">console&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;Instancia creada&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">instance&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">MyClass&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="resultado">Resultado&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">Clase decorada: MyClass
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Instancia creada
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="uso-avanzado-agregar-metadatos">Uso avanzado: Agregar metadatos&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">function&lt;/span> &lt;span class="n">AddMetadata&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">metadata&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">any&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">function&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">target&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">Function&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">target&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">prototype&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">metadata&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">metadata&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">@&lt;/span>&lt;span class="n">AddMetadata&lt;/span>&lt;span class="p">({&lt;/span> &lt;span class="n">role&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;admin&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">permissions&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;read&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;write&amp;#39;&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="p">})&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">class&lt;/span> &lt;span class="n">User&lt;/span> &lt;span class="p">{}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">user&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">User&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">console&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">user&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;metadata&amp;#39;&lt;/span>&lt;span class="p">]);&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="decoradores-de-métodos">Decoradores de métodos&lt;/h2>
+&lt;p>Permiten interceptar y modificar la ejecución de un método. Esto es útil para agregar registros, manejo de errores o validaciones.&lt;/p>
+&lt;h3 id="ejemplo-registro-de-ejecución">Ejemplo: Registro de ejecución&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">function&lt;/span> &lt;span class="n">LogMethod&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">target&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">any&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">propertyKey&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">string&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">descriptor&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">PropertyDescriptor&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="n">originalMethod&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">descriptor&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">value&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">descriptor&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">value&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">function&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="o">...&lt;/span>&lt;span class="n">args&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">any&lt;/span>&lt;span class="p">[])&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">console&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="err">`&lt;/span>&lt;span class="n">Método&lt;/span> &lt;span class="n">ejecutado&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="n">propertyKey&lt;/span>&lt;span class="p">},&lt;/span> &lt;span class="n">con&lt;/span> &lt;span class="n">argumentos&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="n">args&lt;/span>&lt;span class="p">}&lt;/span>&lt;span class="err">`&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">originalMethod&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">apply&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">this&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">args&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">class&lt;/span> &lt;span class="n">Calculator&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="err">@&lt;/span>&lt;span class="n">LogMethod&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">add&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">a&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">number&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">b&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">number&lt;/span>&lt;span class="p">):&lt;/span> &lt;span class="n">number&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">a&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="n">b&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">calc&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">Calculator&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">calc&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">add&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">2&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">3&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="resultado-1">Resultado&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">Método ejecutado: add, con argumentos: 2,3
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="decoradores-de-propiedades">Decoradores de propiedades&lt;/h2>
+&lt;p>Permiten personalizar el comportamiento de las propiedades de clase, por ejemplo, agregando validaciones o valores predeterminados.&lt;/p>
+&lt;h3 id="ejemplo-validar-propiedades">Ejemplo: Validar propiedades&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">function&lt;/span> &lt;span class="n">MinLength&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">length&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">number&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">function&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">target&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">any&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">propertyKey&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">string&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">let&lt;/span> &lt;span class="n">value&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">string&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="ne">Object&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">defineProperty&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">target&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">propertyKey&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">get&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">value&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">set&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">newValue&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">string&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">newValue&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">length&lt;/span> &lt;span class="o">&amp;lt;&lt;/span> &lt;span class="n">length&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">throw&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">Error&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="err">`&lt;/span>&lt;span class="n">La&lt;/span> &lt;span class="n">longitud&lt;/span> &lt;span class="n">mínima&lt;/span> &lt;span class="n">de&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="n">propertyKey&lt;/span>&lt;span class="p">}&lt;/span> &lt;span class="n">es&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="n">length&lt;/span>&lt;span class="p">}&lt;/span>&lt;span class="err">`&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">value&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">newValue&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">class&lt;/span> &lt;span class="n">User&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="err">@&lt;/span>&lt;span class="n">MinLength&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">5&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">username&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">string&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">user&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">User&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">user&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">username&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;John&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="o">//&lt;/span> &lt;span class="n">Error&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">La&lt;/span> &lt;span class="n">longitud&lt;/span> &lt;span class="n">mínima&lt;/span> &lt;span class="n">de&lt;/span> &lt;span class="n">username&lt;/span> &lt;span class="n">es&lt;/span> &lt;span class="mi">5&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="decoradores-de-parámetros">Decoradores de parámetros&lt;/h2>
+&lt;p>Estos decoradores son útiles para realizar validaciones en los parámetros de métodos.&lt;/p>
+&lt;h3 id="ejemplo-validación-de-parámetros">Ejemplo: Validación de parámetros&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">function&lt;/span> &lt;span class="n">Validate&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">target&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">any&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">propertyKey&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">string&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">parameterIndex&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">number&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="n">existingRequiredParameters&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">number&lt;/span>&lt;span class="p">[]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">Reflect&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">getOwnMetadata&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;required&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">target&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">propertyKey&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">||&lt;/span> &lt;span class="p">[];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">existingRequiredParameters&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">push&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">parameterIndex&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Reflect&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">defineMetadata&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;required&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">existingRequiredParameters&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">target&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">propertyKey&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">class&lt;/span> &lt;span class="n">OrderService&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">processOrder&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="err">@&lt;/span>&lt;span class="n">Validate&lt;/span> &lt;span class="n">orderId&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">string&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">console&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="err">`&lt;/span>&lt;span class="n">Procesando&lt;/span> &lt;span class="n">orden&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="n">orderId&lt;/span>&lt;span class="p">}&lt;/span>&lt;span class="err">`&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="buenas-prácticas-con-decoradores">Buenas prácticas con decoradores&lt;/h2>
+&lt;ol>
+&lt;li>&lt;strong>Mantén los decoradores reutilizables&lt;/strong>:
+&lt;ul>
+&lt;li>Diseña decoradores genéricos que puedan ser aplicados en múltiples contextos.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>Evita la lógica compleja&lt;/strong>:
+&lt;ul>
+&lt;li>Mantén los decoradores simples y delega la lógica compleja a otras partes del código.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>Documenta los decoradores&lt;/strong>:
+&lt;ul>
+&lt;li>Proporciona descripciones claras sobre el propósito y uso de cada decorador.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>Combina decoradores con metadatos&lt;/strong>:
+&lt;ul>
+&lt;li>Usa bibliotecas como &lt;code>reflect-metadata&lt;/code> para almacenar y acceder a metadatos en tiempo de ejecución.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>Prueba los decoradores&lt;/strong>:
+&lt;ul>
+&lt;li>Escribe pruebas unitarias para garantizar que los decoradores funcionen correctamente en diferentes escenarios.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="conclusión">Conclusión&lt;/h2>
+&lt;p>Los decoradores en TypeScript son una herramienta poderosa que puede transformar la forma en que organizas y escribes tu código. Desde agregar metadatos hasta interceptar métodos y propiedades, ofrecen una manera elegante y declarativa de manejar lógica transversal. Siguiendo las buenas prácticas y explorando casos de uso avanzados, puedes aprovechar al máximo esta característica y llevar tu desarrollo TypeScript al siguiente nivel.&lt;/p></description></item><item><title>Creación de librerías compartidas en TypeScript</title><link>https://cmas.dev/posts/2024-06-19-share-libraries-typescript/</link><pubDate>Wed, 19 Jun 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-06-19-share-libraries-typescript/</guid><description>&lt;p>La creación de librerías compartidas en &lt;strong>TypeScript&lt;/strong> permite a los desarrolladores encapsular funcionalidad reutilizable y mejorar la mantenibilidad del código. Este artículo explorará el proceso completo de desarrollo de librerías en &lt;strong>TypeScript&lt;/strong>, desde la configuración inicial hasta el despliegue, con un enfoque moderno, ejemplos prácticos y consideraciones de seguridad.&lt;/p>
 &lt;h2 id="por-qué-crear-librerías-compartidas-en-typescript">¿Por qué crear librerías compartidas en TypeScript?&lt;/h2>
 &lt;h3 id="beneficios-principales">Beneficios principales&lt;/h3>
 &lt;ol>

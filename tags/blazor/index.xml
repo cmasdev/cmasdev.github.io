@@ -147,7 +147,142 @@
 &lt;li>&lt;strong>Curva de aprendizaje&lt;/strong> para desarrolladores nuevos en &lt;strong>.NET&lt;/strong>.&lt;/li>
 &lt;/ol>
 &lt;h2 id="conclusión">Conclusión&lt;/h2>
-&lt;p>Combinar las capacidades de &lt;strong>Blazor&lt;/strong> y &lt;strong>PWAs&lt;/strong> permite a los desarrolladores crear aplicaciones modernas y escalables que funcionan offline, se pueden instalar y ofrecen una experiencia de usuario mejorada. Aunque existen algunas limitaciones, las ventajas de usar &lt;strong>Blazor&lt;/strong> con &lt;strong>PWA&lt;/strong> superan ampliamente los desafíos, especialmente para equipos que ya utilizan &lt;strong>.NET&lt;/strong> en su flujo de desarrollo. ¡Explora las posibilidades de &lt;strong>Blazor&lt;/strong> para &lt;strong>PWAs&lt;/strong> y lleva tus aplicaciones web al siguiente nivel!&lt;/p></description></item><item><title>Creación de componentes reutilizables en Blazor para aplicaciones escalables</title><link>https://cmas.dev/posts/2024-07-03-components-blazor/</link><pubDate>Wed, 03 Jul 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-07-03-components-blazor/</guid><description>&lt;p>&lt;strong>Blazor&lt;/strong> es un framework poderoso que permite a los desarrolladores construir aplicaciones web modernas utilizando &lt;strong>C#&lt;/strong>. Una de sus características clave es la capacidad de crear componentes reutilizables que promueven la modularidad, escalabilidad y mantenibilidad de las aplicaciones. En este artículo, exploraremos cómo diseñar y desarrollar componentes reutilizables en Blazor, acompañado de ejemplos prácticos y mejores prácticas.&lt;/p>
+&lt;p>Combinar las capacidades de &lt;strong>Blazor&lt;/strong> y &lt;strong>PWAs&lt;/strong> permite a los desarrolladores crear aplicaciones modernas y escalables que funcionan offline, se pueden instalar y ofrecen una experiencia de usuario mejorada. Aunque existen algunas limitaciones, las ventajas de usar &lt;strong>Blazor&lt;/strong> con &lt;strong>PWA&lt;/strong> superan ampliamente los desafíos, especialmente para equipos que ya utilizan &lt;strong>.NET&lt;/strong> en su flujo de desarrollo. ¡Explora las posibilidades de &lt;strong>Blazor&lt;/strong> para &lt;strong>PWAs&lt;/strong> y lleva tus aplicaciones web al siguiente nivel!&lt;/p></description></item><item><title>Despliegue de aplicaciones Blazor en Azure App Services</title><link>https://cmas.dev/posts/2024-07-10-deploy-blazor-azure-app-services/</link><pubDate>Wed, 10 Jul 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-07-10-deploy-blazor-azure-app-services/</guid><description>&lt;p>&lt;strong>Blazor&lt;/strong>, el framework moderno basado en &lt;strong>.NET&lt;/strong>, permite a los desarrolladores crear aplicaciones web interactivas utilizando &lt;strong>C#&lt;/strong>. Combinado con &lt;strong>Azure App Services&lt;/strong>, puedes desplegar aplicaciones de manera sencilla, escalable y segura. En este artículo, exploraremos los pasos para desplegar aplicaciones &lt;strong>Blazor (Server y WebAssembly)&lt;/strong> en &lt;strong>Azure App Services&lt;/strong>, acompañado de ejemplos detallados y buenas prácticas para garantizar un despliegue óptimo.&lt;/p>
+&lt;h2 id="qué-es-azure-app-services">¿Qué es Azure App Services?&lt;/h2>
+&lt;p>&lt;strong>Azure App Services&lt;/strong> es una plataforma de alojamiento en la nube totalmente administrada que soporta aplicaciones web, móviles y &lt;em>API&lt;/em>. Sus principales características incluyen:&lt;/p>
+&lt;ol>
+&lt;li>&lt;strong>Despliegue rápido&lt;/strong>: Permite subir aplicaciones directamente desde tu entorno de desarrollo.&lt;/li>
+&lt;li>&lt;strong>Escalabilidad&lt;/strong>: Ajusta los recursos según la demanda.&lt;/li>
+&lt;li>&lt;strong>Seguridad&lt;/strong>: Ofrece integración con certificados SSL y autenticación.&lt;/li>
+&lt;li>&lt;strong>Compatibilidad con varias tecnologías&lt;/strong>: Soporta .NET, Node.js, Python, Java y más.&lt;/li>
+&lt;/ol>
+&lt;h2 id="crear-y-configurar-un-azure-app-service">Crear y configurar un Azure App Service&lt;/h2>
+&lt;h3 id="paso-1-crear-un-recurso-en-azure">Paso 1: Crear un recurso en Azure&lt;/h3>
+&lt;ol>
+&lt;li>Inicia sesión en el &lt;a href="https://portal.azure.com">portal de Azure&lt;/a>.&lt;/li>
+&lt;li>Selecciona &lt;strong>Crear un recurso&lt;/strong> y busca &lt;strong>App Service&lt;/strong>.&lt;/li>
+&lt;li>Completa los detalles:
+&lt;ul>
+&lt;li>&lt;strong>Nombre&lt;/strong>: &lt;code>blazor-app-service&lt;/code>.&lt;/li>
+&lt;li>&lt;strong>Pila de runtime&lt;/strong>: .NET 9.&lt;/li>
+&lt;li>&lt;strong>Sistema operativo&lt;/strong>: Windows o Linux.&lt;/li>
+&lt;li>&lt;strong>Plan de App Service&lt;/strong>: Selecciona un plan según tus necesidades (recomendado: Plan de consumo para pruebas o B1 para producción).&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h3 id="paso-2-configurar-el-entorno-de-despliegue">Paso 2: Configurar el entorno de despliegue&lt;/h3>
+&lt;ol>
+&lt;li>Habilita la autenticación si es necesario.&lt;/li>
+&lt;li>Configura las variables de entorno requeridas por la aplicación.&lt;/li>
+&lt;/ol>
+&lt;h2 id="despliegue-de-blazor-server-en-azure-app-services">Despliegue de Blazor Server en Azure App Services&lt;/h2>
+&lt;h3 id="paso-1-crear-una-aplicación-blazor-server">Paso 1: Crear una aplicación Blazor Server&lt;/h3>
+&lt;ol>
+&lt;li>Genera un nuevo proyecto Blazor Server:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">dotnet new blazorserver -o BlazorServerApp
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>Navega al directorio del proyecto:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">cd BlazorServerApp
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>Ejecuta la aplicación localmente:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">dotnet run
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;h3 id="paso-2-publicar-la-aplicación">Paso 2: Publicar la aplicación&lt;/h3>
+&lt;ol>
+&lt;li>Publica la aplicación:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">dotnet publish -c Release -o ./publish
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>Verifica los archivos generados en el directorio &lt;code>publish&lt;/code>.&lt;/li>
+&lt;/ol>
+&lt;h3 id="paso-3-desplegar-a-azure">Paso 3: Desplegar a Azure&lt;/h3>
+&lt;ol>
+&lt;li>Usa el CLI de Azure para iniciar sesión:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">az login
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>Despliega la aplicación:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">az webapp deploy --resource-group MyResourceGroup --name blazor-app-service --src-path ./publish
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;h2 id="despliegue-de-blazor-webassembly-en-azure-app-services">Despliegue de Blazor WebAssembly en Azure App Services&lt;/h2>
+&lt;h3 id="paso-1-crear-una-aplicación-blazor-webassembly">Paso 1: Crear una aplicación Blazor WebAssembly&lt;/h3>
+&lt;ol>
+&lt;li>Genera un nuevo proyecto:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">dotnet new blazorwasm -o BlazorWebAssemblyApp
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>Habilita el modo PWA si es necesario:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">dotnet new blazorwasm -o BlazorPWA --pwa
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>Ejecuta la aplicación localmente:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">dotnet run
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;h3 id="paso-2-publicar-la-aplicación-1">Paso 2: Publicar la aplicación&lt;/h3>
+&lt;ol>
+&lt;li>Publica la aplicación:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">dotnet publish -c Release -o ./publish
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;h3 id="paso-3-configurar-y-desplegar">Paso 3: Configurar y desplegar&lt;/h3>
+&lt;ol>
+&lt;li>Asegúrate de que el servidor web esté configurado para servir contenido estático desde el directorio &lt;code>wwwroot&lt;/code>.&lt;/li>
+&lt;li>Usa Azure CLI o el portal de Azure para subir los archivos.&lt;/li>
+&lt;/ol>
+&lt;h4 id="subir-archivos-usando-azure-storage">Subir archivos usando Azure Storage&lt;/h4>
+&lt;ol>
+&lt;li>Crea una cuenta de almacenamiento:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">az storage account create --name mystorageaccount --resource-group MyResourceGroup --location eastus --sku Standard_LRS
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>Usa &lt;code>azcopy&lt;/code> para subir los archivos:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">azcopy copy ./publish/wwwroot https://mystorageaccount.blob.core.windows.net/$web --recursive
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;h2 id="buenas-prácticas-para-despliegues-en-azure-app-services">Buenas prácticas para despliegues en Azure App Services&lt;/h2>
+&lt;ol>
+&lt;li>&lt;strong>Configurar entornos&lt;/strong>:
+&lt;ul>
+&lt;li>Usa &lt;code>appsettings.json&lt;/code> para gestionar configuraciones por entorno.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>Escalabilidad&lt;/strong>:
+&lt;ul>
+&lt;li>Configura escalado automático para manejar incrementos de tráfico.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>Seguridad&lt;/strong>:
+&lt;ul>
+&lt;li>Habilita HTTPS y usa certificados SSL.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>Monitorización&lt;/strong>:
+&lt;ul>
+&lt;li>Usa Application Insights para supervisar el rendimiento.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>Optimizar el tamaño de la aplicación&lt;/strong>:
+&lt;ul>
+&lt;li>Habilita compresión y minimización de archivos.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="resolución-de-problemas-comunes">Resolución de problemas comunes&lt;/h2>
+&lt;h3 id="error-500-internal-server-error">Error 500: &amp;ldquo;Internal Server Error&amp;rdquo;&lt;/h3>
+&lt;ul>
+&lt;li>&lt;strong>Causa&lt;/strong>: Configuraciones incorrectas en &lt;code>appsettings.json&lt;/code>.&lt;/li>
+&lt;li>&lt;strong>Solución&lt;/strong>: Verifica las rutas y las claves de configuración.&lt;/li>
+&lt;/ul>
+&lt;h3 id="failed-to-start-en-blazor-server">&amp;ldquo;Failed to Start&amp;rdquo; en Blazor Server&lt;/h3>
+&lt;ul>
+&lt;li>&lt;strong>Causa&lt;/strong>: Problemas de dependencias no satisfechas.&lt;/li>
+&lt;li>&lt;strong>Solución&lt;/strong>: Revisa las dependencias en el archivo &lt;code>csproj&lt;/code>.&lt;/li>
+&lt;/ul>
+&lt;h3 id="archivos-estáticos-no-encontrados-en-blazor-webassembly">Archivos estáticos no encontrados en Blazor WebAssembly&lt;/h3>
+&lt;ul>
+&lt;li>&lt;strong>Causa&lt;/strong>: Configuración errónea del servidor.&lt;/li>
+&lt;li>&lt;strong>Solución&lt;/strong>: Asegúrate de que el servidor apunte al directorio &lt;code>wwwroot&lt;/code>.&lt;/li>
+&lt;/ul>
+&lt;h2 id="conclusión">Conclusión&lt;/h2>
+&lt;p>Desplegar aplicaciones &lt;strong>Blazor&lt;/strong> en &lt;strong>Azure App Services&lt;/strong> es un proceso directo que se beneficia de las capacidades robustas de Azure para escalar, monitorear y proteger aplicaciones. Siguiendo las mejores prácticas y resolviendo problemas comunes, puedes garantizar un despliegue exitoso y mantener tus aplicaciones funcionando de manera eficiente. ¡Explora &lt;strong>Azure App Services&lt;/strong> y lleva tus aplicaciones &lt;strong>Blazor&lt;/strong> al siguiente nivel!&lt;/p></description></item><item><title>Creación de componentes reutilizables en Blazor para aplicaciones escalables</title><link>https://cmas.dev/posts/2024-07-03-components-blazor/</link><pubDate>Wed, 03 Jul 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-07-03-components-blazor/</guid><description>&lt;p>&lt;strong>Blazor&lt;/strong> es un framework poderoso que permite a los desarrolladores construir aplicaciones web modernas utilizando &lt;strong>C#&lt;/strong>. Una de sus características clave es la capacidad de crear componentes reutilizables que promueven la modularidad, escalabilidad y mantenibilidad de las aplicaciones. En este artículo, exploraremos cómo diseñar y desarrollar componentes reutilizables en Blazor, acompañado de ejemplos prácticos y mejores prácticas.&lt;/p>
 &lt;h2 id="qué-son-los-componentes-en-blazor">¿Qué son los componentes en Blazor?&lt;/h2>
 &lt;p>Los componentes en Blazor son unidades reutilizables de la interfaz de usuario que combinan lógica y presentación. Cada componente se define en un archivo &lt;code>.razor&lt;/code> y puede incluir código C#, HTML y CSS.&lt;/p>
 &lt;h3 id="características-principales">Características principales&lt;/h3>

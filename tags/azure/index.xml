@@ -1,4 +1,136 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Azure on Christian Amado's Blog</title><link>https://cmas.dev/tags/azure/</link><description>Recent content in Azure on Christian Amado's Blog</description><generator>Hugo -- gohugo.io</generator><language>es</language><lastBuildDate>Wed, 05 Jun 2024 00:00:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/tags/azure/index.xml" rel="self" type="application/rss+xml"/><item><title>Integración de Angular con Azure Static Web Apps: Un caso práctico</title><link>https://cmas.dev/posts/2024-06-05-angular-integration-azure-static-web/</link><pubDate>Wed, 05 Jun 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-06-05-angular-integration-azure-static-web/</guid><description>&lt;p>En la era moderna del desarrollo web, la combinación de frameworks frontend como &lt;strong>Angular&lt;/strong> y servicios en la nube como &lt;strong>Azure Static Web Apps&lt;/strong> proporciona una solución eficiente y escalable para crear y desplegar aplicaciones. Este artículo explora cómo integrar &lt;strong>Angular&lt;/strong> con &lt;strong>Azure Static Web Apps&lt;/strong>, mostrando ejemplos prácticos, buenas prácticas y enfoques modernos y seguros para garantizar el éxito en tus proyectos.&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Azure on Christian Amado's Blog</title><link>https://cmas.dev/tags/azure/</link><description>Recent content in Azure on Christian Amado's Blog</description><generator>Hugo -- gohugo.io</generator><language>es</language><lastBuildDate>Wed, 24 Jul 2024 00:00:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/tags/azure/index.xml" rel="self" type="application/rss+xml"/><item><title>Creación de microservicios con Deno y Azure Functions</title><link>https://cmas.dev/posts/2024-07-24-microservices-deno-azure/</link><pubDate>Wed, 24 Jul 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-07-24-microservices-deno-azure/</guid><description>&lt;p>En el mundo moderno del desarrollo de software, los microservicios han revolucionado la forma de construir y desplegar aplicaciones escalables. Al combinar &lt;strong>Deno&lt;/strong>, una plataforma de runtime moderna basada en &lt;strong>JavaScript&lt;/strong> y &lt;strong>TypeScript&lt;/strong>, con &lt;strong>Azure Functions&lt;/strong>, una solución serverless flexible de &lt;strong>Microsoft&lt;/strong>, los desarrolladores pueden crear microservicios rápidos, seguros y eficientes. Este artículo te guiará paso a paso en el proceso de crear microservicios utilizando estas tecnologías, destacando buenas prácticas, ejemplos prácticos y el uso de &lt;strong>Visual Studio Code&lt;/strong> como herramienta principal.&lt;/p>
+&lt;h2 id="introducción-a-los-microservicios">Introducción a los microservicios&lt;/h2>
+&lt;h3 id="qué-son-los-microservicios">¿Qué son los microservicios?&lt;/h3>
+&lt;p>Los microservicios son un estilo arquitectónico que divide las aplicaciones en servicios independientes, cada uno responsable de una funcionalidad específica. Estos servicios se comunican entre sí mediante protocolos ligeros como &lt;strong>HTTP&lt;/strong> o &lt;strong>gRPC&lt;/strong>.&lt;/p>
+&lt;h3 id="beneficios-de-los-microservicios">Beneficios de los microservicios&lt;/h3>
+&lt;ol>
+&lt;li>&lt;strong>Escalabilidad independiente&lt;/strong>: Cada microservicio puede escalarse según sus necesidades.&lt;/li>
+&lt;li>&lt;strong>Facilidad de despliegue&lt;/strong>: Permite actualizar y desplegar partes de la aplicación sin afectar al sistema completo.&lt;/li>
+&lt;li>&lt;strong>Mantenibilidad&lt;/strong>: Facilita la organización del código y la colaboración en equipos grandes.&lt;/li>
+&lt;/ol>
+&lt;h2 id="introducción-a-deno-y-azure-functions">Introducción a Deno y Azure Functions&lt;/h2>
+&lt;h3 id="qué-es-deno">¿Qué es Deno?&lt;/h3>
+&lt;p>Deno es un runtime para JavaScript y TypeScript creado por Ryan Dahl, el creador de Node.js. Algunas de sus principales características incluyen:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>Seguridad&lt;/strong>: Permisos de ejecución para controlar el acceso a archivos, redes y entornos.&lt;/li>
+&lt;li>&lt;strong>Soporte nativo de TypeScript&lt;/strong>.&lt;/li>
+&lt;li>&lt;strong>Gestor de dependencias integrado&lt;/strong>: No requiere archivos como &lt;code>package.json&lt;/code>.&lt;/li>
+&lt;li>&lt;strong>APIs modernas&lt;/strong>: Inspiradas en las especificaciones del navegador.&lt;/li>
+&lt;/ul>
+&lt;h3 id="qué-es-azure-functions">¿Qué es Azure Functions?&lt;/h3>
+&lt;p>Azure Functions es un servicio serverless que permite ejecutar código en la nube sin necesidad de gestionar infraestructura. Ofrece:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>Ejecución bajo demanda&lt;/strong>: Facturación basada en el tiempo de ejecución.&lt;/li>
+&lt;li>&lt;strong>Integraciones nativas&lt;/strong>: Con Azure Blob Storage, Cosmos DB y otros servicios.&lt;/li>
+&lt;li>&lt;strong>Compatibilidad con varios lenguajes&lt;/strong>: Como JavaScript, Python, C# y TypeScript.&lt;/li>
+&lt;/ul>
+&lt;h2 id="configuración-del-entorno">Configuración del entorno&lt;/h2>
+&lt;h3 id="requisitos-previos">Requisitos previos&lt;/h3>
+&lt;ol>
+&lt;li>&lt;strong>Instalar Deno&lt;/strong>:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">curl -fsSL https://deno.land/x/install/install.sh | sh
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>&lt;strong>Instalar Azure Functions Core Tools&lt;/strong>:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">npm&lt;/span> &lt;span class="n">install&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">g&lt;/span> &lt;span class="n">azure&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">functions&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">core&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">tools&lt;/span>&lt;span class="err">@&lt;/span>&lt;span class="mi">4&lt;/span> &lt;span class="o">--&lt;/span>&lt;span class="n">unsafe&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">perm&lt;/span> &lt;span class="bp">true&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>&lt;strong>Instalar Visual Studio Code&lt;/strong>.&lt;/li>
+&lt;li>&lt;strong>Configurar la extensión de Azure Functions en VS Code&lt;/strong>.&lt;/li>
+&lt;/ol>
+&lt;h3 id="crear-un-nuevo-proyecto-con-azure-functions">Crear un nuevo proyecto con Azure Functions&lt;/h3>
+&lt;ol>
+&lt;li>Crea un directorio para tu proyecto:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">mkdir microservices-deno
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">cd microservices-deno
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>Inicializa un nuevo proyecto:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">func&lt;/span> &lt;span class="n">init&lt;/span> &lt;span class="o">--&lt;/span>&lt;span class="n">worker&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">runtime&lt;/span> &lt;span class="n">custom&lt;/span> &lt;span class="o">--&lt;/span>&lt;span class="n">language&lt;/span> &lt;span class="n">typescript&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>Agrega una nueva función HTTP:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">func&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="o">--&lt;/span>&lt;span class="n">template&lt;/span> &lt;span class="s2">&amp;#34;HTTP trigger&amp;#34;&lt;/span> &lt;span class="o">--&lt;/span>&lt;span class="n">name&lt;/span> &lt;span class="n">MyMicroservice&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;h2 id="crear-un-microservicio-con-deno-y-azure-functions">Crear un microservicio con Deno y Azure Functions&lt;/h2>
+&lt;h3 id="configuración-inicial">Configuración inicial&lt;/h3>
+&lt;ol>
+&lt;li>
+&lt;p>Modifica el archivo &lt;code>MyMicroservice/index.ts&lt;/code> para usar Deno:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">serve&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s2">&amp;#34;https://deno.land/std@0.152.0/http/server.ts&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">serve&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">async&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">req&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="n">url&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">URL&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">req&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">url&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">url&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">pathname&lt;/span> &lt;span class="o">===&lt;/span> &lt;span class="s2">&amp;#34;/api/MyMicroservice&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">Response&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;Hello from Deno and Azure Functions!&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">status&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">200&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">headers&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="s2">&amp;#34;Content-Type&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;text/plain&amp;#34;&lt;/span> &lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">Response&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;Not Found&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">status&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">404&lt;/span> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>Configura los permisos necesarios en el archivo &lt;code>deno.json&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;tasks&amp;#34;: {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;start&amp;#34;: &amp;#34;deno run --allow-net index.ts&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;h3 id="probar-el-microservicio-localmente">Probar el microservicio localmente&lt;/h3>
+&lt;ol>
+&lt;li>Ejecuta la función localmente:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">func&lt;/span> &lt;span class="n">start&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>Accede a la URL generada, como &lt;code>http://localhost:7071/api/MyMicroservice&lt;/code>.&lt;/li>
+&lt;/ol>
+&lt;h2 id="despliegue-en-azure">Despliegue en Azure&lt;/h2>
+&lt;h3 id="paso-1-inicia-sesión-en-azure">Paso 1: Inicia sesión en Azure&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">az login
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="paso-2-crear-un-recurso-de-azure-functions">Paso 2: Crear un recurso de Azure Functions&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">az functionapp create --resource-group MyResourceGroup --consumption-plan-location eastus --runtime custom --functions-version 4 --name MyDenoFunctionApp --storage-account MyStorageAccount
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="paso-3-desplegar-la-función">Paso 3: Desplegar la función&lt;/h3>
+&lt;ol>
+&lt;li>Publica tu función:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">func azure functionapp publish MyDenoFunctionApp
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>Verifica que tu función esté activa visitando la URL proporcionada por Azure.&lt;/li>
+&lt;/ol>
+&lt;h2 id="buenas-prácticas">Buenas prácticas&lt;/h2>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Seguridad&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Limita los permisos en Deno para garantizar la seguridad.&lt;/li>
+&lt;li>Usa claves de API o tokens para proteger los endpoints.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Estructura del proyecto&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Organiza los microservicios en carpetas independientes para facilitar el mantenimiento.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Pruebas unitarias&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Usa bibliotecas como &lt;code>deno test&lt;/code> para escribir pruebas y asegurar la calidad del código.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Monitorización&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Configura Azure Monitor para supervisar el rendimiento y detectar errores.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Optimizar la ejecución&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Minimiza las dependencias externas y cachea resultados frecuentes.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="conclusión">Conclusión&lt;/h2>
+&lt;p>La combinación de &lt;strong>Deno&lt;/strong> y &lt;strong>Azure Functions&lt;/strong> ofrece una solución moderna y eficiente para construir microservicios escalables y seguros. Con las herramientas adecuadas, como &lt;strong>Visual Studio Code&lt;/strong>, y siguiendo buenas prácticas, puedes maximizar el potencial de tus proyectos serverless. Empieza hoy mismo a explorar estas tecnologías y lleva tus microservicios al siguiente nivel.&lt;/p></description></item><item><title>Integración de Angular con Azure Static Web Apps: Un caso práctico</title><link>https://cmas.dev/posts/2024-06-05-angular-integration-azure-static-web/</link><pubDate>Wed, 05 Jun 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-06-05-angular-integration-azure-static-web/</guid><description>&lt;p>En la era moderna del desarrollo web, la combinación de frameworks frontend como &lt;strong>Angular&lt;/strong> y servicios en la nube como &lt;strong>Azure Static Web Apps&lt;/strong> proporciona una solución eficiente y escalable para crear y desplegar aplicaciones. Este artículo explora cómo integrar &lt;strong>Angular&lt;/strong> con &lt;strong>Azure Static Web Apps&lt;/strong>, mostrando ejemplos prácticos, buenas prácticas y enfoques modernos y seguros para garantizar el éxito en tus proyectos.&lt;/p>
 &lt;h2 id="por-qué-elegir-angular-y-azure-static-web-apps">¿Por qué elegir Angular y Azure Static Web Apps?&lt;/h2>
 &lt;h3 id="ventajas-de-angular">Ventajas de Angular&lt;/h3>
 &lt;ol>

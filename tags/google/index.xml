@@ -1,4 +1,350 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Google on Christian Amado's Blog</title><link>https://cmas.dev/tags/google/</link><description>Recent content in Google on Christian Amado's Blog</description><generator>Hugo -- gohugo.io</generator><language>es</language><lastBuildDate>Wed, 17 Jul 2024 00:00:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/tags/google/index.xml" rel="self" type="application/rss+xml"/><item><title>.NET Web API con Proyecto IDX</title><link>https://cmas.dev/posts/2024-07-17-dotnet-project-idx/</link><pubDate>Wed, 17 Jul 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-07-17-dotnet-project-idx/</guid><description>&lt;p>En este artículo veremos cómo crear una Web API básica con el nuevo &lt;strong>Proyecto IDX&lt;/strong> de &lt;strong>Google&lt;/strong>, totalmente desde el navegador sin la necesidad de instalar absolutamente nada en él.&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Google on Christian Amado's Blog</title><link>https://cmas.dev/tags/google/</link><description>Recent content in Google on Christian Amado's Blog</description><generator>Hugo -- gohugo.io</generator><language>es</language><lastBuildDate>Wed, 07 Aug 2024 00:00:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/tags/google/index.xml" rel="self" type="application/rss+xml"/><item><title>Comparación: Angular Signals vs React Hooks</title><link>https://cmas.dev/posts/2024-08-07-angular-signals-vs-react-hooks/</link><pubDate>Wed, 07 Aug 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-08-07-angular-signals-vs-react-hooks/</guid><description>&lt;p>En el mundo del desarrollo frontend, los frameworks y bibliotecas como &lt;strong>Angular&lt;/strong> y &lt;strong>React&lt;/strong> han evolucionado constantemente para ofrecer soluciones más eficientes y escalables. Dos características destacadas de estas tecnologías son los &lt;em>Signals&lt;/em> de &lt;strong>Angular&lt;/strong> y los &lt;em>Hooks&lt;/em> de &lt;strong>React&lt;/strong>. Ambos conceptos están diseñados para manejar estados y mejorar la reactividad, pero lo hacen de maneras muy diferentes. Este artículo explora en profundidad ambas herramientas, sus similitudes, diferencias, ejemplos prácticos y buenas prácticas.&lt;/p>
+&lt;h2 id="qué-son-los-angular-signals">¿Qué son los Angular Signals?&lt;/h2>
+&lt;h3 id="definición">Definición&lt;/h3>
+&lt;p>Los Signals en Angular son una característica relativamente nueva que permite gestionar el estado y la reactividad en aplicaciones. Proporcionan una forma declarativa y eficiente de reaccionar a los cambios de estado mediante el uso de señales que notifican automáticamente a los componentes afectados.&lt;/p>
+&lt;h3 id="ventajas-de-angular-signals">Ventajas de Angular Signals&lt;/h3>
+&lt;ol>
+&lt;li>&lt;strong>Reactividad automática&lt;/strong>: Las actualizaciones de estado notifican automáticamente a los componentes dependientes.&lt;/li>
+&lt;li>&lt;strong>Optimización de rendimiento&lt;/strong>: Solo los componentes afectados se vuelven a renderizar.&lt;/li>
+&lt;li>&lt;strong>Facilidad de uso&lt;/strong>: Simplifican la gestión del estado global y local.&lt;/li>
+&lt;li>&lt;strong>Soporte nativo en Angular&lt;/strong>: Integración directa con el ecosistema Angular.&lt;/li>
+&lt;/ol>
+&lt;h3 id="ejemplo-básico-de-signals">Ejemplo básico de Signals&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="k">signal&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">computed&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;@angular/core&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">@&lt;/span>&lt;span class="n">Component&lt;/span>&lt;span class="p">({&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">selector&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;app-counter&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">template&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="err">`&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">h1&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="n">Contador&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{{&lt;/span> &lt;span class="n">count&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">}}&lt;/span>&lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">h1&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">button&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">click&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;increment()&amp;#34;&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="n">Incrementar&lt;/span>&lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">button&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="err">`&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">})&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="k">class&lt;/span> &lt;span class="n">CounterComponent&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">count&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">signal&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">increment&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">this&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">count&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">set&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">this&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">count&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>En este ejemplo, &lt;code>signal&lt;/code> define un estado reactivo que actualiza automáticamente la plantilla cuando cambia.&lt;/p>
+&lt;h2 id="qué-son-los-react-hooks">¿Qué son los React Hooks?&lt;/h2>
+&lt;h3 id="definición-1">Definición&lt;/h3>
+&lt;p>Los Hooks en React son funciones que permiten usar características de React, como el estado y el ciclo de vida, en componentes funcionales. Introducidos en React 16.8, han transformado la forma en que los desarrolladores construyen aplicaciones React modernas.&lt;/p>
+&lt;h3 id="ventajas-de-react-hooks">Ventajas de React Hooks&lt;/h3>
+&lt;ol>
+&lt;li>&lt;strong>Simplificación de componentes&lt;/strong>: Elimina la necesidad de clases.&lt;/li>
+&lt;li>&lt;strong>Flexibilidad&lt;/strong>: Permite combinar lógica de estado y efectos secundarios en un único componente.&lt;/li>
+&lt;li>&lt;strong>Reutilización de lógica&lt;/strong>: Los Hooks personalizados facilitan la reutilización de lógica en diferentes componentes.&lt;/li>
+&lt;li>&lt;strong>Compatibilidad total&lt;/strong>: Funcionan con todas las herramientas y bibliotecas del ecosistema React.&lt;/li>
+&lt;/ol>
+&lt;h3 id="ejemplo-básico-de-hooks">Ejemplo básico de Hooks&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="n">React&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">useState&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;react&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">function&lt;/span> &lt;span class="n">Counter&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">count&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">setCount&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">useState&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">div&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">h1&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="n">Contador&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{&lt;/span>&lt;span class="n">count&lt;/span>&lt;span class="p">}&lt;/span>&lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">h1&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">button&lt;/span> &lt;span class="n">onClick&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="p">{()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">setCount&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">count&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">)}&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="n">Incrementar&lt;/span>&lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">button&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">div&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="n">default&lt;/span> &lt;span class="n">Counter&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>En este ejemplo, &lt;code>useState&lt;/code> maneja el estado del contador y actualiza automáticamente el componente cuando cambia el estado.&lt;/p>
+&lt;h2 id="comparación-detallada-signals-vs-hooks">Comparación detallada: Signals vs Hooks&lt;/h2>
+&lt;h3 id="declaración-del-estado">Declaración del estado&lt;/h3>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Característica&lt;/th>
+&lt;th>Angular Signals&lt;/th>
+&lt;th>React Hooks&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>Declaración&lt;/td>
+&lt;td>&lt;code>signal(initialValue)&lt;/code>&lt;/td>
+&lt;td>&lt;code>useState(initialValue)&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Reactividad&lt;/td>
+&lt;td>Automática&lt;/td>
+&lt;td>Basada en cambios manuales&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Reutilización&lt;/td>
+&lt;td>Basada en servicios&lt;/td>
+&lt;td>Hooks personalizados&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h3 id="rendimiento">Rendimiento&lt;/h3>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Métrica&lt;/th>
+&lt;th>Angular Signals&lt;/th>
+&lt;th>React Hooks&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>Renderizados&lt;/td>
+&lt;td>Solo los componentes afectados&lt;/td>
+&lt;td>Puede incluir renders innecesarios&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Optimización&lt;/td>
+&lt;td>Nativa en el framework&lt;/td>
+&lt;td>Necesita memoización (e.g., &lt;code>useMemo&lt;/code>)&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h3 id="ejemplo-comparativo">Ejemplo comparativo&lt;/h3>
+&lt;h4 id="angular-signals">Angular Signals&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">Component&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="k">signal&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;@angular/core&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">@&lt;/span>&lt;span class="n">Component&lt;/span>&lt;span class="p">({&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">selector&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;app-signal-example&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">template&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="err">`&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">h1&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">{{&lt;/span> &lt;span class="n">message&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">}}&lt;/span>&lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">h1&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">button&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">click&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;updateMessage()&amp;#34;&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="n">Actualizar&lt;/span>&lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">button&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="err">`&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">})&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="k">class&lt;/span> &lt;span class="n">SignalExampleComponent&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">message&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">signal&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;Hola, Angular Signals!&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">updateMessage&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">this&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">message&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">set&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;Mensaje actualizado con Signals!&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="react-hooks">React Hooks&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="n">React&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">useState&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;react&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">function&lt;/span> &lt;span class="n">HooksExample&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">message&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">setMessage&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">useState&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;Hola, React Hooks!&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">div&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">h1&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="n">message&lt;/span>&lt;span class="p">}&lt;/span>&lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">h1&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">button&lt;/span> &lt;span class="n">onClick&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="p">{()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">setMessage&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;Mensaje actualizado con Hooks!&amp;#39;&lt;/span>&lt;span class="p">)}&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="n">Actualizar&lt;/span>&lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">button&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">div&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="n">default&lt;/span> &lt;span class="n">HooksExample&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="buenas-prácticas">Buenas prácticas&lt;/h2>
+&lt;h3 id="angular-signals-1">Angular Signals&lt;/h3>
+&lt;ol>
+&lt;li>&lt;strong>Evitar dependencias circulares&lt;/strong>:
+&lt;ul>
+&lt;li>Mantén las señales independientes para evitar bucles infinitos.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>Usar &lt;code>computed&lt;/code> para cálculos derivados&lt;/strong>:
+&lt;ul>
+&lt;li>Reduce lógica repetitiva y mejora la legibilidad del código.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>Inyectar servicios para estado global&lt;/strong>:
+&lt;ul>
+&lt;li>Mantén el estado compartido en servicios Angular.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h3 id="react-hooks-1">React Hooks&lt;/h3>
+&lt;ol>
+&lt;li>&lt;strong>Usar Hooks personalizados&lt;/strong>:
+&lt;ul>
+&lt;li>Encapsula lógica repetitiva para mejorar la reutilización.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>Memoizar funciones&lt;/strong>:
+&lt;ul>
+&lt;li>Usa &lt;code>useMemo&lt;/code> y &lt;code>useCallback&lt;/code> para evitar renderizados innecesarios.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>Separar efectos&lt;/strong>:
+&lt;ul>
+&lt;li>Divide los efectos secundarios en múltiples llamadas a &lt;code>useEffect&lt;/code> para mantener la claridad.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="conclusión">Conclusión&lt;/h2>
+&lt;p>Tanto Angular Signals como React Hooks son herramientas poderosas que abordan problemas similares en el manejo del estado y la reactividad, pero con enfoques diferentes. Mientras que Signals enfatiza la simplicidad y el rendimiento nativo en Angular, Hooks ofrece flexibilidad y compatibilidad total con el ecosistema React. La elección entre ambos dependerá del framework que estés utilizando y de las necesidades específicas de tu proyecto.&lt;/p></description></item><item><title>Optimización de Angular Universal para SEO y rendimiento</title><link>https://cmas.dev/posts/2024-07-31-angular-seo/</link><pubDate>Wed, 31 Jul 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-07-31-angular-seo/</guid><description>&lt;p>&lt;strong>Angular Universal&lt;/strong> es una herramienta poderosa que permite realizar el renderizado del lado del servidor (SSR, por sus siglas en inglés) en aplicaciones &lt;strong>Angular&lt;/strong>. Esto no solo mejora la experiencia del usuario, sino que también optimiza la aplicación para motores de búsqueda (SEO) y mejora significativamente el rendimiento. Este artículo explora cómo optimizar &lt;strong>Angular Universal&lt;/strong> para &lt;strong>SEO&lt;/strong> y rendimiento con ejemplos prácticos y buenas prácticas.&lt;/p>
+&lt;h2 id="qué-es-angular-universal">¿Qué es Angular Universal?&lt;/h2>
+&lt;p>&lt;strong>Angular Universal&lt;/strong> es una tecnología que permite renderizar aplicaciones &lt;strong>Angular&lt;/strong> en el servidor antes de enviarlas al cliente. Esto ayuda a los motores de búsqueda y a las redes sociales a indexar correctamente las páginas y a mejorar el tiempo de carga inicial de la aplicación.&lt;/p>
+&lt;h3 id="beneficios-de-angular-universal">Beneficios de Angular Universal&lt;/h3>
+&lt;ol>
+&lt;li>&lt;strong>Mejoras en SEO&lt;/strong>: Permite que los motores de búsqueda indexen contenido dinámico.&lt;/li>
+&lt;li>&lt;strong>Rendimiento mejorado&lt;/strong>: Reduce el tiempo hasta el primer renderizado.&lt;/li>
+&lt;li>&lt;strong>Compartibilidad social&lt;/strong>: Genera metadatos dinámicos para compartir en redes sociales.&lt;/li>
+&lt;li>&lt;strong>Compatibilidad&lt;/strong>: Funciona en navegadores sin soporte para JavaScript habilitado.&lt;/li>
+&lt;/ol>
+&lt;h2 id="configuración-de-angular-universal">Configuración de Angular Universal&lt;/h2>
+&lt;h3 id="requisitos-previos">Requisitos previos&lt;/h3>
+&lt;ol>
+&lt;li>Tener Angular CLI instalado:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">npm install -g @angular/cli
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>Crear o tener un proyecto Angular existente.&lt;/li>
+&lt;/ol>
+&lt;h3 id="agregar-angular-universal-a-tu-proyecto">Agregar Angular Universal a tu proyecto&lt;/h3>
+&lt;ol>
+&lt;li>
+&lt;p>Ejecuta el siguiente comando para agregar Angular Universal:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">ng add @nguniversal/express-engine
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Esto configura automáticamente los archivos necesarios y agrega soporte para SSR.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Verifica que se hayan creado los siguientes archivos:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>server.ts&lt;/code>: El punto de entrada para el servidor.&lt;/li>
+&lt;li>&lt;code>angular.json&lt;/code>: Actualizado con las configuraciones de SSR.&lt;/li>
+&lt;li>&lt;code>main.server.ts&lt;/code>: El módulo principal para la ejecución del servidor.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h3 id="ejecutar-la-aplicación-en-modo-ssr">Ejecutar la aplicación en modo SSR&lt;/h3>
+&lt;ol>
+&lt;li>
+&lt;p>Construye la aplicación para SSR:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">npm run build:ssr
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>Sirve la aplicación:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">npm run serve:ssr
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Visita &lt;code>http://localhost:4000&lt;/code> para verificar que la aplicación se renderice del lado del servidor.&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="optimización-para-seo">Optimización para SEO&lt;/h2>
+&lt;h3 id="implementar-metadatos-dinámicos">Implementar metadatos dinámicos&lt;/h3>
+&lt;ol>
+&lt;li>
+&lt;p>Usa el servicio &lt;code>Meta&lt;/code> para actualizar los metadatos de la página:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">Component&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;@angular/core&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">Meta&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">Title&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;@angular/platform-browser&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">@&lt;/span>&lt;span class="n">Component&lt;/span>&lt;span class="p">({&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">selector&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;app-home&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">templateUrl&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;./home.component.html&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">})&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="k">class&lt;/span> &lt;span class="n">HomeComponent&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">constructor&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">private&lt;/span> &lt;span class="n">meta&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">Meta&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">private&lt;/span> &lt;span class="n">title&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">Title&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">this&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">title&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">setTitle&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;Página de inicio - Mi Aplicación&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">this&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">meta&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">addTags&lt;/span>&lt;span class="p">([&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span> &lt;span class="n">name&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;description&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">content&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;Bienvenido a nuestra aplicación optimizada para SEO.&amp;#39;&lt;/span> &lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span> &lt;span class="n">name&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;keywords&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">content&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;Angular, SEO, Universal&amp;#39;&lt;/span> &lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">]);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>Asegúrate de que cada página tenga un título único y metadatos relevantes.&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h3 id="crear-un-archivo-robotstxt">Crear un archivo &lt;code>robots.txt&lt;/code>&lt;/h3>
+&lt;ol>
+&lt;li>
+&lt;p>Crea un archivo &lt;code>src/assets/robots.txt&lt;/code> con las siguientes líneas:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">User-agent: *
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Allow: /
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>Incluye el archivo en el proceso de construcción:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;assets&amp;#34;: [
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;src/assets&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;src/robots.txt&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;h3 id="agregar-un-sitemapxml">Agregar un &lt;code>sitemap.xml&lt;/code>&lt;/h3>
+&lt;ol>
+&lt;li>Usa herramientas como &lt;a href="https://www.xml-sitemaps.com/">Sitemap Generator&lt;/a> para crear un archivo &lt;code>sitemap.xml&lt;/code>.&lt;/li>
+&lt;li>Inclúyelo en la carpeta &lt;code>src/assets&lt;/code> y asegúrate de que esté accesible desde el servidor.&lt;/li>
+&lt;/ol>
+&lt;h2 id="optimización-para-rendimiento">Optimización para rendimiento&lt;/h2>
+&lt;h3 id="lazy-loading">Lazy Loading&lt;/h3>
+&lt;p>Divide tu aplicación en módulos cargados bajo demanda:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>Configura módulos con lazy loading:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">routes&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">Routes&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">path&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;feature&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">loadChildren&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">import&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;./feature/feature.module&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">then&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">m&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">m&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">FeatureModule&lt;/span>&lt;span class="p">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">];&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>Verifica que cada módulo solo se cargue cuando sea necesario.&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h3 id="implementar-precarga">Implementar precarga&lt;/h3>
+&lt;ol>
+&lt;li>
+&lt;p>Usa el servicio de precarga predeterminado de Angular:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">RouterModule&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">forRoot&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">routes&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">preloadingStrategy&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">PreloadAllModules&lt;/span> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>Asegúrate de que los módulos importantes se carguen rápidamente.&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h3 id="compresión-de-archivos">Compresión de archivos&lt;/h3>
+&lt;ol>
+&lt;li>Configura el servidor para servir archivos comprimidos con Gzip o Brotli.&lt;/li>
+&lt;li>Usa herramientas como &lt;code>webpack-bundle-analyzer&lt;/code> para reducir el tamaño de los paquetes.&lt;/li>
+&lt;/ol>
+&lt;h3 id="caché-en-el-servidor">Caché en el servidor&lt;/h3>
+&lt;ol>
+&lt;li>
+&lt;p>Configura el caché para recursos estáticos y dinámicos:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">server.use(express.static(&amp;#39;dist/browser&amp;#39;, { maxAge: &amp;#39;1y&amp;#39; }));
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>Usa Service Workers para manejar la caché del lado del cliente.&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="buenas-prácticas">Buenas prácticas&lt;/h2>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Mantener URLs amigables&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Usa URLs descriptivas y evita parámetros innecesarios.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Evitar contenido duplicado&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Configura etiquetas &lt;code>canonical&lt;/code> para páginas duplicadas.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Supervisar el rendimiento&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Usa herramientas como Lighthouse y PageSpeed Insights para identificar áreas de mejora.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Pruebas regulares&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Verifica que los motores de búsqueda indexen correctamente tu aplicación.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Minimizar recursos&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Usa imágenes optimizadas y minimiza los archivos CSS y JavaScript.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="conclusión">Conclusión&lt;/h2>
+&lt;p>Optimizar &lt;strong>Angular Universal&lt;/strong> para &lt;strong>SEO&lt;/strong> y rendimiento no solo mejora la experiencia del usuario, sino que también garantiza que tu aplicación sea accesible y visible para los motores de búsqueda. Siguiendo las buenas prácticas y utilizando las herramientas adecuadas, puedes maximizar el potencial de tu aplicación y destacarte en un entorno web competitivo. ¡Comienza hoy mismo y lleva tu aplicación Angular al siguiente nivel!&lt;/p></description></item><item><title>.NET Web API con Proyecto IDX</title><link>https://cmas.dev/posts/2024-07-17-dotnet-project-idx/</link><pubDate>Wed, 17 Jul 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-07-17-dotnet-project-idx/</guid><description>&lt;p>En este artículo veremos cómo crear una Web API básica con el nuevo &lt;strong>Proyecto IDX&lt;/strong> de &lt;strong>Google&lt;/strong>, totalmente desde el navegador sin la necesidad de instalar absolutamente nada en él.&lt;/p>
 &lt;p>El &lt;strong>Proyecto IDX&lt;/strong>, según &lt;strong>Google&lt;/strong> es:&lt;/p>
 &lt;blockquote>
 &lt;p>Project IDX es un espacio de trabajo asistido por IA para el desarrollo de aplicaciones multiplataforma y de pila completa en la nube.

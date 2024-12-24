@@ -147,7 +147,641 @@
 &lt;li>&lt;strong>Curva de aprendizaje&lt;/strong> para desarrolladores nuevos en &lt;strong>.NET&lt;/strong>.&lt;/li>
 &lt;/ol>
 &lt;h2 id="conclusión">Conclusión&lt;/h2>
-&lt;p>Combinar las capacidades de &lt;strong>Blazor&lt;/strong> y &lt;strong>PWAs&lt;/strong> permite a los desarrolladores crear aplicaciones modernas y escalables que funcionan offline, se pueden instalar y ofrecen una experiencia de usuario mejorada. Aunque existen algunas limitaciones, las ventajas de usar &lt;strong>Blazor&lt;/strong> con &lt;strong>PWA&lt;/strong> superan ampliamente los desafíos, especialmente para equipos que ya utilizan &lt;strong>.NET&lt;/strong> en su flujo de desarrollo. ¡Explora las posibilidades de &lt;strong>Blazor&lt;/strong> para &lt;strong>PWAs&lt;/strong> y lleva tus aplicaciones web al siguiente nivel!&lt;/p></description></item><item><title>.NET Web API con Proyecto IDX</title><link>https://cmas.dev/posts/2024-07-17-dotnet-project-idx/</link><pubDate>Wed, 17 Jul 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-07-17-dotnet-project-idx/</guid><description>&lt;p>En este artículo veremos cómo crear una Web API básica con el nuevo &lt;strong>Proyecto IDX&lt;/strong> de &lt;strong>Google&lt;/strong>, totalmente desde el navegador sin la necesidad de instalar absolutamente nada en él.&lt;/p>
+&lt;p>Combinar las capacidades de &lt;strong>Blazor&lt;/strong> y &lt;strong>PWAs&lt;/strong> permite a los desarrolladores crear aplicaciones modernas y escalables que funcionan offline, se pueden instalar y ofrecen una experiencia de usuario mejorada. Aunque existen algunas limitaciones, las ventajas de usar &lt;strong>Blazor&lt;/strong> con &lt;strong>PWA&lt;/strong> superan ampliamente los desafíos, especialmente para equipos que ya utilizan &lt;strong>.NET&lt;/strong> en su flujo de desarrollo. ¡Explora las posibilidades de &lt;strong>Blazor&lt;/strong> para &lt;strong>PWAs&lt;/strong> y lleva tus aplicaciones web al siguiente nivel!&lt;/p></description></item><item><title>Decoradores avanzados en TypeScript: Mejora tu código</title><link>https://cmas.dev/posts/2024-08-14-decorators-typescript/</link><pubDate>Wed, 14 Aug 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-08-14-decorators-typescript/</guid><description>&lt;p>Los decoradores son una característica poderosa y avanzada de &lt;strong>TypeScript&lt;/strong> que permiten modificar el comportamiento de clases, métodos, propiedades y parámetros de una forma declarativa. Son ampliamente utilizados en frameworks como Angular, pero también pueden emplearse en proyectos personalizados para mejorar la reutilización y la claridad del código. En este artículo exploraremos los decoradores avanzados en &lt;strong>TypeScript&lt;/strong>, sus usos más comunes, cómo crearlos desde cero, y las mejores prácticas para implementarlos.&lt;/p>
+&lt;h2 id="introducción-a-los-decoradores">Introducción a los decoradores&lt;/h2>
+&lt;h3 id="qué-son-los-decoradores">¿Qué son los decoradores?&lt;/h3>
+&lt;p>Un decorador es una función especial que puede adjuntarse a una clase, método, accesor, propiedad o parámetro. Proporcionan una forma de agregar meta-programación a tu código, es decir, modificar su comportamiento sin cambiar su estructura básica.&lt;/p>
+&lt;h3 id="tipos-de-decoradores-en-typescript">Tipos de decoradores en TypeScript&lt;/h3>
+&lt;ol>
+&lt;li>&lt;strong>Decoradores de clases&lt;/strong>:
+&lt;ul>
+&lt;li>Aplicados a clases completas para modificar su estructura o comportamiento.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>Decoradores de métodos&lt;/strong>:
+&lt;ul>
+&lt;li>Aplicados a métodos de clase para interceptar, modificar o registrar su ejecución.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>Decoradores de propiedades&lt;/strong>:
+&lt;ul>
+&lt;li>Aplicados a propiedades de clase para añadir lógica adicional al acceso o modificación del valor.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>Decoradores de parámetros&lt;/strong>:
+&lt;ul>
+&lt;li>Aplicados a parámetros de métodos para realizar validaciones o registrar su uso.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h3 id="habilitar-decoradores-en-typescript">Habilitar decoradores en TypeScript&lt;/h3>
+&lt;p>Para usar decoradores, es necesario habilitar la opción &lt;code>experimentalDecorators&lt;/code> en el archivo &lt;code>tsconfig.json&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;compilerOptions&amp;#34;: {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;experimentalDecorators&amp;#34;: true
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="decoradores-de-clases">Decoradores de clases&lt;/h2>
+&lt;p>Un decorador de clase se aplica a la definición de una clase completa. Es ideal para añadir funcionalidades transversales como registros o validaciones.&lt;/p>
+&lt;h3 id="ejemplo-básico">Ejemplo básico&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">function&lt;/span> &lt;span class="n">LogClass&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">target&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">Function&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">console&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="err">`&lt;/span>&lt;span class="n">Clase&lt;/span> &lt;span class="n">decorada&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="n">target&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">name&lt;/span>&lt;span class="p">}&lt;/span>&lt;span class="err">`&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">@&lt;/span>&lt;span class="n">LogClass&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">class&lt;/span> &lt;span class="n">MyClass&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">constructor&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">console&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;Instancia creada&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">instance&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">MyClass&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="resultado">Resultado&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">Clase decorada: MyClass
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Instancia creada
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="uso-avanzado-agregar-metadatos">Uso avanzado: Agregar metadatos&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">function&lt;/span> &lt;span class="n">AddMetadata&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">metadata&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">any&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">function&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">target&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">Function&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">target&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">prototype&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">metadata&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">metadata&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">@&lt;/span>&lt;span class="n">AddMetadata&lt;/span>&lt;span class="p">({&lt;/span> &lt;span class="n">role&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;admin&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">permissions&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;read&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;write&amp;#39;&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="p">})&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">class&lt;/span> &lt;span class="n">User&lt;/span> &lt;span class="p">{}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">user&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">User&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">console&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">user&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;metadata&amp;#39;&lt;/span>&lt;span class="p">]);&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="decoradores-de-métodos">Decoradores de métodos&lt;/h2>
+&lt;p>Permiten interceptar y modificar la ejecución de un método. Esto es útil para agregar registros, manejo de errores o validaciones.&lt;/p>
+&lt;h3 id="ejemplo-registro-de-ejecución">Ejemplo: Registro de ejecución&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">function&lt;/span> &lt;span class="n">LogMethod&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">target&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">any&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">propertyKey&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">string&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">descriptor&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">PropertyDescriptor&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="n">originalMethod&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">descriptor&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">value&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">descriptor&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">value&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">function&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="o">...&lt;/span>&lt;span class="n">args&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">any&lt;/span>&lt;span class="p">[])&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">console&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="err">`&lt;/span>&lt;span class="n">Método&lt;/span> &lt;span class="n">ejecutado&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="n">propertyKey&lt;/span>&lt;span class="p">},&lt;/span> &lt;span class="n">con&lt;/span> &lt;span class="n">argumentos&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="n">args&lt;/span>&lt;span class="p">}&lt;/span>&lt;span class="err">`&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">originalMethod&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">apply&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">this&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">args&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">class&lt;/span> &lt;span class="n">Calculator&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="err">@&lt;/span>&lt;span class="n">LogMethod&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">add&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">a&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">number&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">b&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">number&lt;/span>&lt;span class="p">):&lt;/span> &lt;span class="n">number&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">a&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="n">b&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">calc&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">Calculator&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">calc&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">add&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">2&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">3&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="resultado-1">Resultado&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">Método ejecutado: add, con argumentos: 2,3
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="decoradores-de-propiedades">Decoradores de propiedades&lt;/h2>
+&lt;p>Permiten personalizar el comportamiento de las propiedades de clase, por ejemplo, agregando validaciones o valores predeterminados.&lt;/p>
+&lt;h3 id="ejemplo-validar-propiedades">Ejemplo: Validar propiedades&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">function&lt;/span> &lt;span class="n">MinLength&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">length&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">number&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">function&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">target&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">any&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">propertyKey&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">string&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">let&lt;/span> &lt;span class="n">value&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">string&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="ne">Object&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">defineProperty&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">target&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">propertyKey&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">get&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">value&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">set&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">newValue&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">string&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">newValue&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">length&lt;/span> &lt;span class="o">&amp;lt;&lt;/span> &lt;span class="n">length&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">throw&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">Error&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="err">`&lt;/span>&lt;span class="n">La&lt;/span> &lt;span class="n">longitud&lt;/span> &lt;span class="n">mínima&lt;/span> &lt;span class="n">de&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="n">propertyKey&lt;/span>&lt;span class="p">}&lt;/span> &lt;span class="n">es&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="n">length&lt;/span>&lt;span class="p">}&lt;/span>&lt;span class="err">`&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">value&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">newValue&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">class&lt;/span> &lt;span class="n">User&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="err">@&lt;/span>&lt;span class="n">MinLength&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">5&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">username&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">string&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">user&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">User&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">user&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">username&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;John&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="o">//&lt;/span> &lt;span class="n">Error&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">La&lt;/span> &lt;span class="n">longitud&lt;/span> &lt;span class="n">mínima&lt;/span> &lt;span class="n">de&lt;/span> &lt;span class="n">username&lt;/span> &lt;span class="n">es&lt;/span> &lt;span class="mi">5&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="decoradores-de-parámetros">Decoradores de parámetros&lt;/h2>
+&lt;p>Estos decoradores son útiles para realizar validaciones en los parámetros de métodos.&lt;/p>
+&lt;h3 id="ejemplo-validación-de-parámetros">Ejemplo: Validación de parámetros&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">function&lt;/span> &lt;span class="n">Validate&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">target&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">any&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">propertyKey&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">string&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">parameterIndex&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">number&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="n">existingRequiredParameters&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">number&lt;/span>&lt;span class="p">[]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">Reflect&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">getOwnMetadata&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;required&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">target&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">propertyKey&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">||&lt;/span> &lt;span class="p">[];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">existingRequiredParameters&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">push&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">parameterIndex&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Reflect&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">defineMetadata&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;required&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">existingRequiredParameters&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">target&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">propertyKey&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">class&lt;/span> &lt;span class="n">OrderService&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">processOrder&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="err">@&lt;/span>&lt;span class="n">Validate&lt;/span> &lt;span class="n">orderId&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">string&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">console&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="err">`&lt;/span>&lt;span class="n">Procesando&lt;/span> &lt;span class="n">orden&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="n">orderId&lt;/span>&lt;span class="p">}&lt;/span>&lt;span class="err">`&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="buenas-prácticas-con-decoradores">Buenas prácticas con decoradores&lt;/h2>
+&lt;ol>
+&lt;li>&lt;strong>Mantén los decoradores reutilizables&lt;/strong>:
+&lt;ul>
+&lt;li>Diseña decoradores genéricos que puedan ser aplicados en múltiples contextos.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>Evita la lógica compleja&lt;/strong>:
+&lt;ul>
+&lt;li>Mantén los decoradores simples y delega la lógica compleja a otras partes del código.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>Documenta los decoradores&lt;/strong>:
+&lt;ul>
+&lt;li>Proporciona descripciones claras sobre el propósito y uso de cada decorador.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>Combina decoradores con metadatos&lt;/strong>:
+&lt;ul>
+&lt;li>Usa bibliotecas como &lt;code>reflect-metadata&lt;/code> para almacenar y acceder a metadatos en tiempo de ejecución.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>Prueba los decoradores&lt;/strong>:
+&lt;ul>
+&lt;li>Escribe pruebas unitarias para garantizar que los decoradores funcionen correctamente en diferentes escenarios.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="conclusión">Conclusión&lt;/h2>
+&lt;p>Los decoradores en TypeScript son una herramienta poderosa que puede transformar la forma en que organizas y escribes tu código. Desde agregar metadatos hasta interceptar métodos y propiedades, ofrecen una manera elegante y declarativa de manejar lógica transversal. Siguiendo las buenas prácticas y explorando casos de uso avanzados, puedes aprovechar al máximo esta característica y llevar tu desarrollo TypeScript al siguiente nivel.&lt;/p></description></item><item><title>Comparación: Angular Signals vs React Hooks</title><link>https://cmas.dev/posts/2024-08-07-angular-signals-vs-react-hooks/</link><pubDate>Wed, 07 Aug 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-08-07-angular-signals-vs-react-hooks/</guid><description>&lt;p>En el mundo del desarrollo frontend, los frameworks y bibliotecas como &lt;strong>Angular&lt;/strong> y &lt;strong>React&lt;/strong> han evolucionado constantemente para ofrecer soluciones más eficientes y escalables. Dos características destacadas de estas tecnologías son los &lt;em>Signals&lt;/em> de &lt;strong>Angular&lt;/strong> y los &lt;em>Hooks&lt;/em> de &lt;strong>React&lt;/strong>. Ambos conceptos están diseñados para manejar estados y mejorar la reactividad, pero lo hacen de maneras muy diferentes. Este artículo explora en profundidad ambas herramientas, sus similitudes, diferencias, ejemplos prácticos y buenas prácticas.&lt;/p>
+&lt;h2 id="qué-son-los-angular-signals">¿Qué son los Angular Signals?&lt;/h2>
+&lt;h3 id="definición">Definición&lt;/h3>
+&lt;p>Los Signals en Angular son una característica relativamente nueva que permite gestionar el estado y la reactividad en aplicaciones. Proporcionan una forma declarativa y eficiente de reaccionar a los cambios de estado mediante el uso de señales que notifican automáticamente a los componentes afectados.&lt;/p>
+&lt;h3 id="ventajas-de-angular-signals">Ventajas de Angular Signals&lt;/h3>
+&lt;ol>
+&lt;li>&lt;strong>Reactividad automática&lt;/strong>: Las actualizaciones de estado notifican automáticamente a los componentes dependientes.&lt;/li>
+&lt;li>&lt;strong>Optimización de rendimiento&lt;/strong>: Solo los componentes afectados se vuelven a renderizar.&lt;/li>
+&lt;li>&lt;strong>Facilidad de uso&lt;/strong>: Simplifican la gestión del estado global y local.&lt;/li>
+&lt;li>&lt;strong>Soporte nativo en Angular&lt;/strong>: Integración directa con el ecosistema Angular.&lt;/li>
+&lt;/ol>
+&lt;h3 id="ejemplo-básico-de-signals">Ejemplo básico de Signals&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="k">signal&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">computed&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;@angular/core&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">@&lt;/span>&lt;span class="n">Component&lt;/span>&lt;span class="p">({&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">selector&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;app-counter&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">template&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="err">`&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">h1&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="n">Contador&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{{&lt;/span> &lt;span class="n">count&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">}}&lt;/span>&lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">h1&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">button&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">click&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;increment()&amp;#34;&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="n">Incrementar&lt;/span>&lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">button&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="err">`&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">})&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="k">class&lt;/span> &lt;span class="n">CounterComponent&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">count&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">signal&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">increment&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">this&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">count&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">set&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">this&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">count&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>En este ejemplo, &lt;code>signal&lt;/code> define un estado reactivo que actualiza automáticamente la plantilla cuando cambia.&lt;/p>
+&lt;h2 id="qué-son-los-react-hooks">¿Qué son los React Hooks?&lt;/h2>
+&lt;h3 id="definición-1">Definición&lt;/h3>
+&lt;p>Los Hooks en React son funciones que permiten usar características de React, como el estado y el ciclo de vida, en componentes funcionales. Introducidos en React 16.8, han transformado la forma en que los desarrolladores construyen aplicaciones React modernas.&lt;/p>
+&lt;h3 id="ventajas-de-react-hooks">Ventajas de React Hooks&lt;/h3>
+&lt;ol>
+&lt;li>&lt;strong>Simplificación de componentes&lt;/strong>: Elimina la necesidad de clases.&lt;/li>
+&lt;li>&lt;strong>Flexibilidad&lt;/strong>: Permite combinar lógica de estado y efectos secundarios en un único componente.&lt;/li>
+&lt;li>&lt;strong>Reutilización de lógica&lt;/strong>: Los Hooks personalizados facilitan la reutilización de lógica en diferentes componentes.&lt;/li>
+&lt;li>&lt;strong>Compatibilidad total&lt;/strong>: Funcionan con todas las herramientas y bibliotecas del ecosistema React.&lt;/li>
+&lt;/ol>
+&lt;h3 id="ejemplo-básico-de-hooks">Ejemplo básico de Hooks&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="n">React&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">useState&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;react&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">function&lt;/span> &lt;span class="n">Counter&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">count&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">setCount&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">useState&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">div&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">h1&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="n">Contador&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{&lt;/span>&lt;span class="n">count&lt;/span>&lt;span class="p">}&lt;/span>&lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">h1&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">button&lt;/span> &lt;span class="n">onClick&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="p">{()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">setCount&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">count&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">)}&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="n">Incrementar&lt;/span>&lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">button&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">div&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="n">default&lt;/span> &lt;span class="n">Counter&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>En este ejemplo, &lt;code>useState&lt;/code> maneja el estado del contador y actualiza automáticamente el componente cuando cambia el estado.&lt;/p>
+&lt;h2 id="comparación-detallada-signals-vs-hooks">Comparación detallada: Signals vs Hooks&lt;/h2>
+&lt;h3 id="declaración-del-estado">Declaración del estado&lt;/h3>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Característica&lt;/th>
+&lt;th>Angular Signals&lt;/th>
+&lt;th>React Hooks&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>Declaración&lt;/td>
+&lt;td>&lt;code>signal(initialValue)&lt;/code>&lt;/td>
+&lt;td>&lt;code>useState(initialValue)&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Reactividad&lt;/td>
+&lt;td>Automática&lt;/td>
+&lt;td>Basada en cambios manuales&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Reutilización&lt;/td>
+&lt;td>Basada en servicios&lt;/td>
+&lt;td>Hooks personalizados&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h3 id="rendimiento">Rendimiento&lt;/h3>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Métrica&lt;/th>
+&lt;th>Angular Signals&lt;/th>
+&lt;th>React Hooks&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>Renderizados&lt;/td>
+&lt;td>Solo los componentes afectados&lt;/td>
+&lt;td>Puede incluir renders innecesarios&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Optimización&lt;/td>
+&lt;td>Nativa en el framework&lt;/td>
+&lt;td>Necesita memoización (e.g., &lt;code>useMemo&lt;/code>)&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h3 id="ejemplo-comparativo">Ejemplo comparativo&lt;/h3>
+&lt;h4 id="angular-signals">Angular Signals&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">Component&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="k">signal&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;@angular/core&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">@&lt;/span>&lt;span class="n">Component&lt;/span>&lt;span class="p">({&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">selector&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;app-signal-example&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">template&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="err">`&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">h1&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">{{&lt;/span> &lt;span class="n">message&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">}}&lt;/span>&lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">h1&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">button&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">click&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;updateMessage()&amp;#34;&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="n">Actualizar&lt;/span>&lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">button&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="err">`&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">})&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="k">class&lt;/span> &lt;span class="n">SignalExampleComponent&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">message&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">signal&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;Hola, Angular Signals!&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">updateMessage&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">this&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">message&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">set&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;Mensaje actualizado con Signals!&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="react-hooks">React Hooks&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="n">React&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">useState&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;react&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">function&lt;/span> &lt;span class="n">HooksExample&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">message&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">setMessage&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">useState&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;Hola, React Hooks!&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">div&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">h1&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="n">message&lt;/span>&lt;span class="p">}&lt;/span>&lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">h1&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">button&lt;/span> &lt;span class="n">onClick&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="p">{()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">setMessage&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;Mensaje actualizado con Hooks!&amp;#39;&lt;/span>&lt;span class="p">)}&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="n">Actualizar&lt;/span>&lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">button&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">div&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="n">default&lt;/span> &lt;span class="n">HooksExample&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="buenas-prácticas">Buenas prácticas&lt;/h2>
+&lt;h3 id="angular-signals-1">Angular Signals&lt;/h3>
+&lt;ol>
+&lt;li>&lt;strong>Evitar dependencias circulares&lt;/strong>:
+&lt;ul>
+&lt;li>Mantén las señales independientes para evitar bucles infinitos.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>Usar &lt;code>computed&lt;/code> para cálculos derivados&lt;/strong>:
+&lt;ul>
+&lt;li>Reduce lógica repetitiva y mejora la legibilidad del código.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>Inyectar servicios para estado global&lt;/strong>:
+&lt;ul>
+&lt;li>Mantén el estado compartido en servicios Angular.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h3 id="react-hooks-1">React Hooks&lt;/h3>
+&lt;ol>
+&lt;li>&lt;strong>Usar Hooks personalizados&lt;/strong>:
+&lt;ul>
+&lt;li>Encapsula lógica repetitiva para mejorar la reutilización.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>Memoizar funciones&lt;/strong>:
+&lt;ul>
+&lt;li>Usa &lt;code>useMemo&lt;/code> y &lt;code>useCallback&lt;/code> para evitar renderizados innecesarios.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>Separar efectos&lt;/strong>:
+&lt;ul>
+&lt;li>Divide los efectos secundarios en múltiples llamadas a &lt;code>useEffect&lt;/code> para mantener la claridad.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="conclusión">Conclusión&lt;/h2>
+&lt;p>Tanto Angular Signals como React Hooks son herramientas poderosas que abordan problemas similares en el manejo del estado y la reactividad, pero con enfoques diferentes. Mientras que Signals enfatiza la simplicidad y el rendimiento nativo en Angular, Hooks ofrece flexibilidad y compatibilidad total con el ecosistema React. La elección entre ambos dependerá del framework que estés utilizando y de las necesidades específicas de tu proyecto.&lt;/p></description></item><item><title>Optimización de Angular Universal para SEO y rendimiento</title><link>https://cmas.dev/posts/2024-07-31-angular-seo/</link><pubDate>Wed, 31 Jul 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-07-31-angular-seo/</guid><description>&lt;p>&lt;strong>Angular Universal&lt;/strong> es una herramienta poderosa que permite realizar el renderizado del lado del servidor (SSR, por sus siglas en inglés) en aplicaciones &lt;strong>Angular&lt;/strong>. Esto no solo mejora la experiencia del usuario, sino que también optimiza la aplicación para motores de búsqueda (SEO) y mejora significativamente el rendimiento. Este artículo explora cómo optimizar &lt;strong>Angular Universal&lt;/strong> para &lt;strong>SEO&lt;/strong> y rendimiento con ejemplos prácticos y buenas prácticas.&lt;/p>
+&lt;h2 id="qué-es-angular-universal">¿Qué es Angular Universal?&lt;/h2>
+&lt;p>&lt;strong>Angular Universal&lt;/strong> es una tecnología que permite renderizar aplicaciones &lt;strong>Angular&lt;/strong> en el servidor antes de enviarlas al cliente. Esto ayuda a los motores de búsqueda y a las redes sociales a indexar correctamente las páginas y a mejorar el tiempo de carga inicial de la aplicación.&lt;/p>
+&lt;h3 id="beneficios-de-angular-universal">Beneficios de Angular Universal&lt;/h3>
+&lt;ol>
+&lt;li>&lt;strong>Mejoras en SEO&lt;/strong>: Permite que los motores de búsqueda indexen contenido dinámico.&lt;/li>
+&lt;li>&lt;strong>Rendimiento mejorado&lt;/strong>: Reduce el tiempo hasta el primer renderizado.&lt;/li>
+&lt;li>&lt;strong>Compartibilidad social&lt;/strong>: Genera metadatos dinámicos para compartir en redes sociales.&lt;/li>
+&lt;li>&lt;strong>Compatibilidad&lt;/strong>: Funciona en navegadores sin soporte para JavaScript habilitado.&lt;/li>
+&lt;/ol>
+&lt;h2 id="configuración-de-angular-universal">Configuración de Angular Universal&lt;/h2>
+&lt;h3 id="requisitos-previos">Requisitos previos&lt;/h3>
+&lt;ol>
+&lt;li>Tener Angular CLI instalado:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">npm install -g @angular/cli
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>Crear o tener un proyecto Angular existente.&lt;/li>
+&lt;/ol>
+&lt;h3 id="agregar-angular-universal-a-tu-proyecto">Agregar Angular Universal a tu proyecto&lt;/h3>
+&lt;ol>
+&lt;li>
+&lt;p>Ejecuta el siguiente comando para agregar Angular Universal:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">ng add @nguniversal/express-engine
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Esto configura automáticamente los archivos necesarios y agrega soporte para SSR.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Verifica que se hayan creado los siguientes archivos:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>server.ts&lt;/code>: El punto de entrada para el servidor.&lt;/li>
+&lt;li>&lt;code>angular.json&lt;/code>: Actualizado con las configuraciones de SSR.&lt;/li>
+&lt;li>&lt;code>main.server.ts&lt;/code>: El módulo principal para la ejecución del servidor.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h3 id="ejecutar-la-aplicación-en-modo-ssr">Ejecutar la aplicación en modo SSR&lt;/h3>
+&lt;ol>
+&lt;li>
+&lt;p>Construye la aplicación para SSR:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">npm run build:ssr
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>Sirve la aplicación:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">npm run serve:ssr
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Visita &lt;code>http://localhost:4000&lt;/code> para verificar que la aplicación se renderice del lado del servidor.&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="optimización-para-seo">Optimización para SEO&lt;/h2>
+&lt;h3 id="implementar-metadatos-dinámicos">Implementar metadatos dinámicos&lt;/h3>
+&lt;ol>
+&lt;li>
+&lt;p>Usa el servicio &lt;code>Meta&lt;/code> para actualizar los metadatos de la página:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">Component&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;@angular/core&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">Meta&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">Title&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;@angular/platform-browser&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">@&lt;/span>&lt;span class="n">Component&lt;/span>&lt;span class="p">({&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">selector&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;app-home&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">templateUrl&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;./home.component.html&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">})&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="k">class&lt;/span> &lt;span class="n">HomeComponent&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">constructor&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">private&lt;/span> &lt;span class="n">meta&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">Meta&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">private&lt;/span> &lt;span class="n">title&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">Title&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">this&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">title&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">setTitle&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;Página de inicio - Mi Aplicación&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">this&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">meta&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">addTags&lt;/span>&lt;span class="p">([&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span> &lt;span class="n">name&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;description&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">content&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;Bienvenido a nuestra aplicación optimizada para SEO.&amp;#39;&lt;/span> &lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span> &lt;span class="n">name&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;keywords&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">content&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;Angular, SEO, Universal&amp;#39;&lt;/span> &lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">]);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>Asegúrate de que cada página tenga un título único y metadatos relevantes.&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h3 id="crear-un-archivo-robotstxt">Crear un archivo &lt;code>robots.txt&lt;/code>&lt;/h3>
+&lt;ol>
+&lt;li>
+&lt;p>Crea un archivo &lt;code>src/assets/robots.txt&lt;/code> con las siguientes líneas:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">User-agent: *
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Allow: /
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>Incluye el archivo en el proceso de construcción:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;assets&amp;#34;: [
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;src/assets&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;src/robots.txt&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;h3 id="agregar-un-sitemapxml">Agregar un &lt;code>sitemap.xml&lt;/code>&lt;/h3>
+&lt;ol>
+&lt;li>Usa herramientas como &lt;a href="https://www.xml-sitemaps.com/">Sitemap Generator&lt;/a> para crear un archivo &lt;code>sitemap.xml&lt;/code>.&lt;/li>
+&lt;li>Inclúyelo en la carpeta &lt;code>src/assets&lt;/code> y asegúrate de que esté accesible desde el servidor.&lt;/li>
+&lt;/ol>
+&lt;h2 id="optimización-para-rendimiento">Optimización para rendimiento&lt;/h2>
+&lt;h3 id="lazy-loading">Lazy Loading&lt;/h3>
+&lt;p>Divide tu aplicación en módulos cargados bajo demanda:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>Configura módulos con lazy loading:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">routes&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">Routes&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">path&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;feature&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">loadChildren&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">import&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;./feature/feature.module&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">then&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">m&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">m&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">FeatureModule&lt;/span>&lt;span class="p">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">];&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>Verifica que cada módulo solo se cargue cuando sea necesario.&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h3 id="implementar-precarga">Implementar precarga&lt;/h3>
+&lt;ol>
+&lt;li>
+&lt;p>Usa el servicio de precarga predeterminado de Angular:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">RouterModule&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">forRoot&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">routes&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">preloadingStrategy&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">PreloadAllModules&lt;/span> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>Asegúrate de que los módulos importantes se carguen rápidamente.&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h3 id="compresión-de-archivos">Compresión de archivos&lt;/h3>
+&lt;ol>
+&lt;li>Configura el servidor para servir archivos comprimidos con Gzip o Brotli.&lt;/li>
+&lt;li>Usa herramientas como &lt;code>webpack-bundle-analyzer&lt;/code> para reducir el tamaño de los paquetes.&lt;/li>
+&lt;/ol>
+&lt;h3 id="caché-en-el-servidor">Caché en el servidor&lt;/h3>
+&lt;ol>
+&lt;li>
+&lt;p>Configura el caché para recursos estáticos y dinámicos:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">server.use(express.static(&amp;#39;dist/browser&amp;#39;, { maxAge: &amp;#39;1y&amp;#39; }));
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>Usa Service Workers para manejar la caché del lado del cliente.&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="buenas-prácticas">Buenas prácticas&lt;/h2>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Mantener URLs amigables&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Usa URLs descriptivas y evita parámetros innecesarios.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Evitar contenido duplicado&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Configura etiquetas &lt;code>canonical&lt;/code> para páginas duplicadas.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Supervisar el rendimiento&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Usa herramientas como Lighthouse y PageSpeed Insights para identificar áreas de mejora.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Pruebas regulares&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Verifica que los motores de búsqueda indexen correctamente tu aplicación.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Minimizar recursos&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Usa imágenes optimizadas y minimiza los archivos CSS y JavaScript.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="conclusión">Conclusión&lt;/h2>
+&lt;p>Optimizar &lt;strong>Angular Universal&lt;/strong> para &lt;strong>SEO&lt;/strong> y rendimiento no solo mejora la experiencia del usuario, sino que también garantiza que tu aplicación sea accesible y visible para los motores de búsqueda. Siguiendo las buenas prácticas y utilizando las herramientas adecuadas, puedes maximizar el potencial de tu aplicación y destacarte en un entorno web competitivo. ¡Comienza hoy mismo y lleva tu aplicación Angular al siguiente nivel!&lt;/p></description></item><item><title>Creación de microservicios con Deno y Azure Functions</title><link>https://cmas.dev/posts/2024-07-24-microservices-deno-azure/</link><pubDate>Wed, 24 Jul 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-07-24-microservices-deno-azure/</guid><description>&lt;p>En el mundo moderno del desarrollo de software, los microservicios han revolucionado la forma de construir y desplegar aplicaciones escalables. Al combinar &lt;strong>Deno&lt;/strong>, una plataforma de runtime moderna basada en &lt;strong>JavaScript&lt;/strong> y &lt;strong>TypeScript&lt;/strong>, con &lt;strong>Azure Functions&lt;/strong>, una solución serverless flexible de &lt;strong>Microsoft&lt;/strong>, los desarrolladores pueden crear microservicios rápidos, seguros y eficientes. Este artículo te guiará paso a paso en el proceso de crear microservicios utilizando estas tecnologías, destacando buenas prácticas, ejemplos prácticos y el uso de &lt;strong>Visual Studio Code&lt;/strong> como herramienta principal.&lt;/p>
+&lt;h2 id="introducción-a-los-microservicios">Introducción a los microservicios&lt;/h2>
+&lt;h3 id="qué-son-los-microservicios">¿Qué son los microservicios?&lt;/h3>
+&lt;p>Los microservicios son un estilo arquitectónico que divide las aplicaciones en servicios independientes, cada uno responsable de una funcionalidad específica. Estos servicios se comunican entre sí mediante protocolos ligeros como &lt;strong>HTTP&lt;/strong> o &lt;strong>gRPC&lt;/strong>.&lt;/p>
+&lt;h3 id="beneficios-de-los-microservicios">Beneficios de los microservicios&lt;/h3>
+&lt;ol>
+&lt;li>&lt;strong>Escalabilidad independiente&lt;/strong>: Cada microservicio puede escalarse según sus necesidades.&lt;/li>
+&lt;li>&lt;strong>Facilidad de despliegue&lt;/strong>: Permite actualizar y desplegar partes de la aplicación sin afectar al sistema completo.&lt;/li>
+&lt;li>&lt;strong>Mantenibilidad&lt;/strong>: Facilita la organización del código y la colaboración en equipos grandes.&lt;/li>
+&lt;/ol>
+&lt;h2 id="introducción-a-deno-y-azure-functions">Introducción a Deno y Azure Functions&lt;/h2>
+&lt;h3 id="qué-es-deno">¿Qué es Deno?&lt;/h3>
+&lt;p>Deno es un runtime para JavaScript y TypeScript creado por Ryan Dahl, el creador de Node.js. Algunas de sus principales características incluyen:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>Seguridad&lt;/strong>: Permisos de ejecución para controlar el acceso a archivos, redes y entornos.&lt;/li>
+&lt;li>&lt;strong>Soporte nativo de TypeScript&lt;/strong>.&lt;/li>
+&lt;li>&lt;strong>Gestor de dependencias integrado&lt;/strong>: No requiere archivos como &lt;code>package.json&lt;/code>.&lt;/li>
+&lt;li>&lt;strong>APIs modernas&lt;/strong>: Inspiradas en las especificaciones del navegador.&lt;/li>
+&lt;/ul>
+&lt;h3 id="qué-es-azure-functions">¿Qué es Azure Functions?&lt;/h3>
+&lt;p>Azure Functions es un servicio serverless que permite ejecutar código en la nube sin necesidad de gestionar infraestructura. Ofrece:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>Ejecución bajo demanda&lt;/strong>: Facturación basada en el tiempo de ejecución.&lt;/li>
+&lt;li>&lt;strong>Integraciones nativas&lt;/strong>: Con Azure Blob Storage, Cosmos DB y otros servicios.&lt;/li>
+&lt;li>&lt;strong>Compatibilidad con varios lenguajes&lt;/strong>: Como JavaScript, Python, C# y TypeScript.&lt;/li>
+&lt;/ul>
+&lt;h2 id="configuración-del-entorno">Configuración del entorno&lt;/h2>
+&lt;h3 id="requisitos-previos">Requisitos previos&lt;/h3>
+&lt;ol>
+&lt;li>&lt;strong>Instalar Deno&lt;/strong>:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">curl -fsSL https://deno.land/x/install/install.sh | sh
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>&lt;strong>Instalar Azure Functions Core Tools&lt;/strong>:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">npm&lt;/span> &lt;span class="n">install&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">g&lt;/span> &lt;span class="n">azure&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">functions&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">core&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">tools&lt;/span>&lt;span class="err">@&lt;/span>&lt;span class="mi">4&lt;/span> &lt;span class="o">--&lt;/span>&lt;span class="n">unsafe&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">perm&lt;/span> &lt;span class="bp">true&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>&lt;strong>Instalar Visual Studio Code&lt;/strong>.&lt;/li>
+&lt;li>&lt;strong>Configurar la extensión de Azure Functions en VS Code&lt;/strong>.&lt;/li>
+&lt;/ol>
+&lt;h3 id="crear-un-nuevo-proyecto-con-azure-functions">Crear un nuevo proyecto con Azure Functions&lt;/h3>
+&lt;ol>
+&lt;li>Crea un directorio para tu proyecto:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">mkdir microservices-deno
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">cd microservices-deno
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>Inicializa un nuevo proyecto:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">func&lt;/span> &lt;span class="n">init&lt;/span> &lt;span class="o">--&lt;/span>&lt;span class="n">worker&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">runtime&lt;/span> &lt;span class="n">custom&lt;/span> &lt;span class="o">--&lt;/span>&lt;span class="n">language&lt;/span> &lt;span class="n">typescript&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>Agrega una nueva función HTTP:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">func&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="o">--&lt;/span>&lt;span class="n">template&lt;/span> &lt;span class="s2">&amp;#34;HTTP trigger&amp;#34;&lt;/span> &lt;span class="o">--&lt;/span>&lt;span class="n">name&lt;/span> &lt;span class="n">MyMicroservice&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;h2 id="crear-un-microservicio-con-deno-y-azure-functions">Crear un microservicio con Deno y Azure Functions&lt;/h2>
+&lt;h3 id="configuración-inicial">Configuración inicial&lt;/h3>
+&lt;ol>
+&lt;li>
+&lt;p>Modifica el archivo &lt;code>MyMicroservice/index.ts&lt;/code> para usar Deno:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">serve&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s2">&amp;#34;https://deno.land/std@0.152.0/http/server.ts&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">serve&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">async&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">req&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="n">url&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">URL&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">req&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">url&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">url&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">pathname&lt;/span> &lt;span class="o">===&lt;/span> &lt;span class="s2">&amp;#34;/api/MyMicroservice&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">Response&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;Hello from Deno and Azure Functions!&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">status&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">200&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">headers&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="s2">&amp;#34;Content-Type&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;text/plain&amp;#34;&lt;/span> &lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">Response&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;Not Found&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">status&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">404&lt;/span> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>Configura los permisos necesarios en el archivo &lt;code>deno.json&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;tasks&amp;#34;: {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;start&amp;#34;: &amp;#34;deno run --allow-net index.ts&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;h3 id="probar-el-microservicio-localmente">Probar el microservicio localmente&lt;/h3>
+&lt;ol>
+&lt;li>Ejecuta la función localmente:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">func&lt;/span> &lt;span class="n">start&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>Accede a la URL generada, como &lt;code>http://localhost:7071/api/MyMicroservice&lt;/code>.&lt;/li>
+&lt;/ol>
+&lt;h2 id="despliegue-en-azure">Despliegue en Azure&lt;/h2>
+&lt;h3 id="paso-1-inicia-sesión-en-azure">Paso 1: Inicia sesión en Azure&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">az login
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="paso-2-crear-un-recurso-de-azure-functions">Paso 2: Crear un recurso de Azure Functions&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">az functionapp create --resource-group MyResourceGroup --consumption-plan-location eastus --runtime custom --functions-version 4 --name MyDenoFunctionApp --storage-account MyStorageAccount
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="paso-3-desplegar-la-función">Paso 3: Desplegar la función&lt;/h3>
+&lt;ol>
+&lt;li>Publica tu función:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">func azure functionapp publish MyDenoFunctionApp
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>Verifica que tu función esté activa visitando la URL proporcionada por Azure.&lt;/li>
+&lt;/ol>
+&lt;h2 id="buenas-prácticas">Buenas prácticas&lt;/h2>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Seguridad&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Limita los permisos en Deno para garantizar la seguridad.&lt;/li>
+&lt;li>Usa claves de API o tokens para proteger los endpoints.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Estructura del proyecto&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Organiza los microservicios en carpetas independientes para facilitar el mantenimiento.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Pruebas unitarias&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Usa bibliotecas como &lt;code>deno test&lt;/code> para escribir pruebas y asegurar la calidad del código.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Monitorización&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Configura Azure Monitor para supervisar el rendimiento y detectar errores.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Optimizar la ejecución&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Minimiza las dependencias externas y cachea resultados frecuentes.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="conclusión">Conclusión&lt;/h2>
+&lt;p>La combinación de &lt;strong>Deno&lt;/strong> y &lt;strong>Azure Functions&lt;/strong> ofrece una solución moderna y eficiente para construir microservicios escalables y seguros. Con las herramientas adecuadas, como &lt;strong>Visual Studio Code&lt;/strong>, y siguiendo buenas prácticas, puedes maximizar el potencial de tus proyectos serverless. Empieza hoy mismo a explorar estas tecnologías y lleva tus microservicios al siguiente nivel.&lt;/p></description></item><item><title>.NET Web API con Proyecto IDX</title><link>https://cmas.dev/posts/2024-07-17-dotnet-project-idx/</link><pubDate>Wed, 17 Jul 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-07-17-dotnet-project-idx/</guid><description>&lt;p>En este artículo veremos cómo crear una Web API básica con el nuevo &lt;strong>Proyecto IDX&lt;/strong> de &lt;strong>Google&lt;/strong>, totalmente desde el navegador sin la necesidad de instalar absolutamente nada en él.&lt;/p>
 &lt;p>El &lt;strong>Proyecto IDX&lt;/strong>, según &lt;strong>Google&lt;/strong> es:&lt;/p>
 &lt;blockquote>
 &lt;p>Project IDX es un espacio de trabajo asistido por IA para el desarrollo de aplicaciones multiplataforma y de pila completa en la nube.
@@ -194,7 +828,142 @@ Con soporte para una amplia gama de marcos, lenguajes y servicios, además de in
 &lt;/ol>
 &lt;p>Algo que noté es que la plantilla figura en &lt;strong>Backend&lt;/strong>, pero tranquilamente podemos crear una aplicación Full Stack con .NET de base para cubrir nuestras necesidades.&lt;/p>
 &lt;p>Al momento de escribir este artículo noto que &lt;strong>Proyecto IDX&lt;/strong> = &lt;strong>GitHub Codespace&lt;/strong>. La base es Visual Studio Code.&lt;/p>
-&lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Creación de componentes reutilizables en Blazor para aplicaciones escalables</title><link>https://cmas.dev/posts/2024-07-03-components-blazor/</link><pubDate>Wed, 03 Jul 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-07-03-components-blazor/</guid><description>&lt;p>&lt;strong>Blazor&lt;/strong> es un framework poderoso que permite a los desarrolladores construir aplicaciones web modernas utilizando &lt;strong>C#&lt;/strong>. Una de sus características clave es la capacidad de crear componentes reutilizables que promueven la modularidad, escalabilidad y mantenibilidad de las aplicaciones. En este artículo, exploraremos cómo diseñar y desarrollar componentes reutilizables en Blazor, acompañado de ejemplos prácticos y mejores prácticas.&lt;/p>
+&lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Despliegue de aplicaciones Blazor en Azure App Services</title><link>https://cmas.dev/posts/2024-07-10-deploy-blazor-azure-app-services/</link><pubDate>Wed, 10 Jul 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-07-10-deploy-blazor-azure-app-services/</guid><description>&lt;p>&lt;strong>Blazor&lt;/strong>, el framework moderno basado en &lt;strong>.NET&lt;/strong>, permite a los desarrolladores crear aplicaciones web interactivas utilizando &lt;strong>C#&lt;/strong>. Combinado con &lt;strong>Azure App Services&lt;/strong>, puedes desplegar aplicaciones de manera sencilla, escalable y segura. En este artículo, exploraremos los pasos para desplegar aplicaciones &lt;strong>Blazor (Server y WebAssembly)&lt;/strong> en &lt;strong>Azure App Services&lt;/strong>, acompañado de ejemplos detallados y buenas prácticas para garantizar un despliegue óptimo.&lt;/p>
+&lt;h2 id="qué-es-azure-app-services">¿Qué es Azure App Services?&lt;/h2>
+&lt;p>&lt;strong>Azure App Services&lt;/strong> es una plataforma de alojamiento en la nube totalmente administrada que soporta aplicaciones web, móviles y &lt;em>API&lt;/em>. Sus principales características incluyen:&lt;/p>
+&lt;ol>
+&lt;li>&lt;strong>Despliegue rápido&lt;/strong>: Permite subir aplicaciones directamente desde tu entorno de desarrollo.&lt;/li>
+&lt;li>&lt;strong>Escalabilidad&lt;/strong>: Ajusta los recursos según la demanda.&lt;/li>
+&lt;li>&lt;strong>Seguridad&lt;/strong>: Ofrece integración con certificados SSL y autenticación.&lt;/li>
+&lt;li>&lt;strong>Compatibilidad con varias tecnologías&lt;/strong>: Soporta .NET, Node.js, Python, Java y más.&lt;/li>
+&lt;/ol>
+&lt;h2 id="crear-y-configurar-un-azure-app-service">Crear y configurar un Azure App Service&lt;/h2>
+&lt;h3 id="paso-1-crear-un-recurso-en-azure">Paso 1: Crear un recurso en Azure&lt;/h3>
+&lt;ol>
+&lt;li>Inicia sesión en el &lt;a href="https://portal.azure.com">portal de Azure&lt;/a>.&lt;/li>
+&lt;li>Selecciona &lt;strong>Crear un recurso&lt;/strong> y busca &lt;strong>App Service&lt;/strong>.&lt;/li>
+&lt;li>Completa los detalles:
+&lt;ul>
+&lt;li>&lt;strong>Nombre&lt;/strong>: &lt;code>blazor-app-service&lt;/code>.&lt;/li>
+&lt;li>&lt;strong>Pila de runtime&lt;/strong>: .NET 9.&lt;/li>
+&lt;li>&lt;strong>Sistema operativo&lt;/strong>: Windows o Linux.&lt;/li>
+&lt;li>&lt;strong>Plan de App Service&lt;/strong>: Selecciona un plan según tus necesidades (recomendado: Plan de consumo para pruebas o B1 para producción).&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h3 id="paso-2-configurar-el-entorno-de-despliegue">Paso 2: Configurar el entorno de despliegue&lt;/h3>
+&lt;ol>
+&lt;li>Habilita la autenticación si es necesario.&lt;/li>
+&lt;li>Configura las variables de entorno requeridas por la aplicación.&lt;/li>
+&lt;/ol>
+&lt;h2 id="despliegue-de-blazor-server-en-azure-app-services">Despliegue de Blazor Server en Azure App Services&lt;/h2>
+&lt;h3 id="paso-1-crear-una-aplicación-blazor-server">Paso 1: Crear una aplicación Blazor Server&lt;/h3>
+&lt;ol>
+&lt;li>Genera un nuevo proyecto Blazor Server:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">dotnet new blazorserver -o BlazorServerApp
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>Navega al directorio del proyecto:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">cd BlazorServerApp
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>Ejecuta la aplicación localmente:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">dotnet run
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;h3 id="paso-2-publicar-la-aplicación">Paso 2: Publicar la aplicación&lt;/h3>
+&lt;ol>
+&lt;li>Publica la aplicación:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">dotnet publish -c Release -o ./publish
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>Verifica los archivos generados en el directorio &lt;code>publish&lt;/code>.&lt;/li>
+&lt;/ol>
+&lt;h3 id="paso-3-desplegar-a-azure">Paso 3: Desplegar a Azure&lt;/h3>
+&lt;ol>
+&lt;li>Usa el CLI de Azure para iniciar sesión:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">az login
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>Despliega la aplicación:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">az webapp deploy --resource-group MyResourceGroup --name blazor-app-service --src-path ./publish
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;h2 id="despliegue-de-blazor-webassembly-en-azure-app-services">Despliegue de Blazor WebAssembly en Azure App Services&lt;/h2>
+&lt;h3 id="paso-1-crear-una-aplicación-blazor-webassembly">Paso 1: Crear una aplicación Blazor WebAssembly&lt;/h3>
+&lt;ol>
+&lt;li>Genera un nuevo proyecto:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">dotnet new blazorwasm -o BlazorWebAssemblyApp
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>Habilita el modo PWA si es necesario:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">dotnet new blazorwasm -o BlazorPWA --pwa
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>Ejecuta la aplicación localmente:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">dotnet run
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;h3 id="paso-2-publicar-la-aplicación-1">Paso 2: Publicar la aplicación&lt;/h3>
+&lt;ol>
+&lt;li>Publica la aplicación:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">dotnet publish -c Release -o ./publish
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;h3 id="paso-3-configurar-y-desplegar">Paso 3: Configurar y desplegar&lt;/h3>
+&lt;ol>
+&lt;li>Asegúrate de que el servidor web esté configurado para servir contenido estático desde el directorio &lt;code>wwwroot&lt;/code>.&lt;/li>
+&lt;li>Usa Azure CLI o el portal de Azure para subir los archivos.&lt;/li>
+&lt;/ol>
+&lt;h4 id="subir-archivos-usando-azure-storage">Subir archivos usando Azure Storage&lt;/h4>
+&lt;ol>
+&lt;li>Crea una cuenta de almacenamiento:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">az storage account create --name mystorageaccount --resource-group MyResourceGroup --location eastus --sku Standard_LRS
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>Usa &lt;code>azcopy&lt;/code> para subir los archivos:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">azcopy copy ./publish/wwwroot https://mystorageaccount.blob.core.windows.net/$web --recursive
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;h2 id="buenas-prácticas-para-despliegues-en-azure-app-services">Buenas prácticas para despliegues en Azure App Services&lt;/h2>
+&lt;ol>
+&lt;li>&lt;strong>Configurar entornos&lt;/strong>:
+&lt;ul>
+&lt;li>Usa &lt;code>appsettings.json&lt;/code> para gestionar configuraciones por entorno.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>Escalabilidad&lt;/strong>:
+&lt;ul>
+&lt;li>Configura escalado automático para manejar incrementos de tráfico.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>Seguridad&lt;/strong>:
+&lt;ul>
+&lt;li>Habilita HTTPS y usa certificados SSL.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>Monitorización&lt;/strong>:
+&lt;ul>
+&lt;li>Usa Application Insights para supervisar el rendimiento.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>Optimizar el tamaño de la aplicación&lt;/strong>:
+&lt;ul>
+&lt;li>Habilita compresión y minimización de archivos.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="resolución-de-problemas-comunes">Resolución de problemas comunes&lt;/h2>
+&lt;h3 id="error-500-internal-server-error">Error 500: &amp;ldquo;Internal Server Error&amp;rdquo;&lt;/h3>
+&lt;ul>
+&lt;li>&lt;strong>Causa&lt;/strong>: Configuraciones incorrectas en &lt;code>appsettings.json&lt;/code>.&lt;/li>
+&lt;li>&lt;strong>Solución&lt;/strong>: Verifica las rutas y las claves de configuración.&lt;/li>
+&lt;/ul>
+&lt;h3 id="failed-to-start-en-blazor-server">&amp;ldquo;Failed to Start&amp;rdquo; en Blazor Server&lt;/h3>
+&lt;ul>
+&lt;li>&lt;strong>Causa&lt;/strong>: Problemas de dependencias no satisfechas.&lt;/li>
+&lt;li>&lt;strong>Solución&lt;/strong>: Revisa las dependencias en el archivo &lt;code>csproj&lt;/code>.&lt;/li>
+&lt;/ul>
+&lt;h3 id="archivos-estáticos-no-encontrados-en-blazor-webassembly">Archivos estáticos no encontrados en Blazor WebAssembly&lt;/h3>
+&lt;ul>
+&lt;li>&lt;strong>Causa&lt;/strong>: Configuración errónea del servidor.&lt;/li>
+&lt;li>&lt;strong>Solución&lt;/strong>: Asegúrate de que el servidor apunte al directorio &lt;code>wwwroot&lt;/code>.&lt;/li>
+&lt;/ul>
+&lt;h2 id="conclusión">Conclusión&lt;/h2>
+&lt;p>Desplegar aplicaciones &lt;strong>Blazor&lt;/strong> en &lt;strong>Azure App Services&lt;/strong> es un proceso directo que se beneficia de las capacidades robustas de Azure para escalar, monitorear y proteger aplicaciones. Siguiendo las mejores prácticas y resolviendo problemas comunes, puedes garantizar un despliegue exitoso y mantener tus aplicaciones funcionando de manera eficiente. ¡Explora &lt;strong>Azure App Services&lt;/strong> y lleva tus aplicaciones &lt;strong>Blazor&lt;/strong> al siguiente nivel!&lt;/p></description></item><item><title>Creación de componentes reutilizables en Blazor para aplicaciones escalables</title><link>https://cmas.dev/posts/2024-07-03-components-blazor/</link><pubDate>Wed, 03 Jul 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-07-03-components-blazor/</guid><description>&lt;p>&lt;strong>Blazor&lt;/strong> es un framework poderoso que permite a los desarrolladores construir aplicaciones web modernas utilizando &lt;strong>C#&lt;/strong>. Una de sus características clave es la capacidad de crear componentes reutilizables que promueven la modularidad, escalabilidad y mantenibilidad de las aplicaciones. En este artículo, exploraremos cómo diseñar y desarrollar componentes reutilizables en Blazor, acompañado de ejemplos prácticos y mejores prácticas.&lt;/p>
 &lt;h2 id="qué-son-los-componentes-en-blazor">¿Qué son los componentes en Blazor?&lt;/h2>
 &lt;p>Los componentes en Blazor son unidades reutilizables de la interfaz de usuario que combinan lógica y presentación. Cada componente se define en un archivo &lt;code>.razor&lt;/code> y puede incluir código C#, HTML y CSS.&lt;/p>
 &lt;h3 id="características-principales">Características principales&lt;/h3>
