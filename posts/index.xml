@@ -1,4 +1,153 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Christian Amado's Blog</title><link>https://cmas.dev/posts/</link><description>Recent content in Posts on Christian Amado's Blog</description><generator>Hugo -- gohugo.io</generator><language>es</language><lastBuildDate>Wed, 17 Jul 2024 00:00:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>.NET Web API con Proyecto IDX</title><link>https://cmas.dev/posts/2024-07-17-dotnet-project-idx/</link><pubDate>Wed, 17 Jul 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-07-17-dotnet-project-idx/</guid><description>&lt;p>En este artículo veremos cómo crear una Web API básica con el nuevo &lt;strong>Proyecto IDX&lt;/strong> de &lt;strong>Google&lt;/strong>, totalmente desde el navegador sin la necesidad de instalar absolutamente nada en él.&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Christian Amado's Blog</title><link>https://cmas.dev/posts/</link><description>Recent content in Posts on Christian Amado's Blog</description><generator>Hugo -- gohugo.io</generator><language>es</language><lastBuildDate>Tue, 24 Dec 2024 00:00:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Usando Blazor para crear Progressive Web Apps (PWA)</title><link>https://cmas.dev/posts/2024-12-24-blazor-pwa/</link><pubDate>Tue, 24 Dec 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-12-24-blazor-pwa/</guid><description>&lt;p>&lt;strong>Blazor&lt;/strong>, el framework moderno basado en &lt;strong>.NET&lt;/strong>, ha demostrado ser una herramienta poderosa para el desarrollo de aplicaciones web interactivas. Combinado con las capacidades de &lt;strong>Progressive Web Apps (PWA)&lt;/strong>, ofrece una forma innovadora de construir aplicaciones que funcionan offline. Se pueden instalar en dispositivos y ofrecen una experiencia similar a las aplicaciones nativas. En este artículo, exploraremos cómo usar &lt;strong>Blazor&lt;/strong> para crear &lt;strong>PWAs&lt;/strong>, centrándonos en las nuevas capacidades introducidas con &lt;strong>.NET 9&lt;/strong>, buenas prácticas y ejemplos detallados.&lt;/p>
+&lt;h2 id="qué-es-una-progressive-web-app-pwa">¿Qué es una Progressive Web App (PWA)?&lt;/h2>
+&lt;p>Las &lt;strong>PWAs&lt;/strong> son aplicaciones web que combinan las mejores características de las aplicaciones web y las nativas. Algunas de sus características clave incluyen:&lt;/p>
+&lt;ol>
+&lt;li>&lt;strong>Capacidad offline&lt;/strong>: Funcionan sin conexión a internet mediante el uso de &lt;em>Service Workers&lt;/em>.&lt;/li>
+&lt;li>&lt;strong>Instalables&lt;/strong>: Se pueden agregar a la pantalla de inicio de un dispositivo.&lt;/li>
+&lt;li>&lt;strong>Rápidas y responsivas&lt;/strong>: Optimizadas para ofrecer un rendimiento similar al de las aplicaciones nativas.&lt;/li>
+&lt;li>&lt;strong>Seguras&lt;/strong>: Utilizan &lt;em>HTTPS&lt;/em> para garantizar conexiones seguras.&lt;/li>
+&lt;/ol>
+&lt;h2 id="por-qué-usar-blazor-para-pwas">¿Por qué usar Blazor para PWAs?&lt;/h2>
+&lt;ol>
+&lt;li>&lt;strong>Reutilización de código&lt;/strong>: Con &lt;strong>Blazor&lt;/strong>, puedes usar &lt;strong>C#&lt;/strong> y &lt;strong>.NET&lt;/strong> tanto en el cliente como en el servidor.&lt;/li>
+&lt;li>&lt;strong>Ecosistema robusto&lt;/strong>: Accede a las bibliotecas de .&lt;strong>NET&lt;/strong> y herramientas modernas.&lt;/li>
+&lt;li>&lt;strong>Soporte para WebAssembly&lt;/strong>: &lt;strong>Blazor WebAssembly&lt;/strong> permite ejecutar aplicaciones completas en el navegador.&lt;/li>
+&lt;li>&lt;strong>Integración nativa de PWA&lt;/strong>: Con configuraciones simples, &lt;strong>Blazor&lt;/strong> puede transformar una aplicación en una &lt;strong>PWA&lt;/strong>.&lt;/li>
+&lt;/ol>
+&lt;h2 id="configuración-inicial">Configuración inicial&lt;/h2>
+&lt;h3 id="requisitos-previos">Requisitos previos&lt;/h3>
+&lt;ol>
+&lt;li>Tener instalado &lt;strong>.NET 9 SDK&lt;/strong>:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">dotnet --version
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>Editor de código, como &lt;strong>Visual Studio 2022&lt;/strong> o &lt;strong>Visual Studio Code&lt;/strong>.&lt;/li>
+&lt;li>Navegador moderno compatible con &lt;strong>PWAs&lt;/strong>.&lt;/li>
+&lt;/ol>
+&lt;h3 id="crear-un-proyecto-blazor-webassembly">Crear un proyecto Blazor WebAssembly&lt;/h3>
+&lt;ol>
+&lt;li>Ejecutar el comando para crear un proyecto &lt;strong>PWA&lt;/strong>:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">dotnet new blazorwasm -o BlazorPwaApp --pwa
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>Navegar al directorio del proyecto:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">cd BlazorPwaApp
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>Ejecutar la aplicación:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">dotnet run
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;p>Al usar la opción &lt;code>--pwa&lt;/code>, el proyecto incluye configuraciones predeterminadas para convertirlo en una &lt;strong>PWA&lt;/strong>.&lt;/p>
+&lt;h2 id="entender-los-archivos-clave-de-una-pwa">Entender los archivos clave de una PWA&lt;/h2>
+&lt;h3 id="manifestjson">&lt;code>manifest.json&lt;/code>&lt;/h3>
+&lt;p>El archivo &lt;code>manifest.json&lt;/code> proporciona metadatos sobre la aplicación, como el nombre, íconos y configuraciones de inicio.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;short_name&amp;#34;: &amp;#34;BlazorPWA&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;name&amp;#34;: &amp;#34;Blazor Progressive Web App&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;start_url&amp;#34;: &amp;#34;/&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;display&amp;#34;: &amp;#34;standalone&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;background_color&amp;#34;: &amp;#34;#ffffff&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;theme_color&amp;#34;: &amp;#34;#0078D7&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;icons&amp;#34;: [
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;src&amp;#34;: &amp;#34;icons/icon-192.png&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;sizes&amp;#34;: &amp;#34;192x192&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;type&amp;#34;: &amp;#34;image/png&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> },
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;src&amp;#34;: &amp;#34;icons/icon-512.png&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;sizes&amp;#34;: &amp;#34;512x512&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;type&amp;#34;: &amp;#34;image/png&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="service-worker">Service Worker&lt;/h3>
+&lt;p>El &lt;em>Service Worker&lt;/em> gestiona el almacenamiento en caché y las funcionalidades offline. En &lt;strong>Blazor&lt;/strong>, el archivo predeterminado es &lt;code>service-worker.published.js&lt;/code>.&lt;/p>
+&lt;h4 id="ejemplo-de-manejo-de-caché">Ejemplo de manejo de caché&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">self.addEventListener(&amp;#39;install&amp;#39;, event =&amp;gt; {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> event.waitUntil(
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> caches.open(&amp;#39;blazor-cache&amp;#39;).then(cache =&amp;gt; {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> return cache.addAll([
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#39;/&amp;#39;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#39;index.html&amp;#39;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#39;manifest.json&amp;#39;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#39;_framework/blazor.webassembly.js&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ]);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> })
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> );
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">});
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">self.addEventListener(&amp;#39;fetch&amp;#39;, event =&amp;gt; {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> event.respondWith(
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> caches.match(event.request).then(response =&amp;gt; {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> return response || fetch(event.request);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> })
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> );
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">});
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="crear-una-experiencia-offline">Crear una experiencia offline&lt;/h2>
+&lt;h3 id="habilitar-funcionalidad-offline">Habilitar funcionalidad offline&lt;/h3>
+&lt;ol>
+&lt;li>Actualizar el &lt;em>Service Worker&lt;/em> para gestionar recursos adicionales.&lt;/li>
+&lt;li>Configurar rutas en &lt;code>manifest.json&lt;/code> y asegurarse de incluir recursos clave.&lt;/li>
+&lt;/ol>
+&lt;h4 id="ejemplo">Ejemplo&lt;/h4>
+&lt;p>Agrega un mensaje personalizado para los usuarios sin conexión:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">@if (isOffline)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;p&amp;gt;No tienes conexión a internet. Algunas funcionalidades pueden no estar disponibles.&amp;lt;/p&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">@code {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> private bool isOffline;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> protected override void OnInitialized()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> isOffline = !navigator.onLine;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> window.addEventListener(&amp;#39;online&amp;#39;, () =&amp;gt; isOffline = false);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> window.addEventListener(&amp;#39;offline&amp;#39;, () =&amp;gt; isOffline = true);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="buenas-prácticas-para-pwas-con-blazor">Buenas prácticas para PWAs con Blazor&lt;/h2>
+&lt;ol>
+&lt;li>&lt;strong>Optimizar recursos&lt;/strong>:
+&lt;ul>
+&lt;li>Usa herramientas como &lt;code>dotnet publish&lt;/code> con opciones para reducir el tamaño de los archivos.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>Usar HTTPS&lt;/strong>:
+&lt;ul>
+&lt;li>Las &lt;strong>PWAs&lt;/strong> requieren &lt;em>HTTPS&lt;/em> para funcionar correctamente.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>Pruebas regulares&lt;/strong>:
+&lt;ul>
+&lt;li>Prueba la aplicación en diferentes navegadores y dispositivos.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>Actualizar el Service Worker&lt;/strong>:
+&lt;ul>
+&lt;li>Implementa una estrategia para actualizar el &lt;em>Service Worker&lt;/em> cuando haya cambios significativos.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>Diseño responsivo&lt;/strong>:
+&lt;ul>
+&lt;li>Asegúrate de que la interfaz funcione en diferentes tamaños de pantalla.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="ventajas-y-limitaciones-de-blazor-para-pwas">Ventajas y limitaciones de Blazor para PWAs&lt;/h2>
+&lt;h3 id="ventajas">Ventajas&lt;/h3>
+&lt;ol>
+&lt;li>&lt;strong>Reutilización de código&lt;/strong> entre plataformas.&lt;/li>
+&lt;li>&lt;strong>Integración nativa con .NET&lt;/strong>.&lt;/li>
+&lt;li>&lt;strong>Compatibilidad con WebAssembly&lt;/strong> para un rendimiento eficiente en el cliente.&lt;/li>
+&lt;/ol>
+&lt;h3 id="limitaciones">Limitaciones&lt;/h3>
+&lt;ol>
+&lt;li>&lt;strong>Tamaño inicial&lt;/strong> alto en &lt;strong>Blazor WebAssembly&lt;/strong>.&lt;/li>
+&lt;li>&lt;strong>Dependencia del ecosistema .NET&lt;/strong> para ciertos escenarios.&lt;/li>
+&lt;li>&lt;strong>Curva de aprendizaje&lt;/strong> para desarrolladores nuevos en &lt;strong>.NET&lt;/strong>.&lt;/li>
+&lt;/ol>
+&lt;h2 id="conclusión">Conclusión&lt;/h2>
+&lt;p>Combinar las capacidades de &lt;strong>Blazor&lt;/strong> y &lt;strong>PWAs&lt;/strong> permite a los desarrolladores crear aplicaciones modernas y escalables que funcionan offline, se pueden instalar y ofrecen una experiencia de usuario mejorada. Aunque existen algunas limitaciones, las ventajas de usar &lt;strong>Blazor&lt;/strong> con &lt;strong>PWA&lt;/strong> superan ampliamente los desafíos, especialmente para equipos que ya utilizan &lt;strong>.NET&lt;/strong> en su flujo de desarrollo. ¡Explora las posibilidades de &lt;strong>Blazor&lt;/strong> para &lt;strong>PWAs&lt;/strong> y lleva tus aplicaciones web al siguiente nivel!&lt;/p></description></item><item><title>.NET Web API con Proyecto IDX</title><link>https://cmas.dev/posts/2024-07-17-dotnet-project-idx/</link><pubDate>Wed, 17 Jul 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-07-17-dotnet-project-idx/</guid><description>&lt;p>En este artículo veremos cómo crear una Web API básica con el nuevo &lt;strong>Proyecto IDX&lt;/strong> de &lt;strong>Google&lt;/strong>, totalmente desde el navegador sin la necesidad de instalar absolutamente nada en él.&lt;/p>
 &lt;p>El &lt;strong>Proyecto IDX&lt;/strong>, según &lt;strong>Google&lt;/strong> es:&lt;/p>
 &lt;blockquote>
 &lt;p>Project IDX es un espacio de trabajo asistido por IA para el desarrollo de aplicaciones multiplataforma y de pila completa en la nube.
