@@ -1,4 +1,146 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Christian Amado's Blog</title><link>https://cmas.dev/posts/</link><description>Recent content in Posts on Christian Amado's Blog</description><generator>Hugo -- gohugo.io</generator><language>es</language><lastBuildDate>Tue, 24 Dec 2024 00:00:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Usando Blazor para crear Progressive Web Apps (PWA)</title><link>https://cmas.dev/posts/2024-12-24-blazor-pwa/</link><pubDate>Tue, 24 Dec 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-12-24-blazor-pwa/</guid><description>&lt;p>&lt;strong>Blazor&lt;/strong>, el framework moderno basado en &lt;strong>.NET&lt;/strong>, ha demostrado ser una herramienta poderosa para el desarrollo de aplicaciones web interactivas. Combinado con las capacidades de &lt;strong>Progressive Web Apps (PWA)&lt;/strong>, ofrece una forma innovadora de construir aplicaciones que funcionan offline. Se pueden instalar en dispositivos y ofrecen una experiencia similar a las aplicaciones nativas. En este artículo, exploraremos cómo usar &lt;strong>Blazor&lt;/strong> para crear &lt;strong>PWAs&lt;/strong>, centrándonos en las nuevas capacidades introducidas con &lt;strong>.NET 9&lt;/strong>, buenas prácticas y ejemplos detallados.&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Christian Amado's Blog</title><link>https://cmas.dev/posts/</link><description>Recent content in Posts on Christian Amado's Blog</description><generator>Hugo -- gohugo.io</generator><language>es</language><lastBuildDate>Mon, 06 Jan 2025 00:00:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Optimización de rendimiento en Blazor WebAssembly</title><link>https://cmas.dev/posts/2025-01-06-performance-optimization-blazor-webassembly/</link><pubDate>Mon, 06 Jan 2025 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2025-01-06-performance-optimization-blazor-webassembly/</guid><description>&lt;p>&lt;strong>Blazor WebAssembly&lt;/strong> es una tecnología poderosa que permite a los desarrolladores crear aplicaciones web interactivas utilizando &lt;strong>C#&lt;/strong> y &lt;strong>.NET&lt;/strong> en lugar de &lt;strong>JavaScript&lt;/strong>. Sin embargo, debido a las características inherentes de su arquitectura, la optimización del rendimiento puede ser un desafío crítico. En este artículo, exploraremos técnicas, estrategias y mejores prácticas para optimizar el rendimiento en aplicaciones &lt;strong>Blazor WebAssembly&lt;/strong>.&lt;/p>
+&lt;h2 id="1-introducción-a-blazor-webassembly">1. Introducción a Blazor WebAssembly&lt;/h2>
+&lt;p>&lt;strong>Blazor WebAssembly&lt;/strong> es un modelo de alojamiento de &lt;strong>Blazor&lt;/strong> que ejecuta aplicaciones directamente en el navegador utilizando &lt;strong>WebAssembly&lt;/strong>. Esto permite que las aplicaciones sean ejecutadas en un entorno completamente independiente del servidor, lo que habilita experiencias sin interrupciones.&lt;/p>
+&lt;h3 id="ventajas-de-blazor-webassembly">Ventajas de Blazor WebAssembly&lt;/h3>
+&lt;ul>
+&lt;li>Ejecución en el cliente, reduciendo la carga en el servidor.&lt;/li>
+&lt;li>Uso del ecosistema de .NET para compartir lógica entre el cliente y el servidor.&lt;/li>
+&lt;li>Potencial de desarrollo sin dependencias directas de JavaScript.&lt;/li>
+&lt;/ul>
+&lt;h3 id="limitaciones-de-rendimiento">Limitaciones de rendimiento&lt;/h3>
+&lt;ul>
+&lt;li>&lt;strong>Tamaño inicial grande:&lt;/strong> Los archivos necesarios para ejecutar aplicaciones &lt;strong>Blazor WebAssembly&lt;/strong> pueden ser significativamente grandes.&lt;/li>
+&lt;li>&lt;strong>Capacidad de cómputo:&lt;/strong> La velocidad de ejecución está limitada por el rendimiento del navegador.&lt;/li>
+&lt;li>&lt;strong>Latencia de red:&lt;/strong> Aunque el código se ejecuta en el cliente, el acceso a datos externos sigue dependiendo de la red.&lt;/li>
+&lt;/ul>
+&lt;h2 id="2-entendiendo-los-problemas-comunes-de-rendimiento">2. Entendiendo los problemas comunes de rendimiento&lt;/h2>
+&lt;h3 id="tamaño-del-payload-inicial">Tamaño del payload inicial&lt;/h3>
+&lt;p>El tamaño de la aplicación &lt;strong>Blazor WebAssembly&lt;/strong> afecta directamente el tiempo de carga inicial, ya que los navegadores necesitan descargar los binarios de &lt;strong>WebAssembly&lt;/strong> antes de ejecutar la aplicación.&lt;/p>
+&lt;h3 id="manejo-de-estado">Manejo de estado&lt;/h3>
+&lt;p>Mantener estados complejos puede consumir recursos significativos de memoria y tiempo de procesamiento.&lt;/p>
+&lt;h3 id="renderizado-innecesario">Renderizado innecesario&lt;/h3>
+&lt;p>El renderizado excesivo de componentes afecta negativamente el rendimiento debido a operaciones DOM innecesarias.&lt;/p>
+&lt;h2 id="3-estrategias-generales-de-optimización">3. Estrategias generales de optimización&lt;/h2>
+&lt;h3 id="reducción-del-tamaño-de-la-carga-inicial">Reducción del tamaño de la carga inicial&lt;/h3>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Habilitar la compresión Brotli:&lt;/strong> Los navegadores modernos admiten &lt;strong>Brotli&lt;/strong>, un algoritmo de compresión que reduce drásticamente el tamaño de los archivos.&lt;/p>
+&lt;p>&lt;strong>Configuración en ASP.NET Core:&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">app.UseResponseCompression();
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Eliminar dependencias innecesarias:&lt;/strong> Revisa y elimina bibliotecas que no estén en uso.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Lazy loading de ensamblados:&lt;/strong> Utiliza la carga diferida para ensamblados específicos.&lt;/p>
+&lt;p>&lt;strong>Ejemplo:&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">@if (assemblyLoaded)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Component /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;h3 id="uso-eficiente-de-memoria">Uso eficiente de memoria&lt;/h3>
+&lt;ol>
+&lt;li>&lt;strong>Liberar recursos no utilizados:&lt;/strong> Implementa &lt;code>IDisposable&lt;/code> en componentes que utilizan recursos pesados.&lt;/li>
+&lt;li>&lt;strong>Evitar grandes objetos en memoria:&lt;/strong> Descompone datos grandes en fragmentos más pequeños.&lt;/li>
+&lt;/ol>
+&lt;h3 id="minimizar-la-cantidad-de-renderizados">Minimizar la cantidad de renderizados&lt;/h3>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Evita operaciones innecesarias en el DOM:&lt;/strong> Utiliza &lt;code>ShouldRender&lt;/code> para controlar el renderizado de componentes.&lt;/p>
+&lt;p>&lt;strong>Ejemplo:&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">protected override bool ShouldRender()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> return StateHasChanged;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Optimiza el enlace de datos:&lt;/strong> Evita vincular propiedades que cambian frecuentemente a componentes de renderizado intensivo.&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="4-optimización-del-ciclo-de-vida-de-los-componentes">4. Optimización del ciclo de vida de los componentes&lt;/h2>
+&lt;p>El ciclo de vida de los componentes de &lt;strong>Blazor&lt;/strong> ofrece varios puntos para optimizar:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>OnInitializedAsync:&lt;/strong> Carga datos de forma diferida para evitar bloqueos iniciales.&lt;/p>
+&lt;p>&lt;strong>Ejemplo:&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">protected override async Task OnInitializedAsync()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Data = await LoadDataAsync();
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Dispose:&lt;/strong> Libera recursos o desconecta eventos para evitar fugas de memoria.&lt;/p>
+&lt;p>&lt;strong>Ejemplo:&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">public void Dispose()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> MyEvent -= EventHandler;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;h2 id="5-optimizar-las-dependencias-externas">5. Optimizar las dependencias externas&lt;/h2>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Interoperabilidad con JavaScript:&lt;/strong> Minimiza las llamadas JSInterop y agrúpalas cuando sea posible.&lt;/p>
+&lt;p>&lt;strong>Ejemplo:&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">function batchedOperation(data) {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> // Procesa múltiples operaciones en una sola llamada
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Uso de bibliotecas ligeras:&lt;/strong> Prioriza bibliotecas específicamente diseñadas para &lt;strong>WebAssembly&lt;/strong>.&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="6-uso-de-almacenamiento-en-caché-y-almacenamiento-local">6. Uso de almacenamiento en caché y almacenamiento local&lt;/h2>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Persistencia en el cliente:&lt;/strong> Aprovecha el almacenamiento local para datos que no necesitan ser recargados frecuentemente.&lt;/p>
+&lt;p>&lt;strong>Ejemplo:&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">localStorage&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">SetItem&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;key&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">value&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">var&lt;/span> &lt;span class="n">value&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">localStorage&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">GetItem&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;key&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Service Workers:&lt;/strong> Implementa &lt;strong>PWA&lt;/strong> para optimizar la caché y reducir la dependencia de la red.&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="7-ejemplos-prácticos-y-patrones-de-código">7. Ejemplos prácticos y patrones de código&lt;/h2>
+&lt;h3 id="ejemplo-1-lazy-loading">Ejemplo 1: Lazy Loading&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">@code {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> private bool assemblyLoaded;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> protected override async Task OnAfterRenderAsync(bool firstRender)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> if (firstRender)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> assemblyLoaded = await LoadAssemblyAsync(&amp;#34;Library.dll&amp;#34;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> StateHasChanged();
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="ejemplo-2-optimizar-renderizado-condicional">Ejemplo 2: Optimizar Renderizado Condicional&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">@code {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> private bool isVisible;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> protected override bool ShouldRender()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> return isVisible;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="8-herramientas-para-medir-el-rendimiento">8. Herramientas para medir el rendimiento&lt;/h2>
+&lt;ol>
+&lt;li>&lt;strong>Browser Developer Tools:&lt;/strong> Analiza las solicitudes de red y tiempos de renderizado.&lt;/li>
+&lt;li>&lt;strong>dotnet-trace:&lt;/strong> Herramienta para trazar el rendimiento de las aplicaciones &lt;strong>.NET&lt;/strong>.&lt;/li>
+&lt;li>&lt;strong>Blazor Performance Analyzer:&lt;/strong> Un complemento para inspeccionar cuellos de botella en aplicaciones &lt;strong>Blazor&lt;/strong>.&lt;/li>
+&lt;/ol>
+&lt;h2 id="9-conclusión">9. Conclusión&lt;/h2>
+&lt;p>Optimizar el rendimiento en &lt;strong>Blazor WebAssembly&lt;/strong> requiere un enfoque integral que combine estrategias de reducción de tamaño, uso eficiente de recursos y configuraciones inteligentes. Al implementar las técnicas descritas, puedes garantizar que tus aplicaciones sean rápidas, receptivas y eficientes.&lt;/p>
+&lt;h2 id="10-recursos-adicionales">10. Recursos adicionales&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/">Documentación oficial de Blazor&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://webassembly.org/">Mejoras en WebAssembly&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://github.com/dotnet/diagnostics">Herramientas de depuración en .NET&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Usando Blazor para crear Progressive Web Apps (PWA)</title><link>https://cmas.dev/posts/2024-12-24-blazor-pwa/</link><pubDate>Tue, 24 Dec 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-12-24-blazor-pwa/</guid><description>&lt;p>&lt;strong>Blazor&lt;/strong>, el framework moderno basado en &lt;strong>.NET&lt;/strong>, ha demostrado ser una herramienta poderosa para el desarrollo de aplicaciones web interactivas. Combinado con las capacidades de &lt;strong>Progressive Web Apps (PWA)&lt;/strong>, ofrece una forma innovadora de construir aplicaciones que funcionan offline. Se pueden instalar en dispositivos y ofrecen una experiencia similar a las aplicaciones nativas. En este artículo, exploraremos cómo usar &lt;strong>Blazor&lt;/strong> para crear &lt;strong>PWAs&lt;/strong>, centrándonos en las nuevas capacidades introducidas con &lt;strong>.NET 9&lt;/strong>, buenas prácticas y ejemplos detallados.&lt;/p>
 &lt;h2 id="qué-es-una-progressive-web-app-pwa">¿Qué es una Progressive Web App (PWA)?&lt;/h2>
 &lt;p>Las &lt;strong>PWAs&lt;/strong> son aplicaciones web que combinan las mejores características de las aplicaciones web y las nativas. Algunas de sus características clave incluyen:&lt;/p>
 &lt;ol>
