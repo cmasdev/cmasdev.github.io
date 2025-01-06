@@ -1,4 +1,156 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Deno on Christian Amado's Blog</title><link>https://cmas.dev/tags/deno/</link><description>Recent content in Deno on Christian Amado's Blog</description><generator>Hugo -- gohugo.io</generator><language>es</language><lastBuildDate>Wed, 24 Jul 2024 00:00:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/tags/deno/index.xml" rel="self" type="application/rss+xml"/><item><title>Creación de microservicios con Deno y Azure Functions</title><link>https://cmas.dev/posts/2024-07-24-microservices-deno-azure/</link><pubDate>Wed, 24 Jul 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-07-24-microservices-deno-azure/</guid><description>&lt;p>En el mundo moderno del desarrollo de software, los microservicios han revolucionado la forma de construir y desplegar aplicaciones escalables. Al combinar &lt;strong>Deno&lt;/strong>, una plataforma de runtime moderna basada en &lt;strong>JavaScript&lt;/strong> y &lt;strong>TypeScript&lt;/strong>, con &lt;strong>Azure Functions&lt;/strong>, una solución serverless flexible de &lt;strong>Microsoft&lt;/strong>, los desarrolladores pueden crear microservicios rápidos, seguros y eficientes. Este artículo te guiará paso a paso en el proceso de crear microservicios utilizando estas tecnologías, destacando buenas prácticas, ejemplos prácticos y el uso de &lt;strong>Visual Studio Code&lt;/strong> como herramienta principal.&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Deno on Christian Amado's Blog</title><link>https://cmas.dev/tags/deno/</link><description>Recent content in Deno on Christian Amado's Blog</description><generator>Hugo -- gohugo.io</generator><language>es</language><lastBuildDate>Sat, 24 Aug 2024 00:00:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/tags/deno/index.xml" rel="self" type="application/rss+xml"/><item><title>Migración de Node.js a Deno: Caso práctico</title><link>https://cmas.dev/posts/2024-08-24-nodejs-migration-to-deno/</link><pubDate>Sat, 24 Aug 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-08-24-nodejs-migration-to-deno/</guid><description>&lt;p>En los últimos años, &lt;strong>Deno&lt;/strong> ha emergido como una alternativa moderna a &lt;strong>Node.js&lt;/strong>. Desarrollado por el mismo creador de &lt;strong>Node.js&lt;/strong>, &lt;strong>Deno&lt;/strong> busca abordar algunas de las limitaciones y problemas de diseño que han surgido con &lt;strong>Node.js&lt;/strong> a lo largo del tiempo. Este artículo presenta un caso práctico detallado sobre cómo migrar una aplicación existente de &lt;strong>Node.js&lt;/strong> a &lt;strong>Deno&lt;/strong>, destacando las diferencias clave, los desafíos y las soluciones.&lt;/p>
+&lt;h2 id="1-introducción-a-deno-y-sus-ventajas">1. Introducción a Deno y sus ventajas&lt;/h2>
+&lt;p>&lt;strong>Deno&lt;/strong> es un runtime moderno para &lt;strong>JavaScript&lt;/strong> y &lt;strong>TypeScript&lt;/strong> basado en &lt;strong>V8&lt;/strong> y &lt;strong>Rust&lt;/strong>. Se diferencia de &lt;strong>Node.js&lt;/strong> por su enfoque en la seguridad, su soporte nativo para &lt;strong>TypeScript&lt;/strong> y su sistema de módulos sin un administrador de paquetes como &lt;em>npm&lt;/em>.&lt;/p>
+&lt;h3 id="ventajas-principales-de-deno">Ventajas principales de Deno:&lt;/h3>
+&lt;ul>
+&lt;li>&lt;strong>Seguridad por diseño:&lt;/strong> Deno ejecuta código en un sandbox, lo que significa que no tiene acceso a archivos, red o variables de entorno sin permisos explícitos.&lt;/li>
+&lt;li>&lt;strong>Soporte nativo para TypeScript:&lt;/strong> No se necesita configuración adicional para usar TypeScript.&lt;/li>
+&lt;li>&lt;strong>Gestor de módulos simplificado:&lt;/strong> Deno utiliza URLs para importar módulos, eliminando la necesidad de un archivo &lt;code>package.json&lt;/code>.&lt;/li>
+&lt;li>&lt;strong>Ecosistema moderno:&lt;/strong> Con un enfoque en el desarrollo moderno, Deno integra herramientas como un linter y formateador.&lt;/li>
+&lt;/ul>
+&lt;h2 id="2-preparativos-para-la-migración">2. Preparativos para la migración&lt;/h2>
+&lt;h3 id="requisitos-previos">Requisitos previos&lt;/h3>
+&lt;p>Antes de comenzar la migración, asegúrate de tener lo siguiente:&lt;/p>
+&lt;ul>
+&lt;li>Conocimiento básico de TypeScript.&lt;/li>
+&lt;li>Acceso al código fuente de la aplicación Node.js.&lt;/li>
+&lt;li>Deno instalado. Puedes instalarlo siguiendo la &lt;a href="https://deno.land/manual@v1.0.0/getting_started/installation">documentación oficial&lt;/a>.&lt;/li>
+&lt;/ul>
+&lt;h3 id="configuración-del-entorno">Configuración del entorno&lt;/h3>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Instalar Deno:&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">curl -fsSL https://deno.land/install.sh | sh
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Configurar el editor:&lt;/strong> Si usas VS Code, instala la extensión oficial de Deno.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Revisar dependencias existentes:&lt;/strong> Enumera todas las dependencias utilizadas en tu proyecto de Node.js para planificar su equivalencia en Deno.&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="3-diferencias-clave-entre-nodejs-y-deno">3. Diferencias clave entre Node.js y Deno&lt;/h2>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Característica&lt;/th>
+&lt;th>Node.js&lt;/th>
+&lt;th>Deno&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>Sistema de módulos&lt;/td>
+&lt;td>CommonJS/ESM&lt;/td>
+&lt;td>ESM por defecto&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Gestor de paquetes&lt;/td>
+&lt;td>npm/yarn&lt;/td>
+&lt;td>No tiene (usa URLs)&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Soporte para TypeScript&lt;/td>
+&lt;td>Configuración adicional requerida&lt;/td>
+&lt;td>Soporte nativo&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Seguridad&lt;/td>
+&lt;td>Sin restricciones&lt;/td>
+&lt;td>Requiere permisos explícitos&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Herramientas integradas&lt;/td>
+&lt;td>No&lt;/td>
+&lt;td>Linter, formateador, test runner&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="4-migrando-una-aplicación-paso-a-paso">4. Migrando una aplicación paso a paso&lt;/h2>
+&lt;h3 id="caso-práctico-api-rest">Caso práctico: API REST&lt;/h3>
+&lt;p>Migraré una API REST básica en Node.js a Deno. La API utiliza Express y accede a una base de datos.&lt;/p>
+&lt;h4 id="estructura-original-en-nodejs">Estructura original en Node.js:&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">project/
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">├── package.json
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">├── src/
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ ├── index.js
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ ├── routes/
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ │ └── users.js
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ ├── controllers/
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ │ └── userController.js
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ └── db/
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ └── connection.js
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">└── tests/
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> └── user.test.js
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="paso-1-migración-de-módulos">Paso 1: Migración de módulos&lt;/h4>
+&lt;p>Deno no utiliza npm. En su lugar, los módulos se importan directamente desde URLs.&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>En Node.js:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">express&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">require&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;express&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">app&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">express&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>En Deno:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">Application&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s2">&amp;#34;https://deno.land/x/oak/mod.ts&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">app&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">Application&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ul>
+&lt;h4 id="paso-2-migración-del-código">Paso 2: Migración del código&lt;/h4>
+&lt;p>Deno utiliza &lt;code>async&lt;/code>/&lt;code>await&lt;/code> de forma nativa para operaciones de red y archivo.&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Ejemplo: Middleware para JSON en Node.js:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">express&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">require&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;express&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">app&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">express&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">app&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">use&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">express&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">json&lt;/span>&lt;span class="p">());&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>Equivalente en Deno:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">Application&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s2">&amp;#34;https://deno.land/x/oak/mod.ts&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">app&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">Application&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">app&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">use&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">async&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">ctx&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">next&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">ctx&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">request&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">hasBody&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="n">body&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">await&lt;/span> &lt;span class="n">ctx&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">request&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">body&lt;/span>&lt;span class="p">()&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">value&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ctx&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">state&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">body&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">body&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">await&lt;/span> &lt;span class="n">next&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ul>
+&lt;h4 id="paso-3-manejo-de-dependencias">Paso 3: Manejo de dependencias&lt;/h4>
+&lt;p>En lugar de &lt;code>package.json&lt;/code>, Deno recomienda usar un archivo &lt;code>deps.ts&lt;/code> para centralizar los módulos importados:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">Application&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s2">&amp;#34;https://deno.land/x/oak/mod.ts&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="paso-4-ajustes-en-pruebas">Paso 4: Ajustes en pruebas&lt;/h4>
+&lt;p>Deno incluye un test runner integrado:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Prueba en Node.js (Jest):&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-j" data-lang="j">&lt;span class="line">&lt;span class="cl">&lt;span class="nv">test&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#39;should return all users&amp;#39;&lt;/span>&lt;span class="o">,&lt;/span> &lt;span class="nv">async&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nv">const&lt;/span> &lt;span class="nv">res&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nv">await&lt;/span> &lt;span class="nv">request&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nv">app&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="nv">get&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#39;/users&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nv">expect&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nv">res&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="nv">status&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="nv">toBe&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">200&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">}&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>Equivalente en Deno:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">assertEquals&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s2">&amp;#34;https://deno.land/std/testing/asserts.ts&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">Deno&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">test&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;should return all users&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">async&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="n">res&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">await&lt;/span> &lt;span class="n">fetch&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;http://localhost:8000/users&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">assertEquals&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">res&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">status&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">200&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ul>
+&lt;h2 id="5-buenas-prácticas-para-la-migración">5. Buenas prácticas para la migración&lt;/h2>
+&lt;ol>
+&lt;li>&lt;strong>Iniciar con módulos pequeños:&lt;/strong> Identifica partes autónomas del proyecto que puedan migrarse de manera independiente.&lt;/li>
+&lt;li>&lt;strong>Usar herramientas integradas:&lt;/strong> Aprovecha el formateador (&lt;code>deno fmt&lt;/code>) y linter (&lt;code>deno lint&lt;/code>) integrados para mantener un código limpio.&lt;/li>
+&lt;li>&lt;strong>Revisar permisos:&lt;/strong> Configura correctamente los permisos que tu aplicación necesita con &lt;code>--allow-*&lt;/code>.&lt;/li>
+&lt;li>&lt;strong>Documentar el proceso:&lt;/strong> Mantén un registro de cambios y problemas encontrados para futuras migraciones.&lt;/li>
+&lt;/ol>
+&lt;h2 id="6-conclusión-y-aprendizajes">6. Conclusión y aprendizajes&lt;/h2>
+&lt;p>Migrar de &lt;strong>Node.js&lt;/strong> a &lt;strong>Deno&lt;/strong> requiere un cambio de mentalidad debido a sus diferencias fundamentales. Sin embargo, &lt;strong>Deno&lt;/strong> ofrece un entorno más seguro, moderno y simplificado que puede resultar beneficioso a largo plazo. Este caso práctico demuestra que, aunque la migración puede ser desafiante, las herramientas y características de &lt;strong>Deno&lt;/strong> hacen que valga la pena el esfuerzo.&lt;/p></description></item><item><title>Creación de microservicios con Deno y Azure Functions</title><link>https://cmas.dev/posts/2024-07-24-microservices-deno-azure/</link><pubDate>Wed, 24 Jul 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-07-24-microservices-deno-azure/</guid><description>&lt;p>En el mundo moderno del desarrollo de software, los microservicios han revolucionado la forma de construir y desplegar aplicaciones escalables. Al combinar &lt;strong>Deno&lt;/strong>, una plataforma de runtime moderna basada en &lt;strong>JavaScript&lt;/strong> y &lt;strong>TypeScript&lt;/strong>, con &lt;strong>Azure Functions&lt;/strong>, una solución serverless flexible de &lt;strong>Microsoft&lt;/strong>, los desarrolladores pueden crear microservicios rápidos, seguros y eficientes. Este artículo te guiará paso a paso en el proceso de crear microservicios utilizando estas tecnologías, destacando buenas prácticas, ejemplos prácticos y el uso de &lt;strong>Visual Studio Code&lt;/strong> como herramienta principal.&lt;/p>
 &lt;h2 id="introducción-a-los-microservicios">Introducción a los microservicios&lt;/h2>
 &lt;h3 id="qué-son-los-microservicios">¿Qué son los microservicios?&lt;/h3>
 &lt;p>Los microservicios son un estilo arquitectónico que divide las aplicaciones en servicios independientes, cada uno responsable de una funcionalidad específica. Estos servicios se comunican entre sí mediante protocolos ligeros como &lt;strong>HTTP&lt;/strong> o &lt;strong>gRPC&lt;/strong>.&lt;/p>

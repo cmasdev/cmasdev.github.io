@@ -1,4 +1,158 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Angular on Christian Amado's Blog</title><link>https://cmas.dev/tags/angular/</link><description>Recent content in Angular on Christian Amado's Blog</description><generator>Hugo -- gohugo.io</generator><language>es</language><lastBuildDate>Wed, 07 Aug 2024 00:00:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/tags/angular/index.xml" rel="self" type="application/rss+xml"/><item><title>Comparación: Angular Signals vs React Hooks</title><link>https://cmas.dev/posts/2024-08-07-angular-signals-vs-react-hooks/</link><pubDate>Wed, 07 Aug 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-08-07-angular-signals-vs-react-hooks/</guid><description>&lt;p>En el mundo del desarrollo frontend, los frameworks y bibliotecas como &lt;strong>Angular&lt;/strong> y &lt;strong>React&lt;/strong> han evolucionado constantemente para ofrecer soluciones más eficientes y escalables. Dos características destacadas de estas tecnologías son los &lt;em>Signals&lt;/em> de &lt;strong>Angular&lt;/strong> y los &lt;em>Hooks&lt;/em> de &lt;strong>React&lt;/strong>. Ambos conceptos están diseñados para manejar estados y mejorar la reactividad, pero lo hacen de maneras muy diferentes. Este artículo explora en profundidad ambas herramientas, sus similitudes, diferencias, ejemplos prácticos y buenas prácticas.&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Angular on Christian Amado's Blog</title><link>https://cmas.dev/tags/angular/</link><description>Recent content in Angular on Christian Amado's Blog</description><generator>Hugo -- gohugo.io</generator><language>es</language><lastBuildDate>Wed, 28 Aug 2024 00:00:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/tags/angular/index.xml" rel="self" type="application/rss+xml"/><item><title>Gráficos interactivos con Angular y D3.js</title><link>https://cmas.dev/posts/2024-08-28-interactive-graphics-angular-d3/</link><pubDate>Wed, 28 Aug 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-08-28-interactive-graphics-angular-d3/</guid><description>&lt;p>Los gráficos interactivos son esenciales para visualizar datos de manera efectiva en aplicaciones modernas. &lt;strong>Angular&lt;/strong>, combinado con &lt;strong>D3.js&lt;/strong>, ofrece una solución poderosa para crear visualizaciones dinámicas y altamente interactivas. Este artículo explora cómo integrar &lt;strong>D3.js&lt;/strong> en una aplicación &lt;strong>Angular&lt;/strong> para construir gráficos interactivos desde cero, proporcionando ejemplos prácticos y consejos clave.&lt;/p>
+&lt;h2 id="1-introducción-a-angular-y-d3js">1. Introducción a Angular y D3.js&lt;/h2>
+&lt;h3 id="angular">Angular&lt;/h3>
+&lt;p>Angular es un framework de desarrollo frontend mantenido por Google que permite construir aplicaciones web robustas y escalables. Con su arquitectura basada en componentes y herramientas modernas como TypeScript y RxJS, Angular es ideal para proyectos grandes.&lt;/p>
+&lt;h3 id="d3js">D3.js&lt;/h3>
+&lt;p>D3.js (Data-Driven Documents) es una biblioteca de JavaScript para crear visualizaciones de datos utilizando SVG, HTML y CSS. Es conocido por su flexibilidad y capacidad para manipular el DOM en función de los datos.&lt;/p>
+&lt;h3 id="por-qué-combinar-angular-y-d3js">¿Por qué combinar Angular y D3.js?&lt;/h3>
+&lt;p>La combinación de Angular y D3.js permite:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>Reactividad:&lt;/strong> Sincronizar datos y gráficos con cambios en tiempo real.&lt;/li>
+&lt;li>&lt;strong>Modularidad:&lt;/strong> Organizar código de visualización en componentes reutilizables.&lt;/li>
+&lt;li>&lt;strong>Interactividad:&lt;/strong> Crear experiencias de usuario enriquecedoras.&lt;/li>
+&lt;/ul>
+&lt;h2 id="2-configuración-del-proyecto-angular">2. Configuración del proyecto Angular&lt;/h2>
+&lt;h3 id="creación-del-proyecto-angular">Creación del proyecto Angular&lt;/h3>
+&lt;ol>
+&lt;li>
+&lt;p>Asegúrate de tener Angular CLI instalado:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">npm install -g @angular/cli
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>Crea un nuevo proyecto Angular:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">ng new graficos-angular-d3
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">cd graficos-angular-d3
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>Instala D3.js:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">npm install d3
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;h3 id="estructura-del-proyecto">Estructura del proyecto&lt;/h3>
+&lt;p>Crea un nuevo componente para los gráficos:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">ng generate component components/bar-chart
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="3-fundamentos-de-d3js-en-angular">3. Fundamentos de D3.js en Angular&lt;/h2>
+&lt;p>D3.js utiliza selectores para manipular elementos del DOM y vincularlos a datos. Al trabajar con Angular, es importante integrar estas funcionalidades en el ciclo de vida de los componentes.&lt;/p>
+&lt;h3 id="seleccionar-un-elemento">Seleccionar un elemento&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">import * as d3 from &amp;#39;d3&amp;#39;;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">d3.select(&amp;#39;svg&amp;#39;)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> .append(&amp;#39;rect&amp;#39;)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> .attr(&amp;#39;width&amp;#39;, 100)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> .attr(&amp;#39;height&amp;#39;, 50)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> .attr(&amp;#39;fill&amp;#39;, &amp;#39;blue&amp;#39;);
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="ciclo-de-vida-de-angular">Ciclo de vida de Angular&lt;/h3>
+&lt;p>Usa &lt;code>ngOnInit&lt;/code> para inicializar gráficos:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">Component&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">OnInit&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;@angular/core&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">@&lt;/span>&lt;span class="n">Component&lt;/span>&lt;span class="p">({&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">selector&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;app-bar-chart&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">template&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;&amp;lt;svg&amp;gt;&amp;lt;/svg&amp;gt;&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">styleUrls&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;./bar-chart.component.css&amp;#39;&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">})&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="k">class&lt;/span> &lt;span class="n">BarChartComponent&lt;/span> &lt;span class="n">implements&lt;/span> &lt;span class="n">OnInit&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ngOnInit&lt;/span>&lt;span class="p">():&lt;/span> &lt;span class="n">void&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">this&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">createChart&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">createChart&lt;/span>&lt;span class="p">():&lt;/span> &lt;span class="n">void&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="n">svg&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">d3&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">select&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;svg&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">.&lt;/span>&lt;span class="n">attr&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;width&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">500&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">.&lt;/span>&lt;span class="n">attr&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;height&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">300&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">svg&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">append&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;rect&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">.&lt;/span>&lt;span class="n">attr&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;x&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">50&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">.&lt;/span>&lt;span class="n">attr&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;y&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">50&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">.&lt;/span>&lt;span class="n">attr&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;width&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">100&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">.&lt;/span>&lt;span class="n">attr&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;height&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">200&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">.&lt;/span>&lt;span class="n">attr&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;fill&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;steelblue&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="4-creando-un-gráfico-de-barras-interactivo">4. Creando un gráfico de barras interactivo&lt;/h2>
+&lt;h3 id="configuración-inicial">Configuración inicial&lt;/h3>
+&lt;p>Define los datos y el espacio de trabajo:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">data&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="mi">10&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">20&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">30&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">40&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">50&lt;/span>&lt;span class="p">];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">width&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">500&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">height&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">300&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">margin&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">top&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">20&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">right&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">30&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">bottom&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">30&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">left&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">40&lt;/span> &lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="renderizado-del-gráfico">Renderizado del gráfico&lt;/h3>
+&lt;p>Crea las escalas y ejes:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">x&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">d3&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">scaleBand&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">.&lt;/span>&lt;span class="n">domain&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">data&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">map&lt;/span>&lt;span class="p">((&lt;/span>&lt;span class="n">d&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">i&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">i&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">toString&lt;/span>&lt;span class="p">()))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">.&lt;/span>&lt;span class="n">range&lt;/span>&lt;span class="p">([&lt;/span>&lt;span class="n">margin&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">left&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">width&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="n">margin&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">right&lt;/span>&lt;span class="p">])&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">.&lt;/span>&lt;span class="n">padding&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mf">0.1&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">y&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">d3&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">scaleLinear&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">.&lt;/span>&lt;span class="n">domain&lt;/span>&lt;span class="p">([&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">d3&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">max&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">data&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="n">as&lt;/span> &lt;span class="n">number&lt;/span>&lt;span class="p">])&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">.&lt;/span>&lt;span class="n">nice&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">.&lt;/span>&lt;span class="n">range&lt;/span>&lt;span class="p">([&lt;/span>&lt;span class="n">height&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="n">margin&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">bottom&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">margin&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">top&lt;/span>&lt;span class="p">]);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">svg&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">d3&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">select&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;svg&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">.&lt;/span>&lt;span class="n">attr&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;width&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">width&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">.&lt;/span>&lt;span class="n">attr&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;height&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">height&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">svg&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">append&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;g&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">.&lt;/span>&lt;span class="n">selectAll&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;rect&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">.&lt;/span>&lt;span class="n">data&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">data&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">.&lt;/span>&lt;span class="n">enter&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">.&lt;/span>&lt;span class="n">append&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;rect&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">.&lt;/span>&lt;span class="n">attr&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;x&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">d&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">i&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">x&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">toString&lt;/span>&lt;span class="p">())&lt;/span> &lt;span class="n">as&lt;/span> &lt;span class="n">number&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">.&lt;/span>&lt;span class="n">attr&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;y&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">d&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">y&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">d&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">.&lt;/span>&lt;span class="n">attr&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;height&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">d&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">y&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="n">y&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">d&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">.&lt;/span>&lt;span class="n">attr&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;width&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">x&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">bandwidth&lt;/span>&lt;span class="p">())&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">.&lt;/span>&lt;span class="n">attr&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;fill&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;steelblue&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="agregando-interactividad">Agregando interactividad&lt;/h3>
+&lt;p>Agrega eventos de hover:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">svg.selectAll(&amp;#39;rect&amp;#39;)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> .on(&amp;#39;mouseover&amp;#39;, function () {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> d3.select(this).attr(&amp;#39;fill&amp;#39;, &amp;#39;orange&amp;#39;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> })
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> .on(&amp;#39;mouseout&amp;#39;, function () {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> d3.select(this).attr(&amp;#39;fill&amp;#39;, &amp;#39;steelblue&amp;#39;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> });
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="5-creando-un-gráfico-de-líneas">5. Creando un gráfico de líneas&lt;/h2>
+&lt;p>Define datos y escalas:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">lineData&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span> &lt;span class="n">x&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">y&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">30&lt;/span> &lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span> &lt;span class="n">x&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">y&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">80&lt;/span> &lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span> &lt;span class="n">x&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">y&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">45&lt;/span> &lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span> &lt;span class="n">x&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">3&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">y&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">60&lt;/span> &lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span> &lt;span class="n">x&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">4&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">y&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">20&lt;/span> &lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span> &lt;span class="n">x&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">5&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">y&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">90&lt;/span> &lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">line&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">d3&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">line&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">.&lt;/span>&lt;span class="n">x&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">d&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">x&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">d&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">x&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">.&lt;/span>&lt;span class="n">y&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">d&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">y&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">d&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">y&lt;/span>&lt;span class="p">));&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">svg&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">append&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;path&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">.&lt;/span>&lt;span class="n">datum&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">lineData&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">.&lt;/span>&lt;span class="n">attr&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;fill&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;none&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">.&lt;/span>&lt;span class="n">attr&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;stroke&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;steelblue&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">.&lt;/span>&lt;span class="n">attr&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;d&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">line&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="6-buenas-prácticas-para-trabajar-con-d3js-en-angular">6. Buenas prácticas para trabajar con D3.js en Angular&lt;/h2>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Encapsular lógica en servicios:&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>Centraliza el código D3.js para evitar redundancia.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Utilizar ChangeDetectionStrategy.OnPush:&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>Mejora el rendimiento al minimizar detecciones de cambios innecesarias.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Evitar manipulaciones directas del DOM:&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>Usa ViewChild para seleccionar elementos del DOM en lugar de usar selectores globales.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="7-conclusión">7. Conclusión&lt;/h2>
+&lt;p>&lt;strong>Angular&lt;/strong> y &lt;strong>D3.js&lt;/strong> forman una combinación poderosa para crear visualizaciones interactivas y reactivas. Aunque la integración puede requerir algunos ajustes iniciales, el resultado ofrece flexibilidad y modularidad en aplicaciones modernas. Al seguir las mejores prácticas y estructurar correctamente tu proyecto, puedes aprovechar al máximo estas herramientas.&lt;/p></description></item><item><title>Comparación: Angular Signals vs React Hooks</title><link>https://cmas.dev/posts/2024-08-07-angular-signals-vs-react-hooks/</link><pubDate>Wed, 07 Aug 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-08-07-angular-signals-vs-react-hooks/</guid><description>&lt;p>En el mundo del desarrollo frontend, los frameworks y bibliotecas como &lt;strong>Angular&lt;/strong> y &lt;strong>React&lt;/strong> han evolucionado constantemente para ofrecer soluciones más eficientes y escalables. Dos características destacadas de estas tecnologías son los &lt;em>Signals&lt;/em> de &lt;strong>Angular&lt;/strong> y los &lt;em>Hooks&lt;/em> de &lt;strong>React&lt;/strong>. Ambos conceptos están diseñados para manejar estados y mejorar la reactividad, pero lo hacen de maneras muy diferentes. Este artículo explora en profundidad ambas herramientas, sus similitudes, diferencias, ejemplos prácticos y buenas prácticas.&lt;/p>
 &lt;h2 id="qué-son-los-angular-signals">¿Qué son los Angular Signals?&lt;/h2>
 &lt;h3 id="definición">Definición&lt;/h3>
 &lt;p>Los Signals en Angular son una característica relativamente nueva que permite gestionar el estado y la reactividad en aplicaciones. Proporcionan una forma declarativa y eficiente de reaccionar a los cambios de estado mediante el uso de señales que notifican automáticamente a los componentes afectados.&lt;/p>
