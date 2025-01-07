@@ -289,7 +289,570 @@
 &lt;li>&lt;strong>Curva de aprendizaje&lt;/strong> para desarrolladores nuevos en &lt;strong>.NET&lt;/strong>.&lt;/li>
 &lt;/ol>
 &lt;h2 id="conclusión">Conclusión&lt;/h2>
-&lt;p>Combinar las capacidades de &lt;strong>Blazor&lt;/strong> y &lt;strong>PWAs&lt;/strong> permite a los desarrolladores crear aplicaciones modernas y escalables que funcionan offline, se pueden instalar y ofrecen una experiencia de usuario mejorada. Aunque existen algunas limitaciones, las ventajas de usar &lt;strong>Blazor&lt;/strong> con &lt;strong>PWA&lt;/strong> superan ampliamente los desafíos, especialmente para equipos que ya utilizan &lt;strong>.NET&lt;/strong> en su flujo de desarrollo. ¡Explora las posibilidades de &lt;strong>Blazor&lt;/strong> para &lt;strong>PWAs&lt;/strong> y lleva tus aplicaciones web al siguiente nivel!&lt;/p></description></item><item><title>Gráficos interactivos con Angular y D3.js</title><link>https://cmas.dev/posts/2024-08-28-interactive-graphics-angular-d3/</link><pubDate>Wed, 28 Aug 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-08-28-interactive-graphics-angular-d3/</guid><description>&lt;p>Los gráficos interactivos son esenciales para visualizar datos de manera efectiva en aplicaciones modernas. &lt;strong>Angular&lt;/strong>, combinado con &lt;strong>D3.js&lt;/strong>, ofrece una solución poderosa para crear visualizaciones dinámicas y altamente interactivas. Este artículo explora cómo integrar &lt;strong>D3.js&lt;/strong> en una aplicación &lt;strong>Angular&lt;/strong> para construir gráficos interactivos desde cero, proporcionando ejemplos prácticos y consejos clave.&lt;/p>
+&lt;p>Combinar las capacidades de &lt;strong>Blazor&lt;/strong> y &lt;strong>PWAs&lt;/strong> permite a los desarrolladores crear aplicaciones modernas y escalables que funcionan offline, se pueden instalar y ofrecen una experiencia de usuario mejorada. Aunque existen algunas limitaciones, las ventajas de usar &lt;strong>Blazor&lt;/strong> con &lt;strong>PWA&lt;/strong> superan ampliamente los desafíos, especialmente para equipos que ya utilizan &lt;strong>.NET&lt;/strong> en su flujo de desarrollo. ¡Explora las posibilidades de &lt;strong>Blazor&lt;/strong> para &lt;strong>PWAs&lt;/strong> y lleva tus aplicaciones web al siguiente nivel!&lt;/p></description></item><item><title>Gestión de estado en Angular con NgRx</title><link>https://cmas.dev/posts/2024-09-25-state-management-angular/</link><pubDate>Wed, 25 Sep 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-09-25-state-management-angular/</guid><description>&lt;p>La gestión de estado es un aspecto fundamental en el desarrollo de aplicaciones frontend, especialmente en aplicaciones complejas donde se manejan grandes cantidades de datos compartidos entre componentes. &lt;strong>NgRx&lt;/strong> es una librería basada en &lt;strong>Redux&lt;/strong> que permite gestionar el estado de manera predecible y escalable en aplicaciones &lt;strong>Angular&lt;/strong>. Este artículo ofrece una guía detallada para implementar y utilizar NgRx en tus proyectos Angular.&lt;/p>
+&lt;h2 id="1-qué-es-ngrx-y-por-qué-usarlo">1. ¿Qué es NgRx y por qué usarlo?&lt;/h2>
+&lt;p>NgRx es una implementación de patrones Redux y RxJS para Angular. Redux se basa en un estado único y centralizado que describe toda la aplicación. NgRx combina este patrón con la reactividad de RxJS para manejar flujos de datos asincrónicos y garantizar la inmutabilidad.&lt;/p>
+&lt;h3 id="ventajas-de-ngrx">Ventajas de NgRx:&lt;/h3>
+&lt;ul>
+&lt;li>&lt;strong>Estado centralizado:&lt;/strong> Facilita la sincronización entre componentes.&lt;/li>
+&lt;li>&lt;strong>Predecibilidad:&lt;/strong> Los cambios en el estado son manejados mediante acciones y reducers, lo que mejora la trazabilidad.&lt;/li>
+&lt;li>&lt;strong>Escalabilidad:&lt;/strong> Ideal para aplicaciones de gran tamaño.&lt;/li>
+&lt;li>&lt;strong>Integración con RxJS:&lt;/strong> Simplifica el manejo de operaciones asincrónicas.&lt;/li>
+&lt;/ul>
+&lt;h2 id="2-instalación-y-configuración-inicial">2. Instalación y configuración inicial&lt;/h2>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Instalar NgRx:&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">npm&lt;/span> &lt;span class="n">install&lt;/span> &lt;span class="err">@&lt;/span>&lt;span class="n">ngrx&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">store&lt;/span> &lt;span class="err">@&lt;/span>&lt;span class="n">ngrx&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">effects&lt;/span> &lt;span class="err">@&lt;/span>&lt;span class="n">ngrx&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">entity&lt;/span> &lt;span class="err">@&lt;/span>&lt;span class="n">ngrx&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">store&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">devtools&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Configurar el Store en el módulo principal:&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">NgModule&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;@angular/core&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">StoreModule&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;@ngrx/store&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">EffectsModule&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;@ngrx/effects&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">StoreDevtoolsModule&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;@ngrx/store-devtools&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">environment&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;../environments/environment&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">@&lt;/span>&lt;span class="n">NgModule&lt;/span>&lt;span class="p">({&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">imports&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">StoreModule&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">forRoot&lt;/span>&lt;span class="p">({},&lt;/span> &lt;span class="p">{}),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">EffectsModule&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">forRoot&lt;/span>&lt;span class="p">([]),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">!&lt;/span>&lt;span class="n">environment&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">production&lt;/span> &lt;span class="err">?&lt;/span> &lt;span class="n">StoreDevtoolsModule&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">instrument&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">:&lt;/span> &lt;span class="p">[]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">declarations&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">AppComponent&lt;/span>&lt;span class="p">],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">bootstrap&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">AppComponent&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">})&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="k">class&lt;/span> &lt;span class="n">AppModule&lt;/span> &lt;span class="p">{}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;h2 id="3-conceptos-fundamentales-de-ngrx">3. Conceptos fundamentales de NgRx&lt;/h2>
+&lt;h3 id="store">Store&lt;/h3>
+&lt;p>El &lt;strong>Store&lt;/strong> es un contenedor global para el estado de la aplicación. Proporciona una única fuente de verdad que todos los componentes pueden acceder.&lt;/p>
+&lt;h3 id="actions">Actions&lt;/h3>
+&lt;p>Las &lt;strong>acciones&lt;/strong> describen eventos que ocurren en la aplicación y disparan cambios en el estado.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">createAction&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">props&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;@ngrx/store&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="k">const&lt;/span> &lt;span class="n">loadTasks&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">createAction&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;[Tasks] Load Tasks&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="k">const&lt;/span> &lt;span class="n">addTask&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">createAction&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;[Tasks] Add Task&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">props&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="p">{&lt;/span> &lt;span class="n">task&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">string&lt;/span> &lt;span class="p">}&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">());&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="reducers">Reducers&lt;/h3>
+&lt;p>Los &lt;strong>reducers&lt;/strong> especifican cómo cambia el estado en respuesta a las acciones.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">createReducer&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">on&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;@ngrx/store&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">loadTasks&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">addTask&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;./tasks.actions&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="n">interface&lt;/span> &lt;span class="n">TaskState&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">tasks&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">string&lt;/span>&lt;span class="p">[];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="k">const&lt;/span> &lt;span class="n">initialState&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">TaskState&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">tasks&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[]&lt;/span> &lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="k">const&lt;/span> &lt;span class="n">tasksReducer&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">createReducer&lt;/span>&lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">initialState&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">on&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">loadTasks&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">state&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">({&lt;/span> &lt;span class="o">...&lt;/span>&lt;span class="n">state&lt;/span> &lt;span class="p">})),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">on&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">addTask&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">state&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">task&lt;/span> &lt;span class="p">})&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">({&lt;/span> &lt;span class="o">...&lt;/span>&lt;span class="n">state&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">tasks&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="o">...&lt;/span>&lt;span class="n">state&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">tasks&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">task&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="p">}))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="selectors">Selectors&lt;/h3>
+&lt;p>Los &lt;strong>selectors&lt;/strong> permiten acceder a partes específicas del estado.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">createSelector&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;@ngrx/store&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="k">const&lt;/span> &lt;span class="n">selectTasksState&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">state&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">any&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">state&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">tasks&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="k">const&lt;/span> &lt;span class="n">selectAllTasks&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">createSelector&lt;/span>&lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">selectTasksState&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">(&lt;/span>&lt;span class="n">state&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">TaskState&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">state&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">tasks&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="effects">Effects&lt;/h3>
+&lt;p>Los &lt;strong>effects&lt;/strong> manejan operaciones asincrónicas como llamadas HTTP y despachan nuevas acciones.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">Injectable&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;@angular/core&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">Actions&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">createEffect&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">ofType&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;@ngrx/effects&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">map&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">mergeMap&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;rxjs/operators&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">TaskService&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;./task.service&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">loadTasks&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">addTask&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;./tasks.actions&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">@&lt;/span>&lt;span class="n">Injectable&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="k">class&lt;/span> &lt;span class="n">TaskEffects&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">loadTasks&lt;/span>&lt;span class="o">$&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">createEffect&lt;/span>&lt;span class="p">(()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">this&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">actions&lt;/span>&lt;span class="o">$.&lt;/span>&lt;span class="n">pipe&lt;/span>&lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ofType&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">loadTasks&lt;/span>&lt;span class="p">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">mergeMap&lt;/span>&lt;span class="p">(()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">this&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">taskService&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">getTasks&lt;/span>&lt;span class="p">()&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">pipe&lt;/span>&lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">map&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">tasks&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">addTask&lt;/span>&lt;span class="p">({&lt;/span> &lt;span class="n">task&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">tasks&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="p">}))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">constructor&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">private&lt;/span> &lt;span class="n">actions&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">Actions&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">private&lt;/span> &lt;span class="n">taskService&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">TaskService&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="4-implementación-paso-a-paso">4. Implementación paso a paso&lt;/h2>
+&lt;h3 id="1-creación-del-store">1. Creación del Store&lt;/h3>
+&lt;p>Define el estado inicial y regístralo en el módulo principal.&lt;/p>
+&lt;h3 id="2-definición-de-acciones-y-reducers">2. Definición de acciones y reducers&lt;/h3>
+&lt;p>Crea acciones para describir eventos y reducers para modificar el estado.&lt;/p>
+&lt;h3 id="3-uso-de-selectors-en-componentes">3. Uso de selectors en componentes&lt;/h3>
+&lt;p>Accede al estado usando &lt;code>Store&lt;/code> y &lt;code>selectors&lt;/code>.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">Component&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;@angular/core&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">Store&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;@ngrx/store&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">selectAllTasks&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;./tasks.selectors&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">@&lt;/span>&lt;span class="n">Component&lt;/span>&lt;span class="p">({&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">selector&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;app-task-list&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">template&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;&amp;lt;ul&amp;gt;&amp;lt;li *ngFor=&amp;#34;let task of tasks$ | async&amp;#34;&amp;gt;{{ task }}&amp;lt;/li&amp;gt;&amp;lt;/ul&amp;gt;&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">})&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="k">class&lt;/span> &lt;span class="n">TaskListComponent&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">tasks&lt;/span>&lt;span class="o">$&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">this&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">store&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">select&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">selectAllTasks&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">constructor&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">private&lt;/span> &lt;span class="n">store&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">Store&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="4-manejo-de-efectos-para-llamadas-http">4. Manejo de efectos para llamadas HTTP&lt;/h3>
+&lt;p>Usa effects para realizar operaciones asincrónicas y despachar acciones.&lt;/p>
+&lt;h2 id="5-buenas-prácticas-en-ngrx">5. Buenas prácticas en NgRx&lt;/h2>
+&lt;ul>
+&lt;li>&lt;strong>Mantén los reducers simples:&lt;/strong> Divide los reducers en funciones más pequeñas si es necesario.&lt;/li>
+&lt;li>&lt;strong>Usa actions descriptivas:&lt;/strong> Los nombres de las acciones deben describir claramente el evento.&lt;/li>
+&lt;li>&lt;strong>Centraliza la lógica en effects:&lt;/strong> Mantén las operaciones complejas fuera de los componentes.&lt;/li>
+&lt;li>&lt;strong>Prueba todo:&lt;/strong> Asegúrate de probar reducers, effects y selectors.&lt;/li>
+&lt;/ul>
+&lt;h2 id="6-ejemplo-práctico-aplicación-de-tareas">6. Ejemplo práctico: Aplicación de tareas&lt;/h2>
+&lt;h3 id="estructura-del-proyecto">Estructura del proyecto&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">project/
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">├── actions/
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ └── tasks.actions.ts
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">├── reducers/
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ └── tasks.reducer.ts
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">├── effects/
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ └── tasks.effects.ts
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">├── selectors/
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ └── tasks.selectors.ts
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">└── components/
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> └── task-list.component.ts
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="resultado-esperado">Resultado esperado&lt;/h3>
+&lt;p>Una lista de tareas que se actualiza dinámicamente al agregar nuevas tareas o al cargarlas desde una API.&lt;/p>
+&lt;h2 id="7-conclusión">7. Conclusión&lt;/h2>
+&lt;p>&lt;strong>NgRx&lt;/strong> es una herramienta poderosa para gestionar el estado en aplicaciones Angular complejas. Aunque puede requerir una curva de aprendizaje inicial, su enfoque estructurado y predecible mejora significativamente la mantenibilidad y escalabilidad del código. Al seguir las mejores prácticas descritas en este artículo, estarás bien equipado para implementar &lt;strong>NgRx&lt;/strong> en tus proyectos Angular con éxito.&lt;/p></description></item><item><title>Angular y Firebase: Uso avanzado de RxJS</title><link>https://cmas.dev/posts/2024-09-18-angular-and-firebase/</link><pubDate>Wed, 18 Sep 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-09-18-angular-and-firebase/</guid><description>&lt;p>&lt;strong>Angular&lt;/strong> y &lt;strong>Firebase&lt;/strong> son una combinación poderosa para el desarrollo de aplicaciones web modernas y reactivas. Al integrar &lt;strong>Firebase&lt;/strong> en &lt;strong>Angular&lt;/strong>, &lt;strong>RxJS&lt;/strong> se convierte en una herramienta clave para gestionar flujos de datos y operaciones asincrónicas de manera eficiente. Este artículo explora el uso avanzado de RxJS en aplicaciones &lt;strong>Angular&lt;/strong> con &lt;strong>Firebase&lt;/strong>, proporcionando ejemplos prácticos y estrategias para maximizar su potencial.&lt;/p>
+&lt;h2 id="1-introducción-a-angular-firebase-y-rxjs">1. Introducción a Angular, Firebase y RxJS&lt;/h2>
+&lt;h3 id="angular">Angular&lt;/h3>
+&lt;p>Angular es un framework frontend de código abierto desarrollado por Google. Es conocido por su arquitectura basada en componentes y su uso extensivo de RxJS para manejar flujos de datos reactivos.&lt;/p>
+&lt;h3 id="firebase">Firebase&lt;/h3>
+&lt;p>Firebase es una plataforma para el desarrollo de aplicaciones que proporciona servicios como almacenamiento en la nube, autenticación, bases de datos en tiempo real y hosting.&lt;/p>
+&lt;h3 id="rxjs">RxJS&lt;/h3>
+&lt;p>RxJS (Reactive Extensions for JavaScript) es una biblioteca para programación reactiva que permite trabajar con flujos de datos asincrónicos. En Angular, RxJS se usa para gestionar observables en servicios como HttpClient, formularios reactivos y Firebase.&lt;/p>
+&lt;h2 id="2-configuración-inicial-del-proyecto">2. Configuración inicial del proyecto&lt;/h2>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Crear un nuevo proyecto Angular:&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">ng new angular-firebase-rxjs
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">cd angular-firebase-rxjs
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Instalar AngularFire y Firebase:&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">npm install firebase @angular/fire rxjs
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Configurar Firebase en el proyecto:&lt;/strong>
+Agrega el archivo de configuración de Firebase en &lt;code>environment.ts&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="k">const&lt;/span> &lt;span class="n">environment&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">firebase&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">apiKey&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;&amp;lt;API_KEY&amp;gt;&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">authDomain&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;&amp;lt;AUTH_DOMAIN&amp;gt;&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">projectId&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;&amp;lt;PROJECT_ID&amp;gt;&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">storageBucket&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;&amp;lt;STORAGE_BUCKET&amp;gt;&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">messagingSenderId&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;&amp;lt;MESSAGING_SENDER_ID&amp;gt;&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">appId&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;&amp;lt;APP_ID&amp;gt;&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Importar AngularFire en el módulo principal:&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">AngularFireModule&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;@angular/fire/compat&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">AngularFirestoreModule&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;@angular/fire/compat/firestore&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">@&lt;/span>&lt;span class="n">NgModule&lt;/span>&lt;span class="p">({&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">declarations&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">AppComponent&lt;/span>&lt;span class="p">],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">imports&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">BrowserModule&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">AngularFireModule&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">initializeApp&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">environment&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">firebase&lt;/span>&lt;span class="p">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">AngularFirestoreModule&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">bootstrap&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">AppComponent&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">})&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="k">class&lt;/span> &lt;span class="n">AppModule&lt;/span> &lt;span class="p">{}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;h2 id="3-uso-de-rxjs-con-firestore">3. Uso de RxJS con Firestore&lt;/h2>
+&lt;h3 id="consultas-reactivas">Consultas reactivas&lt;/h3>
+&lt;p>Firestore se integra perfectamente con RxJS al devolver observables para las consultas.&lt;/p>
+&lt;p>&lt;strong>Ejemplo:&lt;/strong> Obtener datos de una colección.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">AngularFirestore&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;@angular/fire/compat/firestore&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">Observable&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;rxjs&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">@&lt;/span>&lt;span class="n">Injectable&lt;/span>&lt;span class="p">({&lt;/span> &lt;span class="n">providedIn&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;root&amp;#39;&lt;/span> &lt;span class="p">})&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="k">class&lt;/span> &lt;span class="n">TaskService&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">constructor&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">private&lt;/span> &lt;span class="n">firestore&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">AngularFirestore&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">getTasks&lt;/span>&lt;span class="p">():&lt;/span> &lt;span class="n">Observable&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">any&lt;/span>&lt;span class="p">[]&lt;/span>&lt;span class="o">&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">this&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">firestore&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">collection&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;tasks&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">valueChanges&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="operadores-avanzados">Operadores avanzados&lt;/h3>
+&lt;p>Puedes usar operadores de RxJS como &lt;code>map&lt;/code> y &lt;code>filter&lt;/code> para transformar datos.&lt;/p>
+&lt;p>&lt;strong>Ejemplo:&lt;/strong> Filtrar tareas completadas.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">getCompletedTasks(): Observable&amp;lt;any[]&amp;gt; {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> return this.firestore.collection(&amp;#39;tasks&amp;#39;).valueChanges().pipe(
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> map(tasks =&amp;gt; tasks.filter(task =&amp;gt; task.completed))
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> );
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="4-manejo-de-autenticación-con-rxjs">4. Manejo de autenticación con RxJS&lt;/h2>
+&lt;h3 id="observables-para-estado-de-autenticación">Observables para estado de autenticación&lt;/h3>
+&lt;p>Firebase Authentication permite suscribirse al estado de autenticación mediante observables.&lt;/p>
+&lt;p>&lt;strong>Ejemplo:&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">AngularFireAuth&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;@angular/fire/compat/auth&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">constructor&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">private&lt;/span> &lt;span class="n">afAuth&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">AngularFireAuth&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">getAuthState&lt;/span>&lt;span class="p">():&lt;/span> &lt;span class="n">Observable&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">any&lt;/span>&lt;span class="o">&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">this&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">afAuth&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">authState&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="pipes-para-transformaciones">Pipes para transformaciones&lt;/h3>
+&lt;p>Usa pipes para modificar el flujo de datos según el usuario autenticado.&lt;/p>
+&lt;p>&lt;strong>Ejemplo:&lt;/strong> Obtener el ID del usuario actual.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">getUserId(): Observable&amp;lt;string | null&amp;gt; {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> return this.afAuth.authState.pipe(
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> map(user =&amp;gt; user ? user.uid : null)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> );
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="5-estrategias-avanzadas-con-rxjs-y-firebase">5. Estrategias avanzadas con RxJS y Firebase&lt;/h2>
+&lt;h3 id="combinar-datos-de-múltiples-colecciones">Combinar datos de múltiples colecciones&lt;/h3>
+&lt;p>Puedes usar operadores como &lt;code>combineLatest&lt;/code> para trabajar con datos relacionados.&lt;/p>
+&lt;p>&lt;strong>Ejemplo:&lt;/strong> Obtener tareas con detalles del usuario.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">combineLatest&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;rxjs&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">switchMap&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;rxjs/operators&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">getTasksWithUserDetails&lt;/span>&lt;span class="p">():&lt;/span> &lt;span class="n">Observable&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">any&lt;/span>&lt;span class="p">[]&lt;/span>&lt;span class="o">&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">this&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">firestore&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">collection&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;tasks&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">valueChanges&lt;/span>&lt;span class="p">()&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">pipe&lt;/span>&lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">switchMap&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">tasks&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="n">userObservables&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">tasks&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">map&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">task&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">this&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">firestore&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">collection&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;users&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">doc&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">task&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">userId&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">valueChanges&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">combineLatest&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">userObservables&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">pipe&lt;/span>&lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">map&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">userDetails&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">tasks&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">map&lt;/span>&lt;span class="p">((&lt;/span>&lt;span class="n">task&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">i&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">({&lt;/span> &lt;span class="o">...&lt;/span>&lt;span class="n">task&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">user&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">userDetails&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="p">})))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">})&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="manejo-de-errores-reactivo">Manejo de errores reactivo&lt;/h3>
+&lt;p>Usa &lt;code>catchError&lt;/code> para gestionar errores de manera elegante.&lt;/p>
+&lt;p>&lt;strong>Ejemplo:&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">getTasks(): Observable&amp;lt;any[]&amp;gt; {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> return this.firestore.collection(&amp;#39;tasks&amp;#39;).valueChanges().pipe(
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> catchError(error =&amp;gt; {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> console.error(&amp;#39;Error fetching tasks:&amp;#39;, error);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> return of([]); // Retorna un arreglo vacío en caso de error.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> })
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> );
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="6-ejemplo-práctico-dashboard-en-tiempo-real">6. Ejemplo práctico: Dashboard en tiempo real&lt;/h2>
+&lt;p>Crea un dashboard que muestre tareas y permita actualizarlas en tiempo real.&lt;/p>
+&lt;h3 id="servicio">Servicio&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">getRealTimeTasks&lt;/span>&lt;span class="p">():&lt;/span> &lt;span class="n">Observable&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">any&lt;/span>&lt;span class="p">[]&lt;/span>&lt;span class="o">&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">this&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">firestore&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">collection&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;tasks&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">snapshotChanges&lt;/span>&lt;span class="p">()&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">pipe&lt;/span>&lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">map&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">actions&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">actions&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">map&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">a&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="n">data&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">a&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">payload&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">doc&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">data&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="n">id&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">a&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">payload&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">doc&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">id&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">id&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="o">...&lt;/span>&lt;span class="n">data&lt;/span> &lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="componente">Componente&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="err">@&lt;/span>&lt;span class="n">Component&lt;/span>&lt;span class="p">({&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">selector&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;app-dashboard&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">template&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="err">`&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">div&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="n">ngFor&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;let task of tasks$ | async&amp;#34;&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">p&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">{{&lt;/span> &lt;span class="n">task&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">name&lt;/span> &lt;span class="p">}}&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="p">{{&lt;/span> &lt;span class="n">task&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">completed&lt;/span> &lt;span class="err">?&lt;/span> &lt;span class="s1">&amp;#39;Done&amp;#39;&lt;/span> &lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;Pending&amp;#39;&lt;/span> &lt;span class="p">}}&lt;/span>&lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">p&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">div&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="err">`&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">})&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="k">class&lt;/span> &lt;span class="n">DashboardComponent&lt;/span> &lt;span class="n">implements&lt;/span> &lt;span class="n">OnInit&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">tasks&lt;/span>&lt;span class="o">$!&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">Observable&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">any&lt;/span>&lt;span class="p">[]&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">constructor&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">private&lt;/span> &lt;span class="n">taskService&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">TaskService&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ngOnInit&lt;/span>&lt;span class="p">():&lt;/span> &lt;span class="n">void&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">this&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">tasks&lt;/span>&lt;span class="o">$&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">this&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">taskService&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">getRealTimeTasks&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="7-conclusión">7. Conclusión&lt;/h2>
+&lt;p>El uso avanzado de &lt;strong>RxJS&lt;/strong> con &lt;strong>Angular&lt;/strong> y &lt;strong>Firebase&lt;/strong> desbloquea todo el potencial de la programación reactiva. Desde consultas reactivas en &lt;strong>Firestore&lt;/strong> hasta manejo de autenticación y datos en tiempo real, &lt;strong>RxJS&lt;/strong> proporciona las herramientas necesarias para construir aplicaciones escalables y altamente interactivas. Aplicar estas técnicas mejorará la calidad y el rendimiento de tus proyectos.&lt;/p></description></item><item><title>Mejores prácticas de modularidad con Deno 2</title><link>https://cmas.dev/posts/2024-09-11-best-practices-modularity-deno2/</link><pubDate>Wed, 11 Sep 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-09-11-best-practices-modularity-deno2/</guid><description>&lt;p>&lt;strong>Deno 2&lt;/strong> ha revolucionado el desarrollo con &lt;strong>JavaScript&lt;/strong> y &lt;strong>TypeScript&lt;/strong> al proporcionar un entorno moderno, seguro y modular. Su sistema de importación basado en URL y su soporte nativo para &lt;strong>TypeScript&lt;/strong> facilitan la creación de aplicaciones bien estructuradas y mantenibles. En este artículo, exploraremos las mejores prácticas para lograr modularidad en proyectos con &lt;strong>Deno 2&lt;/strong>.&lt;/p>
+&lt;h2 id="1-introducción-a-la-modularidad-en-deno-2">1. Introducción a la modularidad en Deno 2&lt;/h2>
+&lt;p>La modularidad se refiere a dividir un programa en componentes más pequeños e independientes. En &lt;strong>Deno 2&lt;/strong>, cada archivo actúa como un módulo independiente, importado y exportado mediante URLs. Esto elimina la necesidad de gestores de paquetes como npm y fomenta un enfoque más directo para manejar dependencias.&lt;/p>
+&lt;h3 id="ventajas-de-la-modularidad-en-deno-2">Ventajas de la modularidad en Deno 2&lt;/h3>
+&lt;ul>
+&lt;li>&lt;strong>Mantenibilidad:&lt;/strong> El código está organizado y es fácil de entender.&lt;/li>
+&lt;li>&lt;strong>Reutilización:&lt;/strong> Los módulos pueden reutilizarse en diferentes proyectos.&lt;/li>
+&lt;li>&lt;strong>Escalabilidad:&lt;/strong> Es más fácil agregar nuevas funcionalidades.&lt;/li>
+&lt;li>&lt;strong>Colaboración:&lt;/strong> Los equipos pueden trabajar en diferentes módulos de forma independiente.&lt;/li>
+&lt;/ul>
+&lt;h2 id="2-estructura-de-carpetas-recomendada">2. Estructura de carpetas recomendada&lt;/h2>
+&lt;p>Una estructura de carpetas bien organizada es esencial para la modularidad. Una configuración recomendada para proyectos en Deno es:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">project/
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">├── src/
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ ├── controllers/
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ │ └── userController.ts
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ ├── services/
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ │ └── userService.ts
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ ├── utils/
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ │ └── logger.ts
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ └── deps.ts
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">├── tests/
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ └── userService_test.ts
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">├── mod.ts
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">└── README.md
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>&lt;strong>&lt;code>src/&lt;/code>&lt;/strong>: Contiene el código principal de la aplicación.&lt;/li>
+&lt;li>&lt;strong>&lt;code>deps.ts&lt;/code>&lt;/strong>: Centraliza las dependencias externas.&lt;/li>
+&lt;li>&lt;strong>&lt;code>tests/&lt;/code>&lt;/strong>: Almacena los archivos de prueba.&lt;/li>
+&lt;li>&lt;strong>&lt;code>mod.ts&lt;/code>&lt;/strong>: Archivo principal que expone los módulos necesarios.&lt;/li>
+&lt;/ul>
+&lt;h2 id="3-uso-de-depsts-para-centralizar-dependencias">3. Uso de deps.ts para centralizar dependencias&lt;/h2>
+&lt;p>En Deno, es común utilizar un archivo &lt;code>deps.ts&lt;/code> para centralizar todas las dependencias externas, lo que facilita su gestión y actualización.&lt;/p>
+&lt;h3 id="ejemplo-de-depsts">Ejemplo de deps.ts&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">Application&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">Router&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s2">&amp;#34;https://deno.land/x/oak/mod.ts&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">assertEquals&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s2">&amp;#34;https://deno.land/std/testing/asserts.ts&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">config&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s2">&amp;#34;https://deno.land/x/dotenv/mod.ts&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="uso-en-un-módulo">Uso en un módulo&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">Application&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">Router&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s2">&amp;#34;../deps.ts&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">app&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">Application&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">router&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">Router&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">router&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">get&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;/&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">context&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">context&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">response&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">body&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;Hello, Deno!&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">app&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">use&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">router&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">routes&lt;/span>&lt;span class="p">());&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">app&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">listen&lt;/span>&lt;span class="p">({&lt;/span> &lt;span class="n">port&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">8000&lt;/span> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="4-importaciones-y-exportaciones-claras">4. Importaciones y exportaciones claras&lt;/h2>
+&lt;p>Las importaciones y exportaciones claras mejoran la legibilidad del código.&lt;/p>
+&lt;h3 id="exportaciones-nombradas">Exportaciones nombradas&lt;/h3>
+&lt;p>Prefiere exportar funciones y clases de manera nombrada:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="o">//&lt;/span> &lt;span class="n">logger&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">ts&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="n">function&lt;/span> &lt;span class="n">logInfo&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">message&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">string&lt;/span>&lt;span class="p">):&lt;/span> &lt;span class="n">void&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">console&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="err">`&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">INFO&lt;/span>&lt;span class="p">]:&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="n">message&lt;/span>&lt;span class="p">}&lt;/span>&lt;span class="err">`&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="importaciones-claras">Importaciones claras&lt;/h3>
+&lt;p>Importa solo lo necesario para evitar confusión:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">import { logInfo } from &amp;#34;./utils/logger.ts&amp;#34;;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">logInfo(&amp;#34;Application started&amp;#34;);
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="5-modularización-de-funcionalidades">5. Modularización de funcionalidades&lt;/h2>
+&lt;h3 id="servicios">Servicios&lt;/h3>
+&lt;p>Los servicios encapsulan la lógica de negocio.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="o">//&lt;/span> &lt;span class="n">userService&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">ts&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="n">async&lt;/span> &lt;span class="n">function&lt;/span> &lt;span class="n">getUsers&lt;/span>&lt;span class="p">():&lt;/span> &lt;span class="n">Promise&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="ne">Array&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">User&lt;/span>&lt;span class="o">&amp;gt;&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="p">[{&lt;/span> &lt;span class="n">id&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">name&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;John Doe&amp;#34;&lt;/span> &lt;span class="p">}];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="controladores">Controladores&lt;/h3>
+&lt;p>Los controladores gestionan las solicitudes HTTP.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="o">//&lt;/span> &lt;span class="n">userController&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">ts&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">Router&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s2">&amp;#34;../deps.ts&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">getUsers&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s2">&amp;#34;../services/userService.ts&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">router&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">Router&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">router&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">get&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;/users&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">async&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">context&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">context&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">response&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">body&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">await&lt;/span> &lt;span class="n">getUsers&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="n">default&lt;/span> &lt;span class="n">router&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="utilidades">Utilidades&lt;/h3>
+&lt;p>Las utilidades ofrecen funciones auxiliares reutilizables.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="o">//&lt;/span> &lt;span class="n">logger&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">ts&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="n">function&lt;/span> &lt;span class="n">logError&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">message&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">string&lt;/span>&lt;span class="p">):&lt;/span> &lt;span class="n">void&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">console&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">error&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="err">`&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">ERROR&lt;/span>&lt;span class="p">]:&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="n">message&lt;/span>&lt;span class="p">}&lt;/span>&lt;span class="err">`&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="6-testing-modular">6. Testing modular&lt;/h2>
+&lt;p>Deno incluye soporte integrado para pruebas, lo que facilita el desarrollo modular.&lt;/p>
+&lt;h3 id="ejemplo-de-prueba">Ejemplo de prueba&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">getUsers&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s2">&amp;#34;../src/services/userService.ts&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">assertEquals&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s2">&amp;#34;../src/deps.ts&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">deno&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">test&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;getUsers devuelve una lista de usuarios&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">async&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="n">users&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">await&lt;/span> &lt;span class="n">getUsers&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">assertEquals&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">users&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">length&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">assertEquals&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">users&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">]&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">name&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;John Doe&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="7-ejemplo-práctico-api-rest-modular">7. Ejemplo práctico: API REST modular&lt;/h2>
+&lt;h3 id="estructura-del-proyecto">Estructura del proyecto&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">project/
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">├── src/
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ ├── controllers/
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ │ └── userController.ts
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ ├── services/
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ │ └── userService.ts
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ ├── deps.ts
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ └── mod.ts
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">├── tests/
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ └── userService_test.ts
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">└── README.md
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="modts">mod.ts&lt;/h3>
+&lt;p>Archivo principal que inicia la aplicación:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">Application&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s2">&amp;#34;./deps.ts&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="n">userRouter&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s2">&amp;#34;./controllers/userController.ts&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">app&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">Application&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">app&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">use&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">userRouter&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">routes&lt;/span>&lt;span class="p">());&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">console&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;Server running on http://localhost:8000&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">app&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">listen&lt;/span>&lt;span class="p">({&lt;/span> &lt;span class="n">port&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">8000&lt;/span> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="8-conclusión">8. Conclusión&lt;/h2>
+&lt;p>La modularidad en &lt;strong>Deno 2&lt;/strong> no solo mejora la organización del código, sino que también facilita la escalabilidad y mantenibilidad de los proyectos. Al seguir las mejores prácticas descritas, como centralizar dependencias, usar importaciones claras y escribir pruebas modulares, puedes garantizar que tus aplicaciones sean robustas y fáciles de gestionar a medida que crecen.&lt;/p></description></item><item><title>Configuración de CI/CD para proyectos Angular con GitHub Actions</title><link>https://cmas.dev/posts/2024-09-04-config-ci-cd-angular-github/</link><pubDate>Wed, 04 Sep 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-09-04-config-ci-cd-angular-github/</guid><description>&lt;p>La integración continua (CI) y la entrega continua (CD) son pilares fundamentales en el desarrollo de software moderno. &lt;strong>GitHub Actions&lt;/strong> proporciona una solución poderosa y flexible para automatizar procesos de &lt;strong>CI/CD&lt;/strong> directamente en repositorios de &lt;strong>GitHub&lt;/strong>. En este artículo, aprenderemos a configurar &lt;strong>CI/CD&lt;/strong> para un proyecto Angular utilizando &lt;strong>GitHub Actions&lt;/strong>.&lt;/p>
+&lt;h2 id="1-introducción-a-cicd-y-github-actions">1. Introducción a CI/CD y GitHub Actions&lt;/h2>
+&lt;h3 id="qué-es-cicd">¿Qué es CI/CD?&lt;/h3>
+&lt;ul>
+&lt;li>&lt;strong>CI (Integración Continua):&lt;/strong> Automatiza la verificación del código mediante pruebas y validaciones cada vez que se realiza un cambio en el repositorio.&lt;/li>
+&lt;li>&lt;strong>CD (Entrega Continua):&lt;/strong> Automatiza el proceso de despliegue del código a entornos de producción o pruebas.&lt;/li>
+&lt;/ul>
+&lt;h3 id="ventajas-de-github-actions">Ventajas de GitHub Actions&lt;/h3>
+&lt;ul>
+&lt;li>Integración nativa con repositorios de GitHub.&lt;/li>
+&lt;li>Flexibilidad para definir pipelines personalizados.&lt;/li>
+&lt;li>Amplio ecosistema de acciones reutilizables.&lt;/li>
+&lt;li>Historial detallado de ejecuciones y logs.&lt;/li>
+&lt;/ul>
+&lt;h2 id="2-configuración-inicial-del-proyecto-angular">2. Configuración inicial del proyecto Angular&lt;/h2>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Crear un proyecto Angular:&lt;/strong>
+Si no tienes un proyecto Angular, puedes crear uno nuevo:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">ng new angular-ci-cd-example
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">cd angular-ci-cd-example
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Subir el proyecto a GitHub:&lt;/strong>
+Inicializa un repositorio y empuja el proyecto:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git init
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">git remote add origin &amp;lt;tu-repositorio&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">git add .
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">git commit -m &amp;#34;Initial commit&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">git push -u origin main
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;h2 id="3-creación-del-workflow-de-ci">3. Creación del workflow de CI&lt;/h2>
+&lt;h3 id="estructura-básica-del-workflow">Estructura básica del workflow&lt;/h3>
+&lt;p>GitHub Actions utiliza un archivo YAML ubicado en &lt;code>.github/workflows&lt;/code>. Crearemos un archivo llamado &lt;code>ci.yml&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">name: CI for Angular
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">on:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> push:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> branches:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - main
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> pull_request:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> branches:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - main
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">jobs:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> build-and-test:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> runs-on: ubuntu-latest
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> steps:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - name: Check out code
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> uses: actions/checkout@v3
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - name: Set up Node.js
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> uses: actions/setup-node@v3
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> with:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> node-version: 18
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - name: Install dependencies
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> run: npm ci
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - name: Run linting
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> run: npm run lint
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - name: Run tests
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> run: npm test
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="explicación-del-workflow">Explicación del workflow&lt;/h3>
+&lt;ol>
+&lt;li>&lt;strong>Eventos de disparo:&lt;/strong> Ejecuta el workflow en cada &lt;code>push&lt;/code> o &lt;code>pull_request&lt;/code> hacia la rama &lt;code>main&lt;/code>.&lt;/li>
+&lt;li>&lt;strong>Jobs:&lt;/strong> El trabajo &lt;code>build-and-test&lt;/code> incluye:
+&lt;ul>
+&lt;li>&lt;strong>actions/checkout:&lt;/strong> Descarga el código del repositorio.&lt;/li>
+&lt;li>&lt;strong>actions/setup-node:&lt;/strong> Configura Node.js en la máquina.&lt;/li>
+&lt;li>&lt;strong>npm ci:&lt;/strong> Instala las dependencias de forma limpia.&lt;/li>
+&lt;li>&lt;strong>npm run lint:&lt;/strong> Ejecuta la verificación de estilo de código.&lt;/li>
+&lt;li>&lt;strong>npm test:&lt;/strong> Ejecuta pruebas unitarias.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="4-configuración-del-workflow-de-cd">4. Configuración del workflow de CD&lt;/h2>
+&lt;h3 id="despliegue-en-github-pages">Despliegue en GitHub Pages&lt;/h3>
+&lt;p>Si deseas publicar tu aplicación Angular en GitHub Pages, sigue estos pasos:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Configurar el archivo &lt;code>angular.json&lt;/code>:&lt;/strong>
+Asegúrate de que la propiedad &lt;code>outputPath&lt;/code> de &lt;code>build&lt;/code> esté configurada correctamente:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">&amp;#34;outputPath&amp;#34;: &amp;#34;dist/angular-ci-cd-example&amp;#34;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Agregar el workflow de despliegue:&lt;/strong>
+Crea un archivo &lt;code>.github/workflows/cd-gh-pages.yml&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">name: Deploy to GitHub Pages
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">on:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> push:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> branches:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - main
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">jobs:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> deploy:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> runs-on: ubuntu-latest
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> steps:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - name: Check out code
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> uses: actions/checkout@v3
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - name: Set up Node.js
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> uses: actions/setup-node@v3
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> with:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> node-version: 18
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - name: Install dependencies
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> run: npm ci
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - name: Build project
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> run: npm run build -- --output-path=dist
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - name: Deploy to GitHub Pages
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> uses: peaceiris/actions-gh-pages@v3
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> with:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> github_token: ${{ secrets.GITHUB_TOKEN }}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> publish_dir: ./dist/angular-ci-cd-example
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Habilitar GitHub Pages:&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>Ve a la configuración de tu repositorio en GitHub.&lt;/li>
+&lt;li>Activa GitHub Pages y selecciona la rama &lt;code>gh-pages&lt;/code> como fuente.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h3 id="despliegue-en-un-servidor-externo">Despliegue en un servidor externo&lt;/h3>
+&lt;p>Si prefieres desplegar en un servidor externo, como AWS o Azure, puedes agregar un paso adicional al workflow.&lt;/p>
+&lt;p>&lt;strong>Ejemplo para FTP:&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl"> &lt;span class="o">-&lt;/span> &lt;span class="n">name&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">Deploy&lt;/span> &lt;span class="n">to&lt;/span> &lt;span class="n">FTP&lt;/span> &lt;span class="n">server&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">uses&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">sebastianpopp&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">ftp&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">action&lt;/span>&lt;span class="err">@&lt;/span>&lt;span class="n">v2&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">with&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">host&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="p">{{&lt;/span> &lt;span class="n">secrets&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">FTP_HOST&lt;/span> &lt;span class="p">}}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">username&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="p">{{&lt;/span> &lt;span class="n">secrets&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">FTP_USERNAME&lt;/span> &lt;span class="p">}}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">password&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="p">{{&lt;/span> &lt;span class="n">secrets&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">FTP_PASSWORD&lt;/span> &lt;span class="p">}}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">local&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">dir&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="o">./&lt;/span>&lt;span class="n">dist&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">angular&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">ci&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">cd&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">example&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">remote&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">dir&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="o">/&lt;/span>&lt;span class="k">var&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">www&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">html&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="5-buenas-prácticas-en-cicd-para-angular">5. Buenas prácticas en CI/CD para Angular&lt;/h2>
+&lt;ol>
+&lt;li>&lt;strong>Usar &lt;code>npm ci&lt;/code> en lugar de &lt;code>npm install&lt;/code>:&lt;/strong> Garantiza una instalación consistente de dependencias.&lt;/li>
+&lt;li>&lt;strong>Configurar pruebas end-to-end (E2E):&lt;/strong> Agrega un paso para ejecutar pruebas E2E utilizando herramientas como Cypress o Protractor.&lt;/li>
+&lt;li>&lt;strong>Separar workflows:&lt;/strong> Divide CI y CD en archivos separados para mayor claridad.&lt;/li>
+&lt;li>&lt;strong>Utilizar secretos de GitHub:&lt;/strong> Almacena credenciales sensibles en &lt;code>Secrets&lt;/code> para mantener la seguridad.&lt;/li>
+&lt;li>&lt;strong>Monitorear el rendimiento:&lt;/strong> Usa herramientas de seguimiento como Lighthouse para verificar el impacto de los cambios.&lt;/li>
+&lt;/ol>
+&lt;h2 id="6-conclusión">6. Conclusión&lt;/h2>
+&lt;p>Configurar &lt;strong>CI/CD&lt;/strong> para proyectos &lt;strong>Angular&lt;/strong> con &lt;strong>GitHub Actions&lt;/strong> mejora la eficiencia del desarrollo y asegura entregas rápidas y confiables. Desde la ejecución de pruebas hasta el despliegue automatizado en &lt;strong>GitHub Pages&lt;/strong> o servidores externos, &lt;strong>GitHub Actions&lt;/strong> simplifica el proceso y permite un flujo de trabajo profesional y moderno. ¡Empieza a automatizar hoy mismo y lleva tu proyecto Angular al siguiente nivel!&lt;/p></description></item><item><title>Gráficos interactivos con Angular y D3.js</title><link>https://cmas.dev/posts/2024-08-28-interactive-graphics-angular-d3/</link><pubDate>Wed, 28 Aug 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-08-28-interactive-graphics-angular-d3/</guid><description>&lt;p>Los gráficos interactivos son esenciales para visualizar datos de manera efectiva en aplicaciones modernas. &lt;strong>Angular&lt;/strong>, combinado con &lt;strong>D3.js&lt;/strong>, ofrece una solución poderosa para crear visualizaciones dinámicas y altamente interactivas. Este artículo explora cómo integrar &lt;strong>D3.js&lt;/strong> en una aplicación &lt;strong>Angular&lt;/strong> para construir gráficos interactivos desde cero, proporcionando ejemplos prácticos y consejos clave.&lt;/p>
 &lt;h2 id="1-introducción-a-angular-y-d3js">1. Introducción a Angular y D3.js&lt;/h2>
 &lt;h3 id="angular">Angular&lt;/h3>
 &lt;p>Angular es un framework de desarrollo frontend mantenido por Google que permite construir aplicaciones web robustas y escalables. Con su arquitectura basada en componentes y herramientas modernas como TypeScript y RxJS, Angular es ideal para proyectos grandes.&lt;/p>
