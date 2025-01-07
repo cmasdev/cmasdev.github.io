@@ -1,4 +1,78 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Christian Amado's Blog</title><link>https://cmas.dev/posts/</link><description>Recent content in Posts on Christian Amado's Blog</description><generator>Hugo -- gohugo.io</generator><language>es</language><lastBuildDate>Wed, 08 Jan 2025 00:00:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Optimización de rendimiento en Blazor WebAssembly</title><link>https://cmas.dev/posts/2025-01-06-performance-optimization-blazor-webassembly/</link><pubDate>Mon, 06 Jan 2025 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2025-01-06-performance-optimization-blazor-webassembly/</guid><description>&lt;p>&lt;strong>Blazor WebAssembly&lt;/strong> es una tecnología poderosa que permite a los desarrolladores crear aplicaciones web interactivas utilizando &lt;strong>C#&lt;/strong> y &lt;strong>.NET&lt;/strong> en lugar de &lt;strong>JavaScript&lt;/strong>. Sin embargo, debido a las características inherentes de su arquitectura, la optimización del rendimiento puede ser un desafío crítico. En este artículo, exploraremos técnicas, estrategias y mejores prácticas para optimizar el rendimiento en aplicaciones &lt;strong>Blazor WebAssembly&lt;/strong>.&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Christian Amado's Blog</title><link>https://cmas.dev/posts/</link><description>Recent content in Posts on Christian Amado's Blog</description><generator>Hugo -- gohugo.io</generator><language>es</language><lastBuildDate>Wed, 08 Jan 2025 00:00:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Internals de WSL 2: Cómo funciona el kernel Linux integrado en Windows</title><link>https://cmas.dev/posts/2025-01-07-internals-wsl-2/</link><pubDate>Tue, 07 Jan 2025 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2025-01-07-internals-wsl-2/</guid><description>&lt;p>El Subsistema de Windows para Linux (WSL) ha transformado significativamente el desarrollo en entornos &lt;strong>Windows&lt;/strong>, permitiendo ejecutar distribuciones de Linux directamente en Windows sin necesidad de virtualización completa. Con &lt;strong>WSL 2&lt;/strong>, Microsoft introdujo un cambio radical: un kernel de Linux real corriendo sobre un sistema basado en hipervisor. En este artículo, exploraremos en detalle cómo funciona este kernel integrado y qué lo hace tan eficiente.&lt;/p>
+&lt;h2 id="introducción-al-wsl-2">Introducción al WSL 2&lt;/h2>
+&lt;p>WSL 2 es la segunda iteración del Subsistema de Windows para Linux. A diferencia de su predecesor (WSL 1), que traducía llamadas del sistema Linux a equivalentes de Windows, WSL 2 utiliza un kernel Linux completo. Esto lo hace más compatible y considerablemente más rápido en operaciones intensivas de E/S.&lt;/p>
+&lt;h2 id="arquitectura-de-wsl-2">Arquitectura de WSL 2&lt;/h2>
+&lt;p>WSL 2 introduce un cambio clave: utiliza una máquina virtual ligera basada en Hyper-V para ejecutar un kernel Linux real. A continuación, desglosamos los componentes principales:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Kernel Linux nativo&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Microsoft compila un kernel Linux personalizado, optimizado para WSL.&lt;/li>
+&lt;li>Este kernel se ejecuta en una máquina virtual ligera y recibe actualizaciones a través de Windows Update.&lt;/li>
+&lt;li>Compatible con módulos y herramientas estándar de Linux.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Hyper-V como hipervisor&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Hyper-V actúa como base para la virtualización.&lt;/li>
+&lt;li>Utiliza tecnología de aislamiento para ejecutar el kernel de Linux en un entorno seguro y eficiente, sin el peso de una VM completa.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Interacción con Windows&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>A través de un sistema de integración, WSL 2 permite que Linux y Windows compartan recursos, como el sistema de archivos.&lt;/li>
+&lt;li>Esto incluye acceso bidireccional al sistema de archivos, compatibilidad con puertos de red, y la capacidad de ejecutar comandos de Linux desde PowerShell o el símbolo del sistema.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="cómo-funciona-el-kernel-de-linux-en-wsl-2">Cómo funciona el kernel de Linux en WSL 2&lt;/h2>
+&lt;p>El kernel de Linux en WSL 2 es la pieza clave que proporciona compatibilidad total con las distribuciones de Linux.&lt;/p>
+&lt;h3 id="1-inicio-del-kernel">1. &lt;strong>Inicio del kernel&lt;/strong>&lt;/h3>
+&lt;ul>
+&lt;li>Al iniciar WSL 2, Windows lanza una instancia del kernel Linux en una máquina virtual ligera. Este proceso es extremadamente rápido, ya que la VM está optimizada para ser liviana y ejecutarse en segundo plano.&lt;/li>
+&lt;li>El kernel es una compilación personalizada basada en la versión principal del kernel de Linux, asegurando compatibilidad con herramientas modernas.&lt;/li>
+&lt;/ul>
+&lt;h3 id="2-sistema-de-archivos">2. &lt;strong>Sistema de archivos&lt;/strong>&lt;/h3>
+&lt;ul>
+&lt;li>WSL 2 utiliza un sistema de archivos virtualizado para integrar Linux y Windows.&lt;/li>
+&lt;li>El sistema de archivos de Windows (&lt;code>C:\&lt;/code>) se monta automáticamente dentro del entorno Linux en &lt;code>/mnt/c&lt;/code>.&lt;/li>
+&lt;li>Las operaciones en archivos son mucho más rápidas gracias a la virtualización basada en bloques.&lt;/li>
+&lt;/ul>
+&lt;h3 id="3-interfaz-de-red">3. &lt;strong>Interfaz de red&lt;/strong>&lt;/h3>
+&lt;ul>
+&lt;li>El kernel Linux tiene acceso completo a una pila de red virtualizada.&lt;/li>
+&lt;li>Puedes ejecutar servicios Linux y exponerlos a través de &lt;code>localhost&lt;/code> en Windows, lo que permite una integración perfecta con herramientas de desarrollo como servidores web.&lt;/li>
+&lt;/ul>
+&lt;h3 id="4-actualizaciones-del-kernel">4. &lt;strong>Actualizaciones del kernel&lt;/strong>&lt;/h3>
+&lt;ul>
+&lt;li>El kernel Linux en WSL 2 se actualiza automáticamente a través de Windows Update.&lt;/li>
+&lt;li>Esto asegura que siempre tengas una versión segura y compatible sin necesidad de intervención manual.&lt;/li>
+&lt;/ul>
+&lt;h2 id="beneficios-técnicos-de-wsl-2">Beneficios técnicos de WSL 2&lt;/h2>
+&lt;h3 id="mayor-rendimiento">Mayor rendimiento&lt;/h3>
+&lt;p>El uso de un kernel Linux nativo elimina la necesidad de traducción de llamadas al sistema, lo que mejora significativamente el rendimiento en tareas como compilación de código o acceso al sistema de archivos.&lt;/p>
+&lt;h3 id="compatibilidad-completa">Compatibilidad completa&lt;/h3>
+&lt;p>WSL 2 es compatible con herramientas estándar de Linux como Docker, gracias a la implementación de características avanzadas como &lt;code>cgroups&lt;/code> y namespaces.&lt;/p>
+&lt;h3 id="consumo-eficiente-de-recursos">Consumo eficiente de recursos&lt;/h3>
+&lt;p>Aunque utiliza virtualización, WSL 2 es notablemente más liviano que las máquinas virtuales tradicionales. La VM de WSL 2 se adapta dinámicamente al uso de recursos, liberando memoria y CPU cuando no se necesita.&lt;/p>
+&lt;h2 id="limitaciones-y-desafíos">Limitaciones y desafíos&lt;/h2>
+&lt;p>A pesar de sus ventajas, WSL 2 tiene algunas limitaciones que deben tenerse en cuenta:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>Requiere virtualización habilitada&lt;/strong>: WSL 2 depende de Hyper-V, por lo que no es compatible con sistemas donde no se puede habilitar la virtualización.&lt;/li>
+&lt;li>&lt;strong>Compatibilidad con el sistema de archivos&lt;/strong>: Aunque es mucho más rápido que WSL 1, las operaciones en archivos alojados en Windows (&lt;code>/mnt/c&lt;/code>) pueden ser más lentas que en el sistema de archivos nativo de Linux.&lt;/li>
+&lt;li>&lt;strong>Reinicio al cambiar configuraciones&lt;/strong>: Algunos cambios de configuración en WSL 2, como ajustes de memoria o CPU, requieren reiniciar la instancia.&lt;/li>
+&lt;/ul>
+&lt;h2 id="casos-prácticos">Casos prácticos&lt;/h2>
+&lt;p>WSL 2 es ideal para:&lt;/p>
+&lt;ul>
+&lt;li>Ejecutar entornos de desarrollo Linux en Windows (Node.js, Python, Go, Ruby, etc.).&lt;/li>
+&lt;li>Usar herramientas de línea de comandos de Linux, como &lt;code>grep&lt;/code>, &lt;code>awk&lt;/code> y &lt;code>sed&lt;/code>.&lt;/li>
+&lt;li>Ejecutar contenedores Docker directamente en Windows sin necesidad de una VM completa.&lt;/li>
+&lt;/ul>
+&lt;h2 id="conclusión">Conclusión&lt;/h2>
+&lt;p>&lt;strong>WSL 2&lt;/strong> representa un gran avance en la integración de &lt;strong>Linux&lt;/strong> y &lt;strong>Windows&lt;/strong>. Al utilizar un kernel Linux real y aprovechar la tecnología de virtualización de Hyper-V, ofrece un rendimiento y compatibilidad sin precedentes. Para desarrolladores que trabajan en entornos híbridos o que prefieren herramientas de Linux, WSL 2 es una solución imprescindible.&lt;/p></description></item><item><title>Optimización de rendimiento en Blazor WebAssembly</title><link>https://cmas.dev/posts/2025-01-06-performance-optimization-blazor-webassembly/</link><pubDate>Mon, 06 Jan 2025 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2025-01-06-performance-optimization-blazor-webassembly/</guid><description>&lt;p>&lt;strong>Blazor WebAssembly&lt;/strong> es una tecnología poderosa que permite a los desarrolladores crear aplicaciones web interactivas utilizando &lt;strong>C#&lt;/strong> y &lt;strong>.NET&lt;/strong> en lugar de &lt;strong>JavaScript&lt;/strong>. Sin embargo, debido a las características inherentes de su arquitectura, la optimización del rendimiento puede ser un desafío crítico. En este artículo, exploraremos técnicas, estrategias y mejores prácticas para optimizar el rendimiento en aplicaciones &lt;strong>Blazor WebAssembly&lt;/strong>.&lt;/p>
 &lt;h2 id="1-introducción-a-blazor-webassembly">1. Introducción a Blazor WebAssembly&lt;/h2>
 &lt;p>&lt;strong>Blazor WebAssembly&lt;/strong> es un modelo de alojamiento de &lt;strong>Blazor&lt;/strong> que ejecuta aplicaciones directamente en el navegador utilizando &lt;strong>WebAssembly&lt;/strong>. Esto permite que las aplicaciones sean ejecutadas en un entorno completamente independiente del servidor, lo que habilita experiencias sin interrupciones.&lt;/p>
 &lt;h3 id="ventajas-de-blazor-webassembly">Ventajas de Blazor WebAssembly&lt;/h3>
