@@ -3,7 +3,7 @@ layout: post
 title: "Internals de WSL 2: Cómo funciona el kernel Linux integrado en Windows"
 author: Christian Amado
 date: 2025-01-07 00:00:00 -0400
-category: [Desarrollo de software]
+category: [Windows]
 tags: [WinDev, WSL]
 thumbnail-img: /img/posts/thumbnails/win11.png
 cover-img: /img/posts/cover/win11.png
