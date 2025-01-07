@@ -4,7 +4,7 @@ title: "Optimización de rendimiento en Blazor WebAssembly"
 author: Christian Amado
 date: 2025-01-06 00:00:00 -0400
 category: [Desarrollo de software]
-tags: [Web Development,Blazor,Web Assembly.NET]
+tags: [Web Development,Blazor,Web Assembly,.NET]
 thumbnail-img: /img/posts/thumbnails/dotnet.png
 cover-img: /img/posts/cover/dotnet.png
 share_img: /img/posts/shared/dotnet.jpg
