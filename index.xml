@@ -1,4 +1,127 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Christian Amado's Blog</title><link>https://cmas.dev/</link><description>Recent content on Christian Amado's Blog</description><generator>Hugo -- gohugo.io</generator><language>es</language><lastBuildDate>Thu, 09 Jan 2025 00:00:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/index.xml" rel="self" type="application/rss+xml"/><item><title>Internals de WSL 2: Cómo funciona el kernel Linux integrado en Windows</title><link>https://cmas.dev/posts/2025-01-07-internals-wsl-2/</link><pubDate>Tue, 07 Jan 2025 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2025-01-07-internals-wsl-2/</guid><description>&lt;p>El Subsistema de Windows para Linux (WSL) ha transformado significativamente el desarrollo en entornos &lt;strong>Windows&lt;/strong>, permitiendo ejecutar distribuciones de Linux directamente en Windows sin necesidad de virtualización completa. Con &lt;strong>WSL 2&lt;/strong>, Microsoft introdujo un cambio radical: un kernel de Linux real corriendo sobre un sistema basado en hipervisor. En este artículo, exploraremos en detalle cómo funciona este kernel integrado y qué lo hace tan eficiente.&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Christian Amado's Blog</title><link>https://cmas.dev/</link><description>Recent content on Christian Amado's Blog</description><generator>Hugo -- gohugo.io</generator><language>es</language><lastBuildDate>Thu, 09 Jan 2025 00:00:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/index.xml" rel="self" type="application/rss+xml"/><item><title>Angular Universal y SEO: Estrategias avanzadas</title><link>https://cmas.dev/posts/2025-01-08-angular-universal-seo/</link><pubDate>Wed, 08 Jan 2025 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2025-01-08-angular-universal-seo/</guid><description>&lt;p>&lt;strong>Angular Universal&lt;/strong> es una herramienta que permite renderizar aplicaciones &lt;strong>Angular&lt;/strong> en el servidor antes de enviarlas al cliente. Este enfoque mejora notablemente la experiencia del usuario al reducir los tiempos de carga y proporciona a los motores de búsqueda &lt;strong>HTML&lt;/strong> estático para indexar correctamente.&lt;/p>
+&lt;h2 id="1-introducción-a-angular-universal">1. Introducción a Angular Universal&lt;/h2>
+&lt;h3 id="características-principales-de-angular-universal">Características principales de Angular Universal&lt;/h3>
+&lt;ul>
+&lt;li>&lt;strong>Renderizado del lado del servidor (SSR):&lt;/strong> Convierte aplicaciones Angular en HTML estático renderizado en el servidor.&lt;/li>
+&lt;li>&lt;strong>Soporte para prerenderizado:&lt;/strong> Genera HTML estático de páginas seleccionadas para una entrega rápida.&lt;/li>
+&lt;li>&lt;strong>Compatibilidad con herramientas modernas de SEO.&lt;/strong>&lt;/li>
+&lt;/ul>
+&lt;h2 id="2-beneficios-de-angular-universal-para-seo">2. Beneficios de Angular Universal para SEO&lt;/h2>
+&lt;h3 id="mejora-del-tiempo-hasta-el-primer-byte-ttfb">Mejora del tiempo hasta el primer byte (TTFB)&lt;/h3>
+&lt;p>Con Angular Universal, el HTML pre-renderizado se entrega rápidamente al navegador, reduciendo significativamente el tiempo de carga inicial.&lt;/p>
+&lt;h3 id="mejor-indexación-por-motores-de-búsqueda">Mejor indexación por motores de búsqueda&lt;/h3>
+&lt;p>Los bots de motores de búsqueda pueden procesar directamente el contenido HTML, eliminando los problemas asociados con JavaScript.&lt;/p>
+&lt;h3 id="aumento-en-el-rendimiento-de-la-aplicación">Aumento en el rendimiento de la aplicación&lt;/h3>
+&lt;p>Angular Universal reduce la carga inicial del navegador, mejorando el rendimiento percibido por los usuarios.&lt;/p>
+&lt;h2 id="3-configuración-de-angular-universal">3. Configuración de Angular Universal&lt;/h2>
+&lt;h3 id="instalación-y-configuración-inicial">Instalación y configuración inicial&lt;/h3>
+&lt;ol>
+&lt;li>
+&lt;p>Instala Angular Universal en tu proyecto:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">ng add @nguniversal/express-engine
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>Angular CLI actualizará los archivos necesarios, incluyendo:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>server.ts:&lt;/strong> Archivo principal para la configuración del servidor.&lt;/li>
+&lt;li>&lt;strong>app.server.module.ts:&lt;/strong> Módulo para renderizado del lado del servidor.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>Agrega un comando de compilación y ejecución al archivo &lt;code>package.json&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">&amp;#34;scripts&amp;#34;: {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;build:ssr&amp;#34;: &amp;#34;ng build &amp;amp;&amp;amp; ng run project-name:server&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;serve:ssr&amp;#34;: &amp;#34;node dist/project-name/server/main.js&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;h3 id="prueba-del-servidor">Prueba del servidor&lt;/h3>
+&lt;p>Ejecuta tu aplicación con SSR:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">npm run serve:ssr
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="4-optimizaciones-avanzadas-de-seo">4. Optimizaciones avanzadas de SEO&lt;/h2>
+&lt;h3 id="uso-de-metaetiquetas-dinámicas">Uso de metaetiquetas dinámicas&lt;/h3>
+&lt;p>Angular Universal permite actualizar metadatos como el título, la descripción y las etiquetas Open Graph.&lt;/p>
+&lt;p>&lt;strong>Ejemplo de implementación:&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">Component&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">OnInit&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;@angular/core&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">Meta&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">Title&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;@angular/platform-browser&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">@&lt;/span>&lt;span class="n">Component&lt;/span>&lt;span class="p">({&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">selector&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;app-home&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">templateUrl&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;./home.component.html&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">})&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="k">class&lt;/span> &lt;span class="n">HomeComponent&lt;/span> &lt;span class="n">implements&lt;/span> &lt;span class="n">OnInit&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">constructor&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">private&lt;/span> &lt;span class="n">meta&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">Meta&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">private&lt;/span> &lt;span class="n">title&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">Title&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ngOnInit&lt;/span>&lt;span class="p">():&lt;/span> &lt;span class="n">void&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">this&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">title&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">setTitle&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;Inicio | Mi Aplicación&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">this&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">meta&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">addTags&lt;/span>&lt;span class="p">([&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span> &lt;span class="n">name&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;description&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">content&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;Bienvenido a nuestra aplicación web&amp;#39;&lt;/span> &lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span> &lt;span class="n">property&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;og:title&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">content&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;Inicio | Mi Aplicación&amp;#39;&lt;/span> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">]);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="generación-de-sitemaps-automáticos">Generación de sitemaps automáticos&lt;/h3>
+&lt;p>Un sitemap ayuda a los motores de búsqueda a navegar por tu sitio web.&lt;/p>
+&lt;p>&lt;strong>Ejemplo con Node.js:&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">writeFile&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;fs&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">urls&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;/&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;/about&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;/products&amp;#39;&lt;/span>&lt;span class="p">];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">sitemap&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">urls&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">.&lt;/span>&lt;span class="n">map&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">url&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="err">`&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">url&lt;/span>&lt;span class="o">&amp;gt;&amp;lt;&lt;/span>&lt;span class="n">loc&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="n">https&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="o">//&lt;/span>&lt;span class="n">mi&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">sitio&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">com&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="n">url&lt;/span>&lt;span class="p">}&lt;/span>&lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">loc&lt;/span>&lt;span class="o">&amp;gt;&amp;lt;/&lt;/span>&lt;span class="n">url&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="err">`&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">.&lt;/span>&lt;span class="n">join&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">writeFile&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;dist/browser/sitemap.xml&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="err">`&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">urlset&lt;/span>&lt;span class="o">&amp;gt;$&lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="n">sitemap&lt;/span>&lt;span class="p">}&lt;/span>&lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">urlset&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="err">`&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">err&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">err&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="n">console&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">error&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;Error generando sitemap:&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">err&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="manejo-de-enlaces-canónicos">Manejo de enlaces canónicos&lt;/h3>
+&lt;p>Evita contenido duplicado configurando enlaces canónicos.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">DOCUMENT&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;@angular/common&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">Inject&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;@angular/core&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">constructor&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="err">@&lt;/span>&lt;span class="n">Inject&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">DOCUMENT&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="n">private&lt;/span> &lt;span class="n">doc&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">Document&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">ngOnInit&lt;/span>&lt;span class="p">():&lt;/span> &lt;span class="n">void&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="n">link&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">HTMLLinkElement&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">this&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">doc&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">createElement&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;link&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">link&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">setAttribute&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;rel&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;canonical&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">link&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">setAttribute&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;href&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;https://mi-sitio.com&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">this&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">doc&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">head&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">appendChild&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">link&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="5-estrategias-de-contenido">5. Estrategias de contenido&lt;/h2>
+&lt;h3 id="optimización-de-contenido-por-idioma">Optimización de contenido por idioma&lt;/h3>
+&lt;p>Configura el soporte multiidioma en Angular usando &lt;code>ngx-translate&lt;/code> o &lt;code>i18n&lt;/code>.&lt;/p>
+&lt;h3 id="incorporación-de-microdatos-y-datos-estructurados">Incorporación de microdatos y datos estructurados&lt;/h3>
+&lt;p>Usa JSON-LD para mejorar la comprensión de tu contenido por motores de búsqueda:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">&amp;lt;script type=&amp;#34;application/ld+json&amp;#34;&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;@context&amp;#34;: &amp;#34;https://schema.org&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;@type&amp;#34;: &amp;#34;WebSite&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;url&amp;#34;: &amp;#34;https://mi-sitio.com&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;name&amp;#34;: &amp;#34;Mi Sitio Web&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;potentialAction&amp;#34;: {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;@type&amp;#34;: &amp;#34;SearchAction&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;target&amp;#34;: &amp;#34;https://mi-sitio.com/buscar?q={search_term_string}&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;query-input&amp;#34;: &amp;#34;required name=search_term_string&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;/script&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="6-medición-del-rendimiento-seo">6. Medición del rendimiento SEO&lt;/h2>
+&lt;h3 id="herramientas">Herramientas&lt;/h3>
+&lt;ul>
+&lt;li>&lt;strong>Google Lighthouse:&lt;/strong> Evalúa el rendimiento y accesibilidad de tu sitio.&lt;/li>
+&lt;li>&lt;strong>Google Search Console:&lt;/strong> Supervisa la indexación y detecta errores.&lt;/li>
+&lt;/ul>
+&lt;h3 id="seguimiento-de-bots-y-crawlers">Seguimiento de bots y crawlers&lt;/h3>
+&lt;p>Configura Google Analytics para registrar actividad de bots:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">if (navigator.userAgent.includes(&amp;#39;Googlebot&amp;#39;)) {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> console.log(&amp;#39;Visita de Googlebot detectada&amp;#39;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="7-casos-prácticos-aplicación-de-una-tienda-en-línea">7. Casos prácticos: Aplicación de una tienda en línea&lt;/h2>
+&lt;ol>
+&lt;li>&lt;strong>Renderizado inicial rápido:&lt;/strong> Implementa Angular Universal para entregar contenido pre-renderizado.&lt;/li>
+&lt;li>&lt;strong>Metaetiquetas específicas por producto:&lt;/strong> Actualiza títulos y descripciones en cada página de producto.&lt;/li>
+&lt;li>&lt;strong>Sitemap para categorías:&lt;/strong> Genera sitemaps por categorías para facilitar la navegación.&lt;/li>
+&lt;/ol>
+&lt;h2 id="8-conclusión-y-buenas-prácticas">8. Conclusión y buenas prácticas&lt;/h2>
+&lt;p>&lt;strong>Angular Universal&lt;/strong> es una herramienta esencial para optimizar el &lt;strong>SEO&lt;/strong> de aplicaciones &lt;strong>Angular&lt;/strong>. Con estrategias avanzadas como metaetiquetas dinámicas, sitemaps automatizados y datos estructurados, puedes mejorar significativamente tu posicionamiento en motores de búsqueda. Asegúrate de combinar estas técnicas con pruebas constantes para maximizar los resultados.&lt;/p></description></item><item><title>Internals de WSL 2: Cómo funciona el kernel Linux integrado en Windows</title><link>https://cmas.dev/posts/2025-01-07-internals-wsl-2/</link><pubDate>Tue, 07 Jan 2025 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2025-01-07-internals-wsl-2/</guid><description>&lt;p>El Subsistema de Windows para Linux (WSL) ha transformado significativamente el desarrollo en entornos &lt;strong>Windows&lt;/strong>, permitiendo ejecutar distribuciones de Linux directamente en Windows sin necesidad de virtualización completa. Con &lt;strong>WSL 2&lt;/strong>, Microsoft introdujo un cambio radical: un kernel de Linux real corriendo sobre un sistema basado en hipervisor. En este artículo, exploraremos en detalle cómo funciona este kernel integrado y qué lo hace tan eficiente.&lt;/p>
 &lt;h2 id="introducción-al-wsl-2">Introducción al WSL 2&lt;/h2>
 &lt;p>WSL 2 es la segunda iteración del Subsistema de Windows para Linux. A diferencia de su predecesor (WSL 1), que traducía llamadas del sistema Linux a equivalentes de Windows, WSL 2 utiliza un kernel Linux completo. Esto lo hace más compatible y considerablemente más rápido en operaciones intensivas de E/S.&lt;/p>
 &lt;h2 id="arquitectura-de-wsl-2">Arquitectura de WSL 2&lt;/h2>
