@@ -1,4 +1,95 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Christian Amado's Blog</title><link>https://cmas.dev/</link><description>Recent content on Christian Amado's Blog</description><generator>Hugo -- gohugo.io</generator><language>es</language><lastBuildDate>Thu, 09 Jan 2025 00:00:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/index.xml" rel="self" type="application/rss+xml"/><item><title>Angular Universal y SEO: Estrategias avanzadas</title><link>https://cmas.dev/posts/2025-01-08-angular-universal-seo/</link><pubDate>Wed, 08 Jan 2025 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2025-01-08-angular-universal-seo/</guid><description>&lt;p>&lt;strong>Angular Universal&lt;/strong> es una herramienta que permite renderizar aplicaciones &lt;strong>Angular&lt;/strong> en el servidor antes de enviarlas al cliente. Este enfoque mejora notablemente la experiencia del usuario al reducir los tiempos de carga y proporciona a los motores de búsqueda &lt;strong>HTML&lt;/strong> estático para indexar correctamente.&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Christian Amado's Blog</title><link>https://cmas.dev/</link><description>Recent content on Christian Amado's Blog</description><generator>Hugo -- gohugo.io</generator><language>es</language><lastBuildDate>Thu, 09 Jan 2025 00:00:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/index.xml" rel="self" type="application/rss+xml"/><item><title>Optimización avanzada de rendimiento en WSL para desarrollo intensivo</title><link>https://cmas.dev/posts/2025-01-09-optimization-wsl-2/</link><pubDate>Thu, 09 Jan 2025 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2025-01-09-optimization-wsl-2/</guid><description>&lt;p>El Subsistema de Windows para Linux (WSL) ha demostrado ser una herramienta esencial para desarrolladores que buscan integrar Linux en su flujo de trabajo en Windows. Sin embargo, para obtener el mejor rendimiento en escenarios de desarrollo intensivo, es importante realizar ajustes y configuraciones avanzadas. En este artículo, aprenderás cómo optimizar &lt;strong>WSL&lt;/strong> con ejemplos prácticos y código, además de visualizar los resultados con capturas de pantalla y diagramas.&lt;/p>
+&lt;h2 id="1-configuración-de-recursos-asignados">1. Configuración de recursos asignados&lt;/h2>
+&lt;p>WSL 2 utiliza una máquina virtual ligera para ejecutar el kernel de Linux. De forma predeterminada, WSL asigna recursos de manera dinámica, pero puedes ajustar manualmente la cantidad de CPU y memoria disponibles para mejorar el rendimiento.&lt;/p>
+&lt;h3 id="paso-1-crear-o-editar-el-archivo-wslconfig">Paso 1: Crear o editar el archivo &lt;code>.wslconfig&lt;/code>&lt;/h3>
+&lt;ol>
+&lt;li>Abre el archivo &lt;code>.wslconfig&lt;/code> en el directorio de tu usuario:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">notepad %USERPROFILE%\.wslconfig
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>Configura los parámetros según tus necesidades:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">[wsl2]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">memory=4GB # Límite de memoria RAM
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">processors=2 # Número de CPUs asignadas
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>Reinicia WSL para aplicar los cambios:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">wsl --shutdown
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">wsl
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;h2 id="2-mejorar-el-rendimiento-del-sistema-de-archivos">2. Mejorar el rendimiento del sistema de archivos&lt;/h2>
+&lt;p>Las operaciones de E/S son un área donde el rendimiento puede degradarse, especialmente al trabajar con archivos en el sistema de Windows desde Linux. Para mejorar esto:&lt;/p>
+&lt;h3 id="paso-1-usa-el-sistema-de-archivos-de-linux-para-proyectos-intensivos">Paso 1: Usa el sistema de archivos de Linux para proyectos intensivos&lt;/h3>
+&lt;p>Guarda tu código y datos en el sistema de archivos nativo de Linux (&lt;code>/home/&amp;lt;usuario&amp;gt;&lt;/code> en lugar de &lt;code>/mnt/c&lt;/code>) para minimizar la latencia.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"># Crear un directorio en el sistema de archivos de Linux
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">mkdir -p ~/projects/my-intensive-app
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># Clonar un repositorio
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">cd ~/projects/my-intensive-app
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">git clone https://github.com/example/project.git
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="paso-2-deshabilitar-el-acceso-automático-a-carpetas-de-windows">Paso 2: Deshabilitar el acceso automático a carpetas de Windows&lt;/h3>
+&lt;p>Evita que WSL indexe innecesariamente carpetas de Windows configurando los métodos de montaje:&lt;/p>
+&lt;ol>
+&lt;li>Agrega esta configuración a &lt;code>.wslconfig&lt;/code>:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">[automount]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">enabled=false
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>Reinicia WSL.&lt;/li>
+&lt;/ol>
+&lt;h3 id="visualización">Visualización&lt;/h3>
+&lt;p>&lt;img src="https://i.ibb.co/NNF0gF4/lectura-vs-escritura-wsl.png" alt="">&lt;/p>
+&lt;h2 id="3-configurar-un-servidor-dns-personalizado">3. Configurar un servidor DNS personalizado&lt;/h2>
+&lt;p>Por defecto, WSL utiliza el servidor DNS de Windows. Sin embargo, puedes mejorar el rendimiento de las solicitudes de red configurando un servidor DNS optimizado.&lt;/p>
+&lt;h3 id="paso-1-modificar-el-archivo-de-resolución-de-dns">Paso 1: Modificar el archivo de resolución de DNS&lt;/h3>
+&lt;ol>
+&lt;li>Crea o edita &lt;code>/etc/wsl.conf&lt;/code> en tu distribución:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">sudo nano /etc/wsl.conf
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>Agrega las siguientes líneas:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">[network]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">generateResolvConf = false
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>Configura manualmente el servidor DNS:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">sudo rm /etc/resolv.conf
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">echo &amp;#34;nameserver 8.8.8.8&amp;#34; | sudo tee /etc/resolv.conf
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>Reinicia WSL:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">wsl --shutdown
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">wsl
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">## 4. Habilitar aceleración de hardware para Docker&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">Si&lt;/span> &lt;span class="n">utilizas&lt;/span> &lt;span class="n">Docker&lt;/span> &lt;span class="n">en&lt;/span> &lt;span class="n">WSL&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">habilitar&lt;/span> &lt;span class="n">la&lt;/span> &lt;span class="n">aceleración&lt;/span> &lt;span class="n">de&lt;/span> &lt;span class="n">hardware&lt;/span> &lt;span class="n">puede&lt;/span> &lt;span class="n">reducir&lt;/span> &lt;span class="n">los&lt;/span> &lt;span class="n">tiempos&lt;/span> &lt;span class="n">de&lt;/span> &lt;span class="n">construcción&lt;/span> &lt;span class="n">y&lt;/span> &lt;span class="n">mejorar&lt;/span> &lt;span class="n">la&lt;/span> &lt;span class="n">eficiencia&lt;/span> &lt;span class="n">general&lt;/span>&lt;span class="o">.&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">### Paso 1: Instalar los controladores de GPU&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="mf">1.&lt;/span> &lt;span class="n">Asegúrate&lt;/span> &lt;span class="n">de&lt;/span> &lt;span class="n">tener&lt;/span> &lt;span class="n">los&lt;/span> &lt;span class="n">controladores&lt;/span> &lt;span class="n">de&lt;/span> &lt;span class="n">GPU&lt;/span> &lt;span class="n">compatibles&lt;/span> &lt;span class="n">con&lt;/span> &lt;span class="n">WSL&lt;/span> &lt;span class="mi">2&lt;/span> &lt;span class="n">instalados&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">-&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">Controladores&lt;/span> &lt;span class="n">NVIDIA&lt;/span> &lt;span class="n">para&lt;/span> &lt;span class="n">CUDA&lt;/span> &lt;span class="n">en&lt;/span> &lt;span class="n">WSL&lt;/span>&lt;span class="p">](&lt;/span>&lt;span class="n">https&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="o">//&lt;/span>&lt;span class="n">developer&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">nvidia&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">com&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">cuda&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">wsl&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">### Paso 2: Configurar Docker para usar GPU&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="mf">1.&lt;/span> &lt;span class="n">Instala&lt;/span> &lt;span class="n">el&lt;/span> &lt;span class="n">paquete&lt;/span> &lt;span class="err">`&lt;/span>&lt;span class="n">nvidia&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">container&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">toolkit&lt;/span>&lt;span class="err">`&lt;/span> &lt;span class="n">dentro&lt;/span> &lt;span class="n">de&lt;/span> &lt;span class="n">tu&lt;/span> &lt;span class="n">distribución&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>sudo apt update
+sudo apt install -y nvidia-container-toolkit&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">2. Verifica que la GPU esté disponible:
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>docker run &amp;ndash;rm &amp;ndash;gpus all nvidia/cuda:11.0-base nvidia-smi&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">## 5. Ajustar la configuración del kernel Linux
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">WSL 2 utiliza un kernel Linux real que puede ajustarse para optimizar su rendimiento. Esto se logra a través del archivo `/etc/sysctl.conf`.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">### Paso 1: Optimizar parámetros de red
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">1. Edita `/etc/sysctl.conf`:
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>sudo nano /etc/sysctl.conf&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">2. Agrega los siguientes ajustes:
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>net.core.default_qdisc=fq
+net.ipv4.tcp_congestion_control=bbr&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">3. Aplica los cambios:
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>sudo sysctl -p&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">## Conclusión
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Con estos ajustes, puedes optimizar **WSL** para maximizar su rendimiento en proyectos de desarrollo intensivo. Desde la asignación eficiente de recursos hasta la configuración de red y almacenamiento, estos pasos te ayudarán a aprovechar al máximo esta poderosa herramienta.
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Angular Universal y SEO: Estrategias avanzadas</title><link>https://cmas.dev/posts/2025-01-08-angular-universal-seo/</link><pubDate>Wed, 08 Jan 2025 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2025-01-08-angular-universal-seo/</guid><description>&lt;p>&lt;strong>Angular Universal&lt;/strong> es una herramienta que permite renderizar aplicaciones &lt;strong>Angular&lt;/strong> en el servidor antes de enviarlas al cliente. Este enfoque mejora notablemente la experiencia del usuario al reducir los tiempos de carga y proporciona a los motores de búsqueda &lt;strong>HTML&lt;/strong> estático para indexar correctamente.&lt;/p>
 &lt;h2 id="1-introducción-a-angular-universal">1. Introducción a Angular Universal&lt;/h2>
 &lt;h3 id="características-principales-de-angular-universal">Características principales de Angular Universal&lt;/h3>
 &lt;ul>
