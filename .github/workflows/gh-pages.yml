@@ -6,6 +6,13 @@ on:
       - main  # Set a branch to deploy
   pull_request:
 
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+  
+  # Daily publish at 05:00Z to allow for scheduled posts
+  schedule:
+    - cron: '0 0 * * *'
+
 jobs:
   deploy:
     runs-on: ubuntu-22.04
