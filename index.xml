@@ -577,7 +577,1281 @@ net.ipv4.tcp_congestion_control=bbr&lt;/p>
 &lt;li>&lt;strong>Curva de aprendizaje&lt;/strong> para desarrolladores nuevos en &lt;strong>.NET&lt;/strong>.&lt;/li>
 &lt;/ol>
 &lt;h2 id="conclusión">Conclusión&lt;/h2>
-&lt;p>Combinar las capacidades de &lt;strong>Blazor&lt;/strong> y &lt;strong>PWAs&lt;/strong> permite a los desarrolladores crear aplicaciones modernas y escalables que funcionan offline, se pueden instalar y ofrecen una experiencia de usuario mejorada. Aunque existen algunas limitaciones, las ventajas de usar &lt;strong>Blazor&lt;/strong> con &lt;strong>PWA&lt;/strong> superan ampliamente los desafíos, especialmente para equipos que ya utilizan &lt;strong>.NET&lt;/strong> en su flujo de desarrollo. ¡Explora las posibilidades de &lt;strong>Blazor&lt;/strong> para &lt;strong>PWAs&lt;/strong> y lleva tus aplicaciones web al siguiente nivel!&lt;/p></description></item><item><title>Gestión de estado en Angular con NgRx</title><link>https://cmas.dev/posts/2024-09-25-state-management-angular/</link><pubDate>Wed, 25 Sep 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-09-25-state-management-angular/</guid><description>&lt;p>La gestión de estado es un aspecto fundamental en el desarrollo de aplicaciones frontend, especialmente en aplicaciones complejas donde se manejan grandes cantidades de datos compartidos entre componentes. &lt;strong>NgRx&lt;/strong> es una librería basada en &lt;strong>Redux&lt;/strong> que permite gestionar el estado de manera predecible y escalable en aplicaciones &lt;strong>Angular&lt;/strong>. Este artículo ofrece una guía detallada para implementar y utilizar NgRx en tus proyectos Angular.&lt;/p>
+&lt;p>Combinar las capacidades de &lt;strong>Blazor&lt;/strong> y &lt;strong>PWAs&lt;/strong> permite a los desarrolladores crear aplicaciones modernas y escalables que funcionan offline, se pueden instalar y ofrecen una experiencia de usuario mejorada. Aunque existen algunas limitaciones, las ventajas de usar &lt;strong>Blazor&lt;/strong> con &lt;strong>PWA&lt;/strong> superan ampliamente los desafíos, especialmente para equipos que ya utilizan &lt;strong>.NET&lt;/strong> en su flujo de desarrollo. ¡Explora las posibilidades de &lt;strong>Blazor&lt;/strong> para &lt;strong>PWAs&lt;/strong> y lleva tus aplicaciones web al siguiente nivel!&lt;/p></description></item><item><title>Integración de Angular con APIs RESTful en Deno</title><link>https://cmas.dev/posts/2024-10-30-testing-unitario-in-blazor/</link><pubDate>Wed, 30 Oct 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-10-30-testing-unitario-in-blazor/</guid><description>&lt;p>La integración entre &lt;strong>Angular&lt;/strong> y &lt;strong>APIs RESTful&lt;/strong> creadas con &lt;strong>Deno&lt;/strong> permite desarrollar aplicaciones modernas y escalables con una arquitectura limpia y basada en &lt;strong>TypeScript&lt;/strong>. En este artículo, exploraremos cómo conectar una aplicación Angular con un backend RESTful en Deno paso a paso, incluyendo fundamentos teóricos, ejemplos prácticos y buenas prácticas.&lt;/p>
+&lt;h2 id="por-qué-utilizar-angular-y-deno">¿Por qué utilizar Angular y Deno?&lt;/h2>
+&lt;h3 id="beneficios-de-angular">&lt;strong>Beneficios de Angular&lt;/strong>&lt;/h3>
+&lt;p>&lt;strong>Angular&lt;/strong> es un framework frontend desarrollado por &lt;strong>Google&lt;/strong> que permite construir aplicaciones web robustas y escalables. Sus principales características incluyen:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>Arquitectura basada en componentes&lt;/strong>: Facilita la reutilización del código y el mantenimiento.&lt;/li>
+&lt;li>&lt;strong>TypeScript como base&lt;/strong>: Mejora la seguridad del código y facilita la detección de errores en tiempo de desarrollo.&lt;/li>
+&lt;li>&lt;strong>Herramientas integradas&lt;/strong>: Angular CLI permite generar componentes, servicios y módulos de manera eficiente.&lt;/li>
+&lt;li>&lt;strong>Manejo avanzado de estado y datos&lt;/strong>: Usa RxJS para gestionar datos de forma reactiva.&lt;/li>
+&lt;/ul>
+&lt;h3 id="beneficios-de-deno">&lt;strong>Beneficios de Deno&lt;/strong>&lt;/h3>
+&lt;p>Deno es un runtime seguro para JavaScript y TypeScript que ofrece múltiples ventajas sobre Node.js:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>Seguridad por defecto&lt;/strong>: Requiere permisos explícitos para acceder a archivos, red y entorno.&lt;/li>
+&lt;li>&lt;strong>Soporte nativo para TypeScript&lt;/strong>: Sin necesidad de configuración adicional.&lt;/li>
+&lt;li>&lt;strong>Gestión de dependencias sin &lt;code>node_modules&lt;/code>&lt;/strong>: Se utilizan URLs en lugar de paquetes locales.&lt;/li>
+&lt;li>&lt;strong>Servidor HTTP integrado&lt;/strong>: No requiere frameworks adicionales para manejar solicitudes HTTP.&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="configuración-del-entorno">Configuración del Entorno&lt;/h2>
+&lt;h3 id="instalación-de-angular">&lt;strong>Instalación de Angular&lt;/strong>&lt;/h3>
+&lt;ol>
+&lt;li>Instalar Angular CLI:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">npm install -g @angular/cli
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>Crear un nuevo proyecto Angular:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">ng new frontend-angular
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">cd frontend-angular
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>Ejecutar la aplicación:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">ng serve --open
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;h3 id="instalación-de-deno">&lt;strong>Instalación de Deno&lt;/strong>&lt;/h3>
+&lt;ol>
+&lt;li>Instalar Deno:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">curl -fsSL https://deno.land/x/install/install.sh | sh
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>Verificar la instalación:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">deno --version
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>Crear el directorio del backend:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">mkdir backend-deno &amp;amp;&amp;amp; cd backend-deno
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;h2 id="creación-de-una-api-restful-en-deno">Creación de una API RESTful en Deno&lt;/h2>
+&lt;h3 id="configuración-del-servidor-http">&lt;strong>Configuración del Servidor HTTP&lt;/strong>&lt;/h3>
+&lt;p>Deno permite crear servidores HTTP de manera sencilla con &lt;code>std/http&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">serve&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s2">&amp;#34;https://deno.land/std@0.194.0/http/server.ts&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">handler&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">request&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">Request&lt;/span>&lt;span class="p">):&lt;/span> &lt;span class="n">Response&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">Response&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;Hola desde Deno API!&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">status&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">200&lt;/span> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">serve&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">handler&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">port&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">8080&lt;/span> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">console&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;Servidor corriendo en http://localhost:8080&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Ejecuta el servidor con:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">deno run --allow-net server.ts
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="implementación-de-una-api-rest-con-deno">&lt;strong>Implementación de una API REST con Deno&lt;/strong>&lt;/h3>
+&lt;h4 id="1-definir-el-modelo">&lt;strong>1. Definir el modelo&lt;/strong>&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="n">interface&lt;/span> &lt;span class="n">Usuario&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">id&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">string&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">nombre&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">string&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">email&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">string&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="2-implementar-un-controlador">&lt;strong>2. Implementar un controlador&lt;/strong>&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">Usuario&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s2">&amp;#34;./models.ts&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">let&lt;/span> &lt;span class="n">usuarios&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">Usuario&lt;/span>&lt;span class="p">[]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="k">const&lt;/span> &lt;span class="n">obtenerUsuarios&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">():&lt;/span> &lt;span class="n">Response&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">Response&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">JSON&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">stringify&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">usuarios&lt;/span>&lt;span class="p">),&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">status&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">200&lt;/span> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="k">const&lt;/span> &lt;span class="n">crearUsuario&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">async&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">req&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">Request&lt;/span>&lt;span class="p">):&lt;/span> &lt;span class="n">Promise&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">Response&lt;/span>&lt;span class="o">&amp;gt;&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="n">body&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">await&lt;/span> &lt;span class="n">req&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">json&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="n">nuevoUsuario&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">Usuario&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">id&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">crypto&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">randomUUID&lt;/span>&lt;span class="p">(),&lt;/span> &lt;span class="o">...&lt;/span>&lt;span class="n">body&lt;/span> &lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">usuarios&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">push&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">nuevoUsuario&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">Response&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">JSON&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">stringify&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">nuevoUsuario&lt;/span>&lt;span class="p">),&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">status&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">201&lt;/span> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="3-configurar-rutas-con-oak">&lt;strong>3. Configurar rutas con Oak&lt;/strong>&lt;/h4>
+&lt;p>Oak es un framework similar a Express.js para Deno.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">Application&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">Router&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s2">&amp;#34;https://deno.land/x/oak/mod.ts&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">obtenerUsuarios&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">crearUsuario&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s2">&amp;#34;./controllers.ts&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">router&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">Router&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">router&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">get&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;/usuarios&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">obtenerUsuarios&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">router&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">post&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;/usuarios&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">crearUsuario&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">app&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">Application&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">app&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">use&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">router&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">routes&lt;/span>&lt;span class="p">());&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">app&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">use&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">router&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">allowedMethods&lt;/span>&lt;span class="p">());&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">await&lt;/span> &lt;span class="n">app&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">listen&lt;/span>&lt;span class="p">({&lt;/span> &lt;span class="n">port&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">8080&lt;/span> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Ejecutar la API:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">deno run --allow-net --allow-read --allow-write server.ts
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="consumo-de-la-api-restful-en-angular">Consumo de la API RESTful en Angular&lt;/h2>
+&lt;h3 id="configurar-conexión-con-la-api">&lt;strong>Configurar conexión con la API&lt;/strong>&lt;/h3>
+&lt;ol>
+&lt;li>Crear un servicio Angular para consumir la API REST:&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">Injectable&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;@angular/core&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">HttpClient&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;@angular/common/http&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">Observable&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;rxjs&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">interface&lt;/span> &lt;span class="n">Usuario&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">id&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">string&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">nombre&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">string&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">email&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">string&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">@&lt;/span>&lt;span class="n">Injectable&lt;/span>&lt;span class="p">({&lt;/span> &lt;span class="n">providedIn&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;root&amp;#39;&lt;/span> &lt;span class="p">})&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="k">class&lt;/span> &lt;span class="n">UsuarioService&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">private&lt;/span> &lt;span class="n">apiUrl&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;http://localhost:8080/usuarios&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">constructor&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">private&lt;/span> &lt;span class="n">http&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">HttpClient&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">obtenerUsuarios&lt;/span>&lt;span class="p">():&lt;/span> &lt;span class="n">Observable&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">Usuario&lt;/span>&lt;span class="p">[]&lt;/span>&lt;span class="o">&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">this&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">http&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">get&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">Usuario&lt;/span>&lt;span class="p">[]&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">this&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">apiUrl&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">crearUsuario&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">usuario&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">Usuario&lt;/span>&lt;span class="p">):&lt;/span> &lt;span class="n">Observable&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">Usuario&lt;/span>&lt;span class="o">&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">this&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">http&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">post&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">Usuario&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">this&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">apiUrl&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">usuario&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="2">
+&lt;li>Agregar el servicio a &lt;code>app.module.ts&lt;/code>:&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">HttpClientModule&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;@angular/common/http&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">@&lt;/span>&lt;span class="n">NgModule&lt;/span>&lt;span class="p">({&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">declarations&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">AppComponent&lt;/span>&lt;span class="p">],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">imports&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">BrowserModule&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">HttpClientModule&lt;/span>&lt;span class="p">],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">providers&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">bootstrap&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">AppComponent&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">})&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="k">class&lt;/span> &lt;span class="n">AppModule&lt;/span> &lt;span class="p">{}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="crear-un-componente-para-mostrar-usuarios">&lt;strong>Crear un componente para mostrar usuarios&lt;/strong>&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">Component&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">OnInit&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;@angular/core&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">UsuarioService&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;../usuario.service&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">@&lt;/span>&lt;span class="n">Component&lt;/span>&lt;span class="p">({&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">selector&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;app-usuarios&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">templateUrl&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;./usuarios.component.html&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">})&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="k">class&lt;/span> &lt;span class="n">UsuariosComponent&lt;/span> &lt;span class="n">implements&lt;/span> &lt;span class="n">OnInit&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">usuarios&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">any&lt;/span>&lt;span class="p">[]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">constructor&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">private&lt;/span> &lt;span class="n">usuarioService&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">UsuarioService&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ngOnInit&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">this&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">usuarioService&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">obtenerUsuarios&lt;/span>&lt;span class="p">()&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">subscribe&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">data&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">this&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">usuarios&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">data&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">&amp;lt;h2&amp;gt;Lista de Usuarios&amp;lt;/h2&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;ul&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;li *ngFor=&amp;#34;let usuario of usuarios&amp;#34;&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {{ usuario.nombre }} - {{ usuario.email }}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/li&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;/ul&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="conclusión">Conclusión&lt;/h2>
+&lt;p>Integrar &lt;strong>Angular&lt;/strong> con &lt;strong>APIs RESTful&lt;/strong> en Deno proporciona una solución segura y escalable para el desarrollo web moderno. La combinación de TypeScript en ambos entornos permite una experiencia de desarrollo fluida y consistente. ¡Explora estas tecnologías y lleva tu desarrollo full-stack al siguiente nivel!&lt;/p></description></item><item><title>Desarrollo full-stack con Angular y Deno</title><link>https://cmas.dev/posts/2024-10-23-fullstack-development-with-angular-and-deno/</link><pubDate>Wed, 23 Oct 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-10-23-fullstack-development-with-angular-and-deno/</guid><description>&lt;p>El desarrollo full-stack ha evolucionado con nuevas tecnologías que permiten construir aplicaciones modernas, escalables y seguras. En este artículo, exploraremos cómo combinar Angular en el frontend y Deno en el backend para crear aplicaciones full-stack eficientes y bien estructuradas.&lt;/p>
+&lt;h2 id="por-qué-angular-y-deno">¿Por qué Angular y Deno?&lt;/h2>
+&lt;h3 id="ventajas-de-angular">&lt;strong>Ventajas de Angular&lt;/strong>&lt;/h3>
+&lt;p>Angular es un framework de desarrollo frontend basado en TypeScript que permite construir aplicaciones web robustas y escalables. Sus principales ventajas incluyen:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>Arquitectura modular&lt;/strong>: Usa módulos y componentes para organizar el código.&lt;/li>
+&lt;li>&lt;strong>Two-way data binding&lt;/strong>: Permite la sincronización automática entre la vista y el modelo.&lt;/li>
+&lt;li>&lt;strong>Soporte para PWA&lt;/strong>: Facilita la creación de aplicaciones progresivas.&lt;/li>
+&lt;li>&lt;strong>Ecosistema amplio&lt;/strong>: Compatible con RxJS, Angular Material y otras bibliotecas.&lt;/li>
+&lt;/ul>
+&lt;h3 id="ventajas-de-deno">&lt;strong>Ventajas de Deno&lt;/strong>&lt;/h3>
+&lt;p>Deno es un runtime seguro para JavaScript y TypeScript que ofrece múltiples mejoras con respecto a Node.js. Sus principales características son:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>Seguridad integrada&lt;/strong>: Requiere permisos explícitos para acceder a archivos, red y entorno.&lt;/li>
+&lt;li>&lt;strong>Soporte nativo para TypeScript&lt;/strong>: No requiere configuración adicional.&lt;/li>
+&lt;li>&lt;strong>Gestión de dependencias simplificada&lt;/strong>: Usa URLs en lugar de &lt;code>node_modules&lt;/code>.&lt;/li>
+&lt;li>&lt;strong>Servidor HTTP nativo&lt;/strong>: Sin necesidad de frameworks adicionales.&lt;/li>
+&lt;/ul>
+&lt;h2 id="configuración-del-entorno">Configuración del entorno&lt;/h2>
+&lt;p>Para desarrollar una aplicación full-stack con Angular y Deno, primero debemos configurar ambos entornos.&lt;/p>
+&lt;h3 id="instalación-de-angular">&lt;strong>Instalación de Angular&lt;/strong>&lt;/h3>
+&lt;ol>
+&lt;li>Instalar Angular CLI:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">npm install -g @angular/cli
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>Crear un nuevo proyecto Angular:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">ng new frontend-angular
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">cd frontend-angular
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>Ejecutar la aplicación:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">ng serve --open
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;h3 id="instalación-de-deno">&lt;strong>Instalación de Deno&lt;/strong>&lt;/h3>
+&lt;ol>
+&lt;li>Instalar Deno:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">curl -fsSL https://deno.land/x/install/install.sh | sh
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>Verificar la instalación:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">deno --version
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>Crear el directorio del backend:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">mkdir backend-deno &amp;amp;&amp;amp; cd backend-deno
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;h2 id="desarrollo-del-backend-con-deno">Desarrollo del Backend con Deno&lt;/h2>
+&lt;h3 id="configuración-del-servidor-http">&lt;strong>Configuración del Servidor HTTP&lt;/strong>&lt;/h3>
+&lt;p>Deno permite crear servidores HTTP de manera sencilla con &lt;code>std/http&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">serve&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s2">&amp;#34;https://deno.land/std@0.194.0/http/server.ts&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">handler&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">request&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">Request&lt;/span>&lt;span class="p">):&lt;/span> &lt;span class="n">Response&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">Response&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;Hola desde Deno API!&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">status&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">200&lt;/span> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">serve&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">handler&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">port&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">8080&lt;/span> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">console&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;Servidor corriendo en http://localhost:8080&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Ejecuta el servidor con:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">deno run --allow-net server.ts
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="creación-de-una-api-rest-con-deno">&lt;strong>Creación de una API REST con Deno&lt;/strong>&lt;/h3>
+&lt;p>Vamos a estructurar nuestra API en un modelo MVC.&lt;/p>
+&lt;h4 id="1-definir-el-modelo">&lt;strong>1. Definir el modelo&lt;/strong>&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="n">interface&lt;/span> &lt;span class="n">Usuario&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">id&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">string&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">nombre&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">string&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">email&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">string&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="2-implementar-un-controlador">&lt;strong>2. Implementar un controlador&lt;/strong>&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">Usuario&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s2">&amp;#34;./models.ts&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">let&lt;/span> &lt;span class="n">usuarios&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">Usuario&lt;/span>&lt;span class="p">[]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="k">const&lt;/span> &lt;span class="n">obtenerUsuarios&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">():&lt;/span> &lt;span class="n">Response&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">Response&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">JSON&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">stringify&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">usuarios&lt;/span>&lt;span class="p">),&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">status&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">200&lt;/span> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="k">const&lt;/span> &lt;span class="n">crearUsuario&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">async&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">req&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">Request&lt;/span>&lt;span class="p">):&lt;/span> &lt;span class="n">Promise&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">Response&lt;/span>&lt;span class="o">&amp;gt;&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="n">body&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">await&lt;/span> &lt;span class="n">req&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">json&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="n">nuevoUsuario&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">Usuario&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">id&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">crypto&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">randomUUID&lt;/span>&lt;span class="p">(),&lt;/span> &lt;span class="o">...&lt;/span>&lt;span class="n">body&lt;/span> &lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">usuarios&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">push&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">nuevoUsuario&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">Response&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">JSON&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">stringify&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">nuevoUsuario&lt;/span>&lt;span class="p">),&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">status&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">201&lt;/span> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="3-configurar-rutas-con-oak">&lt;strong>3. Configurar rutas con Oak&lt;/strong>&lt;/h4>
+&lt;p>Oak es un framework similar a Express.js para Deno.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">Application&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">Router&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s2">&amp;#34;https://deno.land/x/oak/mod.ts&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">obtenerUsuarios&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">crearUsuario&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s2">&amp;#34;./controllers.ts&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">router&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">Router&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">router&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">get&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;/usuarios&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">obtenerUsuarios&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">router&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">post&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;/usuarios&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">crearUsuario&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">app&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">Application&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">app&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">use&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">router&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">routes&lt;/span>&lt;span class="p">());&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">app&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">use&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">router&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">allowedMethods&lt;/span>&lt;span class="p">());&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">await&lt;/span> &lt;span class="n">app&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">listen&lt;/span>&lt;span class="p">({&lt;/span> &lt;span class="n">port&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">8080&lt;/span> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Ejecutar la API:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">deno run --allow-net --allow-read --allow-write server.ts
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="desarrollo-del-frontend-con-angular">Desarrollo del Frontend con Angular&lt;/h2>
+&lt;h3 id="configurar-conexión-con-la-api">&lt;strong>Configurar conexión con la API&lt;/strong>&lt;/h3>
+&lt;ol>
+&lt;li>Crear un servicio Angular para consumir la API REST:&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">Injectable&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;@angular/core&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">HttpClient&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;@angular/common/http&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">Observable&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;rxjs&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">interface&lt;/span> &lt;span class="n">Usuario&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">id&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">string&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">nombre&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">string&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">email&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">string&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">@&lt;/span>&lt;span class="n">Injectable&lt;/span>&lt;span class="p">({&lt;/span> &lt;span class="n">providedIn&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;root&amp;#39;&lt;/span> &lt;span class="p">})&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="k">class&lt;/span> &lt;span class="n">UsuarioService&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">private&lt;/span> &lt;span class="n">apiUrl&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;http://localhost:8080/usuarios&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">constructor&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">private&lt;/span> &lt;span class="n">http&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">HttpClient&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">obtenerUsuarios&lt;/span>&lt;span class="p">():&lt;/span> &lt;span class="n">Observable&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">Usuario&lt;/span>&lt;span class="p">[]&lt;/span>&lt;span class="o">&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">this&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">http&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">get&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">Usuario&lt;/span>&lt;span class="p">[]&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">this&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">apiUrl&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">crearUsuario&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">usuario&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">Usuario&lt;/span>&lt;span class="p">):&lt;/span> &lt;span class="n">Observable&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">Usuario&lt;/span>&lt;span class="o">&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">this&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">http&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">post&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">Usuario&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">this&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">apiUrl&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">usuario&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="2">
+&lt;li>Agregar el servicio a &lt;code>app.module.ts&lt;/code>:&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">HttpClientModule&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;@angular/common/http&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">@&lt;/span>&lt;span class="n">NgModule&lt;/span>&lt;span class="p">({&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">declarations&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">AppComponent&lt;/span>&lt;span class="p">],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">imports&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">BrowserModule&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">HttpClientModule&lt;/span>&lt;span class="p">],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">providers&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">bootstrap&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">AppComponent&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">})&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="k">class&lt;/span> &lt;span class="n">AppModule&lt;/span> &lt;span class="p">{}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="crear-un-componente-para-mostrar-usuarios">&lt;strong>Crear un componente para mostrar usuarios&lt;/strong>&lt;/h3>
+&lt;ol>
+&lt;li>Generar el componente:&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">ng generate component usuarios
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="2">
+&lt;li>Implementar la lógica en &lt;code>usuarios.component.ts&lt;/code>:&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">Component&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">OnInit&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;@angular/core&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">UsuarioService&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;../usuario.service&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">@&lt;/span>&lt;span class="n">Component&lt;/span>&lt;span class="p">({&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">selector&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;app-usuarios&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">templateUrl&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;./usuarios.component.html&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">})&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="k">class&lt;/span> &lt;span class="n">UsuariosComponent&lt;/span> &lt;span class="n">implements&lt;/span> &lt;span class="n">OnInit&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">usuarios&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">any&lt;/span>&lt;span class="p">[]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">constructor&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">private&lt;/span> &lt;span class="n">usuarioService&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">UsuarioService&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ngOnInit&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">this&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">usuarioService&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">obtenerUsuarios&lt;/span>&lt;span class="p">()&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">subscribe&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">data&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">this&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">usuarios&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">data&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="3">
+&lt;li>Agregar la vista en &lt;code>usuarios.component.html&lt;/code>:&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">&amp;lt;h2&amp;gt;Lista de Usuarios&amp;lt;/h2&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;ul&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;li *ngFor=&amp;#34;let usuario of usuarios&amp;#34;&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {{ usuario.nombre }} - {{ usuario.email }}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/li&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;/ul&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="4">
+&lt;li>Incluir el componente en &lt;code>app.component.html&lt;/code>:&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">&amp;lt;app-usuarios&amp;gt;&amp;lt;/app-usuarios&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="conclusión">Conclusión&lt;/h2>
+&lt;p>Desarrollar aplicaciones full-stack con &lt;strong>Angular y Deno&lt;/strong> ofrece ventajas significativas en términos de seguridad, rendimiento y escalabilidad. Con Angular en el frontend y Deno en el backend, podemos construir aplicaciones modernas con un stack completamente basado en TypeScript.&lt;/p>
+&lt;p>¡Explora estas tecnologías y lleva tu desarrollo full-stack al siguiente nivel!&lt;/p></description></item><item><title>Testing unitario en Blazor: Herramientas y estrategias</title><link>https://cmas.dev/posts/2024-10-16-testing-unitario-in-blazor.es-copy-3/</link><pubDate>Wed, 16 Oct 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-10-16-testing-unitario-in-blazor.es-copy-3/</guid><description>&lt;p>El desarrollo de aplicaciones robustas y fiables en &lt;strong>Blazor&lt;/strong> requiere un enfoque disciplinado hacia las pruebas unitarias. Las pruebas unitarias no solo garantizan que los componentes y servicios funcionen como se espera, sino que también facilitan el mantenimiento, la detección temprana de errores y la calidad del software. En este artículo, exploraremos en detalle cómo realizar pruebas unitarias en Blazor utilizando herramientas modernas, estrategias eficaces y ejemplos prácticos.&lt;/p>
+&lt;h2 id="qué-es-el-testing-unitario">¿Qué es el testing unitario?&lt;/h2>
+&lt;p>El testing unitario es un tipo de prueba de software que se enfoca en verificar la funcionalidad de componentes individuales, como clases, métodos o funciones. En Blazor, esto implica probar componentes y servicios para garantizar que realicen su tarea específica de manera correcta.&lt;/p>
+&lt;h3 id="beneficios-del-testing-unitario">Beneficios del testing unitario&lt;/h3>
+&lt;ol>
+&lt;li>&lt;strong>Detección temprana de errores&lt;/strong>:
+&lt;ul>
+&lt;li>Ayuda a identificar problemas en etapas iniciales del desarrollo.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>Facilita el refactoring&lt;/strong>:
+&lt;ul>
+&lt;li>Permite realizar cambios en el código con confianza.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>Mejora la calidad del software&lt;/strong>:
+&lt;ul>
+&lt;li>Garantiza que cada unidad de código funcione correctamente.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>Documentación viva&lt;/strong>:
+&lt;ul>
+&lt;li>Las pruebas actúan como una guía sobre cómo debe comportarse el sistema.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="herramientas-para-testing-unitario-en-blazor">Herramientas para testing unitario en Blazor&lt;/h2>
+&lt;h3 id="1-xunit">1. &lt;strong>xUnit&lt;/strong>&lt;/h3>
+&lt;p>xUnit es un framework popular para pruebas unitarias en .NET. Ofrece una sintaxis simple y características avanzadas para escribir y ejecutar pruebas.&lt;/p>
+&lt;p>&lt;strong>Instalación:&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-go" data-lang="go">&lt;span class="line">&lt;span class="cl">&lt;span class="nx">dotnet&lt;/span> &lt;span class="nx">add&lt;/span> &lt;span class="kn">package&lt;/span> &lt;span class="nx">xunit&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="2-bunit">2. &lt;strong>bUnit&lt;/strong>&lt;/h3>
+&lt;p>bUnit es un framework especializado para probar componentes de Blazor. Proporciona una API fácil de usar para renderizar componentes y realizar aserciones sobre su salida.&lt;/p>
+&lt;p>&lt;strong>Instalación:&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-go" data-lang="go">&lt;span class="line">&lt;span class="cl">&lt;span class="nx">dotnet&lt;/span> &lt;span class="nx">add&lt;/span> &lt;span class="kn">package&lt;/span> &lt;span class="nx">Bunit&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="3-moq">3. &lt;strong>Moq&lt;/strong>&lt;/h3>
+&lt;p>Moq es una biblioteca de mocking que permite simular dependencias como servicios o repositorios durante las pruebas.&lt;/p>
+&lt;p>&lt;strong>Instalación:&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-go" data-lang="go">&lt;span class="line">&lt;span class="cl">&lt;span class="nx">dotnet&lt;/span> &lt;span class="nx">add&lt;/span> &lt;span class="kn">package&lt;/span> &lt;span class="nx">Moq&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="4-fluentassertions">4. &lt;strong>FluentAssertions&lt;/strong>&lt;/h3>
+&lt;p>FluentAssertions es una biblioteca que facilita escribir aserciones legibles y expresivas.&lt;/p>
+&lt;p>&lt;strong>Instalación:&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-go" data-lang="go">&lt;span class="line">&lt;span class="cl">&lt;span class="nx">dotnet&lt;/span> &lt;span class="nx">add&lt;/span> &lt;span class="kn">package&lt;/span> &lt;span class="nx">FluentAssertions&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="configuración-del-entorno">Configuración del entorno&lt;/h2>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Crear un proyecto de pruebas&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">dotnet new xunit -o BlazorApp.Tests
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">cd BlazorApp.Tests
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Agregar referencias al proyecto principal&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">dotnet add reference ../BlazorApp/BlazorApp.csproj
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Instalar las herramientas necesarias&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-go" data-lang="go">&lt;span class="line">&lt;span class="cl">&lt;span class="nx">dotnet&lt;/span> &lt;span class="nx">add&lt;/span> &lt;span class="kn">package&lt;/span> &lt;span class="nx">Bunit&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">dotnet&lt;/span> &lt;span class="nx">add&lt;/span> &lt;span class="kn">package&lt;/span> &lt;span class="nx">Moq&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">dotnet&lt;/span> &lt;span class="nx">add&lt;/span> &lt;span class="kn">package&lt;/span> &lt;span class="nx">FluentAssertions&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;h2 id="estrategias-para-el-testing-unitario-en-blazor">Estrategias para el testing unitario en Blazor&lt;/h2>
+&lt;h3 id="1-pruebas-de-componentes">1. &lt;strong>Pruebas de componentes&lt;/strong>&lt;/h3>
+&lt;p>Probar componentes de Blazor implica verificar su renderizado, interacción y estado interno.&lt;/p>
+&lt;h4 id="ejemplo-básico-prueba-de-un-componente-de-contador">Ejemplo básico: Prueba de un componente de contador&lt;/h4>
+&lt;p>&lt;strong>Componente Counter.razor:&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">@page &amp;#34;/counter&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;h3&amp;gt;Contador&amp;lt;/h3&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;p&amp;gt;Valor actual: @count&amp;lt;/p&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;button @onclick=&amp;#34;Increment&amp;#34;&amp;gt;Incrementar&amp;lt;/button&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">@code {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> private int count = 0;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> private void Increment()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> count++;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>Prueba unitaria:&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">using&lt;/span> &lt;span class="n">Bunit&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">using&lt;/span> &lt;span class="n">Xunit&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">public&lt;/span> &lt;span class="k">class&lt;/span> &lt;span class="n">CounterTests&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">Fact&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">public&lt;/span> &lt;span class="n">void&lt;/span> &lt;span class="n">CounterShouldIncrementWhenButtonClicked&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span> &lt;span class="n">Configurar&lt;/span> &lt;span class="n">el&lt;/span> &lt;span class="n">contexto&lt;/span> &lt;span class="n">de&lt;/span> &lt;span class="n">pruebas&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">using&lt;/span> &lt;span class="k">var&lt;/span> &lt;span class="n">context&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">TestContext&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span> &lt;span class="n">Renderizar&lt;/span> &lt;span class="n">el&lt;/span> &lt;span class="n">componente&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">var&lt;/span> &lt;span class="n">component&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">context&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">RenderComponent&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">Counter&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span> &lt;span class="n">Verificar&lt;/span> &lt;span class="n">el&lt;/span> &lt;span class="n">estado&lt;/span> &lt;span class="n">inicial&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Assert&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Contains&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;Valor actual: 0&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">component&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Markup&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span> &lt;span class="n">Interactuar&lt;/span> &lt;span class="n">con&lt;/span> &lt;span class="n">el&lt;/span> &lt;span class="n">componente&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">component&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Find&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;button&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Click&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span> &lt;span class="n">Verificar&lt;/span> &lt;span class="n">el&lt;/span> &lt;span class="n">nuevo&lt;/span> &lt;span class="n">estado&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Assert&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Contains&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;Valor actual: 1&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">component&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Markup&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="2-pruebas-de-servicios">2. &lt;strong>Pruebas de servicios&lt;/strong>&lt;/h3>
+&lt;p>Los servicios en Blazor suelen manejar la lógica de negocio y las interacciones con APIs. Estas pruebas garantizan que los servicios funcionen correctamente.&lt;/p>
+&lt;h4 id="ejemplo-servicio-de-datos">Ejemplo: Servicio de datos&lt;/h4>
+&lt;p>&lt;strong>Servicio IDataService:&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">public interface IDataService
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Task&amp;lt;List&amp;lt;string&amp;gt;&amp;gt; GetItemsAsync();
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>Implementación DataService:&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">public class DataService : IDataService
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> public async Task&amp;lt;List&amp;lt;string&amp;gt;&amp;gt; GetItemsAsync()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> // Simulación de datos desde una API
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> await Task.Delay(100);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> return new List&amp;lt;string&amp;gt; { &amp;#34;Item1&amp;#34;, &amp;#34;Item2&amp;#34;, &amp;#34;Item3&amp;#34; };
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>Prueba unitaria con Moq:&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">using&lt;/span> &lt;span class="n">Moq&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">using&lt;/span> &lt;span class="n">Xunit&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">using&lt;/span> &lt;span class="n">FluentAssertions&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">public&lt;/span> &lt;span class="k">class&lt;/span> &lt;span class="n">DataServiceTests&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">Fact&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">public&lt;/span> &lt;span class="n">async&lt;/span> &lt;span class="n">Task&lt;/span> &lt;span class="n">GetItemsAsync_ShouldReturnListOfItems&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span> &lt;span class="n">Crear&lt;/span> &lt;span class="n">un&lt;/span> &lt;span class="n">mock&lt;/span> &lt;span class="n">del&lt;/span> &lt;span class="n">servicio&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">var&lt;/span> &lt;span class="n">mockService&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">Mock&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">IDataService&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">mockService&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Setup&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">s&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">s&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">GetItemsAsync&lt;/span>&lt;span class="p">())&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">ReturnsAsync&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">new&lt;/span> &lt;span class="n">List&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">string&lt;/span>&lt;span class="o">&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="s2">&amp;#34;MockItem1&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;MockItem2&amp;#34;&lt;/span> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span> &lt;span class="n">Llamar&lt;/span> &lt;span class="n">al&lt;/span> &lt;span class="n">método&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">var&lt;/span> &lt;span class="n">result&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">await&lt;/span> &lt;span class="n">mockService&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Object&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">GetItemsAsync&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span> &lt;span class="n">Verificar&lt;/span> &lt;span class="n">resultados&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">result&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Should&lt;/span>&lt;span class="p">()&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">NotBeNull&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">result&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Should&lt;/span>&lt;span class="p">()&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">HaveCount&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">2&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">result&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Should&lt;/span>&lt;span class="p">()&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Contain&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;MockItem1&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="3-pruebas-de-integración">3. &lt;strong>Pruebas de integración&lt;/strong>&lt;/h3>
+&lt;p>Las pruebas de integración verifican cómo interactúan múltiples componentes o servicios.&lt;/p>
+&lt;h4 id="ejemplo-integración-de-un-componente-con-un-servicio">Ejemplo: Integración de un componente con un servicio&lt;/h4>
+&lt;p>&lt;strong>Componente ItemList.razor:&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="err">@&lt;/span>&lt;span class="n">inject&lt;/span> &lt;span class="n">IDataService&lt;/span> &lt;span class="n">DataService&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">h3&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="n">Lista&lt;/span> &lt;span class="n">de&lt;/span> &lt;span class="n">Items&lt;/span>&lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">h3&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">ul&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="err">@&lt;/span>&lt;span class="n">foreach&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="k">var&lt;/span> &lt;span class="n">item&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">Items&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">li&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="err">@&lt;/span>&lt;span class="n">item&lt;/span>&lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">li&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">ul&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">@&lt;/span>&lt;span class="n">code&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">private&lt;/span> &lt;span class="n">List&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">string&lt;/span>&lt;span class="o">&amp;gt;&lt;/span> &lt;span class="n">Items&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">new&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">protected&lt;/span> &lt;span class="n">override&lt;/span> &lt;span class="n">async&lt;/span> &lt;span class="n">Task&lt;/span> &lt;span class="n">OnInitializedAsync&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Items&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">await&lt;/span> &lt;span class="n">DataService&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">GetItemsAsync&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>Prueba de integración:&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">using&lt;/span> &lt;span class="n">Bunit&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">using&lt;/span> &lt;span class="n">Moq&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">using&lt;/span> &lt;span class="n">Xunit&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">public&lt;/span> &lt;span class="k">class&lt;/span> &lt;span class="n">ItemListTests&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">Fact&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">public&lt;/span> &lt;span class="n">void&lt;/span> &lt;span class="n">ItemListShouldRenderItemsFromService&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span> &lt;span class="n">Crear&lt;/span> &lt;span class="n">el&lt;/span> &lt;span class="n">mock&lt;/span> &lt;span class="n">del&lt;/span> &lt;span class="n">servicio&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">var&lt;/span> &lt;span class="n">mockService&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">Mock&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">IDataService&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">mockService&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Setup&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">s&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">s&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">GetItemsAsync&lt;/span>&lt;span class="p">())&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">ReturnsAsync&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">new&lt;/span> &lt;span class="n">List&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">string&lt;/span>&lt;span class="o">&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="s2">&amp;#34;Item1&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;Item2&amp;#34;&lt;/span> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span> &lt;span class="n">Configurar&lt;/span> &lt;span class="n">el&lt;/span> &lt;span class="n">contexto&lt;/span> &lt;span class="n">de&lt;/span> &lt;span class="n">pruebas&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">using&lt;/span> &lt;span class="k">var&lt;/span> &lt;span class="n">context&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">TestContext&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">context&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Services&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">AddSingleton&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">mockService&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Object&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span> &lt;span class="n">Renderizar&lt;/span> &lt;span class="n">el&lt;/span> &lt;span class="n">componente&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">var&lt;/span> &lt;span class="n">component&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">context&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">RenderComponent&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="ne">ItemList&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span> &lt;span class="n">Verificar&lt;/span> &lt;span class="n">el&lt;/span> &lt;span class="n">contenido&lt;/span> &lt;span class="n">renderizado&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Assert&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Contains&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;Item1&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">component&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Markup&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Assert&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Contains&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;Item2&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">component&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Markup&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="buenas-prácticas">Buenas prácticas&lt;/h2>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Aislar las pruebas&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Usa mocks para evitar dependencias externas.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Pruebas pequeñas y específicas&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Cada prueba debe centrarse en un solo comportamiento.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Automatización&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Integra las pruebas en un pipeline CI/CD para garantizar que se ejecuten automáticamente.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Cobertura de pruebas&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Asegúrate de cubrir tanto escenarios positivos como negativos.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="conclusión">Conclusión&lt;/h2>
+&lt;p>El testing unitario en Blazor es esencial para garantizar la calidad y fiabilidad de las aplicaciones. Al utilizar herramientas como xUnit, bUnit, Moq y FluentAssertions, junto con estrategias efectivas, puedes construir una base sólida de pruebas que facilite el desarrollo y mantenimiento del software. ¡Empieza a implementar estas prácticas en tus proyectos Blazor hoy mismo!&lt;/p></description></item><item><title>Testing unitario en Blazor: Herramientas y estrategias</title><link>https://cmas.dev/posts/2024-10-16-testing-unitario-in-blazor/</link><pubDate>Wed, 16 Oct 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-10-16-testing-unitario-in-blazor/</guid><description>&lt;p>El desarrollo de aplicaciones robustas y fiables en &lt;strong>Blazor&lt;/strong> requiere un enfoque disciplinado hacia las pruebas unitarias. Las pruebas unitarias no solo garantizan que los componentes y servicios funcionen como se espera, sino que también facilitan el mantenimiento, la detección temprana de errores y la calidad del software. En este artículo, exploraremos en detalle cómo realizar pruebas unitarias en Blazor utilizando herramientas modernas, estrategias eficaces y ejemplos prácticos.&lt;/p>
+&lt;h2 id="qué-es-el-testing-unitario">¿Qué es el testing unitario?&lt;/h2>
+&lt;p>El testing unitario es un tipo de prueba de software que se enfoca en verificar la funcionalidad de componentes individuales, como clases, métodos o funciones. En Blazor, esto implica probar componentes y servicios para garantizar que realicen su tarea específica de manera correcta.&lt;/p>
+&lt;h3 id="beneficios-del-testing-unitario">Beneficios del testing unitario&lt;/h3>
+&lt;ol>
+&lt;li>&lt;strong>Detección temprana de errores&lt;/strong>:
+&lt;ul>
+&lt;li>Ayuda a identificar problemas en etapas iniciales del desarrollo.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>Facilita el refactoring&lt;/strong>:
+&lt;ul>
+&lt;li>Permite realizar cambios en el código con confianza.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>Mejora la calidad del software&lt;/strong>:
+&lt;ul>
+&lt;li>Garantiza que cada unidad de código funcione correctamente.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>Documentación viva&lt;/strong>:
+&lt;ul>
+&lt;li>Las pruebas actúan como una guía sobre cómo debe comportarse el sistema.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="herramientas-para-testing-unitario-en-blazor">Herramientas para testing unitario en Blazor&lt;/h2>
+&lt;h3 id="1-xunit">1. &lt;strong>xUnit&lt;/strong>&lt;/h3>
+&lt;p>xUnit es un framework popular para pruebas unitarias en .NET. Ofrece una sintaxis simple y características avanzadas para escribir y ejecutar pruebas.&lt;/p>
+&lt;p>&lt;strong>Instalación:&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-go" data-lang="go">&lt;span class="line">&lt;span class="cl">&lt;span class="nx">dotnet&lt;/span> &lt;span class="nx">add&lt;/span> &lt;span class="kn">package&lt;/span> &lt;span class="nx">xunit&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="2-bunit">2. &lt;strong>bUnit&lt;/strong>&lt;/h3>
+&lt;p>bUnit es un framework especializado para probar componentes de Blazor. Proporciona una API fácil de usar para renderizar componentes y realizar aserciones sobre su salida.&lt;/p>
+&lt;p>&lt;strong>Instalación:&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-go" data-lang="go">&lt;span class="line">&lt;span class="cl">&lt;span class="nx">dotnet&lt;/span> &lt;span class="nx">add&lt;/span> &lt;span class="kn">package&lt;/span> &lt;span class="nx">Bunit&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="3-moq">3. &lt;strong>Moq&lt;/strong>&lt;/h3>
+&lt;p>Moq es una biblioteca de mocking que permite simular dependencias como servicios o repositorios durante las pruebas.&lt;/p>
+&lt;p>&lt;strong>Instalación:&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-go" data-lang="go">&lt;span class="line">&lt;span class="cl">&lt;span class="nx">dotnet&lt;/span> &lt;span class="nx">add&lt;/span> &lt;span class="kn">package&lt;/span> &lt;span class="nx">Moq&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="4-fluentassertions">4. &lt;strong>FluentAssertions&lt;/strong>&lt;/h3>
+&lt;p>FluentAssertions es una biblioteca que facilita escribir aserciones legibles y expresivas.&lt;/p>
+&lt;p>&lt;strong>Instalación:&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-go" data-lang="go">&lt;span class="line">&lt;span class="cl">&lt;span class="nx">dotnet&lt;/span> &lt;span class="nx">add&lt;/span> &lt;span class="kn">package&lt;/span> &lt;span class="nx">FluentAssertions&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="configuración-del-entorno">Configuración del entorno&lt;/h2>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Crear un proyecto de pruebas&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">dotnet new xunit -o BlazorApp.Tests
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">cd BlazorApp.Tests
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Agregar referencias al proyecto principal&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">dotnet add reference ../BlazorApp/BlazorApp.csproj
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Instalar las herramientas necesarias&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-go" data-lang="go">&lt;span class="line">&lt;span class="cl">&lt;span class="nx">dotnet&lt;/span> &lt;span class="nx">add&lt;/span> &lt;span class="kn">package&lt;/span> &lt;span class="nx">Bunit&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">dotnet&lt;/span> &lt;span class="nx">add&lt;/span> &lt;span class="kn">package&lt;/span> &lt;span class="nx">Moq&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">dotnet&lt;/span> &lt;span class="nx">add&lt;/span> &lt;span class="kn">package&lt;/span> &lt;span class="nx">FluentAssertions&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;h2 id="estrategias-para-el-testing-unitario-en-blazor">Estrategias para el testing unitario en Blazor&lt;/h2>
+&lt;h3 id="1-pruebas-de-componentes">1. &lt;strong>Pruebas de componentes&lt;/strong>&lt;/h3>
+&lt;p>Probar componentes de Blazor implica verificar su renderizado, interacción y estado interno.&lt;/p>
+&lt;h4 id="ejemplo-básico-prueba-de-un-componente-de-contador">Ejemplo básico: Prueba de un componente de contador&lt;/h4>
+&lt;p>&lt;strong>Componente Counter.razor:&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">@page &amp;#34;/counter&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;h3&amp;gt;Contador&amp;lt;/h3&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;p&amp;gt;Valor actual: @count&amp;lt;/p&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;button @onclick=&amp;#34;Increment&amp;#34;&amp;gt;Incrementar&amp;lt;/button&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">@code {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> private int count = 0;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> private void Increment()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> count++;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>Prueba unitaria:&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">using&lt;/span> &lt;span class="n">Bunit&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">using&lt;/span> &lt;span class="n">Xunit&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">public&lt;/span> &lt;span class="k">class&lt;/span> &lt;span class="n">CounterTests&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">Fact&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">public&lt;/span> &lt;span class="n">void&lt;/span> &lt;span class="n">CounterShouldIncrementWhenButtonClicked&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span> &lt;span class="n">Configurar&lt;/span> &lt;span class="n">el&lt;/span> &lt;span class="n">contexto&lt;/span> &lt;span class="n">de&lt;/span> &lt;span class="n">pruebas&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">using&lt;/span> &lt;span class="k">var&lt;/span> &lt;span class="n">context&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">TestContext&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span> &lt;span class="n">Renderizar&lt;/span> &lt;span class="n">el&lt;/span> &lt;span class="n">componente&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">var&lt;/span> &lt;span class="n">component&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">context&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">RenderComponent&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">Counter&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span> &lt;span class="n">Verificar&lt;/span> &lt;span class="n">el&lt;/span> &lt;span class="n">estado&lt;/span> &lt;span class="n">inicial&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Assert&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Contains&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;Valor actual: 0&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">component&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Markup&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span> &lt;span class="n">Interactuar&lt;/span> &lt;span class="n">con&lt;/span> &lt;span class="n">el&lt;/span> &lt;span class="n">componente&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">component&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Find&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;button&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Click&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span> &lt;span class="n">Verificar&lt;/span> &lt;span class="n">el&lt;/span> &lt;span class="n">nuevo&lt;/span> &lt;span class="n">estado&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Assert&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Contains&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;Valor actual: 1&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">component&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Markup&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="2-pruebas-de-servicios">2. &lt;strong>Pruebas de servicios&lt;/strong>&lt;/h3>
+&lt;p>Los servicios en Blazor suelen manejar la lógica de negocio y las interacciones con APIs. Estas pruebas garantizan que los servicios funcionen correctamente.&lt;/p>
+&lt;h4 id="ejemplo-servicio-de-datos">Ejemplo: Servicio de datos&lt;/h4>
+&lt;p>&lt;strong>Servicio IDataService:&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">public interface IDataService
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Task&amp;lt;List&amp;lt;string&amp;gt;&amp;gt; GetItemsAsync();
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>Implementación DataService:&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">public class DataService : IDataService
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> public async Task&amp;lt;List&amp;lt;string&amp;gt;&amp;gt; GetItemsAsync()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> // Simulación de datos desde una API
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> await Task.Delay(100);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> return new List&amp;lt;string&amp;gt; { &amp;#34;Item1&amp;#34;, &amp;#34;Item2&amp;#34;, &amp;#34;Item3&amp;#34; };
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>Prueba unitaria con Moq:&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">using&lt;/span> &lt;span class="n">Moq&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">using&lt;/span> &lt;span class="n">Xunit&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">using&lt;/span> &lt;span class="n">FluentAssertions&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">public&lt;/span> &lt;span class="k">class&lt;/span> &lt;span class="n">DataServiceTests&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">Fact&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">public&lt;/span> &lt;span class="n">async&lt;/span> &lt;span class="n">Task&lt;/span> &lt;span class="n">GetItemsAsync_ShouldReturnListOfItems&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span> &lt;span class="n">Crear&lt;/span> &lt;span class="n">un&lt;/span> &lt;span class="n">mock&lt;/span> &lt;span class="n">del&lt;/span> &lt;span class="n">servicio&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">var&lt;/span> &lt;span class="n">mockService&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">Mock&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">IDataService&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">mockService&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Setup&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">s&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">s&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">GetItemsAsync&lt;/span>&lt;span class="p">())&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">ReturnsAsync&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">new&lt;/span> &lt;span class="n">List&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">string&lt;/span>&lt;span class="o">&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="s2">&amp;#34;MockItem1&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;MockItem2&amp;#34;&lt;/span> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span> &lt;span class="n">Llamar&lt;/span> &lt;span class="n">al&lt;/span> &lt;span class="n">método&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">var&lt;/span> &lt;span class="n">result&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">await&lt;/span> &lt;span class="n">mockService&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Object&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">GetItemsAsync&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span> &lt;span class="n">Verificar&lt;/span> &lt;span class="n">resultados&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">result&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Should&lt;/span>&lt;span class="p">()&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">NotBeNull&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">result&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Should&lt;/span>&lt;span class="p">()&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">HaveCount&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">2&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">result&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Should&lt;/span>&lt;span class="p">()&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Contain&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;MockItem1&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="3-pruebas-de-integración">3. &lt;strong>Pruebas de integración&lt;/strong>&lt;/h3>
+&lt;p>Las pruebas de integración verifican cómo interactúan múltiples componentes o servicios.&lt;/p>
+&lt;h4 id="ejemplo-integración-de-un-componente-con-un-servicio">Ejemplo: Integración de un componente con un servicio&lt;/h4>
+&lt;p>&lt;strong>Componente ItemList.razor:&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="err">@&lt;/span>&lt;span class="n">inject&lt;/span> &lt;span class="n">IDataService&lt;/span> &lt;span class="n">DataService&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">h3&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="n">Lista&lt;/span> &lt;span class="n">de&lt;/span> &lt;span class="n">Items&lt;/span>&lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">h3&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">ul&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="err">@&lt;/span>&lt;span class="n">foreach&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="k">var&lt;/span> &lt;span class="n">item&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">Items&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">li&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="err">@&lt;/span>&lt;span class="n">item&lt;/span>&lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">li&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">ul&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">@&lt;/span>&lt;span class="n">code&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">private&lt;/span> &lt;span class="n">List&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">string&lt;/span>&lt;span class="o">&amp;gt;&lt;/span> &lt;span class="n">Items&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">new&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">protected&lt;/span> &lt;span class="n">override&lt;/span> &lt;span class="n">async&lt;/span> &lt;span class="n">Task&lt;/span> &lt;span class="n">OnInitializedAsync&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Items&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">await&lt;/span> &lt;span class="n">DataService&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">GetItemsAsync&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>Prueba de integración:&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">using&lt;/span> &lt;span class="n">Bunit&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">using&lt;/span> &lt;span class="n">Moq&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">using&lt;/span> &lt;span class="n">Xunit&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">public&lt;/span> &lt;span class="k">class&lt;/span> &lt;span class="n">ItemListTests&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">Fact&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">public&lt;/span> &lt;span class="n">void&lt;/span> &lt;span class="n">ItemListShouldRenderItemsFromService&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span> &lt;span class="n">Crear&lt;/span> &lt;span class="n">el&lt;/span> &lt;span class="n">mock&lt;/span> &lt;span class="n">del&lt;/span> &lt;span class="n">servicio&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">var&lt;/span> &lt;span class="n">mockService&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">Mock&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">IDataService&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">mockService&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Setup&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">s&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">s&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">GetItemsAsync&lt;/span>&lt;span class="p">())&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">ReturnsAsync&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">new&lt;/span> &lt;span class="n">List&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">string&lt;/span>&lt;span class="o">&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="s2">&amp;#34;Item1&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;Item2&amp;#34;&lt;/span> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span> &lt;span class="n">Configurar&lt;/span> &lt;span class="n">el&lt;/span> &lt;span class="n">contexto&lt;/span> &lt;span class="n">de&lt;/span> &lt;span class="n">pruebas&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">using&lt;/span> &lt;span class="k">var&lt;/span> &lt;span class="n">context&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">TestContext&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">context&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Services&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">AddSingleton&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">mockService&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Object&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span> &lt;span class="n">Renderizar&lt;/span> &lt;span class="n">el&lt;/span> &lt;span class="n">componente&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">var&lt;/span> &lt;span class="n">component&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">context&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">RenderComponent&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="ne">ItemList&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span> &lt;span class="n">Verificar&lt;/span> &lt;span class="n">el&lt;/span> &lt;span class="n">contenido&lt;/span> &lt;span class="n">renderizado&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Assert&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Contains&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;Item1&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">component&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Markup&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Assert&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Contains&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;Item2&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">component&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Markup&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="buenas-prácticas">Buenas prácticas&lt;/h2>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Aislar las pruebas&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Usa mocks para evitar dependencias externas.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Pruebas pequeñas y específicas&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Cada prueba debe centrarse en un solo comportamiento.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Automatización&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Integra las pruebas en un pipeline CI/CD para garantizar que se ejecuten automáticamente.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Cobertura de pruebas&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Asegúrate de cubrir tanto escenarios positivos como negativos.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="conclusión">Conclusión&lt;/h2>
+&lt;p>El testing unitario en Blazor es esencial para garantizar la calidad y fiabilidad de las aplicaciones. Al utilizar herramientas como xUnit, bUnit, Moq y FluentAssertions, junto con estrategias efectivas, puedes construir una base sólida de pruebas que facilite el desarrollo y mantenimiento del software. ¡Empieza a implementar estas prácticas en tus proyectos Blazor hoy mismo!&lt;/p></description></item><item><title>Uso de Azure Cosmos DB en aplicaciones Blazor</title><link>https://cmas.dev/posts/2024-10-09-azure-cosmos-in-blazor/</link><pubDate>Wed, 09 Oct 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-10-09-azure-cosmos-in-blazor/</guid><description>&lt;p>&lt;strong>Azure Cosmos DB&lt;/strong> es una base de datos distribuida globalmente y altamente escalable que permite almacenar y consultar datos de forma rápida y segura. Al integrarla con aplicaciones &lt;strong>Blazor&lt;/strong>, puedes construir soluciones web modernas y dinámicas con acceso a datos en tiempo real. Este artículo ofrece un instructivo paso a paso para usar &lt;strong>Azure Cosmos DB&lt;/strong> con &lt;strong>Blazor&lt;/strong>, incluyendo ejemplos de código prácticos y buenas prácticas.&lt;/p>
+&lt;h2 id="qué-es-azure-cosmos-db">¿Qué es Azure Cosmos DB?&lt;/h2>
+&lt;p>Azure Cosmos DB es un servicio de base de datos NoSQL en la nube que soporta múltiples modelos de datos, como documentos, claves-valor, gráficos y tablas. Ofrece:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>Escalabilidad global&lt;/strong>: Replica los datos en múltiples regiones.&lt;/li>
+&lt;li>&lt;strong>Latencia baja&lt;/strong>: Respuestas en milisegundos para operaciones de lectura y escritura.&lt;/li>
+&lt;li>&lt;strong>Soporte para múltiples API&lt;/strong>: Incluye SQL, MongoDB, Cassandra, Gremlin y Table.&lt;/li>
+&lt;li>&lt;strong>Altamente disponible&lt;/strong>: Con acuerdos de nivel de servicio (SLA) del 99.999%.&lt;/li>
+&lt;/ul>
+&lt;p>Azure Cosmos DB es ideal para aplicaciones que requieren alta disponibilidad, consistencia en datos distribuidos y escalabilidad masiva.&lt;/p>
+&lt;h2 id="configuración-inicial">Configuración inicial&lt;/h2>
+&lt;h3 id="requisitos-previos">Requisitos previos&lt;/h3>
+&lt;ol>
+&lt;li>&lt;strong>Cuenta de Azure&lt;/strong>: Si no tienes una, regístrate en &lt;a href="https://portal.azure.com/">Azure Portal&lt;/a>.&lt;/li>
+&lt;li>&lt;strong>Visual Studio 2022 o Visual Studio Code&lt;/strong>.&lt;/li>
+&lt;li>&lt;strong>SDK de .NET 6 o superior&lt;/strong> instalado.&lt;/li>
+&lt;/ol>
+&lt;h3 id="crear-una-cuenta-de-azure-cosmos-db">Crear una cuenta de Azure Cosmos DB&lt;/h3>
+&lt;ol>
+&lt;li>Inicia sesión en el &lt;a href="https://portal.azure.com/">portal de Azure&lt;/a>.&lt;/li>
+&lt;li>Haz clic en &lt;strong>Crear un recurso&lt;/strong> &amp;gt; &lt;strong>Bases de datos&lt;/strong> &amp;gt; &lt;strong>Azure Cosmos DB&lt;/strong>.&lt;/li>
+&lt;li>Selecciona el modelo de API SQL (Core).&lt;/li>
+&lt;li>Proporciona los detalles necesarios:
+&lt;ul>
+&lt;li>&lt;strong>Nombre de la cuenta&lt;/strong>: &lt;code>blazor-cosmosdb-demo&lt;/code>.&lt;/li>
+&lt;li>&lt;strong>Grupo de recursos&lt;/strong>: Crea uno nuevo o selecciona uno existente.&lt;/li>
+&lt;li>&lt;strong>Ubicación&lt;/strong>: Selecciona la región más cercana a tus usuarios.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Haz clic en &lt;strong>Revisar y crear&lt;/strong>.&lt;/li>
+&lt;li>Una vez creada, accede a la cuenta de Cosmos DB y toma nota de la clave primaria y la cadena de conexión.&lt;/li>
+&lt;/ol>
+&lt;h2 id="crear-una-aplicación-blazor-con-cosmos-db">Crear una aplicación Blazor con Cosmos DB&lt;/h2>
+&lt;h3 id="paso-1-configurar-el-proyecto-blazor">Paso 1: Configurar el proyecto Blazor&lt;/h3>
+&lt;ol>
+&lt;li>
+&lt;p>Crea un nuevo proyecto Blazor Server:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">dotnet new blazorserver -o BlazorCosmosDemo
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">cd BlazorCosmosDemo
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>Instala el paquete NuGet para Azure Cosmos DB:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-go" data-lang="go">&lt;span class="line">&lt;span class="cl">&lt;span class="nx">dotnet&lt;/span> &lt;span class="nx">add&lt;/span> &lt;span class="kn">package&lt;/span> &lt;span class="nx">Microsoft&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">Azure&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">Cosmos&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>Verifica que los paquetes estén instalados correctamente ejecutando:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">dotnet list package
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;h3 id="paso-2-configurar-la-conexión-a-cosmos-db">Paso 2: Configurar la conexión a Cosmos DB&lt;/h3>
+&lt;ol>
+&lt;li>
+&lt;p>Agrega las configuraciones de Cosmos DB al archivo &lt;code>appsettings.json&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;CosmosDb&amp;#34;: {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;AccountEndpoint&amp;#34;: &amp;#34;&amp;lt;TU_ENDPOINT&amp;gt;&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;AccountKey&amp;#34;: &amp;#34;&amp;lt;TU_LLAVE&amp;gt;&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;DatabaseName&amp;#34;: &amp;#34;BlazorDemoDB&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;ContainerName&amp;#34;: &amp;#34;Items&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>Configura los servicios en &lt;code>Program.cs&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">using&lt;/span> &lt;span class="n">Microsoft&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Azure&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Cosmos&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">var&lt;/span> &lt;span class="n">builder&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">WebApplication&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">CreateBuilder&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">args&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">builder&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Services&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">AddSingleton&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">s&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">var&lt;/span> &lt;span class="n">config&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">builder&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Configuration&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">GetSection&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;CosmosDb&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">CosmosClient&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">config&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s2">&amp;#34;AccountEndpoint&amp;#34;&lt;/span>&lt;span class="p">],&lt;/span> &lt;span class="n">config&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s2">&amp;#34;AccountKey&amp;#34;&lt;/span>&lt;span class="p">]);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">builder&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Services&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">AddSingleton&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">CosmosDbService&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">var&lt;/span> &lt;span class="n">app&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">builder&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Build&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">app&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Run&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;h3 id="paso-3-crear-el-servicio-cosmos-db">Paso 3: Crear el servicio Cosmos DB&lt;/h3>
+&lt;ol>
+&lt;li>
+&lt;p>Crea una clase llamada &lt;code>CosmosDbService&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">using&lt;/span> &lt;span class="n">Microsoft&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Azure&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Cosmos&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">using&lt;/span> &lt;span class="n">System&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Threading&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Tasks&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">public&lt;/span> &lt;span class="k">class&lt;/span> &lt;span class="n">CosmosDbService&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">private&lt;/span> &lt;span class="n">readonly&lt;/span> &lt;span class="n">CosmosClient&lt;/span> &lt;span class="n">_cosmosClient&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">private&lt;/span> &lt;span class="n">readonly&lt;/span> &lt;span class="ne">Container&lt;/span> &lt;span class="n">_container&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">public&lt;/span> &lt;span class="n">CosmosDbService&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">CosmosClient&lt;/span> &lt;span class="n">cosmosClient&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">IConfiguration&lt;/span> &lt;span class="n">configuration&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">_cosmosClient&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">cosmosClient&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">var&lt;/span> &lt;span class="n">databaseName&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">configuration&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s2">&amp;#34;CosmosDb:DatabaseName&amp;#34;&lt;/span>&lt;span class="p">];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">var&lt;/span> &lt;span class="n">containerName&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">configuration&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s2">&amp;#34;CosmosDb:ContainerName&amp;#34;&lt;/span>&lt;span class="p">];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">_container&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">_cosmosClient&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">GetContainer&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">databaseName&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">containerName&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">public&lt;/span> &lt;span class="n">async&lt;/span> &lt;span class="n">Task&lt;/span> &lt;span class="n">AddItemAsync&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">T&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">T&lt;/span> &lt;span class="n">item&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">string&lt;/span> &lt;span class="n">id&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">await&lt;/span> &lt;span class="n">_container&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">CreateItemAsync&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">item&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">PartitionKey&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">id&lt;/span>&lt;span class="p">));&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">public&lt;/span> &lt;span class="n">async&lt;/span> &lt;span class="n">Task&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">List&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">T&lt;/span>&lt;span class="o">&amp;gt;&amp;gt;&lt;/span> &lt;span class="n">GetItemsAsync&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">T&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">string&lt;/span> &lt;span class="n">query&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">var&lt;/span> &lt;span class="n">items&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">List&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">T&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">var&lt;/span> &lt;span class="n">iterator&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">_container&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">GetItemQueryIterator&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">T&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">query&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">while&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">iterator&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">HasMoreResults&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">var&lt;/span> &lt;span class="n">response&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">await&lt;/span> &lt;span class="n">iterator&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">ReadNextAsync&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">items&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">AddRange&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">response&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">items&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">public&lt;/span> &lt;span class="n">async&lt;/span> &lt;span class="n">Task&lt;/span> &lt;span class="n">DeleteItemAsync&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">string&lt;/span> &lt;span class="n">id&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">await&lt;/span> &lt;span class="n">_container&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">DeleteItemAsync&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">object&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">id&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">PartitionKey&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">id&lt;/span>&lt;span class="p">));&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>Implementa pruebas básicas para verificar la funcionalidad del servicio:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="o">//&lt;/span> &lt;span class="n">Ejemplo&lt;/span> &lt;span class="n">de&lt;/span> &lt;span class="n">prueba&lt;/span> &lt;span class="n">rápida&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">var&lt;/span> &lt;span class="n">service&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">CosmosDbService&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">client&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">configuration&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">await&lt;/span> &lt;span class="n">service&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">AddItemAsync&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">new&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">Id&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;1&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">Name&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;Test Item&amp;#34;&lt;/span> &lt;span class="p">},&lt;/span> &lt;span class="s2">&amp;#34;1&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">var&lt;/span> &lt;span class="n">items&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">await&lt;/span> &lt;span class="n">service&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">GetItemsAsync&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">dynamic&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;SELECT * FROM c&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">Console&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">WriteLine&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">items&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;h2 id="crear-un-componente-blazor-para-interactuar-con-cosmos-db">Crear un componente Blazor para interactuar con Cosmos DB&lt;/h2>
+&lt;h3 id="paso-1-crear-el-componente-itemlistrazor">Paso 1: Crear el componente &lt;code>ItemList.razor&lt;/code>&lt;/h3>
+&lt;ol>
+&lt;li>
+&lt;p>Crea un nuevo componente llamado &lt;code>ItemList.razor&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="err">@&lt;/span>&lt;span class="n">inject&lt;/span> &lt;span class="n">CosmosDbService&lt;/span> &lt;span class="n">CosmosDbService&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">h3&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="n">Lista&lt;/span> &lt;span class="n">de&lt;/span> &lt;span class="n">Items&lt;/span>&lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">h3&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">button&lt;/span> &lt;span class="err">@&lt;/span>&lt;span class="n">onclick&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;LoadItems&amp;#34;&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="n">Cargar&lt;/span> &lt;span class="n">Items&lt;/span>&lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">button&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">button&lt;/span> &lt;span class="err">@&lt;/span>&lt;span class="n">onclick&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;AddNewItem&amp;#34;&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="n">Agregar&lt;/span> &lt;span class="n">Item&lt;/span>&lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">button&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">ul&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="err">@&lt;/span>&lt;span class="n">foreach&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="k">var&lt;/span> &lt;span class="n">item&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">Items&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">li&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="err">@&lt;/span>&lt;span class="n">item&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Name&lt;/span> &lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">button&lt;/span> &lt;span class="err">@&lt;/span>&lt;span class="n">onclick&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;() =&amp;gt; DeleteItem(item.Id)&amp;#34;&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="n">Eliminar&lt;/span>&lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">button&lt;/span>&lt;span class="o">&amp;gt;&amp;lt;/&lt;/span>&lt;span class="n">li&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">ul&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">@&lt;/span>&lt;span class="n">code&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">private&lt;/span> &lt;span class="n">List&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">Item&lt;/span>&lt;span class="o">&amp;gt;&lt;/span> &lt;span class="n">Items&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">List&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">Item&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">private&lt;/span> &lt;span class="n">async&lt;/span> &lt;span class="n">Task&lt;/span> &lt;span class="n">LoadItems&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Items&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">await&lt;/span> &lt;span class="n">CosmosDbService&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">GetItemsAsync&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">Item&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;SELECT * FROM c&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">private&lt;/span> &lt;span class="n">async&lt;/span> &lt;span class="n">Task&lt;/span> &lt;span class="n">AddNewItem&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">var&lt;/span> &lt;span class="n">newItem&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">Item&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">Id&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">Guid&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">NewGuid&lt;/span>&lt;span class="p">()&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">ToString&lt;/span>&lt;span class="p">(),&lt;/span> &lt;span class="n">Name&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;Nuevo Item&amp;#34;&lt;/span> &lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">await&lt;/span> &lt;span class="n">CosmosDbService&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">AddItemAsync&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">newItem&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">newItem&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Id&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">await&lt;/span> &lt;span class="n">LoadItems&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">private&lt;/span> &lt;span class="n">async&lt;/span> &lt;span class="n">Task&lt;/span> &lt;span class="n">DeleteItem&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">string&lt;/span> &lt;span class="n">id&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">await&lt;/span> &lt;span class="n">CosmosDbService&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">DeleteItemAsync&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">id&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">await&lt;/span> &lt;span class="n">LoadItems&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">public&lt;/span> &lt;span class="k">class&lt;/span> &lt;span class="n">Item&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">public&lt;/span> &lt;span class="n">string&lt;/span> &lt;span class="n">Id&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">get&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">set&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">public&lt;/span> &lt;span class="n">string&lt;/span> &lt;span class="n">Name&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">get&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">set&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;h3 id="paso-2-agregar-el-componente-a-la-página-principal">Paso 2: Agregar el componente a la página principal&lt;/h3>
+&lt;ol>
+&lt;li>
+&lt;p>Abre &lt;code>Pages/Index.razor&lt;/code> y agrega:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">&amp;lt;ItemList /&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;h2 id="buenas-prácticas">Buenas prácticas&lt;/h2>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Optimiza las consultas&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Usa índices en Cosmos DB para acelerar las búsquedas.&lt;/li>
+&lt;li>Realiza consultas específicas con cláusulas WHERE para evitar iteraciones innecesarias.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Manejo de errores&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Implementa bloques try-catch en las operaciones CRUD.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Paginación&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Implementa la funcionalidad de paginación para manejar grandes volúmenes de datos.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Validación de datos&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Verifica y valida los datos antes de insertarlos en Cosmos DB.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Seguridad&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>No expongas directamente las claves de acceso en el cliente.&lt;/li>
+&lt;li>Usa servicios de identidad como Azure Managed Identity.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="conclusión">Conclusión&lt;/h2>
+&lt;p>Integrar &lt;strong>Azure Cosmos DB&lt;/strong> con &lt;strong>Blazor&lt;/strong> permite construir aplicaciones escalables y dinámicas con facilidad. Este artículo ha detallado un enfoque paso a paso para configurar, integrar y trabajar con &lt;strong>Cosmos DB&lt;/strong> en aplicaciones &lt;strong>Blazor&lt;/strong>, incluyendo funcionalidades avanzadas como eliminación y paginación. Con el uso de servicios bien configurados y buenas prácticas, puedes aprovechar al máximo esta poderosa base de datos en la nube. ¡Explora las posibilidades de &lt;strong>Azure Cosmos DB&lt;/strong> en tus proyectos &lt;strong>Blazor&lt;/strong> y lleva tus aplicaciones al siguiente nivel!&lt;/p></description></item><item><title>Blazor WebAssembly vs Blazor Server: ¿Cuál elegir?</title><link>https://cmas.dev/posts/2024-10-02-blazor-webassembly-vs-server/</link><pubDate>Wed, 02 Oct 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-10-02-blazor-webassembly-vs-server/</guid><description>&lt;p>&lt;strong>Blazor&lt;/strong>, el framework de desarrollo de aplicaciones web basado en &lt;strong>.NET&lt;/strong>, ofrece dos opciones principales para crear aplicaciones interactivas: &lt;strong>Blazor WebAssembly&lt;/strong> y &lt;strong>Blazor Server&lt;/strong>. Ambas tecnologías tienen sus propias fortalezas, debilidades y casos de uso ideales. En este artículo, exploraremos en detalle estas dos modalidades para ayudarte a decidir cuál se adapta mejor a tu proyecto.&lt;/p>
+&lt;h2 id="qué-es-blazor">¿Qué es Blazor?&lt;/h2>
+&lt;p>Blazor es un framework desarrollado por Microsoft que permite construir aplicaciones web utilizando C#. Blazor se basa en componentes reutilizables que combinan lógica de programación y diseño HTML. Una de las características más interesantes de Blazor es que permite a los desarrolladores trabajar con C# tanto en el cliente como en el servidor, eliminando la dependencia exclusiva de JavaScript.&lt;/p>
+&lt;h2 id="blazor-webassembly">Blazor WebAssembly&lt;/h2>
+&lt;h3 id="definición">Definición&lt;/h3>
+&lt;p>Blazor WebAssembly (WASM) ejecuta aplicaciones directamente en el navegador utilizando WebAssembly. Todo el código, incluidas las dependencias .NET y la lógica de la aplicación, se descarga y ejecuta en el cliente.&lt;/p>
+&lt;h3 id="características-principales">Características principales&lt;/h3>
+&lt;ol>
+&lt;li>&lt;strong>Ejecución en el cliente&lt;/strong>:
+&lt;ul>
+&lt;li>Todo el procesamiento ocurre en el navegador del usuario.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>Sin dependencia del servidor&lt;/strong>:
+&lt;ul>
+&lt;li>Las aplicaciones pueden ejecutarse completamente offline.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>Despliegue sencillo&lt;/strong>:
+&lt;ul>
+&lt;li>Puede alojarse en cualquier servidor web o incluso en un sistema de almacenamiento estático como Azure Blob Storage o GitHub Pages.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h3 id="código-de-ejemplo">Código de ejemplo&lt;/h3>
+&lt;h4 id="componente-blazor-webassembly">Componente Blazor WebAssembly&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">@page &amp;#34;/counter&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;h3&amp;gt;Contador&amp;lt;/h3&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;p&amp;gt;Cuenta actual: @currentCount&amp;lt;/p&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;button @onclick=&amp;#34;IncrementCount&amp;#34;&amp;gt;Incrementar&amp;lt;/button&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">@code {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> private int currentCount = 0;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> private void IncrementCount()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> currentCount++;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="ventajas">Ventajas&lt;/h3>
+&lt;ol>
+&lt;li>&lt;strong>Independencia del servidor&lt;/strong>:
+&lt;ul>
+&lt;li>Ideal para aplicaciones que necesitan trabajar offline o con una conectividad intermitente.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>Escalabilidad&lt;/strong>:
+&lt;ul>
+&lt;li>Reduce la carga en el servidor, ya que el cliente maneja el procesamiento.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>Despliegue flexible&lt;/strong>:
+&lt;ul>
+&lt;li>Compatible con múltiples plataformas de hosting.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h3 id="desventajas">Desventajas&lt;/h3>
+&lt;ol>
+&lt;li>&lt;strong>Tiempo de carga inicial&lt;/strong>:
+&lt;ul>
+&lt;li>La descarga de la aplicación puede ser lenta debido al tamaño de los archivos.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>Limitaciones del navegador&lt;/strong>:
+&lt;ul>
+&lt;li>Depende del soporte de WebAssembly y de los recursos disponibles en el dispositivo del usuario.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>Seguridad&lt;/strong>:
+&lt;ul>
+&lt;li>El código ejecutado en el cliente es más susceptible a ser inspeccionado o manipulado.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h3 id="casos-de-uso-ideales">Casos de uso ideales&lt;/h3>
+&lt;ul>
+&lt;li>Aplicaciones que necesitan funcionar offline.&lt;/li>
+&lt;li>Interfaces ricas en interactividad que dependen poco del servidor.&lt;/li>
+&lt;li>Aplicaciones pequeñas o medianas donde el tamaño inicial de descarga no es un problema.&lt;/li>
+&lt;/ul>
+&lt;h2 id="blazor-server">Blazor Server&lt;/h2>
+&lt;h3 id="definición-1">Definición&lt;/h3>
+&lt;p>Blazor Server ejecuta la lógica de la aplicación en el servidor. La interfaz de usuario se actualiza en el cliente a través de una conexión en tiempo real utilizando SignalR.&lt;/p>
+&lt;h3 id="características-principales-1">Características principales&lt;/h3>
+&lt;ol>
+&lt;li>&lt;strong>Ejecución en el servidor&lt;/strong>:
+&lt;ul>
+&lt;li>Todo el procesamiento ocurre en el servidor y solo se envían actualizaciones al cliente.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>Rendimiento inmediato&lt;/strong>:
+&lt;ul>
+&lt;li>No es necesario descargar toda la aplicación al inicio.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>Seguridad avanzada&lt;/strong>:
+&lt;ul>
+&lt;li>El código y los datos permanecen en el servidor.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h3 id="código-de-ejemplo-1">Código de ejemplo&lt;/h3>
+&lt;h4 id="componente-blazor-server">Componente Blazor Server&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="err">@&lt;/span>&lt;span class="n">page&lt;/span> &lt;span class="s2">&amp;#34;/weather&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">h3&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="n">Pronóstico&lt;/span> &lt;span class="n">del&lt;/span> &lt;span class="n">tiempo&lt;/span>&lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">h3&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">@&lt;/span>&lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">forecasts&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="n">null&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">p&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="n">Cargando&lt;/span>&lt;span class="o">...&amp;lt;/&lt;/span>&lt;span class="n">p&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">else&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">table&lt;/span> &lt;span class="k">class&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;table&amp;#34;&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">thead&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">tr&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">th&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="n">Fecha&lt;/span>&lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">th&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">th&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="n">Temperatura&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">C&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">th&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">th&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="n">Resumen&lt;/span>&lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">th&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">tr&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">thead&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">tbody&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="err">@&lt;/span>&lt;span class="n">foreach&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="k">var&lt;/span> &lt;span class="n">forecast&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">forecasts&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">tr&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">td&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="err">@&lt;/span>&lt;span class="n">forecast&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Date&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">ToShortDateString&lt;/span>&lt;span class="p">()&lt;/span>&lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">td&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">td&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="err">@&lt;/span>&lt;span class="n">forecast&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">TemperatureC&lt;/span>&lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">td&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">td&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="err">@&lt;/span>&lt;span class="n">forecast&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Summary&lt;/span>&lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">td&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">tr&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">tbody&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">table&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">@&lt;/span>&lt;span class="n">code&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">private&lt;/span> &lt;span class="n">WeatherForecast&lt;/span>&lt;span class="p">[]&lt;/span> &lt;span class="n">forecasts&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">protected&lt;/span> &lt;span class="n">override&lt;/span> &lt;span class="n">async&lt;/span> &lt;span class="n">Task&lt;/span> &lt;span class="n">OnInitializedAsync&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">forecasts&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">await&lt;/span> &lt;span class="n">Http&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">GetFromJsonAsync&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">WeatherForecast&lt;/span>&lt;span class="p">[]&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;weatherforecast&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">public&lt;/span> &lt;span class="k">class&lt;/span> &lt;span class="n">WeatherForecast&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">public&lt;/span> &lt;span class="n">DateTime&lt;/span> &lt;span class="n">Date&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">get&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">set&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">public&lt;/span> &lt;span class="ne">int&lt;/span> &lt;span class="n">TemperatureC&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">get&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">set&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">public&lt;/span> &lt;span class="n">string&lt;/span> &lt;span class="n">Summary&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">get&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">set&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="ventajas-1">Ventajas&lt;/h3>
+&lt;ol>
+&lt;li>&lt;strong>Inicio rápido&lt;/strong>:
+&lt;ul>
+&lt;li>La aplicación comienza a funcionar casi de inmediato.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>Menor uso de recursos del cliente&lt;/strong>:
+&lt;ul>
+&lt;li>Ideal para dispositivos con recursos limitados.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>Compatibilidad con navegadores&lt;/strong>:
+&lt;ul>
+&lt;li>Funciona en cualquier navegador moderno sin necesidad de soporte para WebAssembly.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h3 id="desventajas-1">Desventajas&lt;/h3>
+&lt;ol>
+&lt;li>&lt;strong>Dependencia del servidor&lt;/strong>:
+&lt;ul>
+&lt;li>Requiere una conexión constante al servidor para funcionar.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>Escalabilidad limitada&lt;/strong>:
+&lt;ul>
+&lt;li>Aumenta la carga en el servidor, especialmente en aplicaciones con muchos usuarios simultáneos.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>Latencia&lt;/strong>:
+&lt;ul>
+&lt;li>La experiencia del usuario puede verse afectada por una conexión lenta o inestable.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h3 id="casos-de-uso-ideales-1">Casos de uso ideales&lt;/h3>
+&lt;ul>
+&lt;li>Aplicaciones empresariales que requieren alta seguridad.&lt;/li>
+&lt;li>Interfaces con usuarios que necesitan acceso inmediato.&lt;/li>
+&lt;li>Aplicaciones que gestionan datos sensibles y complejos.&lt;/li>
+&lt;/ul>
+&lt;h2 id="comparación-detallada">Comparación detallada&lt;/h2>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Característica&lt;/th>
+&lt;th>Blazor WebAssembly&lt;/th>
+&lt;th>Blazor Server&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;strong>Ejecución&lt;/strong>&lt;/td>
+&lt;td>Cliente&lt;/td>
+&lt;td>Servidor&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>Tiempo de carga inicial&lt;/strong>&lt;/td>
+&lt;td>Más lento&lt;/td>
+&lt;td>Más rápido&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>Funciona offline&lt;/strong>&lt;/td>
+&lt;td>Sí&lt;/td>
+&lt;td>No&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>Carga del servidor&lt;/strong>&lt;/td>
+&lt;td>Baja&lt;/td>
+&lt;td>Alta&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>Requisitos del cliente&lt;/strong>&lt;/td>
+&lt;td>Navegador con soporte WebAssembly&lt;/td>
+&lt;td>Navegador moderno&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>Conexión persistente&lt;/strong>&lt;/td>
+&lt;td>No necesaria&lt;/td>
+&lt;td>Necesaria&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>Seguridad&lt;/strong>&lt;/td>
+&lt;td>Menos seguro&lt;/td>
+&lt;td>Más seguro&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="cuál-elegir">¿Cuál elegir?&lt;/h2>
+&lt;p>La elección entre Blazor WebAssembly y Blazor Server depende en gran medida de los requisitos de tu proyecto. Aquí tienes una guía básica para ayudarte a decidir:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Elige Blazor WebAssembly si&amp;hellip;&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>Necesitas que la aplicación funcione offline.&lt;/li>
+&lt;li>Quieres reducir la carga en el servidor.&lt;/li>
+&lt;li>Estás desarrollando una aplicación que puede tolerar tiempos de carga inicial más largos.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Elige Blazor Server si&amp;hellip;&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>Estás creando una aplicación empresarial con datos sensibles.&lt;/li>
+&lt;li>Necesitas una experiencia de usuario inmediata sin descargas pesadas.&lt;/li>
+&lt;li>El entorno tiene una conectividad constante y fiable.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="conclusión">Conclusión&lt;/h2>
+&lt;p>&lt;strong>Blazor WebAssembly&lt;/strong> y &lt;strong>Blazor Server&lt;/strong> son dos tecnologías potentes y flexibles que cubren diferentes necesidades. &lt;strong>Blazor WebAssembly&lt;/strong> es ideal para aplicaciones independientes del servidor con requisitos offline, mientras que &lt;strong>Blazor Server&lt;/strong> sobresale en aplicaciones empresariales que necesitan alta seguridad y rendimiento inmediato. Evalúa las necesidades específicas de tu proyecto, el entorno de tus usuarios y los recursos disponibles para tomar la mejor decisión.&lt;/p></description></item><item><title>Gestión de estado en Angular con NgRx</title><link>https://cmas.dev/posts/2024-09-25-state-management-angular/</link><pubDate>Wed, 25 Sep 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-09-25-state-management-angular/</guid><description>&lt;p>La gestión de estado es un aspecto fundamental en el desarrollo de aplicaciones frontend, especialmente en aplicaciones complejas donde se manejan grandes cantidades de datos compartidos entre componentes. &lt;strong>NgRx&lt;/strong> es una librería basada en &lt;strong>Redux&lt;/strong> que permite gestionar el estado de manera predecible y escalable en aplicaciones &lt;strong>Angular&lt;/strong>. Este artículo ofrece una guía detallada para implementar y utilizar NgRx en tus proyectos Angular.&lt;/p>
 &lt;h2 id="1-qué-es-ngrx-y-por-qué-usarlo">1. ¿Qué es NgRx y por qué usarlo?&lt;/h2>
 &lt;p>NgRx es una implementación de patrones Redux y RxJS para Angular. Redux se basa en un estado único y centralizado que describe toda la aplicación. NgRx combina este patrón con la reactividad de RxJS para manejar flujos de datos asincrónicos y garantizar la inmutabilidad.&lt;/p>
 &lt;h3 id="ventajas-de-ngrx">Ventajas de NgRx:&lt;/h3>
