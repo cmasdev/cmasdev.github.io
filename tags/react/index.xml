@@ -1,4 +1,246 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>React on Christian Amado's Blog</title><link>https://cmas.dev/tags/react/</link><description>Recent content in React on Christian Amado's Blog</description><generator>Hugo -- gohugo.io</generator><language>es</language><lastBuildDate>Wed, 07 Aug 2024 00:00:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/tags/react/index.xml" rel="self" type="application/rss+xml"/><item><title>Comparación: Angular Signals vs React Hooks</title><link>https://cmas.dev/posts/2024-08-07-angular-signals-vs-react-hooks/</link><pubDate>Wed, 07 Aug 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-08-07-angular-signals-vs-react-hooks/</guid><description>&lt;p>En el mundo del desarrollo frontend, los frameworks y bibliotecas como &lt;strong>Angular&lt;/strong> y &lt;strong>React&lt;/strong> han evolucionado constantemente para ofrecer soluciones más eficientes y escalables. Dos características destacadas de estas tecnologías son los &lt;em>Signals&lt;/em> de &lt;strong>Angular&lt;/strong> y los &lt;em>Hooks&lt;/em> de &lt;strong>React&lt;/strong>. Ambos conceptos están diseñados para manejar estados y mejorar la reactividad, pero lo hacen de maneras muy diferentes. Este artículo explora en profundidad ambas herramientas, sus similitudes, diferencias, ejemplos prácticos y buenas prácticas.&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>React on Christian Amado's Blog</title><link>https://cmas.dev/tags/react/</link><description>Recent content in React on Christian Amado's Blog</description><generator>Hugo -- gohugo.io</generator><language>es</language><lastBuildDate>Wed, 04 Dec 2024 00:00:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/tags/react/index.xml" rel="self" type="application/rss+xml"/><item><title>Comparativa de frameworks: Angular, React y Vue en 2024</title><link>https://cmas.dev/posts/2024-12-04-frameworks-comparatives/</link><pubDate>Wed, 04 Dec 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-12-04-frameworks-comparatives/</guid><description>&lt;p>El desarrollo web ha evolucionado significativamente en los últimos años, y tres de los frameworks más populares continúan liderando el mercado: &lt;strong>Angular, React y Vue&lt;/strong>. En este artículo, compararemos estos frameworks en términos de rendimiento, facilidad de uso, casos de uso ideales y comunidad en 2024.&lt;/p>
+&lt;h2 id="1-introducción-a-angular-react-y-vue">1. Introducción a Angular, React y Vue&lt;/h2>
+&lt;p>Antes de profundizar en la comparativa, veamos una breve descripción de cada framework.&lt;/p>
+&lt;h3 id="angular">&lt;strong>Angular&lt;/strong>&lt;/h3>
+&lt;p>Angular es un framework desarrollado por Google basado en TypeScript. Es una solución completa para el desarrollo de aplicaciones web robustas y escalables.&lt;/p>
+&lt;p>&lt;strong>Características principales:&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>Basado en TypeScript.&lt;/li>
+&lt;li>Arquitectura basada en componentes y módulos.&lt;/li>
+&lt;li>Soporte oficial para PWA y SSR.&lt;/li>
+&lt;li>Enfoque de programación reactiva con RxJS.&lt;/li>
+&lt;li>CLI potente para automatizar tareas.&lt;/li>
+&lt;/ul>
+&lt;h3 id="react">&lt;strong>React&lt;/strong>&lt;/h3>
+&lt;p>React, desarrollado por Meta (Facebook), es una biblioteca enfocada en la construcción de interfaces de usuario reactivas y reutilizables.&lt;/p>
+&lt;p>&lt;strong>Características principales:&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>Basado en JavaScript/TypeScript.&lt;/li>
+&lt;li>Uso de JSX para la creación de interfaces.&lt;/li>
+&lt;li>Unidireccionalidad en el flujo de datos con Redux o Context API.&lt;/li>
+&lt;li>Gran ecosistema de herramientas como Next.js.&lt;/li>
+&lt;li>Flexibilidad para integrarse con otras tecnologías.&lt;/li>
+&lt;/ul>
+&lt;h3 id="vue">&lt;strong>Vue&lt;/strong>&lt;/h3>
+&lt;p>Vue es un framework progresivo diseñado para ser accesible y flexible, ideal para aplicaciones de tamaño mediano y pequeño.&lt;/p>
+&lt;p>&lt;strong>Características principales:&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>Basado en JavaScript/TypeScript.&lt;/li>
+&lt;li>Plantillas declarativas y sintaxis intuitiva.&lt;/li>
+&lt;li>Reactividad eficiente sin necesidad de bibliotecas adicionales.&lt;/li>
+&lt;li>Soporte para PWA y SSR con Nuxt.js.&lt;/li>
+&lt;li>Ecosistema modular y adaptable.&lt;/li>
+&lt;/ul>
+&lt;h2 id="2-comparación-técnica">2. Comparación Técnica&lt;/h2>
+&lt;h3 id="21-rendimiento">&lt;strong>2.1 Rendimiento&lt;/strong>&lt;/h3>
+&lt;p>El rendimiento de un framework depende de múltiples factores como el tamaño del bundle, el tiempo de renderizado y la eficiencia del DOM virtual.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Característica&lt;/th>
+&lt;th>Angular&lt;/th>
+&lt;th>React&lt;/th>
+&lt;th>Vue&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>Tamaño del Bundle&lt;/td>
+&lt;td>Mayor (~120KB)&lt;/td>
+&lt;td>Medio (~40KB)&lt;/td>
+&lt;td>Menor (~30KB)&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Virtual DOM&lt;/td>
+&lt;td>No&lt;/td>
+&lt;td>Sí&lt;/td>
+&lt;td>Sí&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>SSR (Server-Side)&lt;/td>
+&lt;td>Sí (Angular Universal)&lt;/td>
+&lt;td>Sí (Next.js)&lt;/td>
+&lt;td>Sí (Nuxt.js)&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Tiempo de Render&lt;/td>
+&lt;td>Medio&lt;/td>
+&lt;td>Rápido&lt;/td>
+&lt;td>Muy rápido&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h3 id="22-facilidad-de-aprendizaje">&lt;strong>2.2 Facilidad de Aprendizaje&lt;/strong>&lt;/h3>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Aspecto&lt;/th>
+&lt;th>Angular&lt;/th>
+&lt;th>React&lt;/th>
+&lt;th>Vue&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>Complejidad&lt;/td>
+&lt;td>Alta&lt;/td>
+&lt;td>Media&lt;/td>
+&lt;td>Baja&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Documentación&lt;/td>
+&lt;td>Completa&lt;/td>
+&lt;td>Excelente&lt;/td>
+&lt;td>Muy buena&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Configuración&lt;/td>
+&lt;td>Rígida&lt;/td>
+&lt;td>Flexible&lt;/td>
+&lt;td>Flexible&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Escalabilidad&lt;/td>
+&lt;td>Alta&lt;/td>
+&lt;td>Alta&lt;/td>
+&lt;td>Media&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h3 id="23-popularidad-y-comunidad">&lt;strong>2.3 Popularidad y Comunidad&lt;/strong>&lt;/h3>
+&lt;p>El tamaño de la comunidad y la cantidad de recursos disponibles son factores clave para elegir un framework.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Aspecto&lt;/th>
+&lt;th>Angular&lt;/th>
+&lt;th>React&lt;/th>
+&lt;th>Vue&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>GitHub Stars&lt;/td>
+&lt;td>90k+&lt;/td>
+&lt;td>200k+&lt;/td>
+&lt;td>210k+&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Empresas que usan&lt;/td>
+&lt;td>Google, Microsoft&lt;/td>
+&lt;td>Meta, Airbnb&lt;/td>
+&lt;td>Alibaba, Xiaomi&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Ecosistema&lt;/td>
+&lt;td>Amplio&lt;/td>
+&lt;td>Enorme&lt;/td>
+&lt;td>Creciendo&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="3-casos-de-uso">3. Casos de Uso&lt;/h2>
+&lt;h3 id="cuándo-elegir-angular">&lt;strong>¿Cuándo elegir Angular?&lt;/strong>&lt;/h3>
+&lt;ul>
+&lt;li>Aplicaciones empresariales de gran escala.&lt;/li>
+&lt;li>Proyectos que requieren una arquitectura estructurada y modular.&lt;/li>
+&lt;li>Equipos grandes que prefieren convenciones estrictas.&lt;/li>
+&lt;/ul>
+&lt;h3 id="cuándo-elegir-react">&lt;strong>¿Cuándo elegir React?&lt;/strong>&lt;/h3>
+&lt;ul>
+&lt;li>Aplicaciones de alto rendimiento y dinámicas.&lt;/li>
+&lt;li>Proyectos que necesitan SSR con Next.js.&lt;/li>
+&lt;li>Equipos que prefieren una arquitectura flexible y componible.&lt;/li>
+&lt;/ul>
+&lt;h3 id="cuándo-elegir-vue">&lt;strong>¿Cuándo elegir Vue?&lt;/strong>&lt;/h3>
+&lt;ul>
+&lt;li>Aplicaciones de mediana o pequeña escala.&lt;/li>
+&lt;li>Proyectos con requerimientos de reactividad rápida.&lt;/li>
+&lt;li>Equipos pequeños o desarrolladores individuales.&lt;/li>
+&lt;/ul>
+&lt;h2 id="4-ejemplos-de-código">4. Ejemplos de Código&lt;/h2>
+&lt;h3 id="angular-componente-básico">&lt;strong>Angular: Componente Básico&lt;/strong>&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">Component&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;@angular/core&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">@&lt;/span>&lt;span class="n">Component&lt;/span>&lt;span class="p">({&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">selector&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;app-ejemplo&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">template&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;&amp;lt;h1&amp;gt;{{ mensaje }}&amp;lt;/h1&amp;gt;&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">})&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="k">class&lt;/span> &lt;span class="n">EjemploComponent&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">mensaje&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;Hola desde Angular&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="react-componente-funcional">&lt;strong>React: Componente Funcional&lt;/strong>&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="n">React&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;react&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">function&lt;/span> &lt;span class="n">Ejemplo&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">h1&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="n">Hola&lt;/span> &lt;span class="n">desde&lt;/span> &lt;span class="n">React&lt;/span>&lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">h1&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="n">default&lt;/span> &lt;span class="n">Ejemplo&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="vue-componente-sencillo">&lt;strong>Vue: Componente Sencillo&lt;/strong>&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">template&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">h1&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">{{&lt;/span> &lt;span class="n">mensaje&lt;/span> &lt;span class="p">}}&lt;/span>&lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">h1&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">template&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">script&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="n">default&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">data&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">mensaje&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;Hola desde Vue&amp;#39;&lt;/span> &lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">script&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="5-conclusión-cuál-elegir-en-2024">5. Conclusión: ¿Cuál Elegir en 2024?&lt;/h2>
+&lt;p>La elección entre Angular, React y Vue depende del tipo de proyecto y las necesidades del equipo:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>Si necesitas un framework sólido para aplicaciones empresariales:&lt;/strong> Angular es la mejor opción.&lt;/li>
+&lt;li>&lt;strong>Si buscas flexibilidad y escalabilidad con SSR:&lt;/strong> React es la alternativa ideal.&lt;/li>
+&lt;li>&lt;strong>Si prefieres simplicidad y reactividad rápida:&lt;/strong> Vue es una excelente elección.&lt;/li>
+&lt;/ul>
+&lt;p>Cualquiera de estos frameworks es una gran elección en 2024, y la decisión final debe basarse en los requisitos específicos del proyecto y la experiencia del equipo.&lt;/p>
+&lt;h3 id="resumen-final">&lt;strong>Resumen Final&lt;/strong>&lt;/h3>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Característica&lt;/th>
+&lt;th>Angular&lt;/th>
+&lt;th>React&lt;/th>
+&lt;th>Vue&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>Curva de Aprendizaje&lt;/td>
+&lt;td>Alta&lt;/td>
+&lt;td>Media&lt;/td>
+&lt;td>Baja&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Rendimiento&lt;/td>
+&lt;td>Medio&lt;/td>
+&lt;td>Alto&lt;/td>
+&lt;td>Muy alto&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Popularidad&lt;/td>
+&lt;td>Amplia&lt;/td>
+&lt;td>Más popular&lt;/td>
+&lt;td>En crecimiento&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Ecosistema&lt;/td>
+&lt;td>Robusto&lt;/td>
+&lt;td>Más extenso&lt;/td>
+&lt;td>Modular&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Casos de uso&lt;/td>
+&lt;td>Empresas&lt;/td>
+&lt;td>Startups, SSR&lt;/td>
+&lt;td>Aplicaciones pequeñas&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>&lt;strong>En 2024, todos siguen siendo opciones viables. La clave está en seleccionar el adecuado para cada proyecto.&lt;/strong>&lt;/p></description></item><item><title>Comparación: Angular Signals vs React Hooks</title><link>https://cmas.dev/posts/2024-08-07-angular-signals-vs-react-hooks/</link><pubDate>Wed, 07 Aug 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-08-07-angular-signals-vs-react-hooks/</guid><description>&lt;p>En el mundo del desarrollo frontend, los frameworks y bibliotecas como &lt;strong>Angular&lt;/strong> y &lt;strong>React&lt;/strong> han evolucionado constantemente para ofrecer soluciones más eficientes y escalables. Dos características destacadas de estas tecnologías son los &lt;em>Signals&lt;/em> de &lt;strong>Angular&lt;/strong> y los &lt;em>Hooks&lt;/em> de &lt;strong>React&lt;/strong>. Ambos conceptos están diseñados para manejar estados y mejorar la reactividad, pero lo hacen de maneras muy diferentes. Este artículo explora en profundidad ambas herramientas, sus similitudes, diferencias, ejemplos prácticos y buenas prácticas.&lt;/p>
 &lt;h2 id="qué-son-los-angular-signals">¿Qué son los Angular Signals?&lt;/h2>
 &lt;h3 id="definición">Definición&lt;/h3>
 &lt;p>Los Signals en Angular son una característica relativamente nueva que permite gestionar el estado y la reactividad en aplicaciones. Proporcionan una forma declarativa y eficiente de reaccionar a los cambios de estado mediante el uso de señales que notifican automáticamente a los componentes afectados.&lt;/p>

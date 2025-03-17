@@ -121,7 +121,388 @@
 &lt;li>&lt;strong>Sitemap para categorías:&lt;/strong> Genera sitemaps por categorías para facilitar la navegación.&lt;/li>
 &lt;/ol>
 &lt;h2 id="8-conclusión-y-buenas-prácticas">8. Conclusión y buenas prácticas&lt;/h2>
-&lt;p>&lt;strong>Angular Universal&lt;/strong> es una herramienta esencial para optimizar el &lt;strong>SEO&lt;/strong> de aplicaciones &lt;strong>Angular&lt;/strong>. Con estrategias avanzadas como metaetiquetas dinámicas, sitemaps automatizados y datos estructurados, puedes mejorar significativamente tu posicionamiento en motores de búsqueda. Asegúrate de combinar estas técnicas con pruebas constantes para maximizar los resultados.&lt;/p></description></item><item><title>Lazy Loading avanzado en Angular con rutas dinámicas</title><link>https://cmas.dev/posts/2024-11-06-advanced-lazy-loading-in-angular-with-dynamic-rules/</link><pubDate>Wed, 06 Nov 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-11-06-advanced-lazy-loading-in-angular-with-dynamic-rules/</guid><description>&lt;p>El &lt;strong>Lazy Loading&lt;/strong> es una técnica fundamental en Angular para mejorar el rendimiento de las aplicaciones al cargar solo los módulos necesarios cuando se requieren. En este artículo, exploraremos cómo implementar &lt;strong>Lazy Loading avanzado con rutas dinámicas&lt;/strong> para optimizar aún más la carga de módulos y mejorar la experiencia del usuario.&lt;/p>
+&lt;p>&lt;strong>Angular Universal&lt;/strong> es una herramienta esencial para optimizar el &lt;strong>SEO&lt;/strong> de aplicaciones &lt;strong>Angular&lt;/strong>. Con estrategias avanzadas como metaetiquetas dinámicas, sitemaps automatizados y datos estructurados, puedes mejorar significativamente tu posicionamiento en motores de búsqueda. Asegúrate de combinar estas técnicas con pruebas constantes para maximizar los resultados.&lt;/p></description></item><item><title>Seguridad en Angular: Roles y autenticación avanzada</title><link>https://cmas.dev/posts/2024-12-11-angular-security/</link><pubDate>Wed, 11 Dec 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-12-11-angular-security/</guid><description>&lt;p>La seguridad en Angular es un aspecto fundamental para cualquier aplicación web moderna. Implementar un sistema de autenticación robusto y un control de acceso basado en roles garantiza la integridad y protección de los datos. En este artículo, exploraremos estrategias avanzadas de autenticación y gestión de roles en Angular con ejemplos prácticos.&lt;/p>
+&lt;h2 id="1-introducción-a-la-seguridad-en-angular">1. Introducción a la Seguridad en Angular&lt;/h2>
+&lt;p>Las aplicaciones web requieren mecanismos de seguridad efectivos para proteger información sensible y garantizar que los usuarios solo accedan a los recursos que les corresponden. En Angular, se pueden implementar diversas estrategias de seguridad, tales como:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>Autenticación&lt;/strong>: Verificación de identidad de los usuarios.&lt;/li>
+&lt;li>&lt;strong>Autorización basada en roles&lt;/strong>: Control de acceso según privilegios de usuario.&lt;/li>
+&lt;li>&lt;strong>Protección de rutas&lt;/strong>: Restricción de acceso a ciertas secciones de la aplicación.&lt;/li>
+&lt;li>&lt;strong>Manejo de tokens (JWT)&lt;/strong>: Uso de tokens seguros para gestionar sesiones.&lt;/li>
+&lt;/ul>
+&lt;h2 id="2-implementación-de-autenticación-en-angular">2. Implementación de Autenticación en Angular&lt;/h2>
+&lt;h3 id="21-configuración-del-proyecto">2.1 Configuración del Proyecto&lt;/h3>
+&lt;p>Primero, creamos un nuevo proyecto Angular e instalamos las dependencias necesarias:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">ng new angular-security
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">cd angular-security
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">npm install @angular/fire firebase jsonwebtoken
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="22-creación-del-servicio-de-autenticación">2.2 Creación del Servicio de Autenticación&lt;/h3>
+&lt;p>El servicio &lt;code>AuthService&lt;/code> manejará el registro, inicio de sesión y cierre de sesión de usuarios.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">Injectable&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;@angular/core&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">Router&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;@angular/router&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">BehaviorSubject&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;rxjs&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">@&lt;/span>&lt;span class="n">Injectable&lt;/span>&lt;span class="p">({&lt;/span> &lt;span class="n">providedIn&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;root&amp;#39;&lt;/span> &lt;span class="p">})&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="k">class&lt;/span> &lt;span class="n">AuthService&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">private&lt;/span> &lt;span class="n">authState&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">BehaviorSubject&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">boolean&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="bp">false&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">private&lt;/span> &lt;span class="n">userRole&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">BehaviorSubject&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">string&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">constructor&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">private&lt;/span> &lt;span class="n">router&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">Router&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">login&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">email&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">string&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">password&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">string&lt;/span>&lt;span class="p">):&lt;/span> &lt;span class="n">void&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span> &lt;span class="n">Simulación&lt;/span> &lt;span class="n">de&lt;/span> &lt;span class="n">autenticación&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">email&lt;/span> &lt;span class="o">===&lt;/span> &lt;span class="s1">&amp;#39;admin@demo.com&amp;#39;&lt;/span> &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> &lt;span class="n">password&lt;/span> &lt;span class="o">===&lt;/span> &lt;span class="s1">&amp;#39;password&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">localStorage&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">setItem&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;token&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;fake-jwt-token&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">localStorage&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">setItem&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;role&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;admin&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">this&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">authState&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">next&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="bp">true&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">this&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">userRole&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">next&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;admin&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">this&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">router&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">navigate&lt;/span>&lt;span class="p">([&lt;/span>&lt;span class="s1">&amp;#39;/dashboard&amp;#39;&lt;/span>&lt;span class="p">]);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">logout&lt;/span>&lt;span class="p">():&lt;/span> &lt;span class="n">void&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">localStorage&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">removeItem&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;token&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">localStorage&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">removeItem&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;role&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">this&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">authState&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">next&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="bp">false&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">this&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">userRole&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">next&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">this&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">router&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">navigate&lt;/span>&lt;span class="p">([&lt;/span>&lt;span class="s1">&amp;#39;/login&amp;#39;&lt;/span>&lt;span class="p">]);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">isAuthenticated&lt;/span>&lt;span class="p">():&lt;/span> &lt;span class="n">boolean&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="o">!!&lt;/span>&lt;span class="n">localStorage&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">getItem&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;token&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">getRole&lt;/span>&lt;span class="p">():&lt;/span> &lt;span class="n">string&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">localStorage&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">getItem&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;role&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">||&lt;/span> &lt;span class="s1">&amp;#39;&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="3-protección-de-rutas-en-angular">3. Protección de Rutas en Angular&lt;/h2>
+&lt;p>Angular proporciona &lt;strong>route guards&lt;/strong> para restringir el acceso a ciertas rutas en función de la autenticación del usuario.&lt;/p>
+&lt;h3 id="31-implementación-de-authguard">3.1 Implementación de &lt;code>AuthGuard&lt;/code>&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">Injectable&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;@angular/core&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">CanActivate&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">Router&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;@angular/router&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">AuthService&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;./auth.service&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">@&lt;/span>&lt;span class="n">Injectable&lt;/span>&lt;span class="p">({&lt;/span> &lt;span class="n">providedIn&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;root&amp;#39;&lt;/span> &lt;span class="p">})&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="k">class&lt;/span> &lt;span class="n">AuthGuard&lt;/span> &lt;span class="n">implements&lt;/span> &lt;span class="n">CanActivate&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">constructor&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">private&lt;/span> &lt;span class="n">authService&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">AuthService&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">private&lt;/span> &lt;span class="n">router&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">Router&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">canActivate&lt;/span>&lt;span class="p">():&lt;/span> &lt;span class="n">boolean&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">this&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">authService&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">isAuthenticated&lt;/span>&lt;span class="p">())&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="bp">true&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">this&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">router&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">navigate&lt;/span>&lt;span class="p">([&lt;/span>&lt;span class="s1">&amp;#39;/login&amp;#39;&lt;/span>&lt;span class="p">]);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="bp">false&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="32-configuración-de-las-rutas-protegidas">3.2 Configuración de las Rutas Protegidas&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">NgModule&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;@angular/core&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">RouterModule&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">Routes&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;@angular/router&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">DashboardComponent&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;./dashboard/dashboard.component&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">LoginComponent&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;./login/login.component&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">AuthGuard&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;./auth.guard&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">routes&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">Routes&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span> &lt;span class="n">path&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;dashboard&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">component&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">DashboardComponent&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">canActivate&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">AuthGuard&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span> &lt;span class="n">path&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;login&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">component&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">LoginComponent&lt;/span> &lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span> &lt;span class="n">path&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;**&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">redirectTo&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;login&amp;#39;&lt;/span> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">@&lt;/span>&lt;span class="n">NgModule&lt;/span>&lt;span class="p">({&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">imports&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">RouterModule&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">forRoot&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">routes&lt;/span>&lt;span class="p">)],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">exports&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">RouterModule&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">})&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="k">class&lt;/span> &lt;span class="n">AppRoutingModule&lt;/span> &lt;span class="p">{}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="4-gestión-de-roles-en-angular">4. Gestión de Roles en Angular&lt;/h2>
+&lt;p>Para restringir accesos según el rol del usuario, utilizamos un &lt;strong>Role Guard&lt;/strong>.&lt;/p>
+&lt;h3 id="41-implementación-de-roleguard">4.1 Implementación de &lt;code>RoleGuard&lt;/code>&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">Injectable&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;@angular/core&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">CanActivate&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">Router&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;@angular/router&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">AuthService&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;./auth.service&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">@&lt;/span>&lt;span class="n">Injectable&lt;/span>&lt;span class="p">({&lt;/span> &lt;span class="n">providedIn&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;root&amp;#39;&lt;/span> &lt;span class="p">})&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="k">class&lt;/span> &lt;span class="n">RoleGuard&lt;/span> &lt;span class="n">implements&lt;/span> &lt;span class="n">CanActivate&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">constructor&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">private&lt;/span> &lt;span class="n">authService&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">AuthService&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">private&lt;/span> &lt;span class="n">router&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">Router&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">canActivate&lt;/span>&lt;span class="p">():&lt;/span> &lt;span class="n">boolean&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="n">role&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">this&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">authService&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">getRole&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">role&lt;/span> &lt;span class="o">===&lt;/span> &lt;span class="s1">&amp;#39;admin&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="bp">true&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">this&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">router&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">navigate&lt;/span>&lt;span class="p">([&lt;/span>&lt;span class="s1">&amp;#39;/login&amp;#39;&lt;/span>&lt;span class="p">]);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="bp">false&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="42-aplicación-del-roleguard-en-rutas">4.2 Aplicación del &lt;code>RoleGuard&lt;/code> en Rutas&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">routes&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">Routes&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span> &lt;span class="n">path&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;admin&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">component&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">AdminComponent&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">canActivate&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">RoleGuard&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">];&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="5-implementación-de-json-web-tokens-jwt">5. Implementación de JSON Web Tokens (JWT)&lt;/h2>
+&lt;p>Para mejorar la seguridad, se recomienda el uso de &lt;strong>JWT&lt;/strong> para gestionar sesiones.&lt;/p>
+&lt;h3 id="51-generación-de-un-jwt-en-el-servidor-nodejs">5.1 Generación de un JWT en el Servidor (Node.js)&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">jwt&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">require&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;jsonwebtoken&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">function&lt;/span> &lt;span class="n">generateToken&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">user&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">jwt&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">sign&lt;/span>&lt;span class="p">({&lt;/span> &lt;span class="n">email&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">user&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">email&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">role&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">user&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">role&lt;/span> &lt;span class="p">},&lt;/span> &lt;span class="s1">&amp;#39;secreto&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">expiresIn&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;1h&amp;#39;&lt;/span> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="52-validación-del-jwt-en-el-cliente-angular">5.2 Validación del JWT en el Cliente (Angular)&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">HttpClient&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">HttpHeaders&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;@angular/common/http&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">headers&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">HttpHeaders&lt;/span>&lt;span class="p">({&lt;/span> &lt;span class="s1">&amp;#39;Authorization&amp;#39;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="err">`&lt;/span>&lt;span class="n">Bearer&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="n">localStorage&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">getItem&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;token&amp;#39;&lt;/span>&lt;span class="p">)}&lt;/span>&lt;span class="err">`&lt;/span> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">this&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">http&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">get&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;https://api.protegida.com/data&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">headers&lt;/span> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="6-conclusión">6. Conclusión&lt;/h2>
+&lt;p>Implementar autenticación avanzada en Angular es esencial para proteger los datos y restringir el acceso de los usuarios según sus roles. Con &lt;strong>route guards, RoleGuard y JWT&lt;/strong>, podemos garantizar un sistema seguro y escalable.&lt;/p>
+&lt;p>Al aplicar estas prácticas, se fortalece la seguridad de las aplicaciones Angular, proporcionando un entorno confiable para los usuarios.&lt;/p>
+&lt;p>&lt;strong>Resumen:&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>✅ Implementación de autenticación en Angular.&lt;/li>
+&lt;li>✅ Protección de rutas con &lt;code>AuthGuard&lt;/code>.&lt;/li>
+&lt;li>✅ Gestión de roles con &lt;code>RoleGuard&lt;/code>.&lt;/li>
+&lt;li>✅ Uso de JSON Web Tokens (JWT) para mayor seguridad.&lt;/li>
+&lt;/ul>
+&lt;p>¡Con estas estrategias, puedes mejorar significativamente la seguridad de tus aplicaciones Angular!&lt;/p></description></item><item><title>Comparativa de frameworks: Angular, React y Vue en 2024</title><link>https://cmas.dev/posts/2024-12-04-frameworks-comparatives/</link><pubDate>Wed, 04 Dec 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-12-04-frameworks-comparatives/</guid><description>&lt;p>El desarrollo web ha evolucionado significativamente en los últimos años, y tres de los frameworks más populares continúan liderando el mercado: &lt;strong>Angular, React y Vue&lt;/strong>. En este artículo, compararemos estos frameworks en términos de rendimiento, facilidad de uso, casos de uso ideales y comunidad en 2024.&lt;/p>
+&lt;h2 id="1-introducción-a-angular-react-y-vue">1. Introducción a Angular, React y Vue&lt;/h2>
+&lt;p>Antes de profundizar en la comparativa, veamos una breve descripción de cada framework.&lt;/p>
+&lt;h3 id="angular">&lt;strong>Angular&lt;/strong>&lt;/h3>
+&lt;p>Angular es un framework desarrollado por Google basado en TypeScript. Es una solución completa para el desarrollo de aplicaciones web robustas y escalables.&lt;/p>
+&lt;p>&lt;strong>Características principales:&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>Basado en TypeScript.&lt;/li>
+&lt;li>Arquitectura basada en componentes y módulos.&lt;/li>
+&lt;li>Soporte oficial para PWA y SSR.&lt;/li>
+&lt;li>Enfoque de programación reactiva con RxJS.&lt;/li>
+&lt;li>CLI potente para automatizar tareas.&lt;/li>
+&lt;/ul>
+&lt;h3 id="react">&lt;strong>React&lt;/strong>&lt;/h3>
+&lt;p>React, desarrollado por Meta (Facebook), es una biblioteca enfocada en la construcción de interfaces de usuario reactivas y reutilizables.&lt;/p>
+&lt;p>&lt;strong>Características principales:&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>Basado en JavaScript/TypeScript.&lt;/li>
+&lt;li>Uso de JSX para la creación de interfaces.&lt;/li>
+&lt;li>Unidireccionalidad en el flujo de datos con Redux o Context API.&lt;/li>
+&lt;li>Gran ecosistema de herramientas como Next.js.&lt;/li>
+&lt;li>Flexibilidad para integrarse con otras tecnologías.&lt;/li>
+&lt;/ul>
+&lt;h3 id="vue">&lt;strong>Vue&lt;/strong>&lt;/h3>
+&lt;p>Vue es un framework progresivo diseñado para ser accesible y flexible, ideal para aplicaciones de tamaño mediano y pequeño.&lt;/p>
+&lt;p>&lt;strong>Características principales:&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>Basado en JavaScript/TypeScript.&lt;/li>
+&lt;li>Plantillas declarativas y sintaxis intuitiva.&lt;/li>
+&lt;li>Reactividad eficiente sin necesidad de bibliotecas adicionales.&lt;/li>
+&lt;li>Soporte para PWA y SSR con Nuxt.js.&lt;/li>
+&lt;li>Ecosistema modular y adaptable.&lt;/li>
+&lt;/ul>
+&lt;h2 id="2-comparación-técnica">2. Comparación Técnica&lt;/h2>
+&lt;h3 id="21-rendimiento">&lt;strong>2.1 Rendimiento&lt;/strong>&lt;/h3>
+&lt;p>El rendimiento de un framework depende de múltiples factores como el tamaño del bundle, el tiempo de renderizado y la eficiencia del DOM virtual.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Característica&lt;/th>
+&lt;th>Angular&lt;/th>
+&lt;th>React&lt;/th>
+&lt;th>Vue&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>Tamaño del Bundle&lt;/td>
+&lt;td>Mayor (~120KB)&lt;/td>
+&lt;td>Medio (~40KB)&lt;/td>
+&lt;td>Menor (~30KB)&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Virtual DOM&lt;/td>
+&lt;td>No&lt;/td>
+&lt;td>Sí&lt;/td>
+&lt;td>Sí&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>SSR (Server-Side)&lt;/td>
+&lt;td>Sí (Angular Universal)&lt;/td>
+&lt;td>Sí (Next.js)&lt;/td>
+&lt;td>Sí (Nuxt.js)&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Tiempo de Render&lt;/td>
+&lt;td>Medio&lt;/td>
+&lt;td>Rápido&lt;/td>
+&lt;td>Muy rápido&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h3 id="22-facilidad-de-aprendizaje">&lt;strong>2.2 Facilidad de Aprendizaje&lt;/strong>&lt;/h3>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Aspecto&lt;/th>
+&lt;th>Angular&lt;/th>
+&lt;th>React&lt;/th>
+&lt;th>Vue&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>Complejidad&lt;/td>
+&lt;td>Alta&lt;/td>
+&lt;td>Media&lt;/td>
+&lt;td>Baja&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Documentación&lt;/td>
+&lt;td>Completa&lt;/td>
+&lt;td>Excelente&lt;/td>
+&lt;td>Muy buena&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Configuración&lt;/td>
+&lt;td>Rígida&lt;/td>
+&lt;td>Flexible&lt;/td>
+&lt;td>Flexible&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Escalabilidad&lt;/td>
+&lt;td>Alta&lt;/td>
+&lt;td>Alta&lt;/td>
+&lt;td>Media&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h3 id="23-popularidad-y-comunidad">&lt;strong>2.3 Popularidad y Comunidad&lt;/strong>&lt;/h3>
+&lt;p>El tamaño de la comunidad y la cantidad de recursos disponibles son factores clave para elegir un framework.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Aspecto&lt;/th>
+&lt;th>Angular&lt;/th>
+&lt;th>React&lt;/th>
+&lt;th>Vue&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>GitHub Stars&lt;/td>
+&lt;td>90k+&lt;/td>
+&lt;td>200k+&lt;/td>
+&lt;td>210k+&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Empresas que usan&lt;/td>
+&lt;td>Google, Microsoft&lt;/td>
+&lt;td>Meta, Airbnb&lt;/td>
+&lt;td>Alibaba, Xiaomi&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Ecosistema&lt;/td>
+&lt;td>Amplio&lt;/td>
+&lt;td>Enorme&lt;/td>
+&lt;td>Creciendo&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="3-casos-de-uso">3. Casos de Uso&lt;/h2>
+&lt;h3 id="cuándo-elegir-angular">&lt;strong>¿Cuándo elegir Angular?&lt;/strong>&lt;/h3>
+&lt;ul>
+&lt;li>Aplicaciones empresariales de gran escala.&lt;/li>
+&lt;li>Proyectos que requieren una arquitectura estructurada y modular.&lt;/li>
+&lt;li>Equipos grandes que prefieren convenciones estrictas.&lt;/li>
+&lt;/ul>
+&lt;h3 id="cuándo-elegir-react">&lt;strong>¿Cuándo elegir React?&lt;/strong>&lt;/h3>
+&lt;ul>
+&lt;li>Aplicaciones de alto rendimiento y dinámicas.&lt;/li>
+&lt;li>Proyectos que necesitan SSR con Next.js.&lt;/li>
+&lt;li>Equipos que prefieren una arquitectura flexible y componible.&lt;/li>
+&lt;/ul>
+&lt;h3 id="cuándo-elegir-vue">&lt;strong>¿Cuándo elegir Vue?&lt;/strong>&lt;/h3>
+&lt;ul>
+&lt;li>Aplicaciones de mediana o pequeña escala.&lt;/li>
+&lt;li>Proyectos con requerimientos de reactividad rápida.&lt;/li>
+&lt;li>Equipos pequeños o desarrolladores individuales.&lt;/li>
+&lt;/ul>
+&lt;h2 id="4-ejemplos-de-código">4. Ejemplos de Código&lt;/h2>
+&lt;h3 id="angular-componente-básico">&lt;strong>Angular: Componente Básico&lt;/strong>&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">Component&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;@angular/core&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">@&lt;/span>&lt;span class="n">Component&lt;/span>&lt;span class="p">({&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">selector&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;app-ejemplo&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">template&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;&amp;lt;h1&amp;gt;{{ mensaje }}&amp;lt;/h1&amp;gt;&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">})&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="k">class&lt;/span> &lt;span class="n">EjemploComponent&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">mensaje&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;Hola desde Angular&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="react-componente-funcional">&lt;strong>React: Componente Funcional&lt;/strong>&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="n">React&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;react&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">function&lt;/span> &lt;span class="n">Ejemplo&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">h1&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="n">Hola&lt;/span> &lt;span class="n">desde&lt;/span> &lt;span class="n">React&lt;/span>&lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">h1&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="n">default&lt;/span> &lt;span class="n">Ejemplo&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="vue-componente-sencillo">&lt;strong>Vue: Componente Sencillo&lt;/strong>&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">template&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">h1&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">{{&lt;/span> &lt;span class="n">mensaje&lt;/span> &lt;span class="p">}}&lt;/span>&lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">h1&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">template&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">script&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="n">default&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">data&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">mensaje&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;Hola desde Vue&amp;#39;&lt;/span> &lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">script&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="5-conclusión-cuál-elegir-en-2024">5. Conclusión: ¿Cuál Elegir en 2024?&lt;/h2>
+&lt;p>La elección entre Angular, React y Vue depende del tipo de proyecto y las necesidades del equipo:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>Si necesitas un framework sólido para aplicaciones empresariales:&lt;/strong> Angular es la mejor opción.&lt;/li>
+&lt;li>&lt;strong>Si buscas flexibilidad y escalabilidad con SSR:&lt;/strong> React es la alternativa ideal.&lt;/li>
+&lt;li>&lt;strong>Si prefieres simplicidad y reactividad rápida:&lt;/strong> Vue es una excelente elección.&lt;/li>
+&lt;/ul>
+&lt;p>Cualquiera de estos frameworks es una gran elección en 2024, y la decisión final debe basarse en los requisitos específicos del proyecto y la experiencia del equipo.&lt;/p>
+&lt;h3 id="resumen-final">&lt;strong>Resumen Final&lt;/strong>&lt;/h3>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Característica&lt;/th>
+&lt;th>Angular&lt;/th>
+&lt;th>React&lt;/th>
+&lt;th>Vue&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>Curva de Aprendizaje&lt;/td>
+&lt;td>Alta&lt;/td>
+&lt;td>Media&lt;/td>
+&lt;td>Baja&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Rendimiento&lt;/td>
+&lt;td>Medio&lt;/td>
+&lt;td>Alto&lt;/td>
+&lt;td>Muy alto&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Popularidad&lt;/td>
+&lt;td>Amplia&lt;/td>
+&lt;td>Más popular&lt;/td>
+&lt;td>En crecimiento&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Ecosistema&lt;/td>
+&lt;td>Robusto&lt;/td>
+&lt;td>Más extenso&lt;/td>
+&lt;td>Modular&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Casos de uso&lt;/td>
+&lt;td>Empresas&lt;/td>
+&lt;td>Startups, SSR&lt;/td>
+&lt;td>Aplicaciones pequeñas&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>&lt;strong>En 2024, todos siguen siendo opciones viables. La clave está en seleccionar el adecuado para cada proyecto.&lt;/strong>&lt;/p></description></item><item><title>Lazy Loading avanzado en Angular con rutas dinámicas</title><link>https://cmas.dev/posts/2024-11-06-advanced-lazy-loading-in-angular-with-dynamic-rules/</link><pubDate>Wed, 06 Nov 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-11-06-advanced-lazy-loading-in-angular-with-dynamic-rules/</guid><description>&lt;p>El &lt;strong>Lazy Loading&lt;/strong> es una técnica fundamental en Angular para mejorar el rendimiento de las aplicaciones al cargar solo los módulos necesarios cuando se requieren. En este artículo, exploraremos cómo implementar &lt;strong>Lazy Loading avanzado con rutas dinámicas&lt;/strong> para optimizar aún más la carga de módulos y mejorar la experiencia del usuario.&lt;/p>
 &lt;h2 id="qué-es-el-lazy-loading-en-angular">¿Qué es el Lazy Loading en Angular?&lt;/h2>
 &lt;p>&lt;strong>Lazy Loading (Carga diferida)&lt;/strong> permite que los módulos de una aplicación Angular se carguen solo cuando se necesitan, en lugar de cargar todo el código de la aplicación desde el inicio.&lt;/p>
 &lt;h3 id="ventajas-del-lazy-loading">&lt;strong>Ventajas del Lazy Loading&lt;/strong>&lt;/h3>

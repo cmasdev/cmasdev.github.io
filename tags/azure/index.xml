@@ -1,4 +1,144 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Azure on Christian Amado's Blog</title><link>https://cmas.dev/tags/azure/</link><description>Recent content in Azure on Christian Amado's Blog</description><generator>Hugo -- gohugo.io</generator><language>es</language><lastBuildDate>Wed, 20 Nov 2024 00:00:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/tags/azure/index.xml" rel="self" type="application/rss+xml"/><item><title>Creación de aplicaciones serverless con Deno y Azure</title><link>https://cmas.dev/posts/2024-11-20-serverless-apps-deno-azure/</link><pubDate>Wed, 20 Nov 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-11-20-serverless-apps-deno-azure/</guid><description>&lt;p>El paradigma serverless permite construir aplicaciones sin necesidad de gestionar servidores, proporcionando escalabilidad automática y optimización de costos. En este artículo, exploraremos cómo crear aplicaciones serverless utilizando Deno y Azure Functions, combinando la eficiencia de Deno con la potencia de la nube de Azure.&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Azure on Christian Amado's Blog</title><link>https://cmas.dev/tags/azure/</link><description>Recent content in Azure on Christian Amado's Blog</description><generator>Hugo -- gohugo.io</generator><language>es</language><lastBuildDate>Wed, 18 Dec 2024 00:00:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/tags/azure/index.xml" rel="self" type="application/rss+xml"/><item><title>Blazor y Microsoft Entra ID: Implementación de autenticación</title><link>https://cmas.dev/posts/2024-12-18-blazor-and-microsoft-entra/</link><pubDate>Wed, 18 Dec 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-12-18-blazor-and-microsoft-entra/</guid><description>&lt;p>La integración de &lt;strong>Microsoft Entra ID (anteriormente Azure AD)&lt;/strong> con &lt;strong>Blazor&lt;/strong> permite implementar autenticación segura en aplicaciones web y mejorar la gestión de identidades. En este artículo, exploraremos cómo integrar &lt;strong>Microsoft Entra ID&lt;/strong> en una aplicación &lt;strong>Blazor&lt;/strong>, proporcionando un flujo de autenticación robusto y seguro.&lt;/p>
+&lt;h2 id="1-introducción-a-microsoft-entra-id-y-blazor">1. Introducción a Microsoft Entra ID y Blazor&lt;/h2>
+&lt;h3 id="qué-es-microsoft-entra-id">&lt;strong>¿Qué es Microsoft Entra ID?&lt;/strong>&lt;/h3>
+&lt;p>Microsoft Entra ID es una plataforma de administración de identidad basada en la nube que permite el inicio de sesión único (SSO), autenticación multifactor (MFA) y gestión de usuarios y roles en aplicaciones corporativas.&lt;/p>
+&lt;h3 id="por-qué-usar-blazor-con-entra-id">&lt;strong>¿Por qué usar Blazor con Entra ID?&lt;/strong>&lt;/h3>
+&lt;p>Blazor es un framework de desarrollo web de Microsoft basado en C# y Razor, que permite construir aplicaciones interactivas sin depender de JavaScript. Integrarlo con Microsoft Entra ID ofrece beneficios como:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>Autenticación segura basada en estándares OAuth 2.0 y OpenID Connect&lt;/strong>.&lt;/li>
+&lt;li>&lt;strong>SSO (Inicio de Sesión Único) en entornos empresariales&lt;/strong>.&lt;/li>
+&lt;li>&lt;strong>Compatibilidad con MFA (Autenticación Multifactor)&lt;/strong>.&lt;/li>
+&lt;li>&lt;strong>Gestión de permisos y roles con Microsoft Graph API&lt;/strong>.&lt;/li>
+&lt;/ul>
+&lt;h2 id="2-configuración-de-microsoft-entra-id">2. Configuración de Microsoft Entra ID&lt;/h2>
+&lt;p>Antes de integrar Entra ID con Blazor, necesitamos configurar una aplicación en el portal de Azure.&lt;/p>
+&lt;h3 id="paso-1-crear-una-aplicación-en-microsoft-entra-id">&lt;strong>Paso 1: Crear una aplicación en Microsoft Entra ID&lt;/strong>&lt;/h3>
+&lt;ol>
+&lt;li>Accede a &lt;a href="https://portal.azure.com/">Azure Portal&lt;/a>.&lt;/li>
+&lt;li>Dirígete a &lt;strong>Microsoft Entra ID&lt;/strong> &amp;gt; &lt;strong>App Registrations&lt;/strong>.&lt;/li>
+&lt;li>Haz clic en &lt;strong>New Registration&lt;/strong> y configura:
+&lt;ul>
+&lt;li>&lt;strong>Nombre&lt;/strong>: &lt;code>BlazorAuthApp&lt;/code>&lt;/li>
+&lt;li>&lt;strong>Tipo de cuenta&lt;/strong>: &amp;ldquo;Cualquier organización de directorios&amp;rdquo; o &amp;ldquo;Cuentas personales y organizativas&amp;rdquo;.&lt;/li>
+&lt;li>&lt;strong>Redirección&lt;/strong>: &lt;code>https://localhost:5001/authentication/login-callback&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Guarda los cambios y copia:
+&lt;ul>
+&lt;li>&lt;strong>Application (client) ID&lt;/strong>.&lt;/li>
+&lt;li>&lt;strong>Directory (tenant) ID&lt;/strong>.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h3 id="paso-2-configurar-permisos-de-api">&lt;strong>Paso 2: Configurar permisos de API&lt;/strong>&lt;/h3>
+&lt;ol>
+&lt;li>En la sección &lt;strong>API Permissions&lt;/strong>, añade permisos para &lt;code>User.Read&lt;/code> (Microsoft Graph).&lt;/li>
+&lt;li>&lt;strong>Grant Admin Consent&lt;/strong> para aplicar los permisos a todos los usuarios.&lt;/li>
+&lt;/ol>
+&lt;h3 id="paso-3-crear-un-cliente-secreto">&lt;strong>Paso 3: Crear un Cliente Secreto&lt;/strong>&lt;/h3>
+&lt;ol>
+&lt;li>Ve a &lt;strong>Certificates &amp;amp; Secrets&lt;/strong>.&lt;/li>
+&lt;li>Genera un nuevo secreto y copia el valor.&lt;/li>
+&lt;/ol>
+&lt;h2 id="3-configuración-de-blazor-con-entra-id">3. Configuración de Blazor con Entra ID&lt;/h2>
+&lt;p>Ahora que tenemos configurada la aplicación en Entra ID, podemos integrar la autenticación en Blazor.&lt;/p>
+&lt;h3 id="paso-1-crear-un-proyecto-blazor-webassembly">&lt;strong>Paso 1: Crear un Proyecto Blazor WebAssembly&lt;/strong>&lt;/h3>
+&lt;p>Ejecuta el siguiente comando en la terminal:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"> dotnet new blazorwasm -o BlazorAuthApp --auth IndividualB2C
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> cd BlazorAuthApp
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="paso-2-instalar-paquetes-necesarios">&lt;strong>Paso 2: Instalar Paquetes Necesarios&lt;/strong>&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-go" data-lang="go">&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">dotnet&lt;/span> &lt;span class="nx">add&lt;/span> &lt;span class="kn">package&lt;/span> &lt;span class="nx">Microsoft&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">AspNetCore&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">Authentication&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">AzureADB2C&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">UI&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="paso-3-configurar-appsettingsjson">&lt;strong>Paso 3: Configurar &lt;code>appsettings.json&lt;/code>&lt;/strong>&lt;/h3>
+&lt;p>Edita el archivo &lt;code>appsettings.json&lt;/code> con la información de Entra ID:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;AzureAd&amp;#34;: {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;Instance&amp;#34;: &amp;#34;https://login.microsoftonline.com/&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;Domain&amp;#34;: &amp;#34;yourdomain.onmicrosoft.com&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;TenantId&amp;#34;: &amp;#34;your-tenant-id&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;ClientId&amp;#34;: &amp;#34;your-client-id&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;CallbackPath&amp;#34;: &amp;#34;/authentication/login-callback&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;SignedOutCallbackPath&amp;#34;: &amp;#34;/authentication/logout-callback&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="paso-4-configurar-autenticación-en-programcs">&lt;strong>Paso 4: Configurar Autenticación en &lt;code>Program.cs&lt;/code>&lt;/strong>&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">using&lt;/span> &lt;span class="n">Microsoft&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">AspNetCore&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Authentication&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">using&lt;/span> &lt;span class="n">Microsoft&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">AspNetCore&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Authentication&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">OpenIdConnect&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">using&lt;/span> &lt;span class="n">Microsoft&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">AspNetCore&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Authorization&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">using&lt;/span> &lt;span class="n">Microsoft&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">AspNetCore&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Builder&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">using&lt;/span> &lt;span class="n">Microsoft&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">AspNetCore&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Components&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Web&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">using&lt;/span> &lt;span class="n">Microsoft&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">AspNetCore&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Components&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">WebAssembly&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Hosting&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">using&lt;/span> &lt;span class="n">Microsoft&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">AspNetCore&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Http&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">using&lt;/span> &lt;span class="n">Microsoft&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Extensions&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">DependencyInjection&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">using&lt;/span> &lt;span class="n">Microsoft&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Extensions&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Hosting&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">var&lt;/span> &lt;span class="n">builder&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">WebAssemblyHostBuilder&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">CreateDefault&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">args&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">builder&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Services&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">AddAuthentication&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">options&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">options&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">DefaultScheme&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;Cookies&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">options&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">DefaultChallengeScheme&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">OpenIdConnectDefaults&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">AuthenticationScheme&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">})&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">.&lt;/span>&lt;span class="n">AddOpenIdConnect&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">OpenIdConnectDefaults&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">AuthenticationScheme&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">options&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">options&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Authority&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;https://login.microsoftonline.com/{your-tenant-id}&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">options&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">ClientId&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;your-client-id&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">options&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">ResponseType&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;code&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">options&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">SaveTokens&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="bp">true&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">builder&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Services&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">AddAuthorizationCore&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">await&lt;/span> &lt;span class="n">builder&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Build&lt;/span>&lt;span class="p">()&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">RunAsync&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="4-protección-de-rutas-y-gestión-de-roles">4. Protección de Rutas y Gestión de Roles&lt;/h2>
+&lt;h3 id="paso-1-crear-una-página-protegida">&lt;strong>Paso 1: Crear una Página Protegida&lt;/strong>&lt;/h3>
+&lt;p>Modifica &lt;code>Pages/Protected.razor&lt;/code> para permitir el acceso solo a usuarios autenticados:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">@page &amp;#34;/protected&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">@using Microsoft.AspNetCore.Components.Authorization
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;AuthorizeView&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Authorized&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;h3&amp;gt;Bienvenido, usuario autenticado&amp;lt;/h3&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;button @onclick=&amp;#34;Logout&amp;#34;&amp;gt;Cerrar Sesión&amp;lt;/button&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/Authorized&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;NotAuthorized&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;h3&amp;gt;Acceso Restringido&amp;lt;/h3&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/NotAuthorized&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;/AuthorizeView&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">@code {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [Inject] NavigationManager Navigation { get; set; }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> private async Task Logout()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Navigation.NavigateTo(&amp;#34;authentication/logout&amp;#34;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="paso-2-configurar-el-routeview-en-apprazor">&lt;strong>Paso 2: Configurar el &lt;code>RouteView&lt;/code> en &lt;code>App.razor&lt;/code>&lt;/strong>&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">&amp;lt;CascadingAuthenticationState&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;AuthorizeRouteView RouteData=&amp;#34;@routeData&amp;#34; DefaultLayout=&amp;#34;typeof(MainLayout)&amp;#34; /&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;/CascadingAuthenticationState&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="paso-3-agregar-un-componente-de-login">&lt;strong>Paso 3: Agregar un Componente de Login&lt;/strong>&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">&amp;lt;AuthorizeView&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Authorized&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;button @onclick=&amp;#34;Logout&amp;#34;&amp;gt;Cerrar Sesión&amp;lt;/button&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/Authorized&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;NotAuthorized&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;button @onclick=&amp;#34;Login&amp;#34;&amp;gt;Iniciar Sesión&amp;lt;/button&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/NotAuthorized&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;/AuthorizeView&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">@code {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> private void Login() =&amp;gt; Navigation.NavigateTo(&amp;#34;authentication/login&amp;#34;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> private void Logout() =&amp;gt; Navigation.NavigateTo(&amp;#34;authentication/logout&amp;#34;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="5-conclusión">5. Conclusión&lt;/h2>
+&lt;p>La integración de &lt;strong>Blazor con Microsoft Entra ID&lt;/strong> proporciona una solución robusta para la autenticación de usuarios, garantizando seguridad y facilidad de administración. Gracias a OpenID Connect y OAuth 2.0, podemos ofrecer inicio de sesión seguro y control de acceso basado en roles.&lt;/p>
+&lt;h3 id="resumen">&lt;strong>Resumen:&lt;/strong>&lt;/h3>
+&lt;p>✅ Configuración de &lt;strong>Microsoft Entra ID&lt;/strong> en Azure.
+✅ Integración de &lt;strong>Blazor WebAssembly&lt;/strong> con Entra ID.
+✅ Protección de rutas y gestión de autenticación.
+✅ Implementación de un flujo de inicio y cierre de sesión seguro.&lt;/p>
+&lt;p>¡Ahora puedes implementar autenticación avanzada en tus aplicaciones Blazor con Entra ID! 🚀&lt;/p></description></item><item><title>Creación de aplicaciones serverless con Deno y Azure</title><link>https://cmas.dev/posts/2024-11-20-serverless-apps-deno-azure/</link><pubDate>Wed, 20 Nov 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-11-20-serverless-apps-deno-azure/</guid><description>&lt;p>El paradigma serverless permite construir aplicaciones sin necesidad de gestionar servidores, proporcionando escalabilidad automática y optimización de costos. En este artículo, exploraremos cómo crear aplicaciones serverless utilizando Deno y Azure Functions, combinando la eficiencia de Deno con la potencia de la nube de Azure.&lt;/p>
 &lt;h2 id="por-qué-usar-deno-y-azure-functions">¿Por qué usar Deno y Azure Functions?&lt;/h2>
 &lt;h3 id="beneficios-de-deno">&lt;strong>Beneficios de Deno&lt;/strong>&lt;/h3>
 &lt;p>Deno es un runtime moderno para JavaScript y TypeScript con varias características que lo hacen ideal para aplicaciones serverless:&lt;/p>
