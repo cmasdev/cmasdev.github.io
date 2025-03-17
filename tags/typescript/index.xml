@@ -1,4 +1,154 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Typescript on Christian Amado's Blog</title><link>https://cmas.dev/tags/typescript/</link><description>Recent content in Typescript on Christian Amado's Blog</description><generator>Hugo -- gohugo.io</generator><language>es</language><lastBuildDate>Sat, 24 Aug 2024 00:00:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/tags/typescript/index.xml" rel="self" type="application/rss+xml"/><item><title>Migración de Node.js a Deno: Caso práctico</title><link>https://cmas.dev/posts/2024-08-24-nodejs-migration-to-deno/</link><pubDate>Sat, 24 Aug 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-08-24-nodejs-migration-to-deno/</guid><description>&lt;p>En los últimos años, &lt;strong>Deno&lt;/strong> ha emergido como una alternativa moderna a &lt;strong>Node.js&lt;/strong>. Desarrollado por el mismo creador de &lt;strong>Node.js&lt;/strong>, &lt;strong>Deno&lt;/strong> busca abordar algunas de las limitaciones y problemas de diseño que han surgido con &lt;strong>Node.js&lt;/strong> a lo largo del tiempo. Este artículo presenta un caso práctico detallado sobre cómo migrar una aplicación existente de &lt;strong>Node.js&lt;/strong> a &lt;strong>Deno&lt;/strong>, destacando las diferencias clave, los desafíos y las soluciones.&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Typescript on Christian Amado's Blog</title><link>https://cmas.dev/tags/typescript/</link><description>Recent content in Typescript on Christian Amado's Blog</description><generator>Hugo -- gohugo.io</generator><language>es</language><lastBuildDate>Wed, 27 Nov 2024 00:00:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/tags/typescript/index.xml" rel="self" type="application/rss+xml"/><item><title>Gestión de dependencias en TypeScript: Consejos y herramientas</title><link>https://cmas.dev/posts/2024-11-27-dependency-management-typescript/</link><pubDate>Wed, 27 Nov 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-11-27-dependency-management-typescript/</guid><description>&lt;p>La gestión eficiente de dependencias es una parte fundamental del desarrollo en TypeScript. Al trabajar con paquetes externos, es esencial conocer las mejores prácticas y herramientas disponibles para garantizar la estabilidad, seguridad y rendimiento de nuestros proyectos. En este artículo, exploraremos las estrategias para gestionar dependencias en TypeScript, incluyendo herramientas como npm, yarn, pnpm y Deno, junto con ejemplos prácticos.&lt;/p>
+&lt;h2 id="qué-son-las-dependencias-en-typescript">¿Qué son las Dependencias en TypeScript?&lt;/h2>
+&lt;p>Las &lt;strong>dependencias&lt;/strong> son paquetes de código externo que un proyecto necesita para funcionar. Estas pueden ser bibliotecas de utilidad, frameworks, herramientas de compilación, entre otras.&lt;/p>
+&lt;p>En TypeScript, las dependencias se instalan y gestionan a través de gestores de paquetes como:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>npm&lt;/strong> (Node Package Manager)&lt;/li>
+&lt;li>&lt;strong>Yarn&lt;/strong>&lt;/li>
+&lt;li>&lt;strong>pnpm&lt;/strong>&lt;/li>
+&lt;li>&lt;strong>Deno&lt;/strong> (para entornos sin &lt;code>node_modules&lt;/code>)&lt;/li>
+&lt;/ul>
+&lt;p>Existen dos tipos principales de dependencias:&lt;/p>
+&lt;ol>
+&lt;li>&lt;strong>Dependencias regulares (&lt;code>dependencies&lt;/code>)&lt;/strong>: Necesarias para la ejecución de la aplicación.&lt;/li>
+&lt;li>&lt;strong>Dependencias de desarrollo (&lt;code>devDependencies&lt;/code>)&lt;/strong>: Usadas solo en el desarrollo (pruebas, compilación, herramientas de linting, etc.).&lt;/li>
+&lt;/ol>
+&lt;p>Ejemplo de un &lt;code>package.json&lt;/code> con ambas:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;dependencies&amp;#34;: {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;express&amp;#34;: &amp;#34;^4.17.1&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;typeorm&amp;#34;: &amp;#34;^0.2.41&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> },
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;devDependencies&amp;#34;: {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;typescript&amp;#34;: &amp;#34;^4.7.4&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;jest&amp;#34;: &amp;#34;^27.5.1&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="herramientas-para-la-gestión-de-dependencias">Herramientas para la Gestión de Dependencias&lt;/h2>
+&lt;h3 id="1-npm-el-gestor-de-paquetes-predeterminado">1. &lt;strong>npm: El gestor de paquetes predeterminado&lt;/strong>&lt;/h3>
+&lt;p>npm es el gestor de paquetes predeterminado para Node.js y es ampliamente utilizado en proyectos TypeScript.&lt;/p>
+&lt;ul>
+&lt;li>Instalar una dependencia:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">npm install lodash
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>Instalar como &lt;code>devDependency&lt;/code>:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">npm install --save-dev jest
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>Eliminar una dependencia:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">npm uninstall lodash
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ul>
+&lt;h3 id="2-yarn-alternativa-rápida-y-segura">2. &lt;strong>Yarn: Alternativa rápida y segura&lt;/strong>&lt;/h3>
+&lt;p>Yarn ofrece mejoras en rendimiento y seguridad respecto a npm.&lt;/p>
+&lt;ul>
+&lt;li>Instalar una dependencia:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">yarn add lodash
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>Instalar como &lt;code>devDependency&lt;/code>:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">yarn add jest --dev
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ul>
+&lt;h3 id="3-pnpm-ahorro-de-espacio-y-eficiencia">3. &lt;strong>pnpm: Ahorro de espacio y eficiencia&lt;/strong>&lt;/h3>
+&lt;p>pnpm es una alternativa más eficiente en cuanto a almacenamiento ya que utiliza enlaces simbólicos para compartir paquetes entre proyectos.&lt;/p>
+&lt;ul>
+&lt;li>Instalar una dependencia:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">pnpm add lodash
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>Instalar como &lt;code>devDependency&lt;/code>:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">pnpm add jest --save-dev
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ul>
+&lt;h3 id="4-deno-sin-node_modules">4. &lt;strong>Deno: Sin &lt;code>node_modules&lt;/code>&lt;/strong>&lt;/h3>
+&lt;p>Deno elimina la necesidad de un gestor de paquetes tradicional y permite importar dependencias desde URLs.&lt;/p>
+&lt;p>Ejemplo de importación en TypeScript:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">import { serve } from &amp;#34;https://deno.land/std/http/server.ts&amp;#34;;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">serve((req) =&amp;gt; new Response(&amp;#34;Hello, Deno!&amp;#34;), { port: 8000 });
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="estrategias-para-la-gestión-de-dependencias">Estrategias para la Gestión de Dependencias&lt;/h2>
+&lt;h3 id="1-bloquear-versiones-package-lockjson-o-yarnlock">1. &lt;strong>Bloquear versiones (&lt;code>package-lock.json&lt;/code> o &lt;code>yarn.lock&lt;/code>)&lt;/strong>&lt;/h3>
+&lt;p>Para garantizar estabilidad en las versiones de los paquetes, siempre se deben usar archivos de bloqueo (&lt;code>package-lock.json&lt;/code> o &lt;code>yarn.lock&lt;/code>).&lt;/p>
+&lt;p>Ejemplo de instalación con versión fija:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">npm install express@4.17.1
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="2-uso-de-peerdependencies-y-optionaldependencies">2. &lt;strong>Uso de &lt;code>peerDependencies&lt;/code> y &lt;code>optionalDependencies&lt;/code>&lt;/strong>&lt;/h3>
+&lt;ul>
+&lt;li>&lt;strong>&lt;code>peerDependencies&lt;/code>&lt;/strong>: Útil cuando se espera que el usuario instale una versión específica de un paquete.&lt;/li>
+&lt;li>&lt;strong>&lt;code>optionalDependencies&lt;/code>&lt;/strong>: No bloquean la instalación si fallan.&lt;/li>
+&lt;/ul>
+&lt;p>Ejemplo en &lt;code>package.json&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;peerDependencies&amp;#34;: {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;react&amp;#34;: &amp;#34;^17.0.0&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> },
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;optionalDependencies&amp;#34;: {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;fsevents&amp;#34;: &amp;#34;^2.3.2&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="3-actualización-controlada-de-dependencias">3. &lt;strong>Actualización controlada de dependencias&lt;/strong>&lt;/h3>
+&lt;p>Para actualizar dependencias sin romper el proyecto:&lt;/p>
+&lt;ul>
+&lt;li>Revisar actualizaciones disponibles:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">npm outdated
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>Actualizar una dependencia específica:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">npm update lodash
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>Actualizar todas las dependencias:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">npm update
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ul>
+&lt;p>Para mayor control, se recomienda usar &lt;code>npm-check-updates&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">npx npm-check-updates -u
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">npm install
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="4-verificación-de-seguridad-en-dependencias">4. &lt;strong>Verificación de seguridad en dependencias&lt;/strong>&lt;/h3>
+&lt;p>Las vulnerabilidades en dependencias pueden comprometer la seguridad del proyecto. Se recomienda:&lt;/p>
+&lt;ul>
+&lt;li>Analizar dependencias con npm:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">npm audit
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>Aplicar correcciones automáticas:
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">npm audit fix
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ul>
+&lt;p>Para mayor seguridad, se pueden usar herramientas como &lt;strong>Snyk&lt;/strong> o &lt;strong>Dependabot&lt;/strong>.&lt;/p>
+&lt;h2 id="ejemplo-práctico-proyecto-con-typescript-y-express">Ejemplo Práctico: Proyecto con TypeScript y Express&lt;/h2>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Inicializar un proyecto TypeScript&lt;/strong>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">mkdir my-ts-project &amp;amp;&amp;amp; cd my-ts-project
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">npm init -y
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">npm install typescript ts-node express @types/express
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Configurar &lt;code>tsconfig.json&lt;/code>&lt;/strong>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;compilerOptions&amp;#34;: {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;target&amp;#34;: &amp;#34;ES6&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;module&amp;#34;: &amp;#34;CommonJS&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;outDir&amp;#34;: &amp;#34;dist&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;strict&amp;#34;: true
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Crear un servidor Express en &lt;code>index.ts&lt;/code>&lt;/strong>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="n">express&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s2">&amp;#34;express&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">app&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">express&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">app&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">get&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;/&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">req&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">res&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">res&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">send&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;Hello, TypeScript!&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">app&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">listen&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">3000&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">console&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;Servidor corriendo en http://localhost:3000&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Ejecutar el servidor&lt;/strong>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">npx ts-node index.ts
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;h2 id="conclusión">Conclusión&lt;/h2>
+&lt;p>La gestión de dependencias en TypeScript es clave para la estabilidad y seguridad de los proyectos. Usar herramientas adecuadas como &lt;strong>npm, yarn, pnpm o Deno&lt;/strong>, junto con buenas prácticas como el control de versiones y auditorías de seguridad, asegura un desarrollo eficiente y libre de problemas.&lt;/p>
+&lt;p>Siguiendo estos consejos, puedes optimizar la gestión de dependencias y garantizar la calidad de tus proyectos en TypeScript.&lt;/p></description></item><item><title>Migración de Node.js a Deno: Caso práctico</title><link>https://cmas.dev/posts/2024-08-24-nodejs-migration-to-deno/</link><pubDate>Sat, 24 Aug 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-08-24-nodejs-migration-to-deno/</guid><description>&lt;p>En los últimos años, &lt;strong>Deno&lt;/strong> ha emergido como una alternativa moderna a &lt;strong>Node.js&lt;/strong>. Desarrollado por el mismo creador de &lt;strong>Node.js&lt;/strong>, &lt;strong>Deno&lt;/strong> busca abordar algunas de las limitaciones y problemas de diseño que han surgido con &lt;strong>Node.js&lt;/strong> a lo largo del tiempo. Este artículo presenta un caso práctico detallado sobre cómo migrar una aplicación existente de &lt;strong>Node.js&lt;/strong> a &lt;strong>Deno&lt;/strong>, destacando las diferencias clave, los desafíos y las soluciones.&lt;/p>
 &lt;h2 id="1-introducción-a-deno-y-sus-ventajas">1. Introducción a Deno y sus ventajas&lt;/h2>
 &lt;p>&lt;strong>Deno&lt;/strong> es un runtime moderno para &lt;strong>JavaScript&lt;/strong> y &lt;strong>TypeScript&lt;/strong> basado en &lt;strong>V8&lt;/strong> y &lt;strong>Rust&lt;/strong>. Se diferencia de &lt;strong>Node.js&lt;/strong> por su enfoque en la seguridad, su soporte nativo para &lt;strong>TypeScript&lt;/strong> y su sistema de módulos sin un administrador de paquetes como &lt;em>npm&lt;/em>.&lt;/p>
 &lt;h3 id="ventajas-principales-de-deno">Ventajas principales de Deno:&lt;/h3>

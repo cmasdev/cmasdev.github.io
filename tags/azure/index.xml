@@ -1,4 +1,126 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Azure on Christian Amado's Blog</title><link>https://cmas.dev/tags/azure/</link><description>Recent content in Azure on Christian Amado's Blog</description><generator>Hugo -- gohugo.io</generator><language>es</language><lastBuildDate>Wed, 24 Jul 2024 00:00:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/tags/azure/index.xml" rel="self" type="application/rss+xml"/><item><title>Creación de microservicios con Deno y Azure Functions</title><link>https://cmas.dev/posts/2024-07-24-microservices-deno-azure/</link><pubDate>Wed, 24 Jul 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-07-24-microservices-deno-azure/</guid><description>&lt;p>En el mundo moderno del desarrollo de software, los microservicios han revolucionado la forma de construir y desplegar aplicaciones escalables. Al combinar &lt;strong>Deno&lt;/strong>, una plataforma de runtime moderna basada en &lt;strong>JavaScript&lt;/strong> y &lt;strong>TypeScript&lt;/strong>, con &lt;strong>Azure Functions&lt;/strong>, una solución serverless flexible de &lt;strong>Microsoft&lt;/strong>, los desarrolladores pueden crear microservicios rápidos, seguros y eficientes. Este artículo te guiará paso a paso en el proceso de crear microservicios utilizando estas tecnologías, destacando buenas prácticas, ejemplos prácticos y el uso de &lt;strong>Visual Studio Code&lt;/strong> como herramienta principal.&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Azure on Christian Amado's Blog</title><link>https://cmas.dev/tags/azure/</link><description>Recent content in Azure on Christian Amado's Blog</description><generator>Hugo -- gohugo.io</generator><language>es</language><lastBuildDate>Wed, 20 Nov 2024 00:00:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/tags/azure/index.xml" rel="self" type="application/rss+xml"/><item><title>Creación de aplicaciones serverless con Deno y Azure</title><link>https://cmas.dev/posts/2024-11-20-serverless-apps-deno-azure/</link><pubDate>Wed, 20 Nov 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-11-20-serverless-apps-deno-azure/</guid><description>&lt;p>El paradigma serverless permite construir aplicaciones sin necesidad de gestionar servidores, proporcionando escalabilidad automática y optimización de costos. En este artículo, exploraremos cómo crear aplicaciones serverless utilizando Deno y Azure Functions, combinando la eficiencia de Deno con la potencia de la nube de Azure.&lt;/p>
+&lt;h2 id="por-qué-usar-deno-y-azure-functions">¿Por qué usar Deno y Azure Functions?&lt;/h2>
+&lt;h3 id="beneficios-de-deno">&lt;strong>Beneficios de Deno&lt;/strong>&lt;/h3>
+&lt;p>Deno es un runtime moderno para JavaScript y TypeScript con varias características que lo hacen ideal para aplicaciones serverless:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>Seguridad integrada&lt;/strong>: Requiere permisos explícitos para acceder a archivos, red y entorno.&lt;/li>
+&lt;li>&lt;strong>Soporte nativo para TypeScript&lt;/strong>: No necesita configuración adicional.&lt;/li>
+&lt;li>&lt;strong>Gestión de dependencias simplificada&lt;/strong>: Se utilizan URLs en lugar de &lt;code>node_modules&lt;/code>.&lt;/li>
+&lt;li>&lt;strong>Rápido y eficiente&lt;/strong>: Basado en V8 y Rust, ofrece un excelente rendimiento.&lt;/li>
+&lt;/ul>
+&lt;h3 id="beneficios-de-azure-functions">&lt;strong>Beneficios de Azure Functions&lt;/strong>&lt;/h3>
+&lt;p>Azure Functions es una plataforma serverless que permite ejecutar código en la nube sin administrar infraestructura:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>Escalabilidad automática&lt;/strong>: Se adapta a la demanda sin intervención manual.&lt;/li>
+&lt;li>&lt;strong>Modelo de pago por uso&lt;/strong>: Solo se cobra por el tiempo de ejecución.&lt;/li>
+&lt;li>&lt;strong>Integración con otros servicios de Azure&lt;/strong>: Como bases de datos, colas y almacenamiento.&lt;/li>
+&lt;/ul>
+&lt;h2 id="configuración-del-entorno">Configuración del Entorno&lt;/h2>
+&lt;h3 id="1-instalar-deno">&lt;strong>1. Instalar Deno&lt;/strong>&lt;/h3>
+&lt;p>Para instalar Deno en tu máquina local, ejecuta:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">curl -fsSL https://deno.land/x/install/install.sh | sh
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Verifica la instalación con:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">deno --version
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="2-configurar-azure-functions">&lt;strong>2. Configurar Azure Functions&lt;/strong>&lt;/h3>
+&lt;p>Para trabajar con Azure Functions, necesitamos la &lt;strong>Azure Functions Core Tools&lt;/strong> y una suscripción activa en Azure.&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Instalar las herramientas de Azure Functions&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">npm&lt;/span> &lt;span class="n">install&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">g&lt;/span> &lt;span class="n">azure&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">functions&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">core&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">tools&lt;/span>&lt;span class="err">@&lt;/span>&lt;span class="mi">4&lt;/span> &lt;span class="o">--&lt;/span>&lt;span class="n">unsafe&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">perm&lt;/span> &lt;span class="bp">true&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Iniciar sesión en Azure&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">az login
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Crear un nuevo proyecto de Azure Functions&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">func&lt;/span> &lt;span class="n">init&lt;/span> &lt;span class="n">my&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">deno&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">function&lt;/span> &lt;span class="o">--&lt;/span>&lt;span class="n">worker&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">runtime&lt;/span> &lt;span class="n">custom&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">cd&lt;/span> &lt;span class="n">my&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">deno&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">function&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;h2 id="creación-de-una-función-serverless-con-deno">Creación de una Función Serverless con Deno&lt;/h2>
+&lt;p>Vamos a crear una función HTTP que reciba una solicitud y devuelva una respuesta utilizando Deno.&lt;/p>
+&lt;h3 id="1-crear-la-función-http">&lt;strong>1. Crear la Función HTTP&lt;/strong>&lt;/h3>
+&lt;p>Ejecuta el siguiente comando para generar la función:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">func&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="o">--&lt;/span>&lt;span class="n">name&lt;/span> &lt;span class="n">helloDeno&lt;/span> &lt;span class="o">--&lt;/span>&lt;span class="n">template&lt;/span> &lt;span class="s2">&amp;#34;HTTP trigger&amp;#34;&lt;/span> &lt;span class="o">--&lt;/span>&lt;span class="n">language&lt;/span> &lt;span class="n">JavaScript&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Esto generará una carpeta &lt;code>helloDeno&lt;/code> con los archivos necesarios. Ahora, modificamos &lt;code>helloDeno/index.ts&lt;/code> para usar Deno:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="n">default&lt;/span> &lt;span class="n">async&lt;/span> &lt;span class="n">function&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">context&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">any&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">req&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">Request&lt;/span>&lt;span class="p">):&lt;/span> &lt;span class="n">Promise&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">void&lt;/span>&lt;span class="o">&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">context&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;Deno Serverless Function ejecutada&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="n">name&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">req&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">url&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">searchParams&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">get&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;name&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">||&lt;/span> &lt;span class="s2">&amp;#34;Mundo&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">context&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">res&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">body&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="err">`&lt;/span>&lt;span class="n">Hola&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="n">name&lt;/span>&lt;span class="p">}&lt;/span> &lt;span class="n">desde&lt;/span> &lt;span class="n">Deno&lt;/span> &lt;span class="n">y&lt;/span> &lt;span class="n">Azure&lt;/span> &lt;span class="n">Functions&lt;/span>&lt;span class="o">!&lt;/span>&lt;span class="err">`&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="2-modificar-el-archivo-functionjson">&lt;strong>2. Modificar el archivo &lt;code>function.json&lt;/code>&lt;/strong>&lt;/h3>
+&lt;p>Editamos &lt;code>helloDeno/function.json&lt;/code> para definir los métodos HTTP permitidos:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;bindings&amp;#34;: [
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;authLevel&amp;#34;: &amp;#34;anonymous&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;type&amp;#34;: &amp;#34;httpTrigger&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;direction&amp;#34;: &amp;#34;in&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;name&amp;#34;: &amp;#34;req&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;methods&amp;#34;: [&amp;#34;get&amp;#34;, &amp;#34;post&amp;#34;]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> },
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;type&amp;#34;: &amp;#34;http&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;direction&amp;#34;: &amp;#34;out&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;name&amp;#34;: &amp;#34;res&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="despliegue-en-azure">Despliegue en Azure&lt;/h2>
+&lt;h3 id="1-crear-un-recurso-de-azure-functions">&lt;strong>1. Crear un recurso de Azure Functions&lt;/strong>&lt;/h3>
+&lt;p>Antes de desplegar, necesitamos un grupo de recursos y una cuenta de almacenamiento:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">az group create --name deno-serverless --location eastus
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">az storage account create --name denostorage --location eastus --resource-group deno-serverless --sku Standard_LRS
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Luego, creamos una instancia de Azure Functions:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">az functionapp create --resource-group deno-serverless --consumption-plan-location eastus --runtime custom --functions-version 4 --name myDenoFunctionApp --storage-account denostorage
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="2-desplegar-la-función-en-azure">&lt;strong>2. Desplegar la función en Azure&lt;/strong>&lt;/h3>
+&lt;p>Ahora podemos desplegar nuestra función con:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">func&lt;/span> &lt;span class="n">azure&lt;/span> &lt;span class="n">functionapp&lt;/span> &lt;span class="n">publish&lt;/span> &lt;span class="n">myDenoFunctionApp&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Si el despliegue es exitoso, obtendremos una URL donde la función está disponible:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">https://myDenoFunctionApp.azurewebsites.net/api/helloDeno
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Podemos probarla enviando una solicitud HTTP:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">curl &amp;#34;https://myDenoFunctionApp.azurewebsites.net/api/helloDeno?name=Juan&amp;#34;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="integración-con-una-base-de-datos">Integración con una Base de Datos&lt;/h2>
+&lt;p>Para conectar nuestra función con una base de datos, podemos usar Azure Cosmos DB.&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Crear una cuenta de Cosmos DB:&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">az cosmosdb create --resource-group deno-serverless --name denoCosmosDB
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Obtener la cadena de conexión:&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">az cosmosdb keys list --resource-group deno-serverless --name denoCosmosDB --type connection-strings
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Modificar la función para leer datos de Cosmos DB:&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">Client&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s2">&amp;#34;https://deno.land/x/postgres/mod.ts&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">client&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">Client&lt;/span>&lt;span class="p">({&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">user&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;usuario&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">database&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;denoDB&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">hostname&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;tu-host&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">password&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;tu-password&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">port&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">5432&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="n">default&lt;/span> &lt;span class="n">async&lt;/span> &lt;span class="n">function&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">context&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">any&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">req&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">Request&lt;/span>&lt;span class="p">):&lt;/span> &lt;span class="n">Promise&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">void&lt;/span>&lt;span class="o">&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">await&lt;/span> &lt;span class="n">client&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">connect&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="n">result&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">await&lt;/span> &lt;span class="n">client&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">query&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;SELECT * FROM usuarios&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">await&lt;/span> &lt;span class="n">client&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">end&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">context&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">res&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">body&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">JSON&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">stringify&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">result&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">rows&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;h2 id="conclusión">Conclusión&lt;/h2>
+&lt;p>Desarrollar aplicaciones serverless con &lt;strong>Deno y Azure Functions&lt;/strong> nos permite crear aplicaciones altamente escalables y eficientes sin preocuparnos por la infraestructura. &lt;strong>Deno&lt;/strong>, con su seguridad y rendimiento, y &lt;strong>Azure Functions&lt;/strong>, con su escalabilidad automática, forman una combinación poderosa para aplicaciones modernas.&lt;/p>
+&lt;p>¡Explora estas tecnologías y crea tus propias soluciones serverless con Deno y Azure!&lt;/p></description></item><item><title>Creación de microservicios con Deno y Azure Functions</title><link>https://cmas.dev/posts/2024-07-24-microservices-deno-azure/</link><pubDate>Wed, 24 Jul 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-07-24-microservices-deno-azure/</guid><description>&lt;p>En el mundo moderno del desarrollo de software, los microservicios han revolucionado la forma de construir y desplegar aplicaciones escalables. Al combinar &lt;strong>Deno&lt;/strong>, una plataforma de runtime moderna basada en &lt;strong>JavaScript&lt;/strong> y &lt;strong>TypeScript&lt;/strong>, con &lt;strong>Azure Functions&lt;/strong>, una solución serverless flexible de &lt;strong>Microsoft&lt;/strong>, los desarrolladores pueden crear microservicios rápidos, seguros y eficientes. Este artículo te guiará paso a paso en el proceso de crear microservicios utilizando estas tecnologías, destacando buenas prácticas, ejemplos prácticos y el uso de &lt;strong>Visual Studio Code&lt;/strong> como herramienta principal.&lt;/p>
 &lt;h2 id="introducción-a-los-microservicios">Introducción a los microservicios&lt;/h2>
 &lt;h3 id="qué-son-los-microservicios">¿Qué son los microservicios?&lt;/h3>
 &lt;p>Los microservicios son un estilo arquitectónico que divide las aplicaciones en servicios independientes, cada uno responsable de una funcionalidad específica. Estos servicios se comunican entre sí mediante protocolos ligeros como &lt;strong>HTTP&lt;/strong> o &lt;strong>gRPC&lt;/strong>.&lt;/p>

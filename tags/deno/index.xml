@@ -1,4 +1,251 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Deno on Christian Amado's Blog</title><link>https://cmas.dev/tags/deno/</link><description>Recent content in Deno on Christian Amado's Blog</description><generator>Hugo -- gohugo.io</generator><language>es</language><lastBuildDate>Wed, 30 Oct 2024 00:00:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/tags/deno/index.xml" rel="self" type="application/rss+xml"/><item><title>Integración de Angular con APIs RESTful en Deno</title><link>https://cmas.dev/posts/2024-10-30-angular-integration-with-api-rest-in-deno/</link><pubDate>Wed, 30 Oct 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-10-30-angular-integration-with-api-rest-in-deno/</guid><description>&lt;p>La integración entre &lt;strong>Angular&lt;/strong> y &lt;strong>APIs RESTful&lt;/strong> creadas con &lt;strong>Deno&lt;/strong> permite desarrollar aplicaciones modernas y escalables con una arquitectura limpia y basada en &lt;strong>TypeScript&lt;/strong>. En este artículo, exploraremos cómo conectar una aplicación Angular con un backend RESTful en Deno paso a paso, incluyendo fundamentos teóricos, ejemplos prácticos y buenas prácticas.&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Deno on Christian Amado's Blog</title><link>https://cmas.dev/tags/deno/</link><description>Recent content in Deno on Christian Amado's Blog</description><generator>Hugo -- gohugo.io</generator><language>es</language><lastBuildDate>Wed, 20 Nov 2024 00:00:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/tags/deno/index.xml" rel="self" type="application/rss+xml"/><item><title>Creación de aplicaciones serverless con Deno y Azure</title><link>https://cmas.dev/posts/2024-11-20-serverless-apps-deno-azure/</link><pubDate>Wed, 20 Nov 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-11-20-serverless-apps-deno-azure/</guid><description>&lt;p>El paradigma serverless permite construir aplicaciones sin necesidad de gestionar servidores, proporcionando escalabilidad automática y optimización de costos. En este artículo, exploraremos cómo crear aplicaciones serverless utilizando Deno y Azure Functions, combinando la eficiencia de Deno con la potencia de la nube de Azure.&lt;/p>
+&lt;h2 id="por-qué-usar-deno-y-azure-functions">¿Por qué usar Deno y Azure Functions?&lt;/h2>
+&lt;h3 id="beneficios-de-deno">&lt;strong>Beneficios de Deno&lt;/strong>&lt;/h3>
+&lt;p>Deno es un runtime moderno para JavaScript y TypeScript con varias características que lo hacen ideal para aplicaciones serverless:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>Seguridad integrada&lt;/strong>: Requiere permisos explícitos para acceder a archivos, red y entorno.&lt;/li>
+&lt;li>&lt;strong>Soporte nativo para TypeScript&lt;/strong>: No necesita configuración adicional.&lt;/li>
+&lt;li>&lt;strong>Gestión de dependencias simplificada&lt;/strong>: Se utilizan URLs en lugar de &lt;code>node_modules&lt;/code>.&lt;/li>
+&lt;li>&lt;strong>Rápido y eficiente&lt;/strong>: Basado en V8 y Rust, ofrece un excelente rendimiento.&lt;/li>
+&lt;/ul>
+&lt;h3 id="beneficios-de-azure-functions">&lt;strong>Beneficios de Azure Functions&lt;/strong>&lt;/h3>
+&lt;p>Azure Functions es una plataforma serverless que permite ejecutar código en la nube sin administrar infraestructura:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>Escalabilidad automática&lt;/strong>: Se adapta a la demanda sin intervención manual.&lt;/li>
+&lt;li>&lt;strong>Modelo de pago por uso&lt;/strong>: Solo se cobra por el tiempo de ejecución.&lt;/li>
+&lt;li>&lt;strong>Integración con otros servicios de Azure&lt;/strong>: Como bases de datos, colas y almacenamiento.&lt;/li>
+&lt;/ul>
+&lt;h2 id="configuración-del-entorno">Configuración del Entorno&lt;/h2>
+&lt;h3 id="1-instalar-deno">&lt;strong>1. Instalar Deno&lt;/strong>&lt;/h3>
+&lt;p>Para instalar Deno en tu máquina local, ejecuta:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">curl -fsSL https://deno.land/x/install/install.sh | sh
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Verifica la instalación con:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">deno --version
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="2-configurar-azure-functions">&lt;strong>2. Configurar Azure Functions&lt;/strong>&lt;/h3>
+&lt;p>Para trabajar con Azure Functions, necesitamos la &lt;strong>Azure Functions Core Tools&lt;/strong> y una suscripción activa en Azure.&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Instalar las herramientas de Azure Functions&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">npm&lt;/span> &lt;span class="n">install&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">g&lt;/span> &lt;span class="n">azure&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">functions&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">core&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">tools&lt;/span>&lt;span class="err">@&lt;/span>&lt;span class="mi">4&lt;/span> &lt;span class="o">--&lt;/span>&lt;span class="n">unsafe&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">perm&lt;/span> &lt;span class="bp">true&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Iniciar sesión en Azure&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">az login
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Crear un nuevo proyecto de Azure Functions&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">func&lt;/span> &lt;span class="n">init&lt;/span> &lt;span class="n">my&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">deno&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">function&lt;/span> &lt;span class="o">--&lt;/span>&lt;span class="n">worker&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">runtime&lt;/span> &lt;span class="n">custom&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">cd&lt;/span> &lt;span class="n">my&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">deno&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">function&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;h2 id="creación-de-una-función-serverless-con-deno">Creación de una Función Serverless con Deno&lt;/h2>
+&lt;p>Vamos a crear una función HTTP que reciba una solicitud y devuelva una respuesta utilizando Deno.&lt;/p>
+&lt;h3 id="1-crear-la-función-http">&lt;strong>1. Crear la Función HTTP&lt;/strong>&lt;/h3>
+&lt;p>Ejecuta el siguiente comando para generar la función:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">func&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="o">--&lt;/span>&lt;span class="n">name&lt;/span> &lt;span class="n">helloDeno&lt;/span> &lt;span class="o">--&lt;/span>&lt;span class="n">template&lt;/span> &lt;span class="s2">&amp;#34;HTTP trigger&amp;#34;&lt;/span> &lt;span class="o">--&lt;/span>&lt;span class="n">language&lt;/span> &lt;span class="n">JavaScript&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Esto generará una carpeta &lt;code>helloDeno&lt;/code> con los archivos necesarios. Ahora, modificamos &lt;code>helloDeno/index.ts&lt;/code> para usar Deno:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="n">default&lt;/span> &lt;span class="n">async&lt;/span> &lt;span class="n">function&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">context&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">any&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">req&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">Request&lt;/span>&lt;span class="p">):&lt;/span> &lt;span class="n">Promise&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">void&lt;/span>&lt;span class="o">&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">context&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;Deno Serverless Function ejecutada&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="n">name&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">req&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">url&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">searchParams&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">get&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;name&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">||&lt;/span> &lt;span class="s2">&amp;#34;Mundo&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">context&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">res&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">body&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="err">`&lt;/span>&lt;span class="n">Hola&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="n">name&lt;/span>&lt;span class="p">}&lt;/span> &lt;span class="n">desde&lt;/span> &lt;span class="n">Deno&lt;/span> &lt;span class="n">y&lt;/span> &lt;span class="n">Azure&lt;/span> &lt;span class="n">Functions&lt;/span>&lt;span class="o">!&lt;/span>&lt;span class="err">`&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="2-modificar-el-archivo-functionjson">&lt;strong>2. Modificar el archivo &lt;code>function.json&lt;/code>&lt;/strong>&lt;/h3>
+&lt;p>Editamos &lt;code>helloDeno/function.json&lt;/code> para definir los métodos HTTP permitidos:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;bindings&amp;#34;: [
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;authLevel&amp;#34;: &amp;#34;anonymous&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;type&amp;#34;: &amp;#34;httpTrigger&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;direction&amp;#34;: &amp;#34;in&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;name&amp;#34;: &amp;#34;req&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;methods&amp;#34;: [&amp;#34;get&amp;#34;, &amp;#34;post&amp;#34;]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> },
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;type&amp;#34;: &amp;#34;http&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;direction&amp;#34;: &amp;#34;out&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;name&amp;#34;: &amp;#34;res&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="despliegue-en-azure">Despliegue en Azure&lt;/h2>
+&lt;h3 id="1-crear-un-recurso-de-azure-functions">&lt;strong>1. Crear un recurso de Azure Functions&lt;/strong>&lt;/h3>
+&lt;p>Antes de desplegar, necesitamos un grupo de recursos y una cuenta de almacenamiento:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">az group create --name deno-serverless --location eastus
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">az storage account create --name denostorage --location eastus --resource-group deno-serverless --sku Standard_LRS
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Luego, creamos una instancia de Azure Functions:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">az functionapp create --resource-group deno-serverless --consumption-plan-location eastus --runtime custom --functions-version 4 --name myDenoFunctionApp --storage-account denostorage
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="2-desplegar-la-función-en-azure">&lt;strong>2. Desplegar la función en Azure&lt;/strong>&lt;/h3>
+&lt;p>Ahora podemos desplegar nuestra función con:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">func&lt;/span> &lt;span class="n">azure&lt;/span> &lt;span class="n">functionapp&lt;/span> &lt;span class="n">publish&lt;/span> &lt;span class="n">myDenoFunctionApp&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Si el despliegue es exitoso, obtendremos una URL donde la función está disponible:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">https://myDenoFunctionApp.azurewebsites.net/api/helloDeno
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Podemos probarla enviando una solicitud HTTP:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">curl &amp;#34;https://myDenoFunctionApp.azurewebsites.net/api/helloDeno?name=Juan&amp;#34;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="integración-con-una-base-de-datos">Integración con una Base de Datos&lt;/h2>
+&lt;p>Para conectar nuestra función con una base de datos, podemos usar Azure Cosmos DB.&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Crear una cuenta de Cosmos DB:&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">az cosmosdb create --resource-group deno-serverless --name denoCosmosDB
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Obtener la cadena de conexión:&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">az cosmosdb keys list --resource-group deno-serverless --name denoCosmosDB --type connection-strings
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Modificar la función para leer datos de Cosmos DB:&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">Client&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s2">&amp;#34;https://deno.land/x/postgres/mod.ts&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">client&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">Client&lt;/span>&lt;span class="p">({&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">user&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;usuario&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">database&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;denoDB&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">hostname&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;tu-host&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">password&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;tu-password&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">port&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">5432&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="n">default&lt;/span> &lt;span class="n">async&lt;/span> &lt;span class="n">function&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">context&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">any&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">req&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">Request&lt;/span>&lt;span class="p">):&lt;/span> &lt;span class="n">Promise&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">void&lt;/span>&lt;span class="o">&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">await&lt;/span> &lt;span class="n">client&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">connect&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="n">result&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">await&lt;/span> &lt;span class="n">client&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">query&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;SELECT * FROM usuarios&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">await&lt;/span> &lt;span class="n">client&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">end&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">context&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">res&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">body&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">JSON&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">stringify&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">result&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">rows&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;h2 id="conclusión">Conclusión&lt;/h2>
+&lt;p>Desarrollar aplicaciones serverless con &lt;strong>Deno y Azure Functions&lt;/strong> nos permite crear aplicaciones altamente escalables y eficientes sin preocuparnos por la infraestructura. &lt;strong>Deno&lt;/strong>, con su seguridad y rendimiento, y &lt;strong>Azure Functions&lt;/strong>, con su escalabilidad automática, forman una combinación poderosa para aplicaciones modernas.&lt;/p>
+&lt;p>¡Explora estas tecnologías y crea tus propias soluciones serverless con Deno y Azure!&lt;/p></description></item><item><title>Testing en Deno: Estrategias para Aplicaciones Grandes</title><link>https://cmas.dev/posts/2024-11-13-testing-strategies-in-deno/</link><pubDate>Wed, 13 Nov 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-11-13-testing-strategies-in-deno/</guid><description>&lt;p>El desarrollo de aplicaciones grandes con &lt;strong>Deno&lt;/strong> requiere un enfoque sólido en &lt;strong>pruebas automatizadas&lt;/strong> para garantizar su estabilidad y escalabilidad. Deno ofrece un sistema de testing integrado con herramientas modernas que facilitan la escritura y ejecución de pruebas unitarias, de integración y funcionales.&lt;/p>
+&lt;p>En este artículo, exploraremos las &lt;strong>estrategias para testing en Deno&lt;/strong>, incluyendo fundamentos teóricos, mejores prácticas y ejemplos de código para aplicaciones a gran escala.&lt;/p>
+&lt;h2 id="por-qué-es-importante-el-testing-en-deno">¿Por qué es importante el testing en Deno?&lt;/h2>
+&lt;p>A medida que una aplicación crece, es fundamental contar con un &lt;strong>sistema de pruebas eficiente&lt;/strong> para evitar regresiones y asegurar que cada módulo funcione correctamente. Las pruebas en Deno permiten:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>Detectar errores temprano&lt;/strong> antes de que lleguen a producción.&lt;/li>
+&lt;li>&lt;strong>Automatizar la validación&lt;/strong> de funcionalidades clave.&lt;/li>
+&lt;li>&lt;strong>Facilitar la refactorización&lt;/strong> sin comprometer la estabilidad.&lt;/li>
+&lt;li>&lt;strong>Asegurar la compatibilidad&lt;/strong> entre módulos y servicios externos.&lt;/li>
+&lt;/ul>
+&lt;h2 id="configuración-del-entorno-de-pruebas-en-deno">Configuración del Entorno de Pruebas en Deno&lt;/h2>
+&lt;p>Deno tiene soporte nativo para testing sin necesidad de librerías externas. Podemos ejecutar pruebas con:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">deno test --allow-net --allow-read
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="1-estructura-de-pruebas-en-un-proyecto-grande">&lt;strong>1. Estructura de pruebas en un proyecto grande&lt;/strong>&lt;/h3>
+&lt;p>Para organizar nuestras pruebas en aplicaciones grandes, podemos seguir esta estructura:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">/project
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│── src/
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ ├── controllers/
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ ├── services/
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ ├── models/
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ ├── routes/
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│── tests/
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ ├── unit/
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ ├── integration/
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ ├── e2e/
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│── deps.ts
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│── mod.ts
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Las pruebas deben dividirse en:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>Unitarias&lt;/strong>: Validan la lógica de funciones individuales.&lt;/li>
+&lt;li>&lt;strong>Integración&lt;/strong>: Aseguran que múltiples módulos funcionen juntos correctamente.&lt;/li>
+&lt;li>&lt;strong>End-to-End (E2E)&lt;/strong>: Simulan el comportamiento del usuario y prueban la aplicación completa.&lt;/li>
+&lt;/ul>
+&lt;h2 id="pruebas-unitarias-en-deno">Pruebas Unitarias en Deno&lt;/h2>
+&lt;p>Las &lt;strong>pruebas unitarias&lt;/strong> son fundamentales para validar funciones y módulos individuales. Supongamos que tenemos un servicio &lt;code>math.ts&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="n">function&lt;/span> &lt;span class="n">suma&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">a&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">number&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">b&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">number&lt;/span>&lt;span class="p">):&lt;/span> &lt;span class="n">number&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">a&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="n">b&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Podemos escribir una prueba unitaria en &lt;code>tests/unit/math.test.ts&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">import { assertEquals } from &amp;#34;https://deno.land/std@0.194.0/testing/asserts.ts&amp;#34;;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">import { suma } from &amp;#34;../../src/services/math.ts&amp;#34;;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Deno.test(&amp;#34;suma debe retornar la suma de dos números&amp;#34;, () =&amp;gt; {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> assertEquals(suma(2, 3), 5);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> assertEquals(suma(-1, 1), 0);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">});
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Ejecutamos la prueba:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">deno test tests/unit/math.test.ts
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="pruebas-de-integración-en-deno">Pruebas de Integración en Deno&lt;/h2>
+&lt;p>Las &lt;strong>pruebas de integración&lt;/strong> validan la comunicación entre diferentes módulos o servicios. Supongamos que tenemos un servicio que interactúa con una base de datos:&lt;/p>
+&lt;h3 id="1-servicio-de-usuarios-userservicets">&lt;strong>1. Servicio de usuarios &lt;code>userService.ts&lt;/code>&lt;/strong>&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">User&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s2">&amp;#34;../models/user.ts&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="k">class&lt;/span> &lt;span class="n">UserService&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">private&lt;/span> &lt;span class="n">users&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">User&lt;/span>&lt;span class="p">[]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">addUser&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">user&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">User&lt;/span>&lt;span class="p">):&lt;/span> &lt;span class="n">void&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">this&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">users&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">push&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">user&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">getUsers&lt;/span>&lt;span class="p">():&lt;/span> &lt;span class="n">User&lt;/span>&lt;span class="p">[]&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">this&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">users&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="2-prueba-de-integración-testsintegrationuserservicetestts">&lt;strong>2. Prueba de integración &lt;code>tests/integration/userService.test.ts&lt;/code>&lt;/strong>&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">assertEquals&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s2">&amp;#34;https://deno.land/std@0.194.0/testing/asserts.ts&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">UserService&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s2">&amp;#34;../../src/services/userService.ts&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">Deno&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">test&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;UserService debe agregar y recuperar usuarios&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="n">service&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">UserService&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">service&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">addUser&lt;/span>&lt;span class="p">({&lt;/span> &lt;span class="n">id&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;1&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">name&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;Carlos&amp;#34;&lt;/span> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="n">users&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">service&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">getUsers&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">assertEquals&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">users&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">length&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">assertEquals&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">users&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">]&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">name&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;Carlos&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Ejecutamos:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">deno &lt;span class="nb">test&lt;/span> tests/integration/userService.test.ts
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="pruebas-end-to-end-e2e-en-deno">Pruebas End-to-End (E2E) en Deno&lt;/h2>
+&lt;p>Las &lt;strong>pruebas E2E&lt;/strong> evalúan la aplicación completa simulando interacciones de usuario. Utilizaremos &lt;strong>Deno y Oak&lt;/strong> para probar una API REST.&lt;/p>
+&lt;h3 id="1-configurar-un-servidor-api-con-oak">&lt;strong>1. Configurar un servidor API con Oak&lt;/strong>&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">Application&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">Router&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s2">&amp;#34;https://deno.land/x/oak/mod.ts&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">router&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">Router&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">router&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">get&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;/ping&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">ctx&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ctx&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">response&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">body&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">message&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;pong&amp;#34;&lt;/span> &lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">app&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">Application&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">app&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">use&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">router&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">routes&lt;/span>&lt;span class="p">());&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">app&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">use&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">router&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">allowedMethods&lt;/span>&lt;span class="p">());&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">await&lt;/span> &lt;span class="n">app&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">listen&lt;/span>&lt;span class="p">({&lt;/span> &lt;span class="n">port&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">8000&lt;/span> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="2-prueba-e2e-para-la-api">&lt;strong>2. Prueba E2E para la API&lt;/strong>&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">assertEquals&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s2">&amp;#34;https://deno.land/std@0.194.0/testing/asserts.ts&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">Deno&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">test&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;La API debe responder con pong&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">async&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="n">response&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">await&lt;/span> &lt;span class="n">fetch&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;http://localhost:8000/ping&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="n">data&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">await&lt;/span> &lt;span class="n">response&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">json&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">assertEquals&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">data&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">message&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;pong&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Ejecutamos la prueba:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">deno test tests/e2e/api.test.ts --allow-net
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="estrategias-para-testing-en-aplicaciones-grandes">Estrategias para Testing en Aplicaciones Grandes&lt;/h2>
+&lt;p>Para aplicaciones grandes, es importante seguir estas estrategias:&lt;/p>
+&lt;h3 id="1-uso-de-mocks-y-stubs">&lt;strong>1. Uso de Mocks y Stubs&lt;/strong>&lt;/h3>
+&lt;p>Para evitar dependencias innecesarias en pruebas unitarias, podemos utilizar mocks:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">assertEquals&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s2">&amp;#34;https://deno.land/std@0.194.0/testing/asserts.ts&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">spy&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s2">&amp;#34;https://deno.land/x/mock/mod.ts&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">mockFunction&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">spy&lt;/span>&lt;span class="p">(()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="s2">&amp;#34;mock response&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">assertEquals&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">mockFunction&lt;/span>&lt;span class="p">(),&lt;/span> &lt;span class="s2">&amp;#34;mock response&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="2-pruebas-en-paralelo">&lt;strong>2. Pruebas en Paralelo&lt;/strong>&lt;/h3>
+&lt;p>Deno permite ejecutar pruebas en paralelo para mejorar el rendimiento:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">Deno.test(&amp;#34;Prueba 1&amp;#34;, async () =&amp;gt; {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> await new Promise(resolve =&amp;gt; setTimeout(resolve, 100));
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> console.log(&amp;#34;Prueba 1 completada&amp;#34;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">});
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Deno.test(&amp;#34;Prueba 2&amp;#34;, async () =&amp;gt; {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> await new Promise(resolve =&amp;gt; setTimeout(resolve, 50));
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> console.log(&amp;#34;Prueba 2 completada&amp;#34;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">});
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="conclusión">Conclusión&lt;/h2>
+&lt;p>El &lt;strong>testing en Deno&lt;/strong> es una parte esencial del desarrollo de aplicaciones grandes. Implementar &lt;strong>pruebas unitarias, de integración y E2E&lt;/strong> permite mejorar la calidad y fiabilidad del código.&lt;/p>
+&lt;p>Siguiendo estas estrategias y buenas prácticas, podemos asegurar que nuestras aplicaciones en Deno sean &lt;strong>más estables, escalables y fáciles de mantener&lt;/strong>.&lt;/p></description></item><item><title>Integración de Angular con APIs RESTful en Deno</title><link>https://cmas.dev/posts/2024-10-30-angular-integration-with-api-rest-in-deno/</link><pubDate>Wed, 30 Oct 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-10-30-angular-integration-with-api-rest-in-deno/</guid><description>&lt;p>La integración entre &lt;strong>Angular&lt;/strong> y &lt;strong>APIs RESTful&lt;/strong> creadas con &lt;strong>Deno&lt;/strong> permite desarrollar aplicaciones modernas y escalables con una arquitectura limpia y basada en &lt;strong>TypeScript&lt;/strong>. En este artículo, exploraremos cómo conectar una aplicación Angular con un backend RESTful en Deno paso a paso, incluyendo fundamentos teóricos, ejemplos prácticos y buenas prácticas.&lt;/p>
 &lt;h2 id="por-qué-utilizar-angular-y-deno">¿Por qué utilizar Angular y Deno?&lt;/h2>
 &lt;h3 id="beneficios-de-angular">&lt;strong>Beneficios de Angular&lt;/strong>&lt;/h3>
 &lt;p>&lt;strong>Angular&lt;/strong> es un framework frontend desarrollado por &lt;strong>Google&lt;/strong> que permite construir aplicaciones web robustas y escalables. Sus principales características incluyen:&lt;/p>
