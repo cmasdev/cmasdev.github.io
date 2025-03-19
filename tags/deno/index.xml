@@ -1,4 +1,148 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Deno on Christian Amado's Blog</title><link>https://cmas.dev/tags/deno/</link><description>Recent content in Deno on Christian Amado's Blog</description><generator>Hugo -- gohugo.io</generator><language>es</language><lastBuildDate>Wed, 15 Jan 2025 00:00:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/tags/deno/index.xml" rel="self" type="application/rss+xml"/><item><title>Diseño de APIs escalables con Deno y TypeScript</title><link>https://cmas.dev/posts/2025-01-15-scalable-design-apis/</link><pubDate>Wed, 15 Jan 2025 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2025-01-15-scalable-design-apis/</guid><description>&lt;p>El desarrollo de APIs escalables es un aspecto clave en la construcción de aplicaciones modernas. &lt;strong>Deno&lt;/strong>, un runtime moderno para JavaScript y TypeScript, ofrece una serie de características que lo convierten en una excelente alternativa para la creación de APIs seguras y eficientes. En este artículo, exploraremos cómo diseñar una API REST escalable utilizando &lt;strong>Deno y TypeScript&lt;/strong>, aplicando las mejores prácticas y optimizaciones.&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Deno on Christian Amado's Blog</title><link>https://cmas.dev/tags/deno/</link><description>Recent content in Deno on Christian Amado's Blog</description><generator>Hugo -- gohugo.io</generator><language>es</language><lastBuildDate>Wed, 05 Feb 2025 00:00:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/tags/deno/index.xml" rel="self" type="application/rss+xml"/><item><title>Deploy automatizado de APIs Deno en Azure Functions</title><link>https://cmas.dev/posts/2025-02-05-automatized-deploy-api-deno/</link><pubDate>Wed, 05 Feb 2025 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2025-02-05-automatized-deploy-api-deno/</guid><description>&lt;p>El despliegue automatizado de APIs en la nube es una práctica esencial en el desarrollo moderno. &lt;strong>Deno&lt;/strong>, con su seguridad integrada y soporte nativo para TypeScript, es una excelente opción para construir APIs escalables y eficientes. &lt;strong>Azure Functions&lt;/strong>, por otro lado, permite ejecutar código sin preocuparse por la infraestructura subyacente.&lt;/p>
+&lt;p>En este artículo, aprenderás cómo &lt;strong>desplegar automáticamente una API de Deno en Azure Functions&lt;/strong> usando GitHub Actions.&lt;/p>
+&lt;h2 id="1-por-qué-usar-deno-con-azure-functions">1. ¿Por qué Usar Deno con Azure Functions?&lt;/h2>
+&lt;p>Las ventajas de utilizar Deno con &lt;strong>Azure Functions&lt;/strong> incluyen:&lt;/p>
+&lt;p>✅ &lt;strong>Ejecuta código sin servidores&lt;/strong>: Solo pagas por las ejecuciones realizadas.&lt;br>
+✅ &lt;strong>Compatibilidad con TypeScript&lt;/strong>: No requiere configuración adicional.&lt;br>
+✅ &lt;strong>Seguridad mejorada&lt;/strong>: Deno requiere permisos explícitos.&lt;br>
+✅ &lt;strong>Escalabilidad automática&lt;/strong>: Azure Functions escala dinámicamente según la carga.&lt;br>
+✅ &lt;strong>Despliegue automatizado&lt;/strong>: Se puede integrar con GitHub Actions para CI/CD.&lt;/p>
+&lt;h2 id="2-configuración-del-proyecto-deno">2. Configuración del Proyecto Deno&lt;/h2>
+&lt;h3 id="21-instalación-de-deno">&lt;strong>2.1 Instalación de Deno&lt;/strong>&lt;/h3>
+&lt;p>Si no tienes Deno instalado, usa el siguiente comando:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">curl -fsSL https://deno.land/x/install/install.sh | sh
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">deno --version
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="22-creación-de-una-api-en-deno">&lt;strong>2.2 Creación de una API en Deno&lt;/strong>&lt;/h3>
+&lt;p>Primero, creamos una API REST básica usando el framework Oak:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">mkdir deno-api &amp;amp;&amp;amp; cd deno-api
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">echo &amp;#34;{}&amp;#34; &amp;gt; deps.ts
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">echo &amp;#34;{}&amp;#34; &amp;gt; server.ts
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">echo &amp;#34;{}&amp;#34; &amp;gt; routes.ts
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">echo &amp;#34;{}&amp;#34; &amp;gt; controllers.ts
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="depsts-dependencias">&lt;strong>&lt;code>deps.ts&lt;/code> (Dependencias)&lt;/strong>&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">Application&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">Router&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s2">&amp;#34;https://deno.land/x/oak/mod.ts&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="serverts-servidor-principal">&lt;strong>&lt;code>server.ts&lt;/code> (Servidor Principal)&lt;/strong>&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">Application&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s2">&amp;#34;./deps.ts&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="n">router&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s2">&amp;#34;./routes.ts&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">app&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">Application&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">app&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">use&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">router&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">routes&lt;/span>&lt;span class="p">());&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">app&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">use&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">router&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">allowedMethods&lt;/span>&lt;span class="p">());&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">console&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;API Deno corriendo en http://localhost:8080&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">await&lt;/span> &lt;span class="n">app&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">listen&lt;/span>&lt;span class="p">({&lt;/span> &lt;span class="n">port&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">8080&lt;/span> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="routests-definición-de-rutas">&lt;strong>&lt;code>routes.ts&lt;/code> (Definición de Rutas)&lt;/strong>&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">Router&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s2">&amp;#34;./deps.ts&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">getHello&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s2">&amp;#34;./controllers.ts&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">router&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">Router&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">router&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">get&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;/hello&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">getHello&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="n">default&lt;/span> &lt;span class="n">router&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="controllersts-controlador-de-rutas">&lt;strong>&lt;code>controllers.ts&lt;/code> (Controlador de Rutas)&lt;/strong>&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">Context&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s2">&amp;#34;https://deno.land/x/oak/mod.ts&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="k">const&lt;/span> &lt;span class="n">getHello&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">ctx&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">Context&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ctx&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">response&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">body&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">message&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;Hola desde Deno y Azure!&amp;#34;&lt;/span> &lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="3-configuración-de-azure-functions">3. Configuración de Azure Functions&lt;/h2>
+&lt;h3 id="31-crear-un-azure-function-app">&lt;strong>3.1 Crear un Azure Function App&lt;/strong>&lt;/h3>
+&lt;ol>
+&lt;li>Ingresa a &lt;a href="https://portal.azure.com/">Azure Portal&lt;/a>.&lt;/li>
+&lt;li>Dirígete a &lt;strong>Azure Functions&lt;/strong> y selecciona &lt;strong>Crear Función&lt;/strong>.&lt;/li>
+&lt;li>Configura los siguientes parámetros:
+&lt;ul>
+&lt;li>&lt;strong>Nombre de la función&lt;/strong>: &lt;code>deno-api-func&lt;/code>&lt;/li>
+&lt;li>&lt;strong>Lenguaje&lt;/strong>: &lt;strong>Custom Handler&lt;/strong>&lt;/li>
+&lt;li>&lt;strong>Plan de ejecución&lt;/strong>: &lt;strong>Consumo (Pay-as-you-go)&lt;/strong>&lt;/li>
+&lt;li>&lt;strong>Sistema Operativo&lt;/strong>: &lt;strong>Linux&lt;/strong>&lt;/li>
+&lt;li>&lt;strong>Región&lt;/strong>: La más cercana a tu ubicación.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Presiona &lt;strong>Crear y Desplegar&lt;/strong>.&lt;/li>
+&lt;/ol>
+&lt;h3 id="32-configurar-variables-de-entorno">&lt;strong>3.2 Configurar Variables de Entorno&lt;/strong>&lt;/h3>
+&lt;p>En el portal de Azure, dirígete a &lt;strong>Configuración &amp;gt; Variables de Entorno&lt;/strong> y añade:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>DENO_VERSION=1.38.0&lt;/code>&lt;/li>
+&lt;li>&lt;code>PORT=8080&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;h2 id="4-creación-de-hostjson-y-functionjson">4. Creación de &lt;code>host.json&lt;/code> y &lt;code>function.json&lt;/code>&lt;/h2>
+&lt;p>Para que Azure Functions entienda nuestra API, debemos crear archivos de configuración.&lt;/p>
+&lt;h4 id="hostjson">&lt;strong>&lt;code>host.json&lt;/code>&lt;/strong>&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;version&amp;#34;: &amp;#34;2.0&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;extensionBundle&amp;#34;: {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;id&amp;#34;: &amp;#34;Microsoft.Azure.Functions.ExtensionBundle&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;version&amp;#34;: &amp;#34;[3.*, 4.0.0)&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="functionjson">&lt;strong>&lt;code>function.json&lt;/code>&lt;/strong>&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;bindings&amp;#34;: [
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;authLevel&amp;#34;: &amp;#34;anonymous&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;type&amp;#34;: &amp;#34;httpTrigger&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;direction&amp;#34;: &amp;#34;in&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;name&amp;#34;: &amp;#34;req&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;methods&amp;#34;: [&amp;#34;get&amp;#34;]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> },
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;type&amp;#34;: &amp;#34;http&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;direction&amp;#34;: &amp;#34;out&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;name&amp;#34;: &amp;#34;res&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="5-automatización-con-github-actions">5. Automatización con GitHub Actions&lt;/h2>
+&lt;p>Para desplegar automáticamente nuestra API Deno en &lt;strong>Azure Functions&lt;/strong>, usaremos GitHub Actions.&lt;/p>
+&lt;h3 id="51-crear-un-archivo-de-workflow">&lt;strong>5.1 Crear un archivo de Workflow&lt;/strong>&lt;/h3>
+&lt;p>En el repositorio de GitHub, crea la ruta &lt;code>.github/workflows/deploy.yml&lt;/code> y agrega lo siguiente:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">name: Deploy Deno API to Azure Functions
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">on:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> push:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> branches:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - main
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">jobs:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> build-and-deploy:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> runs-on: ubuntu-latest
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> steps:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - name: Checkout repository
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> uses: actions/checkout@v3
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - name: Setup Deno
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> uses: denoland/setup-deno@v1
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> with:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> deno-version: v1.x
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - name: Deploy to Azure Functions
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> uses: Azure/functions-action@v1
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> with:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> app-name: &amp;#34;deno-api-func&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> package: &amp;#34;.&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> publish-profile: ${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE }}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="52-configurar-secretos-en-github">&lt;strong>5.2 Configurar Secretos en GitHub&lt;/strong>&lt;/h3>
+&lt;ol>
+&lt;li>Entra a tu repositorio en GitHub.&lt;/li>
+&lt;li>Ve a &lt;strong>Settings &amp;gt; Secrets and Variables &amp;gt; Actions&lt;/strong>.&lt;/li>
+&lt;li>Agrega un secreto llamado &lt;code>AZURE_FUNCTIONAPP_PUBLISH_PROFILE&lt;/code> con el contenido del perfil de publicación de Azure.&lt;/li>
+&lt;/ol>
+&lt;h2 id="6-despliegue-y-prueba">6. Despliegue y Prueba&lt;/h2>
+&lt;h3 id="61-ejecutar-el-despliegue">&lt;strong>6.1 Ejecutar el Despliegue&lt;/strong>&lt;/h3>
+&lt;p>Cada vez que hagas &lt;code>git push&lt;/code> a la rama &lt;code>main&lt;/code>, GitHub Actions ejecutará el despliegue automáticamente.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git add .
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">git commit -m &amp;#34;Deploy API Deno en Azure Functions&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">git push origin main
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="62-probar-la-api-en-azure">&lt;strong>6.2 Probar la API en Azure&lt;/strong>&lt;/h3>
+&lt;p>Cuando el despliegue finalice, podrás acceder a la API con:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">curl https://deno-api-func.azurewebsites.net/api/hello
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Debería responder:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">{ &amp;#34;message&amp;#34;: &amp;#34;Hola desde Deno y Azure!&amp;#34; }
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="7-conclusión">7. Conclusión&lt;/h2>
+&lt;p>El &lt;strong>deploy automatizado de APIs Deno en Azure Functions&lt;/strong> ofrece una solución escalable y eficiente sin preocuparse por la infraestructura. &lt;strong>GitHub Actions&lt;/strong> facilita la automatización del proceso CI/CD.&lt;/p></description></item><item><title>Diseño de APIs escalables con Deno y TypeScript</title><link>https://cmas.dev/posts/2025-01-15-scalable-design-apis/</link><pubDate>Wed, 15 Jan 2025 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2025-01-15-scalable-design-apis/</guid><description>&lt;p>El desarrollo de APIs escalables es un aspecto clave en la construcción de aplicaciones modernas. &lt;strong>Deno&lt;/strong>, un runtime moderno para JavaScript y TypeScript, ofrece una serie de características que lo convierten en una excelente alternativa para la creación de APIs seguras y eficientes. En este artículo, exploraremos cómo diseñar una API REST escalable utilizando &lt;strong>Deno y TypeScript&lt;/strong>, aplicando las mejores prácticas y optimizaciones.&lt;/p>
 &lt;h2 id="1-introducción-a-deno-y-sus-ventajas">1. Introducción a Deno y sus Ventajas&lt;/h2>
 &lt;h3 id="qué-es-deno">&lt;strong>¿Qué es Deno?&lt;/strong>&lt;/h3>
 &lt;p>Deno es un runtime para JavaScript y TypeScript creado por &lt;strong>Ryan Dahl&lt;/strong>, el mismo creador de Node.js. Se diseñó para corregir deficiencias de Node.js y proporcionar un entorno más seguro y moderno.&lt;/p>

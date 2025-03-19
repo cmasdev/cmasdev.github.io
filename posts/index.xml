@@ -1,4 +1,430 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Christian Amado's Blog</title><link>https://cmas.dev/posts/</link><description>Recent content in Posts on Christian Amado's Blog</description><generator>Hugo -- gohugo.io</generator><language>es</language><lastBuildDate>Wed, 29 Jan 2025 00:00:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Cómo estructurar grandes proyectos en TypeScript</title><link>https://cmas.dev/posts/2025-01-29-how-to-structure-big-projects/</link><pubDate>Wed, 29 Jan 2025 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2025-01-29-how-to-structure-big-projects/</guid><description>&lt;p>El desarrollo de grandes aplicaciones en &lt;strong>TypeScript&lt;/strong> requiere una estructura de proyecto bien definida para mantener la escalabilidad, mantenibilidad y eficiencia del código. Una mala organización puede llevar a problemas de acoplamiento, dificultades en la depuración y una curva de aprendizaje elevada para nuevos desarrolladores en el equipo.&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Christian Amado's Blog</title><link>https://cmas.dev/posts/</link><description>Recent content in Posts on Christian Amado's Blog</description><generator>Hugo -- gohugo.io</generator><language>es</language><lastBuildDate>Wed, 26 Feb 2025 00:00:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Angular 17 y su impacto en el desarrollo web</title><link>https://cmas.dev/posts/2025-02-26-angular-17-web-dev-impact/</link><pubDate>Wed, 26 Feb 2025 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2025-02-26-angular-17-web-dev-impact/</guid><description>&lt;p>Angular ha sido una de las tecnologías más robustas para el desarrollo de aplicaciones web modernas. Con cada nueva versión, el framework introduce mejoras significativas en rendimiento, usabilidad y escalabilidad. &lt;strong>Angular 17&lt;/strong> no es la excepción y trae consigo importantes cambios que impactarán la manera en que los desarrolladores construyen aplicaciones web.&lt;/p>
+&lt;p>En este artículo, exploraremos:&lt;/p>
+&lt;ul>
+&lt;li>Las principales novedades de &lt;strong>Angular 17&lt;/strong>.&lt;/li>
+&lt;li>Mejoras en rendimiento y reactividad.&lt;/li>
+&lt;li>Impacto en la arquitectura de proyectos Angular.&lt;/li>
+&lt;li>Cómo adoptar Angular 17 en proyectos existentes.&lt;/li>
+&lt;/ul>
+&lt;h2 id="1-principales-novedades-de-angular-17">1. Principales Novedades de Angular 17&lt;/h2>
+&lt;h3 id="-nuevo-motor-de-renderizado">🔹 &lt;strong>Nuevo Motor de Renderizado&lt;/strong>&lt;/h3>
+&lt;p>Angular 17 introduce un motor de renderizado más eficiente que reduce los tiempos de carga y mejora la experiencia de usuario.&lt;/p>
+&lt;h3 id="-signals-para-mejorar-la-reactividad">🔹 &lt;strong>Signals para Mejorar la Reactividad&lt;/strong>&lt;/h3>
+&lt;p>Uno de los cambios más esperados es la introducción de &lt;strong>Signals&lt;/strong>, una alternativa eficiente para la reactividad en Angular sin necesidad de usar RxJS.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="k">signal&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;@angular/core&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="k">class&lt;/span> &lt;span class="n">ContadorComponent&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">contador&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">signal&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">incrementar&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">this&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">contador&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">set&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">this&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">contador&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="-optimización-de-hydration-para-ssr">🔹 &lt;strong>Optimización de Hydration para SSR&lt;/strong>&lt;/h3>
+&lt;p>El Server-Side Rendering (SSR) mejora con un nuevo mecanismo de &lt;strong>hydration optimizado&lt;/strong>, lo que permite aplicaciones más rápidas sin afectar la interactividad.&lt;/p>
+&lt;h3 id="-standalone-components-mejorados">🔹 &lt;strong>Standalone Components Mejorados&lt;/strong>&lt;/h3>
+&lt;p>Con Angular 17, los &lt;strong>Standalone Components&lt;/strong> se convierten en la recomendación principal para crear aplicaciones más modulares y ligeras.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">Component&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;@angular/core&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">@&lt;/span>&lt;span class="n">Component&lt;/span>&lt;span class="p">({&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">standalone&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="bp">true&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">selector&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;app-bienvenida&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">template&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;&amp;lt;h1&amp;gt;Bienvenido a Angular 17&amp;lt;/h1&amp;gt;&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">})&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="k">class&lt;/span> &lt;span class="n">BienvenidaComponent&lt;/span> &lt;span class="p">{}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="2-mejoras-en-rendimiento-y-reactividad">2. Mejoras en Rendimiento y Reactividad&lt;/h2>
+&lt;h3 id="-menos-overhead-en-el-cambio-de-estado">✅ &lt;strong>Menos Overhead en el Cambio de Estado&lt;/strong>&lt;/h3>
+&lt;p>Gracias al uso de &lt;strong>Signals&lt;/strong>, Angular 17 elimina gran parte del trabajo extra de &lt;strong>Zone.js&lt;/strong>, permitiendo actualizaciones más rápidas en la interfaz de usuario.&lt;/p>
+&lt;h3 id="-carga-más-rápida-con-bundles-más-pequeños">✅ &lt;strong>Carga Más Rápida con Bundles Más Pequeños&lt;/strong>&lt;/h3>
+&lt;p>El nuevo motor de renderizado optimiza la carga de módulos, eliminando código innecesario y reduciendo el tamaño del bundle final.&lt;/p>
+&lt;h3 id="-mejoras-en-el-ng-build---watch">✅ &lt;strong>Mejoras en el &lt;code>ng build --watch&lt;/code>&lt;/strong>&lt;/h3>
+&lt;p>El tiempo de compilación en &lt;strong>desarrollo&lt;/strong> es significativamente más rápido con mejoras en &lt;code>ng build&lt;/code> y &lt;code>ng serve&lt;/code>.&lt;/p>
+&lt;h2 id="3-impacto-en-la-arquitectura-de-proyectos">3. Impacto en la Arquitectura de Proyectos&lt;/h2>
+&lt;h3 id="-adopción-de-standalone-components">🔹 &lt;strong>Adopción de Standalone Components&lt;/strong>&lt;/h3>
+&lt;p>Con Angular 17, se recomienda abandonar los módulos (&lt;code>NgModule&lt;/code>) en favor de los &lt;strong>Standalone Components&lt;/strong>, lo que reduce la complejidad de la arquitectura.&lt;/p>
+&lt;p>&lt;strong>Antes (con NgModule):&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="err">@&lt;/span>&lt;span class="n">NgModule&lt;/span>&lt;span class="p">({&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">declarations&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">BienvenidaComponent&lt;/span>&lt;span class="p">],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">imports&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">CommonModule&lt;/span>&lt;span class="p">],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">bootstrap&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">BienvenidaComponent&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">})&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="k">class&lt;/span> &lt;span class="n">AppModule&lt;/span> &lt;span class="p">{}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>Ahora (Standalone Component):&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">import { bootstrapApplication } from &amp;#39;@angular/platform-browser&amp;#39;;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">import { BienvenidaComponent } from &amp;#39;./bienvenida.component&amp;#39;;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">bootstrapApplication(BienvenidaComponent);
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="-mejoras-en-server-side-rendering-ssr">🔹 &lt;strong>Mejoras en Server-Side Rendering (SSR)&lt;/strong>&lt;/h3>
+&lt;p>Para aplicaciones que dependen de SEO y rendimiento, Angular 17 hace más eficiente la &lt;strong>renderización en el servidor&lt;/strong>.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">import { provideServerRendering } from &amp;#39;@angular/platform-server&amp;#39;;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">bootstrapApplication(AppComponent, {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> providers: [provideServerRendering()]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">});
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="4-cómo-adoptar-angular-17-en-proyectos-existentes">4. Cómo Adoptar Angular 17 en Proyectos Existentes&lt;/h2>
+&lt;p>Si ya tienes una aplicación en Angular 16 o inferior, puedes actualizar a Angular 17 siguiendo estos pasos:&lt;/p>
+&lt;h3 id="-actualizar-angular-cli-y-core">🔹 &lt;strong>Actualizar Angular CLI y Core&lt;/strong>&lt;/h3>
+&lt;p>Ejecuta el siguiente comando en tu terminal:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">ng update @angular/cli @angular/core
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="-migrar-a-standalone-components-opcional">🔹 &lt;strong>Migrar a Standalone Components (Opcional)&lt;/strong>&lt;/h3>
+&lt;p>Si deseas modernizar tu código, puedes empezar a migrar tus componentes a standalone.&lt;/p>
+&lt;h3 id="-reemplazar-zonejs-con-signals-opcional">🔹 &lt;strong>Reemplazar Zone.js con Signals (Opcional)&lt;/strong>&lt;/h3>
+&lt;p>Para aplicaciones más reactivas, puedes reemplazar &lt;code>EventEmitter&lt;/code> y &lt;code>RxJS&lt;/code> por Signals.&lt;/p>
+&lt;h2 id="5-conclusión">5. Conclusión&lt;/h2>
+&lt;p>Angular 17 marca un &lt;strong>antes y un después&lt;/strong> en la evolución del framework. Sus mejoras en &lt;strong>performance, reactividad y simplificación arquitectónica&lt;/strong> permitirán construir aplicaciones más eficientes y escalables.&lt;/p></description></item><item><title>Usando generics avanzados en TypeScript</title><link>https://cmas.dev/posts/2025-02-19-generics-typescript/</link><pubDate>Wed, 19 Feb 2025 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2025-02-19-generics-typescript/</guid><description>&lt;p>&lt;strong>TypeScript&lt;/strong> ofrece una potente funcionalidad llamada &lt;strong>Generics&lt;/strong> que permite crear componentes y funciones altamente reutilizables y seguros en tiempo de compilación. Los &lt;strong>Generics avanzados&lt;/strong> van más allá de lo básico y permiten escribir código flexible sin perder el tipado estricto.&lt;/p>
+&lt;p>En este artículo, exploraremos:&lt;/p>
+&lt;ul>
+&lt;li>Cómo funcionan los &lt;strong>Generics&lt;/strong> en TypeScript.&lt;/li>
+&lt;li>Uso de &lt;strong>restricciones (&lt;code>extends&lt;/code>)&lt;/strong>.&lt;/li>
+&lt;li>Aplicación de &lt;strong>múltiples tipos genéricos&lt;/strong>.&lt;/li>
+&lt;li>Uso de &lt;strong>tipos condicionales y mapped types&lt;/strong>.&lt;/li>
+&lt;li>Casos prácticos en &lt;strong>funciones, clases e interfaces&lt;/strong>.&lt;/li>
+&lt;/ul>
+&lt;h2 id="1-introducción-a-generics-en-typescript">1. Introducción a Generics en TypeScript&lt;/h2>
+&lt;p>Los &lt;strong>Generics&lt;/strong> permiten escribir código reutilizable sin perder seguridad en el tipado.&lt;/p>
+&lt;p>Ejemplo básico de una función genérica:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">function&lt;/span> &lt;span class="n">identidad&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">T&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">valor&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">T&lt;/span>&lt;span class="p">):&lt;/span> &lt;span class="n">T&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">valor&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">numero&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">identidad&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">number&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">42&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">texto&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">identidad&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">string&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;Hola TypeScript&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Aquí, &lt;code>T&lt;/code> representa un tipo genérico que será inferido por TypeScript en tiempo de ejecución.&lt;/p>
+&lt;h2 id="2-uso-de-restricciones-con-extends">2. Uso de Restricciones con &lt;code>extends&lt;/code>&lt;/h2>
+&lt;p>Podemos restringir los tipos que un &lt;strong>Generic&lt;/strong> puede aceptar usando &lt;code>extends&lt;/code>.&lt;/p>
+&lt;p>Ejemplo con restricción de objeto:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">interface&lt;/span> &lt;span class="n">Persona&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">nombre&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">string&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">edad&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">number&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">function&lt;/span> &lt;span class="n">mostrarNombre&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">T&lt;/span> &lt;span class="k">extends&lt;/span> &lt;span class="n">Persona&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">obj&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">T&lt;/span>&lt;span class="p">):&lt;/span> &lt;span class="n">string&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">obj&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">nombre&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">usuario&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">nombre&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;Carlos&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">edad&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">30&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">rol&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;Admin&amp;#34;&lt;/span> &lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">console&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">mostrarNombre&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">usuario&lt;/span>&lt;span class="p">));&lt;/span> &lt;span class="o">//&lt;/span> &lt;span class="n">Carlos&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Aquí, &lt;code>T&lt;/code> debe cumplir con la estructura de &lt;code>Persona&lt;/code>, lo que garantiza que el objeto pasado tenga un &lt;code>nombre&lt;/code>.&lt;/p>
+&lt;h2 id="3-uso-de-múltiples-tipos-genéricos">3. Uso de Múltiples Tipos Genéricos&lt;/h2>
+&lt;p>Podemos definir múltiples tipos genéricos en una función o clase:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">function&lt;/span> &lt;span class="n">combinar&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">T&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">U&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">a&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">T&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">b&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">U&lt;/span>&lt;span class="p">):&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">T&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">U&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">a&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">b&lt;/span>&lt;span class="p">];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">resultado&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">combinar&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">number&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">string&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">42&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;Hola&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">console&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">resultado&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="o">//&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="mi">42&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;Hola&amp;#39;&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Este método permite combinar distintos tipos en un solo resultado sin perder la inferencia de tipos.&lt;/p>
+&lt;h2 id="4-uso-de-tipos-condicionales-conditional-types">4. Uso de Tipos Condicionales (&lt;code>Conditional Types&lt;/code>)&lt;/h2>
+&lt;p>Los tipos condicionales permiten definir un tipo basado en otro.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">type&lt;/span> &lt;span class="n">EsString&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">T&lt;/span>&lt;span class="o">&amp;gt;&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">T&lt;/span> &lt;span class="k">extends&lt;/span> &lt;span class="n">string&lt;/span> &lt;span class="err">?&lt;/span> &lt;span class="s2">&amp;#34;Es una cadena&amp;#34;&lt;/span> &lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;No es una cadena&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">type&lt;/span> &lt;span class="n">Caso1&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">EsString&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">string&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="o">//&lt;/span> &lt;span class="s2">&amp;#34;Es una cadena&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">type&lt;/span> &lt;span class="n">Caso2&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">EsString&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">number&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="o">//&lt;/span> &lt;span class="s2">&amp;#34;No es una cadena&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Esto es útil para definir tipos que dependen de otros de manera flexible.&lt;/p>
+&lt;h2 id="5-uso-de-mapped-types-con-generics">5. Uso de &lt;strong>Mapped Types&lt;/strong> con Generics&lt;/h2>
+&lt;p>Los &lt;strong>Mapped Types&lt;/strong> permiten transformar tipos basados en un tipo genérico.&lt;/p>
+&lt;p>Ejemplo:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">type&lt;/span> &lt;span class="n">Opcional&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">T&lt;/span>&lt;span class="o">&amp;gt;&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">K&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">keyof&lt;/span> &lt;span class="n">T&lt;/span>&lt;span class="p">]&lt;/span>&lt;span class="err">?&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">T&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">K&lt;/span>&lt;span class="p">];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">interface&lt;/span> &lt;span class="n">Usuario&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">id&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">number&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">nombre&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">string&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">email&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">string&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">type&lt;/span> &lt;span class="n">UsuarioOpcional&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">Opcional&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">Usuario&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">user&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">UsuarioOpcional&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">nombre&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;Carlos&amp;#34;&lt;/span> &lt;span class="p">};&lt;/span> &lt;span class="o">//&lt;/span> &lt;span class="n">Correcto&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Este tipo genérico convierte todas las propiedades de &lt;code>T&lt;/code> en opcionales.&lt;/p>
+&lt;h2 id="6-aplicación-en-clases">6. Aplicación en Clases&lt;/h2>
+&lt;p>Los Generics también son útiles en clases para manejar datos de forma estructurada.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">class&lt;/span> &lt;span class="n">Caja&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">T&lt;/span>&lt;span class="o">&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">private&lt;/span> &lt;span class="n">contenido&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">T&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">constructor&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">valor&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">T&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">this&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">contenido&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">valor&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">obtenerContenido&lt;/span>&lt;span class="p">():&lt;/span> &lt;span class="n">T&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">this&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">contenido&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">cajaNumero&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">Caja&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">number&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">10&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">console&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">cajaNumero&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">obtenerContenido&lt;/span>&lt;span class="p">());&lt;/span> &lt;span class="o">//&lt;/span> &lt;span class="mi">10&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">cajaTexto&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">Caja&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">string&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;Hola Mundo&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">console&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">cajaTexto&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">obtenerContenido&lt;/span>&lt;span class="p">());&lt;/span> &lt;span class="o">//&lt;/span> &lt;span class="n">Hola&lt;/span> &lt;span class="n">Mundo&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Aquí, la clase &lt;code>Caja&amp;lt;T&amp;gt;&lt;/code> puede almacenar cualquier tipo sin perder seguridad en el tipado.&lt;/p>
+&lt;h2 id="7-uso-avanzado-con-keyof-y-in">7. Uso Avanzado con &lt;code>keyof&lt;/code> y &lt;code>in&lt;/code>&lt;/h2>
+&lt;p>&lt;code>keyof&lt;/code> nos permite trabajar con las claves de un objeto en TypeScript.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">function&lt;/span> &lt;span class="n">obtenerValor&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">T&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">K&lt;/span> &lt;span class="k">extends&lt;/span> &lt;span class="n">keyof&lt;/span> &lt;span class="n">T&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">obj&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">T&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">clave&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">K&lt;/span>&lt;span class="p">):&lt;/span> &lt;span class="n">T&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">K&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">obj&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">clave&lt;/span>&lt;span class="p">];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">usuario&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">id&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">nombre&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;Carlos&amp;#34;&lt;/span> &lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">console&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">obtenerValor&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">usuario&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;nombre&amp;#34;&lt;/span>&lt;span class="p">));&lt;/span> &lt;span class="o">//&lt;/span> &lt;span class="n">Carlos&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Aquí &lt;code>K&lt;/code> solo puede ser una clave existente dentro de &lt;code>T&lt;/code>, evitando errores en tiempo de compilación.&lt;/p>
+&lt;h2 id="8-conclusión">8. Conclusión&lt;/h2>
+&lt;p>Los &lt;strong>Generics avanzados&lt;/strong> en TypeScript permiten escribir código reutilizable, seguro y altamente flexible.&lt;/p></description></item><item><title>Angular y gráficos interactivos con Chart.js</title><link>https://cmas.dev/posts/2025-02-12-angular-chart-js/</link><pubDate>Wed, 12 Feb 2025 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2025-02-12-angular-chart-js/</guid><description>&lt;p>La visualización de datos es una parte fundamental en el desarrollo de aplicaciones web modernas. &lt;strong>Chart.js&lt;/strong> es una de las bibliotecas más populares y livianas para la creación de gráficos dinámicos e interactivos. Combinado con &lt;strong>Angular&lt;/strong>, podemos construir visualizaciones de datos altamente eficientes y personalizables.&lt;/p>
+&lt;p>En este artículo, aprenderemos cómo integrar &lt;strong>Chart.js&lt;/strong> en un proyecto Angular y cómo crear gráficos interactivos con ejemplos prácticos.&lt;/p>
+&lt;h2 id="1-por-qué-usar-chartjs-en-angular">1. ¿Por qué Usar Chart.js en Angular?&lt;/h2>
+&lt;p>✅ &lt;strong>Ligero y eficiente&lt;/strong>: Chart.js es una librería optimizada con un tamaño reducido.&lt;br>
+✅ &lt;strong>Compatibilidad con Angular&lt;/strong>: Fácil integración con componentes y servicios de Angular.&lt;br>
+✅ &lt;strong>Interactividad&lt;/strong>: Soporta animaciones y eventos interactivos.&lt;br>
+✅ &lt;strong>Diversidad de gráficos&lt;/strong>: Soporta gráficos de barras, líneas, pastel, radar, burbujas, entre otros.&lt;br>
+✅ &lt;strong>Personalización avanzada&lt;/strong>: Configuración flexible para estilos, colores y datos dinámicos.&lt;/p>
+&lt;h2 id="2-instalación-de-chartjs-en-un-proyecto-angular">2. Instalación de Chart.js en un Proyecto Angular&lt;/h2>
+&lt;p>Para comenzar, crearemos un nuevo proyecto Angular o utilizaremos uno existente.&lt;/p>
+&lt;h3 id="21-crear-un-nuevo-proyecto-angular">&lt;strong>2.1 Crear un Nuevo Proyecto Angular&lt;/strong>&lt;/h3>
+&lt;p>Si aún no tienes un proyecto, puedes crear uno con el siguiente comando:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">ng new angular-chartjs-demo
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">cd angular-chartjs-demo
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="22-instalar-chartjs">&lt;strong>2.2 Instalar Chart.js&lt;/strong>&lt;/h3>
+&lt;p>Ejecuta el siguiente comando para instalar la librería:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">npm install chart.js
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="23-instalar-ng2-charts-opcional-pero-recomendado">&lt;strong>2.3 Instalar &lt;code>ng2-charts&lt;/code> (Opcional, pero Recomendado)&lt;/strong>&lt;/h3>
+&lt;p>Para una integración más sencilla con Angular, podemos instalar &lt;code>ng2-charts&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">npm install ng2-charts
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="3-creación-del-componente-de-gráficos">3. Creación del Componente de Gráficos&lt;/h2>
+&lt;h3 id="31-generar-un-componente-para-el-gráfico">&lt;strong>3.1 Generar un Componente para el Gráfico&lt;/strong>&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">ng generate component components/bar-chart
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="32-configuración-del-componente-bar-chartcomponentts">&lt;strong>3.2 Configuración del Componente (&lt;code>bar-chart.component.ts&lt;/code>)&lt;/strong>&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">Component&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;@angular/core&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">ChartConfiguration&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">ChartOptions&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">ChartType&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;chart.js&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">BaseChartDirective&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;ng2-charts&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">@&lt;/span>&lt;span class="n">Component&lt;/span>&lt;span class="p">({&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">selector&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;app-bar-chart&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">templateUrl&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;./bar-chart.component.html&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">styleUrls&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;./bar-chart.component.css&amp;#39;&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">})&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="k">class&lt;/span> &lt;span class="n">BarChartComponent&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">public&lt;/span> &lt;span class="n">barChartOptions&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">ChartOptions&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">responsive&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="bp">true&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">public&lt;/span> &lt;span class="n">barChartLabels&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">string&lt;/span>&lt;span class="p">[]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;Enero&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;Febrero&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;Marzo&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;Abril&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;Mayo&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;Junio&amp;#39;&lt;/span>&lt;span class="p">];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">public&lt;/span> &lt;span class="n">barChartType&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">ChartType&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;bar&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">public&lt;/span> &lt;span class="n">barChartLegend&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="bp">true&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">public&lt;/span> &lt;span class="n">barChartData&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">ChartConfiguration&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="s1">&amp;#39;bar&amp;#39;&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;data&amp;#39;&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">labels&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">this&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">barChartLabels&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">datasets&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span> &lt;span class="n">data&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="mi">65&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">59&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">80&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">81&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">56&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">55&lt;/span>&lt;span class="p">],&lt;/span> &lt;span class="n">label&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;Ventas 2023&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">backgroundColor&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;#42A5F5&amp;#39;&lt;/span> &lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span> &lt;span class="n">data&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="mi">28&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">48&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">40&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">19&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">86&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">27&lt;/span>&lt;span class="p">],&lt;/span> &lt;span class="n">label&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;Ventas 2024&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">backgroundColor&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;#66BB6A&amp;#39;&lt;/span> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="33-plantilla-html-bar-chartcomponenthtml">&lt;strong>3.3 Plantilla HTML (&lt;code>bar-chart.component.html&lt;/code>)&lt;/strong>&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">&amp;lt;div class=&amp;#34;chart-container&amp;#34;&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;canvas baseChart
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [data]=&amp;#34;barChartData&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [options]=&amp;#34;barChartOptions&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [type]=&amp;#34;barChartType&amp;#34;&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/canvas&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;/div&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="34-estilos-css-bar-chartcomponentcss">&lt;strong>3.4 Estilos CSS (&lt;code>bar-chart.component.css&lt;/code>)&lt;/strong>&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">.chart-container {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> width: 80%;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> margin: auto;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="4-integración-en-la-aplicación">4. Integración en la Aplicación&lt;/h2>
+&lt;p>Para mostrar el gráfico en nuestra aplicación, agregamos el componente en &lt;code>app.component.html&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">&amp;lt;h2&amp;gt;Gráfico de Ventas&amp;lt;/h2&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;app-bar-chart&amp;gt;&amp;lt;/app-bar-chart&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>También es necesario importar &lt;code>NgChartsModule&lt;/code> en &lt;code>app.module.ts&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">NgModule&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;@angular/core&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">BrowserModule&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;@angular/platform-browser&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">AppComponent&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;./app.component&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">BarChartComponent&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;./components/bar-chart/bar-chart.component&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">NgChartsModule&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;ng2-charts&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">@&lt;/span>&lt;span class="n">NgModule&lt;/span>&lt;span class="p">({&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">declarations&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">AppComponent&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">BarChartComponent&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">imports&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">BrowserModule&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">NgChartsModule&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">providers&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">bootstrap&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">AppComponent&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">})&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="k">class&lt;/span> &lt;span class="n">AppModule&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="5-personalización-de-gráficos">5. Personalización de Gráficos&lt;/h2>
+&lt;h3 id="51-cambiar-colores-y-estilos">&lt;strong>5.1 Cambiar Colores y Estilos&lt;/strong>&lt;/h3>
+&lt;p>Podemos personalizar los colores y estilos de los gráficos cambiando las propiedades &lt;code>backgroundColor&lt;/code>, &lt;code>borderColor&lt;/code> y &lt;code>hoverBackgroundColor&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">this.barChartData.datasets[0].backgroundColor = &amp;#39;#FF6384&amp;#39;;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">this.barChartData.datasets[1].backgroundColor = &amp;#39;#36A2EB&amp;#39;;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="52-agregar-animaciones">&lt;strong>5.2 Agregar Animaciones&lt;/strong>&lt;/h3>
+&lt;p>Podemos activar animaciones en el gráfico:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">public barChartOptions: ChartOptions = {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> responsive: true,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> animation: {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> duration: 2000, // Duración en milisegundos
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> easing: &amp;#39;easeInOutQuart&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">};
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="53-agregar-eventos-interactivos">&lt;strong>5.3 Agregar Eventos Interactivos&lt;/strong>&lt;/h3>
+&lt;p>Podemos detectar clics en el gráfico con &lt;code>chartClicked&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">&amp;lt;canvas baseChart
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> (chartClick)=&amp;#34;onChartClick($event)&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [data]=&amp;#34;barChartData&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [options]=&amp;#34;barChartOptions&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [type]=&amp;#34;barChartType&amp;#34;&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;/canvas&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">onChartClick(event: any) {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> console.log(&amp;#39;Datos seleccionados:&amp;#39;, event);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="6-conclusión">6. Conclusión&lt;/h2>
+&lt;p>La integración de &lt;strong>Chart.js&lt;/strong> con &lt;strong>Angular&lt;/strong> nos permite crear gráficos interactivos y dinámicos con facilidad. Al seguir este enfoque, podemos mejorar la presentación de datos en nuestras aplicaciones.&lt;/p></description></item><item><title>Deploy automatizado de APIs Deno en Azure Functions</title><link>https://cmas.dev/posts/2025-02-05-automatized-deploy-api-deno/</link><pubDate>Wed, 05 Feb 2025 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2025-02-05-automatized-deploy-api-deno/</guid><description>&lt;p>El despliegue automatizado de APIs en la nube es una práctica esencial en el desarrollo moderno. &lt;strong>Deno&lt;/strong>, con su seguridad integrada y soporte nativo para TypeScript, es una excelente opción para construir APIs escalables y eficientes. &lt;strong>Azure Functions&lt;/strong>, por otro lado, permite ejecutar código sin preocuparse por la infraestructura subyacente.&lt;/p>
+&lt;p>En este artículo, aprenderás cómo &lt;strong>desplegar automáticamente una API de Deno en Azure Functions&lt;/strong> usando GitHub Actions.&lt;/p>
+&lt;h2 id="1-por-qué-usar-deno-con-azure-functions">1. ¿Por qué Usar Deno con Azure Functions?&lt;/h2>
+&lt;p>Las ventajas de utilizar Deno con &lt;strong>Azure Functions&lt;/strong> incluyen:&lt;/p>
+&lt;p>✅ &lt;strong>Ejecuta código sin servidores&lt;/strong>: Solo pagas por las ejecuciones realizadas.&lt;br>
+✅ &lt;strong>Compatibilidad con TypeScript&lt;/strong>: No requiere configuración adicional.&lt;br>
+✅ &lt;strong>Seguridad mejorada&lt;/strong>: Deno requiere permisos explícitos.&lt;br>
+✅ &lt;strong>Escalabilidad automática&lt;/strong>: Azure Functions escala dinámicamente según la carga.&lt;br>
+✅ &lt;strong>Despliegue automatizado&lt;/strong>: Se puede integrar con GitHub Actions para CI/CD.&lt;/p>
+&lt;h2 id="2-configuración-del-proyecto-deno">2. Configuración del Proyecto Deno&lt;/h2>
+&lt;h3 id="21-instalación-de-deno">&lt;strong>2.1 Instalación de Deno&lt;/strong>&lt;/h3>
+&lt;p>Si no tienes Deno instalado, usa el siguiente comando:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">curl -fsSL https://deno.land/x/install/install.sh | sh
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">deno --version
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="22-creación-de-una-api-en-deno">&lt;strong>2.2 Creación de una API en Deno&lt;/strong>&lt;/h3>
+&lt;p>Primero, creamos una API REST básica usando el framework Oak:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">mkdir deno-api &amp;amp;&amp;amp; cd deno-api
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">echo &amp;#34;{}&amp;#34; &amp;gt; deps.ts
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">echo &amp;#34;{}&amp;#34; &amp;gt; server.ts
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">echo &amp;#34;{}&amp;#34; &amp;gt; routes.ts
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">echo &amp;#34;{}&amp;#34; &amp;gt; controllers.ts
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="depsts-dependencias">&lt;strong>&lt;code>deps.ts&lt;/code> (Dependencias)&lt;/strong>&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">Application&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">Router&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s2">&amp;#34;https://deno.land/x/oak/mod.ts&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="serverts-servidor-principal">&lt;strong>&lt;code>server.ts&lt;/code> (Servidor Principal)&lt;/strong>&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">Application&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s2">&amp;#34;./deps.ts&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="n">router&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s2">&amp;#34;./routes.ts&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">app&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">Application&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">app&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">use&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">router&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">routes&lt;/span>&lt;span class="p">());&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">app&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">use&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">router&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">allowedMethods&lt;/span>&lt;span class="p">());&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">console&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;API Deno corriendo en http://localhost:8080&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">await&lt;/span> &lt;span class="n">app&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">listen&lt;/span>&lt;span class="p">({&lt;/span> &lt;span class="n">port&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">8080&lt;/span> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="routests-definición-de-rutas">&lt;strong>&lt;code>routes.ts&lt;/code> (Definición de Rutas)&lt;/strong>&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">Router&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s2">&amp;#34;./deps.ts&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">getHello&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s2">&amp;#34;./controllers.ts&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">router&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">Router&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">router&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">get&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;/hello&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">getHello&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="n">default&lt;/span> &lt;span class="n">router&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="controllersts-controlador-de-rutas">&lt;strong>&lt;code>controllers.ts&lt;/code> (Controlador de Rutas)&lt;/strong>&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">Context&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s2">&amp;#34;https://deno.land/x/oak/mod.ts&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="k">const&lt;/span> &lt;span class="n">getHello&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">ctx&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">Context&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ctx&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">response&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">body&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">message&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;Hola desde Deno y Azure!&amp;#34;&lt;/span> &lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="3-configuración-de-azure-functions">3. Configuración de Azure Functions&lt;/h2>
+&lt;h3 id="31-crear-un-azure-function-app">&lt;strong>3.1 Crear un Azure Function App&lt;/strong>&lt;/h3>
+&lt;ol>
+&lt;li>Ingresa a &lt;a href="https://portal.azure.com/">Azure Portal&lt;/a>.&lt;/li>
+&lt;li>Dirígete a &lt;strong>Azure Functions&lt;/strong> y selecciona &lt;strong>Crear Función&lt;/strong>.&lt;/li>
+&lt;li>Configura los siguientes parámetros:
+&lt;ul>
+&lt;li>&lt;strong>Nombre de la función&lt;/strong>: &lt;code>deno-api-func&lt;/code>&lt;/li>
+&lt;li>&lt;strong>Lenguaje&lt;/strong>: &lt;strong>Custom Handler&lt;/strong>&lt;/li>
+&lt;li>&lt;strong>Plan de ejecución&lt;/strong>: &lt;strong>Consumo (Pay-as-you-go)&lt;/strong>&lt;/li>
+&lt;li>&lt;strong>Sistema Operativo&lt;/strong>: &lt;strong>Linux&lt;/strong>&lt;/li>
+&lt;li>&lt;strong>Región&lt;/strong>: La más cercana a tu ubicación.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Presiona &lt;strong>Crear y Desplegar&lt;/strong>.&lt;/li>
+&lt;/ol>
+&lt;h3 id="32-configurar-variables-de-entorno">&lt;strong>3.2 Configurar Variables de Entorno&lt;/strong>&lt;/h3>
+&lt;p>En el portal de Azure, dirígete a &lt;strong>Configuración &amp;gt; Variables de Entorno&lt;/strong> y añade:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>DENO_VERSION=1.38.0&lt;/code>&lt;/li>
+&lt;li>&lt;code>PORT=8080&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;h2 id="4-creación-de-hostjson-y-functionjson">4. Creación de &lt;code>host.json&lt;/code> y &lt;code>function.json&lt;/code>&lt;/h2>
+&lt;p>Para que Azure Functions entienda nuestra API, debemos crear archivos de configuración.&lt;/p>
+&lt;h4 id="hostjson">&lt;strong>&lt;code>host.json&lt;/code>&lt;/strong>&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;version&amp;#34;: &amp;#34;2.0&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;extensionBundle&amp;#34;: {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;id&amp;#34;: &amp;#34;Microsoft.Azure.Functions.ExtensionBundle&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;version&amp;#34;: &amp;#34;[3.*, 4.0.0)&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="functionjson">&lt;strong>&lt;code>function.json&lt;/code>&lt;/strong>&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;bindings&amp;#34;: [
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;authLevel&amp;#34;: &amp;#34;anonymous&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;type&amp;#34;: &amp;#34;httpTrigger&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;direction&amp;#34;: &amp;#34;in&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;name&amp;#34;: &amp;#34;req&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;methods&amp;#34;: [&amp;#34;get&amp;#34;]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> },
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;type&amp;#34;: &amp;#34;http&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;direction&amp;#34;: &amp;#34;out&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;name&amp;#34;: &amp;#34;res&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="5-automatización-con-github-actions">5. Automatización con GitHub Actions&lt;/h2>
+&lt;p>Para desplegar automáticamente nuestra API Deno en &lt;strong>Azure Functions&lt;/strong>, usaremos GitHub Actions.&lt;/p>
+&lt;h3 id="51-crear-un-archivo-de-workflow">&lt;strong>5.1 Crear un archivo de Workflow&lt;/strong>&lt;/h3>
+&lt;p>En el repositorio de GitHub, crea la ruta &lt;code>.github/workflows/deploy.yml&lt;/code> y agrega lo siguiente:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">name: Deploy Deno API to Azure Functions
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">on:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> push:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> branches:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - main
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">jobs:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> build-and-deploy:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> runs-on: ubuntu-latest
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> steps:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - name: Checkout repository
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> uses: actions/checkout@v3
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - name: Setup Deno
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> uses: denoland/setup-deno@v1
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> with:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> deno-version: v1.x
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - name: Deploy to Azure Functions
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> uses: Azure/functions-action@v1
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> with:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> app-name: &amp;#34;deno-api-func&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> package: &amp;#34;.&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> publish-profile: ${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE }}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="52-configurar-secretos-en-github">&lt;strong>5.2 Configurar Secretos en GitHub&lt;/strong>&lt;/h3>
+&lt;ol>
+&lt;li>Entra a tu repositorio en GitHub.&lt;/li>
+&lt;li>Ve a &lt;strong>Settings &amp;gt; Secrets and Variables &amp;gt; Actions&lt;/strong>.&lt;/li>
+&lt;li>Agrega un secreto llamado &lt;code>AZURE_FUNCTIONAPP_PUBLISH_PROFILE&lt;/code> con el contenido del perfil de publicación de Azure.&lt;/li>
+&lt;/ol>
+&lt;h2 id="6-despliegue-y-prueba">6. Despliegue y Prueba&lt;/h2>
+&lt;h3 id="61-ejecutar-el-despliegue">&lt;strong>6.1 Ejecutar el Despliegue&lt;/strong>&lt;/h3>
+&lt;p>Cada vez que hagas &lt;code>git push&lt;/code> a la rama &lt;code>main&lt;/code>, GitHub Actions ejecutará el despliegue automáticamente.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git add .
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">git commit -m &amp;#34;Deploy API Deno en Azure Functions&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">git push origin main
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="62-probar-la-api-en-azure">&lt;strong>6.2 Probar la API en Azure&lt;/strong>&lt;/h3>
+&lt;p>Cuando el despliegue finalice, podrás acceder a la API con:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">curl https://deno-api-func.azurewebsites.net/api/hello
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Debería responder:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">{ &amp;#34;message&amp;#34;: &amp;#34;Hola desde Deno y Azure!&amp;#34; }
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="7-conclusión">7. Conclusión&lt;/h2>
+&lt;p>El &lt;strong>deploy automatizado de APIs Deno en Azure Functions&lt;/strong> ofrece una solución escalable y eficiente sin preocuparse por la infraestructura. &lt;strong>GitHub Actions&lt;/strong> facilita la automatización del proceso CI/CD.&lt;/p></description></item><item><title>Cómo estructurar grandes proyectos en TypeScript</title><link>https://cmas.dev/posts/2025-01-29-how-to-structure-big-projects/</link><pubDate>Wed, 29 Jan 2025 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2025-01-29-how-to-structure-big-projects/</guid><description>&lt;p>El desarrollo de grandes aplicaciones en &lt;strong>TypeScript&lt;/strong> requiere una estructura de proyecto bien definida para mantener la escalabilidad, mantenibilidad y eficiencia del código. Una mala organización puede llevar a problemas de acoplamiento, dificultades en la depuración y una curva de aprendizaje elevada para nuevos desarrolladores en el equipo.&lt;/p>
 &lt;p>En este artículo, exploraremos cómo organizar un proyecto grande en TypeScript utilizando &lt;strong>buenas prácticas, patrones de diseño y herramientas avanzadas&lt;/strong>.&lt;/p>
 &lt;h2 id="1-configuración-inicial-del-proyecto">1. Configuración Inicial del Proyecto&lt;/h2>
 &lt;p>Antes de estructurar el código, debemos preparar un entorno robusto en &lt;strong>TypeScript&lt;/strong>.&lt;/p>
