@@ -4866,377 +4866,264 @@ Con soporte para una amplia gama de marcos, lenguajes y servicios, además de in
 &lt;/ol>
 &lt;p>Algo que noté es que la plantilla figura en &lt;strong>Backend&lt;/strong>, pero tranquilamente podemos crear una aplicación Full Stack con .NET de base para cubrir nuestras necesidades.&lt;/p>
 &lt;p>Al momento de escribir este artículo noto que &lt;strong>Proyecto IDX&lt;/strong> = &lt;strong>GitHub Codespace&lt;/strong>. La base es Visual Studio Code.&lt;/p>
-&lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Despliegue de aplicaciones Blazor en Azure App Services</title><link>https://cmas.dev/posts/2024-07-10-deploy-blazor-azure-app-services/</link><pubDate>Wed, 10 Jul 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-07-10-deploy-blazor-azure-app-services/</guid><description>&lt;p>&lt;strong>Blazor&lt;/strong>, el framework moderno basado en &lt;strong>.NET&lt;/strong>, permite a los desarrolladores crear aplicaciones web interactivas utilizando &lt;strong>C#&lt;/strong>. Combinado con &lt;strong>Azure App Services&lt;/strong>, puedes desplegar aplicaciones de manera sencilla, escalable y segura. En este artículo, exploraremos los pasos para desplegar aplicaciones &lt;strong>Blazor (Server y WebAssembly)&lt;/strong> en &lt;strong>Azure App Services&lt;/strong>, acompañado de ejemplos detallados y buenas prácticas para garantizar un despliegue óptimo.&lt;/p>
-&lt;h2 id="qué-es-azure-app-services">¿Qué es Azure App Services?&lt;/h2>
-&lt;p>&lt;strong>Azure App Services&lt;/strong> es una plataforma de alojamiento en la nube totalmente administrada que soporta aplicaciones web, móviles y &lt;em>API&lt;/em>. Sus principales características incluyen:&lt;/p>
-&lt;ol>
-&lt;li>&lt;strong>Despliegue rápido&lt;/strong>: Permite subir aplicaciones directamente desde tu entorno de desarrollo.&lt;/li>
-&lt;li>&lt;strong>Escalabilidad&lt;/strong>: Ajusta los recursos según la demanda.&lt;/li>
-&lt;li>&lt;strong>Seguridad&lt;/strong>: Ofrece integración con certificados SSL y autenticación.&lt;/li>
-&lt;li>&lt;strong>Compatibilidad con varias tecnologías&lt;/strong>: Soporta .NET, Node.js, Python, Java y más.&lt;/li>
-&lt;/ol>
-&lt;h2 id="crear-y-configurar-un-azure-app-service">Crear y configurar un Azure App Service&lt;/h2>
-&lt;h3 id="paso-1-crear-un-recurso-en-azure">Paso 1: Crear un recurso en Azure&lt;/h3>
-&lt;ol>
-&lt;li>Inicia sesión en el &lt;a href="https://portal.azure.com">portal de Azure&lt;/a>.&lt;/li>
-&lt;li>Selecciona &lt;strong>Crear un recurso&lt;/strong> y busca &lt;strong>App Service&lt;/strong>.&lt;/li>
-&lt;li>Completa los detalles:
-&lt;ul>
-&lt;li>&lt;strong>Nombre&lt;/strong>: &lt;code>blazor-app-service&lt;/code>.&lt;/li>
-&lt;li>&lt;strong>Pila de runtime&lt;/strong>: .NET 9.&lt;/li>
-&lt;li>&lt;strong>Sistema operativo&lt;/strong>: Windows o Linux.&lt;/li>
-&lt;li>&lt;strong>Plan de App Service&lt;/strong>: Selecciona un plan según tus necesidades (recomendado: Plan de consumo para pruebas o B1 para producción).&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;/ol>
-&lt;h3 id="paso-2-configurar-el-entorno-de-despliegue">Paso 2: Configurar el entorno de despliegue&lt;/h3>
-&lt;ol>
-&lt;li>Habilita la autenticación si es necesario.&lt;/li>
-&lt;li>Configura las variables de entorno requeridas por la aplicación.&lt;/li>
-&lt;/ol>
-&lt;h2 id="despliegue-de-blazor-server-en-azure-app-services">Despliegue de Blazor Server en Azure App Services&lt;/h2>
-&lt;h3 id="paso-1-crear-una-aplicación-blazor-server">Paso 1: Crear una aplicación Blazor Server&lt;/h3>
-&lt;ol>
-&lt;li>Genera un nuevo proyecto Blazor Server:
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">dotnet new blazorserver -o BlazorServerApp
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
-&lt;li>Navega al directorio del proyecto:
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">cd BlazorServerApp
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
-&lt;li>Ejecuta la aplicación localmente:
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">dotnet run
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
-&lt;/ol>
-&lt;h3 id="paso-2-publicar-la-aplicación">Paso 2: Publicar la aplicación&lt;/h3>
-&lt;ol>
-&lt;li>Publica la aplicación:
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">dotnet publish -c Release -o ./publish
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
-&lt;li>Verifica los archivos generados en el directorio &lt;code>publish&lt;/code>.&lt;/li>
-&lt;/ol>
-&lt;h3 id="paso-3-desplegar-a-azure">Paso 3: Desplegar a Azure&lt;/h3>
-&lt;ol>
-&lt;li>Usa el CLI de Azure para iniciar sesión:
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">az login
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
-&lt;li>Despliega la aplicación:
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">az webapp deploy --resource-group MyResourceGroup --name blazor-app-service --src-path ./publish
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
-&lt;/ol>
-&lt;h2 id="despliegue-de-blazor-webassembly-en-azure-app-services">Despliegue de Blazor WebAssembly en Azure App Services&lt;/h2>
-&lt;h3 id="paso-1-crear-una-aplicación-blazor-webassembly">Paso 1: Crear una aplicación Blazor WebAssembly&lt;/h3>
-&lt;ol>
-&lt;li>Genera un nuevo proyecto:
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">dotnet new blazorwasm -o BlazorWebAssemblyApp
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
-&lt;li>Habilita el modo PWA si es necesario:
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">dotnet new blazorwasm -o BlazorPWA --pwa
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
-&lt;li>Ejecuta la aplicación localmente:
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">dotnet run
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
-&lt;/ol>
-&lt;h3 id="paso-2-publicar-la-aplicación-1">Paso 2: Publicar la aplicación&lt;/h3>
-&lt;ol>
-&lt;li>Publica la aplicación:
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">dotnet publish -c Release -o ./publish
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
-&lt;/ol>
-&lt;h3 id="paso-3-configurar-y-desplegar">Paso 3: Configurar y desplegar&lt;/h3>
-&lt;ol>
-&lt;li>Asegúrate de que el servidor web esté configurado para servir contenido estático desde el directorio &lt;code>wwwroot&lt;/code>.&lt;/li>
-&lt;li>Usa Azure CLI o el portal de Azure para subir los archivos.&lt;/li>
-&lt;/ol>
-&lt;h4 id="subir-archivos-usando-azure-storage">Subir archivos usando Azure Storage&lt;/h4>
-&lt;ol>
-&lt;li>Crea una cuenta de almacenamiento:
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">az storage account create --name mystorageaccount --resource-group MyResourceGroup --location eastus --sku Standard_LRS
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
-&lt;li>Usa &lt;code>azcopy&lt;/code> para subir los archivos:
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">azcopy copy ./publish/wwwroot https://mystorageaccount.blob.core.windows.net/$web --recursive
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
-&lt;/ol>
-&lt;h2 id="buenas-prácticas-para-despliegues-en-azure-app-services">Buenas prácticas para despliegues en Azure App Services&lt;/h2>
-&lt;ol>
-&lt;li>&lt;strong>Configurar entornos&lt;/strong>:
-&lt;ul>
-&lt;li>Usa &lt;code>appsettings.json&lt;/code> para gestionar configuraciones por entorno.&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>&lt;strong>Escalabilidad&lt;/strong>:
-&lt;ul>
-&lt;li>Configura escalado automático para manejar incrementos de tráfico.&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>&lt;strong>Seguridad&lt;/strong>:
-&lt;ul>
-&lt;li>Habilita HTTPS y usa certificados SSL.&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>&lt;strong>Monitorización&lt;/strong>:
-&lt;ul>
-&lt;li>Usa Application Insights para supervisar el rendimiento.&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>&lt;strong>Optimizar el tamaño de la aplicación&lt;/strong>:
-&lt;ul>
-&lt;li>Habilita compresión y minimización de archivos.&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;/ol>
-&lt;h2 id="resolución-de-problemas-comunes">Resolución de problemas comunes&lt;/h2>
-&lt;h3 id="error-500-internal-server-error">Error 500: &amp;ldquo;Internal Server Error&amp;rdquo;&lt;/h3>
-&lt;ul>
-&lt;li>&lt;strong>Causa&lt;/strong>: Configuraciones incorrectas en &lt;code>appsettings.json&lt;/code>.&lt;/li>
-&lt;li>&lt;strong>Solución&lt;/strong>: Verifica las rutas y las claves de configuración.&lt;/li>
-&lt;/ul>
-&lt;h3 id="failed-to-start-en-blazor-server">&amp;ldquo;Failed to Start&amp;rdquo; en Blazor Server&lt;/h3>
-&lt;ul>
-&lt;li>&lt;strong>Causa&lt;/strong>: Problemas de dependencias no satisfechas.&lt;/li>
-&lt;li>&lt;strong>Solución&lt;/strong>: Revisa las dependencias en el archivo &lt;code>csproj&lt;/code>.&lt;/li>
-&lt;/ul>
-&lt;h3 id="archivos-estáticos-no-encontrados-en-blazor-webassembly">Archivos estáticos no encontrados en Blazor WebAssembly&lt;/h3>
-&lt;ul>
-&lt;li>&lt;strong>Causa&lt;/strong>: Configuración errónea del servidor.&lt;/li>
-&lt;li>&lt;strong>Solución&lt;/strong>: Asegúrate de que el servidor apunte al directorio &lt;code>wwwroot&lt;/code>.&lt;/li>
-&lt;/ul>
-&lt;h2 id="conclusión">Conclusión&lt;/h2>
-&lt;p>Desplegar aplicaciones &lt;strong>Blazor&lt;/strong> en &lt;strong>Azure App Services&lt;/strong> es un proceso directo que se beneficia de las capacidades robustas de Azure para escalar, monitorear y proteger aplicaciones. Siguiendo las mejores prácticas y resolviendo problemas comunes, puedes garantizar un despliegue exitoso y mantener tus aplicaciones funcionando de manera eficiente. ¡Explora &lt;strong>Azure App Services&lt;/strong> y lleva tus aplicaciones &lt;strong>Blazor&lt;/strong> al siguiente nivel!&lt;/p></description></item><item><title>Creación de componentes reutilizables en Blazor para aplicaciones escalables</title><link>https://cmas.dev/posts/2024-07-03-components-blazor/</link><pubDate>Wed, 03 Jul 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-07-03-components-blazor/</guid><description>&lt;p>&lt;strong>Blazor&lt;/strong> es un framework poderoso que permite a los desarrolladores construir aplicaciones web modernas utilizando &lt;strong>C#&lt;/strong>. Una de sus características clave es la capacidad de crear componentes reutilizables que promueven la modularidad, escalabilidad y mantenibilidad de las aplicaciones. En este artículo, exploraremos cómo diseñar y desarrollar componentes reutilizables en Blazor, acompañado de ejemplos prácticos y mejores prácticas.&lt;/p>
-&lt;h2 id="qué-son-los-componentes-en-blazor">¿Qué son los componentes en Blazor?&lt;/h2>
-&lt;p>Los componentes en Blazor son unidades reutilizables de la interfaz de usuario que combinan lógica y presentación. Cada componente se define en un archivo &lt;code>.razor&lt;/code> y puede incluir código C#, HTML y CSS.&lt;/p>
-&lt;h3 id="características-principales">Características principales&lt;/h3>
-&lt;ol>
-&lt;li>&lt;strong>Encapsulación&lt;/strong>: Los componentes encapsulan la lógica y el diseño, promoviendo la reutilización.&lt;/li>
-&lt;li>&lt;strong>Reactividad&lt;/strong>: Pueden responder a eventos y actualizarse dinámicamente.&lt;/li>
-&lt;li>&lt;strong>Comunicación entre componentes&lt;/strong>: Soportan la transferencia de datos a través de propiedades y eventos.&lt;/li>
-&lt;li>&lt;strong>Renderizado eficiente&lt;/strong>: Blazor optimiza el renderizado para minimizar los cambios en el DOM.&lt;/li>
-&lt;/ol>
-&lt;h2 id="crear-un-componente-básico">Crear un componente básico&lt;/h2>
-&lt;h3 id="ejemplo-componente-de-botón">Ejemplo: Componente de Botón&lt;/h3>
-&lt;p>Archivo: &lt;code>ButtonComponent.razor&lt;/code>&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">&amp;lt;button class=&amp;#34;btn btn-primary&amp;#34; @onclick=&amp;#34;OnClick&amp;#34;&amp;gt;@Label&amp;lt;/button&amp;gt;
+&lt;p>¡Espero resulte útil!&lt;/p></description></item><item><title>Blazor WebAssembly con .NET 9: Nuevas características y mejoras</title><link>https://cmas.dev/posts/2024-07-10-blazor-wa-dotnet-9/</link><pubDate>Wed, 10 Jul 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-07-10-blazor-wa-dotnet-9/</guid><description>&lt;p>&lt;strong>Blazor WebAssembly&lt;/strong> ha sido una de las tecnologías más populares en el desarrollo de aplicaciones web interactivas con &lt;strong>C#&lt;/strong> en lugar de &lt;strong>JavaScript&lt;/strong>. Con la llegada de &lt;strong>.NET 9&lt;/strong>, &lt;strong>Blazor WebAssembly&lt;/strong> ha incorporado nuevas características y mejoras que optimizan tanto el rendimiento como la experiencia de desarrollo. En este artículo, exploraremos estas nuevas capacidades con ejemplos prácticos y detallaremos cómo sacarles el máximo provecho.&lt;/p>
+&lt;h2 id="introducción">Introducción&lt;/h2>
+&lt;p>Blazor WebAssembly (WASM) es una tecnología que permite ejecutar aplicaciones .NET en el navegador utilizando WebAssembly. Esto proporciona una experiencia de desarrollo unificada para aplicaciones web, permitiendo reutilizar código entre el cliente y el servidor. .NET 9 amplía este potencial al mejorar significativamente el rendimiento, la interoperabilidad con JavaScript, la integración con otras plataformas como .NET MAUI, y al simplificar la arquitectura de las aplicaciones modernas.&lt;/p>
+&lt;h2 id="principales-características-nuevas-en-blazor-webassembly-con-net-9">Principales características nuevas en Blazor WebAssembly con .NET 9&lt;/h2>
+&lt;h3 id="1-optimización-del-rendimiento-en-tiempo-de-carga">1. Optimización del rendimiento en tiempo de carga&lt;/h3>
+&lt;p>Una de las prioridades en .NET 9 ha sido reducir los tiempos de arranque de las aplicaciones. A través de mejoras en la compresión de recursos, AOT (Ahead-Of-Time Compilation) y reducción de dependencias innecesarias, las aplicaciones ahora inician de forma más ágil.&lt;/p>
+&lt;h3 id="2-compilación-aot-mejorada">2. Compilación AOT mejorada&lt;/h3>
+&lt;p>.NET 9 permite compilar completamente la aplicación a WebAssembly de forma anticipada. Esto significa que el tiempo de carga se reduce y el rendimiento de ejecución es más cercano a código nativo.&lt;/p>
+&lt;p>&lt;strong>Configuración en el .csproj&lt;/strong>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">&amp;lt;PropertyGroup&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;RunAOTCompilation&amp;gt;true&amp;lt;/RunAOTCompilation&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;/PropertyGroup&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="3-interoperabilidad-javascript-bidireccional-mejorada">3. Interoperabilidad JavaScript bidireccional mejorada&lt;/h3>
+&lt;p>Con .NET 9, se introducen nuevas APIs para facilitar la interoperabilidad con JavaScript, permitiendo una integración más fluida entre Blazor y librerías del ecosistema JS como Chart.js, Leaflet, entre otras.&lt;/p>
+&lt;p>&lt;strong>Ejemplo de invocación desde JavaScript hacia Blazor&lt;/strong>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">DotNet.invokeMethodAsync(&amp;#34;BlazorWasmExample&amp;#34;, &amp;#34;Metodoblazor&amp;#34;)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> .then(result =&amp;gt; console.log(result));
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="4-standalone-components-y-mejora-en-la-modularidad">4. Standalone Components y mejora en la modularidad&lt;/h3>
+&lt;p>Ahora los componentes pueden desarrollarse sin necesidad de estar dentro de un &lt;code>Razor Component Library&lt;/code> o de depender de un &lt;code>App.razor&lt;/code>, facilitando su reutilización en entornos como MAUI o WASI.&lt;/p>
+&lt;h3 id="5-mejor-integración-con-net-maui">5. Mejor integración con .NET MAUI&lt;/h3>
+&lt;p>Las aplicaciones Blazor ahora pueden ejecutarse de forma híbrida en dispositivos móviles y escritorio con .NET MAUI. Esto unifica aún más el desarrollo multiplataforma.&lt;/p>
+&lt;h3 id="6-lazy-loading-de-ensamblados-optimizado">6. Lazy Loading de ensamblados optimizado&lt;/h3>
+&lt;p>La descarga bajo demanda de ensamblados ahora es más eficiente, permitiendo dividir la aplicación en módulos que se cargan dinámicamente.&lt;/p>
+&lt;p>&lt;strong>Ejemplo de configuración&lt;/strong>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">builder.Services.AddTransient(sp =&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> new LazyAssemblyLoader(sp.GetRequiredService&amp;lt;IJSRuntime&amp;gt;()));
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="caso-práctico-creación-de-una-aplicación-con-blazor-wasm-y-net-9">Caso práctico: Creación de una aplicación con Blazor WASM y .NET 9&lt;/h2>
+&lt;h3 id="paso-1-crear-el-proyecto-base">Paso 1: Crear el proyecto base&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">dotnet new blazorwasm -n DemoWasmNet9 -f net9.0
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="paso-2-activar-aot-y-trimming">Paso 2: Activar AOT y trimming&lt;/h3>
+&lt;p>Agrega en &lt;code>DemoWasmNet9.csproj&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">&amp;lt;PropertyGroup&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;RunAOTCompilation&amp;gt;true&amp;lt;/RunAOTCompilation&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;PublishTrimmed&amp;gt;true&amp;lt;/PublishTrimmed&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;/PropertyGroup&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="paso-3-usar-interoperabilidad-mejorada-con-js">Paso 3: Usar interoperabilidad mejorada con JS&lt;/h3>
+&lt;p>En &lt;code>Pages/Index.razor&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">@inject IJSRuntime JS
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;button @onclick=&amp;#34;MostrarMensaje&amp;#34;&amp;gt;Alerta JS&amp;lt;/button&amp;gt;
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">@code {
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [Parameter]
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> public string Label { get; set; } = &amp;#34;Click Me&amp;#34;;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [Parameter]
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> public EventCallback OnClick { get; set; }
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="uso-del-componente">Uso del componente&lt;/h4>
-&lt;p>Archivo: &lt;code>MainLayout.razor&lt;/code>&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">&amp;lt;ButtonComponent Label=&amp;#34;Guardar&amp;#34; OnClick=&amp;#34;SaveData&amp;#34; /&amp;gt;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">@code {
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> private void SaveData()
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Console.WriteLine(&amp;#34;Datos guardados correctamente.&amp;#34;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> private async Task MostrarMensaje() {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> await JS.InvokeVoidAsync(&amp;#34;alert&amp;#34;, &amp;#34;¡Hola desde Blazor con .NET 9!&amp;#34;);
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="componentes-parametrizables">Componentes parametrizables&lt;/h2>
-&lt;h3 id="paso-1-definir-propiedades-con-parameter">Paso 1: Definir propiedades con &lt;code>[Parameter]&lt;/code>&lt;/h3>
-&lt;p>Las propiedades con el atributo &lt;code>[Parameter]&lt;/code> permiten a los componentes recibir datos externos.&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">&amp;lt;h3&amp;gt;@Title&amp;lt;/h3&amp;gt;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;p&amp;gt;@Description&amp;lt;/p&amp;gt;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">@code {
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [Parameter]
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> public string Title { get; set; }
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [Parameter]
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> public string Description { get; set; }
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="paso-2-render-fragment">Paso 2: Render Fragment&lt;/h3>
-&lt;p>Render Fragment permite pasar bloques de contenido al componente.&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">&amp;lt;div class=&amp;#34;card&amp;#34;&amp;gt;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;div class=&amp;#34;card-header&amp;#34;&amp;gt;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> @Header
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/div&amp;gt;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;div class=&amp;#34;card-body&amp;#34;&amp;gt;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> @Body
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/div&amp;gt;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;/div&amp;gt;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">@code {
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [Parameter]
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> public RenderFragment Header { get; set; }
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [Parameter]
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> public RenderFragment Body { get; set; }
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="ejemplo-de-uso">Ejemplo de uso&lt;/h4>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">&amp;lt;CardComponent&amp;gt;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Header&amp;gt;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;h3&amp;gt;Mi Título&amp;lt;/h3&amp;gt;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/Header&amp;gt;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Body&amp;gt;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;p&amp;gt;Este es el contenido del cuerpo.&amp;lt;/p&amp;gt;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/Body&amp;gt;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;/CardComponent&amp;gt;
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="mejores-prácticas-para-componentes-reutilizables">Mejores prácticas para componentes reutilizables&lt;/h2>
-&lt;ol>
-&lt;li>&lt;strong>Evitar lógica compleja&lt;/strong>:
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="buenas-prácticas-con-blazor-webassembly-en-net-9">Buenas prácticas con Blazor WebAssembly en .NET 9&lt;/h2>
 &lt;ul>
-&lt;li>Divide la funcionalidad compleja en varios componentes más simples.&lt;/li>
+&lt;li>&lt;strong>Minimizar el uso de librerías grandes de terceros&lt;/strong> cuando no son necesarias.&lt;/li>
+&lt;li>&lt;strong>Utilizar lazy loading de rutas y componentes&lt;/strong> para mejorar la experiencia inicial del usuario.&lt;/li>
+&lt;li>&lt;strong>Aplicar almacenamiento local con &lt;code>localStorage&lt;/code> o &lt;code>IndexedDB&lt;/code>&lt;/strong> para evitar solicitudes innecesarias.&lt;/li>
+&lt;li>&lt;strong>Medir y optimizar con herramientas como Lighthouse, Application Insights o Web Vitals&lt;/strong>.&lt;/li>
 &lt;/ul>
-&lt;/li>
-&lt;li>&lt;strong>Documentar parámetros&lt;/strong>:
-&lt;ul>
-&lt;li>Proporciona descripciones claras de los parámetros y su uso.&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>&lt;strong>Usar estilos modulares&lt;/strong>:
-&lt;ul>
-&lt;li>Utiliza CSS aislado para evitar conflictos de estilos.&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>&lt;strong>Validar entradas&lt;/strong>:
-&lt;ul>
-&lt;li>Asegúrate de validar los datos recibidos a través de los parámetros.&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>&lt;strong>Seguir el principio DRY (Don&amp;rsquo;t Repeat Yourself)&lt;/strong>:
-&lt;ul>
-&lt;li>Reutiliza componentes siempre que sea posible.&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;/ol>
-&lt;h2 id="componentes-avanzados">Componentes avanzados&lt;/h2>
-&lt;h3 id="componentes-genéricos">Componentes genéricos&lt;/h3>
-&lt;p>Blazor soporta componentes genéricos que permiten trabajar con diferentes tipos de datos.&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">div&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="err">@&lt;/span>&lt;span class="n">foreach&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="k">var&lt;/span> &lt;span class="n">item&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">Items&lt;/span>&lt;span class="p">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">p&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="err">@&lt;/span>&lt;span class="n">item&lt;/span>&lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">p&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">div&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">@&lt;/span>&lt;span class="n">code&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">Parameter&lt;/span>&lt;span class="p">]&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">public&lt;/span> &lt;span class="n">IEnumerable&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">T&lt;/span>&lt;span class="o">&amp;gt;&lt;/span> &lt;span class="n">Items&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">get&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">set&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="uso-del-componente-genérico">Uso del componente genérico&lt;/h4>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">&amp;lt;GenericComponent Items=&amp;#34;new List&amp;lt;int&amp;gt; { 1, 2, 3 }&amp;#34; /&amp;gt;
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="componentes-dinámicos">Componentes dinámicos&lt;/h3>
-&lt;p>Permiten renderizar diferentes componentes basados en datos o estados.&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="err">@&lt;/span>&lt;span class="n">foreach&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="k">var&lt;/span> &lt;span class="n">component&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">Components&lt;/span>&lt;span class="p">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">DynamicComponent&lt;/span> &lt;span class="n">Type&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;component&amp;#34;&lt;/span> &lt;span class="o">/&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">@&lt;/span>&lt;span class="n">code&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">Parameter&lt;/span>&lt;span class="p">]&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">public&lt;/span> &lt;span class="n">List&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">Type&lt;/span>&lt;span class="o">&amp;gt;&lt;/span> &lt;span class="n">Components&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">get&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">set&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">List&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">Type&lt;/span>&lt;span class="o">&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nb">typeof&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">ButtonComponent&lt;/span>&lt;span class="p">),&lt;/span> &lt;span class="nb">typeof&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">CardComponent&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">};&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="pruebas-de-componentes">Pruebas de componentes&lt;/h2>
-&lt;h3 id="framework-recomendado-bunit">Framework recomendado: &lt;code>bUnit&lt;/code>&lt;/h3>
-&lt;h4 id="configurar-bunit">Configurar &lt;code>bUnit&lt;/code>&lt;/h4>
-&lt;ol>
-&lt;li>Instalar la biblioteca:
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-go" data-lang="go">&lt;span class="line">&lt;span class="cl">&lt;span class="nx">dotnet&lt;/span> &lt;span class="nx">add&lt;/span> &lt;span class="kn">package&lt;/span> &lt;span class="nx">Bunit&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
-&lt;li>Escribir pruebas:
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="p">[&lt;/span>&lt;span class="n">Fact&lt;/span>&lt;span class="p">]&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">public&lt;/span> &lt;span class="n">void&lt;/span> &lt;span class="n">ButtonComponent_DisplaysCorrectLabel&lt;/span>&lt;span class="p">()&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">using&lt;/span> &lt;span class="k">var&lt;/span> &lt;span class="n">ctx&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">TestContext&lt;/span>&lt;span class="p">();&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">var&lt;/span> &lt;span class="n">cut&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">ctx&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">RenderComponent&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">ButtonComponent&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">parameters&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">parameters&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">.&lt;/span>&lt;span class="n">Add&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">p&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">p&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Label&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;Test Button&amp;#34;&lt;/span>&lt;span class="p">));&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Assert&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Contains&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;Test Button&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">cut&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Markup&lt;/span>&lt;span class="p">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
-&lt;/ol>
 &lt;h2 id="conclusión">Conclusión&lt;/h2>
-&lt;p>La creación de componentes reutilizables en &lt;strong>Blazor&lt;/strong> es clave para construir aplicaciones escalables y mantenibles. Siguiendo las buenas prácticas y aprovechando las características avanzadas del framework, los desarrolladores pueden maximizar la productividad y garantizar la calidad de sus aplicaciones. ¡Empieza a diseñar tus propios componentes reutilizables hoy mismo y lleva tus habilidades de desarrollo web al siguiente nivel!&lt;/p></description></item><item><title>Introducción a Blazor: Cambiando el paradigma del desarrollo web</title><link>https://cmas.dev/posts/2024-06-26-intro-blazor/</link><pubDate>Wed, 26 Jun 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-06-26-intro-blazor/</guid><description>&lt;p>&lt;strong>Blazor&lt;/strong> es una tecnología desarrollada por &lt;strong>Microsoft&lt;/strong> que está transformando la forma en que se crean aplicaciones web modernas. Basado en &lt;strong>.NET&lt;/strong>, &lt;strong>Blazor&lt;/strong> permite a los desarrolladores escribir aplicaciones web interactivas utilizando &lt;strong>C#&lt;/strong> en lugar de &lt;strong>JavaScript&lt;/strong>, ofreciendo una solución innovadora para quienes buscan aprovechar las ventajas del ecosistema &lt;strong>.NET&lt;/strong> en el desarrollo web. En este artículo, exploraremos las bases de Blazor, sus ventajas, desventajas y cómo empezar a utilizarlo, acompañado de ejemplos y buenas prácticas.&lt;/p>
-&lt;h2 id="qué-es-blazor">¿Qué es Blazor?&lt;/h2>
-&lt;p>Blazor es un framework de desarrollo web que permite construir aplicaciones interactivas del lado del cliente y del servidor utilizando C#. Se basa en WebAssembly para ejecutar código .NET directamente en el navegador, eliminando la necesidad de JavaScript para muchas funcionalidades.&lt;/p>
-&lt;h3 id="tipos-de-blazor">Tipos de Blazor&lt;/h3>
+&lt;p>Blazor WebAssembly con .NET 9 representa una evolución significativa en la forma de construir aplicaciones web modernas con .NET. Gracias a sus mejoras en compilación, rendimiento, interoperabilidad y soporte multiplataforma, los desarrolladores pueden crear soluciones rápidas, seguras y altamente reutilizables.&lt;/p>
+&lt;p>Esta versión reafirma el compromiso de Microsoft con una plataforma unificada, flexible y lista para la nube y el cliente. Es el momento ideal para adoptar Blazor si aún no lo has hecho, o para actualizar tus aplicaciones actuales y aprovechar las ventajas que ofrece .NET 9.&lt;/p></description></item><item><title>Optimización de rendimiento en Blazor WebAssembly: Estrategias y buenas prácticas con .NET</title><link>https://cmas.dev/posts/2024-07-03-blazor-performance-optimization/</link><pubDate>Wed, 03 Jul 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-07-03-blazor-performance-optimization/</guid><description>&lt;p>&lt;strong>Blazor WebAssembly&lt;/strong> ha revolucionado el desarrollo de aplicaciones web modernas, permitiendo ejecutar aplicaciones &lt;strong>.NET&lt;/strong> directamente en el navegador utilizando &lt;strong>WebAssembly&lt;/strong>. Aunque &lt;strong>Blazor WebAssembly&lt;/strong> ofrece una excelente experiencia de usuario y una integración perfecta con &lt;strong>.NET&lt;/strong>, es crucial aplicar estrategias y buenas prácticas de optimización para asegurar que nuestras aplicaciones funcionen de manera eficiente, especialmente cuando se trata de aplicaciones grandes y complejas.&lt;/p>
+&lt;p>En este artículo, exploraremos estrategias y técnicas de optimización para mejorar el rendimiento de aplicaciones &lt;strong>Blazor WebAssembly&lt;/strong> usando &lt;strong>.NET 8&lt;/strong>, con ejemplos prácticos de código y buenas prácticas.&lt;/p>
+&lt;h2 id="1-entender-cómo-funciona-blazor-webassembly">1. &lt;strong>Entender cómo funciona Blazor WebAssembly&lt;/strong>&lt;/h2>
+&lt;p>Blazor WebAssembly permite ejecutar aplicaciones .NET directamente en el navegador mediante WebAssembly, una tecnología que permite ejecutar código compilado en el navegador de forma segura y eficiente. A diferencia de Blazor Server, que realiza la lógica de la aplicación en el servidor y se comunica con el cliente a través de SignalR, Blazor WebAssembly ejecuta todo en el cliente. Esto puede mejorar la latencia y la experiencia del usuario, pero también introduce desafíos en términos de rendimiento.&lt;/p>
+&lt;h3 id="características-clave-de-blazor-webassembly">Características clave de Blazor WebAssembly:&lt;/h3>
+&lt;ul>
+&lt;li>&lt;strong>Ejecución en el cliente&lt;/strong>: El código .NET se ejecuta directamente en el navegador, lo que permite que la lógica de la aplicación no dependa del servidor para su ejecución.&lt;/li>
+&lt;li>&lt;strong>Uso de WebAssembly&lt;/strong>: Blazor WebAssembly aprovecha WebAssembly para ejecutar código en el navegador a una velocidad casi nativa.&lt;/li>
+&lt;li>&lt;strong>Interoperabilidad con JavaScript&lt;/strong>: Aunque Blazor WebAssembly se ejecuta en .NET, también puede interoperar con JavaScript para acceder a las capacidades del navegador que no están disponibles de forma nativa en .NET.&lt;/li>
+&lt;/ul>
+&lt;h2 id="2-estrategias-de-optimización-para-blazor-webassembly">2. &lt;strong>Estrategias de optimización para Blazor WebAssembly&lt;/strong>&lt;/h2>
+&lt;h3 id="21-reducir-el-tamaño-de-la-carga-inicial">2.1 &lt;strong>Reducir el tamaño de la carga inicial&lt;/strong>&lt;/h3>
+&lt;p>Uno de los principales desafíos de las aplicaciones Blazor WebAssembly es el tiempo de carga inicial. Cuando un usuario visita una aplicación Blazor WebAssembly, el navegador tiene que descargar la aplicación completa (incluyendo el ensamblado .NET y las bibliotecas necesarias).&lt;/p>
+&lt;h4 id="estrategias-para-reducir-el-tamaño-de-la-carga-inicial">Estrategias para reducir el tamaño de la carga inicial:&lt;/h4>
 &lt;ol>
-&lt;li>&lt;strong>Blazor Server&lt;/strong>: La aplicación se ejecuta en el servidor y utiliza SignalR para comunicarse con el cliente. Ideal para aplicaciones con requisitos de tiempo real o cuando se desea un inicio rápido.&lt;/li>
-&lt;li>&lt;strong>Blazor WebAssembly&lt;/strong>: Ejecuta el código directamente en el navegador utilizando WebAssembly. Ofrece una experiencia completamente del lado del cliente.&lt;/li>
-&lt;li>&lt;strong>Blazor Hybrid&lt;/strong>: Integra Blazor con plataformas como MAUI para crear aplicaciones multiplataforma.&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Habilitar la compresión de archivos&lt;/strong>:
+Asegúrate de que los archivos de la aplicación Blazor estén comprimidos. Esto se puede hacer fácilmente configurando la compresión en el servidor (por ejemplo, mediante GZIP o Brotli en un servidor como Nginx o Azure).&lt;/p>
+&lt;p>&lt;strong>Ejemplo en Azure&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>En la configuración de tu aplicación en Azure, habilita la compresión para archivos &lt;code>.blazor&lt;/code>, &lt;code>.wasm&lt;/code>, y otros archivos estáticos.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Dividir el código en fragmentos más pequeños&lt;/strong>:
+Al usar la opción de &lt;strong>Lazy Loading&lt;/strong>, puedes cargar solo las partes necesarias de la aplicación en lugar de cargar toda la aplicación al inicio.&lt;/p>
+&lt;p>&lt;strong>Ejemplo de Lazy Loading en Blazor&lt;/strong>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">builder.Services.AddBlazorWebAssemblyLazyLoad();
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Esto puede ser útil cuando se tiene una aplicación con muchas rutas y componentes pesados.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Optimizar los archivos WebAssembly&lt;/strong>:
+Utiliza el compilador de .NET para optimizar el código WebAssembly para el entorno de producción. En .NET 8, esto se puede lograr configurando el &lt;code>PublishTrimmed&lt;/code> y &lt;code>OptimizeForSize&lt;/code> en el archivo &lt;code>.csproj&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">&amp;lt;PropertyGroup&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;PublishTrimmed&amp;gt;true&amp;lt;/PublishTrimmed&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;OptimizeForSize&amp;gt;true&amp;lt;/OptimizeForSize&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;/PropertyGroup&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Esto elimina código no utilizado y reduce el tamaño del archivo &lt;code>.wasm&lt;/code>.&lt;/p>
+&lt;/li>
 &lt;/ol>
-&lt;h2 id="ventajas-de-blazor">Ventajas de Blazor&lt;/h2>
+&lt;h3 id="22-optimización-de-la-carga-de-recursos">2.2 &lt;strong>Optimización de la carga de recursos&lt;/strong>&lt;/h3>
+&lt;p>Los recursos de la aplicación, como imágenes, hojas de estilo y scripts adicionales, deben ser optimizados para reducir la latencia.&lt;/p>
+&lt;h4 id="buenas-prácticas-para-la-carga-de-recursos">Buenas prácticas para la carga de recursos:&lt;/h4>
 &lt;ol>
-&lt;li>&lt;strong>Reutilización de código&lt;/strong>: Usa el mismo lenguaje, C#, tanto para el cliente como para el servidor.&lt;/li>
-&lt;li>&lt;strong>Ecosistema unificado&lt;/strong>: Aprovecha las herramientas y bibliotecas de .NET.&lt;/li>
-&lt;li>&lt;strong>Soporte a largo plazo&lt;/strong>: Microsoft ofrece soporte continuo para Blazor como parte del ecosistema .NET.&lt;/li>
-&lt;li>&lt;strong>Sin JavaScript adicional&lt;/strong>: Aunque puedes integrarlo, no es necesario para funciones comunes.&lt;/li>
-&lt;li>&lt;strong>Componentes reutilizables&lt;/strong>: Facilita la modularidad y la organización del código.&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Minificación de CSS y JavaScript&lt;/strong>:
+Asegúrate de que todos los archivos CSS y JavaScript estén minificados. Esto reducirá el tamaño de los archivos y mejorará los tiempos de carga.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Uso de imágenes optimizadas&lt;/strong>:
+Utiliza formatos de imágenes modernos como WebP y SVG, que son más eficientes en cuanto a tamaño que los tradicionales JPEG y PNG.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Pre-carga de recursos críticos&lt;/strong>:
+Utiliza técnicas de pre-carga (por ejemplo, con el atributo &lt;code>rel=&amp;quot;preload&amp;quot;&lt;/code> en los enlaces de los recursos importantes como las hojas de estilo y scripts) para cargar estos recursos antes de que sean necesarios en la aplicación.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">link&lt;/span> &lt;span class="n">rel&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;preload&amp;#34;&lt;/span> &lt;span class="n">href&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;styles.css&amp;#34;&lt;/span> &lt;span class="n">as&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;style&amp;#34;&lt;/span> &lt;span class="o">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">link&lt;/span> &lt;span class="n">rel&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;preload&amp;#34;&lt;/span> &lt;span class="n">href&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;script.js&amp;#34;&lt;/span> &lt;span class="n">as&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;script&amp;#34;&lt;/span> &lt;span class="o">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
 &lt;/ol>
-&lt;h2 id="desventajas-de-blazor">Desventajas de Blazor&lt;/h2>
+&lt;h3 id="23-optimización-de-la-ejecución-en-el-navegador">2.3 &lt;strong>Optimización de la ejecución en el navegador&lt;/strong>&lt;/h3>
+&lt;p>Al ejecutar Blazor WebAssembly, el código .NET debe ejecutarse en el navegador, lo que puede consumir recursos. Existen estrategias para optimizar la ejecución en el cliente.&lt;/p>
+&lt;h4 id="estrategias-de-optimización-para-la-ejecución">Estrategias de optimización para la ejecución:&lt;/h4>
 &lt;ol>
-&lt;li>&lt;strong>Tamaño inicial&lt;/strong>: En Blazor WebAssembly, el tamaño de descarga inicial puede ser considerable.&lt;/li>
-&lt;li>&lt;strong>Soporte limitado en navegadores antiguos&lt;/strong>: Requiere navegadores modernos con soporte para WebAssembly.&lt;/li>
-&lt;li>&lt;strong>Latencia en Blazor Server&lt;/strong>: La comunicación constante con el servidor puede introducir latencia.&lt;/li>
-&lt;li>&lt;strong>Curva de aprendizaje&lt;/strong>: Aunque es similar a .NET, puede ser desafiante para desarrolladores sin experiencia previa en el ecosistema.&lt;/li>
-&lt;/ol>
-&lt;h2 id="configuración-inicial">Configuración inicial&lt;/h2>
-&lt;h3 id="requisitos-previos">Requisitos previos&lt;/h3>
-&lt;ol>
-&lt;li>Tener instalado .NET SDK:
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">dotnet --version
+&lt;li>
+&lt;p>&lt;strong>Uso eficiente de los hilos&lt;/strong>:
+Blazor WebAssembly se ejecuta en un solo hilo en el navegador. Para evitar bloqueos y mejorar el rendimiento, asegúrate de no bloquear el hilo principal. Utiliza &lt;code>Task.Run()&lt;/code> y &lt;code>async/await&lt;/code> adecuadamente para las operaciones de larga duración.&lt;/p>
+&lt;p>&lt;strong>Ejemplo de ejecución asincrónica&lt;/strong>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">public&lt;/span> &lt;span class="n">async&lt;/span> &lt;span class="n">Task&lt;/span> &lt;span class="n">LoadDataAsync&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">var&lt;/span> &lt;span class="n">data&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">await&lt;/span> &lt;span class="n">Http&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">GetFromJsonAsync&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">MyData&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;api/data&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">StateHasChanged&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
-&lt;li>Instalar un editor de código, como Visual Studio o Visual Studio Code.&lt;/li>
-&lt;/ol>
-&lt;h3 id="crear-un-proyecto-blazor-server">Crear un proyecto Blazor Server&lt;/h3>
-&lt;ol>
-&lt;li>Ejecutar el comando para crear un proyecto:
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">dotnet new blazorserver -o BlazorServerApp
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
-&lt;li>Navegar al directorio del proyecto:
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">cd BlazorServerApp
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
-&lt;li>Ejecutar la aplicación:
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">dotnet run
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
-&lt;/ol>
-&lt;h3 id="crear-un-proyecto-blazor-webassembly">Crear un proyecto Blazor WebAssembly&lt;/h3>
-&lt;ol>
-&lt;li>Crear un proyecto WebAssembly:
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">dotnet new blazorwasm -o BlazorWebAssemblyApp
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
-&lt;li>Navegar al directorio del proyecto y ejecutarlo:
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">cd BlazorWebAssemblyApp
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">dotnet run
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
-&lt;/ol>
-&lt;h2 id="conceptos-fundamentales">Conceptos fundamentales&lt;/h2>
-&lt;h3 id="componentes">Componentes&lt;/h3>
-&lt;p>Los componentes son la unidad básica en Blazor. Se crean utilizando archivos &lt;code>.razor&lt;/code> y combinan C# con HTML.&lt;/p>
-&lt;h4 id="ejemplo-básico">Ejemplo básico&lt;/h4>
-&lt;p>Archivo: &lt;code>Counter.razor&lt;/code>&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">@page &amp;#34;/counter&amp;#34;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;h3&amp;gt;Contador&amp;lt;/h3&amp;gt;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;p&amp;gt;Valor actual: @currentCount&amp;lt;/p&amp;gt;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;button @onclick=&amp;#34;IncrementCount&amp;#34;&amp;gt;Incrementar&amp;lt;/button&amp;gt;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">@code {
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> private int currentCount = 0;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> private void IncrementCount()
+&lt;li>
+&lt;p>&lt;strong>Reducir la cantidad de renderizados&lt;/strong>:
+Blazor WebAssembly utiliza un modelo de renderizado basado en la actualización de los componentes. Cada vez que un estado de la aplicación cambia, el componente se vuelve a renderizar. Para optimizar el rendimiento, reduce la cantidad de cambios de estado y actualiza solo cuando sea necesario.&lt;/p>
+&lt;p>&lt;strong>Ejemplo de optimización de renderizado&lt;/strong>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">// Evitar un renderizado innecesario
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">private async Task OnClickAsync()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> if (someCondition)
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> currentCount++;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> // Solo actualizar si realmente es necesario
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> await InvokeAsync(StateHasChanged);
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="inyección-de-dependencias">Inyección de dependencias&lt;/h3>
-&lt;p>Blazor soporta inyección de dependencias a través del contenedor de servicios.&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">@inject WeatherService WeatherService
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;h3&amp;gt;Clima actual&amp;lt;/h3&amp;gt;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;p&amp;gt;@WeatherService.GetCurrentWeather()&amp;lt;/p&amp;gt;
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="buenas-prácticas">Buenas prácticas&lt;/h2>
-&lt;ol>
-&lt;li>&lt;strong>Organización del proyecto&lt;/strong>: Divide la aplicación en módulos y componentes reutilizables.&lt;/li>
-&lt;li>&lt;strong>Manejo de estado&lt;/strong>: Usa librerías como &lt;code>Fluxor&lt;/code> o servicios para manejar el estado de la aplicación.&lt;/li>
-&lt;li>&lt;strong>Optimizar el tamaño&lt;/strong>: Para Blazor WebAssembly, minimiza los recursos y activa la compresión.&lt;/li>
-&lt;li>&lt;strong>Seguridad&lt;/strong>: Implementa protección contra ataques XSS y valida todas las entradas de usuario.&lt;/li>
-&lt;li>&lt;strong>Pruebas&lt;/strong>: Usa frameworks como &lt;code>bUnit&lt;/code> para pruebas unitarias de componentes.&lt;/li>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
 &lt;/ol>
+&lt;h3 id="24-uso-de-técnicas-de-almacenamiento-en-caché">2.4 &lt;strong>Uso de técnicas de almacenamiento en caché&lt;/strong>&lt;/h3>
+&lt;p>El almacenamiento en caché puede mejorar significativamente el rendimiento de una aplicación Blazor WebAssembly al reducir la necesidad de cargar datos o archivos repetidos desde el servidor.&lt;/p>
+&lt;h4 id="buenas-prácticas-para-almacenamiento-en-caché">Buenas prácticas para almacenamiento en caché:&lt;/h4>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Almacenar datos en &lt;code>localStorage&lt;/code> o &lt;code>sessionStorage&lt;/code>&lt;/strong>:
+Utiliza &lt;code>localStorage&lt;/code> o &lt;code>sessionStorage&lt;/code> para almacenar datos que se deben acceder rápidamente sin necesidad de hacer nuevas solicitudes al servidor.&lt;/p>
+&lt;p>&lt;strong>Ejemplo de uso de &lt;code>localStorage&lt;/code>&lt;/strong>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">public void StoreDataInLocalStorage(string key, string data)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> JSRuntime.InvokeVoidAsync(&amp;#34;localStorage.setItem&amp;#34;, key, data);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">public async Task&amp;lt;string&amp;gt; GetDataFromLocalStorage(string key)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> return await JSRuntime.InvokeAsync&amp;lt;string&amp;gt;(&amp;#34;localStorage.getItem&amp;#34;, key);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Caching de API REST&lt;/strong>:
+Si tu aplicación realiza muchas solicitudes a una API, puedes usar técnicas de almacenamiento en caché como Service Workers para cachear respuestas de API, reduciendo el tiempo de carga.&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="3-conclusión">3. &lt;strong>Conclusión&lt;/strong>&lt;/h2>
+&lt;p>La optimización del rendimiento en Blazor WebAssembly es crucial para proporcionar una experiencia de usuario rápida y fluida. Aplicando las estrategias mencionadas, como la reducción del tamaño de la carga inicial, la optimización de recursos, la mejora en la ejecución del código y el uso de almacenamiento en caché, se puede lograr un rendimiento mucho más eficiente en aplicaciones Blazor. Además, la configuración adecuada de la infraestructura, como la compresión y el uso de técnicas de Lazy Loading, p&amp;hellip;&lt;/p>
+&lt;p>Implementando estas buenas prácticas y aprovechando las características avanzadas de .NET 8, es posible crear aplicaciones Blazor WebAssembly rápidas, escalables y con una experiencia de usuario optimizada.&lt;/p></description></item><item><title>Autenticación y autorización en Blazor WebAssembly con Microsoft Entra ID</title><link>https://cmas.dev/posts/2024-06-26-identity-blazor-wa-entra/</link><pubDate>Wed, 26 Jun 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-06-26-identity-blazor-wa-entra/</guid><description>&lt;p>&lt;strong>Blazor WebAssembly&lt;/strong> es una tecnología poderosa dentro del ecosistema &lt;strong>.NET&lt;/strong> que permite construir aplicaciones web interactivas completamente en C#. Para aplicaciones empresariales y seguras, la autenticación y autorización son aspectos fundamentales. &lt;strong>Microsoft Entra ID&lt;/strong> (anteriormente Azure Active Directory) proporciona una solución confiable y escalable para la gestión de identidad. En este artículo, exploraremos cómo integrar autenticación y autorización en una aplicación &lt;strong>Blazor WebAssembly&lt;/strong> utilizando &lt;strong>.NET 8&lt;/strong> y &lt;strong>Microsoft Entra ID&lt;/strong>.&lt;/p>
+&lt;h2 id="requisitos-previos">Requisitos previos&lt;/h2>
+&lt;p>Antes de comenzar, asegúrate de contar con lo siguiente:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>.NET 8 SDK&lt;/strong> instalado en tu sistema.&lt;/li>
+&lt;li>&lt;strong>Cuenta de Azure&lt;/strong> con acceso a Microsoft Entra ID.&lt;/li>
+&lt;li>&lt;strong>Visual Studio 2022&lt;/strong> o Visual Studio Code.&lt;/li>
+&lt;li>&lt;strong>Azure CLI&lt;/strong> instalado para la configuración de la identidad.&lt;/li>
+&lt;/ul>
+&lt;h2 id="creación-de-la-aplicación-blazor-webassembly">Creación de la aplicación Blazor WebAssembly&lt;/h2>
+&lt;p>Para iniciar, crearemos una nueva aplicación Blazor WebAssembly con soporte para autenticación de Microsoft Entra ID.&lt;/p>
+&lt;p>Ejecuta el siguiente comando en la terminal:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"> dotnet new blazorwasm -o BlazorAuthApp --auth IndividualB2C
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> cd BlazorAuthApp
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Esto genera una aplicación Blazor WebAssembly con autenticación preconfigurada.&lt;/p>
+&lt;h2 id="configuración-de-microsoft-entra-id">Configuración de Microsoft Entra ID&lt;/h2>
+&lt;h3 id="1-registrar-la-aplicación-en-azure">1. Registrar la aplicación en Azure&lt;/h3>
+&lt;ol>
+&lt;li>Accede al portal de Azure.&lt;/li>
+&lt;li>Dirígete a &lt;strong>Microsoft Entra ID&lt;/strong>.&lt;/li>
+&lt;li>Ve a &lt;strong>Registros de Aplicaciones&lt;/strong> y selecciona &lt;strong>Nueva Aplicación&lt;/strong>.&lt;/li>
+&lt;li>Ingresa un nombre y elige &lt;strong>Cuentas en cualquier directorio organizacional&lt;/strong>.&lt;/li>
+&lt;li>Configura la URL de redirección como &lt;code>https://localhost:5001/authentication/login-callback&lt;/code>.&lt;/li>
+&lt;li>Guarda la aplicación y copia el &lt;strong>Application (client) ID&lt;/strong>.&lt;/li>
+&lt;/ol>
+&lt;h3 id="2-configurar-los-permisos-de-la-api">2. Configurar los permisos de la API&lt;/h3>
+&lt;ol>
+&lt;li>Dentro del registro de la aplicación, ve a &lt;strong>Permisos de API&lt;/strong>.&lt;/li>
+&lt;li>Agrega los siguientes permisos:
+&lt;ul>
+&lt;li>&lt;code>openid&lt;/code>&lt;/li>
+&lt;li>&lt;code>profile&lt;/code>&lt;/li>
+&lt;li>&lt;code>email&lt;/code>&lt;/li>
+&lt;li>&lt;code>User.Read&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Concede el consentimiento del administrador.&lt;/li>
+&lt;/ol>
+&lt;h3 id="3-configurar-los-secretos-del-cliente">3. Configurar los secretos del cliente&lt;/h3>
+&lt;ol>
+&lt;li>Ve a &lt;strong>Certificados y secretos&lt;/strong>.&lt;/li>
+&lt;li>Genera un nuevo secreto de cliente y copia su valor.&lt;/li>
+&lt;/ol>
+&lt;h2 id="integración-de-la-autenticación-en-blazor-webassembly">Integración de la autenticación en Blazor WebAssembly&lt;/h2>
+&lt;h3 id="configurar-appsettingsjson">Configurar appsettings.json&lt;/h3>
+&lt;p>Modifica &lt;code>wwwroot/appsettings.json&lt;/code> para agregar la configuración de Microsoft Entra ID:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;AzureAd&amp;#34;: {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;Authority&amp;#34;: &amp;#34;https://login.microsoftonline.com/{tenant_id}&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;ClientId&amp;#34;: &amp;#34;{client_id}&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;ValidateAuthority&amp;#34;: true
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Reemplaza &lt;code>{tenant_id}&lt;/code> y &lt;code>{client_id}&lt;/code> con los valores de tu aplicación en Azure.&lt;/p>
+&lt;h3 id="configurar-autenticación-en-programcs">Configurar autenticación en Program.cs&lt;/h3>
+&lt;p>Edita &lt;code>Program.cs&lt;/code> para habilitar la autenticación:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">using&lt;/span> &lt;span class="n">Microsoft&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">AspNetCore&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Components&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Web&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">using&lt;/span> &lt;span class="n">Microsoft&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">AspNetCore&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Components&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">WebAssembly&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Authentication&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">using&lt;/span> &lt;span class="n">Microsoft&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">AspNetCore&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Components&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">WebAssembly&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Hosting&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">using&lt;/span> &lt;span class="n">BlazorAuthApp&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">var&lt;/span> &lt;span class="n">builder&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">WebAssemblyHostBuilder&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">CreateDefault&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">args&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">builder&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Services&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">AddAuthorizationCore&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">builder&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Services&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">AddMsalAuthentication&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">options&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">builder&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Configuration&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Bind&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;AzureAd&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">options&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">ProviderOptions&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Authentication&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">await&lt;/span> &lt;span class="n">builder&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Build&lt;/span>&lt;span class="p">()&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">RunAsync&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Esto permite que Blazor WebAssembly use Microsoft Entra ID para autenticación.&lt;/p>
+&lt;h3 id="agregar-control-de-autenticación-en-la-ui">Agregar control de autenticación en la UI&lt;/h3>
+&lt;p>Modifica &lt;code>MainLayout.razor&lt;/code> para incluir botones de inicio de sesión y cierre de sesión:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">&amp;lt;AuthorizeView&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;Authorized&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;p&amp;gt;Bienvenido, @context.User.Identity.Name!&amp;lt;/p&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;button @onclick=&amp;#34;(() =&amp;gt; Navigation.NavigateTo(&amp;#39;authentication/logout&amp;#39;))&amp;#34;&amp;gt;Cerrar sesión&amp;lt;/button&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/Authorized&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;NotAuthorized&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;button @onclick=&amp;#34;(() =&amp;gt; Navigation.NavigateTo(&amp;#39;authentication/login&amp;#39;))&amp;#34;&amp;gt;Iniciar sesión&amp;lt;/button&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;/NotAuthorized&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;/AuthorizeView&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Esto mostrará diferentes opciones dependiendo del estado de autenticación del usuario.&lt;/p>
+&lt;h2 id="implementar-autorización-basada-en-roles">Implementar Autorización basada en Roles&lt;/h2>
+&lt;p>Para restringir el acceso a componentes específicos según roles, puedes modificar el componente Blazor de la siguiente manera:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">&amp;lt;AuthorizeView Roles=&amp;#34;Admin&amp;#34;&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;p&amp;gt;Contenido exclusivo para administradores.&amp;lt;/p&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;/AuthorizeView&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Esto garantiza que solo los usuarios con el rol &amp;ldquo;Admin&amp;rdquo; puedan ver el contenido.&lt;/p>
 &lt;h2 id="conclusión">Conclusión&lt;/h2>
-&lt;p>&lt;strong>Blazor&lt;/strong> representa un cambio significativo en el desarrollo web al permitir que los desarrolladores utilicen C# para crear aplicaciones interactivas. Su capacidad para aprovechar el ecosistema de .NET lo hace una opción atractiva para equipos que ya trabajan con esta tecnología. Aunque tiene limitaciones, las ventajas que ofrece son significativas, especialmente en proyectos donde la reutilización de código y la integración con .NET son esenciales. ¡Explora Blazor y lleva tus habilidades de desarrollo web al siguiente nivel!&lt;/p></description></item><item><title>Creación de librerías compartidas en TypeScript</title><link>https://cmas.dev/posts/2024-06-19-share-libraries-typescript/</link><pubDate>Wed, 19 Jun 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-06-19-share-libraries-typescript/</guid><description>&lt;p>La creación de librerías compartidas en &lt;strong>TypeScript&lt;/strong> permite a los desarrolladores encapsular funcionalidad reutilizable y mejorar la mantenibilidad del código. Este artículo explorará el proceso completo de desarrollo de librerías en &lt;strong>TypeScript&lt;/strong>, desde la configuración inicial hasta el despliegue, con un enfoque moderno, ejemplos prácticos y consideraciones de seguridad.&lt;/p>
+&lt;p>Hemos configurado una aplicación &lt;strong>Blazor WebAssembly&lt;/strong> para autenticarse con &lt;strong>Microsoft Entra ID&lt;/strong> y hemos implementado autorización basada en roles. Esta configuración permite construir aplicaciones seguras y escalables en el ecosistema Microsoft.&lt;/p>
+&lt;p>Con estos pasos, ahora puedes extender tu aplicación agregando más protecciones y permisos según las necesidades de tu proyecto.&lt;/p></description></item><item><title>Creación de librerías compartidas en TypeScript</title><link>https://cmas.dev/posts/2024-06-19-share-libraries-typescript/</link><pubDate>Wed, 19 Jun 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-06-19-share-libraries-typescript/</guid><description>&lt;p>La creación de librerías compartidas en &lt;strong>TypeScript&lt;/strong> permite a los desarrolladores encapsular funcionalidad reutilizable y mejorar la mantenibilidad del código. Este artículo explorará el proceso completo de desarrollo de librerías en &lt;strong>TypeScript&lt;/strong>, desde la configuración inicial hasta el despliegue, con un enfoque moderno, ejemplos prácticos y consideraciones de seguridad.&lt;/p>
 &lt;h2 id="por-qué-crear-librerías-compartidas-en-typescript">¿Por qué crear librerías compartidas en TypeScript?&lt;/h2>
 &lt;h3 id="beneficios-principales">Beneficios principales&lt;/h3>
 &lt;ol>
