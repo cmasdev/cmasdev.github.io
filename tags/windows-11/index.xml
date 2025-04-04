@@ -1,4 +1,421 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Windows 11 on Christian Amado's Blog</title><link>https://cmas.dev/tags/windows-11/</link><description>Recent content in Windows 11 on Christian Amado's Blog</description><generator>Hugo -- gohugo.io</generator><language>es</language><lastBuildDate>Fri, 15 Dec 2023 18:30:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/tags/windows-11/index.xml" rel="self" type="application/rss+xml"/><item><title>XAML para cambio de orientación de pantalla</title><link>https://cmas.dev/posts/2023-12-15-maui-xaml-orientation-screen/</link><pubDate>Fri, 15 Dec 2023 18:30:00 -0400</pubDate><guid>https://cmas.dev/posts/2023-12-15-maui-xaml-orientation-screen/</guid><description>&lt;p>En este artículo veremos la posibilidad de crear un diseño que se adapte a la orientación de pantalla en &lt;strong>.NET MAUI&lt;/strong>.&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Windows 11 on Christian Amado's Blog</title><link>https://cmas.dev/tags/windows-11/</link><description>Recent content in Windows 11 on Christian Amado's Blog</description><generator>Hugo -- gohugo.io</generator><language>es</language><lastBuildDate>Fri, 31 May 2024 00:00:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/tags/windows-11/index.xml" rel="self" type="application/rss+xml"/><item><title>WSL2 como entorno para desarrollo MLOps</title><link>https://cmas.dev/posts/2024-05-31-wsl2-mlops/</link><pubDate>Fri, 31 May 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-05-31-wsl2-mlops/</guid><description>&lt;p>El ciclo de vida del machine learning moderno no solo involucra entrenar modelos, sino también automatizar, versionar y desplegar esos modelos en producción. Esto es lo que define el enfoque de &lt;strong>MLOps&lt;/strong>. Gracias a su compatibilidad con herramientas de Linux, contenedores, aceleración GPU y pipelines reproducibles, &lt;strong>WSL2 es ideal para este tipo de desarrollo desde Windows&lt;/strong>.&lt;/p>
+&lt;h2 id="-objetivo">🎯 Objetivo&lt;/h2>
+&lt;ul>
+&lt;li>Crear un entorno de desarrollo MLOps usando WSL2&lt;/li>
+&lt;li>Integrar herramientas como DVC, MLflow, Docker y Python&lt;/li>
+&lt;li>Automatizar pipelines de entrenamiento y evaluación&lt;/li>
+&lt;li>Ejecutar tareas reproducibles y escalables localmente&lt;/li>
+&lt;/ul>
+&lt;h2 id="-paso-1-preparar-entorno-base-en-wsl2">⚙️ Paso 1: Preparar entorno base en WSL2&lt;/h2>
+&lt;p>Instalar Python y herramientas básicas:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">sudo apt update
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo apt install -y python3-pip python3-venv git
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">pip install --upgrade pip
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Clonar un proyecto de ejemplo o iniciar uno nuevo:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git clone https://github.com/iterative/example-get-started-mlops.git
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">cd example-get-started-mlops
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="-paso-2-instalar-dvc-para-control-de-datos-y-pipelines">🔁 Paso 2: Instalar DVC para control de datos y pipelines&lt;/h2>
+&lt;p>&lt;a href="https://dvc.org/">DVC&lt;/a> es una herramienta fundamental en MLOps para manejar datos y etapas de procesamiento.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">pip install dvc[gs] dvc[ssh]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">dvc init
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Agregar un pipeline:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">dvc run -n preprocess -d src/preprocess.py -o data/processed python src/preprocess.py data/raw data/processed
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="-paso-3-automatizar-experimentos-con-mlflow">🧪 Paso 3: Automatizar experimentos con MLflow&lt;/h2>
+&lt;p>Instalar MLflow:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">pip install mlflow
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Ejecutar un experimento:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">mlflow run .
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Lanzar la interfaz de MLflow:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">mlflow ui
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Ver resultados desde el navegador en &lt;code>http://localhost:5000&lt;/code>&lt;/p>
+&lt;h2 id="-paso-4-contenerizar-el-flujo-con-docker">🐳 Paso 4: Contenerizar el flujo con Docker&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-dockerfile" data-lang="dockerfile">&lt;span class="line">&lt;span class="cl">&lt;span class="k">FROM&lt;/span>&lt;span class="s"> python:3.10-slim&lt;/span>&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">WORKDIR&lt;/span>&lt;span class="s"> /app&lt;/span>&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">COPY&lt;/span> . /app&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">RUN&lt;/span> pip install -r requirements.txt&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">ENTRYPOINT&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="s2">&amp;#34;python&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;src/train.py&amp;#34;&lt;/span>&lt;span class="p">]&lt;/span>&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Construir y correr el contenedor:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">docker build -t mlops-model .
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker run --rm mlops-model
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="-buenas-prácticas-mlops-en-wsl2">🛠️ Buenas prácticas MLOps en WSL2&lt;/h2>
+&lt;ul>
+&lt;li>Usar &lt;code>make&lt;/code> para correr pipelines: &lt;code>make train&lt;/code>, &lt;code>make evaluate&lt;/code>&lt;/li>
+&lt;li>Controlar recursos con &lt;code>.wslconfig&lt;/code>&lt;/li>
+&lt;li>Versionar modelos con &lt;code>dvc push&lt;/code> y &lt;code>git tag&lt;/code>&lt;/li>
+&lt;li>Integrar &lt;code>act&lt;/code> para correr GitHub Actions localmente&lt;/li>
+&lt;li>Usar &lt;code>conda&lt;/code> o &lt;code>pip-tools&lt;/code> para entornos reproducibles&lt;/li>
+&lt;/ul>
+&lt;h2 id="-conclusión">✅ Conclusión&lt;/h2>
+&lt;p>&lt;strong>WSL2&lt;/strong> permite construir un entorno completo de &lt;strong>MLOps&lt;/strong> directamente sobre &lt;strong>Windows&lt;/strong>, integrando control de versiones, contenedores, entrenamiento y despliegue en pipelines reproducibles. Es una solución ideal para equipos que necesitan compatibilidad con Linux pero prefieren trabajar desde Windows.&lt;/p></description></item><item><title>Automatización de tareas con Makefiles y Bash avanzado en WSL2</title><link>https://cmas.dev/posts/2024-05-24-wsl2-automation-makefiles-bash/</link><pubDate>Fri, 24 May 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-05-24-wsl2-automation-makefiles-bash/</guid><description>&lt;p>Una de las ventajas más potentes de WSL2 es la posibilidad de usar herramientas Linux como &lt;code>make&lt;/code> y Bash para automatizar tareas en proyectos de desarrollo, ciencia de datos, o DevOps. Este artículo detalla cómo crear scripts avanzados con Bash y cómo estructurar &lt;code>Makefiles&lt;/code> efectivos para ejecutar tareas complejas con un solo comando.&lt;/p>
+&lt;h2 id="-objetivo">🎯 Objetivo&lt;/h2>
+&lt;ul>
+&lt;li>Crear scripts Bash reutilizables y robustos&lt;/li>
+&lt;li>Diseñar &lt;code>Makefiles&lt;/code> para tareas como tests, builds o pipelines&lt;/li>
+&lt;li>Integrar la automatización en entornos reproducibles bajo WSL2&lt;/li>
+&lt;/ul>
+&lt;h2 id="-paso-1-preparar-entorno-en-wsl2">⚙️ Paso 1: Preparar entorno en WSL2&lt;/h2>
+&lt;p>Instalar dependencias básicas:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">sudo apt update &amp;amp;&amp;amp; sudo apt install -y make build-essential
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Organizar proyecto:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">mi-proyecto/
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">├── scripts/
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ ├── build.sh
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ └── test.sh
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">├── Makefile
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">└── README.md
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="-paso-2-crear-scripts-bash-reutilizables">🧪 Paso 2: Crear scripts Bash reutilizables&lt;/h2>
+&lt;h3 id="buildsh">build.sh&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="cp">#!/bin/bash
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">&lt;/span>&lt;span class="nb">set&lt;/span> -e
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;Compilando proyecto...&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">gcc src/main.c -o bin/app
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;Build completado con éxito.&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="testsh">test.sh&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="cp">#!/bin/bash
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">&lt;/span>&lt;span class="nb">set&lt;/span> -e
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;Ejecutando tests...&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">pytest tests/
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Dar permisos de ejecución:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">chmod +x scripts/*.sh
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="-paso-3-diseñar-un-makefile">📦 Paso 3: Diseñar un Makefile&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">.PHONY: build test clean all
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">build:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> bash scripts/build.sh
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">test:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> bash scripts/test.sh
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">clean:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> rm -rf bin/
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">all: clean build test
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Ahora se pueden ejecutar tareas fácilmente:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">make build
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">make test
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">make all
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="-paso-4-automatización-avanzada">🔁 Paso 4: Automatización avanzada&lt;/h2>
+&lt;p>Agregar detección de entorno, logs o argumentos en los scripts:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="cp">#!/bin/bash
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">&lt;/span>&lt;span class="nb">set&lt;/span> -e
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;Sistema operativo: &lt;/span>&lt;span class="k">$(&lt;/span>uname -a&lt;span class="k">)&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">DATE&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="k">$(&lt;/span>date +%Y-%m-%d&lt;span class="k">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">LOG&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;build_&lt;/span>&lt;span class="nv">$DATE&lt;/span>&lt;span class="s2">.log&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;Iniciando build...&amp;#34;&lt;/span> &lt;span class="p">|&lt;/span> tee &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$LOG&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">gcc src/main.c -o bin/app &amp;gt;&amp;gt; &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$LOG&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> 2&amp;gt;&lt;span class="p">&amp;amp;&lt;/span>&lt;span class="m">1&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>O usar variables en &lt;code>Makefile&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">DATE := $(shell date +%F)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">LOGFILE := logs/build_$(DATE).log
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">logbuild:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> mkdir -p logs
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> bash scripts/build.sh | tee $(LOGFILE)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="-buenas-prácticas">🛠️ Buenas prácticas&lt;/h2>
+&lt;ul>
+&lt;li>Validar argumentos (&lt;code>&amp;quot;$#&amp;quot;&lt;/code> y &lt;code>&amp;quot;$1&amp;quot;&lt;/code>) en scripts&lt;/li>
+&lt;li>Documentar cada tarea con comentarios o &lt;code>README.md&lt;/code>&lt;/li>
+&lt;li>Usar &lt;code>.PHONY&lt;/code> para evitar conflictos con archivos&lt;/li>
+&lt;li>Versionar scripts y &lt;code>Makefile&lt;/code> en Git para control de cambios&lt;/li>
+&lt;/ul>
+&lt;h2 id="-conclusión">✅ Conclusión&lt;/h2>
+&lt;p>Con Bash avanzado y Makefiles bien diseñados, es posible automatizar completamente tareas comunes de desarrollo en WSL2, mejorando la productividad, reduciendo errores y asegurando reproducibilidad en equipos o entornos compartidos.&lt;/p></description></item><item><title>VS Code Remote WSL para flujos de trabajo Data Science</title><link>https://cmas.dev/posts/2024-05-17-wsl2-remote-data-science/</link><pubDate>Fri, 17 May 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-05-17-wsl2-remote-data-science/</guid><description>&lt;p>El desarrollo de proyectos de ciencia de datos desde Windows puede beneficiarse enormemente del uso de &lt;strong>WSL2 con VS Code Remote&lt;/strong>. Esta combinación permite aprovechar herramientas y entornos Linux directamente desde el editor, manteniendo la flexibilidad de Windows en tareas cotidianas como análisis, visualización o modelado de datos.&lt;/p>
+&lt;h2 id="-objetivo">🎯 Objetivo&lt;/h2>
+&lt;ul>
+&lt;li>Configurar un entorno Linux para ciencia de datos dentro de WSL2&lt;/li>
+&lt;li>Integrarlo con &lt;strong>Visual Studio Code&lt;/strong> mediante la extensión &lt;strong>Remote - WSL&lt;/strong>&lt;/li>
+&lt;li>Usar Jupyter Notebooks, entornos virtuales y bibliotecas científicas desde VS Code&lt;/li>
+&lt;li>Trabajar con flujos reproducibles usando pip, conda y notebooks&lt;/li>
+&lt;/ul>
+&lt;h2 id="-requisitos-previos">🧰 Requisitos previos&lt;/h2>
+&lt;ul>
+&lt;li>Windows 10/11 con WSL2 activado&lt;/li>
+&lt;li>Distro Linux instalada (Ubuntu 22.04 recomendado)&lt;/li>
+&lt;li>VS Code con la extensión &lt;strong>Remote - WSL&lt;/strong>&lt;/li>
+&lt;li>Python 3, pip y/o conda&lt;/li>
+&lt;/ul>
+&lt;h2 id="-paso-1-instalar-dependencias-en-la-distro-wsl2">⚙️ Paso 1: Instalar dependencias en la distro WSL2&lt;/h2>
+&lt;p>Desde tu terminal WSL:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">sudo apt update &amp;amp;&amp;amp; sudo apt upgrade -y
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo apt install -y python3-pip python3-venv git
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Instalar bibliotecas de ciencia de datos:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">pip install numpy pandas matplotlib seaborn scikit-learn jupyter
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Opcional: usar &lt;code>miniconda&lt;/code> si se prefiere conda como gestor de entornos.&lt;/p>
+&lt;h2 id="-paso-2-abrir-wsl-desde-vs-code">💻 Paso 2: Abrir WSL desde VS Code&lt;/h2>
+&lt;ol>
+&lt;li>Abrí &lt;strong>VS Code&lt;/strong>&lt;/li>
+&lt;li>Presioná &lt;code>Ctrl+Shift+P&lt;/code> y escribí: &lt;code>Remote-WSL: New Window&lt;/code>&lt;/li>
+&lt;li>Seleccioná tu distribución (ej: Ubuntu)&lt;/li>
+&lt;/ol>
+&lt;p>Ahora estás en una sesión remota con acceso completo a la terminal, Python, Jupyter y entorno Linux desde el editor.&lt;/p>
+&lt;h2 id="-paso-3-usar-jupyter-notebooks-dentro-de-vs-code">📓 Paso 3: Usar Jupyter Notebooks dentro de VS Code&lt;/h2>
+&lt;p>Instalar extensión oficial de &lt;strong>Jupyter&lt;/strong> en VS Code.&lt;/p>
+&lt;p>Crear un nuevo notebook (&lt;code>.ipynb&lt;/code>) y seleccioná el kernel Python correspondiente desde el entorno WSL.&lt;/p>
+&lt;p>Verificá que ejecutás en WSL:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">import platform
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">print(platform.system(), platform.release())
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="-ejemplo-práctico-análisis-exploratorio">🧪 Ejemplo práctico: Análisis exploratorio&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="n">pandas&lt;/span> &lt;span class="n">as&lt;/span> &lt;span class="n">pd&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="n">seaborn&lt;/span> &lt;span class="n">as&lt;/span> &lt;span class="n">sns&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="n">matplotlib&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">pyplot&lt;/span> &lt;span class="n">as&lt;/span> &lt;span class="n">plt&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">df&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">sns&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">load_dataset&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;penguins&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">sns&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">pairplot&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">df&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">hue&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;species&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">plt&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">show&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Este script corre directamente en el entorno WSL, usando la GPU (si está disponible), y sin overhead de traducción de entornos.&lt;/p>
+&lt;h2 id="-buenas-prácticas">🛠️ Buenas prácticas&lt;/h2>
+&lt;ul>
+&lt;li>Guardar los proyectos en el sistema de archivos Linux (&lt;code>~/proyectos&lt;/code>, no en &lt;code>/mnt/c/&lt;/code>) para mayor rendimiento&lt;/li>
+&lt;li>Usar entornos virtuales (&lt;code>python3 -m venv .venv&lt;/code>) para evitar conflictos&lt;/li>
+&lt;li>Versionar notebooks y scripts con Git (&lt;code>git init&lt;/code>)&lt;/li>
+&lt;li>Añadir &lt;code>requirements.txt&lt;/code> para reproducibilidad:&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">pip freeze &amp;gt; requirements.txt
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="-conclusión">✅ Conclusión&lt;/h2>
+&lt;p>&lt;strong>VS Code&lt;/strong> + R&lt;strong>emote WSL&lt;/strong> ofrece una experiencia fluida para la ciencia de datos en &lt;strong>Windows&lt;/strong>, combinando la potencia de &lt;strong>Linux&lt;/strong> con la comodidad de un entorno gráfico moderno. Con Jupyter, Python y bibliotecas científicas listas para usar, es posible construir, visualizar y entrenar modelos de manera productiva, eficiente y reproducible.&lt;/p></description></item><item><title>WSL2 + NVIDIA GPU: configuración óptima para workloads de IA</title><link>https://cmas.dev/posts/2024-05-10-wsl2-nvidia-gpu/</link><pubDate>Fri, 10 May 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-05-10-wsl2-nvidia-gpu/</guid><description>&lt;p>Desde mediados de 2020, WSL2 ofrece soporte oficial para &lt;strong>aceleración por GPU con NVIDIA&lt;/strong>. Esto permite ejecutar frameworks como &lt;strong>[PyTorch]&lt;/strong>(&lt;a href="https://pytorch.org/get-started/locally/">https://pytorch.org/get-started/locally/&lt;/a>) o &lt;strong>TensorFlow&lt;/strong> con &lt;strong>[CUDA]&lt;/strong>(&lt;a href="https://docs.nvidia.com/cuda/wsl-user-guide/index.html">https://docs.nvidia.com/cuda/wsl-user-guide/index.html&lt;/a>) directamente desde &lt;strong>Linux&lt;/strong> en &lt;strong>Windows&lt;/strong>, ideal para tareas de entrenamiento y prueba de modelos de inteligencia artificial.&lt;/p>
+&lt;h2 id="-objetivo">🎯 Objetivo&lt;/h2>
+&lt;p>Configurar un entorno de desarrollo basado en WSL2 con soporte GPU, incluyendo:&lt;/p>
+&lt;ul>
+&lt;li>Acceso a GPU NVIDIA desde el subsistema Linux&lt;/li>
+&lt;li>Instalación de CUDA Toolkit y cuDNN&lt;/li>
+&lt;li>Ejecución de scripts con PyTorch y verificación del entorno&lt;/li>
+&lt;li>Prácticas recomendadas para aprovechar la aceleración por hardware&lt;/li>
+&lt;/ul>
+&lt;h2 id="-requisitos-previos">🧰 Requisitos previos&lt;/h2>
+&lt;ul>
+&lt;li>Windows 11 (o Windows 10 21H2 en adelante)&lt;/li>
+&lt;li>WSL2 instalado y actualizado (&lt;code>wsl --update&lt;/code>)&lt;/li>
+&lt;li>GPU NVIDIA compatible (preferentemente RTX)&lt;/li>
+&lt;li>Driver de GPU actualizado: &lt;a href="https://www.nvidia.com/Download/index.aspx">nvidia.com/Download&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>Verificación del entorno desde PowerShell:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">nvidia-smi
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="-paso-1-activar-wsl2-con-soporte-gpu">⚙️ Paso 1: Activar WSL2 con soporte GPU&lt;/h2>
+&lt;p>Instalar WSL y una distribución como Ubuntu 22.04:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">wsl --install -d Ubuntu
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Actualizar WSL a la última versión:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">wsl --update
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">wsl --shutdown
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="-paso-2-instalar-cuda-y-herramientas-base-en-wsl2">🚀 Paso 2: Instalar CUDA y herramientas base en WSL2&lt;/h2>
+&lt;p>Desde la terminal Linux en WSL2:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">sudo apt update &amp;amp;&amp;amp; sudo apt upgrade -y
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo apt install -y build-essential dkms
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Agregar repositorios oficiales de NVIDIA:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">distribution&lt;/span>&lt;span class="o">=$&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">.&lt;/span> &lt;span class="o">/&lt;/span>&lt;span class="n">etc&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">os&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">release&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="n">echo&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">ID&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">VERSION_ID&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">curl&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">s&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">L&lt;/span> &lt;span class="n">https&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="o">//&lt;/span>&lt;span class="n">nvidia&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">github&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">io&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">libnvidia&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">container&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">gpgkey&lt;/span> &lt;span class="o">|&lt;/span> &lt;span class="n">sudo&lt;/span> &lt;span class="n">apt&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">key&lt;/span> &lt;span class="n">add&lt;/span> &lt;span class="o">-&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">curl&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">s&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">L&lt;/span> &lt;span class="n">https&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="o">//&lt;/span>&lt;span class="n">nvidia&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">github&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">io&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">libnvidia&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">container&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">ubuntu&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">distribution&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">libnvidia&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">container&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">list&lt;/span> &lt;span class="o">|&lt;/span> &lt;span class="n">sudo&lt;/span> &lt;span class="n">tee&lt;/span> &lt;span class="o">/&lt;/span>&lt;span class="n">etc&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">apt&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">sources&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">list&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">d&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">nvidia&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">container&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">list&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">sudo&lt;/span> &lt;span class="n">apt&lt;/span> &lt;span class="n">update&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">sudo&lt;/span> &lt;span class="n">apt&lt;/span> &lt;span class="n">install&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">y&lt;/span> &lt;span class="n">nvidia&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">driver&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="mi">535&lt;/span> &lt;span class="n">nvidia&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">cuda&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">toolkit&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="-paso-3-verificar-acceso-a-la-gpu-desde-wsl2">🧪 Paso 3: Verificar acceso a la GPU desde WSL2&lt;/h2>
+&lt;p>Dentro del entorno WSL2:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">nvidia-smi
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>El sistema debe mostrar la tarjeta gráfica, memoria y uso actual.&lt;/p>
+&lt;h2 id="-paso-4-instalar-pytorch-con-soporte-cuda">🧠 Paso 4: Instalar PyTorch con soporte CUDA&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">pip&lt;/span> &lt;span class="n">install&lt;/span> &lt;span class="n">torch&lt;/span> &lt;span class="n">torchvision&lt;/span> &lt;span class="n">torchaudio&lt;/span> &lt;span class="o">--&lt;/span>&lt;span class="n">index&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">url&lt;/span> &lt;span class="n">https&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="o">//&lt;/span>&lt;span class="n">download&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">pytorch&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">org&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">whl&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">cu118&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Verificar el acceso a la GPU desde un script:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">import torch
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">print(&amp;#34;CUDA disponible:&amp;#34;, torch.cuda.is_available())
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">print(&amp;#34;GPU:&amp;#34;, torch.cuda.get_device_name(0))
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="-solución-de-problemas-comunes">🛠️ Solución de problemas comunes&lt;/h2>
+&lt;ul>
+&lt;li>Si &lt;code>nvidia-smi&lt;/code> no detecta la GPU, asegurarse de tener los drivers y WSL actualizados.&lt;/li>
+&lt;li>No se recomienda instalar CUDA directamente desde la web de NVIDIA; es preferible utilizar los repos oficiales para WSL.&lt;/li>
+&lt;li>Es importante reiniciar el entorno después de cambios: &lt;code>wsl --shutdown&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;h2 id="-buenas-prácticas">📈 Buenas prácticas&lt;/h2>
+&lt;ul>
+&lt;li>Utilizar distribuciones ligeras como Debian o Ubuntu minimal para reducir el uso de recursos.&lt;/li>
+&lt;li>Configurar límites de recursos en &lt;code>.wslconfig&lt;/code> si se comparte la GPU con otros procesos.&lt;/li>
+&lt;li>Monitorear la temperatura y uso con &lt;code>nvidia-smi&lt;/code>.&lt;/li>
+&lt;li>Emplear &lt;code>tmux&lt;/code> o &lt;code>screen&lt;/code> para mantener tareas de entrenamiento corriendo en segundo plano.&lt;/li>
+&lt;/ul>
+&lt;h2 id="-conclusión">✅ Conclusión&lt;/h2>
+&lt;p>Configurar &lt;strong>WSL2&lt;/strong> con acceso a &lt;strong>GPU NVIDIA&lt;/strong> representa una alternativa práctica y poderosa para ejecutar flujos de trabajo de &lt;strong>IA&lt;/strong> desde un entorno &lt;strong>Linux&lt;/strong> en &lt;strong>Windows&lt;/strong>. Esta solución permite acelerar el desarrollo y pruebas de modelos, aprovechando la compatibilidad de herramientas modernas con &lt;strong>CUDA&lt;/strong> y &lt;strong>PyTorch&lt;/strong>.&lt;/p></description></item><item><title>Uso de systemd en WSL2: servicios persistentes y supervisión</title><link>https://cmas.dev/posts/2024-05-03-wsl2-systemd/</link><pubDate>Fri, 03 May 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-05-03-wsl2-systemd/</guid><description>&lt;p>Desde 2022, &lt;strong>WSL2&lt;/strong> incluye soporte para &lt;code>systemd&lt;/code>, el sistema de inicialización y gestión de servicios usado en la mayoría de las distros &lt;strong>Linux&lt;/strong> modernas. Esto habilita la ejecución de servicios persistentes, como &lt;code>ssh&lt;/code>, &lt;code>postgresql&lt;/code> o &lt;code>docker&lt;/code>, directamente en el entorno &lt;strong>WSL2&lt;/strong>&amp;hellip;&lt;/p>
+&lt;h2 id="-activar-systemd-en-wsl2">⚙️ Activar systemd en WSL2&lt;/h2>
+&lt;ol>
+&lt;li>Asegurarse de tener WSL actualizado:&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">wsl --update
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="2">
+&lt;li>Editar el archivo &lt;code>/etc/wsl.conf&lt;/code> en la distro:&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">[boot]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">systemd=true
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="3">
+&lt;li>Cerrar todas las instancias WSL y ejecutar:&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">wsl --shutdown
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="4">
+&lt;li>Verificar que systemd esté activo:&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">systemctl list-units --type=service
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="-ejecutar-servicios">🧪 Ejecutar servicios&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">sudo systemctl enable postgresql
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo systemctl start postgresql
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>También se puede usar &lt;code>journalctl&lt;/code> para logs persistentes:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">journalctl -xe
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="-consideraciones">🔒 Consideraciones&lt;/h2>
+&lt;ul>
+&lt;li>Algunas distros necesitan reconfigurar permisos o reinstalar servicios tras activar systemd.&lt;/li>
+&lt;li>&lt;code>sudo&lt;/code> se vuelve más importante para manejar correctamente el árbol de procesos.&lt;/li>
+&lt;/ul>
+&lt;h2 id="-conclusión">✅ Conclusión&lt;/h2>
+&lt;p>Con &lt;strong>systemd&lt;/strong> habilitado en &lt;strong>WSL2&lt;/strong>, se puede correr y supervisar servicios como si estuviera en un servidor &lt;strong>Linux&lt;/strong> real. Esto hace que &lt;strong>WSL2&lt;/strong> sea una herramienta aún más poderosa para flujos &lt;strong>DevOps&lt;/strong>, testing y desarrollo backend.&lt;/p></description></item><item><title>Integración avanzada con Docker Desktop y contenedores cruzados</title><link>https://cmas.dev/posts/2024-04-25-wsl2-docker-integration/</link><pubDate>Thu, 25 Apr 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-04-25-wsl2-docker-integration/</guid><description>&lt;p>&lt;strong>Docker&lt;/strong> y &lt;strong>WSL2&lt;/strong> trabajan juntos de forma nativa desde 2020. &lt;strong>Docker Desktop&lt;/strong> para &lt;strong>Windows&lt;/strong> ahora se basa completamente en &lt;strong>WSL2&lt;/strong>, permitiendo ejecutar contenedores &lt;strong>Linux&lt;/strong> sin la necesidad de &lt;strong>Hyper-V&lt;/strong> por separado.&lt;/p>
+&lt;h2 id="-cómo-funciona-docker-con-wsl2">🐳 Cómo funciona Docker con WSL2&lt;/h2>
+&lt;p>&lt;strong>Docker&lt;/strong> instala una distro especial llamada &lt;code>docker-desktop&lt;/code> que actúa como backend de ejecución.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">wsl --list --verbose
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># Deberías ver:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># docker-desktop
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># docker-desktop-data
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="-activar-integración-con-tu-distro">🛠️ Activar integración con tu distro&lt;/h2>
+&lt;p>Desde &lt;strong>Docker Desktop&lt;/strong> → &lt;strong>Settings&lt;/strong> → &lt;strong>Resources&lt;/strong> → &lt;strong>WSL Integration&lt;/strong>&lt;/p>
+&lt;p>Habilitá tu distro personalizada (Ubuntu, Debian, etc.).&lt;/p>
+&lt;p>Una vez activada, podés correr Docker directamente:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">docker run --rm alpine echo &amp;#34;Hola desde Alpine en WSL2&amp;#34;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="-contenedores-cruzados-windows--linux">🔄 Contenedores cruzados (Windows ↔ Linux)&lt;/h2>
+&lt;p>Si activás también la integración de &lt;strong>Docker Desktop&lt;/strong> con &lt;strong>PowerShell&lt;/strong>, podés correr contenedores &lt;strong>Linux&lt;/strong> desde &lt;strong>Windows&lt;/strong> y viceversa.&lt;/p>
+&lt;h3 id="ejemplo-build-en-wsl2-deploy-desde-windows">Ejemplo: build en WSL2, deploy desde Windows&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># WSL2: construir imagen&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">docker&lt;/span> &lt;span class="n">build&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">t&lt;/span> &lt;span class="n">myapp&lt;/span> &lt;span class="o">.&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># Windows: ejecutar desde PowerShell&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">docker&lt;/span> &lt;span class="n">run&lt;/span> &lt;span class="o">--&lt;/span>&lt;span class="n">rm&lt;/span> &lt;span class="n">myapp&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="-conclusión">✅ Conclusión&lt;/h2>
+&lt;p>&lt;strong>WSL2&lt;/strong> + &lt;strong>Docker Desktop&lt;/strong> brinda un entorno potente para desarrollo con contenedores, permitiendo compartir imágenes y redes entre sistemas. Esta integración elimina muchas barreras y mejora la productividad para desarrolladores de backend, DevOps y microservicios.&lt;/p></description></item><item><title>Gestión avanzada de múltiples distros en WSL2</title><link>https://cmas.dev/posts/2024-04-19-wsl2-multiple-distros/</link><pubDate>Fri, 19 Apr 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-04-19-wsl2-multiple-distros/</guid><description>&lt;p>Una de las grandes ventajas de WSL2 es la posibilidad de instalar y ejecutar múltiples distribuciones de Linux simultáneamente, cada una con su propio sistema de archivos, paquetes y configuraciones.&lt;/p>
+&lt;h2 id="-listar-distros-disponibles">🔍 Listar distros disponibles&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">wsl --list --verbose
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Esto muestra las distros instaladas, su estado actual y versión de WSL (1 o 2).&lt;/p>
+&lt;h2 id="-instalar-múltiples-distros">📦 Instalar múltiples distros&lt;/h2>
+&lt;p>Desde Microsoft Store o usando una imagen &lt;code>.tar&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">wsl --import Debian-Dev D:\WSL\Debian-Dev debian-rootfs.tar
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="-crear-un-backup-de-una-distro">🛠️ Crear un backup de una distro&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">wsl&lt;/span> &lt;span class="o">--&lt;/span>&lt;span class="k">export&lt;/span> &lt;span class="n">Ubuntu&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">Dev&lt;/span> &lt;span class="n">ubuntu&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">dev&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">backup&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">tar&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="-restaurar-o-clonar-una-distro">🔄 Restaurar o clonar una distro&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">wsl --import Ubuntu-Clon D:\WSL\Ubuntu-Clon ubuntu-dev-backup.tar
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="-sincronizar-configuraciones">🔁 Sincronizar configuraciones&lt;/h2>
+&lt;p>Se puede mantener las configuraciones con &lt;code>dotfiles&lt;/code>, scripts de provisión o herramientas como Ansible o chezmoi.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"># Ejemplo simple con Git
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">git clone https://github.com/tuusuario/dotfiles ~/.dotfiles
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">bash ~/.dotfiles/setup.sh
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="-automatización-de-flujos-entre-distros">⚙️ Automatización de flujos entre distros&lt;/h2>
+&lt;p>Usar scripts Bash para pasar configuraciones, instalar paquetes o incluso ejecutar pruebas cruzadas entre distros.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">for distro in Ubuntu-Dev Debian-Dev; do
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> wsl -d $distro -- bash -c &amp;#34;sudo apt update &amp;amp;&amp;amp; sudo apt upgrade -y&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">done
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="-conclusión">✅ Conclusión&lt;/h2>
+&lt;p>Gestionar múltiples distros con WSL2 permite aislar entornos, probar configuraciones específicas o crear pipelines DevOps más robustos. Con herramientas de exportación, scripting y dotfiles, se puede mantener un stack alineado en todos los equipos o contextos.&lt;/p></description></item><item><title>Automatización avanzada de distros WSL2 con wsl.conf y cloud-init</title><link>https://cmas.dev/posts/2024-04-12-wsl2-advanced-distro-automation/</link><pubDate>Fri, 12 Apr 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-04-12-wsl2-advanced-distro-automation/</guid><description>&lt;p>Uno de los beneficios clave de &lt;strong>WSL2&lt;/strong> es la capacidad de automatizar la configuración del entorno Linux que corre sobre Windows. Esto permite establecer comportamientos predefinidos y provisionar distros listas para el trabajo sin intervención manual. En este artículo exploramos dos mecanismos clave: &lt;code>wsl.conf&lt;/code> y &lt;code>cloud-init&lt;/code>.&lt;/p>
+&lt;h2 id="-qué-es-wslconf">⚙️ ¿Qué es &lt;code>wsl.conf&lt;/code>?&lt;/h2>
+&lt;p>Es un archivo de configuración ubicado en &lt;code>/etc/wsl.conf&lt;/code> dentro de cada distro. Permite modificar cómo WSL monta discos, configura redes y gestiona el entorno.&lt;/p>
+&lt;h3 id="ejemplo-básico">Ejemplo básico:&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">[automount]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">enabled = true
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">root = /mnt/
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">options = &amp;#34;metadata,umask=22,fmask=11&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[network]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">generateResolvConf = false
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[user]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">default = devuser
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>Monta unidades de Windows con metadatos de permisos.&lt;/li>
+&lt;li>Previene conflictos DNS con &lt;code>resolv.conf&lt;/code>.&lt;/li>
+&lt;li>Define el usuario predeterminado al iniciar la terminal.&lt;/li>
+&lt;/ul>
+&lt;p>✅ Ideal para escenarios donde múltiples usuarios usan la misma distro o cuando se quiere mantener un entorno consistente.&lt;/p>
+&lt;h2 id="-qué-es-cloud-init">☁️ ¿Qué es &lt;code>cloud-init&lt;/code>?&lt;/h2>
+&lt;p>Originalmente pensado para entornos cloud como EC2 o Azure VM, &lt;code>cloud-init&lt;/code> también funciona en algunas distros WSL2 (por ejemplo, Ubuntu). Permite definir:&lt;/p>
+&lt;ul>
+&lt;li>Paquetes a instalar&lt;/li>
+&lt;li>Archivos de configuración&lt;/li>
+&lt;li>Comandos post-instalación&lt;/li>
+&lt;li>Creación de usuarios&lt;/li>
+&lt;/ul>
+&lt;h3 id="ejemplo-yaml">Ejemplo YAML:&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"># /etc/cloud/cloud.cfg.d/01-wsl-autoconfig.cfg
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">packages:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - git
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - zsh
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - build-essential
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">runcmd:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - echo &amp;#34;WSL2 provisionado automáticamente&amp;#34; &amp;gt;&amp;gt; /etc/motd
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - chsh -s $(which zsh) devuser
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="activación">Activación:&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">sudo cloud-init init
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo cloud-init status --long
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>🧠 Tip: Se puede combinar esto con &lt;code>setup.sh&lt;/code> para instalar temas, dotfiles y CLI personales.&lt;/p>
+&lt;h2 id="-ejemplo-de-flujo-automatizado-para-onboarding">🛠️ Ejemplo de flujo automatizado para onboarding&lt;/h2>
+&lt;ol>
+&lt;li>Crear distro base con &lt;code>wsl --import&lt;/code>&lt;/li>
+&lt;li>Configurar &lt;code>wsl.conf&lt;/code> y archivos de &lt;code>cloud-init&lt;/code>&lt;/li>
+&lt;li>Ejecutar provisioning&lt;/li>
+&lt;li>Compartir imagen exportada (&lt;code>.tar&lt;/code>) con otros desarrolladores&lt;/li>
+&lt;/ol></description></item><item><title>Introducción avanzada a WSL2</title><link>https://cmas.dev/posts/2024-04-05-wsl2-advanced-intro/</link><pubDate>Fri, 05 Apr 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-04-05-wsl2-advanced-intro/</guid><description>&lt;p>Desde su lanzamiento, WSL2 (Windows Subsystem for Linux 2) ha transformado el panorama del desarrollo en Windows, ofreciendo una integración casi nativa con Linux sin necesidad de usar máquinas virtuales tradicionales. A diferencia de WSL1, que traducía llamadas del sistema de Linux a Windows, WSL2 ejecuta un kernel Linux completo dentro de una VM optimizada y ligera. Esta diferencia técnica lo convierte en una herramienta poderosa para desarrolladores modernos, DevOps, científicos de datos y más.&lt;/p>
+&lt;h2 id="-diferencias-clave-entre-wsl1-y-wsl2">🔍 Diferencias clave entre WSL1 y WSL2&lt;/h2>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Característica&lt;/th>
+&lt;th>WSL1&lt;/th>
+&lt;th>WSL2&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>Kernel Linux&lt;/td>
+&lt;td>No (traducción de llamadas)&lt;/td>
+&lt;td>Sí (kernel completo real)&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Compatibilidad syscall&lt;/td>
+&lt;td>Limitada&lt;/td>
+&lt;td>Total&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Performance en filesystem&lt;/td>
+&lt;td>Más rápido en &lt;code>/mnt/c/&lt;/code>&lt;/td>
+&lt;td>Más rápido en &lt;code>/home/&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Soporte para Docker&lt;/td>
+&lt;td>Parcial&lt;/td>
+&lt;td>Completo con Docker Desktop y systemd&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Uso de memoria&lt;/td>
+&lt;td>Bajo&lt;/td>
+&lt;td>Mayor (usa VM)&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="-arquitectura-de-wsl2">🧱 Arquitectura de WSL2&lt;/h2>
+&lt;ul>
+&lt;li>Utiliza una máquina virtual ligera basada en Hyper-V, completamente administrada por Windows.&lt;/li>
+&lt;li>El kernel Linux es compilado y mantenido por Microsoft, lo que garantiza compatibilidad y actualizaciones.&lt;/li>
+&lt;li>Usa un sistema de archivos virtual (ext4) por cada distro, que puede residir en un archivo &lt;code>.vhdx&lt;/code>.&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"># Ver distros instaladas con su estado
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">wsl --list --verbose
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="-flujos-de-trabajo-avanzados">⚙️ Flujos de trabajo avanzados&lt;/h2>
+&lt;h3 id="-casos-de-uso-reales">🧪 Casos de uso reales&lt;/h3>
+&lt;ol>
+&lt;li>&lt;strong>DevOps híbrido&lt;/strong>: Ejecutar herramientas de infraestructura (Terraform, Ansible) nativamente en Linux.&lt;/li>
+&lt;li>&lt;strong>Desarrollo Backend&lt;/strong>: Node, Rust, Python o Go sobre distros Linux con acceso directo a servicios como PostgreSQL o Redis.&lt;/li>
+&lt;li>&lt;strong>Data Science &amp;amp; AI&lt;/strong>: Compatibilidad con CUDA para entrenamiento de modelos con GPU.&lt;/li>
+&lt;li>&lt;strong>CI/CD local&lt;/strong>: Crear pipelines reproducibles desde scripts Bash antes de subirlos a GitHub Actions o Azure Pipelines.&lt;/li>
+&lt;/ol>
+&lt;h2 id="-consideraciones-y-tips">⚠️ Consideraciones y tips&lt;/h2>
+&lt;ul>
+&lt;li>Evita trabajar en archivos dentro de &lt;code>/mnt/c/&lt;/code> si quieres máxima performance.&lt;/li>
+&lt;li>Usa &lt;code>.wslconfig&lt;/code> para limitar recursos (CPU, memoria, swap) usados por la VM.&lt;/li>
+&lt;li>Configura &lt;code>~/.wslconfig&lt;/code> para tunear el entorno global.&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">[wsl2]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">memory=4GB
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">processors=2
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">swap=2GB
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>XAML para cambio de orientación de pantalla</title><link>https://cmas.dev/posts/2023-12-15-maui-xaml-orientation-screen/</link><pubDate>Fri, 15 Dec 2023 18:30:00 -0400</pubDate><guid>https://cmas.dev/posts/2023-12-15-maui-xaml-orientation-screen/</guid><description>&lt;p>En este artículo veremos la posibilidad de crear un diseño que se adapte a la orientación de pantalla en &lt;strong>.NET MAUI&lt;/strong>.&lt;/p>
 &lt;p>&lt;em>&lt;strong>Windows 11 Insider Preview Build 22635.2915&lt;/strong>&lt;/em>&lt;/p>
 &lt;p>La idea central aquí es aprender a crear un diseño responsivo para brindar la mejor experiencia de usuario con controles que se adapten a la orientación de la pantalla (anteriormente se lograba esto haciendo cambios por plataforma), para ellos adaptaremos una solución presentada por un desarrollador experto en la materia.&lt;/p>
 &lt;h2 id="bloquear-orientación-de-pantalla">Bloquear orientación de pantalla&lt;/h2>
