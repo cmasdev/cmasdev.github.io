@@ -1,4 +1,231 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Windows 11 on Christian Amado's Blog</title><link>https://cmas.dev/tags/windows-11/</link><description>Recent content in Windows 11 on Christian Amado's Blog</description><generator>Hugo -- gohugo.io</generator><language>es</language><lastBuildDate>Fri, 21 Jun 2024 00:00:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/tags/windows-11/index.xml" rel="self" type="application/rss+xml"/><item><title>Compilación cruzada para Linux y Windows desde WSL2</title><link>https://cmas.dev/posts/2024-06-21-wsl2-cross-compiling/</link><pubDate>Fri, 21 Jun 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-06-21-wsl2-cross-compiling/</guid><description>&lt;p>Uno de los beneficios clave de WSL2 es la posibilidad de compilar binarios para Linux dentro de un entorno Linux completo, mientras se sigue trabajando desde Windows. Además, es posible configurar &lt;strong>compilación cruzada&lt;/strong> para generar ejecutables de Windows (&lt;code>.exe&lt;/code>) directamente desde WSL2, lo cual es útil para flujos de trabajo DevOps, empaquetado o testing multiplataforma.&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Windows 11 on Christian Amado's Blog</title><link>https://cmas.dev/tags/windows-11/</link><description>Recent content in Windows 11 on Christian Amado's Blog</description><generator>Hugo -- gohugo.io</generator><language>es</language><lastBuildDate>Fri, 26 Jul 2024 00:00:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/tags/windows-11/index.xml" rel="self" type="application/rss+xml"/><item><title>Benchmark de performance entre WSL2 y Hyper-V para cargas intensivas</title><link>https://cmas.dev/posts/2024-07-26-wsl2-performance-benchmark/</link><pubDate>Fri, 26 Jul 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-07-26-wsl2-performance-benchmark/</guid><description>&lt;p>&lt;strong>WSL2&lt;/strong> y &lt;strong>Hyper-V&lt;/strong> son tecnologías de virtualización de Microsoft que permiten ejecutar entornos Linux sobre Windows. Aunque WSL2 internamente utiliza Hyper-V, existen diferencias en cómo se gestionan los recursos, lo que puede impactar el rendimiento en tareas intensivas como compilación, procesamiento de datos o entrenamiento de modelos.&lt;/p>
+&lt;p>Este artículo presenta un enfoque comparativo y práctico para medir el rendimiento de ambos entornos en escenarios de carga pesada.&lt;/p>
+&lt;h2 id="objetivo">Objetivo&lt;/h2>
+&lt;ul>
+&lt;li>Comparar rendimiento de CPU, disco y memoria en WSL2 vs VM Hyper-V&lt;/li>
+&lt;li>Ejecutar pruebas reproducibles con herramientas estándar&lt;/li>
+&lt;li>Identificar ventajas y limitaciones de cada entorno según la carga&lt;/li>
+&lt;/ul>
+&lt;h2 id="preparación-del-entorno">Preparación del entorno&lt;/h2>
+&lt;p>En ambos casos se utiliza Ubuntu 22.04 como sistema base, con los mismos paquetes y configuración.&lt;/p>
+&lt;h3 id="para-wsl2">Para WSL2:&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">sudo apt update &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> sudo apt install -y sysbench stress-ng fio build-essential
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="para-hyper-v">Para Hyper-V:&lt;/h3>
+&lt;ul>
+&lt;li>Crear una máquina virtual con Ubuntu 22.04&lt;/li>
+&lt;li>Asignar igual cantidad de CPU (por ejemplo, 4) y memoria (8 GB)&lt;/li>
+&lt;li>Instalar los mismos paquetes para benchmark&lt;/li>
+&lt;/ul>
+&lt;h2 id="prueba-1-cpu-sysbench">Prueba 1: CPU (sysbench)&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">sysbench cpu --threads&lt;span class="o">=&lt;/span>&lt;span class="m">4&lt;/span> --time&lt;span class="o">=&lt;/span>&lt;span class="m">10&lt;/span> run
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Mide la cantidad de operaciones realizadas por segundo. Ejecutar la misma prueba en ambos entornos y anotar el throughput.&lt;/p>
+&lt;h2 id="prueba-2-io-en-disco-fio">Prueba 2: I/O en disco (fio)&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">fio --name&lt;span class="o">=&lt;/span>seqwrite --size&lt;span class="o">=&lt;/span>512M --rw&lt;span class="o">=&lt;/span>write --bs&lt;span class="o">=&lt;/span>4k --numjobs&lt;span class="o">=&lt;/span>&lt;span class="m">1&lt;/span> --runtime&lt;span class="o">=&lt;/span>&lt;span class="m">30&lt;/span> --group_reporting
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Esta prueba mide el rendimiento de escritura secuencial. También se puede hacer con lectura (&lt;code>--rw=read&lt;/code>) o mezcla (&lt;code>--rw=randrw&lt;/code>).&lt;/p>
+&lt;h2 id="prueba-3-memoria-stress-ng">Prueba 3: Memoria (stress-ng)&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">stress-ng --vm &lt;span class="m">2&lt;/span> --vm-bytes 1G --timeout 20s
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Simula presión de memoria con dos workers asignados a 1 GB cada uno.&lt;/p>
+&lt;h2 id="prueba-4-compilación-intensiva">Prueba 4: Compilación intensiva&lt;/h2>
+&lt;p>Clonar y compilar un proyecto grande, por ejemplo:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">git clone https://github.com/rust-lang/rust.git
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">cd&lt;/span> rust
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">./x.py build
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Comparar el tiempo de compilación completo.&lt;/p>
+&lt;h2 id="resultados-esperados">Resultados esperados&lt;/h2>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Prueba&lt;/th>
+&lt;th>WSL2&lt;/th>
+&lt;th>Hyper-V VM&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>CPU&lt;/td>
+&lt;td>Similar&lt;/td>
+&lt;td>Similar&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Disco (escritura)&lt;/td>
+&lt;td>Mejor en Hyper-V*&lt;/td>
+&lt;td>Peor en WSL2*&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>RAM (uso intensivo)&lt;/td>
+&lt;td>Similar&lt;/td>
+&lt;td>Similar&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Compilación&lt;/td>
+&lt;td>Mejor en WSL2 (menos overhead de VM)&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>*El rendimiento de disco en WSL2 depende de si se trabaja dentro del FS Linux (&lt;code>~/&lt;/code>) o en &lt;code>/mnt/c/&lt;/code>, donde es mucho más lento.&lt;/p>
+&lt;h2 id="buenas-prácticas-para-benchmarking">Buenas prácticas para benchmarking&lt;/h2>
+&lt;ul>
+&lt;li>Reiniciar ambos entornos antes de cada prueba&lt;/li>
+&lt;li>Usar cronómetro o &lt;code>time&lt;/code> para medir duración total&lt;/li>
+&lt;li>Evitar procesos en segundo plano que alteren los resultados&lt;/li>
+&lt;li>Repetir pruebas y tomar promedio&lt;/li>
+&lt;/ul>
+&lt;h2 id="conclusión">Conclusión&lt;/h2>
+&lt;p>WSL2 ofrece un excelente rendimiento para la mayoría de las cargas intensivas, con ventajas en integración con Windows y facilidad de uso. Hyper-V ofrece más aislamiento y control de hardware, con mejor I/O de disco en algunos casos. La elección depende del tipo de carga y necesidades específicas del entorno de trabajo.&lt;/p></description></item><item><title>Seguridad avanzada en WSL2: sandboxing y seccomp</title><link>https://cmas.dev/posts/2024-07-19-wsl2-advanced-security/</link><pubDate>Fri, 19 Jul 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-07-19-wsl2-advanced-security/</guid><description>&lt;p>WSL2, al ejecutar un kernel Linux completo dentro de Windows, hereda capacidades de seguridad del subsistema Linux y del entorno de Windows. Esto permite aplicar técnicas avanzadas como sandboxing y control de llamadas al sistema mediante &lt;code>seccomp&lt;/code>, protegiendo aplicaciones y conteniendo procesos potencialmente inseguros.&lt;/p>
+&lt;h2 id="entendiendo-el-modelo-de-seguridad-de-wsl2">Entendiendo el modelo de seguridad de WSL2&lt;/h2>
+&lt;ul>
+&lt;li>WSL2 corre dentro de una VM ligera sobre Hyper-V&lt;/li>
+&lt;li>Tiene su propio espacio de usuarios, red y sistema de archivos&lt;/li>
+&lt;li>Puede acceder al sistema de archivos Windows, pero de forma controlada&lt;/li>
+&lt;li>Hereda los permisos y restricciones del usuario de Windows anfitrión&lt;/li>
+&lt;/ul>
+&lt;p>Aunque no es un contenedor, se puede aplicar aislamiento similar con herramientas del ecosistema Linux.&lt;/p>
+&lt;h2 id="usar-seccomp-para-limitar-llamadas-al-sistema">Usar seccomp para limitar llamadas al sistema&lt;/h2>
+&lt;p>&lt;code>seccomp&lt;/code> permite definir qué llamadas al sistema (&lt;code>syscalls&lt;/code>) puede hacer un proceso. Esto es útil para bloquear funcionalidades peligrosas o limitar comportamientos.&lt;/p>
+&lt;p>Instalar herramientas necesarias:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">sudo apt install -y seccomp libseccomp-dev strace
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Ejemplo de script bloqueando &lt;code>execve&lt;/code> (ejecución de procesos):&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-c" data-lang="c">&lt;span class="line">&lt;span class="cl">&lt;span class="cp">#include&lt;/span> &lt;span class="cpf">&amp;lt;linux/seccomp.h&amp;gt;&lt;/span>&lt;span class="cp">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">#include&lt;/span> &lt;span class="cpf">&amp;lt;linux/filter.h&amp;gt;&lt;/span>&lt;span class="cp">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">#include&lt;/span> &lt;span class="cpf">&amp;lt;linux/audit.h&amp;gt;&lt;/span>&lt;span class="cp">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">#include&lt;/span> &lt;span class="cpf">&amp;lt;sys/prctl.h&amp;gt;&lt;/span>&lt;span class="cp">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">#include&lt;/span> &lt;span class="cpf">&amp;lt;unistd.h&amp;gt;&lt;/span>&lt;span class="cp">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">#include&lt;/span> &lt;span class="cpf">&amp;lt;stdio.h&amp;gt;&lt;/span>&lt;span class="cp">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kt">int&lt;/span> &lt;span class="nf">main&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">prctl&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">PR_SET_SECCOMP&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">SECCOMP_MODE_STRICT&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">printf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;Hola, mundo seguro!&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s">&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">execl&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;/bin/ls&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s">&amp;#34;ls&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nb">NULL&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// Esta llamada será bloqueada
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">return&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Compilar y ejecutar:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">gcc secure.c -o secure
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">./secure
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>El intento de ejecutar &lt;code>/bin/ls&lt;/code> fallará, mostrando que &lt;code>execve&lt;/code> fue bloqueado.&lt;/p>
+&lt;h2 id="usar-firejail-para-sandboxing-de-procesos">Usar Firejail para sandboxing de procesos&lt;/h2>
+&lt;p>&lt;strong>Firejail&lt;/strong> crea entornos aislados para correr procesos sin acceso a partes sensibles del sistema.&lt;/p>
+&lt;p>Instalar:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">sudo apt install -y firejail
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Ejecutar un programa con aislamiento:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">firejail --private gedit
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Esto corre &lt;code>gedit&lt;/code> en un entorno aislado, sin acceso al home del usuario.&lt;/p>
+&lt;p>Configurar perfiles personalizados para más control:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">firejail --profile&lt;span class="o">=&lt;/span>mi_perfil.profile programa
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="reforzar-seguridad-con-permisos-de-archivo">Reforzar seguridad con permisos de archivo&lt;/h2>
+&lt;p>Aplicar técnicas tradicionales:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">chmod -R go-rwx ~/proyecto_secreto
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">chattr +i archivo.conf &lt;span class="c1"># Evita que sea modificado&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>También se pueden usar &lt;em>namespaces&lt;/em> y &lt;em>cgroups&lt;/em> para limitar CPU, RAM y accesos.&lt;/p>
+&lt;h2 id="buenas-prácticas">Buenas prácticas&lt;/h2>
+&lt;ul>
+&lt;li>Usar usuarios no privilegiados por defecto&lt;/li>
+&lt;li>Aislar procesos críticos con &lt;code>firejail&lt;/code> o seccomp&lt;/li>
+&lt;li>Limitar accesos al sistema de archivos de Windows desde &lt;code>/mnt/c/&lt;/code>&lt;/li>
+&lt;li>Auditar procesos con &lt;code>strace&lt;/code> o &lt;code>auditd&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;h2 id="conclusión">Conclusión&lt;/h2>
+&lt;p>WSL2 no solo ofrece potencia para desarrollo, sino también mecanismos de seguridad avanzados para proteger datos y procesos. Con herramientas como seccomp, Firejail y permisos reforzados, se puede alcanzar un alto nivel de aislamiento sin perder flexibilidad, incluso en entornos compartidos o productivos.&lt;/p></description></item><item><title>Nix + WSL2: gestión declarativa de entornos</title><link>https://cmas.dev/posts/2024-07-12-wsl2-nix/</link><pubDate>Fri, 12 Jul 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-07-12-wsl2-nix/</guid><description>&lt;p>&lt;strong>Nix&lt;/strong> es un sistema de gestión de paquetes y configuración que permite definir entornos de desarrollo de forma &lt;strong>declarativa y reproducible&lt;/strong>. Al combinar Nix con WSL2, se obtiene lo mejor de ambos mundos: control total sobre las dependencias y entornos aislados, con la eficiencia de Linux corriendo dentro de Windows.&lt;/p>
+&lt;h2 id="por-qué-usar-nix-en-wsl2">Por qué usar Nix en WSL2&lt;/h2>
+&lt;ul>
+&lt;li>Configuración de entornos por proyecto&lt;/li>
+&lt;li>Reproducibilidad exacta entre máquinas y desarrolladores&lt;/li>
+&lt;li>Aislamiento sin necesidad de contenedores&lt;/li>
+&lt;li>Compatibilidad total con herramientas Linux&lt;/li>
+&lt;/ul>
+&lt;p>Esto es especialmente útil en equipos, en proyectos de investigación, o en flujos DevOps que exigen entornos estables.&lt;/p>
+&lt;h2 id="instalar-nix-en-wsl2">Instalar Nix en WSL2&lt;/h2>
+&lt;p>Desde una terminal en Ubuntu o Debian:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">sh &amp;lt;&lt;span class="o">(&lt;/span>curl -L https://nixos.org/nix/install&lt;span class="o">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Al finalizar, activar el entorno:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">. ~/.nix-profile/etc/profile.d/nix.sh
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Verificar:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">nix-env --version
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="crear-entorno-declarativo-con-shellnix">Crear entorno declarativo con &lt;code>shell.nix&lt;/code>&lt;/h2>
+&lt;p>Ejemplo: entorno Python con NumPy y Pandas.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-nix" data-lang="nix">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># shell.nix&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span> &lt;span class="n">pkgs&lt;/span> &lt;span class="o">?&lt;/span> &lt;span class="kn">import&lt;/span> &lt;span class="sr">&amp;lt;nixpkgs&amp;gt;&lt;/span> &lt;span class="p">{}&lt;/span> &lt;span class="p">}:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">pkgs&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">mkShell&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">buildInputs&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[&lt;/span> &lt;span class="n">pkgs&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">python310&lt;/span> &lt;span class="n">pkgs&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">python310Packages&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">numpy&lt;/span> &lt;span class="n">pkgs&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">python310Packages&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">pandas&lt;/span> &lt;span class="p">];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Activar el entorno:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">nix-shell
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Una vez dentro, las herramientas estarán disponibles sin afectar el sistema.&lt;/p>
+&lt;h2 id="caso-práctico-entorno-para-ciencia-de-datos">Caso práctico: entorno para ciencia de datos&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-nix" data-lang="nix">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># shell.nix&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span> &lt;span class="n">pkgs&lt;/span> &lt;span class="o">?&lt;/span> &lt;span class="kn">import&lt;/span> &lt;span class="sr">&amp;lt;nixpkgs&amp;gt;&lt;/span> &lt;span class="p">{}&lt;/span> &lt;span class="p">}:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">pkgs&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">mkShell&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">name&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;data-env&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">buildInputs&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">pkgs&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">python310&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">pkgs&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">python310Packages&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">numpy&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">pkgs&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">python310Packages&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">scipy&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">pkgs&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">python310Packages&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">matplotlib&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">pkgs&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">python310Packages&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">jupyter&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Iniciar:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">nix-shell
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">jupyter notebook
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Esto lanza un entorno Jupyter funcional desde WSL2.&lt;/p>
+&lt;h2 id="buenas-prácticas">Buenas prácticas&lt;/h2>
+&lt;ul>
+&lt;li>Incluir &lt;code>shell.nix&lt;/code> en control de versiones&lt;/li>
+&lt;li>Usar &lt;code>direnv&lt;/code> para cargar entornos automáticamente&lt;/li>
+&lt;li>Combinar con &lt;code>lorri&lt;/code> o &lt;code>nix-direnv&lt;/code> para flujos más eficientes&lt;/li>
+&lt;li>Actualizar paquetes vía &lt;code>nix-channel --update&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;h2 id="conclusión">Conclusión&lt;/h2>
+&lt;p>&lt;strong>Nix&lt;/strong> permite declarar entornos portables y estables para desarrollo, ciencia de datos o DevOps. Junto a WSL2, ofrece una solución poderosa para definir, compartir y automatizar configuraciones sin depender de contenedores o configuraciones globales, todo desde un entorno Linux dentro de Windows.&lt;/p></description></item><item><title>Desarrollo Rust en WSL2: toolchain, testing y empaquetado</title><link>https://cmas.dev/posts/2024-07-05-wsl2-rust-development/</link><pubDate>Fri, 05 Jul 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-07-05-wsl2-rust-development/</guid><description>&lt;p>&lt;strong>Rust&lt;/strong> es un lenguaje moderno y seguro por diseño, ideal para crear aplicaciones de alto rendimiento y sistemas embebidos. Combinado con WSL2, permite a los desarrolladores trabajar en un entorno &lt;strong>Linux&lt;/strong> desde &lt;strong>Windows&lt;/strong>, aprovechando herramientas como &lt;code>cargo&lt;/code>, &lt;code>rustup&lt;/code>, pruebas automatizadas y sistemas de empaquetado como &lt;code>cargo-deb&lt;/code>.&lt;/p>
+&lt;h2 id="instalar-rust-en-wsl2">Instalar Rust en WSL2&lt;/h2>
+&lt;p>Desde la terminal WSL2:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">curl --proto &lt;span class="s1">&amp;#39;=https&amp;#39;&lt;/span> --tlsv1.2 -sSf https://sh.rustup.rs &lt;span class="p">|&lt;/span> sh
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">source&lt;/span> &lt;span class="nv">$HOME&lt;/span>/.cargo/env
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Verificar la instalación:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">rustc --version
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">cargo --version
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="crear-un-proyecto-rust-básico">Crear un proyecto Rust básico&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">cargo new mi_app
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">cd&lt;/span> mi_app
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">cargo run
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Esto crea una estructura de proyecto estándar con &lt;code>Cargo.toml&lt;/code> y un archivo &lt;code>main.rs&lt;/code> en &lt;code>src/&lt;/code>.&lt;/p>
+&lt;h2 id="usar-componentes-adicionales-del-toolchain">Usar componentes adicionales del toolchain&lt;/h2>
+&lt;p>Instalar herramientas comunes:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">rustup component add clippy rustfmt
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Verificar y formatear el código:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">cargo clippy
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">cargo fmt
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="escribir-y-ejecutar-tests-automatizados">Escribir y ejecutar tests automatizados&lt;/h2>
+&lt;p>Agregar una función de prueba en &lt;code>src/lib.rs&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-rust" data-lang="rust">&lt;span class="line">&lt;span class="cl">&lt;span class="cp">#[cfg(test)]&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="k">mod&lt;/span> &lt;span class="nn">tests&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="k">use&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">super&lt;/span>::&lt;span class="o">*&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="cp">#[test]&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="k">fn&lt;/span> &lt;span class="nf">suma_funciona&lt;/span>&lt;span class="p">()&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="fm">assert_eq!&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">2&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="o">+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="mi">2&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="mi">4&lt;/span>&lt;span class="p">);&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="p">}&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="p">}&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Ejecutar tests:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">cargo &lt;span class="nb">test&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Se obtiene un resumen detallado del resultado, cobertura y errores si existen.&lt;/p>
+&lt;h2 id="empaquetado-del-proyecto-con-cargo-deb">Empaquetado del proyecto con cargo-deb&lt;/h2>
+&lt;p>Instalar herramienta para generar paquetes &lt;code>.deb&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">cargo install cargo-deb
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Empaquetar la aplicación:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">cargo deb
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Esto genera un archivo &lt;code>.deb&lt;/code> listo para distribuir e instalar en sistemas basados en Debian.&lt;/p>
+&lt;h2 id="buenas-prácticas">Buenas prácticas&lt;/h2>
+&lt;ul>
+&lt;li>Usar &lt;code>cargo watch&lt;/code> para recompilar automáticamente al guardar cambios&lt;/li>
+&lt;li>Separar lógica en módulos reutilizables dentro de &lt;code>src/&lt;/code>&lt;/li>
+&lt;li>Mantener documentación con &lt;code>cargo doc --open&lt;/code>&lt;/li>
+&lt;li>Publicar paquetes en crates.io solo si están documentados y testeados&lt;/li>
+&lt;/ul>
+&lt;h2 id="conclusión">Conclusión&lt;/h2>
+&lt;p>Desarrollar con Rust en WSL2 brinda una experiencia fluida y potente, integrando el ecosistema Linux sin salir de Windows. Herramientas como &lt;code>cargo&lt;/code>, &lt;code>rustfmt&lt;/code>, &lt;code>clippy&lt;/code> y &lt;code>cargo-deb&lt;/code> permiten construir, probar y empaquetar software profesionalmente desde un entorno moderno y reproducible.&lt;/p></description></item><item><title>Compilación cruzada para Linux y Windows desde WSL2</title><link>https://cmas.dev/posts/2024-06-21-wsl2-cross-compiling/</link><pubDate>Fri, 21 Jun 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-06-21-wsl2-cross-compiling/</guid><description>&lt;p>Uno de los beneficios clave de WSL2 es la posibilidad de compilar binarios para Linux dentro de un entorno Linux completo, mientras se sigue trabajando desde Windows. Además, es posible configurar &lt;strong>compilación cruzada&lt;/strong> para generar ejecutables de Windows (&lt;code>.exe&lt;/code>) directamente desde WSL2, lo cual es útil para flujos de trabajo DevOps, empaquetado o testing multiplataforma.&lt;/p>
 &lt;h3 id="-objetivo">🎯 Objetivo&lt;/h3>
 &lt;ul>
 &lt;li>Compilar aplicaciones para Linux directamente en WSL2&lt;/li>
