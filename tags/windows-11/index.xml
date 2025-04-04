@@ -1,4 +1,216 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Windows 11 on Christian Amado's Blog</title><link>https://cmas.dev/tags/windows-11/</link><description>Recent content in Windows 11 on Christian Amado's Blog</description><generator>Hugo -- gohugo.io</generator><language>es</language><lastBuildDate>Fri, 31 May 2024 00:00:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/tags/windows-11/index.xml" rel="self" type="application/rss+xml"/><item><title>WSL2 como entorno para desarrollo MLOps</title><link>https://cmas.dev/posts/2024-05-31-wsl2-mlops/</link><pubDate>Fri, 31 May 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-05-31-wsl2-mlops/</guid><description>&lt;p>El ciclo de vida del machine learning moderno no solo involucra entrenar modelos, sino también automatizar, versionar y desplegar esos modelos en producción. Esto es lo que define el enfoque de &lt;strong>MLOps&lt;/strong>. Gracias a su compatibilidad con herramientas de Linux, contenedores, aceleración GPU y pipelines reproducibles, &lt;strong>WSL2 es ideal para este tipo de desarrollo desde Windows&lt;/strong>.&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Windows 11 on Christian Amado's Blog</title><link>https://cmas.dev/tags/windows-11/</link><description>Recent content in Windows 11 on Christian Amado's Blog</description><generator>Hugo -- gohugo.io</generator><language>es</language><lastBuildDate>Fri, 21 Jun 2024 00:00:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/tags/windows-11/index.xml" rel="self" type="application/rss+xml"/><item><title>Compilación cruzada para Linux y Windows desde WSL2</title><link>https://cmas.dev/posts/2024-06-21-wsl2-cross-compiling/</link><pubDate>Fri, 21 Jun 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-06-21-wsl2-cross-compiling/</guid><description>&lt;p>Uno de los beneficios clave de WSL2 es la posibilidad de compilar binarios para Linux dentro de un entorno Linux completo, mientras se sigue trabajando desde Windows. Además, es posible configurar &lt;strong>compilación cruzada&lt;/strong> para generar ejecutables de Windows (&lt;code>.exe&lt;/code>) directamente desde WSL2, lo cual es útil para flujos de trabajo DevOps, empaquetado o testing multiplataforma.&lt;/p>
+&lt;h3 id="-objetivo">🎯 Objetivo&lt;/h3>
+&lt;ul>
+&lt;li>Compilar aplicaciones para Linux directamente en WSL2&lt;/li>
+&lt;li>Generar ejecutables &lt;code>.exe&lt;/code> de Windows desde WSL2 usando MinGW&lt;/li>
+&lt;li>Compilar con CMake y Go para ambos entornos&lt;/li>
+&lt;li>Automatizar la compilación multiplataforma&lt;/li>
+&lt;/ul>
+&lt;h2 id="-paso-1-preparar-entorno-de-compilación-en-wsl2">⚙️ Paso 1: Preparar entorno de compilación en WSL2&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">sudo apt update
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo apt install -y build-essential cmake mingw-w64 gcc g++ git
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Verificar toolchains:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">gcc --version
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">x86_64-w64-mingw32-gcc --version
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="-paso-2-compilar-binario-nativo-para-linux">🧪 Paso 2: Compilar binario nativo para Linux&lt;/h2>
+&lt;p>Crear archivo &lt;code>hello.c&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-c" data-lang="c">&lt;span class="line">&lt;span class="cl">&lt;span class="cp">#include&lt;/span> &lt;span class="cpf">&amp;lt;stdio.h&amp;gt;&lt;/span>&lt;span class="cp">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">&lt;/span>&lt;span class="kt">int&lt;/span> &lt;span class="nf">main&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">printf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;Hola desde Linux&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s">&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Compilar:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">gcc hello.c -o hello-linux
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">./hello-linux
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="-paso-3-compilar-para-windows-exe-desde-wsl2">🪟 Paso 3: Compilar para Windows (.exe) desde WSL2&lt;/h2>
+&lt;p>Usar MinGW para compilar en formato Windows:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">x86_64-w64-mingw32-gcc hello.c -o hello.exe
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Mover el binario a Windows:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">cp hello.exe /mnt/c/Users/tuusuario/Desktop/
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Ejecutar desde PowerShell:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-powershell" data-lang="powershell">&lt;span class="line">&lt;span class="cl">&lt;span class="n">C:&lt;/span>&lt;span class="p">\&lt;/span>&lt;span class="n">Users&lt;/span>&lt;span class="p">\&lt;/span>&lt;span class="n">tuusuario&lt;/span>&lt;span class="p">\&lt;/span>&lt;span class="n">Desktop&lt;/span>&lt;span class="p">\&lt;/span>&lt;span class="n">hello&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="py">exe&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="-paso-4-compilación-cruzada-con-cmake">🛠️ Paso 4: Compilación cruzada con CMake&lt;/h2>
+&lt;p>Estructura de proyecto:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">miapp/
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">├── CMakeLists.txt
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">└── main.c
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>CMakeLists.txt:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cmake" data-lang="cmake">&lt;span class="line">&lt;span class="cl">&lt;span class="nb">cmake_minimum_required&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">VERSION&lt;/span> &lt;span class="s">3.10&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="nb">project&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">miapp&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="nb">add_executable&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">miapp&lt;/span> &lt;span class="s">main.c&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Build Linux:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">mkdir build-linux &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> &lt;span class="nb">cd&lt;/span> build-linux
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">cmake ..
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">make
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Build Windows:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">mkdir build-win &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> &lt;span class="nb">cd&lt;/span> build-win
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">cmake -DCMAKE_SYSTEM_NAME&lt;span class="o">=&lt;/span>Windows -DCMAKE_C_COMPILER&lt;span class="o">=&lt;/span>x86_64-w64-mingw32-gcc ..
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">make
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="-paso-5-compilar-con-go-para-ambos-entornos">💡 Paso 5: Compilar con Go para ambos entornos&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">sudo apt install -y golang
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Go detecta plataforma con variables &lt;code>GOOS&lt;/code> y &lt;code>GOARCH&lt;/code>.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># Linux nativo&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">go build -o hello-linux main.go
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># Windows desde WSL2&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">GOOS&lt;/span>&lt;span class="o">=&lt;/span>windows &lt;span class="nv">GOARCH&lt;/span>&lt;span class="o">=&lt;/span>amd64 go build -o hello.exe main.go
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="-conclusión">✅ Conclusión&lt;/h2>
+&lt;p>WSL2 permite compilar aplicaciones para Linux y Windows sin salir del entorno de desarrollo, facilitando pruebas, empaquetado y automatización de builds multiplataforma. Con herramientas como MinGW, CMake y Go, es posible mantener un flujo productivo y coherente desde una única máquina.&lt;/p></description></item><item><title>Uso de WSLg: apps gráficas Linux en Windows con casos reales</title><link>https://cmas.dev/posts/2024-06-28-wsl2-wslg/</link><pubDate>Fri, 21 Jun 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-06-28-wsl2-wslg/</guid><description>&lt;p>WSLg (Windows Subsystem for Linux GUI) permite ejecutar aplicaciones gráficas de Linux directamente en Windows, sin necesidad de configurar un servidor X manualmente. Esta funcionalidad, incluida en WSL2 desde Windows 11, abre nuevas posibilidades para desarrolladores que utilizan herramientas Linux de escritorio como editores, simuladores, navegadores o visores de datos científicos.&lt;/p>
+&lt;h2 id="qué-es-wslg">Qué es WSLg&lt;/h2>
+&lt;p>WSLg es una capa que permite renderizar interfaces gráficas de aplicaciones Linux en el entorno Windows, utilizando una integración nativa de RDP (Remote Desktop Protocol) entre la VM de WSL2 y el host de Windows. No requiere instalación adicional en Windows 11.&lt;/p>
+&lt;h2 id="verificar-que-wslg-esté-activo">Verificar que WSLg esté activo&lt;/h2>
+&lt;p>Ejecutar una app gráfica como &lt;code>xeyes&lt;/code> o &lt;code>gedit&lt;/code> desde la terminal WSL2:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">sudo apt update
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo apt install -y x11-apps gedit
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">xeyes &lt;span class="p">&amp;amp;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">gedit &lt;span class="p">&amp;amp;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Si la ventana se muestra correctamente, WSLg está funcionando.&lt;/p>
+&lt;h2 id="caso-real-visualización-de-datos-científicos">Caso real: Visualización de datos científicos&lt;/h2>
+&lt;p>Instalar herramientas como &lt;code>matplotlib&lt;/code> o &lt;code>plotly&lt;/code> en Python y mostrar gráficos interactivos directamente desde Linux:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">pip install matplotlib
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Código de ejemplo:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="kn">import&lt;/span> &lt;span class="nn">matplotlib.pyplot&lt;/span> &lt;span class="k">as&lt;/span> &lt;span class="nn">plt&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">plt&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">plot&lt;/span>&lt;span class="p">([&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">3&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">4&lt;/span>&lt;span class="p">],&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="mi">10&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">5&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">7&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">12&lt;/span>&lt;span class="p">])&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">plt&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">title&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;Gráfico de prueba en WSLg&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">plt&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">show&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>La ventana gráfica se abrirá automáticamente en Windows usando WSLg.&lt;/p>
+&lt;h2 id="caso-real-uso-de-herramientas-gtk-o-qt">Caso real: Uso de herramientas GTK o Qt&lt;/h2>
+&lt;p>Aplicaciones como GIMP, Inkscape, Kdenlive o editores como Geany se pueden instalar directamente desde el gestor de paquetes:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">sudo apt install -y gimp inkscape kdenlive geany
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Útiles para diseñadores, editores de video o usuarios que necesitan herramientas visuales sin salir del entorno Linux.&lt;/p>
+&lt;h2 id="buenas-prácticas">Buenas prácticas&lt;/h2>
+&lt;ul>
+&lt;li>Usar una distro actualizada (Ubuntu 22.04 o superior)&lt;/li>
+&lt;li>Evitar abrir decenas de ventanas para no saturar el canal RDP&lt;/li>
+&lt;li>Asegurarse de tener aceleración gráfica habilitada (con &lt;code>glxinfo | grep &amp;quot;OpenGL renderer&amp;quot;&lt;/code>)&lt;/li>
+&lt;li>Para rendimiento óptimo, correr apps que no demanden gráficos 3D complejos&lt;/li>
+&lt;/ul>
+&lt;h2 id="conclusión">Conclusión&lt;/h2>
+&lt;p>WSLg extiende las capacidades de WSL2 al permitir ejecutar aplicaciones gráficas Linux de forma nativa en Windows. Esto simplifica flujos de trabajo mixtos, mejora la productividad y elimina la necesidad de usar máquinas virtuales o dual boot para tareas visuales o científicas complejas.&lt;/p></description></item><item><title>Deno, Go y Python en WSL2 para flujos mixtos de backend + AI</title><link>https://cmas.dev/posts/2024-06-14-wsl2-backend-ai/</link><pubDate>Fri, 14 Jun 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-06-14-wsl2-backend-ai/</guid><description>&lt;p>Combinar lenguajes modernos como &lt;strong>Deno&lt;/strong>, &lt;strong>Go&lt;/strong> y &lt;strong>Python&lt;/strong> permite crear soluciones backend de alto rendimiento con componentes de inteligencia artificial de forma modular y eficiente. Gracias a &lt;strong>WSL2&lt;/strong>, es posible configurar este stack en Linux desde Windows, integrando herramientas, librerías y entornos de ejecución en un mismo flujo de trabajo.&lt;/p>
+&lt;h2 id="-objetivo">🎯 Objetivo&lt;/h2>
+&lt;ul>
+&lt;li>Instalar Deno, Go y Python en WSL2&lt;/li>
+&lt;li>Ejecutar servidores backend ligeros con Deno y Go&lt;/li>
+&lt;li>Usar Python para lógica de IA (modelo, predicción)&lt;/li>
+&lt;li>Comunicar los componentes entre sí usando HTTP/REST&lt;/li>
+&lt;/ul>
+&lt;h2 id="-paso-1-instalar-entornos-en-wsl2">⚙️ Paso 1: Instalar entornos en WSL2&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># Python&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo apt update &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> sudo apt install -y python3 python3-pip
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># Go&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo apt install -y golang
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># Deno&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">curl -fsSL https://deno.land/install.sh &lt;span class="p">|&lt;/span> sh
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">echo&lt;/span> &lt;span class="s1">&amp;#39;export DENO_INSTALL=&amp;#34;$HOME/.deno&amp;#34;&amp;#39;&lt;/span> &amp;gt;&amp;gt; ~/.bashrc
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">echo&lt;/span> &lt;span class="s1">&amp;#39;export PATH=&amp;#34;$DENO_INSTALL/bin:$PATH&amp;#34;&amp;#39;&lt;/span> &amp;gt;&amp;gt; ~/.bashrc
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">source&lt;/span> ~/.bashrc
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Verificar versiones:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">python3 --version
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">go version
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">deno --version
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="-paso-2-crear-backend-http-con-deno">🧪 Paso 2: Crear backend HTTP con Deno&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-ts" data-lang="ts">&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// api.ts
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">serve&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="kr">from&lt;/span> &lt;span class="s2">&amp;#34;https://deno.land/std@0.178.0/http/server.ts&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">serve&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">req&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="k">new&lt;/span> &lt;span class="nx">Response&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;Hola desde Deno API&amp;#34;&lt;/span>&lt;span class="p">),&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">port&lt;/span>: &lt;span class="kt">8000&lt;/span> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Ejecutar:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">deno run --allow-net api.ts
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="-paso-3-crear-servicio-go-para-procesamiento">⚙️ Paso 3: Crear servicio Go para procesamiento&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-go" data-lang="go">&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// server.go
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kn">package&lt;/span> &lt;span class="nx">main&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kn">import&lt;/span> &lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s">&amp;#34;fmt&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s">&amp;#34;net/http&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">func&lt;/span> &lt;span class="nf">main&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">http&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">HandleFunc&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;/go&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="kd">func&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">w&lt;/span> &lt;span class="nx">http&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">ResponseWriter&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">r&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="nx">http&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">Request&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">fmt&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Fprintf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">w&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s">&amp;#34;Hola desde Go service&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">})&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">http&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">ListenAndServe&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;:8080&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="kc">nil&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Compilar y correr:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">go run server.go
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="-paso-4-python-como-motor-de-ia">🤖 Paso 4: Python como motor de IA&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># model.py&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kn">from&lt;/span> &lt;span class="nn">flask&lt;/span> &lt;span class="kn">import&lt;/span> &lt;span class="n">Flask&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">request&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">jsonify&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kn">import&lt;/span> &lt;span class="nn">numpy&lt;/span> &lt;span class="k">as&lt;/span> &lt;span class="nn">np&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">app&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">Flask&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="vm">__name__&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nd">@app.route&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;/predict&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">methods&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;POST&amp;#39;&lt;/span>&lt;span class="p">])&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">def&lt;/span> &lt;span class="nf">predict&lt;/span>&lt;span class="p">():&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">x&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">request&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">json&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;input&amp;#39;&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">pred&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">np&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">log1p&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">x&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="c1"># lógica simulada&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">jsonify&lt;/span>&lt;span class="p">({&lt;/span>&lt;span class="s1">&amp;#39;result&amp;#39;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">pred&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">tolist&lt;/span>&lt;span class="p">()})&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">if&lt;/span> &lt;span class="vm">__name__&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="s1">&amp;#39;__main__&amp;#39;&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">app&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">run&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">port&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="mi">5000&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Instalar dependencias y correr:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">pip install flask numpy
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">python3 model.py
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="-paso-5-comunicación-entre-servicios">🔗 Paso 5: Comunicación entre servicios&lt;/h2>
+&lt;p>Desde Deno o Go se puede consumir el endpoint de Python:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">curl -X POST http://localhost:5000/predict -H &lt;span class="s2">&amp;#34;Content-Type: application/json&amp;#34;&lt;/span> -d &lt;span class="s1">&amp;#39;{&amp;#34;input&amp;#34;: [1, 2, 3]}&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Respuesta:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-json" data-lang="json">&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>&lt;span class="nt">&amp;#34;result&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="mf">0.6931&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mf">1.0986&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mf">1.3862&lt;/span>&lt;span class="p">]}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="-conclusión">✅ Conclusión&lt;/h2>
+&lt;p>Con WSL2 es posible combinar de forma eficiente lenguajes especializados para backend (Go, Deno) y lógica de IA (Python), manteniendo un entorno ligero y modular. Esta arquitectura híbrida mejora la productividad y facilita el mantenimiento en equipos multidisciplinarios que desarrollan APIs inteligentes.&lt;/p></description></item><item><title>Telemetría y monitoreo de procesos WSL2 con herramientas como Prometheus</title><link>https://cmas.dev/posts/2024-06-07-wsl2-prometheus/</link><pubDate>Fri, 07 Jun 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-06-07-wsl2-prometheus/</guid><description>&lt;p>El monitoreo de recursos y procesos es clave en cualquier entorno de desarrollo o pruebas. Gracias a la compatibilidad de WSL2 con herramientas Linux estándar, es posible usar soluciones de &lt;strong>observabilidad como Prometheus&lt;/strong> y &lt;strong>Node Exporter&lt;/strong> para visualizar el rendimiento del entorno WSL2 de forma clara y eficiente.&lt;/p>
+&lt;h2 id="-objetivo">🎯 Objetivo&lt;/h2>
+&lt;ul>
+&lt;li>Exponer métricas del entorno Linux en WSL2&lt;/li>
+&lt;li>Instalar y configurar &lt;strong>Node Exporter&lt;/strong>&lt;/li>
+&lt;li>Usar &lt;strong>Prometheus&lt;/strong> para recolectar y visualizar métricas&lt;/li>
+&lt;li>Explorar métricas útiles para desarrolladores y DevOps&lt;/li>
+&lt;/ul>
+&lt;h2 id="-paso-1-preparar-entorno-wsl2">⚙️ Paso 1: Preparar entorno WSL2&lt;/h2>
+&lt;p>Instalar paquetes esenciales:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">sudo apt update &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> sudo apt install -y wget curl tar
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Crear carpeta de monitoreo:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">mkdir -p ~/monitoring &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> &lt;span class="nb">cd&lt;/span> ~/monitoring
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="-paso-2-instalar-node-exporter">📦 Paso 2: Instalar Node Exporter&lt;/h2>
+&lt;p>Descargar binarios oficiales:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">wget https://github.com/prometheus/node_exporter/releases/download/v1.7.0/node_exporter-1.7.0.linux-amd64.tar.gz
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">tar xvf node_exporter-1.7.0.linux-amd64.tar.gz
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">cd&lt;/span> node_exporter-1.7.0.linux-amd64
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Ejecutar Node Exporter:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">./node_exporter
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Por defecto se expone en &lt;code>http://localhost:9100/metrics&lt;/code>&lt;/p>
+&lt;h2 id="-paso-3-verificar-métricas">🔍 Paso 3: Verificar métricas&lt;/h2>
+&lt;p>Acceder desde el navegador o con &lt;code>curl&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">curl http://localhost:9100/metrics &lt;span class="p">|&lt;/span> grep cpu
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Métricas disponibles incluyen:&lt;/p>
+&lt;ul>
+&lt;li>CPU usage&lt;/li>
+&lt;li>Memory&lt;/li>
+&lt;li>Disk I/O&lt;/li>
+&lt;li>Network stats&lt;/li>
+&lt;li>Load average&lt;/li>
+&lt;/ul>
+&lt;h2 id="-paso-4-configurar-prometheus-para-recolectar-datos">📈 Paso 4: Configurar Prometheus para recolectar datos&lt;/h2>
+&lt;p>Crear archivo &lt;code>prometheus.yml&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-yaml" data-lang="yaml">&lt;span class="line">&lt;span class="cl">&lt;span class="nt">global&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">scrape_interval&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">5s&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="nt">scrape_configs&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>- &lt;span class="nt">job_name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;wsl2-node&amp;#39;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">static_configs&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>- &lt;span class="nt">targets&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;localhost:9100&amp;#39;&lt;/span>&lt;span class="p">]&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Descargar y ejecutar Prometheus:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">wget https://github.com/prometheus/prometheus/releases/download/v2.48.0/prometheus-2.48.0.linux-amd64.tar.gz
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">tar xvf prometheus-2.48.0.linux-amd64.tar.gz
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">cd&lt;/span> prometheus-2.48.0.linux-amd64
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">./prometheus --config.file&lt;span class="o">=&lt;/span>prometheus.yml
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Interfaz disponible en &lt;code>http://localhost:9090&lt;/code>&lt;/p>
+&lt;h2 id="-integración-con-docker-opcional">🛠️ Integración con Docker (opcional)&lt;/h2>
+&lt;p>Se puede ejecutar &lt;strong>Node Exporter&lt;/strong> y &lt;strong>Prometheus&lt;/strong> como contenedores:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">docker run -d -p 9100:9100 --name node_exporter prom/node-exporter
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker run -d -p 9090:9090 -v &lt;span class="nv">$PWD&lt;/span>/prometheus.yml:/etc/prometheus/prometheus.yml prom/prometheus
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="-conclusión">✅ Conclusión&lt;/h2>
+&lt;p>WSL2 permite monitorizar recursos de manera profesional usando herramientas estándar como &lt;strong>Prometheus&lt;/strong>. Esto es ideal para desarrolladores que necesitan observar el uso de CPU, RAM y procesos intensivos sin salir de su entorno &lt;strong>Windows&lt;/strong>, facilitando la implementación de prácticas &lt;strong>DevOps&lt;/strong> y &lt;strong>DataOps&lt;/strong>.&lt;/p></description></item><item><title>WSL2 como entorno para desarrollo MLOps</title><link>https://cmas.dev/posts/2024-05-31-wsl2-mlops/</link><pubDate>Fri, 31 May 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-05-31-wsl2-mlops/</guid><description>&lt;p>El ciclo de vida del machine learning moderno no solo involucra entrenar modelos, sino también automatizar, versionar y desplegar esos modelos en producción. Esto es lo que define el enfoque de &lt;strong>MLOps&lt;/strong>. Gracias a su compatibilidad con herramientas de Linux, contenedores, aceleración GPU y pipelines reproducibles, &lt;strong>WSL2 es ideal para este tipo de desarrollo desde Windows&lt;/strong>.&lt;/p>
 &lt;h2 id="-objetivo">🎯 Objetivo&lt;/h2>
 &lt;ul>
 &lt;li>Crear un entorno de desarrollo MLOps usando WSL2&lt;/li>
