@@ -2,7 +2,7 @@
 layout: post
 title: "CI/CD desde WSL2 usando GitHub Actions y Azure Pipelines"
 author: Christian Amado
-date: 2024-08-26 00:00:00 -0400
+date: 2024-08-23 00:00:00 -0400
 category: [Desarrollo de software]
 tags: [WinDev,Windows 11,WSL]
 thumbnail-img: /img/posts/thumbnails/win11.png

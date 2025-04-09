@@ -2,7 +2,7 @@
 layout: post
 title: "Migración de Node.js a Deno: Caso práctico"
 author: Christian Amado
-date: 2024-08-24 00:00:00 -0400
+date: 2024-08-21 00:00:00 -0400
 category: [Desarrollo de software]
 tags: [Web Development,Deno,Typescript,Node.js]
 thumbnail-img: /img/posts/thumbnails/deno.png
