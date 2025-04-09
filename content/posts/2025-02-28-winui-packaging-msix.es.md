@@ -2,7 +2,7 @@
 layout: post
 title: "Empaquetado de apps modernas con MSIX y configuración avanzada del manifiesto"
 author: Christian Amado
-date: 2024-02-28 00:00:00 -0400
+date: 2025-02-28 00:00:00 -0400
 category: [Desarrollo de software]
 tags: [WinDev,Windows 11,WinUI 3,Windows App SDK]
 thumbnail-img: /img/posts/thumbnails/win11.png

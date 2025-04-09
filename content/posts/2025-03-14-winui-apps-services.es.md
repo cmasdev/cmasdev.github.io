@@ -2,7 +2,7 @@
 layout: post
 title: "Integración con servicios locales vía App Services y extensión de funcionalidades entre apps"
 author: Christian Amado
-date: 2024-03-14 00:00:00 -0400
+date: 2025-03-14 00:00:00 -0400
 category: [Desarrollo de software]
 tags: [WinDev,Windows 11,WinUI 3,Windows App SDK]
 thumbnail-img: /img/posts/thumbnails/win11.png
