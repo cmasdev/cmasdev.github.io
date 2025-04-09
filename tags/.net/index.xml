@@ -1,4 +1,467 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>.NET on Christian Amado's Blog</title><link>https://cmas.dev/tags/.net/</link><description>Recent content in .NET on Christian Amado's Blog</description><generator>Hugo -- gohugo.io</generator><language>es</language><lastBuildDate>Mon, 06 Jan 2025 00:00:00 -0400</lastBuildDate><atom:link href="https://cmas.dev/tags/.net/index.xml" rel="self" type="application/rss+xml"/><item><title>Optimización de rendimiento en Blazor WebAssembly</title><link>https://cmas.dev/posts/2025-01-06-performance-optimization-blazor-webassembly/</link><pubDate>Mon, 06 Jan 2025 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2025-01-06-performance-optimization-blazor-webassembly/</guid><description>&lt;p>&lt;strong>Blazor WebAssembly&lt;/strong> es una tecnología poderosa que permite a los desarrolladores crear aplicaciones web interactivas utilizando &lt;strong>C#&lt;/strong> y &lt;strong>.NET&lt;/strong> en lugar de &lt;strong>JavaScript&lt;/strong>. Sin embargo, debido a las características inherentes de su arquitectura, la optimización del rendimiento puede ser un desafío crítico. En este artículo, exploraremos técnicas, estrategias y mejores prácticas para optimizar el rendimiento en aplicaciones &lt;strong>Blazor WebAssembly&lt;/strong>.&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>.NET on Christian Amado's Blog</title><link>https://cmas.dev/tags/.net/</link><description>Recent content in .NET on Christian Amado's Blog</description><generator>Hugo -- gohugo.io</generator><language>es</language><lastBuildDate>Wed, 26 Mar 2025 00:00:00 -0300</lastBuildDate><atom:link href="https://cmas.dev/tags/.net/index.xml" rel="self" type="application/rss+xml"/><item><title>Despliegue continuo de Blazor con Azure DevOps</title><link>https://cmas.dev/posts/2025-03-26-blazor-/</link><pubDate>Wed, 26 Mar 2025 00:00:00 -0300</pubDate><guid>https://cmas.dev/posts/2025-03-26-blazor-/</guid><description>&lt;p>La automatización del proceso de construcción, prueba y despliegue de aplicaciones &lt;strong>Blazor&lt;/strong> es esencial para mantener un ciclo de desarrollo ágil, confiable y repetible. &lt;strong>Azure DevOps&lt;/strong> proporciona un conjunto completo de herramientas que permiten implementar pipelines de integración y entrega continua (CI/CD) para aplicaciones &lt;strong>Blazor Server&lt;/strong> o &lt;strong>Blazor WebAssembly&lt;/strong>.&lt;/p>
+&lt;p>Este artículo explica cómo configurar un pipeline de CI/CD para una aplicación &lt;strong>Blazor Server&lt;/strong>, incluyendo la integración con un repositorio Git, la definición del proceso de build y el despliegue automático a &lt;strong>Azure App Service&lt;/strong>.&lt;/p>
+&lt;h2 id="requisitos-previos">Requisitos previos&lt;/h2>
+&lt;ul>
+&lt;li>Cuenta activa en Azure y acceso al portal &lt;a href="https://portal.azure.com">https://portal.azure.com&lt;/a>.&lt;/li>
+&lt;li>Proyecto Blazor Server funcional y almacenado en un repositorio Git (GitHub o Azure Repos).&lt;/li>
+&lt;li>Cuenta de Azure DevOps y organización configurada.&lt;/li>
+&lt;li>Azure App Service creado para recibir el despliegue.&lt;/li>
+&lt;/ul>
+&lt;h2 id="crear-el-proyecto-en-azure-devops">Crear el proyecto en Azure DevOps&lt;/h2>
+&lt;ol>
+&lt;li>Acceder a &lt;a href="https://dev.azure.com">https://dev.azure.com&lt;/a> y crear un nuevo proyecto.&lt;/li>
+&lt;li>Importar el repositorio Git donde se encuentra el código fuente de la aplicación Blazor Server.&lt;/li>
+&lt;li>Verificar que el proyecto tenga una rama principal (&lt;code>main&lt;/code> o &lt;code>master&lt;/code>) correctamente configurada.&lt;/li>
+&lt;/ol>
+&lt;h2 id="crear-una-app-service-en-azure">Crear una App Service en Azure&lt;/h2>
+&lt;ol>
+&lt;li>En el portal de Azure, seleccionar &lt;strong>Crear recurso &amp;gt; App Service&lt;/strong>.&lt;/li>
+&lt;li>Configurar:
+&lt;ul>
+&lt;li>Nombre: &lt;code>blazor-devops-demo&lt;/code>&lt;/li>
+&lt;li>Publicar: &lt;strong>Código&lt;/strong>&lt;/li>
+&lt;li>Pilas: &lt;strong>.NET 8 (o superior)&lt;/strong>&lt;/li>
+&lt;li>Región: la más cercana al entorno de desarrollo&lt;/li>
+&lt;li>Grupo de recursos: crear uno nuevo si es necesario&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Crear el servicio y esperar a que esté disponible.&lt;/li>
+&lt;/ol>
+&lt;h2 id="crear-un-pipeline-de-cicd-en-azure-devops">Crear un pipeline de CI/CD en Azure DevOps&lt;/h2>
+&lt;ol>
+&lt;li>Ir a la sección &lt;strong>Pipelines &amp;gt; Pipelines&lt;/strong> y seleccionar &lt;strong>Crear Pipeline&lt;/strong>.&lt;/li>
+&lt;li>Elegir la fuente de repositorio: GitHub o Azure Repos.&lt;/li>
+&lt;li>Seleccionar &lt;strong>YAML&lt;/strong> como método de configuración.&lt;/li>
+&lt;li>Agregar el siguiente contenido para el archivo &lt;code>azure-pipelines.yml&lt;/code>:&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-yaml" data-lang="yaml">&lt;span class="line">&lt;span class="cl">&lt;span class="nt">trigger&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">branches&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">include&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>- &lt;span class="l">main&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="nt">pool&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">vmImage&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;windows-latest&amp;#39;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="nt">variables&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">buildConfiguration&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;Release&amp;#39;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="nt">steps&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>- &lt;span class="nt">task&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">UseDotNet@2&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">inputs&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">packageType&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;sdk&amp;#39;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">version&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;8.x&amp;#39;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">installationPath&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">$(Agent.ToolsDirectory)/dotnet&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>- &lt;span class="nt">task&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">DotNetCoreCLI@2&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">inputs&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">command&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;restore&amp;#39;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">projects&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;**/*.csproj&amp;#39;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>- &lt;span class="nt">task&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">DotNetCoreCLI@2&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">inputs&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">command&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;build&amp;#39;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">projects&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;**/*.csproj&amp;#39;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">arguments&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;--configuration $(buildConfiguration)&amp;#39;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>- &lt;span class="nt">task&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">DotNetCoreCLI@2&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">inputs&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">command&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;publish&amp;#39;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">projects&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;**/*.csproj&amp;#39;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">arguments&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)&amp;#39;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>- &lt;span class="nt">task&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">PublishBuildArtifacts@1&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">inputs&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">PathtoPublish&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;$(Build.ArtifactStagingDirectory)&amp;#39;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">ArtifactName&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;drop&amp;#39;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Este pipeline compila y publica la aplicación Blazor en formato listo para despliegue. A continuación, se debe crear una &lt;strong>Release Pipeline&lt;/strong>.&lt;/p>
+&lt;h2 id="crear-el-pipeline-de-release-despliegue">Crear el pipeline de Release (Despliegue)&lt;/h2>
+&lt;ol>
+&lt;li>
+&lt;p>Ir a &lt;strong>Pipelines &amp;gt; Releases&lt;/strong>, seleccionar &lt;strong>New Pipeline&lt;/strong>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Elegir &lt;strong>Empty Job&lt;/strong>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>En el artefacto, seleccionar el pipeline generado anteriormente (&lt;code>drop&lt;/code>) y enlazarlo.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>En la fase de despliegue, agregar una nueva tarea: &lt;strong>Azure App Service Deploy&lt;/strong>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Configurar:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>App Type:&lt;/strong> Web App on Windows&lt;/li>
+&lt;li>&lt;strong>App Service name:&lt;/strong> seleccionar el creado previamente&lt;/li>
+&lt;li>&lt;strong>Package or folder:&lt;/strong> &lt;code>$(System.DefaultWorkingDirectory)/drop&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>Habilitar &lt;strong>Despliegue automático después del build&lt;/strong> en la pestaña &lt;strong>Triggers&lt;/strong> del artefacto.&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="personalizar-con-variables-de-entorno">Personalizar con variables de entorno&lt;/h2>
+&lt;p>En Azure App Service es posible definir variables de entorno que se pueden consumir desde &lt;code>appsettings.Production.json&lt;/code> o directamente en tiempo de ejecución:&lt;/p>
+&lt;ol>
+&lt;li>En el portal de Azure, ir a la App Service &amp;gt; Configuración &amp;gt; Configuración de la aplicación.&lt;/li>
+&lt;li>Agregar claves como &lt;code>ConnectionStrings__Default&lt;/code> o &lt;code>MyCustomVariable&lt;/code>.&lt;/li>
+&lt;/ol>
+&lt;p>Estas configuraciones son seguras, persistentes y no requieren recompilación.&lt;/p>
+&lt;h2 id="pruebas-automáticas-antes-del-despliegue">Pruebas automáticas antes del despliegue&lt;/h2>
+&lt;p>Si el proyecto incluye pruebas unitarias, se puede agregar el siguiente paso antes del &lt;code>publish&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-yaml" data-lang="yaml">&lt;span class="line">&lt;span class="cl">- &lt;span class="nt">task&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">DotNetCoreCLI@2&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">inputs&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">command&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;test&amp;#39;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">projects&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;**/*Tests.csproj&amp;#39;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">arguments&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;--configuration $(buildConfiguration)&amp;#39;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Esto asegura que solo se desplieguen builds que hayan superado las pruebas.&lt;/p>
+&lt;h2 id="conclusión">Conclusión&lt;/h2>
+&lt;p>Implementar un flujo de CI/CD para aplicaciones &lt;strong>Blazor&lt;/strong> con &lt;strong>Azure DevOps&lt;/strong> automatiza completamente el proceso de entrega, desde la validación del código hasta el despliegue en producción. Esto no solo acelera el desarrollo, sino que también reduce errores humanos y mejora la calidad del software.&lt;/p>
+&lt;p>Gracias a los pipelines &lt;strong>YAML&lt;/strong>, las definiciones son auditables, versionables y portables. Esta integración es ideal para proyectos &lt;strong>Blazor&lt;/strong> en entornos empresariales o colaborativos, permitiendo adoptar prácticas modernas de &lt;strong>DevOps&lt;/strong> sin abandonar el ecosistema &lt;strong>.NET&lt;/strong>.&lt;/p></description></item><item><title>Dashboards interactivos con Blazor y gráficos dinámicos</title><link>https://cmas.dev/posts/2025-03-19-blazor-dashboard/</link><pubDate>Wed, 19 Mar 2025 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2025-03-19-blazor-dashboard/</guid><description>&lt;p>Los dashboards interactivos se han convertido en herramientas esenciales para visualizar grandes volúmenes de información en tiempo real. &lt;strong>Blazor&lt;/strong>, como framework moderno para construir aplicaciones web con C#, permite crear interfaces ricas que se ejecutan directamente en el navegador o en el servidor. Cuando se combina con bibliotecas de gráficos dinámicos como Chart.js o ApexCharts, Blazor ofrece una experiencia visual potente y altamente personalizable.&lt;/p>
+&lt;p>Este artículo explora cómo construir un dashboard interactivo en &lt;strong>Blazor Server&lt;/strong> utilizando datos dinámicos y gráficos en tiempo real, abordando tanto el diseño del componente visual como la lógica de actualización de datos.&lt;/p>
+&lt;h2 id="requisitos-previos">Requisitos previos&lt;/h2>
+&lt;ul>
+&lt;li>Visual Studio 2022 o superior con soporte para ASP.NET y Blazor.&lt;/li>
+&lt;li>Conocimientos intermedios de C# y Blazor Server.&lt;/li>
+&lt;li>Familiaridad con conceptos de visualización de datos.&lt;/li>
+&lt;li>Paquete NuGet &lt;code>Blazor-ApexCharts&lt;/code> (u otra biblioteca de gráficos compatible con Blazor).&lt;/li>
+&lt;/ul>
+&lt;h2 id="crear-el-proyecto-base">Crear el proyecto base&lt;/h2>
+&lt;ol>
+&lt;li>Abrir Visual Studio y seleccionar &lt;strong>Crear nuevo proyecto&lt;/strong>.&lt;/li>
+&lt;li>Seleccionar &lt;strong>Blazor Server App&lt;/strong>.&lt;/li>
+&lt;li>Nombrar el proyecto como &lt;code>BlazorDashboardApp&lt;/code> y confirmar la plantilla con .NET 8 (o superior).&lt;/li>
+&lt;/ol>
+&lt;h2 id="instalar-apexcharts-para-blazor">Instalar ApexCharts para Blazor&lt;/h2>
+&lt;p>Desde la consola del administrador de paquetes ejecutar:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-powershell" data-lang="powershell">&lt;span class="line">&lt;span class="cl">&lt;span class="nb">Install-Package&lt;/span> &lt;span class="n">ApexCharts&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>También se puede agregar desde el administrador de NuGet buscando &lt;code>ApexCharts&lt;/code>.&lt;/p>
+&lt;h2 id="configurar-apexcharts">Configurar ApexCharts&lt;/h2>
+&lt;p>En &lt;code>_Imports.razor&lt;/code>, agregar:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">@using ApexCharts
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>En &lt;code>Pages/_Host.cshtml&lt;/code>, agregar en el &lt;code>&amp;lt;head&amp;gt;&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-html" data-lang="html">&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">link&lt;/span> &lt;span class="na">href&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;_content/ApexCharts.Blazor/apexcharts.css&amp;#34;&lt;/span> &lt;span class="na">rel&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;stylesheet&amp;#34;&lt;/span> &lt;span class="p">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Y antes de cerrar la etiqueta &lt;code>&amp;lt;/body&amp;gt;&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-html" data-lang="html">&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">script&lt;/span> &lt;span class="na">src&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;_content/ApexCharts.Blazor/apexcharts.js&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&amp;lt;/&lt;/span>&lt;span class="nt">script&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="crear-un-componente-de-gráfico">Crear un componente de gráfico&lt;/h2>
+&lt;p>Crear una carpeta llamada &lt;code>Components&lt;/code>, y dentro un archivo &lt;code>SalesChart.razor&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">@using ApexCharts
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">@using BlazorDashboardApp.Data
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;ApexChart TItem=&amp;#34;SalesData&amp;#34; Title=&amp;#34;Ventas por mes&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Width=&amp;#34;100%&amp;#34; Height=&amp;#34;350&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Series=&amp;#34;@series&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Options=&amp;#34;@options&amp;#34;&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;/ApexChart&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">@code {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> private List&amp;lt;Series&amp;lt;SalesData&amp;gt;&amp;gt; series = new();
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> private ApexChartOptions&amp;lt;SalesData&amp;gt; options = new();
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> protected override void OnInitialized()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> series.Add(new Series&amp;lt;SalesData&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Name = &amp;#34;Ventas&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Data = new List&amp;lt;SalesData&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> new() { X = &amp;#34;Ene&amp;#34;, Y = 25000 },
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> new() { X = &amp;#34;Feb&amp;#34;, Y = 42000 },
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> new() { X = &amp;#34;Mar&amp;#34;, Y = 37000 },
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> new() { X = &amp;#34;Abr&amp;#34;, Y = 54000 }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> });
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> options = new ApexChartOptions&amp;lt;SalesData&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Chart = new Chart
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Type = ChartType.Bar
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> },
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Xaxis = new XAxis
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Title = new Title { Text = &amp;#34;Mes&amp;#34; }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> },
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Yaxis = new List&amp;lt;YAxis&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> new() { Title = new Title { Text = &amp;#34;Monto (USD)&amp;#34; } }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> };
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Y definir la clase &lt;code>SalesData.cs&lt;/code> en la carpeta &lt;code>Data&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-csharp" data-lang="csharp">&lt;span class="line">&lt;span class="cl">&lt;span class="k">namespace&lt;/span> &lt;span class="nn">BlazorDashboardApp.Data&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">public&lt;/span> &lt;span class="k">class&lt;/span> &lt;span class="nc">SalesData&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">public&lt;/span> &lt;span class="kt">string&lt;/span> &lt;span class="n">X&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="k">get&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">set&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="kt">string&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">Empty&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">public&lt;/span> &lt;span class="kt">decimal&lt;/span> &lt;span class="n">Y&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="k">get&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">set&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="incluir-el-gráfico-en-una-página">Incluir el gráfico en una página&lt;/h2>
+&lt;p>Editar &lt;code>Pages/Index.razor&lt;/code> para incluir el componente del gráfico:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">@page &amp;#34;/&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;h3&amp;gt;Dashboard de Ventas&amp;lt;/h3&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;SalesChart /&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>También es necesario importar el componente:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">@using BlazorDashboardApp.Components
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="hacer-el-gráfico-dinámico">Hacer el gráfico dinámico&lt;/h2>
+&lt;p>Para que el gráfico se actualice cada cierto intervalo, se puede usar un &lt;code>Timer&lt;/code>. Reemplazar el bloque &lt;code>@code&lt;/code> en &lt;code>SalesChart.razor&lt;/code> por:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="err">@&lt;/span>&lt;span class="n">code&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">private&lt;/span> &lt;span class="n">List&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">Series&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">SalesData&lt;/span>&lt;span class="o">&amp;gt;&amp;gt;&lt;/span> &lt;span class="n">series&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">new&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">private&lt;/span> &lt;span class="n">ApexChartOptions&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">SalesData&lt;/span>&lt;span class="o">&amp;gt;&lt;/span> &lt;span class="n">options&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">new&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">private&lt;/span> &lt;span class="n">System&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Timers&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Timer&lt;/span>&lt;span class="err">?&lt;/span> &lt;span class="n">updateTimer&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">protected&lt;/span> &lt;span class="n">override&lt;/span> &lt;span class="n">void&lt;/span> &lt;span class="n">OnInitialized&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">InicializarGrafico&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">updateTimer&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">System&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Timers&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Timer&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">5000&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="o">//&lt;/span> &lt;span class="n">cada&lt;/span> &lt;span class="mi">5&lt;/span> &lt;span class="n">segundos&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">updateTimer&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Elapsed&lt;/span> &lt;span class="o">+=&lt;/span> &lt;span class="n">async&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">_&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">_&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">await&lt;/span> &lt;span class="n">ActualizarDatos&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">updateTimer&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Start&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">private&lt;/span> &lt;span class="n">void&lt;/span> &lt;span class="n">InicializarGrafico&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">series&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Add&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">new&lt;/span> &lt;span class="n">Series&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">SalesData&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Name&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;Ventas&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Data&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">GenerarDatos&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">options&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">ApexChartOptions&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">SalesData&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Chart&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">Chart&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">Type&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">ChartType&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Bar&lt;/span> &lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Xaxis&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">XAxis&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">Title&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">Title&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">Text&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;Mes&amp;#34;&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Yaxis&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">List&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">YAxis&lt;/span>&lt;span class="o">&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">new&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">Title&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">Title&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">Text&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;Monto (USD)&amp;#34;&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">private&lt;/span> &lt;span class="n">async&lt;/span> &lt;span class="n">Task&lt;/span> &lt;span class="n">ActualizarDatos&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">var&lt;/span> &lt;span class="n">nuevosDatos&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">GenerarDatos&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">await&lt;/span> &lt;span class="n">InvokeAsync&lt;/span>&lt;span class="p">(()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">series&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">]&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Data&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">nuevosDatos&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">StateHasChanged&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">private&lt;/span> &lt;span class="n">List&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">SalesData&lt;/span>&lt;span class="o">&amp;gt;&lt;/span> &lt;span class="n">GenerarDatos&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">var&lt;/span> &lt;span class="n">rnd&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">Random&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">List&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">SalesData&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">new&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">X&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;Ene&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">Y&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">rnd&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Next&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">20000&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">50000&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">new&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">X&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;Feb&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">Y&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">rnd&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Next&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">20000&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">50000&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">new&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">X&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;Mar&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">Y&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">rnd&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Next&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">20000&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">50000&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">new&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">X&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;Abr&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">Y&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">rnd&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Next&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">20000&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">50000&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">public&lt;/span> &lt;span class="n">void&lt;/span> &lt;span class="n">Dispose&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">updateTimer&lt;/span>&lt;span class="err">?&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Stop&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">updateTimer&lt;/span>&lt;span class="err">?&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Dispose&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Esto simula datos que se actualizan automáticamente en tiempo real.&lt;/p>
+&lt;h2 id="conclusión">Conclusión&lt;/h2>
+&lt;p>&lt;strong>Blazor&lt;/strong> permite construir dashboards ricos e interactivos combinando componentes gráficos como ApexCharts con datos en tiempo real. Con unas pocas líneas de código, es posible crear visualizaciones profesionales que se actualizan dinámicamente, ya sea mediante temporizadores o eventos del sistema.&lt;/p>
+&lt;p>Este enfoque puede escalar fácilmente para representar múltiples gráficos, integrarse con bases de datos, servicios &lt;strong>REST&lt;/strong> o incluso conectarse a flujos de eventos como &lt;strong>SignalR&lt;/strong> o &lt;strong>Azure Event Hubs&lt;/strong>. Los dashboards construidos con &lt;strong>Blazor&lt;/strong> ofrecen una alternativa moderna, extensible y mantenible a frameworks de &lt;strong>JavaScript&lt;/strong> tradicionales, sin salir del ecosistema &lt;strong>.NET&lt;/strong>.&lt;/p></description></item><item><title>Integración de Blazor con bases de datos SQL en Azure</title><link>https://cmas.dev/posts/2025-03-12-blazor-sql-azure/</link><pubDate>Wed, 12 Mar 2025 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2025-03-12-blazor-sql-azure/</guid><description>&lt;p>El desarrollo de aplicaciones web modernas con &lt;strong>Blazor&lt;/strong> permite aprovechar el poder de .NET para construir interfaces interactivas del lado cliente utilizando &lt;strong>C#&lt;/strong>. A su vez, las bases de datos SQL en &lt;strong>Azure&lt;/strong> ofrecen una solución altamente escalable, segura y gestionada para el almacenamiento de datos. Integrar ambas tecnologías representa una solución robusta para proyectos empresariales que requieren rendimiento, fiabilidad y facilidad de mantenimiento.&lt;/p>
+&lt;p>Este artículo detalla cómo conectar una aplicación Blazor Server con una base de datos SQL en &lt;strong>Azure&lt;/strong>, utilizando &lt;strong>Entity Framework Core&lt;/strong> como ORM (Object-Relational Mapping). Se cubre desde la creación de la base de datos hasta la implementación de operaciones CRUD básicas.&lt;/p>
+&lt;h2 id="requisitos-previos">Requisitos previos&lt;/h2>
+&lt;p>Para seguir este tutorial, se requiere:&lt;/p>
+&lt;ul>
+&lt;li>Una cuenta activa en Microsoft Azure.&lt;/li>
+&lt;li>Visual Studio 2022 o superior con soporte para ASP.NET y desarrollo Blazor.&lt;/li>
+&lt;li>Conocimientos básicos en C#, Blazor Server y Entity Framework Core.&lt;/li>
+&lt;li>SQL Server Management Studio (SSMS) opcional, para gestionar la base de datos en Azure.&lt;/li>
+&lt;/ul>
+&lt;h2 id="crear-una-base-de-datos-sql-en-azure">Crear una base de datos SQL en Azure&lt;/h2>
+&lt;ol>
+&lt;li>
+&lt;p>Iniciar sesión en &lt;a href="https://portal.azure.com">https://portal.azure.com&lt;/a>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Seleccionar &lt;strong>&amp;ldquo;Crear un recurso&amp;rdquo;&lt;/strong> &amp;gt; &lt;strong>&amp;ldquo;Base de datos SQL&amp;rdquo;&lt;/strong>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>En el formulario de configuración, establecer:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>Nombre de la base de datos:&lt;/strong> &lt;code>BlazorAppDB&lt;/code>&lt;/li>
+&lt;li>&lt;strong>Servidor:&lt;/strong> Crear uno nuevo o seleccionar uno existente. Al crear uno nuevo, asignar un nombre como &lt;code>blazor-sql-server&lt;/code>, seleccionar región, usuario administrador (por ejemplo &lt;code>adminuser&lt;/code>) y contraseña.&lt;/li>
+&lt;li>&lt;strong>Nivel de precio:&lt;/strong> Seleccionar el plan básico para propósitos de prueba.&lt;/li>
+&lt;li>&lt;strong>Redes:&lt;/strong> Habilitar el acceso a través del cliente actual para permitir la conexión desde el entorno de desarrollo.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>Una vez creada, tomar nota del &lt;strong>nombre del servidor&lt;/strong> (por ejemplo, &lt;code>blazor-sql-server.database.windows.net&lt;/code>) y el &lt;strong>nombre de la base de datos&lt;/strong>.&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="crear-el-proyecto-blazor-server">Crear el proyecto Blazor Server&lt;/h2>
+&lt;ol>
+&lt;li>Abrir Visual Studio y seleccionar &lt;strong>Crear nuevo proyecto&lt;/strong>.&lt;/li>
+&lt;li>Elegir &lt;strong>Blazor Server App&lt;/strong>.&lt;/li>
+&lt;li>Asignar un nombre, por ejemplo, &lt;code>BlazorAzureSqlApp&lt;/code>.&lt;/li>
+&lt;li>Confirmar que la opción &lt;strong>.NET 8 (o superior)&lt;/strong> esté seleccionada.&lt;/li>
+&lt;li>Finalizar la creación del proyecto.&lt;/li>
+&lt;/ol>
+&lt;h2 id="agregar-entity-framework-core">Agregar Entity Framework Core&lt;/h2>
+&lt;ol>
+&lt;li>Abrir la consola del administrador de paquetes (Package Manager Console).&lt;/li>
+&lt;li>Ejecutar los siguientes comandos:&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-powershell" data-lang="powershell">&lt;span class="line">&lt;span class="cl">&lt;span class="nb">Install-Package&lt;/span> &lt;span class="n">Microsoft&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="py">EntityFrameworkCore&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="py">SqlServer&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">Install-Package&lt;/span> &lt;span class="n">Microsoft&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="py">EntityFrameworkCore&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="py">Tools&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="definir-el-modelo-de-datos">Definir el modelo de datos&lt;/h2>
+&lt;p>Crear una carpeta llamada &lt;code>Models&lt;/code> y dentro, un archivo &lt;code>Product.cs&lt;/code> con el siguiente contenido:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-csharp" data-lang="csharp">&lt;span class="line">&lt;span class="cl">&lt;span class="k">using&lt;/span> &lt;span class="nn">System.ComponentModel.DataAnnotations&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">namespace&lt;/span> &lt;span class="nn">BlazorAzureSqlApp.Models&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">public&lt;/span> &lt;span class="k">class&lt;/span> &lt;span class="nc">Product&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">public&lt;/span> &lt;span class="kt">int&lt;/span> &lt;span class="n">Id&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="k">get&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">set&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="na">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="na"> [Required]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">public&lt;/span> &lt;span class="kt">string?&lt;/span> &lt;span class="n">Name&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="k">get&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">set&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="na">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="na"> [Range(0, double.MaxValue)]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">public&lt;/span> &lt;span class="kt">decimal&lt;/span> &lt;span class="n">Price&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="k">get&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">set&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="crear-el-contexto-de-base-de-datos">Crear el contexto de base de datos&lt;/h2>
+&lt;p>Crear una carpeta llamada &lt;code>Data&lt;/code> y un archivo &lt;code>AppDbContext.cs&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-csharp" data-lang="csharp">&lt;span class="line">&lt;span class="cl">&lt;span class="k">using&lt;/span> &lt;span class="nn">Microsoft.EntityFrameworkCore&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">using&lt;/span> &lt;span class="nn">BlazorAzureSqlApp.Models&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">namespace&lt;/span> &lt;span class="nn">BlazorAzureSqlApp.Data&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">public&lt;/span> &lt;span class="k">class&lt;/span> &lt;span class="nc">AppDbContext&lt;/span> &lt;span class="p">:&lt;/span> &lt;span class="n">DbContext&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">public&lt;/span> &lt;span class="n">AppDbContext&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">DbContextOptions&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="n">AppDbContext&lt;/span>&lt;span class="p">&amp;gt;&lt;/span> &lt;span class="n">options&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">:&lt;/span> &lt;span class="k">base&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">options&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">public&lt;/span> &lt;span class="n">DbSet&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="n">Product&lt;/span>&lt;span class="p">&amp;gt;&lt;/span> &lt;span class="n">Products&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="n">Set&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="n">Product&lt;/span>&lt;span class="p">&amp;gt;();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="configurar-la-cadena-de-conexión-a-azure-sql">Configurar la cadena de conexión a Azure SQL&lt;/h2>
+&lt;p>En el archivo &lt;code>appsettings.json&lt;/code>, agregar la cadena de conexión:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-json" data-lang="json">&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;ConnectionStrings&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;DefaultConnection&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;Server=tcp:blazor-sql-server.database.windows.net,1433;Initial Catalog=BlazorAppDB;Persist Security Info=False;User ID=adminuser;Password=TuPassword123!;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>Nota:&lt;/strong> Sustituir &lt;code>adminuser&lt;/code> y &lt;code>TuPassword123!&lt;/code> por las credenciales reales utilizadas al crear el servidor de Azure SQL.&lt;/p>
+&lt;h2 id="registrar-el-contexto-en-el-contenedor-de-servicios">Registrar el contexto en el contenedor de servicios&lt;/h2>
+&lt;p>En el archivo &lt;code>Program.cs&lt;/code>, agregar la configuración del contexto justo antes de &lt;code>builder.Build()&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-csharp" data-lang="csharp">&lt;span class="line">&lt;span class="cl">&lt;span class="n">builder&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">Services&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">AddDbContext&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="n">AppDbContext&lt;/span>&lt;span class="p">&amp;gt;(&lt;/span>&lt;span class="n">options&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">options&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">UseSqlServer&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">builder&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">Configuration&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">GetConnectionString&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;DefaultConnection&amp;#34;&lt;/span>&lt;span class="p">)));&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="crear-la-migración-e-inicializar-la-base-de-datos">Crear la migración e inicializar la base de datos&lt;/h2>
+&lt;p>Ejecutar en la consola del administrador de paquetes:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-powershell" data-lang="powershell">&lt;span class="line">&lt;span class="cl">&lt;span class="nb">Add-Migration&lt;/span> &lt;span class="n">InitialCreate&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">Update-Database&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Esto creará las tablas necesarias directamente en la base de datos SQL de Azure.&lt;/p>
+&lt;h2 id="crear-un-servicio-para-acceso-a-datos">Crear un servicio para acceso a datos&lt;/h2>
+&lt;p>Dentro de la carpeta &lt;code>Data&lt;/code>, crear el archivo &lt;code>ProductService.cs&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-csharp" data-lang="csharp">&lt;span class="line">&lt;span class="cl">&lt;span class="k">using&lt;/span> &lt;span class="nn">Microsoft.EntityFrameworkCore&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">using&lt;/span> &lt;span class="nn">BlazorAzureSqlApp.Models&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">namespace&lt;/span> &lt;span class="nn">BlazorAzureSqlApp.Data&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">public&lt;/span> &lt;span class="k">class&lt;/span> &lt;span class="nc">ProductService&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">private&lt;/span> &lt;span class="k">readonly&lt;/span> &lt;span class="n">AppDbContext&lt;/span> &lt;span class="n">_context&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">public&lt;/span> &lt;span class="n">ProductService&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">AppDbContext&lt;/span> &lt;span class="n">context&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">_context&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="n">context&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">public&lt;/span> &lt;span class="kd">async&lt;/span> &lt;span class="n">Task&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="n">List&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="n">Product&lt;/span>&lt;span class="p">&amp;gt;&amp;gt;&lt;/span> &lt;span class="n">GetAllAsync&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">await&lt;/span> &lt;span class="n">_context&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">Products&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">ToListAsync&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">public&lt;/span> &lt;span class="kd">async&lt;/span> &lt;span class="n">Task&lt;/span> &lt;span class="n">AddAsync&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">Product&lt;/span> &lt;span class="n">product&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">_context&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">Products&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">Add&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">product&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">await&lt;/span> &lt;span class="n">_context&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">SaveChangesAsync&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">public&lt;/span> &lt;span class="kd">async&lt;/span> &lt;span class="n">Task&lt;/span> &lt;span class="n">DeleteAsync&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kt">int&lt;/span> &lt;span class="n">id&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kt">var&lt;/span> &lt;span class="n">product&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="k">await&lt;/span> &lt;span class="n">_context&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">Products&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">FindAsync&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">id&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">product&lt;/span> &lt;span class="p">!=&lt;/span> &lt;span class="kc">null&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">_context&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">Products&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">Remove&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">product&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">await&lt;/span> &lt;span class="n">_context&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">SaveChangesAsync&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Y registrar el servicio en &lt;code>Program.cs&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-csharp" data-lang="csharp">&lt;span class="line">&lt;span class="cl">&lt;span class="n">builder&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">Services&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">AddScoped&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="n">ProductService&lt;/span>&lt;span class="p">&amp;gt;();&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="crear-una-interfaz-para-gestionar-productos">Crear una interfaz para gestionar productos&lt;/h2>
+&lt;p>Agregar un nuevo componente Razor llamado &lt;code>Pages/Products.razor&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="err">@&lt;/span>&lt;span class="n">page&lt;/span> &lt;span class="s2">&amp;#34;/products&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">@&lt;/span>&lt;span class="n">inject&lt;/span> &lt;span class="n">ProductService&lt;/span> &lt;span class="n">ProductService&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">h3&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="n">Productos&lt;/span>&lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">h3&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">EditForm&lt;/span> &lt;span class="n">Model&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;@newProduct&amp;#34;&lt;/span> &lt;span class="n">OnValidSubmit&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;AddProduct&amp;#34;&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">DataAnnotationsValidator&lt;/span> &lt;span class="o">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">ValidationSummary&lt;/span> &lt;span class="o">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">InputText&lt;/span> &lt;span class="err">@&lt;/span>&lt;span class="n">bind&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">Value&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;newProduct.Name&amp;#34;&lt;/span> &lt;span class="n">placeholder&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;Nombre&amp;#34;&lt;/span> &lt;span class="o">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">InputNumber&lt;/span> &lt;span class="err">@&lt;/span>&lt;span class="n">bind&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">Value&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;newProduct.Price&amp;#34;&lt;/span> &lt;span class="n">placeholder&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;Precio&amp;#34;&lt;/span> &lt;span class="o">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">button&lt;/span> &lt;span class="k">class&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;btn btn-primary&amp;#34;&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="n">Agregar&lt;/span>&lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">button&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">EditForm&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">hr&lt;/span> &lt;span class="o">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">ul&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="err">@&lt;/span>&lt;span class="n">foreach&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="k">var&lt;/span> &lt;span class="n">product&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">products&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">li&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="err">@&lt;/span>&lt;span class="n">product&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Name&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="err">@&lt;/span>&lt;span class="n">product&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Price&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">button&lt;/span> &lt;span class="k">class&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;btn btn-sm btn-danger&amp;#34;&lt;/span> &lt;span class="err">@&lt;/span>&lt;span class="n">onclick&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;() =&amp;gt; DeleteProduct(product.Id)&amp;#34;&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="n">Eliminar&lt;/span>&lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">button&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">li&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">ul&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">@&lt;/span>&lt;span class="n">code&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">private&lt;/span> &lt;span class="n">List&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">Product&lt;/span>&lt;span class="o">&amp;gt;&lt;/span> &lt;span class="n">products&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">new&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">private&lt;/span> &lt;span class="n">Product&lt;/span> &lt;span class="n">newProduct&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">new&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">protected&lt;/span> &lt;span class="n">override&lt;/span> &lt;span class="n">async&lt;/span> &lt;span class="n">Task&lt;/span> &lt;span class="n">OnInitializedAsync&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">products&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">await&lt;/span> &lt;span class="n">ProductService&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">GetAllAsync&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">private&lt;/span> &lt;span class="n">async&lt;/span> &lt;span class="n">Task&lt;/span> &lt;span class="n">AddProduct&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">await&lt;/span> &lt;span class="n">ProductService&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">AddAsync&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">newProduct&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">newProduct&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">new&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">products&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">await&lt;/span> &lt;span class="n">ProductService&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">GetAllAsync&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">private&lt;/span> &lt;span class="n">async&lt;/span> &lt;span class="n">Task&lt;/span> &lt;span class="n">DeleteProduct&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="ne">int&lt;/span> &lt;span class="n">id&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">await&lt;/span> &lt;span class="n">ProductService&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">DeleteAsync&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">id&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">products&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">await&lt;/span> &lt;span class="n">ProductService&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">GetAllAsync&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Agregar esta ruta al menú en &lt;code>Shared/NavMenu.razor&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">&amp;lt;NavLink class=&amp;#34;nav-link&amp;#34; href=&amp;#34;products&amp;#34;&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;lt;span class=&amp;#34;oi oi-list-rich&amp;#34; aria-hidden=&amp;#34;true&amp;#34;&amp;gt;&amp;lt;/span&amp;gt; Productos
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;/NavLink&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="conclusión">Conclusión&lt;/h2>
+&lt;p>Integrar &lt;strong>Blazor&lt;/strong> con una base de datos SQL en &lt;strong>Azure&lt;/strong> es un proceso directo cuando se utiliza &lt;strong>Entity Framework Core&lt;/strong> como puente entre la aplicación y la capa de persistencia. Esta arquitectura permite desarrollar aplicaciones empresariales modernas, seguras y escalables que se ejecutan sobre infraestructura de nube gestionada. El modelo de desarrollo &lt;strong>Blazor Server&lt;/strong>, combinado con una base de datos en &lt;strong>Azure&lt;/strong>, permite reducir costos operativos, mejorar la experiencia de usuario en tiempo real y mantener una lógica de negocio robusta y centralizada en el servidor.&lt;/p>
+&lt;p>A partir de esta base, es posible escalar la solución incorporando autenticación con &lt;strong>Microsoft Entra ID&lt;/strong>, funciones más complejas como reportes dinámicos, paginación, integración con servicios externos y migración hacia una arquitectura Blazor WebAssembly si se desea delegar más carga al cliente. Además, se puede extender el modelo para trabajar con procedimientos almacenados o vistas, y aprovechar herramientas como Azure Key Vault para almacenar credenciales de forma segura.&lt;/p>
+&lt;p>Este enfoque garantiza una solución moderna alineada con los estándares de desarrollo en la nube de &lt;strong>Microsoft&lt;/strong>.**&lt;/p></description></item><item><title>Optimización de rendimiento en Blazor WebAssembly</title><link>https://cmas.dev/posts/2025-01-06-performance-optimization-blazor-webassembly/</link><pubDate>Mon, 06 Jan 2025 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2025-01-06-performance-optimization-blazor-webassembly/</guid><description>&lt;p>&lt;strong>Blazor WebAssembly&lt;/strong> es una tecnología poderosa que permite a los desarrolladores crear aplicaciones web interactivas utilizando &lt;strong>C#&lt;/strong> y &lt;strong>.NET&lt;/strong> en lugar de &lt;strong>JavaScript&lt;/strong>. Sin embargo, debido a las características inherentes de su arquitectura, la optimización del rendimiento puede ser un desafío crítico. En este artículo, exploraremos técnicas, estrategias y mejores prácticas para optimizar el rendimiento en aplicaciones &lt;strong>Blazor WebAssembly&lt;/strong>.&lt;/p>
 &lt;h2 id="1-introducción-a-blazor-webassembly">1. Introducción a Blazor WebAssembly&lt;/h2>
 &lt;p>&lt;strong>Blazor WebAssembly&lt;/strong> es un modelo de alojamiento de &lt;strong>Blazor&lt;/strong> que ejecuta aplicaciones directamente en el navegador utilizando &lt;strong>WebAssembly&lt;/strong>. Esto permite que las aplicaciones sean ejecutadas en un entorno completamente independiente del servidor, lo que habilita experiencias sin interrupciones.&lt;/p>
 &lt;h3 id="ventajas-de-blazor-webassembly">Ventajas de Blazor WebAssembly&lt;/h3>
