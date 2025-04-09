@@ -825,7 +825,136 @@
 &lt;li>No abusar de intervalos mínimos (respetar consumo energético)&lt;/li>
 &lt;/ul>
 &lt;h2 id="conclusión">Conclusión&lt;/h2>
-&lt;p>La implementación de &lt;strong>Background Tasks&lt;/strong> en apps modernas permite extender su funcionalidad más allá del primer plano, ejecutando lógica útil, context-aware y controlada por el sistema. Usando &lt;strong>Windows App SDK&lt;/strong>, es posible construir tareas eficientes, reactivas y persistentes que mejoran la autonomía y robustez de la aplicación.&lt;/p></description></item><item><title>Empaquetado de apps modernas con MSIX y configuración avanzada del manifiesto</title><link>https://cmas.dev/posts/2025-02-28-winui-packaging-msix/</link><pubDate>Fri, 28 Feb 2025 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2025-02-28-winui-packaging-msix/</guid><description>&lt;p>&lt;strong>MSIX&lt;/strong> es el formato de empaquetado moderno para aplicaciones &lt;strong>Windows&lt;/strong>. Ofrece instalación limpia, actualización controlada, aislamiento seguro, y registro transparente de recursos y capacidades. Para aplicaciones desarrolladas con &lt;strong>Windows App SDK&lt;/strong> y &lt;strong>WinUI 3&lt;/strong>, el uso de &lt;strong>MSIX&lt;/strong> no es opcional, es el estándar recomendado para integrarse completamente al ecosistema del sistema operativo moderno.&lt;/p>
+&lt;p>La implementación de &lt;strong>Background Tasks&lt;/strong> en apps modernas permite extender su funcionalidad más allá del primer plano, ejecutando lógica útil, context-aware y controlada por el sistema. Usando &lt;strong>Windows App SDK&lt;/strong>, es posible construir tareas eficientes, reactivas y persistentes que mejoran la autonomía y robustez de la aplicación.&lt;/p></description></item><item><title>Migración de aplicaciones legacy a Deno</title><link>https://cmas.dev/posts/2025-03-05-migrate-legacy-apps-deno2/</link><pubDate>Wed, 05 Mar 2025 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2025-03-05-migrate-legacy-apps-deno2/</guid><description>&lt;p>La evolución de &lt;strong>Deno&lt;/strong> hacia su versión 2 representa un paso firme hacia una experiencia de desarrollo más coherente, segura y moderna en el ecosistema &lt;strong>JavaScript&lt;/strong> y &lt;strong>TypeScript&lt;/strong>. Si bien Deno 1 ya ofrecía ventajas importantes frente a &lt;strong>Node.js&lt;/strong>, &lt;strong>Deno 2&lt;/strong> consolida su propuesta con cambios significativos en la gestión de módulos, configuración del entorno y compatibilidad con estándares web. Este artículo describe cómo migrar una aplicación legacy —ya sea desarrollada en Node.js o en Deno 1— hacia Deno 2, abordando los desafíos técnicos y proponiendo una estrategia ordenada de transición.&lt;/p>
+&lt;h2 id="requisitos-previos">Requisitos previos&lt;/h2>
+&lt;ul>
+&lt;li>Conocimientos sólidos en JavaScript o TypeScript.&lt;/li>
+&lt;li>Familiaridad con la estructura y permisos de Deno.&lt;/li>
+&lt;li>Deno 2 instalado en el entorno local (&lt;a href="https://deno.com/manual">https://deno.com/manual&lt;/a>).&lt;/li>
+&lt;/ul>
+&lt;h2 id="qué-cambia-en-deno-2">¿Qué cambia en Deno 2?&lt;/h2>
+&lt;p>Deno 2 introduce varias diferencias clave:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>Import Maps por defecto.&lt;/strong>&lt;/li>
+&lt;li>&lt;strong>&lt;code>deno.json&lt;/code> es el archivo de configuración estándar.&lt;/strong>&lt;/li>
+&lt;li>&lt;strong>Las tareas (&lt;code>deno task&lt;/code>) tienen sintaxis simplificada.&lt;/strong>&lt;/li>
+&lt;li>&lt;strong>Permisos más restrictivos.&lt;/strong>&lt;/li>
+&lt;li>&lt;strong>Mejor soporte para estándares web, como &lt;code>fetch&lt;/code>, &lt;code>ReadableStream&lt;/code>, &lt;code>WebSocket&lt;/code>, etc.&lt;/strong>&lt;/li>
+&lt;li>&lt;strong>Mayor compatibilidad con NPM mediante &lt;code>npm:&lt;/code> imports.&lt;/strong>&lt;/li>
+&lt;/ul>
+&lt;h2 id="evaluar-la-aplicación-legacy">Evaluar la aplicación legacy&lt;/h2>
+&lt;p>Antes de migrar, es fundamental analizar:&lt;/p>
+&lt;ul>
+&lt;li>¿Se utilizan módulos CommonJS (&lt;code>require&lt;/code>)?&lt;/li>
+&lt;li>¿Qué dependencias NPM existen y son imprescindibles?&lt;/li>
+&lt;li>¿Qué estructura de carpetas y entrada (&lt;code>index.js&lt;/code>/&lt;code>app.ts&lt;/code>) se maneja?&lt;/li>
+&lt;li>¿Se usan scripts definidos en &lt;code>package.json&lt;/code>?&lt;/li>
+&lt;/ul>
+&lt;h2 id="migrar-una-app-nodejs-a-deno-2">Migrar una app Node.js a Deno 2&lt;/h2>
+&lt;p>Supongamos una app Express básica en Node.js:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// index.js
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">const&lt;/span> &lt;span class="nx">express&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">require&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;express&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">const&lt;/span> &lt;span class="nx">app&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">express&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">app&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">get&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;/&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">req&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">res&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="nx">res&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">send&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;Hola desde Node.js&amp;#34;&lt;/span>&lt;span class="p">));&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">app&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">listen&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">3000&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="crear-el-proyecto-en-deno-2">Crear el proyecto en Deno 2&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">mkdir deno2-app
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">cd&lt;/span> deno2-app
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="estructura-del-archivo-principal">Estructura del archivo principal&lt;/h3>
+&lt;p>Crear &lt;code>main.ts&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-ts" data-lang="ts">&lt;span class="line">&lt;span class="cl">&lt;span class="kr">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">serve&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="kr">from&lt;/span> &lt;span class="s2">&amp;#34;https://deno.land/std/http/mod.ts&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">serve&lt;/span>&lt;span class="p">((&lt;/span>&lt;span class="nx">_req&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="k">new&lt;/span> &lt;span class="nx">Response&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;Hola desde Deno 2&amp;#34;&lt;/span>&lt;span class="p">),&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">port&lt;/span>: &lt;span class="kt">8000&lt;/span> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Ejecutar con:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">deno run --allow-net main.ts
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="configurar-denojson">Configurar &lt;code>deno.json&lt;/code>&lt;/h2>
+&lt;p>Deno 2 reconoce automáticamente el archivo &lt;code>deno.json&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-json" data-lang="json">&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;tasks&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;start&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;deno run --allow-net main.ts&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;test&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;deno test&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;importMap&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;import_map.json&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;lint&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;rules&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;tags&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="s2">&amp;#34;recommended&amp;#34;&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="usar-frameworks-modernos-como-oak">Usar frameworks modernos (como Oak)&lt;/h2>
+&lt;p>Crear &lt;code>import_map.json&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-json" data-lang="json">&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;imports&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;oak/&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;https://deno.land/x/oak@v12.6.0/&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>En &lt;code>server.ts&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-ts" data-lang="ts">&lt;span class="line">&lt;span class="cl">&lt;span class="kr">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">Application&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">Router&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="kr">from&lt;/span> &lt;span class="s2">&amp;#34;oak/mod.ts&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">const&lt;/span> &lt;span class="nx">router&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">new&lt;/span> &lt;span class="nx">Router&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">router&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="kr">get&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;/&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">ctx&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">ctx&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">response&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">body&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;Migrado a Deno 2&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">const&lt;/span> &lt;span class="nx">app&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">new&lt;/span> &lt;span class="nx">Application&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">app&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">use&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">router&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">routes&lt;/span>&lt;span class="p">());&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">app&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">use&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">router&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">allowedMethods&lt;/span>&lt;span class="p">());&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;Servidor en http://localhost:8000&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">await&lt;/span> &lt;span class="nx">app&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">listen&lt;/span>&lt;span class="p">({&lt;/span> &lt;span class="nx">port&lt;/span>: &lt;span class="kt">8000&lt;/span> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="uso-de-dependencias-npm">Uso de dependencias npm&lt;/h2>
+&lt;p>Deno 2 permite importar directamente paquetes desde NPM:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-ts" data-lang="ts">&lt;span class="line">&lt;span class="cl">&lt;span class="kr">import&lt;/span> &lt;span class="nx">ora&lt;/span> &lt;span class="kr">from&lt;/span> &lt;span class="s2">&amp;#34;npm:ora&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">const&lt;/span> &lt;span class="nx">spinner&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">ora&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;Cargando...&amp;#34;&lt;/span>&lt;span class="p">).&lt;/span>&lt;span class="nx">start&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">setTimeout&lt;/span>&lt;span class="p">(()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="nx">spinner&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">succeed&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;Listo!&amp;#34;&lt;/span>&lt;span class="p">),&lt;/span> &lt;span class="mi">2000&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
+&lt;p>No se necesita &lt;code>npm install&lt;/code>, ni &lt;code>node_modules&lt;/code>.&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="migrar-pruebas">Migrar pruebas&lt;/h2>
+&lt;p>Deno 2 mantiene su sistema nativo de pruebas:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-ts" data-lang="ts">&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// example_test.ts
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">assertEquals&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="kr">from&lt;/span> &lt;span class="s2">&amp;#34;https://deno.land/std/assert/mod.ts&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">Deno&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">test&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;suma&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">assertEquals&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">2&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">4&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Ejecutar con:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">deno task &lt;span class="nb">test&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="migrar-tareas-de-packagejson-a-denojson">Migrar tareas de &lt;code>package.json&lt;/code> a &lt;code>deno.json&lt;/code>&lt;/h2>
+&lt;p>De:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-json" data-lang="json">&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;scripts&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;start&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;node index.js&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;test&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;jest&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>A:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-json" data-lang="json">&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;tasks&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;start&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;deno run --allow-net main.ts&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;test&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;deno test&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="despliegue-con-deno-deploy">Despliegue con Deno Deploy&lt;/h2>
+&lt;ol>
+&lt;li>Subir el repositorio a GitHub.&lt;/li>
+&lt;li>Ir a &lt;a href="https://dash.deno.com">https://dash.deno.com&lt;/a>.&lt;/li>
+&lt;li>Crear un nuevo proyecto.&lt;/li>
+&lt;li>Seleccionar el archivo de entrada (&lt;code>main.ts&lt;/code> o &lt;code>server.ts&lt;/code>).&lt;/li>
+&lt;li>Deno Deploy configura automáticamente los permisos y entorno.&lt;/li>
+&lt;/ol>
+&lt;h2 id="consideraciones-al-migrar-desde-deno-1">Consideraciones al migrar desde Deno 1&lt;/h2>
+&lt;ul>
+&lt;li>Validar que las URLs de importación sigan funcionando con versiones recientes.&lt;/li>
+&lt;li>Revisar &lt;code>deno.jsonc&lt;/code> → ahora debe ser &lt;code>deno.json&lt;/code>.&lt;/li>
+&lt;li>Ajustar tareas (&lt;code>deno task&lt;/code>) y permisos explícitos.&lt;/li>
+&lt;li>Aprovechar el soporte nativo para &lt;code>npm:&lt;/code> cuando sea necesario.&lt;/li>
+&lt;/ul>
+&lt;h2 id="conclusión">Conclusión&lt;/h2>
+&lt;p>Deno 2 mejora sustancialmente la experiencia de desarrollo al ofrecer una configuración más limpia, soporte oficial para paquetes NPM, tareas simplificadas y una mayor adherencia a los estándares web. Migrar una aplicación legacy a Deno 2 no solo permite modernizar la base de código, sino también adoptar un stack más seguro, modular y mantenible.&lt;/p>
+&lt;p>Ya sea partiendo de Node.js o de una versión anterior de Deno, el proceso de migración es más directo de lo que parece y trae consigo beneficios reales en rendimiento, organización del proyecto y experiencia de desarrollo.&lt;/p></description></item><item><title>Empaquetado de apps modernas con MSIX y configuración avanzada del manifiesto</title><link>https://cmas.dev/posts/2025-02-28-winui-packaging-msix/</link><pubDate>Fri, 28 Feb 2025 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2025-02-28-winui-packaging-msix/</guid><description>&lt;p>&lt;strong>MSIX&lt;/strong> es el formato de empaquetado moderno para aplicaciones &lt;strong>Windows&lt;/strong>. Ofrece instalación limpia, actualización controlada, aislamiento seguro, y registro transparente de recursos y capacidades. Para aplicaciones desarrolladas con &lt;strong>Windows App SDK&lt;/strong> y &lt;strong>WinUI 3&lt;/strong>, el uso de &lt;strong>MSIX&lt;/strong> no es opcional, es el estándar recomendado para integrarse completamente al ecosistema del sistema operativo moderno.&lt;/p>
 &lt;p>Este artículo aborda cómo empaquetar una app moderna con &lt;strong>MSIX&lt;/strong> desde &lt;strong>Visual Studio&lt;/strong>, y cómo configurar el manifiesto del paquete (&lt;code>Package.appxmanifest&lt;/code>) para habilitar capacidades avanzadas como protocolos personalizados, extensiones del sistema, iconografía personalizada y más.&lt;/p>
 &lt;h2 id="requisitos">Requisitos&lt;/h2>
 &lt;ul>
