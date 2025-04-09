@@ -163,7 +163,1302 @@ net.ipv4.tcp_congestion_control=bbr&lt;/p>
 &lt;li>Ejecutar contenedores Docker directamente en Windows sin necesidad de una VM completa.&lt;/li>
 &lt;/ul>
 &lt;h2 id="conclusión">Conclusión&lt;/h2>
-&lt;p>&lt;strong>WSL 2&lt;/strong> representa un gran avance en la integración de &lt;strong>Linux&lt;/strong> y &lt;strong>Windows&lt;/strong>. Al utilizar un kernel Linux real y aprovechar la tecnología de virtualización de Hyper-V, ofrece un rendimiento y compatibilidad sin precedentes. Para desarrolladores que trabajan en entornos híbridos o que prefieren herramientas de Linux, WSL 2 es una solución imprescindible.&lt;/p></description></item><item><title>Benchmark de performance entre WSL2 y Hyper-V para cargas intensivas</title><link>https://cmas.dev/posts/2024-07-26-wsl2-performance-benchmark/</link><pubDate>Fri, 26 Jul 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-07-26-wsl2-performance-benchmark/</guid><description>&lt;p>&lt;strong>WSL2&lt;/strong> y &lt;strong>Hyper-V&lt;/strong> son tecnologías de virtualización de Microsoft que permiten ejecutar entornos Linux sobre Windows. Aunque WSL2 internamente utiliza Hyper-V, existen diferencias en cómo se gestionan los recursos, lo que puede impactar el rendimiento en tareas intensivas como compilación, procesamiento de datos o entrenamiento de modelos.&lt;/p>
+&lt;p>&lt;strong>WSL 2&lt;/strong> representa un gran avance en la integración de &lt;strong>Linux&lt;/strong> y &lt;strong>Windows&lt;/strong>. Al utilizar un kernel Linux real y aprovechar la tecnología de virtualización de Hyper-V, ofrece un rendimiento y compatibilidad sin precedentes. Para desarrolladores que trabajan en entornos híbridos o que prefieren herramientas de Linux, WSL 2 es una solución imprescindible.&lt;/p></description></item><item><title>WSL3, integración con Windows AI y más allá</title><link>https://cmas.dev/posts/2024-11-29-wsl3-futuro/</link><pubDate>Fri, 29 Nov 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-11-29-wsl3-futuro/</guid><description>&lt;p>Desde su introducción, WSL (Windows Subsystem for Linux) ha transformado el desarrollo de software en Windows al proporcionar un entorno Linux completo, sin máquinas virtuales pesadas ni particiones duales. Con WSL2 se dio un salto significativo en rendimiento y compatibilidad al integrar un kernel Linux real y soporte para GPU. Ahora, las miradas están puestas en &lt;strong>WSL3&lt;/strong>, la convergencia con herramientas de inteligencia artificial y la evolución de entornos locales y distribuidos.&lt;/p>
+&lt;p>Este artículo explora las posibles &lt;strong>tendencias futuras&lt;/strong> en el ecosistema WSL, su integración con tecnologías emergentes de Microsoft como Windows AI, DevHome, Azure Arc, y las proyecciones para flujos de trabajo híbridos en la próxima década.&lt;/p>
+&lt;h2 id="wsl3-qué-podemos-esperar">WSL3: ¿Qué podemos esperar?&lt;/h2>
+&lt;p>Aunque Microsoft no ha anunciado formalmente una versión WSL3, existen patrones y desarrollos que permiten anticipar:&lt;/p>
+&lt;h3 id="1-integración-total-con-dev-drive-y-devhome">1. Integración total con Dev Drive y DevHome&lt;/h3>
+&lt;p>WSL3 podría integrarse de forma nativa con las herramientas de productividad para desarrolladores anunciadas en Windows 11:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>Dev Drive&lt;/strong>: almacenamiento optimizado para código y entornos de desarrollo.&lt;/li>
+&lt;li>&lt;strong>DevHome&lt;/strong>: centro de configuración para flujos personalizados.&lt;/li>
+&lt;/ul>
+&lt;p>Esto implica acceso más rápido a archivos, menos latencia y mejor soporte para múltiples entornos paralelos.&lt;/p>
+&lt;h3 id="2-contenedores-integrados-por-defecto">2. Contenedores integrados por defecto&lt;/h3>
+&lt;p>WSL2 ya soporta contenedores con Docker. WSL3 podría incorporar:&lt;/p>
+&lt;ul>
+&lt;li>Soporte nativo para &lt;strong>BuildKit&lt;/strong>, OCI y Podman&lt;/li>
+&lt;li>API directa para &lt;strong>containerd&lt;/strong> sin Docker Desktop&lt;/li>
+&lt;li>Gestión unificada de entornos (devcontainers, containers, distros)&lt;/li>
+&lt;/ul>
+&lt;h3 id="3-systemd-completo--perfiles-extendidos">3. Systemd completo + perfiles extendidos&lt;/h3>
+&lt;p>La llegada de systemd en WSL2 fue un hito. WSL3 podría ofrecer:&lt;/p>
+&lt;ul>
+&lt;li>Perfiles de distro (web, data science, AI, CI/CD)&lt;/li>
+&lt;li>Autoinicio de servicios persistentes&lt;/li>
+&lt;li>Compatibilidad completa con &lt;code>journalctl&lt;/code>, &lt;code>timers&lt;/code>, &lt;code>firewalld&lt;/code>, etc.&lt;/li>
+&lt;/ul>
+&lt;h2 id="integración-con-windows-ai">Integración con Windows AI&lt;/h2>
+&lt;p>Windows 11 ya incorpora funciones de IA en el sistema operativo. Algunas líneas futuras podrían incluir:&lt;/p>
+&lt;h3 id="1-acceso-a-npu-desde-wsl">1. Acceso a NPU desde WSL&lt;/h3>
+&lt;ul>
+&lt;li>Soporte para unidades de procesamiento neuronal (NPUs) desde Linux&lt;/li>
+&lt;li>Frameworks como ONNX Runtime, TensorFlow Lite acelerados por hardware local&lt;/li>
+&lt;/ul>
+&lt;h3 id="2-inferencia-híbrida-localnube">2. Inferencia híbrida local/nube&lt;/h3>
+&lt;ul>
+&lt;li>Uso de Azure AI Services desde Bash/WSL&lt;/li>
+&lt;li>Aceleración local con fallback a Azure&lt;/li>
+&lt;li>SDKs de IA integrados por defecto en distros WSL oficiales&lt;/li>
+&lt;/ul>
+&lt;h3 id="3-ai-copilots-para-wsl">3. AI copilots para WSL&lt;/h3>
+&lt;ul>
+&lt;li>Ayudantes basados en modelos de lenguaje para comandos Bash, optimización de scripts y depuración en tiempo real&lt;/li>
+&lt;/ul>
+&lt;h2 id="hacia-una-arquitectura-unificada-beyond-wsl">Hacia una arquitectura unificada: Beyond WSL&lt;/h2>
+&lt;p>En lugar de mantener dos mundos separados, Microsoft podría apostar a:&lt;/p>
+&lt;h3 id="1-subsistema-linux-como-parte-de-windows-core">1. Subsistema Linux como parte de Windows Core&lt;/h3>
+&lt;ul>
+&lt;li>Instalación sin necesidad de terminal&lt;/li>
+&lt;li>WSL como &amp;ldquo;modo Linux&amp;rdquo; en Windows&lt;/li>
+&lt;li>Interoperabilidad total de procesos, archivos, sockets&lt;/li>
+&lt;/ul>
+&lt;h3 id="2-integración-con-azure-arc">2. Integración con Azure Arc&lt;/h3>
+&lt;ul>
+&lt;li>Exponer entornos WSL2 como recursos gestionados en Azure&lt;/li>
+&lt;li>Telemetría, políticas y seguridad centralizadas&lt;/li>
+&lt;li>Ejecutar WSL desde Edge o dispositivos ARM&lt;/li>
+&lt;/ul>
+&lt;h3 id="3-wsl-en-dispositivos-móviles-y-edge">3. WSL en dispositivos móviles y edge&lt;/h3>
+&lt;ul>
+&lt;li>Extensiones ligeras de WSL corriendo en Surface, HoloLens, IoT&lt;/li>
+&lt;li>Flujos DevOps offline-local basados en contenedores y WSL&lt;/li>
+&lt;/ul>
+&lt;h2 id="prepararse-para-el-futuro">Prepararse para el futuro&lt;/h2>
+&lt;h3 id="qué-puede-hacer-un-desarrollador-hoy">¿Qué puede hacer un desarrollador hoy?&lt;/h3>
+&lt;ul>
+&lt;li>Adoptar WSL2 como base de desarrollo principal&lt;/li>
+&lt;li>Usar Dev Containers para garantizar portabilidad&lt;/li>
+&lt;li>Automatizar entornos con GitHub Codespaces + WSL&lt;/li>
+&lt;li>Familiarizarse con CLI de Azure, Windows AI, Winget y DevHome&lt;/li>
+&lt;li>Seguir los proyectos open source de Microsoft relacionados: WSL, terminal, AI SDKs&lt;/li>
+&lt;/ul>
+&lt;h2 id="conclusión">Conclusión&lt;/h2>
+&lt;p>El ecosistema WSL evoluciona rápidamente, y su futura versión (WSL3 o equivalente) promete una experiencia aún más integrada, potente y preparada para la IA y el desarrollo distribuido. La convergencia entre Linux, Windows y la nube está cada vez más cerca, y WSL será sin duda una pieza clave en esa arquitectura del futuro.&lt;/p>
+&lt;p>Los desarrolladores que dominen hoy las herramientas y flujos modernos sobre WSL2 estarán listos para liderar los entornos del mañana.&lt;/p></description></item><item><title>How To: Ejecución de microservicios híbridos en WSL2 + Windows</title><link>https://cmas.dev/posts/2024-11-22-wsl2-hybrid-microservices/</link><pubDate>Fri, 22 Nov 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-11-22-wsl2-hybrid-microservices/</guid><description>&lt;p>Uno de los escenarios más potentes que habilita WSL2 es la capacidad de ejecutar arquitecturas &lt;strong>híbridas de microservicios&lt;/strong> donde algunos componentes corren sobre Linux (WSL2) y otros directamente sobre Windows. Esto permite integrar aplicaciones legadas, herramientas de escritorio, procesos en contenedores y servicios distribuidos desde una sola estación de trabajo, ideal para desarrollo, testing y validación de arquitecturas modernas.&lt;/p>
+&lt;p>Este artículo presenta un caso real donde se ejecutan múltiples microservicios en ambos entornos, aprovechando la interoperabilidad de red y archivos entre Windows y WSL2.&lt;/p>
+&lt;h2 id="objetivo">Objetivo&lt;/h2>
+&lt;ul>
+&lt;li>Ejecutar una arquitectura basada en microservicios con:
+&lt;ul>
+&lt;li>Backend y base de datos en WSL2 (Linux)&lt;/li>
+&lt;li>Servicio de autenticación en contenedor Docker (Linux)&lt;/li>
+&lt;li>Cliente de escritorio en Windows (Electron app simulada)&lt;/li>
+&lt;li>Comunicación entre servicios vía localhost&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="paso-1-preparar-backend-y-base-de-datos-en-wsl2">Paso 1: Preparar backend y base de datos en WSL2&lt;/h2>
+&lt;p>Desde WSL2:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">mkdir -p ~/proyectos/microservicios/backend
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">cd&lt;/span> ~/proyectos/microservicios/backend
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">npm init -y
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">npm install express pg dotenv
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Crear &lt;code>.env&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-env" data-lang="env">&lt;span class="line">&lt;span class="cl">&lt;span class="nv">PORT&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="m">5001&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">DB_USER&lt;/span>&lt;span class="o">=&lt;/span>dev
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">DB_PASSWORD&lt;/span>&lt;span class="o">=&lt;/span>clave123
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">DB_HOST&lt;/span>&lt;span class="o">=&lt;/span>localhost
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">DB_PORT&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="m">5432&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">DB_NAME&lt;/span>&lt;span class="o">=&lt;/span>ms_backend
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Configurar servicio básico en &lt;code>index.js&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="line">&lt;span class="cl">&lt;span class="kr">const&lt;/span> &lt;span class="nx">express&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">require&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;express&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">const&lt;/span> &lt;span class="nx">app&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">express&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">app&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">get&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;/api/data&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">req&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">res&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="nx">res&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">json&lt;/span>&lt;span class="p">({&lt;/span> &lt;span class="nx">message&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s2">&amp;#34;Hello from backend&amp;#34;&lt;/span> &lt;span class="p">}));&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">app&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">listen&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">process&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">env&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">PORT&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;Backend WSL2 listo&amp;#34;&lt;/span>&lt;span class="p">));&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Ejecutar:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">node index.js
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="paso-2-servicio-de-autenticación-en-docker">Paso 2: Servicio de autenticación en Docker&lt;/h2>
+&lt;p>Crear directorio &lt;code>auth-service/&lt;/code> con un simple servidor Node.js en Docker.&lt;/p>
+&lt;p>&lt;code>Dockerfile&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-Dockerfile" data-lang="Dockerfile">&lt;span class="line">&lt;span class="cl">&lt;span class="k">FROM&lt;/span>&lt;span class="s"> node:18&lt;/span>&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">WORKDIR&lt;/span>&lt;span class="s"> /app&lt;/span>&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">COPY&lt;/span> . .&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">RUN&lt;/span> npm install&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">CMD&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="s2">&amp;#34;node&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;auth.js&amp;#34;&lt;/span>&lt;span class="p">]&lt;/span>&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>auth.js&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="line">&lt;span class="cl">&lt;span class="kr">const&lt;/span> &lt;span class="nx">express&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">require&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;express&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">const&lt;/span> &lt;span class="nx">app&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">express&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">app&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">get&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;/auth&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">_&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">res&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="nx">res&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">json&lt;/span>&lt;span class="p">({&lt;/span> &lt;span class="nx">token&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s2">&amp;#34;abc123&amp;#34;&lt;/span> &lt;span class="p">}));&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">app&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">listen&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">4000&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;Servicio Auth en contenedor&amp;#34;&lt;/span>&lt;span class="p">));&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Construir y ejecutar:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">docker build -t auth-service .
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker run -d --name auth --network host auth-service
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="paso-3-cliente-de-escritorio-en-windows">Paso 3: Cliente de escritorio en Windows&lt;/h2>
+&lt;p>Desde Windows, crear una aplicación simulada con &lt;code>index.html&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-html" data-lang="html">&lt;span class="line">&lt;span class="cl">&lt;span class="cp">&amp;lt;!DOCTYPE html&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">html&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">body&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">h1&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>Microservicio Híbrido&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">h1&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">button&lt;/span> &lt;span class="na">onclick&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;getData()&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>Cargar datos&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">button&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">pre&lt;/span> &lt;span class="na">id&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;output&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&amp;lt;/&lt;/span>&lt;span class="nt">pre&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">script&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">async&lt;/span> &lt;span class="kd">function&lt;/span> &lt;span class="nx">getData&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">const&lt;/span> &lt;span class="nx">res1&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="kr">await&lt;/span> &lt;span class="nx">fetch&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;http://localhost:5001/api/data&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">const&lt;/span> &lt;span class="nx">json1&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="kr">await&lt;/span> &lt;span class="nx">res1&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">json&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">const&lt;/span> &lt;span class="nx">res2&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="kr">await&lt;/span> &lt;span class="nx">fetch&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;http://localhost:4000/auth&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">const&lt;/span> &lt;span class="nx">json2&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="kr">await&lt;/span> &lt;span class="nx">res2&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">json&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">document&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">getElementById&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;output&amp;#34;&lt;/span>&lt;span class="p">).&lt;/span>&lt;span class="nx">textContent&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">JSON&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">stringify&lt;/span>&lt;span class="p">({&lt;/span> &lt;span class="nx">json1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">json2&lt;/span> &lt;span class="p">},&lt;/span> &lt;span class="kc">null&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">script&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">body&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">html&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Abrir en navegador (&lt;code>file:///C:/ruta/a/index.html&lt;/code>).&lt;/p>
+&lt;h2 id="paso-4-comunicación-entre-entornos">Paso 4: Comunicación entre entornos&lt;/h2>
+&lt;p>Gracias al puente virtual de red que crea WSL2, los servicios escuchando en &lt;code>0.0.0.0&lt;/code> o &lt;code>localhost&lt;/code> dentro de WSL2 o Docker con &lt;code>--network host&lt;/code> son accesibles desde Windows.&lt;/p>
+&lt;p>Verificar:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-powershell" data-lang="powershell">&lt;span class="line">&lt;span class="cl">&lt;span class="nb">curl &lt;/span>&lt;span class="n">http&lt;/span>&lt;span class="err">:&lt;/span>&lt;span class="p">//&lt;/span>&lt;span class="n">localhost&lt;/span>&lt;span class="err">:&lt;/span>&lt;span class="mf">5001&lt;/span>&lt;span class="p">/&lt;/span>&lt;span class="n">api&lt;/span>&lt;span class="p">/&lt;/span>&lt;span class="n">data&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">curl &lt;/span>&lt;span class="n">http&lt;/span>&lt;span class="err">:&lt;/span>&lt;span class="p">//&lt;/span>&lt;span class="n">localhost&lt;/span>&lt;span class="err">:&lt;/span>&lt;span class="mf">4000&lt;/span>&lt;span class="p">/&lt;/span>&lt;span class="n">auth&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="paso-5-monitoreo-y-orquestación-opcional">Paso 5: Monitoreo y orquestación opcional&lt;/h2>
+&lt;p>Desde WSL2 o Windows:&lt;/p>
+&lt;ul>
+&lt;li>Monitorear contenedores con &lt;code>docker ps&lt;/code>, &lt;code>docker logs auth&lt;/code>&lt;/li>
+&lt;li>Usar &lt;code>Postman&lt;/code> o &lt;code>curl&lt;/code> para validar endpoints&lt;/li>
+&lt;li>Gestionar servicios con &lt;code>taskkill&lt;/code> (Windows) y &lt;code>kill&lt;/code> (Linux)&lt;/li>
+&lt;/ul>
+&lt;h2 id="buenas-prácticas">Buenas prácticas&lt;/h2>
+&lt;ul>
+&lt;li>Usar &lt;code>.env&lt;/code> y &lt;code>.env.example&lt;/code> para configurar servicios&lt;/li>
+&lt;li>Automatizar inicio de servicios con scripts Bash y PowerShell&lt;/li>
+&lt;li>Mantener contenedores ligeros y separados por función&lt;/li>
+&lt;li>Verificar puertos en uso para evitar conflictos (&lt;code>netstat -an&lt;/code>)&lt;/li>
+&lt;li>Versionar cada microservicio en su propio repositorio si es necesario&lt;/li>
+&lt;/ul>
+&lt;h2 id="conclusión">Conclusión&lt;/h2>
+&lt;p>Con WSL2 y la interoperabilidad de red de Windows, es posible ejecutar arquitecturas híbridas reales con múltiples microservicios distribuidos en Linux y Windows desde una misma máquina. Esto permite validar integración, rendimiento, y colaboración entre equipos sin depender de infraestructura externa o entornos cloud.&lt;/p></description></item><item><title>How To: Desarrollo fullstack con WSL2 y PostgreSQL</title><link>https://cmas.dev/posts/2024-11-07-wsl2-fullstack-dev/</link><pubDate>Thu, 07 Nov 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-11-07-wsl2-fullstack-dev/</guid><description>&lt;p>WSL2 permite desarrollar aplicaciones backend completas desde un entorno Linux real sobre Windows, facilitando el uso de tecnologías como &lt;strong>Node.js&lt;/strong>, &lt;strong>Express&lt;/strong>, &lt;strong>PostgreSQL&lt;/strong> y herramientas modernas de frontend como &lt;strong>React&lt;/strong> o &lt;strong>Vue&lt;/strong>. Este caso real describe paso a paso cómo montar un entorno fullstack funcional, productivo y reproducible usando WSL2, PostgreSQL y herramientas de desarrollo frontend y backend.&lt;/p>
+&lt;h2 id="objetivo">Objetivo&lt;/h2>
+&lt;p>Construir y ejecutar una API REST con Express y PostgreSQL desde WSL2, accesible desde Windows y conectada a un cliente frontend moderno (React). Todo funcionando de forma local, con persistencia y debugging habilitado.&lt;/p>
+&lt;h2 id="paso-1-preparar-entorno-base-en-wsl2">Paso 1: Preparar entorno base en WSL2&lt;/h2>
+&lt;h3 id="crear-proyecto-y-entorno-de-trabajo">Crear proyecto y entorno de trabajo&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">mkdir ~/proyectos/fullstack-wsl2
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">cd&lt;/span> ~/proyectos/fullstack-wsl2
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Instalar dependencias comunes:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">sudo apt update
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo apt install -y nodejs npm postgresql postgresql-contrib
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Verificar PostgreSQL:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">psql --version
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Verificar Node.js:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">node -v
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">npm -v
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="paso-2-configurar-base-de-datos-postgresql">Paso 2: Configurar base de datos PostgreSQL&lt;/h2>
+&lt;h3 id="crear-base-de-datos-y-usuario">Crear base de datos y usuario&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">sudo -u postgres psql
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Dentro de PostgreSQL:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-sql" data-lang="sql">&lt;span class="line">&lt;span class="cl">&lt;span class="k">CREATE&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">DATABASE&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">fullstack_dev&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="k">CREATE&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">USER&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">devuser&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">WITH&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">PASSWORD&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;clave123&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="k">GRANT&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">ALL&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">PRIVILEGES&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">ON&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">DATABASE&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">fullstack_dev&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">TO&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">devuser&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Salir con &lt;code>\q&lt;/code>.&lt;/p>
+&lt;h2 id="paso-3-crear-backend-con-nodejs-y-express">Paso 3: Crear backend con Node.js y Express&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">mkdir backend
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">cd&lt;/span> backend
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">npm init -y
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">npm install express pg dotenv
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Crear archivo &lt;code>.env&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-env" data-lang="env">&lt;span class="line">&lt;span class="cl">&lt;span class="nv">PORT&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="m">5000&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">DB_USER&lt;/span>&lt;span class="o">=&lt;/span>devuser
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">DB_PASSWORD&lt;/span>&lt;span class="o">=&lt;/span>clave123
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">DB_HOST&lt;/span>&lt;span class="o">=&lt;/span>localhost
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">DB_PORT&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="m">5432&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">DB_NAME&lt;/span>&lt;span class="o">=&lt;/span>fullstack_dev
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Crear &lt;code>index.js&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="line">&lt;span class="cl">&lt;span class="kr">const&lt;/span> &lt;span class="nx">express&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">require&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;express&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">const&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">Pool&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">require&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;pg&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">require&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;dotenv&amp;#39;&lt;/span>&lt;span class="p">).&lt;/span>&lt;span class="nx">config&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">const&lt;/span> &lt;span class="nx">app&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">express&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">const&lt;/span> &lt;span class="nx">port&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">process&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">env&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">PORT&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">const&lt;/span> &lt;span class="nx">pool&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">new&lt;/span> &lt;span class="nx">Pool&lt;/span>&lt;span class="p">({&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">user&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="nx">process&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">env&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">DB_USER&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">host&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="nx">process&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">env&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">DB_HOST&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">password&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="nx">process&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">env&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">DB_PASSWORD&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">database&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="nx">process&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">env&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">DB_NAME&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">port&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="nx">process&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">env&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">DB_PORT&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">app&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">use&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">express&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">json&lt;/span>&lt;span class="p">());&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">app&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">get&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;/api/usuarios&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="kr">async&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">req&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">res&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">const&lt;/span> &lt;span class="nx">result&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="kr">await&lt;/span> &lt;span class="nx">pool&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">query&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;SELECT NOW()&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">res&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">json&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">result&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">rows&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">app&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">listen&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">port&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="sb">`Servidor corriendo en http://localhost:&lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nx">port&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="sb">`&lt;/span>&lt;span class="p">));&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Ejecutar backend:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">node index.js
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Probar desde navegador o &lt;code>curl&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">curl http://localhost:5000/api/usuarios
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="paso-4-crear-cliente-frontend-react">Paso 4: Crear cliente frontend (React)&lt;/h2>
+&lt;p>Desde el directorio raíz:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">npx create-react-app frontend
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">cd&lt;/span> frontend
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Modificar &lt;code>package.json&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-json" data-lang="json">&lt;span class="line">&lt;span class="cl">&lt;span class="s2">&amp;#34;proxy&amp;#34;&lt;/span>&lt;span class="err">:&lt;/span> &lt;span class="s2">&amp;#34;http://localhost:5000&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Crear componente para consumir la API:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-jsx" data-lang="jsx">&lt;span class="line">&lt;span class="cl">&lt;span class="kr">import&lt;/span> &lt;span class="nx">React&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">useEffect&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">useState&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="nx">from&lt;/span> &lt;span class="s2">&amp;#34;react&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">function&lt;/span> &lt;span class="nx">App&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">const&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="nx">hora&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">setHora&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">useState&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">useEffect&lt;/span>&lt;span class="p">(()&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">fetch&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;/api/usuarios&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">.&lt;/span>&lt;span class="nx">then&lt;/span>&lt;span class="p">((&lt;/span>&lt;span class="nx">res&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="nx">res&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">json&lt;/span>&lt;span class="p">())&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">.&lt;/span>&lt;span class="nx">then&lt;/span>&lt;span class="p">((&lt;/span>&lt;span class="nx">data&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="nx">setHora&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">data&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">].&lt;/span>&lt;span class="nx">now&lt;/span>&lt;span class="p">));&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">},&lt;/span> &lt;span class="p">[]);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">div&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>&lt;span class="nx">Hora&lt;/span> &lt;span class="nx">desde&lt;/span> &lt;span class="nx">PostgreSQL&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">{&lt;/span>&lt;span class="nx">hora&lt;/span>&lt;span class="p">}&amp;lt;/&lt;/span>&lt;span class="nt">div&lt;/span>&lt;span class="p">&amp;gt;;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">export&lt;/span> &lt;span class="k">default&lt;/span> &lt;span class="nx">App&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Ejecutar:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">npm start
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Acceder desde navegador a &lt;code>http://localhost:3000&lt;/code> para ver la integración.&lt;/p>
+&lt;h2 id="paso-5-acceso-desde-windows">Paso 5: Acceso desde Windows&lt;/h2>
+&lt;p>Tanto el backend (puerto 5000) como el frontend (puerto 3000) son accesibles desde navegador en Windows gracias al reenvío automático de puertos WSL2.&lt;/p>
+&lt;p>Verificar:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-powershell" data-lang="powershell">&lt;span class="line">&lt;span class="cl">&lt;span class="nb">curl &lt;/span>&lt;span class="n">http&lt;/span>&lt;span class="err">:&lt;/span>&lt;span class="p">//&lt;/span>&lt;span class="n">localhost&lt;/span>&lt;span class="err">:&lt;/span>&lt;span class="mf">5000&lt;/span>&lt;span class="p">/&lt;/span>&lt;span class="n">api&lt;/span>&lt;span class="p">/&lt;/span>&lt;span class="n">usuarios&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">start &lt;/span>&lt;span class="n">http&lt;/span>&lt;span class="err">:&lt;/span>&lt;span class="p">//&lt;/span>&lt;span class="n">localhost&lt;/span>&lt;span class="err">:&lt;/span>&lt;span class="mf">3000&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="buenas-prácticas">Buenas prácticas&lt;/h2>
+&lt;ul>
+&lt;li>Separar entorno de desarrollo y producción con variables de entorno&lt;/li>
+&lt;li>Versionar código en Git desde WSL2 o integrado a GitHub&lt;/li>
+&lt;li>Usar &lt;code>nodemon&lt;/code> para hot-reload del backend&lt;/li>
+&lt;li>Crear scripts de inicio en &lt;code>package.json&lt;/code> para automatización&lt;/li>
+&lt;li>Agregar middleware de CORS si frontend se ejecuta desde origen distinto&lt;/li>
+&lt;/ul>
+&lt;h2 id="conclusión">Conclusión&lt;/h2>
+&lt;p>WSL2 permite desarrollar aplicaciones fullstack modernas combinando tecnologías de backend y frontend con base de datos PostgreSQL de manera fluida. Todo el entorno corre desde Linux real dentro de Windows, lo que permite depurar, escalar y trabajar colaborativamente sin comprometer el rendimiento ni la experiencia de desarrollo.&lt;/p></description></item><item><title>How To: Desarrollo fullstack con WSL2 y PostgreSQL</title><link>https://cmas.dev/posts/2024-11-15-wsl2-devsecops/</link><pubDate>Thu, 07 Nov 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-11-15-wsl2-devsecops/</guid><description>&lt;p>WSL2 se ha convertido en una herramienta clave para equipos DevSecOps que buscan una solución ligera, segura y flexible para automatizar la integración, entrega y operaciones de software. Su compatibilidad con herramientas de seguridad, contenedores, scripting y pipelines CI/CD, lo convierte en un puente ideal entre desarrollo y operaciones dentro del sistema operativo Windows.&lt;/p>
+&lt;p>Este artículo detalla un caso real de integración de WSL2 en un entorno DevSecOps, con ejemplos de workflows que incluyen validación de código, escaneo de vulnerabilidades, despliegue automatizado y hardening de entornos desde una terminal Linux sobre Windows.&lt;/p>
+&lt;h2 id="objetivo">Objetivo&lt;/h2>
+&lt;p>Demostrar cómo un entorno WSL2 puede ser parte activa y segura en un flujo DevSecOps moderno, usando herramientas como Docker, GitHub Actions, Trivy, Ansible y más.&lt;/p>
+&lt;h2 id="paso-1-preparar-entorno-de-trabajo-seguro-en-wsl2">Paso 1: Preparar entorno de trabajo seguro en WSL2&lt;/h2>
+&lt;p>Instalar herramientas básicas:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">sudo apt update &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> sudo apt install -y git curl build-essential python3-pip
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Instalar Docker dentro de WSL2 o usar Docker Desktop con integración activa:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">docker version
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Instalar herramientas DevSecOps:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">pip install ansible
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh &lt;span class="p">|&lt;/span> sh
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="paso-2-escaneo-de-vulnerabilidades-con-trivy">Paso 2: Escaneo de vulnerabilidades con Trivy&lt;/h2>
+&lt;p>Escanear imágenes antes del despliegue:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">docker pull node:18
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">trivy image node:18
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Escanear un proyecto local:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">trivy fs .
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Agregar esto a un script &lt;code>scan.sh&lt;/code> para automatizar:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="cp">#!/bin/bash
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">&lt;/span>&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;Escaneando vulnerabilidades...&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">trivy fs ./backend
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="paso-3-automatización-de-seguridad-con-ansible">Paso 3: Automatización de seguridad con Ansible&lt;/h2>
+&lt;p>Playbook de hardening básico:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-yaml" data-lang="yaml">&lt;span class="line">&lt;span class="cl">- &lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">Aplicar hardening de sistema&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">hosts&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">localhost&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">tasks&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>- &lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">Asegurar permisos de logs&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">file&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">path&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">/var/log&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">state&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">directory&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">mode&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;0750&amp;#39;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Ejecutar desde WSL2:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">ansible-playbook playbooks/hardening.yml -c &lt;span class="nb">local&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="paso-4-cicd-con-github-actions-desde-wsl2">Paso 4: CI/CD con GitHub Actions desde WSL2&lt;/h2>
+&lt;p>Simular el pipeline local con &lt;a href="https://github.com/nektos/act">&lt;code>act&lt;/code>&lt;/a>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">brew install act
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">act -j &lt;span class="nb">test&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Ejemplo de workflow:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-yaml" data-lang="yaml">&lt;span class="line">&lt;span class="cl">&lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">CI&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="nt">on&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">push&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="nt">jobs&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">test&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">runs-on&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">ubuntu-latest&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">steps&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>- &lt;span class="nt">uses&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">actions/checkout@v3&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>- &lt;span class="nt">run&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">npm install&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>- &lt;span class="nt">run&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">npm test&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Usar WSL2 para validar estos scripts antes de hacer push a producción.&lt;/p>
+&lt;h2 id="paso-5-integración-de-análisis-de-código-estático">Paso 5: Integración de análisis de código estático&lt;/h2>
+&lt;p>Instalar ESLint o Bandit (Python):&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">npm install -g eslint
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">pip install bandit
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Escanear:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">eslint ./frontend
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">bandit -r ./backend
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="paso-6-política-de-seguridad-de-contenedores">Paso 6: Política de seguridad de contenedores&lt;/h2>
+&lt;p>Definir un archivo &lt;code>Dockerfile&lt;/code> seguro:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-Dockerfile" data-lang="Dockerfile">&lt;span class="line">&lt;span class="cl">&lt;span class="k">FROM&lt;/span>&lt;span class="s"> node:18-alpine&lt;/span>&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">RUN&lt;/span> addgroup -S app &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> adduser -S app -G app&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">USER&lt;/span>&lt;span class="s"> app&lt;/span>&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">COPY&lt;/span> . .&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">CMD&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="s2">&amp;#34;node&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;index.js&amp;#34;&lt;/span>&lt;span class="p">]&lt;/span>&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Validar con Trivy o Docker Scout:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">trivy image myimage:latest
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="buenas-prácticas">Buenas prácticas&lt;/h2>
+&lt;ul>
+&lt;li>No usar root dentro de contenedores&lt;/li>
+&lt;li>Validar código con linters y analizadores de seguridad&lt;/li>
+&lt;li>Versionar todos los scripts y playbooks en Git&lt;/li>
+&lt;li>Usar variables de entorno cifradas para secrets&lt;/li>
+&lt;li>Monitorear imágenes con alertas de vulnerabilidad&lt;/li>
+&lt;/ul>
+&lt;h2 id="conclusión">Conclusión&lt;/h2>
+&lt;p>WSL2 permite simular y ejecutar flujos DevSecOps reales con herramientas de seguridad, automatización y despliegue en un entorno Linux completo dentro de Windows. Con acceso a Docker, Trivy, Ansible y GitHub Actions, es posible desarrollar y validar código seguro, auditable y productivo sin necesidad de servidores externos o máquinas virtuales.&lt;/p></description></item><item><title>Debugging remoto desde Windows a servicios en WSL2</title><link>https://cmas.dev/posts/2024-11-01-wsl2-remote-debugging/</link><pubDate>Fri, 01 Nov 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-11-01-wsl2-remote-debugging/</guid><description>&lt;p>Uno de los grandes beneficios de WSL2 es la integración fluida entre el sistema operativo Windows y el entorno Linux, lo que permite realizar debugging remoto de servicios que corren en WSL2 desde herramientas gráficas y editores del host. Esto es clave para flujos de desarrollo moderno, ya que permite aprovechar lo mejor de ambos mundos: servidores nativos de Linux y herramientas de análisis de Windows.&lt;/p>
+&lt;p>Este artículo describe paso a paso cómo depurar servicios web, APIs, scripts Python, aplicaciones Node.js y otros procesos que corren en WSL2, accediéndolos remotamente desde Windows, especialmente con VS Code y otros entornos integrados.&lt;/p>
+&lt;h2 id="requisitos">Requisitos&lt;/h2>
+&lt;ul>
+&lt;li>Windows 10/11 con WSL2&lt;/li>
+&lt;li>Visual Studio Code con extensiones:
+&lt;ul>
+&lt;li>Remote - WSL&lt;/li>
+&lt;li>Debuggers específicos (Python, Node.js, etc.)&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Servicios corriendo dentro de la distro WSL2&lt;/li>
+&lt;li>Conexión funcional entre host y entorno WSL (localhost)&lt;/li>
+&lt;/ul>
+&lt;h2 id="paso-1-abrir-el-entorno-con-remote-wsl">Paso 1: Abrir el entorno con Remote WSL&lt;/h2>
+&lt;ol>
+&lt;li>Iniciar WSL2 (&lt;code>wsl&lt;/code> en terminal).&lt;/li>
+&lt;li>Ejecutar &lt;code>code .&lt;/code> desde el directorio del proyecto.&lt;/li>
+&lt;li>VS Code se conectará directamente a la distro WSL2 y abrirá el proyecto allí.&lt;/li>
+&lt;/ol>
+&lt;p>Esto permite editar y ejecutar el código dentro de Linux, pero con acceso completo a las herramientas de VS Code.&lt;/p>
+&lt;h2 id="paso-2-configurar-un-archivo-launchjson">Paso 2: Configurar un archivo &lt;code>launch.json&lt;/code>&lt;/h2>
+&lt;p>Ejemplo para depurar un servidor Python:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-json" data-lang="json">&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;version&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;0.2.0&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;configurations&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;name&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;Python: Flask&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;type&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;python&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;request&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;launch&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;program&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;${workspaceFolder}/app.py&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;env&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;FLASK_APP&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;app.py&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;args&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="s2">&amp;#34;run&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;--no-debugger&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;--no-reload&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;--host=0.0.0.0&amp;#34;&lt;/span>&lt;span class="p">],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;jinja&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Ejemplo para Node.js:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-json" data-lang="json">&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;type&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;node&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;request&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;launch&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;name&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;Iniciar servidor Node&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;program&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;${workspaceFolder}/index.js&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;runtimeExecutable&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;node&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;skipFiles&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="s2">&amp;#34;&amp;lt;node_internals&amp;gt;/**&amp;#34;&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="paso-3-exponer-servicios-a-windows">Paso 3: Exponer servicios a Windows&lt;/h2>
+&lt;p>Si el servidor corre en &lt;code>0.0.0.0&lt;/code>, se puede acceder desde el navegador Windows vía &lt;code>http://localhost:&amp;lt;puerto&amp;gt;&lt;/code>.&lt;/p>
+&lt;p>Ejemplo:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">uvicorn app:app --host 0.0.0.0 --port &lt;span class="m">8000&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Verificar desde navegador: &lt;code>http://localhost:8000&lt;/code>&lt;/p>
+&lt;h2 id="paso-4-conexión-desde-otras-herramientas-externas">Paso 4: Conexión desde otras herramientas externas&lt;/h2>
+&lt;p>Desde Windows, se puede conectar a servicios que corren en WSL2 usando herramientas como:&lt;/p>
+&lt;ul>
+&lt;li>Postman&lt;/li>
+&lt;li>Insomnia&lt;/li>
+&lt;li>curl en PowerShell&lt;/li>
+&lt;li>Navegador con consola DevTools&lt;/li>
+&lt;/ul>
+&lt;p>Ejemplo:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-powershell" data-lang="powershell">&lt;span class="line">&lt;span class="cl">&lt;span class="nb">curl &lt;/span>&lt;span class="n">http&lt;/span>&lt;span class="err">:&lt;/span>&lt;span class="p">//&lt;/span>&lt;span class="n">localhost&lt;/span>&lt;span class="err">:&lt;/span>&lt;span class="mf">5000&lt;/span>&lt;span class="p">/&lt;/span>&lt;span class="n">api&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="paso-5-inspección-remota-avanzada-node-chrome-devtools">Paso 5: Inspección remota avanzada (Node, Chrome DevTools)&lt;/h2>
+&lt;p>Node.js puede ser depurado usando el puerto de inspección:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">node --inspect-brk&lt;span class="o">=&lt;/span>0.0.0.0:9229 index.js
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Desde Chrome:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">chrome://inspect
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Agregar target &lt;code>localhost:9229&lt;/code> y conectar al proceso remoto dentro de WSL2.&lt;/p>
+&lt;h2 id="paso-6-breakpoints-y-variables-en-vs-code">Paso 6: Breakpoints y variables en VS Code&lt;/h2>
+&lt;p>Con &lt;code>launch.json&lt;/code> correctamente configurado, es posible:&lt;/p>
+&lt;ul>
+&lt;li>Establecer breakpoints visuales&lt;/li>
+&lt;li>Ver variables locales y globales&lt;/li>
+&lt;li>Inspeccionar la pila&lt;/li>
+&lt;li>Evaluar expresiones interactivamente&lt;/li>
+&lt;/ul>
+&lt;p>Todo esto funciona igual que si se depurara localmente desde Windows.&lt;/p>
+&lt;h2 id="buenas-prácticas">Buenas prácticas&lt;/h2>
+&lt;ul>
+&lt;li>Asegurar que los servicios escuchen en &lt;code>0.0.0.0&lt;/code>, no solo &lt;code>127.0.0.1&lt;/code>&lt;/li>
+&lt;li>Evitar puertos restringidos (&amp;lt;1024) si no se ejecuta como root&lt;/li>
+&lt;li>Usar &lt;code>--reload&lt;/code> solo en desarrollo para Flask/FastAPI&lt;/li>
+&lt;li>Separar entornos de debug y producción en &lt;code>launch.json&lt;/code>&lt;/li>
+&lt;li>Si el puerto no responde, reiniciar WSL con &lt;code>wsl --shutdown&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;h2 id="conclusión">Conclusión&lt;/h2>
+&lt;p>Con WSL2 y herramientas modernas como VS Code, es posible depurar de forma remota y fluida servicios Linux desde Windows. Esta capacidad permite flujos de desarrollo productivos, portables y multiplataforma, manteniendo el rendimiento y la fidelidad del entorno Linux sin salir del sistema operativo principal.&lt;/p></description></item><item><title>Machine learning local distribuido con WSL2 + containers</title><link>https://cmas.dev/posts/2024-10-25-wsl2-machine-learning/</link><pubDate>Fri, 25 Oct 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-10-25-wsl2-machine-learning/</guid><description>&lt;p>Una de las grandes ventajas de WSL2 es su compatibilidad con contenedores Docker y acceso a la GPU, lo que lo convierte en un entorno ideal para correr flujos de &lt;strong>machine learning distribuido&lt;/strong> desde una única máquina con múltiples contenedores Linux. Esto permite simular ambientes de entrenamiento paralelos, microservicios de inferencia o arquitecturas de orquestación como Ray o Dask desde el entorno Windows, sin necesidad de un clúster real o acceso a la nube.&lt;/p>
+&lt;p>Este artículo describe cómo configurar y ejecutar cargas distribuidas de ML usando Docker, PyTorch, TensorFlow, y Ray sobre WSL2, aprovechando la integración con NVIDIA GPU y el rendimiento de Linux.&lt;/p>
+&lt;h2 id="requisitos">Requisitos&lt;/h2>
+&lt;ul>
+&lt;li>Windows 11 con WSL2&lt;/li>
+&lt;li>Docker Desktop con soporte WSL2 y GPU habilitado&lt;/li>
+&lt;li>NVIDIA GPU compatible + drivers + WSL CUDA Toolkit&lt;/li>
+&lt;li>Distro Ubuntu en WSL2&lt;/li>
+&lt;/ul>
+&lt;p>Verificar GPU:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">nvidia-smi
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Verificar Docker:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">docker --version
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker info
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="paso-1-crear-red-de-contenedores-para-ml-distribuido">Paso 1: Crear red de contenedores para ML distribuido&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">docker network create ml-network
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Esto permite que contenedores se comuniquen por nombre dentro de la red.&lt;/p>
+&lt;h2 id="paso-2-crear-imagen-base-de-entrenamiento-con-gpu">Paso 2: Crear imagen base de entrenamiento con GPU&lt;/h2>
+&lt;p>Archivo &lt;code>Dockerfile&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-Dockerfile" data-lang="Dockerfile">&lt;span class="line">&lt;span class="cl">&lt;span class="k">FROM&lt;/span>&lt;span class="s"> pytorch/pytorch:2.1.0-cuda11.8-cudnn8-runtime&lt;/span>&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">RUN&lt;/span> apt update &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> apt install -y git iputils-ping&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">RUN&lt;/span> pip install ray&lt;span class="o">[&lt;/span>default&lt;span class="o">]&lt;/span> dask scikit-learn pandas matplotlib&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">WORKDIR&lt;/span>&lt;span class="s"> /workspace&lt;/span>&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Construir imagen:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">docker build -t ml-node .
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="paso-3-ejecutar-contenedores-coordinados-ray">Paso 3: Ejecutar contenedores coordinados (Ray)&lt;/h2>
+&lt;p>Iniciar nodo principal:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">docker run -it --rm --gpus all --network ml-network --name ray-head ml-node ray start --head --port&lt;span class="o">=&lt;/span>&lt;span class="m">6379&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>En otra terminal, iniciar un nodo worker:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">docker run -it --rm --gpus all --network ml-network --name ray-worker ml-node ray start --address&lt;span class="o">=&lt;/span>ray-head:6379
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Validar desde un contenedor:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="kn">import&lt;/span> &lt;span class="nn">ray&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">ray&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">init&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">address&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s1">&amp;#39;auto&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">ray&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">cluster_resources&lt;/span>&lt;span class="p">())&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Esto habilita paralelismo local real, útil para prototipos, testing o benchmarking.&lt;/p>
+&lt;h2 id="paso-4-alternativa-con-dask">Paso 4: Alternativa con Dask&lt;/h2>
+&lt;p>Dask permite flujos similares con programación paralela y pandas-like API.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="kn">from&lt;/span> &lt;span class="nn">dask.distributed&lt;/span> &lt;span class="kn">import&lt;/span> &lt;span class="n">Client&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">client&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">Client&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;scheduler:8786&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="paso-5-entrenamiento-distribuido-con-pytorch-o-tensorflow">Paso 5: Entrenamiento distribuido con PyTorch o TensorFlow&lt;/h2>
+&lt;p>Utilizar &lt;code>torch.distributed&lt;/code> o &lt;code>tf.distribute&lt;/code> para paralelismo manual o con librerías de alto nivel.&lt;/p>
+&lt;p>Ejemplo básico con &lt;code>torch.multiprocessing&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="kn">import&lt;/span> &lt;span class="nn">torch.multiprocessing&lt;/span> &lt;span class="k">as&lt;/span> &lt;span class="nn">mp&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">def&lt;/span> &lt;span class="nf">train&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">rank&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="sa">f&lt;/span>&lt;span class="s2">&amp;#34;Proceso &lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="n">rank&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2"> entrenando&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">if&lt;/span> &lt;span class="vm">__name__&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="s2">&amp;#34;__main__&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">mp&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">spawn&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">train&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">nprocs&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="mi">2&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Correr en un contenedor con múltiples procesos o GPUs según configuración.&lt;/p>
+&lt;h2 id="casos-de-uso-prácticos">Casos de uso prácticos&lt;/h2>
+&lt;ul>
+&lt;li>Simulación de entrenamiento distribuido sin necesidad de Kubernetes&lt;/li>
+&lt;li>Inferencia paralela desde varios servicios contenedorizados&lt;/li>
+&lt;li>Microservicios de ML (FastAPI + modelo) en red local entre contenedores&lt;/li>
+&lt;li>Pruebas de carga con frameworks de orquestación y métricas&lt;/li>
+&lt;/ul>
+&lt;h2 id="buenas-prácticas">Buenas prácticas&lt;/h2>
+&lt;ul>
+&lt;li>Usar &lt;code>docker-compose&lt;/code> para definir múltiples nodos y servicios&lt;/li>
+&lt;li>Configurar volúmenes compartidos con datasets&lt;/li>
+&lt;li>Asegurar exposición de puertos entre servicios&lt;/li>
+&lt;li>Monitorizar con herramientas como Ray Dashboard (&lt;code>--dashboard-host 0.0.0.0&lt;/code>)&lt;/li>
+&lt;li>Usar contenedores separados por rol (data ingestion, training, inference)&lt;/li>
+&lt;/ul>
+&lt;h2 id="conclusión">Conclusión&lt;/h2>
+&lt;p>WSL2, combinado con Docker y acceso a GPU, permite ejecutar flujos avanzados de machine learning distribuido desde una sola máquina. Esta capacidad potencia a desarrolladores, científicos de datos y equipos de investigación para testear y escalar soluciones ML de forma local, rápida y segura antes de llevarlas a producción.&lt;/p></description></item><item><title>Análisis de logs y observabilidad con herramientas Linux</title><link>https://cmas.dev/posts/2024-10-18-wsl2-logs-analysis/</link><pubDate>Fri, 18 Oct 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-10-18-wsl2-logs-analysis/</guid><description>&lt;p>Una ventaja clave de usar WSL2 es tener acceso completo al ecosistema de herramientas de Linux, incluyendo aquellas utilizadas para análisis de logs, monitoreo y observabilidad. Esto permite replicar entornos de producción o staging de forma local, validar configuraciones, depurar servicios y construir flujos completos de análisis desde la línea de comandos.&lt;/p>
+&lt;p>Este artículo explora cómo aprovechar herramientas como &lt;code>journalctl&lt;/code>, &lt;code>logrotate&lt;/code>, &lt;code>grep&lt;/code>, &lt;code>htop&lt;/code>, &lt;code>iftop&lt;/code>, &lt;code>bmon&lt;/code>, &lt;code>dstat&lt;/code>, &lt;code>atop&lt;/code>, &lt;code>goaccess&lt;/code> y más, directamente desde una terminal en WSL2 para tener visibilidad del sistema, servicios y tráfico de red.&lt;/p>
+&lt;h2 id="requisitos">Requisitos&lt;/h2>
+&lt;ul>
+&lt;li>WSL2 con distribución Ubuntu 20.04 o 22.04&lt;/li>
+&lt;li>Acceso &lt;code>sudo&lt;/code> para instalar herramientas&lt;/li>
+&lt;li>Servicios activos (nginx, PostgreSQL, Python web server, etc.)&lt;/li>
+&lt;/ul>
+&lt;h2 id="análisis-de-logs-clásicos-con-grep-awk-less">Análisis de logs clásicos con &lt;code>grep&lt;/code>, &lt;code>awk&lt;/code>, &lt;code>less&lt;/code>&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="nb">cd&lt;/span> /var/log
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo less syslog
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo tail -f nginx/access.log
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo grep &lt;span class="s2">&amp;#34;error&amp;#34;&lt;/span> nginx/error.log
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Buscar patrones o errores:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">grep -i &lt;span class="s2">&amp;#34;fail&amp;#34;&lt;/span> auth.log
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">awk &lt;span class="s1">&amp;#39;{print $1, $2, $3, $5}&amp;#39;&lt;/span> nginx/access.log &lt;span class="p">|&lt;/span> sort &lt;span class="p">|&lt;/span> uniq -c &lt;span class="p">|&lt;/span> sort -nr
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="observabilidad-del-sistema">Observabilidad del sistema&lt;/h2>
+&lt;h3 id="procesos-en-tiempo-real">Procesos en tiempo real&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">htop
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Filtrar por nombre, CPU o RAM. Permite ordenar e identificar cuellos de botella.&lt;/p>
+&lt;h3 id="uso-de-red-por-proceso">Uso de red por proceso&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">sudo iftop
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo bmon
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Monitorean el tráfico entrante y saliente en &lt;code>eth0&lt;/code> (interfaz de WSL).&lt;/p>
+&lt;h2 id="uso-de-dstat-y-atop-para-análisis-extendido">Uso de &lt;code>dstat&lt;/code> y &lt;code>atop&lt;/code> para análisis extendido&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">sudo apt install -y dstat atop
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Visualizar métricas combinadas:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">dstat -cdnm
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Para monitoreo prolongado:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">sudo atop
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="manejo-y-rotación-de-logs">Manejo y rotación de logs&lt;/h2>
+&lt;p>Instalar &lt;code>logrotate&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">sudo apt install -y logrotate
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Configurar rotación para logs personalizados:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">sudo nano /etc/logrotate.d/custom
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Ejemplo:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">/home/usuario/proyecto/logs/*.log {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> weekly
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> rotate 4
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> compress
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> missingok
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> notifempty
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> create 640 usuario usuario
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Ejecutar rotación manual:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">sudo logrotate -f /etc/logrotate.d/custom
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="visualización-de-logs-web-con-goaccess">Visualización de logs web con GoAccess&lt;/h2>
+&lt;p>Instalar:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">sudo apt install -y goaccess
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Analizar logs de nginx:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">sudo goaccess /var/log/nginx/access.log -o report.html --log-format&lt;span class="o">=&lt;/span>COMBINED
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Abrir &lt;code>report.html&lt;/code> en navegador para ver estadísticas de tráfico, IPs, status codes y más.&lt;/p>
+&lt;h2 id="automatizar-análisis-con-scripts">Automatizar análisis con scripts&lt;/h2>
+&lt;p>Ejemplo de script &lt;code>log-insights.sh&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="cp">#!/bin/bash
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">&lt;/span>&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;Errores recientes:&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">tail -n &lt;span class="m">50&lt;/span> /var/log/nginx/error.log &lt;span class="p">|&lt;/span> grep -i &lt;span class="s2">&amp;#34;error&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;IPs más frecuentes:&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">awk &lt;span class="s1">&amp;#39;{print $1}&amp;#39;&lt;/span> /var/log/nginx/access.log &lt;span class="p">|&lt;/span> sort &lt;span class="p">|&lt;/span> uniq -c &lt;span class="p">|&lt;/span> sort -nr &lt;span class="p">|&lt;/span> head -10
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Dar permisos:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">chmod +x log-insights.sh
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Ejecutar periódicamente o como parte de debugging.&lt;/p>
+&lt;h2 id="buenas-prácticas">Buenas prácticas&lt;/h2>
+&lt;ul>
+&lt;li>Evitar usar &lt;code>journalctl&lt;/code> (no disponible sin systemd en WSL2)&lt;/li>
+&lt;li>Usar &lt;code>nohup&lt;/code> o &lt;code>tee&lt;/code> para guardar logs de procesos manuales&lt;/li>
+&lt;li>Monitorear tráfico entre servicios con &lt;code>netstat&lt;/code>, &lt;code>ss&lt;/code> o &lt;code>lsof&lt;/code>&lt;/li>
+&lt;li>Limitar permisos de lectura en logs sensibles (&lt;code>chmod 640&lt;/code>)&lt;/li>
+&lt;li>Automatizar análisis postmortem con scripts por proyecto&lt;/li>
+&lt;/ul>
+&lt;h2 id="conclusión">Conclusión&lt;/h2>
+&lt;p>Con WSL2 es posible construir flujos completos de observabilidad y análisis de logs utilizando herramientas estándar de Linux. Esto permite a los equipos depurar localmente, simular entornos productivos, y aplicar técnicas profesionales de monitoreo sin salir de Windows. Un entorno ideal para desarrollo, QA, seguridad y debugging distribuido.&lt;/p></description></item><item><title>Integración con VS Code Dev Tunnels y Tailscale</title><link>https://cmas.dev/posts/2024-10-11-wsl2-vs-code-integration/</link><pubDate>Fri, 11 Oct 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-10-11-wsl2-vs-code-integration/</guid><description>&lt;p>WSL2 es una plataforma ideal para desarrollo distribuido y remoto gracias a su entorno Linux real y la capacidad de integrarse con herramientas modernas como &lt;strong>VS Code Dev Tunnels&lt;/strong> y &lt;strong>Tailscale&lt;/strong>. Estas soluciones permiten exponer servicios en desarrollo de forma segura a través de túneles públicos o redes privadas virtuales, sin abrir puertos en el router o usar VPNs corporativas complejas.&lt;/p>
+&lt;p>Este artículo explica cómo configurar y usar ambas herramientas desde WSL2 para exponer APIs, servidores locales, entornos de testing o aplicaciones completas a otros miembros del equipo o entornos externos.&lt;/p>
+&lt;h2 id="qué-son-vs-code-dev-tunnels-y-tailscale">¿Qué son VS Code Dev Tunnels y Tailscale?&lt;/h2>
+&lt;ul>
+&lt;li>&lt;strong>Dev Tunnels&lt;/strong>: una funcionalidad integrada en Visual Studio Code que permite exponer un puerto local a internet de forma segura, ideal para compartir un servidor local en segundos.&lt;/li>
+&lt;li>&lt;strong>Tailscale&lt;/strong>: una VPN mesh que conecta dispositivos mediante WireGuard en una red privada segura, ideal para exponer servicios a otros dispositivos del equipo sin necesidad de configuración de red avanzada.&lt;/li>
+&lt;/ul>
+&lt;h2 id="paso-1-requisitos-previos">Paso 1: Requisitos previos&lt;/h2>
+&lt;ul>
+&lt;li>Windows 11 con WSL2 activo&lt;/li>
+&lt;li>VS Code y la extensión &lt;strong>Remote - WSL&lt;/strong>&lt;/li>
+&lt;li>Cuenta de GitHub o Microsoft para autenticación en Dev Tunnels&lt;/li>
+&lt;li>Cuenta de Tailscale gratuita (&lt;a href="https://tailscale.com">https://tailscale.com&lt;/a>)&lt;/li>
+&lt;li>Distro Ubuntu actualizada&lt;/li>
+&lt;/ul>
+&lt;h2 id="paso-2-usar-dev-tunnels-en-vs-code-con-wsl2">Paso 2: Usar Dev Tunnels en VS Code con WSL2&lt;/h2>
+&lt;ol>
+&lt;li>Abrir el proyecto en VS Code usando &lt;code>Remote - WSL&lt;/code>.&lt;/li>
+&lt;li>Iniciar un servidor local en WSL2, por ejemplo:&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">python3 -m http.server &lt;span class="m">8000&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="3">
+&lt;li>Desde la paleta de comandos (&lt;code>Ctrl+Shift+P&lt;/code>), ejecutar:&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">Dev Tunnels: Create Tunnel...
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="4">
+&lt;li>Elegir el puerto (ej. 8000) y tipo de acceso (authenticated/public).&lt;/li>
+&lt;li>Copiar la URL generada (ej. &lt;code>https://&amp;lt;hash&amp;gt;.dev.tunnels.api.visualstudio.com&lt;/code>) y compartirla.&lt;/li>
+&lt;/ol>
+&lt;p>El túnel redirige tráfico HTTPS desde internet hacia tu entorno WSL2 local sin configuraciones de firewall ni puertos.&lt;/p>
+&lt;h2 id="paso-3-instalar-tailscale-en-wsl2">Paso 3: Instalar Tailscale en WSL2&lt;/h2>
+&lt;p>En la terminal de Ubuntu en WSL2:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">curl -fsSL https://tailscale.com/install.sh &lt;span class="p">|&lt;/span> sh
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo tailscale up
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Esto abrirá una URL de autenticación en el navegador. Una vez aceptado, tu máquina WSL2 estará conectada a la red privada de Tailscale.&lt;/p>
+&lt;p>Ver dispositivos conectados:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">tailscale status
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="paso-4-exponer-un-servicio-local-vía-tailscale">Paso 4: Exponer un servicio local vía Tailscale&lt;/h2>
+&lt;p>Ejecutar un servidor dentro de WSL2:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">uvicorn main:app --host 0.0.0.0 --port &lt;span class="m">5000&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Compartir la dirección &lt;code>http://&amp;lt;tailscale-ip&amp;gt;:5000&lt;/code> con otro miembro del equipo en la misma red Tailscale.&lt;/p>
+&lt;p>Opcionalmente, habilitar el proxy MagicDNS de Tailscale para usar nombres como &lt;code>ubuntu-wsl2.tailnet-name.ts.net&lt;/code>.&lt;/p>
+&lt;h2 id="paso-5-casos-de-uso-combinados">Paso 5: Casos de uso combinados&lt;/h2>
+&lt;ul>
+&lt;li>Exponer una API en desarrollo a un tester sin acceso al repositorio&lt;/li>
+&lt;li>Probar una interfaz frontend desde una app móvil real vía Tailscale&lt;/li>
+&lt;li>Compartir un notebook Jupyter ejecutado desde WSL2 con Dev Tunnels&lt;/li>
+&lt;li>Simular múltiples entornos conectados entre sí (ej. base de datos + backend)&lt;/li>
+&lt;/ul>
+&lt;h2 id="seguridad">Seguridad&lt;/h2>
+&lt;ul>
+&lt;li>Dev Tunnels usa TLS y autenticación con tu cuenta GitHub o Microsoft&lt;/li>
+&lt;li>Tailscale cifra todo el tráfico entre dispositivos con WireGuard&lt;/li>
+&lt;li>Recomendado usar entornos virtuales o contenedores con puertos limitados&lt;/li>
+&lt;li>Evitar exposición de &lt;code>/mnt/c&lt;/code> y no ejecutar como root innecesariamente&lt;/li>
+&lt;/ul>
+&lt;h2 id="conclusión">Conclusión&lt;/h2>
+&lt;p>WSL2, combinado con VS Code Dev Tunnels y Tailscale, proporciona un entorno flexible y seguro para desarrollo distribuido. Permite exponer servicios en segundos, colaborar con otros sin complejidad de red y trabajar desde Windows con las ventajas de un entorno Linux real. Esta integración es clave para flujos modernos, equipos remotos y testing distribuido.&lt;/p></description></item><item><title>Automatización de entornos WSL2 para onboarding de equipos</title><link>https://cmas.dev/posts/2024-10-04-wsl2-automation-environment/</link><pubDate>Fri, 04 Oct 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-10-04-wsl2-automation-environment/</guid><description>&lt;p>El onboarding de nuevos miembros en un equipo técnico suele implicar configurar entornos complejos con múltiples herramientas, dependencias, claves, servicios y flujos específicos. WSL2 permite automatizar completamente esta experiencia, facilitando que cualquier integrante configure un entorno de desarrollo productivo en minutos, con mínima intervención y total reproducibilidad.&lt;/p>
+&lt;p>Este artículo presenta estrategias y herramientas para automatizar la preparación de entornos WSL2, integrando scripting, dotfiles, Dev Containers, provisioning declarativo y prácticas de mantenimiento colaborativo.&lt;/p>
+&lt;h2 id="objetivo">Objetivo&lt;/h2>
+&lt;ul>
+&lt;li>Establecer un entorno base reproducible en WSL2&lt;/li>
+&lt;li>Reducir errores manuales durante onboarding&lt;/li>
+&lt;li>Versionar configuraciones y automatizaciones&lt;/li>
+&lt;li>Proveer una experiencia coherente entre dispositivos&lt;/li>
+&lt;/ul>
+&lt;h2 id="paso-1-script-de-instalación-wsl2--distro-personalizada">Paso 1: Script de instalación WSL2 + Distro personalizada&lt;/h2>
+&lt;p>En una máquina limpia, desde PowerShell (Administrador):&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-powershell" data-lang="powershell">&lt;span class="line">&lt;span class="cl">&lt;span class="n">wsl&lt;/span> &lt;span class="p">-&lt;/span>&lt;span class="n">-install&lt;/span> &lt;span class="n">-d&lt;/span> &lt;span class="n">Ubuntu&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Configurar distro:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">sudo apt update &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> sudo apt upgrade -y
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Instalar herramientas comunes:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">sudo apt install -y git curl build-essential zsh python3-pip
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Guardar este paso como &lt;code>setup.sh&lt;/code> en el repositorio del equipo.&lt;/p>
+&lt;h2 id="paso-2-clonación-y-aplicación-de-dotfiles">Paso 2: Clonación y aplicación de dotfiles&lt;/h2>
+&lt;p>Mantener configuraciones como &lt;code>.bashrc&lt;/code>, &lt;code>.zshrc&lt;/code>, &lt;code>.gitconfig&lt;/code>, alias y funciones personalizadas en un repositorio compartido:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">git clone https://github.com/empresa/dotfiles ~/.dotfiles
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">cp ~/.dotfiles/.zshrc ~/.zshrc
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">cp ~/.dotfiles/.gitconfig ~/.gitconfig
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Usar herramientas como:&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="https://www.chezmoi.io/">&lt;code>chezmoi&lt;/code>&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://github.com/anishathalye/dotbot">&lt;code>dotbot&lt;/code>&lt;/a>&lt;/li>
+&lt;li>&lt;code>make install&lt;/code> con targets definidos&lt;/li>
+&lt;/ul>
+&lt;h2 id="paso-3-provisioning-automatizado-del-stack-de-herramientas">Paso 3: Provisioning automatizado del stack de herramientas&lt;/h2>
+&lt;p>Ejemplo con &lt;code>Makefile&lt;/code> por proyecto:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-makefile" data-lang="makefile">&lt;span class="line">&lt;span class="cl">&lt;span class="nf">install&lt;/span>&lt;span class="o">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> bash scripts/install-python-tools.sh
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> bash scripts/install-node.sh
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> bash scripts/setup-venv.sh
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>También se pueden usar &lt;code>ansible-playbook&lt;/code> o &lt;code>bash setup.sh&lt;/code> con detección de sistema, instalación de dependencias y personalización por usuario.&lt;/p>
+&lt;h2 id="paso-4-dev-containers-para-entornos-por-proyecto">Paso 4: Dev Containers para entornos por proyecto&lt;/h2>
+&lt;p>Usar &lt;code>.devcontainer&lt;/code> para configurar el stack por repositorio:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-json" data-lang="json">&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;name&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;backend-node-postgres&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;image&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;mcr.microsoft.com/devcontainers/javascript-node:18&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;postCreateCommand&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;npm install &amp;amp;&amp;amp; npm run setup-db&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;customizations&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;vscode&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;extensions&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="s2">&amp;#34;dbaeumer.vscode-eslint&amp;#34;&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Esto garantiza que todos los miembros usen las mismas versiones y herramientas al abrir el proyecto en VS Code con WSL2.&lt;/p>
+&lt;h2 id="paso-5-automatizar-con-scripts-de-bootstrap">Paso 5: Automatizar con scripts de bootstrap&lt;/h2>
+&lt;p>Estructura común para bootstrap completo:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">onboarding/
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">├── install.sh
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">├── setup.sh
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">├── dotfiles/
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">├── devcontainer/
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">├── Makefile
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Ejemplo de &lt;code>install.sh&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="cp">#!/bin/bash
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">&lt;/span>&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;Configurando entorno WSL2...&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">bash ./setup.sh
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">git clone https://github.com/org/dotfiles ~/.dotfiles
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">cd&lt;/span> ~/.dotfiles &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> ./install.sh
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">code .
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="buenas-prácticas">Buenas prácticas&lt;/h2>
+&lt;ul>
+&lt;li>Usar scripts idempotentes (que se pueden correr múltiples veces)&lt;/li>
+&lt;li>Documentar variables de entorno necesarias en &lt;code>.env.example&lt;/code>&lt;/li>
+&lt;li>Versionar herramientas y librerías clave en &lt;code>requirements.txt&lt;/code>, &lt;code>package.json&lt;/code>, etc.&lt;/li>
+&lt;li>Probar en entornos limpios y documentar prerequisitos (ej. Docker Desktop, VS Code)&lt;/li>
+&lt;li>Incluir pruebas de validación (&lt;code>make check-env&lt;/code>)&lt;/li>
+&lt;/ul>
+&lt;h2 id="conclusión">Conclusión&lt;/h2>
+&lt;p>Automatizar la configuración de entornos WSL2 mejora el onboarding técnico, elimina fricciones y promueve la colaboración entre desarrolladores. Con un diseño reproducible y bien documentado, cada integrante del equipo puede empezar a trabajar con el stack completo en minutos, desde cualquier máquina con Windows, sin perder tiempo en configuraciones manuales.&lt;/p></description></item><item><title>WSL2 + Azure CLI: gestión de recursos cloud desde terminal Linux</title><link>https://cmas.dev/posts/2024-09-27-wsl2-azure-cli/</link><pubDate>Fri, 27 Sep 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-09-27-wsl2-azure-cli/</guid><description>&lt;p>&lt;strong>WSL2&lt;/strong> permite ejecutar un entorno &lt;strong>Linux&lt;/strong> real dentro de &lt;strong>Windows&lt;/strong>, lo que habilita el uso de herramientas nativas para gestión en la nube como &lt;strong>Azure CLI&lt;/strong>. Con esta combinación, los desarrolladores y administradores pueden trabajar cómodamente desde la terminal Linux para administrar recursos en &lt;strong>Azure&lt;/strong>, automatizar tareas, monitorear infraestructura y ejecutar scripts multiplataforma sin salir del entorno local.&lt;/p>
+&lt;p>Este artículo explica paso a paso cómo instalar &lt;strong>Azure CLI&lt;/strong> en &lt;strong>WSL2&lt;/strong>, cómo autenticarse y gestionar recursos como máquinas virtuales, redes, contenedores y más.&lt;/p>
+&lt;h2 id="requisitos">Requisitos&lt;/h2>
+&lt;ul>
+&lt;li>WSL2 activo con una distribución Ubuntu (recomendado)&lt;/li>
+&lt;li>Cuenta activa de Azure con acceso de administrador&lt;/li>
+&lt;li>Git y curl instalados&lt;/li>
+&lt;li>Acceso a un navegador para autenticación&lt;/li>
+&lt;/ul>
+&lt;h2 id="paso-1-instalar-azure-cli-en-wsl2">Paso 1: Instalar Azure CLI en WSL2&lt;/h2>
+&lt;p>Desde una terminal WSL2 (Ubuntu):&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">curl -sL https://aka.ms/InstallAzureCLIDeb &lt;span class="p">|&lt;/span> sudo bash
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Verificar instalación:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">az version
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Debe mostrar la versión instalada y sus componentes.&lt;/p>
+&lt;h2 id="paso-2-iniciar-sesión-en-azure">Paso 2: Iniciar sesión en Azure&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">az login
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Esto abrirá una URL en el navegador predeterminado de Windows. Se puede copiar y abrir manualmente si es necesario.&lt;/p>
+&lt;p>Una vez autenticado, se mostrará la suscripción activa:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">az account show
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="paso-3-comandos-básicos-para-gestión-de-recursos">Paso 3: Comandos básicos para gestión de recursos&lt;/h2>
+&lt;h3 id="listar-grupos-de-recursos">Listar grupos de recursos&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">az group list --output table
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="crear-un-grupo-de-recursos">Crear un grupo de recursos&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">az group create --name demo-wsl --location eastus
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="crear-una-máquina-virtual">Crear una máquina virtual&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">az vm create --resource-group demo-wsl --name vmLinuxDemo --image UbuntuLTS --admin-username dev --generate-ssh-keys
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="abrir-puerto-ssh">Abrir puerto SSH&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">az vm open-port --resource-group demo-wsl --name vmLinuxDemo --port &lt;span class="m">22&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="conectarse-por-ssh">Conectarse por SSH&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">ssh dev@&amp;lt;IP_PÚBLICA&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Obtener IP pública:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">az vm list-ip-addresses -g demo-wsl -n vmLinuxDemo --query &lt;span class="s2">&amp;#34;[].virtualMachine.network.publicIpAddresses[].ipAddress&amp;#34;&lt;/span> -o tsv
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="paso-4-gestión-de-almacenamiento-y-contenedores">Paso 4: Gestión de almacenamiento y contenedores&lt;/h2>
+&lt;h3 id="crear-una-cuenta-de-almacenamiento">Crear una cuenta de almacenamiento&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">az storage account create --name almacendemowsl --resource-group demo-wsl --location eastus --sku Standard_LRS
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="crear-un-contenedor-en-azure-blob-storage">Crear un contenedor en Azure Blob Storage&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">az storage container create --name archivos --account-name almacendemowsl --auth-mode login
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="subir-un-archivo">Subir un archivo&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">az storage blob upload --account-name almacendemowsl --container-name archivos --name demo.txt --file ./demo.txt --auth-mode login
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="paso-5-automatización-con-scripts-bash">Paso 5: Automatización con scripts Bash&lt;/h2>
+&lt;p>Crear un script &lt;code>provisionar-vm.sh&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="cp">#!/bin/bash
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">&lt;/span>&lt;span class="nv">GRUPO&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;dev-wsl&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">NOMBRE&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;vm-wsl2&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">az group create --name &lt;span class="nv">$GRUPO&lt;/span> --location eastus
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">az vm create --resource-group &lt;span class="nv">$GRUPO&lt;/span> --name &lt;span class="nv">$NOMBRE&lt;/span> --image UbuntuLTS --admin-username dev --generate-ssh-keys
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Dar permisos y ejecutar:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">chmod +x provisionar-vm.sh
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">./provisionar-vm.sh
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="buenas-prácticas">Buenas prácticas&lt;/h2>
+&lt;ul>
+&lt;li>Usar &lt;code>--output table&lt;/code> o &lt;code>--output yaml&lt;/code> para resultados legibles&lt;/li>
+&lt;li>Almacenar scripts en Git y versionarlos por proyecto&lt;/li>
+&lt;li>Usar &lt;code>az config set extension.use_dynamic_install=yes_without_prompt&lt;/code> para extensiones&lt;/li>
+&lt;li>No compartir archivos &lt;code>.azure/&lt;/code> con otras máquinas sin cifrado&lt;/li>
+&lt;li>Combinar con &lt;code>jq&lt;/code> para procesamiento de resultados en JSON&lt;/li>
+&lt;/ul>
+&lt;h2 id="conclusión">Conclusión&lt;/h2>
+&lt;p>Usar &lt;strong>Azure CLI&lt;/strong> desde &lt;strong>WSL2&lt;/strong> permite trabajar de forma profesional y segura con recursos cloud desde un entorno &lt;strong>Linux&lt;/strong>, combinando lo mejor de la nube con la productividad del terminal. Esto habilita flujos de automatización, integración CI/CD, administración remota y scripting robusto directamente desde &lt;strong>Windows&lt;/strong>.&lt;/p></description></item><item><title>Configuración de servicios persistentes en background en WSL2</title><link>https://cmas.dev/posts/2024-09-20-wsl2-background-services/</link><pubDate>Fri, 20 Sep 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-09-20-wsl2-background-services/</guid><description>&lt;p>Aunque &lt;strong>WSL2&lt;/strong> no ofrece un sistema de init tradicional como &lt;code>systemd&lt;/code> por defecto, es totalmente posible configurar y ejecutar servicios persistentes como &lt;strong>nginx&lt;/strong> o &lt;strong>PostgreSQL&lt;/strong> desde &lt;strong>WSL2&lt;/strong>. Esto permite simular entornos de producción, realizar pruebas completas o levantar microservicios sin contenedores ni VMs adicionales.&lt;/p>
+&lt;p>Este artículo explica cómo instalar, configurar, automatizar y mantener servicios en segundo plano en WSL2 con enfoque práctico y seguro.&lt;/p>
+&lt;h2 id="requisitos">Requisitos&lt;/h2>
+&lt;ul>
+&lt;li>Windows 10/11 con WSL2 habilitado&lt;/li>
+&lt;li>Distro Ubuntu 22.04 (u otra basada en Debian)&lt;/li>
+&lt;li>Acceso a &lt;code>sudo&lt;/code>&lt;/li>
+&lt;li>Persistencia del sistema de archivos dentro de &lt;code>~&lt;/code> (no usar &lt;code>/mnt/c/&lt;/code>)&lt;/li>
+&lt;/ul>
+&lt;h2 id="paso-1-instalar-nginx-y-postgresql">Paso 1: Instalar nginx y PostgreSQL&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">sudo apt update
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo apt install -y nginx postgresql
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Verificar que los servicios estén disponibles:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">nginx -v
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">psql --version
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="paso-2-iniciar-servicios-manualmente">Paso 2: Iniciar servicios manualmente&lt;/h2>
+&lt;p>Como no hay &lt;code>systemd&lt;/code>, se inician desde la terminal:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">sudo service nginx start
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo service postgresql start
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Verificar estado:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">ps -ef &lt;span class="p">|&lt;/span> grep nginx
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">ps -ef &lt;span class="p">|&lt;/span> grep postgres
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Ver puertos activos:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">ss -tuln
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="paso-3-hacer-que-los-servicios-se-inicien-automáticamente">Paso 3: Hacer que los servicios se inicien automáticamente&lt;/h2>
+&lt;h3 id="opción-1-script-de-inicio-en-bashrc">Opción 1: Script de inicio en &lt;code>.bashrc&lt;/code>&lt;/h3>
+&lt;p>Agregar al final de &lt;code>~/.bashrc&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># Iniciar servicios al abrir WSL&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">if&lt;/span> ! pgrep nginx &amp;gt; /dev/null&lt;span class="p">;&lt;/span> &lt;span class="k">then&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> sudo service nginx start
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">fi&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">if&lt;/span> ! pgrep postgres &amp;gt; /dev/null&lt;span class="p">;&lt;/span> &lt;span class="k">then&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> sudo service postgresql start
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">fi&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>⚠️ Esto pedirá contraseña a menos que se configure &lt;code>sudo&lt;/code> sin contraseña para estos comandos.&lt;/p>
+&lt;h3 id="opción-2-crear-alias-o-comandos-rápidos">Opción 2: Crear alias o comandos rápidos&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="nb">alias&lt;/span> start-services&lt;span class="o">=&lt;/span>&lt;span class="s1">&amp;#39;sudo service nginx start &amp;amp;&amp;amp; sudo service postgresql start&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Guardar en &lt;code>.bash_aliases&lt;/code> o directamente en &lt;code>.bashrc&lt;/code>.&lt;/p>
+&lt;h2 id="paso-4-configuración-básica-de-nginx">Paso 4: Configuración básica de nginx&lt;/h2>
+&lt;p>Editar archivo principal:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">sudo nano /etc/nginx/sites-available/default
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Configurar un servidor local:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-nginx" data-lang="nginx">&lt;span class="line">&lt;span class="cl">&lt;span class="k">server&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kn">listen&lt;/span> &lt;span class="mi">80&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kn">server_name&lt;/span> &lt;span class="s">localhost&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kn">location&lt;/span> &lt;span class="s">/&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kn">root&lt;/span> &lt;span class="s">/var/www/html&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kn">index&lt;/span> &lt;span class="s">index.html&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Reiniciar para aplicar cambios:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">sudo service nginx restart
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Probar en navegador: &lt;code>http://localhost&lt;/code>&lt;/p>
+&lt;h2 id="paso-5-configurar-postgresql">Paso 5: Configurar PostgreSQL&lt;/h2>
+&lt;p>Cambiar contraseña del usuario por defecto:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">sudo -u postgres psql
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="se">\p&lt;/span>assword postgres
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Crear base de datos y usuario:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-sql" data-lang="sql">&lt;span class="line">&lt;span class="cl">&lt;span class="k">CREATE&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">DATABASE&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">testdb&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="k">CREATE&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">USER&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">dev&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">WITH&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">ENCRYPTED&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">PASSWORD&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;clave123&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="k">GRANT&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">ALL&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">PRIVILEGES&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">ON&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">DATABASE&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">testdb&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">TO&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">dev&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Conectarse:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">psql -U dev -d testdb -h localhost
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="paso-6-acceso-desde-el-host-windows">Paso 6: Acceso desde el host (Windows)&lt;/h2>
+&lt;p>Por defecto, los servicios expuestos en &lt;code>127.0.0.1&lt;/code> dentro de WSL2 son accesibles desde Windows como &lt;code>localhost&lt;/code>.&lt;/p>
+&lt;p>Probar:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-powershell" data-lang="powershell">&lt;span class="line">&lt;span class="cl">&lt;span class="nb">curl &lt;/span>&lt;span class="n">http&lt;/span>&lt;span class="err">:&lt;/span>&lt;span class="p">//&lt;/span>&lt;span class="n">localhost&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">psql&lt;/span> &lt;span class="n">-h&lt;/span> &lt;span class="n">localhost&lt;/span> &lt;span class="n">-U&lt;/span> &lt;span class="n">dev&lt;/span> &lt;span class="n">-d&lt;/span> &lt;span class="n">testdb&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="buenas-prácticas">Buenas prácticas&lt;/h2>
+&lt;ul>
+&lt;li>Ejecutar servicios en &lt;code>~/&lt;/code> o &lt;code>/etc&lt;/code> dentro del FS Linux, nunca desde &lt;code>/mnt/c/&lt;/code>&lt;/li>
+&lt;li>Automatizar con scripts &lt;code>start-services.sh&lt;/code>&lt;/li>
+&lt;li>Usar &lt;code>pgAdmin&lt;/code>, &lt;code>DBeaver&lt;/code> o VS Code para conexión visual a PostgreSQL&lt;/li>
+&lt;li>Para múltiples distros, considerar nginx reverse proxy o Docker&lt;/li>
+&lt;li>Evitar usar &lt;code>nohup&lt;/code> o &lt;code>&amp;amp;&lt;/code> sin monitoreo de procesos (usar &lt;code>tmux&lt;/code> si es necesario)&lt;/li>
+&lt;/ul>
+&lt;h2 id="conclusión">Conclusión&lt;/h2>
+&lt;p>Con unos pocos ajustes, es completamente posible ejecutar servicios persistentes como nginx y PostgreSQL en WSL2 sin contenedores. Esta configuración es ideal para desarrolladores que necesitan replicar entornos de servidor localmente con flexibilidad, rendimiento y compatibilidad total con Linux desde Windows.&lt;/p></description></item><item><title>Sincronización de entornos WSL2 en múltiples dispositivos</title><link>https://cmas.dev/posts/2024-09-13-wsl2-sync-environments/</link><pubDate>Fri, 13 Sep 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-09-13-wsl2-sync-environments/</guid><description>&lt;p>Uno de los desafíos más comunes en equipos distribuidos o desarrolladores con múltiples dispositivos es mantener entornos consistentes entre máquinas. Gracias a las capacidades de exportación de distribuciones, el uso de &lt;strong>Dev Containers&lt;/strong>, gestión de configuraciones declarativas y herramientas de backup, &lt;strong>WSL2&lt;/strong> puede sincronizarse entre diferentes sistemas Windows de forma confiable y productiva.&lt;/p>
+&lt;p>Este artículo explora las mejores estrategias para mantener la coherencia de entornos WSL2 en múltiples PCs o notebooks, incluyendo ejemplos prácticos.&lt;/p>
+&lt;h2 id="estrategia-1-exportar-y-restaurar-distribuciones-wsl2">Estrategia 1: Exportar y restaurar distribuciones WSL2&lt;/h2>
+&lt;p>WSL2 permite exportar una distribución completa a un archivo &lt;code>.tar&lt;/code> que puede transferirse y reinstalarse en otra máquina.&lt;/p>
+&lt;h3 id="exportar-distro-actual">Exportar distro actual&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">wsl --export Ubuntu ubuntu-backup.tar
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="importar-en-otra-máquina">Importar en otra máquina&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">wsl --import UbuntuRestaurado D:&lt;span class="se">\W&lt;/span>SL&lt;span class="se">\U&lt;/span>buntu ubuntu-backup.tar --version &lt;span class="m">2&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Esto restaura una copia exacta del entorno, incluyendo paquetes, usuarios y configuraciones personalizadas.&lt;/p>
+&lt;h2 id="estrategia-2-usar-dotfiles-y-scripts-de-inicialización">Estrategia 2: Usar dotfiles y scripts de inicialización&lt;/h2>
+&lt;p>Versionar archivos de configuración personal (&lt;code>.bashrc&lt;/code>, &lt;code>.gitconfig&lt;/code>, &lt;code>.profile&lt;/code>, etc.) en un repositorio &lt;code>dotfiles&lt;/code>.&lt;/p>
+&lt;h3 id="clonar-y-aplicar-dotfiles">Clonar y aplicar dotfiles&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">git clone https://github.com/tuusuario/dotfiles ~/.dotfiles
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">cp ~/.dotfiles/.bashrc ~/.bashrc
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">source&lt;/span> ~/.bashrc
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>También se pueden automatizar con herramientas como:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>chezmoi&lt;/code>&lt;/li>
+&lt;li>&lt;code>dotbot&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;h2 id="estrategia-3-reproducir-entornos-con-dev-containers-o-nix">Estrategia 3: Reproducir entornos con Dev Containers o Nix&lt;/h2>
+&lt;p>Usar archivos &lt;code>devcontainer.json&lt;/code> para definir entornos que pueden ser abiertos en VS Code o Codespaces:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">.devcontainer/
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">├── devcontainer.json
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">├── Dockerfile
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>También se puede usar &lt;code>shell.nix&lt;/code> o &lt;code>Dockerfile&lt;/code> si se trabaja con entornos reproducibles.&lt;/p>
+&lt;h2 id="estrategia-4-sincronización-de-paquetes-con-scripts">Estrategia 4: Sincronización de paquetes con scripts&lt;/h2>
+&lt;p>Guardar listas de paquetes instalados:&lt;/p>
+&lt;h3 id="debianubuntu">Debian/Ubuntu:&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">dpkg --get-selections &amp;gt; packages.list
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>En la otra máquina:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">sudo dpkg --set-selections &amp;lt; packages.list
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo apt-get dselect-upgrade
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="python">Python:&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">pip freeze &amp;gt; requirements.txt
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">pip install -r requirements.txt
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="estrategia-5-usar-github-codespaces-como-entorno-espejo">Estrategia 5: Usar GitHub Codespaces como entorno espejo&lt;/h2>
+&lt;p>Subir estructura del proyecto con &lt;code>.devcontainer&lt;/code> a un repositorio permite ejecutarlo directamente en la nube con GitHub Codespaces, asegurando un entorno 100% idéntico.&lt;/p>
+&lt;p>Acceder desde cualquier máquina con solo iniciar sesión en GitHub.&lt;/p>
+&lt;h2 id="recomendaciones-de-sincronización-segura">Recomendaciones de sincronización segura&lt;/h2>
+&lt;ul>
+&lt;li>Almacenar &lt;code>.tar&lt;/code> exportados en nube cifrada o con contraseña&lt;/li>
+&lt;li>Evitar sincronizar &lt;code>/mnt/c/&lt;/code> o rutas externas entre máquinas&lt;/li>
+&lt;li>No exportar claves privadas ni &lt;code>.ssh&lt;/code> en entornos compartidos&lt;/li>
+&lt;li>Automatizar con scripts &lt;code>setup.sh&lt;/code> y &lt;code>make bootstrap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;h2 id="conclusión">Conclusión&lt;/h2>
+&lt;p>Mantener entornos WSL2 sincronizados entre varios dispositivos es completamente factible con herramientas estándar del ecosistema Linux y Windows. Ya sea a través de exportaciones manuales, entornos declarativos o integración con GitHub Codespaces, se puede lograr coherencia, productividad y portabilidad en cualquier máquina.&lt;/p></description></item><item><title>Entrenamiento de modelos de ML en WSL2 con CUDA y cuDNN</title><link>https://cmas.dev/posts/2024-09-06-wsl2-ssh-agents/</link><pubDate>Fri, 06 Sep 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-09-06-wsl2-ssh-agents/</guid><description>&lt;p>En entornos de desarrollo modernos, la autenticación segura es fundamental. Ya sea para acceder a servidores remotos, clonar repositorios privados o firmar commits y correos electrónicos, herramientas como &lt;strong>SSH&lt;/strong> y &lt;strong>GPG&lt;/strong> son imprescindibles. &lt;strong>WSL2&lt;/strong> permite integrarlas con el entorno &lt;strong>Windows&lt;/strong>, pero también operar de forma autónoma con control completo sobre claves y agentes.&lt;/p>
+&lt;p>Este artículo explica cómo gestionar agentes &lt;strong>SSH&lt;/strong> y &lt;strong>GPG&lt;/strong> en &lt;strong>WSL2&lt;/strong> de forma segura, cómo compartir claves entre &lt;strong>Windows&lt;/strong> y &lt;strong>Linux&lt;/strong>, y cómo evitar fugas o mal uso de identidades criptográficas.&lt;/p>
+&lt;h2 id="objetivo">Objetivo&lt;/h2>
+&lt;ul>
+&lt;li>Configurar agentes SSH y GPG funcionales en WSL2&lt;/li>
+&lt;li>Compartir claves o usar claves propias dentro del entorno Linux&lt;/li>
+&lt;li>Asegurar el uso exclusivo desde WSL2 o compartirlo con Windows&lt;/li>
+&lt;li>Firmar commits, acceder a GitHub, y cifrar archivos de forma segura&lt;/li>
+&lt;/ul>
+&lt;h2 id="ssh-desde-wsl2">SSH desde WSL2&lt;/h2>
+&lt;h3 id="opción-1-claves-generadas-en-wsl2-recomendado-para-aislamiento">Opción 1: Claves generadas en WSL2 (recomendado para aislamiento)&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">ssh-keygen -t ed25519 -C &lt;span class="s2">&amp;#34;dev@ejemplo.com&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Por defecto se guardan en &lt;code>~/.ssh/id_ed25519&lt;/code>.&lt;/p>
+&lt;p>Agregar clave al agente:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="nb">eval&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="k">$(&lt;/span>ssh-agent -s&lt;span class="k">)&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">ssh-add ~/.ssh/id_ed25519
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Copiar clave pública a GitHub:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">cat ~/.ssh/id_ed25519.pub
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="opción-2-compartir-agente-ssh-de-windows">Opción 2: Compartir agente SSH de Windows&lt;/h3>
+&lt;p>Para esto, se necesita habilitar OpenSSH Agent en Windows y compartir el socket. Requiere herramientas adicionales como &lt;code>npiperelay&lt;/code> y &lt;code>socat&lt;/code>.&lt;/p>
+&lt;h2 id="agente-ssh-persistente-en-wsl2">Agente SSH persistente en WSL2&lt;/h2>
+&lt;p>Agregar esto al &lt;code>.bashrc&lt;/code> o &lt;code>.zshrc&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="nb">export&lt;/span> &lt;span class="nv">SSH_AUTH_SOCK&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$HOME&lt;/span>&lt;span class="s2">/.ssh/ssh-agent.sock&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">if&lt;/span> ! pgrep -u &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$USER&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> ssh-agent &amp;gt; /dev/null&lt;span class="p">;&lt;/span> &lt;span class="k">then&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">eval&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="k">$(&lt;/span>ssh-agent -a &lt;span class="nv">$SSH_AUTH_SOCK&lt;/span>&lt;span class="k">)&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> &amp;gt; /dev/null
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">fi&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Esto evita tener que ejecutar &lt;code>ssh-agent&lt;/code> cada vez.&lt;/p>
+&lt;h2 id="gpg-en-wsl2">GPG en WSL2&lt;/h2>
+&lt;h3 id="generar-clave-nueva">Generar clave nueva&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">gpg --full-generate-key
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Usar tipo RSA, al menos 4096 bits, con email asociado a GitHub.&lt;/p>
+&lt;h3 id="ver-claves-disponibles">Ver claves disponibles&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">gpg --list-secret-keys --keyid-format LONG
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="firmar-commits-de-git">Firmar commits de Git&lt;/h3>
+&lt;p>Configurar firma:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">git config --global user.signingkey ABCD123456789DEF
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">git config --global commit.gpgsign &lt;span class="nb">true&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="habilitar-gpg-agent-persistente">Habilitar GPG-agent persistente&lt;/h3>
+&lt;p>Agregar a &lt;code>~/.gnupg/gpg-agent.conf&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">enable-ssh-support
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">default-cache-ttl 600
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">max-cache-ttl 7200
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Reiniciar agente:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">gpgconf --kill gpg-agent
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">gpgconf --launch gpg-agent
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="uso-conjunto-ssh--gpg-para-github">Uso conjunto: SSH + GPG para GitHub&lt;/h2>
+&lt;ul>
+&lt;li>Claves SSH para acceso remoto a repositorios&lt;/li>
+&lt;li>Claves GPG para firma de commits y verificación de autoría&lt;/li>
+&lt;li>Configuraciones almacenadas por separado para mayor seguridad&lt;/li>
+&lt;/ul>
+&lt;h2 id="buenas-prácticas">Buenas prácticas&lt;/h2>
+&lt;ul>
+&lt;li>Usar passphrase en las claves privadas&lt;/li>
+&lt;li>Mantener &lt;code>.ssh&lt;/code> y &lt;code>.gnupg&lt;/code> con permisos &lt;code>700&lt;/code>&lt;/li>
+&lt;li>No compartir sockets SSH/GPG con Windows si no es necesario&lt;/li>
+&lt;li>Automatizar carga de claves en &lt;code>.bashrc&lt;/code> o &lt;code>direnv&lt;/code>&lt;/li>
+&lt;li>Backups seguros con cifrado de claves privadas&lt;/li>
+&lt;/ul>
+&lt;h2 id="conclusión">Conclusión&lt;/h2>
+&lt;p>Con &lt;strong>WSL2&lt;/strong> se puede configurar un entorno &lt;strong>Linux&lt;/strong> completamente funcional y seguro para autenticación con &lt;strong>SSH&lt;/strong> y &lt;strong>GPG&lt;/strong>, manteniendo control total sobre las claves sin comprometer la seguridad del sistema &lt;strong>Windows&lt;/strong>. Esta integración permite flujos de trabajo modernos y seguros para desarrollo, automatización y colaboración con sistemas remotos y plataformas como &lt;strong>GitHub&lt;/strong>.&lt;/p></description></item><item><title>Entrenamiento de modelos de ML en WSL2 con CUDA y cuDNN</title><link>https://cmas.dev/posts/2024-08-30-wsl2-ml-model-training/</link><pubDate>Fri, 30 Aug 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-08-30-wsl2-ml-model-training/</guid><description>&lt;p>Con la llegada del soporte oficial de GPU a WSL2, Windows se transforma en una plataforma viable y potente para desarrollo de inteligencia artificial desde un entorno Linux real. Gracias a la integración de CUDA y cuDNN, es posible entrenar modelos intensivos directamente desde WSL2, sin necesidad de usar máquinas virtuales completas ni infraestructura en la nube.&lt;/p>
+&lt;p>Este artículo guía el proceso completo de habilitación de GPU, instalación de herramientas y entrenamiento con PyTorch, incluyendo consideraciones prácticas, troubleshooting y optimización de recursos.&lt;/p>
+&lt;h2 id="arquitectura-cómo-funciona-la-gpu-en-wsl2">Arquitectura: cómo funciona la GPU en WSL2&lt;/h2>
+&lt;ul>
+&lt;li>WSL2 ejecuta un kernel Linux real dentro de una VM gestionada por Windows&lt;/li>
+&lt;li>NVIDIA desarrolló un stack que permite exponer la GPU del host Windows al kernel Linux de WSL2&lt;/li>
+&lt;li>La interfaz expuesta es &lt;code>libcuda.so&lt;/code>, compatible con CUDA Toolkit y cuDNN&lt;/li>
+&lt;li>Desde Linux, se puede usar &lt;code>nvidia-smi&lt;/code>, &lt;code>nvcc&lt;/code> y cualquier framework ML compatible con CUDA&lt;/li>
+&lt;/ul>
+&lt;h2 id="verificar-drivers-nvidia-en-windows">Verificar drivers NVIDIA en Windows&lt;/h2>
+&lt;p>Es importante instalar la versión correcta del driver para CUDA en WSL2:&lt;/p>
+&lt;ol>
+&lt;li>Descargar desde: &lt;a href="https://developer.nvidia.com/cuda/wsl">https://developer.nvidia.com/cuda/wsl&lt;/a>&lt;/li>
+&lt;li>Verificar en PowerShell:&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-powershell" data-lang="powershell">&lt;span class="line">&lt;span class="cl">&lt;span class="nb">nvidia-smi&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Se debe ver la versión del driver y el modelo de la GPU (ej: RTX 3080).&lt;/p>
+&lt;h2 id="preparar-el-entorno-wsl2">Preparar el entorno WSL2&lt;/h2>
+&lt;p>Crear una distro Ubuntu específica para ML:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">wsl --install -d Ubuntu
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>O usar una distro existente y prepararla:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">sudo apt update &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> sudo apt upgrade -y
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo apt install -y python3 python3-venv build-essential nvidia-cuda-toolkit
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Verificar acceso:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">nvidia-smi
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Si aparece “No devices were found”, cerrar con &lt;code>wsl --shutdown&lt;/code> y reiniciar.&lt;/p>
+&lt;h2 id="crear-entorno-virtual-para-ml">Crear entorno virtual para ML&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">python3 -m venv ~/.venvs/ml
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">source&lt;/span> ~/.venvs/ml/bin/activate
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">pip install --upgrade pip
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Instalar bibliotecas de IA con soporte CUDA:&lt;/p>
+&lt;h3 id="pytorch-cuda-118">PyTorch (CUDA 11.8):&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="tensorflow-cuda-112">TensorFlow (CUDA 11.2+):&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">pip install tensorflow
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="validar-entorno-con-pytorch">Validar entorno con PyTorch&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="kn">import&lt;/span> &lt;span class="nn">torch&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">if&lt;/span> &lt;span class="n">torch&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">cuda&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">is_available&lt;/span>&lt;span class="p">():&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;GPU detectada:&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">torch&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">cuda&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">get_device_name&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">else&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;CUDA no está disponible.&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="caso-práctico-entrenamiento-con-gpu">Caso práctico: entrenamiento con GPU&lt;/h2>
+&lt;h3 id="código-completo-pytorch">Código completo (PyTorch)&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="kn">import&lt;/span> &lt;span class="nn">torch&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kn">from&lt;/span> &lt;span class="nn">torch&lt;/span> &lt;span class="kn">import&lt;/span> &lt;span class="n">nn&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kn">from&lt;/span> &lt;span class="nn">torch.utils.data&lt;/span> &lt;span class="kn">import&lt;/span> &lt;span class="n">DataLoader&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">TensorDataset&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># Datos sintéticos&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">X&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">torch&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">randn&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">5000&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">20&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">y&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">torch&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">randn&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">5000&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># Dataset&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">ds&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">TensorDataset&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">X&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">y&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">loader&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">DataLoader&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">ds&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">batch_size&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="mi">64&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># Modelo simple&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">model&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">nn&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Sequential&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">nn&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Linear&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">20&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">128&lt;/span>&lt;span class="p">),&lt;/span> &lt;span class="n">nn&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">ReLU&lt;/span>&lt;span class="p">(),&lt;/span> &lt;span class="n">nn&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Linear&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">128&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">))&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">cuda&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">loss_fn&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">nn&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">MSELoss&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">optimizer&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">torch&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">optim&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Adam&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">model&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">parameters&lt;/span>&lt;span class="p">())&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># Entrenamiento&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">for&lt;/span> &lt;span class="n">epoch&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="nb">range&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">10&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span> &lt;span class="n">batch_x&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">batch_y&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">loader&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">batch_x&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">batch_y&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">batch_x&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">cuda&lt;/span>&lt;span class="p">(),&lt;/span> &lt;span class="n">batch_y&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">cuda&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">pred&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">model&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">batch_x&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">loss&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">loss_fn&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">pred&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">batch_y&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">optimizer&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">zero_grad&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">loss&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">backward&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">optimizer&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">step&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="sa">f&lt;/span>&lt;span class="s2">&amp;#34;Epoch &lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="n">epoch&lt;/span>&lt;span class="o">+&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">, Loss: &lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="n">loss&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">item&lt;/span>&lt;span class="p">()&lt;/span>&lt;span class="si">:&lt;/span>&lt;span class="s2">.4f&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="optimización-y-monitoreo">Optimización y monitoreo&lt;/h2>
+&lt;h3 id="monitoreo-de-gpu">Monitoreo de GPU&lt;/h3>
+&lt;p>Desde WSL2:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">watch -n &lt;span class="m">1&lt;/span> nvidia-smi
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>O usar &lt;code>gpustat&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">pip install gpustat
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">gpustat
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="control-de-dispositivos">Control de dispositivos&lt;/h3>
+&lt;p>Si se desea usar una sola GPU en multi-GPU:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="nv">CUDA_VISIBLE_DEVICES&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="m">0&lt;/span> python train.py
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="configurar-uso-mixto-de-cpugpu">Configurar uso mixto de CPU/GPU&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="n">device&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">torch&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">device&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;cuda&amp;#34;&lt;/span> &lt;span class="k">if&lt;/span> &lt;span class="n">torch&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">cuda&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">is_available&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="k">else&lt;/span> &lt;span class="s2">&amp;#34;cpu&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">model&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">model&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">to&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">device&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="buenas-prácticas">Buenas prácticas&lt;/h2>
+&lt;ul>
+&lt;li>Activar entorno virtual siempre (&lt;code>source ~/.venvs/ml/bin/activate&lt;/code>)&lt;/li>
+&lt;li>Mantener requirements.txt actualizado (&lt;code>pip freeze &amp;gt; requirements.txt&lt;/code>)&lt;/li>
+&lt;li>Usar notebooks desde VS Code con Remote WSL + Jupyter&lt;/li>
+&lt;li>Evitar ejecutar entrenamiento desde &lt;code>/mnt/c/&lt;/code> (mejor rendimiento en &lt;code>~/&lt;/code>)&lt;/li>
+&lt;li>Desactivar reenvíos de puertos innecesarios en WSL para liberar recursos&lt;/li>
+&lt;/ul>
+&lt;h2 id="conclusión">Conclusión&lt;/h2>
+&lt;p>WSL2 con soporte CUDA y cuDNN permite ejecutar flujos completos de entrenamiento de IA con aceleración por GPU directamente desde Windows. Esta arquitectura híbrida simplifica el desarrollo y la depuración, al mismo tiempo que mantiene la potencia y flexibilidad del ecosistema Linux para ciencia de datos y machine learning avanzado.&lt;/p></description></item><item><title>CI/CD desde WSL2 usando GitHub Actions y Azure Pipelines</title><link>https://cmas.dev/posts/2024-08-26-cicd-form-wsl2/</link><pubDate>Mon, 26 Aug 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-08-26-cicd-form-wsl2/</guid><description>&lt;p>Uno de los principales beneficios de usar &lt;strong>WSL2&lt;/strong> como entorno de desarrollo es la posibilidad de trabajar con herramientas de integración y entrega continua (CI/CD) de forma local antes de empujarlas a producción. Esto permite validar scripts, simular pipelines y ajustar flujos sin depender de entornos remotos. &lt;strong>GitHub Actions&lt;/strong> y &lt;strong>Azure Pipelines&lt;/strong> son dos de las plataformas más populares y compatibles con &lt;strong>WSL2&lt;/strong>.&lt;/p>
+&lt;p>Este artículo explica cómo configurar y ejecutar pipelines CI/CD localmente desde WSL2, tanto para testing como automatización de despliegues, con ejemplos prácticos y buenas prácticas.&lt;/p>
+&lt;h2 id="ventajas-de-usar-cicd-en-wsl2">Ventajas de usar CI/CD en WSL2&lt;/h2>
+&lt;ul>
+&lt;li>Simulación fiel de Linux en un entorno Windows&lt;/li>
+&lt;li>Ahorro de tiempo y validación previa al push&lt;/li>
+&lt;li>Compatibilidad con herramientas como Docker, Node.js, Python, etc.&lt;/li>
+&lt;li>Integración directa con Git y GitHub desde Linux&lt;/li>
+&lt;/ul>
+&lt;h2 id="paso-1-preparar-entorno-en-wsl2">Paso 1: Preparar entorno en WSL2&lt;/h2>
+&lt;p>Asegurarse de tener:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">sudo apt update
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo apt install -y git curl build-essential
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Configurar Git con tus credenciales:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">git config --global user.name &lt;span class="s2">&amp;#34;Tu Nombre&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">git config --global user.email &lt;span class="s2">&amp;#34;tu@correo.com&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Clonar un repositorio con flujo CI/CD:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">git clone https://github.com/tuusuario/tu-repo.git
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">cd&lt;/span> tu-repo
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="paso-2-ejecutar-github-actions-localmente-con-act">Paso 2: Ejecutar GitHub Actions localmente con &lt;code>act&lt;/code>&lt;/h2>
+&lt;p>&lt;a href="https://github.com/nektos/act">&lt;code>act&lt;/code>&lt;/a> es una herramienta que permite ejecutar workflows de GitHub Actions localmente usando contenedores Docker.&lt;/p>
+&lt;p>Instalar:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">brew install act
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Si no tenés Homebrew:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">curl https://raw.githubusercontent.com/nektos/act/master/install.sh &lt;span class="p">|&lt;/span> sudo bash
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Verificar workflows disponibles:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">act -l
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Ejecutar un job:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">act -j build
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Esto ejecuta el workflow &lt;code>.github/workflows/build.yml&lt;/code> usando el runner predeterminado (&lt;code>ubuntu-latest&lt;/code> por defecto).&lt;/p>
+&lt;p>Ejemplo de workflow para Node.js:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-yaml" data-lang="yaml">&lt;span class="line">&lt;span class="cl">&lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">Build&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="nt">on&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="l">push]&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="nt">jobs&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">build&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">runs-on&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">ubuntu-latest&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">steps&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>- &lt;span class="nt">uses&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">actions/checkout@v3&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>- &lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">Install deps&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">run&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">npm install&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>- &lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">Run tests&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">run&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">npm test&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="paso-3-usar-azure-pipelines-desde-wsl2">Paso 3: Usar Azure Pipelines desde WSL2&lt;/h2>
+&lt;p>Crear un pipeline en el portal de Azure DevOps y vincular el repositorio.&lt;/p>
+&lt;p>Dentro del repo, usar un archivo &lt;code>azure-pipelines.yml&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-yaml" data-lang="yaml">&lt;span class="line">&lt;span class="cl">&lt;span class="nt">trigger&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>- &lt;span class="l">main&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="nt">pool&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">vmImage&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">ubuntu-latest&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="nt">steps&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>- &lt;span class="nt">script&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">|&lt;/span>&lt;span class="sd">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="sd"> echo &amp;#34;Instalando dependencias&amp;#34;
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="sd"> pip install -r requirements.txt
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="sd"> pytest&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">displayName&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;Run tests&amp;#39;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Podés simular los pasos desde WSL2 para validar:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">pip install -r requirements.txt
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">pytest
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Esto garantiza que el script funcionará igual en el agente remoto de Azure.&lt;/p>
+&lt;h2 id="paso-4-automatizar-desde-wsl2-usando-git">Paso 4: Automatizar desde WSL2 usando Git&lt;/h2>
+&lt;p>Hacer commit de cambios en workflows:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">git add .github/workflows/build.yml
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">git commit -m &lt;span class="s2">&amp;#34;Agrega flujo de build CI&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">git push origin main
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Esto disparará automáticamente el pipeline en GitHub o Azure según esté configurado.&lt;/p>
+&lt;h2 id="buenas-prácticas-para-cicd-desde-wsl2">Buenas prácticas para CI/CD desde WSL2&lt;/h2>
+&lt;ul>
+&lt;li>Usar &lt;code>.env&lt;/code> y &lt;code>secrets&lt;/code> en Actions/Azure para no exponer claves&lt;/li>
+&lt;li>Validar localmente antes de subir&lt;/li>
+&lt;li>Usar &lt;code>matrix&lt;/code> para probar múltiples versiones (ej: Node.js 16 y 18)&lt;/li>
+&lt;li>Versionar &lt;code>scripts/&lt;/code> de build y test para integrarlos en pipelines&lt;/li>
+&lt;li>Ejecutar pruebas localmente con &lt;code>act&lt;/code> o manualmente desde terminal&lt;/li>
+&lt;/ul>
+&lt;h2 id="conclusión">Conclusión&lt;/h2>
+&lt;p>&lt;strong>WSL2&lt;/strong> no solo es útil para desarrollo local, sino también para integrar y probar flujos CI/CD antes de llevarlos a producción. Gracias a herramientas como &lt;code>act&lt;/code> y la compatibilidad con pipelines &lt;strong>YAML&lt;/strong> de &lt;strong>GitHub&lt;/strong> y &lt;strong>Azure&lt;/strong>, es posible simular, depurar y optimizar procesos automatizados desde un entorno &lt;strong>Linux&lt;/strong> real, sin salir de &lt;strong>Windows&lt;/strong>.&lt;/p></description></item><item><title>Networking avanzado con WSL2: puertos, servicios y redes privadas</title><link>https://cmas.dev/posts/2024-08-16-wsl2-advanced-networking/</link><pubDate>Fri, 16 Aug 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-08-16-wsl2-advanced-networking/</guid><description>&lt;p>&lt;strong>WSL2&lt;/strong> proporciona un entorno &lt;strong>Linux&lt;/strong> completo ejecutándose dentro de una &lt;strong>VM&lt;/strong> ligera sobre &lt;strong>Windows&lt;/strong>. Esto cambia sustancialmente el comportamiento de red respecto a &lt;strong>WSL1&lt;/strong>. Para muchos desarrolladores, entender cómo funciona el networking en &lt;strong>WSL2&lt;/strong> es esencial para ejecutar servicios, exponer APIs, trabajar con contenedores, y simular entornos de red en pruebas más complejas.&lt;/p>
+&lt;p>Este artículo explica en profundidad el modelo de red de &lt;strong>WSL2&lt;/strong>, cómo manejar puertos, exponer servicios, realizar redirecciones avanzadas y configurar redes privadas para flujos DevOps, testing y desarrollo de aplicaciones distribuidas.&lt;/p>
+&lt;h2 id="introducción-al-modelo-de-red-en-wsl2">Introducción al modelo de red en WSL2&lt;/h2>
+&lt;p>WSL2 ejecuta cada instancia de Linux dentro de una máquina virtual utilizando Hyper-V. A diferencia de WSL1, que compartía la pila de red del host Windows, en WSL2 la red está virtualizada:&lt;/p>
+&lt;ul>
+&lt;li>Cada distro tiene su propia interfaz (&lt;code>eth0&lt;/code>)&lt;/li>
+&lt;li>Tiene su propia IP interna asignada por DHCP&lt;/li>
+&lt;li>Los puertos que se abren dentro de WSL2 no están disponibles automáticamente en Windows, aunque se configuran redirecciones automáticas para &lt;code>localhost&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;p>Ver IP del entorno WSL2:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">ip a &lt;span class="p">|&lt;/span> grep inet
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="exposición-de-servicios-en-wsl2">Exposición de servicios en WSL2&lt;/h2>
+&lt;p>Al ejecutar un servidor en WSL2, por ejemplo:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">python3 -m http.server &lt;span class="m">8000&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Este se expone dentro del entorno Linux. Si se accede desde el mismo WSL, la URL &lt;code>http://localhost:8000&lt;/code> funcionará correctamente. Para acceder desde Windows o el navegador, WSL2 crea automáticamente reglas de reenvío de puertos a &lt;code>localhost&lt;/code>.&lt;/p>
+&lt;p>Esto es transparente para la mayoría de los usos básicos.&lt;/p>
+&lt;h2 id="reenvío-avanzado-con-netsh-y-puertos-personalizados">Reenvío avanzado con netsh y puertos personalizados&lt;/h2>
+&lt;p>Si el reenvío automático no funciona, o se quiere más control, se pueden definir reglas manualmente desde PowerShell en Windows:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-powershell" data-lang="powershell">&lt;span class="line">&lt;span class="cl">&lt;span class="n">netsh&lt;/span> &lt;span class="n">interface&lt;/span> &lt;span class="n">portproxy&lt;/span> &lt;span class="n">add&lt;/span> &lt;span class="n">v4tov4&lt;/span> &lt;span class="n">listenport&lt;/span>&lt;span class="p">=&lt;/span>&lt;span class="mf">8888&lt;/span> &lt;span class="n">connectport&lt;/span>&lt;span class="p">=&lt;/span>&lt;span class="mf">8000&lt;/span> &lt;span class="n">connectaddress&lt;/span>&lt;span class="p">=&lt;/span>&lt;span class="nb">WSL-IP&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Verificar IP WSL:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">ip addr show eth0 &lt;span class="p">|&lt;/span> grep inet
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Listar reglas activas:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-powershell" data-lang="powershell">&lt;span class="line">&lt;span class="cl">&lt;span class="n">netsh&lt;/span> &lt;span class="n">interface&lt;/span> &lt;span class="n">portproxy&lt;/span> &lt;span class="n">show&lt;/span> &lt;span class="n">all&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Eliminar una regla:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-powershell" data-lang="powershell">&lt;span class="line">&lt;span class="cl">&lt;span class="n">netsh&lt;/span> &lt;span class="n">interface&lt;/span> &lt;span class="n">portproxy&lt;/span> &lt;span class="n">delete&lt;/span> &lt;span class="n">v4tov4&lt;/span> &lt;span class="n">listenport&lt;/span>&lt;span class="p">=&lt;/span>&lt;span class="mf">8888&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="configuración-de-múltiples-distros-en-red-privada-simulada">Configuración de múltiples distros en red privada simulada&lt;/h2>
+&lt;p>Para simular una red privada local, se puede trabajar con varias distros en WSL2:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">wsl --list --verbose
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Ejecutar dos distros (por ejemplo, Ubuntu y Debian), y desde una hacer ping a la otra vía su IP interna.&lt;/p>
+&lt;p>Si no responde, asegurarse de habilitar tráfico ICMP dentro de WSL y verificar que ambas estén activas al mismo tiempo.&lt;/p>
+&lt;h2 id="comunicación-con-contenedores-docker">Comunicación con contenedores Docker&lt;/h2>
+&lt;p>Si Docker Desktop está configurado para trabajar con WSL2, se puede usar la red de &lt;code>docker0&lt;/code> para conectar servicios:&lt;/p>
+&lt;ol>
+&lt;li>Correr un contenedor dentro del entorno WSL2&lt;/li>
+&lt;li>Exponerlo con &lt;code>--network host&lt;/code> (si es compatible) o &lt;code>--publish&lt;/code>&lt;/li>
+&lt;li>Usar &lt;code>localhost&lt;/code> o la IP del contenedor desde otro servicio en WSL2&lt;/li>
+&lt;/ol>
+&lt;p>Ejemplo:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">docker run -d -p 5432:5432 --name pg postgres
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">psql -h localhost -p &lt;span class="m">5432&lt;/span> -U postgres
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="simulación-de-red-privada-con-herramientas-adicionales">Simulación de red privada con herramientas adicionales&lt;/h2>
+&lt;h3 id="opción-1-tailscale-en-wsl2">Opción 1: Tailscale en WSL2&lt;/h3>
+&lt;p>Tailscale permite crear una VPN mesh entre máquinas. Instalarlo en WSL2 permite acceder a servicios entre distros, otras PC o incluso entornos cloud.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">curl -fsSL https://tailscale.com/install.sh &lt;span class="p">|&lt;/span> sh
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo tailscale up
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="opción-2-tun2socks-y-redes-virtuales-personalizadas">Opción 2: tun2socks y redes virtuales personalizadas&lt;/h3>
+&lt;p>Para flujos más complejos o tests con proxies, se pueden usar herramientas como:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>socat&lt;/code>&lt;/li>
+&lt;li>&lt;code>ngrok&lt;/code>&lt;/li>
+&lt;li>&lt;code>dnsmasq&lt;/code>&lt;/li>
+&lt;li>&lt;code>iptables&lt;/code> con NAT y routing avanzado&lt;/li>
+&lt;/ul>
+&lt;p>Estas herramientas requieren experiencia en networking de Linux, pero funcionan perfectamente en WSL2.&lt;/p>
+&lt;h2 id="buenas-prácticas-para-servicios-y-redes">Buenas prácticas para servicios y redes&lt;/h2>
+&lt;ul>
+&lt;li>Usar puertos por encima de 1024 para evitar privilegios root&lt;/li>
+&lt;li>Mantener los servicios dentro del FS Linux (&lt;code>~/&lt;/code>) para evitar problemas de rendimiento&lt;/li>
+&lt;li>Automatizar redirecciones en PowerShell o Bash con scripts&lt;/li>
+&lt;li>Para uso profesional, evitar confiar en reenvíos automáticos y configurar manualmente&lt;/li>
+&lt;li>Evitar trabajar con IPs cambiantes: usar DNS locales (&lt;code>/etc/hosts&lt;/code> o resolvers)&lt;/li>
+&lt;/ul>
+&lt;h2 id="conclusión">Conclusión&lt;/h2>
+&lt;p>&lt;strong>WSL2&lt;/strong> ofrece una red aislada, pero accesible y flexible, ideal para desarrollo y pruebas. Comprender su arquitectura y cómo manipular puertos y conexiones permite simular redes privadas, trabajar con múltiples servicios y ejecutar entornos avanzados de forma profesional desde &lt;strong>Windows&lt;/strong> con un núcleo &lt;strong>Linux&lt;/strong> real.&lt;/p></description></item><item><title>Dev Containers con WSL2: casos reales con VS Code y GitHub Codespaces</title><link>https://cmas.dev/posts/2024-08-09-wsl2-dev-container/</link><pubDate>Fri, 09 Aug 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-08-09-wsl2-dev-container/</guid><description>&lt;p>Los &lt;strong>Dev Containers&lt;/strong> son entornos de desarrollo preconfigurados definidos por archivo, que permiten a cualquier persona trabajar con el mismo stack, dependencias y configuraciones. Combinados con &lt;strong>WSL2&lt;/strong> y &lt;strong>VS Code&lt;/strong>, permiten construir entornos reproducibles que funcionan tanto localmente como en la nube a través de GitHub Codespaces.&lt;/p>
+&lt;p>Este artículo explica cómo trabajar con &lt;strong>Dev Containers&lt;/strong> en &lt;strong>WSL2&lt;/strong>, con ejemplos prácticos y recomendaciones para distintos escenarios.&lt;/p>
+&lt;h1 id="qué-es-un-dev-container">Qué es un Dev Container&lt;/h1>
+&lt;p>Un Dev Container se define mediante un archivo &lt;code>.devcontainer/devcontainer.json&lt;/code> y opcionalmente un &lt;code>Dockerfile&lt;/code>. Permite:&lt;/p>
+&lt;ul>
+&lt;li>Usar una imagen base o personalizada&lt;/li>
+&lt;li>Instalar dependencias automáticamente&lt;/li>
+&lt;li>Configurar extensiones y settings del editor&lt;/li>
+&lt;li>Automatizar comandos post-configuración&lt;/li>
+&lt;/ul>
+&lt;h2 id="requisitos">Requisitos&lt;/h2>
+&lt;ul>
+&lt;li>Windows 10/11 con WSL2&lt;/li>
+&lt;li>Docker Desktop instalado con integración WSL2 habilitada&lt;/li>
+&lt;li>Visual Studio Code&lt;/li>
+&lt;li>Extensiones:
+&lt;ul>
+&lt;li>Remote - Containers&lt;/li>
+&lt;li>Dev Containers&lt;/li>
+&lt;li>GitHub Codespaces (opcional)&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="crear-un-proyecto-con-dev-container">Crear un proyecto con Dev Container&lt;/h2>
+&lt;p>Estructura mínima:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">proyecto/
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">└── .devcontainer/
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ├── devcontainer.json
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> └── Dockerfile (opcional)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Ejemplo básico de &lt;code>devcontainer.json&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-json" data-lang="json">&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;name&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;python-dev&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;image&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;mcr.microsoft.com/devcontainers/python:3.10&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;features&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;ghcr.io/devcontainers/features/git:1&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;postCreateCommand&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;pip install -r requirements.txt&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;customizations&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;vscode&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;extensions&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s2">&amp;#34;ms-python.python&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s2">&amp;#34;ms-toolsai.jupyter&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="abrir-el-entorno-con-vs-code">Abrir el entorno con VS Code&lt;/h2>
+&lt;p>Desde VS Code:&lt;/p>
+&lt;ol>
+&lt;li>Abrir la carpeta del proyecto&lt;/li>
+&lt;li>Ir al menú Command Palette (&lt;code>Ctrl+Shift+P&lt;/code>)&lt;/li>
+&lt;li>Ejecutar: &lt;code>Dev Containers: Reopen in Container&lt;/code>&lt;/li>
+&lt;/ol>
+&lt;p>Esto lanzará el contenedor dentro del entorno WSL2, montado como si fuera local.&lt;/p>
+&lt;h2 id="caso-real-1-data-science-colaborativo">Caso real 1: Data Science colaborativo&lt;/h2>
+&lt;p>Un equipo define un entorno con &lt;em>Python&lt;/em>, &lt;em>Jupyter&lt;/em>, &lt;em>pandas&lt;/em>, &lt;em>seaborn&lt;/em> y &lt;em>VS Code&lt;/em>. Todos trabajan con el mismo entorno en Windows vía WSL2 o en Codespaces, sin diferencias en comportamiento o dependencias.&lt;/p>
+&lt;h2 id="caso-real-2-backend-con-nodejs-y-postgresql">Caso real 2: Backend con Node.js y PostgreSQL&lt;/h2>
+&lt;p>El contenedor incluye Node.js y se conecta a una base PostgreSQL que corre en otro contenedor. Toda la infraestructura de desarrollo se define en &lt;code>docker-compose.yml&lt;/code> y el Dev Container se integra automáticamente.&lt;/p>
+&lt;h2 id="sincronización-con-github-codespaces">Sincronización con GitHub Codespaces&lt;/h2>
+&lt;p>El archivo &lt;code>.devcontainer/&lt;/code> funciona igual en la nube. Al crear un Codespace desde un repositorio con esta estructura, GitHub construye automáticamente el mismo entorno.&lt;/p>
+&lt;p>Esto permite:&lt;/p>
+&lt;ul>
+&lt;li>Switch sin fricción entre local y nube&lt;/li>
+&lt;li>Reproducibilidad garantizada&lt;/li>
+&lt;li>Onboarding instantáneo de nuevos colaboradores&lt;/li>
+&lt;/ul>
+&lt;h2 id="buenas-prácticas">Buenas prácticas&lt;/h2>
+&lt;ul>
+&lt;li>Usar imágenes base oficiales (&lt;code>devcontainers/&lt;/code>)&lt;/li>
+&lt;li>Versionar &lt;code>.devcontainer&lt;/code> completo en el repositorio&lt;/li>
+&lt;li>Automatizar instalaciones en &lt;code>postCreateCommand&lt;/code>&lt;/li>
+&lt;li>Usar &lt;code>devcontainer.json&lt;/code> + &lt;code>docker-compose.yml&lt;/code> para múltiples servicios&lt;/li>
+&lt;/ul>
+&lt;h2 id="conclusión">Conclusión&lt;/h2>
+&lt;p>&lt;strong>WSL2&lt;/strong> y &lt;strong>Dev Containers&lt;/strong> con &lt;strong>VS Code&lt;/strong> ofrecen un entorno portátil y reproducible para desarrollo moderno. Cuando se combinan con &lt;strong>GitHub Codespaces&lt;/strong>, permiten trabajar desde cualquier lugar con el mismo entorno, reduciendo errores, facilitando colaboración y acelerando el desarrollo en equipos distribuidos.&lt;/p></description></item><item><title>Implementación de clusters Kubernetes locales con k3s sobre WSL2</title><link>https://cmas.dev/posts/2024-08-02-wsl2-kubernetes-k3s/</link><pubDate>Fri, 02 Aug 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-08-02-wsl2-kubernetes-k3s/</guid><description>&lt;p>Para entornos de desarrollo y pruebas, contar con un cluster &lt;strong>Kubernetes&lt;/strong> liviano y funcional es clave. &lt;strong>k3s&lt;/strong>, una distribución de &lt;strong>Kubernetes&lt;/strong> simplificada, se puede ejecutar perfectamente sobre &lt;strong>WSL2&lt;/strong>, permitiendo crear un cluster local completo sin necesidad de herramientas pesadas como &lt;strong>Minikube&lt;/strong> o &lt;strong>Docker Desktop&lt;/strong>.&lt;/p>
+&lt;p>Este artículo describe paso a paso cómo instalar y configurar &lt;strong>k3s&lt;/strong> en &lt;strong>WSL2&lt;/strong>, con recomendaciones prácticas para flujos &lt;strong>DevOps&lt;/strong> y testing de microservicios.&lt;/p>
+&lt;h2 id="requisitos">Requisitos&lt;/h2>
+&lt;ul>
+&lt;li>Windows 10/11 con WSL2 habilitado&lt;/li>
+&lt;li>Distro Linux instalada (Ubuntu 22.04 recomendado)&lt;/li>
+&lt;li>Usuario con privilegios &lt;code>sudo&lt;/code>&lt;/li>
+&lt;li>Docker (opcional para algunos complementos)&lt;/li>
+&lt;/ul>
+&lt;h2 id="paso-1-preparar-el-entorno">Paso 1: Preparar el entorno&lt;/h2>
+&lt;p>Actualizar paquetes e instalar herramientas necesarias:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">sudo apt update &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> sudo apt install -y curl wget gnupg lsb-release
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Verificar la red de WSL2:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">ip addr show eth0
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="paso-2-instalar-k3s-en-modo-single-node">Paso 2: Instalar k3s en modo single-node&lt;/h2>
+&lt;p>Ejecutar el script oficial:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">curl -sfL https://get.k3s.io &lt;span class="p">|&lt;/span> sh -
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Esto instalará k3s como un servicio y arrancará automáticamente.&lt;/p>
+&lt;p>Verificar que el cluster esté en funcionamiento:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">sudo kubectl get nodes
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Debería verse un nodo en estado &lt;code>Ready&lt;/code>.&lt;/p>
+&lt;h2 id="paso-3-acceder-a-kubectl-sin-sudo">Paso 3: Acceder a &lt;code>kubectl&lt;/code> sin &lt;code>sudo&lt;/code>&lt;/h2>
+&lt;p>Para facilitar el acceso:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">sudo cp /etc/rancher/k3s/k3s.yaml ~/.kube/config
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo chown &lt;span class="k">$(&lt;/span>id -u&lt;span class="k">)&lt;/span>:&lt;span class="k">$(&lt;/span>id -g&lt;span class="k">)&lt;/span> ~/.kube/config
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Comprobar acceso:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">kubectl get pods -A
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="paso-4-desplegar-una-aplicación-de-prueba">Paso 4: Desplegar una aplicación de prueba&lt;/h2>
+&lt;p>Ejemplo: servidor NGINX&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">kubectl create deployment nginx --image&lt;span class="o">=&lt;/span>nginx
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">kubectl expose deployment nginx --port&lt;span class="o">=&lt;/span>&lt;span class="m">80&lt;/span> --type&lt;span class="o">=&lt;/span>NodePort
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Ver el servicio expuesto:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">kubectl get svc
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Usar el puerto asignado (ej: 30001) para acceder desde el navegador:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">http://localhost:30001
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="paso-5-usar-k3s-en-entornos-multi-node-avanzado">Paso 5: Usar k3s en entornos multi-node (avanzado)&lt;/h2>
+&lt;p>También es posible crear múltiples distros WSL2 y configurar nodos worker usando direcciones IP locales, aunque este flujo requiere túneles, sincronización SSH y scripts personalizados.&lt;/p>
+&lt;p>Para la mayoría de los casos de desarrollo, el nodo único es suficiente.&lt;/p>
+&lt;h2 id="buenas-prácticas">Buenas prácticas&lt;/h2>
+&lt;ul>
+&lt;li>Configurar &lt;code>.kube/config&lt;/code> con perfiles personalizados&lt;/li>
+&lt;li>Automatizar la instalación con Makefiles o scripts&lt;/li>
+&lt;li>Agregar namespaces para separar proyectos: &lt;code>kubectl create ns desarrollo&lt;/code>&lt;/li>
+&lt;li>Usar &lt;code>k9s&lt;/code> para una visualización tipo TUI&lt;/li>
+&lt;/ul>
+&lt;h2 id="conclusión">Conclusión&lt;/h2>
+&lt;p>&lt;strong>k3s&lt;/strong> permite implementar clusters &lt;strong>Kubernetes&lt;/strong> funcionales en segundos, ideal para desarrollo de microservicios, CI/CD local o pruebas en pipelines. Ejecutarlo sobre &lt;strong>WSL2&lt;/strong> combina rendimiento, facilidad y compatibilidad total con &lt;strong>Linux&lt;/strong> sin salir de &lt;strong>Windows&lt;/strong>.&lt;/p></description></item><item><title>Benchmark de performance entre WSL2 y Hyper-V para cargas intensivas</title><link>https://cmas.dev/posts/2024-07-26-wsl2-performance-benchmark/</link><pubDate>Fri, 26 Jul 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-07-26-wsl2-performance-benchmark/</guid><description>&lt;p>&lt;strong>WSL2&lt;/strong> y &lt;strong>Hyper-V&lt;/strong> son tecnologías de virtualización de Microsoft que permiten ejecutar entornos Linux sobre Windows. Aunque WSL2 internamente utiliza Hyper-V, existen diferencias en cómo se gestionan los recursos, lo que puede impactar el rendimiento en tareas intensivas como compilación, procesamiento de datos o entrenamiento de modelos.&lt;/p>
 &lt;p>Este artículo presenta un enfoque comparativo y práctico para medir el rendimiento de ambos entornos en escenarios de carga pesada.&lt;/p>
 &lt;h2 id="objetivo">Objetivo&lt;/h2>
 &lt;ul>
