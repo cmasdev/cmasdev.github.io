@@ -1,8 +1,8 @@
 ---
 layout: post
-title: "How To: Desarrollo fullstack con WSL2 y PostgreSQL"
+title: "Integración de WSL en un entorno DevSecOps"
 author: Christian Amado
-date: 2024-11-07 00:00:00 -0400
+date: 2024-11-15 00:00:00 -0400
 category: [Desarrollo de software]
 tags: [WinDev,Windows 11,WSL]
 thumbnail-img: /img/posts/thumbnails/win11.png
