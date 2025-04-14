@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Entrenamiento de modelos de ML en WSL2 con CUDA y cuDNN"
+title: "Gestión de agentes SSH y GPG en WSL"
 author: Christian Amado
 date: 2024-09-06 00:00:00 -0400
 category: [Desarrollo de software]
