@@ -325,7 +325,83 @@ net.ipv4.tcp_congestion_control=bbr&lt;/p>
 &lt;li>Versionar cada microservicio en su propio repositorio si es necesario&lt;/li>
 &lt;/ul>
 &lt;h2 id="conclusión">Conclusión&lt;/h2>
-&lt;p>Con WSL2 y la interoperabilidad de red de Windows, es posible ejecutar arquitecturas híbridas reales con múltiples microservicios distribuidos en Linux y Windows desde una misma máquina. Esto permite validar integración, rendimiento, y colaboración entre equipos sin depender de infraestructura externa o entornos cloud.&lt;/p></description></item><item><title>How To: Desarrollo fullstack con WSL2 y PostgreSQL</title><link>https://cmas.dev/posts/2024-11-07-wsl2-fullstack-dev/</link><pubDate>Thu, 07 Nov 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-11-07-wsl2-fullstack-dev/</guid><description>&lt;p>WSL2 permite desarrollar aplicaciones backend completas desde un entorno Linux real sobre Windows, facilitando el uso de tecnologías como &lt;strong>Node.js&lt;/strong>, &lt;strong>Express&lt;/strong>, &lt;strong>PostgreSQL&lt;/strong> y herramientas modernas de frontend como &lt;strong>React&lt;/strong> o &lt;strong>Vue&lt;/strong>. Este caso real describe paso a paso cómo montar un entorno fullstack funcional, productivo y reproducible usando WSL2, PostgreSQL y herramientas de desarrollo frontend y backend.&lt;/p>
+&lt;p>Con WSL2 y la interoperabilidad de red de Windows, es posible ejecutar arquitecturas híbridas reales con múltiples microservicios distribuidos en Linux y Windows desde una misma máquina. Esto permite validar integración, rendimiento, y colaboración entre equipos sin depender de infraestructura externa o entornos cloud.&lt;/p></description></item><item><title>Integración de WSL en un entorno DevSecOps</title><link>https://cmas.dev/posts/2024-11-15-wsl2-devsecops/</link><pubDate>Fri, 15 Nov 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-11-15-wsl2-devsecops/</guid><description>&lt;p>WSL2 se ha convertido en una herramienta clave para equipos DevSecOps que buscan una solución ligera, segura y flexible para automatizar la integración, entrega y operaciones de software. Su compatibilidad con herramientas de seguridad, contenedores, scripting y pipelines CI/CD, lo convierte en un puente ideal entre desarrollo y operaciones dentro del sistema operativo Windows.&lt;/p>
+&lt;p>Este artículo detalla un caso real de integración de WSL2 en un entorno DevSecOps, con ejemplos de workflows que incluyen validación de código, escaneo de vulnerabilidades, despliegue automatizado y hardening de entornos desde una terminal Linux sobre Windows.&lt;/p>
+&lt;h2 id="objetivo">Objetivo&lt;/h2>
+&lt;p>Demostrar cómo un entorno WSL2 puede ser parte activa y segura en un flujo DevSecOps moderno, usando herramientas como Docker, GitHub Actions, Trivy, Ansible y más.&lt;/p>
+&lt;h2 id="paso-1-preparar-entorno-de-trabajo-seguro-en-wsl2">Paso 1: Preparar entorno de trabajo seguro en WSL2&lt;/h2>
+&lt;p>Instalar herramientas básicas:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">sudo apt update &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> sudo apt install -y git curl build-essential python3-pip
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Instalar Docker dentro de WSL2 o usar Docker Desktop con integración activa:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">docker version
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Instalar herramientas DevSecOps:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">pip install ansible
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh &lt;span class="p">|&lt;/span> sh
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="paso-2-escaneo-de-vulnerabilidades-con-trivy">Paso 2: Escaneo de vulnerabilidades con Trivy&lt;/h2>
+&lt;p>Escanear imágenes antes del despliegue:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">docker pull node:18
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">trivy image node:18
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Escanear un proyecto local:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">trivy fs .
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Agregar esto a un script &lt;code>scan.sh&lt;/code> para automatizar:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="cp">#!/bin/bash
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">&lt;/span>&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;Escaneando vulnerabilidades...&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">trivy fs ./backend
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="paso-3-automatización-de-seguridad-con-ansible">Paso 3: Automatización de seguridad con Ansible&lt;/h2>
+&lt;p>Playbook de hardening básico:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-yaml" data-lang="yaml">&lt;span class="line">&lt;span class="cl">- &lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">Aplicar hardening de sistema&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">hosts&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">localhost&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">tasks&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>- &lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">Asegurar permisos de logs&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">file&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">path&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">/var/log&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">state&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">directory&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">mode&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;0750&amp;#39;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Ejecutar desde WSL2:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">ansible-playbook playbooks/hardening.yml -c &lt;span class="nb">local&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="paso-4-cicd-con-github-actions-desde-wsl2">Paso 4: CI/CD con GitHub Actions desde WSL2&lt;/h2>
+&lt;p>Simular el pipeline local con &lt;a href="https://github.com/nektos/act">&lt;code>act&lt;/code>&lt;/a>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">brew install act
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">act -j &lt;span class="nb">test&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Ejemplo de workflow:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-yaml" data-lang="yaml">&lt;span class="line">&lt;span class="cl">&lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">CI&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="nt">on&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">push&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="nt">jobs&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">test&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">runs-on&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">ubuntu-latest&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">steps&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>- &lt;span class="nt">uses&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">actions/checkout@v3&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>- &lt;span class="nt">run&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">npm install&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>- &lt;span class="nt">run&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">npm test&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Usar WSL2 para validar estos scripts antes de hacer push a producción.&lt;/p>
+&lt;h2 id="paso-5-integración-de-análisis-de-código-estático">Paso 5: Integración de análisis de código estático&lt;/h2>
+&lt;p>Instalar ESLint o Bandit (Python):&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">npm install -g eslint
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">pip install bandit
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Escanear:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">eslint ./frontend
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">bandit -r ./backend
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="paso-6-política-de-seguridad-de-contenedores">Paso 6: Política de seguridad de contenedores&lt;/h2>
+&lt;p>Definir un archivo &lt;code>Dockerfile&lt;/code> seguro:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-Dockerfile" data-lang="Dockerfile">&lt;span class="line">&lt;span class="cl">&lt;span class="k">FROM&lt;/span>&lt;span class="s"> node:18-alpine&lt;/span>&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">RUN&lt;/span> addgroup -S app &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> adduser -S app -G app&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">USER&lt;/span>&lt;span class="s"> app&lt;/span>&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">COPY&lt;/span> . .&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">CMD&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="s2">&amp;#34;node&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;index.js&amp;#34;&lt;/span>&lt;span class="p">]&lt;/span>&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Validar con Trivy o Docker Scout:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">trivy image myimage:latest
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="buenas-prácticas">Buenas prácticas&lt;/h2>
+&lt;ul>
+&lt;li>No usar root dentro de contenedores&lt;/li>
+&lt;li>Validar código con linters y analizadores de seguridad&lt;/li>
+&lt;li>Versionar todos los scripts y playbooks en Git&lt;/li>
+&lt;li>Usar variables de entorno cifradas para secrets&lt;/li>
+&lt;li>Monitorear imágenes con alertas de vulnerabilidad&lt;/li>
+&lt;/ul>
+&lt;h2 id="conclusión">Conclusión&lt;/h2>
+&lt;p>WSL2 permite simular y ejecutar flujos DevSecOps reales con herramientas de seguridad, automatización y despliegue en un entorno Linux completo dentro de Windows. Con acceso a Docker, Trivy, Ansible y GitHub Actions, es posible desarrollar y validar código seguro, auditable y productivo sin necesidad de servidores externos o máquinas virtuales.&lt;/p></description></item><item><title>How To: Desarrollo fullstack con WSL2 y PostgreSQL</title><link>https://cmas.dev/posts/2024-11-08-wsl2-fullstack-dev/</link><pubDate>Fri, 08 Nov 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-11-08-wsl2-fullstack-dev/</guid><description>&lt;p>WSL2 permite desarrollar aplicaciones backend completas desde un entorno Linux real sobre Windows, facilitando el uso de tecnologías como &lt;strong>Node.js&lt;/strong>, &lt;strong>Express&lt;/strong>, &lt;strong>PostgreSQL&lt;/strong> y herramientas modernas de frontend como &lt;strong>React&lt;/strong> o &lt;strong>Vue&lt;/strong>. Este caso real describe paso a paso cómo montar un entorno fullstack funcional, productivo y reproducible usando WSL2, PostgreSQL y herramientas de desarrollo frontend y backend.&lt;/p>
 &lt;h2 id="objetivo">Objetivo&lt;/h2>
 &lt;p>Construir y ejecutar una API REST con Express y PostgreSQL desde WSL2, accesible desde Windows y conectada a un cliente frontend moderno (React). Todo funcionando de forma local, con persistencia y debugging habilitado.&lt;/p>
 &lt;h2 id="paso-1-preparar-entorno-base-en-wsl2">Paso 1: Preparar entorno base en WSL2&lt;/h2>
@@ -427,83 +503,7 @@ net.ipv4.tcp_congestion_control=bbr&lt;/p>
 &lt;li>Agregar middleware de CORS si frontend se ejecuta desde origen distinto&lt;/li>
 &lt;/ul>
 &lt;h2 id="conclusión">Conclusión&lt;/h2>
-&lt;p>WSL2 permite desarrollar aplicaciones fullstack modernas combinando tecnologías de backend y frontend con base de datos PostgreSQL de manera fluida. Todo el entorno corre desde Linux real dentro de Windows, lo que permite depurar, escalar y trabajar colaborativamente sin comprometer el rendimiento ni la experiencia de desarrollo.&lt;/p></description></item><item><title>How To: Desarrollo fullstack con WSL2 y PostgreSQL</title><link>https://cmas.dev/posts/2024-11-15-wsl2-devsecops/</link><pubDate>Thu, 07 Nov 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-11-15-wsl2-devsecops/</guid><description>&lt;p>WSL2 se ha convertido en una herramienta clave para equipos DevSecOps que buscan una solución ligera, segura y flexible para automatizar la integración, entrega y operaciones de software. Su compatibilidad con herramientas de seguridad, contenedores, scripting y pipelines CI/CD, lo convierte en un puente ideal entre desarrollo y operaciones dentro del sistema operativo Windows.&lt;/p>
-&lt;p>Este artículo detalla un caso real de integración de WSL2 en un entorno DevSecOps, con ejemplos de workflows que incluyen validación de código, escaneo de vulnerabilidades, despliegue automatizado y hardening de entornos desde una terminal Linux sobre Windows.&lt;/p>
-&lt;h2 id="objetivo">Objetivo&lt;/h2>
-&lt;p>Demostrar cómo un entorno WSL2 puede ser parte activa y segura en un flujo DevSecOps moderno, usando herramientas como Docker, GitHub Actions, Trivy, Ansible y más.&lt;/p>
-&lt;h2 id="paso-1-preparar-entorno-de-trabajo-seguro-en-wsl2">Paso 1: Preparar entorno de trabajo seguro en WSL2&lt;/h2>
-&lt;p>Instalar herramientas básicas:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">sudo apt update &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> sudo apt install -y git curl build-essential python3-pip
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Instalar Docker dentro de WSL2 o usar Docker Desktop con integración activa:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">docker version
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Instalar herramientas DevSecOps:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">pip install ansible
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh &lt;span class="p">|&lt;/span> sh
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="paso-2-escaneo-de-vulnerabilidades-con-trivy">Paso 2: Escaneo de vulnerabilidades con Trivy&lt;/h2>
-&lt;p>Escanear imágenes antes del despliegue:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">docker pull node:18
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">trivy image node:18
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Escanear un proyecto local:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">trivy fs .
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Agregar esto a un script &lt;code>scan.sh&lt;/code> para automatizar:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="cp">#!/bin/bash
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">&lt;/span>&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;Escaneando vulnerabilidades...&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">trivy fs ./backend
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="paso-3-automatización-de-seguridad-con-ansible">Paso 3: Automatización de seguridad con Ansible&lt;/h2>
-&lt;p>Playbook de hardening básico:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-yaml" data-lang="yaml">&lt;span class="line">&lt;span class="cl">- &lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">Aplicar hardening de sistema&lt;/span>&lt;span class="w">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">hosts&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">localhost&lt;/span>&lt;span class="w">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">tasks&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>- &lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">Asegurar permisos de logs&lt;/span>&lt;span class="w">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">file&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">path&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">/var/log&lt;/span>&lt;span class="w">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">state&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">directory&lt;/span>&lt;span class="w">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">mode&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;0750&amp;#39;&lt;/span>&lt;span class="w">
-&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Ejecutar desde WSL2:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">ansible-playbook playbooks/hardening.yml -c &lt;span class="nb">local&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="paso-4-cicd-con-github-actions-desde-wsl2">Paso 4: CI/CD con GitHub Actions desde WSL2&lt;/h2>
-&lt;p>Simular el pipeline local con &lt;a href="https://github.com/nektos/act">&lt;code>act&lt;/code>&lt;/a>:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">brew install act
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">act -j &lt;span class="nb">test&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Ejemplo de workflow:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-yaml" data-lang="yaml">&lt;span class="line">&lt;span class="cl">&lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">CI&lt;/span>&lt;span class="w">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="nt">on&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">push&lt;/span>&lt;span class="w">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="nt">jobs&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">test&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">runs-on&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">ubuntu-latest&lt;/span>&lt;span class="w">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">steps&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>- &lt;span class="nt">uses&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">actions/checkout@v3&lt;/span>&lt;span class="w">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>- &lt;span class="nt">run&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">npm install&lt;/span>&lt;span class="w">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>- &lt;span class="nt">run&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">npm test&lt;/span>&lt;span class="w">
-&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Usar WSL2 para validar estos scripts antes de hacer push a producción.&lt;/p>
-&lt;h2 id="paso-5-integración-de-análisis-de-código-estático">Paso 5: Integración de análisis de código estático&lt;/h2>
-&lt;p>Instalar ESLint o Bandit (Python):&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">npm install -g eslint
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">pip install bandit
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Escanear:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">eslint ./frontend
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">bandit -r ./backend
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="paso-6-política-de-seguridad-de-contenedores">Paso 6: Política de seguridad de contenedores&lt;/h2>
-&lt;p>Definir un archivo &lt;code>Dockerfile&lt;/code> seguro:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-Dockerfile" data-lang="Dockerfile">&lt;span class="line">&lt;span class="cl">&lt;span class="k">FROM&lt;/span>&lt;span class="s"> node:18-alpine&lt;/span>&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">RUN&lt;/span> addgroup -S app &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> adduser -S app -G app&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">USER&lt;/span>&lt;span class="s"> app&lt;/span>&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">COPY&lt;/span> . .&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>&lt;span class="k">CMD&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="s2">&amp;#34;node&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;index.js&amp;#34;&lt;/span>&lt;span class="p">]&lt;/span>&lt;span class="err">
-&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Validar con Trivy o Docker Scout:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">trivy image myimage:latest
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="buenas-prácticas">Buenas prácticas&lt;/h2>
-&lt;ul>
-&lt;li>No usar root dentro de contenedores&lt;/li>
-&lt;li>Validar código con linters y analizadores de seguridad&lt;/li>
-&lt;li>Versionar todos los scripts y playbooks en Git&lt;/li>
-&lt;li>Usar variables de entorno cifradas para secrets&lt;/li>
-&lt;li>Monitorear imágenes con alertas de vulnerabilidad&lt;/li>
-&lt;/ul>
-&lt;h2 id="conclusión">Conclusión&lt;/h2>
-&lt;p>WSL2 permite simular y ejecutar flujos DevSecOps reales con herramientas de seguridad, automatización y despliegue en un entorno Linux completo dentro de Windows. Con acceso a Docker, Trivy, Ansible y GitHub Actions, es posible desarrollar y validar código seguro, auditable y productivo sin necesidad de servidores externos o máquinas virtuales.&lt;/p></description></item><item><title>Debugging remoto desde Windows a servicios en WSL2</title><link>https://cmas.dev/posts/2024-11-01-wsl2-remote-debugging/</link><pubDate>Fri, 01 Nov 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-11-01-wsl2-remote-debugging/</guid><description>&lt;p>Uno de los grandes beneficios de WSL2 es la integración fluida entre el sistema operativo Windows y el entorno Linux, lo que permite realizar debugging remoto de servicios que corren en WSL2 desde herramientas gráficas y editores del host. Esto es clave para flujos de desarrollo moderno, ya que permite aprovechar lo mejor de ambos mundos: servidores nativos de Linux y herramientas de análisis de Windows.&lt;/p>
+&lt;p>WSL2 permite desarrollar aplicaciones fullstack modernas combinando tecnologías de backend y frontend con base de datos PostgreSQL de manera fluida. Todo el entorno corre desde Linux real dentro de Windows, lo que permite depurar, escalar y trabajar colaborativamente sin comprometer el rendimiento ni la experiencia de desarrollo.&lt;/p></description></item><item><title>Debugging remoto desde Windows a servicios en WSL2</title><link>https://cmas.dev/posts/2024-11-01-wsl2-remote-debugging/</link><pubDate>Fri, 01 Nov 2024 00:00:00 -0400</pubDate><guid>https://cmas.dev/posts/2024-11-01-wsl2-remote-debugging/</guid><description>&lt;p>Uno de los grandes beneficios de WSL2 es la integración fluida entre el sistema operativo Windows y el entorno Linux, lo que permite realizar debugging remoto de servicios que corren en WSL2 desde herramientas gráficas y editores del host. Esto es clave para flujos de desarrollo moderno, ya que permite aprovechar lo mejor de ambos mundos: servidores nativos de Linux y herramientas de análisis de Windows.&lt;/p>
 &lt;p>Este artículo describe paso a paso cómo depurar servicios web, APIs, scripts Python, aplicaciones Node.js y otros procesos que corren en WSL2, accediéndolos remotamente desde Windows, especialmente con VS Code y otros entornos integrados.&lt;/p>
 &lt;h2 id="requisitos">Requisitos&lt;/h2>
 &lt;ul>
