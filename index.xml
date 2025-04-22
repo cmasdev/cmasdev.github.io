@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Christian Amado's Blog</title><link>https://cmas.dev/</link><description>Recent content on Christian Amado's Blog</description><generator>Hugo -- gohugo.io</generator><language>es</language><lastBuildDate>Tue, 22 Apr 2025 11:43:00 -0300</lastBuildDate><atom:link href="https://cmas.dev/index.xml" rel="self" type="application/rss+xml"/><item><title>Integración de WebView2 en aplicaciones WinUI 3</title><link>https://cmas.dev/posts/2025-04-22-webview2-integration-winui3/</link><pubDate>Tue, 22 Apr 2025 11:00:00 -0300</pubDate><guid>https://cmas.dev/posts/2025-04-22-webview2-integration-winui3/</guid><description>&lt;p>La necesidad de mostrar contenido web dentro de una aplicación de escritorio ha existido por décadas. Con la evolución de los navegadores modernos y la demanda de experiencias híbridas, el control &lt;strong>WebView2&lt;/strong> se ha posicionado como una solución poderosa y moderna para las aplicaciones &lt;strong>Windows&lt;/strong> desarrolladas con &lt;strong>WinUI 3&lt;/strong>. Este artículo explora en detalle cómo integrar &lt;strong>WebView2&lt;/strong> en una app de escritorio &lt;strong>WinUI 3&lt;/strong> y cómo optimizar la carga de contenido web de manera eficiente.&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Christian Amado's Blog</title><link>https://cmas.dev/</link><description>Recent content on Christian Amado's Blog</description><generator>Hugo -- gohugo.io</generator><language>es</language><lastBuildDate>Tue, 22 Apr 2025 11:00:00 -0300</lastBuildDate><atom:link href="https://cmas.dev/index.xml" rel="self" type="application/rss+xml"/><item><title>Integración de WebView2 en aplicaciones WinUI 3</title><link>https://cmas.dev/posts/2025-04-22-webview2-integration-winui3/</link><pubDate>Tue, 22 Apr 2025 11:00:00 -0300</pubDate><guid>https://cmas.dev/posts/2025-04-22-webview2-integration-winui3/</guid><description>&lt;p>La necesidad de mostrar contenido web dentro de una aplicación de escritorio ha existido por décadas. Con la evolución de los navegadores modernos y la demanda de experiencias híbridas, el control &lt;strong>WebView2&lt;/strong> se ha posicionado como una solución poderosa y moderna para las aplicaciones &lt;strong>Windows&lt;/strong> desarrolladas con &lt;strong>WinUI 3&lt;/strong>. Este artículo explora en detalle cómo integrar &lt;strong>WebView2&lt;/strong> en una app de escritorio &lt;strong>WinUI 3&lt;/strong> y cómo optimizar la carga de contenido web de manera eficiente.&lt;/p>
 &lt;h2 id="qué-es-webview2">¿Qué es WebView2?&lt;/h2>
 &lt;p>&lt;code>WebView2&lt;/code> es un control de Microsoft que permite incrustar contenido web utilizando el motor de renderizado de &lt;strong>Microsoft Edge (Chromium)&lt;/strong> dentro de aplicaciones Win32 o Windows App SDK. A diferencia del antiguo &lt;code>WebView&lt;/code> basado en EdgeHTML, &lt;code>WebView2&lt;/code> ofrece mayor compatibilidad, seguridad y rendimiento gracias a su base Chromium.&lt;/p>
 &lt;h3 id="principales-beneficios">Principales beneficios:&lt;/h3>
@@ -131,7 +131,98 @@ Lenguaje: C#&lt;/p>
 &lt;/ul>
 &lt;h2 id="conclusión">Conclusión&lt;/h2>
 &lt;p>La integración de WebView2 con WinUI 3 permite desarrollar aplicaciones de escritorio modernas, ricas en experiencia y capaces de interactuar con contenido web sin sacrificar rendimiento ni seguridad. Con una arquitectura eficiente de precarga, manejo de errores y comunicación bidireccional, las aplicaciones híbridas se vuelven una opción poderosa y flexible.&lt;/p>
-&lt;p>El enfoque recomendado es aprovechar el ecosistema Chromium sin sacrificar la integridad del entorno de escritorio, permitiendo una experiencia fluida tanto online como offline. Con buenas prácticas y un manejo consciente de los recursos, WebView2 se convierte en un aliado fundamental para desarrolladores de WinUI 3 en el mundo actual.&lt;/p></description></item><item><title>Construcción de un asistente contextual para escritorio usando IA local con acceso al sistema</title><link>https://cmas.dev/posts/2025-03-28-local-ai/</link><pubDate>Fri, 28 Mar 2025 00:00:00 -0300</pubDate><guid>https://cmas.dev/posts/2025-03-28-local-ai/</guid><description>&lt;p>La combinación de capacidades de &lt;strong>IA local&lt;/strong> (como modelos &lt;strong>ONNX&lt;/strong>) con APIs del sistema de &lt;strong>Windows&lt;/strong> abre la puerta al desarrollo de asistentes inteligentes capaces de entender el contexto del usuario y reaccionar en consecuencia. En este artículo se describe cómo crear un asistente de escritorio moderno con &lt;strong>WinUI 3&lt;/strong> que escuche el contenido del portapapeles, analice el texto localmente mediante inferencia con IA, y sugiera acciones o realice comandos con base en el resultado.&lt;/p>
+&lt;p>El enfoque recomendado es aprovechar el ecosistema Chromium sin sacrificar la integridad del entorno de escritorio, permitiendo una experiencia fluida tanto online como offline. Con buenas prácticas y un manejo consciente de los recursos, WebView2 se convierte en un aliado fundamental para desarrolladores de WinUI 3 en el mundo actual.&lt;/p></description></item><item><title>Native AOT en .NET 9</title><link>https://cmas.dev/posts/2025-04-22-aot-nativo-dotnet-9/</link><pubDate>Tue, 22 Apr 2025 00:00:00 -0300</pubDate><guid>https://cmas.dev/posts/2025-04-22-aot-nativo-dotnet-9/</guid><description>&lt;p>Con cada nueva versión de &lt;strong>.NET&lt;/strong>, &lt;strong>Microsoft&lt;/strong> ha trabajado activamente en mejorar el rendimiento, el tamaño de despliegue y la experiencia en entornos de bajo consumo. Uno de los avances más importantes en este sentido es &lt;strong>Native AOT&lt;/strong> (&lt;em>Ahead-of-Time Compilation&lt;/em>). Introducido como parte estable en &lt;strong>.NET 7&lt;/strong>, y refinado aún más en &lt;strong>.NET 8&lt;/strong> y &lt;strong>.NET 9&lt;/strong>, &lt;strong>Native AOT&lt;/strong> permite compilar aplicaciones directamente a código nativo, eliminando por completo la dependencia del &lt;strong>CLR&lt;/strong> en tiempo de ejecución.&lt;/p>
+&lt;p>Este artículo explora cómo utilizar &lt;strong>Native AOT&lt;/strong> en aplicaciones de consola en &lt;strong>.NET 9&lt;/strong>, con un enfoque práctico para reducir significativamente el tiempo de arranque y el consumo de memoria.&lt;/p>
+&lt;h2 id="qué-es-native-aot">¿Qué es Native AOT?&lt;/h2>
+&lt;p>Native AOT (Ahead-of-Time) es un modelo de compilación en el que el código IL (Intermediate Language) generado por el compilador C# es transformado directamente en código máquina antes de que la aplicación se ejecute. Esto contrasta con el modelo Just-in-Time (JIT), que compila partes del IL durante la ejecución.&lt;/p>
+&lt;h3 id="ventajas-clave">Ventajas clave:&lt;/h3>
+&lt;ul>
+&lt;li>&lt;strong>Tiempo de arranque más rápido&lt;/strong> (ideal para herramientas CLI y contenedores).&lt;/li>
+&lt;li>&lt;strong>Menor consumo de memoria&lt;/strong>, ya que se evita el motor JIT.&lt;/li>
+&lt;li>&lt;strong>Distribución como binario único y autónomo&lt;/strong>.&lt;/li>
+&lt;li>&lt;strong>Mejor compatibilidad con entornos restringidos (por ejemplo, Alpine Linux)&lt;/strong>.&lt;/li>
+&lt;/ul>
+&lt;h2 id="requisitos-previos">Requisitos previos&lt;/h2>
+&lt;ul>
+&lt;li>&lt;strong>.NET 9 SDK&lt;/strong>.&lt;/li>
+&lt;li>&lt;strong>Visual Studio 2022 (v17.8 o superior)&lt;/strong> o cualquier editor con soporte para .NET 9.&lt;/li>
+&lt;li>Sistemas operativos compatibles: Windows, Linux, macOS.&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>Nota: Native AOT &lt;strong>no soporta&lt;/strong> todo el ecosistema de .NET (por ejemplo, no es compatible con Reflection completa ni con &lt;code>Assembly.Load&lt;/code> dinámico). Es ideal para escenarios &lt;strong>de consola, CLI, microservicios simples o herramientas de línea de comandos&lt;/strong>.&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="crear-una-aplicación-de-consola-con-native-aot">Crear una aplicación de consola con Native AOT&lt;/h2>
+&lt;h3 id="paso-1-crear-el-proyecto">Paso 1: Crear el proyecto&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">dotnet new console -n AotConsoleApp
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">cd&lt;/span> AotConsoleApp
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="paso-2-modificar-el-archivo-csproj">Paso 2: Modificar el archivo &lt;code>.csproj&lt;/code>&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-xml" data-lang="xml">&lt;span class="line">&lt;span class="cl">&lt;span class="nt">&amp;lt;Project&lt;/span> &lt;span class="na">Sdk=&lt;/span>&lt;span class="s">&amp;#34;Microsoft.NET.Sdk&amp;#34;&lt;/span>&lt;span class="nt">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;PropertyGroup&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;OutputType&amp;gt;&lt;/span>Exe&lt;span class="nt">&amp;lt;/OutputType&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;TargetFramework&amp;gt;&lt;/span>net9.0&lt;span class="nt">&amp;lt;/TargetFramework&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;PublishAot&amp;gt;&lt;/span>true&lt;span class="nt">&amp;lt;/PublishAot&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;InvariantGlobalization&amp;gt;&lt;/span>true&lt;span class="nt">&amp;lt;/InvariantGlobalization&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;StripSymbols&amp;gt;&lt;/span>true&lt;span class="nt">&amp;lt;/StripSymbols&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;IlcOptimizationPreference&amp;gt;&lt;/span>Size&lt;span class="nt">&amp;lt;/IlcOptimizationPreference&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;UseSystemResourceKeys&amp;gt;&lt;/span>false&lt;span class="nt">&amp;lt;/UseSystemResourceKeys&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;/PropertyGroup&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nt">&amp;lt;/Project&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="paso-3-escribir-código-de-ejemplo">Paso 3: Escribir código de ejemplo&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-csharp" data-lang="csharp">&lt;span class="line">&lt;span class="cl">&lt;span class="k">using&lt;/span> &lt;span class="nn">System&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">Console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">WriteLine&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;¡Hola desde Native AOT!&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="paso-4-publicar-con-aot">Paso 4: Publicar con AOT&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">dotnet publish -c Release -r win-x64 --self-contained &lt;span class="nb">true&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="medición-de-rendimiento">Medición de rendimiento&lt;/h2>
+&lt;h3 id="tiempo-de-arranque-ejemplo-en-windows-con-measure-command">Tiempo de arranque (ejemplo en Windows con &lt;code>Measure-Command&lt;/code>):&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-powershell" data-lang="powershell">&lt;span class="line">&lt;span class="cl">&lt;span class="nb">Measure-Command&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="p">.\&lt;/span>&lt;span class="n">AotConsoleApp&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="py">exe&lt;/span> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Modelo&lt;/th>
+&lt;th>Tiempo arranque&lt;/th>
+&lt;th>Memoria inicial&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>.NET JIT&lt;/td>
+&lt;td>150-200 ms&lt;/td>
+&lt;td>~40-60 MB&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Native AOT&lt;/td>
+&lt;td>10-20 ms&lt;/td>
+&lt;td>~5-10 MB&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="buenas-prácticas-y-consideraciones">Buenas prácticas y consideraciones&lt;/h2>
+&lt;h3 id="1-evitar-reflexión-no-compatible">1. Evitar reflexión no compatible&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-csharp" data-lang="csharp">&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// ❌ Esto fallará&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">Type&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">GetType&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;System.String&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// ✅ Alternativa&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">typeof&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kt">string&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="2-minimizar-dependencias">2. Minimizar dependencias&lt;/h3>
+&lt;h3 id="3-evaluar-uso-de-trimming">3. Evaluar uso de &lt;code>Trimming&lt;/code>&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-xml" data-lang="xml">&lt;span class="line">&lt;span class="cl">&lt;span class="nt">&amp;lt;PublishTrimmed&amp;gt;&lt;/span>true&lt;span class="nt">&amp;lt;/PublishTrimmed&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="4-optimizar-para-tamaño-o-velocidad">4. Optimizar para tamaño o velocidad&lt;/h3>
+&lt;ul>
+&lt;li>&lt;code>Speed&lt;/code>: para maximizar el rendimiento.&lt;/li>
+&lt;li>&lt;code>Size&lt;/code>: para minimizar el binario.&lt;/li>
+&lt;/ul>
+&lt;h3 id="5-multiplataforma">5. Multiplataforma&lt;/h3>
+&lt;p>Compilar por separado para cada &lt;code>RID&lt;/code>.&lt;/p>
+&lt;h2 id="escenarios-ideales-para-native-aot">Escenarios ideales para Native AOT&lt;/h2>
+&lt;ul>
+&lt;li>Herramientas de línea de comandos.&lt;/li>
+&lt;li>Microservicios autónomos.&lt;/li>
+&lt;li>Contenedores minimalistas.&lt;/li>
+&lt;li>Cronjobs o tareas agendadas.&lt;/li>
+&lt;/ul>
+&lt;h2 id="conclusión">Conclusión&lt;/h2>
+&lt;p>&lt;strong>Native AOT&lt;/strong> en &lt;strong>.NET 9&lt;/strong> representa un avance significativo en la capacidad de &lt;strong>.NET&lt;/strong> para competir en entornos donde el rendimiento, el tamaño del binario y la velocidad de arranque son críticos. Si bien aún presenta limitaciones respecto a reflexión, carga dinámica y ciertas bibliotecas, para escenarios de consola, herramientas y microservicios es una solución madura, estable y recomendada.&lt;/p></description></item><item><title>Construcción de un asistente contextual para escritorio usando IA local con acceso al sistema</title><link>https://cmas.dev/posts/2025-03-28-local-ai/</link><pubDate>Fri, 28 Mar 2025 00:00:00 -0300</pubDate><guid>https://cmas.dev/posts/2025-03-28-local-ai/</guid><description>&lt;p>La combinación de capacidades de &lt;strong>IA local&lt;/strong> (como modelos &lt;strong>ONNX&lt;/strong>) con APIs del sistema de &lt;strong>Windows&lt;/strong> abre la puerta al desarrollo de asistentes inteligentes capaces de entender el contexto del usuario y reaccionar en consecuencia. En este artículo se describe cómo crear un asistente de escritorio moderno con &lt;strong>WinUI 3&lt;/strong> que escuche el contenido del portapapeles, analice el texto localmente mediante inferencia con IA, y sugiera acciones o realice comandos con base en el resultado.&lt;/p>
 &lt;p>Este enfoque funciona completamente offline, preservando privacidad y respondiendo en tiempo real.&lt;/p>
 &lt;h2 id="escenario">Escenario&lt;/h2>
 &lt;p>Se construye una app tipo widget flotante que:&lt;/p>
