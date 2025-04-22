@@ -2,7 +2,7 @@
 layout: post
 title: "Native AOT en .NET 9"
 author: Christian Amado
-date: 2025-04-22 11:43:00 -0300
+date: 2025-04-22 00:00:00 -0300
 category: [Desarrollo de software]
 tags: [.NET]
 thumbnail-img: /img/posts/thumbnails/dotnet.png
