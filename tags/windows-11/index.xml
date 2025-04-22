@@ -1,4 +1,137 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Windows 11 on Christian Amado's Blog</title><link>https://cmas.dev/tags/windows-11/</link><description>Recent content in Windows 11 on Christian Amado's Blog</description><generator>Hugo -- gohugo.io</generator><language>es</language><lastBuildDate>Fri, 28 Mar 2025 00:00:00 -0300</lastBuildDate><atom:link href="https://cmas.dev/tags/windows-11/index.xml" rel="self" type="application/rss+xml"/><item><title>Construcción de un asistente contextual para escritorio usando IA local con acceso al sistema</title><link>https://cmas.dev/posts/2025-03-28-local-ai/</link><pubDate>Fri, 28 Mar 2025 00:00:00 -0300</pubDate><guid>https://cmas.dev/posts/2025-03-28-local-ai/</guid><description>&lt;p>La combinación de capacidades de &lt;strong>IA local&lt;/strong> (como modelos &lt;strong>ONNX&lt;/strong>) con APIs del sistema de &lt;strong>Windows&lt;/strong> abre la puerta al desarrollo de asistentes inteligentes capaces de entender el contexto del usuario y reaccionar en consecuencia. En este artículo se describe cómo crear un asistente de escritorio moderno con &lt;strong>WinUI 3&lt;/strong> que escuche el contenido del portapapeles, analice el texto localmente mediante inferencia con IA, y sugiera acciones o realice comandos con base en el resultado.&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Windows 11 on Christian Amado's Blog</title><link>https://cmas.dev/tags/windows-11/</link><description>Recent content in Windows 11 on Christian Amado's Blog</description><generator>Hugo -- gohugo.io</generator><language>es</language><lastBuildDate>Tue, 22 Apr 2025 11:00:00 -0300</lastBuildDate><atom:link href="https://cmas.dev/tags/windows-11/index.xml" rel="self" type="application/rss+xml"/><item><title>Integración de WebView2 en aplicaciones WinUI 3</title><link>https://cmas.dev/posts/2025-04-22-webview2-integration-winui3/</link><pubDate>Tue, 22 Apr 2025 11:00:00 -0300</pubDate><guid>https://cmas.dev/posts/2025-04-22-webview2-integration-winui3/</guid><description>&lt;p>La necesidad de mostrar contenido web dentro de una aplicación de escritorio ha existido por décadas. Con la evolución de los navegadores modernos y la demanda de experiencias híbridas, el control &lt;strong>WebView2&lt;/strong> se ha posicionado como una solución poderosa y moderna para las aplicaciones &lt;strong>Windows&lt;/strong> desarrolladas con &lt;strong>WinUI 3&lt;/strong>. Este artículo explora en detalle cómo integrar &lt;strong>WebView2&lt;/strong> en una app de escritorio &lt;strong>WinUI 3&lt;/strong> y cómo optimizar la carga de contenido web de manera eficiente.&lt;/p>
+&lt;h2 id="qué-es-webview2">¿Qué es WebView2?&lt;/h2>
+&lt;p>&lt;code>WebView2&lt;/code> es un control de Microsoft que permite incrustar contenido web utilizando el motor de renderizado de &lt;strong>Microsoft Edge (Chromium)&lt;/strong> dentro de aplicaciones Win32 o Windows App SDK. A diferencia del antiguo &lt;code>WebView&lt;/code> basado en EdgeHTML, &lt;code>WebView2&lt;/code> ofrece mayor compatibilidad, seguridad y rendimiento gracias a su base Chromium.&lt;/p>
+&lt;h3 id="principales-beneficios">Principales beneficios:&lt;/h3>
+&lt;ul>
+&lt;li>Motor moderno basado en Chromium.&lt;/li>
+&lt;li>Aislamiento de procesos.&lt;/li>
+&lt;li>Integración con cookies y almacenamiento local.&lt;/li>
+&lt;li>Comunicación bidireccional entre JavaScript y código nativo.&lt;/li>
+&lt;li>Soporte a largo plazo por parte de Microsoft.&lt;/li>
+&lt;/ul>
+&lt;h2 id="requisitos-previos">Requisitos previos&lt;/h2>
+&lt;p>Antes de comenzar, se deben tener en cuenta los siguientes requisitos:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>Windows App SDK&lt;/strong> (v1.3 o superior).&lt;/li>
+&lt;li>&lt;strong>Microsoft Edge WebView2 Runtime&lt;/strong> instalado (no confundir con el navegador Edge).&lt;/li>
+&lt;li>&lt;strong>Visual Studio 2022&lt;/strong> con soporte para escritorio con C# y WinUI 3.&lt;/li>
+&lt;li>SDK de Windows 10 o 11 instalado.&lt;/li>
+&lt;/ul>
+&lt;h2 id="instalación-de-dependencias">Instalación de dependencias&lt;/h2>
+&lt;ol>
+&lt;li>
+&lt;p>Crear un nuevo proyecto en Visual Studio:&lt;br>
+Tipo: &lt;code>Blank App, Packaged (WinUI 3 in Desktop)&lt;/code>&lt;br>
+Lenguaje: C#&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Agregar la referencia a WebView2:&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;p>En el archivo &lt;code>.csproj&lt;/code>, añadir el paquete NuGet:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-xml" data-lang="xml">&lt;span class="line">&lt;span class="cl">&lt;span class="nt">&amp;lt;PackageReference&lt;/span> &lt;span class="na">Include=&lt;/span>&lt;span class="s">&amp;#34;Microsoft.Web.WebView2&amp;#34;&lt;/span> &lt;span class="na">Version=&lt;/span>&lt;span class="s">&amp;#34;1.0.1901.177&amp;#34;&lt;/span> &lt;span class="nt">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Guardar y restaurar los paquetes.&lt;/p>
+&lt;h2 id="estructura-base-de-una-app-winui-3-con-webview2">Estructura base de una app WinUI 3 con WebView2&lt;/h2>
+&lt;h3 id="xaml">XAML&lt;/h3>
+&lt;p>Editar &lt;code>MainWindow.xaml&lt;/code> para incluir el control &lt;code>WebView2&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-xml" data-lang="xml">&lt;span class="line">&lt;span class="cl">&lt;span class="nt">&amp;lt;Window&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="na">x:Class=&lt;/span>&lt;span class="s">&amp;#34;WebView2Sample.MainWindow&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="na">xmlns=&lt;/span>&lt;span class="s">&amp;#34;http://schemas.microsoft.com/winfx/2006/xaml/presentation&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="na">xmlns:local=&lt;/span>&lt;span class="s">&amp;#34;using:WebView2Sample&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="na">xmlns:x=&lt;/span>&lt;span class="s">&amp;#34;http://schemas.microsoft.com/winfx/2006/xaml&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="na">xmlns:wv2=&lt;/span>&lt;span class="s">&amp;#34;using:Microsoft.Web.WebView2.WinUI&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="na">Title=&lt;/span>&lt;span class="s">&amp;#34;WebView2 Sample&amp;#34;&lt;/span> &lt;span class="na">Height=&lt;/span>&lt;span class="s">&amp;#34;450&amp;#34;&lt;/span> &lt;span class="na">Width=&lt;/span>&lt;span class="s">&amp;#34;800&amp;#34;&lt;/span>&lt;span class="nt">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;Grid&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;wv2:WebView2&lt;/span> &lt;span class="na">x:Name=&lt;/span>&lt;span class="s">&amp;#34;MyWebView&amp;#34;&lt;/span> &lt;span class="na">HorizontalAlignment=&lt;/span>&lt;span class="s">&amp;#34;Stretch&amp;#34;&lt;/span> &lt;span class="na">VerticalAlignment=&lt;/span>&lt;span class="s">&amp;#34;Stretch&amp;#34;&lt;/span> &lt;span class="nt">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;/Grid&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nt">&amp;lt;/Window&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="code-behind-c">Code-behind (C#)&lt;/h3>
+&lt;p>Modificar &lt;code>MainWindow.xaml.cs&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-csharp" data-lang="csharp">&lt;span class="line">&lt;span class="cl">&lt;span class="k">using&lt;/span> &lt;span class="nn">Microsoft.UI.Xaml&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">using&lt;/span> &lt;span class="nn">Microsoft.UI.Xaml.Controls&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">using&lt;/span> &lt;span class="nn">Microsoft.Web.WebView2.Core&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">using&lt;/span> &lt;span class="nn">System&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">namespace&lt;/span> &lt;span class="nn">WebView2Sample&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">public&lt;/span> &lt;span class="kd">sealed&lt;/span> &lt;span class="kd">partial&lt;/span> &lt;span class="k">class&lt;/span> &lt;span class="nc">MainWindow&lt;/span> &lt;span class="p">:&lt;/span> &lt;span class="n">Window&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">public&lt;/span> &lt;span class="n">MainWindow&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">InitializeComponent&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">InitializeWebViewAsync&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">private&lt;/span> &lt;span class="kd">async&lt;/span> &lt;span class="k">void&lt;/span> &lt;span class="n">InitializeWebViewAsync&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">await&lt;/span> &lt;span class="n">MyWebView&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">EnsureCoreWebView2Async&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">MyWebView&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">Source&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="k">new&lt;/span> &lt;span class="n">Uri&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;https://cmas.dev&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="buenas-prácticas-para-una-carga-eficiente">Buenas prácticas para una carga eficiente&lt;/h2>
+&lt;h3 id="1-usar-caché-inteligente">1. Usar caché inteligente&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-csharp" data-lang="csharp">&lt;span class="line">&lt;span class="cl">&lt;span class="kt">var&lt;/span> &lt;span class="n">environment&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="k">await&lt;/span> &lt;span class="n">CoreWebView2Environment&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">CreateAsync&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kc">null&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s">&amp;#34;webview2_cache&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">await&lt;/span> &lt;span class="n">MyWebView&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">EnsureCoreWebView2Async&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">environment&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="2-cargar-contenido-local-como-fallback">2. Cargar contenido local como fallback&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-csharp" data-lang="csharp">&lt;span class="line">&lt;span class="cl">&lt;span class="n">MyWebView&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">CoreWebView2&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">NavigationCompleted&lt;/span> &lt;span class="p">+=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">s&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">e&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(!&lt;/span>&lt;span class="n">e&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">IsSuccess&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">MyWebView&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">NavigateToString&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;&amp;lt;html&amp;gt;&amp;lt;body&amp;gt;&amp;lt;h1&amp;gt;Error al cargar el sitio&amp;lt;/h1&amp;gt;&amp;lt;/body&amp;gt;&amp;lt;/html&amp;gt;&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="3-optimizar-el-tamaño-del-webview2">3. Optimizar el tamaño del WebView2&lt;/h3>
+&lt;p>Evitar redimensionamientos costosos en tiempo de ejecución. Usar &lt;code>Stretch&lt;/code> y márgenes fijos mejora la renderización.&lt;/p>
+&lt;h3 id="4-precalentamiento-del-entorno">4. Precalentamiento del entorno&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-csharp" data-lang="csharp">&lt;span class="line">&lt;span class="cl">&lt;span class="kd">private&lt;/span> &lt;span class="kd">static&lt;/span> &lt;span class="n">CoreWebView2Environment&lt;/span> &lt;span class="n">_preloadedEnvironment&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">public&lt;/span> &lt;span class="kd">static&lt;/span> &lt;span class="kd">async&lt;/span> &lt;span class="n">Task&lt;/span> &lt;span class="n">PreloadWebViewEnvironment&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">_preloadedEnvironment&lt;/span> &lt;span class="p">??=&lt;/span> &lt;span class="k">await&lt;/span> &lt;span class="n">CoreWebView2Environment&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">CreateAsync&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="5-comunicación-entre-c-y-javascript">5. Comunicación entre C# y JavaScript&lt;/h3>
+&lt;p>&lt;strong>Ejecutar script desde C#:&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-csharp" data-lang="csharp">&lt;span class="line">&lt;span class="cl">&lt;span class="k">await&lt;/span> &lt;span class="n">MyWebView&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">CoreWebView2&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">ExecuteScriptAsync&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;alert(&amp;#39;Hola desde C#&amp;#39;);&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>Enviar mensaje desde JavaScript:&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="line">&lt;span class="cl">&lt;span class="nb">window&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">chrome&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">webview&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">postMessage&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;Hola desde JS&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>Recibir mensaje en C#:&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-csharp" data-lang="csharp">&lt;span class="line">&lt;span class="cl">&lt;span class="n">MyWebView&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">CoreWebView2&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">WebMessageReceived&lt;/span> &lt;span class="p">+=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">s&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">e&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kt">var&lt;/span> &lt;span class="n">message&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="n">e&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">TryGetWebMessageAsString&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">WriteLine&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;Mensaje recibido: &amp;#34;&lt;/span> &lt;span class="p">+&lt;/span> &lt;span class="n">message&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="manejo-de-eventos-importantes">Manejo de eventos importantes&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>NavigationStarting&lt;/code>: Permite cancelar navegaciones o filtrar dominios.&lt;/li>
+&lt;li>&lt;code>ContentLoading&lt;/code>: Indica que se está comenzando a renderizar el contenido.&lt;/li>
+&lt;li>&lt;code>NavigationCompleted&lt;/code>: Útil para validar si una página cargó correctamente.&lt;/li>
+&lt;/ul>
+&lt;p>Ejemplo de bloqueo de dominios:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-csharp" data-lang="csharp">&lt;span class="line">&lt;span class="cl">&lt;span class="n">MyWebView&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">CoreWebView2&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">NavigationStarting&lt;/span> &lt;span class="p">+=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">s&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">e&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">e&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">Uri&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">Contains&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;facebook.com&amp;#34;&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">e&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">Cancel&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="kc">true&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="seguridad-y-aislamiento">Seguridad y aislamiento&lt;/h2>
+&lt;p>Es recomendable usar permisos mínimos si se carga contenido externo:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-csharp" data-lang="csharp">&lt;span class="line">&lt;span class="cl">&lt;span class="n">MyWebView&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">CoreWebView2&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">Settings&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">IsScriptEnabled&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="kc">true&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">MyWebView&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">CoreWebView2&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">Settings&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">AreDefaultContextMenusEnabled&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="kc">false&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">MyWebView&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">CoreWebView2&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">Settings&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">AreDevToolsEnabled&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="kc">false&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Y para contenido local, asegurarse de usar &lt;code>https&lt;/code> o rutas en disco firmadas.&lt;/p>
+&lt;h2 id="escenarios-de-uso-comunes">Escenarios de uso comunes&lt;/h2>
+&lt;ul>
+&lt;li>Dashboards empresariales que combinan gráficos web y lógica nativa.&lt;/li>
+&lt;li>Apps híbridas que consumen microfrontends.&lt;/li>
+&lt;li>Visualización de documentación o ayuda contextual online.&lt;/li>
+&lt;li>Integración con servicios web modernos (OAuth, APIs REST, etc).&lt;/li>
+&lt;/ul>
+&lt;h2 id="conclusión">Conclusión&lt;/h2>
+&lt;p>La integración de WebView2 con WinUI 3 permite desarrollar aplicaciones de escritorio modernas, ricas en experiencia y capaces de interactuar con contenido web sin sacrificar rendimiento ni seguridad. Con una arquitectura eficiente de precarga, manejo de errores y comunicación bidireccional, las aplicaciones híbridas se vuelven una opción poderosa y flexible.&lt;/p>
+&lt;p>El enfoque recomendado es aprovechar el ecosistema Chromium sin sacrificar la integridad del entorno de escritorio, permitiendo una experiencia fluida tanto online como offline. Con buenas prácticas y un manejo consciente de los recursos, WebView2 se convierte en un aliado fundamental para desarrolladores de WinUI 3 en el mundo actual.&lt;/p></description></item><item><title>Construcción de un asistente contextual para escritorio usando IA local con acceso al sistema</title><link>https://cmas.dev/posts/2025-03-28-local-ai/</link><pubDate>Fri, 28 Mar 2025 00:00:00 -0300</pubDate><guid>https://cmas.dev/posts/2025-03-28-local-ai/</guid><description>&lt;p>La combinación de capacidades de &lt;strong>IA local&lt;/strong> (como modelos &lt;strong>ONNX&lt;/strong>) con APIs del sistema de &lt;strong>Windows&lt;/strong> abre la puerta al desarrollo de asistentes inteligentes capaces de entender el contexto del usuario y reaccionar en consecuencia. En este artículo se describe cómo crear un asistente de escritorio moderno con &lt;strong>WinUI 3&lt;/strong> que escuche el contenido del portapapeles, analice el texto localmente mediante inferencia con IA, y sugiera acciones o realice comandos con base en el resultado.&lt;/p>
 &lt;p>Este enfoque funciona completamente offline, preservando privacidad y respondiendo en tiempo real.&lt;/p>
 &lt;h2 id="escenario">Escenario&lt;/h2>
 &lt;p>Se construye una app tipo widget flotante que:&lt;/p>
