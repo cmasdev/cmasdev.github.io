@@ -7,7 +7,7 @@ category: [Desarrollo de software]
 tags: [Google,Google Cloud,Go,Firestore]
 thumbnail-img: /img/posts/thumbnails/golang.jpg
 cover-img: /img/posts/cover/Go-Lang.png
-share_img: /img/posts/shared/golang.jpg
+share_img: /img/posts/shared/golang.png
 ---
 
 **Firestore**, la base de datos **NoSQL** de **Google Cloud**, ofrece una solución escalable y de baja latencia ideal para aplicaciones modernas. En este artículo se explora cómo integrar **Firestore** con aplicaciones desarrolladas en **Go**, aprovechando el **SDK** oficial de **Google Cloud**. A lo largo del artículo se muestra un enfoque práctico para conectar, leer, escribir y actualizar documentos en **Firestore** desde una aplicación escrita en **Go**.
