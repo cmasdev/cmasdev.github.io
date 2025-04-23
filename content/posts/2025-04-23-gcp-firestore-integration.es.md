@@ -5,8 +5,8 @@ author: Christian Amado
 date: 2025-04-23 00:00:00 -0300
 category: [Desarrollo de software]
 tags: [Google,Google Cloud,Go,Firestore]
-thumbnail-img: /img/posts/thumbnails/golang.jpg
-cover-img: /img/posts/cover/Go-Lang.png
+thumbnail-img: /img/posts/thumbnails/golang.webp
+cover-img: /img/posts/cover/Go-Lang.svg
 share_img: /img/posts/shared/golang.png
 ---
 
