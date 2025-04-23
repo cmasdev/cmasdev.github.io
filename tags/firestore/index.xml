@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Firestore on Christian Amado's Blog</title><link>https://cmas.dev/tags/firestore/</link><description>Recent content in Firestore on Christian Amado's Blog</description><generator>Hugo -- gohugo.io</generator><language>es</language><lastBuildDate>Wed, 23 Apr 2025 00:00:00 -0300</lastBuildDate><atom:link href="https://cmas.dev/tags/firestore/index.xml" rel="self" type="application/rss+xml"/><item><title/><link>https://cmas.dev/posts/2025-04-23-gcp-firestore-integration/</link><pubDate>Wed, 23 Apr 2025 00:00:00 -0300</pubDate><guid>https://cmas.dev/posts/2025-04-23-gcp-firestore-integration/</guid><description>&lt;p>&lt;strong>Firestore&lt;/strong>, la base de datos &lt;strong>NoSQL&lt;/strong> de &lt;strong>Google Cloud&lt;/strong>, ofrece una solución escalable y de baja latencia ideal para aplicaciones modernas. En este artículo se explora cómo integrar &lt;strong>Firestore&lt;/strong> con aplicaciones desarrolladas en &lt;strong>Go&lt;/strong>, aprovechando el &lt;strong>SDK&lt;/strong> oficial de &lt;strong>Google Cloud&lt;/strong>. A lo largo del artículo se muestra un enfoque práctico para conectar, leer, escribir y actualizar documentos en &lt;strong>Firestore&lt;/strong> desde una aplicación escrita en &lt;strong>Go&lt;/strong>.&lt;/p>
+&lt;h2 id="por-qué-firestore-con-go">¿Por qué Firestore con Go?&lt;/h2>
+&lt;p>Go es un lenguaje compilado, concurrente y eficiente, ideal para aplicaciones de backend. Firestore, por su parte, ofrece sincronización en tiempo real, una estructura basada en documentos y una integración nativa con GCP. Combinarlos resulta natural si se desea:&lt;/p>
+&lt;ul>
+&lt;li>Escalabilidad automática sin configurar instancias manualmente.&lt;/li>
+&lt;li>Un esquema flexible sin necesidad de migraciones.&lt;/li>
+&lt;li>Baja latencia para operaciones de lectura/escritura.&lt;/li>
+&lt;li>Seguridad granular con reglas basadas en usuarios.&lt;/li>
+&lt;/ul>
+&lt;h2 id="requisitos-previos">Requisitos previos&lt;/h2>
+&lt;p>Antes de comenzar, se debe tener:&lt;/p>
+&lt;ul>
+&lt;li>Una cuenta de Google Cloud (puede ser gratuita).&lt;/li>
+&lt;li>Un proyecto de GCP con Firestore habilitado.&lt;/li>
+&lt;li>El SDK de Google Cloud instalado (&lt;code>gcloud&lt;/code>).&lt;/li>
+&lt;li>Go instalado (recomendado Go 1.20 o superior).&lt;/li>
+&lt;li>Una carpeta de proyecto Go con módulos habilitados (&lt;code>go mod init&lt;/code>).&lt;/li>
+&lt;/ul>
+&lt;h2 id="paso-1-crear-el-proyecto-en-gcp-y-habilitar-firestore">Paso 1: Crear el proyecto en GCP y habilitar Firestore&lt;/h2>
+&lt;p>Desde la consola de Google Cloud:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>Crear un nuevo proyecto:&lt;br>
+Navegar a &lt;a href="https://console.cloud.google.com">console.cloud.google.com&lt;/a>, ir a &amp;ldquo;IAM y administración&amp;rdquo; &amp;gt; &amp;ldquo;Proyectos&amp;rdquo; &amp;gt; &amp;ldquo;Nuevo Proyecto&amp;rdquo;.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Habilitar Firestore:&lt;br>
+En el menú lateral, ir a &amp;ldquo;Firestore&amp;rdquo;, seleccionar &amp;ldquo;Modo nativo&amp;rdquo; y elegir una región.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Crear una cuenta de servicio:&lt;/p>
+&lt;ul>
+&lt;li>Ir a &amp;ldquo;IAM y administración&amp;rdquo; &amp;gt; &amp;ldquo;Cuentas de servicio&amp;rdquo;.&lt;/li>
+&lt;li>Crear una nueva con permisos &lt;code>Cloud Datastore User&lt;/code>.&lt;/li>
+&lt;li>Descargar la clave en formato JSON.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="paso-2-configurar-el-entorno-de-desarrollo-go">Paso 2: Configurar el entorno de desarrollo Go&lt;/h2>
+&lt;p>En la terminal:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="nb">export&lt;/span> &lt;span class="nv">GOOGLE_APPLICATION_CREDENTIALS&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;/ruta/a/tu/clave.json&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>En tu proyecto Go, instala las dependencias necesarias:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">go mod init firego
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">go get cloud.google.com/go/firestore
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">go get google.golang.org/api/option
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="paso-3-conectar-a-firestore">Paso 3: Conectar a Firestore&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-go" data-lang="go">&lt;span class="line">&lt;span class="cl">&lt;span class="kn">package&lt;/span> &lt;span class="nx">main&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kn">import&lt;/span> &lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s">&amp;#34;context&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s">&amp;#34;fmt&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s">&amp;#34;log&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s">&amp;#34;cloud.google.com/go/firestore&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s">&amp;#34;google.golang.org/api/option&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">func&lt;/span> &lt;span class="nf">main&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">ctx&lt;/span> &lt;span class="o">:=&lt;/span> &lt;span class="nx">context&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Background&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">sa&lt;/span> &lt;span class="o">:=&lt;/span> &lt;span class="nx">option&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">WithCredentialsFile&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;ruta/a/tu/clave.json&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">client&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">err&lt;/span> &lt;span class="o">:=&lt;/span> &lt;span class="nx">firestore&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">NewClient&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">ctx&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s">&amp;#34;ID_DEL_PROYECTO&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">sa&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="nx">err&lt;/span> &lt;span class="o">!=&lt;/span> &lt;span class="kc">nil&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">log&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Fatalf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;Error al conectar con Firestore: %v&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">err&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">defer&lt;/span> &lt;span class="nx">client&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Close&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">fmt&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Println&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;Conexión establecida con Firestore&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="paso-4-agregar-documentos">Paso 4: Agregar documentos&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-go" data-lang="go">&lt;span class="line">&lt;span class="cl">&lt;span class="kd">type&lt;/span> &lt;span class="nx">Usuario&lt;/span> &lt;span class="kd">struct&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">Nombre&lt;/span> &lt;span class="kt">string&lt;/span> &lt;span class="s">`firestore:&amp;#34;nombre&amp;#34;`&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">Correo&lt;/span> &lt;span class="kt">string&lt;/span> &lt;span class="s">`firestore:&amp;#34;correo&amp;#34;`&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">Activo&lt;/span> &lt;span class="kt">bool&lt;/span> &lt;span class="s">`firestore:&amp;#34;activo&amp;#34;`&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">func&lt;/span> &lt;span class="nf">agregarUsuario&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">client&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="nx">firestore&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">Client&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">ctx&lt;/span> &lt;span class="nx">context&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">Context&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="kt">error&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">u&lt;/span> &lt;span class="o">:=&lt;/span> &lt;span class="nx">Usuario&lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="s">&amp;#34;Christian&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s">&amp;#34;cmas@example.com&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="kc">true&lt;/span>&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">_&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">_&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">err&lt;/span> &lt;span class="o">:=&lt;/span> &lt;span class="nx">client&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Collection&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;usuarios&amp;#34;&lt;/span>&lt;span class="p">).&lt;/span>&lt;span class="nf">Add&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">ctx&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">u&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="nx">err&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="paso-5-leer-documentos">Paso 5: Leer documentos&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-go" data-lang="go">&lt;span class="line">&lt;span class="cl">&lt;span class="kd">func&lt;/span> &lt;span class="nf">obtenerUsuarios&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">client&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="nx">firestore&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">Client&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">ctx&lt;/span> &lt;span class="nx">context&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">Context&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="kt">error&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">iter&lt;/span> &lt;span class="o">:=&lt;/span> &lt;span class="nx">client&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Collection&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;usuarios&amp;#34;&lt;/span>&lt;span class="p">).&lt;/span>&lt;span class="nf">Documents&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">ctx&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">doc&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">err&lt;/span> &lt;span class="o">:=&lt;/span> &lt;span class="nx">iter&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Next&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="nx">err&lt;/span> &lt;span class="o">!=&lt;/span> &lt;span class="kc">nil&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">break&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">var&lt;/span> &lt;span class="nx">u&lt;/span> &lt;span class="nx">Usuario&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">doc&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">DataTo&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">&amp;amp;&lt;/span>&lt;span class="nx">u&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">fmt&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Printf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;Usuario: %+v\n&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">u&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="kc">nil&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="paso-6-actualizar-documentos">Paso 6: Actualizar documentos&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-go" data-lang="go">&lt;span class="line">&lt;span class="cl">&lt;span class="kd">func&lt;/span> &lt;span class="nf">actualizarCorreo&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">client&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="nx">firestore&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">Client&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">ctx&lt;/span> &lt;span class="nx">context&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">Context&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">docID&lt;/span> &lt;span class="kt">string&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="kt">error&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">_&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">err&lt;/span> &lt;span class="o">:=&lt;/span> &lt;span class="nx">client&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Collection&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;usuarios&amp;#34;&lt;/span>&lt;span class="p">).&lt;/span>&lt;span class="nf">Doc&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">docID&lt;/span>&lt;span class="p">).&lt;/span>&lt;span class="nf">Update&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">ctx&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">[]&lt;/span>&lt;span class="nx">firestore&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">Update&lt;/span>&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>&lt;span class="nx">Path&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s">&amp;#34;correo&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">Value&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s">&amp;#34;nuevo@email.com&amp;#34;&lt;/span>&lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">})&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="nx">err&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="paso-7-eliminar-documentos">Paso 7: Eliminar documentos&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-go" data-lang="go">&lt;span class="line">&lt;span class="cl">&lt;span class="kd">func&lt;/span> &lt;span class="nf">eliminarUsuario&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">client&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="nx">firestore&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">Client&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">ctx&lt;/span> &lt;span class="nx">context&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">Context&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">docID&lt;/span> &lt;span class="kt">string&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="kt">error&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">_&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">err&lt;/span> &lt;span class="o">:=&lt;/span> &lt;span class="nx">client&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Collection&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;usuarios&amp;#34;&lt;/span>&lt;span class="p">).&lt;/span>&lt;span class="nf">Doc&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">docID&lt;/span>&lt;span class="p">).&lt;/span>&lt;span class="nf">Delete&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">ctx&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="nx">err&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="buenas-prácticas">Buenas prácticas&lt;/h2>
+&lt;ul>
+&lt;li>&lt;strong>Evitar operaciones dentro de loops&lt;/strong> sin control de errores.&lt;/li>
+&lt;li>&lt;strong>Usar &lt;code>context.WithTimeout&lt;/code>&lt;/strong> para prevenir bloqueos indefinidos.&lt;/li>
+&lt;li>&lt;strong>Cerrar el cliente correctamente&lt;/strong> con &lt;code>defer client.Close()&lt;/code>.&lt;/li>
+&lt;li>&lt;strong>Aplicar reglas de seguridad&lt;/strong> desde la consola para limitar accesos.&lt;/li>
+&lt;li>&lt;strong>Monitorear el uso y costos&lt;/strong> desde el panel de GCP.&lt;/li>
+&lt;/ul>
+&lt;h2 id="conclusión">Conclusión&lt;/h2>
+&lt;p>Integrar &lt;strong>Firestore&lt;/strong> en una aplicación &lt;strong>Go&lt;/strong> es un proceso directo gracias al &lt;strong>SDK&lt;/strong> oficial de &lt;strong>Google Cloud&lt;/strong>. Este enfoque permite desarrollar aplicaciones backend escalables, eficientes y seguras. Con &lt;strong>Firestore&lt;/strong> se elimina la necesidad de gestionar servidores o configurar réplicas manuales, y se gana un modelo de datos flexible ideal para apps modernas.&lt;/p>
+&lt;p>Este artículo mostró paso a paso cómo conectar, crear, leer, actualizar y borrar documentos. A partir de aquí, se puede escalar a funcionalidades más avanzadas como búsquedas compuestas, seguridad basada en usuarios, y sincronización en tiempo real mediante &lt;strong>Firebase Authentication&lt;/strong> y &lt;strong>Firestore listeners&lt;/strong>.&lt;/p></description></item></channel></rss>
