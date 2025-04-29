@@ -1,4 +1,129 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>.NET on Christian Amado's Blog</title><link>https://cmas.dev/tags/.net/</link><description>Recent content in .NET on Christian Amado's Blog</description><generator>Hugo -- gohugo.io</generator><language>es</language><lastBuildDate>Tue, 22 Apr 2025 00:00:00 -0300</lastBuildDate><atom:link href="https://cmas.dev/tags/.net/index.xml" rel="self" type="application/rss+xml"/><item><title>Native AOT en .NET 9</title><link>https://cmas.dev/posts/2025-04-22-aot-nativo-dotnet-9/</link><pubDate>Tue, 22 Apr 2025 00:00:00 -0300</pubDate><guid>https://cmas.dev/posts/2025-04-22-aot-nativo-dotnet-9/</guid><description>&lt;p>Con cada nueva versión de &lt;strong>.NET&lt;/strong>, &lt;strong>Microsoft&lt;/strong> ha trabajado activamente en mejorar el rendimiento, el tamaño de despliegue y la experiencia en entornos de bajo consumo. Uno de los avances más importantes en este sentido es &lt;strong>Native AOT&lt;/strong> (&lt;em>Ahead-of-Time Compilation&lt;/em>). Introducido como parte estable en &lt;strong>.NET 7&lt;/strong>, y refinado aún más en &lt;strong>.NET 8&lt;/strong> y &lt;strong>.NET 9&lt;/strong>, &lt;strong>Native AOT&lt;/strong> permite compilar aplicaciones directamente a código nativo, eliminando por completo la dependencia del &lt;strong>CLR&lt;/strong> en tiempo de ejecución.&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>.NET on Christian Amado's Blog</title><link>https://cmas.dev/tags/.net/</link><description>Recent content in .NET on Christian Amado's Blog</description><generator>Hugo -- gohugo.io</generator><language>es</language><lastBuildDate>Tue, 29 Apr 2025 00:00:00 -0300</lastBuildDate><atom:link href="https://cmas.dev/tags/.net/index.xml" rel="self" type="application/rss+xml"/><item><title>Creando analizadores personalizados en C# con Roslyn</title><link>https://cmas.dev/posts/2025-04-29-creating-analizers-in-csharp/</link><pubDate>Tue, 29 Apr 2025 00:00:00 -0300</pubDate><guid>https://cmas.dev/posts/2025-04-29-creating-analizers-in-csharp/</guid><description>&lt;p>Mantener un código limpio, coherente y alineado con estándares internos es clave en proyectos profesionales. Aunque herramientas como &lt;strong>SonarQube&lt;/strong>, &lt;strong>StyleCop&lt;/strong> o &lt;strong>ReSharper&lt;/strong> ayudan, a veces es necesario ir más allá y crear reglas personalizadas que se adapten a las necesidades específicas del equipo o la arquitectura.&lt;/p>
+&lt;p>Con &lt;strong>Roslyn&lt;/strong>, el compilador de &lt;strong>C#&lt;/strong> y &lt;strong>VB.NET&lt;/strong>, es posible crear analizadores (analyzers) que inspeccionen el código fuente, detecten patrones y ofrezcan sugerencias o advertencias en tiempo de compilación. En este artículo se muestra cómo crear, probar e integrar un analizador personalizado en un proyecto C#.&lt;/p>
+&lt;h2 id="qué-es-roslyn">¿Qué es Roslyn?&lt;/h2>
+&lt;p>&lt;strong>Roslyn&lt;/strong> es el nombre clave del compilador de código abierto de .NET que permite acceder al análisis del código fuente como un modelo estructurado de árboles de sintaxis, semántica, símbolos, y mucho más.&lt;/p>
+&lt;p>Con Roslyn es posible:&lt;/p>
+&lt;ul>
+&lt;li>Leer y analizar código fuente como árbol de sintaxis (AST).&lt;/li>
+&lt;li>Modificar código o generar nuevo.&lt;/li>
+&lt;li>Crear herramientas de refactorización.&lt;/li>
+&lt;li>Desarrollar analizadores personalizados para detectar problemas en tiempo real en Visual Studio o en pipelines de CI.&lt;/li>
+&lt;/ul>
+&lt;h2 id="escenario-detectar-clases-cuyo-nombre-no-termina-en-service">Escenario: Detectar clases cuyo nombre no termina en &amp;ldquo;Service&amp;rdquo;&lt;/h2>
+&lt;p>Supongamos que en una arquitectura basada en servicios, toda clase de capa de servicio debe terminar en &lt;code>Service&lt;/code>. Si alguien crea una clase &lt;code>UserHandler&lt;/code> en la capa de servicios, queremos advertirlo.&lt;/p>
+&lt;h2 id="paso-1-crear-un-proyecto-de-analizador-con-plantilla-roslyn">Paso 1: Crear un proyecto de analizador con plantilla Roslyn&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">dotnet new analyzer -n NamingConventionAnalyzer
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">cd&lt;/span> NamingConventionAnalyzer
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="paso-2-modificar-el-analizador-generado">Paso 2: Modificar el analizador generado&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-csharp" data-lang="csharp">&lt;span class="line">&lt;span class="cl">&lt;span class="k">using&lt;/span> &lt;span class="nn">System.Collections.Immutable&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">using&lt;/span> &lt;span class="nn">Microsoft.CodeAnalysis&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">using&lt;/span> &lt;span class="nn">Microsoft.CodeAnalysis.Diagnostics&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">using&lt;/span> &lt;span class="nn">Microsoft.CodeAnalysis.CSharp&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">using&lt;/span> &lt;span class="nn">Microsoft.CodeAnalysis.CSharp.Syntax&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">namespace&lt;/span> &lt;span class="nn">NamingConventionAnalyzer&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="na"> [DiagnosticAnalyzer(LanguageNames.CSharp)]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">public&lt;/span> &lt;span class="k">class&lt;/span> &lt;span class="nc">NamingConventionAnalyzer&lt;/span> &lt;span class="p">:&lt;/span> &lt;span class="n">DiagnosticAnalyzer&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">public&lt;/span> &lt;span class="kd">const&lt;/span> &lt;span class="kt">string&lt;/span> &lt;span class="n">DiagnosticId&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="s">&amp;#34;NC001&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">private&lt;/span> &lt;span class="kd">static&lt;/span> &lt;span class="k">readonly&lt;/span> &lt;span class="n">LocalizableString&lt;/span> &lt;span class="n">Title&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="s">&amp;#34;Nombre de clase de servicio incorrecto&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">private&lt;/span> &lt;span class="kd">static&lt;/span> &lt;span class="k">readonly&lt;/span> &lt;span class="n">LocalizableString&lt;/span> &lt;span class="n">MessageFormat&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="s">&amp;#34;La clase &amp;#39;{0}&amp;#39; debería terminar en &amp;#39;Service&amp;#39;&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">private&lt;/span> &lt;span class="kd">const&lt;/span> &lt;span class="kt">string&lt;/span> &lt;span class="n">Category&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="s">&amp;#34;Naming&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">private&lt;/span> &lt;span class="kd">static&lt;/span> &lt;span class="n">DiagnosticDescriptor&lt;/span> &lt;span class="n">Rule&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="k">new&lt;/span> &lt;span class="n">DiagnosticDescriptor&lt;/span>&lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">DiagnosticId&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">Title&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">MessageFormat&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">Category&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">DiagnosticSeverity&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">Warning&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">isEnabledByDefault&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">true&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">public&lt;/span> &lt;span class="kd">override&lt;/span> &lt;span class="n">ImmutableArray&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="n">DiagnosticDescriptor&lt;/span>&lt;span class="p">&amp;gt;&lt;/span> &lt;span class="n">SupportedDiagnostics&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="n">ImmutableArray&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">Create&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">Rule&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">public&lt;/span> &lt;span class="kd">override&lt;/span> &lt;span class="k">void&lt;/span> &lt;span class="n">Initialize&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">AnalysisContext&lt;/span> &lt;span class="n">context&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">context&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">ConfigureGeneratedCodeAnalysis&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">GeneratedCodeAnalysisFlags&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">None&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">context&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">EnableConcurrentExecution&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">context&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">RegisterSyntaxNodeAction&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">AnalyzeClassDeclaration&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">SyntaxKind&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">ClassDeclaration&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">private&lt;/span> &lt;span class="k">void&lt;/span> &lt;span class="n">AnalyzeClassDeclaration&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">SyntaxNodeAnalysisContext&lt;/span> &lt;span class="n">context&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kt">var&lt;/span> &lt;span class="n">classDecl&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">ClassDeclarationSyntax&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="n">context&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">Node&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kt">var&lt;/span> &lt;span class="n">className&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="n">classDecl&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">Identifier&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">Text&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(!&lt;/span>&lt;span class="n">className&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">EndsWith&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;Service&amp;#34;&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kt">var&lt;/span> &lt;span class="n">diagnostic&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="n">Diagnostic&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">Create&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">Rule&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">classDecl&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">Identifier&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">GetLocation&lt;/span>&lt;span class="p">(),&lt;/span> &lt;span class="n">className&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">context&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">ReportDiagnostic&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">diagnostic&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="paso-3-crear-una-prueba-unitaria-para-validar-el-analizador">Paso 3: Crear una prueba unitaria para validar el analizador&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-csharp" data-lang="csharp">&lt;span class="line">&lt;span class="cl">&lt;span class="k">using&lt;/span> &lt;span class="nn">Microsoft.CodeAnalysis&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">using&lt;/span> &lt;span class="nn">Microsoft.CodeAnalysis.Diagnostics&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">using&lt;/span> &lt;span class="nn">Microsoft.CodeAnalysis.Testing&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">using&lt;/span> &lt;span class="nn">Microsoft.CodeAnalysis.CSharp.Testing&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">using&lt;/span> &lt;span class="nn">Microsoft.CodeAnalysis.Testing.Verifiers&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">using&lt;/span> &lt;span class="nn">System.Threading.Tasks&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">using&lt;/span> &lt;span class="nn">Xunit&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">using&lt;/span> &lt;span class="nn">Verify&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="n">Microsoft&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">CodeAnalysis&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">CSharp&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">Testing&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">XUnit&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">AnalyzerVerifier&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="n">NamingConventionAnalyzer&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">NamingConventionAnalyzer&lt;/span>&lt;span class="p">&amp;gt;;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">namespace&lt;/span> &lt;span class="nn">NamingConventionAnalyzer.Test&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">public&lt;/span> &lt;span class="k">class&lt;/span> &lt;span class="nc">NamingConventionAnalyzerTests&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="na"> [Fact]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">public&lt;/span> &lt;span class="kd">async&lt;/span> &lt;span class="n">Task&lt;/span> &lt;span class="n">DetectaClaseSinSufijoService&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kt">var&lt;/span> &lt;span class="n">testCode&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="s">@&amp;#34;
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s"> public class {|#0:UserHandler|}
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s"> {
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s"> }
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s"> &amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kt">var&lt;/span> &lt;span class="n">expected&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="n">Verify&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">Diagnostic&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;NC001&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">.&lt;/span>&lt;span class="n">WithLocation&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="m">0&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">.&lt;/span>&lt;span class="n">WithArguments&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;UserHandler&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">await&lt;/span> &lt;span class="n">Verify&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">VerifyAnalyzerAsync&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">testCode&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">expected&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="na">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="na"> [Fact]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">public&lt;/span> &lt;span class="kd">async&lt;/span> &lt;span class="n">Task&lt;/span> &lt;span class="n">NoMarcaClaseCorrecta&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kt">var&lt;/span> &lt;span class="n">testCode&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="s">@&amp;#34;
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s"> public class UserService
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s"> {
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s"> }
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s"> &amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">await&lt;/span> &lt;span class="n">Verify&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">VerifyAnalyzerAsync&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">testCode&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="paso-4-compilar-y-probar">Paso 4: Compilar y probar&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">dotnet &lt;span class="nb">test&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="paso-5-usar-el-analizador-en-otros-proyectos">Paso 5: Usar el analizador en otros proyectos&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">dotnet pack -c Release
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">dotnet add reference ../NamingConventionAnalyzer/bin/Release/NamingConventionAnalyzer.nupkg
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="buenas-prácticas">Buenas prácticas&lt;/h2>
+&lt;ul>
+&lt;li>Utilizar &lt;code>DiagnosticSeverity.Info&lt;/code>, &lt;code>Warning&lt;/code> o &lt;code>Error&lt;/code> según el impacto.&lt;/li>
+&lt;li>Proveer sugerencias claras para el desarrollador.&lt;/li>
+&lt;li>Usar atributos como &lt;code>SupportedDiagnostics&lt;/code> para registrar múltiples reglas.&lt;/li>
+&lt;li>Crear &lt;em>code fixes&lt;/em> para permitir al usuario aplicar correcciones automáticamente.&lt;/li>
+&lt;li>Publicar en NuGet con un prefijo de ID único (&lt;code>Company.RuleId&lt;/code>) para evitar colisiones.&lt;/li>
+&lt;/ul>
+&lt;h2 id="escenarios-de-uso-comunes">Escenarios de uso comunes&lt;/h2>
+&lt;ul>
+&lt;li>Detectar convenciones de nombres o estructuras de carpetas.&lt;/li>
+&lt;li>Forzar uso de &lt;code>ConfigureAwait(false)&lt;/code> en librerías.&lt;/li>
+&lt;li>Validar uso de APIs internas o legacy.&lt;/li>
+&lt;li>Evitar &lt;code>DateTime.Now&lt;/code> en código que debería usar &lt;code>DateTime.UtcNow&lt;/code>.&lt;/li>
+&lt;/ul>
+&lt;h2 id="conclusión">Conclusión&lt;/h2>
+&lt;p>Crear analizadores personalizados con &lt;strong>Roslyn&lt;/strong> es una forma poderosa de reforzar la calidad del código desde dentro del &lt;strong>IDE&lt;/strong>. Permite implementar políticas específicas del equipo, detectar errores antes de llegar al build, y educar progresivamente a los desarrolladores sobre buenas prácticas.&lt;/p>
+&lt;p>Integrado con pruebas automáticas y pipelines CI, &lt;strong>Roslyn&lt;/strong> se convierte en una herramienta esencial para entornos profesionales que requieren código robusto, mantenible y alineado con las reglas internas.&lt;/p></description></item><item><title>Native AOT en .NET 9</title><link>https://cmas.dev/posts/2025-04-22-aot-nativo-dotnet-9/</link><pubDate>Tue, 22 Apr 2025 00:00:00 -0300</pubDate><guid>https://cmas.dev/posts/2025-04-22-aot-nativo-dotnet-9/</guid><description>&lt;p>Con cada nueva versión de &lt;strong>.NET&lt;/strong>, &lt;strong>Microsoft&lt;/strong> ha trabajado activamente en mejorar el rendimiento, el tamaño de despliegue y la experiencia en entornos de bajo consumo. Uno de los avances más importantes en este sentido es &lt;strong>Native AOT&lt;/strong> (&lt;em>Ahead-of-Time Compilation&lt;/em>). Introducido como parte estable en &lt;strong>.NET 7&lt;/strong>, y refinado aún más en &lt;strong>.NET 8&lt;/strong> y &lt;strong>.NET 9&lt;/strong>, &lt;strong>Native AOT&lt;/strong> permite compilar aplicaciones directamente a código nativo, eliminando por completo la dependencia del &lt;strong>CLR&lt;/strong> en tiempo de ejecución.&lt;/p>
 &lt;p>Este artículo explora cómo utilizar &lt;strong>Native AOT&lt;/strong> en aplicaciones de consola en &lt;strong>.NET 9&lt;/strong>, con un enfoque práctico para reducir significativamente el tiempo de arranque y el consumo de memoria.&lt;/p>
 &lt;h2 id="qué-es-native-aot">¿Qué es Native AOT?&lt;/h2>
 &lt;p>Native AOT (Ahead-of-Time) es un modelo de compilación en el que el código IL (Intermediate Language) generado por el compilador C# es transformado directamente en código máquina antes de que la aplicación se ejecute. Esto contrasta con el modelo Just-in-Time (JIT), que compila partes del IL durante la ejecución.&lt;/p>

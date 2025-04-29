@@ -1,4 +1,109 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>WinDev on Christian Amado's Blog</title><link>https://cmas.dev/tags/windev/</link><description>Recent content in WinDev on Christian Amado's Blog</description><generator>Hugo -- gohugo.io</generator><language>es</language><lastBuildDate>Tue, 22 Apr 2025 11:00:00 -0300</lastBuildDate><atom:link href="https://cmas.dev/tags/windev/index.xml" rel="self" type="application/rss+xml"/><item><title>Integración de WebView2 en aplicaciones WinUI 3</title><link>https://cmas.dev/posts/2025-04-22-webview2-integration-winui3/</link><pubDate>Tue, 22 Apr 2025 11:00:00 -0300</pubDate><guid>https://cmas.dev/posts/2025-04-22-webview2-integration-winui3/</guid><description>&lt;p>La necesidad de mostrar contenido web dentro de una aplicación de escritorio ha existido por décadas. Con la evolución de los navegadores modernos y la demanda de experiencias híbridas, el control &lt;strong>WebView2&lt;/strong> se ha posicionado como una solución poderosa y moderna para las aplicaciones &lt;strong>Windows&lt;/strong> desarrolladas con &lt;strong>WinUI 3&lt;/strong>. Este artículo explora en detalle cómo integrar &lt;strong>WebView2&lt;/strong> en una app de escritorio &lt;strong>WinUI 3&lt;/strong> y cómo optimizar la carga de contenido web de manera eficiente.&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>WinDev on Christian Amado's Blog</title><link>https://cmas.dev/tags/windev/</link><description>Recent content in WinDev on Christian Amado's Blog</description><generator>Hugo -- gohugo.io</generator><language>es</language><lastBuildDate>Tue, 29 Apr 2025 00:00:00 -0300</lastBuildDate><atom:link href="https://cmas.dev/tags/windev/index.xml" rel="self" type="application/rss+xml"/><item><title>Desarrollo de aplicaciones WinUI 3 sin empaquetado MSIX: Uso del bootstrapper API</title><link>https://cmas.dev/posts/2025-04-29-winui3-apps-no-msix/</link><pubDate>Tue, 29 Apr 2025 00:00:00 -0300</pubDate><guid>https://cmas.dev/posts/2025-04-29-winui3-apps-no-msix/</guid><description>&lt;p>Uno de los retos más comunes al desarrollar aplicaciones modernas con &lt;strong>WinUI 3&lt;/strong> (&lt;strong>Windows App SDK&lt;/strong>) es la necesidad de empaquetarlas como &lt;strong>MSIX&lt;/strong> para poder ejecutarlas. Si bien &lt;strong>MSIX&lt;/strong> ofrece ventajas como actualización automática y mayor seguridad, no siempre es la opción ideal —especialmente para herramientas internas, entornos empresariales controlados o aplicaciones distribuidas manualmente.&lt;/p>
+&lt;p>Con la evolución del &lt;strong>Windows App SDK&lt;/strong>, &lt;strong>Microsoft&lt;/strong> introdujo la posibilidad de ejecutar aplicaciones *&lt;em>WinUI 3&lt;/em> &lt;code>unpackaged&lt;/code> (sin MSIX), utilizando un enfoque conocido como bootstrapper API. Este artículo explora cómo implementar este enfoque, cuáles son sus ventajas y limitaciones, y cómo configurarlo correctamente.&lt;/p>
+&lt;h2 id="qué-significa-una-app-winui-3-sin-empaquetar">¿Qué significa una app WinUI 3 sin empaquetar?&lt;/h2>
+&lt;p>Una aplicación &lt;strong>unpackaged&lt;/strong> es aquella que:&lt;/p>
+&lt;ul>
+&lt;li>No requiere instalación con MSIX.&lt;/li>
+&lt;li>No se registra en el sistema con capacidades como actualizaciones automáticas o integración con URI handlers.&lt;/li>
+&lt;li>Puede ejecutarse directamente desde un &lt;code>.exe&lt;/code> como cualquier aplicación tradicional Win32.&lt;/li>
+&lt;li>Requiere inicialización manual del entorno Windows App SDK.&lt;/li>
+&lt;/ul>
+&lt;p>Esta opción resulta ideal para desarrolladores que buscan control absoluto sobre el despliegue y ejecución.&lt;/p>
+&lt;h2 id="qué-es-el-bootstrapper-api">¿Qué es el bootstrapper API?&lt;/h2>
+&lt;p>El &lt;strong>bootstrapper API&lt;/strong> es una librería que permite inicializar manualmente el entorno de ejecución del Windows App SDK en tiempo de ejecución, sin necesidad de empaquetado MSIX. Es el corazón del soporte &lt;strong>&amp;ldquo;unpackaged apps&amp;rdquo;&lt;/strong> en WinUI 3.&lt;/p>
+&lt;p>Permite:&lt;/p>
+&lt;ul>
+&lt;li>Iniciar el runtime del Windows App SDK desde el ejecutable.&lt;/li>
+&lt;li>Validar e instalar automáticamente las dependencias necesarias.&lt;/li>
+&lt;li>Acceder a la funcionalidad de WinUI 3 desde un entorno nativo (sin empaquetar).&lt;/li>
+&lt;/ul>
+&lt;h2 id="requisitos-previos">Requisitos previos&lt;/h2>
+&lt;ul>
+&lt;li>&lt;strong>Visual Studio 2022&lt;/strong> (v17.8+) con workloads para Desktop Development (C++) y .NET Desktop.&lt;/li>
+&lt;li>&lt;strong>Windows App SDK 1.3 o superior&lt;/strong>.&lt;/li>
+&lt;li>SDK de Windows 11 (recomendado).&lt;/li>
+&lt;li>Runtime de Windows App SDK preinstalado en la máquina destino.&lt;/li>
+&lt;/ul>
+&lt;h2 id="crear-una-app-winui-3-sin-msix-paso-a-paso">Crear una app WinUI 3 sin MSIX paso a paso&lt;/h2>
+&lt;h3 id="paso-1-crear-el-proyecto">Paso 1: Crear el proyecto&lt;/h3>
+&lt;p>En Visual Studio:&lt;/p>
+&lt;ol>
+&lt;li>Crear un nuevo proyecto del tipo &lt;strong>&amp;ldquo;Blank App, Unpackaged (WinUI 3 in Desktop)&amp;rdquo;&lt;/strong>.&lt;/li>
+&lt;li>Seleccionar el target framework &lt;code>net8.0-windows10.0.19041.0&lt;/code> o superior.&lt;/li>
+&lt;/ol>
+&lt;p>Esto generará una estructura básica con soporte para ejecución sin MSIX.&lt;/p>
+&lt;h3 id="paso-2-verificar-el-uso-del-bootstrapper">Paso 2: Verificar el uso del bootstrapper&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-csharp" data-lang="csharp">&lt;span class="line">&lt;span class="cl">&lt;span class="k">using&lt;/span> &lt;span class="nn">Microsoft.UI&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">using&lt;/span> &lt;span class="nn">Microsoft.UI.Xaml&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">using&lt;/span> &lt;span class="nn">Microsoft.Windows.AppLifecycle&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">using&lt;/span> &lt;span class="nn">Microsoft.Windows.AppNotifications&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">using&lt;/span> &lt;span class="nn">Microsoft.Windows.ApplicationModel.DynamicDependency&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">class&lt;/span> &lt;span class="nc">Program&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="na"> [STAThread]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">static&lt;/span> &lt;span class="k">void&lt;/span> &lt;span class="n">Main&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kt">string&lt;/span>&lt;span class="p">[]&lt;/span> &lt;span class="n">args&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Bootstrap&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">Initialize&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kt">var&lt;/span> &lt;span class="n">app&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="k">new&lt;/span> &lt;span class="n">App&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">app&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">Run&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="paso-3-agregar-referencia-al-sdk">Paso 3: Agregar referencia al SDK&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-xml" data-lang="xml">&lt;span class="line">&lt;span class="cl">&lt;span class="nt">&amp;lt;Project&lt;/span> &lt;span class="na">Sdk=&lt;/span>&lt;span class="s">&amp;#34;Microsoft.NET.Sdk&amp;#34;&lt;/span>&lt;span class="nt">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;PropertyGroup&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;OutputType&amp;gt;&lt;/span>WinExe&lt;span class="nt">&amp;lt;/OutputType&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;TargetFramework&amp;gt;&lt;/span>net8.0-windows10.0.19041.0&lt;span class="nt">&amp;lt;/TargetFramework&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;UseWinUI&amp;gt;&lt;/span>true&lt;span class="nt">&amp;lt;/UseWinUI&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;/PropertyGroup&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;ItemGroup&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;PackageReference&lt;/span> &lt;span class="na">Include=&lt;/span>&lt;span class="s">&amp;#34;Microsoft.WindowsAppSDK&amp;#34;&lt;/span> &lt;span class="na">Version=&lt;/span>&lt;span class="s">&amp;#34;1.5.240316000&amp;#34;&lt;/span> &lt;span class="nt">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;/ItemGroup&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nt">&amp;lt;/Project&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="paso-4-generar-el-ejecutable-sin-msix">Paso 4: Generar el ejecutable sin MSIX&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">dotnet publish -c Release -r win-x64 --self-contained &lt;span class="nb">true&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="paso-5-verificación-del-entorno-en-tiempo-de-ejecución">Paso 5: Verificación del entorno en tiempo de ejecución&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-csharp" data-lang="csharp">&lt;span class="line">&lt;span class="cl">&lt;span class="k">try&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Bootstrap&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">Initialize&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">catch&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">Exception&lt;/span> &lt;span class="n">ex&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">MessageBox&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">Show&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;El entorno de ejecución requerido (Windows App SDK) no está disponible. Por favor, instale la versión correcta.&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s">&amp;#34;Error&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Environment&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">Exit&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="m">1&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="ventajas-del-enfoque-sin-empaquetado">Ventajas del enfoque sin empaquetado&lt;/h2>
+&lt;ul>
+&lt;li>&lt;strong>Distribución simple&lt;/strong>: basta con copiar el &lt;code>.exe&lt;/code> y sus dependencias.&lt;/li>
+&lt;li>&lt;strong>Integración con flujos CI/CD existentes&lt;/strong> sin necesidad de firmar o empaquetar.&lt;/li>
+&lt;li>&lt;strong>Ideal para herramientas internas&lt;/strong>, utilidades empresariales o entornos sin Store.&lt;/li>
+&lt;li>Compatible con &lt;strong>instaladores tradicionales&lt;/strong> como InnoSetup, NSIS o scripts personalizados.&lt;/li>
+&lt;/ul>
+&lt;h2 id="limitaciones">Limitaciones&lt;/h2>
+&lt;ul>
+&lt;li>No tiene acceso a funciones específicas del manifiesto MSIX (por ejemplo, alias de terminal, protocol handlers).&lt;/li>
+&lt;li>El usuario final debe tener el runtime del Windows App SDK instalado.&lt;/li>
+&lt;li>No se puede publicar en Microsoft Store sin MSIX.&lt;/li>
+&lt;/ul>
+&lt;h2 id="buenas-prácticas">Buenas prácticas&lt;/h2>
+&lt;ul>
+&lt;li>Incluir en el instalador un chequeo del runtime del Windows App SDK.&lt;/li>
+&lt;li>Usar &lt;code>InvariantGlobalization=true&lt;/code> para mejorar compatibilidad y reducir tamaño.&lt;/li>
+&lt;li>Documentar claramente que la app no requiere instalación formal.&lt;/li>
+&lt;/ul>
+&lt;h2 id="escenarios-ideales">Escenarios ideales&lt;/h2>
+&lt;ul>
+&lt;li>Aplicaciones de línea de comandos con interfaz gráfica ligera.&lt;/li>
+&lt;li>Herramientas internas para técnicos de soporte o administradores.&lt;/li>
+&lt;li>Desarrollos experimentales o MVPs donde se requiere rapidez de entrega.&lt;/li>
+&lt;li>Sustitución de aplicaciones WPF o WinForms clásicas por tecnologías modernas sin imponer fricción en la distribución.&lt;/li>
+&lt;/ul>
+&lt;h2 id="conclusión">Conclusión&lt;/h2>
+&lt;p>Desarrollar aplicaciones &lt;strong>WinUI 3&lt;/strong> sin empaquetado &lt;strong>MSIX&lt;/strong> es completamente viable gracias al bootstrapper API del &lt;strong>Windows App SDK&lt;/strong>. Este enfoque ofrece flexibilidad total en despliegue, una experiencia de desarrollo más cercana a las apps &lt;strong>Win32&lt;/strong> tradicionales, y la potencia de una interfaz moderna con XAML.&lt;/p>
+&lt;p>Para equipos que buscan adoptar &lt;strong>WinUI 3&lt;/strong> sin complicaciones de distribución, esta alternativa representa un camino realista, moderno y alineado con las necesidades empresariales del escritorio de hoy.&lt;/p></description></item><item><title>Integración de WebView2 en aplicaciones WinUI 3</title><link>https://cmas.dev/posts/2025-04-22-webview2-integration-winui3/</link><pubDate>Tue, 22 Apr 2025 11:00:00 -0300</pubDate><guid>https://cmas.dev/posts/2025-04-22-webview2-integration-winui3/</guid><description>&lt;p>La necesidad de mostrar contenido web dentro de una aplicación de escritorio ha existido por décadas. Con la evolución de los navegadores modernos y la demanda de experiencias híbridas, el control &lt;strong>WebView2&lt;/strong> se ha posicionado como una solución poderosa y moderna para las aplicaciones &lt;strong>Windows&lt;/strong> desarrolladas con &lt;strong>WinUI 3&lt;/strong>. Este artículo explora en detalle cómo integrar &lt;strong>WebView2&lt;/strong> en una app de escritorio &lt;strong>WinUI 3&lt;/strong> y cómo optimizar la carga de contenido web de manera eficiente.&lt;/p>
 &lt;h2 id="qué-es-webview2">¿Qué es WebView2?&lt;/h2>
 &lt;p>&lt;code>WebView2&lt;/code> es un control de Microsoft que permite incrustar contenido web utilizando el motor de renderizado de &lt;strong>Microsoft Edge (Chromium)&lt;/strong> dentro de aplicaciones Win32 o Windows App SDK. A diferencia del antiguo &lt;code>WebView&lt;/code> basado en EdgeHTML, &lt;code>WebView2&lt;/code> ofrece mayor compatibilidad, seguridad y rendimiento gracias a su base Chromium.&lt;/p>
 &lt;h3 id="principales-beneficios">Principales beneficios:&lt;/h3>
