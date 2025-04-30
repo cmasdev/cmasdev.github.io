@@ -4,7 +4,7 @@ title: "Arquitectura limpia con Deno: estructuras escalables para proyectos open
 author: Christian Amado
 date: 2025-04-24 00:00:00 -0300
 category: [Desarrollo de software]
-tags: [Go,GitHub Star]
+tags: [Deno,GitHub Star]
 thumbnail-img: /img/posts/thumbnails/deno.png
 cover-img: /img/posts/cover/deno.png
 share_img: /img/posts/shared/deno.webp
