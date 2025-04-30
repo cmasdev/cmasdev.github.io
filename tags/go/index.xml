@@ -1,136 +1,99 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Go on Christian Amado's Blog</title><link>https://cmas.dev/tags/go/</link><description>Recent content in Go on Christian Amado's Blog</description><generator>Hugo -- gohugo.io</generator><language>es</language><lastBuildDate>Thu, 24 Apr 2025 00:00:00 -0300</lastBuildDate><atom:link href="https://cmas.dev/tags/go/index.xml" rel="self" type="application/rss+xml"/><item><title>Arquitectura limpia con Deno: estructuras escalables para proyectos open source</title><link>https://cmas.dev/posts/2025-04-24-deno-clean-architecture/</link><pubDate>Thu, 24 Apr 2025 00:00:00 -0300</pubDate><guid>https://cmas.dev/posts/2025-04-24-deno-clean-architecture/</guid><description>&lt;p>&lt;strong>Deno 2&lt;/strong> ha consolidado su lugar como una plataforma moderna para el desarrollo backend, enfocada en seguridad, rendimiento y simplicidad. Sin embargo, aún existe el desafío de estructurar proyectos de forma escalable y mantenible, especialmente cuando se busca colaborar en comunidad. Este artículo explora cómo aplicar los principios de &lt;strong>Clean Architecture&lt;/strong> en proyectos con &lt;strong>Deno 2&lt;/strong>, creando un código desacoplado, testable y abierto a contribuciones.&lt;/p>
-&lt;h2 id="principios-de-clean-architecture">Principios de Clean Architecture&lt;/h2>
-&lt;p>Clean Architecture, propuesto por Robert C. Martin (Uncle Bob), se basa en separar responsabilidades y controlar la dirección de las dependencias. Su objetivo es crear sistemas mantenibles, independientes de frameworks y fácilmente testeables.&lt;/p>
-&lt;p>Los principios clave son:&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Go on Christian Amado's Blog</title><link>https://cmas.dev/tags/go/</link><description>Recent content in Go on Christian Amado's Blog</description><generator>Hugo -- gohugo.io</generator><language>es</language><lastBuildDate>Wed, 30 Apr 2025 00:00:00 -0300</lastBuildDate><atom:link href="https://cmas.dev/tags/go/index.xml" rel="self" type="application/rss+xml"/><item><title>Uso seguro de variables y secretos en GCP con Go</title><link>https://cmas.dev/posts/2025-04-30-secure-variables-go/</link><pubDate>Wed, 30 Apr 2025 00:00:00 -0300</pubDate><guid>https://cmas.dev/posts/2025-04-30-secure-variables-go/</guid><description>&lt;p>Manejar secretos —como claves API, tokens y credenciales— de forma segura es esencial en cualquier aplicación moderna. &lt;strong>Google Cloud Platform (GCP)&lt;/strong> ofrece una solución robusta para este desafío a través de &lt;strong>Secret Manager&lt;/strong>, que permite almacenar, acceder y auditar secretos de manera segura y centralizada.&lt;/p>
+&lt;p>Este artículo muestra cómo acceder y gestionar secretos en &lt;strong>GCP&lt;/strong> desde aplicaciones desarrolladas en &lt;strong>Go&lt;/strong>, asegurando que tus variables sensibles estén protegidas sin necesidad de hardcodearlas o exponerlas en entornos inseguros.&lt;/p>
+&lt;h2 id="por-qué-usar-secret-manager">¿Por qué usar Secret Manager?&lt;/h2>
+&lt;p>Secret Manager de GCP es un servicio completamente gestionado que ofrece:&lt;/p>
 &lt;ul>
-&lt;li>&lt;strong>Independencia de frameworks:&lt;/strong> El core del sistema no depende de tecnologías externas.&lt;/li>
-&lt;li>&lt;strong>Testabilidad:&lt;/strong> Las reglas de negocio pueden probarse sin UI, base de datos o entorno externo.&lt;/li>
-&lt;li>&lt;strong>Separación por capas:&lt;/strong> Cada capa tiene su rol: &lt;code>domain&lt;/code>, &lt;code>application&lt;/code>, &lt;code>infrastructure&lt;/code>, &lt;code>interfaces&lt;/code>.&lt;/li>
-&lt;li>&lt;strong>Dependencias hacia adentro:&lt;/strong> Las capas externas pueden depender de las internas, pero nunca al revés.&lt;/li>
+&lt;li>&lt;strong>Cifrado automático&lt;/strong> con claves de Google o personalizadas (CMEK).&lt;/li>
+&lt;li>&lt;strong>Versionado de secretos&lt;/strong> para revertir fácilmente a estados anteriores.&lt;/li>
+&lt;li>&lt;strong>Control de acceso granular&lt;/strong> vía IAM.&lt;/li>
+&lt;li>&lt;strong>Registros de auditoría&lt;/strong> con Cloud Audit Logs.&lt;/li>
+&lt;li>&lt;strong>Integración nativa con entornos serverless, Compute Engine y GKE&lt;/strong>.&lt;/li>
 &lt;/ul>
-&lt;h2 id="organización-del-proyecto-en-deno-2">Organización del proyecto en Deno 2&lt;/h2>
-&lt;h3 id="estructura-de-carpetas-sugerida">Estructura de carpetas sugerida:&lt;/h3>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">project-root/
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">├── import_map.json
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">├── deps.ts
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">├── main.ts
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">├── domain/
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ ├── entities/
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ └── interfaces/
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">├── application/
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ └── use_cases/
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">├── infrastructure/
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ └── repositories/
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">├── interfaces/
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ └── http/
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">└── tests/
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="uso-de-import_mapjson">Uso de &lt;code>import_map.json&lt;/code>:&lt;/h3>
-&lt;p>Permite evitar rutas relativas complejas:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-json" data-lang="json">&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;imports&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;@domain/&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;./domain/&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;@app/&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;./application/&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;@infra/&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;./infrastructure/&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;@http/&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;./interfaces/http/&amp;#34;&lt;/span>
+&lt;h2 id="requisitos-previos">Requisitos previos&lt;/h2>
+&lt;p>Antes de comenzar, asegurate de tener:&lt;/p>
+&lt;ul>
+&lt;li>Un proyecto activo en Google Cloud.&lt;/li>
+&lt;li>El API de Secret Manager habilitada.&lt;/li>
+&lt;li>El SDK de Google Cloud (&lt;code>gcloud&lt;/code>) configurado.&lt;/li>
+&lt;li>Una cuenta de servicio con permisos &lt;code>Secret Manager Accessor&lt;/code> (&lt;code>roles/secretmanager.secretAccessor&lt;/code>).&lt;/li>
+&lt;li>Go instalado (se recomienda Go 1.20+).&lt;/li>
+&lt;li>Módulos habilitados (&lt;code>go mod init&lt;/code> en tu proyecto).&lt;/li>
+&lt;/ul>
+&lt;h2 id="paso-1-crear-y-almacenar-un-secreto-en-gcp">Paso 1: Crear y almacenar un secreto en GCP&lt;/h2>
+&lt;p>Desde la consola o terminal:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">gcloud secrets create DB_PASSWORD --replication-policy&lt;span class="o">=&lt;/span>automatic
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">echo&lt;/span> -n &lt;span class="s2">&amp;#34;super-clave-secreta&amp;#34;&lt;/span> &lt;span class="p">|&lt;/span> gcloud secrets versions add DB_PASSWORD --data-file&lt;span class="o">=&lt;/span>-
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Esto crea el secreto &lt;code>DB_PASSWORD&lt;/code> con una versión y lo almacena de forma segura.&lt;/p>
+&lt;h2 id="paso-2-configurar-permisos-de-acceso">Paso 2: Configurar permisos de acceso&lt;/h2>
+&lt;p>Otorgá acceso a la cuenta de servicio usada por tu aplicación:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">gcloud secrets add-iam-policy-binding DB_PASSWORD &lt;span class="se">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="se">&lt;/span> --member&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;serviceAccount:mi-cuenta@mi-proyecto.iam.gserviceaccount.com&amp;#34;&lt;/span> &lt;span class="se">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="se">&lt;/span> --role&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;roles/secretmanager.secretAccessor&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="paso-3-instalar-dependencias-en-go">Paso 3: Instalar dependencias en Go&lt;/h2>
+&lt;p>En tu archivo &lt;code>go.mod&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">go get cloud.google.com/go/secretmanager/apiv1
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">go get google.golang.org/api/option
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="paso-4-código-para-acceder-al-secreto-en-go">Paso 4: Código para acceder al secreto en Go&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-go" data-lang="go">&lt;span class="line">&lt;span class="cl">&lt;span class="kn">package&lt;/span> &lt;span class="nx">main&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kn">import&lt;/span> &lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s">&amp;#34;context&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s">&amp;#34;fmt&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s">&amp;#34;log&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">secretmanager&lt;/span> &lt;span class="s">&amp;#34;cloud.google.com/go/secretmanager/apiv1&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s">&amp;#34;google.golang.org/api/option&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">secretspb&lt;/span> &lt;span class="s">&amp;#34;google.golang.org/genproto/googleapis/cloud/secretmanager/v1&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">func&lt;/span> &lt;span class="nf">main&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">ctx&lt;/span> &lt;span class="o">:=&lt;/span> &lt;span class="nx">context&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Background&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">client&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">err&lt;/span> &lt;span class="o">:=&lt;/span> &lt;span class="nx">secretmanager&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">NewClient&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">ctx&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">option&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">WithCredentialsFile&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;ruta/a/tu/clave.json&amp;#34;&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="nx">err&lt;/span> &lt;span class="o">!=&lt;/span> &lt;span class="kc">nil&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">log&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Fatalf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;Error creando cliente: %v&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">err&lt;/span>&lt;span class="p">)&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Luego, en tus módulos:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-ts" data-lang="ts">&lt;span class="line">&lt;span class="cl">&lt;span class="kr">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">Task&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="kr">from&lt;/span> &lt;span class="s2">&amp;#34;@domain/entities/task.ts&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="archivo-depsts">Archivo &lt;code>deps.ts&lt;/code>:&lt;/h3>
-&lt;p>Centraliza tus dependencias externas para facilitar testing y actualizaciones:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-ts" data-lang="ts">&lt;span class="line">&lt;span class="cl">&lt;span class="kr">export&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">Application&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">Router&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="kr">from&lt;/span> &lt;span class="s2">&amp;#34;https://deno.land/x/oak@12.6.1/mod.ts&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="ejemplo-práctico-api-para-gestión-de-tareas">Ejemplo práctico: API para gestión de tareas&lt;/h2>
-&lt;h3 id="1-capa-domain">1. Capa &lt;code>domain&lt;/code>&lt;/h3>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-ts" data-lang="ts">&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// domain/entities/task.ts
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">export&lt;/span> &lt;span class="kr">interface&lt;/span> &lt;span class="nx">Task&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">id&lt;/span>: &lt;span class="kt">string&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">title&lt;/span>: &lt;span class="kt">string&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">completed&lt;/span>: &lt;span class="kt">boolean&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-ts" data-lang="ts">&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// domain/interfaces/task_repository.ts
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">Task&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="kr">from&lt;/span> &lt;span class="s2">&amp;#34;./task.ts&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">defer&lt;/span> &lt;span class="nx">client&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Close&lt;/span>&lt;span class="p">()&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">export&lt;/span> &lt;span class="kr">interface&lt;/span> &lt;span class="nx">TaskRepository&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">findAll&lt;/span>&lt;span class="p">()&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="nx">Promise&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">Task&lt;/span>&lt;span class="err">[]&lt;/span>&lt;span class="p">&amp;gt;;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">save&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">task&lt;/span>: &lt;span class="kt">Task&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="nx">Promise&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">void&lt;/span>&lt;span class="p">&amp;gt;;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="2-capa-application">2. Capa &lt;code>application&lt;/code>&lt;/h3>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-ts" data-lang="ts">&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// application/use_cases/get_all_tasks.ts
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">TaskRepository&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="kr">from&lt;/span> &lt;span class="s2">&amp;#34;@domain/interfaces/task_repository.ts&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">export&lt;/span> &lt;span class="kr">class&lt;/span> &lt;span class="nx">GetAllTasks&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">constructor&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kr">private&lt;/span> &lt;span class="nx">repo&lt;/span>: &lt;span class="kt">TaskRepository&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{}&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">execute() {&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">repo&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">findAll&lt;/span>&lt;span class="p">();&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="3-capa-infrastructure">3. Capa &lt;code>infrastructure&lt;/code>&lt;/h3>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-ts" data-lang="ts">&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// infrastructure/repositories/in_memory_task_repo.ts
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">Task&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="kr">from&lt;/span> &lt;span class="s2">&amp;#34;@domain/entities/task.ts&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">TaskRepository&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="kr">from&lt;/span> &lt;span class="s2">&amp;#34;@domain/interfaces/task_repository.ts&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">export&lt;/span> &lt;span class="kr">class&lt;/span> &lt;span class="nx">InMemoryTaskRepo&lt;/span> &lt;span class="kr">implements&lt;/span> &lt;span class="nx">TaskRepository&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">private&lt;/span> &lt;span class="nx">tasks&lt;/span>: &lt;span class="kt">Task&lt;/span>&lt;span class="p">[]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[];&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">findAll&lt;/span>&lt;span class="p">()&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="nx">Promise&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">Task&lt;/span>&lt;span class="err">[]&lt;/span>&lt;span class="p">&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="nx">Promise&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">resolve&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">tasks&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">accessRequest&lt;/span> &lt;span class="o">:=&lt;/span> &lt;span class="o">&amp;amp;&lt;/span>&lt;span class="nx">secretspb&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">AccessSecretVersionRequest&lt;/span>&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">Name&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s">&amp;#34;projects/ID_PROYECTO/secrets/DB_PASSWORD/versions/latest&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">save&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">task&lt;/span>: &lt;span class="kt">Task&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="nx">Promise&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">void&lt;/span>&lt;span class="p">&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">tasks&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">push&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">task&lt;/span>&lt;span class="p">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="nx">Promise&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">resolve&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">result&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">err&lt;/span> &lt;span class="o">:=&lt;/span> &lt;span class="nx">client&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">AccessSecretVersion&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">ctx&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">accessRequest&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="nx">err&lt;/span> &lt;span class="o">!=&lt;/span> &lt;span class="kc">nil&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">log&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Fatalf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;Error accediendo al secreto: %v&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">err&lt;/span>&lt;span class="p">)&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">secret&lt;/span> &lt;span class="o">:=&lt;/span> &lt;span class="nb">string&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">result&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">Payload&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">Data&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">fmt&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Println&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;Secreto accedido:&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">secret&lt;/span>&lt;span class="p">)&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="4-capa-interfaces">4. Capa &lt;code>interfaces&lt;/code>&lt;/h3>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-ts" data-lang="ts">&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// interfaces/http/routes.ts
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">Router&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="kr">from&lt;/span> &lt;span class="s2">&amp;#34;../deps.ts&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">InMemoryTaskRepo&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="kr">from&lt;/span> &lt;span class="s2">&amp;#34;@infra/repositories/in_memory_task_repo.ts&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">GetAllTasks&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="kr">from&lt;/span> &lt;span class="s2">&amp;#34;@app/use_cases/get_all_tasks.ts&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
+&lt;p>⚠️ &lt;strong>Nunca imprimas el secreto en producción.&lt;/strong> Este ejemplo es solo para demostración.&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="paso-5-uso-de-secretos-en-variables-de-entorno">Paso 5: Uso de secretos en variables de entorno&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-go" data-lang="go">&lt;span class="line">&lt;span class="cl">&lt;span class="kn">import&lt;/span> &lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s">&amp;#34;os&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">)&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">const&lt;/span> &lt;span class="nx">router&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">new&lt;/span> &lt;span class="nx">Router&lt;/span>&lt;span class="p">();&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">const&lt;/span> &lt;span class="nx">taskRepo&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">new&lt;/span> &lt;span class="nx">InMemoryTaskRepo&lt;/span>&lt;span class="p">();&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">const&lt;/span> &lt;span class="nx">getAllTasks&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">new&lt;/span> &lt;span class="nx">GetAllTasks&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">taskRepo&lt;/span>&lt;span class="p">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">router&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="kr">get&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;/tasks&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="kr">async&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">ctx&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">const&lt;/span> &lt;span class="nx">tasks&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">await&lt;/span> &lt;span class="nx">getAllTasks&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">execute&lt;/span>&lt;span class="p">();&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">ctx&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">response&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">body&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">tasks&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">});&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">export&lt;/span> &lt;span class="k">default&lt;/span> &lt;span class="nx">router&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-ts" data-lang="ts">&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// main.ts
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">Application&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="kr">from&lt;/span> &lt;span class="s2">&amp;#34;./deps.ts&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">import&lt;/span> &lt;span class="nx">router&lt;/span> &lt;span class="kr">from&lt;/span> &lt;span class="s2">&amp;#34;./interfaces/http/routes.ts&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">const&lt;/span> &lt;span class="nx">app&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">new&lt;/span> &lt;span class="nx">Application&lt;/span>&lt;span class="p">();&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">app&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">use&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">router&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">routes&lt;/span>&lt;span class="p">());&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">app&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">use&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">router&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">allowedMethods&lt;/span>&lt;span class="p">());&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">await&lt;/span> &lt;span class="nx">app&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">listen&lt;/span>&lt;span class="p">({&lt;/span> &lt;span class="nx">port&lt;/span>: &lt;span class="kt">8000&lt;/span> &lt;span class="p">});&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="testing-por-capas">Testing por capas&lt;/h2>
-&lt;p>Puedes testear sin depender del servidor HTTP ni de la base de datos:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-ts" data-lang="ts">&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// tests/get_all_tasks_test.ts
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">InMemoryTaskRepo&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="kr">from&lt;/span> &lt;span class="s2">&amp;#34;@infra/repositories/in_memory_task_repo.ts&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">GetAllTasks&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="kr">from&lt;/span> &lt;span class="s2">&amp;#34;@app/use_cases/get_all_tasks.ts&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">assertEquals&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="kr">from&lt;/span> &lt;span class="s2">&amp;#34;https://deno.land/std@0.224.0/assert/mod.ts&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">Deno&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">test&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;GetAllTasks devuelve una lista vacía al inicio&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="kr">async&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">const&lt;/span> &lt;span class="nx">repo&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">new&lt;/span> &lt;span class="nx">InMemoryTaskRepo&lt;/span>&lt;span class="p">();&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">const&lt;/span> &lt;span class="nx">useCase&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">new&lt;/span> &lt;span class="nx">GetAllTasks&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">repo&lt;/span>&lt;span class="p">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">const&lt;/span> &lt;span class="nx">result&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">await&lt;/span> &lt;span class="nx">useCase&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">execute&lt;/span>&lt;span class="p">();&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">assertEquals&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">result&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">length&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">});&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="buenas-prácticas-para-proyectos-open-source">Buenas prácticas para proyectos open source&lt;/h2>
-&lt;ol>
-&lt;li>&lt;strong>README.md claro:&lt;/strong> Explica la estructura, propósito y cómo contribuir.&lt;/li>
-&lt;li>&lt;strong>CONTRIBUTING.md:&lt;/strong> Guía para pull requests, testeo y estándares.&lt;/li>
-&lt;li>&lt;strong>GitHub Actions:&lt;/strong> Añade flujos CI con &lt;code>deno lint&lt;/code>, &lt;code>deno test&lt;/code>, &lt;code>deno check&lt;/code>.&lt;/li>
-&lt;li>&lt;strong>Etiquetas y Issues bien definidas:&lt;/strong> Ayuda a nuevos contribuidores.&lt;/li>
-&lt;li>&lt;strong>Uso de versiones específicas:&lt;/strong> Siempre usa URLs con versiones fijas para evitar rupturas.&lt;/li>
-&lt;/ol>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">os&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Setenv&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;DB_PASSWORD&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">secret&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">fmt&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Println&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">os&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Getenv&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;DB_PASSWORD&amp;#34;&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Esto es útil para usar librerías que esperan configuraciones vía &lt;code>env&lt;/code>.&lt;/p>
+&lt;h2 id="buenas-prácticas">Buenas prácticas&lt;/h2>
+&lt;ul>
+&lt;li>&lt;strong>Nunca hardcodees secretos&lt;/strong> en el código fuente.&lt;/li>
+&lt;li>&lt;strong>Evitá guardar secretos en archivos de configuración planos&lt;/strong>.&lt;/li>
+&lt;li>&lt;strong>Usá versionado de secretos&lt;/strong> para rotaciones sin downtime.&lt;/li>
+&lt;li>&lt;strong>Controlá el acceso con políticas IAM específicas&lt;/strong> para minimizar el riesgo.&lt;/li>
+&lt;li>&lt;strong>Usá registros de auditoría&lt;/strong> para detectar accesos indebidos.&lt;/li>
+&lt;li>&lt;strong>No loguees secretos accidentalmente.&lt;/strong>&lt;/li>
+&lt;/ul>
+&lt;h2 id="alternativas-acceso-automático-desde-cloud-run-o-gke">Alternativas: acceso automático desde Cloud Run o GKE&lt;/h2>
+&lt;p>Si desplegás en Cloud Run, App Engine o GKE, podés acceder a los secretos sin usar claves JSON, simplemente mediante la cuenta de servicio adjunta al entorno, lo que refuerza la seguridad y evita manejar archivos sensibles.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-go" data-lang="go">&lt;span class="line">&lt;span class="cl">&lt;span class="nx">client&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">err&lt;/span> &lt;span class="o">:=&lt;/span> &lt;span class="nx">secretmanager&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">NewClient&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">ctx&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="c1">// sin option.WithCredentialsFile
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Este enfoque se recomienda en producción.&lt;/p>
 &lt;h2 id="conclusión">Conclusión&lt;/h2>
-&lt;p>Deno 2 facilita el desarrollo moderno, pero estructurar bien el código es clave para su crecimiento en proyectos reales. Clean Architecture ofrece una guía sólida para escalar, probar y colaborar en proyectos open source. Con esta base, no solo mejorarás la calidad de tus aplicaciones, sino que también te posicionás como un referente técnico dentro del ecosistema Deno.&lt;/p>
-&lt;p>¿Te interesa ver esta arquitectura aplicada en un proyecto real? Encontralo en el repositorio &lt;a href="https://github.com/tu-usuario/deno-clean-architecture">github.com/tu-usuario/deno-clean-architecture&lt;/a>&lt;/p></description></item><item><title>Firestore como base NoSQL para apps Go</title><link>https://cmas.dev/posts/2025-04-23-gcp-firestore-integration/</link><pubDate>Wed, 23 Apr 2025 00:00:00 -0300</pubDate><guid>https://cmas.dev/posts/2025-04-23-gcp-firestore-integration/</guid><description>&lt;p>&lt;strong>Firestore&lt;/strong>, la base de datos &lt;strong>NoSQL&lt;/strong> de &lt;strong>Google Cloud&lt;/strong>, ofrece una solución escalable y de baja latencia ideal para aplicaciones modernas. En este artículo se explora cómo integrar &lt;strong>Firestore&lt;/strong> con aplicaciones desarrolladas en &lt;strong>Go&lt;/strong>, aprovechando el &lt;strong>SDK&lt;/strong> oficial de &lt;strong>Google Cloud&lt;/strong>. A lo largo del artículo se muestra un enfoque práctico para conectar, leer, escribir y actualizar documentos en &lt;strong>Firestore&lt;/strong> desde una aplicación escrita en &lt;strong>Go&lt;/strong>.&lt;/p>
+&lt;p>&lt;strong>Secret Manager&lt;/strong> permite gestionar variables sensibles de forma segura, eficiente y auditada. Su integración con &lt;strong>Go&lt;/strong> es directa gracias al &lt;em>SDK&lt;/em> oficial, lo que permite eliminar configuraciones inseguras y mejorar la postura de seguridad general de cualquier aplicación backend.&lt;/p>
+&lt;p>Adoptar estas buenas prácticas desde el inicio mejora la seguridad, simplifica la gestión de configuración y garantiza que tus aplicaciones &lt;strong>Go&lt;/strong> en &lt;strong>GCP&lt;/strong> estén listas para producción desde el primer día.&lt;/p></description></item><item><title>Firestore como base NoSQL para apps Go</title><link>https://cmas.dev/posts/2025-04-23-gcp-firestore-integration/</link><pubDate>Wed, 23 Apr 2025 00:00:00 -0300</pubDate><guid>https://cmas.dev/posts/2025-04-23-gcp-firestore-integration/</guid><description>&lt;p>&lt;strong>Firestore&lt;/strong>, la base de datos &lt;strong>NoSQL&lt;/strong> de &lt;strong>Google Cloud&lt;/strong>, ofrece una solución escalable y de baja latencia ideal para aplicaciones modernas. En este artículo se explora cómo integrar &lt;strong>Firestore&lt;/strong> con aplicaciones desarrolladas en &lt;strong>Go&lt;/strong>, aprovechando el &lt;strong>SDK&lt;/strong> oficial de &lt;strong>Google Cloud&lt;/strong>. A lo largo del artículo se muestra un enfoque práctico para conectar, leer, escribir y actualizar documentos en &lt;strong>Firestore&lt;/strong> desde una aplicación escrita en &lt;strong>Go&lt;/strong>.&lt;/p>
 &lt;h2 id="por-qué-firestore-con-go">¿Por qué Firestore con Go?&lt;/h2>
 &lt;p>Go es un lenguaje compilado, concurrente y eficiente, ideal para aplicaciones de backend. Firestore, por su parte, ofrece sincronización en tiempo real, una estructura basada en documentos y una integración nativa con GCP. Combinarlos resulta natural si se desea:&lt;/p>
 &lt;ul>

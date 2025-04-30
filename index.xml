@@ -1,4 +1,99 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Christian Amado's Blog</title><link>https://cmas.dev/</link><description>Recent content on Christian Amado's Blog</description><generator>Hugo -- gohugo.io</generator><language>es</language><lastBuildDate>Tue, 29 Apr 2025 00:00:00 -0300</lastBuildDate><atom:link href="https://cmas.dev/index.xml" rel="self" type="application/rss+xml"/><item><title>Creando analizadores personalizados en C# con Roslyn</title><link>https://cmas.dev/posts/2025-04-29-creating-analizers-in-csharp/</link><pubDate>Tue, 29 Apr 2025 00:00:00 -0300</pubDate><guid>https://cmas.dev/posts/2025-04-29-creating-analizers-in-csharp/</guid><description>&lt;p>Mantener un código limpio, coherente y alineado con estándares internos es clave en proyectos profesionales. Aunque herramientas como &lt;strong>SonarQube&lt;/strong>, &lt;strong>StyleCop&lt;/strong> o &lt;strong>ReSharper&lt;/strong> ayudan, a veces es necesario ir más allá y crear reglas personalizadas que se adapten a las necesidades específicas del equipo o la arquitectura.&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Christian Amado's Blog</title><link>https://cmas.dev/</link><description>Recent content on Christian Amado's Blog</description><generator>Hugo -- gohugo.io</generator><language>es</language><lastBuildDate>Fri, 02 May 2025 10:00:00 -0300</lastBuildDate><atom:link href="https://cmas.dev/index.xml" rel="self" type="application/rss+xml"/><item><title>Uso seguro de variables y secretos en GCP con Go</title><link>https://cmas.dev/posts/2025-04-30-secure-variables-go/</link><pubDate>Wed, 30 Apr 2025 00:00:00 -0300</pubDate><guid>https://cmas.dev/posts/2025-04-30-secure-variables-go/</guid><description>&lt;p>Manejar secretos —como claves API, tokens y credenciales— de forma segura es esencial en cualquier aplicación moderna. &lt;strong>Google Cloud Platform (GCP)&lt;/strong> ofrece una solución robusta para este desafío a través de &lt;strong>Secret Manager&lt;/strong>, que permite almacenar, acceder y auditar secretos de manera segura y centralizada.&lt;/p>
+&lt;p>Este artículo muestra cómo acceder y gestionar secretos en &lt;strong>GCP&lt;/strong> desde aplicaciones desarrolladas en &lt;strong>Go&lt;/strong>, asegurando que tus variables sensibles estén protegidas sin necesidad de hardcodearlas o exponerlas en entornos inseguros.&lt;/p>
+&lt;h2 id="por-qué-usar-secret-manager">¿Por qué usar Secret Manager?&lt;/h2>
+&lt;p>Secret Manager de GCP es un servicio completamente gestionado que ofrece:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>Cifrado automático&lt;/strong> con claves de Google o personalizadas (CMEK).&lt;/li>
+&lt;li>&lt;strong>Versionado de secretos&lt;/strong> para revertir fácilmente a estados anteriores.&lt;/li>
+&lt;li>&lt;strong>Control de acceso granular&lt;/strong> vía IAM.&lt;/li>
+&lt;li>&lt;strong>Registros de auditoría&lt;/strong> con Cloud Audit Logs.&lt;/li>
+&lt;li>&lt;strong>Integración nativa con entornos serverless, Compute Engine y GKE&lt;/strong>.&lt;/li>
+&lt;/ul>
+&lt;h2 id="requisitos-previos">Requisitos previos&lt;/h2>
+&lt;p>Antes de comenzar, asegurate de tener:&lt;/p>
+&lt;ul>
+&lt;li>Un proyecto activo en Google Cloud.&lt;/li>
+&lt;li>El API de Secret Manager habilitada.&lt;/li>
+&lt;li>El SDK de Google Cloud (&lt;code>gcloud&lt;/code>) configurado.&lt;/li>
+&lt;li>Una cuenta de servicio con permisos &lt;code>Secret Manager Accessor&lt;/code> (&lt;code>roles/secretmanager.secretAccessor&lt;/code>).&lt;/li>
+&lt;li>Go instalado (se recomienda Go 1.20+).&lt;/li>
+&lt;li>Módulos habilitados (&lt;code>go mod init&lt;/code> en tu proyecto).&lt;/li>
+&lt;/ul>
+&lt;h2 id="paso-1-crear-y-almacenar-un-secreto-en-gcp">Paso 1: Crear y almacenar un secreto en GCP&lt;/h2>
+&lt;p>Desde la consola o terminal:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">gcloud secrets create DB_PASSWORD --replication-policy&lt;span class="o">=&lt;/span>automatic
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">echo&lt;/span> -n &lt;span class="s2">&amp;#34;super-clave-secreta&amp;#34;&lt;/span> &lt;span class="p">|&lt;/span> gcloud secrets versions add DB_PASSWORD --data-file&lt;span class="o">=&lt;/span>-
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Esto crea el secreto &lt;code>DB_PASSWORD&lt;/code> con una versión y lo almacena de forma segura.&lt;/p>
+&lt;h2 id="paso-2-configurar-permisos-de-acceso">Paso 2: Configurar permisos de acceso&lt;/h2>
+&lt;p>Otorgá acceso a la cuenta de servicio usada por tu aplicación:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">gcloud secrets add-iam-policy-binding DB_PASSWORD &lt;span class="se">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="se">&lt;/span> --member&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;serviceAccount:mi-cuenta@mi-proyecto.iam.gserviceaccount.com&amp;#34;&lt;/span> &lt;span class="se">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="se">&lt;/span> --role&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;roles/secretmanager.secretAccessor&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="paso-3-instalar-dependencias-en-go">Paso 3: Instalar dependencias en Go&lt;/h2>
+&lt;p>En tu archivo &lt;code>go.mod&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">go get cloud.google.com/go/secretmanager/apiv1
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">go get google.golang.org/api/option
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="paso-4-código-para-acceder-al-secreto-en-go">Paso 4: Código para acceder al secreto en Go&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-go" data-lang="go">&lt;span class="line">&lt;span class="cl">&lt;span class="kn">package&lt;/span> &lt;span class="nx">main&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kn">import&lt;/span> &lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s">&amp;#34;context&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s">&amp;#34;fmt&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s">&amp;#34;log&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">secretmanager&lt;/span> &lt;span class="s">&amp;#34;cloud.google.com/go/secretmanager/apiv1&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s">&amp;#34;google.golang.org/api/option&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">secretspb&lt;/span> &lt;span class="s">&amp;#34;google.golang.org/genproto/googleapis/cloud/secretmanager/v1&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">func&lt;/span> &lt;span class="nf">main&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">ctx&lt;/span> &lt;span class="o">:=&lt;/span> &lt;span class="nx">context&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Background&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">client&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">err&lt;/span> &lt;span class="o">:=&lt;/span> &lt;span class="nx">secretmanager&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">NewClient&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">ctx&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">option&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">WithCredentialsFile&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;ruta/a/tu/clave.json&amp;#34;&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="nx">err&lt;/span> &lt;span class="o">!=&lt;/span> &lt;span class="kc">nil&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">log&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Fatalf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;Error creando cliente: %v&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">err&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">defer&lt;/span> &lt;span class="nx">client&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Close&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">accessRequest&lt;/span> &lt;span class="o">:=&lt;/span> &lt;span class="o">&amp;amp;&lt;/span>&lt;span class="nx">secretspb&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">AccessSecretVersionRequest&lt;/span>&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">Name&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s">&amp;#34;projects/ID_PROYECTO/secrets/DB_PASSWORD/versions/latest&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">result&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">err&lt;/span> &lt;span class="o">:=&lt;/span> &lt;span class="nx">client&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">AccessSecretVersion&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">ctx&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">accessRequest&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="nx">err&lt;/span> &lt;span class="o">!=&lt;/span> &lt;span class="kc">nil&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">log&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Fatalf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;Error accediendo al secreto: %v&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">err&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">secret&lt;/span> &lt;span class="o">:=&lt;/span> &lt;span class="nb">string&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">result&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">Payload&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">Data&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">fmt&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Println&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;Secreto accedido:&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">secret&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
+&lt;p>⚠️ &lt;strong>Nunca imprimas el secreto en producción.&lt;/strong> Este ejemplo es solo para demostración.&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="paso-5-uso-de-secretos-en-variables-de-entorno">Paso 5: Uso de secretos en variables de entorno&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-go" data-lang="go">&lt;span class="line">&lt;span class="cl">&lt;span class="kn">import&lt;/span> &lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s">&amp;#34;os&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">os&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Setenv&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;DB_PASSWORD&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">secret&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">fmt&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Println&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">os&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Getenv&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;DB_PASSWORD&amp;#34;&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Esto es útil para usar librerías que esperan configuraciones vía &lt;code>env&lt;/code>.&lt;/p>
+&lt;h2 id="buenas-prácticas">Buenas prácticas&lt;/h2>
+&lt;ul>
+&lt;li>&lt;strong>Nunca hardcodees secretos&lt;/strong> en el código fuente.&lt;/li>
+&lt;li>&lt;strong>Evitá guardar secretos en archivos de configuración planos&lt;/strong>.&lt;/li>
+&lt;li>&lt;strong>Usá versionado de secretos&lt;/strong> para rotaciones sin downtime.&lt;/li>
+&lt;li>&lt;strong>Controlá el acceso con políticas IAM específicas&lt;/strong> para minimizar el riesgo.&lt;/li>
+&lt;li>&lt;strong>Usá registros de auditoría&lt;/strong> para detectar accesos indebidos.&lt;/li>
+&lt;li>&lt;strong>No loguees secretos accidentalmente.&lt;/strong>&lt;/li>
+&lt;/ul>
+&lt;h2 id="alternativas-acceso-automático-desde-cloud-run-o-gke">Alternativas: acceso automático desde Cloud Run o GKE&lt;/h2>
+&lt;p>Si desplegás en Cloud Run, App Engine o GKE, podés acceder a los secretos sin usar claves JSON, simplemente mediante la cuenta de servicio adjunta al entorno, lo que refuerza la seguridad y evita manejar archivos sensibles.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-go" data-lang="go">&lt;span class="line">&lt;span class="cl">&lt;span class="nx">client&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">err&lt;/span> &lt;span class="o">:=&lt;/span> &lt;span class="nx">secretmanager&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">NewClient&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">ctx&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="c1">// sin option.WithCredentialsFile
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Este enfoque se recomienda en producción.&lt;/p>
+&lt;h2 id="conclusión">Conclusión&lt;/h2>
+&lt;p>&lt;strong>Secret Manager&lt;/strong> permite gestionar variables sensibles de forma segura, eficiente y auditada. Su integración con &lt;strong>Go&lt;/strong> es directa gracias al &lt;em>SDK&lt;/em> oficial, lo que permite eliminar configuraciones inseguras y mejorar la postura de seguridad general de cualquier aplicación backend.&lt;/p>
+&lt;p>Adoptar estas buenas prácticas desde el inicio mejora la seguridad, simplifica la gestión de configuración y garantiza que tus aplicaciones &lt;strong>Go&lt;/strong> en &lt;strong>GCP&lt;/strong> estén listas para producción desde el primer día.&lt;/p></description></item><item><title>Creando analizadores personalizados en C# con Roslyn</title><link>https://cmas.dev/posts/2025-04-29-creating-analizers-in-csharp/</link><pubDate>Tue, 29 Apr 2025 00:00:00 -0300</pubDate><guid>https://cmas.dev/posts/2025-04-29-creating-analizers-in-csharp/</guid><description>&lt;p>Mantener un código limpio, coherente y alineado con estándares internos es clave en proyectos profesionales. Aunque herramientas como &lt;strong>SonarQube&lt;/strong>, &lt;strong>StyleCop&lt;/strong> o &lt;strong>ReSharper&lt;/strong> ayudan, a veces es necesario ir más allá y crear reglas personalizadas que se adapten a las necesidades específicas del equipo o la arquitectura.&lt;/p>
 &lt;p>Con &lt;strong>Roslyn&lt;/strong>, el compilador de &lt;strong>C#&lt;/strong> y &lt;strong>VB.NET&lt;/strong>, es posible crear analizadores (analyzers) que inspeccionen el código fuente, detecten patrones y ofrezcan sugerencias o advertencias en tiempo de compilación. En este artículo se muestra cómo crear, probar e integrar un analizador personalizado en un proyecto C#.&lt;/p>
 &lt;h2 id="qué-es-roslyn">¿Qué es Roslyn?&lt;/h2>
 &lt;p>&lt;strong>Roslyn&lt;/strong> es el nombre clave del compilador de código abierto de .NET que permite acceder al análisis del código fuente como un modelo estructurado de árboles de sintaxis, semántica, símbolos, y mucho más.&lt;/p>
