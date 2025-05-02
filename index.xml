@@ -1,4 +1,100 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Christian Amado's Blog</title><link>https://cmas.dev/</link><description>Recent content on Christian Amado's Blog</description><generator>Hugo -- gohugo.io</generator><language>es</language><lastBuildDate>Fri, 02 May 2025 10:00:00 -0300</lastBuildDate><atom:link href="https://cmas.dev/index.xml" rel="self" type="application/rss+xml"/><item><title>Uso seguro de variables y secretos en GCP con Go</title><link>https://cmas.dev/posts/2025-04-30-secure-variables-go/</link><pubDate>Wed, 30 Apr 2025 00:00:00 -0300</pubDate><guid>https://cmas.dev/posts/2025-04-30-secure-variables-go/</guid><description>&lt;p>Manejar secretos —como claves API, tokens y credenciales— de forma segura es esencial en cualquier aplicación moderna. &lt;strong>Google Cloud Platform (GCP)&lt;/strong> ofrece una solución robusta para este desafío a través de &lt;strong>Secret Manager&lt;/strong>, que permite almacenar, acceder y auditar secretos de manera segura y centralizada.&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Christian Amado's Blog</title><link>https://cmas.dev/</link><description>Recent content on Christian Amado's Blog</description><generator>Hugo -- gohugo.io</generator><language>es</language><lastBuildDate>Fri, 02 May 2025 00:00:00 -0300</lastBuildDate><atom:link href="https://cmas.dev/index.xml" rel="self" type="application/rss+xml"/><item><title>Mocks, cobertura y pruebas por capas en proyectos escalables</title><link>https://cmas.dev/posts/2025-05-02-advanced-testing-deno/</link><pubDate>Fri, 02 May 2025 00:00:00 -0300</pubDate><guid>https://cmas.dev/posts/2025-05-02-advanced-testing-deno/</guid><description>&lt;p>En el ecosistema moderno del desarrollo backend, el testing no es opcional: es esencial. En proyectos colaborativos y escalables, contar con pruebas automatizadas bien estructuradas marca la diferencia entre un código confiable y uno frágil. Deno 2 ofrece herramientas nativas poderosas para testear, pero muchas veces su uso avanzado no está del todo documentado. Este artículo muestra cómo implementar un enfoque de testing avanzado en Deno 2, incluyendo mocks manuales, cobertura de código y organización por capas.&lt;/p>
+&lt;h2 id="por-qué-testear-en-deno-2">¿Por qué testear en Deno 2?&lt;/h2>
+&lt;p>Deno 2 cuenta con un sistema de testing nativo muy sólido:&lt;/p>
+&lt;ul>
+&lt;li>Sintaxis clara para definir y ejecutar tests.&lt;/li>
+&lt;li>Aislamiento automático de cada test.&lt;/li>
+&lt;li>Herramientas para cobertura de código (&lt;code>deno coverage&lt;/code>).&lt;/li>
+&lt;li>Posibilidad de testear sin librerías externas.&lt;/li>
+&lt;/ul>
+&lt;p>Esto permite aplicar testing por capas y simular distintos escenarios sin introducir dependencias innecesarias.&lt;/p>
+&lt;h2 id="tipos-de-pruebas-por-capa">Tipos de pruebas por capa&lt;/h2>
+&lt;h3 id="-pruebas-unitarias">✅ Pruebas unitarias&lt;/h3>
+&lt;p>Se enfocan en una función o clase específica, con dependencias simuladas.&lt;/p>
+&lt;h3 id="-pruebas-de-integración">🔄 Pruebas de integración&lt;/h3>
+&lt;p>Verifican cómo interactúan varios componentes entre sí, sin tocar la capa HTTP.&lt;/p>
+&lt;h3 id="-pruebas-end-to-end-e2e">🌐 Pruebas end-to-end (E2E)&lt;/h3>
+&lt;p>Simulan una petición real, verificando el comportamiento de la aplicación de punta a punta.&lt;/p>
+&lt;h2 id="organización-recomendada-de-carpetas">Organización recomendada de carpetas&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">tests/
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">├── unit/
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ └── get_all_tasks_test.ts
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">├── integration/
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ └── task_repository_test.ts
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">└── e2e/
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> └── api_tasks_test.ts
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Esto permite escalar los tests de forma ordenada y mantener una separación lógica.&lt;/p>
+&lt;h2 id="mocks-en-deno-2-sin-librerías-externas">Mocks en Deno 2 sin librerías externas&lt;/h2>
+&lt;p>Deno permite crear mocks fácilmente utilizando clases o funciones anónimas. Ejemplo:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-ts" data-lang="ts">&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// Mock de TaskRepository
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">class&lt;/span> &lt;span class="nx">MockTaskRepo&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">private&lt;/span> &lt;span class="nx">tasks&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[{&lt;/span> &lt;span class="nx">id&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s2">&amp;#34;1&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">title&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s2">&amp;#34;Test&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">completed&lt;/span>: &lt;span class="kt">false&lt;/span> &lt;span class="p">}];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">findAll() {&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="nx">Promise&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">resolve&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">tasks&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Uso en el test:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-ts" data-lang="ts">&lt;span class="line">&lt;span class="cl">&lt;span class="kr">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">assertEquals&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="kr">from&lt;/span> &lt;span class="s2">&amp;#34;https://deno.land/std@0.224.0/assert/mod.ts&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">GetAllTasks&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="kr">from&lt;/span> &lt;span class="s2">&amp;#34;@app/use_cases/get_all_tasks.ts&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">Deno&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">test&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;Devuelve tareas del repositorio mockeado&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="kr">async&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">const&lt;/span> &lt;span class="nx">repo&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">new&lt;/span> &lt;span class="nx">MockTaskRepo&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">const&lt;/span> &lt;span class="nx">useCase&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">new&lt;/span> &lt;span class="nx">GetAllTasks&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">repo&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">const&lt;/span> &lt;span class="nx">result&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">await&lt;/span> &lt;span class="nx">useCase&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">execute&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">assertEquals&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">result&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">length&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="simulación-de-errores">Simulación de errores&lt;/h2>
+&lt;p>También podés simular excepciones:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-ts" data-lang="ts">&lt;span class="line">&lt;span class="cl">&lt;span class="kr">class&lt;/span> &lt;span class="nx">FailingRepo&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">findAll() {&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">throw&lt;/span> &lt;span class="k">new&lt;/span> &lt;span class="nb">Error&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;DB unavailable&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">Deno&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">test&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;Manejo de error en repositorio&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">const&lt;/span> &lt;span class="nx">useCase&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">new&lt;/span> &lt;span class="nx">GetAllTasks&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="k">new&lt;/span> &lt;span class="nx">FailingRepo&lt;/span>&lt;span class="p">());&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">try&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">useCase&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">execute&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span> &lt;span class="k">catch&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">e&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">assertEquals&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">e&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">message&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;DB unavailable&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="cobertura-de-código-en-deno-2">Cobertura de código en Deno 2&lt;/h2>
+&lt;h3 id="1-ejecutar-tests-con-cobertura">1. Ejecutar tests con cobertura:&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">deno &lt;span class="nb">test&lt;/span> --coverage&lt;span class="o">=&lt;/span>coverage/
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="2-generar-informe-legible">2. Generar informe legible:&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">deno coverage coverage/ --lcov &amp;gt; coverage.lcov
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="3-ver-informe-html">3. Ver informe HTML:&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">genhtml coverage.lcov -o coverage_html
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Podés usar &lt;a href="https://manpages.debian.org/testing/lcov/genhtml.1.en.html">genhtml&lt;/a> desde &lt;code>lcov&lt;/code> (requiere instalación externa).&lt;/p>
+&lt;h2 id="automatización-con-github-actions">Automatización con GitHub Actions&lt;/h2>
+&lt;p>Un flujo simple para ejecutar los tests y verificar la cobertura:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-yaml" data-lang="yaml">&lt;span class="line">&lt;span class="cl">&lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">test&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="nt">on&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="l">push, pull_request]&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="nt">jobs&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">test&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">runs-on&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">ubuntu-latest&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">steps&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>- &lt;span class="nt">uses&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">actions/checkout@v3&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>- &lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">Setup Deno&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">uses&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">denoland/setup-deno@v1&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">with&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">deno-version&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">v2.x&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>- &lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">Run Tests&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">run&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">deno test --coverage=coverage/&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>También podés subir la cobertura a &lt;a href="https://coveralls.io/">coveralls.io&lt;/a> o &lt;a href="https://about.codecov.io/">codecov.io&lt;/a> si querés seguimiento continuo.&lt;/p>
+&lt;h2 id="buenas-prácticas">Buenas prácticas&lt;/h2>
+&lt;ul>
+&lt;li>✅ Nombrar tests descriptivamente.&lt;/li>
+&lt;li>✅ Mantener las dependencias mínimas.&lt;/li>
+&lt;li>✅ Testear cada capa por separado.&lt;/li>
+&lt;li>✅ Usar import maps para simplificar imports.&lt;/li>
+&lt;li>✅ Evitar testear implementaciones internas.&lt;/li>
+&lt;/ul>
+&lt;h2 id="conclusión">Conclusión&lt;/h2>
+&lt;p>Con &lt;strong>Deno 2&lt;/strong>, tenés todo lo necesario para aplicar pruebas por capas, cobertura de código y mocks sin dependencias externas. Adoptar estas prácticas no solo mejora la calidad de tu software, sino que también facilita la colaboración en proyectos open source.&lt;/p></description></item><item><title>Uso seguro de variables y secretos en GCP con Go</title><link>https://cmas.dev/posts/2025-04-30-secure-variables-go/</link><pubDate>Wed, 30 Apr 2025 00:00:00 -0300</pubDate><guid>https://cmas.dev/posts/2025-04-30-secure-variables-go/</guid><description>&lt;p>Manejar secretos —como claves API, tokens y credenciales— de forma segura es esencial en cualquier aplicación moderna. &lt;strong>Google Cloud Platform (GCP)&lt;/strong> ofrece una solución robusta para este desafío a través de &lt;strong>Secret Manager&lt;/strong>, que permite almacenar, acceder y auditar secretos de manera segura y centralizada.&lt;/p>
 &lt;p>Este artículo muestra cómo acceder y gestionar secretos en &lt;strong>GCP&lt;/strong> desde aplicaciones desarrolladas en &lt;strong>Go&lt;/strong>, asegurando que tus variables sensibles estén protegidas sin necesidad de hardcodearlas o exponerlas en entornos inseguros.&lt;/p>
 &lt;h2 id="por-qué-usar-secret-manager">¿Por qué usar Secret Manager?&lt;/h2>
 &lt;p>Secret Manager de GCP es un servicio completamente gestionado que ofrece:&lt;/p>
