@@ -2,7 +2,7 @@
 layout: post
 title: "Mocks, cobertura y pruebas por capas en proyectos escalables"
 author: Christian Amado
-date: 2025-05-02 10:00:00 -0300
+date: 2025-05-02 00:00:00 -0300
 category: [Desarrollo de software]
 tags: [Deno,GitHub Star]
 thumbnail-img: /img/posts/thumbnails/deno.png
