@@ -53,7 +53,7 @@ colorScheme = "auto"
 # Hide the toggle button, along with the associated vertical divider
 hideColorSchemeToggle = false
 # Series see also post count
-maxSeeAlsoItems = 5
+maxSeeAlsoItems = 12
 
 # If you want to use Google Tag Manager(https://analytics.google.com/) for analytics, add this section
 [params.googleTagManager]
