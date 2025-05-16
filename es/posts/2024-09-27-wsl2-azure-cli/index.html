@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  WSL2 &#43; Azure CLI: gestión de recursos cloud desde terminal Linux · Christian Amado
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Christian Amado">
+<meta name="description" content="WSL2 permite ejecutar un entorno Linux real dentro de Windows, lo que habilita el uso de herramientas nativas para gestión en la nube como Azure CLI. Con esta combinación, los desarrolladores y administradores pueden trabajar cómodamente desde la terminal Linux para administrar recursos en Azure, automatizar tareas, monitorear infraestructura y ejecutar scripts multiplataforma sin salir del entorno local.
+Este artículo explica paso a paso cómo instalar Azure CLI en WSL2, cómo autenticarse y gestionar recursos como máquinas virtuales, redes, contenedores y más.">
+<meta name="keywords" content="blog,desarrollador,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="WSL2 &#43; Azure CLI: gestión de recursos cloud desde terminal Linux">
+  <meta name="twitter:description" content="WSL2 permite ejecutar un entorno Linux real dentro de Windows, lo que habilita el uso de herramientas nativas para gestión en la nube como Azure CLI. Con esta combinación, los desarrolladores y administradores pueden trabajar cómodamente desde la terminal Linux para administrar recursos en Azure, automatizar tareas, monitorear infraestructura y ejecutar scripts multiplataforma sin salir del entorno local.
+Este artículo explica paso a paso cómo instalar Azure CLI en WSL2, cómo autenticarse y gestionar recursos como máquinas virtuales, redes, contenedores y más.">
+
+<meta property="og:url" content="http://localhost:1313/es/posts/2024-09-27-wsl2-azure-cli/">
+  <meta property="og:site_name" content="Christian Amado">
+  <meta property="og:title" content="WSL2 &#43; Azure CLI: gestión de recursos cloud desde terminal Linux">
+  <meta property="og:description" content="WSL2 permite ejecutar un entorno Linux real dentro de Windows, lo que habilita el uso de herramientas nativas para gestión en la nube como Azure CLI. Con esta combinación, los desarrolladores y administradores pueden trabajar cómodamente desde la terminal Linux para administrar recursos en Azure, automatizar tareas, monitorear infraestructura y ejecutar scripts multiplataforma sin salir del entorno local.
+Este artículo explica paso a paso cómo instalar Azure CLI en WSL2, cómo autenticarse y gestionar recursos como máquinas virtuales, redes, contenedores y más.">
+  <meta property="og:locale" content="es">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-09-27T00:00:00-04:00">
+    <meta property="article:modified_time" content="2024-09-27T00:00:00-04:00">
+    <meta property="article:tag" content="WinDev">
+    <meta property="article:tag" content="Windows 11">
+    <meta property="article:tag" content="WSL">
+
+
+
+
+<link rel="canonical" href="http://localhost:1313/es/posts/2024-09-27-wsl2-azure-cli/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/es/">
+      Christian Amado
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/about">Biografía</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/contact">Contacto</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/diabetes">Diabetes</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/tags">Etiquetas</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/en/">🇺🇸</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/es/posts/2024-09-27-wsl2-azure-cli/">
+              WSL2 &#43; Azure CLI: gestión de recursos cloud desde terminal Linux
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2024-09-27T00:00:00-04:00">
+                septiembre 27, 2024
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              3 minutos de lectura.
+            </span>
+          </div>
+          
+          
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/es/tags/windev/">WinDev</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/es/tags/windows-11/">Windows 11</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/es/tags/wsl/">WSL</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <p><strong>WSL2</strong> permite ejecutar un entorno <strong>Linux</strong> real dentro de <strong>Windows</strong>, lo que habilita el uso de herramientas nativas para gestión en la nube como <strong>Azure CLI</strong>. Con esta combinación, los desarrolladores y administradores pueden trabajar cómodamente desde la terminal Linux para administrar recursos en <strong>Azure</strong>, automatizar tareas, monitorear infraestructura y ejecutar scripts multiplataforma sin salir del entorno local.</p>
+<p>Este artículo explica paso a paso cómo instalar <strong>Azure CLI</strong> en <strong>WSL2</strong>, cómo autenticarse y gestionar recursos como máquinas virtuales, redes, contenedores y más.</p>
+<h2 id="requisitos">
+  Requisitos
+  <a class="heading-link" href="#requisitos">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ul>
+<li>WSL2 activo con una distribución Ubuntu (recomendado)</li>
+<li>Cuenta activa de Azure con acceso de administrador</li>
+<li>Git y curl instalados</li>
+<li>Acceso a un navegador para autenticación</li>
+</ul>
+<h2 id="paso-1-instalar-azure-cli-en-wsl2">
+  Paso 1: Instalar Azure CLI en WSL2
+  <a class="heading-link" href="#paso-1-instalar-azure-cli-en-wsl2">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Desde una terminal WSL2 (Ubuntu):</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">curl -sL https://aka.ms/InstallAzureCLIDeb <span class="p">|</span> sudo bash
+</span></span></code></pre></div><p>Verificar instalación:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">az version
+</span></span></code></pre></div><p>Debe mostrar la versión instalada y sus componentes.</p>
+<h2 id="paso-2-iniciar-sesión-en-azure">
+  Paso 2: Iniciar sesión en Azure
+  <a class="heading-link" href="#paso-2-iniciar-sesi%c3%b3n-en-azure">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">az login
+</span></span></code></pre></div><p>Esto abrirá una URL en el navegador predeterminado de Windows. Se puede copiar y abrir manualmente si es necesario.</p>
+<p>Una vez autenticado, se mostrará la suscripción activa:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">az account show
+</span></span></code></pre></div><h2 id="paso-3-comandos-básicos-para-gestión-de-recursos">
+  Paso 3: Comandos básicos para gestión de recursos
+  <a class="heading-link" href="#paso-3-comandos-b%c3%a1sicos-para-gesti%c3%b3n-de-recursos">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="listar-grupos-de-recursos">
+  Listar grupos de recursos
+  <a class="heading-link" href="#listar-grupos-de-recursos">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">az group list --output table
+</span></span></code></pre></div><h3 id="crear-un-grupo-de-recursos">
+  Crear un grupo de recursos
+  <a class="heading-link" href="#crear-un-grupo-de-recursos">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">az group create --name demo-wsl --location eastus
+</span></span></code></pre></div><h3 id="crear-una-máquina-virtual">
+  Crear una máquina virtual
+  <a class="heading-link" href="#crear-una-m%c3%a1quina-virtual">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">az vm create   --resource-group demo-wsl   --name vmLinuxDemo   --image UbuntuLTS   --admin-username dev   --generate-ssh-keys
+</span></span></code></pre></div><h3 id="abrir-puerto-ssh">
+  Abrir puerto SSH
+  <a class="heading-link" href="#abrir-puerto-ssh">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">az vm open-port --resource-group demo-wsl --name vmLinuxDemo --port <span class="m">22</span>
+</span></span></code></pre></div><h3 id="conectarse-por-ssh">
+  Conectarse por SSH
+  <a class="heading-link" href="#conectarse-por-ssh">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ssh dev@&lt;IP_PÚBLICA&gt;
+</span></span></code></pre></div><p>Obtener IP pública:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">az vm list-ip-addresses -g demo-wsl -n vmLinuxDemo --query <span class="s2">&#34;[].virtualMachine.network.publicIpAddresses[].ipAddress&#34;</span> -o tsv
+</span></span></code></pre></div><h2 id="paso-4-gestión-de-almacenamiento-y-contenedores">
+  Paso 4: Gestión de almacenamiento y contenedores
+  <a class="heading-link" href="#paso-4-gesti%c3%b3n-de-almacenamiento-y-contenedores">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="crear-una-cuenta-de-almacenamiento">
+  Crear una cuenta de almacenamiento
+  <a class="heading-link" href="#crear-una-cuenta-de-almacenamiento">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">az storage account create   --name almacendemowsl   --resource-group demo-wsl   --location eastus   --sku Standard_LRS
+</span></span></code></pre></div><h3 id="crear-un-contenedor-en-azure-blob-storage">
+  Crear un contenedor en Azure Blob Storage
+  <a class="heading-link" href="#crear-un-contenedor-en-azure-blob-storage">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">az storage container create   --name archivos   --account-name almacendemowsl   --auth-mode login
+</span></span></code></pre></div><h3 id="subir-un-archivo">
+  Subir un archivo
+  <a class="heading-link" href="#subir-un-archivo">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">az storage blob upload   --account-name almacendemowsl   --container-name archivos   --name demo.txt   --file ./demo.txt   --auth-mode login
+</span></span></code></pre></div><h2 id="paso-5-automatización-con-scripts-bash">
+  Paso 5: Automatización con scripts Bash
+  <a class="heading-link" href="#paso-5-automatizaci%c3%b3n-con-scripts-bash">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Crear un script <code>provisionar-vm.sh</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="cp">#!/bin/bash
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="nv">GRUPO</span><span class="o">=</span><span class="s2">&#34;dev-wsl&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">NOMBRE</span><span class="o">=</span><span class="s2">&#34;vm-wsl2&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">az group create --name <span class="nv">$GRUPO</span> --location eastus
+</span></span><span class="line"><span class="cl">az vm create --resource-group <span class="nv">$GRUPO</span> --name <span class="nv">$NOMBRE</span> --image UbuntuLTS --admin-username dev --generate-ssh-keys
+</span></span></code></pre></div><p>Dar permisos y ejecutar:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">chmod +x provisionar-vm.sh
+</span></span><span class="line"><span class="cl">./provisionar-vm.sh
+</span></span></code></pre></div><h2 id="buenas-prácticas">
+  Buenas prácticas
+  <a class="heading-link" href="#buenas-pr%c3%a1cticas">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ul>
+<li>Usar <code>--output table</code> o <code>--output yaml</code> para resultados legibles</li>
+<li>Almacenar scripts en Git y versionarlos por proyecto</li>
+<li>Usar <code>az config set extension.use_dynamic_install=yes_without_prompt</code> para extensiones</li>
+<li>No compartir archivos <code>.azure/</code> con otras máquinas sin cifrado</li>
+<li>Combinar con <code>jq</code> para procesamiento de resultados en JSON</li>
+</ul>
+<h2 id="conclusión">
+  Conclusión
+  <a class="heading-link" href="#conclusi%c3%b3n">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Usar <strong>Azure CLI</strong> desde <strong>WSL2</strong> permite trabajar de forma profesional y segura con recursos cloud desde un entorno <strong>Linux</strong>, combinando lo mejor de la nube con la productividad del terminal. Esto habilita flujos de automatización, integración CI/CD, administración remota y scripting robusto directamente desde <strong>Windows</strong>.</p>
+      </div>
+
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script>
+  window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "cmasblog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    
+    document.addEventListener('themeChanged', function (e) { 
+        if (document.readyState == 'complete') {
+          DISQUS.reset({ reload: true, config: disqus_config });
+        }
+    });
+</script>
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2018 -
+    
+    2025
+     Christian Amado 
+    ·
+    
+    Desarrollado por <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+      <script async src="https://www.googletagmanager.com/gtag/js?id=356375808"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '356375808');
+        }
+      </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=013131931956450466198%3ablhmkdpweyq"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '013131931956450466198:blhmkdpweyq');
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

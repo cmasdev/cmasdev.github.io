@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>IDX on Christian Amado</title>
+    <link>http://localhost:1313/es/tags/idx/</link>
+    <description>Recent content in IDX on Christian Amado</description>
+    <generator>Hugo</generator>
+    <language>es</language>
+    <lastBuildDate>Wed, 17 Jul 2024 00:00:00 -0400</lastBuildDate>
+    <atom:link href="http://localhost:1313/es/tags/idx/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>.NET Web API con Proyecto IDX</title>
+      <link>http://localhost:1313/es/posts/2024-07-17-dotnet-project-idx/</link>
+      <pubDate>Wed, 17 Jul 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2024-07-17-dotnet-project-idx/</guid>
+      <description>&lt;p&gt;En este artículo veremos cómo crear una Web API básica con el nuevo &lt;strong&gt;Proyecto IDX&lt;/strong&gt; de &lt;strong&gt;Google&lt;/strong&gt;, totalmente desde el navegador sin la necesidad de instalar absolutamente nada en él.&lt;/p&gt;&#xA;&lt;p&gt;El &lt;strong&gt;Proyecto IDX&lt;/strong&gt;, según &lt;strong&gt;Google&lt;/strong&gt; es:&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;Project IDX es un espacio de trabajo asistido por IA para el desarrollo de aplicaciones multiplataforma y de pila completa en la nube.&#xA;Con soporte para una amplia gama de marcos, lenguajes y servicios, además de integraciones con sus productos favoritos de Google, IDX optimiza su flujo de trabajo de desarrollo para que pueda crear y enviar aplicaciones entre plataformas con velocidad, facilidad y calidad.&lt;/p&gt;&lt;/blockquote&gt;&#xA;&lt;p&gt;Más info &lt;a href=&#34;https://idx.dev/&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;aquí&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

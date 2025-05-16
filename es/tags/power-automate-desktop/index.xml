@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Power Automate Desktop on Christian Amado</title>
+    <link>http://localhost:1313/es/tags/power-automate-desktop/</link>
+    <description>Recent content in Power Automate Desktop on Christian Amado</description>
+    <generator>Hugo</generator>
+    <language>es</language>
+    <lastBuildDate>Wed, 31 Jan 2024 00:00:00 -0400</lastBuildDate>
+    <atom:link href="http://localhost:1313/es/tags/power-automate-desktop/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Simular un click de botón con Power Automate Desktop</title>
+      <link>http://localhost:1313/es/posts/2024-01-31-simulate-click-button-power-automate-desktop/</link>
+      <pubDate>Wed, 31 Jan 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2024-01-31-simulate-click-button-power-automate-desktop/</guid>
+      <description>&lt;p&gt;En este artículo mostraré cómo simular un botón clic en un sitio web utilizando &lt;strong&gt;Microsoft Power Automate Desktop&lt;/strong&gt; para el manejo de flujos.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Invocar servicios SOAP desde Power Automate Desktop</title>
+      <link>http://localhost:1313/es/posts/2024-01-24-invoke-soap-services-in-power-automate-desktop/</link>
+      <pubDate>Wed, 24 Jan 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2024-01-24-invoke-soap-services-in-power-automate-desktop/</guid>
+      <description>&lt;p&gt;En este artículo mostraré cómo consumir un Servicio Web SOAP desde &lt;strong&gt;Microsoft Power Automate Desktop&lt;/strong&gt;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Primeros pasos con Power Automate Desktop</title>
+      <link>http://localhost:1313/es/posts/2024-01-17-first-steps-in-power-automate-desktop/</link>
+      <pubDate>Wed, 17 Jan 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2024-01-17-first-steps-in-power-automate-desktop/</guid>
+      <description>&lt;p&gt;En este artículo mostraré cómo dar los primeros pasos con &lt;strong&gt;Microsoft Power Automate Desktop&lt;/strong&gt; para procesos locales y consumos externos.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

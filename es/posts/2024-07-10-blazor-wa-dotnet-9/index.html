@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  Blazor WebAssembly con .NET 9: Nuevas características y mejoras · Christian Amado
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Christian Amado">
+<meta name="description" content="Blazor WebAssembly ha sido una de las tecnologías más populares en el desarrollo de aplicaciones web interactivas con C# en lugar de JavaScript. Con la llegada de .NET 9, Blazor WebAssembly ha incorporado nuevas características y mejoras que optimizan tanto el rendimiento como la experiencia de desarrollo. En este artículo, exploraremos estas nuevas capacidades con ejemplos prácticos y detallaremos cómo sacarles el máximo provecho.">
+<meta name="keywords" content="blog,desarrollador,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Blazor WebAssembly con .NET 9: Nuevas características y mejoras">
+  <meta name="twitter:description" content="Blazor WebAssembly ha sido una de las tecnologías más populares en el desarrollo de aplicaciones web interactivas con C# en lugar de JavaScript. Con la llegada de .NET 9, Blazor WebAssembly ha incorporado nuevas características y mejoras que optimizan tanto el rendimiento como la experiencia de desarrollo. En este artículo, exploraremos estas nuevas capacidades con ejemplos prácticos y detallaremos cómo sacarles el máximo provecho.">
+
+<meta property="og:url" content="http://localhost:1313/es/posts/2024-07-10-blazor-wa-dotnet-9/">
+  <meta property="og:site_name" content="Christian Amado">
+  <meta property="og:title" content="Blazor WebAssembly con .NET 9: Nuevas características y mejoras">
+  <meta property="og:description" content="Blazor WebAssembly ha sido una de las tecnologías más populares en el desarrollo de aplicaciones web interactivas con C# en lugar de JavaScript. Con la llegada de .NET 9, Blazor WebAssembly ha incorporado nuevas características y mejoras que optimizan tanto el rendimiento como la experiencia de desarrollo. En este artículo, exploraremos estas nuevas capacidades con ejemplos prácticos y detallaremos cómo sacarles el máximo provecho.">
+  <meta property="og:locale" content="es">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-07-10T00:00:00-04:00">
+    <meta property="article:modified_time" content="2024-07-10T00:00:00-04:00">
+    <meta property="article:tag" content="Web Development">
+    <meta property="article:tag" content="Blazor">
+    <meta property="article:tag" content=".NET">
+
+
+
+
+<link rel="canonical" href="http://localhost:1313/es/posts/2024-07-10-blazor-wa-dotnet-9/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/es/">
+      Christian Amado
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/about">Biografía</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/contact">Contacto</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/diabetes">Diabetes</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/tags">Etiquetas</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/en/">🇺🇸</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/es/posts/2024-07-10-blazor-wa-dotnet-9/">
+              Blazor WebAssembly con .NET 9: Nuevas características y mejoras
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2024-07-10T00:00:00-04:00">
+                julio 10, 2024
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              3 minutos de lectura.
+            </span>
+          </div>
+          
+          
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/es/tags/web-development/">Web Development</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/es/tags/blazor/">Blazor</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/es/tags/.net/">.NET</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <p><strong>Blazor WebAssembly</strong> ha sido una de las tecnologías más populares en el desarrollo de aplicaciones web interactivas con <strong>C#</strong> en lugar de <strong>JavaScript</strong>. Con la llegada de <strong>.NET 9</strong>, <strong>Blazor WebAssembly</strong> ha incorporado nuevas características y mejoras que optimizan tanto el rendimiento como la experiencia de desarrollo. En este artículo, exploraremos estas nuevas capacidades con ejemplos prácticos y detallaremos cómo sacarles el máximo provecho.</p>
+<h2 id="introducción">
+  Introducción
+  <a class="heading-link" href="#introducci%c3%b3n">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Blazor WebAssembly (WASM) es una tecnología que permite ejecutar aplicaciones .NET en el navegador utilizando WebAssembly. Esto proporciona una experiencia de desarrollo unificada para aplicaciones web, permitiendo reutilizar código entre el cliente y el servidor. .NET 9 amplía este potencial al mejorar significativamente el rendimiento, la interoperabilidad con JavaScript, la integración con otras plataformas como .NET MAUI, y al simplificar la arquitectura de las aplicaciones modernas.</p>
+<h2 id="principales-características-nuevas-en-blazor-webassembly-con-net-9">
+  Principales características nuevas en Blazor WebAssembly con .NET 9
+  <a class="heading-link" href="#principales-caracter%c3%adsticas-nuevas-en-blazor-webassembly-con-net-9">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="1-optimización-del-rendimiento-en-tiempo-de-carga">
+  1. Optimización del rendimiento en tiempo de carga
+  <a class="heading-link" href="#1-optimizaci%c3%b3n-del-rendimiento-en-tiempo-de-carga">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Una de las prioridades en .NET 9 ha sido reducir los tiempos de arranque de las aplicaciones. A través de mejoras en la compresión de recursos, AOT (Ahead-Of-Time Compilation) y reducción de dependencias innecesarias, las aplicaciones ahora inician de forma más ágil.</p>
+<h3 id="2-compilación-aot-mejorada">
+  2. Compilación AOT mejorada
+  <a class="heading-link" href="#2-compilaci%c3%b3n-aot-mejorada">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>.NET 9 permite compilar completamente la aplicación a WebAssembly de forma anticipada. Esto significa que el tiempo de carga se reduce y el rendimiento de ejecución es más cercano a código nativo.</p>
+<p><strong>Configuración en el .csproj</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&lt;PropertyGroup&gt;
+</span></span><span class="line"><span class="cl">  &lt;RunAOTCompilation&gt;true&lt;/RunAOTCompilation&gt;
+</span></span><span class="line"><span class="cl">&lt;/PropertyGroup&gt;
+</span></span></code></pre></div><h3 id="3-interoperabilidad-javascript-bidireccional-mejorada">
+  3. Interoperabilidad JavaScript bidireccional mejorada
+  <a class="heading-link" href="#3-interoperabilidad-javascript-bidireccional-mejorada">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Con .NET 9, se introducen nuevas APIs para facilitar la interoperabilidad con JavaScript, permitiendo una integración más fluida entre Blazor y librerías del ecosistema JS como Chart.js, Leaflet, entre otras.</p>
+<p><strong>Ejemplo de invocación desde JavaScript hacia Blazor</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">DotNet.invokeMethodAsync(&#34;BlazorWasmExample&#34;, &#34;Metodoblazor&#34;)
+</span></span><span class="line"><span class="cl">  .then(result =&gt; console.log(result));
+</span></span></code></pre></div><h3 id="4-standalone-components-y-mejora-en-la-modularidad">
+  4. Standalone Components y mejora en la modularidad
+  <a class="heading-link" href="#4-standalone-components-y-mejora-en-la-modularidad">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Ahora los componentes pueden desarrollarse sin necesidad de estar dentro de un <code>Razor Component Library</code> o de depender de un <code>App.razor</code>, facilitando su reutilización en entornos como MAUI o WASI.</p>
+<h3 id="5-mejor-integración-con-net-maui">
+  5. Mejor integración con .NET MAUI
+  <a class="heading-link" href="#5-mejor-integraci%c3%b3n-con-net-maui">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Las aplicaciones Blazor ahora pueden ejecutarse de forma híbrida en dispositivos móviles y escritorio con .NET MAUI. Esto unifica aún más el desarrollo multiplataforma.</p>
+<h3 id="6-lazy-loading-de-ensamblados-optimizado">
+  6. Lazy Loading de ensamblados optimizado
+  <a class="heading-link" href="#6-lazy-loading-de-ensamblados-optimizado">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>La descarga bajo demanda de ensamblados ahora es más eficiente, permitiendo dividir la aplicación en módulos que se cargan dinámicamente.</p>
+<p><strong>Ejemplo de configuración</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">builder.Services.AddTransient(sp =&gt;
+</span></span><span class="line"><span class="cl">    new LazyAssemblyLoader(sp.GetRequiredService&lt;IJSRuntime&gt;()));
+</span></span></code></pre></div><h2 id="caso-práctico-creación-de-una-aplicación-con-blazor-wasm-y-net-9">
+  Caso práctico: Creación de una aplicación con Blazor WASM y .NET 9
+  <a class="heading-link" href="#caso-pr%c3%a1ctico-creaci%c3%b3n-de-una-aplicaci%c3%b3n-con-blazor-wasm-y-net-9">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="paso-1-crear-el-proyecto-base">
+  Paso 1: Crear el proyecto base
+  <a class="heading-link" href="#paso-1-crear-el-proyecto-base">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">dotnet new blazorwasm -n DemoWasmNet9 -f net9.0
+</span></span></code></pre></div><h3 id="paso-2-activar-aot-y-trimming">
+  Paso 2: Activar AOT y trimming
+  <a class="heading-link" href="#paso-2-activar-aot-y-trimming">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Agrega en <code>DemoWasmNet9.csproj</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&lt;PropertyGroup&gt;
+</span></span><span class="line"><span class="cl">  &lt;RunAOTCompilation&gt;true&lt;/RunAOTCompilation&gt;
+</span></span><span class="line"><span class="cl">  &lt;PublishTrimmed&gt;true&lt;/PublishTrimmed&gt;
+</span></span><span class="line"><span class="cl">&lt;/PropertyGroup&gt;
+</span></span></code></pre></div><h3 id="paso-3-usar-interoperabilidad-mejorada-con-js">
+  Paso 3: Usar interoperabilidad mejorada con JS
+  <a class="heading-link" href="#paso-3-usar-interoperabilidad-mejorada-con-js">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>En <code>Pages/Index.razor</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">@inject IJSRuntime JS
+</span></span><span class="line"><span class="cl">&lt;button @onclick=&#34;MostrarMensaje&#34;&gt;Alerta JS&lt;/button&gt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">@code {
+</span></span><span class="line"><span class="cl">  private async Task MostrarMensaje() {
+</span></span><span class="line"><span class="cl">    await JS.InvokeVoidAsync(&#34;alert&#34;, &#34;¡Hola desde Blazor con .NET 9!&#34;);
+</span></span><span class="line"><span class="cl">  }
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></div><h2 id="buenas-prácticas-con-blazor-webassembly-en-net-9">
+  Buenas prácticas con Blazor WebAssembly en .NET 9
+  <a class="heading-link" href="#buenas-pr%c3%a1cticas-con-blazor-webassembly-en-net-9">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ul>
+<li><strong>Minimizar el uso de librerías grandes de terceros</strong> cuando no son necesarias.</li>
+<li><strong>Utilizar lazy loading de rutas y componentes</strong> para mejorar la experiencia inicial del usuario.</li>
+<li><strong>Aplicar almacenamiento local con <code>localStorage</code> o <code>IndexedDB</code></strong> para evitar solicitudes innecesarias.</li>
+<li><strong>Medir y optimizar con herramientas como Lighthouse, Application Insights o Web Vitals</strong>.</li>
+</ul>
+<h2 id="conclusión">
+  Conclusión
+  <a class="heading-link" href="#conclusi%c3%b3n">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Blazor WebAssembly con .NET 9 representa una evolución significativa en la forma de construir aplicaciones web modernas con .NET. Gracias a sus mejoras en compilación, rendimiento, interoperabilidad y soporte multiplataforma, los desarrolladores pueden crear soluciones rápidas, seguras y altamente reutilizables.</p>
+<p>Esta versión reafirma el compromiso de Microsoft con una plataforma unificada, flexible y lista para la nube y el cliente. Es el momento ideal para adoptar Blazor si aún no lo has hecho, o para actualizar tus aplicaciones actuales y aprovechar las ventajas que ofrece .NET 9.</p>
+      </div>
+
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script>
+  window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "cmasblog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    
+    document.addEventListener('themeChanged', function (e) { 
+        if (document.readyState == 'complete') {
+          DISQUS.reset({ reload: true, config: disqus_config });
+        }
+    });
+</script>
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2018 -
+    
+    2025
+     Christian Amado 
+    ·
+    
+    Desarrollado por <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+      <script async src="https://www.googletagmanager.com/gtag/js?id=356375808"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '356375808');
+        }
+      </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=013131931956450466198%3ablhmkdpweyq"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '013131931956450466198:blhmkdpweyq');
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

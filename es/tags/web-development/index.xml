@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Web Development on Christian Amado</title>
+    <link>http://localhost:1313/es/tags/web-development/</link>
+    <description>Recent content in Web Development on Christian Amado</description>
+    <generator>Hugo</generator>
+    <language>es</language>
+    <lastBuildDate>Wed, 05 Mar 2025 00:00:00 -0400</lastBuildDate>
+    <atom:link href="http://localhost:1313/es/tags/web-development/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Migración de aplicaciones legacy a Deno</title>
+      <link>http://localhost:1313/es/posts/2025-03-05-migrate-legacy-apps-deno2/</link>
+      <pubDate>Wed, 05 Mar 2025 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2025-03-05-migrate-legacy-apps-deno2/</guid>
+      <description>&lt;p&gt;La evolución de &lt;strong&gt;Deno&lt;/strong&gt; hacia su versión 2 representa un paso firme hacia una experiencia de desarrollo más coherente, segura y moderna en el ecosistema &lt;strong&gt;JavaScript&lt;/strong&gt; y &lt;strong&gt;TypeScript&lt;/strong&gt;. Si bien Deno 1 ya ofrecía ventajas importantes frente a &lt;strong&gt;Node.js&lt;/strong&gt;, &lt;strong&gt;Deno 2&lt;/strong&gt; consolida su propuesta con cambios significativos en la gestión de módulos, configuración del entorno y compatibilidad con estándares web. Este artículo describe cómo migrar una aplicación legacy —ya sea desarrollada en Node.js o en Deno 1— hacia Deno 2, abordando los desafíos técnicos y proponiendo una estrategia ordenada de transición.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Angular 17 y su impacto en el desarrollo web</title>
+      <link>http://localhost:1313/es/posts/2025-02-26-angular-17-web-dev-impact/</link>
+      <pubDate>Wed, 26 Feb 2025 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2025-02-26-angular-17-web-dev-impact/</guid>
+      <description>&lt;p&gt;Angular ha sido una de las tecnologías más robustas para el desarrollo de aplicaciones web modernas. Con cada nueva versión, el framework introduce mejoras significativas en rendimiento, usabilidad y escalabilidad. &lt;strong&gt;Angular 17&lt;/strong&gt; no es la excepción y trae consigo importantes cambios que impactarán la manera en que los desarrolladores construyen aplicaciones web.&lt;/p&gt;&#xA;&lt;p&gt;En este artículo, exploraremos:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Las principales novedades de &lt;strong&gt;Angular 17&lt;/strong&gt;.&lt;/li&gt;&#xA;&lt;li&gt;Mejoras en rendimiento y reactividad.&lt;/li&gt;&#xA;&lt;li&gt;Impacto en la arquitectura de proyectos Angular.&lt;/li&gt;&#xA;&lt;li&gt;Cómo adoptar Angular 17 en proyectos existentes.&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
+    </item>
+    <item>
+      <title>Usando generics avanzados en TypeScript</title>
+      <link>http://localhost:1313/es/posts/2025-02-19-generics-typescript/</link>
+      <pubDate>Wed, 19 Feb 2025 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2025-02-19-generics-typescript/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;TypeScript&lt;/strong&gt; ofrece una potente funcionalidad llamada &lt;strong&gt;Generics&lt;/strong&gt; que permite crear componentes y funciones altamente reutilizables y seguros en tiempo de compilación. Los &lt;strong&gt;Generics avanzados&lt;/strong&gt; van más allá de lo básico y permiten escribir código flexible sin perder el tipado estricto.&lt;/p&gt;&#xA;&lt;p&gt;En este artículo, exploraremos:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Cómo funcionan los &lt;strong&gt;Generics&lt;/strong&gt; en TypeScript.&lt;/li&gt;&#xA;&lt;li&gt;Uso de &lt;strong&gt;restricciones (&lt;code&gt;extends&lt;/code&gt;)&lt;/strong&gt;.&lt;/li&gt;&#xA;&lt;li&gt;Aplicación de &lt;strong&gt;múltiples tipos genéricos&lt;/strong&gt;.&lt;/li&gt;&#xA;&lt;li&gt;Uso de &lt;strong&gt;tipos condicionales y mapped types&lt;/strong&gt;.&lt;/li&gt;&#xA;&lt;li&gt;Casos prácticos en &lt;strong&gt;funciones, clases e interfaces&lt;/strong&gt;.&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
+    </item>
+    <item>
+      <title>Angular y gráficos interactivos con Chart.js</title>
+      <link>http://localhost:1313/es/posts/2025-02-12-angular-chart-js/</link>
+      <pubDate>Wed, 12 Feb 2025 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2025-02-12-angular-chart-js/</guid>
+      <description>&lt;p&gt;La visualización de datos es una parte fundamental en el desarrollo de aplicaciones web modernas. &lt;strong&gt;Chart.js&lt;/strong&gt; es una de las bibliotecas más populares y livianas para la creación de gráficos dinámicos e interactivos. Combinado con &lt;strong&gt;Angular&lt;/strong&gt;, podemos construir visualizaciones de datos altamente eficientes y personalizables.&lt;/p&gt;&#xA;&lt;p&gt;En este artículo, aprenderemos cómo integrar &lt;strong&gt;Chart.js&lt;/strong&gt; en un proyecto Angular y cómo crear gráficos interactivos con ejemplos prácticos.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Deploy automatizado de APIs Deno en Azure Functions</title>
+      <link>http://localhost:1313/es/posts/2025-02-05-automatized-deploy-api-deno/</link>
+      <pubDate>Wed, 05 Feb 2025 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2025-02-05-automatized-deploy-api-deno/</guid>
+      <description>&lt;p&gt;El despliegue automatizado de APIs en la nube es una práctica esencial en el desarrollo moderno. &lt;strong&gt;Deno&lt;/strong&gt;, con su seguridad integrada y soporte nativo para TypeScript, es una excelente opción para construir APIs escalables y eficientes. &lt;strong&gt;Azure Functions&lt;/strong&gt;, por otro lado, permite ejecutar código sin preocuparse por la infraestructura subyacente.&lt;/p&gt;&#xA;&lt;p&gt;En este artículo, aprenderás cómo &lt;strong&gt;desplegar automáticamente una API de Deno en Azure Functions&lt;/strong&gt; usando GitHub Actions.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Cómo estructurar grandes proyectos en TypeScript</title>
+      <link>http://localhost:1313/es/posts/2025-01-29-how-to-structure-big-projects/</link>
+      <pubDate>Wed, 29 Jan 2025 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2025-01-29-how-to-structure-big-projects/</guid>
+      <description>&lt;p&gt;El desarrollo de grandes aplicaciones en &lt;strong&gt;TypeScript&lt;/strong&gt; requiere una estructura de proyecto bien definida para mantener la escalabilidad, mantenibilidad y eficiencia del código. Una mala organización puede llevar a problemas de acoplamiento, dificultades en la depuración y una curva de aprendizaje elevada para nuevos desarrolladores en el equipo.&lt;/p&gt;&#xA;&lt;p&gt;En este artículo, exploraremos cómo organizar un proyecto grande en TypeScript utilizando &lt;strong&gt;buenas prácticas, patrones de diseño y herramientas avanzadas&lt;/strong&gt;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Angular Signals para flujos complejos: Ejemplos prácticos</title>
+      <link>http://localhost:1313/es/posts/2025-01-22-angular-signals/</link>
+      <pubDate>Wed, 22 Jan 2025 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2025-01-22-angular-signals/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;Angular Signals&lt;/strong&gt; es una de las características más recientes del ecosistema de Angular, diseñada para mejorar la reactividad y la eficiencia en la gestión de estado. En aplicaciones con flujos complejos, la correcta implementación de signals permite una arquitectura más predecible, reduciendo renders innecesarios y mejorando el rendimiento.&lt;/p&gt;&#xA;&lt;p&gt;En este artículo exploraremos cómo usar &lt;strong&gt;Angular Signals&lt;/strong&gt; en escenarios avanzados, incluyendo su aplicación en &lt;strong&gt;gestión de estado, comunicación entre componentes y sincronización de datos asíncronos&lt;/strong&gt;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Diseño de APIs escalables con Deno y TypeScript</title>
+      <link>http://localhost:1313/es/posts/2025-01-15-scalable-design-apis/</link>
+      <pubDate>Wed, 15 Jan 2025 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2025-01-15-scalable-design-apis/</guid>
+      <description>&lt;p&gt;El desarrollo de APIs escalables es un aspecto clave en la construcción de aplicaciones modernas. &lt;strong&gt;Deno&lt;/strong&gt;, un runtime moderno para JavaScript y TypeScript, ofrece una serie de características que lo convierten en una excelente alternativa para la creación de APIs seguras y eficientes. En este artículo, exploraremos cómo diseñar una API REST escalable utilizando &lt;strong&gt;Deno y TypeScript&lt;/strong&gt;, aplicando las mejores prácticas y optimizaciones.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Angular Universal y SEO: Estrategias avanzadas</title>
+      <link>http://localhost:1313/es/posts/2025-01-08-angular-universal-seo/</link>
+      <pubDate>Wed, 08 Jan 2025 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2025-01-08-angular-universal-seo/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;Angular Universal&lt;/strong&gt; es una herramienta que permite renderizar aplicaciones &lt;strong&gt;Angular&lt;/strong&gt; en el servidor antes de enviarlas al cliente. Este enfoque mejora notablemente la experiencia del usuario al reducir los tiempos de carga y proporciona a los motores de búsqueda &lt;strong&gt;HTML&lt;/strong&gt; estático para indexar correctamente.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Optimización de rendimiento en Blazor WebAssembly</title>
+      <link>http://localhost:1313/es/posts/2025-01-06-performance-optimization-blazor-webassembly/</link>
+      <pubDate>Mon, 06 Jan 2025 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2025-01-06-performance-optimization-blazor-webassembly/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;Blazor WebAssembly&lt;/strong&gt; es una tecnología poderosa que permite a los desarrolladores crear aplicaciones web interactivas utilizando &lt;strong&gt;C#&lt;/strong&gt; y &lt;strong&gt;.NET&lt;/strong&gt; en lugar de &lt;strong&gt;JavaScript&lt;/strong&gt;. Sin embargo, debido a las características inherentes de su arquitectura, la optimización del rendimiento puede ser un desafío crítico. En este artículo, exploraremos técnicas, estrategias y mejores prácticas para optimizar el rendimiento en aplicaciones &lt;strong&gt;Blazor WebAssembly&lt;/strong&gt;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Usando Blazor para crear Progressive Web Apps (PWA)</title>
+      <link>http://localhost:1313/es/posts/2024-12-24-blazor-pwa/</link>
+      <pubDate>Tue, 24 Dec 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2024-12-24-blazor-pwa/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;Blazor&lt;/strong&gt;, el framework moderno basado en &lt;strong&gt;.NET&lt;/strong&gt;, ha demostrado ser una herramienta poderosa para el desarrollo de aplicaciones web interactivas. Combinado con las capacidades de &lt;strong&gt;Progressive Web Apps (PWA)&lt;/strong&gt;, ofrece una forma innovadora de construir aplicaciones que funcionan offline. Se pueden instalar en dispositivos y ofrecen una experiencia similar a las aplicaciones nativas. En este artículo, exploraremos cómo usar &lt;strong&gt;Blazor&lt;/strong&gt; para crear &lt;strong&gt;PWAs&lt;/strong&gt;, centrándonos en las nuevas capacidades introducidas con &lt;strong&gt;.NET 9&lt;/strong&gt;, buenas prácticas y ejemplos detallados.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Blazor y Microsoft Entra ID: Implementación de autenticación</title>
+      <link>http://localhost:1313/es/posts/2024-12-18-blazor-and-microsoft-entra/</link>
+      <pubDate>Wed, 18 Dec 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2024-12-18-blazor-and-microsoft-entra/</guid>
+      <description>&lt;p&gt;La integración de &lt;strong&gt;Microsoft Entra ID (anteriormente Azure AD)&lt;/strong&gt; con &lt;strong&gt;Blazor&lt;/strong&gt; permite implementar autenticación segura en aplicaciones web y mejorar la gestión de identidades. En este artículo, exploraremos cómo integrar &lt;strong&gt;Microsoft Entra ID&lt;/strong&gt; en una aplicación &lt;strong&gt;Blazor&lt;/strong&gt;, proporcionando un flujo de autenticación robusto y seguro.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Seguridad en Angular: Roles y autenticación avanzada</title>
+      <link>http://localhost:1313/es/posts/2024-12-11-angular-security/</link>
+      <pubDate>Wed, 11 Dec 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2024-12-11-angular-security/</guid>
+      <description>&lt;p&gt;La seguridad en Angular es un aspecto fundamental para cualquier aplicación web moderna. Implementar un sistema de autenticación robusto y un control de acceso basado en roles garantiza la integridad y protección de los datos. En este artículo, exploraremos estrategias avanzadas de autenticación y gestión de roles en Angular con ejemplos prácticos.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Comparativa de frameworks: Angular, React y Vue en 2024</title>
+      <link>http://localhost:1313/es/posts/2024-12-04-frameworks-comparatives/</link>
+      <pubDate>Wed, 04 Dec 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2024-12-04-frameworks-comparatives/</guid>
+      <description>&lt;p&gt;El desarrollo web ha evolucionado significativamente en los últimos años, y tres de los frameworks más populares continúan liderando el mercado: &lt;strong&gt;Angular, React y Vue&lt;/strong&gt;. En este artículo, compararemos estos frameworks en términos de rendimiento, facilidad de uso, casos de uso ideales y comunidad en 2024.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Gestión de dependencias en TypeScript: Consejos y herramientas</title>
+      <link>http://localhost:1313/es/posts/2024-11-27-dependency-management-typescript/</link>
+      <pubDate>Wed, 27 Nov 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2024-11-27-dependency-management-typescript/</guid>
+      <description>&lt;p&gt;La gestión eficiente de dependencias es una parte fundamental del desarrollo en TypeScript. Al trabajar con paquetes externos, es esencial conocer las mejores prácticas y herramientas disponibles para garantizar la estabilidad, seguridad y rendimiento de nuestros proyectos. En este artículo, exploraremos las estrategias para gestionar dependencias en TypeScript, incluyendo herramientas como npm, yarn, pnpm y Deno, junto con ejemplos prácticos.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Creación de aplicaciones serverless con Deno y Azure</title>
+      <link>http://localhost:1313/es/posts/2024-11-20-serverless-apps-deno-azure/</link>
+      <pubDate>Wed, 20 Nov 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2024-11-20-serverless-apps-deno-azure/</guid>
+      <description>&lt;p&gt;El paradigma serverless permite construir aplicaciones sin necesidad de gestionar servidores, proporcionando escalabilidad automática y optimización de costos. En este artículo, exploraremos cómo crear aplicaciones serverless utilizando Deno y Azure Functions, combinando la eficiencia de Deno con la potencia de la nube de Azure.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Testing en Deno: Estrategias para Aplicaciones Grandes</title>
+      <link>http://localhost:1313/es/posts/2024-11-13-testing-strategies-in-deno/</link>
+      <pubDate>Wed, 13 Nov 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2024-11-13-testing-strategies-in-deno/</guid>
+      <description>&lt;p&gt;El desarrollo de aplicaciones grandes con &lt;strong&gt;Deno&lt;/strong&gt; requiere un enfoque sólido en &lt;strong&gt;pruebas automatizadas&lt;/strong&gt; para garantizar su estabilidad y escalabilidad. Deno ofrece un sistema de testing integrado con herramientas modernas que facilitan la escritura y ejecución de pruebas unitarias, de integración y funcionales.&lt;/p&gt;&#xA;&lt;p&gt;En este artículo, exploraremos las &lt;strong&gt;estrategias para testing en Deno&lt;/strong&gt;, incluyendo fundamentos teóricos, mejores prácticas y ejemplos de código para aplicaciones a gran escala.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Lazy Loading avanzado en Angular con rutas dinámicas</title>
+      <link>http://localhost:1313/es/posts/2024-11-06-advanced-lazy-loading-in-angular-with-dynamic-rules/</link>
+      <pubDate>Wed, 06 Nov 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2024-11-06-advanced-lazy-loading-in-angular-with-dynamic-rules/</guid>
+      <description>&lt;p&gt;El &lt;strong&gt;Lazy Loading&lt;/strong&gt; es una técnica fundamental en Angular para mejorar el rendimiento de las aplicaciones al cargar solo los módulos necesarios cuando se requieren. En este artículo, exploraremos cómo implementar &lt;strong&gt;Lazy Loading avanzado con rutas dinámicas&lt;/strong&gt; para optimizar aún más la carga de módulos y mejorar la experiencia del usuario.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Integración de Angular con APIs RESTful en Deno</title>
+      <link>http://localhost:1313/es/posts/2024-10-30-angular-integration-with-api-rest-in-deno/</link>
+      <pubDate>Wed, 30 Oct 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2024-10-30-angular-integration-with-api-rest-in-deno/</guid>
+      <description>&lt;p&gt;La integración entre &lt;strong&gt;Angular&lt;/strong&gt; y &lt;strong&gt;APIs RESTful&lt;/strong&gt; creadas con &lt;strong&gt;Deno&lt;/strong&gt; permite desarrollar aplicaciones modernas y escalables con una arquitectura limpia y basada en &lt;strong&gt;TypeScript&lt;/strong&gt;. En este artículo, exploraremos cómo conectar una aplicación Angular con un backend RESTful en Deno paso a paso, incluyendo fundamentos teóricos, ejemplos prácticos y buenas prácticas.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Desarrollo full-stack con Angular y Deno</title>
+      <link>http://localhost:1313/es/posts/2024-10-23-fullstack-development-with-angular-and-deno/</link>
+      <pubDate>Wed, 23 Oct 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2024-10-23-fullstack-development-with-angular-and-deno/</guid>
+      <description>&lt;p&gt;El desarrollo full-stack ha evolucionado con nuevas tecnologías que permiten construir aplicaciones modernas, escalables y seguras. En este artículo, exploraremos cómo combinar Angular en el frontend y Deno en el backend para crear aplicaciones full-stack eficientes y bien estructuradas.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Testing unitario en Blazor: Herramientas y estrategias</title>
+      <link>http://localhost:1313/es/posts/2024-10-16-testing-unitario-in-blazor/</link>
+      <pubDate>Wed, 16 Oct 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2024-10-16-testing-unitario-in-blazor/</guid>
+      <description>&lt;p&gt;El desarrollo de aplicaciones robustas y fiables en &lt;strong&gt;Blazor&lt;/strong&gt; requiere un enfoque disciplinado hacia las pruebas unitarias. Las pruebas unitarias no solo garantizan que los componentes y servicios funcionen como se espera, sino que también facilitan el mantenimiento, la detección temprana de errores y la calidad del software. En este artículo, exploraremos en detalle cómo realizar pruebas unitarias en Blazor utilizando herramientas modernas, estrategias eficaces y ejemplos prácticos.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Uso de Azure Cosmos DB en aplicaciones Blazor</title>
+      <link>http://localhost:1313/es/posts/2024-10-09-azure-cosmos-in-blazor/</link>
+      <pubDate>Wed, 09 Oct 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2024-10-09-azure-cosmos-in-blazor/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;Azure Cosmos DB&lt;/strong&gt; es una base de datos distribuida globalmente y altamente escalable que permite almacenar y consultar datos de forma rápida y segura. Al integrarla con aplicaciones &lt;strong&gt;Blazor&lt;/strong&gt;, puedes construir soluciones web modernas y dinámicas con acceso a datos en tiempo real. Este artículo ofrece un instructivo paso a paso para usar &lt;strong&gt;Azure Cosmos DB&lt;/strong&gt; con &lt;strong&gt;Blazor&lt;/strong&gt;, incluyendo ejemplos de código prácticos y buenas prácticas.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Blazor WebAssembly vs Blazor Server: ¿Cuál elegir?</title>
+      <link>http://localhost:1313/es/posts/2024-10-02-blazor-webassembly-vs-server/</link>
+      <pubDate>Wed, 02 Oct 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2024-10-02-blazor-webassembly-vs-server/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;Blazor&lt;/strong&gt;, el framework de desarrollo de aplicaciones web basado en &lt;strong&gt;.NET&lt;/strong&gt;, ofrece dos opciones principales para crear aplicaciones interactivas: &lt;strong&gt;Blazor WebAssembly&lt;/strong&gt; y &lt;strong&gt;Blazor Server&lt;/strong&gt;. Ambas tecnologías tienen sus propias fortalezas, debilidades y casos de uso ideales. En este artículo, exploraremos en detalle estas dos modalidades para ayudarte a decidir cuál se adapta mejor a tu proyecto.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Gestión de estado en Angular con NgRx</title>
+      <link>http://localhost:1313/es/posts/2024-09-25-state-management-angular/</link>
+      <pubDate>Wed, 25 Sep 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2024-09-25-state-management-angular/</guid>
+      <description>&lt;p&gt;La gestión de estado es un aspecto fundamental en el desarrollo de aplicaciones frontend, especialmente en aplicaciones complejas donde se manejan grandes cantidades de datos compartidos entre componentes. &lt;strong&gt;NgRx&lt;/strong&gt; es una librería basada en &lt;strong&gt;Redux&lt;/strong&gt; que permite gestionar el estado de manera predecible y escalable en aplicaciones &lt;strong&gt;Angular&lt;/strong&gt;. Este artículo ofrece una guía detallada para implementar y utilizar NgRx en tus proyectos Angular.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Angular y Firebase: Uso avanzado de RxJS</title>
+      <link>http://localhost:1313/es/posts/2024-09-18-angular-and-firebase/</link>
+      <pubDate>Wed, 18 Sep 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2024-09-18-angular-and-firebase/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;Angular&lt;/strong&gt; y &lt;strong&gt;Firebase&lt;/strong&gt; son una combinación poderosa para el desarrollo de aplicaciones web modernas y reactivas. Al integrar &lt;strong&gt;Firebase&lt;/strong&gt; en &lt;strong&gt;Angular&lt;/strong&gt;, &lt;strong&gt;RxJS&lt;/strong&gt; se convierte en una herramienta clave para gestionar flujos de datos y operaciones asincrónicas de manera eficiente. Este artículo explora el uso avanzado de RxJS en aplicaciones &lt;strong&gt;Angular&lt;/strong&gt; con &lt;strong&gt;Firebase&lt;/strong&gt;, proporcionando ejemplos prácticos y estrategias para maximizar su potencial.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Mejores prácticas de modularidad con Deno 2</title>
+      <link>http://localhost:1313/es/posts/2024-09-11-best-practices-modularity-deno2/</link>
+      <pubDate>Wed, 11 Sep 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2024-09-11-best-practices-modularity-deno2/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;Deno 2&lt;/strong&gt; ha revolucionado el desarrollo con &lt;strong&gt;JavaScript&lt;/strong&gt; y &lt;strong&gt;TypeScript&lt;/strong&gt; al proporcionar un entorno moderno, seguro y modular. Su sistema de importación basado en URL y su soporte nativo para &lt;strong&gt;TypeScript&lt;/strong&gt; facilitan la creación de aplicaciones bien estructuradas y mantenibles. En este artículo, exploraremos las mejores prácticas para lograr modularidad en proyectos con &lt;strong&gt;Deno 2&lt;/strong&gt;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Configuración de CI/CD para proyectos Angular con GitHub Actions</title>
+      <link>http://localhost:1313/es/posts/2024-09-04-config-ci-cd-angular-github/</link>
+      <pubDate>Wed, 04 Sep 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2024-09-04-config-ci-cd-angular-github/</guid>
+      <description>&lt;p&gt;La integración continua (CI) y la entrega continua (CD) son pilares fundamentales en el desarrollo de software moderno. &lt;strong&gt;GitHub Actions&lt;/strong&gt; proporciona una solución poderosa y flexible para automatizar procesos de &lt;strong&gt;CI/CD&lt;/strong&gt; directamente en repositorios de &lt;strong&gt;GitHub&lt;/strong&gt;. En este artículo, aprenderemos a configurar &lt;strong&gt;CI/CD&lt;/strong&gt; para un proyecto Angular utilizando &lt;strong&gt;GitHub Actions&lt;/strong&gt;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Gráficos interactivos con Angular y D3.js</title>
+      <link>http://localhost:1313/es/posts/2024-08-28-interactive-graphics-angular-d3/</link>
+      <pubDate>Wed, 28 Aug 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2024-08-28-interactive-graphics-angular-d3/</guid>
+      <description>&lt;p&gt;Los gráficos interactivos son esenciales para visualizar datos de manera efectiva en aplicaciones modernas. &lt;strong&gt;Angular&lt;/strong&gt;, combinado con &lt;strong&gt;D3.js&lt;/strong&gt;, ofrece una solución poderosa para crear visualizaciones dinámicas y altamente interactivas. Este artículo explora cómo integrar &lt;strong&gt;D3.js&lt;/strong&gt; en una aplicación &lt;strong&gt;Angular&lt;/strong&gt; para construir gráficos interactivos desde cero, proporcionando ejemplos prácticos y consejos clave.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Migración de Node.js a Deno: Caso práctico</title>
+      <link>http://localhost:1313/es/posts/2024-08-21-nodejs-migration-to-deno/</link>
+      <pubDate>Wed, 21 Aug 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2024-08-21-nodejs-migration-to-deno/</guid>
+      <description>&lt;p&gt;En los últimos años, &lt;strong&gt;Deno&lt;/strong&gt; ha emergido como una alternativa moderna a &lt;strong&gt;Node.js&lt;/strong&gt;. Desarrollado por el mismo creador de &lt;strong&gt;Node.js&lt;/strong&gt;, &lt;strong&gt;Deno&lt;/strong&gt; busca abordar algunas de las limitaciones y problemas de diseño que han surgido con &lt;strong&gt;Node.js&lt;/strong&gt; a lo largo del tiempo. Este artículo presenta un caso práctico detallado sobre cómo migrar una aplicación existente de &lt;strong&gt;Node.js&lt;/strong&gt; a &lt;strong&gt;Deno&lt;/strong&gt;, destacando las diferencias clave, los desafíos y las soluciones.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Decoradores avanzados en TypeScript: Mejora tu código</title>
+      <link>http://localhost:1313/es/posts/2024-08-14-decorators-typescript/</link>
+      <pubDate>Wed, 14 Aug 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2024-08-14-decorators-typescript/</guid>
+      <description>&lt;p&gt;Los decoradores son una característica poderosa y avanzada de &lt;strong&gt;TypeScript&lt;/strong&gt; que permiten modificar el comportamiento de clases, métodos, propiedades y parámetros de una forma declarativa. Son ampliamente utilizados en frameworks como Angular, pero también pueden emplearse en proyectos personalizados para mejorar la reutilización y la claridad del código. En este artículo exploraremos los decoradores avanzados en &lt;strong&gt;TypeScript&lt;/strong&gt;, sus usos más comunes, cómo crearlos desde cero, y las mejores prácticas para implementarlos.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Comparación: Angular Signals vs React Hooks</title>
+      <link>http://localhost:1313/es/posts/2024-08-07-angular-signals-vs-react-hooks/</link>
+      <pubDate>Wed, 07 Aug 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2024-08-07-angular-signals-vs-react-hooks/</guid>
+      <description>&lt;p&gt;En el mundo del desarrollo frontend, los frameworks y bibliotecas como &lt;strong&gt;Angular&lt;/strong&gt; y &lt;strong&gt;React&lt;/strong&gt; han evolucionado constantemente para ofrecer soluciones más eficientes y escalables. Dos características destacadas de estas tecnologías son los &lt;em&gt;Signals&lt;/em&gt; de &lt;strong&gt;Angular&lt;/strong&gt; y los &lt;em&gt;Hooks&lt;/em&gt; de &lt;strong&gt;React&lt;/strong&gt;. Ambos conceptos están diseñados para manejar estados y mejorar la reactividad, pero lo hacen de maneras muy diferentes. Este artículo explora en profundidad ambas herramientas, sus similitudes, diferencias, ejemplos prácticos y buenas prácticas.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Optimización de Angular Universal para SEO y rendimiento</title>
+      <link>http://localhost:1313/es/posts/2024-07-31-angular-seo/</link>
+      <pubDate>Wed, 31 Jul 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2024-07-31-angular-seo/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;Angular Universal&lt;/strong&gt; es una herramienta poderosa que permite realizar el renderizado del lado del servidor (SSR, por sus siglas en inglés) en aplicaciones &lt;strong&gt;Angular&lt;/strong&gt;. Esto no solo mejora la experiencia del usuario, sino que también optimiza la aplicación para motores de búsqueda (SEO) y mejora significativamente el rendimiento. Este artículo explora cómo optimizar &lt;strong&gt;Angular Universal&lt;/strong&gt; para &lt;strong&gt;SEO&lt;/strong&gt; y rendimiento con ejemplos prácticos y buenas prácticas.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Creación de microservicios con Deno y Azure Functions</title>
+      <link>http://localhost:1313/es/posts/2024-07-24-microservices-deno-azure/</link>
+      <pubDate>Wed, 24 Jul 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2024-07-24-microservices-deno-azure/</guid>
+      <description>&lt;p&gt;En el mundo moderno del desarrollo de software, los microservicios han revolucionado la forma de construir y desplegar aplicaciones escalables. Al combinar &lt;strong&gt;Deno&lt;/strong&gt;, una plataforma de runtime moderna basada en &lt;strong&gt;JavaScript&lt;/strong&gt; y &lt;strong&gt;TypeScript&lt;/strong&gt;, con &lt;strong&gt;Azure Functions&lt;/strong&gt;, una solución serverless flexible de &lt;strong&gt;Microsoft&lt;/strong&gt;, los desarrolladores pueden crear microservicios rápidos, seguros y eficientes. Este artículo te guiará paso a paso en el proceso de crear microservicios utilizando estas tecnologías, destacando buenas prácticas, ejemplos prácticos y el uso de &lt;strong&gt;Visual Studio Code&lt;/strong&gt; como herramienta principal.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>.NET Web API con Proyecto IDX</title>
+      <link>http://localhost:1313/es/posts/2024-07-17-dotnet-project-idx/</link>
+      <pubDate>Wed, 17 Jul 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2024-07-17-dotnet-project-idx/</guid>
+      <description>&lt;p&gt;En este artículo veremos cómo crear una Web API básica con el nuevo &lt;strong&gt;Proyecto IDX&lt;/strong&gt; de &lt;strong&gt;Google&lt;/strong&gt;, totalmente desde el navegador sin la necesidad de instalar absolutamente nada en él.&lt;/p&gt;&#xA;&lt;p&gt;El &lt;strong&gt;Proyecto IDX&lt;/strong&gt;, según &lt;strong&gt;Google&lt;/strong&gt; es:&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;Project IDX es un espacio de trabajo asistido por IA para el desarrollo de aplicaciones multiplataforma y de pila completa en la nube.&#xA;Con soporte para una amplia gama de marcos, lenguajes y servicios, además de integraciones con sus productos favoritos de Google, IDX optimiza su flujo de trabajo de desarrollo para que pueda crear y enviar aplicaciones entre plataformas con velocidad, facilidad y calidad.&lt;/p&gt;&lt;/blockquote&gt;&#xA;&lt;p&gt;Más info &lt;a href=&#34;https://idx.dev/&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;aquí&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Blazor WebAssembly con .NET 9: Nuevas características y mejoras</title>
+      <link>http://localhost:1313/es/posts/2024-07-10-blazor-wa-dotnet-9/</link>
+      <pubDate>Wed, 10 Jul 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2024-07-10-blazor-wa-dotnet-9/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;Blazor WebAssembly&lt;/strong&gt; ha sido una de las tecnologías más populares en el desarrollo de aplicaciones web interactivas con &lt;strong&gt;C#&lt;/strong&gt; en lugar de &lt;strong&gt;JavaScript&lt;/strong&gt;. Con la llegada de &lt;strong&gt;.NET 9&lt;/strong&gt;, &lt;strong&gt;Blazor WebAssembly&lt;/strong&gt; ha incorporado nuevas características y mejoras que optimizan tanto el rendimiento como la experiencia de desarrollo. En este artículo, exploraremos estas nuevas capacidades con ejemplos prácticos y detallaremos cómo sacarles el máximo provecho.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Optimización de rendimiento en Blazor WebAssembly: Estrategias y buenas prácticas con .NET</title>
+      <link>http://localhost:1313/es/posts/2024-07-03-blazor-performance-optimization/</link>
+      <pubDate>Wed, 03 Jul 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2024-07-03-blazor-performance-optimization/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;Blazor WebAssembly&lt;/strong&gt; ha revolucionado el desarrollo de aplicaciones web modernas, permitiendo ejecutar aplicaciones &lt;strong&gt;.NET&lt;/strong&gt; directamente en el navegador utilizando &lt;strong&gt;WebAssembly&lt;/strong&gt;. Aunque &lt;strong&gt;Blazor WebAssembly&lt;/strong&gt; ofrece una excelente experiencia de usuario y una integración perfecta con &lt;strong&gt;.NET&lt;/strong&gt;, es crucial aplicar estrategias y buenas prácticas de optimización para asegurar que nuestras aplicaciones funcionen de manera eficiente, especialmente cuando se trata de aplicaciones grandes y complejas.&lt;/p&gt;&#xA;&lt;p&gt;En este artículo, exploraremos estrategias y técnicas de optimización para mejorar el rendimiento de aplicaciones &lt;strong&gt;Blazor WebAssembly&lt;/strong&gt; usando &lt;strong&gt;.NET 8&lt;/strong&gt;, con ejemplos prácticos de código y buenas prácticas.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Autenticación y autorización en Blazor WebAssembly con Microsoft Entra ID</title>
+      <link>http://localhost:1313/es/posts/2024-06-26-identity-blazor-wa-entra/</link>
+      <pubDate>Wed, 26 Jun 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2024-06-26-identity-blazor-wa-entra/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;Blazor WebAssembly&lt;/strong&gt; es una tecnología poderosa dentro del ecosistema &lt;strong&gt;.NET&lt;/strong&gt; que permite construir aplicaciones web interactivas completamente en C#. Para aplicaciones empresariales y seguras, la autenticación y autorización son aspectos fundamentales. &lt;strong&gt;Microsoft Entra ID&lt;/strong&gt; (anteriormente Azure Active Directory) proporciona una solución confiable y escalable para la gestión de identidad. En este artículo, exploraremos cómo integrar autenticación y autorización en una aplicación &lt;strong&gt;Blazor WebAssembly&lt;/strong&gt; utilizando &lt;strong&gt;.NET 8&lt;/strong&gt; y &lt;strong&gt;Microsoft Entra ID&lt;/strong&gt;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Creación de librerías compartidas en TypeScript</title>
+      <link>http://localhost:1313/es/posts/2024-06-19-share-libraries-typescript/</link>
+      <pubDate>Wed, 19 Jun 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2024-06-19-share-libraries-typescript/</guid>
+      <description>&lt;p&gt;La creación de librerías compartidas en &lt;strong&gt;TypeScript&lt;/strong&gt; permite a los desarrolladores encapsular funcionalidad reutilizable y mejorar la mantenibilidad del código. Este artículo explorará el proceso completo de desarrollo de librerías en &lt;strong&gt;TypeScript&lt;/strong&gt;, desde la configuración inicial hasta el despliegue, con un enfoque moderno, ejemplos prácticos y consideraciones de seguridad.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Testing avanzado en Angular con Jest: Mejores prácticas</title>
+      <link>http://localhost:1313/es/posts/2024-06-12-testing-angular-jest/</link>
+      <pubDate>Wed, 12 Jun 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2024-06-12-testing-angular-jest/</guid>
+      <description>&lt;p&gt;Las pruebas en aplicaciones &lt;strong&gt;Angular&lt;/strong&gt; son esenciales para garantizar la calidad, confiabilidad y mantenibilidad del código. En este artículo, exploraremos el uso avanzado de &lt;strong&gt;Jest&lt;/strong&gt; como framework de pruebas en &lt;strong&gt;Angular&lt;/strong&gt;, cubriendo configuración inicial, estrategias de pruebas unitarias y de integración, así como buenas prácticas para lograr un enfoque moderno, eficiente y seguro.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Integración de Angular con Azure Static Web Apps: Un caso práctico</title>
+      <link>http://localhost:1313/es/posts/2024-06-05-angular-integration-azure-static-web/</link>
+      <pubDate>Wed, 05 Jun 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2024-06-05-angular-integration-azure-static-web/</guid>
+      <description>&lt;p&gt;En la era moderna del desarrollo web, la combinación de frameworks frontend como &lt;strong&gt;Angular&lt;/strong&gt; y servicios en la nube como &lt;strong&gt;Azure Static Web Apps&lt;/strong&gt; proporciona una solución eficiente y escalable para crear y desplegar aplicaciones. Este artículo explora cómo integrar &lt;strong&gt;Angular&lt;/strong&gt; con &lt;strong&gt;Azure Static Web Apps&lt;/strong&gt;, mostrando ejemplos prácticos, buenas prácticas y enfoques modernos y seguros para garantizar el éxito en tus proyectos.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>API RESTful con TypeScript y Deno: Guía completa</title>
+      <link>http://localhost:1313/es/posts/2024-05-29-api-restful-typescript-deno/</link>
+      <pubDate>Wed, 29 May 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2024-05-29-api-restful-typescript-deno/</guid>
+      <description>&lt;p&gt;Deno, el moderno entorno de ejecución para JavaScript y TypeScript creado por Ryan Dahl, está transformando la manera en que se desarrollan aplicaciones backend. A diferencia de Node.js, Deno se centra en la seguridad, el rendimiento y una experiencia de desarrollo simplificada. En este artículo, exploraremos cómo construir una API RESTful utilizando &lt;strong&gt;TypeScript&lt;/strong&gt; y &lt;strong&gt;Deno&lt;/strong&gt; desde cero, cubriendo todas las operaciones CRUD (&lt;strong&gt;POST, GET, PUT, DELETE&lt;/strong&gt;) junto con buenas prácticas, seguridad y optimización&amp;hellip;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Introducción a los Signals en Angular: Casos prácticos</title>
+      <link>http://localhost:1313/es/posts/2024-05-22-intro-signals-angular/</link>
+      <pubDate>Wed, 22 May 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2024-05-22-intro-signals-angular/</guid>
+      <description>&lt;p&gt;Angular es un framework robusto y evolutivo que continuamente introduce nuevas características para mejorar el desarrollo de aplicaciones web modernas. Una de estas innovaciones son los &lt;strong&gt;Signals&lt;/strong&gt;, una herramienta que permite manejar cambios de estado de manera reactiva, clara y eficiente. Este artículo ofrece una introducción detallada a los Signals en Angular, explicando cómo utilizarlos, sus ventajas comparativas frente a otras soluciones reactivas y sus aplicaciones en el desarrollo real, acompañado de casos prácticos ampliados, buenas prácticas y un enfoque moderno en seguridad.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Lazy Loading en Angular: Mejora el rendimiento de tus aplicaciones</title>
+      <link>http://localhost:1313/es/posts/2024-05-15-lazy-loading-angular/</link>
+      <pubDate>Wed, 15 May 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2024-05-15-lazy-loading-angular/</guid>
+      <description>&lt;p&gt;El rendimiento es un factor crítico en las aplicaciones web modernas. Angular, como uno de los frameworks más populares para construir aplicaciones, ofrece herramientas avanzadas para optimizar la carga y el uso de recursos. Una de estas herramientas es el &lt;strong&gt;Lazy Loading&lt;/strong&gt; (carga diferida), que permite cargar módulos de la aplicación sólo cuando son necesarios. Este artículo explora cómo implementar Lazy Loading en Angular, sus beneficios y las mejores prácticas para maximizar su eficacia.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Seguridad en aplicaciones Deno: Autenticación y autorización</title>
+      <link>http://localhost:1313/es/posts/2024-05-08-deno-apps-security/</link>
+      <pubDate>Wed, 08 May 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2024-05-08-deno-apps-security/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;Deno&lt;/strong&gt;, como entorno de ejecución moderno para &lt;strong&gt;JavaScript&lt;/strong&gt; y &lt;strong&gt;TypeScript&lt;/strong&gt;, ofrece varias ventajas en términos de seguridad. Su enfoque en la seguridad por diseño incluye la gestión de permisos granular y un runtime sin acceso implícito al sistema. Sin embargo, la seguridad en aplicaciones Deno no solo depende del entorno, sino también de cómo se implementan funcionalidades clave como la autenticación y autorización. Este artículo explora cómo construir aplicaciones seguras en Deno con ejemplos prácticos y buenas prácticas.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>¿Cómo configurar un proyecto TypeScript moderno con Deno?</title>
+      <link>http://localhost:1313/es/posts/2024-05-01-typescript-project-with-deno/</link>
+      <pubDate>Wed, 01 May 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2024-05-01-typescript-project-with-deno/</guid>
+      <description>&lt;h2 id=&#34;introducción&#34;&gt;&#xD;&#xA;  Introducción&#xD;&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#introducci%c3%b3n&#34;&gt;&#xD;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xD;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xD;&#xA;  &lt;/a&gt;&#xD;&#xA;&lt;/h2&gt;&#xD;&#xA;&lt;p&gt;Configurar un proyecto moderno en &lt;strong&gt;TypeScript&lt;/strong&gt; con &lt;strong&gt;Deno&lt;/strong&gt; permitirá aprovechar un entorno de desarrollo optimizado, seguro y compatible con los estándares más recientes, como &lt;strong&gt;ES2024&lt;/strong&gt;. Este artículo mostrará cómo realizar esta configuración tanto en &lt;strong&gt;Visual Studio Code&lt;/strong&gt; como en &lt;strong&gt;JetBrains Rider&lt;/strong&gt;, destacando buenas prácticas, incluyendo &lt;strong&gt;testing&lt;/strong&gt; con TypeScript, y proporcionando ejemplos prácticos de código.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Introducción a Angular 17: Características clave y mejoras</title>
+      <link>http://localhost:1313/es/posts/2024-04-24-angular-17-characteristics/</link>
+      <pubDate>Tue, 23 Apr 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2024-04-24-angular-17-characteristics/</guid>
+      <description>&lt;p&gt;Angular 17, la última versión del popular framework de desarrollo web, introduce mejoras significativas para desarrolladores y equipos técnicos. Con un enfoque en el rendimiento, herramientas optimizadas y simplificación de procesos, esta actualización trae nuevas características como las Signals API, mejoras en el manejo de estados y optimizaciones para el desarrollo y pruebas. En este artículo, exploramos las características clave de Angular 17, su impacto en el desarrollo de aplicaciones modernas y cómo empezar a usar estas innovaciones en tus proyectos. Descubre cómo esta versión refuerza la posición de Angular como un pilar en el ecosistema de desarrollo web.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Despliegue de aplicaciones Blazor en Azure App Services</title>
+      <link>http://localhost:1313/es/posts/2024-04-17-deploy-blazor-apps-azure/</link>
+      <pubDate>Wed, 17 Apr 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2024-04-17-deploy-blazor-apps-azure/</guid>
+      <description>&lt;p&gt;El despliegue de aplicaciones Blazor en Azure App Services ofrece una forma rápida y eficiente de llevar tus proyectos al entorno de producción. Azure proporciona escalabilidad, seguridad y opciones flexibles para automatizar el flujo de trabajo de despliegue. En este artículo, exploramos tres métodos clave: usando Visual Studio, la CLI de Azure, y GitHub Actions, con pasos prácticos y ejemplos detallados. Con las mejoras de .NET 8, las aplicaciones Blazor ahora son más rápidas y optimizadas para la nube, lo que facilita la entrega de soluciones web escalables y modernas.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Creación de componentes reutilizables en Blazor para aplicaciones escalables</title>
+      <link>http://localhost:1313/es/posts/2024-04-10-blazor-reusable-components/</link>
+      <pubDate>Wed, 10 Apr 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2024-04-10-blazor-reusable-components/</guid>
+      <description>&lt;p&gt;Los componentes reutilizables son esenciales para construir aplicaciones Blazor escalables y mantenibles. Este artículo explora cómo aprovechar las capacidades de .NET 8 para crear componentes modulares que mejoren la eficiencia y la reutilización en proyectos de cualquier tamaño. Además, aprenderás las mejores prácticas y técnicas clave para optimizar la construcción de interfaces dinámicas con Blazor.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Introducción a Blazor: Cambiando el paradigma del desarrollo web</title>
+      <link>http://localhost:1313/es/posts/2024-04-03-intro-blazor/</link>
+      <pubDate>Wed, 03 Apr 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2024-04-03-intro-blazor/</guid>
+      <description>&lt;p&gt;El framework de Microsoft, está transformando el desarrollo web al permitir crear aplicaciones interactivas con C# y .NET, eliminando la necesidad de JavaScript. Con las mejoras de .NET 8, ofrece mayor rendimiento y flexibilidad, facilitando la creación de aplicaciones tanto en el cliente como en el servidor. Este artículo explora cómo Blazor redefine el desarrollo web y muestra cómo empezar a usarlo.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

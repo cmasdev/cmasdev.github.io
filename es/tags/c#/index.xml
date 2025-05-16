@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>C# on Christian Amado</title>
+    <link>http://localhost:1313/es/tags/c%23/</link>
+    <description>Recent content in C# on Christian Amado</description>
+    <generator>Hugo</generator>
+    <language>es</language>
+    <lastBuildDate>Sun, 19 Mar 2023 09:01:00 -0400</lastBuildDate>
+    <atom:link href="http://localhost:1313/es/tags/c%23/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ChatGPT en WPF</title>
+      <link>http://localhost:1313/es/posts/2023-03-19-chatgpt-wpf/</link>
+      <pubDate>Sun, 19 Mar 2023 09:01:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2023-03-19-chatgpt-wpf/</guid>
+      <description>&lt;p&gt;En este artículo veremos cómo crear un Chat con la API de &lt;strong&gt;ChatGPT&lt;/strong&gt; y &lt;strong&gt;WPF&lt;/strong&gt; con controles &lt;strong&gt;Telerik&lt;/strong&gt;.&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Windows 11 Insider Preview Build 25314&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Creando una aplicación tipo Chat en WPF usando Telerik</title>
+      <link>http://localhost:1313/es/posts/2023-03-15-creating-chat-app-wpf-using-telerik/</link>
+      <pubDate>Wed, 15 Mar 2023 20:57:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2023-03-15-creating-chat-app-wpf-using-telerik/</guid>
+      <description>&lt;p&gt;En este artículo veremos cómo crear una aplicación de Chat en &lt;strong&gt;WPF&lt;/strong&gt; con &lt;strong&gt;Telerik&lt;/strong&gt;. (Antesala de todo el tema de &lt;a href=&#34;https://openai.com/blog/chatgpt/&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;ChatGPT&lt;/a&gt;)&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Windows 11 Insider Preview Build 25290&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Business Central: Consumir servicios web SOAP desde .NET</title>
+      <link>http://localhost:1313/es/posts/2021-11-03-business-central-consumir-servicios-soap-dotnet/</link>
+      <pubDate>Wed, 03 Nov 2021 19:05:24 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2021-11-03-business-central-consumir-servicios-soap-dotnet/</guid>
+      <description>&lt;p&gt;En este artículo mostraré cómo consumir un servicio desde Microsoft Dynamics 365 Business Central con Microsoft .NET.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

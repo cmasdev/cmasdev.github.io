@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  Creación de microservicios con Deno y Azure Functions · Christian Amado
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Christian Amado">
+<meta name="description" content="En el mundo moderno del desarrollo de software, los microservicios han revolucionado la forma de construir y desplegar aplicaciones escalables. Al combinar Deno, una plataforma de runtime moderna basada en JavaScript y TypeScript, con Azure Functions, una solución serverless flexible de Microsoft, los desarrolladores pueden crear microservicios rápidos, seguros y eficientes. Este artículo te guiará paso a paso en el proceso de crear microservicios utilizando estas tecnologías, destacando buenas prácticas, ejemplos prácticos y el uso de Visual Studio Code como herramienta principal.">
+<meta name="keywords" content="blog,desarrollador,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Creación de microservicios con Deno y Azure Functions">
+  <meta name="twitter:description" content="En el mundo moderno del desarrollo de software, los microservicios han revolucionado la forma de construir y desplegar aplicaciones escalables. Al combinar Deno, una plataforma de runtime moderna basada en JavaScript y TypeScript, con Azure Functions, una solución serverless flexible de Microsoft, los desarrolladores pueden crear microservicios rápidos, seguros y eficientes. Este artículo te guiará paso a paso en el proceso de crear microservicios utilizando estas tecnologías, destacando buenas prácticas, ejemplos prácticos y el uso de Visual Studio Code como herramienta principal.">
+
+<meta property="og:url" content="http://localhost:1313/es/posts/2024-07-24-microservices-deno-azure/">
+  <meta property="og:site_name" content="Christian Amado">
+  <meta property="og:title" content="Creación de microservicios con Deno y Azure Functions">
+  <meta property="og:description" content="En el mundo moderno del desarrollo de software, los microservicios han revolucionado la forma de construir y desplegar aplicaciones escalables. Al combinar Deno, una plataforma de runtime moderna basada en JavaScript y TypeScript, con Azure Functions, una solución serverless flexible de Microsoft, los desarrolladores pueden crear microservicios rápidos, seguros y eficientes. Este artículo te guiará paso a paso en el proceso de crear microservicios utilizando estas tecnologías, destacando buenas prácticas, ejemplos prácticos y el uso de Visual Studio Code como herramienta principal.">
+  <meta property="og:locale" content="es">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-07-24T00:00:00-04:00">
+    <meta property="article:modified_time" content="2024-07-24T00:00:00-04:00">
+    <meta property="article:tag" content="Web Development">
+    <meta property="article:tag" content="Deno">
+    <meta property="article:tag" content="Azure">
+
+
+
+
+<link rel="canonical" href="http://localhost:1313/es/posts/2024-07-24-microservices-deno-azure/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/es/">
+      Christian Amado
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/about">Biografía</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/contact">Contacto</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/diabetes">Diabetes</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/tags">Etiquetas</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/en/">🇺🇸</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/es/posts/2024-07-24-microservices-deno-azure/">
+              Creación de microservicios con Deno y Azure Functions
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2024-07-24T00:00:00-04:00">
+                julio 24, 2024
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              4 minutos de lectura.
+            </span>
+          </div>
+          
+          
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/es/tags/web-development/">Web Development</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/es/tags/deno/">Deno</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/es/tags/azure/">Azure</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <p>En el mundo moderno del desarrollo de software, los microservicios han revolucionado la forma de construir y desplegar aplicaciones escalables. Al combinar <strong>Deno</strong>, una plataforma de runtime moderna basada en <strong>JavaScript</strong> y <strong>TypeScript</strong>, con <strong>Azure Functions</strong>, una solución serverless flexible de <strong>Microsoft</strong>, los desarrolladores pueden crear microservicios rápidos, seguros y eficientes. Este artículo te guiará paso a paso en el proceso de crear microservicios utilizando estas tecnologías, destacando buenas prácticas, ejemplos prácticos y el uso de <strong>Visual Studio Code</strong> como herramienta principal.</p>
+<h2 id="introducción-a-los-microservicios">
+  Introducción a los microservicios
+  <a class="heading-link" href="#introducci%c3%b3n-a-los-microservicios">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="qué-son-los-microservicios">
+  ¿Qué son los microservicios?
+  <a class="heading-link" href="#qu%c3%a9-son-los-microservicios">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Los microservicios son un estilo arquitectónico que divide las aplicaciones en servicios independientes, cada uno responsable de una funcionalidad específica. Estos servicios se comunican entre sí mediante protocolos ligeros como <strong>HTTP</strong> o <strong>gRPC</strong>.</p>
+<h3 id="beneficios-de-los-microservicios">
+  Beneficios de los microservicios
+  <a class="heading-link" href="#beneficios-de-los-microservicios">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li><strong>Escalabilidad independiente</strong>: Cada microservicio puede escalarse según sus necesidades.</li>
+<li><strong>Facilidad de despliegue</strong>: Permite actualizar y desplegar partes de la aplicación sin afectar al sistema completo.</li>
+<li><strong>Mantenibilidad</strong>: Facilita la organización del código y la colaboración en equipos grandes.</li>
+</ol>
+<h2 id="introducción-a-deno-y-azure-functions">
+  Introducción a Deno y Azure Functions
+  <a class="heading-link" href="#introducci%c3%b3n-a-deno-y-azure-functions">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="qué-es-deno">
+  ¿Qué es Deno?
+  <a class="heading-link" href="#qu%c3%a9-es-deno">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Deno es un runtime para JavaScript y TypeScript creado por Ryan Dahl, el creador de Node.js. Algunas de sus principales características incluyen:</p>
+<ul>
+<li><strong>Seguridad</strong>: Permisos de ejecución para controlar el acceso a archivos, redes y entornos.</li>
+<li><strong>Soporte nativo de TypeScript</strong>.</li>
+<li><strong>Gestor de dependencias integrado</strong>: No requiere archivos como <code>package.json</code>.</li>
+<li><strong>APIs modernas</strong>: Inspiradas en las especificaciones del navegador.</li>
+</ul>
+<h3 id="qué-es-azure-functions">
+  ¿Qué es Azure Functions?
+  <a class="heading-link" href="#qu%c3%a9-es-azure-functions">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Azure Functions es un servicio serverless que permite ejecutar código en la nube sin necesidad de gestionar infraestructura. Ofrece:</p>
+<ul>
+<li><strong>Ejecución bajo demanda</strong>: Facturación basada en el tiempo de ejecución.</li>
+<li><strong>Integraciones nativas</strong>: Con Azure Blob Storage, Cosmos DB y otros servicios.</li>
+<li><strong>Compatibilidad con varios lenguajes</strong>: Como JavaScript, Python, C# y TypeScript.</li>
+</ul>
+<h2 id="configuración-del-entorno">
+  Configuración del entorno
+  <a class="heading-link" href="#configuraci%c3%b3n-del-entorno">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="requisitos-previos">
+  Requisitos previos
+  <a class="heading-link" href="#requisitos-previos">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li><strong>Instalar Deno</strong>:
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">curl -fsSL https://deno.land/x/install/install.sh | sh
+</span></span></code></pre></div></li>
+<li><strong>Instalar Azure Functions Core Tools</strong>:
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">npm</span> <span class="n">install</span> <span class="o">-</span><span class="n">g</span> <span class="n">azure</span><span class="o">-</span><span class="n">functions</span><span class="o">-</span><span class="n">core</span><span class="o">-</span><span class="n">tools</span><span class="err">@</span><span class="mi">4</span> <span class="o">--</span><span class="n">unsafe</span><span class="o">-</span><span class="n">perm</span> <span class="bp">true</span>
+</span></span></code></pre></div></li>
+<li><strong>Instalar Visual Studio Code</strong>.</li>
+<li><strong>Configurar la extensión de Azure Functions en VS Code</strong>.</li>
+</ol>
+<h3 id="crear-un-nuevo-proyecto-con-azure-functions">
+  Crear un nuevo proyecto con Azure Functions
+  <a class="heading-link" href="#crear-un-nuevo-proyecto-con-azure-functions">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>Crea un directorio para tu proyecto:
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">mkdir microservices-deno
+</span></span><span class="line"><span class="cl">cd microservices-deno
+</span></span></code></pre></div></li>
+<li>Inicializa un nuevo proyecto:
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">func</span> <span class="n">init</span> <span class="o">--</span><span class="n">worker</span><span class="o">-</span><span class="n">runtime</span> <span class="n">custom</span> <span class="o">--</span><span class="n">language</span> <span class="n">typescript</span>
+</span></span></code></pre></div></li>
+<li>Agrega una nueva función HTTP:
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">func</span> <span class="n">new</span> <span class="o">--</span><span class="n">template</span> <span class="s2">&#34;HTTP trigger&#34;</span> <span class="o">--</span><span class="n">name</span> <span class="n">MyMicroservice</span>
+</span></span></code></pre></div></li>
+</ol>
+<h2 id="crear-un-microservicio-con-deno-y-azure-functions">
+  Crear un microservicio con Deno y Azure Functions
+  <a class="heading-link" href="#crear-un-microservicio-con-deno-y-azure-functions">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="configuración-inicial">
+  Configuración inicial
+  <a class="heading-link" href="#configuraci%c3%b3n-inicial">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p>Modifica el archivo <code>MyMicroservice/index.ts</code> para usar Deno:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">import</span> <span class="p">{</span> <span class="n">serve</span> <span class="p">}</span> <span class="n">from</span> <span class="s2">&#34;https://deno.land/std@0.152.0/http/server.ts&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">serve</span><span class="p">(</span><span class="n">async</span> <span class="p">(</span><span class="n">req</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="n">url</span> <span class="o">=</span> <span class="n">new</span> <span class="n">URL</span><span class="p">(</span><span class="n">req</span><span class="o">.</span><span class="n">url</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">url</span><span class="o">.</span><span class="n">pathname</span> <span class="o">===</span> <span class="s2">&#34;/api/MyMicroservice&#34;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">new</span> <span class="n">Response</span><span class="p">(</span><span class="s2">&#34;Hello from Deno and Azure Functions!&#34;</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">status</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">headers</span><span class="p">:</span> <span class="p">{</span> <span class="s2">&#34;Content-Type&#34;</span><span class="p">:</span> <span class="s2">&#34;text/plain&#34;</span> <span class="p">},</span>
+</span></span><span class="line"><span class="cl">        <span class="p">});</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">new</span> <span class="n">Response</span><span class="p">(</span><span class="s2">&#34;Not Found&#34;</span><span class="p">,</span> <span class="p">{</span> <span class="n">status</span><span class="p">:</span> <span class="mi">404</span> <span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span></code></pre></div></li>
+<li>
+<p>Configura los permisos necesarios en el archivo <code>deno.json</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">    &#34;tasks&#34;: {
+</span></span><span class="line"><span class="cl">        &#34;start&#34;: &#34;deno run --allow-net index.ts&#34;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="probar-el-microservicio-localmente">
+  Probar el microservicio localmente
+  <a class="heading-link" href="#probar-el-microservicio-localmente">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>Ejecuta la función localmente:
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">func</span> <span class="n">start</span>
+</span></span></code></pre></div></li>
+<li>Accede a la URL generada, como <code>http://localhost:7071/api/MyMicroservice</code>.</li>
+</ol>
+<h2 id="despliegue-en-azure">
+  Despliegue en Azure
+  <a class="heading-link" href="#despliegue-en-azure">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="paso-1-inicia-sesión-en-azure">
+  Paso 1: Inicia sesión en Azure
+  <a class="heading-link" href="#paso-1-inicia-sesi%c3%b3n-en-azure">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">az login
+</span></span></code></pre></div><h3 id="paso-2-crear-un-recurso-de-azure-functions">
+  Paso 2: Crear un recurso de Azure Functions
+  <a class="heading-link" href="#paso-2-crear-un-recurso-de-azure-functions">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">az functionapp create --resource-group MyResourceGroup --consumption-plan-location eastus --runtime custom --functions-version 4 --name MyDenoFunctionApp --storage-account MyStorageAccount
+</span></span></code></pre></div><h3 id="paso-3-desplegar-la-función">
+  Paso 3: Desplegar la función
+  <a class="heading-link" href="#paso-3-desplegar-la-funci%c3%b3n">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>Publica tu función:
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">func azure functionapp publish MyDenoFunctionApp
+</span></span></code></pre></div></li>
+<li>Verifica que tu función esté activa visitando la URL proporcionada por Azure.</li>
+</ol>
+<h2 id="buenas-prácticas">
+  Buenas prácticas
+  <a class="heading-link" href="#buenas-pr%c3%a1cticas">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ol>
+<li>
+<p><strong>Seguridad</strong>:</p>
+<ul>
+<li>Limita los permisos en Deno para garantizar la seguridad.</li>
+<li>Usa claves de API o tokens para proteger los endpoints.</li>
+</ul>
+</li>
+<li>
+<p><strong>Estructura del proyecto</strong>:</p>
+<ul>
+<li>Organiza los microservicios en carpetas independientes para facilitar el mantenimiento.</li>
+</ul>
+</li>
+<li>
+<p><strong>Pruebas unitarias</strong>:</p>
+<ul>
+<li>Usa bibliotecas como <code>deno test</code> para escribir pruebas y asegurar la calidad del código.</li>
+</ul>
+</li>
+<li>
+<p><strong>Monitorización</strong>:</p>
+<ul>
+<li>Configura Azure Monitor para supervisar el rendimiento y detectar errores.</li>
+</ul>
+</li>
+<li>
+<p><strong>Optimizar la ejecución</strong>:</p>
+<ul>
+<li>Minimiza las dependencias externas y cachea resultados frecuentes.</li>
+</ul>
+</li>
+</ol>
+<h2 id="conclusión">
+  Conclusión
+  <a class="heading-link" href="#conclusi%c3%b3n">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>La combinación de <strong>Deno</strong> y <strong>Azure Functions</strong> ofrece una solución moderna y eficiente para construir microservicios escalables y seguros. Con las herramientas adecuadas, como <strong>Visual Studio Code</strong>, y siguiendo buenas prácticas, puedes maximizar el potencial de tus proyectos serverless. Empieza hoy mismo a explorar estas tecnologías y lleva tus microservicios al siguiente nivel.</p>
+      </div>
+
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script>
+  window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "cmasblog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    
+    document.addEventListener('themeChanged', function (e) { 
+        if (document.readyState == 'complete') {
+          DISQUS.reset({ reload: true, config: disqus_config });
+        }
+    });
+</script>
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2018 -
+    
+    2025
+     Christian Amado 
+    ·
+    
+    Desarrollado por <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+      <script async src="https://www.googletagmanager.com/gtag/js?id=356375808"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '356375808');
+        }
+      </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=013131931956450466198%3ablhmkdpweyq"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '013131931956450466198:blhmkdpweyq');
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  Automatización de entornos WSL2 para onboarding de equipos · Christian Amado
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Christian Amado">
+<meta name="description" content="El onboarding de nuevos miembros en un equipo técnico suele implicar configurar entornos complejos con múltiples herramientas, dependencias, claves, servicios y flujos específicos. WSL2 permite automatizar completamente esta experiencia, facilitando que cualquier integrante configure un entorno de desarrollo productivo en minutos, con mínima intervención y total reproducibilidad.
+Este artículo presenta estrategias y herramientas para automatizar la preparación de entornos WSL2, integrando scripting, dotfiles, Dev Containers, provisioning declarativo y prácticas de mantenimiento colaborativo.">
+<meta name="keywords" content="blog,desarrollador,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Automatización de entornos WSL2 para onboarding de equipos">
+  <meta name="twitter:description" content="El onboarding de nuevos miembros en un equipo técnico suele implicar configurar entornos complejos con múltiples herramientas, dependencias, claves, servicios y flujos específicos. WSL2 permite automatizar completamente esta experiencia, facilitando que cualquier integrante configure un entorno de desarrollo productivo en minutos, con mínima intervención y total reproducibilidad.
+Este artículo presenta estrategias y herramientas para automatizar la preparación de entornos WSL2, integrando scripting, dotfiles, Dev Containers, provisioning declarativo y prácticas de mantenimiento colaborativo.">
+
+<meta property="og:url" content="http://localhost:1313/es/posts/2024-10-04-wsl2-automation-environment/">
+  <meta property="og:site_name" content="Christian Amado">
+  <meta property="og:title" content="Automatización de entornos WSL2 para onboarding de equipos">
+  <meta property="og:description" content="El onboarding de nuevos miembros en un equipo técnico suele implicar configurar entornos complejos con múltiples herramientas, dependencias, claves, servicios y flujos específicos. WSL2 permite automatizar completamente esta experiencia, facilitando que cualquier integrante configure un entorno de desarrollo productivo en minutos, con mínima intervención y total reproducibilidad.
+Este artículo presenta estrategias y herramientas para automatizar la preparación de entornos WSL2, integrando scripting, dotfiles, Dev Containers, provisioning declarativo y prácticas de mantenimiento colaborativo.">
+  <meta property="og:locale" content="es">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-10-04T00:00:00-04:00">
+    <meta property="article:modified_time" content="2024-10-04T00:00:00-04:00">
+    <meta property="article:tag" content="WinDev">
+    <meta property="article:tag" content="Windows 11">
+    <meta property="article:tag" content="WSL">
+
+
+
+
+<link rel="canonical" href="http://localhost:1313/es/posts/2024-10-04-wsl2-automation-environment/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/es/">
+      Christian Amado
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/about">Biografía</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/contact">Contacto</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/diabetes">Diabetes</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/tags">Etiquetas</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/en/">🇺🇸</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/es/posts/2024-10-04-wsl2-automation-environment/">
+              Automatización de entornos WSL2 para onboarding de equipos
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2024-10-04T00:00:00-04:00">
+                octubre 4, 2024
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              3 minutos de lectura.
+            </span>
+          </div>
+          
+          
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/es/tags/windev/">WinDev</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/es/tags/windows-11/">Windows 11</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/es/tags/wsl/">WSL</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <p>El onboarding de nuevos miembros en un equipo técnico suele implicar configurar entornos complejos con múltiples herramientas, dependencias, claves, servicios y flujos específicos. WSL2 permite automatizar completamente esta experiencia, facilitando que cualquier integrante configure un entorno de desarrollo productivo en minutos, con mínima intervención y total reproducibilidad.</p>
+<p>Este artículo presenta estrategias y herramientas para automatizar la preparación de entornos WSL2, integrando scripting, dotfiles, Dev Containers, provisioning declarativo y prácticas de mantenimiento colaborativo.</p>
+<h2 id="objetivo">
+  Objetivo
+  <a class="heading-link" href="#objetivo">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ul>
+<li>Establecer un entorno base reproducible en WSL2</li>
+<li>Reducir errores manuales durante onboarding</li>
+<li>Versionar configuraciones y automatizaciones</li>
+<li>Proveer una experiencia coherente entre dispositivos</li>
+</ul>
+<h2 id="paso-1-script-de-instalación-wsl2--distro-personalizada">
+  Paso 1: Script de instalación WSL2 + Distro personalizada
+  <a class="heading-link" href="#paso-1-script-de-instalaci%c3%b3n-wsl2--distro-personalizada">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>En una máquina limpia, desde PowerShell (Administrador):</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="n">wsl</span> <span class="p">-</span><span class="n">-install</span> <span class="n">-d</span> <span class="n">Ubuntu</span>
+</span></span></code></pre></div><p>Configurar distro:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt update <span class="o">&amp;&amp;</span> sudo apt upgrade -y
+</span></span></code></pre></div><p>Instalar herramientas comunes:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt install -y git curl build-essential zsh python3-pip
+</span></span></code></pre></div><p>Guardar este paso como <code>setup.sh</code> en el repositorio del equipo.</p>
+<h2 id="paso-2-clonación-y-aplicación-de-dotfiles">
+  Paso 2: Clonación y aplicación de dotfiles
+  <a class="heading-link" href="#paso-2-clonaci%c3%b3n-y-aplicaci%c3%b3n-de-dotfiles">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Mantener configuraciones como <code>.bashrc</code>, <code>.zshrc</code>, <code>.gitconfig</code>, alias y funciones personalizadas en un repositorio compartido:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git clone https://github.com/empresa/dotfiles ~/.dotfiles
+</span></span><span class="line"><span class="cl">cp ~/.dotfiles/.zshrc ~/.zshrc
+</span></span><span class="line"><span class="cl">cp ~/.dotfiles/.gitconfig ~/.gitconfig
+</span></span></code></pre></div><p>Usar herramientas como:</p>
+<ul>
+<li><a href="https://www.chezmoi.io/"  class="external-link" target="_blank" rel="noopener"><code>chezmoi</code></a></li>
+<li><a href="https://github.com/anishathalye/dotbot"  class="external-link" target="_blank" rel="noopener"><code>dotbot</code></a></li>
+<li><code>make install</code> con targets definidos</li>
+</ul>
+<h2 id="paso-3-provisioning-automatizado-del-stack-de-herramientas">
+  Paso 3: Provisioning automatizado del stack de herramientas
+  <a class="heading-link" href="#paso-3-provisioning-automatizado-del-stack-de-herramientas">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Ejemplo con <code>Makefile</code> por proyecto:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-makefile" data-lang="makefile"><span class="line"><span class="cl"><span class="nf">install</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">	bash scripts/install-python-tools.sh
+</span></span><span class="line"><span class="cl">	bash scripts/install-node.sh
+</span></span><span class="line"><span class="cl">	bash scripts/setup-venv.sh
+</span></span></code></pre></div><p>También se pueden usar <code>ansible-playbook</code> o <code>bash setup.sh</code> con detección de sistema, instalación de dependencias y personalización por usuario.</p>
+<h2 id="paso-4-dev-containers-para-entornos-por-proyecto">
+  Paso 4: Dev Containers para entornos por proyecto
+  <a class="heading-link" href="#paso-4-dev-containers-para-entornos-por-proyecto">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Usar <code>.devcontainer</code> para configurar el stack por repositorio:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;backend-node-postgres&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;image&#34;</span><span class="p">:</span> <span class="s2">&#34;mcr.microsoft.com/devcontainers/javascript-node:18&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;postCreateCommand&#34;</span><span class="p">:</span> <span class="s2">&#34;npm install &amp;&amp; npm run setup-db&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;customizations&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;vscode&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&#34;extensions&#34;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&#34;dbaeumer.vscode-eslint&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Esto garantiza que todos los miembros usen las mismas versiones y herramientas al abrir el proyecto en VS Code con WSL2.</p>
+<h2 id="paso-5-automatizar-con-scripts-de-bootstrap">
+  Paso 5: Automatizar con scripts de bootstrap
+  <a class="heading-link" href="#paso-5-automatizar-con-scripts-de-bootstrap">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Estructura común para bootstrap completo:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">onboarding/
+</span></span><span class="line"><span class="cl">├── install.sh
+</span></span><span class="line"><span class="cl">├── setup.sh
+</span></span><span class="line"><span class="cl">├── dotfiles/
+</span></span><span class="line"><span class="cl">├── devcontainer/
+</span></span><span class="line"><span class="cl">├── Makefile
+</span></span></code></pre></div><p>Ejemplo de <code>install.sh</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="cp">#!/bin/bash
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="nb">echo</span> <span class="s2">&#34;Configurando entorno WSL2...&#34;</span>
+</span></span><span class="line"><span class="cl">bash ./setup.sh
+</span></span><span class="line"><span class="cl">git clone https://github.com/org/dotfiles ~/.dotfiles
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> ~/.dotfiles <span class="o">&amp;&amp;</span> ./install.sh
+</span></span><span class="line"><span class="cl">code .
+</span></span></code></pre></div><h2 id="buenas-prácticas">
+  Buenas prácticas
+  <a class="heading-link" href="#buenas-pr%c3%a1cticas">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ul>
+<li>Usar scripts idempotentes (que se pueden correr múltiples veces)</li>
+<li>Documentar variables de entorno necesarias en <code>.env.example</code></li>
+<li>Versionar herramientas y librerías clave en <code>requirements.txt</code>, <code>package.json</code>, etc.</li>
+<li>Probar en entornos limpios y documentar prerequisitos (ej. Docker Desktop, VS Code)</li>
+<li>Incluir pruebas de validación (<code>make check-env</code>)</li>
+</ul>
+<h2 id="conclusión">
+  Conclusión
+  <a class="heading-link" href="#conclusi%c3%b3n">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Automatizar la configuración de entornos WSL2 mejora el onboarding técnico, elimina fricciones y promueve la colaboración entre desarrolladores. Con un diseño reproducible y bien documentado, cada integrante del equipo puede empezar a trabajar con el stack completo en minutos, desde cualquier máquina con Windows, sin perder tiempo en configuraciones manuales.</p>
+      </div>
+
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script>
+  window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "cmasblog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    
+    document.addEventListener('themeChanged', function (e) { 
+        if (document.readyState == 'complete') {
+          DISQUS.reset({ reload: true, config: disqus_config });
+        }
+    });
+</script>
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2018 -
+    
+    2025
+     Christian Amado 
+    ·
+    
+    Desarrollado por <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+      <script async src="https://www.googletagmanager.com/gtag/js?id=356375808"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '356375808');
+        }
+      </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=013131931956450466198%3ablhmkdpweyq"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '013131931956450466198:blhmkdpweyq');
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

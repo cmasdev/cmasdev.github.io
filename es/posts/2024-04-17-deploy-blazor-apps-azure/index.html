@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  Despliegue de aplicaciones Blazor en Azure App Services · Christian Amado
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Christian Amado">
+<meta name="description" content="El despliegue de aplicaciones Blazor en Azure App Services ofrece una forma rápida y eficiente de llevar tus proyectos al entorno de producción. Azure proporciona escalabilidad, seguridad y opciones flexibles para automatizar el flujo de trabajo de despliegue. En este artículo, exploramos tres métodos clave: usando Visual Studio, la CLI de Azure, y GitHub Actions, con pasos prácticos y ejemplos detallados. Con las mejoras de .NET 8, las aplicaciones Blazor ahora son más rápidas y optimizadas para la nube, lo que facilita la entrega de soluciones web escalables y modernas.">
+<meta name="keywords" content="blog,desarrollador,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Despliegue de aplicaciones Blazor en Azure App Services">
+  <meta name="twitter:description" content="El despliegue de aplicaciones Blazor en Azure App Services ofrece una forma rápida y eficiente de llevar tus proyectos al entorno de producción. Azure proporciona escalabilidad, seguridad y opciones flexibles para automatizar el flujo de trabajo de despliegue. En este artículo, exploramos tres métodos clave: usando Visual Studio, la CLI de Azure, y GitHub Actions, con pasos prácticos y ejemplos detallados. Con las mejoras de .NET 8, las aplicaciones Blazor ahora son más rápidas y optimizadas para la nube, lo que facilita la entrega de soluciones web escalables y modernas.">
+
+<meta property="og:url" content="http://localhost:1313/es/posts/2024-04-17-deploy-blazor-apps-azure/">
+  <meta property="og:site_name" content="Christian Amado">
+  <meta property="og:title" content="Despliegue de aplicaciones Blazor en Azure App Services">
+  <meta property="og:description" content="El despliegue de aplicaciones Blazor en Azure App Services ofrece una forma rápida y eficiente de llevar tus proyectos al entorno de producción. Azure proporciona escalabilidad, seguridad y opciones flexibles para automatizar el flujo de trabajo de despliegue. En este artículo, exploramos tres métodos clave: usando Visual Studio, la CLI de Azure, y GitHub Actions, con pasos prácticos y ejemplos detallados. Con las mejoras de .NET 8, las aplicaciones Blazor ahora son más rápidas y optimizadas para la nube, lo que facilita la entrega de soluciones web escalables y modernas.">
+  <meta property="og:locale" content="es">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-04-17T00:00:00-04:00">
+    <meta property="article:modified_time" content="2024-04-17T00:00:00-04:00">
+    <meta property="article:tag" content="Web Development">
+    <meta property="article:tag" content=".NET">
+    <meta property="article:tag" content="Blazor">
+    <meta property="article:tag" content="Azure">
+    <meta property="article:tag" content="GitHub Actions">
+
+
+
+
+<link rel="canonical" href="http://localhost:1313/es/posts/2024-04-17-deploy-blazor-apps-azure/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/es/">
+      Christian Amado
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/about">Biografía</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/contact">Contacto</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/diabetes">Diabetes</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/tags">Etiquetas</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/en/">🇺🇸</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/es/posts/2024-04-17-deploy-blazor-apps-azure/">
+              Despliegue de aplicaciones Blazor en Azure App Services
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2024-04-17T00:00:00-04:00">
+                abril 17, 2024
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              4 minutos de lectura.
+            </span>
+          </div>
+          
+          
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/es/tags/web-development/">Web Development</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/es/tags/.net/">.NET</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/es/tags/blazor/">Blazor</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/es/tags/azure/">Azure</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/es/tags/github-actions/">GitHub Actions</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <p>El despliegue de aplicaciones Blazor en Azure App Services ofrece una forma rápida y eficiente de llevar tus proyectos al entorno de producción. Azure proporciona escalabilidad, seguridad y opciones flexibles para automatizar el flujo de trabajo de despliegue. En este artículo, exploramos tres métodos clave: usando Visual Studio, la CLI de Azure, y GitHub Actions, con pasos prácticos y ejemplos detallados. Con las mejoras de .NET 8, las aplicaciones Blazor ahora son más rápidas y optimizadas para la nube, lo que facilita la entrega de soluciones web escalables y modernas.</p>
+<h2 id="introducción">
+  Introducción
+  <a class="heading-link" href="#introducci%c3%b3n">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Desplegar aplicaciones Blazor en <strong>Azure App Services</strong> es una solución sencilla y eficiente para llevar tus aplicaciones web al entorno de producción. Azure proporciona escalabilidad, seguridad y herramientas integradas para un despliegue rápido. En este artículo, exploraremos cómo configurar y desplegar una aplicación Blazor, incluyendo pasos prácticos y ejemplos detallados. Con <strong>.NET 8</strong>, el rendimiento y la optimización de aplicaciones Blazor han mejorado significativamente, facilitando el despliegue en la nube.</p>
+<hr>
+<h2 id="prerrequisitos">
+  Prerrequisitos
+  <a class="heading-link" href="#prerrequisitos">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Antes de comenzar, asegúrate de contar con lo siguiente:</p>
+<ol>
+<li><strong>.NET SDK 8</strong> instalado en tu máquina.</li>
+<li>Una cuenta de <strong>Azure</strong>.</li>
+<li>Azure CLI instalada y configurada.</li>
+<li>Una aplicación Blazor lista para ser desplegada.</li>
+</ol>
+<hr>
+<h2 id="paso-1-crear-una-aplicación-blazor">
+  Paso 1: Crear una aplicación Blazor
+  <a class="heading-link" href="#paso-1-crear-una-aplicaci%c3%b3n-blazor">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Primero, crea una aplicación Blazor WebAssembly básica si no tienes una ya:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">dotnet new blazorwasm -o BlazorApp
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> BlazorApp
+</span></span><span class="line"><span class="cl">dotnet build
+</span></span></code></pre></div><p>Ejecuta el proyecto para verificar que funciona correctamente:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">dotnet run
+</span></span></code></pre></div><p>Accede a <code>http://localhost:5000</code> para comprobar que la aplicación se ejecuta correctamente.</p>
+<hr>
+<h2 id="paso-2-configurar-azure-app-service">
+  Paso 2: Configurar Azure App Service
+  <a class="heading-link" href="#paso-2-configurar-azure-app-service">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="21-acceder-al-portal-de-azure">
+  <strong>2.1 Acceder al portal de Azure</strong>
+  <a class="heading-link" href="#21-acceder-al-portal-de-azure">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>Ve al <a href="https://portal.azure.com"  class="external-link" target="_blank" rel="noopener">Portal de Azure</a> e inicia sesión con tu cuenta.</li>
+<li>En la barra de búsqueda superior, escribe &ldquo;App Services&rdquo; y selecciona la opción <strong>App Services</strong>.</li>
+</ol>
+<h3 id="22-crear-un-nuevo-app-service">
+  <strong>2.2 Crear un nuevo App Service</strong>
+  <a class="heading-link" href="#22-crear-un-nuevo-app-service">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p>Haz clic en el botón <strong>Crear</strong> en la parte superior.</p>
+</li>
+<li>
+<p>Aparecerá un formulario de configuración donde debes proporcionar la siguiente información:</p>
+<ul>
+<li><strong>Suscripción</strong>: Selecciona tu suscripción activa.</li>
+<li><strong>Grupo de recursos</strong>: Crea uno nuevo o elige un grupo existente.</li>
+<li><strong>Nombre de la aplicación</strong>: Introduce un nombre único, por ejemplo, <code>blazor-app-deploy</code>.</li>
+<li><strong>Publicación</strong>: Selecciona <strong>Código</strong>.</li>
+<li><strong>Pila de ejecución</strong>: Elige <strong>.NET 8</strong>.</li>
+<li><strong>Sistema operativo</strong>: Selecciona <strong>Windows</strong> o <strong>Linux</strong> según tu preferencia.</li>
+<li><strong>Plan de App Service</strong>: Crea uno nuevo o selecciona un plan existente.</li>
+</ul>
+</li>
+<li>
+<p>Haz clic en <strong>Revisar + Crear</strong> y luego en <strong>Crear</strong> para iniciar la implementación del App Service.</p>
+</li>
+</ol>
+<h3 id="23-validar-la-creación-del-app-service">
+  <strong>2.3 Validar la creación del App Service</strong>
+  <a class="heading-link" href="#23-validar-la-creaci%c3%b3n-del-app-service">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>Una vez creada, verás un mensaje de confirmación en la parte superior del portal.</li>
+<li>Haz clic en <strong>Ir al recurso</strong> para acceder al panel del App Service.</li>
+</ol>
+<h3 id="24-configurar-las-opciones-del-app-service">
+  <strong>2.4 Configurar las opciones del App Service</strong>
+  <a class="heading-link" href="#24-configurar-las-opciones-del-app-service">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>En el panel del App Service, selecciona <strong>Configuración</strong> en el menú lateral.</li>
+<li>Verifica que la versión de .NET sea la correcta (<strong>.NET 8</strong>).</li>
+<li>Configura las variables de entorno necesarias para tu aplicación (si aplica) en la pestaña <strong>Configuración de aplicaciones</strong>.</li>
+</ol>
+<h3 id="25-obtener-la-url-del-app-service">
+  <strong>2.5 Obtener la URL del App Service</strong>
+  <a class="heading-link" href="#25-obtener-la-url-del-app-service">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>En el panel principal del App Service, encuentra el enlace de <strong>URL predeterminada</strong>.</li>
+<li>Esta será la dirección donde se alojará tu aplicación una vez desplegada.</li>
+</ol>
+<hr>
+<h2 id="paso-3-publicar-la-aplicación-desde-visual-studio">
+  Paso 3: Publicar la aplicación desde Visual Studio
+  <a class="heading-link" href="#paso-3-publicar-la-aplicaci%c3%b3n-desde-visual-studio">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ol>
+<li>Abre tu proyecto Blazor en <strong>Visual Studio</strong>.</li>
+<li>Haz clic derecho en el proyecto y selecciona <strong>Publicar</strong>.</li>
+<li>Selecciona <strong>App Service (Windows)</strong> o <strong>App Service (Linux)</strong> según tu configuración.</li>
+<li>Inicia sesión en tu cuenta de Azure.</li>
+<li>Selecciona el App Service creado previamente.</li>
+<li>Haz clic en <strong>Publicar</strong> y espera a que finalice el proceso.</li>
+</ol>
+<hr>
+<h2 id="paso-4-usar-azure-cli-para-el-despliegue">
+  Paso 4: Usar Azure CLI para el despliegue
+  <a class="heading-link" href="#paso-4-usar-azure-cli-para-el-despliegue">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Si prefieres usar la CLI, sigue estos pasos:</p>
+<ol>
+<li>Publica la aplicación localmente:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">dotnet publish -c Release
+</span></span></code></pre></div><ol start="2">
+<li>Crea un recurso de App Service en Azure si aún no lo has hecho:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">az webapp create --name blazor-app-deploy --resource-group &lt;tu-grupo&gt; --plan &lt;tu-plan&gt; --runtime <span class="s2">&#34;DOTNET-8.0&#34;</span>
+</span></span></code></pre></div><ol start="3">
+<li>Despliega la aplicación:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">az webapp deploy --resource-group &lt;tu-grupo&gt; --name blazor-app-deploy --src-path ./bin/Release/net8.0/publish
+</span></span></code></pre></div><ol start="4">
+<li>Accede a la URL proporcionada por Azure para ver tu aplicación.</li>
+</ol>
+<hr>
+<h2 id="paso-5-configurar-cicd-con-github-actions">
+  Paso 5: Configurar CI/CD con GitHub Actions
+  <a class="heading-link" href="#paso-5-configurar-cicd-con-github-actions">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Automatiza el despliegue utilizando GitHub Actions:</p>
+<ol>
+<li>Crea un archivo llamado <code>.github/workflows/azure-webapp.yml</code> en tu repositorio.</li>
+<li>Añade la siguiente configuración:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Deploy Blazor App to Azure</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">on</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">push</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">branches</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">main</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">jobs</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">build-and-deploy</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l">ubuntu-latest</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">steps</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l">actions/checkout@v3</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Setup .NET</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l">actions/setup-dotnet@v3</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">with</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">dotnet-version</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;8.0&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Build Project</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l">dotnet build --configuration Release</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Deploy to Azure</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l">azure/webapps-deploy@v2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">with</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">app-name</span><span class="p">:</span><span class="w"> </span><span class="l">blazor-app-deploy</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">slot-name</span><span class="p">:</span><span class="w"> </span><span class="l">production</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">publish-profile</span><span class="p">:</span><span class="w"> </span><span class="l">${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}</span><span class="w">
+</span></span></span></code></pre></div><ol start="3">
+<li>Configura el secreto <code>AZURE_WEBAPP_PUBLISH_PROFILE</code> en los ajustes de tu repositorio.</li>
+</ol>
+<hr>
+<h2 id="conclusión">
+  Conclusión
+  <a class="heading-link" href="#conclusi%c3%b3n">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Desplegar aplicaciones Blazor en Azure App Services es un proceso flexible y eficiente. Ya sea utilizando Visual Studio, la CLI de Azure o GitHub Actions, Azure ofrece las herramientas necesarias para simplificar el flujo de trabajo de desarrollo y despliegue. Con las mejoras de <strong>.NET 8</strong>, tus aplicaciones serán más rápidas y escalables que nunca. ¡Empieza hoy mismo a aprovechar el poder de Blazor en la nube!</p>
+      </div>
+
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script>
+  window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "cmasblog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    
+    document.addEventListener('themeChanged', function (e) { 
+        if (document.readyState == 'complete') {
+          DISQUS.reset({ reload: true, config: disqus_config });
+        }
+    });
+</script>
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2018 -
+    
+    2025
+     Christian Amado 
+    ·
+    
+    Desarrollado por <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+      <script async src="https://www.googletagmanager.com/gtag/js?id=356375808"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '356375808');
+        }
+      </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=013131931956450466198%3ablhmkdpweyq"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '013131931956450466198:blhmkdpweyq');
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

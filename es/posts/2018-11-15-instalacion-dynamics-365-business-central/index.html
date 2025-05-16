@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  Instalación Dynamics 365 Business Central · Christian Amado
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Christian Amado">
+<meta name="description" content="Cuando le estaba tomando mucho cariño a Microsoft Dynamics NAV 2018, me encuentro con este producto. Básicamente es la nueva versión de Dynamics NAV pero orientado a la nube y al uso de navegadores Web. Tal como acabas de leer, El cliente Windows se eliminará en las próximas versiones (por el momento sigue disponible).
+En esta breve, pero completa guía mostraré como realizar la instalación paso a paso.">
+<meta name="keywords" content="blog,desarrollador,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Instalación Dynamics 365 Business Central">
+  <meta name="twitter:description" content="Cuando le estaba tomando mucho cariño a Microsoft Dynamics NAV 2018, me encuentro con este producto. Básicamente es la nueva versión de Dynamics NAV pero orientado a la nube y al uso de navegadores Web. Tal como acabas de leer, El cliente Windows se eliminará en las próximas versiones (por el momento sigue disponible).
+En esta breve, pero completa guía mostraré como realizar la instalación paso a paso.">
+
+<meta property="og:url" content="http://localhost:1313/es/posts/2018-11-15-instalacion-dynamics-365-business-central/">
+  <meta property="og:site_name" content="Christian Amado">
+  <meta property="og:title" content="Instalación Dynamics 365 Business Central">
+  <meta property="og:description" content="Cuando le estaba tomando mucho cariño a Microsoft Dynamics NAV 2018, me encuentro con este producto. Básicamente es la nueva versión de Dynamics NAV pero orientado a la nube y al uso de navegadores Web. Tal como acabas de leer, El cliente Windows se eliminará en las próximas versiones (por el momento sigue disponible).
+En esta breve, pero completa guía mostraré como realizar la instalación paso a paso.">
+  <meta property="og:locale" content="es">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2018-11-14T23:33:02-04:00">
+    <meta property="article:modified_time" content="2018-11-14T23:33:02-04:00">
+    <meta property="article:tag" content="Dynamics 365 Business Central">
+
+
+
+
+<link rel="canonical" href="http://localhost:1313/es/posts/2018-11-15-instalacion-dynamics-365-business-central/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/es/">
+      Christian Amado
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/about">Biografía</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/contact">Contacto</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/diabetes">Diabetes</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/tags">Etiquetas</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/en/">🇺🇸</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/es/posts/2018-11-15-instalacion-dynamics-365-business-central/">
+              Instalación Dynamics 365 Business Central
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2018-11-14T23:33:02-04:00">
+                noviembre 14, 2018
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              Un minuto de lectura
+            </span>
+          </div>
+          
+          <div class="categories">
+  <i class="fa-solid fa-folder" aria-hidden="true"></i>
+    <a href="/es/categories/aplicaciones-de-negocio/">Aplicaciones De Negocio</a></div>
+
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/es/tags/dynamics-365-business-central/">Dynamics 365 Business Central</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <p>Cuando le estaba tomando mucho cariño a Microsoft Dynamics NAV 2018, me encuentro con este producto. Básicamente es la nueva versión de Dynamics NAV pero orientado a la nube y al uso de navegadores Web. Tal como acabas de leer, El cliente Windows se eliminará en las próximas versiones (por el momento sigue disponible).</p>
+<p>En esta breve, pero completa guía mostraré como realizar la instalación paso a paso.</p>
+<ol>
+<li>
+<p>Buscamos el instalador, hacemos doble clic en &ldquo;setup.exe&rdquo; y saldrá la ventana principal:<br>
+<img src="/img/posts/migrated/2019/03/1-7.png" alt=""></p>
+</li>
+<li>
+<p>Leemos ;) y aceptamos los términos de licencia:<br>
+<img src="/img/posts/migrated/2019/03/2-7.png" alt=""></p>
+</li>
+<li>
+<p>Procedemos a utilizar la última opción:<br>
+<img src="/img/posts/migrated/2019/03/3-5.png" alt=""></p>
+</li>
+<li>
+<p>Seleccionamos la opción de instalación:<br>
+<img src="/img/posts/migrated/2019/03/4-6.png" alt=""></p>
+</li>
+<li>
+<p>Debemos elegir &ldquo;Personalizado&rdquo;:<br>
+<img src="/img/posts/migrated/2019/03/5-6.png" alt=""></p>
+</li>
+<li>
+<p>Ejecutamos todo desde la PC:<br>
+<img src="/img/posts/migrated/2019/03/6-6.png" alt=""></p>
+</li>
+<li>
+<p>Configuramos las opciones de base de datos:<br>
+<img src="/img/posts/migrated/2019/03/7-4.png" alt=""></p>
+</li>
+<li>
+<p>El avance de instalación aparece:<br>
+<img src="/img/posts/migrated/2019/03/8-2.png" alt=""></p>
+</li>
+<li>
+<p>Abrimos el programa &ldquo;Business Central Web Client&rdquo;:<br>
+<img src="/img/posts/migrated/2019/03/9-1.png" alt=""></p>
+</li>
+<li>
+<p>El ERP se ve de la siguiente manera:<br>
+<img src="/img/posts/migrated/2019/03/10-1.png" alt=""></p>
+</li>
+</ol>
+<p>Siguiendo los pasos anteriores hemos podido instalar Dynamics 365 Business Central sin problemas.</p>
+      </div>
+
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script>
+  window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "cmasblog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    
+    document.addEventListener('themeChanged', function (e) { 
+        if (document.readyState == 'complete') {
+          DISQUS.reset({ reload: true, config: disqus_config });
+        }
+    });
+</script>
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2018 -
+    
+    2025
+     Christian Amado 
+    ·
+    
+    Desarrollado por <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+      <script async src="https://www.googletagmanager.com/gtag/js?id=356375808"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '356375808');
+        }
+      </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=013131931956450466198%3ablhmkdpweyq"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '013131931956450466198:blhmkdpweyq');
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

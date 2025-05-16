@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>PowerApps on Christian Amado</title>
+    <link>http://localhost:1313/es/tags/powerapps/</link>
+    <description>Recent content in PowerApps on Christian Amado</description>
+    <generator>Hugo</generator>
+    <language>es</language>
+    <lastBuildDate>Wed, 27 Sep 2023 00:00:00 -0400</lastBuildDate>
+    <atom:link href="http://localhost:1313/es/tags/powerapps/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Utilizando Visual Studio Code para modificar objetos Power Apps</title>
+      <link>http://localhost:1313/es/posts/2023-09-27-using-vs-code-for-changing-objects-in-power-apps/</link>
+      <pubDate>Wed, 27 Sep 2023 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2023-09-27-using-vs-code-for-changing-objects-in-power-apps/</guid>
+      <description>&lt;p&gt;En este artículo veremos cómo desarrollar aplicaciones &lt;strong&gt;Microsoft Power Apps&lt;/strong&gt; directamente en &lt;strong&gt;Visual Studio Code&lt;/strong&gt; para realizar tareas mas complejas de diseño o de código mismo.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Incrustar página web externa en Power Apps</title>
+      <link>http://localhost:1313/es/posts/2023-09-20-embed-external-page-in-power-apps/</link>
+      <pubDate>Wed, 20 Sep 2023 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2023-09-20-embed-external-page-in-power-apps/</guid>
+      <description>&lt;p&gt;En este artículo veremos cómo incrustar oáginas web externas en &lt;strong&gt;Microsoft Power Apps&lt;/strong&gt; como si incluyeramos un IFrame dentro de nuestra App.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>¿Qué es Power Apps Creator Kit?</title>
+      <link>http://localhost:1313/es/posts/2023-09-13-what-is-power-apps-creator-kit/</link>
+      <pubDate>Wed, 13 Sep 2023 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2023-09-13-what-is-power-apps-creator-kit/</guid>
+      <description>&lt;p&gt;En este artículo veremos qué es &lt;strong&gt;Microsoft Power Apps Creator Kit&lt;/strong&gt; y para qué nos resultaría útil.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Utilizando Power Apps Monitor</title>
+      <link>http://localhost:1313/es/posts/2023-09-06-using-monitor-in-power-apps/</link>
+      <pubDate>Wed, 06 Sep 2023 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2023-09-06-using-monitor-in-power-apps/</guid>
+      <description>&lt;p&gt;En este artículo veremos cómo utilizar esta herramienta para monitorear aplicaciones desarrolladas en &lt;strong&gt;Microsoft Power Apps&lt;/strong&gt;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Seguridad basada en Roles en Power Apps</title>
+      <link>http://localhost:1313/es/posts/2023-06-21-role-based-security-in-power-apps/</link>
+      <pubDate>Wed, 21 Jun 2023 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2023-06-21-role-based-security-in-power-apps/</guid>
+      <description>&lt;p&gt;En este artículo veremos cómo bloquear elementos con la seguridad basada en roles en &lt;strong&gt;Microsoft Power Apps&lt;/strong&gt; para permitir incrementar la seguridad de nuestras aplicaciones.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Opciones de filtros en Power Apps</title>
+      <link>http://localhost:1313/es/posts/2023-06-14-filtering-options-in-power-apps/</link>
+      <pubDate>Wed, 14 Jun 2023 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2023-06-14-filtering-options-in-power-apps/</guid>
+      <description>&lt;p&gt;En este artículo veremos cómo implementar algunas opciones de filtros en &lt;strong&gt;Microsoft Power Apps&lt;/strong&gt; con el objetivo de econtrar rápidamente ciertos valores según la necesidad que surga en el momento.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Confirmación de cierre en Power Apps</title>
+      <link>http://localhost:1313/es/posts/2023-06-07-close-confirmation-in-power-apps/</link>
+      <pubDate>Wed, 07 Jun 2023 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2023-06-07-close-confirmation-in-power-apps/</guid>
+      <description>&lt;p&gt;En este artículo veremos cómo Confirmar una ventana en &lt;strong&gt;Microsoft Power Apps&lt;/strong&gt; antes de cerrarla.&lt;/p&gt;&#xA;&lt;p&gt;Como el título indica veremos cómo confirmar el cierre de uina ventana en &lt;strong&gt;Power Apps&lt;/strong&gt; para permitir que el usuario decida qué acciones tomar y nuestra lógica permita realizar ciertas gestiones según sea necesario.&lt;/p&gt;&#xA;&lt;p&gt;Esta función sólo sirve para aplicaciones orientadas a modelos.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Galería Ecommerce en Power Apps</title>
+      <link>http://localhost:1313/es/posts/2023-05-24-ecommerce-gallery-in-power-apps/</link>
+      <pubDate>Wed, 24 May 2023 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2023-05-24-ecommerce-gallery-in-power-apps/</guid>
+      <description>&lt;p&gt;En este artículo veremos cómo crear empezar con un sitio Ecommerce en &lt;strong&gt;Microsoft Power Apps&lt;/strong&gt;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Mostrar foto de perfil desde Microsoft 365 en Power Apps</title>
+      <link>http://localhost:1313/es/posts/2023-05-17-display-profile-photo-from-m365-in-power-apps/</link>
+      <pubDate>Wed, 17 May 2023 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2023-05-17-display-profile-photo-from-m365-in-power-apps/</guid>
+      <description>&lt;p&gt;En este artículo veremos cómo agregar una foto de perfil desde &lt;strong&gt;Microsoft 365&lt;/strong&gt; en &lt;strong&gt;Microsoft Power Apps&lt;/strong&gt; de modo a reutilizarlo y manejar un mismo perfil dentro de las aplicaciones.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Formularios Dinámicos en Power Apps</title>
+      <link>http://localhost:1313/es/posts/2023-05-10-dynamics-forms-in-power-apps/</link>
+      <pubDate>Wed, 10 May 2023 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2023-05-10-dynamics-forms-in-power-apps/</guid>
+      <description>&lt;p&gt;En este artículo veremos cómo crear formularios dinámicos en &lt;strong&gt;Microsoft Power Apps&lt;/strong&gt; debido a que es un escenario bastante útil en el día a día. tengamos en cuenta que no todo es estático en este mundo de la transformación digital.&lt;/p&gt;&#xA;&lt;p&gt;Este artículo es sólo una referencia al artículo original que me sirvió para implementar en mi propio Tenant.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Manejo de errores en Power Apps</title>
+      <link>http://localhost:1313/es/posts/2023-05-03-error-handling-in-power-apps/</link>
+      <pubDate>Wed, 03 May 2023 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2023-05-03-error-handling-in-power-apps/</guid>
+      <description>&lt;p&gt;En este artículo veremos cómo manejar errores en &lt;strong&gt;Microsoft Power Apps&lt;/strong&gt; pues no es algo netamente de lenguajes de programación sino que es un tema real que debe ser cubierto también por aplciaciones de tipo &lt;em&gt;Low Code&lt;/em&gt;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Publicar aplicación para usuarios externos</title>
+      <link>http://localhost:1313/es/posts/2020-03-31-publicar-aplicacion-para-usuarios-externos/</link>
+      <pubDate>Tue, 31 Mar 2020 12:32:20 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2020-03-31-publicar-aplicacion-para-usuarios-externos/</guid>
+      <description>&lt;p&gt;En la &lt;a href=&#34;http://localhost:1313/2020/03/publicar-aplicacion/&#34; &gt;entrada de ayer&lt;/a&gt; vimos cómo publicar una aplicación dentro del dominio de nuestra organización con usuarios propios de la empresa. Digamos que sirve para una aplicación interna que puede ser utilizada sin inconvenientes.&lt;/p&gt;&#xA;&lt;p&gt;En este caso, habilitaremos la misma aplicación pero para usuarios externos a nuestra organización. Para eso necesitamos un poco de Microsoft Azure.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Publicar aplicación</title>
+      <link>http://localhost:1313/es/posts/2020-03-30-publicar-aplicacion/</link>
+      <pubDate>Mon, 30 Mar 2020 18:09:32 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2020-03-30-publicar-aplicacion/</guid>
+      <description>&lt;p&gt;En esta oportunidad quiero mostrar cómo publicar una aplicación &amp;ldquo;desarrollada&amp;rdquo; con PowerApps. La publicación es muy sencilla y en pocos pasos está disponible para ser utilizada sin inconveniente alguno.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Tipos de pantallas</title>
+      <link>http://localhost:1313/es/posts/2020-01-22-tipos-de-pantallas/</link>
+      <pubDate>Wed, 22 Jan 2020 20:55:38 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2020-01-22-tipos-de-pantallas/</guid>
+      <description>&lt;p&gt;Cada vez que doy una mirada a Microsoft PowerApps encuentro cosas nuevas y mejoradas. en este caso vengo a explicar las posibles opciones que tenemos disponibles como plantillas para distintas formas de representar la forma de desplegar la información de nuestra aplicación.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Enviar correo desde PowerApps</title>
+      <link>http://localhost:1313/es/posts/2020-01-15-enviar-correo-desde-powerapps/</link>
+      <pubDate>Wed, 15 Jan 2020 22:31:59 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2020-01-15-enviar-correo-desde-powerapps/</guid>
+      <description>&lt;p&gt;En esta oportunidad me gustaría mostrar la integración entre dos aplicaciones disponibles en Office 365, en este caso, PowerApps y Power Automate (Flow).&lt;/p&gt;&#xA;&lt;p&gt;PowerApps nos permite crear una aplicación en segundos y Power Automate (Flow) nos permite utilizar muchos servicios para integrarlos a nuestra aplicación.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Procesando…</title>
+      <link>http://localhost:1313/es/posts/2019-12-06-procesando/</link>
+      <pubDate>Thu, 05 Dec 2019 23:11:50 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2019-12-06-procesando/</guid>
+      <description>&lt;p&gt;En una entrada anterior, habíamos visto cómo crear una barra de progreso dentro de PowerApps. Vimos que no existe un control como tal pero que podemos adaptar uno a las necesidades que vamos teniendo.&lt;/p&gt;&#xA;&lt;p&gt;Aquí veremos cómo mostrar un control &amp;ldquo;Procesando&amp;hellip;&amp;rdquo; (loading) mientras se procesa algo, tomando como ejemplo el origen de datos &lt;strong&gt;Cuentas&lt;/strong&gt; desde Dynamics 365 for Sales.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>PDF Viewer</title>
+      <link>http://localhost:1313/es/posts/2019-10-22-pdf-viewer/</link>
+      <pubDate>Tue, 22 Oct 2019 19:24:11 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2019-10-22-pdf-viewer/</guid>
+      <description>&lt;p&gt;Muchas veces necesitamos, poder visualizar documentos en nuestras aplicaciones. A la fecha, uno de los documentos más utilizados es el formato PDF.&lt;/p&gt;&#xA;&lt;p&gt;Por eso, Microsoft PowerApps provee un visor de documentos PDF. Con estos sencillos pasos logramos ver estos documentos rápidamente.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Barra de progreso</title>
+      <link>http://localhost:1313/es/posts/2019-10-11-barra-de-progreso/</link>
+      <pubDate>Thu, 10 Oct 2019 23:14:41 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2019-10-11-barra-de-progreso/</guid>
+      <description>&lt;p&gt;Otra herramienta que se utiliza mucho a la hora de desarrollar aplicaciones es la barra de progreso, para mostrar algún avance en el proceso. En Microsoft PowerApps no tenemos un control especializado para realizar esa tarea, por lo tanto debemos crear algo que simule esa tarea.&lt;/p&gt;&#xA;&lt;p&gt;Para ello utilizaremos dos controles de tipo &lt;strong&gt;Rectángulo&lt;/strong&gt; y un control &lt;strong&gt;Slider&lt;/strong&gt; que permitirá mostrar el proceso deseado.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Campos ocultos</title>
+      <link>http://localhost:1313/es/posts/2019-10-08-campos-ocultos/</link>
+      <pubDate>Tue, 08 Oct 2019 21:03:18 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2019-10-08-campos-ocultos/</guid>
+      <description>&lt;p&gt;Este último fin de semana me han preguntado cómo puedo manejar campos ocultos en Microsoft PowerApps. La respuesta corta es No se puede. ¿Por qué no se puede?&lt;/p&gt;&#xA;&lt;p&gt;Porque no existe un control o campo oculto como tal. En HTML, por ejemplo, tenemos un control de ese tipo que lo podemos utilizar como un campo auxiliar para almacenar algo que necesitamos utilizar. Más información &lt;a href=&#34;https://developer.mozilla.org/es/docs/Web/HTML/Elemento/input/hidden&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;aquí&lt;/a&gt;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Validaciones</title>
+      <link>http://localhost:1313/es/posts/2019-10-03-validaciones/</link>
+      <pubDate>Thu, 03 Oct 2019 20:11:49 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2019-10-03-validaciones/</guid>
+      <description>&lt;p&gt;Esta entrada tiene relación con el trabajo con datos, en la entrada anterior vimos cómo ordenar y filtrar datos. Aquí veremos otro punto importante que se basa en las validaciones. Aquí me centraré en validar datos en la pantalla donde se insertan elementos.&lt;/p&gt;&#xA;&lt;p&gt;De esta manera, los datos validados terminarán en el Dynamics 365 for Sales. Vamos a ver cómo podemos hacerlo.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Ordenamiento y filtrado de columnas</title>
+      <link>http://localhost:1313/es/posts/2019-10-01-ordenamiento-y-filtrado-de-columnas/</link>
+      <pubDate>Tue, 01 Oct 2019 18:54:23 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2019-10-01-ordenamiento-y-filtrado-de-columnas/</guid>
+      <description>&lt;p&gt;Luego de algunos meses, con otros temas, aquí continúo con Microsoft PowerApps. En la &lt;a href=&#34;http://localhost:1313/2019/05/trabajando-con-tablas/&#34; &gt;última entrada referente al tema&lt;/a&gt; hemos vimos cómo crear una aplicación completa con datos de una manera sencilla. Me han preguntado ¿Cómo puedo ordenar y/o filtrar los datos? Para el caso del ejemplo, ya estaba ordenado y filtrado. Pero, me interesa explicar cómo hacerlo y que ustedes puedan aplicar según su necesidad.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Trabajando con tablas</title>
+      <link>http://localhost:1313/es/posts/2019-05-30-trabajando-con-tablas/</link>
+      <pubDate>Thu, 30 May 2019 20:59:02 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2019-05-30-trabajando-con-tablas/</guid>
+      <description>&lt;p&gt;En una &lt;a href=&#34;http://localhost:1313/2019/05/formularios/&#34; &gt;entrada anterior&lt;/a&gt;, dimos un adelanto sobre este tema debido a que trabajamos con formulario. En este caso mostraré las operaciones CRUD (Create, Read, Update y Delete) que se pueden realizar en una base de datos. Sin dar demasiadas vueltas, empecemos con las operaciones.&lt;/p&gt;&#xA;&lt;p&gt;En cualquier otra herramienta tomaría muchos pasos hacer esta tarea, pero con Microsoft PowerApps no es el caso pues con algunos clics ya tenemos todas las operaciones necesarias, utilizando cualquier conector disponible.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Funciones</title>
+      <link>http://localhost:1313/es/posts/2019-05-28-funciones/</link>
+      <pubDate>Tue, 28 May 2019 19:40:31 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2019-05-28-funciones/</guid>
+      <description>&lt;p&gt;En la &lt;a href=&#34;http://localhost:1313/posts/2019-05-16-reglas/&#34; &gt;entrada anterior&lt;/a&gt;, vimos cómo crear reglas relacionadas a un control. En esta entrada veremos cómo utilizar las funciones propias que están incluídas dentro de Microsoft PowerApps y veremos cómo crear nuestras propias funciones. Según wikipedia&amp;hellip;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Reglas</title>
+      <link>http://localhost:1313/es/posts/2019-05-16-reglas/</link>
+      <pubDate>Thu, 16 May 2019 20:36:02 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2019-05-16-reglas/</guid>
+      <description>&lt;p&gt;Siguiendo con el tema de &lt;a href=&#34;http://localhost:1313/posts/2019-05-14-controles/&#34; &gt;la entrada anterior&lt;/a&gt;, ahora vamos a ver cómo utilizar reglas dentro de Microsoft PowerApps. Según Microsoft Docs&amp;hellip;&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;Las reglas se crean para modificar automáticamente una aplicación en función de los criterios que se especifiquen. Por ejemplo, mostrar los elementos de cada lista en rojo, amarillo o verde según su estado, o bien mostrar un botón de aprobación sólo a determinados usuarios (por ejemplo, los administradores). Las reglas se pueden agregar a varios controles.&lt;/p&gt;&lt;/blockquote&gt;</description>
+    </item>
+    <item>
+      <title>Controles</title>
+      <link>http://localhost:1313/es/posts/2019-05-14-controles/</link>
+      <pubDate>Tue, 14 May 2019 22:52:47 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2019-05-14-controles/</guid>
+      <description>&lt;p&gt;Continuando la serie que empezamos en la &lt;a href=&#34;http://localhost:1313/posts/2019-05-08-formularios/&#34; &gt;entrada anterior&lt;/a&gt;, en esta ocasión hablaremos sobre los controles disponibles en Microsoft PowerApps.&lt;/p&gt;&#xA;&lt;p&gt;Como toda aplicación se necesita que éstas muestren o permitan editar cierta información dentro de ellas. En este caso, los controles se utilizan para cumplir con esa simple pero imprescindible tarea.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Formularios</title>
+      <link>http://localhost:1313/es/posts/2019-05-08-formularios/</link>
+      <pubDate>Wed, 08 May 2019 19:46:10 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2019-05-08-formularios/</guid>
+      <description>&lt;p&gt;En esta oportunidad, quisiera compartir con ustedes conceptos básicos de Microsoft PowerApps. Esta herramienta ya se viene utilizando hace tiempo (sobre todo para aquellas personas que desarrollamos/personalizamos cosas dentro de Microsoft Dynamics 365/CRM), tiene sus facilidades y también sus complejidades.&lt;/p&gt;&#xA;&lt;p&gt;Lo positivo de esta herramienta es que todo es visual y muy fácil de aprender para personas que no están sumergidas en el mundo de la programación pero quieren realizar tareas necesarias para cumplir con sus labores.&lt;/p&gt;&#xA;&lt;p&gt;Estaré publicando una serie de 5 artículos para este mes de manera a compreder los conceptos más básicos de esta herramienta incluída en Microsoft Office 365.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

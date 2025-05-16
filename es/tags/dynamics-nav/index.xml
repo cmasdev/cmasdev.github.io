@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Dynamics NAV on Christian Amado</title>
+    <link>http://localhost:1313/es/tags/dynamics-nav/</link>
+    <description>Recent content in Dynamics NAV on Christian Amado</description>
+    <generator>Hugo</generator>
+    <language>es</language>
+    <lastBuildDate>Wed, 18 Dec 2019 22:36:06 -0400</lastBuildDate>
+    <atom:link href="http://localhost:1313/es/tags/dynamics-nav/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>NAV: Conexión con base de datos externa - Parte 2</title>
+      <link>http://localhost:1313/es/posts/2019-12-18-nav-conexion-con-base-de-datos-externa-parte-2/</link>
+      <pubDate>Wed, 18 Dec 2019 22:36:06 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2019-12-18-nav-conexion-con-base-de-datos-externa-parte-2/</guid>
+      <description>&lt;p&gt;En la entrada anterior, vimos cómo crear una tabla en SQL Server y agregarla en Dynamics NAV (sin consumir licencias). en esta ocasión veremos cómo utilizarla dentro de una página de Dynamics NAV para verificar si los datos son correctos.&lt;/p&gt;&#xA;&lt;p&gt;Para ello, debemos seguir estos pasos&amp;hellip;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>NAV: Conexión con base de datos externa - Parte 1</title>
+      <link>http://localhost:1313/es/posts/2019-12-11-nav-conexion-con-base-de-datos-externa-parte-1/</link>
+      <pubDate>Wed, 11 Dec 2019 19:33:55 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2019-12-11-nav-conexion-con-base-de-datos-externa-parte-1/</guid>
+      <description>&lt;p&gt;Los desarrolladores de Dynamics NAV sabemos que tenemos limitaciones a nivel de tablas (normalmente con una licencia vienen 10 tablas) por eso tenemos esta oportunidad de integrar o crear tablas externas. Estas tablas externas permiten ser accedidas desde fuera de Dynamics NAV y poder trabajar con ellas sin mayores problemas.&lt;/p&gt;&#xA;&lt;p&gt;Divido esta entrada en dos partes para que se entiendan bien los pasos que debemos realizar para que todo esto funcione como esperamos que lo haga. En la primera parte, veremos lo relacionado a una base de datos externa a Dynamics NAV y cómo crear la misma tabla dentro de Dynamics NAV. No te preocupes, las tablas externas NO consumen licencias de tablas. En la segunda parte, veremos lo relacionado a Dynamics NAV para crear una página que lea los datos de esa tabla externa.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>NAVDEV Tips: Elimina las variables globales o locales no utilizadas</title>
+      <link>http://localhost:1313/es/posts/2019-08-28-navdev-tips-elimina-las-variables-globales-o-locales-no-utilizadas/</link>
+      <pubDate>Wed, 28 Aug 2019 12:10:56 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2019-08-28-navdev-tips-elimina-las-variables-globales-o-locales-no-utilizadas/</guid>
+      <description>&lt;p&gt;En esta oportunidad, quiero exponerles un punto de vista que al final de cuentas resultará en un buen consejo de desarrollo.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>NAVDEV Tips: Guardar archivo de código sin compilar</title>
+      <link>http://localhost:1313/es/posts/2019-08-27-navdev-tips-guardar-archivo-de-codigo-sin-compilar/</link>
+      <pubDate>Tue, 27 Aug 2019 13:41:31 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2019-08-27-navdev-tips-guardar-archivo-de-codigo-sin-compilar/</guid>
+      <description>&lt;p&gt;A muchos amigos desarrolladores de C/SIDE les habrá pasado que crearon variables globales, locales, modificar acciones y funciones, luego, al Guardar el archivo de código y seleccionar la opción compilar&amp;hellip; BOOOM&lt;/p&gt;&#xA;&lt;p&gt;El Dynamics NAV Development Environment se cierra con el famoso mensaje &amp;ldquo;se ha cerrado inesperadamente&amp;rdquo;. Luego de tanto esfuerzo escribiendo código se pierden los cambios.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Modificar valores de listas desplegables</title>
+      <link>http://localhost:1313/es/posts/2019-06-27-modificar-valores-de-listas-desplegables/</link>
+      <pubDate>Thu, 27 Jun 2019 19:44:42 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2019-06-27-modificar-valores-de-listas-desplegables/</guid>
+      <description>&lt;p&gt;El día de hoy tuve un pedido relacionado a cómo se visualizan los cambos en una lista desplegable dentro de una página en Dynamics NAV 2018. Básicamente, se debe hacer un cambio en la tabla de origen del elemento, pues es ahí donde se definen los campos de la lista desplegable.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Reporte de procesos</title>
+      <link>http://localhost:1313/es/posts/2019-06-26-reporte-de-procesos/</link>
+      <pubDate>Wed, 26 Jun 2019 19:06:12 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2019-06-26-reporte-de-procesos/</guid>
+      <description>&lt;p&gt;En el mundo de Dynamics NAV el reporte tiene dos funciones:&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;Mostrar un reporte como tal con muchos datos ordenados según requerimientos estándares.&lt;/li&gt;&#xA;&lt;li&gt;Procesar información sin mostrar resultado alguno&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;En este caso tomaremos la opción 2 de la situación.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>NAVDEV Tips: Modificar valores en Factura de Ventas</title>
+      <link>http://localhost:1313/es/posts/2019-06-25-navdev-tips-modificar-valores-en-factura-de-ventas/</link>
+      <pubDate>Tue, 25 Jun 2019 21:06:19 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2019-06-25-navdev-tips-modificar-valores-en-factura-de-ventas/</guid>
+      <description>&lt;p&gt;Microsoft Dynamics NAV es un sistema muy consistente y seguro cuando hablamos de transacciones. En ocasiones, podemos equivocarnos, como operadores, y olvidarnos de cargar ciertos datos o bien equivocarnos en cosas mínimas como olvidar colocar el vendedor, algún dato secundario que precisamos para tener toda la información relacionada con una factura.&lt;/p&gt;&#xA;&lt;p&gt;En esta entrada, menciono exclusivamente el ejemplo de Factura de Ventas, pero esto sería útil para cualquier tabla relacionada con Históricos de documentos (facturas, movimientos, etc).&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>NAV: DataItem Temporal en Reporte</title>
+      <link>http://localhost:1313/es/posts/2019-06-12-nav-dataitem-temporal-en-reporte/</link>
+      <pubDate>Wed, 12 Jun 2019 22:44:30 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2019-06-12-nav-dataitem-temporal-en-reporte/</guid>
+      <description>&lt;p&gt;Dentro del mundo de desarrollo de Microsoft Dynamics NAV 2018 existen limitaciones, por ejemplo, sólo se pueden crear hasta 10 tablas (luego se deben comprar más tablas si se desea seguir desarrollando). Es por eso, que muchas veces necesitamos procesar el resultado de una tabla existente dentro de la misma tabla, pero haciéndola temporal sólo para emitir un reporte.&lt;/p&gt;&#xA;&lt;p&gt;En ese caso, debemos procesar lo necesario en un paso previo y pasar los datos temporales al reporte que posee como DataItem una tabla temporal. En este ejemplo intentaremos hacer un &amp;ldquo;análisis de saldo por proveedor&amp;rdquo;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>NAVDEV Tips: Abrir WinForms desde Dynamics NAV 2018</title>
+      <link>http://localhost:1313/es/posts/2019-06-11-navdev-tips-abrir-winforms-desde-dynamics-nav-2018/</link>
+      <pubDate>Tue, 11 Jun 2019 12:49:07 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2019-06-11-navdev-tips-abrir-winforms-desde-dynamics-nav-2018/</guid>
+      <description>&lt;p&gt;En esta ocasión quiero compartir con ustedes una información bastante útil referente al consumo de aplicaciones ya desarrolladas. Normalmente, es ley no reinventar la rueda en cuanto a trabajos de desarrollo se refiere. Vamos a un caso puntual&amp;hellip;&lt;/p&gt;&#xA;&lt;p&gt;Tenemos una pequeña aplicación que gestiona las actividades del cajero de un Restaurant. Los dueños han decidido gestionar sus operaciones con Microsoft Dynamics NAV 2018 (buena decisión) pero no desean modificar su aplicación de cajero que les funciona de maravilla. Entonces, le proponemos utilizar ambos sistemas para que no dejen de utilizar su sistema actual.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>NAVDEV Tips: Reporte lento por índice de clave que no existe</title>
+      <link>http://localhost:1313/es/posts/2019-06-04-navdev-tips-reporte-lento-por-indice-de-clave-que-no-existe/</link>
+      <pubDate>Tue, 04 Jun 2019 23:32:29 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2019-06-04-navdev-tips-reporte-lento-por-indice-de-clave-que-no-existe/</guid>
+      <description>&lt;p&gt;Dependiendo de la cantidad de datos y de la manera en que se ha desarrollado un reporte éste puede ser lento en su carga. Para este caso consideremos culpable al equipo de desarrollo.&lt;/p&gt;&#xA;&lt;p&gt;Normalmente las tablas de Dynamics NAV tiene sus claves (Keys) generadas y agrupadas según conceptos genéricos. Ej: No, Fecha. Pero en ocasiones necesitamos agrupar los registros por un agrupador que no está presente en neustro origen de datos.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>NAV: Solución de problemas DNS con NavUserPassword</title>
+      <link>http://localhost:1313/es/posts/2019-05-07-nav-solucion-de-problemas-dns-con-navuserpassword/</link>
+      <pubDate>Tue, 07 May 2019 22:13:51 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2019-05-07-nav-solucion-de-problemas-dns-con-navuserpassword/</guid>
+      <description>&lt;p&gt;Recibí la llamada de un cliente referente a una situación de conexión entre el Servidor NAV y su cliente, que en este caso utilizan las credenciales de tipo &lt;strong&gt;NavUserPassword&lt;/strong&gt;. El problema se muestra en la siguiente imagen (CMASUS es el nombre de referencia del Servidor):&lt;br&gt;&#xA;&lt;img src=&#34;http://localhost:1313/img/posts/migrated/2018/07/7-1.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Creando csv con XMLPort</title>
+      <link>http://localhost:1313/es/posts/2019-05-01-creando-csv-con-xmlport/</link>
+      <pubDate>Wed, 01 May 2019 23:13:56 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2019-05-01-creando-csv-con-xmlport/</guid>
+      <description>&lt;p&gt;Hace tiempo veía una opción que se llamaba &lt;strong&gt;XMLPort&lt;/strong&gt; y surgió el interés en saber a qué se refería. Pero entre el trabajo y otras actividades no tuve tiempo de darle una miradita.&lt;/p&gt;&#xA;&lt;p&gt;Ahora que surgió la necesidad de exportación de una tabla a un archivo &lt;strong&gt;.txt&lt;/strong&gt; es útil escribir esta entrada. &lt;strong&gt;XMLPort&lt;/strong&gt; realiza la exportación a un archivo &lt;strong&gt;XML&lt;/strong&gt; o &lt;strong&gt;csv&lt;/strong&gt; según la necesidad. Es por eso que decidí plasmarlo en esta entrada.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>NAV: Mostrar imagen dentro de un reporte</title>
+      <link>http://localhost:1313/es/posts/2019-01-23-nav-mostrar-imagen-dentro-de-un-reporte/</link>
+      <pubDate>Wed, 23 Jan 2019 18:26:33 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2019-01-23-nav-mostrar-imagen-dentro-de-un-reporte/</guid>
+      <description>&lt;p&gt;En esta entrada pretendo mostrar los pasos para poder cargar una imagen dentro de un reporte en Dynamics NAV 2018. No resulta complicado pero sí es un proceso largo para realizar una tarea tan simple.&lt;/p&gt;&#xA;&lt;p&gt;Los pasos a seguir serían los siguientes:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Dynamics NAV conectado a Business Central</title>
+      <link>http://localhost:1313/es/posts/2019-01-16-dynamics-nav-conectado-a-business-central/</link>
+      <pubDate>Wed, 16 Jan 2019 20:02:53 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2019-01-16-dynamics-nav-conectado-a-business-central/</guid>
+      <description>&lt;p&gt;Dynamics 365 Business Central, como ya hemos visto anteriormente posee su interfaz Web (que funciona en todos los dispositivos) pero por el momento tenemos la posibilidad e utilizarlo con el cliente de Dynamics NAV.&lt;/p&gt;&#xA;&lt;p&gt;Para eso debemos seguir los siguientes pasos:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>NAVDEV Tips: Esconder DataItem en Request Page</title>
+      <link>http://localhost:1313/es/posts/2018-12-19-navdev-tips-esconder-dataitem-en-request-page/</link>
+      <pubDate>Wed, 19 Dec 2018 02:51:18 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2018-12-19-navdev-tips-esconder-dataitem-en-request-page/</guid>
+      <description>&lt;p&gt;De manera nativa, nos encontramos con la ventana de parámetros en Microsoft Dynamics NAV 2018. Muchas veces necesitamos esconder esa ventana de parámetros y ese es el tema central de esta entrada&lt;/p&gt;&#xA;&lt;p&gt;En esta entrada, mostraré cómo vamos a esconder ese filtro según la necesidad.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>NAVDEV Tips: Comparación de registros modificados</title>
+      <link>http://localhost:1313/es/posts/2018-11-28-navdev-tips-comparacion-de-registros-modificados/</link>
+      <pubDate>Wed, 28 Nov 2018 21:42:18 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2018-11-28-navdev-tips-comparacion-de-registros-modificados/</guid>
+      <description>&lt;p&gt;Muchas veces necesitamos hacer comparaciones entre los valores nuevos y los valores anteriores para realizar ciertas acciones.&lt;/p&gt;&#xA;&lt;p&gt;En Dynamics NAV 2018 tenemos dos variables globales implícitas (variables propias del NAV) las cuales son &amp;ldquo;Rec&amp;rdquo; para el registro nuevo y &amp;ldquo;xRec&amp;rdquo; para el registro anterior.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>NAVDEV Tips: Filtrar campos del diseñador de objetos</title>
+      <link>http://localhost:1313/es/posts/2018-11-22-navdev-tips-filtrar-campos-del-disenador-de-objetos/</link>
+      <pubDate>Wed, 21 Nov 2018 23:34:36 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2018-11-22-navdev-tips-filtrar-campos-del-disenador-de-objetos/</guid>
+      <description>&lt;p&gt;Cuando desarrollamos dentro de Dynamics NAV 2018 nos encontramos con miles de objetos (tablas, páginas, reportes, consultas, XML Port) y muchas veces necesitamos encontrar los desarrollos que ya se han modificado y/o la fecha de modificación de los mismos.&lt;/p&gt;&#xA;&lt;p&gt;Como desventaja encontramos que en NAV 2018 no existe el control de versiones ni podemos saber que usuario realizó las modificaciones.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>FIUNA TECH DAY 2018</title>
+      <link>http://localhost:1313/es/posts/2018-11-16-fiuna-tech-day-2018/</link>
+      <pubDate>Fri, 16 Nov 2018 21:04:04 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2018-11-16-fiuna-tech-day-2018/</guid>
+      <description>&lt;p&gt;La Universidad Nacional de Asunción ha realizado su ya conocido evento de tecnología donde fui amablemente invitado.&lt;/p&gt;&#xA;&lt;p&gt;Este año estuve con problemas en las fotos, pero agradezco el certificado expedido.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>NAVDEV Tips: Depuración en Dynamics NAV 2018</title>
+      <link>http://localhost:1313/es/posts/2018-11-07-navdev-tips-depuracion-en-dynamics-nav-2018/</link>
+      <pubDate>Wed, 07 Nov 2018 03:17:28 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2018-11-07-navdev-tips-depuracion-en-dynamics-nav-2018/</guid>
+      <description>&lt;p&gt;NAV, como cualquier herramienta de desarrollo ofrece la posibilidad de depurar el programa, y lo permite de manera remota, sí, de manera remota depurando la sesión de cualquier usuario para poder realizar las pruebas necesarias.&lt;/p&gt;&#xA;&lt;p&gt;Esto es muy interesante y útil a la hora de encontrar cosas, que debido a la complejidad de la aplciación de negocio, están encapsuladas en Code Units o bien dentro de la misma tabla.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

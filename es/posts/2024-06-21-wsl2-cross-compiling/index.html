@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  Compilación cruzada para Linux y Windows desde WSL2 · Christian Amado
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Christian Amado">
+<meta name="description" content="Uno de los beneficios clave de WSL2 es la posibilidad de compilar binarios para Linux dentro de un entorno Linux completo, mientras se sigue trabajando desde Windows. Además, es posible configurar compilación cruzada para generar ejecutables de Windows (.exe) directamente desde WSL2, lo cual es útil para flujos de trabajo DevOps, empaquetado o testing multiplataforma.">
+<meta name="keywords" content="blog,desarrollador,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Compilación cruzada para Linux y Windows desde WSL2">
+  <meta name="twitter:description" content="Uno de los beneficios clave de WSL2 es la posibilidad de compilar binarios para Linux dentro de un entorno Linux completo, mientras se sigue trabajando desde Windows. Además, es posible configurar compilación cruzada para generar ejecutables de Windows (.exe) directamente desde WSL2, lo cual es útil para flujos de trabajo DevOps, empaquetado o testing multiplataforma.">
+
+<meta property="og:url" content="http://localhost:1313/es/posts/2024-06-21-wsl2-cross-compiling/">
+  <meta property="og:site_name" content="Christian Amado">
+  <meta property="og:title" content="Compilación cruzada para Linux y Windows desde WSL2">
+  <meta property="og:description" content="Uno de los beneficios clave de WSL2 es la posibilidad de compilar binarios para Linux dentro de un entorno Linux completo, mientras se sigue trabajando desde Windows. Además, es posible configurar compilación cruzada para generar ejecutables de Windows (.exe) directamente desde WSL2, lo cual es útil para flujos de trabajo DevOps, empaquetado o testing multiplataforma.">
+  <meta property="og:locale" content="es">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-06-21T00:00:00-04:00">
+    <meta property="article:modified_time" content="2024-06-21T00:00:00-04:00">
+    <meta property="article:tag" content="WinDev">
+    <meta property="article:tag" content="Windows 11">
+    <meta property="article:tag" content="WSL">
+
+
+
+
+<link rel="canonical" href="http://localhost:1313/es/posts/2024-06-21-wsl2-cross-compiling/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/es/">
+      Christian Amado
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/about">Biografía</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/contact">Contacto</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/diabetes">Diabetes</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/tags">Etiquetas</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/en/">🇺🇸</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/es/posts/2024-06-21-wsl2-cross-compiling/">
+              Compilación cruzada para Linux y Windows desde WSL2
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2024-06-21T00:00:00-04:00">
+                junio 21, 2024
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              2 minutos de lectura.
+            </span>
+          </div>
+          
+          
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/es/tags/windev/">WinDev</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/es/tags/windows-11/">Windows 11</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/es/tags/wsl/">WSL</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <p>Uno de los beneficios clave de WSL2 es la posibilidad de compilar binarios para Linux dentro de un entorno Linux completo, mientras se sigue trabajando desde Windows. Además, es posible configurar <strong>compilación cruzada</strong> para generar ejecutables de Windows (<code>.exe</code>) directamente desde WSL2, lo cual es útil para flujos de trabajo DevOps, empaquetado o testing multiplataforma.</p>
+<h3 id="-objetivo">
+  🎯 Objetivo
+  <a class="heading-link" href="#-objetivo">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>Compilar aplicaciones para Linux directamente en WSL2</li>
+<li>Generar ejecutables <code>.exe</code> de Windows desde WSL2 usando MinGW</li>
+<li>Compilar con CMake y Go para ambos entornos</li>
+<li>Automatizar la compilación multiplataforma</li>
+</ul>
+<h2 id="-paso-1-preparar-entorno-de-compilación-en-wsl2">
+  ⚙️ Paso 1: Preparar entorno de compilación en WSL2
+  <a class="heading-link" href="#-paso-1-preparar-entorno-de-compilaci%c3%b3n-en-wsl2">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt update
+</span></span><span class="line"><span class="cl">sudo apt install -y build-essential cmake mingw-w64 gcc g++ git
+</span></span></code></pre></div><p>Verificar toolchains:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">gcc --version
+</span></span><span class="line"><span class="cl">x86_64-w64-mingw32-gcc --version
+</span></span></code></pre></div><h2 id="-paso-2-compilar-binario-nativo-para-linux">
+  🧪 Paso 2: Compilar binario nativo para Linux
+  <a class="heading-link" href="#-paso-2-compilar-binario-nativo-para-linux">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Crear archivo <code>hello.c</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;Hola desde Linux</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Compilar:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">gcc hello.c -o hello-linux
+</span></span><span class="line"><span class="cl">./hello-linux
+</span></span></code></pre></div><h2 id="-paso-3-compilar-para-windows-exe-desde-wsl2">
+  🪟 Paso 3: Compilar para Windows (.exe) desde WSL2
+  <a class="heading-link" href="#-paso-3-compilar-para-windows-exe-desde-wsl2">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Usar MinGW para compilar en formato Windows:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">x86_64-w64-mingw32-gcc hello.c -o hello.exe
+</span></span></code></pre></div><p>Mover el binario a Windows:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">cp hello.exe /mnt/c/Users/tuusuario/Desktop/
+</span></span></code></pre></div><p>Ejecutar desde PowerShell:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="n">C:</span><span class="p">\</span><span class="n">Users</span><span class="p">\</span><span class="n">tuusuario</span><span class="p">\</span><span class="n">Desktop</span><span class="p">\</span><span class="n">hello</span><span class="p">.</span><span class="py">exe</span>
+</span></span></code></pre></div><h2 id="-paso-4-compilación-cruzada-con-cmake">
+  🛠️ Paso 4: Compilación cruzada con CMake
+  <a class="heading-link" href="#-paso-4-compilaci%c3%b3n-cruzada-con-cmake">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Estructura de proyecto:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">miapp/
+</span></span><span class="line"><span class="cl">├── CMakeLists.txt
+</span></span><span class="line"><span class="cl">└── main.c
+</span></span></code></pre></div><p>CMakeLists.txt:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cmake" data-lang="cmake"><span class="line"><span class="cl"><span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span> <span class="s">3.10</span><span class="p">)</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nb">project</span><span class="p">(</span><span class="s">miapp</span><span class="p">)</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nb">add_executable</span><span class="p">(</span><span class="s">miapp</span> <span class="s">main.c</span><span class="p">)</span><span class="err">
+</span></span></span></code></pre></div><p>Build Linux:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">mkdir build-linux <span class="o">&amp;&amp;</span> <span class="nb">cd</span> build-linux
+</span></span><span class="line"><span class="cl">cmake ..
+</span></span><span class="line"><span class="cl">make
+</span></span></code></pre></div><p>Build Windows:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">mkdir build-win <span class="o">&amp;&amp;</span> <span class="nb">cd</span> build-win
+</span></span><span class="line"><span class="cl">cmake -DCMAKE_SYSTEM_NAME<span class="o">=</span>Windows -DCMAKE_C_COMPILER<span class="o">=</span>x86_64-w64-mingw32-gcc ..
+</span></span><span class="line"><span class="cl">make
+</span></span></code></pre></div><h2 id="-paso-5-compilar-con-go-para-ambos-entornos">
+  💡 Paso 5: Compilar con Go para ambos entornos
+  <a class="heading-link" href="#-paso-5-compilar-con-go-para-ambos-entornos">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt install -y golang
+</span></span></code></pre></div><p>Go detecta plataforma con variables <code>GOOS</code> y <code>GOARCH</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Linux nativo</span>
+</span></span><span class="line"><span class="cl">go build -o hello-linux main.go
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Windows desde WSL2</span>
+</span></span><span class="line"><span class="cl"><span class="nv">GOOS</span><span class="o">=</span>windows <span class="nv">GOARCH</span><span class="o">=</span>amd64 go build -o hello.exe main.go
+</span></span></code></pre></div><h2 id="-conclusión">
+  ✅ Conclusión
+  <a class="heading-link" href="#-conclusi%c3%b3n">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>WSL2 permite compilar aplicaciones para Linux y Windows sin salir del entorno de desarrollo, facilitando pruebas, empaquetado y automatización de builds multiplataforma. Con herramientas como MinGW, CMake y Go, es posible mantener un flujo productivo y coherente desde una única máquina.</p>
+      </div>
+
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script>
+  window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "cmasblog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    
+    document.addEventListener('themeChanged', function (e) { 
+        if (document.readyState == 'complete') {
+          DISQUS.reset({ reload: true, config: disqus_config });
+        }
+    });
+</script>
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2018 -
+    
+    2025
+     Christian Amado 
+    ·
+    
+    Desarrollado por <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+      <script async src="https://www.googletagmanager.com/gtag/js?id=356375808"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '356375808');
+        }
+      </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=013131931956450466198%3ablhmkdpweyq"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '013131931956450466198:blhmkdpweyq');
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

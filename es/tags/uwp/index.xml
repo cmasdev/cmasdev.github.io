@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>UWP on Christian Amado</title>
+    <link>http://localhost:1313/es/tags/uwp/</link>
+    <description>Recent content in UWP on Christian Amado</description>
+    <generator>Hugo</generator>
+    <language>es</language>
+    <lastBuildDate>Wed, 20 Jul 2022 23:01:00 -0400</lastBuildDate>
+    <atom:link href="http://localhost:1313/es/tags/uwp/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Hospedar Web App en UWP</title>
+      <link>http://localhost:1313/es/posts/2022-07-20-host-web-app-in-uwp/</link>
+      <pubDate>Wed, 20 Jul 2022 23:01:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2022-07-20-host-web-app-in-uwp/</guid>
+      <description>&lt;p&gt;En este artículo mostraré cómo hospedar/mostrar una aplicación &lt;strong&gt;ASP.NET Core&lt;/strong&gt; dentro de una aplicación &lt;strong&gt;UWP&lt;/strong&gt; en Windows.&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Windows 11 Insider Preview Build 25126&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Migración UWP a WinUI 3</title>
+      <link>http://localhost:1313/es/posts/2022-07-06-upgrade-uwp-to-winui3/</link>
+      <pubDate>Wed, 06 Jul 2022 00:12:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2022-07-06-upgrade-uwp-to-winui3/</guid>
+      <description>&lt;p&gt;¡Feliz cumple para mí! Arranco mi día con un artículo (es día de festejo así que será complicado cumplir con la comunidad).&lt;/p&gt;&#xA;&lt;p&gt;En este artículo haré una migración de &lt;strong&gt;UWP&lt;/strong&gt; a &lt;strong&gt;WinUI 3&lt;/strong&gt; sin que se complique demasiado.&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Windows 11 Insider Preview Build 25151&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>UWP en Windows 11</title>
+      <link>http://localhost:1313/es/posts/2022-05-11-uwp-in-windows-11/</link>
+      <pubDate>Wed, 11 May 2022 19:53:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2022-05-11-uwp-in-windows-11/</guid>
+      <description>&lt;p&gt;En este artículo mostraré cómo crear una aplicación UWP (Universal Windows Platform) en Windows 11 (aunque ya debemos ir dejándola ;)).&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Windows 11 Insider Preview Build 22621&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Node.js on Christian Amado</title>
+    <link>http://localhost:1313/es/tags/node.js/</link>
+    <description>Recent content in Node.js on Christian Amado</description>
+    <generator>Hugo</generator>
+    <language>es</language>
+    <lastBuildDate>Wed, 21 Aug 2024 00:00:00 -0400</lastBuildDate>
+    <atom:link href="http://localhost:1313/es/tags/node.js/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Migración de Node.js a Deno: Caso práctico</title>
+      <link>http://localhost:1313/es/posts/2024-08-21-nodejs-migration-to-deno/</link>
+      <pubDate>Wed, 21 Aug 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2024-08-21-nodejs-migration-to-deno/</guid>
+      <description>&lt;p&gt;En los últimos años, &lt;strong&gt;Deno&lt;/strong&gt; ha emergido como una alternativa moderna a &lt;strong&gt;Node.js&lt;/strong&gt;. Desarrollado por el mismo creador de &lt;strong&gt;Node.js&lt;/strong&gt;, &lt;strong&gt;Deno&lt;/strong&gt; busca abordar algunas de las limitaciones y problemas de diseño que han surgido con &lt;strong&gt;Node.js&lt;/strong&gt; a lo largo del tiempo. Este artículo presenta un caso práctico detallado sobre cómo migrar una aplicación existente de &lt;strong&gt;Node.js&lt;/strong&gt; a &lt;strong&gt;Deno&lt;/strong&gt;, destacando las diferencias clave, los desafíos y las soluciones.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

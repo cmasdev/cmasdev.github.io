@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  Native AOT en .NET 9 · Christian Amado
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Christian Amado">
+<meta name="description" content="Con cada nueva versión de .NET, Microsoft ha trabajado activamente en mejorar el rendimiento, el tamaño de despliegue y la experiencia en entornos de bajo consumo. Uno de los avances más importantes en este sentido es Native AOT (Ahead-of-Time Compilation). Introducido como parte estable en .NET 7, y refinado aún más en .NET 8 y .NET 9, Native AOT permite compilar aplicaciones directamente a código nativo, eliminando por completo la dependencia del CLR en tiempo de ejecución.
+Este artículo explora cómo utilizar Native AOT en aplicaciones de consola en .NET 9, con un enfoque práctico para reducir significativamente el tiempo de arranque y el consumo de memoria.">
+<meta name="keywords" content="blog,desarrollador,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Native AOT en .NET 9">
+  <meta name="twitter:description" content="Con cada nueva versión de .NET, Microsoft ha trabajado activamente en mejorar el rendimiento, el tamaño de despliegue y la experiencia en entornos de bajo consumo. Uno de los avances más importantes en este sentido es Native AOT (Ahead-of-Time Compilation). Introducido como parte estable en .NET 7, y refinado aún más en .NET 8 y .NET 9, Native AOT permite compilar aplicaciones directamente a código nativo, eliminando por completo la dependencia del CLR en tiempo de ejecución.
+Este artículo explora cómo utilizar Native AOT en aplicaciones de consola en .NET 9, con un enfoque práctico para reducir significativamente el tiempo de arranque y el consumo de memoria.">
+
+<meta property="og:url" content="http://localhost:1313/es/posts/2025-04-22-aot-nativo-dotnet-9/">
+  <meta property="og:site_name" content="Christian Amado">
+  <meta property="og:title" content="Native AOT en .NET 9">
+  <meta property="og:description" content="Con cada nueva versión de .NET, Microsoft ha trabajado activamente en mejorar el rendimiento, el tamaño de despliegue y la experiencia en entornos de bajo consumo. Uno de los avances más importantes en este sentido es Native AOT (Ahead-of-Time Compilation). Introducido como parte estable en .NET 7, y refinado aún más en .NET 8 y .NET 9, Native AOT permite compilar aplicaciones directamente a código nativo, eliminando por completo la dependencia del CLR en tiempo de ejecución.
+Este artículo explora cómo utilizar Native AOT en aplicaciones de consola en .NET 9, con un enfoque práctico para reducir significativamente el tiempo de arranque y el consumo de memoria.">
+  <meta property="og:locale" content="es">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-04-22T00:00:00-03:00">
+    <meta property="article:modified_time" content="2025-04-22T00:00:00-03:00">
+    <meta property="article:tag" content=".NET">
+
+
+
+
+<link rel="canonical" href="http://localhost:1313/es/posts/2025-04-22-aot-nativo-dotnet-9/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/es/">
+      Christian Amado
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/about">Biografía</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/contact">Contacto</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/diabetes">Diabetes</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/tags">Etiquetas</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/en/">🇺🇸</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/es/posts/2025-04-22-aot-nativo-dotnet-9/">
+              Native AOT en .NET 9
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2025-04-22T00:00:00-03:00">
+                abril 22, 2025
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              3 minutos de lectura.
+            </span>
+          </div>
+          
+          
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/es/tags/.net/">.NET</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <p>Con cada nueva versión de <strong>.NET</strong>, <strong>Microsoft</strong> ha trabajado activamente en mejorar el rendimiento, el tamaño de despliegue y la experiencia en entornos de bajo consumo. Uno de los avances más importantes en este sentido es <strong>Native AOT</strong> (<em>Ahead-of-Time Compilation</em>). Introducido como parte estable en <strong>.NET 7</strong>, y refinado aún más en <strong>.NET 8</strong> y <strong>.NET 9</strong>, <strong>Native AOT</strong> permite compilar aplicaciones directamente a código nativo, eliminando por completo la dependencia del <strong>CLR</strong> en tiempo de ejecución.</p>
+<p>Este artículo explora cómo utilizar <strong>Native AOT</strong> en aplicaciones de consola en <strong>.NET 9</strong>, con un enfoque práctico para reducir significativamente el tiempo de arranque y el consumo de memoria.</p>
+<h2 id="qué-es-native-aot">
+  ¿Qué es Native AOT?
+  <a class="heading-link" href="#qu%c3%a9-es-native-aot">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Native AOT (Ahead-of-Time) es un modelo de compilación en el que el código IL (Intermediate Language) generado por el compilador C# es transformado directamente en código máquina antes de que la aplicación se ejecute. Esto contrasta con el modelo Just-in-Time (JIT), que compila partes del IL durante la ejecución.</p>
+<h3 id="ventajas-clave">
+  Ventajas clave:
+  <a class="heading-link" href="#ventajas-clave">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Tiempo de arranque más rápido</strong> (ideal para herramientas CLI y contenedores).</li>
+<li><strong>Menor consumo de memoria</strong>, ya que se evita el motor JIT.</li>
+<li><strong>Distribución como binario único y autónomo</strong>.</li>
+<li><strong>Mejor compatibilidad con entornos restringidos (por ejemplo, Alpine Linux)</strong>.</li>
+</ul>
+<h2 id="requisitos-previos">
+  Requisitos previos
+  <a class="heading-link" href="#requisitos-previos">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ul>
+<li><strong>.NET 9 SDK</strong>.</li>
+<li><strong>Visual Studio 2022 (v17.8 o superior)</strong> o cualquier editor con soporte para .NET 9.</li>
+<li>Sistemas operativos compatibles: Windows, Linux, macOS.</li>
+</ul>
+<blockquote>
+<p>Nota: Native AOT <strong>no soporta</strong> todo el ecosistema de .NET (por ejemplo, no es compatible con Reflection completa ni con <code>Assembly.Load</code> dinámico). Es ideal para escenarios <strong>de consola, CLI, microservicios simples o herramientas de línea de comandos</strong>.</p></blockquote>
+<h2 id="crear-una-aplicación-de-consola-con-native-aot">
+  Crear una aplicación de consola con Native AOT
+  <a class="heading-link" href="#crear-una-aplicaci%c3%b3n-de-consola-con-native-aot">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="paso-1-crear-el-proyecto">
+  Paso 1: Crear el proyecto
+  <a class="heading-link" href="#paso-1-crear-el-proyecto">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">dotnet new console -n AotConsoleApp
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> AotConsoleApp
+</span></span></code></pre></div><h3 id="paso-2-modificar-el-archivo-csproj">
+  Paso 2: Modificar el archivo <code>.csproj</code>
+  <a class="heading-link" href="#paso-2-modificar-el-archivo-csproj">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;Project</span> <span class="na">Sdk=</span><span class="s">&#34;Microsoft.NET.Sdk&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&lt;PropertyGroup&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;OutputType&gt;</span>Exe<span class="nt">&lt;/OutputType&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;TargetFramework&gt;</span>net9.0<span class="nt">&lt;/TargetFramework&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;PublishAot&gt;</span>true<span class="nt">&lt;/PublishAot&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;InvariantGlobalization&gt;</span>true<span class="nt">&lt;/InvariantGlobalization&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;StripSymbols&gt;</span>true<span class="nt">&lt;/StripSymbols&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;IlcOptimizationPreference&gt;</span>Size<span class="nt">&lt;/IlcOptimizationPreference&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;UseSystemResourceKeys&gt;</span>false<span class="nt">&lt;/UseSystemResourceKeys&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&lt;/PropertyGroup&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/Project&gt;</span>
+</span></span></code></pre></div><h3 id="paso-3-escribir-código-de-ejemplo">
+  Paso 3: Escribir código de ejemplo
+  <a class="heading-link" href="#paso-3-escribir-c%c3%b3digo-de-ejemplo">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">System</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&#34;¡Hola desde Native AOT!&#34;</span><span class="p">);</span>
+</span></span></code></pre></div><h3 id="paso-4-publicar-con-aot">
+  Paso 4: Publicar con AOT
+  <a class="heading-link" href="#paso-4-publicar-con-aot">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">dotnet publish -c Release -r win-x64 --self-contained <span class="nb">true</span>
+</span></span></code></pre></div><h2 id="medición-de-rendimiento">
+  Medición de rendimiento
+  <a class="heading-link" href="#medici%c3%b3n-de-rendimiento">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="tiempo-de-arranque-ejemplo-en-windows-con-measure-command">
+  Tiempo de arranque (ejemplo en Windows con <code>Measure-Command</code>):
+  <a class="heading-link" href="#tiempo-de-arranque-ejemplo-en-windows-con-measure-command">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">Measure-Command</span> <span class="p">{</span> <span class="p">.\</span><span class="n">AotConsoleApp</span><span class="p">.</span><span class="py">exe</span> <span class="p">}</span>
+</span></span></code></pre></div><table>
+  <thead>
+      <tr>
+          <th>Modelo</th>
+          <th>Tiempo arranque</th>
+          <th>Memoria inicial</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>.NET JIT</td>
+          <td>150-200 ms</td>
+          <td>~40-60 MB</td>
+      </tr>
+      <tr>
+          <td>Native AOT</td>
+          <td>10-20 ms</td>
+          <td>~5-10 MB</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="buenas-prácticas-y-consideraciones">
+  Buenas prácticas y consideraciones
+  <a class="heading-link" href="#buenas-pr%c3%a1cticas-y-consideraciones">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="1-evitar-reflexión-no-compatible">
+  1. Evitar reflexión no compatible
+  <a class="heading-link" href="#1-evitar-reflexi%c3%b3n-no-compatible">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="c1">// ❌ Esto fallará</span>
+</span></span><span class="line"><span class="cl"><span class="n">Type</span><span class="p">.</span><span class="n">GetType</span><span class="p">(</span><span class="s">&#34;System.String&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// ✅ Alternativa</span>
+</span></span><span class="line"><span class="cl"><span class="k">typeof</span><span class="p">(</span><span class="kt">string</span><span class="p">);</span>
+</span></span></code></pre></div><h3 id="2-minimizar-dependencias">
+  2. Minimizar dependencias
+  <a class="heading-link" href="#2-minimizar-dependencias">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h3 id="3-evaluar-uso-de-trimming">
+  3. Evaluar uso de <code>Trimming</code>
+  <a class="heading-link" href="#3-evaluar-uso-de-trimming">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;PublishTrimmed&gt;</span>true<span class="nt">&lt;/PublishTrimmed&gt;</span>
+</span></span></code></pre></div><h3 id="4-optimizar-para-tamaño-o-velocidad">
+  4. Optimizar para tamaño o velocidad
+  <a class="heading-link" href="#4-optimizar-para-tama%c3%b1o-o-velocidad">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><code>Speed</code>: para maximizar el rendimiento.</li>
+<li><code>Size</code>: para minimizar el binario.</li>
+</ul>
+<h3 id="5-multiplataforma">
+  5. Multiplataforma
+  <a class="heading-link" href="#5-multiplataforma">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Compilar por separado para cada <code>RID</code>.</p>
+<h2 id="escenarios-ideales-para-native-aot">
+  Escenarios ideales para Native AOT
+  <a class="heading-link" href="#escenarios-ideales-para-native-aot">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ul>
+<li>Herramientas de línea de comandos.</li>
+<li>Microservicios autónomos.</li>
+<li>Contenedores minimalistas.</li>
+<li>Cronjobs o tareas agendadas.</li>
+</ul>
+<h2 id="conclusión">
+  Conclusión
+  <a class="heading-link" href="#conclusi%c3%b3n">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p><strong>Native AOT</strong> en <strong>.NET 9</strong> representa un avance significativo en la capacidad de <strong>.NET</strong> para competir en entornos donde el rendimiento, el tamaño del binario y la velocidad de arranque son críticos. Si bien aún presenta limitaciones respecto a reflexión, carga dinámica y ciertas bibliotecas, para escenarios de consola, herramientas y microservicios es una solución madura, estable y recomendada.</p>
+      </div>
+
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script>
+  window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "cmasblog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    
+    document.addEventListener('themeChanged', function (e) { 
+        if (document.readyState == 'complete') {
+          DISQUS.reset({ reload: true, config: disqus_config });
+        }
+    });
+</script>
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2018 -
+    
+    2025
+     Christian Amado 
+    ·
+    
+    Desarrollado por <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+      <script async src="https://www.googletagmanager.com/gtag/js?id=356375808"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '356375808');
+        }
+      </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=013131931956450466198%3ablhmkdpweyq"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '013131931956450466198:blhmkdpweyq');
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

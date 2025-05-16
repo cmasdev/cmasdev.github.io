@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  Integración de Angular con Azure Static Web Apps: Un caso práctico · Christian Amado
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Christian Amado">
+<meta name="description" content="En la era moderna del desarrollo web, la combinación de frameworks frontend como Angular y servicios en la nube como Azure Static Web Apps proporciona una solución eficiente y escalable para crear y desplegar aplicaciones. Este artículo explora cómo integrar Angular con Azure Static Web Apps, mostrando ejemplos prácticos, buenas prácticas y enfoques modernos y seguros para garantizar el éxito en tus proyectos.">
+<meta name="keywords" content="blog,desarrollador,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Integración de Angular con Azure Static Web Apps: Un caso práctico">
+  <meta name="twitter:description" content="En la era moderna del desarrollo web, la combinación de frameworks frontend como Angular y servicios en la nube como Azure Static Web Apps proporciona una solución eficiente y escalable para crear y desplegar aplicaciones. Este artículo explora cómo integrar Angular con Azure Static Web Apps, mostrando ejemplos prácticos, buenas prácticas y enfoques modernos y seguros para garantizar el éxito en tus proyectos.">
+
+<meta property="og:url" content="http://localhost:1313/es/posts/2024-06-05-angular-integration-azure-static-web/">
+  <meta property="og:site_name" content="Christian Amado">
+  <meta property="og:title" content="Integración de Angular con Azure Static Web Apps: Un caso práctico">
+  <meta property="og:description" content="En la era moderna del desarrollo web, la combinación de frameworks frontend como Angular y servicios en la nube como Azure Static Web Apps proporciona una solución eficiente y escalable para crear y desplegar aplicaciones. Este artículo explora cómo integrar Angular con Azure Static Web Apps, mostrando ejemplos prácticos, buenas prácticas y enfoques modernos y seguros para garantizar el éxito en tus proyectos.">
+  <meta property="og:locale" content="es">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-06-05T00:00:00-04:00">
+    <meta property="article:modified_time" content="2024-06-05T00:00:00-04:00">
+    <meta property="article:tag" content="Web Development">
+    <meta property="article:tag" content="Azure">
+    <meta property="article:tag" content="Angular">
+    <meta property="article:tag" content="Google">
+
+
+
+
+<link rel="canonical" href="http://localhost:1313/es/posts/2024-06-05-angular-integration-azure-static-web/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/es/">
+      Christian Amado
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/about">Biografía</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/contact">Contacto</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/diabetes">Diabetes</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/tags">Etiquetas</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/en/">🇺🇸</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/es/posts/2024-06-05-angular-integration-azure-static-web/">
+              Integración de Angular con Azure Static Web Apps: Un caso práctico
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2024-06-05T00:00:00-04:00">
+                junio 5, 2024
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              4 minutos de lectura.
+            </span>
+          </div>
+          
+          
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/es/tags/web-development/">Web Development</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/es/tags/azure/">Azure</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/es/tags/angular/">Angular</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/es/tags/google/">Google</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <p>En la era moderna del desarrollo web, la combinación de frameworks frontend como <strong>Angular</strong> y servicios en la nube como <strong>Azure Static Web Apps</strong> proporciona una solución eficiente y escalable para crear y desplegar aplicaciones. Este artículo explora cómo integrar <strong>Angular</strong> con <strong>Azure Static Web Apps</strong>, mostrando ejemplos prácticos, buenas prácticas y enfoques modernos y seguros para garantizar el éxito en tus proyectos.</p>
+<h2 id="por-qué-elegir-angular-y-azure-static-web-apps">
+  ¿Por qué elegir Angular y Azure Static Web Apps?
+  <a class="heading-link" href="#por-qu%c3%a9-elegir-angular-y-azure-static-web-apps">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="ventajas-de-angular">
+  Ventajas de Angular
+  <a class="heading-link" href="#ventajas-de-angular">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li><strong>Ecosistema robusto</strong>: Angular es un framework completo con herramientas integradas para el desarrollo de aplicaciones escalables.</li>
+<li><strong>TypeScript nativo</strong>: Mejora la calidad del código y la experiencia del desarrollador.</li>
+<li><strong>Componentes reusables</strong>: Facilitan la organización y el mantenimiento del código.</li>
+</ol>
+<h3 id="beneficios-de-azure-static-web-apps">
+  Beneficios de Azure Static Web Apps
+  <a class="heading-link" href="#beneficios-de-azure-static-web-apps">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li><strong>Despliegue sencillo</strong>: Automatiza el despliegue directo desde repositorios como GitHub.</li>
+<li><strong>Distribución global</strong>: Servidores edge para un rendimiento óptimo.</li>
+<li><strong>Soporte para APIs</strong>: Integración con Azure Functions para lógica backend.</li>
+<li><strong>Certificados SSL automáticos</strong>: Garantiza conexiones seguras sin configuraciones adicionales.</li>
+</ol>
+<h2 id="configuración-inicial">
+  Configuración inicial
+  <a class="heading-link" href="#configuraci%c3%b3n-inicial">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="requisitos-previos">
+  Requisitos previos
+  <a class="heading-link" href="#requisitos-previos">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>Node.js y Angular CLI instalados:
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">npm install -g @angular/cli
+</span></span></code></pre></div></li>
+<li>Cuenta de Azure activa.</li>
+<li>Repositorio en GitHub (opcional pero recomendado).</li>
+</ul>
+<h3 id="crear-una-aplicación-angular">
+  Crear una aplicación Angular
+  <a class="heading-link" href="#crear-una-aplicaci%c3%b3n-angular">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>Generar un nuevo proyecto:
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">ng new angular-azure-demo --routing --style css
+</span></span></code></pre></div></li>
+<li>Navegar al directorio del proyecto:
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">cd angular-azure-demo
+</span></span></code></pre></div></li>
+<li>Ejecutar el servidor de desarrollo:
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">ng serve
+</span></span></code></pre></div></li>
+</ol>
+<h2 id="preparar-la-aplicación-para-despliegue">
+  Preparar la aplicación para despliegue
+  <a class="heading-link" href="#preparar-la-aplicaci%c3%b3n-para-despliegue">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="generar-los-archivos-de-producción">
+  Generar los archivos de producción
+  <a class="heading-link" href="#generar-los-archivos-de-producci%c3%b3n">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>Ejecutar el comando de construcción:
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">ng build --prod
+</span></span></code></pre></div></li>
+<li>Los archivos generados se encontrarán en el directorio <code>dist/angular-azure-demo</code>.</li>
+</ol>
+<h3 id="configurar-un-archivo-staticwebappconfigjson">
+  Configurar un archivo <code>staticwebapp.config.json</code>
+  <a class="heading-link" href="#configurar-un-archivo-staticwebappconfigjson">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Este archivo define rutas y configuraciones personalizadas para Azure Static Web Apps:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">  &#34;routes&#34;: [
+</span></span><span class="line"><span class="cl">    {
+</span></span><span class="line"><span class="cl">      &#34;route&#34;: &#34;/api/*&#34;,
+</span></span><span class="line"><span class="cl">      &#34;method&#34;: &#34;GET&#34;,
+</span></span><span class="line"><span class="cl">      &#34;allowedRoles&#34;: [&#34;anonymous&#34;]
+</span></span><span class="line"><span class="cl">    },
+</span></span><span class="line"><span class="cl">    {
+</span></span><span class="line"><span class="cl">      &#34;route&#34;: &#34;/*&#34;,
+</span></span><span class="line"><span class="cl">      &#34;rewrite&#34;: &#34;/index.html&#34;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">  ]
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></div><p>Guarda este archivo en el directorio <code>dist/angular-azure-demo</code>.</p>
+<h2 id="crear-y-configurar-azure-static-web-app">
+  Crear y configurar Azure Static Web App
+  <a class="heading-link" href="#crear-y-configurar-azure-static-web-app">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="paso-1-crear-un-recurso-en-azure">
+  Paso 1: Crear un recurso en Azure
+  <a class="heading-link" href="#paso-1-crear-un-recurso-en-azure">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>Inicia sesión en el <a href="https://portal.azure.com"  class="external-link" target="_blank" rel="noopener">portal de Azure</a>.</li>
+<li>Selecciona <strong>Crear un recurso</strong> y busca <strong>Static Web Apps</strong>.</li>
+<li>Completa los detalles del recurso:
+<ul>
+<li><strong>Nombre</strong>: <code>angular-static-web</code>.</li>
+<li><strong>Plan</strong>: Gratis (Free).</li>
+<li><strong>Región</strong>: Elige la más cercana a tus usuarios.</li>
+</ul>
+</li>
+</ol>
+<h3 id="paso-2-vincular-el-repositorio">
+  Paso 2: Vincular el repositorio
+  <a class="heading-link" href="#paso-2-vincular-el-repositorio">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>Conecta el recurso con tu repositorio de GitHub.</li>
+<li>Selecciona la rama principal y el directorio de la aplicación (<code>/dist/angular-azure-demo</code>).</li>
+</ol>
+<h3 id="paso-3-despliegue-automático">
+  Paso 3: Despliegue automático
+  <a class="heading-link" href="#paso-3-despliegue-autom%c3%a1tico">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Cada vez que actualices la rama principal, Azure redeployará la aplicación automáticamente.</p>
+<h2 id="integrar-una-api-con-azure-functions">
+  Integrar una API con Azure Functions
+  <a class="heading-link" href="#integrar-una-api-con-azure-functions">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="crear-una-azure-function">
+  Crear una Azure Function
+  <a class="heading-link" href="#crear-una-azure-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>Instalar las herramientas necesarias:
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">npm</span> <span class="n">install</span> <span class="o">-</span><span class="n">g</span> <span class="n">azure</span><span class="o">-</span><span class="n">functions</span><span class="o">-</span><span class="n">core</span><span class="o">-</span><span class="n">tools</span><span class="err">@</span><span class="mi">4</span> <span class="o">--</span><span class="n">unsafe</span><span class="o">-</span><span class="n">perm</span> <span class="bp">true</span>
+</span></span></code></pre></div></li>
+<li>Crear un proyecto de funciones:
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">func</span> <span class="n">init</span> <span class="n">api</span> <span class="o">--</span><span class="n">typescript</span>
+</span></span></code></pre></div></li>
+<li>Crear una nueva función HTTP:
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">cd</span> <span class="n">api</span>
+</span></span><span class="line"><span class="cl"><span class="k">func</span> <span class="n">new</span> <span class="o">--</span><span class="n">template</span> <span class="s2">&#34;HTTP trigger&#34;</span> <span class="o">--</span><span class="n">name</span> <span class="n">GetMessage</span>
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="conectar-la-api-con-la-aplicación-angular">
+  Conectar la API con la aplicación Angular
+  <a class="heading-link" href="#conectar-la-api-con-la-aplicaci%c3%b3n-angular">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>Modificar el código de la función:
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">export</span> <span class="n">async</span> <span class="n">function</span> <span class="n">run</span><span class="p">(</span><span class="n">context</span><span class="p">:</span> <span class="n">Context</span><span class="p">,</span> <span class="n">req</span><span class="p">:</span> <span class="n">HttpRequest</span><span class="p">):</span> <span class="n">Promise</span><span class="o">&lt;</span><span class="n">void</span><span class="o">&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">context</span><span class="o">.</span><span class="n">res</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">body</span><span class="p">:</span> <span class="p">{</span> <span class="n">message</span><span class="p">:</span> <span class="s2">&#34;Hola desde Azure Functions&#34;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div></li>
+<li>Agregar un servicio Angular para consumir la API:
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">import</span> <span class="p">{</span> <span class="n">HttpClient</span> <span class="p">}</span> <span class="n">from</span> <span class="s1">&#39;@angular/common/http&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">import</span> <span class="p">{</span> <span class="n">Injectable</span> <span class="p">}</span> <span class="n">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">@</span><span class="n">Injectable</span><span class="p">({</span> <span class="n">providedIn</span><span class="p">:</span> <span class="s1">&#39;root&#39;</span> <span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="k">export</span> <span class="k">class</span> <span class="n">ApiService</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">constructor</span><span class="p">(</span><span class="n">private</span> <span class="n">http</span><span class="p">:</span> <span class="n">HttpClient</span><span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">getMessage</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">this</span><span class="o">.</span><span class="n">http</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/api/GetMessage&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div></li>
+<li>Usar el servicio en un componente:
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">import</span> <span class="p">{</span> <span class="n">Component</span><span class="p">,</span> <span class="n">OnInit</span> <span class="p">}</span> <span class="n">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">import</span> <span class="p">{</span> <span class="n">ApiService</span> <span class="p">}</span> <span class="n">from</span> <span class="s1">&#39;./api.service&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">@</span><span class="n">Component</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">  <span class="n">selector</span><span class="p">:</span> <span class="s1">&#39;app-root&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="n">template</span><span class="p">:</span> <span class="err">`</span><span class="o">&lt;</span><span class="n">h1</span><span class="o">&gt;</span><span class="p">{{</span> <span class="n">message</span> <span class="p">}}</span><span class="o">&lt;/</span><span class="n">h1</span><span class="o">&gt;</span><span class="err">`</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="k">export</span> <span class="k">class</span> <span class="n">AppComponent</span> <span class="n">implements</span> <span class="n">OnInit</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">message</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">constructor</span><span class="p">(</span><span class="n">private</span> <span class="n">api</span><span class="p">:</span> <span class="n">ApiService</span><span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">ngOnInit</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">this</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">getMessage</span><span class="p">()</span><span class="o">.</span><span class="n">subscribe</span><span class="p">((</span><span class="n">data</span><span class="p">:</span> <span class="n">any</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">this</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">message</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">});</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div></li>
+</ol>
+<h2 id="buenas-prácticas">
+  Buenas prácticas
+  <a class="heading-link" href="#buenas-pr%c3%a1cticas">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ol>
+<li><strong>Usar HTTPS</strong>: Siempre habilita HTTPS en el entorno de producción.</li>
+<li><strong>Monitorear el rendimiento</strong>: Utiliza Azure Monitor para detectar cuellos de botella.</li>
+<li><strong>Validar entradas</strong>: Implementa validaciones en la API para evitar vulnerabilidades como inyecciones.</li>
+<li><strong>Minimizar y optimizar recursos</strong>: Usa herramientas como <code>ng build --prod</code> para reducir el tamaño de los archivos.</li>
+<li><strong>Seguridad</strong>: Configura roles y permisos en el archivo <code>staticwebapp.config.json</code> para proteger rutas sensibles.</li>
+</ol>
+<h2 id="conclusión">
+  Conclusión
+  <a class="heading-link" href="#conclusi%c3%b3n">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>La integración de Angular con <strong>Azure Static Web Apps</strong> ofrece una solución moderna, escalable y eficiente para desplegar aplicaciones web. Siguiendo las mejores prácticas y aprovechando herramientas como Azure Functions, puedes construir sistemas completos y seguros que se adapten a las necesidades de tus usuarios. ¡Empieza hoy mismo a aprovechar estas tecnologías y lleva tus proyectos al siguiente nivel!</p>
+      </div>
+
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script>
+  window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "cmasblog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    
+    document.addEventListener('themeChanged', function (e) { 
+        if (document.readyState == 'complete') {
+          DISQUS.reset({ reload: true, config: disqus_config });
+        }
+    });
+</script>
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2018 -
+    
+    2025
+     Christian Amado 
+    ·
+    
+    Desarrollado por <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+      <script async src="https://www.googletagmanager.com/gtag/js?id=356375808"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '356375808');
+        }
+      </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=013131931956450466198%3ablhmkdpweyq"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '013131931956450466198:blhmkdpweyq');
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>HTML on Christian Amado</title>
+    <link>http://localhost:1313/es/tags/html/</link>
+    <description>Recent content in HTML on Christian Amado</description>
+    <generator>Hugo</generator>
+    <language>es</language>
+    <lastBuildDate>Wed, 09 Jun 2021 15:12:00 -0400</lastBuildDate>
+    <atom:link href="http://localhost:1313/es/tags/html/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Business Central: Añadir código JavaScript en una página</title>
+      <link>http://localhost:1313/es/posts/2021-06-09-business-central-anadir-codigo-javascript-en-una-pagina/</link>
+      <pubDate>Wed, 09 Jun 2021 15:12:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2021-06-09-business-central-anadir-codigo-javascript-en-una-pagina/</guid>
+      <description>&lt;p&gt;La &lt;a href=&#34;https://cmas.dev/posts/2021-06-02-business-central-anadir-html-en-una-pagina/&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;semana pasada vimos&lt;/a&gt; como inyectar HTML en una página dentro de Microsoft Dynamics 365 Business Central. Hoy veremos cómo agregar código Javascript que muestre una ventana de confirmación y luego muestre una alerta. Ya dá para empezar&amp;hellip;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Business Central: Añadir HTML en una página</title>
+      <link>http://localhost:1313/es/posts/2021-06-02-business-central-anadir-html-en-una-pagina/</link>
+      <pubDate>Wed, 02 Jun 2021 18:17:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2021-06-02-business-central-anadir-html-en-una-pagina/</guid>
+      <description>&lt;p&gt;En este artículo deseo mostrar cómo inyectar HTML en una página dentro de Microsoft Dynamics 365 Business Central. No es muy complejo realizar la tarea necesaria pero debemos entender su utilidad y qué podemos lograr haciéndolo. Así que espero lo disfruten&amp;hellip;&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

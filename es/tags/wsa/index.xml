@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>WSA on Christian Amado</title>
+    <link>http://localhost:1313/es/tags/wsa/</link>
+    <description>Recent content in WSA on Christian Amado</description>
+    <generator>Hugo</generator>
+    <language>es</language>
+    <lastBuildDate>Wed, 27 Jul 2022 19:16:00 -0400</lastBuildDate>
+    <atom:link href="http://localhost:1313/es/tags/wsa/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>MAUI on WSA</title>
+      <link>http://localhost:1313/es/posts/2022-07-27-maui-in-wsa/</link>
+      <pubDate>Wed, 27 Jul 2022 19:16:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2022-07-27-maui-in-wsa/</guid>
+      <description>&lt;p&gt;En este artículo mostraré cómo ejecutar una aplicación &lt;strong&gt;.NET MAUI&lt;/strong&gt; sobre &lt;strong&gt;Windows Subsystem for Android&lt;/strong&gt;.&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Windows 11 Insider Preview Build 25163&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

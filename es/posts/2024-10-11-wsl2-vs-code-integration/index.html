@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  Integración con VS Code Dev Tunnels y Tailscale · Christian Amado
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Christian Amado">
+<meta name="description" content="WSL2 es una plataforma ideal para desarrollo distribuido y remoto gracias a su entorno Linux real y la capacidad de integrarse con herramientas modernas como VS Code Dev Tunnels y Tailscale. Estas soluciones permiten exponer servicios en desarrollo de forma segura a través de túneles públicos o redes privadas virtuales, sin abrir puertos en el router o usar VPNs corporativas complejas.
+Este artículo explica cómo configurar y usar ambas herramientas desde WSL2 para exponer APIs, servidores locales, entornos de testing o aplicaciones completas a otros miembros del equipo o entornos externos.">
+<meta name="keywords" content="blog,desarrollador,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Integración con VS Code Dev Tunnels y Tailscale">
+  <meta name="twitter:description" content="WSL2 es una plataforma ideal para desarrollo distribuido y remoto gracias a su entorno Linux real y la capacidad de integrarse con herramientas modernas como VS Code Dev Tunnels y Tailscale. Estas soluciones permiten exponer servicios en desarrollo de forma segura a través de túneles públicos o redes privadas virtuales, sin abrir puertos en el router o usar VPNs corporativas complejas.
+Este artículo explica cómo configurar y usar ambas herramientas desde WSL2 para exponer APIs, servidores locales, entornos de testing o aplicaciones completas a otros miembros del equipo o entornos externos.">
+
+<meta property="og:url" content="http://localhost:1313/es/posts/2024-10-11-wsl2-vs-code-integration/">
+  <meta property="og:site_name" content="Christian Amado">
+  <meta property="og:title" content="Integración con VS Code Dev Tunnels y Tailscale">
+  <meta property="og:description" content="WSL2 es una plataforma ideal para desarrollo distribuido y remoto gracias a su entorno Linux real y la capacidad de integrarse con herramientas modernas como VS Code Dev Tunnels y Tailscale. Estas soluciones permiten exponer servicios en desarrollo de forma segura a través de túneles públicos o redes privadas virtuales, sin abrir puertos en el router o usar VPNs corporativas complejas.
+Este artículo explica cómo configurar y usar ambas herramientas desde WSL2 para exponer APIs, servidores locales, entornos de testing o aplicaciones completas a otros miembros del equipo o entornos externos.">
+  <meta property="og:locale" content="es">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-10-11T00:00:00-04:00">
+    <meta property="article:modified_time" content="2024-10-11T00:00:00-04:00">
+    <meta property="article:tag" content="WinDev">
+    <meta property="article:tag" content="Windows 11">
+    <meta property="article:tag" content="WSL">
+
+
+
+
+<link rel="canonical" href="http://localhost:1313/es/posts/2024-10-11-wsl2-vs-code-integration/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/es/">
+      Christian Amado
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/about">Biografía</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/contact">Contacto</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/diabetes">Diabetes</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/tags">Etiquetas</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/en/">🇺🇸</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/es/posts/2024-10-11-wsl2-vs-code-integration/">
+              Integración con VS Code Dev Tunnels y Tailscale
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2024-10-11T00:00:00-04:00">
+                octubre 11, 2024
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              3 minutos de lectura.
+            </span>
+          </div>
+          
+          
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/es/tags/windev/">WinDev</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/es/tags/windows-11/">Windows 11</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/es/tags/wsl/">WSL</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <p>WSL2 es una plataforma ideal para desarrollo distribuido y remoto gracias a su entorno Linux real y la capacidad de integrarse con herramientas modernas como <strong>VS Code Dev Tunnels</strong> y <strong>Tailscale</strong>. Estas soluciones permiten exponer servicios en desarrollo de forma segura a través de túneles públicos o redes privadas virtuales, sin abrir puertos en el router o usar VPNs corporativas complejas.</p>
+<p>Este artículo explica cómo configurar y usar ambas herramientas desde WSL2 para exponer APIs, servidores locales, entornos de testing o aplicaciones completas a otros miembros del equipo o entornos externos.</p>
+<h2 id="qué-son-vs-code-dev-tunnels-y-tailscale">
+  ¿Qué son VS Code Dev Tunnels y Tailscale?
+  <a class="heading-link" href="#qu%c3%a9-son-vs-code-dev-tunnels-y-tailscale">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ul>
+<li><strong>Dev Tunnels</strong>: una funcionalidad integrada en Visual Studio Code que permite exponer un puerto local a internet de forma segura, ideal para compartir un servidor local en segundos.</li>
+<li><strong>Tailscale</strong>: una VPN mesh que conecta dispositivos mediante WireGuard en una red privada segura, ideal para exponer servicios a otros dispositivos del equipo sin necesidad de configuración de red avanzada.</li>
+</ul>
+<h2 id="paso-1-requisitos-previos">
+  Paso 1: Requisitos previos
+  <a class="heading-link" href="#paso-1-requisitos-previos">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ul>
+<li>Windows 11 con WSL2 activo</li>
+<li>VS Code y la extensión <strong>Remote - WSL</strong></li>
+<li>Cuenta de GitHub o Microsoft para autenticación en Dev Tunnels</li>
+<li>Cuenta de Tailscale gratuita (<a href="https://tailscale.com"  class="external-link" target="_blank" rel="noopener">https://tailscale.com</a>)</li>
+<li>Distro Ubuntu actualizada</li>
+</ul>
+<h2 id="paso-2-usar-dev-tunnels-en-vs-code-con-wsl2">
+  Paso 2: Usar Dev Tunnels en VS Code con WSL2
+  <a class="heading-link" href="#paso-2-usar-dev-tunnels-en-vs-code-con-wsl2">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ol>
+<li>Abrir el proyecto en VS Code usando <code>Remote - WSL</code>.</li>
+<li>Iniciar un servidor local en WSL2, por ejemplo:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">python3 -m http.server <span class="m">8000</span>
+</span></span></code></pre></div><ol start="3">
+<li>Desde la paleta de comandos (<code>Ctrl+Shift+P</code>), ejecutar:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Dev Tunnels: Create Tunnel...
+</span></span></code></pre></div><ol start="4">
+<li>Elegir el puerto (ej. 8000) y tipo de acceso (authenticated/public).</li>
+<li>Copiar la URL generada (ej. <code>https://&lt;hash&gt;.dev.tunnels.api.visualstudio.com</code>) y compartirla.</li>
+</ol>
+<p>El túnel redirige tráfico HTTPS desde internet hacia tu entorno WSL2 local sin configuraciones de firewall ni puertos.</p>
+<h2 id="paso-3-instalar-tailscale-en-wsl2">
+  Paso 3: Instalar Tailscale en WSL2
+  <a class="heading-link" href="#paso-3-instalar-tailscale-en-wsl2">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>En la terminal de Ubuntu en WSL2:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">curl -fsSL https://tailscale.com/install.sh <span class="p">|</span> sh
+</span></span><span class="line"><span class="cl">sudo tailscale up
+</span></span></code></pre></div><p>Esto abrirá una URL de autenticación en el navegador. Una vez aceptado, tu máquina WSL2 estará conectada a la red privada de Tailscale.</p>
+<p>Ver dispositivos conectados:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">tailscale status
+</span></span></code></pre></div><h2 id="paso-4-exponer-un-servicio-local-vía-tailscale">
+  Paso 4: Exponer un servicio local vía Tailscale
+  <a class="heading-link" href="#paso-4-exponer-un-servicio-local-v%c3%ada-tailscale">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Ejecutar un servidor dentro de WSL2:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">uvicorn main:app --host 0.0.0.0 --port <span class="m">5000</span>
+</span></span></code></pre></div><p>Compartir la dirección <code>http://&lt;tailscale-ip&gt;:5000</code> con otro miembro del equipo en la misma red Tailscale.</p>
+<p>Opcionalmente, habilitar el proxy MagicDNS de Tailscale para usar nombres como <code>ubuntu-wsl2.tailnet-name.ts.net</code>.</p>
+<h2 id="paso-5-casos-de-uso-combinados">
+  Paso 5: Casos de uso combinados
+  <a class="heading-link" href="#paso-5-casos-de-uso-combinados">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ul>
+<li>Exponer una API en desarrollo a un tester sin acceso al repositorio</li>
+<li>Probar una interfaz frontend desde una app móvil real vía Tailscale</li>
+<li>Compartir un notebook Jupyter ejecutado desde WSL2 con Dev Tunnels</li>
+<li>Simular múltiples entornos conectados entre sí (ej. base de datos + backend)</li>
+</ul>
+<h2 id="seguridad">
+  Seguridad
+  <a class="heading-link" href="#seguridad">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ul>
+<li>Dev Tunnels usa TLS y autenticación con tu cuenta GitHub o Microsoft</li>
+<li>Tailscale cifra todo el tráfico entre dispositivos con WireGuard</li>
+<li>Recomendado usar entornos virtuales o contenedores con puertos limitados</li>
+<li>Evitar exposición de <code>/mnt/c</code> y no ejecutar como root innecesariamente</li>
+</ul>
+<h2 id="conclusión">
+  Conclusión
+  <a class="heading-link" href="#conclusi%c3%b3n">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>WSL2, combinado con VS Code Dev Tunnels y Tailscale, proporciona un entorno flexible y seguro para desarrollo distribuido. Permite exponer servicios en segundos, colaborar con otros sin complejidad de red y trabajar desde Windows con las ventajas de un entorno Linux real. Esta integración es clave para flujos modernos, equipos remotos y testing distribuido.</p>
+      </div>
+
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script>
+  window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "cmasblog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    
+    document.addEventListener('themeChanged', function (e) { 
+        if (document.readyState == 'complete') {
+          DISQUS.reset({ reload: true, config: disqus_config });
+        }
+    });
+</script>
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2018 -
+    
+    2025
+     Christian Amado 
+    ·
+    
+    Desarrollado por <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+      <script async src="https://www.googletagmanager.com/gtag/js?id=356375808"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '356375808');
+        }
+      </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=013131931956450466198%3ablhmkdpweyq"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '013131931956450466198:blhmkdpweyq');
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

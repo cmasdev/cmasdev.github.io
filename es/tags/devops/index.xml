@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>DevOps on Christian Amado</title>
+    <link>http://localhost:1313/es/tags/devops/</link>
+    <description>Recent content in DevOps on Christian Amado</description>
+    <generator>Hugo</generator>
+    <language>es</language>
+    <lastBuildDate>Mon, 18 Apr 2022 23:24:00 -0400</lastBuildDate>
+    <atom:link href="http://localhost:1313/es/tags/devops/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Integración de Azure DevOps con GitHub</title>
+      <link>http://localhost:1313/es/posts/2022-04-18-azure-devops-integration-with-github/</link>
+      <pubDate>Mon, 18 Apr 2022 23:24:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2022-04-18-azure-devops-integration-with-github/</guid>
+      <description>&lt;p&gt;En este artículo mostraré cómo integrar un repositorio GitHub, que lo hemos visto en &lt;a href=&#34;http://localhost:1313/posts/2022-04-04-create-repository-github&#34; &gt;este artículo&lt;/a&gt;, con Azure DevOps que lo hemos visto &lt;a href=&#34;http://localhost:1313/posts/2022-04-11-create-project-azure-devops/&#34; &gt;aquí&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Windows 11 Insider Preview Build 22598&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Crear un proyecto en Azure DevOps</title>
+      <link>http://localhost:1313/es/posts/2022-04-11-create-project-azure-devops/</link>
+      <pubDate>Mon, 11 Apr 2022 18:01:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2022-04-11-create-project-azure-devops/</guid>
+      <description>&lt;p&gt;En este artículo mostraré cómo crear un proyecto en Microsoft Azure DevOps para realizar todas las tareas relacionadas a CI/CD (Integración Contínua/Entrega Contíuna) con la plataforma Windows, sobre todo con UWP (Universal Windows Platform).&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Windows 11 Insider Preview Build 22593&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Crear un repositorio en GitHub</title>
+      <link>http://localhost:1313/es/posts/2022-04-04-create-repository-github/</link>
+      <pubDate>Mon, 04 Apr 2022 22:13:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2022-04-04-create-repository-github/</guid>
+      <description>&lt;p&gt;En este artículo mostraré cómo crear un repositorio en GitHub para poder integrarlo en el futuro con Azure DevOps.&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Windows 11 Insider Preview Build 22581&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  Desarrollo de aplicaciones NodeJs en WSL · Christian Amado
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Christian Amado">
+<meta name="description" content="En este artículo mostraré como instalar Node.js en WSL. También, veremos como escribir código, compilar y ejecutarlo en WSL desde Visual Studio Code.
+Windows 11 Insider Preview Build 25131">
+<meta name="keywords" content="blog,desarrollador,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Desarrollo de aplicaciones NodeJs en WSL">
+  <meta name="twitter:description" content="En este artículo mostraré como instalar Node.js en WSL. También, veremos como escribir código, compilar y ejecutarlo en WSL desde Visual Studio Code.
+Windows 11 Insider Preview Build 25131">
+
+<meta property="og:url" content="http://localhost:1313/es/posts/2022-06-08-app-nodejs-in-wsl/">
+  <meta property="og:site_name" content="Christian Amado">
+  <meta property="og:title" content="Desarrollo de aplicaciones NodeJs en WSL">
+  <meta property="og:description" content="En este artículo mostraré como instalar Node.js en WSL. También, veremos como escribir código, compilar y ejecutarlo en WSL desde Visual Studio Code.
+Windows 11 Insider Preview Build 25131">
+  <meta property="og:locale" content="es">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2022-06-08T18:07:00-04:00">
+    <meta property="article:modified_time" content="2022-06-08T18:07:00-04:00">
+    <meta property="article:tag" content="WinDev">
+    <meta property="article:tag" content="WSL">
+    <meta property="article:tag" content="Windows 11">
+    <meta property="article:tag" content="Windows Insider Preview">
+    <meta property="article:tag" content="NodeJs">
+
+
+
+
+<link rel="canonical" href="http://localhost:1313/es/posts/2022-06-08-app-nodejs-in-wsl/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/es/">
+      Christian Amado
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/about">Biografía</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/contact">Contacto</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/diabetes">Diabetes</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/tags">Etiquetas</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/en/">🇺🇸</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/es/posts/2022-06-08-app-nodejs-in-wsl/">
+              Desarrollo de aplicaciones NodeJs en WSL
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2022-06-08T18:07:00-04:00">
+                junio 8, 2022
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              2 minutos de lectura.
+            </span>
+          </div>
+          
+          
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/es/tags/windev/">WinDev</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/es/tags/wsl/">WSL</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/es/tags/windows-11/">Windows 11</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/es/tags/windows-insider-preview/">Windows Insider Preview</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/es/tags/nodejs/">NodeJs</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <p>En este artículo mostraré como instalar <strong>Node.js</strong> en <strong>WSL</strong>. También, veremos como escribir código, compilar y ejecutarlo en <strong>WSL</strong> desde <strong>Visual Studio Code</strong>.</p>
+<p><em><strong>Windows 11 Insider Preview Build 25131</strong></em></p>
+<p>En Windows 11, especificamente gracias a <strong>WSL - Windows Subssytem for Linux</strong> podemos instalar y ejecutar aplicaciones desarrolladas con <strong>Node.js</strong> de manera bastante sencilla y rápida.</p>
+<h2 id="instalar-nodejs-en-wsl">
+  Instalar Node.js en WSL
+  <a class="heading-link" href="#instalar-nodejs-en-wsl">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Preparamos WSL para la instalación de Node.js</p>
+<ol>
+<li>Verificamos las versiones de Node.js y NVM que tenemos instaladas (se supone que no las tenemos):
+<img src="/img/posts/2022/06/08/1.png" alt=""></li>
+<li>Procedemos a instalar NVM (Node Version Manager):</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+</span></span></code></pre></div><ol start="3">
+<li>Ahora, instalamos la última versión de Node.js:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">nvm install node
+</span></span></code></pre></div><ol start="4">
+<li>Verificamos las versiones y listo:
+<img src="/img/posts/2022/06/08/2.png" alt=""></li>
+</ol>
+<h2 id="aplicacion-en-visual-studio-code">
+  Aplicacion en Visual Studio Code
+  <a class="heading-link" href="#aplicacion-en-visual-studio-code">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Dentro del Visual Studio Code creamos la aplicación y procedemos a ejecutarla normalmente.</p>
+<ol>
+<li>Creamos un archivo <strong>app.js</strong></li>
+<li>Escribimos las siguientes líneas de código:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">var</span> <span class="n">http</span> <span class="o">=</span> <span class="n">require</span><span class="p">(</span><span class="s1">&#39;http&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">http</span><span class="o">.</span><span class="n">createServer</span><span class="p">(</span><span class="n">function</span> <span class="p">(</span><span class="n">req</span><span class="p">,</span> <span class="n">res</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">res</span><span class="o">.</span><span class="n">writeHead</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;Content-Type&#39;</span><span class="p">:</span> <span class="s1">&#39;text/plain&#39;</span><span class="p">});</span>
+</span></span><span class="line"><span class="cl">  <span class="n">res</span><span class="o">.</span><span class="n">end</span><span class="p">(</span><span class="s1">&#39;Hola desde cmas.dev!&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span><span class="o">.</span><span class="n">listen</span><span class="p">(</span><span class="mi">8080</span><span class="p">);</span>
+</span></span></code></pre></div><ol start="3">
+<li>Presionamos la tecla <em>F5</em> y seleccionamos la opción <strong>Node.js</strong>:
+<img src="/img/posts/2022/06/08/4.png" alt=""></li>
+<li>Veremos los controles de depuración y en la consola veremos que ha creado la aplicación:
+<img src="/img/posts/2022/06/08/5.png" alt=""></li>
+<li>En el navegador de preferencia, colocamos la URL definida en el código y vermeos nuestro pequeña applicación:
+<img src="/img/posts/2022/06/08/6.png" alt=""></li>
+</ol>
+<h2 id="aplicacion-en-visual-studio-code-con-wsl">
+  Aplicacion en Visual Studio Code con WSL
+  <a class="heading-link" href="#aplicacion-en-visual-studio-code-con-wsl">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Dentro del Visual Studio Code creamos la aplicación y procedemos a ejecutarla en WSL.</p>
+<ol>
+<li>Descargar la extensión para desarrollo remoto <a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl"  class="external-link" target="_blank" rel="noopener">aquí</a></li>
+<li>Abrimos una nueva ventana de Visual Studio Code y hacemos clicn en el icono de acceso remoto:
+<img src="/img/posts/2022/06/08/7.png" alt=""></li>
+<li>Seleccionamos la opción de distro para WSL:
+<img src="/img/posts/2022/06/08/8.png" alt=""></li>
+<li>Marcamos la opción Ubuntu:
+<img src="/img/posts/2022/06/08/9.png" alt=""></li>
+<li>Abrimos la carpeta donde almacenaremos el proyecto (en Ubuntu):
+<img src="/img/posts/2022/06/08/10.png" alt=""></li>
+<li>Escribimos las siguientes líneas de código (con algunas diferencias del código anterior):</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">var</span> <span class="n">http</span> <span class="o">=</span> <span class="n">require</span><span class="p">(</span><span class="s1">&#39;http&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">http</span><span class="o">.</span><span class="n">createServer</span><span class="p">(</span><span class="n">function</span> <span class="p">(</span><span class="n">req</span><span class="p">,</span> <span class="n">res</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">res</span><span class="o">.</span><span class="n">writeHead</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;Content-Type&#39;</span><span class="p">:</span> <span class="s1">&#39;text/plain&#39;</span><span class="p">});</span>
+</span></span><span class="line"><span class="cl">  <span class="n">res</span><span class="o">.</span><span class="n">end</span><span class="p">(</span><span class="s1">&#39;¡Hola desde cmas.dev y WSL!&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span><span class="o">.</span><span class="n">listen</span><span class="p">(</span><span class="mi">8081</span><span class="p">);</span>
+</span></span></code></pre></div><ol start="7">
+<li>Ejecutamos la aplicación desde la Terminal de <strong>Ubuntu</strong>:
+<img src="/img/posts/2022/06/08/12.png" alt=""></li>
+<li>Abrimos el navegador y colocamos la dirección que especificamos en el código:
+<img src="/img/posts/2022/06/08/13.png" alt=""></li>
+</ol>
+<p>De esta manera hemos realizado una aplicación NodeJs en <strong>Windows</strong> directamente así como en <strong>WSL</strong>. Ambas opciones son válidas, nada más depende de la elección del desarrollador.</p>
+<p>¡Espero resulte útil!</p>
+      </div>
+
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script>
+  window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "cmasblog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    
+    document.addEventListener('themeChanged', function (e) { 
+        if (document.readyState == 'complete') {
+          DISQUS.reset({ reload: true, config: disqus_config });
+        }
+    });
+</script>
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2018 -
+    
+    2025
+     Christian Amado 
+    ·
+    
+    Desarrollado por <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+      <script async src="https://www.googletagmanager.com/gtag/js?id=356375808"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '356375808');
+        }
+      </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=013131931956450466198%3ablhmkdpweyq"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '013131931956450466198:blhmkdpweyq');
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

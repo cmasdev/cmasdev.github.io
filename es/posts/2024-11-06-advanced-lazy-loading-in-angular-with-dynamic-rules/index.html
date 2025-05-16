@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  Lazy Loading avanzado en Angular con rutas dinámicas · Christian Amado
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Christian Amado">
+<meta name="description" content="El Lazy Loading es una técnica fundamental en Angular para mejorar el rendimiento de las aplicaciones al cargar solo los módulos necesarios cuando se requieren. En este artículo, exploraremos cómo implementar Lazy Loading avanzado con rutas dinámicas para optimizar aún más la carga de módulos y mejorar la experiencia del usuario.">
+<meta name="keywords" content="blog,desarrollador,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Lazy Loading avanzado en Angular con rutas dinámicas">
+  <meta name="twitter:description" content="El Lazy Loading es una técnica fundamental en Angular para mejorar el rendimiento de las aplicaciones al cargar solo los módulos necesarios cuando se requieren. En este artículo, exploraremos cómo implementar Lazy Loading avanzado con rutas dinámicas para optimizar aún más la carga de módulos y mejorar la experiencia del usuario.">
+
+<meta property="og:url" content="http://localhost:1313/es/posts/2024-11-06-advanced-lazy-loading-in-angular-with-dynamic-rules/">
+  <meta property="og:site_name" content="Christian Amado">
+  <meta property="og:title" content="Lazy Loading avanzado en Angular con rutas dinámicas">
+  <meta property="og:description" content="El Lazy Loading es una técnica fundamental en Angular para mejorar el rendimiento de las aplicaciones al cargar solo los módulos necesarios cuando se requieren. En este artículo, exploraremos cómo implementar Lazy Loading avanzado con rutas dinámicas para optimizar aún más la carga de módulos y mejorar la experiencia del usuario.">
+  <meta property="og:locale" content="es">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-11-06T00:00:00-04:00">
+    <meta property="article:modified_time" content="2024-11-06T00:00:00-04:00">
+    <meta property="article:tag" content="Web Development">
+    <meta property="article:tag" content="Angular">
+
+
+
+
+<link rel="canonical" href="http://localhost:1313/es/posts/2024-11-06-advanced-lazy-loading-in-angular-with-dynamic-rules/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/es/">
+      Christian Amado
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/about">Biografía</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/contact">Contacto</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/diabetes">Diabetes</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/tags">Etiquetas</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/en/">🇺🇸</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/es/posts/2024-11-06-advanced-lazy-loading-in-angular-with-dynamic-rules/">
+              Lazy Loading avanzado en Angular con rutas dinámicas
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2024-11-06T00:00:00-04:00">
+                noviembre 6, 2024
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              4 minutos de lectura.
+            </span>
+          </div>
+          
+          
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/es/tags/web-development/">Web Development</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/es/tags/angular/">Angular</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <p>El <strong>Lazy Loading</strong> es una técnica fundamental en Angular para mejorar el rendimiento de las aplicaciones al cargar solo los módulos necesarios cuando se requieren. En este artículo, exploraremos cómo implementar <strong>Lazy Loading avanzado con rutas dinámicas</strong> para optimizar aún más la carga de módulos y mejorar la experiencia del usuario.</p>
+<h2 id="qué-es-el-lazy-loading-en-angular">
+  ¿Qué es el Lazy Loading en Angular?
+  <a class="heading-link" href="#qu%c3%a9-es-el-lazy-loading-en-angular">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p><strong>Lazy Loading (Carga diferida)</strong> permite que los módulos de una aplicación Angular se carguen solo cuando se necesitan, en lugar de cargar todo el código de la aplicación desde el inicio.</p>
+<h3 id="ventajas-del-lazy-loading">
+  <strong>Ventajas del Lazy Loading</strong>
+  <a class="heading-link" href="#ventajas-del-lazy-loading">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Mejora el rendimiento</strong>: Reduce el tiempo de carga inicial de la aplicación.</li>
+<li><strong>Optimiza el uso de recursos</strong>: Solo se cargan los módulos cuando son necesarios.</li>
+<li><strong>Reduce el consumo de memoria</strong>: La aplicación no mantiene en memoria módulos innecesarios.</li>
+<li><strong>Escalabilidad</strong>: Facilita la gestión de grandes aplicaciones con múltiples módulos.</li>
+</ul>
+<h2 id="configuración-básica-del-lazy-loading">
+  Configuración Básica del Lazy Loading
+  <a class="heading-link" href="#configuraci%c3%b3n-b%c3%a1sica-del-lazy-loading">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Para empezar, configuraremos una aplicación Angular con Lazy Loading. Supongamos que tenemos los siguientes módulos:</p>
+<ul>
+<li><strong>HomeModule</strong> → <code>/home</code></li>
+<li><strong>AdminModule</strong> → <code>/admin</code></li>
+<li><strong>UserModule</strong> → <code>/user</code></li>
+</ul>
+<h3 id="1-configurar-el-approutingmodule">
+  <strong>1. Configurar el AppRoutingModule</strong>
+  <a class="heading-link" href="#1-configurar-el-approutingmodule">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">import</span> <span class="p">{</span> <span class="n">NgModule</span> <span class="p">}</span> <span class="n">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">import</span> <span class="p">{</span> <span class="n">RouterModule</span><span class="p">,</span> <span class="n">Routes</span> <span class="p">}</span> <span class="n">from</span> <span class="s1">&#39;@angular/router&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">routes</span><span class="p">:</span> <span class="n">Routes</span> <span class="o">=</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span> <span class="n">path</span><span class="p">:</span> <span class="s1">&#39;home&#39;</span><span class="p">,</span> <span class="n">loadChildren</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="n">import</span><span class="p">(</span><span class="s1">&#39;./home/home.module&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">then</span><span class="p">(</span><span class="n">m</span> <span class="o">=&gt;</span> <span class="n">m</span><span class="o">.</span><span class="n">HomeModule</span><span class="p">)</span> <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span> <span class="n">path</span><span class="p">:</span> <span class="s1">&#39;admin&#39;</span><span class="p">,</span> <span class="n">loadChildren</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="n">import</span><span class="p">(</span><span class="s1">&#39;./admin/admin.module&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">then</span><span class="p">(</span><span class="n">m</span> <span class="o">=&gt;</span> <span class="n">m</span><span class="o">.</span><span class="n">AdminModule</span><span class="p">)</span> <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span> <span class="n">path</span><span class="p">:</span> <span class="s1">&#39;user&#39;</span><span class="p">,</span> <span class="n">loadChildren</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="n">import</span><span class="p">(</span><span class="s1">&#39;./user/user.module&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">then</span><span class="p">(</span><span class="n">m</span> <span class="o">=&gt;</span> <span class="n">m</span><span class="o">.</span><span class="n">UserModule</span><span class="p">)</span> <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span> <span class="n">path</span><span class="p">:</span> <span class="s1">&#39;**&#39;</span><span class="p">,</span> <span class="n">redirectTo</span><span class="p">:</span> <span class="s1">&#39;home&#39;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">];</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">@</span><span class="n">NgModule</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">  <span class="n">imports</span><span class="p">:</span> <span class="p">[</span><span class="n">RouterModule</span><span class="o">.</span><span class="n">forRoot</span><span class="p">(</span><span class="n">routes</span><span class="p">)],</span>
+</span></span><span class="line"><span class="cl">  <span class="n">exports</span><span class="p">:</span> <span class="p">[</span><span class="n">RouterModule</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="k">export</span> <span class="k">class</span> <span class="n">AppRoutingModule</span> <span class="p">{}</span>
+</span></span></code></pre></div><h2 id="lazy-loading-con-rutas-dinámicas">
+  Lazy Loading con Rutas Dinámicas
+  <a class="heading-link" href="#lazy-loading-con-rutas-din%c3%a1micas">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>En muchas aplicaciones, las rutas pueden ser dinámicas, lo que significa que los módulos deben cargarse en función de parámetros o roles de usuario. Vamos a ver cómo hacerlo con Angular.</p>
+<h3 id="1-crear-un-servicio-para-la-carga-dinámica-de-módulos">
+  <strong>1. Crear un servicio para la carga dinámica de módulos</strong>
+  <a class="heading-link" href="#1-crear-un-servicio-para-la-carga-din%c3%a1mica-de-m%c3%b3dulos">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">import</span> <span class="p">{</span> <span class="n">Injectable</span> <span class="p">}</span> <span class="n">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">import</span> <span class="p">{</span> <span class="n">CanLoad</span><span class="p">,</span> <span class="n">Route</span><span class="p">,</span> <span class="n">Router</span> <span class="p">}</span> <span class="n">from</span> <span class="s1">&#39;@angular/router&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">import</span> <span class="p">{</span> <span class="n">AuthService</span> <span class="p">}</span> <span class="n">from</span> <span class="s1">&#39;./auth.service&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">@</span><span class="n">Injectable</span><span class="p">({</span> <span class="n">providedIn</span><span class="p">:</span> <span class="s1">&#39;root&#39;</span> <span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="k">export</span> <span class="k">class</span> <span class="n">DynamicLoaderGuard</span> <span class="n">implements</span> <span class="n">CanLoad</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">constructor</span><span class="p">(</span><span class="n">private</span> <span class="n">authService</span><span class="p">:</span> <span class="n">AuthService</span><span class="p">,</span> <span class="n">private</span> <span class="n">router</span><span class="p">:</span> <span class="n">Router</span><span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">canLoad</span><span class="p">(</span><span class="n">route</span><span class="p">:</span> <span class="n">Route</span><span class="p">):</span> <span class="n">boolean</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="n">userRole</span> <span class="o">=</span> <span class="n">this</span><span class="o">.</span><span class="n">authService</span><span class="o">.</span><span class="n">getUserRole</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">route</span><span class="o">.</span><span class="n">path</span> <span class="o">===</span> <span class="s1">&#39;admin&#39;</span> <span class="o">&amp;&amp;</span> <span class="n">userRole</span> <span class="o">!==</span> <span class="s1">&#39;admin&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">this</span><span class="o">.</span><span class="n">router</span><span class="o">.</span><span class="n">navigate</span><span class="p">([</span><span class="s1">&#39;/home&#39;</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="bp">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="bp">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h3 id="2-configurar-las-rutas-con-el-lazy-loading-condicional">
+  <strong>2. Configurar las rutas con el Lazy Loading condicional</strong>
+  <a class="heading-link" href="#2-configurar-las-rutas-con-el-lazy-loading-condicional">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">const</span> <span class="n">routes</span><span class="p">:</span> <span class="n">Routes</span> <span class="o">=</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span> <span class="n">path</span><span class="p">:</span> <span class="s1">&#39;home&#39;</span><span class="p">,</span> <span class="n">loadChildren</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="n">import</span><span class="p">(</span><span class="s1">&#39;./home/home.module&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">then</span><span class="p">(</span><span class="n">m</span> <span class="o">=&gt;</span> <span class="n">m</span><span class="o">.</span><span class="n">HomeModule</span><span class="p">)</span> <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span> <span class="n">path</span><span class="p">:</span> <span class="s1">&#39;admin&#39;</span><span class="p">,</span> <span class="n">loadChildren</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="n">import</span><span class="p">(</span><span class="s1">&#39;./admin/admin.module&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">then</span><span class="p">(</span><span class="n">m</span> <span class="o">=&gt;</span> <span class="n">m</span><span class="o">.</span><span class="n">AdminModule</span><span class="p">),</span> <span class="n">canLoad</span><span class="p">:</span> <span class="p">[</span><span class="n">DynamicLoaderGuard</span><span class="p">]</span> <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span> <span class="n">path</span><span class="p">:</span> <span class="s1">&#39;user&#39;</span><span class="p">,</span> <span class="n">loadChildren</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="n">import</span><span class="p">(</span><span class="s1">&#39;./user/user.module&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">then</span><span class="p">(</span><span class="n">m</span> <span class="o">=&gt;</span> <span class="n">m</span><span class="o">.</span><span class="n">UserModule</span><span class="p">)</span> <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span> <span class="n">path</span><span class="p">:</span> <span class="s1">&#39;**&#39;</span><span class="p">,</span> <span class="n">redirectTo</span><span class="p">:</span> <span class="s1">&#39;home&#39;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">];</span>
+</span></span></code></pre></div><p>Aquí, usamos <code>canLoad</code> para evitar la carga del módulo si el usuario no tiene el rol adecuado.</p>
+<h2 id="implementación-de-un-loader-para-el-lazy-loading">
+  Implementación de un Loader para el Lazy Loading
+  <a class="heading-link" href="#implementaci%c3%b3n-de-un-loader-para-el-lazy-loading">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Para mejorar la experiencia del usuario, podemos agregar un <strong>Loader</strong> que se muestre mientras se carga un módulo.</p>
+<h3 id="1-crear-un-loader-component">
+  <strong>1. Crear un Loader Component</strong>
+  <a class="heading-link" href="#1-crear-un-loader-component">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">import</span> <span class="p">{</span> <span class="n">Component</span> <span class="p">}</span> <span class="n">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">@</span><span class="n">Component</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">  <span class="n">selector</span><span class="p">:</span> <span class="s1">&#39;app-loader&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="n">template</span><span class="p">:</span> <span class="err">`</span><span class="o">&lt;</span><span class="n">div</span> <span class="k">class</span><span class="o">=</span><span class="s2">&#34;loader&#34;</span><span class="o">&gt;</span><span class="n">Cargando</span><span class="o">...&lt;/</span><span class="n">div</span><span class="o">&gt;</span><span class="err">`</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="n">styles</span><span class="p">:</span> <span class="p">[</span><span class="err">`</span><span class="o">.</span><span class="n">loader</span> <span class="p">{</span> <span class="n">font</span><span class="o">-</span><span class="n">size</span><span class="p">:</span> <span class="mi">20</span><span class="n">px</span><span class="p">;</span> <span class="n">text</span><span class="o">-</span><span class="n">align</span><span class="p">:</span> <span class="n">center</span><span class="p">;</span> <span class="n">padding</span><span class="p">:</span> <span class="mi">20</span><span class="n">px</span><span class="p">;</span> <span class="p">}</span><span class="err">`</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="k">export</span> <span class="k">class</span> <span class="n">LoaderComponent</span> <span class="p">{}</span>
+</span></span></code></pre></div><h3 id="2-modificar-el-appcomponent-para-mostrar-el-loader">
+  <strong>2. Modificar el AppComponent para mostrar el Loader</strong>
+  <a class="heading-link" href="#2-modificar-el-appcomponent-para-mostrar-el-loader">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">import</span> <span class="p">{</span> <span class="n">Component</span> <span class="p">}</span> <span class="n">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">import</span> <span class="p">{</span> <span class="n">Router</span><span class="p">,</span> <span class="n">NavigationStart</span><span class="p">,</span> <span class="n">NavigationEnd</span> <span class="p">}</span> <span class="n">from</span> <span class="s1">&#39;@angular/router&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">@</span><span class="n">Component</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">  <span class="n">selector</span><span class="p">:</span> <span class="s1">&#39;app-root&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="n">template</span><span class="p">:</span> <span class="err">`</span>
+</span></span><span class="line"><span class="cl">    <span class="o">&lt;</span><span class="n">app</span><span class="o">-</span><span class="n">loader</span> <span class="o">*</span><span class="n">ngIf</span><span class="o">=</span><span class="s2">&#34;isLoading&#34;</span><span class="o">&gt;&lt;/</span><span class="n">app</span><span class="o">-</span><span class="n">loader</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">&lt;</span><span class="n">router</span><span class="o">-</span><span class="n">outlet</span><span class="o">&gt;&lt;/</span><span class="n">router</span><span class="o">-</span><span class="n">outlet</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="err">`</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="k">export</span> <span class="k">class</span> <span class="n">AppComponent</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">isLoading</span> <span class="o">=</span> <span class="bp">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">constructor</span><span class="p">(</span><span class="n">private</span> <span class="n">router</span><span class="p">:</span> <span class="n">Router</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">this</span><span class="o">.</span><span class="n">router</span><span class="o">.</span><span class="n">events</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span><span class="n">event</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="p">(</span><span class="n">event</span> <span class="n">instanceof</span> <span class="n">NavigationStart</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">this</span><span class="o">.</span><span class="n">isLoading</span> <span class="o">=</span> <span class="bp">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">event</span> <span class="n">instanceof</span> <span class="n">NavigationEnd</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">this</span><span class="o">.</span><span class="n">isLoading</span> <span class="o">=</span> <span class="bp">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">});</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Con esta implementación, se mostrará el Loader mientras un módulo se está cargando.</p>
+<h2 id="optimización-del-lazy-loading-con-prefetching">
+  Optimización del Lazy Loading con Prefetching
+  <a class="heading-link" href="#optimizaci%c3%b3n-del-lazy-loading-con-prefetching">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Podemos optimizar aún más la carga diferida utilizando <strong>preloading strategies</strong>, lo que permite cargar en segundo plano los módulos que probablemente se necesiten pronto.</p>
+<h3 id="1-usar-preloadallmodules">
+  <strong>1. Usar PreloadAllModules</strong>
+  <a class="heading-link" href="#1-usar-preloadallmodules">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="err">@</span><span class="n">NgModule</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">  <span class="n">imports</span><span class="p">:</span> <span class="p">[</span><span class="n">RouterModule</span><span class="o">.</span><span class="n">forRoot</span><span class="p">(</span><span class="n">routes</span><span class="p">,</span> <span class="p">{</span> <span class="n">preloadingStrategy</span><span class="p">:</span> <span class="n">PreloadAllModules</span> <span class="p">})],</span>
+</span></span><span class="line"><span class="cl">  <span class="n">exports</span><span class="p">:</span> <span class="p">[</span><span class="n">RouterModule</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="k">export</span> <span class="k">class</span> <span class="n">AppRoutingModule</span> <span class="p">{}</span>
+</span></span></code></pre></div><p>Esta estrategia carga los módulos en segundo plano después de que la aplicación haya terminado de cargar, mejorando la velocidad de navegación sin afectar el rendimiento inicial.</p>
+<h2 id="conclusión">
+  Conclusión
+  <a class="heading-link" href="#conclusi%c3%b3n">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>El <strong>Lazy Loading avanzado en Angular</strong> con rutas dinámicas permite optimizar el rendimiento de las aplicaciones y mejorar la experiencia del usuario. Implementar estrategias como <strong>canLoad</strong>, <strong>Loaders visuales</strong> y <strong>Preloading Strategies</strong> ayuda a gestionar mejor los recursos y acelerar la carga de los módulos.</p>
+<p>Con este enfoque, puedes construir aplicaciones más eficientes y escalables, garantizando una navegación fluida y una mejor administración de los módulos en tu proyecto Angular.</p>
+      </div>
+
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script>
+  window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "cmasblog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    
+    document.addEventListener('themeChanged', function (e) { 
+        if (document.readyState == 'complete') {
+          DISQUS.reset({ reload: true, config: disqus_config });
+        }
+    });
+</script>
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2018 -
+    
+    2025
+     Christian Amado 
+    ·
+    
+    Desarrollado por <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+      <script async src="https://www.googletagmanager.com/gtag/js?id=356375808"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '356375808');
+        }
+      </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=013131931956450466198%3ablhmkdpweyq"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '013131931956450466198:blhmkdpweyq');
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

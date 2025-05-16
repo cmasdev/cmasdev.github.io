@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  Aplicando modelo MVVM con MAUI · Christian Amado
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Christian Amado">
+<meta name="description" content="En este artículo mostraré cómo aplicar el modelo MVVM en .NET MAUI sobre Windows 11.
+Windows 11 Insider Preview Build 25206">
+<meta name="keywords" content="blog,desarrollador,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Aplicando modelo MVVM con MAUI">
+  <meta name="twitter:description" content="En este artículo mostraré cómo aplicar el modelo MVVM en .NET MAUI sobre Windows 11.
+Windows 11 Insider Preview Build 25206">
+
+<meta property="og:url" content="http://localhost:1313/es/posts/2022-09-28-mvvm-in-maui/">
+  <meta property="og:site_name" content="Christian Amado">
+  <meta property="og:title" content="Aplicando modelo MVVM con MAUI">
+  <meta property="og:description" content="En este artículo mostraré cómo aplicar el modelo MVVM en .NET MAUI sobre Windows 11.
+Windows 11 Insider Preview Build 25206">
+  <meta property="og:locale" content="es">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2022-09-28T21:06:00-04:00">
+    <meta property="article:modified_time" content="2022-09-28T21:06:00-04:00">
+    <meta property="article:tag" content="WinDev">
+    <meta property="article:tag" content="MAUI">
+    <meta property="article:tag" content="Windows 11">
+
+
+
+
+<link rel="canonical" href="http://localhost:1313/es/posts/2022-09-28-mvvm-in-maui/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/es/">
+      Christian Amado
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/about">Biografía</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/contact">Contacto</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/diabetes">Diabetes</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/tags">Etiquetas</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/en/">🇺🇸</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/es/posts/2022-09-28-mvvm-in-maui/">
+              Aplicando modelo MVVM con MAUI
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2022-09-28T21:06:00-04:00">
+                septiembre 28, 2022
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              2 minutos de lectura.
+            </span>
+          </div>
+          
+          
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/es/tags/windev/">WinDev</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/es/tags/maui/">MAUI</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/es/tags/windows-11/">Windows 11</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <p>En este artículo mostraré cómo aplicar el modelo MVVM en <strong>.NET MAUI</strong> sobre <strong>Windows 11</strong>.</p>
+<p><em><strong>Windows 11 Insider Preview Build 25206</strong></em></p>
+<p><strong>MVVM</strong> en <strong>.NET MAUI</strong> para <strong>Windows</strong> es un patrón que permite crear aplicaciones de escritorio con una interfaz de usuario basada en <strong>XAML</strong> y una lógica de negocio separada en el modelo de vista. <strong>MVVM</strong> es un patrón bien establecido en <strong>.NET</strong> y hay muchos marcos que facilitan su desarrollo. Uno de ellos es el <strong>MVVM Toolkit</strong>, que es parte del <strong>.NET Community Toolkit</strong>.</p>
+<p>Así que me puse a leer la documentación oficial (deberías hacer lo mismo) que se encuentra <a href="https://learn.microsoft.com/es-es/dotnet/architecture/maui/mvvm"  class="external-link" target="_blank" rel="noopener">aquí</a>.</p>
+<p>Para el ejemplo, crearemos una lista de &ldquo;Alumnos&rdquo; (Nombre y Apellido con fotos) que aplicaremos en un modelo <em>MVVM</em>.</p>
+<h2 id="creando-el-código">
+  Creando el código
+  <a class="heading-link" href="#creando-el-c%c3%b3digo">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ol>
+<li>
+<p>Descargamos el paquete <strong>NuGet</strong> para <em>MVVM</em> que se encuentra <a href="https://www.nuget.org/packages/CommunityToolkit.Mvvm/"  class="external-link" target="_blank" rel="noopener">aquí</a>(obviamente es mejor hacerlo desde Visual Studio 2022) y lo instalamos.</p>
+</li>
+<li>
+<p>Agregamos una nueva clase con el nombre <strong>Alumno.cs</strong> y lo colocamos en la raiz del proyecto con el siguiente código:</p>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">namespace MauiMvvm
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">    public class Alumno
+</span></span><span class="line"><span class="cl">    {
+</span></span><span class="line"><span class="cl">        public string FirstName { get; set; }
+</span></span><span class="line"><span class="cl">        public string LastName { get; set; }
+</span></span><span class="line"><span class="cl">        public string ImageUrl { get; set; }
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></div><ol start="3">
+<li>Agregamos una nueva clase con el nombre <strong>AlumnoViewModel.cs</strong> y lo colocamos en la raiz del proyecto con el siguiente código:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">using CommunityToolkit.Mvvm.ComponentModel;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">namespace MauiMvvm
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">    [INotifyPropertyChanged]
+</span></span><span class="line"><span class="cl">    public partial class AlumnoViewModel
+</span></span><span class="line"><span class="cl">    {
+</span></span><span class="line"><span class="cl">        [ObservableProperty]
+</span></span><span class="line"><span class="cl">        public List&lt;Alumno&gt; alumnos = new List&lt;Alumno&gt;();
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        public AlumnoViewModel() 
+</span></span><span class="line"><span class="cl">        {
+</span></span><span class="line"><span class="cl">            alumnos.Add(new Alumno() { FirstName = &#34;Eliseo&#34;, LastName = &#34;Ortega&#34;, ImageUrl = &#34;mugpy.jpg&#34; });
+</span></span><span class="line"><span class="cl">            alumnos.Add(new Alumno() { FirstName = &#34;Dulce&#34;, LastName = &#34;Barrios&#34;, ImageUrl = &#34;profile.jpg&#34; });
+</span></span><span class="line"><span class="cl">            alumnos.Add(new Alumno() { FirstName = &#34;Microsoft&#34;, LastName = &#34;DotNet&#34;, ImageUrl = &#34;dotnet_bot.png&#34; });
+</span></span><span class="line"><span class="cl">            alumnos.Add(new Alumno() { FirstName = &#34;Christian&#34;, LastName = &#34;Amado&#34;, ImageUrl = &#34;amado.jpg&#34; });
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></div><ol start="4">
+<li>En la página principal <strong>MainPage.xaml</strong> generamos una lista:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34; ?&gt;
+</span></span><span class="line"><span class="cl">&lt;ContentPage xmlns=&#34;http://schemas.microsoft.com/dotnet/2021/maui&#34;
+</span></span><span class="line"><span class="cl">             xmlns:x=&#34;http://schemas.microsoft.com/winfx/2009/xaml&#34;
+</span></span><span class="line"><span class="cl">             x:Class=&#34;MauiMvvm.MainPage&#34;&gt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    &lt;ListView ItemsSource=&#34;{Binding Alumnos}&#34;&gt;
+</span></span><span class="line"><span class="cl">        &lt;ListView.ItemTemplate&gt;
+</span></span><span class="line"><span class="cl">            &lt;DataTemplate&gt;
+</span></span><span class="line"><span class="cl">                &lt;ViewCell&gt;
+</span></span><span class="line"><span class="cl">                    &lt;Grid Padding=&#34;10&#34;&gt;
+</span></span><span class="line"><span class="cl">                        &lt;Grid.RowDefinitions&gt;
+</span></span><span class="line"><span class="cl">                            &lt;RowDefinition Height=&#34;Auto&#34; /&gt;
+</span></span><span class="line"><span class="cl">                            &lt;RowDefinition Height=&#34;Auto&#34; /&gt;
+</span></span><span class="line"><span class="cl">                        &lt;/Grid.RowDefinitions&gt;
+</span></span><span class="line"><span class="cl">                        &lt;Grid.ColumnDefinitions&gt;
+</span></span><span class="line"><span class="cl">                            &lt;ColumnDefinition Width=&#34;Auto&#34; /&gt;
+</span></span><span class="line"><span class="cl">                            &lt;ColumnDefinition Width=&#34;Auto&#34; /&gt;
+</span></span><span class="line"><span class="cl">                        &lt;/Grid.ColumnDefinitions&gt;
+</span></span><span class="line"><span class="cl">                        &lt;Image Grid.RowSpan=&#34;2&#34;
+</span></span><span class="line"><span class="cl">                           Source=&#34;{Binding ImageUrl}&#34;
+</span></span><span class="line"><span class="cl">                           Aspect=&#34;AspectFill&#34;
+</span></span><span class="line"><span class="cl">                           HeightRequest=&#34;60&#34;
+</span></span><span class="line"><span class="cl">                           WidthRequest=&#34;60&#34; /&gt;
+</span></span><span class="line"><span class="cl">                        &lt;Label Grid.Column=&#34;1&#34;
+</span></span><span class="line"><span class="cl">                           Text=&#34;{Binding FirstName}&#34;
+</span></span><span class="line"><span class="cl">                           FontAttributes=&#34;Bold&#34; /&gt;
+</span></span><span class="line"><span class="cl">                        &lt;Label Grid.Row=&#34;1&#34;
+</span></span><span class="line"><span class="cl">                           Grid.Column=&#34;1&#34;
+</span></span><span class="line"><span class="cl">                           Text=&#34;{Binding LastName}&#34;
+</span></span><span class="line"><span class="cl">                           FontAttributes=&#34;Italic&#34;
+</span></span><span class="line"><span class="cl">                           VerticalOptions=&#34;End&#34; /&gt;
+</span></span><span class="line"><span class="cl">                    &lt;/Grid&gt;
+</span></span><span class="line"><span class="cl">                &lt;/ViewCell&gt;
+</span></span><span class="line"><span class="cl">            &lt;/DataTemplate&gt;
+</span></span><span class="line"><span class="cl">        &lt;/ListView.ItemTemplate&gt;
+</span></span><span class="line"><span class="cl">    &lt;/ListView&gt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">&lt;/ContentPage&gt;
+</span></span></code></pre></div><ol start="5">
+<li>El código <strong>C#</strong> que se encuentra en <strong>MainPage.xaml.cs</strong> se encuentra aquí:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">namespace MauiMvvm;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">public partial class MainPage : ContentPage
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">	int count = 0;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	public MainPage()
+</span></span><span class="line"><span class="cl">	{
+</span></span><span class="line"><span class="cl">		InitializeComponent();
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		BindingContext = new AlumnoViewModel();
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></div><ol start="6">
+<li>Ejecutamos el código con <em>F5</em> y&hellip;
+<img src="/img/posts/2022/09/28/1.png" alt=""></li>
+</ol>
+<p>De esta manera implementamos el modelo MVVM de manera muy rápida y sencilla gracias al paquete <strong>MVVM Toolkit</strong>.</p>
+<p>¡Espero resulte útil!</p>
+      </div>
+
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script>
+  window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "cmasblog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    
+    document.addEventListener('themeChanged', function (e) { 
+        if (document.readyState == 'complete') {
+          DISQUS.reset({ reload: true, config: disqus_config });
+        }
+    });
+</script>
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2018 -
+    
+    2025
+     Christian Amado 
+    ·
+    
+    Desarrollado por <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+      <script async src="https://www.googletagmanager.com/gtag/js?id=356375808"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '356375808');
+        }
+      </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=013131931956450466198%3ablhmkdpweyq"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '013131931956450466198:blhmkdpweyq');
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

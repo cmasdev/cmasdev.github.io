@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  Despliegue continuo de Blazor con Azure DevOps · Christian Amado
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Christian Amado">
+<meta name="description" content="La automatización del proceso de construcción, prueba y despliegue de aplicaciones Blazor es esencial para mantener un ciclo de desarrollo ágil, confiable y repetible. Azure DevOps proporciona un conjunto completo de herramientas que permiten implementar pipelines de integración y entrega continua (CI/CD) para aplicaciones Blazor Server o Blazor WebAssembly.
+Este artículo explica cómo configurar un pipeline de CI/CD para una aplicación Blazor Server, incluyendo la integración con un repositorio Git, la definición del proceso de build y el despliegue automático a Azure App Service.">
+<meta name="keywords" content="blog,desarrollador,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Despliegue continuo de Blazor con Azure DevOps">
+  <meta name="twitter:description" content="La automatización del proceso de construcción, prueba y despliegue de aplicaciones Blazor es esencial para mantener un ciclo de desarrollo ágil, confiable y repetible. Azure DevOps proporciona un conjunto completo de herramientas que permiten implementar pipelines de integración y entrega continua (CI/CD) para aplicaciones Blazor Server o Blazor WebAssembly.
+Este artículo explica cómo configurar un pipeline de CI/CD para una aplicación Blazor Server, incluyendo la integración con un repositorio Git, la definición del proceso de build y el despliegue automático a Azure App Service.">
+
+<meta property="og:url" content="http://localhost:1313/es/posts/2025-03-26-blazor-azure-devops/">
+  <meta property="og:site_name" content="Christian Amado">
+  <meta property="og:title" content="Despliegue continuo de Blazor con Azure DevOps">
+  <meta property="og:description" content="La automatización del proceso de construcción, prueba y despliegue de aplicaciones Blazor es esencial para mantener un ciclo de desarrollo ágil, confiable y repetible. Azure DevOps proporciona un conjunto completo de herramientas que permiten implementar pipelines de integración y entrega continua (CI/CD) para aplicaciones Blazor Server o Blazor WebAssembly.
+Este artículo explica cómo configurar un pipeline de CI/CD para una aplicación Blazor Server, incluyendo la integración con un repositorio Git, la definición del proceso de build y el despliegue automático a Azure App Service.">
+  <meta property="og:locale" content="es">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-03-26T00:00:00-03:00">
+    <meta property="article:modified_time" content="2025-03-26T00:00:00-03:00">
+    <meta property="article:tag" content=".NET">
+    <meta property="article:tag" content="Blazor">
+
+
+
+
+<link rel="canonical" href="http://localhost:1313/es/posts/2025-03-26-blazor-azure-devops/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/es/">
+      Christian Amado
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/about">Biografía</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/contact">Contacto</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/diabetes">Diabetes</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/tags">Etiquetas</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/en/">🇺🇸</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/es/posts/2025-03-26-blazor-azure-devops/">
+              Despliegue continuo de Blazor con Azure DevOps
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2025-03-26T00:00:00-03:00">
+                marzo 26, 2025
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              3 minutos de lectura.
+            </span>
+          </div>
+          
+          
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/es/tags/.net/">.NET</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/es/tags/blazor/">Blazor</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <p>La automatización del proceso de construcción, prueba y despliegue de aplicaciones <strong>Blazor</strong> es esencial para mantener un ciclo de desarrollo ágil, confiable y repetible. <strong>Azure DevOps</strong> proporciona un conjunto completo de herramientas que permiten implementar pipelines de integración y entrega continua (CI/CD) para aplicaciones <strong>Blazor Server</strong> o <strong>Blazor WebAssembly</strong>.</p>
+<p>Este artículo explica cómo configurar un pipeline de CI/CD para una aplicación <strong>Blazor Server</strong>, incluyendo la integración con un repositorio Git, la definición del proceso de build y el despliegue automático a <strong>Azure App Service</strong>.</p>
+<h2 id="requisitos-previos">
+  Requisitos previos
+  <a class="heading-link" href="#requisitos-previos">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ul>
+<li>Cuenta activa en Azure y acceso al portal <a href="https://portal.azure.com"  class="external-link" target="_blank" rel="noopener">https://portal.azure.com</a>.</li>
+<li>Proyecto Blazor Server funcional y almacenado en un repositorio Git (GitHub o Azure Repos).</li>
+<li>Cuenta de Azure DevOps y organización configurada.</li>
+<li>Azure App Service creado para recibir el despliegue.</li>
+</ul>
+<h2 id="crear-el-proyecto-en-azure-devops">
+  Crear el proyecto en Azure DevOps
+  <a class="heading-link" href="#crear-el-proyecto-en-azure-devops">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ol>
+<li>Acceder a <a href="https://dev.azure.com"  class="external-link" target="_blank" rel="noopener">https://dev.azure.com</a> y crear un nuevo proyecto.</li>
+<li>Importar el repositorio Git donde se encuentra el código fuente de la aplicación Blazor Server.</li>
+<li>Verificar que el proyecto tenga una rama principal (<code>main</code> o <code>master</code>) correctamente configurada.</li>
+</ol>
+<h2 id="crear-una-app-service-en-azure">
+  Crear una App Service en Azure
+  <a class="heading-link" href="#crear-una-app-service-en-azure">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ol>
+<li>En el portal de Azure, seleccionar <strong>Crear recurso &gt; App Service</strong>.</li>
+<li>Configurar:
+<ul>
+<li>Nombre: <code>blazor-devops-demo</code></li>
+<li>Publicar: <strong>Código</strong></li>
+<li>Pilas: <strong>.NET 8 (o superior)</strong></li>
+<li>Región: la más cercana al entorno de desarrollo</li>
+<li>Grupo de recursos: crear uno nuevo si es necesario</li>
+</ul>
+</li>
+<li>Crear el servicio y esperar a que esté disponible.</li>
+</ol>
+<h2 id="crear-un-pipeline-de-cicd-en-azure-devops">
+  Crear un pipeline de CI/CD en Azure DevOps
+  <a class="heading-link" href="#crear-un-pipeline-de-cicd-en-azure-devops">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ol>
+<li>Ir a la sección <strong>Pipelines &gt; Pipelines</strong> y seleccionar <strong>Crear Pipeline</strong>.</li>
+<li>Elegir la fuente de repositorio: GitHub o Azure Repos.</li>
+<li>Seleccionar <strong>YAML</strong> como método de configuración.</li>
+<li>Agregar el siguiente contenido para el archivo <code>azure-pipelines.yml</code>:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">trigger</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">branches</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">include</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">main</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">pool</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">vmImage</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;windows-latest&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">variables</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">buildConfiguration</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;Release&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">steps</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="nt">task</span><span class="p">:</span><span class="w"> </span><span class="l">UseDotNet@2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">inputs</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">packageType</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;sdk&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;8.x&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">installationPath</span><span class="p">:</span><span class="w"> </span><span class="l">$(Agent.ToolsDirectory)/dotnet</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="nt">task</span><span class="p">:</span><span class="w"> </span><span class="l">DotNetCoreCLI@2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">inputs</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;restore&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">projects</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;**/*.csproj&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="nt">task</span><span class="p">:</span><span class="w"> </span><span class="l">DotNetCoreCLI@2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">inputs</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;build&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">projects</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;**/*.csproj&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">arguments</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;--configuration $(buildConfiguration)&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="nt">task</span><span class="p">:</span><span class="w"> </span><span class="l">DotNetCoreCLI@2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">inputs</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;publish&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">projects</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;**/*.csproj&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">arguments</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="nt">task</span><span class="p">:</span><span class="w"> </span><span class="l">PublishBuildArtifacts@1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">inputs</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">PathtoPublish</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;$(Build.ArtifactStagingDirectory)&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ArtifactName</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;drop&#39;</span><span class="w">
+</span></span></span></code></pre></div><p>Este pipeline compila y publica la aplicación Blazor en formato listo para despliegue. A continuación, se debe crear una <strong>Release Pipeline</strong>.</p>
+<h2 id="crear-el-pipeline-de-release-despliegue">
+  Crear el pipeline de Release (Despliegue)
+  <a class="heading-link" href="#crear-el-pipeline-de-release-despliegue">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ol>
+<li>
+<p>Ir a <strong>Pipelines &gt; Releases</strong>, seleccionar <strong>New Pipeline</strong>.</p>
+</li>
+<li>
+<p>Elegir <strong>Empty Job</strong>.</p>
+</li>
+<li>
+<p>En el artefacto, seleccionar el pipeline generado anteriormente (<code>drop</code>) y enlazarlo.</p>
+</li>
+<li>
+<p>En la fase de despliegue, agregar una nueva tarea: <strong>Azure App Service Deploy</strong>.</p>
+</li>
+<li>
+<p>Configurar:</p>
+<ul>
+<li><strong>App Type:</strong> Web App on Windows</li>
+<li><strong>App Service name:</strong> seleccionar el creado previamente</li>
+<li><strong>Package or folder:</strong> <code>$(System.DefaultWorkingDirectory)/drop</code></li>
+</ul>
+</li>
+<li>
+<p>Habilitar <strong>Despliegue automático después del build</strong> en la pestaña <strong>Triggers</strong> del artefacto.</p>
+</li>
+</ol>
+<h2 id="personalizar-con-variables-de-entorno">
+  Personalizar con variables de entorno
+  <a class="heading-link" href="#personalizar-con-variables-de-entorno">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>En Azure App Service es posible definir variables de entorno que se pueden consumir desde <code>appsettings.Production.json</code> o directamente en tiempo de ejecución:</p>
+<ol>
+<li>En el portal de Azure, ir a la App Service &gt; Configuración &gt; Configuración de la aplicación.</li>
+<li>Agregar claves como <code>ConnectionStrings__Default</code> o <code>MyCustomVariable</code>.</li>
+</ol>
+<p>Estas configuraciones son seguras, persistentes y no requieren recompilación.</p>
+<h2 id="pruebas-automáticas-antes-del-despliegue">
+  Pruebas automáticas antes del despliegue
+  <a class="heading-link" href="#pruebas-autom%c3%a1ticas-antes-del-despliegue">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Si el proyecto incluye pruebas unitarias, se puede agregar el siguiente paso antes del <code>publish</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl">- <span class="nt">task</span><span class="p">:</span><span class="w"> </span><span class="l">DotNetCoreCLI@2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">inputs</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;test&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">projects</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;**/*Tests.csproj&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">arguments</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;--configuration $(buildConfiguration)&#39;</span><span class="w">
+</span></span></span></code></pre></div><p>Esto asegura que solo se desplieguen builds que hayan superado las pruebas.</p>
+<h2 id="conclusión">
+  Conclusión
+  <a class="heading-link" href="#conclusi%c3%b3n">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Implementar un flujo de CI/CD para aplicaciones <strong>Blazor</strong> con <strong>Azure DevOps</strong> automatiza completamente el proceso de entrega, desde la validación del código hasta el despliegue en producción. Esto no solo acelera el desarrollo, sino que también reduce errores humanos y mejora la calidad del software.</p>
+<p>Gracias a los pipelines <strong>YAML</strong>, las definiciones son auditables, versionables y portables. Esta integración es ideal para proyectos <strong>Blazor</strong> en entornos empresariales o colaborativos, permitiendo adoptar prácticas modernas de <strong>DevOps</strong> sin abandonar el ecosistema <strong>.NET</strong>.</p>
+      </div>
+
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script>
+  window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "cmasblog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    
+    document.addEventListener('themeChanged', function (e) { 
+        if (document.readyState == 'complete') {
+          DISQUS.reset({ reload: true, config: disqus_config });
+        }
+    });
+</script>
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2018 -
+    
+    2025
+     Christian Amado 
+    ·
+    
+    Desarrollado por <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+      <script async src="https://www.googletagmanager.com/gtag/js?id=356375808"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '356375808');
+        }
+      </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=013131931956450466198%3ablhmkdpweyq"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '013131931956450466198:blhmkdpweyq');
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

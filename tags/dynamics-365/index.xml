@@ -1,108 +1,18 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Dynamics 365 on Christian Amado's Blog</title><link>https://cmas.dev/tags/dynamics-365/</link><description>Recent content in Dynamics 365 on Christian Amado's Blog</description><generator>Hugo -- gohugo.io</generator><language>es</language><lastBuildDate>Thu, 26 Dec 2019 13:47:18 -0400</lastBuildDate><atom:link href="https://cmas.dev/tags/dynamics-365/index.xml" rel="self" type="application/rss+xml"/><item><title>Integración con WhatsApp</title><link>https://cmas.dev/posts/2019-12-26-integracion-con-whatsapp/</link><pubDate>Thu, 26 Dec 2019 13:47:18 -0400</pubDate><guid>https://cmas.dev/posts/2019-12-26-integracion-con-whatsapp/</guid><description>&lt;p>Estamos cerrando el año y en casi todas las presentaciones de producto que hemos tenido en los últimos meses surgió una pregunta en común por parte de los potenciales clientes de mi empresa.&lt;/p>
-&lt;h2 id="cómo-puedo-integrar-dynamics-365-for-sales-con-whatsapp">¿Cómo puedo integrar Dynamics 365 for Sales con WhatsApp?&lt;/h2>
-&lt;p>La respuesta es corta y simple: ¡No se puede!&lt;/p>
-&lt;p>Pero, dijimos que se podía hacer casi cualquier cosa con Dynamics 365 for Sales. Sí pero la integración con WhatsApp no depende ni del producto ni de Microsoft sino de Facebook, que es el propietario de WhatsApp. Al momento de escribir esta entrada no se puede realizar esa acción.&lt;/p>
-&lt;p>Con WhatsApp Business API se puede, pero hasta el momento no lo he probado así que no puedo opinar al respecto. Lo prometo para un futuro no tan lejano.&lt;/p></description></item><item><title>Creación de procesos en D365</title><link>https://cmas.dev/posts/2019-12-12-creacion-de-procesos-en-d365/</link><pubDate>Thu, 12 Dec 2019 20:43:07 -0400</pubDate><guid>https://cmas.dev/posts/2019-12-12-creacion-de-procesos-en-d365/</guid><description>&lt;p>En una &lt;a href="https://cmas.dev/2019/12/creacion-de-reglas-de-negocios/">entrada anterior&lt;/a>, vimos cómo crear reglas de negocios para una entidad. En esta entrada mostraré cómo crear o modificar procesos de negocios existentes. Para este caso, tomaremos como ejemplo una Oportunidad y modificaremos el proceso predeterminado de un proceso de ventas.&lt;/p>
-&lt;p>¿Qué es un proceso de negocio? Según Microsoft Docs&amp;hellip;&lt;/p>
-&lt;blockquote>
-&lt;p>Los flujos de proceso de negocio proporcionan una guía para que la gente realice el trabajo. Proporcionan una experiencia de usuario simplificada que guía a los usuarios por los procesos que su organización ha definido para las interacciones que deben avanzarse a una conclusión de algún tipo.&lt;/p>
-&lt;p>Use flujos de proceso de negocio para definir un conjunto de pasos para que la gente siga para obtener el resultado deseado. Estos pasos proporcionan un mensaje visual que indica a los usuarios dónde se encuentran en el proceso de negocio.&lt;/p>
-&lt;/blockquote>
-&lt;p>Observemos el proceso actual de un proceso de venta:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/12/2-6.png" alt="">&lt;/p>
-&lt;p>Nos dirigimos a &lt;strong>Opciones Avanzadas&lt;/strong> &amp;gt; &lt;strong>Personalizaciones&lt;/strong> &amp;gt; &lt;strong>Personalizar el sistema&lt;/strong>:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/12/1-6.png" alt="">&lt;/p>
-&lt;p>Buscamos el proceso y procedemos a modificarlo:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/12/3-6.png" alt="">&lt;/p>
-&lt;p>Realizamos las modificaciones necesarias, hacemos clic en &lt;strong>Guardar&lt;/strong> y &lt;strong>Validar&lt;/strong>:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/12/4-5.png" alt="">&lt;/p>
-&lt;p>Vemos el cambio realizado (eliminado un proceso completo, el de &lt;strong>Contrato&lt;/strong>):&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/12/5-3.png" alt="">&lt;/p>
-&lt;p>De esta manera se puede crear y/o modificar el proceso necesario.&lt;/p></description></item><item><title>Creación de reglas de negocios</title><link>https://cmas.dev/posts/2019-12-10-creacion-de-reglas-de-negocios/</link><pubDate>Tue, 10 Dec 2019 19:43:22 -0400</pubDate><guid>https://cmas.dev/posts/2019-12-10-creacion-de-reglas-de-negocios/</guid><description>&lt;p>En esta ocasión quiero comentarles cómo poder crear reglas de negocio dentro de Dynamics 365 for Sales (al fin y al cabo utilizamos PowerApps de fondo :P).&lt;/p>
-&lt;h2 id="qué-son-las-reglas-de-negocios">¿Qué son las reglas de negocios?&lt;/h2>
-&lt;p>Las reglas de negocios son pequeños flujos que se realizan en determinados campos cuando queremos que éstos realicen una determinada acción siguiendo algunas condiciones y variables que definamos.&lt;/p>
-&lt;h2 id="cómo-se-crean">¿Cómo se crean?&lt;/h2>
-&lt;p>Gracias al poder de PowerApps se pueden crear estas reglas fácilmente utilizando el diseñador y siguiendo los pasos que se especifican. Veremos paso a paso un ejemplo donde queremos ver si el país es &lt;strong>Paraguay&lt;/strong>, que esconda el &lt;strong>Código Postal&lt;/strong> del formulario de &lt;strong>Cuentas&lt;/strong>.&lt;/p>
-&lt;p>Tener en cuenta que la opción &amp;ldquo;Editar formulario&amp;rdquo; fue quitada de la aplicación para ser accedida desde allí.&lt;/p>
-&lt;p>Primero debemos dirigirnos al entorno de desarrollo de Dynamics 365 for Sales (basado en PowerApps): Nos dirigimos a Opciones Avanzadas &amp;gt; Personalizaciones &amp;gt; Personalizar el sistema&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/12/1-5.png" alt="">&lt;/p>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2019/12/2-5.png" alt="">&lt;/p>
-&lt;p>&lt;img src="https://cmas.dev/img/posts/migrated/2019/12/3-5.png" alt="">&lt;/p>
-&lt;p>A continuación, agregamos los detalles de la regla de negocio:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/12/4-4.png" alt="">&lt;/p>
-&lt;p>Colocamos las propiedades de la Entidad que deseamos controlar y agregamos las condiciones:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/12/5-2.png" alt="">&lt;/p>
-&lt;p>Una vez culminado, procedemos a agregar las acciones que una condición puede realizar (hay dos salidas siempre, el &lt;strong>sí&lt;/strong> y el &lt;strong>no&lt;/strong>):&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/12/6-2.png" alt="">&lt;/p>
-&lt;p>Agregamos la acción para el &lt;strong>sí&lt;/strong>:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/12/7-1.png" alt="">&lt;/p>
-&lt;p>Luego, agregamos la acción pàra el &lt;strong>no&lt;/strong>:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/12/8-1.png" alt="">&lt;/p>
-&lt;p>Una vez terminado, hacemos clic en &lt;strong>Validar&lt;/strong> y luego en &lt;strong>Guardar&lt;/strong>:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/12/9-1.png" alt="">&lt;/p>
-&lt;p>Si todo es correcto, procedemos a &lt;strong>Activar&lt;/strong> la regla de negocio:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/12/10.png" alt="">&lt;/p>
-&lt;p>Probamos el no cumplimiento de la condición:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/12/11.png" alt="">&lt;/p>
-&lt;p>Y por último, probamos el cumplimiento de la condición:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/12/12.png" alt="">&lt;/p>
-&lt;p>De esta manera logramos crear en simples pasos reglas de negocios sin la necesidad de un programador/desarrollador.&lt;/p></description></item><item><title>Valores predeterminados para integración</title><link>https://cmas.dev/posts/2019-04-09-valores-predeterminados-para-integracion/</link><pubDate>Tue, 09 Apr 2019 20:35:15 -0400</pubDate><guid>https://cmas.dev/posts/2019-04-09-valores-predeterminados-para-integracion/</guid><description>&lt;p>Siguiendo con el tema de la integración entre Dynamics 365 Business Central y Dynamics 365 for Sales es bueno entender cuáles son los valores predeterminados en una integración. Para eso debemos ingresar en la página correspondiente y ver cuales son sus valores iniciales. A la primera, ya podemos tener algo integrado. en esta entrada veremos cómo integrar las cuentas entre ambos productos.&lt;/p>
-&lt;p>Primeramente debemos ingresar a la &amp;ldquo;Lista de Asignaciones de tablas de integración&amp;rdquo;:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/04/1-3.png" alt="">&lt;/p>
-&lt;p>Una vez dentro, observamos la lista predeterminada:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/04/2-3.png" alt="">&lt;/p>
-&lt;p>Se debe tener en cuenta que esta lista es la que se modifican valores según las necesidades de integración que se tengan. Los filtros pueden aplicarse dentro de Business Central como también en Dynamics 365 for Sales.&lt;/p>
-&lt;p>Ahora, nos dirigimos a la lista de clientes y buscamos un cliente en particular:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/04/3-3.png" alt="">&lt;/p>
-&lt;p>Procedemos a agregarlo desde Dynamics 365 for Sales:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/04/4-3.png" alt="">&lt;/p>
-&lt;p>Creamos al cliente en Dynamics 365 Business Central:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/04/5-3.png" alt="">&lt;/p>
-&lt;p>Verificamos si no hay error y todo sigue su curso:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/04/6-3.png" alt="">&lt;/p>
-&lt;p>Apenas salimos de esa pantalla y ya deberíamos ver el nuevo cliente (si hay otras tareas programadas se ejecutarán esas en primer lugar):&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/04/7-3.png" alt="">&lt;/p>
-&lt;p>¡Espero les resulte útil!&lt;/p></description></item><item><title>Integración con Dynamics 365 for Sales</title><link>https://cmas.dev/posts/2019-04-03-integracion-con-dynamics-365-for-sales/</link><pubDate>Wed, 03 Apr 2019 21:34:10 -0400</pubDate><guid>https://cmas.dev/posts/2019-04-03-integracion-con-dynamics-365-for-sales/</guid><description>&lt;p>Como todo producto Microsoft existe integraciones entre ellos que nos facilitan la vida. En este caso veremos cómo se integra Dynamics 365 Business Central (On-Premise) con Dynamics 365 for Sales (Cloud).&lt;/p>
-&lt;p>En un &lt;a href="https://cmas.dev/2018/05/integracion-dynamics-nav-2018-con-dynamics-365-for-sales/">artículo anterior&lt;/a>, ya hemos visto como realizar la mitad de la integración (sigamos hasta el paso 10 de ese tutorial para no repetir la historia). Donde cambia un poco el panorama es dentro de Dynamics 365 Business Central que reemplaza a Dynamics NAV 2018.&lt;/p>
-&lt;p>También resulta importante ver &lt;a href="https://cmas.dev/2018/10/roles-de-seguridad-para-integracion-con-d365-business-central/">este artículo&lt;/a> sobre los roles de seguridad a ser aplicados para la integración.&lt;/p>
-&lt;p>Primeramente, debemos enlazar el usuario Business Central con el usuario CRM (al que acabamos de asignar los permisos necesarios). Entonces, los datos del usuario quedarían de la siguiente manera: Debemos buscar la ruta con la Lupa&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/04/1-2.png" alt="">&lt;/p>
-&lt;ol>
-&lt;li>
-&lt;p>Obtener el usuario (email) de inicio de sesion del usuario en Dynamics 365 for Sales&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/04/2-2.png" alt="">&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>En Dynamics Business Central, colocar dicho correo en el campo usuario de Office 365:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/04/3-2.png" alt="">&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>En la misma ventana, colocar los permisos necesarios para D365 (en este caso le damos FULL ACCESS):&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/04/4-2.png" alt="">&lt;/p>
-&lt;/li>
-&lt;/ol>
-&lt;p>Hemos culminado, con lo referente al usuario. Es decir, que el usuario de Dynamics Business Central esta enlazado con el usuario de Dynamics 365 for Sales.&lt;/p>
-&lt;p>Ahora debemos configurar la conexión de Microsoft Dynamics Business Central con Microsoft Dynamics 365 for Sales. Para ello, seguimos estos pasos:&lt;/p>
-&lt;ol>
-&lt;li>
-&lt;p>Ingresamos al modulo necesario, colocando en el buscador la palabra &amp;ldquo;conexión&amp;rdquo;&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/04/5-2.png" alt="">&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>Completamos los datos de conexión y le damos clic en &amp;ldquo;Probar conexión&amp;rdquo;&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/04/6-2.png" alt="">&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>Si la conexión fue exitosa, veremos un mensaje como este:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/04/7-2.png" alt="">&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>Hacemos clic en la opción &amp;ldquo;Activado&amp;rdquo;. Si sale error debemos corregirlo:&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/04/8-2.png" alt="">&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>Si nos aceptan los cambios procedemos a completar los demás campos necesarios y listo.&lt;br>
-&lt;img src="https://cmas.dev/img/posts/migrated/2019/04/9-1.png" alt="">&lt;/p>
-&lt;/li>
-&lt;/ol>
-&lt;p>De esta manera, logramos la integración en esta nueva plataforma.&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Dynamics 365 on Christian Amado</title><link>https://cmas.dev/tags/dynamics-365/</link><description>Recent content in Dynamics 365 on Christian Amado</description><generator>Hugo</generator><language>es</language><lastBuildDate>Thu, 26 Dec 2019 13:47:18 -0400</lastBuildDate><atom:link href="https://cmas.dev/tags/dynamics-365/index.xml" rel="self" type="application/rss+xml"/><item><title>Integración con WhatsApp</title><link>https://cmas.dev/posts/2019-12-26-integracion-con-whatsapp/</link><pubDate>Thu, 26 Dec 2019 13:47:18 -0400</pubDate><guid>https://cmas.dev/posts/2019-12-26-integracion-con-whatsapp/</guid><description>&lt;p>Estamos cerrando el año y en casi todas las presentaciones de producto que hemos tenido en los últimos meses surgió una pregunta en común por parte de los potenciales clientes de mi empresa.&lt;/p>
+&lt;h2 id="cómo-puedo-integrar-dynamics-365-for-sales-con-whatsapp">
+ ¿Cómo puedo integrar Dynamics 365 for Sales con WhatsApp?
+ &lt;a class="heading-link" href="#c%c3%b3mo-puedo-integrar-dynamics-365-for-sales-con-whatsapp">
+ &lt;i class="fa-solid fa-link" aria-hidden="true" title="Link to heading">&lt;/i>
+ &lt;span class="sr-only">Link to heading&lt;/span>
+ &lt;/a>
+&lt;/h2></description></item><item><title>Creación de procesos en D365</title><link>https://cmas.dev/posts/2019-12-12-creacion-de-procesos-en-d365/</link><pubDate>Thu, 12 Dec 2019 20:43:07 -0400</pubDate><guid>https://cmas.dev/posts/2019-12-12-creacion-de-procesos-en-d365/</guid><description>&lt;p>En una &lt;a href="https://cmas.dev/2019/12/creacion-de-reglas-de-negocios/" >entrada anterior&lt;/a>, vimos cómo crear reglas de negocios para una entidad. En esta entrada mostraré cómo crear o modificar procesos de negocios existentes. Para este caso, tomaremos como ejemplo una Oportunidad y modificaremos el proceso predeterminado de un proceso de ventas.&lt;/p>
+&lt;p>¿Qué es un proceso de negocio? Según Microsoft Docs&amp;hellip;&lt;/p></description></item><item><title>Creación de reglas de negocios</title><link>https://cmas.dev/posts/2019-12-10-creacion-de-reglas-de-negocios/</link><pubDate>Tue, 10 Dec 2019 19:43:22 -0400</pubDate><guid>https://cmas.dev/posts/2019-12-10-creacion-de-reglas-de-negocios/</guid><description>&lt;p>En esta ocasión quiero comentarles cómo poder crear reglas de negocio dentro de Dynamics 365 for Sales (al fin y al cabo utilizamos PowerApps de fondo :P).&lt;/p>
+&lt;h2 id="qué-son-las-reglas-de-negocios">
+ ¿Qué son las reglas de negocios?
+ &lt;a class="heading-link" href="#qu%c3%a9-son-las-reglas-de-negocios">
+ &lt;i class="fa-solid fa-link" aria-hidden="true" title="Link to heading">&lt;/i>
+ &lt;span class="sr-only">Link to heading&lt;/span>
+ &lt;/a>
+&lt;/h2>
+&lt;p>Las reglas de negocios son pequeños flujos que se realizan en determinados campos cuando queremos que éstos realicen una determinada acción siguiendo algunas condiciones y variables que definamos.&lt;/p></description></item><item><title>Valores predeterminados para integración</title><link>https://cmas.dev/posts/2019-04-09-valores-predeterminados-para-integracion/</link><pubDate>Tue, 09 Apr 2019 20:35:15 -0400</pubDate><guid>https://cmas.dev/posts/2019-04-09-valores-predeterminados-para-integracion/</guid><description>&lt;p>Siguiendo con el tema de la integración entre Dynamics 365 Business Central y Dynamics 365 for Sales es bueno entender cuáles son los valores predeterminados en una integración. Para eso debemos ingresar en la página correspondiente y ver cuales son sus valores iniciales. A la primera, ya podemos tener algo integrado. en esta entrada veremos cómo integrar las cuentas entre ambos productos.&lt;/p></description></item><item><title>Integración con Dynamics 365 for Sales</title><link>https://cmas.dev/posts/2019-04-03-integracion-con-dynamics-365-for-sales/</link><pubDate>Wed, 03 Apr 2019 21:34:10 -0400</pubDate><guid>https://cmas.dev/posts/2019-04-03-integracion-con-dynamics-365-for-sales/</guid><description>&lt;p>Como todo producto Microsoft existe integraciones entre ellos que nos facilitan la vida. En este caso veremos cómo se integra Dynamics 365 Business Central (On-Premise) con Dynamics 365 for Sales (Cloud).&lt;/p>
+&lt;p>En un &lt;a href="https://cmas.dev/2018/05/integracion-dynamics-nav-2018-con-dynamics-365-for-sales/" >artículo anterior&lt;/a>, ya hemos visto como realizar la mitad de la integración (sigamos hasta el paso 10 de ese tutorial para no repetir la historia). Donde cambia un poco el panorama es dentro de Dynamics 365 Business Central que reemplaza a Dynamics NAV 2018.&lt;/p></description></item></channel></rss>

@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  Integración de WSL en un entorno DevSecOps · Christian Amado
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Christian Amado">
+<meta name="description" content="WSL2 se ha convertido en una herramienta clave para equipos DevSecOps que buscan una solución ligera, segura y flexible para automatizar la integración, entrega y operaciones de software. Su compatibilidad con herramientas de seguridad, contenedores, scripting y pipelines CI/CD, lo convierte en un puente ideal entre desarrollo y operaciones dentro del sistema operativo Windows.
+Este artículo detalla un caso real de integración de WSL2 en un entorno DevSecOps, con ejemplos de workflows que incluyen validación de código, escaneo de vulnerabilidades, despliegue automatizado y hardening de entornos desde una terminal Linux sobre Windows.">
+<meta name="keywords" content="blog,desarrollador,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Integración de WSL en un entorno DevSecOps">
+  <meta name="twitter:description" content="WSL2 se ha convertido en una herramienta clave para equipos DevSecOps que buscan una solución ligera, segura y flexible para automatizar la integración, entrega y operaciones de software. Su compatibilidad con herramientas de seguridad, contenedores, scripting y pipelines CI/CD, lo convierte en un puente ideal entre desarrollo y operaciones dentro del sistema operativo Windows.
+Este artículo detalla un caso real de integración de WSL2 en un entorno DevSecOps, con ejemplos de workflows que incluyen validación de código, escaneo de vulnerabilidades, despliegue automatizado y hardening de entornos desde una terminal Linux sobre Windows.">
+
+<meta property="og:url" content="http://localhost:1313/es/posts/2024-11-15-wsl2-devsecops/">
+  <meta property="og:site_name" content="Christian Amado">
+  <meta property="og:title" content="Integración de WSL en un entorno DevSecOps">
+  <meta property="og:description" content="WSL2 se ha convertido en una herramienta clave para equipos DevSecOps que buscan una solución ligera, segura y flexible para automatizar la integración, entrega y operaciones de software. Su compatibilidad con herramientas de seguridad, contenedores, scripting y pipelines CI/CD, lo convierte en un puente ideal entre desarrollo y operaciones dentro del sistema operativo Windows.
+Este artículo detalla un caso real de integración de WSL2 en un entorno DevSecOps, con ejemplos de workflows que incluyen validación de código, escaneo de vulnerabilidades, despliegue automatizado y hardening de entornos desde una terminal Linux sobre Windows.">
+  <meta property="og:locale" content="es">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-11-15T00:00:00-04:00">
+    <meta property="article:modified_time" content="2024-11-15T00:00:00-04:00">
+    <meta property="article:tag" content="WinDev">
+    <meta property="article:tag" content="Windows 11">
+    <meta property="article:tag" content="WSL">
+
+
+
+
+<link rel="canonical" href="http://localhost:1313/es/posts/2024-11-15-wsl2-devsecops/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/es/">
+      Christian Amado
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/about">Biografía</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/contact">Contacto</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/diabetes">Diabetes</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/tags">Etiquetas</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/en/">🇺🇸</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/es/posts/2024-11-15-wsl2-devsecops/">
+              Integración de WSL en un entorno DevSecOps
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2024-11-15T00:00:00-04:00">
+                noviembre 15, 2024
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              3 minutos de lectura.
+            </span>
+          </div>
+          
+          
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/es/tags/windev/">WinDev</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/es/tags/windows-11/">Windows 11</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/es/tags/wsl/">WSL</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <p>WSL2 se ha convertido en una herramienta clave para equipos DevSecOps que buscan una solución ligera, segura y flexible para automatizar la integración, entrega y operaciones de software. Su compatibilidad con herramientas de seguridad, contenedores, scripting y pipelines CI/CD, lo convierte en un puente ideal entre desarrollo y operaciones dentro del sistema operativo Windows.</p>
+<p>Este artículo detalla un caso real de integración de WSL2 en un entorno DevSecOps, con ejemplos de workflows que incluyen validación de código, escaneo de vulnerabilidades, despliegue automatizado y hardening de entornos desde una terminal Linux sobre Windows.</p>
+<h2 id="objetivo">
+  Objetivo
+  <a class="heading-link" href="#objetivo">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Demostrar cómo un entorno WSL2 puede ser parte activa y segura en un flujo DevSecOps moderno, usando herramientas como Docker, GitHub Actions, Trivy, Ansible y más.</p>
+<h2 id="paso-1-preparar-entorno-de-trabajo-seguro-en-wsl2">
+  Paso 1: Preparar entorno de trabajo seguro en WSL2
+  <a class="heading-link" href="#paso-1-preparar-entorno-de-trabajo-seguro-en-wsl2">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Instalar herramientas básicas:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt update <span class="o">&amp;&amp;</span> sudo apt install -y git curl build-essential python3-pip
+</span></span></code></pre></div><p>Instalar Docker dentro de WSL2 o usar Docker Desktop con integración activa:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker version
+</span></span></code></pre></div><p>Instalar herramientas DevSecOps:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">pip install ansible
+</span></span><span class="line"><span class="cl">curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh <span class="p">|</span> sh
+</span></span></code></pre></div><h2 id="paso-2-escaneo-de-vulnerabilidades-con-trivy">
+  Paso 2: Escaneo de vulnerabilidades con Trivy
+  <a class="heading-link" href="#paso-2-escaneo-de-vulnerabilidades-con-trivy">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Escanear imágenes antes del despliegue:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker pull node:18
+</span></span><span class="line"><span class="cl">trivy image node:18
+</span></span></code></pre></div><p>Escanear un proyecto local:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">trivy fs .
+</span></span></code></pre></div><p>Agregar esto a un script <code>scan.sh</code> para automatizar:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="cp">#!/bin/bash
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="nb">echo</span> <span class="s2">&#34;Escaneando vulnerabilidades...&#34;</span>
+</span></span><span class="line"><span class="cl">trivy fs ./backend
+</span></span></code></pre></div><h2 id="paso-3-automatización-de-seguridad-con-ansible">
+  Paso 3: Automatización de seguridad con Ansible
+  <a class="heading-link" href="#paso-3-automatizaci%c3%b3n-de-seguridad-con-ansible">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Playbook de hardening básico:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl">- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Aplicar hardening de sistema</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">hosts</span><span class="p">:</span><span class="w"> </span><span class="l">localhost</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">tasks</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Asegurar permisos de logs</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">file</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">/var/log</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l">directory</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">mode</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;0750&#39;</span><span class="w">
+</span></span></span></code></pre></div><p>Ejecutar desde WSL2:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ansible-playbook playbooks/hardening.yml -c <span class="nb">local</span>
+</span></span></code></pre></div><h2 id="paso-4-cicd-con-github-actions-desde-wsl2">
+  Paso 4: CI/CD con GitHub Actions desde WSL2
+  <a class="heading-link" href="#paso-4-cicd-con-github-actions-desde-wsl2">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Simular el pipeline local con <a href="https://github.com/nektos/act"  class="external-link" target="_blank" rel="noopener"><code>act</code></a>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">brew install act
+</span></span><span class="line"><span class="cl">act -j <span class="nb">test</span>
+</span></span></code></pre></div><p>Ejemplo de workflow:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">CI</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">on</span><span class="p">:</span><span class="w"> </span><span class="l">push</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">jobs</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">test</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l">ubuntu-latest</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">steps</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l">actions/checkout@v3</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l">npm install</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l">npm test</span><span class="w">
+</span></span></span></code></pre></div><p>Usar WSL2 para validar estos scripts antes de hacer push a producción.</p>
+<h2 id="paso-5-integración-de-análisis-de-código-estático">
+  Paso 5: Integración de análisis de código estático
+  <a class="heading-link" href="#paso-5-integraci%c3%b3n-de-an%c3%a1lisis-de-c%c3%b3digo-est%c3%a1tico">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Instalar ESLint o Bandit (Python):</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">npm install -g eslint
+</span></span><span class="line"><span class="cl">pip install bandit
+</span></span></code></pre></div><p>Escanear:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">eslint ./frontend
+</span></span><span class="line"><span class="cl">bandit -r ./backend
+</span></span></code></pre></div><h2 id="paso-6-política-de-seguridad-de-contenedores">
+  Paso 6: Política de seguridad de contenedores
+  <a class="heading-link" href="#paso-6-pol%c3%adtica-de-seguridad-de-contenedores">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Definir un archivo <code>Dockerfile</code> seguro:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-Dockerfile" data-lang="Dockerfile"><span class="line"><span class="cl"><span class="k">FROM</span><span class="s"> node:18-alpine</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> addgroup -S app <span class="o">&amp;&amp;</span> adduser -S app -G app<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">USER</span><span class="s"> app</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">COPY</span> . .<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">CMD</span> <span class="p">[</span><span class="s2">&#34;node&#34;</span><span class="p">,</span> <span class="s2">&#34;index.js&#34;</span><span class="p">]</span><span class="err">
+</span></span></span></code></pre></div><p>Validar con Trivy o Docker Scout:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">trivy image myimage:latest
+</span></span></code></pre></div><h2 id="buenas-prácticas">
+  Buenas prácticas
+  <a class="heading-link" href="#buenas-pr%c3%a1cticas">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ul>
+<li>No usar root dentro de contenedores</li>
+<li>Validar código con linters y analizadores de seguridad</li>
+<li>Versionar todos los scripts y playbooks en Git</li>
+<li>Usar variables de entorno cifradas para secrets</li>
+<li>Monitorear imágenes con alertas de vulnerabilidad</li>
+</ul>
+<h2 id="conclusión">
+  Conclusión
+  <a class="heading-link" href="#conclusi%c3%b3n">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>WSL2 permite simular y ejecutar flujos DevSecOps reales con herramientas de seguridad, automatización y despliegue en un entorno Linux completo dentro de Windows. Con acceso a Docker, Trivy, Ansible y GitHub Actions, es posible desarrollar y validar código seguro, auditable y productivo sin necesidad de servidores externos o máquinas virtuales.</p>
+      </div>
+
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script>
+  window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "cmasblog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    
+    document.addEventListener('themeChanged', function (e) { 
+        if (document.readyState == 'complete') {
+          DISQUS.reset({ reload: true, config: disqus_config });
+        }
+    });
+</script>
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2018 -
+    
+    2025
+     Christian Amado 
+    ·
+    
+    Desarrollado por <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+      <script async src="https://www.googletagmanager.com/gtag/js?id=356375808"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '356375808');
+        }
+      </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=013131931956450466198%3ablhmkdpweyq"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '013131931956450466198:blhmkdpweyq');
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

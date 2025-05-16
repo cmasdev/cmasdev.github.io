@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  Estructura básica de un proyecto con Windows App SDK · Christian Amado
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Christian Amado">
+<meta name="description" content="En este artículo intentaré explicar lo que entiendo es la estructura básica de Windows App SDK, pues resulta algo nuevo para mí (en el pasado desarrollaba con WPF y después con UWP en sus inicios). En un artículo anterior hemos visto los primeros pasos en esta plataforma.
+Windows 11 Insider Preview Build 25126">
+<meta name="keywords" content="blog,desarrollador,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Estructura básica de un proyecto con Windows App SDK">
+  <meta name="twitter:description" content="En este artículo intentaré explicar lo que entiendo es la estructura básica de Windows App SDK, pues resulta algo nuevo para mí (en el pasado desarrollaba con WPF y después con UWP en sus inicios). En un artículo anterior hemos visto los primeros pasos en esta plataforma.
+Windows 11 Insider Preview Build 25126">
+
+<meta property="og:url" content="http://localhost:1313/es/posts/2022-05-25-basic-struct-of-windows-app-sdk-project/">
+  <meta property="og:site_name" content="Christian Amado">
+  <meta property="og:title" content="Estructura básica de un proyecto con Windows App SDK">
+  <meta property="og:description" content="En este artículo intentaré explicar lo que entiendo es la estructura básica de Windows App SDK, pues resulta algo nuevo para mí (en el pasado desarrollaba con WPF y después con UWP en sus inicios). En un artículo anterior hemos visto los primeros pasos en esta plataforma.
+Windows 11 Insider Preview Build 25126">
+  <meta property="og:locale" content="es">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2022-05-25T18:45:00-04:00">
+    <meta property="article:modified_time" content="2022-05-25T18:45:00-04:00">
+    <meta property="article:tag" content="WinDev">
+    <meta property="article:tag" content="Windows 11">
+    <meta property="article:tag" content="Windows App SDK">
+
+
+
+
+<link rel="canonical" href="http://localhost:1313/es/posts/2022-05-25-basic-struct-of-windows-app-sdk-project/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/es/">
+      Christian Amado
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/about">Biografía</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/contact">Contacto</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/diabetes">Diabetes</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/tags">Etiquetas</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/en/">🇺🇸</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/es/posts/2022-05-25-basic-struct-of-windows-app-sdk-project/">
+              Estructura básica de un proyecto con Windows App SDK
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2022-05-25T18:45:00-04:00">
+                mayo 25, 2022
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              2 minutos de lectura.
+            </span>
+          </div>
+          
+          
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/es/tags/windev/">WinDev</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/es/tags/windows-11/">Windows 11</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/es/tags/windows-app-sdk/">Windows App SDK</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <p>En este artículo intentaré explicar lo que entiendo es la estructura básica de <strong>Windows App SDK</strong>, pues resulta algo nuevo para mí (en el pasado desarrollaba con WPF y después con UWP en sus inicios). En un <a href="/posts/2022-05-18-windows-app-sdk-development/" >artículo anterior</a> hemos visto los primeros pasos en esta plataforma.</p>
+<p><em><strong>Windows 11 Insider Preview Build 25126</strong></em></p>
+<p>Según la definición tenemos que esta definición:</p>
+<blockquote>
+<p>Windows App SDK es un conjunto de nuevos componentes y herramientas para desarrolladores que representan la próxima evolución en la plataforma de desarrollo de aplicaciones de Windows. Windows App SDK proporciona un conjunto unificado de API y herramientas que se pueden usar de manera consistente por cualquier aplicación de escritorio en Windows 11 y versiones anteriores hasta Windows 10, versión 1809</p></blockquote>
+<p>Rápidamente podemos entender que su estructura básica se compone de:</p>
+<ol>
+<li>
+<p><strong>Foundation</strong>: es la capa que ofrece las <em>API</em> básicas para acceder a las características y servicios de <em>Windows</em>, como la configuración del sistema, el almacenamiento de datos, la red y la seguridad.</p>
+</li>
+<li>
+<p><strong>UI</strong>: es la capa que ofrece los controles y componentes de interfaz de usuario para crear aplicaciones modernas y atractivas en <em>Windows</em>, como <em>XAML Islands</em>, <em>WinUI 3</em> y <em>WebView2</em>.</p>
+</li>
+<li>
+<p><strong>Frameworks</strong>: es la capa que ofrece los marcos de trabajo y patrones para facilitar el desarrollo de aplicaciones en <em>Windows</em>, como <em>App Lifecycle</em>, <em>Push Notifications</em> y <em>Reunion Windowing</em>.</p>
+</li>
+<li>
+<p><strong>Tools</strong>: es la capa que ofrece las extensiones y plantillas para Visual Studio 2022 que permiten usar los componentes de <strong>Windows App SDK</strong> en proyectos nuevos o existentes. También incluye un paquete <em>NuGet</em> que contiene las bibliotecas de Windows App SDK.</p>
+</li>
+</ol>
+<h2 id="diferencias-entre-win32-apis-y-uwp-apis">
+  Diferencias entre Win32 APIs y UWP APIs
+  <a class="heading-link" href="#diferencias-entre-win32-apis-y-uwp-apis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ul>
+<li>
+<p><strong>Win32 APIs</strong>: son las API de <em>Windows</em> que se usan para crear aplicaciones de escritorio tradicionales en C++ o C#. Algunas de estas <em>API</em> son: <em>CreateWindowEx</em>, <em>MessageBox</em>, <em>ShellExecute</em>, etc.</p>
+</li>
+<li>
+<p><strong>UWP APIs</strong>: son las API de <em>Windows</em> que se usan para crear aplicaciones universales que pueden ejecutarse en diferentes dispositivos con <strong>Windows 11</strong>. Algunas de estas API son: <em>Windows.UI.Xaml.Controls</em>, <em>Windows.Media.Capture</em>, <em>Windows.Storage</em>, etc.</p>
+</li>
+</ul>
+<p><strong>Windows App SDK</strong> permite usar ambas API en una misma aplicación, lo que ofrece más flexibilidad y compatibilidad a los desarrolladores1.</p>
+<p>Esta es una pequeña introducción (con sabor a trabajo práctico) sobre Windows App SDK. A partir de esto se vienen muchos artículos sobre este <em>SDK</em>.</p>
+<p>¡Espero resulte útil!</p>
+      </div>
+
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script>
+  window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "cmasblog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    
+    document.addEventListener('themeChanged', function (e) { 
+        if (document.readyState == 'complete') {
+          DISQUS.reset({ reload: true, config: disqus_config });
+        }
+    });
+</script>
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2018 -
+    
+    2025
+     Christian Amado 
+    ·
+    
+    Desarrollado por <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+      <script async src="https://www.googletagmanager.com/gtag/js?id=356375808"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '356375808');
+        }
+      </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=013131931956450466198%3ablhmkdpweyq"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '013131931956450466198:blhmkdpweyq');
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

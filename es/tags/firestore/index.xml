@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Firestore on Christian Amado</title>
+    <link>http://localhost:1313/es/tags/firestore/</link>
+    <description>Recent content in Firestore on Christian Amado</description>
+    <generator>Hugo</generator>
+    <language>es</language>
+    <lastBuildDate>Wed, 23 Apr 2025 00:00:00 -0300</lastBuildDate>
+    <atom:link href="http://localhost:1313/es/tags/firestore/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Firestore como base NoSQL para apps Go</title>
+      <link>http://localhost:1313/es/posts/2025-04-23-gcp-firestore-integration/</link>
+      <pubDate>Wed, 23 Apr 2025 00:00:00 -0300</pubDate>
+      <guid>http://localhost:1313/es/posts/2025-04-23-gcp-firestore-integration/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;Firestore&lt;/strong&gt;, la base de datos &lt;strong&gt;NoSQL&lt;/strong&gt; de &lt;strong&gt;Google Cloud&lt;/strong&gt;, ofrece una solución escalable y de baja latencia ideal para aplicaciones modernas. En este artículo se explora cómo integrar &lt;strong&gt;Firestore&lt;/strong&gt; con aplicaciones desarrolladas en &lt;strong&gt;Go&lt;/strong&gt;, aprovechando el &lt;strong&gt;SDK&lt;/strong&gt; oficial de &lt;strong&gt;Google Cloud&lt;/strong&gt;. A lo largo del artículo se muestra un enfoque práctico para conectar, leer, escribir y actualizar documentos en &lt;strong&gt;Firestore&lt;/strong&gt; desde una aplicación escrita en &lt;strong&gt;Go&lt;/strong&gt;.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

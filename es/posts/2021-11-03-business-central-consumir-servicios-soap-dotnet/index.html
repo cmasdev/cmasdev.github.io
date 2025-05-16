@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  Business Central: Consumir servicios web SOAP desde .NET · Christian Amado
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Christian Amado">
+<meta name="description" content="En este artículo mostraré cómo consumir un servicio desde Microsoft Dynamics 365 Business Central con Microsoft .NET.">
+<meta name="keywords" content="blog,desarrollador,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Business Central: Consumir servicios web SOAP desde .NET">
+  <meta name="twitter:description" content="En este artículo mostraré cómo consumir un servicio desde Microsoft Dynamics 365 Business Central con Microsoft .NET.">
+
+<meta property="og:url" content="http://localhost:1313/es/posts/2021-11-03-business-central-consumir-servicios-soap-dotnet/">
+  <meta property="og:site_name" content="Christian Amado">
+  <meta property="og:title" content="Business Central: Consumir servicios web SOAP desde .NET">
+  <meta property="og:description" content="En este artículo mostraré cómo consumir un servicio desde Microsoft Dynamics 365 Business Central con Microsoft .NET.">
+  <meta property="og:locale" content="es">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2021-11-03T19:05:24-04:00">
+    <meta property="article:modified_time" content="2021-11-03T19:05:24-04:00">
+    <meta property="article:tag" content="Dynamics 365 Business Central">
+    <meta property="article:tag" content="Visual Studio">
+    <meta property="article:tag" content="C#">
+    <meta property="article:tag" content="WPF">
+
+
+
+
+<link rel="canonical" href="http://localhost:1313/es/posts/2021-11-03-business-central-consumir-servicios-soap-dotnet/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/es/">
+      Christian Amado
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/about">Biografía</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/contact">Contacto</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/diabetes">Diabetes</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/tags">Etiquetas</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/en/">🇺🇸</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/es/posts/2021-11-03-business-central-consumir-servicios-soap-dotnet/">
+              Business Central: Consumir servicios web SOAP desde .NET
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2021-11-03T19:05:24-04:00">
+                noviembre 3, 2021
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              2 minutos de lectura.
+            </span>
+          </div>
+          
+          
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/es/tags/dynamics-365-business-central/">Dynamics 365 Business Central</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/es/tags/visual-studio/">Visual Studio</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/es/tags/c%23/">C#</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/es/tags/wpf/">WPF</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <p>En este artículo mostraré cómo consumir un servicio desde Microsoft Dynamics 365 Business Central con Microsoft .NET.</p>
+<p><em><font size="2">Versión: 2021 Wave 1 (KID: 5007779)</font></em></p>
+<h2 id="en-microsoft-dynamics-365-business-central">
+  En Microsoft Dynamics 365 Business Central
+  <a class="heading-link" href="#en-microsoft-dynamics-365-business-central">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Primero, verificamos que el servicio de Microsoft Dynamics 365 esté habilitado para <strong>SOAP</strong>:<br>
+<img src="/img/posts/2021/11/03/Soap1.png" alt=""></p>
+<p>Copiamos la dirección <strong>URL de SOAP</strong>, por la utilizaremos después:<br>
+<img src="/img/posts/2021/11/03/Soap2.png" alt=""></p>
+<h2 id="en-visual-studio">
+  En Visual Studio
+  <a class="heading-link" href="#en-visual-studio">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Creamos una aplicación <strong>WPF</strong> o la que les facilite la vida:<br>
+<img src="/img/posts/2021/11/03/Soap3.png" alt=""></p>
+<p>Configuramos el nuevo proyecto:<br>
+<img src="/img/posts/2021/11/03/Soap4.png" alt=""></p>
+<p>Elegimos el <em>Framework a ser utilizado</em>:<br>
+<img src="/img/posts/2021/11/03/Soap5.png" alt=""></p>
+<p>Agregamos el servicio al proyecto:<br>
+<img src="/img/posts/2021/11/03/Soap6.png" alt=""></p>
+<p>Seleccionamos el tipo <strong>WCF Web Service</strong>:<br>
+<img src="/img/posts/2021/11/03/Soap7.png" alt=""></p>
+<p>Agregamos la referencia (que copiamos más arriba):<br>
+<img src="/img/posts/2021/11/03/Soap8.png" alt=""></p>
+<p>Configuramos la referencia al servicio y listo:<br>
+<img src="/img/posts/2021/11/03/Soap9.png" alt=""></p>
+<p>Verificamos que en el proyecto se haya agregado todo:<br>
+<img src="/img/posts/2021/11/03/Soap10.png" alt=""></p>
+<p>El codigo XAML visual es algo así</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&lt;Window x:Class=&#34;WpfBC.MainWindow&#34;
+</span></span><span class="line"><span class="cl">        xmlns=&#34;http://schemas.microsoft.com/winfx/2006/xaml/presentation&#34;
+</span></span><span class="line"><span class="cl">        xmlns:x=&#34;http://schemas.microsoft.com/winfx/2006/xaml&#34;
+</span></span><span class="line"><span class="cl">        xmlns:d=&#34;http://schemas.microsoft.com/expression/blend/2008&#34;
+</span></span><span class="line"><span class="cl">        xmlns:mc=&#34;http://schemas.openxmlformats.org/markup-compatibility/2006&#34;
+</span></span><span class="line"><span class="cl">        xmlns:local=&#34;clr-namespace:WpfBC&#34;
+</span></span><span class="line"><span class="cl">        mc:Ignorable=&#34;d&#34; Loaded=&#34;Window_Loaded&#34;
+</span></span><span class="line"><span class="cl">        Title=&#34;MainWindow&#34; Height=&#34;450&#34; Width=&#34;800&#34;&gt;
+</span></span><span class="line"><span class="cl">    &lt;Grid&gt;
+</span></span><span class="line"><span class="cl">        &lt;DataGrid Name=&#34;DG1&#34; ItemsSource=&#34;{Binding}&#34; AutoGenerateColumns=&#34;True&#34; &gt;
+</span></span><span class="line"><span class="cl">        &lt;/DataGrid&gt;
+</span></span><span class="line"><span class="cl">    &lt;/Grid&gt;
+</span></span><span class="line"><span class="cl">&lt;/Window&gt;
+</span></span></code></pre></div><p>Enlazamos el DataGrid con el servicio SOAP que consumimos en la aplicacion WPF:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">using</span> <span class="n">System</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">using</span> <span class="n">System</span><span class="o">.</span><span class="n">Security</span><span class="o">.</span><span class="n">Cryptography</span><span class="o">.</span><span class="n">X509Certificates</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">using</span> <span class="n">System</span><span class="o">.</span><span class="n">ServiceModel</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">using</span> <span class="n">System</span><span class="o">.</span><span class="n">ServiceModel</span><span class="o">.</span><span class="n">Security</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">using</span> <span class="n">System</span><span class="o">.</span><span class="n">Windows</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">namespace</span> <span class="n">WpfBC</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="o">///</span> <span class="o">&lt;</span><span class="n">summary</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">///</span> <span class="n">Interaction</span> <span class="n">logic</span> <span class="k">for</span> <span class="n">MainWindow</span><span class="o">.</span><span class="n">xaml</span>
+</span></span><span class="line"><span class="cl">    <span class="o">///</span> <span class="o">&lt;/</span><span class="n">summary</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">public</span> <span class="n">partial</span> <span class="k">class</span> <span class="n">MainWindow</span> <span class="p">:</span> <span class="n">Window</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">public</span> <span class="n">MainWindow</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">InitializeComponent</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">private</span> <span class="n">void</span> <span class="n">Window_Loaded</span><span class="p">(</span><span class="n">object</span> <span class="n">sender</span><span class="p">,</span> <span class="n">RoutedEventArgs</span> <span class="n">e</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">string</span> <span class="n">WSURL</span> <span class="o">=</span> <span class="s2">&#34;https://cmasdev:7047/BC190/WS/CRONUS%20Mexico%20S.A./Page/Plan_de_cuentas&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">   
+</span></span><span class="line"><span class="cl">            <span class="o">//</span><span class="n">Creamos</span> <span class="n">el</span> <span class="n">enlace</span> <span class="n">basico</span> <span class="n">HTPPS</span>
+</span></span><span class="line"><span class="cl">            <span class="n">BasicHttpsBinding</span> <span class="n">binding</span> <span class="o">=</span> <span class="n">new</span> <span class="n">BasicHttpsBinding</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="n">binding</span><span class="o">.</span><span class="n">Security</span><span class="o">.</span><span class="n">Mode</span> <span class="o">=</span> <span class="n">BasicHttpsSecurityMode</span><span class="o">.</span><span class="n">Transport</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">binding</span><span class="o">.</span><span class="n">Security</span><span class="o">.</span><span class="n">Transport</span><span class="o">.</span><span class="n">ClientCredentialType</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">            <span class="n">HttpClientCredentialType</span><span class="o">.</span><span class="n">Windows</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">binding</span><span class="o">.</span><span class="n">MaxReceivedMessageSize</span> <span class="o">=</span> <span class="ne">int</span><span class="o">.</span><span class="n">MaxValue</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="o">//</span><span class="n">Hacemos</span> <span class="n">la</span> <span class="n">llamada</span> <span class="n">al</span> <span class="n">servicio</span> <span class="n">y</span> <span class="n">como</span> <span class="n">prueba</span> <span class="n">salteamos</span> <span class="n">el</span> <span class="n">control</span> <span class="n">SSL</span> <span class="n">del</span> <span class="n">Servidor</span>
+</span></span><span class="line"><span class="cl">            <span class="n">ServicioPrueba</span><span class="o">.</span><span class="n">Plan_de_cuentas_PortClient</span> <span class="n">ws</span> <span class="o">=</span> <span class="n">new</span>
+</span></span><span class="line"><span class="cl">            <span class="n">ServicioPrueba</span><span class="o">.</span><span class="n">Plan_de_cuentas_PortClient</span><span class="p">(</span><span class="n">binding</span><span class="p">,</span> <span class="n">new</span> <span class="n">EndpointAddress</span><span class="p">(</span><span class="n">WSURL</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">            <span class="n">ws</span><span class="o">.</span><span class="n">ClientCredentials</span><span class="o">.</span><span class="n">ServiceCertificate</span><span class="o">.</span><span class="n">SslCertificateAuthentication</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">            <span class="n">new</span> <span class="n">X509ServiceCertificateAuthentication</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">            <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">CertificateValidationMode</span> <span class="o">=</span> <span class="n">X509CertificateValidationMode</span><span class="o">.</span><span class="n">None</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="n">RevocationMode</span> <span class="o">=</span> <span class="n">X509RevocationMode</span><span class="o">.</span><span class="n">NoCheck</span>
+</span></span><span class="line"><span class="cl">            <span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="n">try</span>
+</span></span><span class="line"><span class="cl">            <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="o">//</span><span class="n">Obtenemos</span> <span class="n">la</span> <span class="n">lista</span> <span class="n">de</span> <span class="n">todos</span> <span class="n">los</span> <span class="n">registros</span><span class="o">.</span> <span class="n">En</span> <span class="n">este</span> <span class="n">caso</span> <span class="n">de</span> <span class="n">prueba</span> <span class="nb">sin</span> <span class="n">filtro</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl">                <span class="k">var</span> <span class="n">lista</span> <span class="o">=</span> <span class="n">ws</span><span class="o">.</span><span class="n">ReadMultipleAsync</span><span class="p">(</span><span class="n">null</span><span class="p">,</span> <span class="s2">&#34;&#34;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">Result</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">this</span><span class="o">.</span><span class="n">DG1</span><span class="o">.</span><span class="n">ItemsSource</span> <span class="o">=</span> <span class="n">lista</span><span class="o">.</span><span class="n">ReadMultiple_Result1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="n">catch</span> <span class="p">(</span><span class="n">Exception</span> <span class="n">ex</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="o">//</span><span class="n">Si</span> <span class="n">hay</span> <span class="n">error</span> <span class="n">mostramos</span> <span class="n">un</span> <span class="n">mensaje</span>
+</span></span><span class="line"><span class="cl">                <span class="n">MessageBox</span><span class="o">.</span><span class="n">Show</span><span class="p">(</span><span class="n">ex</span><span class="o">.</span><span class="n">Message</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Ejecutamos y&hellip;
+<img src="/img/posts/2021/11/03/Soap11.png" alt=""></p>
+<p>¡Espero resulte útil!</p>
+      </div>
+
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script>
+  window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "cmasblog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    
+    document.addEventListener('themeChanged', function (e) { 
+        if (document.readyState == 'complete') {
+          DISQUS.reset({ reload: true, config: disqus_config });
+        }
+    });
+</script>
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2018 -
+    
+    2025
+     Christian Amado 
+    ·
+    
+    Desarrollado por <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+      <script async src="https://www.googletagmanager.com/gtag/js?id=356375808"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '356375808');
+        }
+      </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=013131931956450466198%3ablhmkdpweyq"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '013131931956450466198:blhmkdpweyq');
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

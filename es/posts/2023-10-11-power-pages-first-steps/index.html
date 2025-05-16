@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  Primeros pasos en Power Pages · Christian Amado
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Christian Amado">
+<meta name="description" content="En este artículo, veremos cómo crear un primer sitio utilizando Power Pages con una visión general de los distintos grupos de funcionalidades que posee la herramienta.
+En el artículo anterior hemos visto cómo se habilita el servicio, aquí veremos cómo utilizar ese servicio habilitado.">
+<meta name="keywords" content="blog,desarrollador,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Primeros pasos en Power Pages">
+  <meta name="twitter:description" content="En este artículo, veremos cómo crear un primer sitio utilizando Power Pages con una visión general de los distintos grupos de funcionalidades que posee la herramienta.
+En el artículo anterior hemos visto cómo se habilita el servicio, aquí veremos cómo utilizar ese servicio habilitado.">
+
+<meta property="og:url" content="http://localhost:1313/es/posts/2023-10-11-power-pages-first-steps/">
+  <meta property="og:site_name" content="Christian Amado">
+  <meta property="og:title" content="Primeros pasos en Power Pages">
+  <meta property="og:description" content="En este artículo, veremos cómo crear un primer sitio utilizando Power Pages con una visión general de los distintos grupos de funcionalidades que posee la herramienta.
+En el artículo anterior hemos visto cómo se habilita el servicio, aquí veremos cómo utilizar ese servicio habilitado.">
+  <meta property="og:locale" content="es">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2023-10-11T00:00:00-04:00">
+    <meta property="article:modified_time" content="2023-10-11T00:00:00-04:00">
+    <meta property="article:tag" content="Power Pages">
+
+
+
+
+<link rel="canonical" href="http://localhost:1313/es/posts/2023-10-11-power-pages-first-steps/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/es/">
+      Christian Amado
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/about">Biografía</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/contact">Contacto</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/diabetes">Diabetes</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/tags">Etiquetas</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/en/">🇺🇸</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/es/posts/2023-10-11-power-pages-first-steps/">
+              Primeros pasos en Power Pages
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2023-10-11T00:00:00-04:00">
+                octubre 11, 2023
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              2 minutos de lectura.
+            </span>
+          </div>
+          
+          <div class="categories">
+  <i class="fa-solid fa-folder" aria-hidden="true"></i>
+    <a href="/es/categories/aplicaciones-de-negocio/">Aplicaciones De Negocio</a></div>
+
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/es/tags/power-pages/">Power Pages</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <p>En este artículo, veremos cómo crear un primer sitio utilizando <strong>Power Pages</strong> con una visión general de los distintos grupos de funcionalidades que posee la herramienta.</p>
+<p>En el <a href="/posts/2023-10-11-power-pages-first-steps/" >artículo anterior</a> hemos visto cómo se habilita el servicio, aquí veremos cómo utilizar ese servicio habilitado.</p>
+<h1 id="creación">
+  Creación
+  <a class="heading-link" href="#creaci%c3%b3n">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h1>
+<p>Para poder crear un sitio debemos seguir los siguientes pasos:</p>
+<ol>
+<li>
+<p>Crear el sitio desde la página principal
+<img src="https://i.ibb.co/mSQ5BQN/enable-PP-3.png" alt=""></p>
+</li>
+<li>
+<p>Seleccionar la plantilla que necesitamos (en caso que en la opción anterior hayamos seleccionado la opción de elegir plantilla)
+<img src="https://i.ibb.co/PmBcmKM/new-site-PP-1.png" alt=""></p>
+</li>
+<li>
+<p>Colocar las propiedades principales del nuevo sitio
+<img src="https://i.ibb.co/2K0hWhp/new-site-PP-2.png" alt=""></p>
+</li>
+<li>
+<p>Esperar un tiempo para la creación (recomiendo que tomes un vaso de agua mientras)
+<img src="https://i.ibb.co/gTV3RBm/new-site-PP-3.png" alt=""></p>
+</li>
+<li>
+<p>Veremos el sitio nuevo y nos presenta la ayuda en pantalla
+<img src="https://i.ibb.co/GJg61QB/new-site-PP-4.png" alt=""></p>
+</li>
+</ol>
+<h1 id="configuración-general">
+  Configuración General
+  <a class="heading-link" href="#configuraci%c3%b3n-general">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h1>
+<p>Luego de crear el sitio nuevo, en la sección izquierda de la pantalla veremos las opciones disponibles para cada sitio, estas serían las configuraciones generales del mismo.</p>
+<p>Todo esto lo hacemos en el <em><strong>Design Studio</strong></em> que nos presenta <strong>Power Pages</strong>.</p>
+<h2 id="páginas">
+  Páginas
+  <a class="heading-link" href="#p%c3%a1ginas">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>En esta sección se modifican todos los detalles de las páginas y subpáginas que se tenga en el nuevo sitio. Aquí es donde se arma la estructura del sitio.</p>
+<p><img src="https://i.ibb.co/VJNDntV/new-site-PP-5.png" alt=""></p>
+<h2 id="estilos">
+  Estilos
+  <a class="heading-link" href="#estilos">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>En esta sección se modifican los detalles visuales como ser colores, tonos, tipografía, etc.</p>
+<p><img src="https://i.ibb.co/2g5yp6x/new-site-PP-6.png" alt=""></p>
+<h2 id="datos">
+  Datos
+  <a class="heading-link" href="#datos">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>En esta sección se relacionan los componentes de las páginas con los datos existentes en <strong>Dataverse</strong>. Las tablas creadas aquí serán visibles en el <strong>Dataverse</strong></p>
+<p><img src="https://i.ibb.co/B6gD2vh/new-site-PP-7.png" alt=""></p>
+<h2 id="configuración">
+  Configuración
+  <a class="heading-link" href="#configuraci%c3%b3n">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>En esta sección se configuran los detalles del sitio como ser permisos, visibilidiad, flujos de <strong>Power Automate</strong> y otras configuraciones generales.</p>
+<p><img src="https://i.ibb.co/fQgZQLz/new-site-PP-8.png" alt=""></p>
+<p>De esta manera hemos visto detalles iniciales de <strong>Power Pages</strong>.</p>
+<p>¡Espero resulte útil!</p>
+      </div>
+
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script>
+  window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "cmasblog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    
+    document.addEventListener('themeChanged', function (e) { 
+        if (document.readyState == 'complete') {
+          DISQUS.reset({ reload: true, config: disqus_config });
+        }
+    });
+</script>
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2018 -
+    
+    2025
+     Christian Amado 
+    ·
+    
+    Desarrollado por <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+      <script async src="https://www.googletagmanager.com/gtag/js?id=356375808"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '356375808');
+        }
+      </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=013131931956450466198%3ablhmkdpweyq"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '013131931956450466198:blhmkdpweyq');
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

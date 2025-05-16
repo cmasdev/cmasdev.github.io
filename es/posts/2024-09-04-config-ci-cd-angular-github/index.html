@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  Configuración de CI/CD para proyectos Angular con GitHub Actions · Christian Amado
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Christian Amado">
+<meta name="description" content="La integración continua (CI) y la entrega continua (CD) son pilares fundamentales en el desarrollo de software moderno. GitHub Actions proporciona una solución poderosa y flexible para automatizar procesos de CI/CD directamente en repositorios de GitHub. En este artículo, aprenderemos a configurar CI/CD para un proyecto Angular utilizando GitHub Actions.">
+<meta name="keywords" content="blog,desarrollador,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Configuración de CI/CD para proyectos Angular con GitHub Actions">
+  <meta name="twitter:description" content="La integración continua (CI) y la entrega continua (CD) son pilares fundamentales en el desarrollo de software moderno. GitHub Actions proporciona una solución poderosa y flexible para automatizar procesos de CI/CD directamente en repositorios de GitHub. En este artículo, aprenderemos a configurar CI/CD para un proyecto Angular utilizando GitHub Actions.">
+
+<meta property="og:url" content="http://localhost:1313/es/posts/2024-09-04-config-ci-cd-angular-github/">
+  <meta property="og:site_name" content="Christian Amado">
+  <meta property="og:title" content="Configuración de CI/CD para proyectos Angular con GitHub Actions">
+  <meta property="og:description" content="La integración continua (CI) y la entrega continua (CD) son pilares fundamentales en el desarrollo de software moderno. GitHub Actions proporciona una solución poderosa y flexible para automatizar procesos de CI/CD directamente en repositorios de GitHub. En este artículo, aprenderemos a configurar CI/CD para un proyecto Angular utilizando GitHub Actions.">
+  <meta property="og:locale" content="es">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-09-04T00:00:00-04:00">
+    <meta property="article:modified_time" content="2024-09-04T00:00:00-04:00">
+    <meta property="article:tag" content="Web Development">
+    <meta property="article:tag" content="Angular">
+    <meta property="article:tag" content="GitHub">
+
+
+
+
+<link rel="canonical" href="http://localhost:1313/es/posts/2024-09-04-config-ci-cd-angular-github/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/es/">
+      Christian Amado
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/about">Biografía</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/contact">Contacto</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/diabetes">Diabetes</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/tags">Etiquetas</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/en/">🇺🇸</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/es/posts/2024-09-04-config-ci-cd-angular-github/">
+              Configuración de CI/CD para proyectos Angular con GitHub Actions
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2024-09-04T00:00:00-04:00">
+                septiembre 4, 2024
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              4 minutos de lectura.
+            </span>
+          </div>
+          
+          
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/es/tags/web-development/">Web Development</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/es/tags/angular/">Angular</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/es/tags/github/">GitHub</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <p>La integración continua (CI) y la entrega continua (CD) son pilares fundamentales en el desarrollo de software moderno. <strong>GitHub Actions</strong> proporciona una solución poderosa y flexible para automatizar procesos de <strong>CI/CD</strong> directamente en repositorios de <strong>GitHub</strong>. En este artículo, aprenderemos a configurar <strong>CI/CD</strong> para un proyecto Angular utilizando <strong>GitHub Actions</strong>.</p>
+<h2 id="1-introducción-a-cicd-y-github-actions">
+  1. Introducción a CI/CD y GitHub Actions
+  <a class="heading-link" href="#1-introducci%c3%b3n-a-cicd-y-github-actions">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="qué-es-cicd">
+  ¿Qué es CI/CD?
+  <a class="heading-link" href="#qu%c3%a9-es-cicd">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>CI (Integración Continua):</strong> Automatiza la verificación del código mediante pruebas y validaciones cada vez que se realiza un cambio en el repositorio.</li>
+<li><strong>CD (Entrega Continua):</strong> Automatiza el proceso de despliegue del código a entornos de producción o pruebas.</li>
+</ul>
+<h3 id="ventajas-de-github-actions">
+  Ventajas de GitHub Actions
+  <a class="heading-link" href="#ventajas-de-github-actions">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>Integración nativa con repositorios de GitHub.</li>
+<li>Flexibilidad para definir pipelines personalizados.</li>
+<li>Amplio ecosistema de acciones reutilizables.</li>
+<li>Historial detallado de ejecuciones y logs.</li>
+</ul>
+<h2 id="2-configuración-inicial-del-proyecto-angular">
+  2. Configuración inicial del proyecto Angular
+  <a class="heading-link" href="#2-configuraci%c3%b3n-inicial-del-proyecto-angular">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ol>
+<li>
+<p><strong>Crear un proyecto Angular:</strong>
+Si no tienes un proyecto Angular, puedes crear uno nuevo:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">ng new angular-ci-cd-example
+</span></span><span class="line"><span class="cl">cd angular-ci-cd-example
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Subir el proyecto a GitHub:</strong>
+Inicializa un repositorio y empuja el proyecto:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">git init
+</span></span><span class="line"><span class="cl">git remote add origin &lt;tu-repositorio&gt;
+</span></span><span class="line"><span class="cl">git add .
+</span></span><span class="line"><span class="cl">git commit -m &#34;Initial commit&#34;
+</span></span><span class="line"><span class="cl">git push -u origin main
+</span></span></code></pre></div></li>
+</ol>
+<h2 id="3-creación-del-workflow-de-ci">
+  3. Creación del workflow de CI
+  <a class="heading-link" href="#3-creaci%c3%b3n-del-workflow-de-ci">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="estructura-básica-del-workflow">
+  Estructura básica del workflow
+  <a class="heading-link" href="#estructura-b%c3%a1sica-del-workflow">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>GitHub Actions utiliza un archivo YAML ubicado en <code>.github/workflows</code>. Crearemos un archivo llamado <code>ci.yml</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">name: CI for Angular
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">on:
+</span></span><span class="line"><span class="cl">  push:
+</span></span><span class="line"><span class="cl">    branches:
+</span></span><span class="line"><span class="cl">      - main
+</span></span><span class="line"><span class="cl">  pull_request:
+</span></span><span class="line"><span class="cl">    branches:
+</span></span><span class="line"><span class="cl">      - main
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">jobs:
+</span></span><span class="line"><span class="cl">  build-and-test:
+</span></span><span class="line"><span class="cl">    runs-on: ubuntu-latest
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    steps:
+</span></span><span class="line"><span class="cl">    - name: Check out code
+</span></span><span class="line"><span class="cl">      uses: actions/checkout@v3
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    - name: Set up Node.js
+</span></span><span class="line"><span class="cl">      uses: actions/setup-node@v3
+</span></span><span class="line"><span class="cl">      with:
+</span></span><span class="line"><span class="cl">        node-version: 18
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    - name: Install dependencies
+</span></span><span class="line"><span class="cl">      run: npm ci
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    - name: Run linting
+</span></span><span class="line"><span class="cl">      run: npm run lint
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    - name: Run tests
+</span></span><span class="line"><span class="cl">      run: npm test
+</span></span></code></pre></div><h3 id="explicación-del-workflow">
+  Explicación del workflow
+  <a class="heading-link" href="#explicaci%c3%b3n-del-workflow">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li><strong>Eventos de disparo:</strong> Ejecuta el workflow en cada <code>push</code> o <code>pull_request</code> hacia la rama <code>main</code>.</li>
+<li><strong>Jobs:</strong> El trabajo <code>build-and-test</code> incluye:
+<ul>
+<li><strong>actions/checkout:</strong> Descarga el código del repositorio.</li>
+<li><strong>actions/setup-node:</strong> Configura Node.js en la máquina.</li>
+<li><strong>npm ci:</strong> Instala las dependencias de forma limpia.</li>
+<li><strong>npm run lint:</strong> Ejecuta la verificación de estilo de código.</li>
+<li><strong>npm test:</strong> Ejecuta pruebas unitarias.</li>
+</ul>
+</li>
+</ol>
+<h2 id="4-configuración-del-workflow-de-cd">
+  4. Configuración del workflow de CD
+  <a class="heading-link" href="#4-configuraci%c3%b3n-del-workflow-de-cd">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="despliegue-en-github-pages">
+  Despliegue en GitHub Pages
+  <a class="heading-link" href="#despliegue-en-github-pages">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Si deseas publicar tu aplicación Angular en GitHub Pages, sigue estos pasos:</p>
+<ol>
+<li>
+<p><strong>Configurar el archivo <code>angular.json</code>:</strong>
+Asegúrate de que la propiedad <code>outputPath</code> de <code>build</code> esté configurada correctamente:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&#34;outputPath&#34;: &#34;dist/angular-ci-cd-example&#34;
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Agregar el workflow de despliegue:</strong>
+Crea un archivo <code>.github/workflows/cd-gh-pages.yml</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">name: Deploy to GitHub Pages
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">on:
+</span></span><span class="line"><span class="cl">  push:
+</span></span><span class="line"><span class="cl">    branches:
+</span></span><span class="line"><span class="cl">      - main
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">jobs:
+</span></span><span class="line"><span class="cl">  deploy:
+</span></span><span class="line"><span class="cl">    runs-on: ubuntu-latest
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    steps:
+</span></span><span class="line"><span class="cl">    - name: Check out code
+</span></span><span class="line"><span class="cl">      uses: actions/checkout@v3
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    - name: Set up Node.js
+</span></span><span class="line"><span class="cl">      uses: actions/setup-node@v3
+</span></span><span class="line"><span class="cl">      with:
+</span></span><span class="line"><span class="cl">        node-version: 18
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    - name: Install dependencies
+</span></span><span class="line"><span class="cl">      run: npm ci
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    - name: Build project
+</span></span><span class="line"><span class="cl">      run: npm run build -- --output-path=dist
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    - name: Deploy to GitHub Pages
+</span></span><span class="line"><span class="cl">      uses: peaceiris/actions-gh-pages@v3
+</span></span><span class="line"><span class="cl">      with:
+</span></span><span class="line"><span class="cl">        github_token: ${{ secrets.GITHUB_TOKEN }}
+</span></span><span class="line"><span class="cl">        publish_dir: ./dist/angular-ci-cd-example
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Habilitar GitHub Pages:</strong></p>
+<ul>
+<li>Ve a la configuración de tu repositorio en GitHub.</li>
+<li>Activa GitHub Pages y selecciona la rama <code>gh-pages</code> como fuente.</li>
+</ul>
+</li>
+</ol>
+<h3 id="despliegue-en-un-servidor-externo">
+  Despliegue en un servidor externo
+  <a class="heading-link" href="#despliegue-en-un-servidor-externo">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Si prefieres desplegar en un servidor externo, como AWS o Azure, puedes agregar un paso adicional al workflow.</p>
+<p><strong>Ejemplo para FTP:</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl">    <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">Deploy</span> <span class="n">to</span> <span class="n">FTP</span> <span class="n">server</span>
+</span></span><span class="line"><span class="cl">      <span class="n">uses</span><span class="p">:</span> <span class="n">sebastianpopp</span><span class="o">/</span><span class="n">ftp</span><span class="o">-</span><span class="n">action</span><span class="err">@</span><span class="n">v2</span>
+</span></span><span class="line"><span class="cl">      <span class="n">with</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">host</span><span class="p">:</span> <span class="o">$</span><span class="p">{{</span> <span class="n">secrets</span><span class="o">.</span><span class="n">FTP_HOST</span> <span class="p">}}</span>
+</span></span><span class="line"><span class="cl">        <span class="n">username</span><span class="p">:</span> <span class="o">$</span><span class="p">{{</span> <span class="n">secrets</span><span class="o">.</span><span class="n">FTP_USERNAME</span> <span class="p">}}</span>
+</span></span><span class="line"><span class="cl">        <span class="n">password</span><span class="p">:</span> <span class="o">$</span><span class="p">{{</span> <span class="n">secrets</span><span class="o">.</span><span class="n">FTP_PASSWORD</span> <span class="p">}}</span>
+</span></span><span class="line"><span class="cl">        <span class="n">local</span><span class="o">-</span><span class="n">dir</span><span class="p">:</span> <span class="o">./</span><span class="n">dist</span><span class="o">/</span><span class="n">angular</span><span class="o">-</span><span class="n">ci</span><span class="o">-</span><span class="n">cd</span><span class="o">-</span><span class="n">example</span>
+</span></span><span class="line"><span class="cl">        <span class="n">remote</span><span class="o">-</span><span class="n">dir</span><span class="p">:</span> <span class="o">/</span><span class="k">var</span><span class="o">/</span><span class="n">www</span><span class="o">/</span><span class="n">html</span>
+</span></span></code></pre></div><h2 id="5-buenas-prácticas-en-cicd-para-angular">
+  5. Buenas prácticas en CI/CD para Angular
+  <a class="heading-link" href="#5-buenas-pr%c3%a1cticas-en-cicd-para-angular">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ol>
+<li><strong>Usar <code>npm ci</code> en lugar de <code>npm install</code>:</strong> Garantiza una instalación consistente de dependencias.</li>
+<li><strong>Configurar pruebas end-to-end (E2E):</strong> Agrega un paso para ejecutar pruebas E2E utilizando herramientas como Cypress o Protractor.</li>
+<li><strong>Separar workflows:</strong> Divide CI y CD en archivos separados para mayor claridad.</li>
+<li><strong>Utilizar secretos de GitHub:</strong> Almacena credenciales sensibles en <code>Secrets</code> para mantener la seguridad.</li>
+<li><strong>Monitorear el rendimiento:</strong> Usa herramientas de seguimiento como Lighthouse para verificar el impacto de los cambios.</li>
+</ol>
+<h2 id="6-conclusión">
+  6. Conclusión
+  <a class="heading-link" href="#6-conclusi%c3%b3n">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Configurar <strong>CI/CD</strong> para proyectos <strong>Angular</strong> con <strong>GitHub Actions</strong> mejora la eficiencia del desarrollo y asegura entregas rápidas y confiables. Desde la ejecución de pruebas hasta el despliegue automatizado en <strong>GitHub Pages</strong> o servidores externos, <strong>GitHub Actions</strong> simplifica el proceso y permite un flujo de trabajo profesional y moderno. ¡Empieza a automatizar hoy mismo y lleva tu proyecto Angular al siguiente nivel!</p>
+      </div>
+
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script>
+  window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "cmasblog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    
+    document.addEventListener('themeChanged', function (e) { 
+        if (document.readyState == 'complete') {
+          DISQUS.reset({ reload: true, config: disqus_config });
+        }
+    });
+</script>
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2018 -
+    
+    2025
+     Christian Amado 
+    ·
+    
+    Desarrollado por <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+      <script async src="https://www.googletagmanager.com/gtag/js?id=356375808"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '356375808');
+        }
+      </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=013131931956450466198%3ablhmkdpweyq"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '013131931956450466198:blhmkdpweyq');
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

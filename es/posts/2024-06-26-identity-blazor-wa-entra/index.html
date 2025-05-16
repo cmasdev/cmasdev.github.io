@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  Autenticación y autorización en Blazor WebAssembly con Microsoft Entra ID · Christian Amado
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Christian Amado">
+<meta name="description" content="Blazor WebAssembly es una tecnología poderosa dentro del ecosistema .NET que permite construir aplicaciones web interactivas completamente en C#. Para aplicaciones empresariales y seguras, la autenticación y autorización son aspectos fundamentales. Microsoft Entra ID (anteriormente Azure Active Directory) proporciona una solución confiable y escalable para la gestión de identidad. En este artículo, exploraremos cómo integrar autenticación y autorización en una aplicación Blazor WebAssembly utilizando .NET 8 y Microsoft Entra ID.">
+<meta name="keywords" content="blog,desarrollador,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Autenticación y autorización en Blazor WebAssembly con Microsoft Entra ID">
+  <meta name="twitter:description" content="Blazor WebAssembly es una tecnología poderosa dentro del ecosistema .NET que permite construir aplicaciones web interactivas completamente en C#. Para aplicaciones empresariales y seguras, la autenticación y autorización son aspectos fundamentales. Microsoft Entra ID (anteriormente Azure Active Directory) proporciona una solución confiable y escalable para la gestión de identidad. En este artículo, exploraremos cómo integrar autenticación y autorización en una aplicación Blazor WebAssembly utilizando .NET 8 y Microsoft Entra ID.">
+
+<meta property="og:url" content="http://localhost:1313/es/posts/2024-06-26-identity-blazor-wa-entra/">
+  <meta property="og:site_name" content="Christian Amado">
+  <meta property="og:title" content="Autenticación y autorización en Blazor WebAssembly con Microsoft Entra ID">
+  <meta property="og:description" content="Blazor WebAssembly es una tecnología poderosa dentro del ecosistema .NET que permite construir aplicaciones web interactivas completamente en C#. Para aplicaciones empresariales y seguras, la autenticación y autorización son aspectos fundamentales. Microsoft Entra ID (anteriormente Azure Active Directory) proporciona una solución confiable y escalable para la gestión de identidad. En este artículo, exploraremos cómo integrar autenticación y autorización en una aplicación Blazor WebAssembly utilizando .NET 8 y Microsoft Entra ID.">
+  <meta property="og:locale" content="es">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-06-26T00:00:00-04:00">
+    <meta property="article:modified_time" content="2024-06-26T00:00:00-04:00">
+    <meta property="article:tag" content="Web Development">
+    <meta property="article:tag" content="Blazor">
+    <meta property="article:tag" content=".NET">
+
+
+
+
+<link rel="canonical" href="http://localhost:1313/es/posts/2024-06-26-identity-blazor-wa-entra/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/es/">
+      Christian Amado
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/about">Biografía</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/contact">Contacto</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/diabetes">Diabetes</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/tags">Etiquetas</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/en/">🇺🇸</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/es/posts/2024-06-26-identity-blazor-wa-entra/">
+              Autenticación y autorización en Blazor WebAssembly con Microsoft Entra ID
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2024-06-26T00:00:00-04:00">
+                junio 26, 2024
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              3 minutos de lectura.
+            </span>
+          </div>
+          
+          
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/es/tags/web-development/">Web Development</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/es/tags/blazor/">Blazor</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/es/tags/.net/">.NET</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <p><strong>Blazor WebAssembly</strong> es una tecnología poderosa dentro del ecosistema <strong>.NET</strong> que permite construir aplicaciones web interactivas completamente en C#. Para aplicaciones empresariales y seguras, la autenticación y autorización son aspectos fundamentales. <strong>Microsoft Entra ID</strong> (anteriormente Azure Active Directory) proporciona una solución confiable y escalable para la gestión de identidad. En este artículo, exploraremos cómo integrar autenticación y autorización en una aplicación <strong>Blazor WebAssembly</strong> utilizando <strong>.NET 8</strong> y <strong>Microsoft Entra ID</strong>.</p>
+<h2 id="requisitos-previos">
+  Requisitos previos
+  <a class="heading-link" href="#requisitos-previos">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Antes de comenzar, asegúrate de contar con lo siguiente:</p>
+<ul>
+<li><strong>.NET 8 SDK</strong> instalado en tu sistema.</li>
+<li><strong>Cuenta de Azure</strong> con acceso a Microsoft Entra ID.</li>
+<li><strong>Visual Studio 2022</strong> o Visual Studio Code.</li>
+<li><strong>Azure CLI</strong> instalado para la configuración de la identidad.</li>
+</ul>
+<h2 id="creación-de-la-aplicación-blazor-webassembly">
+  Creación de la aplicación Blazor WebAssembly
+  <a class="heading-link" href="#creaci%c3%b3n-de-la-aplicaci%c3%b3n-blazor-webassembly">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Para iniciar, crearemos una nueva aplicación Blazor WebAssembly con soporte para autenticación de Microsoft Entra ID.</p>
+<p>Ejecuta el siguiente comando en la terminal:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"> dotnet new blazorwasm -o BlazorAuthApp --auth IndividualB2C
+</span></span><span class="line"><span class="cl"> cd BlazorAuthApp
+</span></span></code></pre></div><p>Esto genera una aplicación Blazor WebAssembly con autenticación preconfigurada.</p>
+<h2 id="configuración-de-microsoft-entra-id">
+  Configuración de Microsoft Entra ID
+  <a class="heading-link" href="#configuraci%c3%b3n-de-microsoft-entra-id">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="1-registrar-la-aplicación-en-azure">
+  1. Registrar la aplicación en Azure
+  <a class="heading-link" href="#1-registrar-la-aplicaci%c3%b3n-en-azure">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>Accede al portal de Azure.</li>
+<li>Dirígete a <strong>Microsoft Entra ID</strong>.</li>
+<li>Ve a <strong>Registros de Aplicaciones</strong> y selecciona <strong>Nueva Aplicación</strong>.</li>
+<li>Ingresa un nombre y elige <strong>Cuentas en cualquier directorio organizacional</strong>.</li>
+<li>Configura la URL de redirección como <code>https://localhost:5001/authentication/login-callback</code>.</li>
+<li>Guarda la aplicación y copia el <strong>Application (client) ID</strong>.</li>
+</ol>
+<h3 id="2-configurar-los-permisos-de-la-api">
+  2. Configurar los permisos de la API
+  <a class="heading-link" href="#2-configurar-los-permisos-de-la-api">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>Dentro del registro de la aplicación, ve a <strong>Permisos de API</strong>.</li>
+<li>Agrega los siguientes permisos:
+<ul>
+<li><code>openid</code></li>
+<li><code>profile</code></li>
+<li><code>email</code></li>
+<li><code>User.Read</code></li>
+</ul>
+</li>
+<li>Concede el consentimiento del administrador.</li>
+</ol>
+<h3 id="3-configurar-los-secretos-del-cliente">
+  3. Configurar los secretos del cliente
+  <a class="heading-link" href="#3-configurar-los-secretos-del-cliente">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>Ve a <strong>Certificados y secretos</strong>.</li>
+<li>Genera un nuevo secreto de cliente y copia su valor.</li>
+</ol>
+<h2 id="integración-de-la-autenticación-en-blazor-webassembly">
+  Integración de la autenticación en Blazor WebAssembly
+  <a class="heading-link" href="#integraci%c3%b3n-de-la-autenticaci%c3%b3n-en-blazor-webassembly">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="configurar-appsettingsjson">
+  Configurar appsettings.json
+  <a class="heading-link" href="#configurar-appsettingsjson">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Modifica <code>wwwroot/appsettings.json</code> para agregar la configuración de Microsoft Entra ID:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">  &#34;AzureAd&#34;: {
+</span></span><span class="line"><span class="cl">    &#34;Authority&#34;: &#34;https://login.microsoftonline.com/{tenant_id}&#34;,
+</span></span><span class="line"><span class="cl">    &#34;ClientId&#34;: &#34;{client_id}&#34;,
+</span></span><span class="line"><span class="cl">    &#34;ValidateAuthority&#34;: true
+</span></span><span class="line"><span class="cl">  }
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></div><p>Reemplaza <code>{tenant_id}</code> y <code>{client_id}</code> con los valores de tu aplicación en Azure.</p>
+<h3 id="configurar-autenticación-en-programcs">
+  Configurar autenticación en Program.cs
+  <a class="heading-link" href="#configurar-autenticaci%c3%b3n-en-programcs">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Edita <code>Program.cs</code> para habilitar la autenticación:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">using</span> <span class="n">Microsoft</span><span class="o">.</span><span class="n">AspNetCore</span><span class="o">.</span><span class="n">Components</span><span class="o">.</span><span class="n">Web</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">using</span> <span class="n">Microsoft</span><span class="o">.</span><span class="n">AspNetCore</span><span class="o">.</span><span class="n">Components</span><span class="o">.</span><span class="n">WebAssembly</span><span class="o">.</span><span class="n">Authentication</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">using</span> <span class="n">Microsoft</span><span class="o">.</span><span class="n">AspNetCore</span><span class="o">.</span><span class="n">Components</span><span class="o">.</span><span class="n">WebAssembly</span><span class="o">.</span><span class="n">Hosting</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">using</span> <span class="n">BlazorAuthApp</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">var</span> <span class="n">builder</span> <span class="o">=</span> <span class="n">WebAssemblyHostBuilder</span><span class="o">.</span><span class="n">CreateDefault</span><span class="p">(</span><span class="n">args</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">builder</span><span class="o">.</span><span class="n">Services</span><span class="o">.</span><span class="n">AddAuthorizationCore</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="n">builder</span><span class="o">.</span><span class="n">Services</span><span class="o">.</span><span class="n">AddMsalAuthentication</span><span class="p">(</span><span class="n">options</span> <span class="o">=&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">builder</span><span class="o">.</span><span class="n">Configuration</span><span class="o">.</span><span class="n">Bind</span><span class="p">(</span><span class="s2">&#34;AzureAd&#34;</span><span class="p">,</span> <span class="n">options</span><span class="o">.</span><span class="n">ProviderOptions</span><span class="o">.</span><span class="n">Authentication</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">await</span> <span class="n">builder</span><span class="o">.</span><span class="n">Build</span><span class="p">()</span><span class="o">.</span><span class="n">RunAsync</span><span class="p">();</span>
+</span></span></code></pre></div><p>Esto permite que Blazor WebAssembly use Microsoft Entra ID para autenticación.</p>
+<h3 id="agregar-control-de-autenticación-en-la-ui">
+  Agregar control de autenticación en la UI
+  <a class="heading-link" href="#agregar-control-de-autenticaci%c3%b3n-en-la-ui">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Modifica <code>MainLayout.razor</code> para incluir botones de inicio de sesión y cierre de sesión:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&lt;AuthorizeView&gt;
+</span></span><span class="line"><span class="cl">    &lt;Authorized&gt;
+</span></span><span class="line"><span class="cl">        &lt;p&gt;Bienvenido, @context.User.Identity.Name!&lt;/p&gt;
+</span></span><span class="line"><span class="cl">        &lt;button @onclick=&#34;(() =&gt; Navigation.NavigateTo(&#39;authentication/logout&#39;))&#34;&gt;Cerrar sesión&lt;/button&gt;
+</span></span><span class="line"><span class="cl">    &lt;/Authorized&gt;
+</span></span><span class="line"><span class="cl">    &lt;NotAuthorized&gt;
+</span></span><span class="line"><span class="cl">        &lt;button @onclick=&#34;(() =&gt; Navigation.NavigateTo(&#39;authentication/login&#39;))&#34;&gt;Iniciar sesión&lt;/button&gt;
+</span></span><span class="line"><span class="cl">    &lt;/NotAuthorized&gt;
+</span></span><span class="line"><span class="cl">&lt;/AuthorizeView&gt;
+</span></span></code></pre></div><p>Esto mostrará diferentes opciones dependiendo del estado de autenticación del usuario.</p>
+<h2 id="implementar-autorización-basada-en-roles">
+  Implementar Autorización basada en Roles
+  <a class="heading-link" href="#implementar-autorizaci%c3%b3n-basada-en-roles">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Para restringir el acceso a componentes específicos según roles, puedes modificar el componente Blazor de la siguiente manera:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&lt;AuthorizeView Roles=&#34;Admin&#34;&gt;
+</span></span><span class="line"><span class="cl">    &lt;p&gt;Contenido exclusivo para administradores.&lt;/p&gt;
+</span></span><span class="line"><span class="cl">&lt;/AuthorizeView&gt;
+</span></span></code></pre></div><p>Esto garantiza que solo los usuarios con el rol &ldquo;Admin&rdquo; puedan ver el contenido.</p>
+<h2 id="conclusión">
+  Conclusión
+  <a class="heading-link" href="#conclusi%c3%b3n">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Hemos configurado una aplicación <strong>Blazor WebAssembly</strong> para autenticarse con <strong>Microsoft Entra ID</strong> y hemos implementado autorización basada en roles. Esta configuración permite construir aplicaciones seguras y escalables en el ecosistema Microsoft.</p>
+<p>Con estos pasos, ahora puedes extender tu aplicación agregando más protecciones y permisos según las necesidades de tu proyecto.</p>
+      </div>
+
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script>
+  window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "cmasblog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    
+    document.addEventListener('themeChanged', function (e) { 
+        if (document.readyState == 'complete') {
+          DISQUS.reset({ reload: true, config: disqus_config });
+        }
+    });
+</script>
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2018 -
+    
+    2025
+     Christian Amado 
+    ·
+    
+    Desarrollado por <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+      <script async src="https://www.googletagmanager.com/gtag/js?id=356375808"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '356375808');
+        }
+      </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=013131931956450466198%3ablhmkdpweyq"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '013131931956450466198:blhmkdpweyq');
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

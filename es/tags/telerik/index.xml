@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Telerik on Christian Amado</title>
+    <link>http://localhost:1313/es/tags/telerik/</link>
+    <description>Recent content in Telerik on Christian Amado</description>
+    <generator>Hugo</generator>
+    <language>es</language>
+    <lastBuildDate>Sun, 19 Mar 2023 09:01:00 -0400</lastBuildDate>
+    <atom:link href="http://localhost:1313/es/tags/telerik/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ChatGPT en WPF</title>
+      <link>http://localhost:1313/es/posts/2023-03-19-chatgpt-wpf/</link>
+      <pubDate>Sun, 19 Mar 2023 09:01:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2023-03-19-chatgpt-wpf/</guid>
+      <description>&lt;p&gt;En este artículo veremos cómo crear un Chat con la API de &lt;strong&gt;ChatGPT&lt;/strong&gt; y &lt;strong&gt;WPF&lt;/strong&gt; con controles &lt;strong&gt;Telerik&lt;/strong&gt;.&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Windows 11 Insider Preview Build 25314&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Creando una aplicación tipo Chat en WPF usando Telerik</title>
+      <link>http://localhost:1313/es/posts/2023-03-15-creating-chat-app-wpf-using-telerik/</link>
+      <pubDate>Wed, 15 Mar 2023 20:57:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2023-03-15-creating-chat-app-wpf-using-telerik/</guid>
+      <description>&lt;p&gt;En este artículo veremos cómo crear una aplicación de Chat en &lt;strong&gt;WPF&lt;/strong&gt; con &lt;strong&gt;Telerik&lt;/strong&gt;. (Antesala de todo el tema de &lt;a href=&#34;https://openai.com/blog/chatgpt/&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;ChatGPT&lt;/a&gt;)&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Windows 11 Insider Preview Build 25290&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Primeros pasos con XAML en MAUI</title>
+      <link>http://localhost:1313/es/posts/2022-09-14-first-step-xaml-in-maui/</link>
+      <pubDate>Wed, 14 Sep 2022 23:18:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2022-09-14-first-step-xaml-in-maui/</guid>
+      <description>&lt;p&gt;En este artículo mostraré cómo iniciar los pasos con el lenguaje &lt;strong&gt;XAML&lt;/strong&gt; en &lt;strong&gt;.NET MAUI&lt;/strong&gt;.&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Windows 11 Insider Preview Build 25201&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

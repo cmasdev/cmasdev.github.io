@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  Construcción de un asistente contextual para escritorio usando IA local con acceso al sistema · Christian Amado
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Christian Amado">
+<meta name="description" content="La combinación de capacidades de IA local (como modelos ONNX) con APIs del sistema de Windows abre la puerta al desarrollo de asistentes inteligentes capaces de entender el contexto del usuario y reaccionar en consecuencia. En este artículo se describe cómo crear un asistente de escritorio moderno con WinUI 3 que escuche el contenido del portapapeles, analice el texto localmente mediante inferencia con IA, y sugiera acciones o realice comandos con base en el resultado.
+Este enfoque funciona completamente offline, preservando privacidad y respondiendo en tiempo real.">
+<meta name="keywords" content="blog,desarrollador,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Construcción de un asistente contextual para escritorio usando IA local con acceso al sistema">
+  <meta name="twitter:description" content="La combinación de capacidades de IA local (como modelos ONNX) con APIs del sistema de Windows abre la puerta al desarrollo de asistentes inteligentes capaces de entender el contexto del usuario y reaccionar en consecuencia. En este artículo se describe cómo crear un asistente de escritorio moderno con WinUI 3 que escuche el contenido del portapapeles, analice el texto localmente mediante inferencia con IA, y sugiera acciones o realice comandos con base en el resultado.
+Este enfoque funciona completamente offline, preservando privacidad y respondiendo en tiempo real.">
+
+<meta property="og:url" content="http://localhost:1313/es/posts/2025-03-28-local-ai/">
+  <meta property="og:site_name" content="Christian Amado">
+  <meta property="og:title" content="Construcción de un asistente contextual para escritorio usando IA local con acceso al sistema">
+  <meta property="og:description" content="La combinación de capacidades de IA local (como modelos ONNX) con APIs del sistema de Windows abre la puerta al desarrollo de asistentes inteligentes capaces de entender el contexto del usuario y reaccionar en consecuencia. En este artículo se describe cómo crear un asistente de escritorio moderno con WinUI 3 que escuche el contenido del portapapeles, analice el texto localmente mediante inferencia con IA, y sugiera acciones o realice comandos con base en el resultado.
+Este enfoque funciona completamente offline, preservando privacidad y respondiendo en tiempo real.">
+  <meta property="og:locale" content="es">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-03-28T00:00:00-03:00">
+    <meta property="article:modified_time" content="2025-03-28T00:00:00-03:00">
+    <meta property="article:tag" content="WinDev">
+    <meta property="article:tag" content="Windows 11">
+    <meta property="article:tag" content="WinUI 3">
+    <meta property="article:tag" content="Windows App SDK">
+
+
+
+
+<link rel="canonical" href="http://localhost:1313/es/posts/2025-03-28-local-ai/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/es/">
+      Christian Amado
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/about">Biografía</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/contact">Contacto</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/diabetes">Diabetes</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/tags">Etiquetas</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/en/">🇺🇸</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/es/posts/2025-03-28-local-ai/">
+              Construcción de un asistente contextual para escritorio usando IA local con acceso al sistema
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2025-03-28T00:00:00-03:00">
+                marzo 28, 2025
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              3 minutos de lectura.
+            </span>
+          </div>
+          
+          
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/es/tags/windev/">WinDev</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/es/tags/windows-11/">Windows 11</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/es/tags/winui-3/">WinUI 3</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/es/tags/windows-app-sdk/">Windows App SDK</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <p>La combinación de capacidades de <strong>IA local</strong> (como modelos <strong>ONNX</strong>) con APIs del sistema de <strong>Windows</strong> abre la puerta al desarrollo de asistentes inteligentes capaces de entender el contexto del usuario y reaccionar en consecuencia. En este artículo se describe cómo crear un asistente de escritorio moderno con <strong>WinUI 3</strong> que escuche el contenido del portapapeles, analice el texto localmente mediante inferencia con IA, y sugiera acciones o realice comandos con base en el resultado.</p>
+<p>Este enfoque funciona completamente offline, preservando privacidad y respondiendo en tiempo real.</p>
+<h2 id="escenario">
+  Escenario
+  <a class="heading-link" href="#escenario">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Se construye una app tipo widget flotante que:</p>
+<ul>
+<li>Detecta texto nuevo en el portapapeles</li>
+<li>Usa un modelo ONNX de clasificación de intención</li>
+<li>Sugiere acciones como: buscar, traducir, abrir app, copiar info, etc.</li>
+<li>Accede a procesos del sistema para acciones automatizadas</li>
+</ul>
+<h2 id="requisitos">
+  Requisitos
+  <a class="heading-link" href="#requisitos">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ul>
+<li>Windows 11</li>
+<li>Visual Studio 2022</li>
+<li>Windows App SDK + WinUI 3</li>
+<li>Microsoft.AI.MachineLearning + acceso a Windows.ApplicationModel.DataTransfer</li>
+<li>Modelo ONNX de clasificación (intención o NLP embebido)</li>
+<li>Permiso para acceder a procesos (System.Diagnostics)</li>
+</ul>
+<h2 id="paso-1-crear-ventana-persistente-estilo-widget">
+  Paso 1: Crear ventana persistente estilo Widget
+  <a class="heading-link" href="#paso-1-crear-ventana-persistente-estilo-widget">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Basado en el artículo anterior, crear ventana flotante:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kt">var</span> <span class="n">hwnd</span> <span class="p">=</span> <span class="n">WindowNative</span><span class="p">.</span><span class="n">GetWindowHandle</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kt">var</span> <span class="n">appWindow</span> <span class="p">=</span> <span class="n">AppWindow</span><span class="p">.</span><span class="n">GetFromWindowId</span><span class="p">(</span><span class="n">GetWindowIdForWindow</span><span class="p">(</span><span class="k">this</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl"><span class="n">appWindow</span><span class="p">.</span><span class="n">SetPresenter</span><span class="p">(</span><span class="n">AppWindowPresenterKind</span><span class="p">.</span><span class="n">CompactOverlay</span><span class="p">);</span>
+</span></span></code></pre></div><h2 id="paso-2-capturar-texto-del-portapapeles">
+  Paso 2: Capturar texto del portapapeles
+  <a class="heading-link" href="#paso-2-capturar-texto-del-portapapeles">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="n">DispatcherQueueTimer</span> <span class="n">timer</span> <span class="p">=</span> <span class="n">DispatcherQueue</span><span class="p">.</span><span class="n">CreateTimer</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="kt">string</span> <span class="n">anterior</span> <span class="p">=</span> <span class="s">&#34;&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">timer</span><span class="p">.</span><span class="n">Interval</span> <span class="p">=</span> <span class="n">TimeSpan</span><span class="p">.</span><span class="n">FromSeconds</span><span class="p">(</span><span class="m">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">timer</span><span class="p">.</span><span class="n">Tick</span> <span class="p">+=</span> <span class="kd">async</span> <span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span> <span class="p">=&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">var</span> <span class="n">data</span> <span class="p">=</span> <span class="n">Clipboard</span><span class="p">.</span><span class="n">GetContent</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="n">Contains</span><span class="p">(</span><span class="n">StandardDataFormats</span><span class="p">.</span><span class="n">Text</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">string</span> <span class="n">texto</span> <span class="p">=</span> <span class="k">await</span> <span class="n">data</span><span class="p">.</span><span class="n">GetTextAsync</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">texto</span> <span class="p">!=</span> <span class="n">anterior</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">anterior</span> <span class="p">=</span> <span class="n">texto</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">await</span> <span class="n">EvaluarTexto</span><span class="p">(</span><span class="n">texto</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="n">timer</span><span class="p">.</span><span class="n">Start</span><span class="p">();</span>
+</span></span></code></pre></div><h2 id="paso-3-evaluar-intención-con-modelo-onnx">
+  Paso 3: Evaluar intención con modelo ONNX
+  <a class="heading-link" href="#paso-3-evaluar-intenci%c3%b3n-con-modelo-onnx">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Cargar modelo preentrenado de intención o clasificación:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kt">var</span> <span class="n">model</span> <span class="p">=</span> <span class="n">LearningModel</span><span class="p">.</span><span class="n">LoadFromFilePath</span><span class="p">(</span><span class="s">&#34;Assets/Modelos/clasificador.onnx&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kt">var</span> <span class="n">session</span> <span class="p">=</span> <span class="k">new</span> <span class="n">LearningModelSession</span><span class="p">(</span><span class="n">model</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kt">var</span> <span class="n">tensor</span> <span class="p">=</span> <span class="n">TensorString</span><span class="p">.</span><span class="n">CreateFromArray</span><span class="p">(</span><span class="k">new</span><span class="p">[]</span> <span class="p">{</span> <span class="m">1</span><span class="n">u</span> <span class="p">},</span> <span class="k">new</span><span class="p">[]</span> <span class="p">{</span> <span class="n">texto</span> <span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="kt">var</span> <span class="n">binding</span> <span class="p">=</span> <span class="k">new</span> <span class="n">LearningModelBinding</span><span class="p">(</span><span class="n">session</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">binding</span><span class="p">.</span><span class="n">Bind</span><span class="p">(</span><span class="s">&#34;input_text&#34;</span><span class="p">,</span> <span class="n">tensor</span><span class="p">);</span>
+</span></span></code></pre></div><p>Ejecutar:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kt">var</span> <span class="n">resultado</span> <span class="p">=</span> <span class="k">await</span> <span class="n">session</span><span class="p">.</span><span class="n">EvaluateAsync</span><span class="p">(</span><span class="n">binding</span><span class="p">,</span> <span class="s">&#34;Inferencia&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kt">var</span> <span class="n">salida</span> <span class="p">=</span> <span class="n">resultado</span><span class="p">.</span><span class="n">Outputs</span><span class="p">[</span><span class="s">&#34;output_label&#34;</span><span class="p">]</span> <span class="k">as</span> <span class="n">TensorString</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">var</span> <span class="n">prediccion</span> <span class="p">=</span> <span class="n">salida</span><span class="p">.</span><span class="n">GetAsVectorView</span><span class="p">().</span><span class="n">FirstOrDefault</span><span class="p">();</span>
+</span></span></code></pre></div><h2 id="paso-4-mostrar-sugerencia-en-ui">
+  Paso 4: Mostrar sugerencia en UI
+  <a class="heading-link" href="#paso-4-mostrar-sugerencia-en-ui">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="n">SugerenciaText</span><span class="p">.</span><span class="n">Text</span> <span class="p">=</span> <span class="s">$&#34;¿Deseás {prediccion}?&#34;</span><span class="p">;</span>
+</span></span></code></pre></div><p>Agregar botón según intención:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="n">prediccion</span> <span class="p">==</span> <span class="s">&#34;traducir&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Traducir</span><span class="p">(</span><span class="n">texto</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">prediccion</span> <span class="p">==</span> <span class="s">&#34;buscar&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Process</span><span class="p">.</span><span class="n">Start</span><span class="p">(</span><span class="k">new</span> <span class="n">ProcessStartInfo</span><span class="p">(</span><span class="s">&#34;https://www.bing.com/search?q=&#34;</span> <span class="p">+</span> <span class="n">Uri</span><span class="p">.</span><span class="n">EscapeDataString</span><span class="p">(</span><span class="n">texto</span><span class="p">))</span> <span class="p">{</span> <span class="n">UseShellExecute</span> <span class="p">=</span> <span class="kc">true</span> <span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h2 id="paso-5-automatización-de-acciones">
+  Paso 5: Automatización de acciones
+  <a class="heading-link" href="#paso-5-automatizaci%c3%b3n-de-acciones">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Acceder a procesos abiertos:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kt">var</span> <span class="n">procesos</span> <span class="p">=</span> <span class="n">Process</span><span class="p">.</span><span class="n">GetProcesses</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="k">foreach</span> <span class="p">(</span><span class="kt">var</span> <span class="n">proc</span> <span class="k">in</span> <span class="n">procesos</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">proc</span><span class="p">.</span><span class="n">ProcessName</span><span class="p">.</span><span class="n">Contains</span><span class="p">(</span><span class="s">&#34;notepad&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">proc</span><span class="p">.</span><span class="n">Kill</span><span class="p">();</span> <span class="c1">// o traer al frente</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Ejemplo: copiar texto detectado como nombre de archivo → abrir archivo.</p>
+<h2 id="paso-6-ui-simplificada-con-feedback">
+  Paso 6: UI simplificada con feedback
+  <a class="heading-link" href="#paso-6-ui-simplificada-con-feedback">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>En XAML:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;StackPanel&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&lt;TextBlock</span> <span class="na">x:Name=</span><span class="s">&#34;TextoDetectado&#34;</span><span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&lt;TextBlock</span> <span class="na">x:Name=</span><span class="s">&#34;SugerenciaText&#34;</span><span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&lt;Button</span> <span class="na">Content=</span><span class="s">&#34;Ejecutar acción&#34;</span> <span class="na">Click=</span><span class="s">&#34;Ejecutar_Click&#34;</span><span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/StackPanel&gt;</span>
+</span></span></code></pre></div><p>Actualizar en tiempo real:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="n">TextoDetectado</span><span class="p">.</span><span class="n">Text</span> <span class="p">=</span> <span class="n">texto</span><span class="p">;</span>
+</span></span></code></pre></div><h2 id="casos-de-uso-reales">
+  Casos de uso reales
+  <a class="heading-link" href="#casos-de-uso-reales">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ul>
+<li>Asistentes de productividad (resumen, acción sugerida)</li>
+<li>IA contextual para tareas repetitivas</li>
+<li>Reemplazo de accesos rápidos con comandos inteligentes</li>
+<li>Interfaces adaptativas para entornos sin conectividad</li>
+</ul>
+<h2 id="buenas-prácticas">
+  Buenas prácticas
+  <a class="heading-link" href="#buenas-pr%c3%a1cticas">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ul>
+<li>Permitir desactivar portapapeles automático</li>
+<li>Evitar acciones destructivas (confirmar antes de cerrar apps)</li>
+<li>Mostrar claramente el resultado de la inferencia</li>
+<li>Ejecutar tareas en background sin bloquear la UI</li>
+<li>No ejecutar si la confianza es baja (basado en score)</li>
+</ul>
+<h2 id="conclusión">
+  Conclusión
+  <a class="heading-link" href="#conclusi%c3%b3n">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>La construcción de un asistente inteligente de escritorio que combine IA local con APIs del sistema permite ofrecer experiencias proactivas, eficientes y altamente personalizadas. <strong>WinUI 3</strong> junto con <strong>Windows ML</strong> y la integración con funcionalidades como el portapapeles, procesos y UI flotante, ofrece un entorno ideal para crear agentes inteligentes que funcionan sin depender de la nube.</p>
+      </div>
+
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script>
+  window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "cmasblog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    
+    document.addEventListener('themeChanged', function (e) { 
+        if (document.readyState == 'complete') {
+          DISQUS.reset({ reload: true, config: disqus_config });
+        }
+    });
+</script>
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2018 -
+    
+    2025
+     Christian Amado 
+    ·
+    
+    Desarrollado por <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+      <script async src="https://www.googletagmanager.com/gtag/js?id=356375808"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '356375808');
+        }
+      </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=013131931956450466198%3ablhmkdpweyq"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '013131931956450466198:blhmkdpweyq');
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>
