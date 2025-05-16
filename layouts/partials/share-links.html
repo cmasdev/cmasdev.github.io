@@ -1,0 +1,50 @@
+{{ if ne .Type "page" }} 
+{{ if or .Params.socialShare (and .Site.Params.socialShare (ne .Params.socialShare false)) }}
+<!-- Social Share Button HTML -->
+<div class="share-box" aria-hidden="true">
+    <ul class="share">
+      <!-- Twitter -->
+      <li>
+        <a href="//x.com/share?url={{ .Permalink }}&amp;text={{ .Title }}&amp;via={{ .Site.Params.Author.twitter }}" target="_blank" title="Share on X">
+          <i class="fab fa-x-twitter"></i>
+        </a>
+      </li>
+  
+      <!-- Bluesky -->
+      <li>
+        <a href="//bsky.app/intent/compose?text={{ .Title }}&amp;via={{ .Site.Params.Author.bluesky }}" target="_blank" title="Share on Bluesky">
+          <i class="fab fa-bluesky"></i>
+        </a>
+      </li>
+  
+      <!-- Mastodon -->
+      <li>
+        <a href="//mastodon.social/share?url={{ .Permalink }}&amp;text={{ .Title }}&amp;via={{ .Site.Params.Author.mastodon }}" target="_blank" title="Share on Mastodon">
+          <i class="fab fa-mastodon"></i>
+        </a>
+      </li>
+  
+      <!-- LinkedIn -->
+      <li>
+        <a href="//www.linkedin.com/shareArticle?url={{ .Permalink }}&amp;title={{ .Title }}" target="_blank" title="Share on LinkedIn">
+          <i class="fab fa-linkedin"></i>
+        </a>
+      </li>
+  
+      <!-- Facebook -->
+      <li>
+        <a href="//www.facebook.com/sharer/sharer.php?u={{ .Permalink }}" target="_blank" title="Share on Facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+  
+      <!-- Reddit -->
+      <li>
+        <a href="//reddit.com/submit?url={{ .Permalink }}&amp;title={{ .Title }}" target="_blank" title="Share on Reddit">
+          <i class="fab fa-reddit"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+  {{ end }}
+  {{ end }}
