@@ -129,7 +129,7 @@ languageName = ":es:"
 
 [languages.es.params]
         author = "Christian Amado"
-        info = "Ingeniería de Software y Soluciones de Negocios"
+        info = ["Ingeniero de Software", "Desarrollador .NET"]
         description = "Un blog dedicado a la ingeniería de software, programación y soluciones de negocios principalmente para tecnologías Microsoft"
         keywords = "blog,desarrollador,personal"
         weight = 2
@@ -174,7 +174,7 @@ languageName = ":us:"
 
 [languages.en.params]
     author = "Christian Amado"  
-    info = "Software Engineering & Business Solutions"
+    info = ["Software Engineering", ".NET Developer"]
     description = "A blog dedicated to software engineering, programming and business applications mainly based on Microsoft technologies"
     keyword = "blog,developer,personal"
         
