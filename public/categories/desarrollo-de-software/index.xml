@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Desarrollo De Software on Christian Amado</title>
+    <link>http://localhost:1313/categories/desarrollo-de-software/</link>
+    <description>Recent content in Desarrollo De Software on Christian Amado</description>
+    <generator>Hugo</generator>
+    <language>es</language>
+    <lastBuildDate>Sat, 19 Jun 2021 11:56:00 -0400</lastBuildDate>
+    <atom:link href="http://localhost:1313/categories/desarrollo-de-software/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>VS: Instalando Visual Studio 2022 Preview 1</title>
+      <link>http://localhost:1313/posts/2021-06-19-instalando-visual-studio-2022-preview/</link>
+      <pubDate>Sat, 19 Jun 2021 11:56:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2021-06-19-instalando-visual-studio-2022-preview/</guid>
+      <description>&lt;p&gt;El pasado 17 de junio, Microsoft ha lanzado la versión Preview del nuevo Visual Studio 2022, el cual posee muchas mejoras en cuanto a productividad se refiere. En este artículo mostraré el proceso de instalación de Visual Studio 2022 Preview 1.&lt;/p&gt;&#xA;&lt;p&gt;Para mayor detalle de las características del producto puedes ver &lt;a href=&#34;https://devblogs.microsoft.com/visualstudio/visual-studio-2022-preview-1-now-available/&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;aquí&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Python: Instalando en Visual Studio Code</title>
+      <link>http://localhost:1313/posts/2019-04-04-python-instalando-en-visual-studio-code/</link>
+      <pubDate>Thu, 04 Apr 2019 20:19:30 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2019-04-04-python-instalando-en-visual-studio-code/</guid>
+      <description>&lt;p&gt;En esta entrada veremos cómo instalar Python para utilizarlo con nuestro IDE favorito, el Visual Studio Code. En una &lt;a href=&#34;http://localhost:1313/2019/04/python-instalacion/&#34; &gt;entrada anterior&lt;/a&gt;, hemos visto cómo instalar Python en uestro Windows.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Python: Instalación</title>
+      <link>http://localhost:1313/posts/2019-04-02-python-instalacion/</link>
+      <pubDate>Tue, 02 Apr 2019 19:13:52 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2019-04-02-python-instalacion/</guid>
+      <description>&lt;p&gt;A partir de hoy, volveré a escribir artículos referentes a desarrollo de software. Además de aplicaciones de negocios me apasiona lo referente al mundo del desarrollo. ¡Así que manos a la obra!&lt;/p&gt;&#xA;&lt;p&gt;Primeramente, debemos conocer lo que es Python y para tal motivio podemos &lt;a href=&#34;https://wiki.python.org/moin/BeginnersGuide&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;ver la documentación oficial del lenguaje&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;p&gt;En esta entrada veremos cómo instalar Python y realizar una pequeña prueba.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

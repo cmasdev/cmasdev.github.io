@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Jest on Christian Amado</title>
+    <link>http://localhost:1313/tags/jest/</link>
+    <description>Recent content in Jest on Christian Amado</description>
+    <generator>Hugo</generator>
+    <language>es</language>
+    <lastBuildDate>Wed, 12 Jun 2024 00:00:00 -0400</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/jest/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Testing avanzado en Angular con Jest: Mejores prácticas</title>
+      <link>http://localhost:1313/posts/2024-06-12-testing-angular-jest/</link>
+      <pubDate>Wed, 12 Jun 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2024-06-12-testing-angular-jest/</guid>
+      <description>&lt;p&gt;Las pruebas en aplicaciones &lt;strong&gt;Angular&lt;/strong&gt; son esenciales para garantizar la calidad, confiabilidad y mantenibilidad del código. En este artículo, exploraremos el uso avanzado de &lt;strong&gt;Jest&lt;/strong&gt; como framework de pruebas en &lt;strong&gt;Angular&lt;/strong&gt;, cubriendo configuración inicial, estrategias de pruebas unitarias y de integración, así como buenas prácticas para lograr un enfoque moderno, eficiente y seguro.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

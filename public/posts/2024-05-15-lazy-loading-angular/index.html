@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  Lazy Loading en Angular: Mejora el rendimiento de tus aplicaciones · Christian Amado
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Christian Amado">
+<meta name="description" content="El rendimiento es un factor crítico en las aplicaciones web modernas. Angular, como uno de los frameworks más populares para construir aplicaciones, ofrece herramientas avanzadas para optimizar la carga y el uso de recursos. Una de estas herramientas es el Lazy Loading (carga diferida), que permite cargar módulos de la aplicación sólo cuando son necesarios. Este artículo explora cómo implementar Lazy Loading en Angular, sus beneficios y las mejores prácticas para maximizar su eficacia.">
+<meta name="keywords" content="blog,desarrollador,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Lazy Loading en Angular: Mejora el rendimiento de tus aplicaciones">
+  <meta name="twitter:description" content="El rendimiento es un factor crítico en las aplicaciones web modernas. Angular, como uno de los frameworks más populares para construir aplicaciones, ofrece herramientas avanzadas para optimizar la carga y el uso de recursos. Una de estas herramientas es el Lazy Loading (carga diferida), que permite cargar módulos de la aplicación sólo cuando son necesarios. Este artículo explora cómo implementar Lazy Loading en Angular, sus beneficios y las mejores prácticas para maximizar su eficacia.">
+
+<meta property="og:url" content="http://localhost:1313/posts/2024-05-15-lazy-loading-angular/">
+  <meta property="og:site_name" content="Christian Amado">
+  <meta property="og:title" content="Lazy Loading en Angular: Mejora el rendimiento de tus aplicaciones">
+  <meta property="og:description" content="El rendimiento es un factor crítico en las aplicaciones web modernas. Angular, como uno de los frameworks más populares para construir aplicaciones, ofrece herramientas avanzadas para optimizar la carga y el uso de recursos. Una de estas herramientas es el Lazy Loading (carga diferida), que permite cargar módulos de la aplicación sólo cuando son necesarios. Este artículo explora cómo implementar Lazy Loading en Angular, sus beneficios y las mejores prácticas para maximizar su eficacia.">
+  <meta property="og:locale" content="es">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-05-15T00:00:00-04:00">
+    <meta property="article:modified_time" content="2024-05-15T00:00:00-04:00">
+    <meta property="article:tag" content="Web Development">
+    <meta property="article:tag" content="Angular">
+    <meta property="article:tag" content="Google">
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-V1ZRP82YFD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-V1ZRP82YFD');
+</script>
+
+
+
+<link rel="canonical" href="http://localhost:1313/posts/2024-05-15-lazy-loading-angular/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="apple-touch-icon" sizes="57x57" href="/img/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/img/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/img/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/img/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/img/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/img/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/img/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/img/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/img/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="/img/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/img/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+<link rel="manifest" href="/img/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/img/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/">
+      Christian Amado
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/about">Biografía</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/contact">Contacto</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/diabetes">Diabetes</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/tags">Etiquetas</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/en/">🇺🇸</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/posts/2024-05-15-lazy-loading-angular/">
+              Lazy Loading en Angular: Mejora el rendimiento de tus aplicaciones
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2024-05-15T00:00:00-04:00">
+                mayo 15, 2024
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              4 minutos de lectura.
+            </span>
+          </div>
+          
+          
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/tags/web-development/">Web Development</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/angular/">Angular</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/google/">Google</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <p>El rendimiento es un factor crítico en las aplicaciones web modernas. Angular, como uno de los frameworks más populares para construir aplicaciones, ofrece herramientas avanzadas para optimizar la carga y el uso de recursos. Una de estas herramientas es el <strong>Lazy Loading</strong> (carga diferida), que permite cargar módulos de la aplicación sólo cuando son necesarios. Este artículo explora cómo implementar Lazy Loading en Angular, sus beneficios y las mejores prácticas para maximizar su eficacia.</p>
+<h2 id="qué-es-lazy-loading">
+  ¿Qué es Lazy Loading?
+  <a class="heading-link" href="#qu%c3%a9-es-lazy-loading">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Lazy Loading es una técnica que retrasa la carga de recursos o módulos hasta que sean realmente necesarios. En el contexto de Angular, esto implica cargar partes específicas de la aplicación (como módulos) sólo cuando el usuario las solicita. Esto mejora significativamente el tiempo de carga inicial de la aplicación y reduce el uso de recursos del navegador.</p>
+<h3 id="beneficios-de-lazy-loading">
+  Beneficios de Lazy Loading
+  <a class="heading-link" href="#beneficios-de-lazy-loading">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li><strong>Tiempo de carga inicial reducido</strong>: Solo se cargan los recursos necesarios para la vista inicial.</li>
+<li><strong>Uso eficiente de recursos</strong>: Reduce la cantidad de código que el navegador necesita procesar al inicio.</li>
+<li><strong>Mejora en la experiencia del usuario</strong>: La aplicación responde más rápido a las interacciones iniciales.</li>
+<li><strong>Soporte para escalabilidad</strong>: Ideal para aplicaciones grandes con múltiples módulos y rutas.</li>
+</ol>
+<h2 id="configuración-básica-de-lazy-loading-en-angular">
+  Configuración básica de Lazy Loading en Angular
+  <a class="heading-link" href="#configuraci%c3%b3n-b%c3%a1sica-de-lazy-loading-en-angular">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="paso-1-crear-un-módulo-con-rutas-independientes">
+  Paso 1: Crear un módulo con rutas independientes
+  <a class="heading-link" href="#paso-1-crear-un-m%c3%b3dulo-con-rutas-independientes">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Primero, generar un nuevo módulo utilizando Angular CLI:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">ng generate module feature --route feature --module app.module
+</span></span></code></pre></div><p>Este comando genera un módulo llamado <code>FeatureModule</code> y configura la ruta correspondiente en el <code>AppRoutingModule</code>.</p>
+<h3 id="paso-2-configurar-rutas-con-lazy-loading">
+  Paso 2: Configurar rutas con Lazy Loading
+  <a class="heading-link" href="#paso-2-configurar-rutas-con-lazy-loading">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>El archivo <code>app-routing.module.ts</code> debería verse así:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">import</span> <span class="p">{</span> <span class="n">NgModule</span> <span class="p">}</span> <span class="n">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">import</span> <span class="p">{</span> <span class="n">RouterModule</span><span class="p">,</span> <span class="n">Routes</span> <span class="p">}</span> <span class="n">from</span> <span class="s1">&#39;@angular/router&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">routes</span><span class="p">:</span> <span class="n">Routes</span> <span class="o">=</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">path</span><span class="p">:</span> <span class="s1">&#39;feature&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">loadChildren</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="n">import</span><span class="p">(</span><span class="s1">&#39;./feature/feature.module&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">then</span><span class="p">(</span><span class="n">m</span> <span class="o">=&gt;</span> <span class="n">m</span><span class="o">.</span><span class="n">FeatureModule</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">  <span class="p">},</span>
+</span></span><span class="line"><span class="cl"><span class="p">];</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">@</span><span class="n">NgModule</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">  <span class="n">imports</span><span class="p">:</span> <span class="p">[</span><span class="n">RouterModule</span><span class="o">.</span><span class="n">forRoot</span><span class="p">(</span><span class="n">routes</span><span class="p">)],</span>
+</span></span><span class="line"><span class="cl">  <span class="n">exports</span><span class="p">:</span> <span class="p">[</span><span class="n">RouterModule</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="k">export</span> <span class="k">class</span> <span class="n">AppRoutingModule</span> <span class="p">{}</span>
+</span></span></code></pre></div><h3 id="paso-3-crear-componentes-dentro-del-módulo-cargado-de-forma-diferida">
+  Paso 3: Crear componentes dentro del módulo cargado de forma diferida
+  <a class="heading-link" href="#paso-3-crear-componentes-dentro-del-m%c3%b3dulo-cargado-de-forma-diferida">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Dentro del <code>FeatureModule</code>, genera un componente:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">ng generate component feature/feature-home
+</span></span></code></pre></div><p>Asegúrate de declarar este componente en el <code>FeatureModule</code> y configurarlo en el archivo <code>feature-routing.module.ts</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">import</span> <span class="p">{</span> <span class="n">NgModule</span> <span class="p">}</span> <span class="n">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">import</span> <span class="p">{</span> <span class="n">RouterModule</span><span class="p">,</span> <span class="n">Routes</span> <span class="p">}</span> <span class="n">from</span> <span class="s1">&#39;@angular/router&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">import</span> <span class="p">{</span> <span class="n">FeatureHomeComponent</span> <span class="p">}</span> <span class="n">from</span> <span class="s1">&#39;./feature-home/feature-home.component&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">routes</span><span class="p">:</span> <span class="n">Routes</span> <span class="o">=</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span> <span class="n">path</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">component</span><span class="p">:</span> <span class="n">FeatureHomeComponent</span> <span class="p">},</span>
+</span></span><span class="line"><span class="cl"><span class="p">];</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">@</span><span class="n">NgModule</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">  <span class="n">imports</span><span class="p">:</span> <span class="p">[</span><span class="n">RouterModule</span><span class="o">.</span><span class="n">forChild</span><span class="p">(</span><span class="n">routes</span><span class="p">)],</span>
+</span></span><span class="line"><span class="cl">  <span class="n">exports</span><span class="p">:</span> <span class="p">[</span><span class="n">RouterModule</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="k">export</span> <span class="k">class</span> <span class="n">FeatureRoutingModule</span> <span class="p">{}</span>
+</span></span></code></pre></div><h2 id="mejores-prácticas-para-lazy-loading">
+  Mejores prácticas para Lazy Loading
+  <a class="heading-link" href="#mejores-pr%c3%a1cticas-para-lazy-loading">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ol>
+<li><strong>Organización modular</strong>: Divide la aplicación en módulos coherentes y significativos.</li>
+<li><strong>Prefetching</strong>: Carga anticipada de módulos con alta probabilidad de ser usados.</li>
+<li><strong>Rutas protegidas</strong>: Implementa Lazy Loading junto con guardias de ruta (route guards) para asegurar recursos sensibles.</li>
+<li><strong>Análisis de rendimiento</strong>: Usa herramientas como Lighthouse para identificar oportunidades de mejora.</li>
+</ol>
+<h3 id="ejemplo-implementación-de-prefetching">
+  Ejemplo: Implementación de prefetching
+  <a class="heading-link" href="#ejemplo-implementaci%c3%b3n-de-prefetching">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>El prefetching anticipa y carga módulos en segundo plano mientras el usuario interactúa con la aplicación.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">NgModule</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">RouterModule</span><span class="p">,</span> <span class="nx">Routes</span><span class="p">,</span> <span class="nx">PreloadAllModules</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/router&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">routes</span>: <span class="kt">Routes</span> <span class="o">=</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">path</span><span class="o">:</span> <span class="s1">&#39;feature&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">loadChildren</span><span class="o">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="kr">import</span><span class="p">(</span><span class="s1">&#39;./feature/feature.module&#39;</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="nx">m</span> <span class="o">=&gt;</span> <span class="nx">m</span><span class="p">.</span><span class="nx">FeatureModule</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">  <span class="p">},</span>
+</span></span><span class="line"><span class="cl"><span class="p">];</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">@NgModule</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">imports</span><span class="o">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">RouterModule</span><span class="p">.</span><span class="nx">forRoot</span><span class="p">(</span><span class="nx">routes</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">preloadingStrategy</span>: <span class="kt">PreloadAllModules</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}),</span>
+</span></span><span class="line"><span class="cl">  <span class="p">],</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">exports</span><span class="o">:</span> <span class="p">[</span><span class="nx">RouterModule</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="kr">class</span> <span class="nx">AppRoutingModule</span> <span class="p">{}</span>
+</span></span></code></pre></div><h2 id="seguridad-en-lazy-loading">
+  Seguridad en Lazy Loading
+  <a class="heading-link" href="#seguridad-en-lazy-loading">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Lazy Loading también puede usarse para proteger rutas sensibles de forma eficiente. Algunos enfoques incluyen:</p>
+<h3 id="uso-de-route-guards">
+  Uso de Route Guards
+  <a class="heading-link" href="#uso-de-route-guards">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Los Route Guards controlan el acceso a rutas específicas. Implementa un guardia básico:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">import</span> <span class="p">{</span> <span class="n">Injectable</span> <span class="p">}</span> <span class="n">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">import</span> <span class="p">{</span> <span class="n">CanActivate</span><span class="p">,</span> <span class="n">Router</span> <span class="p">}</span> <span class="n">from</span> <span class="s1">&#39;@angular/router&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">@</span><span class="n">Injectable</span><span class="p">({</span> <span class="n">providedIn</span><span class="p">:</span> <span class="s1">&#39;root&#39;</span> <span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="k">export</span> <span class="k">class</span> <span class="n">AuthGuard</span> <span class="n">implements</span> <span class="n">CanActivate</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">constructor</span><span class="p">(</span><span class="n">private</span> <span class="n">router</span><span class="p">:</span> <span class="n">Router</span><span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">canActivate</span><span class="p">():</span> <span class="n">boolean</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="n">isAuthenticated</span> <span class="o">=</span> <span class="o">!!</span><span class="n">localStorage</span><span class="o">.</span><span class="n">getItem</span><span class="p">(</span><span class="s1">&#39;token&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">isAuthenticated</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">this</span><span class="o">.</span><span class="n">router</span><span class="o">.</span><span class="n">navigate</span><span class="p">([</span><span class="s1">&#39;/login&#39;</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="bp">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="bp">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Configura el guardia en la ruta:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">const</span> <span class="n">routes</span><span class="p">:</span> <span class="n">Routes</span> <span class="o">=</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">path</span><span class="p">:</span> <span class="s1">&#39;feature&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">loadChildren</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="n">import</span><span class="p">(</span><span class="s1">&#39;./feature/feature.module&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">then</span><span class="p">(</span><span class="n">m</span> <span class="o">=&gt;</span> <span class="n">m</span><span class="o">.</span><span class="n">FeatureModule</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="n">canActivate</span><span class="p">:</span> <span class="p">[</span><span class="n">AuthGuard</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">  <span class="p">},</span>
+</span></span><span class="line"><span class="cl"><span class="p">];</span>
+</span></span></code></pre></div><h3 id="validación-de-datos-en-el-servidor">
+  Validación de datos en el servidor
+  <a class="heading-link" href="#validaci%c3%b3n-de-datos-en-el-servidor">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Siempre valida los datos del lado del servidor para evitar accesos no autorizados, incluso si se usan guardias del lado del cliente.</p>
+<h2 id="conclusión">
+  Conclusión
+  <a class="heading-link" href="#conclusi%c3%b3n">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Lazy Loading es una técnica poderosa para optimizar aplicaciones Angular, mejorando tanto el rendimiento como la experiencia del usuario. Al combinar Lazy Loading con buenas prácticas de seguridad y prefetching, puedes construir aplicaciones escalables, rápidas y seguras. Mantén tu aplicación organizada y realiza pruebas de rendimiento periódicas para garantizar su eficacia.</p>
+
+      </div>
+
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script>
+  window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "cmasblog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    
+    document.addEventListener('themeChanged', function (e) { 
+        if (document.readyState == 'complete') {
+          DISQUS.reset({ reload: true, config: disqus_config });
+        }
+    });
+</script>
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2018 -
+    
+    2025
+     Christian Amado 
+    ·
+    
+    Desarrollado por <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+      <script async src="https://www.googletagmanager.com/gtag/js?id=356375808"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '356375808');
+        }
+      </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=013131931956450466198%3ablhmkdpweyq"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '013131931956450466198:blhmkdpweyq');
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

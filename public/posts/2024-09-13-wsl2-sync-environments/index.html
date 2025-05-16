@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  Sincronización de entornos WSL2 en múltiples dispositivos · Christian Amado
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Christian Amado">
+<meta name="description" content="Uno de los desafíos más comunes en equipos distribuidos o desarrolladores con múltiples dispositivos es mantener entornos consistentes entre máquinas. Gracias a las capacidades de exportación de distribuciones, el uso de Dev Containers, gestión de configuraciones declarativas y herramientas de backup, WSL2 puede sincronizarse entre diferentes sistemas Windows de forma confiable y productiva.
+Este artículo explora las mejores estrategias para mantener la coherencia de entornos WSL2 en múltiples PCs o notebooks, incluyendo ejemplos prácticos.">
+<meta name="keywords" content="blog,desarrollador,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Sincronización de entornos WSL2 en múltiples dispositivos">
+  <meta name="twitter:description" content="Uno de los desafíos más comunes en equipos distribuidos o desarrolladores con múltiples dispositivos es mantener entornos consistentes entre máquinas. Gracias a las capacidades de exportación de distribuciones, el uso de Dev Containers, gestión de configuraciones declarativas y herramientas de backup, WSL2 puede sincronizarse entre diferentes sistemas Windows de forma confiable y productiva.
+Este artículo explora las mejores estrategias para mantener la coherencia de entornos WSL2 en múltiples PCs o notebooks, incluyendo ejemplos prácticos.">
+
+<meta property="og:url" content="http://localhost:1313/posts/2024-09-13-wsl2-sync-environments/">
+  <meta property="og:site_name" content="Christian Amado">
+  <meta property="og:title" content="Sincronización de entornos WSL2 en múltiples dispositivos">
+  <meta property="og:description" content="Uno de los desafíos más comunes en equipos distribuidos o desarrolladores con múltiples dispositivos es mantener entornos consistentes entre máquinas. Gracias a las capacidades de exportación de distribuciones, el uso de Dev Containers, gestión de configuraciones declarativas y herramientas de backup, WSL2 puede sincronizarse entre diferentes sistemas Windows de forma confiable y productiva.
+Este artículo explora las mejores estrategias para mantener la coherencia de entornos WSL2 en múltiples PCs o notebooks, incluyendo ejemplos prácticos.">
+  <meta property="og:locale" content="es">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-09-13T00:00:00-04:00">
+    <meta property="article:modified_time" content="2024-09-13T00:00:00-04:00">
+    <meta property="article:tag" content="WinDev">
+    <meta property="article:tag" content="Windows 11">
+    <meta property="article:tag" content="WSL">
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-V1ZRP82YFD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-V1ZRP82YFD');
+</script>
+
+
+
+<link rel="canonical" href="http://localhost:1313/posts/2024-09-13-wsl2-sync-environments/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="apple-touch-icon" sizes="57x57" href="/img/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/img/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/img/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/img/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/img/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/img/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/img/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/img/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/img/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="/img/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/img/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+<link rel="manifest" href="/img/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/img/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/">
+      Christian Amado
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/about">Biografía</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/contact">Contacto</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/diabetes">Diabetes</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/tags">Etiquetas</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/en/">🇺🇸</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/posts/2024-09-13-wsl2-sync-environments/">
+              Sincronización de entornos WSL2 en múltiples dispositivos
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2024-09-13T00:00:00-04:00">
+                septiembre 13, 2024
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              2 minutos de lectura.
+            </span>
+          </div>
+          
+          
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/tags/windev/">WinDev</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/windows-11/">Windows 11</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/wsl/">WSL</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <p>Uno de los desafíos más comunes en equipos distribuidos o desarrolladores con múltiples dispositivos es mantener entornos consistentes entre máquinas. Gracias a las capacidades de exportación de distribuciones, el uso de <strong>Dev Containers</strong>, gestión de configuraciones declarativas y herramientas de backup, <strong>WSL2</strong> puede sincronizarse entre diferentes sistemas Windows de forma confiable y productiva.</p>
+<p>Este artículo explora las mejores estrategias para mantener la coherencia de entornos WSL2 en múltiples PCs o notebooks, incluyendo ejemplos prácticos.</p>
+<h2 id="estrategia-1-exportar-y-restaurar-distribuciones-wsl2">
+  Estrategia 1: Exportar y restaurar distribuciones WSL2
+  <a class="heading-link" href="#estrategia-1-exportar-y-restaurar-distribuciones-wsl2">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>WSL2 permite exportar una distribución completa a un archivo <code>.tar</code> que puede transferirse y reinstalarse en otra máquina.</p>
+<h3 id="exportar-distro-actual">
+  Exportar distro actual
+  <a class="heading-link" href="#exportar-distro-actual">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">wsl --export Ubuntu ubuntu-backup.tar
+</span></span></code></pre></div><h3 id="importar-en-otra-máquina">
+  Importar en otra máquina
+  <a class="heading-link" href="#importar-en-otra-m%c3%a1quina">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">wsl --import UbuntuRestaurado D:<span class="se">\W</span>SL<span class="se">\U</span>buntu ubuntu-backup.tar --version <span class="m">2</span>
+</span></span></code></pre></div><p>Esto restaura una copia exacta del entorno, incluyendo paquetes, usuarios y configuraciones personalizadas.</p>
+<h2 id="estrategia-2-usar-dotfiles-y-scripts-de-inicialización">
+  Estrategia 2: Usar dotfiles y scripts de inicialización
+  <a class="heading-link" href="#estrategia-2-usar-dotfiles-y-scripts-de-inicializaci%c3%b3n">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Versionar archivos de configuración personal (<code>.bashrc</code>, <code>.gitconfig</code>, <code>.profile</code>, etc.) en un repositorio <code>dotfiles</code>.</p>
+<h3 id="clonar-y-aplicar-dotfiles">
+  Clonar y aplicar dotfiles
+  <a class="heading-link" href="#clonar-y-aplicar-dotfiles">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git clone https://github.com/tuusuario/dotfiles ~/.dotfiles
+</span></span><span class="line"><span class="cl">cp ~/.dotfiles/.bashrc ~/.bashrc
+</span></span><span class="line"><span class="cl"><span class="nb">source</span> ~/.bashrc
+</span></span></code></pre></div><p>También se pueden automatizar con herramientas como:</p>
+<ul>
+<li><code>chezmoi</code></li>
+<li><code>dotbot</code></li>
+</ul>
+<h2 id="estrategia-3-reproducir-entornos-con-dev-containers-o-nix">
+  Estrategia 3: Reproducir entornos con Dev Containers o Nix
+  <a class="heading-link" href="#estrategia-3-reproducir-entornos-con-dev-containers-o-nix">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Usar archivos <code>devcontainer.json</code> para definir entornos que pueden ser abiertos en VS Code o Codespaces:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">.devcontainer/
+</span></span><span class="line"><span class="cl">├── devcontainer.json
+</span></span><span class="line"><span class="cl">├── Dockerfile
+</span></span></code></pre></div><p>También se puede usar <code>shell.nix</code> o <code>Dockerfile</code> si se trabaja con entornos reproducibles.</p>
+<h2 id="estrategia-4-sincronización-de-paquetes-con-scripts">
+  Estrategia 4: Sincronización de paquetes con scripts
+  <a class="heading-link" href="#estrategia-4-sincronizaci%c3%b3n-de-paquetes-con-scripts">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Guardar listas de paquetes instalados:</p>
+<h3 id="debianubuntu">
+  Debian/Ubuntu:
+  <a class="heading-link" href="#debianubuntu">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">dpkg --get-selections &gt; packages.list
+</span></span></code></pre></div><p>En la otra máquina:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo dpkg --set-selections &lt; packages.list
+</span></span><span class="line"><span class="cl">sudo apt-get dselect-upgrade
+</span></span></code></pre></div><h3 id="python">
+  Python:
+  <a class="heading-link" href="#python">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">pip freeze &gt; requirements.txt
+</span></span><span class="line"><span class="cl">pip install -r requirements.txt
+</span></span></code></pre></div><h2 id="estrategia-5-usar-github-codespaces-como-entorno-espejo">
+  Estrategia 5: Usar GitHub Codespaces como entorno espejo
+  <a class="heading-link" href="#estrategia-5-usar-github-codespaces-como-entorno-espejo">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Subir estructura del proyecto con <code>.devcontainer</code> a un repositorio permite ejecutarlo directamente en la nube con GitHub Codespaces, asegurando un entorno 100% idéntico.</p>
+<p>Acceder desde cualquier máquina con solo iniciar sesión en GitHub.</p>
+<h2 id="recomendaciones-de-sincronización-segura">
+  Recomendaciones de sincronización segura
+  <a class="heading-link" href="#recomendaciones-de-sincronizaci%c3%b3n-segura">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ul>
+<li>Almacenar <code>.tar</code> exportados en nube cifrada o con contraseña</li>
+<li>Evitar sincronizar <code>/mnt/c/</code> o rutas externas entre máquinas</li>
+<li>No exportar claves privadas ni <code>.ssh</code> en entornos compartidos</li>
+<li>Automatizar con scripts <code>setup.sh</code> y <code>make bootstrap</code></li>
+</ul>
+<h2 id="conclusión">
+  Conclusión
+  <a class="heading-link" href="#conclusi%c3%b3n">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Mantener entornos WSL2 sincronizados entre varios dispositivos es completamente factible con herramientas estándar del ecosistema Linux y Windows. Ya sea a través de exportaciones manuales, entornos declarativos o integración con GitHub Codespaces, se puede lograr coherencia, productividad y portabilidad en cualquier máquina.</p>
+      </div>
+
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script>
+  window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "cmasblog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    
+    document.addEventListener('themeChanged', function (e) { 
+        if (document.readyState == 'complete') {
+          DISQUS.reset({ reload: true, config: disqus_config });
+        }
+    });
+</script>
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2018 -
+    
+    2025
+     Christian Amado 
+    ·
+    
+    Desarrollado por <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+      <script async src="https://www.googletagmanager.com/gtag/js?id=356375808"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '356375808');
+        }
+      </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=013131931956450466198%3ablhmkdpweyq"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '013131931956450466198:blhmkdpweyq');
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  Angular 17 y su impacto en el desarrollo web · Christian Amado
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Christian Amado">
+<meta name="description" content="Angular ha sido una de las tecnologías más robustas para el desarrollo de aplicaciones web modernas. Con cada nueva versión, el framework introduce mejoras significativas en rendimiento, usabilidad y escalabilidad. Angular 17 no es la excepción y trae consigo importantes cambios que impactarán la manera en que los desarrolladores construyen aplicaciones web.
+En este artículo, exploraremos:
+
+Las principales novedades de Angular 17.
+Mejoras en rendimiento y reactividad.
+Impacto en la arquitectura de proyectos Angular.
+Cómo adoptar Angular 17 en proyectos existentes.
+">
+<meta name="keywords" content="blog,desarrollador,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Angular 17 y su impacto en el desarrollo web">
+  <meta name="twitter:description" content="Angular ha sido una de las tecnologías más robustas para el desarrollo de aplicaciones web modernas. Con cada nueva versión, el framework introduce mejoras significativas en rendimiento, usabilidad y escalabilidad. Angular 17 no es la excepción y trae consigo importantes cambios que impactarán la manera en que los desarrolladores construyen aplicaciones web.
+En este artículo, exploraremos:
+Las principales novedades de Angular 17. Mejoras en rendimiento y reactividad. Impacto en la arquitectura de proyectos Angular. Cómo adoptar Angular 17 en proyectos existentes.">
+
+<meta property="og:url" content="http://localhost:1313/posts/2025-02-26-angular-17-web-dev-impact/">
+  <meta property="og:site_name" content="Christian Amado">
+  <meta property="og:title" content="Angular 17 y su impacto en el desarrollo web">
+  <meta property="og:description" content="Angular ha sido una de las tecnologías más robustas para el desarrollo de aplicaciones web modernas. Con cada nueva versión, el framework introduce mejoras significativas en rendimiento, usabilidad y escalabilidad. Angular 17 no es la excepción y trae consigo importantes cambios que impactarán la manera en que los desarrolladores construyen aplicaciones web.
+En este artículo, exploraremos:
+Las principales novedades de Angular 17. Mejoras en rendimiento y reactividad. Impacto en la arquitectura de proyectos Angular. Cómo adoptar Angular 17 en proyectos existentes.">
+  <meta property="og:locale" content="es">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-02-26T00:00:00-04:00">
+    <meta property="article:modified_time" content="2025-02-26T00:00:00-04:00">
+    <meta property="article:tag" content="Web Development">
+    <meta property="article:tag" content="Angular">
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-V1ZRP82YFD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-V1ZRP82YFD');
+</script>
+
+
+
+<link rel="canonical" href="http://localhost:1313/posts/2025-02-26-angular-17-web-dev-impact/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="apple-touch-icon" sizes="57x57" href="/img/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/img/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/img/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/img/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/img/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/img/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/img/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/img/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/img/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="/img/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/img/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+<link rel="manifest" href="/img/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/img/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/">
+      Christian Amado
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/about">Biografía</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/contact">Contacto</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/diabetes">Diabetes</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/tags">Etiquetas</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/en/">🇺🇸</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/posts/2025-02-26-angular-17-web-dev-impact/">
+              Angular 17 y su impacto en el desarrollo web
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2025-02-26T00:00:00-04:00">
+                febrero 26, 2025
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              3 minutos de lectura.
+            </span>
+          </div>
+          
+          
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/tags/web-development/">Web Development</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/angular/">Angular</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <p>Angular ha sido una de las tecnologías más robustas para el desarrollo de aplicaciones web modernas. Con cada nueva versión, el framework introduce mejoras significativas en rendimiento, usabilidad y escalabilidad. <strong>Angular 17</strong> no es la excepción y trae consigo importantes cambios que impactarán la manera en que los desarrolladores construyen aplicaciones web.</p>
+<p>En este artículo, exploraremos:</p>
+<ul>
+<li>Las principales novedades de <strong>Angular 17</strong>.</li>
+<li>Mejoras en rendimiento y reactividad.</li>
+<li>Impacto en la arquitectura de proyectos Angular.</li>
+<li>Cómo adoptar Angular 17 en proyectos existentes.</li>
+</ul>
+<h2 id="1-principales-novedades-de-angular-17">
+  1. Principales Novedades de Angular 17
+  <a class="heading-link" href="#1-principales-novedades-de-angular-17">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="-nuevo-motor-de-renderizado">
+  🔹 <strong>Nuevo Motor de Renderizado</strong>
+  <a class="heading-link" href="#-nuevo-motor-de-renderizado">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Angular 17 introduce un motor de renderizado más eficiente que reduce los tiempos de carga y mejora la experiencia de usuario.</p>
+<h3 id="-signals-para-mejorar-la-reactividad">
+  🔹 <strong>Signals para Mejorar la Reactividad</strong>
+  <a class="heading-link" href="#-signals-para-mejorar-la-reactividad">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Uno de los cambios más esperados es la introducción de <strong>Signals</strong>, una alternativa eficiente para la reactividad en Angular sin necesidad de usar RxJS.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">import</span> <span class="p">{</span> <span class="k">signal</span> <span class="p">}</span> <span class="n">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">export</span> <span class="k">class</span> <span class="n">ContadorComponent</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">contador</span> <span class="o">=</span> <span class="k">signal</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">incrementar</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">this</span><span class="o">.</span><span class="n">contador</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">this</span><span class="o">.</span><span class="n">contador</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h3 id="-optimización-de-hydration-para-ssr">
+  🔹 <strong>Optimización de Hydration para SSR</strong>
+  <a class="heading-link" href="#-optimizaci%c3%b3n-de-hydration-para-ssr">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>El Server-Side Rendering (SSR) mejora con un nuevo mecanismo de <strong>hydration optimizado</strong>, lo que permite aplicaciones más rápidas sin afectar la interactividad.</p>
+<h3 id="-standalone-components-mejorados">
+  🔹 <strong>Standalone Components Mejorados</strong>
+  <a class="heading-link" href="#-standalone-components-mejorados">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Con Angular 17, los <strong>Standalone Components</strong> se convierten en la recomendación principal para crear aplicaciones más modulares y ligeras.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">import</span> <span class="p">{</span> <span class="n">Component</span> <span class="p">}</span> <span class="n">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">@</span><span class="n">Component</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">  <span class="n">standalone</span><span class="p">:</span> <span class="bp">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="n">selector</span><span class="p">:</span> <span class="s1">&#39;app-bienvenida&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="n">template</span><span class="p">:</span> <span class="s1">&#39;&lt;h1&gt;Bienvenido a Angular 17&lt;/h1&gt;&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="k">export</span> <span class="k">class</span> <span class="n">BienvenidaComponent</span> <span class="p">{}</span>
+</span></span></code></pre></div><h2 id="2-mejoras-en-rendimiento-y-reactividad">
+  2. Mejoras en Rendimiento y Reactividad
+  <a class="heading-link" href="#2-mejoras-en-rendimiento-y-reactividad">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="-menos-overhead-en-el-cambio-de-estado">
+  ✅ <strong>Menos Overhead en el Cambio de Estado</strong>
+  <a class="heading-link" href="#-menos-overhead-en-el-cambio-de-estado">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Gracias al uso de <strong>Signals</strong>, Angular 17 elimina gran parte del trabajo extra de <strong>Zone.js</strong>, permitiendo actualizaciones más rápidas en la interfaz de usuario.</p>
+<h3 id="-carga-más-rápida-con-bundles-más-pequeños">
+  ✅ <strong>Carga Más Rápida con Bundles Más Pequeños</strong>
+  <a class="heading-link" href="#-carga-m%c3%a1s-r%c3%a1pida-con-bundles-m%c3%a1s-peque%c3%b1os">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>El nuevo motor de renderizado optimiza la carga de módulos, eliminando código innecesario y reduciendo el tamaño del bundle final.</p>
+<h3 id="-mejoras-en-el">
+  ✅ <strong>Mejoras en el <code>ng build --watch</code></strong>
+  <a class="heading-link" href="#-mejoras-en-el">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>El tiempo de compilación en <strong>desarrollo</strong> es significativamente más rápido con mejoras en <code>ng build</code> y <code>ng serve</code>.</p>
+<h2 id="3-impacto-en-la-arquitectura-de-proyectos">
+  3. Impacto en la Arquitectura de Proyectos
+  <a class="heading-link" href="#3-impacto-en-la-arquitectura-de-proyectos">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="-adopción-de-standalone-components">
+  🔹 <strong>Adopción de Standalone Components</strong>
+  <a class="heading-link" href="#-adopci%c3%b3n-de-standalone-components">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Con Angular 17, se recomienda abandonar los módulos (<code>NgModule</code>) en favor de los <strong>Standalone Components</strong>, lo que reduce la complejidad de la arquitectura.</p>
+<p><strong>Antes (con NgModule):</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="err">@</span><span class="n">NgModule</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">  <span class="n">declarations</span><span class="p">:</span> <span class="p">[</span><span class="n">BienvenidaComponent</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">  <span class="n">imports</span><span class="p">:</span> <span class="p">[</span><span class="n">CommonModule</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">  <span class="n">bootstrap</span><span class="p">:</span> <span class="p">[</span><span class="n">BienvenidaComponent</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="k">export</span> <span class="k">class</span> <span class="n">AppModule</span> <span class="p">{}</span>
+</span></span></code></pre></div><p><strong>Ahora (Standalone Component):</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">import { bootstrapApplication } from &#39;@angular/platform-browser&#39;;
+</span></span><span class="line"><span class="cl">import { BienvenidaComponent } from &#39;./bienvenida.component&#39;;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">bootstrapApplication(BienvenidaComponent);
+</span></span></code></pre></div><h3 id="-mejoras-en-server-side-rendering-ssr">
+  🔹 <strong>Mejoras en Server-Side Rendering (SSR)</strong>
+  <a class="heading-link" href="#-mejoras-en-server-side-rendering-ssr">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Para aplicaciones que dependen de SEO y rendimiento, Angular 17 hace más eficiente la <strong>renderización en el servidor</strong>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">import { provideServerRendering } from &#39;@angular/platform-server&#39;;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">bootstrapApplication(AppComponent, {
+</span></span><span class="line"><span class="cl">  providers: [provideServerRendering()]
+</span></span><span class="line"><span class="cl">});
+</span></span></code></pre></div><h2 id="4-cómo-adoptar-angular-17-en-proyectos-existentes">
+  4. Cómo Adoptar Angular 17 en Proyectos Existentes
+  <a class="heading-link" href="#4-c%c3%b3mo-adoptar-angular-17-en-proyectos-existentes">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Si ya tienes una aplicación en Angular 16 o inferior, puedes actualizar a Angular 17 siguiendo estos pasos:</p>
+<h3 id="-actualizar-angular-cli-y-core">
+  🔹 <strong>Actualizar Angular CLI y Core</strong>
+  <a class="heading-link" href="#-actualizar-angular-cli-y-core">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Ejecuta el siguiente comando en tu terminal:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">ng update @angular/cli @angular/core
+</span></span></code></pre></div><h3 id="-migrar-a-standalone-components-opcional">
+  🔹 <strong>Migrar a Standalone Components (Opcional)</strong>
+  <a class="heading-link" href="#-migrar-a-standalone-components-opcional">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Si deseas modernizar tu código, puedes empezar a migrar tus componentes a standalone.</p>
+<h3 id="-reemplazar-zonejs-con-signals-opcional">
+  🔹 <strong>Reemplazar Zone.js con Signals (Opcional)</strong>
+  <a class="heading-link" href="#-reemplazar-zonejs-con-signals-opcional">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Para aplicaciones más reactivas, puedes reemplazar <code>EventEmitter</code> y <code>RxJS</code> por Signals.</p>
+<h2 id="5-conclusión">
+  5. Conclusión
+  <a class="heading-link" href="#5-conclusi%c3%b3n">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Angular 17 marca un <strong>antes y un después</strong> en la evolución del framework. Sus mejoras en <strong>performance, reactividad y simplificación arquitectónica</strong> permitirán construir aplicaciones más eficientes y escalables.</p>
+      </div>
+
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script>
+  window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "cmasblog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    
+    document.addEventListener('themeChanged', function (e) { 
+        if (document.readyState == 'complete') {
+          DISQUS.reset({ reload: true, config: disqus_config });
+        }
+    });
+</script>
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2018 -
+    
+    2025
+     Christian Amado 
+    ·
+    
+    Desarrollado por <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+      <script async src="https://www.googletagmanager.com/gtag/js?id=356375808"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '356375808');
+        }
+      </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=013131931956450466198%3ablhmkdpweyq"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '013131931956450466198:blhmkdpweyq');
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

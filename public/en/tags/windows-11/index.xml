@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Windows 11 on Christian Amado</title>
+    <link>http://localhost:1313/en/tags/windows-11/</link>
+    <description>Recent content in Windows 11 on Christian Amado</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 20 Apr 2022 13:01:14 -0400</lastBuildDate>
+    <atom:link href="http://localhost:1313/en/tags/windows-11/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Install Android Apps from APK in Windows 11</title>
+      <link>http://localhost:1313/en/posts/2022-04-20-install-android-apps-from-apk/</link>
+      <pubDate>Wed, 20 Apr 2022 13:01:14 -0400</pubDate>
+      <guid>http://localhost:1313/en/posts/2022-04-20-install-android-apps-from-apk/</guid>
+      <description>&lt;p&gt;In this article I will show how to install Android applications on Windows 11 thanks to &lt;strong&gt;Windows Subsystem for Android&lt;/strong&gt; using Android tools and enabling certain options. In a &lt;a href=&#34;http://localhost:1313/posts/2022-04-13-enable-wsa/&#34; &gt;previous article&lt;/a&gt; we have seen how to enable the platform from the &lt;strong&gt;Microsoft Store&lt;/strong&gt;.&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Windows 11 Insider Preview Build 22598&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Enable Windows Subsystem for Android™️</title>
+      <link>http://localhost:1313/en/posts/2022-04-13-enable-wsa/</link>
+      <pubDate>Wed, 13 Apr 2022 13:41:27 -0400</pubDate>
+      <guid>http://localhost:1313/en/posts/2022-04-13-enable-wsa/</guid>
+      <description>&lt;p&gt;In this article I will show step by step how to enable the &lt;strong&gt;Windows Subsystem for Android&lt;/strong&gt; in our favorite operating system. Please note that at the time of writing this article it is not available outside of the US.&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Windows 11 Insider Preview Build 22598&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Create shortcut to virtual machine</title>
+      <link>http://localhost:1313/en/posts/2022-04-06-windows-11-shortcut-vm/</link>
+      <pubDate>Wed, 06 Apr 2022 19:21:43 -0400</pubDate>
+      <guid>http://localhost:1313/en/posts/2022-04-06-windows-11-shortcut-vm/</guid>
+      <description>&lt;p&gt;The most practical and useful thing for a user is to find what they are looking for quickly and easily. That is why I will show the steps to create a shortcut to a virtual machine in Hyper-V.&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Windows 11 Insider Preview Build 22593&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,481 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on Christian Amado</title>
+    <link>http://localhost:1313/tags/</link>
+    <description>Recent content in Tags on Christian Amado</description>
+    <generator>Hugo</generator>
+    <language>es</language>
+    <lastBuildDate>Fri, 02 May 2025 00:00:00 -0300</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Deno</title>
+      <link>http://localhost:1313/tags/deno/</link>
+      <pubDate>Fri, 02 May 2025 00:00:00 -0300</pubDate>
+      <guid>http://localhost:1313/tags/deno/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>GitHub Star</title>
+      <link>http://localhost:1313/tags/github-star/</link>
+      <pubDate>Fri, 02 May 2025 00:00:00 -0300</pubDate>
+      <guid>http://localhost:1313/tags/github-star/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>GCP</title>
+      <link>http://localhost:1313/tags/gcp/</link>
+      <pubDate>Wed, 30 Apr 2025 00:00:00 -0300</pubDate>
+      <guid>http://localhost:1313/tags/gcp/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Go</title>
+      <link>http://localhost:1313/tags/go/</link>
+      <pubDate>Wed, 30 Apr 2025 00:00:00 -0300</pubDate>
+      <guid>http://localhost:1313/tags/go/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Google</title>
+      <link>http://localhost:1313/tags/google/</link>
+      <pubDate>Wed, 30 Apr 2025 00:00:00 -0300</pubDate>
+      <guid>http://localhost:1313/tags/google/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Google Cloud</title>
+      <link>http://localhost:1313/tags/google-cloud/</link>
+      <pubDate>Wed, 30 Apr 2025 00:00:00 -0300</pubDate>
+      <guid>http://localhost:1313/tags/google-cloud/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>.NET</title>
+      <link>http://localhost:1313/tags/.net/</link>
+      <pubDate>Tue, 29 Apr 2025 00:00:00 -0300</pubDate>
+      <guid>http://localhost:1313/tags/.net/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>WinDev</title>
+      <link>http://localhost:1313/tags/windev/</link>
+      <pubDate>Tue, 29 Apr 2025 00:00:00 -0300</pubDate>
+      <guid>http://localhost:1313/tags/windev/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Windows 11</title>
+      <link>http://localhost:1313/tags/windows-11/</link>
+      <pubDate>Tue, 29 Apr 2025 00:00:00 -0300</pubDate>
+      <guid>http://localhost:1313/tags/windows-11/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>WinUI 3</title>
+      <link>http://localhost:1313/tags/winui-3/</link>
+      <pubDate>Tue, 29 Apr 2025 00:00:00 -0300</pubDate>
+      <guid>http://localhost:1313/tags/winui-3/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Firestore</title>
+      <link>http://localhost:1313/tags/firestore/</link>
+      <pubDate>Wed, 23 Apr 2025 00:00:00 -0300</pubDate>
+      <guid>http://localhost:1313/tags/firestore/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Windows App SDK</title>
+      <link>http://localhost:1313/tags/windows-app-sdk/</link>
+      <pubDate>Fri, 28 Mar 2025 00:00:00 -0300</pubDate>
+      <guid>http://localhost:1313/tags/windows-app-sdk/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Blazor</title>
+      <link>http://localhost:1313/tags/blazor/</link>
+      <pubDate>Wed, 26 Mar 2025 00:00:00 -0300</pubDate>
+      <guid>http://localhost:1313/tags/blazor/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Web Development</title>
+      <link>http://localhost:1313/tags/web-development/</link>
+      <pubDate>Wed, 05 Mar 2025 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/tags/web-development/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Angular</title>
+      <link>http://localhost:1313/tags/angular/</link>
+      <pubDate>Wed, 26 Feb 2025 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/tags/angular/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Typescript</title>
+      <link>http://localhost:1313/tags/typescript/</link>
+      <pubDate>Wed, 19 Feb 2025 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/tags/typescript/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Azure</title>
+      <link>http://localhost:1313/tags/azure/</link>
+      <pubDate>Wed, 05 Feb 2025 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/tags/azure/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>WSL</title>
+      <link>http://localhost:1313/tags/wsl/</link>
+      <pubDate>Thu, 09 Jan 2025 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/tags/wsl/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Web Assembly</title>
+      <link>http://localhost:1313/tags/web-assembly/</link>
+      <pubDate>Mon, 06 Jan 2025 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/tags/web-assembly/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>React</title>
+      <link>http://localhost:1313/tags/react/</link>
+      <pubDate>Wed, 04 Dec 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/tags/react/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Vue</title>
+      <link>http://localhost:1313/tags/vue/</link>
+      <pubDate>Wed, 04 Dec 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/tags/vue/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Firebase</title>
+      <link>http://localhost:1313/tags/firebase/</link>
+      <pubDate>Wed, 25 Sep 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/tags/firebase/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>GitHub</title>
+      <link>http://localhost:1313/tags/github/</link>
+      <pubDate>Wed, 11 Sep 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/tags/github/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Javascript</title>
+      <link>http://localhost:1313/tags/javascript/</link>
+      <pubDate>Wed, 28 Aug 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/tags/javascript/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Node.js</title>
+      <link>http://localhost:1313/tags/node.js/</link>
+      <pubDate>Wed, 21 Aug 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/tags/node.js/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>IDX</title>
+      <link>http://localhost:1313/tags/idx/</link>
+      <pubDate>Wed, 17 Jul 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/tags/idx/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Microsoft MVP</title>
+      <link>http://localhost:1313/tags/microsoft-mvp/</link>
+      <pubDate>Wed, 10 Jul 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/tags/microsoft-mvp/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Python</title>
+      <link>http://localhost:1313/tags/python/</link>
+      <pubDate>Fri, 14 Jun 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/tags/python/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Jest</title>
+      <link>http://localhost:1313/tags/jest/</link>
+      <pubDate>Wed, 12 Jun 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/tags/jest/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>GitHub Actions</title>
+      <link>http://localhost:1313/tags/github-actions/</link>
+      <pubDate>Wed, 17 Apr 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/tags/github-actions/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Power Automate</title>
+      <link>http://localhost:1313/tags/power-automate/</link>
+      <pubDate>Wed, 07 Feb 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/tags/power-automate/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Power Automate Desktop</title>
+      <link>http://localhost:1313/tags/power-automate-desktop/</link>
+      <pubDate>Wed, 31 Jan 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/tags/power-automate-desktop/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>MAUI</title>
+      <link>http://localhost:1313/tags/maui/</link>
+      <pubDate>Fri, 15 Dec 2023 18:30:00 -0400</pubDate>
+      <guid>http://localhost:1313/tags/maui/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>XAML</title>
+      <link>http://localhost:1313/tags/xaml/</link>
+      <pubDate>Fri, 15 Dec 2023 18:30:00 -0400</pubDate>
+      <guid>http://localhost:1313/tags/xaml/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Power Pages</title>
+      <link>http://localhost:1313/tags/power-pages/</link>
+      <pubDate>Wed, 29 Nov 2023 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/tags/power-pages/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>PowerApps</title>
+      <link>http://localhost:1313/tags/powerapps/</link>
+      <pubDate>Wed, 27 Sep 2023 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/tags/powerapps/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Visual Studio Code</title>
+      <link>http://localhost:1313/tags/visual-studio-code/</link>
+      <pubDate>Wed, 27 Sep 2023 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/tags/visual-studio-code/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Microsoft 365</title>
+      <link>http://localhost:1313/tags/microsoft-365/</link>
+      <pubDate>Wed, 17 May 2023 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/tags/microsoft-365/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>C#</title>
+      <link>http://localhost:1313/tags/c%23/</link>
+      <pubDate>Sun, 19 Mar 2023 09:01:00 -0400</pubDate>
+      <guid>http://localhost:1313/tags/c%23/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Telerik</title>
+      <link>http://localhost:1313/tags/telerik/</link>
+      <pubDate>Sun, 19 Mar 2023 09:01:00 -0400</pubDate>
+      <guid>http://localhost:1313/tags/telerik/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>WPF</title>
+      <link>http://localhost:1313/tags/wpf/</link>
+      <pubDate>Sun, 19 Mar 2023 09:01:00 -0400</pubDate>
+      <guid>http://localhost:1313/tags/wpf/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>ChatGPT</title>
+      <link>http://localhost:1313/tags/chatgpt/</link>
+      <pubDate>Fri, 17 Mar 2023 21:25:00 -0400</pubDate>
+      <guid>http://localhost:1313/tags/chatgpt/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>WinUI</title>
+      <link>http://localhost:1313/tags/winui/</link>
+      <pubDate>Fri, 17 Mar 2023 21:25:00 -0400</pubDate>
+      <guid>http://localhost:1313/tags/winui/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Django</title>
+      <link>http://localhost:1313/tags/django/</link>
+      <pubDate>Wed, 21 Dec 2022 19:39:00 -0400</pubDate>
+      <guid>http://localhost:1313/tags/django/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Figma</title>
+      <link>http://localhost:1313/tags/figma/</link>
+      <pubDate>Wed, 07 Dec 2022 21:12:00 -0400</pubDate>
+      <guid>http://localhost:1313/tags/figma/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Windows Fluent Design System</title>
+      <link>http://localhost:1313/tags/windows-fluent-design-system/</link>
+      <pubDate>Wed, 07 Dec 2022 21:12:00 -0400</pubDate>
+      <guid>http://localhost:1313/tags/windows-fluent-design-system/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Android</title>
+      <link>http://localhost:1313/tags/android/</link>
+      <pubDate>Wed, 24 Aug 2022 21:04:00 -0400</pubDate>
+      <guid>http://localhost:1313/tags/android/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>WSA</title>
+      <link>http://localhost:1313/tags/wsa/</link>
+      <pubDate>Wed, 27 Jul 2022 19:16:00 -0400</pubDate>
+      <guid>http://localhost:1313/tags/wsa/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>ASP.NET Core</title>
+      <link>http://localhost:1313/tags/asp.net-core/</link>
+      <pubDate>Wed, 20 Jul 2022 23:01:00 -0400</pubDate>
+      <guid>http://localhost:1313/tags/asp.net-core/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>UWP</title>
+      <link>http://localhost:1313/tags/uwp/</link>
+      <pubDate>Wed, 20 Jul 2022 23:01:00 -0400</pubDate>
+      <guid>http://localhost:1313/tags/uwp/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Java</title>
+      <link>http://localhost:1313/tags/java/</link>
+      <pubDate>Wed, 29 Jun 2022 20:47:00 -0400</pubDate>
+      <guid>http://localhost:1313/tags/java/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Ubuntu</title>
+      <link>http://localhost:1313/tags/ubuntu/</link>
+      <pubDate>Wed, 29 Jun 2022 20:47:00 -0400</pubDate>
+      <guid>http://localhost:1313/tags/ubuntu/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>NodeJs</title>
+      <link>http://localhost:1313/tags/nodejs/</link>
+      <pubDate>Wed, 08 Jun 2022 18:07:00 -0400</pubDate>
+      <guid>http://localhost:1313/tags/nodejs/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Windows Insider Preview</title>
+      <link>http://localhost:1313/tags/windows-insider-preview/</link>
+      <pubDate>Wed, 08 Jun 2022 18:07:00 -0400</pubDate>
+      <guid>http://localhost:1313/tags/windows-insider-preview/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Git</title>
+      <link>http://localhost:1313/tags/git/</link>
+      <pubDate>Wed, 04 May 2022 13:48:00 -0400</pubDate>
+      <guid>http://localhost:1313/tags/git/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>DevOps</title>
+      <link>http://localhost:1313/tags/devops/</link>
+      <pubDate>Mon, 18 Apr 2022 23:24:00 -0400</pubDate>
+      <guid>http://localhost:1313/tags/devops/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Hyper-V</title>
+      <link>http://localhost:1313/tags/hyper-v/</link>
+      <pubDate>Wed, 06 Apr 2022 19:21:43 -0400</pubDate>
+      <guid>http://localhost:1313/tags/hyper-v/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Dynamics 365 Business Central</title>
+      <link>http://localhost:1313/tags/dynamics-365-business-central/</link>
+      <pubDate>Wed, 09 Mar 2022 22:12:07 -0400</pubDate>
+      <guid>http://localhost:1313/tags/dynamics-365-business-central/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Microsoft Edge</title>
+      <link>http://localhost:1313/tags/microsoft-edge/</link>
+      <pubDate>Wed, 02 Mar 2022 18:55:04 -0400</pubDate>
+      <guid>http://localhost:1313/tags/microsoft-edge/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>AL</title>
+      <link>http://localhost:1313/tags/al/</link>
+      <pubDate>Wed, 16 Feb 2022 09:12:07 -0400</pubDate>
+      <guid>http://localhost:1313/tags/al/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Visual Studio</title>
+      <link>http://localhost:1313/tags/visual-studio/</link>
+      <pubDate>Wed, 03 Nov 2021 19:05:24 -0400</pubDate>
+      <guid>http://localhost:1313/tags/visual-studio/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>HTML</title>
+      <link>http://localhost:1313/tags/html/</link>
+      <pubDate>Wed, 09 Jun 2021 15:12:00 -0400</pubDate>
+      <guid>http://localhost:1313/tags/html/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>C/SIDE</title>
+      <link>http://localhost:1313/tags/c/side/</link>
+      <pubDate>Wed, 08 Apr 2020 17:06:00 -0400</pubDate>
+      <guid>http://localhost:1313/tags/c/side/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Flow</title>
+      <link>http://localhost:1313/tags/flow/</link>
+      <pubDate>Thu, 02 Apr 2020 17:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/tags/flow/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>CRM</title>
+      <link>http://localhost:1313/tags/crm/</link>
+      <pubDate>Thu, 26 Dec 2019 13:47:18 -0400</pubDate>
+      <guid>http://localhost:1313/tags/crm/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Dynamics 365</title>
+      <link>http://localhost:1313/tags/dynamics-365/</link>
+      <pubDate>Thu, 26 Dec 2019 13:47:18 -0400</pubDate>
+      <guid>http://localhost:1313/tags/dynamics-365/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Dynamics NAV</title>
+      <link>http://localhost:1313/tags/dynamics-nav/</link>
+      <pubDate>Wed, 18 Dec 2019 22:36:06 -0400</pubDate>
+      <guid>http://localhost:1313/tags/dynamics-nav/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  Introducción a los Signals en Angular: Casos prácticos · Christian Amado
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Christian Amado">
+<meta name="description" content="Angular es un framework robusto y evolutivo que continuamente introduce nuevas características para mejorar el desarrollo de aplicaciones web modernas. Una de estas innovaciones son los Signals, una herramienta que permite manejar cambios de estado de manera reactiva, clara y eficiente. Este artículo ofrece una introducción detallada a los Signals en Angular, explicando cómo utilizarlos, sus ventajas comparativas frente a otras soluciones reactivas y sus aplicaciones en el desarrollo real, acompañado de casos prácticos ampliados, buenas prácticas y un enfoque moderno en seguridad.">
+<meta name="keywords" content="blog,desarrollador,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Introducción a los Signals en Angular: Casos prácticos">
+  <meta name="twitter:description" content="Angular es un framework robusto y evolutivo que continuamente introduce nuevas características para mejorar el desarrollo de aplicaciones web modernas. Una de estas innovaciones son los Signals, una herramienta que permite manejar cambios de estado de manera reactiva, clara y eficiente. Este artículo ofrece una introducción detallada a los Signals en Angular, explicando cómo utilizarlos, sus ventajas comparativas frente a otras soluciones reactivas y sus aplicaciones en el desarrollo real, acompañado de casos prácticos ampliados, buenas prácticas y un enfoque moderno en seguridad.">
+
+<meta property="og:url" content="http://localhost:1313/es/posts/2024-05-22-intro-signals-angular/">
+  <meta property="og:site_name" content="Christian Amado">
+  <meta property="og:title" content="Introducción a los Signals en Angular: Casos prácticos">
+  <meta property="og:description" content="Angular es un framework robusto y evolutivo que continuamente introduce nuevas características para mejorar el desarrollo de aplicaciones web modernas. Una de estas innovaciones son los Signals, una herramienta que permite manejar cambios de estado de manera reactiva, clara y eficiente. Este artículo ofrece una introducción detallada a los Signals en Angular, explicando cómo utilizarlos, sus ventajas comparativas frente a otras soluciones reactivas y sus aplicaciones en el desarrollo real, acompañado de casos prácticos ampliados, buenas prácticas y un enfoque moderno en seguridad.">
+  <meta property="og:locale" content="es">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-05-22T00:00:00-04:00">
+    <meta property="article:modified_time" content="2024-05-22T00:00:00-04:00">
+    <meta property="article:tag" content="Web Development">
+    <meta property="article:tag" content="Angular">
+    <meta property="article:tag" content="Google">
+
+
+
+
+<link rel="canonical" href="http://localhost:1313/es/posts/2024-05-22-intro-signals-angular/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/es/">
+      Christian Amado
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/about">Biografía</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/contact">Contacto</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/diabetes">Diabetes</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/tags">Etiquetas</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/en/">🇺🇸</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/es/posts/2024-05-22-intro-signals-angular/">
+              Introducción a los Signals en Angular: Casos prácticos
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2024-05-22T00:00:00-04:00">
+                mayo 22, 2024
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              5 minutos de lectura.
+            </span>
+          </div>
+          
+          
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/es/tags/web-development/">Web Development</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/es/tags/angular/">Angular</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/es/tags/google/">Google</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <p>Angular es un framework robusto y evolutivo que continuamente introduce nuevas características para mejorar el desarrollo de aplicaciones web modernas. Una de estas innovaciones son los <strong>Signals</strong>, una herramienta que permite manejar cambios de estado de manera reactiva, clara y eficiente. Este artículo ofrece una introducción detallada a los Signals en Angular, explicando cómo utilizarlos, sus ventajas comparativas frente a otras soluciones reactivas y sus aplicaciones en el desarrollo real, acompañado de casos prácticos ampliados, buenas prácticas y un enfoque moderno en seguridad.</p>
+<h2 id="qué-son-los-signals-en-angular">
+  ¿Qué son los Signals en Angular?
+  <a class="heading-link" href="#qu%c3%a9-son-los-signals-en-angular">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Los Signals son una forma reactiva de manejar cambios de estado dentro de una aplicación Angular. A diferencia de las propiedades tradicionales o las soluciones basadas en <em>Observables</em> de <em>RxJS</em>, los Signals proporcionan un enfoque más directo para gestionar actualizaciones en la interfaz de usuario. Esta simplicidad es particularmente útil para escenarios donde se necesita un manejo del estado local claro y eficiente, reduciendo la complejidad general del código.</p>
+<h3 id="características-clave-de-los-signals">
+  Características clave de los Signals
+  <a class="heading-link" href="#caracter%c3%adsticas-clave-de-los-signals">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li><strong>Reactividad Automática</strong>: Los Signals reaccionan automáticamente a los cambios en su estado, actualizando los componentes afectados. Esto elimina la necesidad de invocar manualmente procesos de actualización de la interfaz.</li>
+<li><strong>Simplicidad</strong>: Reducir la necesidad de suscribirse y manejar manualmente flujos de datos, mejorando la legibilidad del código.</li>
+<li><strong>Integración nativa</strong>: Diseñar para integrarse de manera fluida con Angular, los Signals pueden ser utilizados junto con otras herramientas del framework.</li>
+</ol>
+<h2 id="configuración-de-signals-en-angular">
+  Configuración de Signals en Angular
+  <a class="heading-link" href="#configuraci%c3%b3n-de-signals-en-angular">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="paso-1-configurar-un-proyecto-angular">
+  Paso 1: Configurar un proyecto Angular
+  <a class="heading-link" href="#paso-1-configurar-un-proyecto-angular">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Primero, crear un nuevo proyecto Angular utilizando Angular CLI. Este proceso genera una estructura base para la aplicación.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">ng</span> <span class="n">new</span> <span class="n">signals</span><span class="o">-</span><span class="n">demo</span> <span class="o">--</span><span class="n">routing</span> <span class="o">--</span><span class="n">style</span> <span class="n">css</span>
+</span></span></code></pre></div><h3 id="paso-2-instalar-las-dependencias-necesarias">
+  Paso 2: Instalar las dependencias necesarias
+  <a class="heading-link" href="#paso-2-instalar-las-dependencias-necesarias">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Si los Signals no están incluidos en tu versión de Angular, se debe asegurar de actualizar a la última versión. Esto garantiza que se tenga acceso a las funcionalidades más recientes y al soporte técnico oficial.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">ng update @angular/core @angular/cli
+</span></span></code></pre></div><h2 id="usando-signals-en-angular">
+  Usando Signals en Angular
+  <a class="heading-link" href="#usando-signals-en-angular">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="declaración-de-un-signal">
+  Declaración de un Signal
+  <a class="heading-link" href="#declaraci%c3%b3n-de-un-signal">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Poder declarar un Signal utilizando el método <code>signal</code> del paquete Angular. Este método permitir definir estados reactivos que pueden actualizarse y observarse de manera eficiente.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">import</span> <span class="p">{</span> <span class="k">signal</span> <span class="p">}</span> <span class="n">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">export</span> <span class="k">class</span> <span class="n">AppComponent</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">count</span> <span class="o">=</span> <span class="k">signal</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">increment</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">this</span><span class="o">.</span><span class="n">count</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">value</span> <span class="o">=&gt;</span> <span class="n">value</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h3 id="uso-en-plantillas">
+  Uso en plantillas
+  <a class="heading-link" href="#uso-en-plantillas">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Los Signals se integran perfectamente con las plantillas de Angular. Se puede enlazarlos directamente, lo que simplifica la gestión del estado en la interfaz de usuario.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&lt;div&gt;
+</span></span><span class="line"><span class="cl">  &lt;p&gt;Contador: {{ count() }}&lt;/p&gt;
+</span></span><span class="line"><span class="cl">  &lt;button (click)=&#34;increment()&#34;&gt;Incrementar&lt;/button&gt;
+</span></span><span class="line"><span class="cl">&lt;/div&gt;
+</span></span></code></pre></div><h3 id="reactividad-con-computed-signals">
+  Reactividad con Computed Signals
+  <a class="heading-link" href="#reactividad-con-computed-signals">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Los <em>Computed Signals</em> permiten derivar valores basados en otros Signals. Esto es útil para evitar cálculos repetitivos o duplicados en la aplicación.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">import</span> <span class="p">{</span> <span class="k">signal</span><span class="p">,</span> <span class="n">computed</span> <span class="p">}</span> <span class="n">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">export</span> <span class="k">class</span> <span class="n">AppComponent</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">count</span> <span class="o">=</span> <span class="k">signal</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">doubleCount</span> <span class="o">=</span> <span class="n">computed</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="n">this</span><span class="o">.</span><span class="n">count</span><span class="p">()</span> <span class="o">*</span> <span class="mi">2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">increment</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">this</span><span class="o">.</span><span class="n">count</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">value</span> <span class="o">=&gt;</span> <span class="n">value</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>En la plantilla:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&lt;div&gt;
+</span></span><span class="line"><span class="cl">  &lt;p&gt;Doble del contador: {{ doubleCount() }}&lt;/p&gt;
+</span></span><span class="line"><span class="cl">  &lt;button (click)=&#34;increment()&#34;&gt;Incrementar&lt;/button&gt;
+</span></span><span class="line"><span class="cl">&lt;/div&gt;
+</span></span></code></pre></div><h2 id="casos-prácticos">
+  Casos Prácticos
+  <a class="heading-link" href="#casos-pr%c3%a1cticos">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="1-manejo-de-estados-globales">
+  1. Manejo de Estados Globales
+  <a class="heading-link" href="#1-manejo-de-estados-globales">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Los Signals son útiles para gestionar estados compartidos en una aplicación. Un ejemplo clásico es la administración del estado de autenticación.</p>
+<h4 id="ejemplo">
+  Ejemplo
+  <a class="heading-link" href="#ejemplo">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">import</span> <span class="p">{</span> <span class="n">Injectable</span><span class="p">,</span> <span class="k">signal</span> <span class="p">}</span> <span class="n">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">@</span><span class="n">Injectable</span><span class="p">({</span> <span class="n">providedIn</span><span class="p">:</span> <span class="s1">&#39;root&#39;</span> <span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="k">export</span> <span class="k">class</span> <span class="n">AuthService</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">private</span> <span class="n">_isLoggedIn</span> <span class="o">=</span> <span class="k">signal</span><span class="p">(</span><span class="bp">false</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">isLoggedIn</span> <span class="o">=</span> <span class="n">this</span><span class="o">.</span><span class="n">_isLoggedIn</span><span class="o">.</span><span class="n">asReadonly</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">login</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">this</span><span class="o">.</span><span class="n">_isLoggedIn</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="bp">true</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">logout</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">this</span><span class="o">.</span><span class="n">_isLoggedIn</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="bp">false</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h3 id="2-formularios-reactivos-con-signals">
+  2. Formularios Reactivos con Signals
+  <a class="heading-link" href="#2-formularios-reactivos-con-signals">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Los Signals pueden simplificar la reactividad en formularios, mejorando la claridad del código y reduciendo la dependencia de estados auxiliares.</p>
+<h4 id="ejemplo-1">
+  Ejemplo
+  <a class="heading-link" href="#ejemplo-1">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">import</span> <span class="p">{</span> <span class="n">Component</span> <span class="p">}</span> <span class="n">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">import</span> <span class="p">{</span> <span class="n">FormBuilder</span><span class="p">,</span> <span class="n">FormGroup</span><span class="p">,</span> <span class="n">Validators</span> <span class="p">}</span> <span class="n">from</span> <span class="s1">&#39;@angular/forms&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">import</span> <span class="p">{</span> <span class="k">signal</span> <span class="p">}</span> <span class="n">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">@</span><span class="n">Component</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">  <span class="n">selector</span><span class="p">:</span> <span class="s1">&#39;app-login&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="n">templateUrl</span><span class="p">:</span> <span class="s1">&#39;./login.component.html&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="k">export</span> <span class="k">class</span> <span class="n">LoginComponent</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">loginForm</span><span class="p">:</span> <span class="n">FormGroup</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">isSubmitting</span> <span class="o">=</span> <span class="k">signal</span><span class="p">(</span><span class="bp">false</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">constructor</span><span class="p">(</span><span class="n">private</span> <span class="n">fb</span><span class="p">:</span> <span class="n">FormBuilder</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">this</span><span class="o">.</span><span class="n">loginForm</span> <span class="o">=</span> <span class="n">this</span><span class="o">.</span><span class="n">fb</span><span class="o">.</span><span class="n">group</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">      <span class="n">username</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">Validators</span><span class="o">.</span><span class="n">required</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">      <span class="n">password</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">Validators</span><span class="o">.</span><span class="n">required</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">    <span class="p">});</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">submit</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">this</span><span class="o">.</span><span class="n">loginForm</span><span class="o">.</span><span class="n">valid</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">this</span><span class="o">.</span><span class="n">isSubmitting</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="bp">true</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="o">//</span> <span class="n">Simular</span> <span class="n">una</span> <span class="n">petición</span> <span class="n">de</span> <span class="n">login</span>
+</span></span><span class="line"><span class="cl">      <span class="n">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">this</span><span class="o">.</span><span class="n">isSubmitting</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="bp">false</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="p">},</span> <span class="mi">2000</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Plantilla:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&lt;form [formGroup]=&#34;loginForm&#34; (ngSubmit)=&#34;submit()&#34;&gt;
+</span></span><span class="line"><span class="cl">  &lt;input formControlName=&#34;username&#34; placeholder=&#34;Usuario&#34; /&gt;
+</span></span><span class="line"><span class="cl">  &lt;input formControlName=&#34;password&#34; type=&#34;password&#34; placeholder=&#34;Contraseña&#34; /&gt;
+</span></span><span class="line"><span class="cl">  &lt;button type=&#34;submit&#34; [disabled]=&#34;isSubmitting()&#34;&gt;Iniciar Sesión&lt;/button&gt;
+</span></span><span class="line"><span class="cl">&lt;/form&gt;
+</span></span></code></pre></div><h2 id="buenas-prácticas-con-signals">
+  Buenas Prácticas con Signals
+  <a class="heading-link" href="#buenas-pr%c3%a1cticas-con-signals">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ol>
+<li><strong>Mantener la simplicidad</strong>: Usar Signals para estados locales y Observables para flujos de datos complejos o asíncronos.</li>
+<li><strong>Usar Signals derivados</strong>: Preferir <code>computed</code> para evitar código duplicado y mejorar la eficiencia.</li>
+<li><strong>Proteger los Signals</strong>: Utilizar <code>asReadonly</code> para evitar modificaciones accidentales en estados que no deben cambiarse directamente.</li>
+<li><strong>Combinar Signals y Observables</strong>: En aplicaciones grandes, considerar usar Signals para estados locales y Observables para comunicaciones con servicios remotos.</li>
+</ol>
+<h2 id="seguridad-con-signals">
+  Seguridad con Signals
+  <a class="heading-link" href="#seguridad-con-signals">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ol>
+<li><strong>Validar datos</strong>: Siempre validar los datos antes de actualizarlos en un Signal. Esto es especialmente importante en escenarios donde los datos provienen de entradas de usuario.</li>
+<li><strong>Evitar manipulaciones directas</strong>: Encapsular los Signals en servicios para proteger su integridad y evitar accesos no autorizados.</li>
+<li><strong>Auditar</strong>: Implementar logs para registrar cambios en Signals sensibles. Esto permite rastrear modificaciones inesperadas y detectar posibles problemas de seguridad.</li>
+<li><strong>Evitar exponerse a cambios externos</strong>: Cuando se trabaja con aplicaciones multiusuario, considerar estrategias de sincronización seguras para evitar conflictos.</li>
+</ol>
+<h2 id="conclusión">
+  Conclusión
+  <a class="heading-link" href="#conclusi%c3%b3n">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Los Signals representan un avance significativo en el manejo del estado reactivo en Angular. Su simplicidad y eficiencia los convierten en una herramienta esencial para aplicaciones modernas. Al adoptar buenas prácticas y aprovechar sus características avanzadas, como los Computed Signals, los desarrolladores pueden construir experiencias de usuario más fluidas, escalables y seguras. ¡Empezá a explorar los Signals hoy mismo y transforma la manera en que diseñas aplicaciones con Angular! Además, considerar su combinación con otras herramientas reactivas para maximizar su impacto en proyectos complejos.</p>
+      </div>
+
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script>
+  window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "cmasblog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    
+    document.addEventListener('themeChanged', function (e) { 
+        if (document.readyState == 'complete') {
+          DISQUS.reset({ reload: true, config: disqus_config });
+        }
+    });
+</script>
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2018 -
+    
+    2025
+     Christian Amado 
+    ·
+    
+    Desarrollado por <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+      <script async src="https://www.googletagmanager.com/gtag/js?id=356375808"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '356375808');
+        }
+      </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=013131931956450466198%3ablhmkdpweyq"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '013131931956450466198:blhmkdpweyq');
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

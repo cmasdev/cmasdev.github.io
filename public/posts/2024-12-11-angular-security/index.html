@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  Seguridad en Angular: Roles y autenticación avanzada · Christian Amado
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Christian Amado">
+<meta name="description" content="La seguridad en Angular es un aspecto fundamental para cualquier aplicación web moderna. Implementar un sistema de autenticación robusto y un control de acceso basado en roles garantiza la integridad y protección de los datos. En este artículo, exploraremos estrategias avanzadas de autenticación y gestión de roles en Angular con ejemplos prácticos.">
+<meta name="keywords" content="blog,desarrollador,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Seguridad en Angular: Roles y autenticación avanzada">
+  <meta name="twitter:description" content="La seguridad en Angular es un aspecto fundamental para cualquier aplicación web moderna. Implementar un sistema de autenticación robusto y un control de acceso basado en roles garantiza la integridad y protección de los datos. En este artículo, exploraremos estrategias avanzadas de autenticación y gestión de roles en Angular con ejemplos prácticos.">
+
+<meta property="og:url" content="http://localhost:1313/posts/2024-12-11-angular-security/">
+  <meta property="og:site_name" content="Christian Amado">
+  <meta property="og:title" content="Seguridad en Angular: Roles y autenticación avanzada">
+  <meta property="og:description" content="La seguridad en Angular es un aspecto fundamental para cualquier aplicación web moderna. Implementar un sistema de autenticación robusto y un control de acceso basado en roles garantiza la integridad y protección de los datos. En este artículo, exploraremos estrategias avanzadas de autenticación y gestión de roles en Angular con ejemplos prácticos.">
+  <meta property="og:locale" content="es">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-12-11T00:00:00-04:00">
+    <meta property="article:modified_time" content="2024-12-11T00:00:00-04:00">
+    <meta property="article:tag" content="Web Development">
+    <meta property="article:tag" content="Angular">
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-V1ZRP82YFD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-V1ZRP82YFD');
+</script>
+
+
+
+<link rel="canonical" href="http://localhost:1313/posts/2024-12-11-angular-security/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="apple-touch-icon" sizes="57x57" href="/img/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/img/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/img/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/img/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/img/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/img/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/img/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/img/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/img/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="/img/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/img/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+<link rel="manifest" href="/img/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/img/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/">
+      Christian Amado
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/about">Biografía</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/contact">Contacto</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/diabetes">Diabetes</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/tags">Etiquetas</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/en/">🇺🇸</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/posts/2024-12-11-angular-security/">
+              Seguridad en Angular: Roles y autenticación avanzada
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2024-12-11T00:00:00-04:00">
+                diciembre 11, 2024
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              4 minutos de lectura.
+            </span>
+          </div>
+          
+          
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/tags/web-development/">Web Development</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/angular/">Angular</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <p>La seguridad en Angular es un aspecto fundamental para cualquier aplicación web moderna. Implementar un sistema de autenticación robusto y un control de acceso basado en roles garantiza la integridad y protección de los datos. En este artículo, exploraremos estrategias avanzadas de autenticación y gestión de roles en Angular con ejemplos prácticos.</p>
+<h2 id="1-introducción-a-la-seguridad-en-angular">
+  1. Introducción a la Seguridad en Angular
+  <a class="heading-link" href="#1-introducci%c3%b3n-a-la-seguridad-en-angular">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Las aplicaciones web requieren mecanismos de seguridad efectivos para proteger información sensible y garantizar que los usuarios solo accedan a los recursos que les corresponden. En Angular, se pueden implementar diversas estrategias de seguridad, tales como:</p>
+<ul>
+<li><strong>Autenticación</strong>: Verificación de identidad de los usuarios.</li>
+<li><strong>Autorización basada en roles</strong>: Control de acceso según privilegios de usuario.</li>
+<li><strong>Protección de rutas</strong>: Restricción de acceso a ciertas secciones de la aplicación.</li>
+<li><strong>Manejo de tokens (JWT)</strong>: Uso de tokens seguros para gestionar sesiones.</li>
+</ul>
+<h2 id="2-implementación-de-autenticación-en-angular">
+  2. Implementación de Autenticación en Angular
+  <a class="heading-link" href="#2-implementaci%c3%b3n-de-autenticaci%c3%b3n-en-angular">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="21-configuración-del-proyecto">
+  2.1 Configuración del Proyecto
+  <a class="heading-link" href="#21-configuraci%c3%b3n-del-proyecto">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Primero, creamos un nuevo proyecto Angular e instalamos las dependencias necesarias:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">ng new angular-security
+</span></span><span class="line"><span class="cl">cd angular-security
+</span></span><span class="line"><span class="cl">npm install @angular/fire firebase jsonwebtoken
+</span></span></code></pre></div><h3 id="22-creación-del-servicio-de-autenticación">
+  2.2 Creación del Servicio de Autenticación
+  <a class="heading-link" href="#22-creaci%c3%b3n-del-servicio-de-autenticaci%c3%b3n">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>El servicio <code>AuthService</code> manejará el registro, inicio de sesión y cierre de sesión de usuarios.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">import</span> <span class="p">{</span> <span class="n">Injectable</span> <span class="p">}</span> <span class="n">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">import</span> <span class="p">{</span> <span class="n">Router</span> <span class="p">}</span> <span class="n">from</span> <span class="s1">&#39;@angular/router&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">import</span> <span class="p">{</span> <span class="n">BehaviorSubject</span> <span class="p">}</span> <span class="n">from</span> <span class="s1">&#39;rxjs&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">@</span><span class="n">Injectable</span><span class="p">({</span> <span class="n">providedIn</span><span class="p">:</span> <span class="s1">&#39;root&#39;</span> <span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="k">export</span> <span class="k">class</span> <span class="n">AuthService</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">private</span> <span class="n">authState</span> <span class="o">=</span> <span class="n">new</span> <span class="n">BehaviorSubject</span><span class="o">&lt;</span><span class="n">boolean</span><span class="o">&gt;</span><span class="p">(</span><span class="bp">false</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">private</span> <span class="n">userRole</span> <span class="o">=</span> <span class="n">new</span> <span class="n">BehaviorSubject</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">constructor</span><span class="p">(</span><span class="n">private</span> <span class="n">router</span><span class="p">:</span> <span class="n">Router</span><span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">login</span><span class="p">(</span><span class="n">email</span><span class="p">:</span> <span class="n">string</span><span class="p">,</span> <span class="n">password</span><span class="p">:</span> <span class="n">string</span><span class="p">):</span> <span class="n">void</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="o">//</span> <span class="n">Simulación</span> <span class="n">de</span> <span class="n">autenticación</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">email</span> <span class="o">===</span> <span class="s1">&#39;admin@demo.com&#39;</span> <span class="o">&amp;&amp;</span> <span class="n">password</span> <span class="o">===</span> <span class="s1">&#39;password&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">localStorage</span><span class="o">.</span><span class="n">setItem</span><span class="p">(</span><span class="s1">&#39;token&#39;</span><span class="p">,</span> <span class="s1">&#39;fake-jwt-token&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="n">localStorage</span><span class="o">.</span><span class="n">setItem</span><span class="p">(</span><span class="s1">&#39;role&#39;</span><span class="p">,</span> <span class="s1">&#39;admin&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="n">this</span><span class="o">.</span><span class="n">authState</span><span class="o">.</span><span class="n">next</span><span class="p">(</span><span class="bp">true</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="n">this</span><span class="o">.</span><span class="n">userRole</span><span class="o">.</span><span class="n">next</span><span class="p">(</span><span class="s1">&#39;admin&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="n">this</span><span class="o">.</span><span class="n">router</span><span class="o">.</span><span class="n">navigate</span><span class="p">([</span><span class="s1">&#39;/dashboard&#39;</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">logout</span><span class="p">():</span> <span class="n">void</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">localStorage</span><span class="o">.</span><span class="n">removeItem</span><span class="p">(</span><span class="s1">&#39;token&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">localStorage</span><span class="o">.</span><span class="n">removeItem</span><span class="p">(</span><span class="s1">&#39;role&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">this</span><span class="o">.</span><span class="n">authState</span><span class="o">.</span><span class="n">next</span><span class="p">(</span><span class="bp">false</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">this</span><span class="o">.</span><span class="n">userRole</span><span class="o">.</span><span class="n">next</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">this</span><span class="o">.</span><span class="n">router</span><span class="o">.</span><span class="n">navigate</span><span class="p">([</span><span class="s1">&#39;/login&#39;</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">isAuthenticated</span><span class="p">():</span> <span class="n">boolean</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="o">!!</span><span class="n">localStorage</span><span class="o">.</span><span class="n">getItem</span><span class="p">(</span><span class="s1">&#39;token&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">getRole</span><span class="p">():</span> <span class="n">string</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">localStorage</span><span class="o">.</span><span class="n">getItem</span><span class="p">(</span><span class="s1">&#39;role&#39;</span><span class="p">)</span> <span class="o">||</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h2 id="3-protección-de-rutas-en-angular">
+  3. Protección de Rutas en Angular
+  <a class="heading-link" href="#3-protecci%c3%b3n-de-rutas-en-angular">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Angular proporciona <strong>route guards</strong> para restringir el acceso a ciertas rutas en función de la autenticación del usuario.</p>
+<h3 id="31-implementación-de-authguard">
+  3.1 Implementación de <code>AuthGuard</code>
+  <a class="heading-link" href="#31-implementaci%c3%b3n-de-authguard">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">import</span> <span class="p">{</span> <span class="n">Injectable</span> <span class="p">}</span> <span class="n">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">import</span> <span class="p">{</span> <span class="n">CanActivate</span><span class="p">,</span> <span class="n">Router</span> <span class="p">}</span> <span class="n">from</span> <span class="s1">&#39;@angular/router&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">import</span> <span class="p">{</span> <span class="n">AuthService</span> <span class="p">}</span> <span class="n">from</span> <span class="s1">&#39;./auth.service&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">@</span><span class="n">Injectable</span><span class="p">({</span> <span class="n">providedIn</span><span class="p">:</span> <span class="s1">&#39;root&#39;</span> <span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="k">export</span> <span class="k">class</span> <span class="n">AuthGuard</span> <span class="n">implements</span> <span class="n">CanActivate</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">constructor</span><span class="p">(</span><span class="n">private</span> <span class="n">authService</span><span class="p">:</span> <span class="n">AuthService</span><span class="p">,</span> <span class="n">private</span> <span class="n">router</span><span class="p">:</span> <span class="n">Router</span><span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">canActivate</span><span class="p">():</span> <span class="n">boolean</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">this</span><span class="o">.</span><span class="n">authService</span><span class="o">.</span><span class="n">isAuthenticated</span><span class="p">())</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="bp">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">this</span><span class="o">.</span><span class="n">router</span><span class="o">.</span><span class="n">navigate</span><span class="p">([</span><span class="s1">&#39;/login&#39;</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="bp">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h3 id="32-configuración-de-las-rutas-protegidas">
+  3.2 Configuración de las Rutas Protegidas
+  <a class="heading-link" href="#32-configuraci%c3%b3n-de-las-rutas-protegidas">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">import</span> <span class="p">{</span> <span class="n">NgModule</span> <span class="p">}</span> <span class="n">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">import</span> <span class="p">{</span> <span class="n">RouterModule</span><span class="p">,</span> <span class="n">Routes</span> <span class="p">}</span> <span class="n">from</span> <span class="s1">&#39;@angular/router&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">import</span> <span class="p">{</span> <span class="n">DashboardComponent</span> <span class="p">}</span> <span class="n">from</span> <span class="s1">&#39;./dashboard/dashboard.component&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">import</span> <span class="p">{</span> <span class="n">LoginComponent</span> <span class="p">}</span> <span class="n">from</span> <span class="s1">&#39;./login/login.component&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">import</span> <span class="p">{</span> <span class="n">AuthGuard</span> <span class="p">}</span> <span class="n">from</span> <span class="s1">&#39;./auth.guard&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">routes</span><span class="p">:</span> <span class="n">Routes</span> <span class="o">=</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span> <span class="n">path</span><span class="p">:</span> <span class="s1">&#39;dashboard&#39;</span><span class="p">,</span> <span class="n">component</span><span class="p">:</span> <span class="n">DashboardComponent</span><span class="p">,</span> <span class="n">canActivate</span><span class="p">:</span> <span class="p">[</span><span class="n">AuthGuard</span><span class="p">]</span> <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span> <span class="n">path</span><span class="p">:</span> <span class="s1">&#39;login&#39;</span><span class="p">,</span> <span class="n">component</span><span class="p">:</span> <span class="n">LoginComponent</span> <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span> <span class="n">path</span><span class="p">:</span> <span class="s1">&#39;**&#39;</span><span class="p">,</span> <span class="n">redirectTo</span><span class="p">:</span> <span class="s1">&#39;login&#39;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">];</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">@</span><span class="n">NgModule</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">  <span class="n">imports</span><span class="p">:</span> <span class="p">[</span><span class="n">RouterModule</span><span class="o">.</span><span class="n">forRoot</span><span class="p">(</span><span class="n">routes</span><span class="p">)],</span>
+</span></span><span class="line"><span class="cl">  <span class="n">exports</span><span class="p">:</span> <span class="p">[</span><span class="n">RouterModule</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="k">export</span> <span class="k">class</span> <span class="n">AppRoutingModule</span> <span class="p">{}</span>
+</span></span></code></pre></div><h2 id="4-gestión-de-roles-en-angular">
+  4. Gestión de Roles en Angular
+  <a class="heading-link" href="#4-gesti%c3%b3n-de-roles-en-angular">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Para restringir accesos según el rol del usuario, utilizamos un <strong>Role Guard</strong>.</p>
+<h3 id="41-implementación-de-roleguard">
+  4.1 Implementación de <code>RoleGuard</code>
+  <a class="heading-link" href="#41-implementaci%c3%b3n-de-roleguard">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">import</span> <span class="p">{</span> <span class="n">Injectable</span> <span class="p">}</span> <span class="n">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">import</span> <span class="p">{</span> <span class="n">CanActivate</span><span class="p">,</span> <span class="n">Router</span> <span class="p">}</span> <span class="n">from</span> <span class="s1">&#39;@angular/router&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">import</span> <span class="p">{</span> <span class="n">AuthService</span> <span class="p">}</span> <span class="n">from</span> <span class="s1">&#39;./auth.service&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">@</span><span class="n">Injectable</span><span class="p">({</span> <span class="n">providedIn</span><span class="p">:</span> <span class="s1">&#39;root&#39;</span> <span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="k">export</span> <span class="k">class</span> <span class="n">RoleGuard</span> <span class="n">implements</span> <span class="n">CanActivate</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">constructor</span><span class="p">(</span><span class="n">private</span> <span class="n">authService</span><span class="p">:</span> <span class="n">AuthService</span><span class="p">,</span> <span class="n">private</span> <span class="n">router</span><span class="p">:</span> <span class="n">Router</span><span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">canActivate</span><span class="p">():</span> <span class="n">boolean</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="n">role</span> <span class="o">=</span> <span class="n">this</span><span class="o">.</span><span class="n">authService</span><span class="o">.</span><span class="n">getRole</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">role</span> <span class="o">===</span> <span class="s1">&#39;admin&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="bp">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">this</span><span class="o">.</span><span class="n">router</span><span class="o">.</span><span class="n">navigate</span><span class="p">([</span><span class="s1">&#39;/login&#39;</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="bp">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h3 id="42-aplicación-del-roleguard-en-rutas">
+  4.2 Aplicación del <code>RoleGuard</code> en Rutas
+  <a class="heading-link" href="#42-aplicaci%c3%b3n-del-roleguard-en-rutas">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">const</span> <span class="n">routes</span><span class="p">:</span> <span class="n">Routes</span> <span class="o">=</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span> <span class="n">path</span><span class="p">:</span> <span class="s1">&#39;admin&#39;</span><span class="p">,</span> <span class="n">component</span><span class="p">:</span> <span class="n">AdminComponent</span><span class="p">,</span> <span class="n">canActivate</span><span class="p">:</span> <span class="p">[</span><span class="n">RoleGuard</span><span class="p">]</span> <span class="p">},</span>
+</span></span><span class="line"><span class="cl"><span class="p">];</span>
+</span></span></code></pre></div><h2 id="5-implementación-de-json-web-tokens-jwt">
+  5. Implementación de JSON Web Tokens (JWT)
+  <a class="heading-link" href="#5-implementaci%c3%b3n-de-json-web-tokens-jwt">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Para mejorar la seguridad, se recomienda el uso de <strong>JWT</strong> para gestionar sesiones.</p>
+<h3 id="51-generación-de-un-jwt-en-el-servidor-nodejs">
+  5.1 Generación de un JWT en el Servidor (Node.js)
+  <a class="heading-link" href="#51-generaci%c3%b3n-de-un-jwt-en-el-servidor-nodejs">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">const</span> <span class="n">jwt</span> <span class="o">=</span> <span class="n">require</span><span class="p">(</span><span class="s1">&#39;jsonwebtoken&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">function</span> <span class="n">generateToken</span><span class="p">(</span><span class="n">user</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="n">jwt</span><span class="o">.</span><span class="n">sign</span><span class="p">({</span> <span class="n">email</span><span class="p">:</span> <span class="n">user</span><span class="o">.</span><span class="n">email</span><span class="p">,</span> <span class="n">role</span><span class="p">:</span> <span class="n">user</span><span class="o">.</span><span class="n">role</span> <span class="p">},</span> <span class="s1">&#39;secreto&#39;</span><span class="p">,</span> <span class="p">{</span> <span class="n">expiresIn</span><span class="p">:</span> <span class="s1">&#39;1h&#39;</span> <span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h3 id="52-validación-del-jwt-en-el-cliente-angular">
+  5.2 Validación del JWT en el Cliente (Angular)
+  <a class="heading-link" href="#52-validaci%c3%b3n-del-jwt-en-el-cliente-angular">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">import</span> <span class="p">{</span> <span class="n">HttpClient</span><span class="p">,</span> <span class="n">HttpHeaders</span> <span class="p">}</span> <span class="n">from</span> <span class="s1">&#39;@angular/common/http&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">new</span> <span class="n">HttpHeaders</span><span class="p">({</span> <span class="s1">&#39;Authorization&#39;</span><span class="p">:</span> <span class="err">`</span><span class="n">Bearer</span> <span class="o">$</span><span class="p">{</span><span class="n">localStorage</span><span class="o">.</span><span class="n">getItem</span><span class="p">(</span><span class="s1">&#39;token&#39;</span><span class="p">)}</span><span class="err">`</span> <span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="n">this</span><span class="o">.</span><span class="n">http</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;https://api.protegida.com/data&#39;</span><span class="p">,</span> <span class="p">{</span> <span class="n">headers</span> <span class="p">});</span>
+</span></span></code></pre></div><h2 id="6-conclusión">
+  6. Conclusión
+  <a class="heading-link" href="#6-conclusi%c3%b3n">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Implementar autenticación avanzada en Angular es esencial para proteger los datos y restringir el acceso de los usuarios según sus roles. Con <strong>route guards, RoleGuard y JWT</strong>, podemos garantizar un sistema seguro y escalable.</p>
+<p>Al aplicar estas prácticas, se fortalece la seguridad de las aplicaciones Angular, proporcionando un entorno confiable para los usuarios.</p>
+<p><strong>Resumen:</strong></p>
+<ul>
+<li>✅ Implementación de autenticación en Angular.</li>
+<li>✅ Protección de rutas con <code>AuthGuard</code>.</li>
+<li>✅ Gestión de roles con <code>RoleGuard</code>.</li>
+<li>✅ Uso de JSON Web Tokens (JWT) para mayor seguridad.</li>
+</ul>
+<p>¡Con estas estrategias, puedes mejorar significativamente la seguridad de tus aplicaciones Angular!</p>
+      </div>
+
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script>
+  window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "cmasblog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    
+    document.addEventListener('themeChanged', function (e) { 
+        if (document.readyState == 'complete') {
+          DISQUS.reset({ reload: true, config: disqus_config });
+        }
+    });
+</script>
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2018 -
+    
+    2025
+     Christian Amado 
+    ·
+    
+    Desarrollado por <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+      <script async src="https://www.googletagmanager.com/gtag/js?id=356375808"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '356375808');
+        }
+      </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=013131931956450466198%3ablhmkdpweyq"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '013131931956450466198:blhmkdpweyq');
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

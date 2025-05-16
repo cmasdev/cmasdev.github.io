@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>C/SIDE on Christian Amado</title>
+    <link>http://localhost:1313/tags/c/side/</link>
+    <description>Recent content in C/SIDE on Christian Amado</description>
+    <generator>Hugo</generator>
+    <language>es</language>
+    <lastBuildDate>Wed, 08 Apr 2020 17:06:00 -0400</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/c/side/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Business Central: Wave 2 Txt2AL no existe</title>
+      <link>http://localhost:1313/posts/2020-04-08-business-central-wave-2-txt2al-no-existe/</link>
+      <pubDate>Wed, 08 Apr 2020 17:06:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2020-04-08-business-central-wave-2-txt2al-no-existe/</guid>
+      <description>&lt;p&gt;En la &lt;a href=&#34;http://localhost:1313/2020/04/business-central-convertir-c-side-a-codigo-al/&#34; &gt;entrada anterior&lt;/a&gt; hemos visto cómo convertir código &lt;strong&gt;C/SIDE&lt;/strong&gt; y código &lt;strong&gt;AL&lt;/strong&gt;. Ahora veremos cómo disponibilizar esta herramienta en &lt;strong&gt;Dynamics 365 Business Central Wave 2&lt;/strong&gt;, pues ya no está disponible directamente como antes.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Business Central: Convertir C/SIDE a código AL</title>
+      <link>http://localhost:1313/posts/2020-04-07-business-central-convertir-c-side-a-codigo-al/</link>
+      <pubDate>Tue, 07 Apr 2020 12:24:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2020-04-07-business-central-convertir-c-side-a-codigo-al/</guid>
+      <description>&lt;p&gt;La semana pasada me tocó realizar migración de Dynamics NAV 2018 a Dynamics 365 Business Central Wave 2 y me encontré con que debía hacerlo tabla por tabla. Va ser un proceso muy largo, cuanto más objetos tengas más código escribiremos. Es por eso que el propio &lt;strong&gt;Dynamics 365 Business Central&lt;/strong&gt; trae una herramienta que hace ese trabajo por nosotros. Se llama &lt;strong&gt;Txt2AL.exe&lt;/strong&gt; y es muy útil.&lt;/p&gt;&#xA;&lt;p&gt;Primeramente, debemos crear dos carpetas:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>NAV: Conexión con base de datos externa - Parte 2</title>
+      <link>http://localhost:1313/posts/2019-12-18-nav-conexion-con-base-de-datos-externa-parte-2/</link>
+      <pubDate>Wed, 18 Dec 2019 22:36:06 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2019-12-18-nav-conexion-con-base-de-datos-externa-parte-2/</guid>
+      <description>&lt;p&gt;En la entrada anterior, vimos cómo crear una tabla en SQL Server y agregarla en Dynamics NAV (sin consumir licencias). en esta ocasión veremos cómo utilizarla dentro de una página de Dynamics NAV para verificar si los datos son correctos.&lt;/p&gt;&#xA;&lt;p&gt;Para ello, debemos seguir estos pasos&amp;hellip;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>NAV: Conexión con base de datos externa - Parte 1</title>
+      <link>http://localhost:1313/posts/2019-12-11-nav-conexion-con-base-de-datos-externa-parte-1/</link>
+      <pubDate>Wed, 11 Dec 2019 19:33:55 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2019-12-11-nav-conexion-con-base-de-datos-externa-parte-1/</guid>
+      <description>&lt;p&gt;Los desarrolladores de Dynamics NAV sabemos que tenemos limitaciones a nivel de tablas (normalmente con una licencia vienen 10 tablas) por eso tenemos esta oportunidad de integrar o crear tablas externas. Estas tablas externas permiten ser accedidas desde fuera de Dynamics NAV y poder trabajar con ellas sin mayores problemas.&lt;/p&gt;&#xA;&lt;p&gt;Divido esta entrada en dos partes para que se entiendan bien los pasos que debemos realizar para que todo esto funcione como esperamos que lo haga. En la primera parte, veremos lo relacionado a una base de datos externa a Dynamics NAV y cómo crear la misma tabla dentro de Dynamics NAV. No te preocupes, las tablas externas NO consumen licencias de tablas. En la segunda parte, veremos lo relacionado a Dynamics NAV para crear una página que lea los datos de esa tabla externa.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>NAVDEV Tips: Elimina las variables globales o locales no utilizadas</title>
+      <link>http://localhost:1313/posts/2019-08-28-navdev-tips-elimina-las-variables-globales-o-locales-no-utilizadas/</link>
+      <pubDate>Wed, 28 Aug 2019 12:10:56 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2019-08-28-navdev-tips-elimina-las-variables-globales-o-locales-no-utilizadas/</guid>
+      <description>&lt;p&gt;En esta oportunidad, quiero exponerles un punto de vista que al final de cuentas resultará en un buen consejo de desarrollo.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>NAVDEV Tips: Guardar archivo de código sin compilar</title>
+      <link>http://localhost:1313/posts/2019-08-27-navdev-tips-guardar-archivo-de-codigo-sin-compilar/</link>
+      <pubDate>Tue, 27 Aug 2019 13:41:31 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2019-08-27-navdev-tips-guardar-archivo-de-codigo-sin-compilar/</guid>
+      <description>&lt;p&gt;A muchos amigos desarrolladores de C/SIDE les habrá pasado que crearon variables globales, locales, modificar acciones y funciones, luego, al Guardar el archivo de código y seleccionar la opción compilar&amp;hellip; BOOOM&lt;/p&gt;&#xA;&lt;p&gt;El Dynamics NAV Development Environment se cierra con el famoso mensaje &amp;ldquo;se ha cerrado inesperadamente&amp;rdquo;. Luego de tanto esfuerzo escribiendo código se pierden los cambios.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Modificar valores de listas desplegables</title>
+      <link>http://localhost:1313/posts/2019-06-27-modificar-valores-de-listas-desplegables/</link>
+      <pubDate>Thu, 27 Jun 2019 19:44:42 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2019-06-27-modificar-valores-de-listas-desplegables/</guid>
+      <description>&lt;p&gt;El día de hoy tuve un pedido relacionado a cómo se visualizan los cambos en una lista desplegable dentro de una página en Dynamics NAV 2018. Básicamente, se debe hacer un cambio en la tabla de origen del elemento, pues es ahí donde se definen los campos de la lista desplegable.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Reporte de procesos</title>
+      <link>http://localhost:1313/posts/2019-06-26-reporte-de-procesos/</link>
+      <pubDate>Wed, 26 Jun 2019 19:06:12 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2019-06-26-reporte-de-procesos/</guid>
+      <description>&lt;p&gt;En el mundo de Dynamics NAV el reporte tiene dos funciones:&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;Mostrar un reporte como tal con muchos datos ordenados según requerimientos estándares.&lt;/li&gt;&#xA;&lt;li&gt;Procesar información sin mostrar resultado alguno&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;En este caso tomaremos la opción 2 de la situación.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>NAVDEV Tips: Modificar valores en Factura de Ventas</title>
+      <link>http://localhost:1313/posts/2019-06-25-navdev-tips-modificar-valores-en-factura-de-ventas/</link>
+      <pubDate>Tue, 25 Jun 2019 21:06:19 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2019-06-25-navdev-tips-modificar-valores-en-factura-de-ventas/</guid>
+      <description>&lt;p&gt;Microsoft Dynamics NAV es un sistema muy consistente y seguro cuando hablamos de transacciones. En ocasiones, podemos equivocarnos, como operadores, y olvidarnos de cargar ciertos datos o bien equivocarnos en cosas mínimas como olvidar colocar el vendedor, algún dato secundario que precisamos para tener toda la información relacionada con una factura.&lt;/p&gt;&#xA;&lt;p&gt;En esta entrada, menciono exclusivamente el ejemplo de Factura de Ventas, pero esto sería útil para cualquier tabla relacionada con Históricos de documentos (facturas, movimientos, etc).&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>NAV: DataItem Temporal en Reporte</title>
+      <link>http://localhost:1313/posts/2019-06-12-nav-dataitem-temporal-en-reporte/</link>
+      <pubDate>Wed, 12 Jun 2019 22:44:30 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2019-06-12-nav-dataitem-temporal-en-reporte/</guid>
+      <description>&lt;p&gt;Dentro del mundo de desarrollo de Microsoft Dynamics NAV 2018 existen limitaciones, por ejemplo, sólo se pueden crear hasta 10 tablas (luego se deben comprar más tablas si se desea seguir desarrollando). Es por eso, que muchas veces necesitamos procesar el resultado de una tabla existente dentro de la misma tabla, pero haciéndola temporal sólo para emitir un reporte.&lt;/p&gt;&#xA;&lt;p&gt;En ese caso, debemos procesar lo necesario en un paso previo y pasar los datos temporales al reporte que posee como DataItem una tabla temporal. En este ejemplo intentaremos hacer un &amp;ldquo;análisis de saldo por proveedor&amp;rdquo;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>NAVDEV Tips: Abrir WinForms desde Dynamics NAV 2018</title>
+      <link>http://localhost:1313/posts/2019-06-11-navdev-tips-abrir-winforms-desde-dynamics-nav-2018/</link>
+      <pubDate>Tue, 11 Jun 2019 12:49:07 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2019-06-11-navdev-tips-abrir-winforms-desde-dynamics-nav-2018/</guid>
+      <description>&lt;p&gt;En esta ocasión quiero compartir con ustedes una información bastante útil referente al consumo de aplicaciones ya desarrolladas. Normalmente, es ley no reinventar la rueda en cuanto a trabajos de desarrollo se refiere. Vamos a un caso puntual&amp;hellip;&lt;/p&gt;&#xA;&lt;p&gt;Tenemos una pequeña aplicación que gestiona las actividades del cajero de un Restaurant. Los dueños han decidido gestionar sus operaciones con Microsoft Dynamics NAV 2018 (buena decisión) pero no desean modificar su aplicación de cajero que les funciona de maravilla. Entonces, le proponemos utilizar ambos sistemas para que no dejen de utilizar su sistema actual.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Creando csv con XMLPort</title>
+      <link>http://localhost:1313/posts/2019-05-01-creando-csv-con-xmlport/</link>
+      <pubDate>Wed, 01 May 2019 23:13:56 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2019-05-01-creando-csv-con-xmlport/</guid>
+      <description>&lt;p&gt;Hace tiempo veía una opción que se llamaba &lt;strong&gt;XMLPort&lt;/strong&gt; y surgió el interés en saber a qué se refería. Pero entre el trabajo y otras actividades no tuve tiempo de darle una miradita.&lt;/p&gt;&#xA;&lt;p&gt;Ahora que surgió la necesidad de exportación de una tabla a un archivo &lt;strong&gt;.txt&lt;/strong&gt; es útil escribir esta entrada. &lt;strong&gt;XMLPort&lt;/strong&gt; realiza la exportación a un archivo &lt;strong&gt;XML&lt;/strong&gt; o &lt;strong&gt;csv&lt;/strong&gt; según la necesidad. Es por eso que decidí plasmarlo en esta entrada.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>GitHub Star on Christian Amado</title>
+    <link>http://localhost:1313/tags/github-star/</link>
+    <description>Recent content in GitHub Star on Christian Amado</description>
+    <generator>Hugo</generator>
+    <language>es</language>
+    <lastBuildDate>Fri, 02 May 2025 00:00:00 -0300</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/github-star/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Mocks, cobertura y pruebas por capas en proyectos escalables</title>
+      <link>http://localhost:1313/posts/2025-05-02-advanced-testing-deno/</link>
+      <pubDate>Fri, 02 May 2025 00:00:00 -0300</pubDate>
+      <guid>http://localhost:1313/posts/2025-05-02-advanced-testing-deno/</guid>
+      <description>&lt;p&gt;En el ecosistema moderno del desarrollo backend, el testing no es opcional: es esencial. En proyectos colaborativos y escalables, contar con pruebas automatizadas bien estructuradas marca la diferencia entre un código confiable y uno frágil. Deno 2 ofrece herramientas nativas poderosas para testear, pero muchas veces su uso avanzado no está del todo documentado. Este artículo muestra cómo implementar un enfoque de testing avanzado en Deno 2, incluyendo mocks manuales, cobertura de código y organización por capas.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Arquitectura limpia con Deno: estructuras escalables para proyectos open source</title>
+      <link>http://localhost:1313/posts/2025-04-24-deno-clean-architecture/</link>
+      <pubDate>Thu, 24 Apr 2025 00:00:00 -0300</pubDate>
+      <guid>http://localhost:1313/posts/2025-04-24-deno-clean-architecture/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;Deno 2&lt;/strong&gt; ha consolidado su lugar como una plataforma moderna para el desarrollo backend, enfocada en seguridad, rendimiento y simplicidad. Sin embargo, aún existe el desafío de estructurar proyectos de forma escalable y mantenible, especialmente cuando se busca colaborar en comunidad. Este artículo explora cómo aplicar los principios de &lt;strong&gt;Clean Architecture&lt;/strong&gt; en proyectos con &lt;strong&gt;Deno 2&lt;/strong&gt;, creando un código desacoplado, testable y abierto a contribuciones.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

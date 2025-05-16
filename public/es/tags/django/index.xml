@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Django on Christian Amado</title>
+    <link>http://localhost:1313/es/tags/django/</link>
+    <description>Recent content in Django on Christian Amado</description>
+    <generator>Hugo</generator>
+    <language>es</language>
+    <lastBuildDate>Wed, 21 Dec 2022 19:39:00 -0400</lastBuildDate>
+    <atom:link href="http://localhost:1313/es/tags/django/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Django sobre WSL</title>
+      <link>http://localhost:1313/es/posts/2022-12-21-django-on-wsl/</link>
+      <pubDate>Wed, 21 Dec 2022 19:39:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2022-12-21-django-on-wsl/</guid>
+      <description>&lt;p&gt;En este corto artículo veremos cómo desarrollar sobre &lt;strong&gt;WSL (Windows Subsystem for Linux)&lt;/strong&gt; con &lt;strong&gt;Python&lt;/strong&gt; y &lt;strong&gt;Django&lt;/strong&gt;. Ya hemos visto que lo podemos hacer con &lt;a href=&#34;http://localhost:1313/posts/2022-06-29-java-with-wsl-part-2/&#34; &gt;Java&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Windows 11 Insider Preview Build 25267&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

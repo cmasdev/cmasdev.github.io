@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  Implementación de clusters Kubernetes locales con k3s sobre WSL2 · Christian Amado
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Christian Amado">
+<meta name="description" content="Para entornos de desarrollo y pruebas, contar con un cluster Kubernetes liviano y funcional es clave. k3s, una distribución de Kubernetes simplificada, se puede ejecutar perfectamente sobre WSL2, permitiendo crear un cluster local completo sin necesidad de herramientas pesadas como Minikube o Docker Desktop.
+Este artículo describe paso a paso cómo instalar y configurar k3s en WSL2, con recomendaciones prácticas para flujos DevOps y testing de microservicios.">
+<meta name="keywords" content="blog,desarrollador,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Implementación de clusters Kubernetes locales con k3s sobre WSL2">
+  <meta name="twitter:description" content="Para entornos de desarrollo y pruebas, contar con un cluster Kubernetes liviano y funcional es clave. k3s, una distribución de Kubernetes simplificada, se puede ejecutar perfectamente sobre WSL2, permitiendo crear un cluster local completo sin necesidad de herramientas pesadas como Minikube o Docker Desktop.
+Este artículo describe paso a paso cómo instalar y configurar k3s en WSL2, con recomendaciones prácticas para flujos DevOps y testing de microservicios.">
+
+<meta property="og:url" content="http://localhost:1313/posts/2024-08-02-wsl2-kubernetes-k3s/">
+  <meta property="og:site_name" content="Christian Amado">
+  <meta property="og:title" content="Implementación de clusters Kubernetes locales con k3s sobre WSL2">
+  <meta property="og:description" content="Para entornos de desarrollo y pruebas, contar con un cluster Kubernetes liviano y funcional es clave. k3s, una distribución de Kubernetes simplificada, se puede ejecutar perfectamente sobre WSL2, permitiendo crear un cluster local completo sin necesidad de herramientas pesadas como Minikube o Docker Desktop.
+Este artículo describe paso a paso cómo instalar y configurar k3s en WSL2, con recomendaciones prácticas para flujos DevOps y testing de microservicios.">
+  <meta property="og:locale" content="es">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-08-02T00:00:00-04:00">
+    <meta property="article:modified_time" content="2024-08-02T00:00:00-04:00">
+    <meta property="article:tag" content="WinDev">
+    <meta property="article:tag" content="Windows 11">
+    <meta property="article:tag" content="WSL">
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-V1ZRP82YFD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-V1ZRP82YFD');
+</script>
+
+
+
+<link rel="canonical" href="http://localhost:1313/posts/2024-08-02-wsl2-kubernetes-k3s/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="apple-touch-icon" sizes="57x57" href="/img/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/img/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/img/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/img/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/img/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/img/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/img/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/img/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/img/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="/img/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/img/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+<link rel="manifest" href="/img/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/img/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/">
+      Christian Amado
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/about">Biografía</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/contact">Contacto</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/diabetes">Diabetes</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/tags">Etiquetas</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/en/">🇺🇸</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/posts/2024-08-02-wsl2-kubernetes-k3s/">
+              Implementación de clusters Kubernetes locales con k3s sobre WSL2
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2024-08-02T00:00:00-04:00">
+                agosto 2, 2024
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              2 minutos de lectura.
+            </span>
+          </div>
+          
+          
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/tags/windev/">WinDev</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/windows-11/">Windows 11</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/wsl/">WSL</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <p>Para entornos de desarrollo y pruebas, contar con un cluster <strong>Kubernetes</strong> liviano y funcional es clave. <strong>k3s</strong>, una distribución de <strong>Kubernetes</strong> simplificada, se puede ejecutar perfectamente sobre <strong>WSL2</strong>, permitiendo crear un cluster local completo sin necesidad de herramientas pesadas como <strong>Minikube</strong> o <strong>Docker Desktop</strong>.</p>
+<p>Este artículo describe paso a paso cómo instalar y configurar <strong>k3s</strong> en <strong>WSL2</strong>, con recomendaciones prácticas para flujos <strong>DevOps</strong> y testing de microservicios.</p>
+<h2 id="requisitos">
+  Requisitos
+  <a class="heading-link" href="#requisitos">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ul>
+<li>Windows 10/11 con WSL2 habilitado</li>
+<li>Distro Linux instalada (Ubuntu 22.04 recomendado)</li>
+<li>Usuario con privilegios <code>sudo</code></li>
+<li>Docker (opcional para algunos complementos)</li>
+</ul>
+<h2 id="paso-1-preparar-el-entorno">
+  Paso 1: Preparar el entorno
+  <a class="heading-link" href="#paso-1-preparar-el-entorno">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Actualizar paquetes e instalar herramientas necesarias:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt update <span class="o">&amp;&amp;</span> sudo apt install -y curl wget gnupg lsb-release
+</span></span></code></pre></div><p>Verificar la red de WSL2:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ip addr show eth0
+</span></span></code></pre></div><h2 id="paso-2-instalar-k3s-en-modo-single-node">
+  Paso 2: Instalar k3s en modo single-node
+  <a class="heading-link" href="#paso-2-instalar-k3s-en-modo-single-node">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Ejecutar el script oficial:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">curl -sfL https://get.k3s.io <span class="p">|</span> sh -
+</span></span></code></pre></div><p>Esto instalará k3s como un servicio y arrancará automáticamente.</p>
+<p>Verificar que el cluster esté en funcionamiento:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo kubectl get nodes
+</span></span></code></pre></div><p>Debería verse un nodo en estado <code>Ready</code>.</p>
+<h2 id="paso-3-acceder-a-kubectl-sin-sudo">
+  Paso 3: Acceder a <code>kubectl</code> sin <code>sudo</code>
+  <a class="heading-link" href="#paso-3-acceder-a-kubectl-sin-sudo">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Para facilitar el acceso:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo cp /etc/rancher/k3s/k3s.yaml ~/.kube/config
+</span></span><span class="line"><span class="cl">sudo chown <span class="k">$(</span>id -u<span class="k">)</span>:<span class="k">$(</span>id -g<span class="k">)</span> ~/.kube/config
+</span></span></code></pre></div><p>Comprobar acceso:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl get pods -A
+</span></span></code></pre></div><h2 id="paso-4-desplegar-una-aplicación-de-prueba">
+  Paso 4: Desplegar una aplicación de prueba
+  <a class="heading-link" href="#paso-4-desplegar-una-aplicaci%c3%b3n-de-prueba">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Ejemplo: servidor NGINX</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl create deployment nginx --image<span class="o">=</span>nginx
+</span></span><span class="line"><span class="cl">kubectl expose deployment nginx --port<span class="o">=</span><span class="m">80</span> --type<span class="o">=</span>NodePort
+</span></span></code></pre></div><p>Ver el servicio expuesto:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl get svc
+</span></span></code></pre></div><p>Usar el puerto asignado (ej: 30001) para acceder desde el navegador:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">http://localhost:30001
+</span></span></code></pre></div><h2 id="paso-5-usar-k3s-en-entornos-multi-node-avanzado">
+  Paso 5: Usar k3s en entornos multi-node (avanzado)
+  <a class="heading-link" href="#paso-5-usar-k3s-en-entornos-multi-node-avanzado">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>También es posible crear múltiples distros WSL2 y configurar nodos worker usando direcciones IP locales, aunque este flujo requiere túneles, sincronización SSH y scripts personalizados.</p>
+<p>Para la mayoría de los casos de desarrollo, el nodo único es suficiente.</p>
+<h2 id="buenas-prácticas">
+  Buenas prácticas
+  <a class="heading-link" href="#buenas-pr%c3%a1cticas">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ul>
+<li>Configurar <code>.kube/config</code> con perfiles personalizados</li>
+<li>Automatizar la instalación con Makefiles o scripts</li>
+<li>Agregar namespaces para separar proyectos: <code>kubectl create ns desarrollo</code></li>
+<li>Usar <code>k9s</code> para una visualización tipo TUI</li>
+</ul>
+<h2 id="conclusión">
+  Conclusión
+  <a class="heading-link" href="#conclusi%c3%b3n">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p><strong>k3s</strong> permite implementar clusters <strong>Kubernetes</strong> funcionales en segundos, ideal para desarrollo de microservicios, CI/CD local o pruebas en pipelines. Ejecutarlo sobre <strong>WSL2</strong> combina rendimiento, facilidad y compatibilidad total con <strong>Linux</strong> sin salir de <strong>Windows</strong>.</p>
+      </div>
+
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script>
+  window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "cmasblog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    
+    document.addEventListener('themeChanged', function (e) { 
+        if (document.readyState == 'complete') {
+          DISQUS.reset({ reload: true, config: disqus_config });
+        }
+    });
+</script>
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2018 -
+    
+    2025
+     Christian Amado 
+    ·
+    
+    Desarrollado por <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+      <script async src="https://www.googletagmanager.com/gtag/js?id=356375808"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '356375808');
+        }
+      </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=013131931956450466198%3ablhmkdpweyq"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '013131931956450466198:blhmkdpweyq');
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  Integración de Angular con APIs RESTful en Deno · Christian Amado
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Christian Amado">
+<meta name="description" content="La integración entre Angular y APIs RESTful creadas con Deno permite desarrollar aplicaciones modernas y escalables con una arquitectura limpia y basada en TypeScript. En este artículo, exploraremos cómo conectar una aplicación Angular con un backend RESTful en Deno paso a paso, incluyendo fundamentos teóricos, ejemplos prácticos y buenas prácticas.">
+<meta name="keywords" content="blog,desarrollador,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Integración de Angular con APIs RESTful en Deno">
+  <meta name="twitter:description" content="La integración entre Angular y APIs RESTful creadas con Deno permite desarrollar aplicaciones modernas y escalables con una arquitectura limpia y basada en TypeScript. En este artículo, exploraremos cómo conectar una aplicación Angular con un backend RESTful en Deno paso a paso, incluyendo fundamentos teóricos, ejemplos prácticos y buenas prácticas.">
+
+<meta property="og:url" content="http://localhost:1313/es/posts/2024-10-30-angular-integration-with-api-rest-in-deno/">
+  <meta property="og:site_name" content="Christian Amado">
+  <meta property="og:title" content="Integración de Angular con APIs RESTful en Deno">
+  <meta property="og:description" content="La integración entre Angular y APIs RESTful creadas con Deno permite desarrollar aplicaciones modernas y escalables con una arquitectura limpia y basada en TypeScript. En este artículo, exploraremos cómo conectar una aplicación Angular con un backend RESTful en Deno paso a paso, incluyendo fundamentos teóricos, ejemplos prácticos y buenas prácticas.">
+  <meta property="og:locale" content="es">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-10-30T00:00:00-04:00">
+    <meta property="article:modified_time" content="2024-10-30T00:00:00-04:00">
+    <meta property="article:tag" content="Web Development">
+    <meta property="article:tag" content="Angular">
+    <meta property="article:tag" content="Deno">
+
+
+
+
+<link rel="canonical" href="http://localhost:1313/es/posts/2024-10-30-angular-integration-with-api-rest-in-deno/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/es/">
+      Christian Amado
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/about">Biografía</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/contact">Contacto</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/diabetes">Diabetes</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/tags">Etiquetas</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/en/">🇺🇸</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/es/posts/2024-10-30-angular-integration-with-api-rest-in-deno/">
+              Integración de Angular con APIs RESTful en Deno
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2024-10-30T00:00:00-04:00">
+                octubre 30, 2024
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              4 minutos de lectura.
+            </span>
+          </div>
+          
+          
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/es/tags/web-development/">Web Development</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/es/tags/angular/">Angular</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/es/tags/deno/">Deno</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <p>La integración entre <strong>Angular</strong> y <strong>APIs RESTful</strong> creadas con <strong>Deno</strong> permite desarrollar aplicaciones modernas y escalables con una arquitectura limpia y basada en <strong>TypeScript</strong>. En este artículo, exploraremos cómo conectar una aplicación Angular con un backend RESTful en Deno paso a paso, incluyendo fundamentos teóricos, ejemplos prácticos y buenas prácticas.</p>
+<h2 id="por-qué-utilizar-angular-y-deno">
+  ¿Por qué utilizar Angular y Deno?
+  <a class="heading-link" href="#por-qu%c3%a9-utilizar-angular-y-deno">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="beneficios-de-angular">
+  <strong>Beneficios de Angular</strong>
+  <a class="heading-link" href="#beneficios-de-angular">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p><strong>Angular</strong> es un framework frontend desarrollado por <strong>Google</strong> que permite construir aplicaciones web robustas y escalables. Sus principales características incluyen:</p>
+<ul>
+<li><strong>Arquitectura basada en componentes</strong>: Facilita la reutilización del código y el mantenimiento.</li>
+<li><strong>TypeScript como base</strong>: Mejora la seguridad del código y facilita la detección de errores en tiempo de desarrollo.</li>
+<li><strong>Herramientas integradas</strong>: Angular CLI permite generar componentes, servicios y módulos de manera eficiente.</li>
+<li><strong>Manejo avanzado de estado y datos</strong>: Usa RxJS para gestionar datos de forma reactiva.</li>
+</ul>
+<h3 id="beneficios-de-deno">
+  <strong>Beneficios de Deno</strong>
+  <a class="heading-link" href="#beneficios-de-deno">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Deno es un runtime seguro para JavaScript y TypeScript que ofrece múltiples ventajas sobre Node.js:</p>
+<ul>
+<li><strong>Seguridad por defecto</strong>: Requiere permisos explícitos para acceder a archivos, red y entorno.</li>
+<li><strong>Soporte nativo para TypeScript</strong>: Sin necesidad de configuración adicional.</li>
+<li><strong>Gestión de dependencias sin <code>node_modules</code></strong>: Se utilizan URLs en lugar de paquetes locales.</li>
+<li><strong>Servidor HTTP integrado</strong>: No requiere frameworks adicionales para manejar solicitudes HTTP.</li>
+</ul>
+<hr>
+<h2 id="configuración-del-entorno">
+  Configuración del Entorno
+  <a class="heading-link" href="#configuraci%c3%b3n-del-entorno">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="instalación-de-angular">
+  <strong>Instalación de Angular</strong>
+  <a class="heading-link" href="#instalaci%c3%b3n-de-angular">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>Instalar Angular CLI:
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">npm install -g @angular/cli
+</span></span></code></pre></div></li>
+<li>Crear un nuevo proyecto Angular:
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">ng new frontend-angular
+</span></span><span class="line"><span class="cl">cd frontend-angular
+</span></span></code></pre></div></li>
+<li>Ejecutar la aplicación:
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">ng serve --open
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="instalación-de-deno">
+  <strong>Instalación de Deno</strong>
+  <a class="heading-link" href="#instalaci%c3%b3n-de-deno">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>Instalar Deno:
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">curl -fsSL https://deno.land/x/install/install.sh | sh
+</span></span></code></pre></div></li>
+<li>Verificar la instalación:
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">deno --version
+</span></span></code></pre></div></li>
+<li>Crear el directorio del backend:
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">mkdir backend-deno &amp;&amp; cd backend-deno
+</span></span></code></pre></div></li>
+</ol>
+<h2 id="creación-de-una-api-restful-en-deno">
+  Creación de una API RESTful en Deno
+  <a class="heading-link" href="#creaci%c3%b3n-de-una-api-restful-en-deno">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="configuración-del-servidor-http">
+  <strong>Configuración del Servidor HTTP</strong>
+  <a class="heading-link" href="#configuraci%c3%b3n-del-servidor-http">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Deno permite crear servidores HTTP de manera sencilla con <code>std/http</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">import</span> <span class="p">{</span> <span class="n">serve</span> <span class="p">}</span> <span class="n">from</span> <span class="s2">&#34;https://deno.land/std@0.194.0/http/server.ts&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">handler</span> <span class="o">=</span> <span class="p">(</span><span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">):</span> <span class="n">Response</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">new</span> <span class="n">Response</span><span class="p">(</span><span class="s2">&#34;Hola desde Deno API!&#34;</span><span class="p">,</span> <span class="p">{</span> <span class="n">status</span><span class="p">:</span> <span class="mi">200</span> <span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">serve</span><span class="p">(</span><span class="n">handler</span><span class="p">,</span> <span class="p">{</span> <span class="n">port</span><span class="p">:</span> <span class="mi">8080</span> <span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s2">&#34;Servidor corriendo en http://localhost:8080&#34;</span><span class="p">);</span>
+</span></span></code></pre></div><p>Ejecuta el servidor con:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">deno run --allow-net server.ts
+</span></span></code></pre></div><h3 id="implementación-de-una-api-rest-con-deno">
+  <strong>Implementación de una API REST con Deno</strong>
+  <a class="heading-link" href="#implementaci%c3%b3n-de-una-api-rest-con-deno">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="1-definir-el-modelo">
+  <strong>1. Definir el modelo</strong>
+  <a class="heading-link" href="#1-definir-el-modelo">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">export</span> <span class="n">interface</span> <span class="n">Usuario</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span><span class="p">:</span> <span class="n">string</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">nombre</span><span class="p">:</span> <span class="n">string</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">email</span><span class="p">:</span> <span class="n">string</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h4 id="2-implementar-un-controlador">
+  <strong>2. Implementar un controlador</strong>
+  <a class="heading-link" href="#2-implementar-un-controlador">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">import</span> <span class="p">{</span> <span class="n">Usuario</span> <span class="p">}</span> <span class="n">from</span> <span class="s2">&#34;./models.ts&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">let</span> <span class="n">usuarios</span><span class="p">:</span> <span class="n">Usuario</span><span class="p">[]</span> <span class="o">=</span> <span class="p">[];</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">export</span> <span class="k">const</span> <span class="n">obtenerUsuarios</span> <span class="o">=</span> <span class="p">():</span> <span class="n">Response</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">new</span> <span class="n">Response</span><span class="p">(</span><span class="n">JSON</span><span class="o">.</span><span class="n">stringify</span><span class="p">(</span><span class="n">usuarios</span><span class="p">),</span> <span class="p">{</span> <span class="n">status</span><span class="p">:</span> <span class="mi">200</span> <span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">export</span> <span class="k">const</span> <span class="n">crearUsuario</span> <span class="o">=</span> <span class="n">async</span> <span class="p">(</span><span class="n">req</span><span class="p">:</span> <span class="n">Request</span><span class="p">):</span> <span class="n">Promise</span><span class="o">&lt;</span><span class="n">Response</span><span class="o">&gt;</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="n">body</span> <span class="o">=</span> <span class="n">await</span> <span class="n">req</span><span class="o">.</span><span class="n">json</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="n">nuevoUsuario</span><span class="p">:</span> <span class="n">Usuario</span> <span class="o">=</span> <span class="p">{</span> <span class="n">id</span><span class="p">:</span> <span class="n">crypto</span><span class="o">.</span><span class="n">randomUUID</span><span class="p">(),</span> <span class="o">...</span><span class="n">body</span> <span class="p">};</span>
+</span></span><span class="line"><span class="cl">    <span class="n">usuarios</span><span class="o">.</span><span class="n">push</span><span class="p">(</span><span class="n">nuevoUsuario</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">new</span> <span class="n">Response</span><span class="p">(</span><span class="n">JSON</span><span class="o">.</span><span class="n">stringify</span><span class="p">(</span><span class="n">nuevoUsuario</span><span class="p">),</span> <span class="p">{</span> <span class="n">status</span><span class="p">:</span> <span class="mi">201</span> <span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><h4 id="3-configurar-rutas-con-oak">
+  <strong>3. Configurar rutas con Oak</strong>
+  <a class="heading-link" href="#3-configurar-rutas-con-oak">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>Oak es un framework similar a Express.js para Deno.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">import</span> <span class="p">{</span> <span class="n">Application</span><span class="p">,</span> <span class="n">Router</span> <span class="p">}</span> <span class="n">from</span> <span class="s2">&#34;https://deno.land/x/oak/mod.ts&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">import</span> <span class="p">{</span> <span class="n">obtenerUsuarios</span><span class="p">,</span> <span class="n">crearUsuario</span> <span class="p">}</span> <span class="n">from</span> <span class="s2">&#34;./controllers.ts&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">router</span> <span class="o">=</span> <span class="n">new</span> <span class="n">Router</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="n">router</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&#34;/usuarios&#34;</span><span class="p">,</span> <span class="n">obtenerUsuarios</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">router</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&#34;/usuarios&#34;</span><span class="p">,</span> <span class="n">crearUsuario</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">app</span> <span class="o">=</span> <span class="n">new</span> <span class="n">Application</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="n">app</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="n">router</span><span class="o">.</span><span class="n">routes</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl"><span class="n">app</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="n">router</span><span class="o">.</span><span class="n">allowedMethods</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">await</span> <span class="n">app</span><span class="o">.</span><span class="n">listen</span><span class="p">({</span> <span class="n">port</span><span class="p">:</span> <span class="mi">8080</span> <span class="p">});</span>
+</span></span></code></pre></div><p>Ejecutar la API:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">deno run --allow-net --allow-read --allow-write server.ts
+</span></span></code></pre></div><h2 id="consumo-de-la-api-restful-en-angular">
+  Consumo de la API RESTful en Angular
+  <a class="heading-link" href="#consumo-de-la-api-restful-en-angular">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="configurar-conexión-con-la-api">
+  <strong>Configurar conexión con la API</strong>
+  <a class="heading-link" href="#configurar-conexi%c3%b3n-con-la-api">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>Crear un servicio Angular para consumir la API REST:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">import</span> <span class="p">{</span> <span class="n">Injectable</span> <span class="p">}</span> <span class="n">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">import</span> <span class="p">{</span> <span class="n">HttpClient</span> <span class="p">}</span> <span class="n">from</span> <span class="s1">&#39;@angular/common/http&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">import</span> <span class="p">{</span> <span class="n">Observable</span> <span class="p">}</span> <span class="n">from</span> <span class="s1">&#39;rxjs&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">interface</span> <span class="n">Usuario</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span><span class="p">:</span> <span class="n">string</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">nombre</span><span class="p">:</span> <span class="n">string</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">email</span><span class="p">:</span> <span class="n">string</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">@</span><span class="n">Injectable</span><span class="p">({</span> <span class="n">providedIn</span><span class="p">:</span> <span class="s1">&#39;root&#39;</span> <span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="k">export</span> <span class="k">class</span> <span class="n">UsuarioService</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">private</span> <span class="n">apiUrl</span> <span class="o">=</span> <span class="s1">&#39;http://localhost:8080/usuarios&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">constructor</span><span class="p">(</span><span class="n">private</span> <span class="n">http</span><span class="p">:</span> <span class="n">HttpClient</span><span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">obtenerUsuarios</span><span class="p">():</span> <span class="n">Observable</span><span class="o">&lt;</span><span class="n">Usuario</span><span class="p">[]</span><span class="o">&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">this</span><span class="o">.</span><span class="n">http</span><span class="o">.</span><span class="n">get</span><span class="o">&lt;</span><span class="n">Usuario</span><span class="p">[]</span><span class="o">&gt;</span><span class="p">(</span><span class="n">this</span><span class="o">.</span><span class="n">apiUrl</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">crearUsuario</span><span class="p">(</span><span class="n">usuario</span><span class="p">:</span> <span class="n">Usuario</span><span class="p">):</span> <span class="n">Observable</span><span class="o">&lt;</span><span class="n">Usuario</span><span class="o">&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">this</span><span class="o">.</span><span class="n">http</span><span class="o">.</span><span class="n">post</span><span class="o">&lt;</span><span class="n">Usuario</span><span class="o">&gt;</span><span class="p">(</span><span class="n">this</span><span class="o">.</span><span class="n">apiUrl</span><span class="p">,</span> <span class="n">usuario</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><ol start="2">
+<li>Agregar el servicio a <code>app.module.ts</code>:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">import</span> <span class="p">{</span> <span class="n">HttpClientModule</span> <span class="p">}</span> <span class="n">from</span> <span class="s1">&#39;@angular/common/http&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">@</span><span class="n">NgModule</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">  <span class="n">declarations</span><span class="p">:</span> <span class="p">[</span><span class="n">AppComponent</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">  <span class="n">imports</span><span class="p">:</span> <span class="p">[</span><span class="n">BrowserModule</span><span class="p">,</span> <span class="n">HttpClientModule</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">  <span class="n">providers</span><span class="p">:</span> <span class="p">[],</span>
+</span></span><span class="line"><span class="cl">  <span class="n">bootstrap</span><span class="p">:</span> <span class="p">[</span><span class="n">AppComponent</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="k">export</span> <span class="k">class</span> <span class="n">AppModule</span> <span class="p">{}</span>
+</span></span></code></pre></div><h3 id="crear-un-componente-para-mostrar-usuarios">
+  <strong>Crear un componente para mostrar usuarios</strong>
+  <a class="heading-link" href="#crear-un-componente-para-mostrar-usuarios">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">import</span> <span class="p">{</span> <span class="n">Component</span><span class="p">,</span> <span class="n">OnInit</span> <span class="p">}</span> <span class="n">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">import</span> <span class="p">{</span> <span class="n">UsuarioService</span> <span class="p">}</span> <span class="n">from</span> <span class="s1">&#39;../usuario.service&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">@</span><span class="n">Component</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">  <span class="n">selector</span><span class="p">:</span> <span class="s1">&#39;app-usuarios&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="n">templateUrl</span><span class="p">:</span> <span class="s1">&#39;./usuarios.component.html&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="k">export</span> <span class="k">class</span> <span class="n">UsuariosComponent</span> <span class="n">implements</span> <span class="n">OnInit</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">usuarios</span><span class="p">:</span> <span class="n">any</span><span class="p">[]</span> <span class="o">=</span> <span class="p">[];</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">constructor</span><span class="p">(</span><span class="n">private</span> <span class="n">usuarioService</span><span class="p">:</span> <span class="n">UsuarioService</span><span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">ngOnInit</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">this</span><span class="o">.</span><span class="n">usuarioService</span><span class="o">.</span><span class="n">obtenerUsuarios</span><span class="p">()</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span><span class="n">data</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">this</span><span class="o">.</span><span class="n">usuarios</span> <span class="o">=</span> <span class="n">data</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">});</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&lt;h2&gt;Lista de Usuarios&lt;/h2&gt;
+</span></span><span class="line"><span class="cl">&lt;ul&gt;
+</span></span><span class="line"><span class="cl">  &lt;li *ngFor=&#34;let usuario of usuarios&#34;&gt;
+</span></span><span class="line"><span class="cl">    {{ usuario.nombre }} - {{ usuario.email }}
+</span></span><span class="line"><span class="cl">  &lt;/li&gt;
+</span></span><span class="line"><span class="cl">&lt;/ul&gt;
+</span></span></code></pre></div><h2 id="conclusión">
+  Conclusión
+  <a class="heading-link" href="#conclusi%c3%b3n">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Integrar <strong>Angular</strong> con <strong>APIs RESTful</strong> en Deno proporciona una solución segura y escalable para el desarrollo web moderno. La combinación de TypeScript en ambos entornos permite una experiencia de desarrollo fluida y consistente. ¡Explora estas tecnologías y lleva tu desarrollo full-stack al siguiente nivel!</p>
+      </div>
+
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script>
+  window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "cmasblog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    
+    document.addEventListener('themeChanged', function (e) { 
+        if (document.readyState == 'complete') {
+          DISQUS.reset({ reload: true, config: disqus_config });
+        }
+    });
+</script>
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2018 -
+    
+    2025
+     Christian Amado 
+    ·
+    
+    Desarrollado por <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+      <script async src="https://www.googletagmanager.com/gtag/js?id=356375808"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '356375808');
+        }
+      </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=013131931956450466198%3ablhmkdpweyq"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '013131931956450466198:blhmkdpweyq');
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

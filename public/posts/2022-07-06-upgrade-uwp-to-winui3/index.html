@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  Migración UWP a WinUI 3 · Christian Amado
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Christian Amado">
+<meta name="description" content="¡Feliz cumple para mí! Arranco mi día con un artículo (es día de festejo así que será complicado cumplir con la comunidad).
+En este artículo haré una migración de UWP a WinUI 3 sin que se complique demasiado.
+Windows 11 Insider Preview Build 25151">
+<meta name="keywords" content="blog,desarrollador,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Migración UWP a WinUI 3">
+  <meta name="twitter:description" content="¡Feliz cumple para mí! Arranco mi día con un artículo (es día de festejo así que será complicado cumplir con la comunidad).
+En este artículo haré una migración de UWP a WinUI 3 sin que se complique demasiado.
+Windows 11 Insider Preview Build 25151">
+
+<meta property="og:url" content="http://localhost:1313/posts/2022-07-06-upgrade-uwp-to-winui3/">
+  <meta property="og:site_name" content="Christian Amado">
+  <meta property="og:title" content="Migración UWP a WinUI 3">
+  <meta property="og:description" content="¡Feliz cumple para mí! Arranco mi día con un artículo (es día de festejo así que será complicado cumplir con la comunidad).
+En este artículo haré una migración de UWP a WinUI 3 sin que se complique demasiado.
+Windows 11 Insider Preview Build 25151">
+  <meta property="og:locale" content="es">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2022-07-06T00:12:00-04:00">
+    <meta property="article:modified_time" content="2022-07-06T00:12:00-04:00">
+    <meta property="article:tag" content="WinDev">
+    <meta property="article:tag" content="Windows 11">
+    <meta property="article:tag" content="UWP">
+    <meta property="article:tag" content="WinUI 3">
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-V1ZRP82YFD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-V1ZRP82YFD');
+</script>
+
+
+
+<link rel="canonical" href="http://localhost:1313/posts/2022-07-06-upgrade-uwp-to-winui3/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="apple-touch-icon" sizes="57x57" href="/img/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/img/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/img/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/img/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/img/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/img/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/img/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/img/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/img/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="/img/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/img/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+<link rel="manifest" href="/img/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/img/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/">
+      Christian Amado
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/about">Biografía</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/contact">Contacto</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/diabetes">Diabetes</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/tags">Etiquetas</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/en/">🇺🇸</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/posts/2022-07-06-upgrade-uwp-to-winui3/">
+              Migración UWP a WinUI 3
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2022-07-06T00:12:00-04:00">
+                julio 6, 2022
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              4 minutos de lectura.
+            </span>
+          </div>
+          
+          
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/tags/windev/">WinDev</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/windows-11/">Windows 11</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/uwp/">UWP</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/winui-3/">WinUI 3</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <p>¡Feliz cumple para mí! Arranco mi día con un artículo (es día de festejo así que será complicado cumplir con la comunidad).</p>
+<p>En este artículo haré una migración de <strong>UWP</strong> a <strong>WinUI 3</strong> sin que se complique demasiado.</p>
+<p><em><strong>Windows 11 Insider Preview Build 25151</strong></em></p>
+<p>Microsoft ha anunciado oficialmente la depreciación de <strong>UWP</strong> (Plataforma Universal de Windows) y que no se actualizaría en el nuevo sistema <strong>Windows 11</strong>. Sin embargo, todavía hay algunas formas de usar <strong>UWP</strong> en proyectos existentes o nuevos.</p>
+<blockquote>
+<p>Microsoft continues to baby-step around the obvious, but it has officially deprecated the Universal Windows Platform (UWP) as it pushes the desktop-focused Windows App SDK (formerly called Project Reunion) and WinUI 3 as the future of Windows application development.</p></blockquote>
+<p>Esto lo expresó Paul Thurrott en su blog (<a href="https://www.thurrott.com/paul"  class="external-link" target="_blank" rel="noopener">quién es él</a>) donde nos lleva al enlace de <strong>GitHub</strong> del proyecto <strong>Windows App SDK</strong>. Aunque esta noticia no es nueva ahora, en este momento abandono <strong>UWP</strong> antes que me ocurra lo mismo que con mis desarrollos <strong>Windows Phone</strong> 🫶</p>
+<h2 id="cómo-proceder-con-la-migración">
+  ¿Cómo proceder con la migración?
+  <a class="heading-link" href="#c%c3%b3mo-proceder-con-la-migraci%c3%b3n">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Como la ansiedad me gana, abrí un proyecto de <strong>UWP</strong> que tenía (no lo puedo exponer porque es de la empresa donde trabajaba) y decidí crear un nuevo proyecto de tipo <strong>WinUI3</strong> para adelantarme a los hechos &hellip;</p>
+<p>Me encontré con dos maneras de hacer la migración:</p>
+<h3 id="la-migración-manual">
+  La migración &ldquo;manual&rdquo;
+  <a class="heading-link" href="#la-migraci%c3%b3n-manual">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Al migrar, en la mayoría de los casos, el código de la interfaz de usuario solo necesita algunos cambios en el espacio de nombres. Gran parte del código de su plataforma seguirá siendo el mismo. Se tiene que modificar o cambiar algún código en función de las diferentes funcionalidades/disponibilidades de las aplicaciones de escritorio frente a las aplicaciones para <strong>UWP</strong>.</p>
+<p>A nivel general se deben realizar estas tareas:</p>
+<ol>
+<li>
+<p>Crear un nuevo proyecto de escritorio empaquetado de <strong>WinUI 3</strong> en la solución existente.</p>
+</li>
+<li>
+<p>Copiar el código <strong>XAML</strong> para la <strong>UI</strong> (esto debido a cambios en los nombres de espacios de nombres).</p>
+</li>
+<li>
+<p>Copiar el código lógico de la aplicación (clases diferentes y/o diferencias de APIs).</p>
+</li>
+</ol>
+<p>Debemos seguir los pasos indicados <a href="https://learn.microsoft.com/es-es/windows/apps/windows-app-sdk/migrate-to-windows-app-sdk/migrate-to-windows-app-sdk-ovw"  class="external-link" target="_blank" rel="noopener">aquí</a></p>
+<h3 id="la-migración-con-una-herramienta">
+  La migración con una herramienta
+  <a class="heading-link" href="#la-migraci%c3%b3n-con-una-herramienta">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Para migrar una aplicación UWP a <strong>WinUI 3</strong>, se puede usar el <strong>.NET Upgrade Assistant</strong>, que es una herramienta que automatiza gran parte del proceso de migración. Antes de migrar, se recomienda revisar la siguiente lista de características que aún no son compatibles con <strong>WinUI 3</strong>.</p>
+<table>
+  <thead>
+      <tr>
+          <th>Característica de <strong>UWP</strong></th>
+          <th>Estado de <strong>WinUI 3</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Controles comunes de la interfaz de usuario</td>
+          <td>✅ Soportado</td>
+      </tr>
+      <tr>
+          <td>MSIX</td>
+          <td>✅ Soportado</td>
+      </tr>
+      <tr>
+          <td>Notificaciones del sistema</td>
+          <td>✅ Soportado</td>
+      </tr>
+      <tr>
+          <td>Iconos dinámicos (en Windows 10)</td>
+          <td>✅ Soportado</td>
+      </tr>
+      <tr>
+          <td>Distribución a través de la Tienda</td>
+          <td>✅ Soportado</td>
+      </tr>
+      <tr>
+          <td>Biblioteca MSAL</td>
+          <td>✅ Soportado</td>
+      </tr>
+      <tr>
+          <td>Visual Studio App Center</td>
+          <td>✅ Soportado</td>
+      </tr>
+      <tr>
+          <td>Creación de instancias únicas</td>
+          <td>✅ Soportado</td>
+      </tr>
+      <tr>
+          <td>Tareas en segundo plano</td>
+          <td>✅ Compatible con C++ ⚠️ Compatible parcialmente con C# (se admiten tareas en segundo plano de OOP)</td>
+      </tr>
+      <tr>
+          <td>CameraCaptureUI</td>
+          <td>❌ No se admite en la versión 1.0</td>
+      </tr>
+      <tr>
+          <td>CoreTextServicesManager</td>
+          <td>⚠️ Solo se admite en Windows 11</td>
+      </tr>
+      <tr>
+          <td>InkCanvas</td>
+          <td>❌ No se admite en la versión 1.0</td>
+      </tr>
+      <tr>
+          <td>MapControl</td>
+          <td>❌ No se admite en la versión 1.0</td>
+      </tr>
+      <tr>
+          <td>MediaElement</td>
+          <td>❌ No se admite en la versión 1.0</td>
+      </tr>
+      <tr>
+          <td>PrintManager</td>
+          <td>❌ No se admite en la versión 1.0</td>
+      </tr>
+      <tr>
+          <td>WebAuthenticationBroker</td>
+          <td>❌ No se admite en la versión 1.0</td>
+      </tr>
+      <tr>
+          <td>Acrílico en el fondo</td>
+          <td>❌ No se admite en la versión 1.0</td>
+      </tr>
+      <tr>
+          <td>Quiosco de una sola aplicación</td>
+          <td>❌ No se admite en la versión 1.0</td>
+      </tr>
+      <tr>
+          <td>TaskbarManager API</td>
+          <td>❌ No se admite en la versión 1.0</td>
+      </tr>
+      <tr>
+          <td>Contenedorización completa de la aplicación</td>
+          <td>❌ No se admite en la versión 1.0</td>
+      </tr>
+      <tr>
+          <td>Mejor velocidad y rendimiento de lanzamiento</td>
+          <td>⚠️ Ligera desventaja, consulte consideraciones de rendimiento.</td>
+      </tr>
+  </tbody>
+</table>
+<p>Más información sobre la migración, se encuentra en la documentación oficial de <strong>Microsoft</strong> <a href="https://learn.microsoft.com/es-es/windows/apps/windows-app-sdk/migrate-to-windows-app-sdk/upgrade-assistant"  class="external-link" target="_blank" rel="noopener">aquí</a></p>
+<h2 id="conclusión">
+  Conclusión
+  <a class="heading-link" href="#conclusi%c3%b3n">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>En general, el proceso de migración es sencillo si se utiliza el <strong>.NET Upgrade Assistant</strong>, que guía paso a paso y realiza los cambios necesarios en el código. Sin embargo, puede haber algunos casos en los que se tenga que hacer ajustes manuales o buscar alternativas a algunas características que no son compatibles con <strong>WinUI 3</strong>.</p>
+<p>En líneas generales seguí <a href="https://learn.microsoft.com/es-es/dotnet/core/porting/upgrade-assistant-uwp-framework"  class="external-link" target="_blank" rel="noopener">el ejemplo de la documentación de Microsoft</a> y logramos terminar la migración sin problemas en 2 días (14 horas en total).</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">upgrade-assistant upgrade XX.sln
+</span></span></code></pre></div><p>¡No modificamos nada!</p>
+<p>Es hora de ir a tomar un poco de tequila 😋</p>
+<p>¡Espero resulte útil!</p>
+      </div>
+
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script>
+  window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "cmasblog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    
+    document.addEventListener('themeChanged', function (e) { 
+        if (document.readyState == 'complete') {
+          DISQUS.reset({ reload: true, config: disqus_config });
+        }
+    });
+</script>
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2018 -
+    
+    2025
+     Christian Amado 
+    ·
+    
+    Desarrollado por <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+      <script async src="https://www.googletagmanager.com/gtag/js?id=356375808"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '356375808');
+        }
+      </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=013131931956450466198%3ablhmkdpweyq"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '013131931956450466198:blhmkdpweyq');
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

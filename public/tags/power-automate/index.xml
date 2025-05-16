@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Power Automate on Christian Amado</title>
+    <link>http://localhost:1313/tags/power-automate/</link>
+    <description>Recent content in Power Automate on Christian Amado</description>
+    <generator>Hugo</generator>
+    <language>es</language>
+    <lastBuildDate>Wed, 07 Feb 2024 00:00:00 -0400</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/power-automate/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Invocar servicios REST API desde Power Automate</title>
+      <link>http://localhost:1313/posts/2024-02-07-invoke-rest-api-from-power-automate/</link>
+      <pubDate>Wed, 07 Feb 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2024-02-07-invoke-rest-api-from-power-automate/</guid>
+      <description>&lt;p&gt;En este artículo mostraré cómo invocar a un servicio REST API con &lt;strong&gt;Microsoft Power Automate&lt;/strong&gt;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Simular un click de botón con Power Automate Desktop</title>
+      <link>http://localhost:1313/posts/2024-01-31-simulate-click-button-power-automate-desktop/</link>
+      <pubDate>Wed, 31 Jan 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2024-01-31-simulate-click-button-power-automate-desktop/</guid>
+      <description>&lt;p&gt;En este artículo mostraré cómo simular un botón clic en un sitio web utilizando &lt;strong&gt;Microsoft Power Automate Desktop&lt;/strong&gt; para el manejo de flujos.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Invocar servicios SOAP desde Power Automate Desktop</title>
+      <link>http://localhost:1313/posts/2024-01-24-invoke-soap-services-in-power-automate-desktop/</link>
+      <pubDate>Wed, 24 Jan 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2024-01-24-invoke-soap-services-in-power-automate-desktop/</guid>
+      <description>&lt;p&gt;En este artículo mostraré cómo consumir un Servicio Web SOAP desde &lt;strong&gt;Microsoft Power Automate Desktop&lt;/strong&gt;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Primeros pasos con Power Automate Desktop</title>
+      <link>http://localhost:1313/posts/2024-01-17-first-steps-in-power-automate-desktop/</link>
+      <pubDate>Wed, 17 Jan 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2024-01-17-first-steps-in-power-automate-desktop/</guid>
+      <description>&lt;p&gt;En este artículo mostraré cómo dar los primeros pasos con &lt;strong&gt;Microsoft Power Automate Desktop&lt;/strong&gt; para procesos locales y consumos externos.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Integrar Power Pages con Power Automate</title>
+      <link>http://localhost:1313/posts/2023-11-29-integrate-power-pages-with-power-automate/</link>
+      <pubDate>Wed, 29 Nov 2023 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2023-11-29-integrate-power-pages-with-power-automate/</guid>
+      <description>&lt;p&gt;En este artículo mostraré cómo iniciar con la integración de &lt;strong&gt;Microsoft Power Pages&lt;/strong&gt; y &lt;strong&gt;Microsoft Power Automate&lt;/strong&gt; para el manejo de flujos.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Enviar correo luego de completar formulario</title>
+      <link>http://localhost:1313/posts/2020-04-02-enviar-correo-luego-de-completar-formulario/</link>
+      <pubDate>Thu, 02 Apr 2020 17:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2020-04-02-enviar-correo-luego-de-completar-formulario/</guid>
+      <description>&lt;p&gt;En esta ocasión, quiero compartir con ustedes una funcionalidad muy buena de Power Automate. Imaginemos que necesitamos completar un formulario y que la respuesta sea enviada por correo electrónica a dicho usuario.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Enviar correo desde PowerApps</title>
+      <link>http://localhost:1313/posts/2020-01-15-enviar-correo-desde-powerapps/</link>
+      <pubDate>Wed, 15 Jan 2020 22:31:59 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2020-01-15-enviar-correo-desde-powerapps/</guid>
+      <description>&lt;p&gt;En esta oportunidad me gustaría mostrar la integración entre dos aplicaciones disponibles en Office 365, en este caso, PowerApps y Power Automate (Flow).&lt;/p&gt;&#xA;&lt;p&gt;PowerApps nos permite crear una aplicación en segundos y Power Automate (Flow) nos permite utilizar muchos servicios para integrarlos a nuestra aplicación.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Creación de flujos desde plantillas</title>
+      <link>http://localhost:1313/posts/2019-12-03-creacion-de-flujos-desde-plantillas/</link>
+      <pubDate>Tue, 03 Dec 2019 13:50:53 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2019-12-03-creacion-de-flujos-desde-plantillas/</guid>
+      <description>&lt;p&gt;Alguna vez en el pasado &lt;a href=&#34;http://localhost:1313/2018/08/primeros-pasos-con-microsoft-flow/&#34; &gt;había escrito algo sobre los primeros pasos con Microsoft Flow&lt;/a&gt;. Microsoft ha cambiado el nombre del producto y ahora se llama Microsoft Power Automate que tiene las mismas funcionalidades agregándoles nuevas.&lt;/p&gt;&#xA;&lt;p&gt;Así que aquí empezaremos el camino de &lt;strong&gt;Power Automate&lt;/strong&gt; (me gustan sus bondades e integración con otros productos de Microsoft).&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

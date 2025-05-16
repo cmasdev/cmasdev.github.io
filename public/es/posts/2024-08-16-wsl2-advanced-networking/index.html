@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  Networking avanzado con WSL2: puertos, servicios y redes privadas · Christian Amado
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Christian Amado">
+<meta name="description" content="WSL2 proporciona un entorno Linux completo ejecutándose dentro de una VM ligera sobre Windows. Esto cambia sustancialmente el comportamiento de red respecto a WSL1. Para muchos desarrolladores, entender cómo funciona el networking en WSL2 es esencial para ejecutar servicios, exponer APIs, trabajar con contenedores, y simular entornos de red en pruebas más complejas.
+Este artículo explica en profundidad el modelo de red de WSL2, cómo manejar puertos, exponer servicios, realizar redirecciones avanzadas y configurar redes privadas para flujos DevOps, testing y desarrollo de aplicaciones distribuidas.">
+<meta name="keywords" content="blog,desarrollador,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Networking avanzado con WSL2: puertos, servicios y redes privadas">
+  <meta name="twitter:description" content="WSL2 proporciona un entorno Linux completo ejecutándose dentro de una VM ligera sobre Windows. Esto cambia sustancialmente el comportamiento de red respecto a WSL1. Para muchos desarrolladores, entender cómo funciona el networking en WSL2 es esencial para ejecutar servicios, exponer APIs, trabajar con contenedores, y simular entornos de red en pruebas más complejas.
+Este artículo explica en profundidad el modelo de red de WSL2, cómo manejar puertos, exponer servicios, realizar redirecciones avanzadas y configurar redes privadas para flujos DevOps, testing y desarrollo de aplicaciones distribuidas.">
+
+<meta property="og:url" content="http://localhost:1313/es/posts/2024-08-16-wsl2-advanced-networking/">
+  <meta property="og:site_name" content="Christian Amado">
+  <meta property="og:title" content="Networking avanzado con WSL2: puertos, servicios y redes privadas">
+  <meta property="og:description" content="WSL2 proporciona un entorno Linux completo ejecutándose dentro de una VM ligera sobre Windows. Esto cambia sustancialmente el comportamiento de red respecto a WSL1. Para muchos desarrolladores, entender cómo funciona el networking en WSL2 es esencial para ejecutar servicios, exponer APIs, trabajar con contenedores, y simular entornos de red en pruebas más complejas.
+Este artículo explica en profundidad el modelo de red de WSL2, cómo manejar puertos, exponer servicios, realizar redirecciones avanzadas y configurar redes privadas para flujos DevOps, testing y desarrollo de aplicaciones distribuidas.">
+  <meta property="og:locale" content="es">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-08-16T00:00:00-04:00">
+    <meta property="article:modified_time" content="2024-08-16T00:00:00-04:00">
+    <meta property="article:tag" content="WinDev">
+    <meta property="article:tag" content="Windows 11">
+    <meta property="article:tag" content="WSL">
+
+
+
+
+<link rel="canonical" href="http://localhost:1313/es/posts/2024-08-16-wsl2-advanced-networking/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/es/">
+      Christian Amado
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/about">Biografía</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/contact">Contacto</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/diabetes">Diabetes</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/tags">Etiquetas</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/en/">🇺🇸</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/es/posts/2024-08-16-wsl2-advanced-networking/">
+              Networking avanzado con WSL2: puertos, servicios y redes privadas
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2024-08-16T00:00:00-04:00">
+                agosto 16, 2024
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              4 minutos de lectura.
+            </span>
+          </div>
+          
+          
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/es/tags/windev/">WinDev</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/es/tags/windows-11/">Windows 11</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/es/tags/wsl/">WSL</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <p><strong>WSL2</strong> proporciona un entorno <strong>Linux</strong> completo ejecutándose dentro de una <strong>VM</strong> ligera sobre <strong>Windows</strong>. Esto cambia sustancialmente el comportamiento de red respecto a <strong>WSL1</strong>. Para muchos desarrolladores, entender cómo funciona el networking en <strong>WSL2</strong> es esencial para ejecutar servicios, exponer APIs, trabajar con contenedores, y simular entornos de red en pruebas más complejas.</p>
+<p>Este artículo explica en profundidad el modelo de red de <strong>WSL2</strong>, cómo manejar puertos, exponer servicios, realizar redirecciones avanzadas y configurar redes privadas para flujos DevOps, testing y desarrollo de aplicaciones distribuidas.</p>
+<h2 id="introducción-al-modelo-de-red-en-wsl2">
+  Introducción al modelo de red en WSL2
+  <a class="heading-link" href="#introducci%c3%b3n-al-modelo-de-red-en-wsl2">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>WSL2 ejecuta cada instancia de Linux dentro de una máquina virtual utilizando Hyper-V. A diferencia de WSL1, que compartía la pila de red del host Windows, en WSL2 la red está virtualizada:</p>
+<ul>
+<li>Cada distro tiene su propia interfaz (<code>eth0</code>)</li>
+<li>Tiene su propia IP interna asignada por DHCP</li>
+<li>Los puertos que se abren dentro de WSL2 no están disponibles automáticamente en Windows, aunque se configuran redirecciones automáticas para <code>localhost</code></li>
+</ul>
+<p>Ver IP del entorno WSL2:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ip a <span class="p">|</span> grep inet
+</span></span></code></pre></div><h2 id="exposición-de-servicios-en-wsl2">
+  Exposición de servicios en WSL2
+  <a class="heading-link" href="#exposici%c3%b3n-de-servicios-en-wsl2">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Al ejecutar un servidor en WSL2, por ejemplo:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">python3 -m http.server <span class="m">8000</span>
+</span></span></code></pre></div><p>Este se expone dentro del entorno Linux. Si se accede desde el mismo WSL, la URL <code>http://localhost:8000</code> funcionará correctamente. Para acceder desde Windows o el navegador, WSL2 crea automáticamente reglas de reenvío de puertos a <code>localhost</code>.</p>
+<p>Esto es transparente para la mayoría de los usos básicos.</p>
+<h2 id="reenvío-avanzado-con-netsh-y-puertos-personalizados">
+  Reenvío avanzado con netsh y puertos personalizados
+  <a class="heading-link" href="#reenv%c3%ado-avanzado-con-netsh-y-puertos-personalizados">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Si el reenvío automático no funciona, o se quiere más control, se pueden definir reglas manualmente desde PowerShell en Windows:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="n">netsh</span> <span class="n">interface</span> <span class="n">portproxy</span> <span class="n">add</span> <span class="n">v4tov4</span> <span class="n">listenport</span><span class="p">=</span><span class="mf">8888</span> <span class="n">connectport</span><span class="p">=</span><span class="mf">8000</span> <span class="n">connectaddress</span><span class="p">=</span><span class="nb">WSL-IP</span>
+</span></span></code></pre></div><p>Verificar IP WSL:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ip addr show eth0 <span class="p">|</span> grep inet
+</span></span></code></pre></div><p>Listar reglas activas:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="n">netsh</span> <span class="n">interface</span> <span class="n">portproxy</span> <span class="n">show</span> <span class="n">all</span>
+</span></span></code></pre></div><p>Eliminar una regla:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="n">netsh</span> <span class="n">interface</span> <span class="n">portproxy</span> <span class="n">delete</span> <span class="n">v4tov4</span> <span class="n">listenport</span><span class="p">=</span><span class="mf">8888</span>
+</span></span></code></pre></div><h2 id="configuración-de-múltiples-distros-en-red-privada-simulada">
+  Configuración de múltiples distros en red privada simulada
+  <a class="heading-link" href="#configuraci%c3%b3n-de-m%c3%baltiples-distros-en-red-privada-simulada">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Para simular una red privada local, se puede trabajar con varias distros en WSL2:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">wsl --list --verbose
+</span></span></code></pre></div><p>Ejecutar dos distros (por ejemplo, Ubuntu y Debian), y desde una hacer ping a la otra vía su IP interna.</p>
+<p>Si no responde, asegurarse de habilitar tráfico ICMP dentro de WSL y verificar que ambas estén activas al mismo tiempo.</p>
+<h2 id="comunicación-con-contenedores-docker">
+  Comunicación con contenedores Docker
+  <a class="heading-link" href="#comunicaci%c3%b3n-con-contenedores-docker">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Si Docker Desktop está configurado para trabajar con WSL2, se puede usar la red de <code>docker0</code> para conectar servicios:</p>
+<ol>
+<li>Correr un contenedor dentro del entorno WSL2</li>
+<li>Exponerlo con <code>--network host</code> (si es compatible) o <code>--publish</code></li>
+<li>Usar <code>localhost</code> o la IP del contenedor desde otro servicio en WSL2</li>
+</ol>
+<p>Ejemplo:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker run -d -p 5432:5432 --name pg postgres
+</span></span><span class="line"><span class="cl">psql -h localhost -p <span class="m">5432</span> -U postgres
+</span></span></code></pre></div><h2 id="simulación-de-red-privada-con-herramientas-adicionales">
+  Simulación de red privada con herramientas adicionales
+  <a class="heading-link" href="#simulaci%c3%b3n-de-red-privada-con-herramientas-adicionales">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="opción-1-tailscale-en-wsl2">
+  Opción 1: Tailscale en WSL2
+  <a class="heading-link" href="#opci%c3%b3n-1-tailscale-en-wsl2">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Tailscale permite crear una VPN mesh entre máquinas. Instalarlo en WSL2 permite acceder a servicios entre distros, otras PC o incluso entornos cloud.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">curl -fsSL https://tailscale.com/install.sh <span class="p">|</span> sh
+</span></span><span class="line"><span class="cl">sudo tailscale up
+</span></span></code></pre></div><h3 id="opción-2-tun2socks-y-redes-virtuales-personalizadas">
+  Opción 2: tun2socks y redes virtuales personalizadas
+  <a class="heading-link" href="#opci%c3%b3n-2-tun2socks-y-redes-virtuales-personalizadas">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Para flujos más complejos o tests con proxies, se pueden usar herramientas como:</p>
+<ul>
+<li><code>socat</code></li>
+<li><code>ngrok</code></li>
+<li><code>dnsmasq</code></li>
+<li><code>iptables</code> con NAT y routing avanzado</li>
+</ul>
+<p>Estas herramientas requieren experiencia en networking de Linux, pero funcionan perfectamente en WSL2.</p>
+<h2 id="buenas-prácticas-para-servicios-y-redes">
+  Buenas prácticas para servicios y redes
+  <a class="heading-link" href="#buenas-pr%c3%a1cticas-para-servicios-y-redes">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ul>
+<li>Usar puertos por encima de 1024 para evitar privilegios root</li>
+<li>Mantener los servicios dentro del FS Linux (<code>~/</code>) para evitar problemas de rendimiento</li>
+<li>Automatizar redirecciones en PowerShell o Bash con scripts</li>
+<li>Para uso profesional, evitar confiar en reenvíos automáticos y configurar manualmente</li>
+<li>Evitar trabajar con IPs cambiantes: usar DNS locales (<code>/etc/hosts</code> o resolvers)</li>
+</ul>
+<h2 id="conclusión">
+  Conclusión
+  <a class="heading-link" href="#conclusi%c3%b3n">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p><strong>WSL2</strong> ofrece una red aislada, pero accesible y flexible, ideal para desarrollo y pruebas. Comprender su arquitectura y cómo manipular puertos y conexiones permite simular redes privadas, trabajar con múltiples servicios y ejecutar entornos avanzados de forma profesional desde <strong>Windows</strong> con un núcleo <strong>Linux</strong> real.</p>
+      </div>
+
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script>
+  window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "cmasblog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    
+    document.addEventListener('themeChanged', function (e) { 
+        if (document.readyState == 'complete') {
+          DISQUS.reset({ reload: true, config: disqus_config });
+        }
+    });
+</script>
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2018 -
+    
+    2025
+     Christian Amado 
+    ·
+    
+    Desarrollado por <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+      <script async src="https://www.googletagmanager.com/gtag/js?id=356375808"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '356375808');
+        }
+      </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=013131931956450466198%3ablhmkdpweyq"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '013131931956450466198:blhmkdpweyq');
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

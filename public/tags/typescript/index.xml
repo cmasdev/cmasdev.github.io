@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Typescript on Christian Amado</title>
+    <link>http://localhost:1313/tags/typescript/</link>
+    <description>Recent content in Typescript on Christian Amado</description>
+    <generator>Hugo</generator>
+    <language>es</language>
+    <lastBuildDate>Wed, 19 Feb 2025 00:00:00 -0400</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/typescript/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Usando generics avanzados en TypeScript</title>
+      <link>http://localhost:1313/posts/2025-02-19-generics-typescript/</link>
+      <pubDate>Wed, 19 Feb 2025 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2025-02-19-generics-typescript/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;TypeScript&lt;/strong&gt; ofrece una potente funcionalidad llamada &lt;strong&gt;Generics&lt;/strong&gt; que permite crear componentes y funciones altamente reutilizables y seguros en tiempo de compilación. Los &lt;strong&gt;Generics avanzados&lt;/strong&gt; van más allá de lo básico y permiten escribir código flexible sin perder el tipado estricto.&lt;/p&gt;&#xA;&lt;p&gt;En este artículo, exploraremos:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Cómo funcionan los &lt;strong&gt;Generics&lt;/strong&gt; en TypeScript.&lt;/li&gt;&#xA;&lt;li&gt;Uso de &lt;strong&gt;restricciones (&lt;code&gt;extends&lt;/code&gt;)&lt;/strong&gt;.&lt;/li&gt;&#xA;&lt;li&gt;Aplicación de &lt;strong&gt;múltiples tipos genéricos&lt;/strong&gt;.&lt;/li&gt;&#xA;&lt;li&gt;Uso de &lt;strong&gt;tipos condicionales y mapped types&lt;/strong&gt;.&lt;/li&gt;&#xA;&lt;li&gt;Casos prácticos en &lt;strong&gt;funciones, clases e interfaces&lt;/strong&gt;.&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
+    </item>
+    <item>
+      <title>Cómo estructurar grandes proyectos en TypeScript</title>
+      <link>http://localhost:1313/posts/2025-01-29-how-to-structure-big-projects/</link>
+      <pubDate>Wed, 29 Jan 2025 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2025-01-29-how-to-structure-big-projects/</guid>
+      <description>&lt;p&gt;El desarrollo de grandes aplicaciones en &lt;strong&gt;TypeScript&lt;/strong&gt; requiere una estructura de proyecto bien definida para mantener la escalabilidad, mantenibilidad y eficiencia del código. Una mala organización puede llevar a problemas de acoplamiento, dificultades en la depuración y una curva de aprendizaje elevada para nuevos desarrolladores en el equipo.&lt;/p&gt;&#xA;&lt;p&gt;En este artículo, exploraremos cómo organizar un proyecto grande en TypeScript utilizando &lt;strong&gt;buenas prácticas, patrones de diseño y herramientas avanzadas&lt;/strong&gt;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Diseño de APIs escalables con Deno y TypeScript</title>
+      <link>http://localhost:1313/posts/2025-01-15-scalable-design-apis/</link>
+      <pubDate>Wed, 15 Jan 2025 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2025-01-15-scalable-design-apis/</guid>
+      <description>&lt;p&gt;El desarrollo de APIs escalables es un aspecto clave en la construcción de aplicaciones modernas. &lt;strong&gt;Deno&lt;/strong&gt;, un runtime moderno para JavaScript y TypeScript, ofrece una serie de características que lo convierten en una excelente alternativa para la creación de APIs seguras y eficientes. En este artículo, exploraremos cómo diseñar una API REST escalable utilizando &lt;strong&gt;Deno y TypeScript&lt;/strong&gt;, aplicando las mejores prácticas y optimizaciones.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Gestión de dependencias en TypeScript: Consejos y herramientas</title>
+      <link>http://localhost:1313/posts/2024-11-27-dependency-management-typescript/</link>
+      <pubDate>Wed, 27 Nov 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2024-11-27-dependency-management-typescript/</guid>
+      <description>&lt;p&gt;La gestión eficiente de dependencias es una parte fundamental del desarrollo en TypeScript. Al trabajar con paquetes externos, es esencial conocer las mejores prácticas y herramientas disponibles para garantizar la estabilidad, seguridad y rendimiento de nuestros proyectos. En este artículo, exploraremos las estrategias para gestionar dependencias en TypeScript, incluyendo herramientas como npm, yarn, pnpm y Deno, junto con ejemplos prácticos.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Migración de Node.js a Deno: Caso práctico</title>
+      <link>http://localhost:1313/posts/2024-08-21-nodejs-migration-to-deno/</link>
+      <pubDate>Wed, 21 Aug 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2024-08-21-nodejs-migration-to-deno/</guid>
+      <description>&lt;p&gt;En los últimos años, &lt;strong&gt;Deno&lt;/strong&gt; ha emergido como una alternativa moderna a &lt;strong&gt;Node.js&lt;/strong&gt;. Desarrollado por el mismo creador de &lt;strong&gt;Node.js&lt;/strong&gt;, &lt;strong&gt;Deno&lt;/strong&gt; busca abordar algunas de las limitaciones y problemas de diseño que han surgido con &lt;strong&gt;Node.js&lt;/strong&gt; a lo largo del tiempo. Este artículo presenta un caso práctico detallado sobre cómo migrar una aplicación existente de &lt;strong&gt;Node.js&lt;/strong&gt; a &lt;strong&gt;Deno&lt;/strong&gt;, destacando las diferencias clave, los desafíos y las soluciones.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Decoradores avanzados en TypeScript: Mejora tu código</title>
+      <link>http://localhost:1313/posts/2024-08-14-decorators-typescript/</link>
+      <pubDate>Wed, 14 Aug 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2024-08-14-decorators-typescript/</guid>
+      <description>&lt;p&gt;Los decoradores son una característica poderosa y avanzada de &lt;strong&gt;TypeScript&lt;/strong&gt; que permiten modificar el comportamiento de clases, métodos, propiedades y parámetros de una forma declarativa. Son ampliamente utilizados en frameworks como Angular, pero también pueden emplearse en proyectos personalizados para mejorar la reutilización y la claridad del código. En este artículo exploraremos los decoradores avanzados en &lt;strong&gt;TypeScript&lt;/strong&gt;, sus usos más comunes, cómo crearlos desde cero, y las mejores prácticas para implementarlos.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Creación de librerías compartidas en TypeScript</title>
+      <link>http://localhost:1313/posts/2024-06-19-share-libraries-typescript/</link>
+      <pubDate>Wed, 19 Jun 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2024-06-19-share-libraries-typescript/</guid>
+      <description>&lt;p&gt;La creación de librerías compartidas en &lt;strong&gt;TypeScript&lt;/strong&gt; permite a los desarrolladores encapsular funcionalidad reutilizable y mejorar la mantenibilidad del código. Este artículo explorará el proceso completo de desarrollo de librerías en &lt;strong&gt;TypeScript&lt;/strong&gt;, desde la configuración inicial hasta el despliegue, con un enfoque moderno, ejemplos prácticos y consideraciones de seguridad.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>API RESTful con TypeScript y Deno: Guía completa</title>
+      <link>http://localhost:1313/posts/2024-05-29-api-restful-typescript-deno/</link>
+      <pubDate>Wed, 29 May 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2024-05-29-api-restful-typescript-deno/</guid>
+      <description>&lt;p&gt;Deno, el moderno entorno de ejecución para JavaScript y TypeScript creado por Ryan Dahl, está transformando la manera en que se desarrollan aplicaciones backend. A diferencia de Node.js, Deno se centra en la seguridad, el rendimiento y una experiencia de desarrollo simplificada. En este artículo, exploraremos cómo construir una API RESTful utilizando &lt;strong&gt;TypeScript&lt;/strong&gt; y &lt;strong&gt;Deno&lt;/strong&gt; desde cero, cubriendo todas las operaciones CRUD (&lt;strong&gt;POST, GET, PUT, DELETE&lt;/strong&gt;) junto con buenas prácticas, seguridad y optimización&amp;hellip;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Seguridad en aplicaciones Deno: Autenticación y autorización</title>
+      <link>http://localhost:1313/posts/2024-05-08-deno-apps-security/</link>
+      <pubDate>Wed, 08 May 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2024-05-08-deno-apps-security/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;Deno&lt;/strong&gt;, como entorno de ejecución moderno para &lt;strong&gt;JavaScript&lt;/strong&gt; y &lt;strong&gt;TypeScript&lt;/strong&gt;, ofrece varias ventajas en términos de seguridad. Su enfoque en la seguridad por diseño incluye la gestión de permisos granular y un runtime sin acceso implícito al sistema. Sin embargo, la seguridad en aplicaciones Deno no solo depende del entorno, sino también de cómo se implementan funcionalidades clave como la autenticación y autorización. Este artículo explora cómo construir aplicaciones seguras en Deno con ejemplos prácticos y buenas prácticas.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>¿Cómo configurar un proyecto TypeScript moderno con Deno?</title>
+      <link>http://localhost:1313/posts/2024-05-01-typescript-project-with-deno/</link>
+      <pubDate>Wed, 01 May 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2024-05-01-typescript-project-with-deno/</guid>
+      <description>&lt;h2 id=&#34;introducción&#34;&gt;&#xD;&#xA;  Introducción&#xD;&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#introducci%c3%b3n&#34;&gt;&#xD;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xD;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xD;&#xA;  &lt;/a&gt;&#xD;&#xA;&lt;/h2&gt;&#xD;&#xA;&lt;p&gt;Configurar un proyecto moderno en &lt;strong&gt;TypeScript&lt;/strong&gt; con &lt;strong&gt;Deno&lt;/strong&gt; permitirá aprovechar un entorno de desarrollo optimizado, seguro y compatible con los estándares más recientes, como &lt;strong&gt;ES2024&lt;/strong&gt;. Este artículo mostrará cómo realizar esta configuración tanto en &lt;strong&gt;Visual Studio Code&lt;/strong&gt; como en &lt;strong&gt;JetBrains Rider&lt;/strong&gt;, destacando buenas prácticas, incluyendo &lt;strong&gt;testing&lt;/strong&gt; con TypeScript, y proporcionando ejemplos prácticos de código.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

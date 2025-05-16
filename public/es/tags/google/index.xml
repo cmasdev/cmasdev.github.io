@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Google on Christian Amado</title>
+    <link>http://localhost:1313/es/tags/google/</link>
+    <description>Recent content in Google on Christian Amado</description>
+    <generator>Hugo</generator>
+    <language>es</language>
+    <lastBuildDate>Wed, 30 Apr 2025 00:00:00 -0300</lastBuildDate>
+    <atom:link href="http://localhost:1313/es/tags/google/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Uso seguro de variables y secretos en GCP con Go</title>
+      <link>http://localhost:1313/es/posts/2025-04-30-secure-variables-go/</link>
+      <pubDate>Wed, 30 Apr 2025 00:00:00 -0300</pubDate>
+      <guid>http://localhost:1313/es/posts/2025-04-30-secure-variables-go/</guid>
+      <description>&lt;p&gt;Manejar secretos —como claves API, tokens y credenciales— de forma segura es esencial en cualquier aplicación moderna. &lt;strong&gt;Google Cloud Platform (GCP)&lt;/strong&gt; ofrece una solución robusta para este desafío a través de &lt;strong&gt;Secret Manager&lt;/strong&gt;, que permite almacenar, acceder y auditar secretos de manera segura y centralizada.&lt;/p&gt;&#xA;&lt;p&gt;Este artículo muestra cómo acceder y gestionar secretos en &lt;strong&gt;GCP&lt;/strong&gt; desde aplicaciones desarrolladas en &lt;strong&gt;Go&lt;/strong&gt;, asegurando que tus variables sensibles estén protegidas sin necesidad de hardcodearlas o exponerlas en entornos inseguros.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Firestore como base NoSQL para apps Go</title>
+      <link>http://localhost:1313/es/posts/2025-04-23-gcp-firestore-integration/</link>
+      <pubDate>Wed, 23 Apr 2025 00:00:00 -0300</pubDate>
+      <guid>http://localhost:1313/es/posts/2025-04-23-gcp-firestore-integration/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;Firestore&lt;/strong&gt;, la base de datos &lt;strong&gt;NoSQL&lt;/strong&gt; de &lt;strong&gt;Google Cloud&lt;/strong&gt;, ofrece una solución escalable y de baja latencia ideal para aplicaciones modernas. En este artículo se explora cómo integrar &lt;strong&gt;Firestore&lt;/strong&gt; con aplicaciones desarrolladas en &lt;strong&gt;Go&lt;/strong&gt;, aprovechando el &lt;strong&gt;SDK&lt;/strong&gt; oficial de &lt;strong&gt;Google Cloud&lt;/strong&gt;. A lo largo del artículo se muestra un enfoque práctico para conectar, leer, escribir y actualizar documentos en &lt;strong&gt;Firestore&lt;/strong&gt; desde una aplicación escrita en &lt;strong&gt;Go&lt;/strong&gt;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Comparación: Angular Signals vs React Hooks</title>
+      <link>http://localhost:1313/es/posts/2024-08-07-angular-signals-vs-react-hooks/</link>
+      <pubDate>Wed, 07 Aug 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2024-08-07-angular-signals-vs-react-hooks/</guid>
+      <description>&lt;p&gt;En el mundo del desarrollo frontend, los frameworks y bibliotecas como &lt;strong&gt;Angular&lt;/strong&gt; y &lt;strong&gt;React&lt;/strong&gt; han evolucionado constantemente para ofrecer soluciones más eficientes y escalables. Dos características destacadas de estas tecnologías son los &lt;em&gt;Signals&lt;/em&gt; de &lt;strong&gt;Angular&lt;/strong&gt; y los &lt;em&gt;Hooks&lt;/em&gt; de &lt;strong&gt;React&lt;/strong&gt;. Ambos conceptos están diseñados para manejar estados y mejorar la reactividad, pero lo hacen de maneras muy diferentes. Este artículo explora en profundidad ambas herramientas, sus similitudes, diferencias, ejemplos prácticos y buenas prácticas.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Optimización de Angular Universal para SEO y rendimiento</title>
+      <link>http://localhost:1313/es/posts/2024-07-31-angular-seo/</link>
+      <pubDate>Wed, 31 Jul 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2024-07-31-angular-seo/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;Angular Universal&lt;/strong&gt; es una herramienta poderosa que permite realizar el renderizado del lado del servidor (SSR, por sus siglas en inglés) en aplicaciones &lt;strong&gt;Angular&lt;/strong&gt;. Esto no solo mejora la experiencia del usuario, sino que también optimiza la aplicación para motores de búsqueda (SEO) y mejora significativamente el rendimiento. Este artículo explora cómo optimizar &lt;strong&gt;Angular Universal&lt;/strong&gt; para &lt;strong&gt;SEO&lt;/strong&gt; y rendimiento con ejemplos prácticos y buenas prácticas.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>.NET Web API con Proyecto IDX</title>
+      <link>http://localhost:1313/es/posts/2024-07-17-dotnet-project-idx/</link>
+      <pubDate>Wed, 17 Jul 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2024-07-17-dotnet-project-idx/</guid>
+      <description>&lt;p&gt;En este artículo veremos cómo crear una Web API básica con el nuevo &lt;strong&gt;Proyecto IDX&lt;/strong&gt; de &lt;strong&gt;Google&lt;/strong&gt;, totalmente desde el navegador sin la necesidad de instalar absolutamente nada en él.&lt;/p&gt;&#xA;&lt;p&gt;El &lt;strong&gt;Proyecto IDX&lt;/strong&gt;, según &lt;strong&gt;Google&lt;/strong&gt; es:&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;Project IDX es un espacio de trabajo asistido por IA para el desarrollo de aplicaciones multiplataforma y de pila completa en la nube.&#xA;Con soporte para una amplia gama de marcos, lenguajes y servicios, además de integraciones con sus productos favoritos de Google, IDX optimiza su flujo de trabajo de desarrollo para que pueda crear y enviar aplicaciones entre plataformas con velocidad, facilidad y calidad.&lt;/p&gt;&lt;/blockquote&gt;&#xA;&lt;p&gt;Más info &lt;a href=&#34;https://idx.dev/&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;aquí&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Testing avanzado en Angular con Jest: Mejores prácticas</title>
+      <link>http://localhost:1313/es/posts/2024-06-12-testing-angular-jest/</link>
+      <pubDate>Wed, 12 Jun 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2024-06-12-testing-angular-jest/</guid>
+      <description>&lt;p&gt;Las pruebas en aplicaciones &lt;strong&gt;Angular&lt;/strong&gt; son esenciales para garantizar la calidad, confiabilidad y mantenibilidad del código. En este artículo, exploraremos el uso avanzado de &lt;strong&gt;Jest&lt;/strong&gt; como framework de pruebas en &lt;strong&gt;Angular&lt;/strong&gt;, cubriendo configuración inicial, estrategias de pruebas unitarias y de integración, así como buenas prácticas para lograr un enfoque moderno, eficiente y seguro.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Integración de Angular con Azure Static Web Apps: Un caso práctico</title>
+      <link>http://localhost:1313/es/posts/2024-06-05-angular-integration-azure-static-web/</link>
+      <pubDate>Wed, 05 Jun 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2024-06-05-angular-integration-azure-static-web/</guid>
+      <description>&lt;p&gt;En la era moderna del desarrollo web, la combinación de frameworks frontend como &lt;strong&gt;Angular&lt;/strong&gt; y servicios en la nube como &lt;strong&gt;Azure Static Web Apps&lt;/strong&gt; proporciona una solución eficiente y escalable para crear y desplegar aplicaciones. Este artículo explora cómo integrar &lt;strong&gt;Angular&lt;/strong&gt; con &lt;strong&gt;Azure Static Web Apps&lt;/strong&gt;, mostrando ejemplos prácticos, buenas prácticas y enfoques modernos y seguros para garantizar el éxito en tus proyectos.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Introducción a los Signals en Angular: Casos prácticos</title>
+      <link>http://localhost:1313/es/posts/2024-05-22-intro-signals-angular/</link>
+      <pubDate>Wed, 22 May 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2024-05-22-intro-signals-angular/</guid>
+      <description>&lt;p&gt;Angular es un framework robusto y evolutivo que continuamente introduce nuevas características para mejorar el desarrollo de aplicaciones web modernas. Una de estas innovaciones son los &lt;strong&gt;Signals&lt;/strong&gt;, una herramienta que permite manejar cambios de estado de manera reactiva, clara y eficiente. Este artículo ofrece una introducción detallada a los Signals en Angular, explicando cómo utilizarlos, sus ventajas comparativas frente a otras soluciones reactivas y sus aplicaciones en el desarrollo real, acompañado de casos prácticos ampliados, buenas prácticas y un enfoque moderno en seguridad.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Lazy Loading en Angular: Mejora el rendimiento de tus aplicaciones</title>
+      <link>http://localhost:1313/es/posts/2024-05-15-lazy-loading-angular/</link>
+      <pubDate>Wed, 15 May 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2024-05-15-lazy-loading-angular/</guid>
+      <description>&lt;p&gt;El rendimiento es un factor crítico en las aplicaciones web modernas. Angular, como uno de los frameworks más populares para construir aplicaciones, ofrece herramientas avanzadas para optimizar la carga y el uso de recursos. Una de estas herramientas es el &lt;strong&gt;Lazy Loading&lt;/strong&gt; (carga diferida), que permite cargar módulos de la aplicación sólo cuando son necesarios. Este artículo explora cómo implementar Lazy Loading en Angular, sus beneficios y las mejores prácticas para maximizar su eficacia.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

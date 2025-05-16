@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  Testing en Deno: Estrategias para Aplicaciones Grandes · Christian Amado
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Christian Amado">
+<meta name="description" content="El desarrollo de aplicaciones grandes con Deno requiere un enfoque sólido en pruebas automatizadas para garantizar su estabilidad y escalabilidad. Deno ofrece un sistema de testing integrado con herramientas modernas que facilitan la escritura y ejecución de pruebas unitarias, de integración y funcionales.
+En este artículo, exploraremos las estrategias para testing en Deno, incluyendo fundamentos teóricos, mejores prácticas y ejemplos de código para aplicaciones a gran escala.">
+<meta name="keywords" content="blog,desarrollador,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Testing en Deno: Estrategias para Aplicaciones Grandes">
+  <meta name="twitter:description" content="El desarrollo de aplicaciones grandes con Deno requiere un enfoque sólido en pruebas automatizadas para garantizar su estabilidad y escalabilidad. Deno ofrece un sistema de testing integrado con herramientas modernas que facilitan la escritura y ejecución de pruebas unitarias, de integración y funcionales.
+En este artículo, exploraremos las estrategias para testing en Deno, incluyendo fundamentos teóricos, mejores prácticas y ejemplos de código para aplicaciones a gran escala.">
+
+<meta property="og:url" content="http://localhost:1313/posts/2024-11-13-testing-strategies-in-deno/">
+  <meta property="og:site_name" content="Christian Amado">
+  <meta property="og:title" content="Testing en Deno: Estrategias para Aplicaciones Grandes">
+  <meta property="og:description" content="El desarrollo de aplicaciones grandes con Deno requiere un enfoque sólido en pruebas automatizadas para garantizar su estabilidad y escalabilidad. Deno ofrece un sistema de testing integrado con herramientas modernas que facilitan la escritura y ejecución de pruebas unitarias, de integración y funcionales.
+En este artículo, exploraremos las estrategias para testing en Deno, incluyendo fundamentos teóricos, mejores prácticas y ejemplos de código para aplicaciones a gran escala.">
+  <meta property="og:locale" content="es">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-11-13T00:00:00-04:00">
+    <meta property="article:modified_time" content="2024-11-13T00:00:00-04:00">
+    <meta property="article:tag" content="Web Development">
+    <meta property="article:tag" content="Deno">
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-V1ZRP82YFD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-V1ZRP82YFD');
+</script>
+
+
+
+<link rel="canonical" href="http://localhost:1313/posts/2024-11-13-testing-strategies-in-deno/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="apple-touch-icon" sizes="57x57" href="/img/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/img/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/img/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/img/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/img/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/img/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/img/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/img/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/img/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="/img/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/img/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+<link rel="manifest" href="/img/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/img/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/">
+      Christian Amado
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/about">Biografía</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/contact">Contacto</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/diabetes">Diabetes</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/tags">Etiquetas</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/en/">🇺🇸</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/posts/2024-11-13-testing-strategies-in-deno/">
+              Testing en Deno: Estrategias para Aplicaciones Grandes
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2024-11-13T00:00:00-04:00">
+                noviembre 13, 2024
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              4 minutos de lectura.
+            </span>
+          </div>
+          
+          
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/tags/web-development/">Web Development</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/deno/">Deno</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <p>El desarrollo de aplicaciones grandes con <strong>Deno</strong> requiere un enfoque sólido en <strong>pruebas automatizadas</strong> para garantizar su estabilidad y escalabilidad. Deno ofrece un sistema de testing integrado con herramientas modernas que facilitan la escritura y ejecución de pruebas unitarias, de integración y funcionales.</p>
+<p>En este artículo, exploraremos las <strong>estrategias para testing en Deno</strong>, incluyendo fundamentos teóricos, mejores prácticas y ejemplos de código para aplicaciones a gran escala.</p>
+<h2 id="por-qué-es-importante-el-testing-en-deno">
+  ¿Por qué es importante el testing en Deno?
+  <a class="heading-link" href="#por-qu%c3%a9-es-importante-el-testing-en-deno">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>A medida que una aplicación crece, es fundamental contar con un <strong>sistema de pruebas eficiente</strong> para evitar regresiones y asegurar que cada módulo funcione correctamente. Las pruebas en Deno permiten:</p>
+<ul>
+<li><strong>Detectar errores temprano</strong> antes de que lleguen a producción.</li>
+<li><strong>Automatizar la validación</strong> de funcionalidades clave.</li>
+<li><strong>Facilitar la refactorización</strong> sin comprometer la estabilidad.</li>
+<li><strong>Asegurar la compatibilidad</strong> entre módulos y servicios externos.</li>
+</ul>
+<h2 id="configuración-del-entorno-de-pruebas-en-deno">
+  Configuración del Entorno de Pruebas en Deno
+  <a class="heading-link" href="#configuraci%c3%b3n-del-entorno-de-pruebas-en-deno">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Deno tiene soporte nativo para testing sin necesidad de librerías externas. Podemos ejecutar pruebas con:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">deno test --allow-net --allow-read
+</span></span></code></pre></div><h3 id="1-estructura-de-pruebas-en-un-proyecto-grande">
+  <strong>1. Estructura de pruebas en un proyecto grande</strong>
+  <a class="heading-link" href="#1-estructura-de-pruebas-en-un-proyecto-grande">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Para organizar nuestras pruebas en aplicaciones grandes, podemos seguir esta estructura:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">/project
+</span></span><span class="line"><span class="cl">│── src/
+</span></span><span class="line"><span class="cl">│   ├── controllers/
+</span></span><span class="line"><span class="cl">│   ├── services/
+</span></span><span class="line"><span class="cl">│   ├── models/
+</span></span><span class="line"><span class="cl">│   ├── routes/
+</span></span><span class="line"><span class="cl">│── tests/
+</span></span><span class="line"><span class="cl">│   ├── unit/
+</span></span><span class="line"><span class="cl">│   ├── integration/
+</span></span><span class="line"><span class="cl">│   ├── e2e/
+</span></span><span class="line"><span class="cl">│── deps.ts
+</span></span><span class="line"><span class="cl">│── mod.ts
+</span></span></code></pre></div><p>Las pruebas deben dividirse en:</p>
+<ul>
+<li><strong>Unitarias</strong>: Validan la lógica de funciones individuales.</li>
+<li><strong>Integración</strong>: Aseguran que múltiples módulos funcionen juntos correctamente.</li>
+<li><strong>End-to-End (E2E)</strong>: Simulan el comportamiento del usuario y prueban la aplicación completa.</li>
+</ul>
+<h2 id="pruebas-unitarias-en-deno">
+  Pruebas Unitarias en Deno
+  <a class="heading-link" href="#pruebas-unitarias-en-deno">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Las <strong>pruebas unitarias</strong> son fundamentales para validar funciones y módulos individuales. Supongamos que tenemos un servicio <code>math.ts</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">export</span> <span class="n">function</span> <span class="n">suma</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="n">number</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="n">number</span><span class="p">):</span> <span class="n">number</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Podemos escribir una prueba unitaria en <code>tests/unit/math.test.ts</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">import { assertEquals } from &#34;https://deno.land/std@0.194.0/testing/asserts.ts&#34;;
+</span></span><span class="line"><span class="cl">import { suma } from &#34;../../src/services/math.ts&#34;;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Deno.test(&#34;suma debe retornar la suma de dos números&#34;, () =&gt; {
+</span></span><span class="line"><span class="cl">    assertEquals(suma(2, 3), 5);
+</span></span><span class="line"><span class="cl">    assertEquals(suma(-1, 1), 0);
+</span></span><span class="line"><span class="cl">});
+</span></span></code></pre></div><p>Ejecutamos la prueba:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">deno test tests/unit/math.test.ts
+</span></span></code></pre></div><h2 id="pruebas-de-integración-en-deno">
+  Pruebas de Integración en Deno
+  <a class="heading-link" href="#pruebas-de-integraci%c3%b3n-en-deno">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Las <strong>pruebas de integración</strong> validan la comunicación entre diferentes módulos o servicios. Supongamos que tenemos un servicio que interactúa con una base de datos:</p>
+<h3 id="1-servicio-de-usuarios">
+  <strong>1. Servicio de usuarios <code>userService.ts</code></strong>
+  <a class="heading-link" href="#1-servicio-de-usuarios">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">import</span> <span class="p">{</span> <span class="n">User</span> <span class="p">}</span> <span class="n">from</span> <span class="s2">&#34;../models/user.ts&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">export</span> <span class="k">class</span> <span class="n">UserService</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">private</span> <span class="n">users</span><span class="p">:</span> <span class="n">User</span><span class="p">[]</span> <span class="o">=</span> <span class="p">[];</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">addUser</span><span class="p">(</span><span class="n">user</span><span class="p">:</span> <span class="n">User</span><span class="p">):</span> <span class="n">void</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">this</span><span class="o">.</span><span class="n">users</span><span class="o">.</span><span class="n">push</span><span class="p">(</span><span class="n">user</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">getUsers</span><span class="p">():</span> <span class="n">User</span><span class="p">[]</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">this</span><span class="o">.</span><span class="n">users</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h3 id="2-prueba-de-integración">
+  <strong>2. Prueba de integración <code>tests/integration/userService.test.ts</code></strong>
+  <a class="heading-link" href="#2-prueba-de-integraci%c3%b3n">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">import</span> <span class="p">{</span> <span class="n">assertEquals</span> <span class="p">}</span> <span class="n">from</span> <span class="s2">&#34;https://deno.land/std@0.194.0/testing/asserts.ts&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">import</span> <span class="p">{</span> <span class="n">UserService</span> <span class="p">}</span> <span class="n">from</span> <span class="s2">&#34;../../src/services/userService.ts&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">Deno</span><span class="o">.</span><span class="n">test</span><span class="p">(</span><span class="s2">&#34;UserService debe agregar y recuperar usuarios&#34;</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="n">service</span> <span class="o">=</span> <span class="n">new</span> <span class="n">UserService</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="n">service</span><span class="o">.</span><span class="n">addUser</span><span class="p">({</span> <span class="n">id</span><span class="p">:</span> <span class="s2">&#34;1&#34;</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="s2">&#34;Carlos&#34;</span> <span class="p">});</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="n">users</span> <span class="o">=</span> <span class="n">service</span><span class="o">.</span><span class="n">getUsers</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="n">assertEquals</span><span class="p">(</span><span class="n">users</span><span class="o">.</span><span class="n">length</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">assertEquals</span><span class="p">(</span><span class="n">users</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s2">&#34;Carlos&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span></code></pre></div><p>Ejecutamos:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">deno <span class="nb">test</span> tests/integration/userService.test.ts
+</span></span></code></pre></div><h2 id="pruebas-end-to-end-e2e-en-deno">
+  Pruebas End-to-End (E2E) en Deno
+  <a class="heading-link" href="#pruebas-end-to-end-e2e-en-deno">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Las <strong>pruebas E2E</strong> evalúan la aplicación completa simulando interacciones de usuario. Utilizaremos <strong>Deno y Oak</strong> para probar una API REST.</p>
+<h3 id="1-configurar-un-servidor-api-con-oak">
+  <strong>1. Configurar un servidor API con Oak</strong>
+  <a class="heading-link" href="#1-configurar-un-servidor-api-con-oak">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">import</span> <span class="p">{</span> <span class="n">Application</span><span class="p">,</span> <span class="n">Router</span> <span class="p">}</span> <span class="n">from</span> <span class="s2">&#34;https://deno.land/x/oak/mod.ts&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">router</span> <span class="o">=</span> <span class="n">new</span> <span class="n">Router</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="n">router</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&#34;/ping&#34;</span><span class="p">,</span> <span class="p">(</span><span class="n">ctx</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ctx</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">body</span> <span class="o">=</span> <span class="p">{</span> <span class="n">message</span><span class="p">:</span> <span class="s2">&#34;pong&#34;</span> <span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">app</span> <span class="o">=</span> <span class="n">new</span> <span class="n">Application</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="n">app</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="n">router</span><span class="o">.</span><span class="n">routes</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl"><span class="n">app</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="n">router</span><span class="o">.</span><span class="n">allowedMethods</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">await</span> <span class="n">app</span><span class="o">.</span><span class="n">listen</span><span class="p">({</span> <span class="n">port</span><span class="p">:</span> <span class="mi">8000</span> <span class="p">});</span>
+</span></span></code></pre></div><h3 id="2-prueba-e2e-para-la-api">
+  <strong>2. Prueba E2E para la API</strong>
+  <a class="heading-link" href="#2-prueba-e2e-para-la-api">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">import</span> <span class="p">{</span> <span class="n">assertEquals</span> <span class="p">}</span> <span class="n">from</span> <span class="s2">&#34;https://deno.land/std@0.194.0/testing/asserts.ts&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">Deno</span><span class="o">.</span><span class="n">test</span><span class="p">(</span><span class="s2">&#34;La API debe responder con pong&#34;</span><span class="p">,</span> <span class="n">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="n">response</span> <span class="o">=</span> <span class="n">await</span> <span class="n">fetch</span><span class="p">(</span><span class="s2">&#34;http://localhost:8000/ping&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="n">data</span> <span class="o">=</span> <span class="n">await</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="n">assertEquals</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">message</span><span class="p">,</span> <span class="s2">&#34;pong&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span></code></pre></div><p>Ejecutamos la prueba:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">deno test tests/e2e/api.test.ts --allow-net
+</span></span></code></pre></div><h2 id="estrategias-para-testing-en-aplicaciones-grandes">
+  Estrategias para Testing en Aplicaciones Grandes
+  <a class="heading-link" href="#estrategias-para-testing-en-aplicaciones-grandes">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Para aplicaciones grandes, es importante seguir estas estrategias:</p>
+<h3 id="1-uso-de-mocks-y-stubs">
+  <strong>1. Uso de Mocks y Stubs</strong>
+  <a class="heading-link" href="#1-uso-de-mocks-y-stubs">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Para evitar dependencias innecesarias en pruebas unitarias, podemos utilizar mocks:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">import</span> <span class="p">{</span> <span class="n">assertEquals</span> <span class="p">}</span> <span class="n">from</span> <span class="s2">&#34;https://deno.land/std@0.194.0/testing/asserts.ts&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">import</span> <span class="p">{</span> <span class="n">spy</span> <span class="p">}</span> <span class="n">from</span> <span class="s2">&#34;https://deno.land/x/mock/mod.ts&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">mockFunction</span> <span class="o">=</span> <span class="n">spy</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="s2">&#34;mock response&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">assertEquals</span><span class="p">(</span><span class="n">mockFunction</span><span class="p">(),</span> <span class="s2">&#34;mock response&#34;</span><span class="p">);</span>
+</span></span></code></pre></div><h3 id="2-pruebas-en-paralelo">
+  <strong>2. Pruebas en Paralelo</strong>
+  <a class="heading-link" href="#2-pruebas-en-paralelo">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Deno permite ejecutar pruebas en paralelo para mejorar el rendimiento:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Deno.test(&#34;Prueba 1&#34;, async () =&gt; {
+</span></span><span class="line"><span class="cl">    await new Promise(resolve =&gt; setTimeout(resolve, 100));
+</span></span><span class="line"><span class="cl">    console.log(&#34;Prueba 1 completada&#34;);
+</span></span><span class="line"><span class="cl">});
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Deno.test(&#34;Prueba 2&#34;, async () =&gt; {
+</span></span><span class="line"><span class="cl">    await new Promise(resolve =&gt; setTimeout(resolve, 50));
+</span></span><span class="line"><span class="cl">    console.log(&#34;Prueba 2 completada&#34;);
+</span></span><span class="line"><span class="cl">});
+</span></span></code></pre></div><h2 id="conclusión">
+  Conclusión
+  <a class="heading-link" href="#conclusi%c3%b3n">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>El <strong>testing en Deno</strong> es una parte esencial del desarrollo de aplicaciones grandes. Implementar <strong>pruebas unitarias, de integración y E2E</strong> permite mejorar la calidad y fiabilidad del código.</p>
+<p>Siguiendo estas estrategias y buenas prácticas, podemos asegurar que nuestras aplicaciones en Deno sean <strong>más estables, escalables y fáciles de mantener</strong>.</p>
+      </div>
+
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script>
+  window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "cmasblog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    
+    document.addEventListener('themeChanged', function (e) { 
+        if (document.readyState == 'complete') {
+          DISQUS.reset({ reload: true, config: disqus_config });
+        }
+    });
+</script>
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2018 -
+    
+    2025
+     Christian Amado 
+    ·
+    
+    Desarrollado por <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+      <script async src="https://www.googletagmanager.com/gtag/js?id=356375808"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '356375808');
+        }
+      </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=013131931956450466198%3ablhmkdpweyq"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '013131931956450466198:blhmkdpweyq');
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

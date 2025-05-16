@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Windows App SDK on Christian Amado</title>
+    <link>http://localhost:1313/tags/windows-app-sdk/</link>
+    <description>Recent content in Windows App SDK on Christian Amado</description>
+    <generator>Hugo</generator>
+    <language>es</language>
+    <lastBuildDate>Fri, 28 Mar 2025 00:00:00 -0300</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/windows-app-sdk/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Construcción de un asistente contextual para escritorio usando IA local con acceso al sistema</title>
+      <link>http://localhost:1313/posts/2025-03-28-local-ai/</link>
+      <pubDate>Fri, 28 Mar 2025 00:00:00 -0300</pubDate>
+      <guid>http://localhost:1313/posts/2025-03-28-local-ai/</guid>
+      <description>&lt;p&gt;La combinación de capacidades de &lt;strong&gt;IA local&lt;/strong&gt; (como modelos &lt;strong&gt;ONNX&lt;/strong&gt;) con APIs del sistema de &lt;strong&gt;Windows&lt;/strong&gt; abre la puerta al desarrollo de asistentes inteligentes capaces de entender el contexto del usuario y reaccionar en consecuencia. En este artículo se describe cómo crear un asistente de escritorio moderno con &lt;strong&gt;WinUI 3&lt;/strong&gt; que escuche el contenido del portapapeles, analice el texto localmente mediante inferencia con IA, y sugiera acciones o realice comandos con base en el resultado.&lt;/p&gt;&#xA;&lt;p&gt;Este enfoque funciona completamente offline, preservando privacidad y respondiendo en tiempo real.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Integración de inferencia local ONNX con Windows ML en apps modernas</title>
+      <link>http://localhost:1313/posts/2025-03-21-onnx-windows-ml/</link>
+      <pubDate>Fri, 21 Mar 2025 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2025-03-21-onnx-windows-ml/</guid>
+      <description>&lt;p&gt;La inteligencia artificial en el entorno de escritorio ya no está limitada a la nube. &lt;strong&gt;Windows&lt;/strong&gt; proporciona soporte nativo para la ejecución de modelos &lt;strong&gt;ONNX&lt;/strong&gt; directamente desde una app &lt;strong&gt;WinUI 3&lt;/strong&gt; utilizando &lt;strong&gt;Windows ML&lt;/strong&gt;. Esto permite realizar inferencia local con alto rendimiento y sin necesidad de conexión a internet, ideal para escenarios de privacidad, baja latencia o ejecución offline.&lt;/p&gt;&#xA;&lt;p&gt;En este artículo se describe cómo integrar un modelo &lt;strong&gt;ONNX&lt;/strong&gt; a una app moderna, cómo usar la &lt;strong&gt;API&lt;/strong&gt; de &lt;strong&gt;Windows ML&lt;/strong&gt; y cómo estructurar un flujo de inferencia optimizado con soporte para entrada y salida de datos reales.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Integración con servicios locales vía App Services y extensión de funcionalidades entre apps</title>
+      <link>http://localhost:1313/posts/2025-03-14-winui-apps-services/</link>
+      <pubDate>Fri, 14 Mar 2025 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2025-03-14-winui-apps-services/</guid>
+      <description>&lt;p&gt;En &lt;strong&gt;Windows&lt;/strong&gt;, las aplicaciones modernas pueden compartir capacidades y comunicarse entre sí a través de &lt;strong&gt;App Services&lt;/strong&gt;. Esta tecnología permite que una app ofrezca un servicio que puede ser invocado por otra app —incluso si están empaquetadas por separado— de forma segura y asincrónica.&lt;/p&gt;&#xA;&lt;p&gt;Este enfoque es ideal para dividir funcionalidades entre componentes, implementar microservicios locales o permitir extensibilidad entre apps del mismo desarrollador. &lt;strong&gt;Windows App SDK&lt;/strong&gt; conserva la compatibilidad con App Services, permitiendo a las apps modernas establecer esta comunicación sin usar sockets ni canalizaciones personalizadas.&lt;/p&gt;&#xA;&lt;p&gt;Este artículo explora cómo implementar un servicio local entre dos apps modernas, incluyendo su declaración, registro, activación y comunicación estructurada con respuestas.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Implementación de Background Tasks persistentes en apps modernas</title>
+      <link>http://localhost:1313/posts/2025-03-07-winui-background-tasks/</link>
+      <pubDate>Fri, 07 Mar 2025 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2025-03-07-winui-background-tasks/</guid>
+      <description>&lt;p&gt;Las apps modernas no siempre necesitan estar en primer plano para ofrecer valor. Muchas tareas pueden ejecutarse en segundo plano: desde sincronizar datos, recibir notificaciones push, recolectar telemetría o mantener información actualizada. &lt;strong&gt;Windows App SDK&lt;/strong&gt;, junto con el modelo de &lt;strong&gt;Background Tasks&lt;/strong&gt;, permite que las aplicaciones &lt;strong&gt;WinUI 3&lt;/strong&gt; implementen lógica persistente y autónoma en segundo plano, sin requerir una ventana activa.&lt;/p&gt;&#xA;&lt;p&gt;Este artículo explica cómo crear y registrar tareas en segundo plano usando temporizadores, eventos del sistema o push notifications (RAW), y cómo integrarlas en una aplicación moderna empaquetada.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Empaquetado de apps modernas con MSIX y configuración avanzada del manifiesto</title>
+      <link>http://localhost:1313/posts/2025-02-28-winui-packaging-msix/</link>
+      <pubDate>Fri, 28 Feb 2025 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2025-02-28-winui-packaging-msix/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;MSIX&lt;/strong&gt; es el formato de empaquetado moderno para aplicaciones &lt;strong&gt;Windows&lt;/strong&gt;. Ofrece instalación limpia, actualización controlada, aislamiento seguro, y registro transparente de recursos y capacidades. Para aplicaciones desarrolladas con &lt;strong&gt;Windows App SDK&lt;/strong&gt; y &lt;strong&gt;WinUI 3&lt;/strong&gt;, el uso de &lt;strong&gt;MSIX&lt;/strong&gt; no es opcional, es el estándar recomendado para integrarse completamente al ecosistema del sistema operativo moderno.&lt;/p&gt;&#xA;&lt;p&gt;Este artículo aborda cómo empaquetar una app moderna con &lt;strong&gt;MSIX&lt;/strong&gt; desde &lt;strong&gt;Visual Studio&lt;/strong&gt;, y cómo configurar el manifiesto del paquete (&lt;code&gt;Package.appxmanifest&lt;/code&gt;) para habilitar capacidades avanzadas como protocolos personalizados, extensiones del sistema, iconografía personalizada y más.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Creación de ventanas flotantes estilo Widget con posicionamiento persistente en pantalla</title>
+      <link>http://localhost:1313/posts/2025-02-21-winui-floating-windows/</link>
+      <pubDate>Fri, 21 Feb 2025 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2025-02-21-winui-floating-windows/</guid>
+      <description>&lt;p&gt;Las ventanas flotantes (overlay) son una técnica poderosa para presentar información contextual o utilitaria en una aplicación de escritorio. En el ecosistema moderno de &lt;strong&gt;Windows&lt;/strong&gt;, se pueden implementar como “ventanas tipo Widget” que permanecen siempre visibles, no aparecen en la barra de tareas y mantienen su posición de forma persistente. Este tipo de UI es ideal para herramientas de monitoreo, asistentes, controles rápidos o paneles interactivos.&lt;/p&gt;&#xA;&lt;p&gt;Este artículo explica cómo crear este tipo de ventana en una app moderna usando &lt;strong&gt;WinUI 3&lt;/strong&gt; y &lt;strong&gt;Windows App SDK&lt;/strong&gt;, controlando su estilo, posición y comportamiento sin interferir con el foco de otras ventanas del sistema.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Uso de la nueva API de Shared Window Mode para apps multi-ventana en Windows 11</title>
+      <link>http://localhost:1313/posts/2025-02-14-winui-shared-window-multi-windows/</link>
+      <pubDate>Fri, 14 Feb 2025 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2025-02-14-winui-shared-window-multi-windows/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;Windows 11&lt;/strong&gt; introduce nuevas capacidades para la gestión de ventanas, entre ellas el &lt;strong&gt;Shared Window Mode&lt;/strong&gt;, que permite que las aplicaciones modernas compartan múltiples ventanas como parte de una misma experiencia multitarea. Esta característica mejora el soporte nativo para escenarios como edición paralela, múltiples vistas, comparaciones en paralelo y workflows de aplicaciones productivas.&lt;/p&gt;&#xA;&lt;p&gt;En este artículo se explora cómo utilizar esta API desde una aplicación moderna WinUI 3 utilizando &lt;strong&gt;Windows App SDK&lt;/strong&gt;, gestionando múltiples ventanas, compartiéndolas dentro de un contexto común y habilitando integración visual con Snap Layouts y Alt+Tab de forma coherente.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Deep linking entre apps modernas y el sistema</title>
+      <link>http://localhost:1313/posts/2025-02-07-winui-deep-linking/</link>
+      <pubDate>Fri, 07 Feb 2025 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2025-02-07-winui-deep-linking/</guid>
+      <description>&lt;p&gt;Una de las características más poderosas de &lt;strong&gt;Windows App SDK&lt;/strong&gt; es su capacidad para integrar aplicaciones modernas con el sistema operativo a través de mecanismos como &lt;strong&gt;URI scheme handlers&lt;/strong&gt; y &lt;strong&gt;asociaciones de tipos de archivo&lt;/strong&gt;. Esta integración permite a las apps &lt;strong&gt;WinUI 3&lt;/strong&gt; ser invocadas desde otras apps, scripts, accesos directos o enlaces web, facilitando flujos interconectados, automatización y mejores experiencias de usuario.&lt;/p&gt;&#xA;&lt;p&gt;En este artículo se aborda cómo habilitar el deep linking en aplicaciones modernas, tanto desde URI personalizados como desde archivos con extensiones registradas. Se incluyen ejemplos prácticos, manejo de activación, y recomendaciones de seguridad y diseño.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Implementación de Widgets personalizados para Windows 11 desde una app moderna</title>
+      <link>http://localhost:1313/posts/2025-01-31-winui-widget-windows11/</link>
+      <pubDate>Fri, 31 Jan 2025 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2025-01-31-winui-widget-windows11/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;Windows 11&lt;/strong&gt; ha reintroducido el concepto de widgets como parte central de su experiencia de usuario, permitiendo a las aplicaciones modernas integrar contenido interactivo directamente en el panel de Widgets. Con la reciente apertura del canal de desarrollo de widgets para terceros, los desarrolladores pueden crear experiencias ligeras, contextuales y persistentes ancladas al sistema operativo, todo desde una aplicación moderna basada en Windows App SDK.&lt;/p&gt;&#xA;&lt;p&gt;Este artículo detalla paso a paso cómo estructurar, registrar y mostrar un widget personalizado en Windows 11, partiendo de una aplicación moderna &lt;strong&gt;WinUI 3&lt;/strong&gt; empaquetada. Se incluye la configuración del manifiesto, diseño visual y manejo de datos dinámicos.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Interacción con el portapapeles del sistema usando Windows.ApplicationModel.DataTransfer</title>
+      <link>http://localhost:1313/posts/2025-01-24-winui-clipboard-interaction/</link>
+      <pubDate>Fri, 24 Jan 2025 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2025-01-24-winui-clipboard-interaction/</guid>
+      <description>&lt;p&gt;El portapapeles es una funcionalidad crítica para la experiencia del usuario en &lt;strong&gt;Windows&lt;/strong&gt;. Permite copiar y pegar texto, imágenes, URIs y otros datos entre aplicaciones. En las apps modernas desarrolladas con &lt;strong&gt;WinUI 3&lt;/strong&gt; y &lt;strong&gt;Windows App SDK&lt;/strong&gt;, se puede interactuar programáticamente con el portapapeles del sistema para mejorar la productividad, ofrecer funcionalidades avanzadas y controlar la experiencia de transferencia de contenido.&lt;/p&gt;&#xA;&lt;p&gt;Este artículo explica paso a paso cómo acceder, escribir y leer del portapapeles en aplicaciones modernas, así como técnicas para escuchar cambios en su contenido, realizar transformaciones y trabajar con múltiples formatos.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Consumo de información del sistema desde WinUI 3</title>
+      <link>http://localhost:1313/posts/2025-01-17-winui-system-information/</link>
+      <pubDate>Fri, 17 Jan 2025 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2025-01-17-winui-system-information/</guid>
+      <description>&lt;p&gt;Una aplicación moderna que corre sobre Windows no tiene por qué operar de manera aislada. Gracias a las APIs del sistema operativo disponibles en &lt;strong&gt;Windows App SDK&lt;/strong&gt;, es posible acceder a múltiples fuentes de información contextual del sistema como el estado de la batería, conectividad de red, nivel de volumen y hasta el estado de energía. Esto permite que una app se adapte dinámicamente al entorno del usuario, optimizando la experiencia, reduciendo consumo o informando condiciones especiales.&lt;/p&gt;&#xA;&lt;p&gt;En este artículo se muestra cómo consumir información clave del sistema desde una app &lt;strong&gt;WinUI 3&lt;/strong&gt; usando C#, incluyendo suscriptores a eventos para obtener actualizaciones en tiempo real.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Uso avanzado de la Jump List API para apps modernas</title>
+      <link>http://localhost:1313/posts/2024-12-27-win-jump-list/</link>
+      <pubDate>Fri, 27 Dec 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2024-12-27-win-jump-list/</guid>
+      <description>&lt;p&gt;Las &lt;em&gt;Jump Lists&lt;/em&gt; en &lt;strong&gt;Windows&lt;/strong&gt; son menús contextuales que aparecen cuando el usuario hace clic derecho sobre el icono de una aplicación anclada a la barra de tareas o en el menú de inicio. Estas listas permiten exponer accesos directos a tareas frecuentes o específicas dentro de la aplicación, mejorando la accesibilidad, productividad y personalización de la experiencia de usuario.&lt;/p&gt;&#xA;&lt;p&gt;Con &lt;strong&gt;Windows App SDK&lt;/strong&gt; y &lt;strong&gt;WinUI 3&lt;/strong&gt;, las apps modernas pueden crear y actualizar Jump Lists de forma dinámica, segmentarlas por grupos, incluir acciones personalizadas y manejar parámetros que activen flujos específicos al iniciarse la app.&lt;/p&gt;&#xA;&lt;p&gt;Este artículo describe paso a paso cómo implementar Jump Lists avanzadas con categorías, argumentos, iconos y comportamiento personalizado en apps &lt;strong&gt;WinUI 3&lt;/strong&gt; empaquetadas.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Integración con la API de notificaciones nativas</title>
+      <link>http://localhost:1313/posts/2024-12-20-notification-api-integration/</link>
+      <pubDate>Fri, 20 Dec 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2024-12-20-notification-api-integration/</guid>
+      <description>&lt;p&gt;Las notificaciones del sistema son uno de los mecanismos más eficaces para comunicar información al usuario sin interrumpir su flujo de trabajo. En &lt;strong&gt;Windows&lt;/strong&gt;, estas notificaciones pueden ser enriquecidas mediante el sistema de notificaciones nativas, que incluye soporte para contenido visual dinámico con Adaptive Cards y la posibilidad de recibir notificaciones push incluso cuando la aplicación no está en ejecución.&lt;/p&gt;&#xA;&lt;p&gt;Con &lt;strong&gt;WinUI 3&lt;/strong&gt; y &lt;strong&gt;Windows App SDK&lt;/strong&gt;, es posible crear y gestionar notificaciones enriquecidas, personalizadas y reactivas. Este artículo muestra cómo implementar notificaciones toast locales, cómo personalizarlas con Adaptive Cards, y cómo configurar notificaciones push para mantener al usuario informado en tiempo real.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Creación y gestión de accesos directos dinámicos en Start Menu y Taskbar</title>
+      <link>http://localhost:1313/posts/2024-12-13-winapp-dynamic-direct-access/</link>
+      <pubDate>Fri, 13 Dec 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2024-12-13-winapp-dynamic-direct-access/</guid>
+      <description>&lt;p&gt;Una de las capacidades distintivas de las apps modernas en &lt;strong&gt;Windows&lt;/strong&gt; es la posibilidad de integrarse dinámicamente con la experiencia del sistema operativo. Esto incluye la creación de accesos directos personalizados en el menú de inicio (Start Menu), así como la integración con la barra de tareas (Taskbar), ofreciendo accesos rápidos a funciones internas de la aplicación.&lt;/p&gt;&#xA;&lt;p&gt;Gracias a &lt;strong&gt;Windows App SDK&lt;/strong&gt;, las apps desarrolladas con &lt;strong&gt;WinUI 3&lt;/strong&gt; pueden programáticamente crear y administrar accesos directos sin depender de métodos antiguos como acceso directo manual o scripts externos. Este artículo explora cómo crear accesos dinámicos con metadatos enriquecidos y cómo extender su funcionalidad mediante Jump Lists y pinning automático.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Usando MAUI con Windows App SDK</title>
+      <link>http://localhost:1313/posts/2022-11-02-windows-app-using-maui/</link>
+      <pubDate>Wed, 02 Nov 2022 23:42:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2022-11-02-windows-app-using-maui/</guid>
+      <description>&lt;p&gt;En este artículo veremos cómo &lt;strong&gt;.NET MAUI&lt;/strong&gt; interactúa con &lt;strong&gt;Windows 11&lt;/strong&gt; sin necesidad de funciones extras ni código para llegar a ese resultado.&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Windows 11 Insider Preview Build 25236&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Estructura básica de un proyecto con Windows App SDK</title>
+      <link>http://localhost:1313/posts/2022-05-25-basic-struct-of-windows-app-sdk-project/</link>
+      <pubDate>Wed, 25 May 2022 18:45:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2022-05-25-basic-struct-of-windows-app-sdk-project/</guid>
+      <description>&lt;p&gt;En este artículo intentaré explicar lo que entiendo es la estructura básica de &lt;strong&gt;Windows App SDK&lt;/strong&gt;, pues resulta algo nuevo para mí (en el pasado desarrollaba con WPF y después con UWP en sus inicios). En un &lt;a href=&#34;http://localhost:1313/posts/2022-05-18-windows-app-sdk-development/&#34; &gt;artículo anterior&lt;/a&gt; hemos visto los primeros pasos en esta plataforma.&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Windows 11 Insider Preview Build 25126&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

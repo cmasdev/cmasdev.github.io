@@ -1,0 +1,677 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>WinDev on Christian Amado</title>
+    <link>http://localhost:1313/tags/windev/</link>
+    <description>Recent content in WinDev on Christian Amado</description>
+    <generator>Hugo</generator>
+    <language>es</language>
+    <lastBuildDate>Tue, 29 Apr 2025 00:00:00 -0300</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/windev/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Desarrollo de aplicaciones WinUI 3 sin empaquetado MSIX: Uso del bootstrapper API</title>
+      <link>http://localhost:1313/posts/2025-04-29-winui3-apps-no-msix/</link>
+      <pubDate>Tue, 29 Apr 2025 00:00:00 -0300</pubDate>
+      <guid>http://localhost:1313/posts/2025-04-29-winui3-apps-no-msix/</guid>
+      <description>&lt;p&gt;Uno de los retos más comunes al desarrollar aplicaciones modernas con &lt;strong&gt;WinUI 3&lt;/strong&gt; (&lt;strong&gt;Windows App SDK&lt;/strong&gt;) es la necesidad de empaquetarlas como &lt;strong&gt;MSIX&lt;/strong&gt; para poder ejecutarlas. Si bien &lt;strong&gt;MSIX&lt;/strong&gt; ofrece ventajas como actualización automática y mayor seguridad, no siempre es la opción ideal —especialmente para herramientas internas, entornos empresariales controlados o aplicaciones distribuidas manualmente.&lt;/p&gt;&#xA;&lt;p&gt;Con la evolución del &lt;strong&gt;Windows App SDK&lt;/strong&gt;, &lt;strong&gt;Microsoft&lt;/strong&gt; introdujo la posibilidad de ejecutar aplicaciones *&lt;em&gt;WinUI 3&lt;/em&gt; &lt;code&gt;unpackaged&lt;/code&gt; (sin MSIX), utilizando un enfoque conocido como bootstrapper API. Este artículo explora cómo implementar este enfoque, cuáles son sus ventajas y limitaciones, y cómo configurarlo correctamente.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Integración de WebView2 en aplicaciones WinUI 3</title>
+      <link>http://localhost:1313/posts/2025-04-22-webview2-integration-winui3/</link>
+      <pubDate>Tue, 22 Apr 2025 11:00:00 -0300</pubDate>
+      <guid>http://localhost:1313/posts/2025-04-22-webview2-integration-winui3/</guid>
+      <description>&lt;p&gt;La necesidad de mostrar contenido web dentro de una aplicación de escritorio ha existido por décadas. Con la evolución de los navegadores modernos y la demanda de experiencias híbridas, el control &lt;strong&gt;WebView2&lt;/strong&gt; se ha posicionado como una solución poderosa y moderna para las aplicaciones &lt;strong&gt;Windows&lt;/strong&gt; desarrolladas con &lt;strong&gt;WinUI 3&lt;/strong&gt;. Este artículo explora en detalle cómo integrar &lt;strong&gt;WebView2&lt;/strong&gt; en una app de escritorio &lt;strong&gt;WinUI 3&lt;/strong&gt; y cómo optimizar la carga de contenido web de manera eficiente.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Construcción de un asistente contextual para escritorio usando IA local con acceso al sistema</title>
+      <link>http://localhost:1313/posts/2025-03-28-local-ai/</link>
+      <pubDate>Fri, 28 Mar 2025 00:00:00 -0300</pubDate>
+      <guid>http://localhost:1313/posts/2025-03-28-local-ai/</guid>
+      <description>&lt;p&gt;La combinación de capacidades de &lt;strong&gt;IA local&lt;/strong&gt; (como modelos &lt;strong&gt;ONNX&lt;/strong&gt;) con APIs del sistema de &lt;strong&gt;Windows&lt;/strong&gt; abre la puerta al desarrollo de asistentes inteligentes capaces de entender el contexto del usuario y reaccionar en consecuencia. En este artículo se describe cómo crear un asistente de escritorio moderno con &lt;strong&gt;WinUI 3&lt;/strong&gt; que escuche el contenido del portapapeles, analice el texto localmente mediante inferencia con IA, y sugiera acciones o realice comandos con base en el resultado.&lt;/p&gt;&#xA;&lt;p&gt;Este enfoque funciona completamente offline, preservando privacidad y respondiendo en tiempo real.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Integración de inferencia local ONNX con Windows ML en apps modernas</title>
+      <link>http://localhost:1313/posts/2025-03-21-onnx-windows-ml/</link>
+      <pubDate>Fri, 21 Mar 2025 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2025-03-21-onnx-windows-ml/</guid>
+      <description>&lt;p&gt;La inteligencia artificial en el entorno de escritorio ya no está limitada a la nube. &lt;strong&gt;Windows&lt;/strong&gt; proporciona soporte nativo para la ejecución de modelos &lt;strong&gt;ONNX&lt;/strong&gt; directamente desde una app &lt;strong&gt;WinUI 3&lt;/strong&gt; utilizando &lt;strong&gt;Windows ML&lt;/strong&gt;. Esto permite realizar inferencia local con alto rendimiento y sin necesidad de conexión a internet, ideal para escenarios de privacidad, baja latencia o ejecución offline.&lt;/p&gt;&#xA;&lt;p&gt;En este artículo se describe cómo integrar un modelo &lt;strong&gt;ONNX&lt;/strong&gt; a una app moderna, cómo usar la &lt;strong&gt;API&lt;/strong&gt; de &lt;strong&gt;Windows ML&lt;/strong&gt; y cómo estructurar un flujo de inferencia optimizado con soporte para entrada y salida de datos reales.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Integración con servicios locales vía App Services y extensión de funcionalidades entre apps</title>
+      <link>http://localhost:1313/posts/2025-03-14-winui-apps-services/</link>
+      <pubDate>Fri, 14 Mar 2025 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2025-03-14-winui-apps-services/</guid>
+      <description>&lt;p&gt;En &lt;strong&gt;Windows&lt;/strong&gt;, las aplicaciones modernas pueden compartir capacidades y comunicarse entre sí a través de &lt;strong&gt;App Services&lt;/strong&gt;. Esta tecnología permite que una app ofrezca un servicio que puede ser invocado por otra app —incluso si están empaquetadas por separado— de forma segura y asincrónica.&lt;/p&gt;&#xA;&lt;p&gt;Este enfoque es ideal para dividir funcionalidades entre componentes, implementar microservicios locales o permitir extensibilidad entre apps del mismo desarrollador. &lt;strong&gt;Windows App SDK&lt;/strong&gt; conserva la compatibilidad con App Services, permitiendo a las apps modernas establecer esta comunicación sin usar sockets ni canalizaciones personalizadas.&lt;/p&gt;&#xA;&lt;p&gt;Este artículo explora cómo implementar un servicio local entre dos apps modernas, incluyendo su declaración, registro, activación y comunicación estructurada con respuestas.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Implementación de Background Tasks persistentes en apps modernas</title>
+      <link>http://localhost:1313/posts/2025-03-07-winui-background-tasks/</link>
+      <pubDate>Fri, 07 Mar 2025 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2025-03-07-winui-background-tasks/</guid>
+      <description>&lt;p&gt;Las apps modernas no siempre necesitan estar en primer plano para ofrecer valor. Muchas tareas pueden ejecutarse en segundo plano: desde sincronizar datos, recibir notificaciones push, recolectar telemetría o mantener información actualizada. &lt;strong&gt;Windows App SDK&lt;/strong&gt;, junto con el modelo de &lt;strong&gt;Background Tasks&lt;/strong&gt;, permite que las aplicaciones &lt;strong&gt;WinUI 3&lt;/strong&gt; implementen lógica persistente y autónoma en segundo plano, sin requerir una ventana activa.&lt;/p&gt;&#xA;&lt;p&gt;Este artículo explica cómo crear y registrar tareas en segundo plano usando temporizadores, eventos del sistema o push notifications (RAW), y cómo integrarlas en una aplicación moderna empaquetada.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Empaquetado de apps modernas con MSIX y configuración avanzada del manifiesto</title>
+      <link>http://localhost:1313/posts/2025-02-28-winui-packaging-msix/</link>
+      <pubDate>Fri, 28 Feb 2025 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2025-02-28-winui-packaging-msix/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;MSIX&lt;/strong&gt; es el formato de empaquetado moderno para aplicaciones &lt;strong&gt;Windows&lt;/strong&gt;. Ofrece instalación limpia, actualización controlada, aislamiento seguro, y registro transparente de recursos y capacidades. Para aplicaciones desarrolladas con &lt;strong&gt;Windows App SDK&lt;/strong&gt; y &lt;strong&gt;WinUI 3&lt;/strong&gt;, el uso de &lt;strong&gt;MSIX&lt;/strong&gt; no es opcional, es el estándar recomendado para integrarse completamente al ecosistema del sistema operativo moderno.&lt;/p&gt;&#xA;&lt;p&gt;Este artículo aborda cómo empaquetar una app moderna con &lt;strong&gt;MSIX&lt;/strong&gt; desde &lt;strong&gt;Visual Studio&lt;/strong&gt;, y cómo configurar el manifiesto del paquete (&lt;code&gt;Package.appxmanifest&lt;/code&gt;) para habilitar capacidades avanzadas como protocolos personalizados, extensiones del sistema, iconografía personalizada y más.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Creación de ventanas flotantes estilo Widget con posicionamiento persistente en pantalla</title>
+      <link>http://localhost:1313/posts/2025-02-21-winui-floating-windows/</link>
+      <pubDate>Fri, 21 Feb 2025 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2025-02-21-winui-floating-windows/</guid>
+      <description>&lt;p&gt;Las ventanas flotantes (overlay) son una técnica poderosa para presentar información contextual o utilitaria en una aplicación de escritorio. En el ecosistema moderno de &lt;strong&gt;Windows&lt;/strong&gt;, se pueden implementar como “ventanas tipo Widget” que permanecen siempre visibles, no aparecen en la barra de tareas y mantienen su posición de forma persistente. Este tipo de UI es ideal para herramientas de monitoreo, asistentes, controles rápidos o paneles interactivos.&lt;/p&gt;&#xA;&lt;p&gt;Este artículo explica cómo crear este tipo de ventana en una app moderna usando &lt;strong&gt;WinUI 3&lt;/strong&gt; y &lt;strong&gt;Windows App SDK&lt;/strong&gt;, controlando su estilo, posición y comportamiento sin interferir con el foco de otras ventanas del sistema.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Uso de la nueva API de Shared Window Mode para apps multi-ventana en Windows 11</title>
+      <link>http://localhost:1313/posts/2025-02-14-winui-shared-window-multi-windows/</link>
+      <pubDate>Fri, 14 Feb 2025 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2025-02-14-winui-shared-window-multi-windows/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;Windows 11&lt;/strong&gt; introduce nuevas capacidades para la gestión de ventanas, entre ellas el &lt;strong&gt;Shared Window Mode&lt;/strong&gt;, que permite que las aplicaciones modernas compartan múltiples ventanas como parte de una misma experiencia multitarea. Esta característica mejora el soporte nativo para escenarios como edición paralela, múltiples vistas, comparaciones en paralelo y workflows de aplicaciones productivas.&lt;/p&gt;&#xA;&lt;p&gt;En este artículo se explora cómo utilizar esta API desde una aplicación moderna WinUI 3 utilizando &lt;strong&gt;Windows App SDK&lt;/strong&gt;, gestionando múltiples ventanas, compartiéndolas dentro de un contexto común y habilitando integración visual con Snap Layouts y Alt+Tab de forma coherente.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Deep linking entre apps modernas y el sistema</title>
+      <link>http://localhost:1313/posts/2025-02-07-winui-deep-linking/</link>
+      <pubDate>Fri, 07 Feb 2025 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2025-02-07-winui-deep-linking/</guid>
+      <description>&lt;p&gt;Una de las características más poderosas de &lt;strong&gt;Windows App SDK&lt;/strong&gt; es su capacidad para integrar aplicaciones modernas con el sistema operativo a través de mecanismos como &lt;strong&gt;URI scheme handlers&lt;/strong&gt; y &lt;strong&gt;asociaciones de tipos de archivo&lt;/strong&gt;. Esta integración permite a las apps &lt;strong&gt;WinUI 3&lt;/strong&gt; ser invocadas desde otras apps, scripts, accesos directos o enlaces web, facilitando flujos interconectados, automatización y mejores experiencias de usuario.&lt;/p&gt;&#xA;&lt;p&gt;En este artículo se aborda cómo habilitar el deep linking en aplicaciones modernas, tanto desde URI personalizados como desde archivos con extensiones registradas. Se incluyen ejemplos prácticos, manejo de activación, y recomendaciones de seguridad y diseño.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Implementación de Widgets personalizados para Windows 11 desde una app moderna</title>
+      <link>http://localhost:1313/posts/2025-01-31-winui-widget-windows11/</link>
+      <pubDate>Fri, 31 Jan 2025 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2025-01-31-winui-widget-windows11/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;Windows 11&lt;/strong&gt; ha reintroducido el concepto de widgets como parte central de su experiencia de usuario, permitiendo a las aplicaciones modernas integrar contenido interactivo directamente en el panel de Widgets. Con la reciente apertura del canal de desarrollo de widgets para terceros, los desarrolladores pueden crear experiencias ligeras, contextuales y persistentes ancladas al sistema operativo, todo desde una aplicación moderna basada en Windows App SDK.&lt;/p&gt;&#xA;&lt;p&gt;Este artículo detalla paso a paso cómo estructurar, registrar y mostrar un widget personalizado en Windows 11, partiendo de una aplicación moderna &lt;strong&gt;WinUI 3&lt;/strong&gt; empaquetada. Se incluye la configuración del manifiesto, diseño visual y manejo de datos dinámicos.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Interacción con el portapapeles del sistema usando Windows.ApplicationModel.DataTransfer</title>
+      <link>http://localhost:1313/posts/2025-01-24-winui-clipboard-interaction/</link>
+      <pubDate>Fri, 24 Jan 2025 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2025-01-24-winui-clipboard-interaction/</guid>
+      <description>&lt;p&gt;El portapapeles es una funcionalidad crítica para la experiencia del usuario en &lt;strong&gt;Windows&lt;/strong&gt;. Permite copiar y pegar texto, imágenes, URIs y otros datos entre aplicaciones. En las apps modernas desarrolladas con &lt;strong&gt;WinUI 3&lt;/strong&gt; y &lt;strong&gt;Windows App SDK&lt;/strong&gt;, se puede interactuar programáticamente con el portapapeles del sistema para mejorar la productividad, ofrecer funcionalidades avanzadas y controlar la experiencia de transferencia de contenido.&lt;/p&gt;&#xA;&lt;p&gt;Este artículo explica paso a paso cómo acceder, escribir y leer del portapapeles en aplicaciones modernas, así como técnicas para escuchar cambios en su contenido, realizar transformaciones y trabajar con múltiples formatos.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Consumo de información del sistema desde WinUI 3</title>
+      <link>http://localhost:1313/posts/2025-01-17-winui-system-information/</link>
+      <pubDate>Fri, 17 Jan 2025 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2025-01-17-winui-system-information/</guid>
+      <description>&lt;p&gt;Una aplicación moderna que corre sobre Windows no tiene por qué operar de manera aislada. Gracias a las APIs del sistema operativo disponibles en &lt;strong&gt;Windows App SDK&lt;/strong&gt;, es posible acceder a múltiples fuentes de información contextual del sistema como el estado de la batería, conectividad de red, nivel de volumen y hasta el estado de energía. Esto permite que una app se adapte dinámicamente al entorno del usuario, optimizando la experiencia, reduciendo consumo o informando condiciones especiales.&lt;/p&gt;&#xA;&lt;p&gt;En este artículo se muestra cómo consumir información clave del sistema desde una app &lt;strong&gt;WinUI 3&lt;/strong&gt; usando C#, incluyendo suscriptores a eventos para obtener actualizaciones en tiempo real.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Optimización avanzada de rendimiento en WSL para desarrollo intensivo</title>
+      <link>http://localhost:1313/posts/2025-01-09-optimization-wsl-2/</link>
+      <pubDate>Thu, 09 Jan 2025 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2025-01-09-optimization-wsl-2/</guid>
+      <description>&lt;p&gt;El Subsistema de Windows para Linux (WSL) ha demostrado ser una herramienta esencial para desarrolladores que buscan integrar Linux en su flujo de trabajo en Windows. Sin embargo, para obtener el mejor rendimiento en escenarios de desarrollo intensivo, es importante realizar ajustes y configuraciones avanzadas. En este artículo, aprenderás cómo optimizar &lt;strong&gt;WSL&lt;/strong&gt; con ejemplos prácticos y código, además de visualizar los resultados con capturas de pantalla y diagramas.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Internals de WSL 2: Cómo funciona el kernel Linux integrado en Windows</title>
+      <link>http://localhost:1313/posts/2025-01-07-internals-wsl-2/</link>
+      <pubDate>Tue, 07 Jan 2025 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2025-01-07-internals-wsl-2/</guid>
+      <description>&lt;p&gt;El Subsistema de Windows para Linux (WSL) ha transformado significativamente el desarrollo en entornos &lt;strong&gt;Windows&lt;/strong&gt;, permitiendo ejecutar distribuciones de Linux directamente en Windows sin necesidad de virtualización completa. Con &lt;strong&gt;WSL 2&lt;/strong&gt;, Microsoft introdujo un cambio radical: un kernel de Linux real corriendo sobre un sistema basado en hipervisor. En este artículo, exploraremos en detalle cómo funciona este kernel integrado y qué lo hace tan eficiente.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Uso avanzado de la Jump List API para apps modernas</title>
+      <link>http://localhost:1313/posts/2024-12-27-win-jump-list/</link>
+      <pubDate>Fri, 27 Dec 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2024-12-27-win-jump-list/</guid>
+      <description>&lt;p&gt;Las &lt;em&gt;Jump Lists&lt;/em&gt; en &lt;strong&gt;Windows&lt;/strong&gt; son menús contextuales que aparecen cuando el usuario hace clic derecho sobre el icono de una aplicación anclada a la barra de tareas o en el menú de inicio. Estas listas permiten exponer accesos directos a tareas frecuentes o específicas dentro de la aplicación, mejorando la accesibilidad, productividad y personalización de la experiencia de usuario.&lt;/p&gt;&#xA;&lt;p&gt;Con &lt;strong&gt;Windows App SDK&lt;/strong&gt; y &lt;strong&gt;WinUI 3&lt;/strong&gt;, las apps modernas pueden crear y actualizar Jump Lists de forma dinámica, segmentarlas por grupos, incluir acciones personalizadas y manejar parámetros que activen flujos específicos al iniciarse la app.&lt;/p&gt;&#xA;&lt;p&gt;Este artículo describe paso a paso cómo implementar Jump Lists avanzadas con categorías, argumentos, iconos y comportamiento personalizado en apps &lt;strong&gt;WinUI 3&lt;/strong&gt; empaquetadas.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Integración con la API de notificaciones nativas</title>
+      <link>http://localhost:1313/posts/2024-12-20-notification-api-integration/</link>
+      <pubDate>Fri, 20 Dec 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2024-12-20-notification-api-integration/</guid>
+      <description>&lt;p&gt;Las notificaciones del sistema son uno de los mecanismos más eficaces para comunicar información al usuario sin interrumpir su flujo de trabajo. En &lt;strong&gt;Windows&lt;/strong&gt;, estas notificaciones pueden ser enriquecidas mediante el sistema de notificaciones nativas, que incluye soporte para contenido visual dinámico con Adaptive Cards y la posibilidad de recibir notificaciones push incluso cuando la aplicación no está en ejecución.&lt;/p&gt;&#xA;&lt;p&gt;Con &lt;strong&gt;WinUI 3&lt;/strong&gt; y &lt;strong&gt;Windows App SDK&lt;/strong&gt;, es posible crear y gestionar notificaciones enriquecidas, personalizadas y reactivas. Este artículo muestra cómo implementar notificaciones toast locales, cómo personalizarlas con Adaptive Cards, y cómo configurar notificaciones push para mantener al usuario informado en tiempo real.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Creación y gestión de accesos directos dinámicos en Start Menu y Taskbar</title>
+      <link>http://localhost:1313/posts/2024-12-13-winapp-dynamic-direct-access/</link>
+      <pubDate>Fri, 13 Dec 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2024-12-13-winapp-dynamic-direct-access/</guid>
+      <description>&lt;p&gt;Una de las capacidades distintivas de las apps modernas en &lt;strong&gt;Windows&lt;/strong&gt; es la posibilidad de integrarse dinámicamente con la experiencia del sistema operativo. Esto incluye la creación de accesos directos personalizados en el menú de inicio (Start Menu), así como la integración con la barra de tareas (Taskbar), ofreciendo accesos rápidos a funciones internas de la aplicación.&lt;/p&gt;&#xA;&lt;p&gt;Gracias a &lt;strong&gt;Windows App SDK&lt;/strong&gt;, las apps desarrolladas con &lt;strong&gt;WinUI 3&lt;/strong&gt; pueden programáticamente crear y administrar accesos directos sin depender de métodos antiguos como acceso directo manual o scripts externos. Este artículo explora cómo crear accesos dinámicos con metadatos enriquecidos y cómo extender su funcionalidad mediante Jump Lists y pinning automático.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Acceso a sensores del sistema desde WinUI 3 con Windows.Devices.Sensors</title>
+      <link>http://localhost:1313/posts/2024-12-06-winui3-sensors/</link>
+      <pubDate>Fri, 06 Dec 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2024-12-06-winui3-sensors/</guid>
+      <description>&lt;p&gt;Las apps modernas desarrolladas con &lt;strong&gt;WinUI 3&lt;/strong&gt; y &lt;strong&gt;Windows App SDK&lt;/strong&gt; pueden aprovechar una amplia gama de sensores disponibles en el sistema operativo Windows. Esto incluye acelerómetro, giroscopio, brújula, inclinación, orientación y sensores de luz ambiental. Estas capacidades permiten que una app de escritorio moderna reaccione al entorno físico, lo cual es especialmente útil en dispositivos portátiles como tablets, convertibles, laptops o incluso PCs todo-en-uno con sensores.&lt;/p&gt;&#xA;&lt;p&gt;En este artículo se explora paso a paso cómo acceder a sensores desde una aplicación &lt;strong&gt;WinUI 3&lt;/strong&gt; utilizando la API &lt;code&gt;Windows.Devices.Sensors&lt;/code&gt;, incluyendo el manejo de eventos, actualización de UI en tiempo real y recomendaciones de uso avanzado para escenarios como logging, visualización de datos y adaptación dinámica de la interfaz.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>WSL3, integración con Windows AI y más allá</title>
+      <link>http://localhost:1313/posts/2024-11-29-wsl3-futuro/</link>
+      <pubDate>Fri, 29 Nov 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2024-11-29-wsl3-futuro/</guid>
+      <description>&lt;p&gt;Desde su introducción, WSL (Windows Subsystem for Linux) ha transformado el desarrollo de software en Windows al proporcionar un entorno Linux completo, sin máquinas virtuales pesadas ni particiones duales. Con WSL2 se dio un salto significativo en rendimiento y compatibilidad al integrar un kernel Linux real y soporte para GPU. Ahora, las miradas están puestas en &lt;strong&gt;WSL3&lt;/strong&gt;, la convergencia con herramientas de inteligencia artificial y la evolución de entornos locales y distribuidos.&lt;/p&gt;&#xA;&lt;p&gt;Este artículo explora las posibles &lt;strong&gt;tendencias futuras&lt;/strong&gt; en el ecosistema WSL, su integración con tecnologías emergentes de Microsoft como Windows AI, DevHome, Azure Arc, y las proyecciones para flujos de trabajo híbridos en la próxima década.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>How To: Ejecución de microservicios híbridos en WSL2 &#43; Windows</title>
+      <link>http://localhost:1313/posts/2024-11-22-wsl2-hybrid-microservices/</link>
+      <pubDate>Fri, 22 Nov 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2024-11-22-wsl2-hybrid-microservices/</guid>
+      <description>&lt;p&gt;Uno de los escenarios más potentes que habilita WSL2 es la capacidad de ejecutar arquitecturas &lt;strong&gt;híbridas de microservicios&lt;/strong&gt; donde algunos componentes corren sobre Linux (WSL2) y otros directamente sobre Windows. Esto permite integrar aplicaciones legadas, herramientas de escritorio, procesos en contenedores y servicios distribuidos desde una sola estación de trabajo, ideal para desarrollo, testing y validación de arquitecturas modernas.&lt;/p&gt;&#xA;&lt;p&gt;Este artículo presenta un caso real donde se ejecutan múltiples microservicios en ambos entornos, aprovechando la interoperabilidad de red y archivos entre Windows y WSL2.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Integración de WSL en un entorno DevSecOps</title>
+      <link>http://localhost:1313/posts/2024-11-15-wsl2-devsecops/</link>
+      <pubDate>Fri, 15 Nov 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2024-11-15-wsl2-devsecops/</guid>
+      <description>&lt;p&gt;WSL2 se ha convertido en una herramienta clave para equipos DevSecOps que buscan una solución ligera, segura y flexible para automatizar la integración, entrega y operaciones de software. Su compatibilidad con herramientas de seguridad, contenedores, scripting y pipelines CI/CD, lo convierte en un puente ideal entre desarrollo y operaciones dentro del sistema operativo Windows.&lt;/p&gt;&#xA;&lt;p&gt;Este artículo detalla un caso real de integración de WSL2 en un entorno DevSecOps, con ejemplos de workflows que incluyen validación de código, escaneo de vulnerabilidades, despliegue automatizado y hardening de entornos desde una terminal Linux sobre Windows.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>How To: Desarrollo fullstack con WSL2 y PostgreSQL</title>
+      <link>http://localhost:1313/posts/2024-11-08-wsl2-fullstack-dev/</link>
+      <pubDate>Fri, 08 Nov 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2024-11-08-wsl2-fullstack-dev/</guid>
+      <description>&lt;p&gt;WSL2 permite desarrollar aplicaciones backend completas desde un entorno Linux real sobre Windows, facilitando el uso de tecnologías como &lt;strong&gt;Node.js&lt;/strong&gt;, &lt;strong&gt;Express&lt;/strong&gt;, &lt;strong&gt;PostgreSQL&lt;/strong&gt; y herramientas modernas de frontend como &lt;strong&gt;React&lt;/strong&gt; o &lt;strong&gt;Vue&lt;/strong&gt;. Este caso real describe paso a paso cómo montar un entorno fullstack funcional, productivo y reproducible usando WSL2, PostgreSQL y herramientas de desarrollo frontend y backend.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Debugging remoto desde Windows a servicios en WSL2</title>
+      <link>http://localhost:1313/posts/2024-11-01-wsl2-remote-debugging/</link>
+      <pubDate>Fri, 01 Nov 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2024-11-01-wsl2-remote-debugging/</guid>
+      <description>&lt;p&gt;Uno de los grandes beneficios de WSL2 es la integración fluida entre el sistema operativo Windows y el entorno Linux, lo que permite realizar debugging remoto de servicios que corren en WSL2 desde herramientas gráficas y editores del host. Esto es clave para flujos de desarrollo moderno, ya que permite aprovechar lo mejor de ambos mundos: servidores nativos de Linux y herramientas de análisis de Windows.&lt;/p&gt;&#xA;&lt;p&gt;Este artículo describe paso a paso cómo depurar servicios web, APIs, scripts Python, aplicaciones Node.js y otros procesos que corren en WSL2, accediéndolos remotamente desde Windows, especialmente con VS Code y otros entornos integrados.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Machine learning local distribuido con WSL2 &#43; containers</title>
+      <link>http://localhost:1313/posts/2024-10-25-wsl2-machine-learning/</link>
+      <pubDate>Fri, 25 Oct 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2024-10-25-wsl2-machine-learning/</guid>
+      <description>&lt;p&gt;Una de las grandes ventajas de WSL2 es su compatibilidad con contenedores Docker y acceso a la GPU, lo que lo convierte en un entorno ideal para correr flujos de &lt;strong&gt;machine learning distribuido&lt;/strong&gt; desde una única máquina con múltiples contenedores Linux. Esto permite simular ambientes de entrenamiento paralelos, microservicios de inferencia o arquitecturas de orquestación como Ray o Dask desde el entorno Windows, sin necesidad de un clúster real o acceso a la nube.&lt;/p&gt;&#xA;&lt;p&gt;Este artículo describe cómo configurar y ejecutar cargas distribuidas de ML usando Docker, PyTorch, TensorFlow, y Ray sobre WSL2, aprovechando la integración con NVIDIA GPU y el rendimiento de Linux.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Análisis de logs y observabilidad con herramientas Linux</title>
+      <link>http://localhost:1313/posts/2024-10-18-wsl2-logs-analysis/</link>
+      <pubDate>Fri, 18 Oct 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2024-10-18-wsl2-logs-analysis/</guid>
+      <description>&lt;p&gt;Una ventaja clave de usar WSL2 es tener acceso completo al ecosistema de herramientas de Linux, incluyendo aquellas utilizadas para análisis de logs, monitoreo y observabilidad. Esto permite replicar entornos de producción o staging de forma local, validar configuraciones, depurar servicios y construir flujos completos de análisis desde la línea de comandos.&lt;/p&gt;&#xA;&lt;p&gt;Este artículo explora cómo aprovechar herramientas como &lt;code&gt;journalctl&lt;/code&gt;, &lt;code&gt;logrotate&lt;/code&gt;, &lt;code&gt;grep&lt;/code&gt;, &lt;code&gt;htop&lt;/code&gt;, &lt;code&gt;iftop&lt;/code&gt;, &lt;code&gt;bmon&lt;/code&gt;, &lt;code&gt;dstat&lt;/code&gt;, &lt;code&gt;atop&lt;/code&gt;, &lt;code&gt;goaccess&lt;/code&gt; y más, directamente desde una terminal en WSL2 para tener visibilidad del sistema, servicios y tráfico de red.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Integración con VS Code Dev Tunnels y Tailscale</title>
+      <link>http://localhost:1313/posts/2024-10-11-wsl2-vs-code-integration/</link>
+      <pubDate>Fri, 11 Oct 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2024-10-11-wsl2-vs-code-integration/</guid>
+      <description>&lt;p&gt;WSL2 es una plataforma ideal para desarrollo distribuido y remoto gracias a su entorno Linux real y la capacidad de integrarse con herramientas modernas como &lt;strong&gt;VS Code Dev Tunnels&lt;/strong&gt; y &lt;strong&gt;Tailscale&lt;/strong&gt;. Estas soluciones permiten exponer servicios en desarrollo de forma segura a través de túneles públicos o redes privadas virtuales, sin abrir puertos en el router o usar VPNs corporativas complejas.&lt;/p&gt;&#xA;&lt;p&gt;Este artículo explica cómo configurar y usar ambas herramientas desde WSL2 para exponer APIs, servidores locales, entornos de testing o aplicaciones completas a otros miembros del equipo o entornos externos.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Automatización de entornos WSL2 para onboarding de equipos</title>
+      <link>http://localhost:1313/posts/2024-10-04-wsl2-automation-environment/</link>
+      <pubDate>Fri, 04 Oct 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2024-10-04-wsl2-automation-environment/</guid>
+      <description>&lt;p&gt;El onboarding de nuevos miembros en un equipo técnico suele implicar configurar entornos complejos con múltiples herramientas, dependencias, claves, servicios y flujos específicos. WSL2 permite automatizar completamente esta experiencia, facilitando que cualquier integrante configure un entorno de desarrollo productivo en minutos, con mínima intervención y total reproducibilidad.&lt;/p&gt;&#xA;&lt;p&gt;Este artículo presenta estrategias y herramientas para automatizar la preparación de entornos WSL2, integrando scripting, dotfiles, Dev Containers, provisioning declarativo y prácticas de mantenimiento colaborativo.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>WSL2 &#43; Azure CLI: gestión de recursos cloud desde terminal Linux</title>
+      <link>http://localhost:1313/posts/2024-09-27-wsl2-azure-cli/</link>
+      <pubDate>Fri, 27 Sep 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2024-09-27-wsl2-azure-cli/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;WSL2&lt;/strong&gt; permite ejecutar un entorno &lt;strong&gt;Linux&lt;/strong&gt; real dentro de &lt;strong&gt;Windows&lt;/strong&gt;, lo que habilita el uso de herramientas nativas para gestión en la nube como &lt;strong&gt;Azure CLI&lt;/strong&gt;. Con esta combinación, los desarrolladores y administradores pueden trabajar cómodamente desde la terminal Linux para administrar recursos en &lt;strong&gt;Azure&lt;/strong&gt;, automatizar tareas, monitorear infraestructura y ejecutar scripts multiplataforma sin salir del entorno local.&lt;/p&gt;&#xA;&lt;p&gt;Este artículo explica paso a paso cómo instalar &lt;strong&gt;Azure CLI&lt;/strong&gt; en &lt;strong&gt;WSL2&lt;/strong&gt;, cómo autenticarse y gestionar recursos como máquinas virtuales, redes, contenedores y más.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Configuración de servicios persistentes en background en WSL2</title>
+      <link>http://localhost:1313/posts/2024-09-20-wsl2-background-services/</link>
+      <pubDate>Fri, 20 Sep 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2024-09-20-wsl2-background-services/</guid>
+      <description>&lt;p&gt;Aunque &lt;strong&gt;WSL2&lt;/strong&gt; no ofrece un sistema de init tradicional como &lt;code&gt;systemd&lt;/code&gt; por defecto, es totalmente posible configurar y ejecutar servicios persistentes como &lt;strong&gt;nginx&lt;/strong&gt; o &lt;strong&gt;PostgreSQL&lt;/strong&gt; desde &lt;strong&gt;WSL2&lt;/strong&gt;. Esto permite simular entornos de producción, realizar pruebas completas o levantar microservicios sin contenedores ni VMs adicionales.&lt;/p&gt;&#xA;&lt;p&gt;Este artículo explica cómo instalar, configurar, automatizar y mantener servicios en segundo plano en WSL2 con enfoque práctico y seguro.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Sincronización de entornos WSL2 en múltiples dispositivos</title>
+      <link>http://localhost:1313/posts/2024-09-13-wsl2-sync-environments/</link>
+      <pubDate>Fri, 13 Sep 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2024-09-13-wsl2-sync-environments/</guid>
+      <description>&lt;p&gt;Uno de los desafíos más comunes en equipos distribuidos o desarrolladores con múltiples dispositivos es mantener entornos consistentes entre máquinas. Gracias a las capacidades de exportación de distribuciones, el uso de &lt;strong&gt;Dev Containers&lt;/strong&gt;, gestión de configuraciones declarativas y herramientas de backup, &lt;strong&gt;WSL2&lt;/strong&gt; puede sincronizarse entre diferentes sistemas Windows de forma confiable y productiva.&lt;/p&gt;&#xA;&lt;p&gt;Este artículo explora las mejores estrategias para mantener la coherencia de entornos WSL2 en múltiples PCs o notebooks, incluyendo ejemplos prácticos.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Gestión de agentes SSH y GPG en WSL</title>
+      <link>http://localhost:1313/posts/2024-09-06-wsl2-ssh-agents/</link>
+      <pubDate>Fri, 06 Sep 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2024-09-06-wsl2-ssh-agents/</guid>
+      <description>&lt;p&gt;En entornos de desarrollo modernos, la autenticación segura es fundamental. Ya sea para acceder a servidores remotos, clonar repositorios privados o firmar commits y correos electrónicos, herramientas como &lt;strong&gt;SSH&lt;/strong&gt; y &lt;strong&gt;GPG&lt;/strong&gt; son imprescindibles. &lt;strong&gt;WSL2&lt;/strong&gt; permite integrarlas con el entorno &lt;strong&gt;Windows&lt;/strong&gt;, pero también operar de forma autónoma con control completo sobre claves y agentes.&lt;/p&gt;&#xA;&lt;p&gt;Este artículo explica cómo gestionar agentes &lt;strong&gt;SSH&lt;/strong&gt; y &lt;strong&gt;GPG&lt;/strong&gt; en &lt;strong&gt;WSL2&lt;/strong&gt; de forma segura, cómo compartir claves entre &lt;strong&gt;Windows&lt;/strong&gt; y &lt;strong&gt;Linux&lt;/strong&gt;, y cómo evitar fugas o mal uso de identidades criptográficas.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Entrenamiento de modelos de ML en WSL2 con CUDA y cuDNN</title>
+      <link>http://localhost:1313/posts/2024-08-30-wsl2-ml-model-training/</link>
+      <pubDate>Fri, 30 Aug 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2024-08-30-wsl2-ml-model-training/</guid>
+      <description>&lt;p&gt;Con la llegada del soporte oficial de GPU a WSL2, Windows se transforma en una plataforma viable y potente para desarrollo de inteligencia artificial desde un entorno Linux real. Gracias a la integración de CUDA y cuDNN, es posible entrenar modelos intensivos directamente desde WSL2, sin necesidad de usar máquinas virtuales completas ni infraestructura en la nube.&lt;/p&gt;&#xA;&lt;p&gt;Este artículo guía el proceso completo de habilitación de GPU, instalación de herramientas y entrenamiento con PyTorch, incluyendo consideraciones prácticas, troubleshooting y optimización de recursos.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>CI/CD desde WSL2 usando GitHub Actions y Azure Pipelines</title>
+      <link>http://localhost:1313/posts/2024-08-23-cicd-form-wsl2/</link>
+      <pubDate>Fri, 23 Aug 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2024-08-23-cicd-form-wsl2/</guid>
+      <description>&lt;p&gt;Uno de los principales beneficios de usar &lt;strong&gt;WSL2&lt;/strong&gt; como entorno de desarrollo es la posibilidad de trabajar con herramientas de integración y entrega continua (CI/CD) de forma local antes de empujarlas a producción. Esto permite validar scripts, simular pipelines y ajustar flujos sin depender de entornos remotos. &lt;strong&gt;GitHub Actions&lt;/strong&gt; y &lt;strong&gt;Azure Pipelines&lt;/strong&gt; son dos de las plataformas más populares y compatibles con &lt;strong&gt;WSL2&lt;/strong&gt;.&lt;/p&gt;&#xA;&lt;p&gt;Este artículo explica cómo configurar y ejecutar pipelines CI/CD localmente desde WSL2, tanto para testing como automatización de despliegues, con ejemplos prácticos y buenas prácticas.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Networking avanzado con WSL2: puertos, servicios y redes privadas</title>
+      <link>http://localhost:1313/posts/2024-08-16-wsl2-advanced-networking/</link>
+      <pubDate>Fri, 16 Aug 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2024-08-16-wsl2-advanced-networking/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;WSL2&lt;/strong&gt; proporciona un entorno &lt;strong&gt;Linux&lt;/strong&gt; completo ejecutándose dentro de una &lt;strong&gt;VM&lt;/strong&gt; ligera sobre &lt;strong&gt;Windows&lt;/strong&gt;. Esto cambia sustancialmente el comportamiento de red respecto a &lt;strong&gt;WSL1&lt;/strong&gt;. Para muchos desarrolladores, entender cómo funciona el networking en &lt;strong&gt;WSL2&lt;/strong&gt; es esencial para ejecutar servicios, exponer APIs, trabajar con contenedores, y simular entornos de red en pruebas más complejas.&lt;/p&gt;&#xA;&lt;p&gt;Este artículo explica en profundidad el modelo de red de &lt;strong&gt;WSL2&lt;/strong&gt;, cómo manejar puertos, exponer servicios, realizar redirecciones avanzadas y configurar redes privadas para flujos DevOps, testing y desarrollo de aplicaciones distribuidas.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Dev Containers con WSL2: casos reales con VS Code y GitHub Codespaces</title>
+      <link>http://localhost:1313/posts/2024-08-09-wsl2-dev-container/</link>
+      <pubDate>Fri, 09 Aug 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2024-08-09-wsl2-dev-container/</guid>
+      <description>&lt;p&gt;Los &lt;strong&gt;Dev Containers&lt;/strong&gt; son entornos de desarrollo preconfigurados definidos por archivo, que permiten a cualquier persona trabajar con el mismo stack, dependencias y configuraciones. Combinados con &lt;strong&gt;WSL2&lt;/strong&gt; y &lt;strong&gt;VS Code&lt;/strong&gt;, permiten construir entornos reproducibles que funcionan tanto localmente como en la nube a través de GitHub Codespaces.&lt;/p&gt;&#xA;&lt;p&gt;Este artículo explica cómo trabajar con &lt;strong&gt;Dev Containers&lt;/strong&gt; en &lt;strong&gt;WSL2&lt;/strong&gt;, con ejemplos prácticos y recomendaciones para distintos escenarios.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Implementación de clusters Kubernetes locales con k3s sobre WSL2</title>
+      <link>http://localhost:1313/posts/2024-08-02-wsl2-kubernetes-k3s/</link>
+      <pubDate>Fri, 02 Aug 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2024-08-02-wsl2-kubernetes-k3s/</guid>
+      <description>&lt;p&gt;Para entornos de desarrollo y pruebas, contar con un cluster &lt;strong&gt;Kubernetes&lt;/strong&gt; liviano y funcional es clave. &lt;strong&gt;k3s&lt;/strong&gt;, una distribución de &lt;strong&gt;Kubernetes&lt;/strong&gt; simplificada, se puede ejecutar perfectamente sobre &lt;strong&gt;WSL2&lt;/strong&gt;, permitiendo crear un cluster local completo sin necesidad de herramientas pesadas como &lt;strong&gt;Minikube&lt;/strong&gt; o &lt;strong&gt;Docker Desktop&lt;/strong&gt;.&lt;/p&gt;&#xA;&lt;p&gt;Este artículo describe paso a paso cómo instalar y configurar &lt;strong&gt;k3s&lt;/strong&gt; en &lt;strong&gt;WSL2&lt;/strong&gt;, con recomendaciones prácticas para flujos &lt;strong&gt;DevOps&lt;/strong&gt; y testing de microservicios.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Benchmark de performance entre WSL2 y Hyper-V para cargas intensivas</title>
+      <link>http://localhost:1313/posts/2024-07-26-wsl2-performance-benchmark/</link>
+      <pubDate>Fri, 26 Jul 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2024-07-26-wsl2-performance-benchmark/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;WSL2&lt;/strong&gt; y &lt;strong&gt;Hyper-V&lt;/strong&gt; son tecnologías de virtualización de Microsoft que permiten ejecutar entornos Linux sobre Windows. Aunque WSL2 internamente utiliza Hyper-V, existen diferencias en cómo se gestionan los recursos, lo que puede impactar el rendimiento en tareas intensivas como compilación, procesamiento de datos o entrenamiento de modelos.&lt;/p&gt;&#xA;&lt;p&gt;Este artículo presenta un enfoque comparativo y práctico para medir el rendimiento de ambos entornos en escenarios de carga pesada.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Seguridad avanzada en WSL2: sandboxing y seccomp</title>
+      <link>http://localhost:1313/posts/2024-07-19-wsl2-advanced-security/</link>
+      <pubDate>Fri, 19 Jul 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2024-07-19-wsl2-advanced-security/</guid>
+      <description>&lt;p&gt;WSL2, al ejecutar un kernel Linux completo dentro de Windows, hereda capacidades de seguridad del subsistema Linux y del entorno de Windows. Esto permite aplicar técnicas avanzadas como sandboxing y control de llamadas al sistema mediante &lt;code&gt;seccomp&lt;/code&gt;, protegiendo aplicaciones y conteniendo procesos potencialmente inseguros.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Nix &#43; WSL2: gestión declarativa de entornos</title>
+      <link>http://localhost:1313/posts/2024-07-12-wsl2-nix/</link>
+      <pubDate>Fri, 12 Jul 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2024-07-12-wsl2-nix/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;Nix&lt;/strong&gt; es un sistema de gestión de paquetes y configuración que permite definir entornos de desarrollo de forma &lt;strong&gt;declarativa y reproducible&lt;/strong&gt;. Al combinar Nix con WSL2, se obtiene lo mejor de ambos mundos: control total sobre las dependencias y entornos aislados, con la eficiencia de Linux corriendo dentro de Windows.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Desarrollo Rust en WSL2: toolchain, testing y empaquetado</title>
+      <link>http://localhost:1313/posts/2024-07-05-wsl2-rust-development/</link>
+      <pubDate>Fri, 05 Jul 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2024-07-05-wsl2-rust-development/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;Rust&lt;/strong&gt; es un lenguaje moderno y seguro por diseño, ideal para crear aplicaciones de alto rendimiento y sistemas embebidos. Combinado con WSL2, permite a los desarrolladores trabajar en un entorno &lt;strong&gt;Linux&lt;/strong&gt; desde &lt;strong&gt;Windows&lt;/strong&gt;, aprovechando herramientas como &lt;code&gt;cargo&lt;/code&gt;, &lt;code&gt;rustup&lt;/code&gt;, pruebas automatizadas y sistemas de empaquetado como &lt;code&gt;cargo-deb&lt;/code&gt;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Uso de WSLg: apps gráficas Linux en Windows con casos reales</title>
+      <link>http://localhost:1313/posts/2024-06-28-wsl2-wslg/</link>
+      <pubDate>Fri, 28 Jun 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2024-06-28-wsl2-wslg/</guid>
+      <description>&lt;p&gt;WSLg (Windows Subsystem for Linux GUI) permite ejecutar aplicaciones gráficas de Linux directamente en Windows, sin necesidad de configurar un servidor X manualmente. Esta funcionalidad, incluida en WSL2 desde Windows 11, abre nuevas posibilidades para desarrolladores que utilizan herramientas Linux de escritorio como editores, simuladores, navegadores o visores de datos científicos.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Compilación cruzada para Linux y Windows desde WSL2</title>
+      <link>http://localhost:1313/posts/2024-06-21-wsl2-cross-compiling/</link>
+      <pubDate>Fri, 21 Jun 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2024-06-21-wsl2-cross-compiling/</guid>
+      <description>&lt;p&gt;Uno de los beneficios clave de WSL2 es la posibilidad de compilar binarios para Linux dentro de un entorno Linux completo, mientras se sigue trabajando desde Windows. Además, es posible configurar &lt;strong&gt;compilación cruzada&lt;/strong&gt; para generar ejecutables de Windows (&lt;code&gt;.exe&lt;/code&gt;) directamente desde WSL2, lo cual es útil para flujos de trabajo DevOps, empaquetado o testing multiplataforma.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Deno, Go y Python en WSL2 para flujos mixtos de backend &#43; AI</title>
+      <link>http://localhost:1313/posts/2024-06-14-wsl2-backend-ai/</link>
+      <pubDate>Fri, 14 Jun 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2024-06-14-wsl2-backend-ai/</guid>
+      <description>&lt;p&gt;Combinar lenguajes modernos como &lt;strong&gt;Deno&lt;/strong&gt;, &lt;strong&gt;Go&lt;/strong&gt; y &lt;strong&gt;Python&lt;/strong&gt; permite crear soluciones backend de alto rendimiento con componentes de inteligencia artificial de forma modular y eficiente. Gracias a &lt;strong&gt;WSL2&lt;/strong&gt;, es posible configurar este stack en Linux desde Windows, integrando herramientas, librerías y entornos de ejecución en un mismo flujo de trabajo.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Telemetría y monitoreo de procesos WSL2 con herramientas como Prometheus</title>
+      <link>http://localhost:1313/posts/2024-06-07-wsl2-prometheus/</link>
+      <pubDate>Fri, 07 Jun 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2024-06-07-wsl2-prometheus/</guid>
+      <description>&lt;p&gt;El monitoreo de recursos y procesos es clave en cualquier entorno de desarrollo o pruebas. Gracias a la compatibilidad de WSL2 con herramientas Linux estándar, es posible usar soluciones de &lt;strong&gt;observabilidad como Prometheus&lt;/strong&gt; y &lt;strong&gt;Node Exporter&lt;/strong&gt; para visualizar el rendimiento del entorno WSL2 de forma clara y eficiente.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>WSL2 como entorno para desarrollo MLOps</title>
+      <link>http://localhost:1313/posts/2024-05-31-wsl2-mlops/</link>
+      <pubDate>Fri, 31 May 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2024-05-31-wsl2-mlops/</guid>
+      <description>&lt;p&gt;El ciclo de vida del machine learning moderno no solo involucra entrenar modelos, sino también automatizar, versionar y desplegar esos modelos en producción. Esto es lo que define el enfoque de &lt;strong&gt;MLOps&lt;/strong&gt;. Gracias a su compatibilidad con herramientas de Linux, contenedores, aceleración GPU y pipelines reproducibles, &lt;strong&gt;WSL2 es ideal para este tipo de desarrollo desde Windows&lt;/strong&gt;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Automatización de tareas con Makefiles y Bash avanzado en WSL2</title>
+      <link>http://localhost:1313/posts/2024-05-24-wsl2-automation-makefiles-bash/</link>
+      <pubDate>Fri, 24 May 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2024-05-24-wsl2-automation-makefiles-bash/</guid>
+      <description>&lt;p&gt;Una de las ventajas más potentes de WSL2 es la posibilidad de usar herramientas Linux como &lt;code&gt;make&lt;/code&gt; y Bash para automatizar tareas en proyectos de desarrollo, ciencia de datos, o DevOps. Este artículo detalla cómo crear scripts avanzados con Bash y cómo estructurar &lt;code&gt;Makefiles&lt;/code&gt; efectivos para ejecutar tareas complejas con un solo comando.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>VS Code Remote WSL para flujos de trabajo Data Science</title>
+      <link>http://localhost:1313/posts/2024-05-17-wsl2-remote-data-science/</link>
+      <pubDate>Fri, 17 May 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2024-05-17-wsl2-remote-data-science/</guid>
+      <description>&lt;p&gt;El desarrollo de proyectos de ciencia de datos desde Windows puede beneficiarse enormemente del uso de &lt;strong&gt;WSL2 con VS Code Remote&lt;/strong&gt;. Esta combinación permite aprovechar herramientas y entornos Linux directamente desde el editor, manteniendo la flexibilidad de Windows en tareas cotidianas como análisis, visualización o modelado de datos.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>WSL2 &#43; NVIDIA GPU: configuración óptima para workloads de IA</title>
+      <link>http://localhost:1313/posts/2024-05-10-wsl2-nvidia-gpu/</link>
+      <pubDate>Fri, 10 May 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2024-05-10-wsl2-nvidia-gpu/</guid>
+      <description>&lt;p&gt;Desde mediados de 2020, WSL2 ofrece soporte oficial para &lt;strong&gt;aceleración por GPU con NVIDIA&lt;/strong&gt;. Esto permite ejecutar frameworks como &lt;strong&gt;[PyTorch]&lt;/strong&gt;(&lt;a href=&#34;https://pytorch.org/get-started/locally/&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://pytorch.org/get-started/locally/&lt;/a&gt;) o &lt;strong&gt;TensorFlow&lt;/strong&gt; con &lt;strong&gt;[CUDA]&lt;/strong&gt;(&lt;a href=&#34;https://docs.nvidia.com/cuda/wsl-user-guide/index.html&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://docs.nvidia.com/cuda/wsl-user-guide/index.html&lt;/a&gt;) directamente desde &lt;strong&gt;Linux&lt;/strong&gt; en &lt;strong&gt;Windows&lt;/strong&gt;, ideal para tareas de entrenamiento y prueba de modelos de inteligencia artificial.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Uso de systemd en WSL2: servicios persistentes y supervisión</title>
+      <link>http://localhost:1313/posts/2024-05-03-wsl2-systemd/</link>
+      <pubDate>Fri, 03 May 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2024-05-03-wsl2-systemd/</guid>
+      <description>&lt;p&gt;Desde 2022, &lt;strong&gt;WSL2&lt;/strong&gt; incluye soporte para &lt;code&gt;systemd&lt;/code&gt;, el sistema de inicialización y gestión de servicios usado en la mayoría de las distros &lt;strong&gt;Linux&lt;/strong&gt; modernas. Esto habilita la ejecución de servicios persistentes, como &lt;code&gt;ssh&lt;/code&gt;, &lt;code&gt;postgresql&lt;/code&gt; o &lt;code&gt;docker&lt;/code&gt;, directamente en el entorno &lt;strong&gt;WSL2&lt;/strong&gt;&amp;hellip;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Integración avanzada con Docker Desktop y contenedores cruzados</title>
+      <link>http://localhost:1313/posts/2024-04-25-wsl2-docker-integration/</link>
+      <pubDate>Thu, 25 Apr 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2024-04-25-wsl2-docker-integration/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;Docker&lt;/strong&gt; y &lt;strong&gt;WSL2&lt;/strong&gt; trabajan juntos de forma nativa desde 2020. &lt;strong&gt;Docker Desktop&lt;/strong&gt; para &lt;strong&gt;Windows&lt;/strong&gt; ahora se basa completamente en &lt;strong&gt;WSL2&lt;/strong&gt;, permitiendo ejecutar contenedores &lt;strong&gt;Linux&lt;/strong&gt; sin la necesidad de &lt;strong&gt;Hyper-V&lt;/strong&gt; por separado.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Gestión avanzada de múltiples distros en WSL2</title>
+      <link>http://localhost:1313/posts/2024-04-19-wsl2-multiple-distros/</link>
+      <pubDate>Fri, 19 Apr 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2024-04-19-wsl2-multiple-distros/</guid>
+      <description>&lt;p&gt;Una de las grandes ventajas de WSL2 es la posibilidad de instalar y ejecutar múltiples distribuciones de Linux simultáneamente, cada una con su propio sistema de archivos, paquetes y configuraciones.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Automatización avanzada de distros WSL2 con wsl.conf y cloud-init</title>
+      <link>http://localhost:1313/posts/2024-04-12-wsl2-advanced-distro-automation/</link>
+      <pubDate>Fri, 12 Apr 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2024-04-12-wsl2-advanced-distro-automation/</guid>
+      <description>&lt;p&gt;Uno de los beneficios clave de &lt;strong&gt;WSL2&lt;/strong&gt; es la capacidad de automatizar la configuración del entorno Linux que corre sobre Windows. Esto permite establecer comportamientos predefinidos y provisionar distros listas para el trabajo sin intervención manual. En este artículo exploramos dos mecanismos clave: &lt;code&gt;wsl.conf&lt;/code&gt; y &lt;code&gt;cloud-init&lt;/code&gt;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Introducción avanzada a WSL2</title>
+      <link>http://localhost:1313/posts/2024-04-05-wsl2-advanced-intro/</link>
+      <pubDate>Fri, 05 Apr 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2024-04-05-wsl2-advanced-intro/</guid>
+      <description>&lt;p&gt;Desde su lanzamiento, WSL2 (Windows Subsystem for Linux 2) ha transformado el panorama del desarrollo en Windows, ofreciendo una integración casi nativa con Linux sin necesidad de usar máquinas virtuales tradicionales. A diferencia de WSL1, que traducía llamadas del sistema de Linux a Windows, WSL2 ejecuta un kernel Linux completo dentro de una VM optimizada y ligera. Esta diferencia técnica lo convierte en una herramienta poderosa para desarrolladores modernos, DevOps, científicos de datos y más.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>XAML para cambio de orientación de pantalla</title>
+      <link>http://localhost:1313/posts/2023-12-15-maui-xaml-orientation-screen/</link>
+      <pubDate>Fri, 15 Dec 2023 18:30:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2023-12-15-maui-xaml-orientation-screen/</guid>
+      <description>&lt;p&gt;En este artículo veremos la posibilidad de crear un diseño que se adapte a la orientación de pantalla en &lt;strong&gt;.NET MAUI&lt;/strong&gt;.&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Windows 11 Insider Preview Build 22635.2915&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Novedades en .NET MAUI con .NET 8</title>
+      <link>http://localhost:1313/posts/2023-12-01-whats-new-in-maui-net-8/</link>
+      <pubDate>Fri, 01 Dec 2023 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2023-12-01-whats-new-in-maui-net-8/</guid>
+      <description>&lt;p&gt;En este artículo mostraré algunas novedades de .NET 8 en &lt;strong&gt;.NET MAUI&lt;/strong&gt;.&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Windows 11 Insider Preview Build 22635.2776&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>ChatGPT en WPF</title>
+      <link>http://localhost:1313/posts/2023-03-19-chatgpt-wpf/</link>
+      <pubDate>Sun, 19 Mar 2023 09:01:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2023-03-19-chatgpt-wpf/</guid>
+      <description>&lt;p&gt;En este artículo veremos cómo crear un Chat con la API de &lt;strong&gt;ChatGPT&lt;/strong&gt; y &lt;strong&gt;WPF&lt;/strong&gt; con controles &lt;strong&gt;Telerik&lt;/strong&gt;.&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Windows 11 Insider Preview Build 25314&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Ingresando a ChatGPT desde Paraguay</title>
+      <link>http://localhost:1313/posts/2023-03-17-chatgpt-from-paraguay/</link>
+      <pubDate>Fri, 17 Mar 2023 21:25:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2023-03-17-chatgpt-from-paraguay/</guid>
+      <description>&lt;p&gt;En este artículo veremos cómo crear una cuenta en OpenAI para utilizar su famoso producto &lt;strong&gt;ChatGPT&lt;/strong&gt; y obtener acceso a su API para usarlo en nuestros desarrollos de &lt;strong&gt;Windows&lt;/strong&gt;.&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Windows 11 Insider Preview Build 25314&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Creando una aplicación tipo Chat en WPF usando Telerik</title>
+      <link>http://localhost:1313/posts/2023-03-15-creating-chat-app-wpf-using-telerik/</link>
+      <pubDate>Wed, 15 Mar 2023 20:57:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2023-03-15-creating-chat-app-wpf-using-telerik/</guid>
+      <description>&lt;p&gt;En este artículo veremos cómo crear una aplicación de Chat en &lt;strong&gt;WPF&lt;/strong&gt; con &lt;strong&gt;Telerik&lt;/strong&gt;. (Antesala de todo el tema de &lt;a href=&#34;https://openai.com/blog/chatgpt/&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;ChatGPT&lt;/a&gt;)&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Windows 11 Insider Preview Build 25290&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Django sobre WSL</title>
+      <link>http://localhost:1313/posts/2022-12-21-django-on-wsl/</link>
+      <pubDate>Wed, 21 Dec 2022 19:39:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2022-12-21-django-on-wsl/</guid>
+      <description>&lt;p&gt;En este corto artículo veremos cómo desarrollar sobre &lt;strong&gt;WSL (Windows Subsystem for Linux)&lt;/strong&gt; con &lt;strong&gt;Python&lt;/strong&gt; y &lt;strong&gt;Django&lt;/strong&gt;. Ya hemos visto que lo podemos hacer con &lt;a href=&#34;http://localhost:1313/posts/2022-06-29-java-with-wsl-part-2/&#34; &gt;Java&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Windows 11 Insider Preview Build 25267&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Desarrollo con Python sobre WSL</title>
+      <link>http://localhost:1313/posts/2022-12-14-developing-python-on-wsl/</link>
+      <pubDate>Wed, 14 Dec 2022 21:12:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2022-12-14-developing-python-on-wsl/</guid>
+      <description>&lt;p&gt;En este corto artículo veremos cómo desarrollar sobre &lt;strong&gt;WSL (Windows Subsystem for Linux)&lt;/strong&gt; con &lt;strong&gt;Python&lt;/strong&gt;. Ya hemos visto que lo podemos hacer con &lt;a href=&#34;http://localhost:1313/posts/2022-06-29-java-with-wsl-part-2/&#34; &gt;Java&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Windows 11 Insider Preview Build 25267&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Figma y Windows Fluent Design System</title>
+      <link>http://localhost:1313/posts/2022-12-07-figma-and-windows-fluent-design-system/</link>
+      <pubDate>Wed, 07 Dec 2022 21:12:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2022-12-07-figma-and-windows-fluent-design-system/</guid>
+      <description>&lt;p&gt;En este corto artículo trataremos de entender las directrices de diseño y analizaremos código de interfaz de usuario para crear experiencias de aplicaciones de &lt;strong&gt;Windows&lt;/strong&gt;.&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Windows 11 Insider Preview Build 25252&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Usando MAUI con Windows App SDK</title>
+      <link>http://localhost:1313/posts/2022-11-02-windows-app-using-maui/</link>
+      <pubDate>Wed, 02 Nov 2022 23:42:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2022-11-02-windows-app-using-maui/</guid>
+      <description>&lt;p&gt;En este artículo veremos cómo &lt;strong&gt;.NET MAUI&lt;/strong&gt; interactúa con &lt;strong&gt;Windows 11&lt;/strong&gt; sin necesidad de funciones extras ni código para llegar a ese resultado.&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Windows 11 Insider Preview Build 25236&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Windows Terminal en Windows 11</title>
+      <link>http://localhost:1313/posts/2022-10-26-windows-terminal-in-windows-11/</link>
+      <pubDate>Wed, 26 Oct 2022 13:01:14 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2022-10-26-windows-terminal-in-windows-11/</guid>
+      <description>&lt;p&gt;En este artículo explicaré detalles sobre &lt;strong&gt;Windows Terminal&lt;/strong&gt; (que forma parte del sistema operativo &lt;strong&gt;Windows 11&lt;/strong&gt;).&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Windows 11 Insider Preview Build 25227&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Visual Studio Code Server WSL</title>
+      <link>http://localhost:1313/posts/2022-10-19-visual-studio-code-server-wsl/</link>
+      <pubDate>Wed, 19 Oct 2022 22:35:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2022-10-19-visual-studio-code-server-wsl/</guid>
+      <description>&lt;p&gt;En este artículo corto, pero preciso, mostraré cómo utilizar &lt;strong&gt;Visual Studio Code&lt;/strong&gt; como servidor de &lt;strong&gt;WSL&lt;/strong&gt; para facilitarnos la vida en ciertas pruebas que tenemos como desarrolladores.&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Windows 11 Insider Preview Build 25227&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Aplicación multilingüe en MAUI</title>
+      <link>http://localhost:1313/posts/2022-10-05-multi-language-app-maui/</link>
+      <pubDate>Wed, 05 Oct 2022 17:48:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2022-10-05-multi-language-app-maui/</guid>
+      <description>&lt;p&gt;En este artículo mostraré cómo crear una aplicación &lt;strong&gt;.NET MAUI&lt;/strong&gt; multilingüe sobre &lt;strong&gt;Windows 11&lt;/strong&gt; utilizando archivos de recursos.&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Windows 11 Insider Preview Build 22621&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Aplicando modelo MVVM con MAUI</title>
+      <link>http://localhost:1313/posts/2022-09-28-mvvm-in-maui/</link>
+      <pubDate>Wed, 28 Sep 2022 21:06:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2022-09-28-mvvm-in-maui/</guid>
+      <description>&lt;p&gt;En este artículo mostraré cómo aplicar el modelo MVVM en &lt;strong&gt;.NET MAUI&lt;/strong&gt; sobre &lt;strong&gt;Windows 11&lt;/strong&gt;.&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Windows 11 Insider Preview Build 25206&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Data Binding en MAUI</title>
+      <link>http://localhost:1313/posts/2022-09-21-data-binding-in-maui/</link>
+      <pubDate>Wed, 21 Sep 2022 20:32:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2022-09-21-data-binding-in-maui/</guid>
+      <description>&lt;p&gt;En este artículo mostraré cómo utilizar la técnica de &lt;em&gt;Data Binding&lt;/em&gt; en una aplicación &lt;strong&gt;.NET MAUI&lt;/strong&gt; sobre &lt;strong&gt;Windows 11&lt;/strong&gt;.&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Windows 11 Insider Preview Build 25206&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Primeros pasos con XAML en MAUI</title>
+      <link>http://localhost:1313/posts/2022-09-14-first-step-xaml-in-maui/</link>
+      <pubDate>Wed, 14 Sep 2022 23:18:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2022-09-14-first-step-xaml-in-maui/</guid>
+      <description>&lt;p&gt;En este artículo mostraré cómo iniciar los pasos con el lenguaje &lt;strong&gt;XAML&lt;/strong&gt; en &lt;strong&gt;.NET MAUI&lt;/strong&gt;.&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Windows 11 Insider Preview Build 25201&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Mi primera aplicación con Windows App SDK</title>
+      <link>http://localhost:1313/posts/2022-09-07-first-windows-app-reactjs/</link>
+      <pubDate>Wed, 07 Sep 2022 19:14:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2022-09-07-first-windows-app-reactjs/</guid>
+      <description>&lt;p&gt;En este artículo mostraré cómo crear una aplicación con &lt;strong&gt;Windows App SDK&lt;/strong&gt; en &lt;strong&gt;React&lt;/strong&gt;. &lt;em&gt;Ojo&lt;/em&gt;: Es mi primera prueba con React (nunca lo he usado).&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Windows 11 Insider Preview Build 25188&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Preparando entorno para desarrollo con Windows App SDK</title>
+      <link>http://localhost:1313/posts/2022-08-31-preparing-windows-app-sdk/</link>
+      <pubDate>Wed, 31 Aug 2022 22:36:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2022-08-31-preparing-windows-app-sdk/</guid>
+      <description>&lt;p&gt;En este artículo mostraré cómo preparar el entorno para el desarrollo de aplicaciones con &lt;strong&gt;Windows App SDK&lt;/strong&gt;.&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Windows 11 Insider Preview Build 25188&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Mi Primera Aplicación MAUI</title>
+      <link>http://localhost:1313/posts/2022-08-24-first-app-in-maui/</link>
+      <pubDate>Wed, 24 Aug 2022 21:04:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2022-08-24-first-app-in-maui/</guid>
+      <description>&lt;p&gt;En este artículo mostraré cómo crear la primera aplicación &lt;strong&gt;.NET MAUI&lt;/strong&gt; preparada para Android y Windows 11.&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Windows 11 Insider Preview Build 25188&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Estructura básica de un proyecto MAUI</title>
+      <link>http://localhost:1313/posts/2022-08-17-basic-struct-of-maui-project/</link>
+      <pubDate>Wed, 17 Aug 2022 18:07:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2022-08-17-basic-struct-of-maui-project/</guid>
+      <description>&lt;p&gt;En este artículo mostraré cómo es la estructura básica de un proyecto &lt;strong&gt;.NET MAUI&lt;/strong&gt; .&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Windows 11 Insider Preview Build 25179&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Instalando .NET MAUI en Visual Studio 2022</title>
+      <link>http://localhost:1313/posts/2022-08-10-installing-maui-on-visual-studio-2022/</link>
+      <pubDate>Wed, 10 Aug 2022 19:19:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2022-08-10-installing-maui-on-visual-studio-2022/</guid>
+      <description>&lt;p&gt;En este artículo mostraré cómo instalar los componentes necesarios para el desarrollo en &lt;strong&gt;.NET MAUI&lt;/strong&gt; para Windows 11 y Android.&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Windows 11 Insider Preview Build 25179&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>MAUI ¿Qué? ¿Por qué? ¿Para qué?</title>
+      <link>http://localhost:1313/posts/2022-08-03-maui-some-questions/</link>
+      <pubDate>Wed, 03 Aug 2022 22:12:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2022-08-03-maui-some-questions/</guid>
+      <description>&lt;p&gt;En este artículo intentaré explicar o dar a entender que es &lt;strong&gt;.NET MAUI&lt;/strong&gt; y otras cuestiones relacionada a esta plaforma que básicamente reemplaza al viejo conocido de &lt;strong&gt;Xamarin.Forms&lt;/strong&gt;.&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Windows 11 Insider Preview Build 25174&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>MAUI on WSA</title>
+      <link>http://localhost:1313/posts/2022-07-27-maui-in-wsa/</link>
+      <pubDate>Wed, 27 Jul 2022 19:16:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2022-07-27-maui-in-wsa/</guid>
+      <description>&lt;p&gt;En este artículo mostraré cómo ejecutar una aplicación &lt;strong&gt;.NET MAUI&lt;/strong&gt; sobre &lt;strong&gt;Windows Subsystem for Android&lt;/strong&gt;.&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Windows 11 Insider Preview Build 25163&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Hospedar Web App en UWP</title>
+      <link>http://localhost:1313/posts/2022-07-20-host-web-app-in-uwp/</link>
+      <pubDate>Wed, 20 Jul 2022 23:01:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2022-07-20-host-web-app-in-uwp/</guid>
+      <description>&lt;p&gt;En este artículo mostraré cómo hospedar/mostrar una aplicación &lt;strong&gt;ASP.NET Core&lt;/strong&gt; dentro de una aplicación &lt;strong&gt;UWP&lt;/strong&gt; en Windows.&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Windows 11 Insider Preview Build 25126&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>¿Por qué elegir aplicaciones de escritorio en 2022?</title>
+      <link>http://localhost:1313/posts/2022-07-13-why-desktop-apps-in-2022/</link>
+      <pubDate>Wed, 13 Jul 2022 23:16:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2022-07-13-why-desktop-apps-in-2022/</guid>
+      <description>&lt;p&gt;En este corto artículo intentaré convencerlos de por qué sigue siendo bueno y rentable crear aplicaciones de escritorio en 2022.&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Windows 11 Insider Preview Build 25158&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Migración UWP a WinUI 3</title>
+      <link>http://localhost:1313/posts/2022-07-06-upgrade-uwp-to-winui3/</link>
+      <pubDate>Wed, 06 Jul 2022 00:12:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2022-07-06-upgrade-uwp-to-winui3/</guid>
+      <description>&lt;p&gt;¡Feliz cumple para mí! Arranco mi día con un artículo (es día de festejo así que será complicado cumplir con la comunidad).&lt;/p&gt;&#xA;&lt;p&gt;En este artículo haré una migración de &lt;strong&gt;UWP&lt;/strong&gt; a &lt;strong&gt;WinUI 3&lt;/strong&gt; sin que se complique demasiado.&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Windows 11 Insider Preview Build 25151&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Java con WSL parte 2</title>
+      <link>http://localhost:1313/posts/2022-06-29-java-with-wsl-part-2/</link>
+      <pubDate>Wed, 29 Jun 2022 20:47:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2022-06-29-java-with-wsl-part-2/</guid>
+      <description>&lt;p&gt;En este artículo mostraré cómo desarrollar una pequeña aplicación web en &lt;strong&gt;Java&lt;/strong&gt; corriendo sobre &lt;strong&gt;WSL (Windows Subsystem for Linux)&lt;/strong&gt;. En el &lt;a href=&#34;http://localhost:1313/posts/2022-06-22-java-with-wsl-part-1/&#34; &gt;artículo anterior&lt;/a&gt; hemos visto como preparar &lt;strong&gt;Visual Studio Code&lt;/strong&gt; para &lt;strong&gt;Java&lt;/strong&gt; sobre &lt;strong&gt;WSL (Windows Subsystem for Linux)&lt;/strong&gt;.&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Windows 11 Insider Preview Build 25151&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Java con WSL parte 1</title>
+      <link>http://localhost:1313/posts/2022-06-22-java-with-wsl-part-1/</link>
+      <pubDate>Wed, 22 Jun 2022 18:19:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2022-06-22-java-with-wsl-part-1/</guid>
+      <description>&lt;p&gt;En este artículo mostraré cómo instalar y preparar el entorno para el desarrollo de &lt;strong&gt;Java&lt;/strong&gt; sobre &lt;strong&gt;Windows Subsystem for Linux (WSL)&lt;/strong&gt;.&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Windows 11 Insider Preview Build 25145&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>ASP.NET Core en Ubuntu</title>
+      <link>http://localhost:1313/posts/2022-06-15-aspnet-core-on-ubuntu/</link>
+      <pubDate>Wed, 15 Jun 2022 12:08:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2022-06-15-aspnet-core-on-ubuntu/</guid>
+      <description>&lt;p&gt;En este artículo mostraré cómo ejecutar una aplicación &lt;strong&gt;ASP.NET Core&lt;/strong&gt; sobre &lt;strong&gt;Windows Subsystem for Linux&lt;/strong&gt;, es decir, alojar un servidor web en Ubuntu para ejecutar nuestra aplicación web.&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Windows 11 Insider Preview Build 25140&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Desarrollo de aplicaciones NodeJs en WSL</title>
+      <link>http://localhost:1313/posts/2022-06-08-app-nodejs-in-wsl/</link>
+      <pubDate>Wed, 08 Jun 2022 18:07:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2022-06-08-app-nodejs-in-wsl/</guid>
+      <description>&lt;p&gt;En este artículo mostraré como instalar &lt;strong&gt;Node.js&lt;/strong&gt; en &lt;strong&gt;WSL&lt;/strong&gt;. También, veremos como escribir código, compilar y ejecutarlo en &lt;strong&gt;WSL&lt;/strong&gt; desde &lt;strong&gt;Visual Studio Code&lt;/strong&gt;.&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Windows 11 Insider Preview Build 25131&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>WSL: Ejecutar aplicaciones con GUI Linux</title>
+      <link>http://localhost:1313/posts/2022-06-01-wsl-run-apps-gui-ubuntu/</link>
+      <pubDate>Wed, 01 Jun 2022 18:32:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2022-06-01-wsl-run-apps-gui-ubuntu/</guid>
+      <description>&lt;p&gt;En este artículo mostraré cómo utilizar aplicaciones Linux (con interfaz de usuario) gracias a &lt;strong&gt;Windows Subsystem for Linux&lt;/strong&gt; .&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Windows 11 Insider Preview Build 22621&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Estructura básica de un proyecto con Windows App SDK</title>
+      <link>http://localhost:1313/posts/2022-05-25-basic-struct-of-windows-app-sdk-project/</link>
+      <pubDate>Wed, 25 May 2022 18:45:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2022-05-25-basic-struct-of-windows-app-sdk-project/</guid>
+      <description>&lt;p&gt;En este artículo intentaré explicar lo que entiendo es la estructura básica de &lt;strong&gt;Windows App SDK&lt;/strong&gt;, pues resulta algo nuevo para mí (en el pasado desarrollaba con WPF y después con UWP en sus inicios). En un &lt;a href=&#34;http://localhost:1313/posts/2022-05-18-windows-app-sdk-development/&#34; &gt;artículo anterior&lt;/a&gt; hemos visto los primeros pasos en esta plataforma.&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Windows 11 Insider Preview Build 25126&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Desarrollo en Windows App SDK</title>
+      <link>http://localhost:1313/posts/2022-05-18-windows-app-sdk-development/</link>
+      <pubDate>Wed, 18 May 2022 21:56:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2022-05-18-windows-app-sdk-development/</guid>
+      <description>&lt;p&gt;En este articulo, mostraré cómo empezar con el desarrollo con Windows App SDK especialmente diseñado para Widnows 11 y ciertas versiones de Windows 10 (superior a la versión 1809).&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Windows 11 Insider Preview Build 22621&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>UWP en Windows 11</title>
+      <link>http://localhost:1313/posts/2022-05-11-uwp-in-windows-11/</link>
+      <pubDate>Wed, 11 May 2022 19:53:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2022-05-11-uwp-in-windows-11/</guid>
+      <description>&lt;p&gt;En este artículo mostraré cómo crear una aplicación UWP (Universal Windows Platform) en Windows 11 (aunque ya debemos ir dejándola ;)).&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Windows 11 Insider Preview Build 22621&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Git y WSL</title>
+      <link>http://localhost:1313/posts/2022-05-04-git-and-wsl/</link>
+      <pubDate>Wed, 04 May 2022 13:48:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2022-05-04-git-and-wsl/</guid>
+      <description>&lt;p&gt;En este artículo mostraré cómo instalar o actualizar git dentro de &lt;strong&gt;Windows Subsystem for Linux&lt;/strong&gt; de modo a poder clonar repositorio desde y hacia &lt;strong&gt;GitHub&lt;/strong&gt;. En un &lt;a href=&#34;http://localhost:1313/posts/2022-04-26-configuring-my-wsl-environment/&#34; &gt;artículo anterior&lt;/a&gt; hemos visto cómo habilitar la plataforma &lt;strong&gt;Windows Subsystem for Linux&lt;/strong&gt;.&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Windows 11 Insider Preview Build 22610&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>WSL sin internet</title>
+      <link>http://localhost:1313/posts/2022-04-27-wsl-no-internet/</link>
+      <pubDate>Wed, 27 Apr 2022 12:26:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2022-04-27-wsl-no-internet/</guid>
+      <description>&lt;p&gt;En este artículo mostraré cómo conectar a internet en &lt;strong&gt;Windows Subsystem for Linux&lt;/strong&gt; para cualquier distro (pero aquí siempre con Ubuntu) utilizando &lt;strong&gt;Windows Terminal&lt;/strong&gt;.&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Windows 11 Insider Preview Build 22598&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Configurando mi ambiente WSL</title>
+      <link>http://localhost:1313/posts/2022-04-26-configuring-my-wsl-environment/</link>
+      <pubDate>Tue, 26 Apr 2022 20:41:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2022-04-26-configuring-my-wsl-environment/</guid>
+      <description>&lt;p&gt;En este artículo mostraré cómo configurar un ambiente de desarrollo WSL (Windows Subsystem Linux) dentro de Windows para el desarrollo de aplicaciones en múltiples plataformas (que en el futuro iré asociando a este artículo). Para este artículo ya tenemos disponible la nueva distro de Ubuntu 22.04 (recientemente lanzada).&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Windows 11 Insider Preview Build 22598&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Introducción a Windows Fluent Design System</title>
+      <link>http://localhost:1313/posts/2022-04-25-introduction-to-windows-fluent-system/</link>
+      <pubDate>Mon, 25 Apr 2022 19:22:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2022-04-25-introduction-to-windows-fluent-system/</guid>
+      <description>&lt;p&gt;En este artículo intentaré enteder y explicar qué es &lt;strong&gt;Windows Fluent Design System&lt;/strong&gt;, por qué es Open Source, para qué se utiliza y que se puede lograr con esto.&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Windows 11 Insider Preview Build 22598&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Integración de Azure DevOps con GitHub</title>
+      <link>http://localhost:1313/posts/2022-04-18-azure-devops-integration-with-github/</link>
+      <pubDate>Mon, 18 Apr 2022 23:24:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2022-04-18-azure-devops-integration-with-github/</guid>
+      <description>&lt;p&gt;En este artículo mostraré cómo integrar un repositorio GitHub, que lo hemos visto en &lt;a href=&#34;http://localhost:1313/posts/2022-04-04-create-repository-github&#34; &gt;este artículo&lt;/a&gt;, con Azure DevOps que lo hemos visto &lt;a href=&#34;http://localhost:1313/posts/2022-04-11-create-project-azure-devops/&#34; &gt;aquí&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Windows 11 Insider Preview Build 22598&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Crear un proyecto en Azure DevOps</title>
+      <link>http://localhost:1313/posts/2022-04-11-create-project-azure-devops/</link>
+      <pubDate>Mon, 11 Apr 2022 18:01:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2022-04-11-create-project-azure-devops/</guid>
+      <description>&lt;p&gt;En este artículo mostraré cómo crear un proyecto en Microsoft Azure DevOps para realizar todas las tareas relacionadas a CI/CD (Integración Contínua/Entrega Contíuna) con la plataforma Windows, sobre todo con UWP (Universal Windows Platform).&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Windows 11 Insider Preview Build 22593&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Crear un repositorio en GitHub</title>
+      <link>http://localhost:1313/posts/2022-04-04-create-repository-github/</link>
+      <pubDate>Mon, 04 Apr 2022 22:13:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2022-04-04-create-repository-github/</guid>
+      <description>&lt;p&gt;En este artículo mostraré cómo crear un repositorio en GitHub para poder integrarlo en el futuro con Azure DevOps.&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Windows 11 Insider Preview Build 22581&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>VS: Instalando Visual Studio 2022 Preview 1</title>
+      <link>http://localhost:1313/posts/2021-06-19-instalando-visual-studio-2022-preview/</link>
+      <pubDate>Sat, 19 Jun 2021 11:56:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2021-06-19-instalando-visual-studio-2022-preview/</guid>
+      <description>&lt;p&gt;El pasado 17 de junio, Microsoft ha lanzado la versión Preview del nuevo Visual Studio 2022, el cual posee muchas mejoras en cuanto a productividad se refiere. En este artículo mostraré el proceso de instalación de Visual Studio 2022 Preview 1.&lt;/p&gt;&#xA;&lt;p&gt;Para mayor detalle de las características del producto puedes ver &lt;a href=&#34;https://devblogs.microsoft.com/visualstudio/visual-studio-2022-preview-1-now-available/&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;aquí&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

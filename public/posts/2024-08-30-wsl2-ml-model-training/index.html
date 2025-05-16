@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  Entrenamiento de modelos de ML en WSL2 con CUDA y cuDNN · Christian Amado
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Christian Amado">
+<meta name="description" content="Con la llegada del soporte oficial de GPU a WSL2, Windows se transforma en una plataforma viable y potente para desarrollo de inteligencia artificial desde un entorno Linux real. Gracias a la integración de CUDA y cuDNN, es posible entrenar modelos intensivos directamente desde WSL2, sin necesidad de usar máquinas virtuales completas ni infraestructura en la nube.
+Este artículo guía el proceso completo de habilitación de GPU, instalación de herramientas y entrenamiento con PyTorch, incluyendo consideraciones prácticas, troubleshooting y optimización de recursos.">
+<meta name="keywords" content="blog,desarrollador,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Entrenamiento de modelos de ML en WSL2 con CUDA y cuDNN">
+  <meta name="twitter:description" content="Con la llegada del soporte oficial de GPU a WSL2, Windows se transforma en una plataforma viable y potente para desarrollo de inteligencia artificial desde un entorno Linux real. Gracias a la integración de CUDA y cuDNN, es posible entrenar modelos intensivos directamente desde WSL2, sin necesidad de usar máquinas virtuales completas ni infraestructura en la nube.
+Este artículo guía el proceso completo de habilitación de GPU, instalación de herramientas y entrenamiento con PyTorch, incluyendo consideraciones prácticas, troubleshooting y optimización de recursos.">
+
+<meta property="og:url" content="http://localhost:1313/posts/2024-08-30-wsl2-ml-model-training/">
+  <meta property="og:site_name" content="Christian Amado">
+  <meta property="og:title" content="Entrenamiento de modelos de ML en WSL2 con CUDA y cuDNN">
+  <meta property="og:description" content="Con la llegada del soporte oficial de GPU a WSL2, Windows se transforma en una plataforma viable y potente para desarrollo de inteligencia artificial desde un entorno Linux real. Gracias a la integración de CUDA y cuDNN, es posible entrenar modelos intensivos directamente desde WSL2, sin necesidad de usar máquinas virtuales completas ni infraestructura en la nube.
+Este artículo guía el proceso completo de habilitación de GPU, instalación de herramientas y entrenamiento con PyTorch, incluyendo consideraciones prácticas, troubleshooting y optimización de recursos.">
+  <meta property="og:locale" content="es">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-08-30T00:00:00-04:00">
+    <meta property="article:modified_time" content="2024-08-30T00:00:00-04:00">
+    <meta property="article:tag" content="WinDev">
+    <meta property="article:tag" content="Windows 11">
+    <meta property="article:tag" content="WSL">
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-V1ZRP82YFD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-V1ZRP82YFD');
+</script>
+
+
+
+<link rel="canonical" href="http://localhost:1313/posts/2024-08-30-wsl2-ml-model-training/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="apple-touch-icon" sizes="57x57" href="/img/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/img/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/img/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/img/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/img/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/img/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/img/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/img/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/img/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="/img/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/img/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+<link rel="manifest" href="/img/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/img/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/">
+      Christian Amado
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/about">Biografía</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/contact">Contacto</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/diabetes">Diabetes</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/tags">Etiquetas</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/en/">🇺🇸</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/posts/2024-08-30-wsl2-ml-model-training/">
+              Entrenamiento de modelos de ML en WSL2 con CUDA y cuDNN
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2024-08-30T00:00:00-04:00">
+                agosto 30, 2024
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              3 minutos de lectura.
+            </span>
+          </div>
+          
+          
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/tags/windev/">WinDev</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/windows-11/">Windows 11</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/wsl/">WSL</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <p>Con la llegada del soporte oficial de GPU a WSL2, Windows se transforma en una plataforma viable y potente para desarrollo de inteligencia artificial desde un entorno Linux real. Gracias a la integración de CUDA y cuDNN, es posible entrenar modelos intensivos directamente desde WSL2, sin necesidad de usar máquinas virtuales completas ni infraestructura en la nube.</p>
+<p>Este artículo guía el proceso completo de habilitación de GPU, instalación de herramientas y entrenamiento con PyTorch, incluyendo consideraciones prácticas, troubleshooting y optimización de recursos.</p>
+<h2 id="arquitectura-cómo-funciona-la-gpu-en-wsl2">
+  Arquitectura: cómo funciona la GPU en WSL2
+  <a class="heading-link" href="#arquitectura-c%c3%b3mo-funciona-la-gpu-en-wsl2">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ul>
+<li>WSL2 ejecuta un kernel Linux real dentro de una VM gestionada por Windows</li>
+<li>NVIDIA desarrolló un stack que permite exponer la GPU del host Windows al kernel Linux de WSL2</li>
+<li>La interfaz expuesta es <code>libcuda.so</code>, compatible con CUDA Toolkit y cuDNN</li>
+<li>Desde Linux, se puede usar <code>nvidia-smi</code>, <code>nvcc</code> y cualquier framework ML compatible con CUDA</li>
+</ul>
+<h2 id="verificar-drivers-nvidia-en-windows">
+  Verificar drivers NVIDIA en Windows
+  <a class="heading-link" href="#verificar-drivers-nvidia-en-windows">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Es importante instalar la versión correcta del driver para CUDA en WSL2:</p>
+<ol>
+<li>Descargar desde: <a href="https://developer.nvidia.com/cuda/wsl"  class="external-link" target="_blank" rel="noopener">https://developer.nvidia.com/cuda/wsl</a></li>
+<li>Verificar en PowerShell:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">nvidia-smi</span>
+</span></span></code></pre></div><p>Se debe ver la versión del driver y el modelo de la GPU (ej: RTX 3080).</p>
+<h2 id="preparar-el-entorno-wsl2">
+  Preparar el entorno WSL2
+  <a class="heading-link" href="#preparar-el-entorno-wsl2">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Crear una distro Ubuntu específica para ML:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">wsl --install -d Ubuntu
+</span></span></code></pre></div><p>O usar una distro existente y prepararla:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt update <span class="o">&amp;&amp;</span> sudo apt upgrade -y
+</span></span><span class="line"><span class="cl">sudo apt install -y python3 python3-venv build-essential nvidia-cuda-toolkit
+</span></span></code></pre></div><p>Verificar acceso:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">nvidia-smi
+</span></span></code></pre></div><p>Si aparece “No devices were found”, cerrar con <code>wsl --shutdown</code> y reiniciar.</p>
+<h2 id="crear-entorno-virtual-para-ml">
+  Crear entorno virtual para ML
+  <a class="heading-link" href="#crear-entorno-virtual-para-ml">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">python3 -m venv ~/.venvs/ml
+</span></span><span class="line"><span class="cl"><span class="nb">source</span> ~/.venvs/ml/bin/activate
+</span></span><span class="line"><span class="cl">pip install --upgrade pip
+</span></span></code></pre></div><p>Instalar bibliotecas de IA con soporte CUDA:</p>
+<h3 id="pytorch-cuda-118">
+  PyTorch (CUDA 11.8):
+  <a class="heading-link" href="#pytorch-cuda-118">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+</span></span></code></pre></div><h3 id="tensorflow-cuda-112">
+  TensorFlow (CUDA 11.2+):
+  <a class="heading-link" href="#tensorflow-cuda-112">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">pip install tensorflow
+</span></span></code></pre></div><h2 id="validar-entorno-con-pytorch">
+  Validar entorno con PyTorch
+  <a class="heading-link" href="#validar-entorno-con-pytorch">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">torch</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;GPU detectada:&#34;</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">get_device_name</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;CUDA no está disponible.&#34;</span><span class="p">)</span>
+</span></span></code></pre></div><h2 id="caso-práctico-entrenamiento-con-gpu">
+  Caso práctico: entrenamiento con GPU
+  <a class="heading-link" href="#caso-pr%c3%a1ctico-entrenamiento-con-gpu">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="código-completo-pytorch">
+  Código completo (PyTorch)
+  <a class="heading-link" href="#c%c3%b3digo-completo-pytorch">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">torch</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">nn</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">torch.utils.data</span> <span class="kn">import</span> <span class="n">DataLoader</span><span class="p">,</span> <span class="n">TensorDataset</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Datos sintéticos</span>
+</span></span><span class="line"><span class="cl"><span class="n">X</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">5000</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">y</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">5000</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Dataset</span>
+</span></span><span class="line"><span class="cl"><span class="n">ds</span> <span class="o">=</span> <span class="n">TensorDataset</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">loader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">64</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Modelo simple</span>
+</span></span><span class="line"><span class="cl"><span class="n">model</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">128</span><span class="p">),</span> <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">cuda</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">loss_fn</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">MSELoss</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Entrenamiento</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">batch_x</span><span class="p">,</span> <span class="n">batch_y</span> <span class="ow">in</span> <span class="n">loader</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">batch_x</span><span class="p">,</span> <span class="n">batch_y</span> <span class="o">=</span> <span class="n">batch_x</span><span class="o">.</span><span class="n">cuda</span><span class="p">(),</span> <span class="n">batch_y</span><span class="o">.</span><span class="n">cuda</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="n">pred</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">batch_x</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">loss</span> <span class="o">=</span> <span class="n">loss_fn</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span> <span class="n">batch_y</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;Epoch </span><span class="si">{</span><span class="n">epoch</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">, Loss: </span><span class="si">{</span><span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">()</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span></code></pre></div><h2 id="optimización-y-monitoreo">
+  Optimización y monitoreo
+  <a class="heading-link" href="#optimizaci%c3%b3n-y-monitoreo">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="monitoreo-de-gpu">
+  Monitoreo de GPU
+  <a class="heading-link" href="#monitoreo-de-gpu">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Desde WSL2:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">watch -n <span class="m">1</span> nvidia-smi
+</span></span></code></pre></div><p>O usar <code>gpustat</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">pip install gpustat
+</span></span><span class="line"><span class="cl">gpustat
+</span></span></code></pre></div><h3 id="control-de-dispositivos">
+  Control de dispositivos
+  <a class="heading-link" href="#control-de-dispositivos">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Si se desea usar una sola GPU en multi-GPU:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nv">CUDA_VISIBLE_DEVICES</span><span class="o">=</span><span class="m">0</span> python train.py
+</span></span></code></pre></div><h3 id="configurar-uso-mixto-de-cpugpu">
+  Configurar uso mixto de CPU/GPU
+  <a class="heading-link" href="#configurar-uso-mixto-de-cpugpu">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&#34;cuda&#34;</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="s2">&#34;cpu&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">model</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+</span></span></code></pre></div><h2 id="buenas-prácticas">
+  Buenas prácticas
+  <a class="heading-link" href="#buenas-pr%c3%a1cticas">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ul>
+<li>Activar entorno virtual siempre (<code>source ~/.venvs/ml/bin/activate</code>)</li>
+<li>Mantener requirements.txt actualizado (<code>pip freeze &gt; requirements.txt</code>)</li>
+<li>Usar notebooks desde VS Code con Remote WSL + Jupyter</li>
+<li>Evitar ejecutar entrenamiento desde <code>/mnt/c/</code> (mejor rendimiento en <code>~/</code>)</li>
+<li>Desactivar reenvíos de puertos innecesarios en WSL para liberar recursos</li>
+</ul>
+<h2 id="conclusión">
+  Conclusión
+  <a class="heading-link" href="#conclusi%c3%b3n">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>WSL2 con soporte CUDA y cuDNN permite ejecutar flujos completos de entrenamiento de IA con aceleración por GPU directamente desde Windows. Esta arquitectura híbrida simplifica el desarrollo y la depuración, al mismo tiempo que mantiene la potencia y flexibilidad del ecosistema Linux para ciencia de datos y machine learning avanzado.</p>
+      </div>
+
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script>
+  window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "cmasblog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    
+    document.addEventListener('themeChanged', function (e) { 
+        if (document.readyState == 'complete') {
+          DISQUS.reset({ reload: true, config: disqus_config });
+        }
+    });
+</script>
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2018 -
+    
+    2025
+     Christian Amado 
+    ·
+    
+    Desarrollado por <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+      <script async src="https://www.googletagmanager.com/gtag/js?id=356375808"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '356375808');
+        }
+      </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=013131931956450466198%3ablhmkdpweyq"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '013131931956450466198:blhmkdpweyq');
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

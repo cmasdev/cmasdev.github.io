@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  Introducción a Blazor: Cambiando el paradigma del desarrollo web · Christian Amado
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Christian Amado">
+<meta name="description" content="El framework de Microsoft, está transformando el desarrollo web al permitir crear aplicaciones interactivas con C# y .NET, eliminando la necesidad de JavaScript. Con las mejoras de .NET 8, ofrece mayor rendimiento y flexibilidad, facilitando la creación de aplicaciones tanto en el cliente como en el servidor. Este artículo explora cómo Blazor redefine el desarrollo web y muestra cómo empezar a usarlo.">
+<meta name="keywords" content="blog,desarrollador,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Introducción a Blazor: Cambiando el paradigma del desarrollo web">
+  <meta name="twitter:description" content="El framework de Microsoft, está transformando el desarrollo web al permitir crear aplicaciones interactivas con C# y .NET, eliminando la necesidad de JavaScript. Con las mejoras de .NET 8, ofrece mayor rendimiento y flexibilidad, facilitando la creación de aplicaciones tanto en el cliente como en el servidor. Este artículo explora cómo Blazor redefine el desarrollo web y muestra cómo empezar a usarlo.">
+
+<meta property="og:url" content="http://localhost:1313/es/posts/2024-04-03-intro-blazor/">
+  <meta property="og:site_name" content="Christian Amado">
+  <meta property="og:title" content="Introducción a Blazor: Cambiando el paradigma del desarrollo web">
+  <meta property="og:description" content="El framework de Microsoft, está transformando el desarrollo web al permitir crear aplicaciones interactivas con C# y .NET, eliminando la necesidad de JavaScript. Con las mejoras de .NET 8, ofrece mayor rendimiento y flexibilidad, facilitando la creación de aplicaciones tanto en el cliente como en el servidor. Este artículo explora cómo Blazor redefine el desarrollo web y muestra cómo empezar a usarlo.">
+  <meta property="og:locale" content="es">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-04-03T00:00:00-04:00">
+    <meta property="article:modified_time" content="2024-04-03T00:00:00-04:00">
+    <meta property="article:tag" content="Web Development">
+    <meta property="article:tag" content=".NET">
+    <meta property="article:tag" content="Blazor">
+
+
+
+
+<link rel="canonical" href="http://localhost:1313/es/posts/2024-04-03-intro-blazor/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/es/">
+      Christian Amado
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/about">Biografía</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/contact">Contacto</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/diabetes">Diabetes</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/tags">Etiquetas</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/en/">🇺🇸</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/es/posts/2024-04-03-intro-blazor/">
+              Introducción a Blazor: Cambiando el paradigma del desarrollo web
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2024-04-03T00:00:00-04:00">
+                abril 3, 2024
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              4 minutos de lectura.
+            </span>
+          </div>
+          
+          
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/es/tags/web-development/">Web Development</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/es/tags/.net/">.NET</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/es/tags/blazor/">Blazor</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <p>El framework de Microsoft, está transformando el desarrollo web al permitir crear aplicaciones interactivas con C# y .NET, eliminando la necesidad de JavaScript. Con las mejoras de .NET 8, ofrece mayor rendimiento y flexibilidad, facilitando la creación de aplicaciones tanto en el cliente como en el servidor. Este artículo explora cómo Blazor redefine el desarrollo web y muestra cómo empezar a usarlo.</p>
+<h2 id="qué-es-blazor">
+  ¿Qué es Blazor?
+  <a class="heading-link" href="#qu%c3%a9-es-blazor">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Blazor es un framework de desarrollo web de <strong>Microsoft</strong> que permite construir aplicaciones web interactivas utilizando <strong>C# y .NET</strong> en lugar de depender exclusivamente de <strong>JavaScript</strong>. Lanzado inicialmente como una alternativa a frameworks como Angular o React, Blazor ha evolucionado significativamente, y con la llegada de <strong>.NET 8</strong>, sus capacidades y rendimiento han alcanzado nuevos niveles.</p>
+<h3 id="por-qué-blazor-es-revolucionario">
+  ¿Por qué Blazor es revolucionario?
+  <a class="heading-link" href="#por-qu%c3%a9-blazor-es-revolucionario">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Blazor introduce un cambio importante al permitir que los desarrolladores trabajen en aplicaciones web sin salir del ecosistema .NET. Esto reduce la necesidad de manejar múltiples lenguajes y frameworks en un solo proyecto. Además, Blazor está diseñado para cubrir diversos escenarios:</p>
+<ul>
+<li><strong>Blazor Server:</strong> Renderiza componentes en el servidor y envía actualizaciones al cliente a través de SignalR.</li>
+<li><strong>Blazor WebAssembly (WASM):</strong> Ejecuta la aplicación directamente en el navegador, utilizando WebAssembly para una experiencia completamente client-side.</li>
+<li><strong>Blazor en .NET MAUI:</strong> Permite usar Blazor para construir aplicaciones de escritorio y móviles.</li>
+</ul>
+<p>Con <strong>.NET 8</strong>, estas capacidades han sido optimizadas para ofrecer un mejor rendimiento y una experiencia de desarrollo más fluida.</p>
+<hr>
+<h2 id="ventajas-de-usar-blazor-en-net-8">
+  Ventajas de usar Blazor en .NET 8
+  <a class="heading-link" href="#ventajas-de-usar-blazor-en-net-8">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ol>
+<li>
+<p><strong>Un único lenguaje para todo:</strong><br>
+Con Blazor, puedes desarrollar aplicaciones completas utilizando <strong>C#</strong>, eliminando la necesidad de escribir código en JavaScript para el frontend.</p>
+</li>
+<li>
+<p><strong>Rendimiento mejorado en WebAssembly:</strong><br>
+La llegada de .NET 8 ha reducido los tiempos de carga inicial en Blazor WebAssembly, gracias a la optimización de su tamaño y mejor manejo de caché.</p>
+</li>
+<li>
+<p><strong>Integración con el ecosistema .NET:</strong><br>
+Blazor se integra perfectamente con APIs .NET, Entity Framework, Azure, y bibliotecas de terceros.</p>
+</li>
+<li>
+<p><strong>Componentes reutilizables:</strong><br>
+Blazor permite crear componentes UI que son reutilizables en distintas partes de una aplicación, similar a otros frameworks modernos como React.</p>
+</li>
+<li>
+<p><strong>Compatibilidad con JavaScript:</strong><br>
+Aunque elimina la dependencia de JavaScript, Blazor permite interactuar con librerías JavaScript cuando sea necesario.</p>
+</li>
+</ol>
+<hr>
+<h2 id="blazor-en-acción-un-ejemplo-práctico">
+  Blazor en acción: Un ejemplo práctico
+  <a class="heading-link" href="#blazor-en-acci%c3%b3n-un-ejemplo-pr%c3%a1ctico">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="paso-1-creación-de-un-proyecto-blazor">
+  Paso 1: Creación de un proyecto Blazor
+  <a class="heading-link" href="#paso-1-creaci%c3%b3n-de-un-proyecto-blazor">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Primero, asegúrate de tener instalada la última versión de .NET 8. Luego, crea un nuevo proyecto Blazor WebAssembly desde la CLI de .NET:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">dotnet new blazorwasm -o BlazorApp
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> BlazorApp
+</span></span><span class="line"><span class="cl">dotnet run
+</span></span></code></pre></div><p>Este comando genera una aplicación Blazor básica. Accede a <code>http://localhost:5000</code> para verla en funcionamiento.</p>
+<h3 id="paso-2-crear-un-componente-de-contador">
+  Paso 2: Crear un componente de contador
+  <a class="heading-link" href="#paso-2-crear-un-componente-de-contador">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Edita el archivo <code>Counter.razor</code> para personalizar el contador:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">@page &#34;/counter&#34;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">&lt;h3&gt;Contador&lt;/h3&gt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">&lt;p&gt;Contador actual: @count&lt;/p&gt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">&lt;button class=&#34;btn btn-primary&#34; @onclick=&#34;IncrementarContador&#34;&gt;Incrementar&lt;/button&gt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">@code {
+</span></span><span class="line"><span class="cl">    private int count = 0;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    private void IncrementarContador()
+</span></span><span class="line"><span class="cl">    {
+</span></span><span class="line"><span class="cl">        count++;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></div><h3 id="paso-3-agregar-estilos-personalizados">
+  Paso 3: Agregar estilos personalizados
+  <a class="heading-link" href="#paso-3-agregar-estilos-personalizados">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Puedes personalizar los estilos en el archivo <code>wwwroot/css/app.css</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="nt">button</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">font-size</span><span class="p">:</span> <span class="mf">1.2</span><span class="kt">rem</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">padding</span><span class="p">:</span> <span class="mi">10</span><span class="kt">px</span> <span class="mi">20</span><span class="kt">px</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">margin-top</span><span class="p">:</span> <span class="mi">10</span><span class="kt">px</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Este simple ejemplo muestra cómo Blazor permite crear componentes interactivos utilizando únicamente C#.</p>
+<hr>
+<h2 id="blazor-y-el-futuro-del-desarrollo-web">
+  Blazor y el futuro del desarrollo web
+  <a class="heading-link" href="#blazor-y-el-futuro-del-desarrollo-web">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Con la llegada de <strong>.NET 8</strong>, Microsoft ha reforzado su compromiso con Blazor como una herramienta clave para el desarrollo web. Algunas de las mejoras que destacan en esta versión incluyen:</p>
+<ul>
+<li>
+<p><strong>Mejoras en el soporte de WebAssembly:</strong></p>
+<ul>
+<li>Reducción del tiempo de carga inicial.</li>
+<li>Implementación de AOT (Ahead-of-Time Compilation) para optimizar el rendimiento.</li>
+</ul>
+</li>
+<li>
+<p><strong>Blazor United:</strong><br>
+Introducción de un enfoque híbrido que combina las ventajas de Blazor Server y WebAssembly, permitiendo cambiar dinámicamente entre ambos modelos según las necesidades de la aplicación.</p>
+</li>
+<li>
+<p><strong>Integración con .NET MAUI:</strong><br>
+Blazor ahora puede usarse para desarrollar aplicaciones de escritorio y móviles con un solo código base.</p>
+</li>
+</ul>
+<hr>
+<h2 id="cuándo-elegir-blazor-para-tu-proyecto">
+  Cuándo elegir Blazor para tu proyecto
+  <a class="heading-link" href="#cu%c3%a1ndo-elegir-blazor-para-tu-proyecto">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Blazor es una excelente opción si:</p>
+<ol>
+<li>Tu equipo ya está familiarizado con el ecosistema .NET.</li>
+<li>Necesitas desarrollar aplicaciones web rápidamente sin aprender un nuevo lenguaje como JavaScript.</li>
+<li>Quieres aprovechar las capacidades de WebAssembly para mejorar la experiencia del cliente.</li>
+<li>Planeas integrar tu aplicación con otros servicios en Azure o APIs basadas en .NET.</li>
+</ol>
+<hr>
+<h2 id="conclusión">
+  Conclusión
+  <a class="heading-link" href="#conclusi%c3%b3n">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Blazor está cambiando el paradigma del desarrollo web al eliminar la necesidad de separar el frontend y backend en lenguajes diferentes. Gracias a .NET 8, las aplicaciones Blazor son más rápidas, ligeras y fáciles de desarrollar que nunca.</p>
+<p>Si todavía no has probado Blazor, ahora es el momento perfecto para sumergirte en esta tecnología y descubrir cómo puede transformar tus proyectos web. Con un lenguaje unificado y un ecosistema robusto, Blazor está listo para liderar el futuro del desarrollo web.</p>
+      </div>
+
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script>
+  window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "cmasblog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    
+    document.addEventListener('themeChanged', function (e) { 
+        if (document.readyState == 'complete') {
+          DISQUS.reset({ reload: true, config: disqus_config });
+        }
+    });
+</script>
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2018 -
+    
+    2025
+     Christian Amado 
+    ·
+    
+    Desarrollado por <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+      <script async src="https://www.googletagmanager.com/gtag/js?id=356375808"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '356375808');
+        }
+      </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=013131931956450466198%3ablhmkdpweyq"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '013131931956450466198:blhmkdpweyq');
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  Internals de WSL 2: Cómo funciona el kernel Linux integrado en Windows · Christian Amado
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Christian Amado">
+<meta name="description" content="El Subsistema de Windows para Linux (WSL) ha transformado significativamente el desarrollo en entornos Windows, permitiendo ejecutar distribuciones de Linux directamente en Windows sin necesidad de virtualización completa. Con WSL 2, Microsoft introdujo un cambio radical: un kernel de Linux real corriendo sobre un sistema basado en hipervisor. En este artículo, exploraremos en detalle cómo funciona este kernel integrado y qué lo hace tan eficiente.">
+<meta name="keywords" content="blog,desarrollador,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Internals de WSL 2: Cómo funciona el kernel Linux integrado en Windows">
+  <meta name="twitter:description" content="El Subsistema de Windows para Linux (WSL) ha transformado significativamente el desarrollo en entornos Windows, permitiendo ejecutar distribuciones de Linux directamente en Windows sin necesidad de virtualización completa. Con WSL 2, Microsoft introdujo un cambio radical: un kernel de Linux real corriendo sobre un sistema basado en hipervisor. En este artículo, exploraremos en detalle cómo funciona este kernel integrado y qué lo hace tan eficiente.">
+
+<meta property="og:url" content="http://localhost:1313/es/posts/2025-01-07-internals-wsl-2/">
+  <meta property="og:site_name" content="Christian Amado">
+  <meta property="og:title" content="Internals de WSL 2: Cómo funciona el kernel Linux integrado en Windows">
+  <meta property="og:description" content="El Subsistema de Windows para Linux (WSL) ha transformado significativamente el desarrollo en entornos Windows, permitiendo ejecutar distribuciones de Linux directamente en Windows sin necesidad de virtualización completa. Con WSL 2, Microsoft introdujo un cambio radical: un kernel de Linux real corriendo sobre un sistema basado en hipervisor. En este artículo, exploraremos en detalle cómo funciona este kernel integrado y qué lo hace tan eficiente.">
+  <meta property="og:locale" content="es">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-01-07T00:00:00-04:00">
+    <meta property="article:modified_time" content="2025-01-07T00:00:00-04:00">
+    <meta property="article:tag" content="WinDev">
+    <meta property="article:tag" content="WSL">
+
+
+
+
+<link rel="canonical" href="http://localhost:1313/es/posts/2025-01-07-internals-wsl-2/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/es/">
+      Christian Amado
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/about">Biografía</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/contact">Contacto</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/diabetes">Diabetes</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/tags">Etiquetas</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/en/">🇺🇸</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/es/posts/2025-01-07-internals-wsl-2/">
+              Internals de WSL 2: Cómo funciona el kernel Linux integrado en Windows
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2025-01-07T00:00:00-04:00">
+                enero 7, 2025
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              4 minutos de lectura.
+            </span>
+          </div>
+          
+          
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/es/tags/windev/">WinDev</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/es/tags/wsl/">WSL</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <p>El Subsistema de Windows para Linux (WSL) ha transformado significativamente el desarrollo en entornos <strong>Windows</strong>, permitiendo ejecutar distribuciones de Linux directamente en Windows sin necesidad de virtualización completa. Con <strong>WSL 2</strong>, Microsoft introdujo un cambio radical: un kernel de Linux real corriendo sobre un sistema basado en hipervisor. En este artículo, exploraremos en detalle cómo funciona este kernel integrado y qué lo hace tan eficiente.</p>
+<h2 id="introducción-al-wsl-2">
+  Introducción al WSL 2
+  <a class="heading-link" href="#introducci%c3%b3n-al-wsl-2">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>WSL 2 es la segunda iteración del Subsistema de Windows para Linux. A diferencia de su predecesor (WSL 1), que traducía llamadas del sistema Linux a equivalentes de Windows, WSL 2 utiliza un kernel Linux completo. Esto lo hace más compatible y considerablemente más rápido en operaciones intensivas de E/S.</p>
+<h2 id="arquitectura-de-wsl-2">
+  Arquitectura de WSL 2
+  <a class="heading-link" href="#arquitectura-de-wsl-2">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>WSL 2 introduce un cambio clave: utiliza una máquina virtual ligera basada en Hyper-V para ejecutar un kernel Linux real. A continuación, desglosamos los componentes principales:</p>
+<ol>
+<li>
+<p><strong>Kernel Linux nativo</strong>:</p>
+<ul>
+<li>Microsoft compila un kernel Linux personalizado, optimizado para WSL.</li>
+<li>Este kernel se ejecuta en una máquina virtual ligera y recibe actualizaciones a través de Windows Update.</li>
+<li>Compatible con módulos y herramientas estándar de Linux.</li>
+</ul>
+</li>
+<li>
+<p><strong>Hyper-V como hipervisor</strong>:</p>
+<ul>
+<li>Hyper-V actúa como base para la virtualización.</li>
+<li>Utiliza tecnología de aislamiento para ejecutar el kernel de Linux en un entorno seguro y eficiente, sin el peso de una VM completa.</li>
+</ul>
+</li>
+<li>
+<p><strong>Interacción con Windows</strong>:</p>
+<ul>
+<li>A través de un sistema de integración, WSL 2 permite que Linux y Windows compartan recursos, como el sistema de archivos.</li>
+<li>Esto incluye acceso bidireccional al sistema de archivos, compatibilidad con puertos de red, y la capacidad de ejecutar comandos de Linux desde PowerShell o el símbolo del sistema.</li>
+</ul>
+</li>
+</ol>
+<h2 id="cómo-funciona-el-kernel-de-linux-en-wsl-2">
+  Cómo funciona el kernel de Linux en WSL 2
+  <a class="heading-link" href="#c%c3%b3mo-funciona-el-kernel-de-linux-en-wsl-2">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>El kernel de Linux en WSL 2 es la pieza clave que proporciona compatibilidad total con las distribuciones de Linux.</p>
+<h3 id="1-inicio-del-kernel">
+  1. <strong>Inicio del kernel</strong>
+  <a class="heading-link" href="#1-inicio-del-kernel">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>Al iniciar WSL 2, Windows lanza una instancia del kernel Linux en una máquina virtual ligera. Este proceso es extremadamente rápido, ya que la VM está optimizada para ser liviana y ejecutarse en segundo plano.</li>
+<li>El kernel es una compilación personalizada basada en la versión principal del kernel de Linux, asegurando compatibilidad con herramientas modernas.</li>
+</ul>
+<h3 id="2-sistema-de-archivos">
+  2. <strong>Sistema de archivos</strong>
+  <a class="heading-link" href="#2-sistema-de-archivos">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>WSL 2 utiliza un sistema de archivos virtualizado para integrar Linux y Windows.</li>
+<li>El sistema de archivos de Windows (<code>C:\</code>) se monta automáticamente dentro del entorno Linux en <code>/mnt/c</code>.</li>
+<li>Las operaciones en archivos son mucho más rápidas gracias a la virtualización basada en bloques.</li>
+</ul>
+<h3 id="3-interfaz-de-red">
+  3. <strong>Interfaz de red</strong>
+  <a class="heading-link" href="#3-interfaz-de-red">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>El kernel Linux tiene acceso completo a una pila de red virtualizada.</li>
+<li>Puedes ejecutar servicios Linux y exponerlos a través de <code>localhost</code> en Windows, lo que permite una integración perfecta con herramientas de desarrollo como servidores web.</li>
+</ul>
+<h3 id="4-actualizaciones-del-kernel">
+  4. <strong>Actualizaciones del kernel</strong>
+  <a class="heading-link" href="#4-actualizaciones-del-kernel">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>El kernel Linux en WSL 2 se actualiza automáticamente a través de Windows Update.</li>
+<li>Esto asegura que siempre tengas una versión segura y compatible sin necesidad de intervención manual.</li>
+</ul>
+<h2 id="beneficios-técnicos-de-wsl-2">
+  Beneficios técnicos de WSL 2
+  <a class="heading-link" href="#beneficios-t%c3%a9cnicos-de-wsl-2">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="mayor-rendimiento">
+  Mayor rendimiento
+  <a class="heading-link" href="#mayor-rendimiento">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>El uso de un kernel Linux nativo elimina la necesidad de traducción de llamadas al sistema, lo que mejora significativamente el rendimiento en tareas como compilación de código o acceso al sistema de archivos.</p>
+<h3 id="compatibilidad-completa">
+  Compatibilidad completa
+  <a class="heading-link" href="#compatibilidad-completa">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>WSL 2 es compatible con herramientas estándar de Linux como Docker, gracias a la implementación de características avanzadas como <code>cgroups</code> y namespaces.</p>
+<h3 id="consumo-eficiente-de-recursos">
+  Consumo eficiente de recursos
+  <a class="heading-link" href="#consumo-eficiente-de-recursos">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Aunque utiliza virtualización, WSL 2 es notablemente más liviano que las máquinas virtuales tradicionales. La VM de WSL 2 se adapta dinámicamente al uso de recursos, liberando memoria y CPU cuando no se necesita.</p>
+<h2 id="limitaciones-y-desafíos">
+  Limitaciones y desafíos
+  <a class="heading-link" href="#limitaciones-y-desaf%c3%ados">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>A pesar de sus ventajas, WSL 2 tiene algunas limitaciones que deben tenerse en cuenta:</p>
+<ul>
+<li><strong>Requiere virtualización habilitada</strong>: WSL 2 depende de Hyper-V, por lo que no es compatible con sistemas donde no se puede habilitar la virtualización.</li>
+<li><strong>Compatibilidad con el sistema de archivos</strong>: Aunque es mucho más rápido que WSL 1, las operaciones en archivos alojados en Windows (<code>/mnt/c</code>) pueden ser más lentas que en el sistema de archivos nativo de Linux.</li>
+<li><strong>Reinicio al cambiar configuraciones</strong>: Algunos cambios de configuración en WSL 2, como ajustes de memoria o CPU, requieren reiniciar la instancia.</li>
+</ul>
+<h2 id="casos-prácticos">
+  Casos prácticos
+  <a class="heading-link" href="#casos-pr%c3%a1cticos">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>WSL 2 es ideal para:</p>
+<ul>
+<li>Ejecutar entornos de desarrollo Linux en Windows (Node.js, Python, Go, Ruby, etc.).</li>
+<li>Usar herramientas de línea de comandos de Linux, como <code>grep</code>, <code>awk</code> y <code>sed</code>.</li>
+<li>Ejecutar contenedores Docker directamente en Windows sin necesidad de una VM completa.</li>
+</ul>
+<h2 id="conclusión">
+  Conclusión
+  <a class="heading-link" href="#conclusi%c3%b3n">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p><strong>WSL 2</strong> representa un gran avance en la integración de <strong>Linux</strong> y <strong>Windows</strong>. Al utilizar un kernel Linux real y aprovechar la tecnología de virtualización de Hyper-V, ofrece un rendimiento y compatibilidad sin precedentes. Para desarrolladores que trabajan en entornos híbridos o que prefieren herramientas de Linux, WSL 2 es una solución imprescindible.</p>
+      </div>
+
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script>
+  window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "cmasblog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    
+    document.addEventListener('themeChanged', function (e) { 
+        if (document.readyState == 'complete') {
+          DISQUS.reset({ reload: true, config: disqus_config });
+        }
+    });
+</script>
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2018 -
+    
+    2025
+     Christian Amado 
+    ·
+    
+    Desarrollado por <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+      <script async src="https://www.googletagmanager.com/gtag/js?id=356375808"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '356375808');
+        }
+      </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=013131931956450466198%3ablhmkdpweyq"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '013131931956450466198:blhmkdpweyq');
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  Creando analizadores personalizados en C# con Roslyn · Christian Amado
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Christian Amado">
+<meta name="description" content="Mantener un código limpio, coherente y alineado con estándares internos es clave en proyectos profesionales. Aunque herramientas como SonarQube, StyleCop o ReSharper ayudan, a veces es necesario ir más allá y crear reglas personalizadas que se adapten a las necesidades específicas del equipo o la arquitectura.
+Con Roslyn, el compilador de C# y VB.NET, es posible crear analizadores (analyzers) que inspeccionen el código fuente, detecten patrones y ofrezcan sugerencias o advertencias en tiempo de compilación. En este artículo se muestra cómo crear, probar e integrar un analizador personalizado en un proyecto C#.">
+<meta name="keywords" content="blog,desarrollador,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Creando analizadores personalizados en C# con Roslyn">
+  <meta name="twitter:description" content="Mantener un código limpio, coherente y alineado con estándares internos es clave en proyectos profesionales. Aunque herramientas como SonarQube, StyleCop o ReSharper ayudan, a veces es necesario ir más allá y crear reglas personalizadas que se adapten a las necesidades específicas del equipo o la arquitectura.
+Con Roslyn, el compilador de C# y VB.NET, es posible crear analizadores (analyzers) que inspeccionen el código fuente, detecten patrones y ofrezcan sugerencias o advertencias en tiempo de compilación. En este artículo se muestra cómo crear, probar e integrar un analizador personalizado en un proyecto C#.">
+
+<meta property="og:url" content="http://localhost:1313/posts/2025-04-29-creating-analizers-in-csharp/">
+  <meta property="og:site_name" content="Christian Amado">
+  <meta property="og:title" content="Creando analizadores personalizados en C# con Roslyn">
+  <meta property="og:description" content="Mantener un código limpio, coherente y alineado con estándares internos es clave en proyectos profesionales. Aunque herramientas como SonarQube, StyleCop o ReSharper ayudan, a veces es necesario ir más allá y crear reglas personalizadas que se adapten a las necesidades específicas del equipo o la arquitectura.
+Con Roslyn, el compilador de C# y VB.NET, es posible crear analizadores (analyzers) que inspeccionen el código fuente, detecten patrones y ofrezcan sugerencias o advertencias en tiempo de compilación. En este artículo se muestra cómo crear, probar e integrar un analizador personalizado en un proyecto C#.">
+  <meta property="og:locale" content="es">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-04-29T00:00:00-03:00">
+    <meta property="article:modified_time" content="2025-04-29T00:00:00-03:00">
+    <meta property="article:tag" content=".NET">
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-V1ZRP82YFD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-V1ZRP82YFD');
+</script>
+
+
+
+<link rel="canonical" href="http://localhost:1313/posts/2025-04-29-creating-analizers-in-csharp/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="apple-touch-icon" sizes="57x57" href="/img/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/img/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/img/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/img/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/img/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/img/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/img/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/img/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/img/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="/img/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/img/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+<link rel="manifest" href="/img/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/img/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/">
+      Christian Amado
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/about">Biografía</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/contact">Contacto</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/diabetes">Diabetes</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/tags">Etiquetas</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/en/">🇺🇸</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/posts/2025-04-29-creating-analizers-in-csharp/">
+              Creando analizadores personalizados en C# con Roslyn
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2025-04-29T00:00:00-03:00">
+                abril 29, 2025
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              3 minutos de lectura.
+            </span>
+          </div>
+          
+          
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/tags/.net/">.NET</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <p>Mantener un código limpio, coherente y alineado con estándares internos es clave en proyectos profesionales. Aunque herramientas como <strong>SonarQube</strong>, <strong>StyleCop</strong> o <strong>ReSharper</strong> ayudan, a veces es necesario ir más allá y crear reglas personalizadas que se adapten a las necesidades específicas del equipo o la arquitectura.</p>
+<p>Con <strong>Roslyn</strong>, el compilador de <strong>C#</strong> y <strong>VB.NET</strong>, es posible crear analizadores (analyzers) que inspeccionen el código fuente, detecten patrones y ofrezcan sugerencias o advertencias en tiempo de compilación. En este artículo se muestra cómo crear, probar e integrar un analizador personalizado en un proyecto C#.</p>
+<h2 id="qué-es-roslyn">
+  ¿Qué es Roslyn?
+  <a class="heading-link" href="#qu%c3%a9-es-roslyn">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p><strong>Roslyn</strong> es el nombre clave del compilador de código abierto de .NET que permite acceder al análisis del código fuente como un modelo estructurado de árboles de sintaxis, semántica, símbolos, y mucho más.</p>
+<p>Con Roslyn es posible:</p>
+<ul>
+<li>Leer y analizar código fuente como árbol de sintaxis (AST).</li>
+<li>Modificar código o generar nuevo.</li>
+<li>Crear herramientas de refactorización.</li>
+<li>Desarrollar analizadores personalizados para detectar problemas en tiempo real en Visual Studio o en pipelines de CI.</li>
+</ul>
+<h2 id="escenario-detectar-clases-cuyo-nombre-no-termina-en-service">
+  Escenario: Detectar clases cuyo nombre no termina en &ldquo;Service&rdquo;
+  <a class="heading-link" href="#escenario-detectar-clases-cuyo-nombre-no-termina-en-service">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Supongamos que en una arquitectura basada en servicios, toda clase de capa de servicio debe terminar en <code>Service</code>. Si alguien crea una clase <code>UserHandler</code> en la capa de servicios, queremos advertirlo.</p>
+<h2 id="paso-1-crear-un-proyecto-de-analizador-con-plantilla-roslyn">
+  Paso 1: Crear un proyecto de analizador con plantilla Roslyn
+  <a class="heading-link" href="#paso-1-crear-un-proyecto-de-analizador-con-plantilla-roslyn">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">dotnet new analyzer -n NamingConventionAnalyzer
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> NamingConventionAnalyzer
+</span></span></code></pre></div><h2 id="paso-2-modificar-el-analizador-generado">
+  Paso 2: Modificar el analizador generado
+  <a class="heading-link" href="#paso-2-modificar-el-analizador-generado">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">System.Collections.Immutable</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">Microsoft.CodeAnalysis</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">Microsoft.CodeAnalysis.Diagnostics</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">Microsoft.CodeAnalysis.CSharp</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">Microsoft.CodeAnalysis.CSharp.Syntax</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">namespace</span> <span class="nn">NamingConventionAnalyzer</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="na">    [DiagnosticAnalyzer(LanguageNames.CSharp)]</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="k">class</span> <span class="nc">NamingConventionAnalyzer</span> <span class="p">:</span> <span class="n">DiagnosticAnalyzer</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">public</span> <span class="kd">const</span> <span class="kt">string</span> <span class="n">DiagnosticId</span> <span class="p">=</span> <span class="s">&#34;NC001&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">private</span> <span class="kd">static</span> <span class="k">readonly</span> <span class="n">LocalizableString</span> <span class="n">Title</span> <span class="p">=</span> <span class="s">&#34;Nombre de clase de servicio incorrecto&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">private</span> <span class="kd">static</span> <span class="k">readonly</span> <span class="n">LocalizableString</span> <span class="n">MessageFormat</span> <span class="p">=</span> <span class="s">&#34;La clase &#39;{0}&#39; debería terminar en &#39;Service&#39;&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">private</span> <span class="kd">const</span> <span class="kt">string</span> <span class="n">Category</span> <span class="p">=</span> <span class="s">&#34;Naming&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="kd">private</span> <span class="kd">static</span> <span class="n">DiagnosticDescriptor</span> <span class="n">Rule</span> <span class="p">=</span> <span class="k">new</span> <span class="n">DiagnosticDescriptor</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="n">DiagnosticId</span><span class="p">,</span> <span class="n">Title</span><span class="p">,</span> <span class="n">MessageFormat</span><span class="p">,</span> <span class="n">Category</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">DiagnosticSeverity</span><span class="p">.</span><span class="n">Warning</span><span class="p">,</span> <span class="n">isEnabledByDefault</span><span class="p">:</span> <span class="kc">true</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="kd">public</span> <span class="kd">override</span> <span class="n">ImmutableArray</span><span class="p">&lt;</span><span class="n">DiagnosticDescriptor</span><span class="p">&gt;</span> <span class="n">SupportedDiagnostics</span> <span class="p">=&gt;</span> <span class="n">ImmutableArray</span><span class="p">.</span><span class="n">Create</span><span class="p">(</span><span class="n">Rule</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="kd">public</span> <span class="kd">override</span> <span class="k">void</span> <span class="n">Initialize</span><span class="p">(</span><span class="n">AnalysisContext</span> <span class="n">context</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">context</span><span class="p">.</span><span class="n">ConfigureGeneratedCodeAnalysis</span><span class="p">(</span><span class="n">GeneratedCodeAnalysisFlags</span><span class="p">.</span><span class="n">None</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">context</span><span class="p">.</span><span class="n">EnableConcurrentExecution</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="n">context</span><span class="p">.</span><span class="n">RegisterSyntaxNodeAction</span><span class="p">(</span><span class="n">AnalyzeClassDeclaration</span><span class="p">,</span> <span class="n">SyntaxKind</span><span class="p">.</span><span class="n">ClassDeclaration</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="kd">private</span> <span class="k">void</span> <span class="n">AnalyzeClassDeclaration</span><span class="p">(</span><span class="n">SyntaxNodeAnalysisContext</span> <span class="n">context</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">var</span> <span class="n">classDecl</span> <span class="p">=</span> <span class="p">(</span><span class="n">ClassDeclarationSyntax</span><span class="p">)</span><span class="n">context</span><span class="p">.</span><span class="n">Node</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">var</span> <span class="n">className</span> <span class="p">=</span> <span class="n">classDecl</span><span class="p">.</span><span class="n">Identifier</span><span class="p">.</span><span class="n">Text</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(!</span><span class="n">className</span><span class="p">.</span><span class="n">EndsWith</span><span class="p">(</span><span class="s">&#34;Service&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">            <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="kt">var</span> <span class="n">diagnostic</span> <span class="p">=</span> <span class="n">Diagnostic</span><span class="p">.</span><span class="n">Create</span><span class="p">(</span><span class="n">Rule</span><span class="p">,</span> <span class="n">classDecl</span><span class="p">.</span><span class="n">Identifier</span><span class="p">.</span><span class="n">GetLocation</span><span class="p">(),</span> <span class="n">className</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="n">context</span><span class="p">.</span><span class="n">ReportDiagnostic</span><span class="p">(</span><span class="n">diagnostic</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h2 id="paso-3-crear-una-prueba-unitaria-para-validar-el-analizador">
+  Paso 3: Crear una prueba unitaria para validar el analizador
+  <a class="heading-link" href="#paso-3-crear-una-prueba-unitaria-para-validar-el-analizador">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">Microsoft.CodeAnalysis</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">Microsoft.CodeAnalysis.Diagnostics</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">Microsoft.CodeAnalysis.Testing</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">Microsoft.CodeAnalysis.CSharp.Testing</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">Microsoft.CodeAnalysis.Testing.Verifiers</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">System.Threading.Tasks</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">Xunit</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">Verify</span> <span class="p">=</span> <span class="n">Microsoft</span><span class="p">.</span><span class="n">CodeAnalysis</span><span class="p">.</span><span class="n">CSharp</span><span class="p">.</span><span class="n">Testing</span><span class="p">.</span><span class="n">XUnit</span><span class="p">.</span><span class="n">AnalyzerVerifier</span><span class="p">&lt;</span><span class="n">NamingConventionAnalyzer</span><span class="p">.</span><span class="n">NamingConventionAnalyzer</span><span class="p">&gt;;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">namespace</span> <span class="nn">NamingConventionAnalyzer.Test</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="k">class</span> <span class="nc">NamingConventionAnalyzerTests</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="na">        [Fact]</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">public</span> <span class="kd">async</span> <span class="n">Task</span> <span class="n">DetectaClaseSinSufijoService</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">var</span> <span class="n">testCode</span> <span class="p">=</span> <span class="s">@&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">                public class {|#0:UserHandler|}
+</span></span></span><span class="line"><span class="cl"><span class="s">                {
+</span></span></span><span class="line"><span class="cl"><span class="s">                }
+</span></span></span><span class="line"><span class="cl"><span class="s">            &#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="kt">var</span> <span class="n">expected</span> <span class="p">=</span> <span class="n">Verify</span><span class="p">.</span><span class="n">Diagnostic</span><span class="p">(</span><span class="s">&#34;NC001&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="p">.</span><span class="n">WithLocation</span><span class="p">(</span><span class="m">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="p">.</span><span class="n">WithArguments</span><span class="p">(</span><span class="s">&#34;UserHandler&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="k">await</span> <span class="n">Verify</span><span class="p">.</span><span class="n">VerifyAnalyzerAsync</span><span class="p">(</span><span class="n">testCode</span><span class="p">,</span> <span class="n">expected</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="na">
+</span></span></span><span class="line"><span class="cl"><span class="na">        [Fact]</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">public</span> <span class="kd">async</span> <span class="n">Task</span> <span class="n">NoMarcaClaseCorrecta</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">var</span> <span class="n">testCode</span> <span class="p">=</span> <span class="s">@&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">                public class UserService
+</span></span></span><span class="line"><span class="cl"><span class="s">                {
+</span></span></span><span class="line"><span class="cl"><span class="s">                }
+</span></span></span><span class="line"><span class="cl"><span class="s">            &#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="k">await</span> <span class="n">Verify</span><span class="p">.</span><span class="n">VerifyAnalyzerAsync</span><span class="p">(</span><span class="n">testCode</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h2 id="paso-4-compilar-y-probar">
+  Paso 4: Compilar y probar
+  <a class="heading-link" href="#paso-4-compilar-y-probar">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">dotnet <span class="nb">test</span>
+</span></span></code></pre></div><h2 id="paso-5-usar-el-analizador-en-otros-proyectos">
+  Paso 5: Usar el analizador en otros proyectos
+  <a class="heading-link" href="#paso-5-usar-el-analizador-en-otros-proyectos">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">dotnet pack -c Release
+</span></span><span class="line"><span class="cl">dotnet add reference ../NamingConventionAnalyzer/bin/Release/NamingConventionAnalyzer.nupkg
+</span></span></code></pre></div><h2 id="buenas-prácticas">
+  Buenas prácticas
+  <a class="heading-link" href="#buenas-pr%c3%a1cticas">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ul>
+<li>Utilizar <code>DiagnosticSeverity.Info</code>, <code>Warning</code> o <code>Error</code> según el impacto.</li>
+<li>Proveer sugerencias claras para el desarrollador.</li>
+<li>Usar atributos como <code>SupportedDiagnostics</code> para registrar múltiples reglas.</li>
+<li>Crear <em>code fixes</em> para permitir al usuario aplicar correcciones automáticamente.</li>
+<li>Publicar en NuGet con un prefijo de ID único (<code>Company.RuleId</code>) para evitar colisiones.</li>
+</ul>
+<h2 id="escenarios-de-uso-comunes">
+  Escenarios de uso comunes
+  <a class="heading-link" href="#escenarios-de-uso-comunes">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ul>
+<li>Detectar convenciones de nombres o estructuras de carpetas.</li>
+<li>Forzar uso de <code>ConfigureAwait(false)</code> en librerías.</li>
+<li>Validar uso de APIs internas o legacy.</li>
+<li>Evitar <code>DateTime.Now</code> en código que debería usar <code>DateTime.UtcNow</code>.</li>
+</ul>
+<h2 id="conclusión">
+  Conclusión
+  <a class="heading-link" href="#conclusi%c3%b3n">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Crear analizadores personalizados con <strong>Roslyn</strong> es una forma poderosa de reforzar la calidad del código desde dentro del <strong>IDE</strong>. Permite implementar políticas específicas del equipo, detectar errores antes de llegar al build, y educar progresivamente a los desarrolladores sobre buenas prácticas.</p>
+<p>Integrado con pruebas automáticas y pipelines CI, <strong>Roslyn</strong> se convierte en una herramienta esencial para entornos profesionales que requieren código robusto, mantenible y alineado con las reglas internas.</p>
+      </div>
+
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script>
+  window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "cmasblog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    
+    document.addEventListener('themeChanged', function (e) { 
+        if (document.readyState == 'complete') {
+          DISQUS.reset({ reload: true, config: disqus_config });
+        }
+    });
+</script>
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2018 -
+    
+    2025
+     Christian Amado 
+    ·
+    
+    Desarrollado por <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+      <script async src="https://www.googletagmanager.com/gtag/js?id=356375808"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '356375808');
+        }
+      </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=013131931956450466198%3ablhmkdpweyq"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '013131931956450466198:blhmkdpweyq');
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

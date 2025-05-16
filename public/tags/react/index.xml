@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>React on Christian Amado</title>
+    <link>http://localhost:1313/tags/react/</link>
+    <description>Recent content in React on Christian Amado</description>
+    <generator>Hugo</generator>
+    <language>es</language>
+    <lastBuildDate>Wed, 04 Dec 2024 00:00:00 -0400</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/react/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Comparativa de frameworks: Angular, React y Vue en 2024</title>
+      <link>http://localhost:1313/posts/2024-12-04-frameworks-comparatives/</link>
+      <pubDate>Wed, 04 Dec 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2024-12-04-frameworks-comparatives/</guid>
+      <description>&lt;p&gt;El desarrollo web ha evolucionado significativamente en los últimos años, y tres de los frameworks más populares continúan liderando el mercado: &lt;strong&gt;Angular, React y Vue&lt;/strong&gt;. En este artículo, compararemos estos frameworks en términos de rendimiento, facilidad de uso, casos de uso ideales y comunidad en 2024.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Comparación: Angular Signals vs React Hooks</title>
+      <link>http://localhost:1313/posts/2024-08-07-angular-signals-vs-react-hooks/</link>
+      <pubDate>Wed, 07 Aug 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2024-08-07-angular-signals-vs-react-hooks/</guid>
+      <description>&lt;p&gt;En el mundo del desarrollo frontend, los frameworks y bibliotecas como &lt;strong&gt;Angular&lt;/strong&gt; y &lt;strong&gt;React&lt;/strong&gt; han evolucionado constantemente para ofrecer soluciones más eficientes y escalables. Dos características destacadas de estas tecnologías son los &lt;em&gt;Signals&lt;/em&gt; de &lt;strong&gt;Angular&lt;/strong&gt; y los &lt;em&gt;Hooks&lt;/em&gt; de &lt;strong&gt;React&lt;/strong&gt;. Ambos conceptos están diseñados para manejar estados y mejorar la reactividad, pero lo hacen de maneras muy diferentes. Este artículo explora en profundidad ambas herramientas, sus similitudes, diferencias, ejemplos prácticos y buenas prácticas.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Mi primera aplicación con Windows App SDK</title>
+      <link>http://localhost:1313/posts/2022-09-07-first-windows-app-reactjs/</link>
+      <pubDate>Wed, 07 Sep 2022 19:14:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2022-09-07-first-windows-app-reactjs/</guid>
+      <description>&lt;p&gt;En este artículo mostraré cómo crear una aplicación con &lt;strong&gt;Windows App SDK&lt;/strong&gt; en &lt;strong&gt;React&lt;/strong&gt;. &lt;em&gt;Ojo&lt;/em&gt;: Es mi primera prueba con React (nunca lo he usado).&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Windows 11 Insider Preview Build 25188&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

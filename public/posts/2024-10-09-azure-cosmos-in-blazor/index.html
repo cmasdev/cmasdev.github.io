@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  Uso de Azure Cosmos DB en aplicaciones Blazor · Christian Amado
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Christian Amado">
+<meta name="description" content="Azure Cosmos DB es una base de datos distribuida globalmente y altamente escalable que permite almacenar y consultar datos de forma rápida y segura. Al integrarla con aplicaciones Blazor, puedes construir soluciones web modernas y dinámicas con acceso a datos en tiempo real. Este artículo ofrece un instructivo paso a paso para usar Azure Cosmos DB con Blazor, incluyendo ejemplos de código prácticos y buenas prácticas.">
+<meta name="keywords" content="blog,desarrollador,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Uso de Azure Cosmos DB en aplicaciones Blazor">
+  <meta name="twitter:description" content="Azure Cosmos DB es una base de datos distribuida globalmente y altamente escalable que permite almacenar y consultar datos de forma rápida y segura. Al integrarla con aplicaciones Blazor, puedes construir soluciones web modernas y dinámicas con acceso a datos en tiempo real. Este artículo ofrece un instructivo paso a paso para usar Azure Cosmos DB con Blazor, incluyendo ejemplos de código prácticos y buenas prácticas.">
+
+<meta property="og:url" content="http://localhost:1313/posts/2024-10-09-azure-cosmos-in-blazor/">
+  <meta property="og:site_name" content="Christian Amado">
+  <meta property="og:title" content="Uso de Azure Cosmos DB en aplicaciones Blazor">
+  <meta property="og:description" content="Azure Cosmos DB es una base de datos distribuida globalmente y altamente escalable que permite almacenar y consultar datos de forma rápida y segura. Al integrarla con aplicaciones Blazor, puedes construir soluciones web modernas y dinámicas con acceso a datos en tiempo real. Este artículo ofrece un instructivo paso a paso para usar Azure Cosmos DB con Blazor, incluyendo ejemplos de código prácticos y buenas prácticas.">
+  <meta property="og:locale" content="es">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-10-09T00:00:00-04:00">
+    <meta property="article:modified_time" content="2024-10-09T00:00:00-04:00">
+    <meta property="article:tag" content="Web Development">
+    <meta property="article:tag" content=".NET">
+    <meta property="article:tag" content="Blazor">
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-V1ZRP82YFD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-V1ZRP82YFD');
+</script>
+
+
+
+<link rel="canonical" href="http://localhost:1313/posts/2024-10-09-azure-cosmos-in-blazor/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="apple-touch-icon" sizes="57x57" href="/img/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/img/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/img/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/img/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/img/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/img/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/img/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/img/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/img/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="/img/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/img/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+<link rel="manifest" href="/img/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/img/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/">
+      Christian Amado
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/about">Biografía</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/contact">Contacto</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/diabetes">Diabetes</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/tags">Etiquetas</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/en/">🇺🇸</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/posts/2024-10-09-azure-cosmos-in-blazor/">
+              Uso de Azure Cosmos DB en aplicaciones Blazor
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2024-10-09T00:00:00-04:00">
+                octubre 9, 2024
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              5 minutos de lectura.
+            </span>
+          </div>
+          
+          
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/tags/web-development/">Web Development</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/.net/">.NET</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/blazor/">Blazor</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <p><strong>Azure Cosmos DB</strong> es una base de datos distribuida globalmente y altamente escalable que permite almacenar y consultar datos de forma rápida y segura. Al integrarla con aplicaciones <strong>Blazor</strong>, puedes construir soluciones web modernas y dinámicas con acceso a datos en tiempo real. Este artículo ofrece un instructivo paso a paso para usar <strong>Azure Cosmos DB</strong> con <strong>Blazor</strong>, incluyendo ejemplos de código prácticos y buenas prácticas.</p>
+<h2 id="qué-es-azure-cosmos-db">
+  ¿Qué es Azure Cosmos DB?
+  <a class="heading-link" href="#qu%c3%a9-es-azure-cosmos-db">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Azure Cosmos DB es un servicio de base de datos NoSQL en la nube que soporta múltiples modelos de datos, como documentos, claves-valor, gráficos y tablas. Ofrece:</p>
+<ul>
+<li><strong>Escalabilidad global</strong>: Replica los datos en múltiples regiones.</li>
+<li><strong>Latencia baja</strong>: Respuestas en milisegundos para operaciones de lectura y escritura.</li>
+<li><strong>Soporte para múltiples API</strong>: Incluye SQL, MongoDB, Cassandra, Gremlin y Table.</li>
+<li><strong>Altamente disponible</strong>: Con acuerdos de nivel de servicio (SLA) del 99.999%.</li>
+</ul>
+<p>Azure Cosmos DB es ideal para aplicaciones que requieren alta disponibilidad, consistencia en datos distribuidos y escalabilidad masiva.</p>
+<h2 id="configuración-inicial">
+  Configuración inicial
+  <a class="heading-link" href="#configuraci%c3%b3n-inicial">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="requisitos-previos">
+  Requisitos previos
+  <a class="heading-link" href="#requisitos-previos">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li><strong>Cuenta de Azure</strong>: Si no tienes una, regístrate en <a href="https://portal.azure.com/"  class="external-link" target="_blank" rel="noopener">Azure Portal</a>.</li>
+<li><strong>Visual Studio 2022 o Visual Studio Code</strong>.</li>
+<li><strong>SDK de .NET 6 o superior</strong> instalado.</li>
+</ol>
+<h3 id="crear-una-cuenta-de-azure-cosmos-db">
+  Crear una cuenta de Azure Cosmos DB
+  <a class="heading-link" href="#crear-una-cuenta-de-azure-cosmos-db">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>Inicia sesión en el <a href="https://portal.azure.com/"  class="external-link" target="_blank" rel="noopener">portal de Azure</a>.</li>
+<li>Haz clic en <strong>Crear un recurso</strong> &gt; <strong>Bases de datos</strong> &gt; <strong>Azure Cosmos DB</strong>.</li>
+<li>Selecciona el modelo de API SQL (Core).</li>
+<li>Proporciona los detalles necesarios:
+<ul>
+<li><strong>Nombre de la cuenta</strong>: <code>blazor-cosmosdb-demo</code>.</li>
+<li><strong>Grupo de recursos</strong>: Crea uno nuevo o selecciona uno existente.</li>
+<li><strong>Ubicación</strong>: Selecciona la región más cercana a tus usuarios.</li>
+</ul>
+</li>
+<li>Haz clic en <strong>Revisar y crear</strong>.</li>
+<li>Una vez creada, accede a la cuenta de Cosmos DB y toma nota de la clave primaria y la cadena de conexión.</li>
+</ol>
+<h2 id="crear-una-aplicación-blazor-con-cosmos-db">
+  Crear una aplicación Blazor con Cosmos DB
+  <a class="heading-link" href="#crear-una-aplicaci%c3%b3n-blazor-con-cosmos-db">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="paso-1-configurar-el-proyecto-blazor">
+  Paso 1: Configurar el proyecto Blazor
+  <a class="heading-link" href="#paso-1-configurar-el-proyecto-blazor">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p>Crea un nuevo proyecto Blazor Server:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">dotnet new blazorserver -o BlazorCosmosDemo
+</span></span><span class="line"><span class="cl">cd BlazorCosmosDemo
+</span></span></code></pre></div></li>
+<li>
+<p>Instala el paquete NuGet para Azure Cosmos DB:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">dotnet</span> <span class="nx">add</span> <span class="kn">package</span> <span class="nx">Microsoft</span><span class="p">.</span><span class="nx">Azure</span><span class="p">.</span><span class="nx">Cosmos</span>
+</span></span></code></pre></div></li>
+<li>
+<p>Verifica que los paquetes estén instalados correctamente ejecutando:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">dotnet list package
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="paso-2-configurar-la-conexión-a-cosmos-db">
+  Paso 2: Configurar la conexión a Cosmos DB
+  <a class="heading-link" href="#paso-2-configurar-la-conexi%c3%b3n-a-cosmos-db">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p>Agrega las configuraciones de Cosmos DB al archivo <code>appsettings.json</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">  &#34;CosmosDb&#34;: {
+</span></span><span class="line"><span class="cl">    &#34;AccountEndpoint&#34;: &#34;&lt;TU_ENDPOINT&gt;&#34;,
+</span></span><span class="line"><span class="cl">    &#34;AccountKey&#34;: &#34;&lt;TU_LLAVE&gt;&#34;,
+</span></span><span class="line"><span class="cl">    &#34;DatabaseName&#34;: &#34;BlazorDemoDB&#34;,
+</span></span><span class="line"><span class="cl">    &#34;ContainerName&#34;: &#34;Items&#34;
+</span></span><span class="line"><span class="cl">  }
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></div></li>
+<li>
+<p>Configura los servicios en <code>Program.cs</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">using</span> <span class="n">Microsoft</span><span class="o">.</span><span class="n">Azure</span><span class="o">.</span><span class="n">Cosmos</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">var</span> <span class="n">builder</span> <span class="o">=</span> <span class="n">WebApplication</span><span class="o">.</span><span class="n">CreateBuilder</span><span class="p">(</span><span class="n">args</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">builder</span><span class="o">.</span><span class="n">Services</span><span class="o">.</span><span class="n">AddSingleton</span><span class="p">(</span><span class="n">s</span> <span class="o">=&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">var</span> <span class="n">config</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="n">Configuration</span><span class="o">.</span><span class="n">GetSection</span><span class="p">(</span><span class="s2">&#34;CosmosDb&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">new</span> <span class="n">CosmosClient</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s2">&#34;AccountEndpoint&#34;</span><span class="p">],</span> <span class="n">config</span><span class="p">[</span><span class="s2">&#34;AccountKey&#34;</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">builder</span><span class="o">.</span><span class="n">Services</span><span class="o">.</span><span class="n">AddSingleton</span><span class="o">&lt;</span><span class="n">CosmosDbService</span><span class="o">&gt;</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">var</span> <span class="n">app</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="n">Build</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">app</span><span class="o">.</span><span class="n">Run</span><span class="p">();</span>
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="paso-3-crear-el-servicio-cosmos-db">
+  Paso 3: Crear el servicio Cosmos DB
+  <a class="heading-link" href="#paso-3-crear-el-servicio-cosmos-db">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p>Crea una clase llamada <code>CosmosDbService</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">using</span> <span class="n">Microsoft</span><span class="o">.</span><span class="n">Azure</span><span class="o">.</span><span class="n">Cosmos</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">using</span> <span class="n">System</span><span class="o">.</span><span class="n">Threading</span><span class="o">.</span><span class="n">Tasks</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">public</span> <span class="k">class</span> <span class="n">CosmosDbService</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">private</span> <span class="n">readonly</span> <span class="n">CosmosClient</span> <span class="n">_cosmosClient</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">private</span> <span class="n">readonly</span> <span class="ne">Container</span> <span class="n">_container</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">public</span> <span class="n">CosmosDbService</span><span class="p">(</span><span class="n">CosmosClient</span> <span class="n">cosmosClient</span><span class="p">,</span> <span class="n">IConfiguration</span> <span class="n">configuration</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">_cosmosClient</span> <span class="o">=</span> <span class="n">cosmosClient</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">var</span> <span class="n">databaseName</span> <span class="o">=</span> <span class="n">configuration</span><span class="p">[</span><span class="s2">&#34;CosmosDb:DatabaseName&#34;</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="k">var</span> <span class="n">containerName</span> <span class="o">=</span> <span class="n">configuration</span><span class="p">[</span><span class="s2">&#34;CosmosDb:ContainerName&#34;</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">_container</span> <span class="o">=</span> <span class="n">_cosmosClient</span><span class="o">.</span><span class="n">GetContainer</span><span class="p">(</span><span class="n">databaseName</span><span class="p">,</span> <span class="n">containerName</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">public</span> <span class="n">async</span> <span class="n">Task</span> <span class="n">AddItemAsync</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">T</span> <span class="n">item</span><span class="p">,</span> <span class="n">string</span> <span class="n">id</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">await</span> <span class="n">_container</span><span class="o">.</span><span class="n">CreateItemAsync</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">new</span> <span class="n">PartitionKey</span><span class="p">(</span><span class="n">id</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">public</span> <span class="n">async</span> <span class="n">Task</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&gt;</span> <span class="n">GetItemsAsync</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">string</span> <span class="n">query</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">var</span> <span class="n">items</span> <span class="o">=</span> <span class="n">new</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="k">var</span> <span class="n">iterator</span> <span class="o">=</span> <span class="n">_container</span><span class="o">.</span><span class="n">GetItemQueryIterator</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">query</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">while</span> <span class="p">(</span><span class="n">iterator</span><span class="o">.</span><span class="n">HasMoreResults</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">var</span> <span class="n">response</span> <span class="o">=</span> <span class="n">await</span> <span class="n">iterator</span><span class="o">.</span><span class="n">ReadNextAsync</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="n">items</span><span class="o">.</span><span class="n">AddRange</span><span class="p">(</span><span class="n">response</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">items</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">public</span> <span class="n">async</span> <span class="n">Task</span> <span class="n">DeleteItemAsync</span><span class="p">(</span><span class="n">string</span> <span class="n">id</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">await</span> <span class="n">_container</span><span class="o">.</span><span class="n">DeleteItemAsync</span><span class="o">&lt;</span><span class="n">object</span><span class="o">&gt;</span><span class="p">(</span><span class="n">id</span><span class="p">,</span> <span class="n">new</span> <span class="n">PartitionKey</span><span class="p">(</span><span class="n">id</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div></li>
+<li>
+<p>Implementa pruebas básicas para verificar la funcionalidad del servicio:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">//</span> <span class="n">Ejemplo</span> <span class="n">de</span> <span class="n">prueba</span> <span class="n">rápida</span>
+</span></span><span class="line"><span class="cl"><span class="k">var</span> <span class="n">service</span> <span class="o">=</span> <span class="n">new</span> <span class="n">CosmosDbService</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">configuration</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">await</span> <span class="n">service</span><span class="o">.</span><span class="n">AddItemAsync</span><span class="p">(</span><span class="n">new</span> <span class="p">{</span> <span class="n">Id</span> <span class="o">=</span> <span class="s2">&#34;1&#34;</span><span class="p">,</span> <span class="n">Name</span> <span class="o">=</span> <span class="s2">&#34;Test Item&#34;</span> <span class="p">},</span> <span class="s2">&#34;1&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="k">var</span> <span class="n">items</span> <span class="o">=</span> <span class="n">await</span> <span class="n">service</span><span class="o">.</span><span class="n">GetItemsAsync</span><span class="o">&lt;</span><span class="n">dynamic</span><span class="o">&gt;</span><span class="p">(</span><span class="s2">&#34;SELECT * FROM c&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">Console</span><span class="o">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">items</span><span class="p">);</span>
+</span></span></code></pre></div></li>
+</ol>
+<h2 id="crear-un-componente-blazor-para-interactuar-con-cosmos-db">
+  Crear un componente Blazor para interactuar con Cosmos DB
+  <a class="heading-link" href="#crear-un-componente-blazor-para-interactuar-con-cosmos-db">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="paso-1-crear-el-componente-itemlistrazor">
+  Paso 1: Crear el componente <code>ItemList.razor</code>
+  <a class="heading-link" href="#paso-1-crear-el-componente-itemlistrazor">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p>Crea un nuevo componente llamado <code>ItemList.razor</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="err">@</span><span class="n">inject</span> <span class="n">CosmosDbService</span> <span class="n">CosmosDbService</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="n">h3</span><span class="o">&gt;</span><span class="n">Lista</span> <span class="n">de</span> <span class="n">Items</span><span class="o">&lt;/</span><span class="n">h3</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="n">button</span> <span class="err">@</span><span class="n">onclick</span><span class="o">=</span><span class="s2">&#34;LoadItems&#34;</span><span class="o">&gt;</span><span class="n">Cargar</span> <span class="n">Items</span><span class="o">&lt;/</span><span class="n">button</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="n">button</span> <span class="err">@</span><span class="n">onclick</span><span class="o">=</span><span class="s2">&#34;AddNewItem&#34;</span><span class="o">&gt;</span><span class="n">Agregar</span> <span class="n">Item</span><span class="o">&lt;/</span><span class="n">button</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="n">ul</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">@</span><span class="n">foreach</span> <span class="p">(</span><span class="k">var</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">Items</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;</span><span class="err">@</span><span class="n">item</span><span class="o">.</span><span class="n">Name</span> <span class="o">&lt;</span><span class="n">button</span> <span class="err">@</span><span class="n">onclick</span><span class="o">=</span><span class="s2">&#34;() =&gt; DeleteItem(item.Id)&#34;</span><span class="o">&gt;</span><span class="n">Eliminar</span><span class="o">&lt;/</span><span class="n">button</span><span class="o">&gt;&lt;/</span><span class="n">li</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;/</span><span class="n">ul</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">@</span><span class="n">code</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">private</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Item</span><span class="o">&gt;</span> <span class="n">Items</span> <span class="o">=</span> <span class="n">new</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Item</span><span class="o">&gt;</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">private</span> <span class="n">async</span> <span class="n">Task</span> <span class="n">LoadItems</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Items</span> <span class="o">=</span> <span class="n">await</span> <span class="n">CosmosDbService</span><span class="o">.</span><span class="n">GetItemsAsync</span><span class="o">&lt;</span><span class="n">Item</span><span class="o">&gt;</span><span class="p">(</span><span class="s2">&#34;SELECT * FROM c&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">private</span> <span class="n">async</span> <span class="n">Task</span> <span class="n">AddNewItem</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">var</span> <span class="n">newItem</span> <span class="o">=</span> <span class="n">new</span> <span class="n">Item</span> <span class="p">{</span> <span class="n">Id</span> <span class="o">=</span> <span class="n">Guid</span><span class="o">.</span><span class="n">NewGuid</span><span class="p">()</span><span class="o">.</span><span class="n">ToString</span><span class="p">(),</span> <span class="n">Name</span> <span class="o">=</span> <span class="s2">&#34;Nuevo Item&#34;</span> <span class="p">};</span>
+</span></span><span class="line"><span class="cl">        <span class="n">await</span> <span class="n">CosmosDbService</span><span class="o">.</span><span class="n">AddItemAsync</span><span class="p">(</span><span class="n">newItem</span><span class="p">,</span> <span class="n">newItem</span><span class="o">.</span><span class="n">Id</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">await</span> <span class="n">LoadItems</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">private</span> <span class="n">async</span> <span class="n">Task</span> <span class="n">DeleteItem</span><span class="p">(</span><span class="n">string</span> <span class="n">id</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">await</span> <span class="n">CosmosDbService</span><span class="o">.</span><span class="n">DeleteItemAsync</span><span class="p">(</span><span class="n">id</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">await</span> <span class="n">LoadItems</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">public</span> <span class="k">class</span> <span class="n">Item</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">public</span> <span class="n">string</span> <span class="n">Id</span> <span class="p">{</span> <span class="n">get</span><span class="p">;</span> <span class="n">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="n">public</span> <span class="n">string</span> <span class="n">Name</span> <span class="p">{</span> <span class="n">get</span><span class="p">;</span> <span class="n">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="paso-2-agregar-el-componente-a-la-página-principal">
+  Paso 2: Agregar el componente a la página principal
+  <a class="heading-link" href="#paso-2-agregar-el-componente-a-la-p%c3%a1gina-principal">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p>Abre <code>Pages/Index.razor</code> y agrega:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&lt;ItemList /&gt;
+</span></span></code></pre></div></li>
+</ol>
+<h2 id="buenas-prácticas">
+  Buenas prácticas
+  <a class="heading-link" href="#buenas-pr%c3%a1cticas">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ol>
+<li>
+<p><strong>Optimiza las consultas</strong>:</p>
+<ul>
+<li>Usa índices en Cosmos DB para acelerar las búsquedas.</li>
+<li>Realiza consultas específicas con cláusulas WHERE para evitar iteraciones innecesarias.</li>
+</ul>
+</li>
+<li>
+<p><strong>Manejo de errores</strong>:</p>
+<ul>
+<li>Implementa bloques try-catch en las operaciones CRUD.</li>
+</ul>
+</li>
+<li>
+<p><strong>Paginación</strong>:</p>
+<ul>
+<li>Implementa la funcionalidad de paginación para manejar grandes volúmenes de datos.</li>
+</ul>
+</li>
+<li>
+<p><strong>Validación de datos</strong>:</p>
+<ul>
+<li>Verifica y valida los datos antes de insertarlos en Cosmos DB.</li>
+</ul>
+</li>
+<li>
+<p><strong>Seguridad</strong>:</p>
+<ul>
+<li>No expongas directamente las claves de acceso en el cliente.</li>
+<li>Usa servicios de identidad como Azure Managed Identity.</li>
+</ul>
+</li>
+</ol>
+<h2 id="conclusión">
+  Conclusión
+  <a class="heading-link" href="#conclusi%c3%b3n">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Integrar <strong>Azure Cosmos DB</strong> con <strong>Blazor</strong> permite construir aplicaciones escalables y dinámicas con facilidad. Este artículo ha detallado un enfoque paso a paso para configurar, integrar y trabajar con <strong>Cosmos DB</strong> en aplicaciones <strong>Blazor</strong>, incluyendo funcionalidades avanzadas como eliminación y paginación. Con el uso de servicios bien configurados y buenas prácticas, puedes aprovechar al máximo esta poderosa base de datos en la nube. ¡Explora las posibilidades de <strong>Azure Cosmos DB</strong> en tus proyectos <strong>Blazor</strong> y lleva tus aplicaciones al siguiente nivel!</p>
+      </div>
+
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script>
+  window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "cmasblog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    
+    document.addEventListener('themeChanged', function (e) { 
+        if (document.readyState == 'complete') {
+          DISQUS.reset({ reload: true, config: disqus_config });
+        }
+    });
+</script>
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2018 -
+    
+    2025
+     Christian Amado 
+    ·
+    
+    Desarrollado por <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+      <script async src="https://www.googletagmanager.com/gtag/js?id=356375808"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '356375808');
+        }
+      </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=013131931956450466198%3ablhmkdpweyq"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '013131931956450466198:blhmkdpweyq');
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

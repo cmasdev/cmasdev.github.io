@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Figma on Christian Amado</title>
+    <link>http://localhost:1313/tags/figma/</link>
+    <description>Recent content in Figma on Christian Amado</description>
+    <generator>Hugo</generator>
+    <language>es</language>
+    <lastBuildDate>Wed, 07 Dec 2022 21:12:00 -0400</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/figma/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Figma y Windows Fluent Design System</title>
+      <link>http://localhost:1313/posts/2022-12-07-figma-and-windows-fluent-design-system/</link>
+      <pubDate>Wed, 07 Dec 2022 21:12:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2022-12-07-figma-and-windows-fluent-design-system/</guid>
+      <description>&lt;p&gt;En este corto artículo trataremos de entender las directrices de diseño y analizaremos código de interfaz de usuario para crear experiencias de aplicaciones de &lt;strong&gt;Windows&lt;/strong&gt;.&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Windows 11 Insider Preview Build 25252&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

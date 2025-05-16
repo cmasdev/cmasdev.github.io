@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  Dashboards interactivos con Blazor y gráficos dinámicos · Christian Amado
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Christian Amado">
+<meta name="description" content="Los dashboards interactivos se han convertido en herramientas esenciales para visualizar grandes volúmenes de información en tiempo real. Blazor, como framework moderno para construir aplicaciones web con C#, permite crear interfaces ricas que se ejecutan directamente en el navegador o en el servidor. Cuando se combina con bibliotecas de gráficos dinámicos como Chart.js o ApexCharts, Blazor ofrece una experiencia visual potente y altamente personalizable.
+Este artículo explora cómo construir un dashboard interactivo en Blazor Server utilizando datos dinámicos y gráficos en tiempo real, abordando tanto el diseño del componente visual como la lógica de actualización de datos.">
+<meta name="keywords" content="blog,desarrollador,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Dashboards interactivos con Blazor y gráficos dinámicos">
+  <meta name="twitter:description" content="Los dashboards interactivos se han convertido en herramientas esenciales para visualizar grandes volúmenes de información en tiempo real. Blazor, como framework moderno para construir aplicaciones web con C#, permite crear interfaces ricas que se ejecutan directamente en el navegador o en el servidor. Cuando se combina con bibliotecas de gráficos dinámicos como Chart.js o ApexCharts, Blazor ofrece una experiencia visual potente y altamente personalizable.
+Este artículo explora cómo construir un dashboard interactivo en Blazor Server utilizando datos dinámicos y gráficos en tiempo real, abordando tanto el diseño del componente visual como la lógica de actualización de datos.">
+
+<meta property="og:url" content="http://localhost:1313/posts/2025-03-19-blazor-dashboard/">
+  <meta property="og:site_name" content="Christian Amado">
+  <meta property="og:title" content="Dashboards interactivos con Blazor y gráficos dinámicos">
+  <meta property="og:description" content="Los dashboards interactivos se han convertido en herramientas esenciales para visualizar grandes volúmenes de información en tiempo real. Blazor, como framework moderno para construir aplicaciones web con C#, permite crear interfaces ricas que se ejecutan directamente en el navegador o en el servidor. Cuando se combina con bibliotecas de gráficos dinámicos como Chart.js o ApexCharts, Blazor ofrece una experiencia visual potente y altamente personalizable.
+Este artículo explora cómo construir un dashboard interactivo en Blazor Server utilizando datos dinámicos y gráficos en tiempo real, abordando tanto el diseño del componente visual como la lógica de actualización de datos.">
+  <meta property="og:locale" content="es">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-03-19T00:00:00-04:00">
+    <meta property="article:modified_time" content="2025-03-19T00:00:00-04:00">
+    <meta property="article:tag" content=".NET">
+    <meta property="article:tag" content="Blazor">
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-V1ZRP82YFD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-V1ZRP82YFD');
+</script>
+
+
+
+<link rel="canonical" href="http://localhost:1313/posts/2025-03-19-blazor-dashboard/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="apple-touch-icon" sizes="57x57" href="/img/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/img/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/img/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/img/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/img/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/img/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/img/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/img/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/img/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="/img/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/img/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+<link rel="manifest" href="/img/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/img/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/">
+      Christian Amado
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/about">Biografía</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/contact">Contacto</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/diabetes">Diabetes</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/tags">Etiquetas</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/en/">🇺🇸</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/posts/2025-03-19-blazor-dashboard/">
+              Dashboards interactivos con Blazor y gráficos dinámicos
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2025-03-19T00:00:00-04:00">
+                marzo 19, 2025
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              4 minutos de lectura.
+            </span>
+          </div>
+          
+          
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/tags/.net/">.NET</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/blazor/">Blazor</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <p>Los dashboards interactivos se han convertido en herramientas esenciales para visualizar grandes volúmenes de información en tiempo real. <strong>Blazor</strong>, como framework moderno para construir aplicaciones web con C#, permite crear interfaces ricas que se ejecutan directamente en el navegador o en el servidor. Cuando se combina con bibliotecas de gráficos dinámicos como Chart.js o ApexCharts, Blazor ofrece una experiencia visual potente y altamente personalizable.</p>
+<p>Este artículo explora cómo construir un dashboard interactivo en <strong>Blazor Server</strong> utilizando datos dinámicos y gráficos en tiempo real, abordando tanto el diseño del componente visual como la lógica de actualización de datos.</p>
+<h2 id="requisitos-previos">
+  Requisitos previos
+  <a class="heading-link" href="#requisitos-previos">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ul>
+<li>Visual Studio 2022 o superior con soporte para ASP.NET y Blazor.</li>
+<li>Conocimientos intermedios de C# y Blazor Server.</li>
+<li>Familiaridad con conceptos de visualización de datos.</li>
+<li>Paquete NuGet <code>Blazor-ApexCharts</code> (u otra biblioteca de gráficos compatible con Blazor).</li>
+</ul>
+<h2 id="crear-el-proyecto-base">
+  Crear el proyecto base
+  <a class="heading-link" href="#crear-el-proyecto-base">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ol>
+<li>Abrir Visual Studio y seleccionar <strong>Crear nuevo proyecto</strong>.</li>
+<li>Seleccionar <strong>Blazor Server App</strong>.</li>
+<li>Nombrar el proyecto como <code>BlazorDashboardApp</code> y confirmar la plantilla con .NET 8 (o superior).</li>
+</ol>
+<h2 id="instalar-apexcharts-para-blazor">
+  Instalar ApexCharts para Blazor
+  <a class="heading-link" href="#instalar-apexcharts-para-blazor">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Desde la consola del administrador de paquetes ejecutar:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">Install-Package</span> <span class="n">ApexCharts</span>
+</span></span></code></pre></div><p>También se puede agregar desde el administrador de NuGet buscando <code>ApexCharts</code>.</p>
+<h2 id="configurar-apexcharts">
+  Configurar ApexCharts
+  <a class="heading-link" href="#configurar-apexcharts">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>En <code>_Imports.razor</code>, agregar:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">@using ApexCharts
+</span></span></code></pre></div><p>En <code>Pages/_Host.cshtml</code>, agregar en el <code>&lt;head&gt;</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">link</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;_content/ApexCharts.Blazor/apexcharts.css&#34;</span> <span class="na">rel</span><span class="o">=</span><span class="s">&#34;stylesheet&#34;</span> <span class="p">/&gt;</span>
+</span></span></code></pre></div><p>Y antes de cerrar la etiqueta <code>&lt;/body&gt;</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;_content/ApexCharts.Blazor/apexcharts.js&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span></code></pre></div><h2 id="crear-un-componente-de-gráfico">
+  Crear un componente de gráfico
+  <a class="heading-link" href="#crear-un-componente-de-gr%c3%a1fico">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Crear una carpeta llamada <code>Components</code>, y dentro un archivo <code>SalesChart.razor</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">@using ApexCharts
+</span></span><span class="line"><span class="cl">@using BlazorDashboardApp.Data
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">&lt;ApexChart TItem=&#34;SalesData&#34; Title=&#34;Ventas por mes&#34;
+</span></span><span class="line"><span class="cl">           Width=&#34;100%&#34; Height=&#34;350&#34;
+</span></span><span class="line"><span class="cl">           Series=&#34;@series&#34;
+</span></span><span class="line"><span class="cl">           Options=&#34;@options&#34;&gt;
+</span></span><span class="line"><span class="cl">&lt;/ApexChart&gt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">@code {
+</span></span><span class="line"><span class="cl">    private List&lt;Series&lt;SalesData&gt;&gt; series = new();
+</span></span><span class="line"><span class="cl">    private ApexChartOptions&lt;SalesData&gt; options = new();
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    protected override void OnInitialized()
+</span></span><span class="line"><span class="cl">    {
+</span></span><span class="line"><span class="cl">        series.Add(new Series&lt;SalesData&gt;
+</span></span><span class="line"><span class="cl">        {
+</span></span><span class="line"><span class="cl">            Name = &#34;Ventas&#34;,
+</span></span><span class="line"><span class="cl">            Data = new List&lt;SalesData&gt;
+</span></span><span class="line"><span class="cl">            {
+</span></span><span class="line"><span class="cl">                new() { X = &#34;Ene&#34;, Y = 25000 },
+</span></span><span class="line"><span class="cl">                new() { X = &#34;Feb&#34;, Y = 42000 },
+</span></span><span class="line"><span class="cl">                new() { X = &#34;Mar&#34;, Y = 37000 },
+</span></span><span class="line"><span class="cl">                new() { X = &#34;Abr&#34;, Y = 54000 }
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">        });
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        options = new ApexChartOptions&lt;SalesData&gt;
+</span></span><span class="line"><span class="cl">        {
+</span></span><span class="line"><span class="cl">            Chart = new Chart
+</span></span><span class="line"><span class="cl">            {
+</span></span><span class="line"><span class="cl">                Type = ChartType.Bar
+</span></span><span class="line"><span class="cl">            },
+</span></span><span class="line"><span class="cl">            Xaxis = new XAxis
+</span></span><span class="line"><span class="cl">            {
+</span></span><span class="line"><span class="cl">                Title = new Title { Text = &#34;Mes&#34; }
+</span></span><span class="line"><span class="cl">            },
+</span></span><span class="line"><span class="cl">            Yaxis = new List&lt;YAxis&gt;
+</span></span><span class="line"><span class="cl">            {
+</span></span><span class="line"><span class="cl">                new() { Title = new Title { Text = &#34;Monto (USD)&#34; } }
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">        };
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></div><p>Y definir la clase <code>SalesData.cs</code> en la carpeta <code>Data</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="k">namespace</span> <span class="nn">BlazorDashboardApp.Data</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="k">class</span> <span class="nc">SalesData</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">public</span> <span class="kt">string</span> <span class="n">X</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span> <span class="p">=</span> <span class="kt">string</span><span class="p">.</span><span class="n">Empty</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">public</span> <span class="kt">decimal</span> <span class="n">Y</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h2 id="incluir-el-gráfico-en-una-página">
+  Incluir el gráfico en una página
+  <a class="heading-link" href="#incluir-el-gr%c3%a1fico-en-una-p%c3%a1gina">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Editar <code>Pages/Index.razor</code> para incluir el componente del gráfico:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">@page &#34;/&#34;
+</span></span><span class="line"><span class="cl">&lt;h3&gt;Dashboard de Ventas&lt;/h3&gt;
+</span></span><span class="line"><span class="cl">&lt;SalesChart /&gt;
+</span></span></code></pre></div><p>También es necesario importar el componente:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">@using BlazorDashboardApp.Components
+</span></span></code></pre></div><h2 id="hacer-el-gráfico-dinámico">
+  Hacer el gráfico dinámico
+  <a class="heading-link" href="#hacer-el-gr%c3%a1fico-din%c3%a1mico">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Para que el gráfico se actualice cada cierto intervalo, se puede usar un <code>Timer</code>. Reemplazar el bloque <code>@code</code> en <code>SalesChart.razor</code> por:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="err">@</span><span class="n">code</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">private</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Series</span><span class="o">&lt;</span><span class="n">SalesData</span><span class="o">&gt;&gt;</span> <span class="n">series</span> <span class="o">=</span> <span class="n">new</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="n">private</span> <span class="n">ApexChartOptions</span><span class="o">&lt;</span><span class="n">SalesData</span><span class="o">&gt;</span> <span class="n">options</span> <span class="o">=</span> <span class="n">new</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="n">private</span> <span class="n">System</span><span class="o">.</span><span class="n">Timers</span><span class="o">.</span><span class="n">Timer</span><span class="err">?</span> <span class="n">updateTimer</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">protected</span> <span class="n">override</span> <span class="n">void</span> <span class="n">OnInitialized</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">InicializarGrafico</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">updateTimer</span> <span class="o">=</span> <span class="n">new</span> <span class="n">System</span><span class="o">.</span><span class="n">Timers</span><span class="o">.</span><span class="n">Timer</span><span class="p">(</span><span class="mi">5000</span><span class="p">);</span> <span class="o">//</span> <span class="n">cada</span> <span class="mi">5</span> <span class="n">segundos</span>
+</span></span><span class="line"><span class="cl">        <span class="n">updateTimer</span><span class="o">.</span><span class="n">Elapsed</span> <span class="o">+=</span> <span class="n">async</span> <span class="p">(</span><span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">await</span> <span class="n">ActualizarDatos</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">updateTimer</span><span class="o">.</span><span class="n">Start</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">private</span> <span class="n">void</span> <span class="n">InicializarGrafico</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">series</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="n">new</span> <span class="n">Series</span><span class="o">&lt;</span><span class="n">SalesData</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Name</span> <span class="o">=</span> <span class="s2">&#34;Ventas&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Data</span> <span class="o">=</span> <span class="n">GenerarDatos</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">options</span> <span class="o">=</span> <span class="n">new</span> <span class="n">ApexChartOptions</span><span class="o">&lt;</span><span class="n">SalesData</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Chart</span> <span class="o">=</span> <span class="n">new</span> <span class="n">Chart</span> <span class="p">{</span> <span class="n">Type</span> <span class="o">=</span> <span class="n">ChartType</span><span class="o">.</span><span class="n">Bar</span> <span class="p">},</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Xaxis</span> <span class="o">=</span> <span class="n">new</span> <span class="n">XAxis</span> <span class="p">{</span> <span class="n">Title</span> <span class="o">=</span> <span class="n">new</span> <span class="n">Title</span> <span class="p">{</span> <span class="n">Text</span> <span class="o">=</span> <span class="s2">&#34;Mes&#34;</span> <span class="p">}</span> <span class="p">},</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Yaxis</span> <span class="o">=</span> <span class="n">new</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">YAxis</span><span class="o">&gt;</span> <span class="p">{</span> <span class="n">new</span><span class="p">()</span> <span class="p">{</span> <span class="n">Title</span> <span class="o">=</span> <span class="n">new</span> <span class="n">Title</span> <span class="p">{</span> <span class="n">Text</span> <span class="o">=</span> <span class="s2">&#34;Monto (USD)&#34;</span> <span class="p">}</span> <span class="p">}</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">};</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">private</span> <span class="n">async</span> <span class="n">Task</span> <span class="n">ActualizarDatos</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">var</span> <span class="n">nuevosDatos</span> <span class="o">=</span> <span class="n">GenerarDatos</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">await</span> <span class="n">InvokeAsync</span><span class="p">(()</span> <span class="o">=&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">series</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">Data</span> <span class="o">=</span> <span class="n">nuevosDatos</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">StateHasChanged</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="p">});</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">private</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">SalesData</span><span class="o">&gt;</span> <span class="n">GenerarDatos</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">var</span> <span class="n">rnd</span> <span class="o">=</span> <span class="n">new</span> <span class="n">Random</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">new</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">SalesData</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">new</span><span class="p">()</span> <span class="p">{</span> <span class="n">X</span> <span class="o">=</span> <span class="s2">&#34;Ene&#34;</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">rnd</span><span class="o">.</span><span class="n">Next</span><span class="p">(</span><span class="mi">20000</span><span class="p">,</span> <span class="mi">50000</span><span class="p">)</span> <span class="p">},</span>
+</span></span><span class="line"><span class="cl">            <span class="n">new</span><span class="p">()</span> <span class="p">{</span> <span class="n">X</span> <span class="o">=</span> <span class="s2">&#34;Feb&#34;</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">rnd</span><span class="o">.</span><span class="n">Next</span><span class="p">(</span><span class="mi">20000</span><span class="p">,</span> <span class="mi">50000</span><span class="p">)</span> <span class="p">},</span>
+</span></span><span class="line"><span class="cl">            <span class="n">new</span><span class="p">()</span> <span class="p">{</span> <span class="n">X</span> <span class="o">=</span> <span class="s2">&#34;Mar&#34;</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">rnd</span><span class="o">.</span><span class="n">Next</span><span class="p">(</span><span class="mi">20000</span><span class="p">,</span> <span class="mi">50000</span><span class="p">)</span> <span class="p">},</span>
+</span></span><span class="line"><span class="cl">            <span class="n">new</span><span class="p">()</span> <span class="p">{</span> <span class="n">X</span> <span class="o">=</span> <span class="s2">&#34;Abr&#34;</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">rnd</span><span class="o">.</span><span class="n">Next</span><span class="p">(</span><span class="mi">20000</span><span class="p">,</span> <span class="mi">50000</span><span class="p">)</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">};</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">public</span> <span class="n">void</span> <span class="n">Dispose</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">updateTimer</span><span class="err">?</span><span class="o">.</span><span class="n">Stop</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">updateTimer</span><span class="err">?</span><span class="o">.</span><span class="n">Dispose</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Esto simula datos que se actualizan automáticamente en tiempo real.</p>
+<h2 id="conclusión">
+  Conclusión
+  <a class="heading-link" href="#conclusi%c3%b3n">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p><strong>Blazor</strong> permite construir dashboards ricos e interactivos combinando componentes gráficos como ApexCharts con datos en tiempo real. Con unas pocas líneas de código, es posible crear visualizaciones profesionales que se actualizan dinámicamente, ya sea mediante temporizadores o eventos del sistema.</p>
+<p>Este enfoque puede escalar fácilmente para representar múltiples gráficos, integrarse con bases de datos, servicios <strong>REST</strong> o incluso conectarse a flujos de eventos como <strong>SignalR</strong> o <strong>Azure Event Hubs</strong>. Los dashboards construidos con <strong>Blazor</strong> ofrecen una alternativa moderna, extensible y mantenible a frameworks de <strong>JavaScript</strong> tradicionales, sin salir del ecosistema <strong>.NET</strong>.</p>
+      </div>
+
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script>
+  window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "cmasblog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    
+    document.addEventListener('themeChanged', function (e) { 
+        if (document.readyState == 'complete') {
+          DISQUS.reset({ reload: true, config: disqus_config });
+        }
+    });
+</script>
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2018 -
+    
+    2025
+     Christian Amado 
+    ·
+    
+    Desarrollado por <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+      <script async src="https://www.googletagmanager.com/gtag/js?id=356375808"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '356375808');
+        }
+      </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=013131931956450466198%3ablhmkdpweyq"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '013131931956450466198:blhmkdpweyq');
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

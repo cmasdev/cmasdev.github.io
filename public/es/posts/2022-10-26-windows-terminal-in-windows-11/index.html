@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  Windows Terminal en Windows 11 · Christian Amado
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Christian Amado">
+<meta name="description" content="En este artículo explicaré detalles sobre Windows Terminal (que forma parte del sistema operativo Windows 11).
+Windows 11 Insider Preview Build 25227">
+<meta name="keywords" content="blog,desarrollador,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Windows Terminal en Windows 11">
+  <meta name="twitter:description" content="En este artículo explicaré detalles sobre Windows Terminal (que forma parte del sistema operativo Windows 11).
+Windows 11 Insider Preview Build 25227">
+
+<meta property="og:url" content="http://localhost:1313/es/posts/2022-10-26-windows-terminal-in-windows-11/">
+  <meta property="og:site_name" content="Christian Amado">
+  <meta property="og:title" content="Windows Terminal en Windows 11">
+  <meta property="og:description" content="En este artículo explicaré detalles sobre Windows Terminal (que forma parte del sistema operativo Windows 11).
+Windows 11 Insider Preview Build 25227">
+  <meta property="og:locale" content="es">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2022-10-26T13:01:14-04:00">
+    <meta property="article:modified_time" content="2022-10-26T13:01:14-04:00">
+    <meta property="article:tag" content="WinDev">
+    <meta property="article:tag" content="Windows 11">
+
+
+
+
+<link rel="canonical" href="http://localhost:1313/es/posts/2022-10-26-windows-terminal-in-windows-11/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/es/">
+      Christian Amado
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/about">Biografía</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/contact">Contacto</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/diabetes">Diabetes</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/tags">Etiquetas</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/en/">🇺🇸</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/es/posts/2022-10-26-windows-terminal-in-windows-11/">
+              Windows Terminal en Windows 11
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2022-10-26T13:01:14-04:00">
+                octubre 26, 2022
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              4 minutos de lectura.
+            </span>
+          </div>
+          
+          
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/es/tags/windev/">WinDev</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/es/tags/windows-11/">Windows 11</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <p>En este artículo explicaré detalles sobre <strong>Windows Terminal</strong> (que forma parte del sistema operativo <strong>Windows 11</strong>).</p>
+<p><em><strong>Windows 11 Insider Preview Build 25227</strong></em></p>
+<p><strong>Windows Terminal</strong> es una nueva aplicación de terminal moderna, rápida, eficiente y productiva para usuarios de herramientas y shells de línea de comandos como el <strong>símbolo del sistema</strong>, <strong>PowerShell</strong> y <strong>WSL</strong>. Tiene múltiples pestañas, soporte para caracteres <em>Unicode</em> y <em>UTF-8</em>, un motor de renderizado de texto acelerado por <em>GPU</em> y temas personalizados.</p>
+<h2 id="beneficios">
+  Beneficios
+  <a class="heading-link" href="#beneficios">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p><strong>Windows Terminal</strong> tiene muchos beneficios para los usuarios de <strong>línea de comandos</strong> y <strong>WSL</strong>. Algunos de ellos son:</p>
+<ul>
+<li>Modo de pantalla completa.</li>
+<li>Interfaz con pestañas para abrir múltiples instancias de las herramientas.</li>
+<li>Teclas de acceso rápido para abrir nuevas pestañas.</li>
+<li>Zoom con el ratón.</li>
+<li>Soporte para caracteres <em>Unicode</em> y <em>UTF-8</em>, como emoji y caracteres de diferentes idiomas.</li>
+<li>Motor de renderizado de texto acelerado por <em>GPU</em>.</li>
+<li>Temas y estilos personalizados.</li>
+<li>Soporte para stylus.</li>
+<li>Acceso a sistemas remotos o ejecución de scripts en ellos.</li>
+</ul>
+<p><strong>Windows Terminal</strong> también tiene algunas desventajas que debes tener en cuenta antes de instalarlo. Algunas de ellas son:</p>
+<ul>
+<li>Limitaciones en la reproducción de vídeo HD a través del terminal.</li>
+<li>Falta de soporte para dispositivos USB como cámaras y almacenamiento externo.</li>
+<li>No es ideal para requerimientos gráficos pesados.</li>
+</ul>
+<h2 id="cómo-instalarlo">
+  ¿Cómo instalarlo?
+  <a class="heading-link" href="#c%c3%b3mo-instalarlo">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>A partir de windows 11 22H2 no es necesario instalarlo, pues ya forma parte del sistema operativo. Aquí es donde se puede ver eso:
+<img src="/img/posts/2022/10/26/1.png" alt=""></p>
+<p>Pero, para versiones anteriores a la mencionada debemos seguir los siguientes pasos:</p>
+<ul>
+<li>Abrir *<em>Microsoft Store</em> y buscar <strong>Windows Terminal</strong>.</li>
+<li>Seleccionar <strong>Obtener</strong> o <strong>Instalar</strong> para descargar e instalar la aplicación.</li>
+<li>Una vez instalada, se puede abrir <strong>Windows Terminal</strong> desde el menú Inicio o la barra de tareas.</li>
+<li>También se puede configurar la terminal predeterminada en <strong>Configuración</strong> &gt; <strong>Privacidad y seguridad</strong> &gt; <strong>Para desarrolladores</strong> &gt; <strong>Terminal</strong>.</li>
+</ul>
+<h2 id="funciones">
+  Funciones
+  <a class="heading-link" href="#funciones">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="perfiles">
+  Perfiles
+  <a class="heading-link" href="#perfiles">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Los perfiles en <strong>Windows Terminal</strong> son configuraciones que determinan la apariencia y el comportamiento de cada shell o aplicación que se ejecuta en el terminal. Se pueden personalizar los perfiles para cambiar el color, la fuente, el icono y otras opciones de cada shell. También se pueden ocultar o deshabilitar los perfiles que se no quieran ver en el menú desplegable del terminal. Además, puedes agregar perfiles de terceros como <strong>Git Bash</strong> o <strong>Azure Cloud Shell</strong> (como tengo instalados los compnentede de desarrollo Azure de Visual Studio viene activado de manera predeterminada).</p>
+<p>En mi máquina se ve así:
+<img src="/img/posts/2022/10/26/2.png" alt=""></p>
+<h3 id="pestañas-y-paneles">
+  Pestañas y paneles
+  <a class="heading-link" href="#pesta%c3%b1as-y-paneles">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Las pestañas y los paneles son formas de organizar las diferentes shells o aplicaciones que se ejecutan en el terminal. Se pueden abrir varias pestañas con diferentes perfiles y cambiar entre ellas con <strong>Ctrl</strong> + <strong>Tab</strong> o haciendo clic en el nombre de la pestaña. También se puede dividir una pestaña en varios paneles para ver varias shells al mismo tiempo. Se pueden crear, mover, cambiar el tamaño y cerrar los paneles con el teclado o el ratón.</p>
+<p>Aquí vemos detalles de lo que explicamos más arriba:</p>
+<ol>
+<li>Apertura de pestañas del mismo perfil o de otro perfil necesario (Todo desde el mimso terminal):</li>
+</ol>
+<video width=100% controls autoplay>
+<source src="/img/posts/2022/10/26/3.mp4" type="video/mp4">
+Your browser does not support the video tag.  
+</video> 
+![]()
+<ol start="2">
+<li>Apertura de paneles (en la misma pestaña) utilizando las teclas <strong>Alt</strong>+ hacer clic en el icono &ldquo;+&rdquo;:</li>
+</ol>
+<video width=100% controls autoplay>
+    <source src="/img/posts/2022/10/26/4.mp4" type="video/mp4">
+    Your browser does not support the video tag.  
+</video>  
+<h3 id="paleta-de-comandos">
+  Paleta de comandos
+  <a class="heading-link" href="#paleta-de-comandos">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>La paleta de comandos permite visualizar y ejecutar las acciones que se puede hacer dentro de <strong>Windows Terminal</strong>. Se puede invocar la paleta de comandos con <strong>Ctrl</strong> + <strong>Shift</strong> + <strong>P</strong> o personalizar el atajo de teclado. También  se puede usar el modo de línea de comandos para escribir un comando <em><strong>wt</strong></em> directamente en la paleta. Además, se pueden agregar iconos, comandos anidados, comandos iterables y ocultar los comandos que no se quiera ver.</p>
+<p>Una vez presionadas las teclas mencionadas arriba veremos lo siguiente:
+<img src="/img/posts/2022/10/26/5.png" alt=""></p>
+<h3 id="personalización">
+  Personalización
+  <a class="heading-link" href="#personalizaci%c3%b3n">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p><strong>Windows Terminal</strong> permite personalizar muchos aspectos de su apariencia y funcionamiento. Se puede acceder a la configuración de <strong>Windows Terminal</strong> desde el menú desplegable o con <strong>Ctrl</strong> + <strong>,</strong>. Algunas de las opciones de personalización que se pueden encontrar son:</p>
+<ul>
+<li><strong>Idioma</strong>: se puede cambiar el idioma preferido de la aplicación.</li>
+<li><strong>Tema</strong>: se puede elegir entre un tema claro, oscuro o basado en el sistema.</li>
+<li><strong>Posición de las pestañas</strong>: se puede decidir si las nuevas pestañas se abren al principio o al final.</li>
+<li><strong>Barra de título</strong>: se puede ocultar la barra de título para ahorrar espacio.</li>
+<li><strong>Acrílico</strong>: se puede activar o desactivar el efecto acrílico en la fila de pestañas.</li>
+<li><strong>Título de la aplicación</strong>: se puede usar el título del terminal activo como título de la aplicación.</li>
+<li><strong>Siempre visible</strong>: se puede hacer que Windows Terminal permanezca siempre encima de otras ventanas.</li>
+<li><strong>Modo de ancho de las pestañas</strong>: se puede ajustar el ancho de las pestañas según tu preferencia.</li>
+</ul>
+<p><img src="/img/posts/2022/10/26/6.png" alt=""></p>
+<p>¡Espero resulte útil!</p>
+      </div>
+
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script>
+  window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "cmasblog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    
+    document.addEventListener('themeChanged', function (e) { 
+        if (document.readyState == 'complete') {
+          DISQUS.reset({ reload: true, config: disqus_config });
+        }
+    });
+</script>
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2018 -
+    
+    2025
+     Christian Amado 
+    ·
+    
+    Desarrollado por <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+      <script async src="https://www.googletagmanager.com/gtag/js?id=356375808"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '356375808');
+        }
+      </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=013131931956450466198%3ablhmkdpweyq"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '013131931956450466198:blhmkdpweyq');
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  Uso avanzado de la Jump List API para apps modernas · Christian Amado
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Christian Amado">
+<meta name="description" content="Las Jump Lists en Windows son menús contextuales que aparecen cuando el usuario hace clic derecho sobre el icono de una aplicación anclada a la barra de tareas o en el menú de inicio. Estas listas permiten exponer accesos directos a tareas frecuentes o específicas dentro de la aplicación, mejorando la accesibilidad, productividad y personalización de la experiencia de usuario.
+Con Windows App SDK y WinUI 3, las apps modernas pueden crear y actualizar Jump Lists de forma dinámica, segmentarlas por grupos, incluir acciones personalizadas y manejar parámetros que activen flujos específicos al iniciarse la app.
+Este artículo describe paso a paso cómo implementar Jump Lists avanzadas con categorías, argumentos, iconos y comportamiento personalizado en apps WinUI 3 empaquetadas.">
+<meta name="keywords" content="blog,desarrollador,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Uso avanzado de la Jump List API para apps modernas">
+  <meta name="twitter:description" content="Las Jump Lists en Windows son menús contextuales que aparecen cuando el usuario hace clic derecho sobre el icono de una aplicación anclada a la barra de tareas o en el menú de inicio. Estas listas permiten exponer accesos directos a tareas frecuentes o específicas dentro de la aplicación, mejorando la accesibilidad, productividad y personalización de la experiencia de usuario.
+Con Windows App SDK y WinUI 3, las apps modernas pueden crear y actualizar Jump Lists de forma dinámica, segmentarlas por grupos, incluir acciones personalizadas y manejar parámetros que activen flujos específicos al iniciarse la app.
+Este artículo describe paso a paso cómo implementar Jump Lists avanzadas con categorías, argumentos, iconos y comportamiento personalizado en apps WinUI 3 empaquetadas.">
+
+<meta property="og:url" content="http://localhost:1313/posts/2024-12-27-win-jump-list/">
+  <meta property="og:site_name" content="Christian Amado">
+  <meta property="og:title" content="Uso avanzado de la Jump List API para apps modernas">
+  <meta property="og:description" content="Las Jump Lists en Windows son menús contextuales que aparecen cuando el usuario hace clic derecho sobre el icono de una aplicación anclada a la barra de tareas o en el menú de inicio. Estas listas permiten exponer accesos directos a tareas frecuentes o específicas dentro de la aplicación, mejorando la accesibilidad, productividad y personalización de la experiencia de usuario.
+Con Windows App SDK y WinUI 3, las apps modernas pueden crear y actualizar Jump Lists de forma dinámica, segmentarlas por grupos, incluir acciones personalizadas y manejar parámetros que activen flujos específicos al iniciarse la app.
+Este artículo describe paso a paso cómo implementar Jump Lists avanzadas con categorías, argumentos, iconos y comportamiento personalizado en apps WinUI 3 empaquetadas.">
+  <meta property="og:locale" content="es">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-12-27T00:00:00-04:00">
+    <meta property="article:modified_time" content="2024-12-27T00:00:00-04:00">
+    <meta property="article:tag" content="WinDev">
+    <meta property="article:tag" content="Windows 11">
+    <meta property="article:tag" content="WinUI 3">
+    <meta property="article:tag" content="Windows App SDK">
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-V1ZRP82YFD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-V1ZRP82YFD');
+</script>
+
+
+
+<link rel="canonical" href="http://localhost:1313/posts/2024-12-27-win-jump-list/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="apple-touch-icon" sizes="57x57" href="/img/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/img/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/img/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/img/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/img/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/img/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/img/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/img/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/img/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="/img/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/img/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+<link rel="manifest" href="/img/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/img/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/">
+      Christian Amado
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/about">Biografía</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/contact">Contacto</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/diabetes">Diabetes</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/tags">Etiquetas</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/en/">🇺🇸</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/posts/2024-12-27-win-jump-list/">
+              Uso avanzado de la Jump List API para apps modernas
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2024-12-27T00:00:00-04:00">
+                diciembre 27, 2024
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              4 minutos de lectura.
+            </span>
+          </div>
+          
+          
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/tags/windev/">WinDev</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/windows-11/">Windows 11</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/winui-3/">WinUI 3</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/windows-app-sdk/">Windows App SDK</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <p>Las <em>Jump Lists</em> en <strong>Windows</strong> son menús contextuales que aparecen cuando el usuario hace clic derecho sobre el icono de una aplicación anclada a la barra de tareas o en el menú de inicio. Estas listas permiten exponer accesos directos a tareas frecuentes o específicas dentro de la aplicación, mejorando la accesibilidad, productividad y personalización de la experiencia de usuario.</p>
+<p>Con <strong>Windows App SDK</strong> y <strong>WinUI 3</strong>, las apps modernas pueden crear y actualizar Jump Lists de forma dinámica, segmentarlas por grupos, incluir acciones personalizadas y manejar parámetros que activen flujos específicos al iniciarse la app.</p>
+<p>Este artículo describe paso a paso cómo implementar Jump Lists avanzadas con categorías, argumentos, iconos y comportamiento personalizado en apps <strong>WinUI 3</strong> empaquetadas.</p>
+<h2 id="requisitos">
+  Requisitos
+  <a class="heading-link" href="#requisitos">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ul>
+<li>Windows 11</li>
+<li>Visual Studio 2022 o superior</li>
+<li>Proyecto WinUI 3 (packaged) con Windows App SDK</li>
+<li>SDK mínimo: Windows 10 1903 (10.0.18362) o superior</li>
+<li>Referencia a <code>Windows.UI.StartScreen</code> y <code>Windows.Foundation.Collections</code></li>
+</ul>
+<h2 id="paso-1-verificar-soporte-de-jump-list">
+  Paso 1: Verificar soporte de Jump List
+  <a class="heading-link" href="#paso-1-verificar-soporte-de-jump-list">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Antes de cualquier operación, se debe verificar si la funcionalidad está habilitada en el sistema del usuario:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kt">bool</span> <span class="n">isSupported</span> <span class="p">=</span> <span class="k">await</span> <span class="n">JumpList</span><span class="p">.</span><span class="n">IsSupportedAsync</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(!</span><span class="n">isSupported</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// Mostrar mensaje o fallback</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h2 id="paso-2-crear-una-jump-list-básica">
+  Paso 2: Crear una Jump List básica
+  <a class="heading-link" href="#paso-2-crear-una-jump-list-b%c3%a1sica">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kt">var</span> <span class="n">jumpList</span> <span class="p">=</span> <span class="k">await</span> <span class="n">JumpList</span><span class="p">.</span><span class="n">LoadCurrentAsync</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="n">jumpList</span><span class="p">.</span><span class="n">Items</span><span class="p">.</span><span class="n">Clear</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">var</span> <span class="n">item</span> <span class="p">=</span> <span class="n">JumpListItem</span><span class="p">.</span><span class="n">CreateWithArguments</span><span class="p">(</span><span class="s">&#34;abrirPanel&#34;</span><span class="p">,</span> <span class="s">&#34;Panel de control&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">item</span><span class="p">.</span><span class="n">Description</span> <span class="p">=</span> <span class="s">&#34;Abrir el panel principal de la app&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">item</span><span class="p">.</span><span class="n">Logo</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Uri</span><span class="p">(</span><span class="s">&#34;ms-appx:///Assets/panel.png&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">jumpList</span><span class="p">.</span><span class="n">Items</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">item</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="k">await</span> <span class="n">jumpList</span><span class="p">.</span><span class="n">SaveAsync</span><span class="p">();</span>
+</span></span></code></pre></div><p>Este ejemplo muestra cómo crear un acceso directo que aparecerá al hacer clic derecho en la app anclada.</p>
+<h2 id="paso-3-crear-múltiples-categorías-grupos">
+  Paso 3: Crear múltiples categorías (grupos)
+  <a class="heading-link" href="#paso-3-crear-m%c3%baltiples-categor%c3%adas-grupos">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="n">jumpList</span><span class="p">.</span><span class="n">Items</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">JumpListItem</span><span class="p">.</span><span class="n">CreateSeparator</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">var</span> <span class="n">item1</span> <span class="p">=</span> <span class="n">JumpListItem</span><span class="p">.</span><span class="n">CreateWithArguments</span><span class="p">(</span><span class="s">&#34;modoLectura&#34;</span><span class="p">,</span> <span class="s">&#34;Abrir en modo lectura&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">item1</span><span class="p">.</span><span class="n">GroupName</span> <span class="p">=</span> <span class="s">&#34;Modos de inicio&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">var</span> <span class="n">item2</span> <span class="p">=</span> <span class="n">JumpListItem</span><span class="p">.</span><span class="n">CreateWithArguments</span><span class="p">(</span><span class="s">&#34;modoEdicion&#34;</span><span class="p">,</span> <span class="s">&#34;Abrir en modo edición&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">item2</span><span class="p">.</span><span class="n">GroupName</span> <span class="p">=</span> <span class="s">&#34;Modos de inicio&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">jumpList</span><span class="p">.</span><span class="n">Items</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">item1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">jumpList</span><span class="p">.</span><span class="n">Items</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">item2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">await</span> <span class="n">jumpList</span><span class="p">.</span><span class="n">SaveAsync</span><span class="p">();</span>
+</span></span></code></pre></div><p>Los elementos con el mismo <code>GroupName</code> aparecerán agrupados bajo ese título.</p>
+<h2 id="paso-4-manejar-los-argumentos-en-el-arranque">
+  Paso 4: Manejar los argumentos en el arranque
+  <a class="heading-link" href="#paso-4-manejar-los-argumentos-en-el-arranque">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>En <code>App.xaml.cs</code>, sobrescribir <code>OnLaunched</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kd">protected</span> <span class="kd">override</span> <span class="k">void</span> <span class="n">OnLaunched</span><span class="p">(</span><span class="n">Microsoft</span><span class="p">.</span><span class="n">UI</span><span class="p">.</span><span class="n">Xaml</span><span class="p">.</span><span class="n">LaunchActivatedEventArgs</span> <span class="n">args</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">var</span> <span class="n">arguments</span> <span class="p">=</span> <span class="n">args</span><span class="p">.</span><span class="n">Arguments</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">arguments</span> <span class="p">==</span> <span class="s">&#34;modoLectura&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">new</span> <span class="n">ReaderWindow</span><span class="p">().</span><span class="n">Activate</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">arguments</span> <span class="p">==</span> <span class="s">&#34;modoEdicion&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">new</span> <span class="n">EditorWindow</span><span class="p">().</span><span class="n">Activate</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">arguments</span> <span class="p">==</span> <span class="s">&#34;abrirPanel&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">new</span> <span class="n">PanelWindow</span><span class="p">().</span><span class="n">Activate</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">m_window</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MainWindow</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="n">m_window</span><span class="p">.</span><span class="n">Activate</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Esto permite que cada acceso directo ejecute una función distinta de la app.</p>
+<h2 id="paso-5-añadir-iconos-personalizados">
+  Paso 5: Añadir iconos personalizados
+  <a class="heading-link" href="#paso-5-a%c3%b1adir-iconos-personalizados">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Los íconos de cada elemento deben estar en formato <code>.png</code> dentro del paquete MSIX (por ejemplo, en <code>/Assets</code>).</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="n">item</span><span class="p">.</span><span class="n">Logo</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Uri</span><span class="p">(</span><span class="s">&#34;ms-appx:///Assets/lectura.png&#34;</span><span class="p">);</span>
+</span></span></code></pre></div><p>Tamaño recomendado: 32x32 o 64x64. Asegurarse de que estén incluidos en el proyecto como contenido con &ldquo;Copy if newer&rdquo;.</p>
+<h2 id="paso-6-añadir-separadores-visuales">
+  Paso 6: Añadir separadores visuales
+  <a class="heading-link" href="#paso-6-a%c3%b1adir-separadores-visuales">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Para mejorar la jerarquía, usar:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="n">jumpList</span><span class="p">.</span><span class="n">Items</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">JumpListItem</span><span class="p">.</span><span class="n">CreateSeparator</span><span class="p">());</span>
+</span></span></code></pre></div><p>Esto crea una línea de separación visual entre grupos o categorías.</p>
+<h2 id="paso-7-actualización-dinámica-de-la-jump-list">
+  Paso 7: Actualización dinámica de la Jump List
+  <a class="heading-link" href="#paso-7-actualizaci%c3%b3n-din%c3%a1mica-de-la-jump-list">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Las Jump Lists pueden ser actualizadas dinámicamente según el estado del usuario, datos recientes, documentos o permisos:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="n">usuarioEsAdmin</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">var</span> <span class="n">adminItem</span> <span class="p">=</span> <span class="n">JumpListItem</span><span class="p">.</span><span class="n">CreateWithArguments</span><span class="p">(</span><span class="s">&#34;panelAdmin&#34;</span><span class="p">,</span> <span class="s">&#34;Panel de administración&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">adminItem</span><span class="p">.</span><span class="n">GroupName</span> <span class="p">=</span> <span class="s">&#34;Herramientas&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">jumpList</span><span class="p">.</span><span class="n">Items</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">adminItem</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Después de modificar, recordar guardar:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="k">await</span> <span class="n">jumpList</span><span class="p">.</span><span class="n">SaveAsync</span><span class="p">();</span>
+</span></span></code></pre></div><h2 id="paso-8-limpiar-o-resetear-la-jump-list">
+  Paso 8: Limpiar o resetear la Jump List
+  <a class="heading-link" href="#paso-8-limpiar-o-resetear-la-jump-list">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>En algunos escenarios (cerrar sesión, cambiar de perfil), es útil limpiar:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kt">var</span> <span class="n">jumpList</span> <span class="p">=</span> <span class="k">await</span> <span class="n">JumpList</span><span class="p">.</span><span class="n">LoadCurrentAsync</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="n">jumpList</span><span class="p">.</span><span class="n">Items</span><span class="p">.</span><span class="n">Clear</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="k">await</span> <span class="n">jumpList</span><span class="p">.</span><span class="n">SaveAsync</span><span class="p">();</span>
+</span></span></code></pre></div><p>Esto garantiza que no haya entradas obsoletas.</p>
+<h2 id="buenas-prácticas">
+  Buenas prácticas
+  <a class="heading-link" href="#buenas-pr%c3%a1cticas">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ul>
+<li>Usar textos cortos y descripciones claras</li>
+<li>Limitar la lista a 5–7 accesos para no sobrecargar</li>
+<li>Organizar por contexto (modos, herramientas, recientes)</li>
+<li>Evitar agregar funciones no disponibles para el usuario actual</li>
+<li>Actualizar en tiempo de ejecución si cambia el contexto del usuario</li>
+</ul>
+<h2 id="casos-de-uso-reales">
+  Casos de uso reales
+  <a class="heading-link" href="#casos-de-uso-reales">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ul>
+<li>Acceder directamente a secciones internas de una app (informes, configuración, contactos)</li>
+<li>Iniciar flujos especiales (cámara, escaneo, captura, conexión)</li>
+<li>Abrir documentos recientes o plantillas específicas</li>
+<li>Exponer acciones administrativas para perfiles con privilegios</li>
+<li>Soporte para herramientas multitarea sin cambiar ventana principal</li>
+</ul>
+<h2 id="conclusión">
+  Conclusión
+  <a class="heading-link" href="#conclusi%c3%b3n">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>La <em>Jump List API</em> permite a las aplicaciones modernas <strong>WinUI 3</strong> integrarse profundamente con la experiencia del escritorio en <strong>Windows</strong>, ofreciendo accesos directos contextualizados, útiles y adaptables. Esta funcionalidad mejora la interacción del usuario con la aplicación y refuerza su presencia en el sistema operativo, permitiendo flujos más rápidos y naturales desde la barra de tareas o el menú inicio.</p>
+<p>A través de argumentos, iconos, agrupaciones y lógica condicional, las Jump Lists pueden convertirse en una poderosa extensión de la experiencia del usuario para cualquier aplicación moderna en <strong>Windows</strong>.</p>
+      </div>
+
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script>
+  window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "cmasblog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    
+    document.addEventListener('themeChanged', function (e) { 
+        if (document.readyState == 'complete') {
+          DISQUS.reset({ reload: true, config: disqus_config });
+        }
+    });
+</script>
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2018 -
+    
+    2025
+     Christian Amado 
+    ·
+    
+    Desarrollado por <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+      <script async src="https://www.googletagmanager.com/gtag/js?id=356375808"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '356375808');
+        }
+      </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=013131931956450466198%3ablhmkdpweyq"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '013131931956450466198:blhmkdpweyq');
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

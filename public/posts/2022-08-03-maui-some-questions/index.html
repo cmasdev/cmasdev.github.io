@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  MAUI ¿Qué? ¿Por qué? ¿Para qué? · Christian Amado
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Christian Amado">
+<meta name="description" content="En este artículo intentaré explicar o dar a entender que es .NET MAUI y otras cuestiones relacionada a esta plaforma que básicamente reemplaza al viejo conocido de Xamarin.Forms.
+Windows 11 Insider Preview Build 25174">
+<meta name="keywords" content="blog,desarrollador,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="MAUI ¿Qué? ¿Por qué? ¿Para qué?">
+  <meta name="twitter:description" content="En este artículo intentaré explicar o dar a entender que es .NET MAUI y otras cuestiones relacionada a esta plaforma que básicamente reemplaza al viejo conocido de Xamarin.Forms.
+Windows 11 Insider Preview Build 25174">
+
+<meta property="og:url" content="http://localhost:1313/posts/2022-08-03-maui-some-questions/">
+  <meta property="og:site_name" content="Christian Amado">
+  <meta property="og:title" content="MAUI ¿Qué? ¿Por qué? ¿Para qué?">
+  <meta property="og:description" content="En este artículo intentaré explicar o dar a entender que es .NET MAUI y otras cuestiones relacionada a esta plaforma que básicamente reemplaza al viejo conocido de Xamarin.Forms.
+Windows 11 Insider Preview Build 25174">
+  <meta property="og:locale" content="es">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2022-08-03T22:12:00-04:00">
+    <meta property="article:modified_time" content="2022-08-03T22:12:00-04:00">
+    <meta property="article:tag" content="WinDev">
+    <meta property="article:tag" content="MAUI">
+    <meta property="article:tag" content="Windows 11">
+    <meta property="article:tag" content="Android">
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-V1ZRP82YFD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-V1ZRP82YFD');
+</script>
+
+
+
+<link rel="canonical" href="http://localhost:1313/posts/2022-08-03-maui-some-questions/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="apple-touch-icon" sizes="57x57" href="/img/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/img/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/img/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/img/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/img/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/img/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/img/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/img/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/img/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="/img/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/img/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+<link rel="manifest" href="/img/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/img/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/">
+      Christian Amado
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/about">Biografía</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/contact">Contacto</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/diabetes">Diabetes</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/tags">Etiquetas</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/en/">🇺🇸</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/posts/2022-08-03-maui-some-questions/">
+              MAUI ¿Qué? ¿Por qué? ¿Para qué?
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2022-08-03T22:12:00-04:00">
+                agosto 3, 2022
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              4 minutos de lectura.
+            </span>
+          </div>
+          
+          
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/tags/windev/">WinDev</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/maui/">MAUI</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/windows-11/">Windows 11</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/android/">Android</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <p>En este artículo intentaré explicar o dar a entender que es <strong>.NET MAUI</strong> y otras cuestiones relacionada a esta plaforma que básicamente reemplaza al viejo conocido de <strong>Xamarin.Forms</strong>.</p>
+<p><em><strong>Windows 11 Insider Preview Build 25174</strong></em></p>
+<h2 id="qué-es-net-maui-flutter-es-mejor">
+  ¿Qué es .NET MAUI? Flutter es mejor&hellip;
+  <a class="heading-link" href="#qu%c3%a9-es-net-maui-flutter-es-mejor">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p><strong>.NET MAUI</strong> es un marco de trabajo multiplataforma para crear aplicaciones nativas móviles y de escritorio con C# y XAML. Con <strong>.NET MAUI</strong>, se puede desarrollar aplicaciones que pueden ejecutarse en <em><strong>Android</strong></em>, <em><strong>iOS</strong></em>, <em><strong>macOS</strong></em> y <em><strong>Windows</strong></em> desde un solo código compartido. Es la evolución de <em>Xamarin.Forms</em> que amplía las capacidades más allá de los dispositivos móviles.</p>
+<p><strong>.NET MAUI</strong> es para desarrolladores que quieren:</p>
+<ol>
+<li>Escribir aplicaciones multiplataforma en XAML y C#, desde un solo código compartido en Visual Studio.</li>
+<li>Compartir el diseño y la disposición de la interfaz de usuario entre plataformas.</li>
+<li>Compartir código, pruebas y lógica de negocio entre plataformas.</li>
+</ol>
+<p><strong>.NET MAUI</strong> proporciona una colección de controles que se pueden usar para mostrar datos, iniciar acciones, indicar actividad, mostrar colecciones, elegir datos y más. Además de una colección de controles, <strong>.NET MAUI</strong> también ofrece: Un motor de diseño elaborado para diseñar páginas. Un proyecto único compartido que puede apuntar a <em><strong>Android</strong></em>, <em><strong>iOS</strong></em>, <em><strong>macOS</strong></em> y <em><strong>Windows</strong></em>. Una selección simplificada del objetivo de depuración para ejecutar las aplicaciones <strong>.NET MAUI</strong>.</p>
+<p>Ya escuché comentarios sobre ¡<em>Flutter</em> es mucho mejor!. Pero ¿Es realmente así?</p>
+<p>No hay una respuesta definitiva a esta pregunta, ya que depende de las preferencias y necesidades de cada desarrollador y proyecto. Sin embargo, se pueden mencionar algunas diferencias y ventajas de cada plataforma:</p>
+<ol>
+<li><strong>Flutter</strong> usa <strong>Dart</strong>, un lenguaje desarrollado por <em>Google</em>, mientras que <strong>.NET MAUI</strong> usa <strong>C#</strong>, un lenguaje ampliamente usado en el ecosistema <strong>.NET</strong>.</li>
+<li><strong>Flutter</strong> ofrece una interfaz de usuario más rápida y fluida, gracias a su compilación anticipada que reduce el tamaño del código compilado. Además, <strong>Flutter</strong> soporta <em>Material Design</em> para <em><strong>Android</strong></em> y <em>Cupertino</em> para <em><strong>iOS</strong></em>, lo que permite crear aplicaciones con aspecto nativo para cada plataforma.</li>
+<li><strong>.NET MAUI</strong> es una buena opción para los desarrolladores que ya están familiarizados con la plataforma <strong>.NET</strong> y quieren crear aplicaciones multiplataforma usando <strong>C#</strong>. También ofrece una mayor integración con <em>Visual Studio</em> y otras herramientas de desarrollo.</li>
+<li><strong>Flutter</strong> soporta el desarrollo web y <em>Linux</em>, mientras que <strong>.NET MAUI</strong> no. Sin embargo, los desarrolladores de <strong>.NET MAUI</strong> pueden utilizar el marco <em><strong>Blazor</strong></em> para proporcionar un puente para usar recursos de <strong>MAUI</strong>.</li>
+</ol>
+<p>En conclusión, ambas plataformas tienen sus pros y contras, y la elección dependerá de factores como el lenguaje de programación preferido, el tipo de aplicación que se quiere crear, el público objetivo y el presupuesto disponible.</p>
+<h2 id="qué-puedo-hacer-con-esto">
+  ¿Qué puedo hacer con esto?
+  <a class="heading-link" href="#qu%c3%a9-puedo-hacer-con-esto">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Con <strong>.NET MAUI</strong> se puede desarrollar aplicaciones nativas para <strong>Windows</strong>, <em>macOS</em>, <em>iOS</em> y <strong>Android</strong>, usando un solo código compartido en <strong>C#</strong> y <strong>XAML</strong>. Se puede crear aplicaciones que se adapten al aspecto y la funcionalidad de cada plataforma, aprovechando las últimas tecnologías de desarrollo.</p>
+<p>Algunos ejemplos de tipos de aplicaciones que se pueden crear con <strong>.NET MAUI</strong> son:</p>
+<ul>
+<li>Aplicaciones de productividad que permitan gestionar tareas, calendarios, correos electrónicos, etc.</li>
+<li>Aplicaciones de entretenimiento que ofrezcan juegos, música, vídeos, etc.</li>
+<li>Aplicaciones de educación que faciliten el aprendizaje interactivo y el acceso a recursos didácticos.</li>
+<li>Aplicaciones de negocios que integren servicios web, bases de datos, análisis de datos, etc.</li>
+</ul>
+<h2 id="un-poco-de-código">
+  Un poco de código
+  <a class="heading-link" href="#un-poco-de-c%c3%b3digo">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Primero, veamos el código <strong>XAML</strong> que se utiliza para la visual:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&lt;ContentPage xmlns=&#34;http://schemas.microsoft.com/dotnet/2021/maui&#34;
+</span></span><span class="line"><span class="cl">             xmlns:x=&#34;http://schemas.microsoft.com/winfx/2009/xaml&#34;
+</span></span><span class="line"><span class="cl">             x:Class=&#34;ButtonSample.MainPage&#34;&gt;
+</span></span><span class="line"><span class="cl">    &lt;StackLayout&gt;
+</span></span><span class="line"><span class="cl">        &lt;Button Text=&#34;Click Me!&#34;
+</span></span><span class="line"><span class="cl">                Clicked=&#34;OnCounterClicked&#34; /&gt;
+</span></span><span class="line"><span class="cl">        &lt;Label x:Name=&#34;CounterLabel&#34;
+</span></span><span class="line"><span class="cl">               Text=&#34;Welcome to .NET MAUI!&#34;
+</span></span><span class="line"><span class="cl">               HorizontalOptions=&#34;Center&#34;
+</span></span><span class="line"><span class="cl">               VerticalOptions=&#34;CenterAndExpand&#34; /&gt;
+</span></span><span class="line"><span class="cl">    &lt;/StackLayout&gt;
+</span></span><span class="line"><span class="cl">&lt;/ContentPage&gt;
+</span></span></code></pre></div><p>Luego, vemos el código <strong>C#</strong> para poder realizar las acciones necesarias:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">using Microsoft.Maui;
+</span></span><span class="line"><span class="cl">using Microsoft.Maui.Controls;
+</span></span><span class="line"><span class="cl">using Microsoft.Maui.Essentials;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">namespace ButtonSample
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">    public partial class MainPage : ContentPage
+</span></span><span class="line"><span class="cl">    {
+</span></span><span class="line"><span class="cl">        int count = 0;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        public MainPage()
+</span></span><span class="line"><span class="cl">        {
+</span></span><span class="line"><span class="cl">            InitializeComponent();
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        void OnCounterClicked(object sender, EventArgs e)
+</span></span><span class="line"><span class="cl">        {
+</span></span><span class="line"><span class="cl">            count++;
+</span></span><span class="line"><span class="cl">            CounterLabel.Text = $&#34;Contador actual: {count}&#34;;
+</span></span><span class="line"><span class="cl">            CounterLabel.FontSize = Device.GetNamedSize(NamedSize.Large, typeof(Label));
+</span></span><span class="line"><span class="cl">            CounterLabel.TextColor = Color.FromHex(&#34;#FF0000&#34;);
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></div><h2 id="conclusión">
+  Conclusión
+  <a class="heading-link" href="#conclusi%c3%b3n">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p><strong>.NET MAUI</strong> es una plataforma multiplataforma que ofrece muchas ventajas para los desarrolladores que quieren crear aplicaciones nativas con un solo código compartido en <strong>C#</strong> y <strong>XAML</strong>. Sin embargo, también tiene algunos inconvenientes y limitaciones que se debe tener en cuenta.</p>
+<p>En este contexto, se recomienda <strong>.NET MAUI</strong> si:</p>
+<ul>
+<li>Ya se tiene experiencia con la plataforma <strong>.NET</strong> y el lenguaje <strong>C#</strong>.</li>
+<li>Se quiere crear aplicaciones para <strong>Windows</strong>, <em>macOS</em>, <em>iOS</em> y <strong>Android</strong> con una interfaz de usuario consistente y personalizable.</li>
+<li>Se quiere aprovechar las herramientas de desarrollo de <em>Visual Studio</em> y otras librerías del ecosistema <strong>.NET</strong>.</li>
+</ul>
+<p>No se recomienda <strong>.NET MAUI</strong> si:</p>
+<ul>
+<li>Se prefiere usar otro lenguaje de programación como <em>Dart</em> o <em>JavaScript</em>.</li>
+<li>Se quiere crear aplicaciones web o para <em>Linux</em> sin usar <strong>Blazor</strong>.</li>
+<li>Se quiere usar las últimas características y tecnologías de cada plataforma nativa.</li>
+</ul>
+<p>¡Espero resulte útil!</p>
+      </div>
+
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script>
+  window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "cmasblog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    
+    document.addEventListener('themeChanged', function (e) { 
+        if (document.readyState == 'complete') {
+          DISQUS.reset({ reload: true, config: disqus_config });
+        }
+    });
+</script>
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2018 -
+    
+    2025
+     Christian Amado 
+    ·
+    
+    Desarrollado por <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+      <script async src="https://www.googletagmanager.com/gtag/js?id=356375808"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '356375808');
+        }
+      </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=013131931956450466198%3ablhmkdpweyq"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '013131931956450466198:blhmkdpweyq');
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  Benchmark de performance entre WSL2 y Hyper-V para cargas intensivas · Christian Amado
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Christian Amado">
+<meta name="description" content="WSL2 y Hyper-V son tecnologías de virtualización de Microsoft que permiten ejecutar entornos Linux sobre Windows. Aunque WSL2 internamente utiliza Hyper-V, existen diferencias en cómo se gestionan los recursos, lo que puede impactar el rendimiento en tareas intensivas como compilación, procesamiento de datos o entrenamiento de modelos.
+Este artículo presenta un enfoque comparativo y práctico para medir el rendimiento de ambos entornos en escenarios de carga pesada.">
+<meta name="keywords" content="blog,desarrollador,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Benchmark de performance entre WSL2 y Hyper-V para cargas intensivas">
+  <meta name="twitter:description" content="WSL2 y Hyper-V son tecnologías de virtualización de Microsoft que permiten ejecutar entornos Linux sobre Windows. Aunque WSL2 internamente utiliza Hyper-V, existen diferencias en cómo se gestionan los recursos, lo que puede impactar el rendimiento en tareas intensivas como compilación, procesamiento de datos o entrenamiento de modelos.
+Este artículo presenta un enfoque comparativo y práctico para medir el rendimiento de ambos entornos en escenarios de carga pesada.">
+
+<meta property="og:url" content="http://localhost:1313/es/posts/2024-07-26-wsl2-performance-benchmark/">
+  <meta property="og:site_name" content="Christian Amado">
+  <meta property="og:title" content="Benchmark de performance entre WSL2 y Hyper-V para cargas intensivas">
+  <meta property="og:description" content="WSL2 y Hyper-V son tecnologías de virtualización de Microsoft que permiten ejecutar entornos Linux sobre Windows. Aunque WSL2 internamente utiliza Hyper-V, existen diferencias en cómo se gestionan los recursos, lo que puede impactar el rendimiento en tareas intensivas como compilación, procesamiento de datos o entrenamiento de modelos.
+Este artículo presenta un enfoque comparativo y práctico para medir el rendimiento de ambos entornos en escenarios de carga pesada.">
+  <meta property="og:locale" content="es">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-07-26T00:00:00-04:00">
+    <meta property="article:modified_time" content="2024-07-26T00:00:00-04:00">
+    <meta property="article:tag" content="WinDev">
+    <meta property="article:tag" content="Windows 11">
+    <meta property="article:tag" content="WSL">
+
+
+
+
+<link rel="canonical" href="http://localhost:1313/es/posts/2024-07-26-wsl2-performance-benchmark/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/es/">
+      Christian Amado
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/about">Biografía</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/contact">Contacto</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/diabetes">Diabetes</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/tags">Etiquetas</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/en/">🇺🇸</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/es/posts/2024-07-26-wsl2-performance-benchmark/">
+              Benchmark de performance entre WSL2 y Hyper-V para cargas intensivas
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2024-07-26T00:00:00-04:00">
+                julio 26, 2024
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              3 minutos de lectura.
+            </span>
+          </div>
+          
+          
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/es/tags/windev/">WinDev</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/es/tags/windows-11/">Windows 11</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/es/tags/wsl/">WSL</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <p><strong>WSL2</strong> y <strong>Hyper-V</strong> son tecnologías de virtualización de Microsoft que permiten ejecutar entornos Linux sobre Windows. Aunque WSL2 internamente utiliza Hyper-V, existen diferencias en cómo se gestionan los recursos, lo que puede impactar el rendimiento en tareas intensivas como compilación, procesamiento de datos o entrenamiento de modelos.</p>
+<p>Este artículo presenta un enfoque comparativo y práctico para medir el rendimiento de ambos entornos en escenarios de carga pesada.</p>
+<h2 id="objetivo">
+  Objetivo
+  <a class="heading-link" href="#objetivo">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ul>
+<li>Comparar rendimiento de CPU, disco y memoria en WSL2 vs VM Hyper-V</li>
+<li>Ejecutar pruebas reproducibles con herramientas estándar</li>
+<li>Identificar ventajas y limitaciones de cada entorno según la carga</li>
+</ul>
+<h2 id="preparación-del-entorno">
+  Preparación del entorno
+  <a class="heading-link" href="#preparaci%c3%b3n-del-entorno">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>En ambos casos se utiliza Ubuntu 22.04 como sistema base, con los mismos paquetes y configuración.</p>
+<h3 id="para-wsl2">
+  Para WSL2:
+  <a class="heading-link" href="#para-wsl2">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt update <span class="o">&amp;&amp;</span> sudo apt install -y sysbench stress-ng fio build-essential
+</span></span></code></pre></div><h3 id="para-hyper-v">
+  Para Hyper-V:
+  <a class="heading-link" href="#para-hyper-v">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>Crear una máquina virtual con Ubuntu 22.04</li>
+<li>Asignar igual cantidad de CPU (por ejemplo, 4) y memoria (8 GB)</li>
+<li>Instalar los mismos paquetes para benchmark</li>
+</ul>
+<h2 id="prueba-1-cpu-sysbench">
+  Prueba 1: CPU (sysbench)
+  <a class="heading-link" href="#prueba-1-cpu-sysbench">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sysbench cpu --threads<span class="o">=</span><span class="m">4</span> --time<span class="o">=</span><span class="m">10</span> run
+</span></span></code></pre></div><p>Mide la cantidad de operaciones realizadas por segundo. Ejecutar la misma prueba en ambos entornos y anotar el throughput.</p>
+<h2 id="prueba-2-io-en-disco-fio">
+  Prueba 2: I/O en disco (fio)
+  <a class="heading-link" href="#prueba-2-io-en-disco-fio">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">fio --name<span class="o">=</span>seqwrite --size<span class="o">=</span>512M --rw<span class="o">=</span>write --bs<span class="o">=</span>4k --numjobs<span class="o">=</span><span class="m">1</span> --runtime<span class="o">=</span><span class="m">30</span> --group_reporting
+</span></span></code></pre></div><p>Esta prueba mide el rendimiento de escritura secuencial. También se puede hacer con lectura (<code>--rw=read</code>) o mezcla (<code>--rw=randrw</code>).</p>
+<h2 id="prueba-3-memoria-stress-ng">
+  Prueba 3: Memoria (stress-ng)
+  <a class="heading-link" href="#prueba-3-memoria-stress-ng">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">stress-ng --vm <span class="m">2</span> --vm-bytes 1G --timeout 20s
+</span></span></code></pre></div><p>Simula presión de memoria con dos workers asignados a 1 GB cada uno.</p>
+<h2 id="prueba-4-compilación-intensiva">
+  Prueba 4: Compilación intensiva
+  <a class="heading-link" href="#prueba-4-compilaci%c3%b3n-intensiva">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Clonar y compilar un proyecto grande, por ejemplo:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git clone https://github.com/rust-lang/rust.git
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> rust
+</span></span><span class="line"><span class="cl">./x.py build
+</span></span></code></pre></div><p>Comparar el tiempo de compilación completo.</p>
+<h2 id="resultados-esperados">
+  Resultados esperados
+  <a class="heading-link" href="#resultados-esperados">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Prueba</th>
+          <th>WSL2</th>
+          <th>Hyper-V VM</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>CPU</td>
+          <td>Similar</td>
+          <td>Similar</td>
+      </tr>
+      <tr>
+          <td>Disco (escritura)</td>
+          <td>Mejor en Hyper-V*</td>
+          <td>Peor en WSL2*</td>
+      </tr>
+      <tr>
+          <td>RAM (uso intensivo)</td>
+          <td>Similar</td>
+          <td>Similar</td>
+      </tr>
+      <tr>
+          <td>Compilación</td>
+          <td>Mejor en WSL2 (menos overhead de VM)</td>
+          <td></td>
+      </tr>
+  </tbody>
+</table>
+<p>*El rendimiento de disco en WSL2 depende de si se trabaja dentro del FS Linux (<code>~/</code>) o en <code>/mnt/c/</code>, donde es mucho más lento.</p>
+<h2 id="buenas-prácticas-para-benchmarking">
+  Buenas prácticas para benchmarking
+  <a class="heading-link" href="#buenas-pr%c3%a1cticas-para-benchmarking">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ul>
+<li>Reiniciar ambos entornos antes de cada prueba</li>
+<li>Usar cronómetro o <code>time</code> para medir duración total</li>
+<li>Evitar procesos en segundo plano que alteren los resultados</li>
+<li>Repetir pruebas y tomar promedio</li>
+</ul>
+<h2 id="conclusión">
+  Conclusión
+  <a class="heading-link" href="#conclusi%c3%b3n">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>WSL2 ofrece un excelente rendimiento para la mayoría de las cargas intensivas, con ventajas en integración con Windows y facilidad de uso. Hyper-V ofrece más aislamiento y control de hardware, con mejor I/O de disco en algunos casos. La elección depende del tipo de carga y necesidades específicas del entorno de trabajo.</p>
+      </div>
+
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script>
+  window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "cmasblog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    
+    document.addEventListener('themeChanged', function (e) { 
+        if (document.readyState == 'complete') {
+          DISQUS.reset({ reload: true, config: disqus_config });
+        }
+    });
+</script>
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2018 -
+    
+    2025
+     Christian Amado 
+    ·
+    
+    Desarrollado por <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+      <script async src="https://www.googletagmanager.com/gtag/js?id=356375808"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '356375808');
+        }
+      </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=013131931956450466198%3ablhmkdpweyq"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '013131931956450466198:blhmkdpweyq');
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

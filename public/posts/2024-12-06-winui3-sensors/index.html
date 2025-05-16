@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  Acceso a sensores del sistema desde WinUI 3 con Windows.Devices.Sensors · Christian Amado
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Christian Amado">
+<meta name="description" content="Las apps modernas desarrolladas con WinUI 3 y Windows App SDK pueden aprovechar una amplia gama de sensores disponibles en el sistema operativo Windows. Esto incluye acelerómetro, giroscopio, brújula, inclinación, orientación y sensores de luz ambiental. Estas capacidades permiten que una app de escritorio moderna reaccione al entorno físico, lo cual es especialmente útil en dispositivos portátiles como tablets, convertibles, laptops o incluso PCs todo-en-uno con sensores.
+En este artículo se explora paso a paso cómo acceder a sensores desde una aplicación WinUI 3 utilizando la API Windows.Devices.Sensors, incluyendo el manejo de eventos, actualización de UI en tiempo real y recomendaciones de uso avanzado para escenarios como logging, visualización de datos y adaptación dinámica de la interfaz.">
+<meta name="keywords" content="blog,desarrollador,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Acceso a sensores del sistema desde WinUI 3 con Windows.Devices.Sensors">
+  <meta name="twitter:description" content="Las apps modernas desarrolladas con WinUI 3 y Windows App SDK pueden aprovechar una amplia gama de sensores disponibles en el sistema operativo Windows. Esto incluye acelerómetro, giroscopio, brújula, inclinación, orientación y sensores de luz ambiental. Estas capacidades permiten que una app de escritorio moderna reaccione al entorno físico, lo cual es especialmente útil en dispositivos portátiles como tablets, convertibles, laptops o incluso PCs todo-en-uno con sensores.
+En este artículo se explora paso a paso cómo acceder a sensores desde una aplicación WinUI 3 utilizando la API Windows.Devices.Sensors, incluyendo el manejo de eventos, actualización de UI en tiempo real y recomendaciones de uso avanzado para escenarios como logging, visualización de datos y adaptación dinámica de la interfaz.">
+
+<meta property="og:url" content="http://localhost:1313/posts/2024-12-06-winui3-sensors/">
+  <meta property="og:site_name" content="Christian Amado">
+  <meta property="og:title" content="Acceso a sensores del sistema desde WinUI 3 con Windows.Devices.Sensors">
+  <meta property="og:description" content="Las apps modernas desarrolladas con WinUI 3 y Windows App SDK pueden aprovechar una amplia gama de sensores disponibles en el sistema operativo Windows. Esto incluye acelerómetro, giroscopio, brújula, inclinación, orientación y sensores de luz ambiental. Estas capacidades permiten que una app de escritorio moderna reaccione al entorno físico, lo cual es especialmente útil en dispositivos portátiles como tablets, convertibles, laptops o incluso PCs todo-en-uno con sensores.
+En este artículo se explora paso a paso cómo acceder a sensores desde una aplicación WinUI 3 utilizando la API Windows.Devices.Sensors, incluyendo el manejo de eventos, actualización de UI en tiempo real y recomendaciones de uso avanzado para escenarios como logging, visualización de datos y adaptación dinámica de la interfaz.">
+  <meta property="og:locale" content="es">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-12-06T00:00:00-04:00">
+    <meta property="article:modified_time" content="2024-12-06T00:00:00-04:00">
+    <meta property="article:tag" content="WinDev">
+    <meta property="article:tag" content="Windows 11">
+    <meta property="article:tag" content="WinUI 3">
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-V1ZRP82YFD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-V1ZRP82YFD');
+</script>
+
+
+
+<link rel="canonical" href="http://localhost:1313/posts/2024-12-06-winui3-sensors/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="apple-touch-icon" sizes="57x57" href="/img/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/img/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/img/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/img/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/img/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/img/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/img/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/img/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/img/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="/img/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/img/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+<link rel="manifest" href="/img/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/img/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/">
+      Christian Amado
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/about">Biografía</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/contact">Contacto</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/diabetes">Diabetes</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/tags">Etiquetas</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/en/">🇺🇸</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/posts/2024-12-06-winui3-sensors/">
+              Acceso a sensores del sistema desde WinUI 3 con Windows.Devices.Sensors
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2024-12-06T00:00:00-04:00">
+                diciembre 6, 2024
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              4 minutos de lectura.
+            </span>
+          </div>
+          
+          
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/tags/windev/">WinDev</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/windows-11/">Windows 11</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/winui-3/">WinUI 3</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <p>Las apps modernas desarrolladas con <strong>WinUI 3</strong> y <strong>Windows App SDK</strong> pueden aprovechar una amplia gama de sensores disponibles en el sistema operativo Windows. Esto incluye acelerómetro, giroscopio, brújula, inclinación, orientación y sensores de luz ambiental. Estas capacidades permiten que una app de escritorio moderna reaccione al entorno físico, lo cual es especialmente útil en dispositivos portátiles como tablets, convertibles, laptops o incluso PCs todo-en-uno con sensores.</p>
+<p>En este artículo se explora paso a paso cómo acceder a sensores desde una aplicación <strong>WinUI 3</strong> utilizando la API <code>Windows.Devices.Sensors</code>, incluyendo el manejo de eventos, actualización de UI en tiempo real y recomendaciones de uso avanzado para escenarios como logging, visualización de datos y adaptación dinámica de la interfaz.</p>
+<h2 id="requisitos-previos">
+  Requisitos previos
+  <a class="heading-link" href="#requisitos-previos">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Para este tutorial se asume que ya está configurado un entorno de desarrollo con:</p>
+<ul>
+<li>Windows 11</li>
+<li>Visual Studio 2022 o superior</li>
+<li>Windows App SDK 1.3+ instalado</li>
+<li>Proyecto WinUI 3 en C# (aplicación empaquetada con MSIX)</li>
+</ul>
+<p>También es importante habilitar las capacidades necesarias en el manifiesto de la app si se va a distribuir. Para pruebas locales, basta con permisos de ejecución.</p>
+<h2 id="paso-1-crear-un-nuevo-proyecto-winui-3">
+  Paso 1: Crear un nuevo proyecto WinUI 3
+  <a class="heading-link" href="#paso-1-crear-un-nuevo-proyecto-winui-3">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ol>
+<li>Abrir Visual Studio y crear un nuevo proyecto.</li>
+<li>Seleccionar <strong>Blank App, Packaged (WinUI 3 in Desktop)</strong>.</li>
+<li>Asignar nombre: <code>SensorReaderApp</code></li>
+<li>Confirmar el uso de Windows App SDK y arquitectura x64.</li>
+</ol>
+<p>Esto generará la estructura básica con <code>MainWindow.xaml</code> y <code>App.xaml</code>.</p>
+<h2 id="paso-2-agregar-namespaces-y-referencias">
+  Paso 2: Agregar namespaces y referencias
+  <a class="heading-link" href="#paso-2-agregar-namespaces-y-referencias">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Agregar las siguientes directivas al archivo <code>MainWindow.xaml.cs</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">Windows.Devices.Sensors</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">Microsoft.UI.Xaml</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">Microsoft.UI.Xaml.Controls</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">Microsoft.UI.Dispatching</span><span class="p">;</span>
+</span></span></code></pre></div><p>Estas son necesarias para acceder a sensores, actualizar UI y trabajar con el hilo de UI en WinUI 3.</p>
+<h2 id="paso-3-declarar-sensores-en-la-clase-mainwindow">
+  Paso 3: Declarar sensores en la clase MainWindow
+  <a class="heading-link" href="#paso-3-declarar-sensores-en-la-clase-mainwindow">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>En la clase <code>MainWindow</code>, declarar los sensores que se desean utilizar:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kd">private</span> <span class="n">Accelerometer</span> <span class="n">_accelerometer</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kd">private</span> <span class="n">Gyrometer</span> <span class="n">_gyrometer</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kd">private</span> <span class="n">Compass</span> <span class="n">_compass</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kd">private</span> <span class="n">OrientationSensor</span> <span class="n">_orientationSensor</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kd">private</span> <span class="n">LightSensor</span> <span class="n">_lightSensor</span><span class="p">;</span>
+</span></span></code></pre></div><p>En el constructor, inicializar los sensores y registrar los eventos:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kd">public</span> <span class="n">MainWindow</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="n">InitializeComponent</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">_accelerometer</span> <span class="p">=</span> <span class="n">Accelerometer</span><span class="p">.</span><span class="n">GetDefault</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="n">_gyrometer</span> <span class="p">=</span> <span class="n">Gyrometer</span><span class="p">.</span><span class="n">GetDefault</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="n">_compass</span> <span class="p">=</span> <span class="n">Compass</span><span class="p">.</span><span class="n">GetDefault</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="n">_orientationSensor</span> <span class="p">=</span> <span class="n">OrientationSensor</span><span class="p">.</span><span class="n">GetDefault</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="n">_lightSensor</span> <span class="p">=</span> <span class="n">LightSensor</span><span class="p">.</span><span class="n">GetDefault</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">_accelerometer</span> <span class="p">!=</span> <span class="kc">null</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">_accelerometer</span><span class="p">.</span><span class="n">ReadingChanged</span> <span class="p">+=</span> <span class="n">Accelerometer_ReadingChanged</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">_gyrometer</span> <span class="p">!=</span> <span class="kc">null</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">_gyrometer</span><span class="p">.</span><span class="n">ReadingChanged</span> <span class="p">+=</span> <span class="n">Gyrometer_ReadingChanged</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">_compass</span> <span class="p">!=</span> <span class="kc">null</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">_compass</span><span class="p">.</span><span class="n">ReadingChanged</span> <span class="p">+=</span> <span class="n">Compass_ReadingChanged</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">_orientationSensor</span> <span class="p">!=</span> <span class="kc">null</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">_orientationSensor</span><span class="p">.</span><span class="n">ReadingChanged</span> <span class="p">+=</span> <span class="n">OrientationSensor_ReadingChanged</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">_lightSensor</span> <span class="p">!=</span> <span class="kc">null</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">_lightSensor</span><span class="p">.</span><span class="n">ReadingChanged</span> <span class="p">+=</span> <span class="n">LightSensor_ReadingChanged</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h2 id="paso-4-manejar-los-eventos-de-lectura">
+  Paso 4: Manejar los eventos de lectura
+  <a class="heading-link" href="#paso-4-manejar-los-eventos-de-lectura">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Cada evento entrega una estructura de datos con las lecturas. Por ejemplo:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kd">private</span> <span class="kd">async</span> <span class="k">void</span> <span class="n">Accelerometer_ReadingChanged</span><span class="p">(</span><span class="n">Accelerometer</span> <span class="n">sender</span><span class="p">,</span> <span class="n">AccelerometerReadingChangedEventArgs</span> <span class="n">args</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">var</span> <span class="n">reading</span> <span class="p">=</span> <span class="n">args</span><span class="p">.</span><span class="n">Reading</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">await</span> <span class="n">DispatcherQueue</span><span class="p">.</span><span class="n">EnqueueAsync</span><span class="p">(()</span> <span class="p">=&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">txtAccel</span><span class="p">.</span><span class="n">Text</span> <span class="p">=</span> <span class="s">$&#34;Accel X: {reading.AccelerationX:F2}, Y: {reading.AccelerationY:F2}, Z: {reading.AccelerationZ:F2}&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Repetir para los demás sensores. Ejemplo para el giroscopio:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kd">private</span> <span class="kd">async</span> <span class="k">void</span> <span class="n">Gyrometer_ReadingChanged</span><span class="p">(</span><span class="n">Gyrometer</span> <span class="n">sender</span><span class="p">,</span> <span class="n">GyrometerReadingChangedEventArgs</span> <span class="n">args</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">var</span> <span class="n">reading</span> <span class="p">=</span> <span class="n">args</span><span class="p">.</span><span class="n">Reading</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">await</span> <span class="n">DispatcherQueue</span><span class="p">.</span><span class="n">EnqueueAsync</span><span class="p">(()</span> <span class="p">=&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">txtGyro</span><span class="p">.</span><span class="n">Text</span> <span class="p">=</span> <span class="s">$&#34;Gyro X: {reading.AngularVelocityX:F2}, Y: {reading.AngularVelocityY:F2}, Z: {reading.AngularVelocityZ:F2}&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Y para la orientación:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kd">private</span> <span class="kd">async</span> <span class="k">void</span> <span class="n">OrientationSensor_ReadingChanged</span><span class="p">(</span><span class="n">OrientationSensor</span> <span class="n">sender</span><span class="p">,</span> <span class="n">OrientationSensorReadingChangedEventArgs</span> <span class="n">args</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">var</span> <span class="n">quaternion</span> <span class="p">=</span> <span class="n">args</span><span class="p">.</span><span class="n">Reading</span><span class="p">.</span><span class="n">Quaternion</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">await</span> <span class="n">DispatcherQueue</span><span class="p">.</span><span class="n">EnqueueAsync</span><span class="p">(()</span> <span class="p">=&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">txtOrientation</span><span class="p">.</span><span class="n">Text</span> <span class="p">=</span> <span class="s">$&#34;Quaternion: X={quaternion.X:F2}, Y={quaternion.Y:F2}, Z={quaternion.Z:F2}, W={quaternion.W:F2}&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h2 id="paso-5-diseño-de-la-interfaz-de-usuario">
+  Paso 5: Diseño de la interfaz de usuario
+  <a class="heading-link" href="#paso-5-dise%c3%b1o-de-la-interfaz-de-usuario">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>En <code>MainWindow.xaml</code>, agregar un StackPanel con TextBlocks:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;StackPanel</span> <span class="na">Spacing=</span><span class="s">&#34;10&#34;</span> <span class="na">Padding=</span><span class="s">&#34;20&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;TextBlock</span> <span class="na">x:Name=</span><span class="s">&#34;txtAccel&#34;</span> <span class="na">FontSize=</span><span class="s">&#34;14&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;TextBlock</span> <span class="na">x:Name=</span><span class="s">&#34;txtGyro&#34;</span> <span class="na">FontSize=</span><span class="s">&#34;14&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;TextBlock</span> <span class="na">x:Name=</span><span class="s">&#34;txtCompass&#34;</span> <span class="na">FontSize=</span><span class="s">&#34;14&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;TextBlock</span> <span class="na">x:Name=</span><span class="s">&#34;txtOrientation&#34;</span> <span class="na">FontSize=</span><span class="s">&#34;14&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;TextBlock</span> <span class="na">x:Name=</span><span class="s">&#34;txtLight&#34;</span> <span class="na">FontSize=</span><span class="s">&#34;14&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/StackPanel&gt;</span>
+</span></span></code></pre></div><p>Esto mostrará las lecturas en tiempo real cada vez que cambien.</p>
+<h2 id="paso-6-consideraciones-de-rendimiento-y-energía">
+  Paso 6: Consideraciones de rendimiento y energía
+  <a class="heading-link" href="#paso-6-consideraciones-de-rendimiento-y-energ%c3%ada">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Los sensores pueden consumir energía. Se recomienda:</p>
+<ul>
+<li>Activar sensores solo cuando se necesita</li>
+<li>Detener sensores en <code>OnSuspending</code> o al minimizar</li>
+<li>Utilizar <code>ReportInterval</code> para reducir frecuencia de actualización</li>
+</ul>
+<p>Ejemplo:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="n">_accelerometer</span> <span class="p">!=</span> <span class="kc">null</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">_accelerometer</span><span class="p">.</span><span class="n">ReportInterval</span> <span class="p">=</span> <span class="m">500</span><span class="p">;</span> <span class="c1">// milisegundos</span>
+</span></span></code></pre></div><h2 id="paso-7-aplicaciones-reales-y-escenarios-de-uso">
+  Paso 7: Aplicaciones reales y escenarios de uso
+  <a class="heading-link" href="#paso-7-aplicaciones-reales-y-escenarios-de-uso">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Este tipo de integración es útil para:</p>
+<ul>
+<li>Apps de visualización de entorno (IoT, educación, ciencia)</li>
+<li>Adaptación de UI a inclinación o orientación</li>
+<li>Logging de movimiento para auditorías</li>
+<li>Control de juegos, cámaras o navegación mediante sensores</li>
+<li>Accesibilidad aumentada y experiencia context-aware</li>
+</ul>
+<h2 id="paso-8-diagnóstico-de-compatibilidad">
+  Paso 8: Diagnóstico de compatibilidad
+  <a class="heading-link" href="#paso-8-diagn%c3%b3stico-de-compatibilidad">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>No todos los equipos tienen todos los sensores. Se debe validar su disponibilidad:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="n">_accelerometer</span> <span class="p">==</span> <span class="kc">null</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">txtAccel</span><span class="p">.</span><span class="n">Text</span> <span class="p">=</span> <span class="s">&#34;Acelerómetro no disponible&#34;</span><span class="p">;</span>
+</span></span></code></pre></div><p>Esto mejora la experiencia del usuario final.</p>
+<h2 id="conclusión">
+  Conclusión
+  <a class="heading-link" href="#conclusi%c3%b3n">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Acceder a sensores desde una aplicación <strong>WinUI 3</strong> es completamente posible y está bien soportado por Windows App SDK mediante las APIs de <code>Windows.Devices.Sensors</code>. Con unos pocos pasos se pueden integrar funcionalidades contextuales que elevan la experiencia del usuario en dispositivos modernos. Ya sea para orientación, lectura de luz, movimiento o estado físico del dispositivo, los sensores ofrecen un puente natural entre hardware y software en el desarrollo de apps modernas para <strong>Windows</strong>.</p>
+<p>Esta capacidad posiciona a WinUI 3 como una plataforma no solo estética, sino también funcional, lista para aprovechar al máximo la interacción con el sistema operativo y el hardware disponible en equipos modernos.</p>
+      </div>
+
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script>
+  window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "cmasblog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    
+    document.addEventListener('themeChanged', function (e) { 
+        if (document.readyState == 'complete') {
+          DISQUS.reset({ reload: true, config: disqus_config });
+        }
+    });
+</script>
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2018 -
+    
+    2025
+     Christian Amado 
+    ·
+    
+    Desarrollado por <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+      <script async src="https://www.googletagmanager.com/gtag/js?id=356375808"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '356375808');
+        }
+      </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=013131931956450466198%3ablhmkdpweyq"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '013131931956450466198:blhmkdpweyq');
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

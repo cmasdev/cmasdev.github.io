@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Blazor on Christian Amado</title>
+    <link>http://localhost:1313/tags/blazor/</link>
+    <description>Recent content in Blazor on Christian Amado</description>
+    <generator>Hugo</generator>
+    <language>es</language>
+    <lastBuildDate>Wed, 26 Mar 2025 00:00:00 -0300</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/blazor/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Despliegue continuo de Blazor con Azure DevOps</title>
+      <link>http://localhost:1313/posts/2025-03-26-blazor-azure-devops/</link>
+      <pubDate>Wed, 26 Mar 2025 00:00:00 -0300</pubDate>
+      <guid>http://localhost:1313/posts/2025-03-26-blazor-azure-devops/</guid>
+      <description>&lt;p&gt;La automatización del proceso de construcción, prueba y despliegue de aplicaciones &lt;strong&gt;Blazor&lt;/strong&gt; es esencial para mantener un ciclo de desarrollo ágil, confiable y repetible. &lt;strong&gt;Azure DevOps&lt;/strong&gt; proporciona un conjunto completo de herramientas que permiten implementar pipelines de integración y entrega continua (CI/CD) para aplicaciones &lt;strong&gt;Blazor Server&lt;/strong&gt; o &lt;strong&gt;Blazor WebAssembly&lt;/strong&gt;.&lt;/p&gt;&#xA;&lt;p&gt;Este artículo explica cómo configurar un pipeline de CI/CD para una aplicación &lt;strong&gt;Blazor Server&lt;/strong&gt;, incluyendo la integración con un repositorio Git, la definición del proceso de build y el despliegue automático a &lt;strong&gt;Azure App Service&lt;/strong&gt;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Dashboards interactivos con Blazor y gráficos dinámicos</title>
+      <link>http://localhost:1313/posts/2025-03-19-blazor-dashboard/</link>
+      <pubDate>Wed, 19 Mar 2025 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2025-03-19-blazor-dashboard/</guid>
+      <description>&lt;p&gt;Los dashboards interactivos se han convertido en herramientas esenciales para visualizar grandes volúmenes de información en tiempo real. &lt;strong&gt;Blazor&lt;/strong&gt;, como framework moderno para construir aplicaciones web con C#, permite crear interfaces ricas que se ejecutan directamente en el navegador o en el servidor. Cuando se combina con bibliotecas de gráficos dinámicos como Chart.js o ApexCharts, Blazor ofrece una experiencia visual potente y altamente personalizable.&lt;/p&gt;&#xA;&lt;p&gt;Este artículo explora cómo construir un dashboard interactivo en &lt;strong&gt;Blazor Server&lt;/strong&gt; utilizando datos dinámicos y gráficos en tiempo real, abordando tanto el diseño del componente visual como la lógica de actualización de datos.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Integración de Blazor con bases de datos SQL en Azure</title>
+      <link>http://localhost:1313/posts/2025-03-12-blazor-sql-azure/</link>
+      <pubDate>Wed, 12 Mar 2025 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2025-03-12-blazor-sql-azure/</guid>
+      <description>&lt;p&gt;El desarrollo de aplicaciones web modernas con &lt;strong&gt;Blazor&lt;/strong&gt; permite aprovechar el poder de .NET para construir interfaces interactivas del lado cliente utilizando &lt;strong&gt;C#&lt;/strong&gt;. A su vez, las bases de datos SQL en &lt;strong&gt;Azure&lt;/strong&gt; ofrecen una solución altamente escalable, segura y gestionada para el almacenamiento de datos. Integrar ambas tecnologías representa una solución robusta para proyectos empresariales que requieren rendimiento, fiabilidad y facilidad de mantenimiento.&lt;/p&gt;&#xA;&lt;p&gt;Este artículo detalla cómo conectar una aplicación Blazor Server con una base de datos SQL en &lt;strong&gt;Azure&lt;/strong&gt;, utilizando &lt;strong&gt;Entity Framework Core&lt;/strong&gt; como ORM (Object-Relational Mapping). Se cubre desde la creación de la base de datos hasta la implementación de operaciones CRUD básicas.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Optimización de rendimiento en Blazor WebAssembly</title>
+      <link>http://localhost:1313/posts/2025-01-06-performance-optimization-blazor-webassembly/</link>
+      <pubDate>Mon, 06 Jan 2025 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2025-01-06-performance-optimization-blazor-webassembly/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;Blazor WebAssembly&lt;/strong&gt; es una tecnología poderosa que permite a los desarrolladores crear aplicaciones web interactivas utilizando &lt;strong&gt;C#&lt;/strong&gt; y &lt;strong&gt;.NET&lt;/strong&gt; en lugar de &lt;strong&gt;JavaScript&lt;/strong&gt;. Sin embargo, debido a las características inherentes de su arquitectura, la optimización del rendimiento puede ser un desafío crítico. En este artículo, exploraremos técnicas, estrategias y mejores prácticas para optimizar el rendimiento en aplicaciones &lt;strong&gt;Blazor WebAssembly&lt;/strong&gt;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Usando Blazor para crear Progressive Web Apps (PWA)</title>
+      <link>http://localhost:1313/posts/2024-12-24-blazor-pwa/</link>
+      <pubDate>Tue, 24 Dec 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2024-12-24-blazor-pwa/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;Blazor&lt;/strong&gt;, el framework moderno basado en &lt;strong&gt;.NET&lt;/strong&gt;, ha demostrado ser una herramienta poderosa para el desarrollo de aplicaciones web interactivas. Combinado con las capacidades de &lt;strong&gt;Progressive Web Apps (PWA)&lt;/strong&gt;, ofrece una forma innovadora de construir aplicaciones que funcionan offline. Se pueden instalar en dispositivos y ofrecen una experiencia similar a las aplicaciones nativas. En este artículo, exploraremos cómo usar &lt;strong&gt;Blazor&lt;/strong&gt; para crear &lt;strong&gt;PWAs&lt;/strong&gt;, centrándonos en las nuevas capacidades introducidas con &lt;strong&gt;.NET 9&lt;/strong&gt;, buenas prácticas y ejemplos detallados.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Blazor y Microsoft Entra ID: Implementación de autenticación</title>
+      <link>http://localhost:1313/posts/2024-12-18-blazor-and-microsoft-entra/</link>
+      <pubDate>Wed, 18 Dec 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2024-12-18-blazor-and-microsoft-entra/</guid>
+      <description>&lt;p&gt;La integración de &lt;strong&gt;Microsoft Entra ID (anteriormente Azure AD)&lt;/strong&gt; con &lt;strong&gt;Blazor&lt;/strong&gt; permite implementar autenticación segura en aplicaciones web y mejorar la gestión de identidades. En este artículo, exploraremos cómo integrar &lt;strong&gt;Microsoft Entra ID&lt;/strong&gt; en una aplicación &lt;strong&gt;Blazor&lt;/strong&gt;, proporcionando un flujo de autenticación robusto y seguro.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Testing unitario en Blazor: Herramientas y estrategias</title>
+      <link>http://localhost:1313/posts/2024-10-16-testing-unitario-in-blazor/</link>
+      <pubDate>Wed, 16 Oct 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2024-10-16-testing-unitario-in-blazor/</guid>
+      <description>&lt;p&gt;El desarrollo de aplicaciones robustas y fiables en &lt;strong&gt;Blazor&lt;/strong&gt; requiere un enfoque disciplinado hacia las pruebas unitarias. Las pruebas unitarias no solo garantizan que los componentes y servicios funcionen como se espera, sino que también facilitan el mantenimiento, la detección temprana de errores y la calidad del software. En este artículo, exploraremos en detalle cómo realizar pruebas unitarias en Blazor utilizando herramientas modernas, estrategias eficaces y ejemplos prácticos.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Uso de Azure Cosmos DB en aplicaciones Blazor</title>
+      <link>http://localhost:1313/posts/2024-10-09-azure-cosmos-in-blazor/</link>
+      <pubDate>Wed, 09 Oct 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2024-10-09-azure-cosmos-in-blazor/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;Azure Cosmos DB&lt;/strong&gt; es una base de datos distribuida globalmente y altamente escalable que permite almacenar y consultar datos de forma rápida y segura. Al integrarla con aplicaciones &lt;strong&gt;Blazor&lt;/strong&gt;, puedes construir soluciones web modernas y dinámicas con acceso a datos en tiempo real. Este artículo ofrece un instructivo paso a paso para usar &lt;strong&gt;Azure Cosmos DB&lt;/strong&gt; con &lt;strong&gt;Blazor&lt;/strong&gt;, incluyendo ejemplos de código prácticos y buenas prácticas.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Blazor WebAssembly vs Blazor Server: ¿Cuál elegir?</title>
+      <link>http://localhost:1313/posts/2024-10-02-blazor-webassembly-vs-server/</link>
+      <pubDate>Wed, 02 Oct 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2024-10-02-blazor-webassembly-vs-server/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;Blazor&lt;/strong&gt;, el framework de desarrollo de aplicaciones web basado en &lt;strong&gt;.NET&lt;/strong&gt;, ofrece dos opciones principales para crear aplicaciones interactivas: &lt;strong&gt;Blazor WebAssembly&lt;/strong&gt; y &lt;strong&gt;Blazor Server&lt;/strong&gt;. Ambas tecnologías tienen sus propias fortalezas, debilidades y casos de uso ideales. En este artículo, exploraremos en detalle estas dos modalidades para ayudarte a decidir cuál se adapta mejor a tu proyecto.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Blazor WebAssembly con .NET 9: Nuevas características y mejoras</title>
+      <link>http://localhost:1313/posts/2024-07-10-blazor-wa-dotnet-9/</link>
+      <pubDate>Wed, 10 Jul 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2024-07-10-blazor-wa-dotnet-9/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;Blazor WebAssembly&lt;/strong&gt; ha sido una de las tecnologías más populares en el desarrollo de aplicaciones web interactivas con &lt;strong&gt;C#&lt;/strong&gt; en lugar de &lt;strong&gt;JavaScript&lt;/strong&gt;. Con la llegada de &lt;strong&gt;.NET 9&lt;/strong&gt;, &lt;strong&gt;Blazor WebAssembly&lt;/strong&gt; ha incorporado nuevas características y mejoras que optimizan tanto el rendimiento como la experiencia de desarrollo. En este artículo, exploraremos estas nuevas capacidades con ejemplos prácticos y detallaremos cómo sacarles el máximo provecho.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Optimización de rendimiento en Blazor WebAssembly: Estrategias y buenas prácticas con .NET</title>
+      <link>http://localhost:1313/posts/2024-07-03-blazor-performance-optimization/</link>
+      <pubDate>Wed, 03 Jul 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2024-07-03-blazor-performance-optimization/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;Blazor WebAssembly&lt;/strong&gt; ha revolucionado el desarrollo de aplicaciones web modernas, permitiendo ejecutar aplicaciones &lt;strong&gt;.NET&lt;/strong&gt; directamente en el navegador utilizando &lt;strong&gt;WebAssembly&lt;/strong&gt;. Aunque &lt;strong&gt;Blazor WebAssembly&lt;/strong&gt; ofrece una excelente experiencia de usuario y una integración perfecta con &lt;strong&gt;.NET&lt;/strong&gt;, es crucial aplicar estrategias y buenas prácticas de optimización para asegurar que nuestras aplicaciones funcionen de manera eficiente, especialmente cuando se trata de aplicaciones grandes y complejas.&lt;/p&gt;&#xA;&lt;p&gt;En este artículo, exploraremos estrategias y técnicas de optimización para mejorar el rendimiento de aplicaciones &lt;strong&gt;Blazor WebAssembly&lt;/strong&gt; usando &lt;strong&gt;.NET 8&lt;/strong&gt;, con ejemplos prácticos de código y buenas prácticas.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Autenticación y autorización en Blazor WebAssembly con Microsoft Entra ID</title>
+      <link>http://localhost:1313/posts/2024-06-26-identity-blazor-wa-entra/</link>
+      <pubDate>Wed, 26 Jun 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2024-06-26-identity-blazor-wa-entra/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;Blazor WebAssembly&lt;/strong&gt; es una tecnología poderosa dentro del ecosistema &lt;strong&gt;.NET&lt;/strong&gt; que permite construir aplicaciones web interactivas completamente en C#. Para aplicaciones empresariales y seguras, la autenticación y autorización son aspectos fundamentales. &lt;strong&gt;Microsoft Entra ID&lt;/strong&gt; (anteriormente Azure Active Directory) proporciona una solución confiable y escalable para la gestión de identidad. En este artículo, exploraremos cómo integrar autenticación y autorización en una aplicación &lt;strong&gt;Blazor WebAssembly&lt;/strong&gt; utilizando &lt;strong&gt;.NET 8&lt;/strong&gt; y &lt;strong&gt;Microsoft Entra ID&lt;/strong&gt;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Despliegue de aplicaciones Blazor en Azure App Services</title>
+      <link>http://localhost:1313/posts/2024-04-17-deploy-blazor-apps-azure/</link>
+      <pubDate>Wed, 17 Apr 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2024-04-17-deploy-blazor-apps-azure/</guid>
+      <description>&lt;p&gt;El despliegue de aplicaciones Blazor en Azure App Services ofrece una forma rápida y eficiente de llevar tus proyectos al entorno de producción. Azure proporciona escalabilidad, seguridad y opciones flexibles para automatizar el flujo de trabajo de despliegue. En este artículo, exploramos tres métodos clave: usando Visual Studio, la CLI de Azure, y GitHub Actions, con pasos prácticos y ejemplos detallados. Con las mejoras de .NET 8, las aplicaciones Blazor ahora son más rápidas y optimizadas para la nube, lo que facilita la entrega de soluciones web escalables y modernas.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Creación de componentes reutilizables en Blazor para aplicaciones escalables</title>
+      <link>http://localhost:1313/posts/2024-04-10-blazor-reusable-components/</link>
+      <pubDate>Wed, 10 Apr 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2024-04-10-blazor-reusable-components/</guid>
+      <description>&lt;p&gt;Los componentes reutilizables son esenciales para construir aplicaciones Blazor escalables y mantenibles. Este artículo explora cómo aprovechar las capacidades de .NET 8 para crear componentes modulares que mejoren la eficiencia y la reutilización en proyectos de cualquier tamaño. Además, aprenderás las mejores prácticas y técnicas clave para optimizar la construcción de interfaces dinámicas con Blazor.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Introducción a Blazor: Cambiando el paradigma del desarrollo web</title>
+      <link>http://localhost:1313/posts/2024-04-03-intro-blazor/</link>
+      <pubDate>Wed, 03 Apr 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2024-04-03-intro-blazor/</guid>
+      <description>&lt;p&gt;El framework de Microsoft, está transformando el desarrollo web al permitir crear aplicaciones interactivas con C# y .NET, eliminando la necesidad de JavaScript. Con las mejoras de .NET 8, ofrece mayor rendimiento y flexibilidad, facilitando la creación de aplicaciones tanto en el cliente como en el servidor. Este artículo explora cómo Blazor redefine el desarrollo web y muestra cómo empezar a usarlo.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

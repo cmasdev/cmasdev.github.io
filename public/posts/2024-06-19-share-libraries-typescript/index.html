@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  Creación de librerías compartidas en TypeScript · Christian Amado
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Christian Amado">
+<meta name="description" content="La creación de librerías compartidas en TypeScript permite a los desarrolladores encapsular funcionalidad reutilizable y mejorar la mantenibilidad del código. Este artículo explorará el proceso completo de desarrollo de librerías en TypeScript, desde la configuración inicial hasta el despliegue, con un enfoque moderno, ejemplos prácticos y consideraciones de seguridad.">
+<meta name="keywords" content="blog,desarrollador,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Creación de librerías compartidas en TypeScript">
+  <meta name="twitter:description" content="La creación de librerías compartidas en TypeScript permite a los desarrolladores encapsular funcionalidad reutilizable y mejorar la mantenibilidad del código. Este artículo explorará el proceso completo de desarrollo de librerías en TypeScript, desde la configuración inicial hasta el despliegue, con un enfoque moderno, ejemplos prácticos y consideraciones de seguridad.">
+
+<meta property="og:url" content="http://localhost:1313/posts/2024-06-19-share-libraries-typescript/">
+  <meta property="og:site_name" content="Christian Amado">
+  <meta property="og:title" content="Creación de librerías compartidas en TypeScript">
+  <meta property="og:description" content="La creación de librerías compartidas en TypeScript permite a los desarrolladores encapsular funcionalidad reutilizable y mejorar la mantenibilidad del código. Este artículo explorará el proceso completo de desarrollo de librerías en TypeScript, desde la configuración inicial hasta el despliegue, con un enfoque moderno, ejemplos prácticos y consideraciones de seguridad.">
+  <meta property="og:locale" content="es">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-06-19T00:00:00-04:00">
+    <meta property="article:modified_time" content="2024-06-19T00:00:00-04:00">
+    <meta property="article:tag" content="Web Development">
+    <meta property="article:tag" content="Typescript">
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-V1ZRP82YFD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-V1ZRP82YFD');
+</script>
+
+
+
+<link rel="canonical" href="http://localhost:1313/posts/2024-06-19-share-libraries-typescript/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="apple-touch-icon" sizes="57x57" href="/img/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/img/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/img/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/img/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/img/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/img/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/img/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/img/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/img/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="/img/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/img/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+<link rel="manifest" href="/img/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/img/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/">
+      Christian Amado
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/about">Biografía</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/contact">Contacto</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/diabetes">Diabetes</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/tags">Etiquetas</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/en/">🇺🇸</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/posts/2024-06-19-share-libraries-typescript/">
+              Creación de librerías compartidas en TypeScript
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2024-06-19T00:00:00-04:00">
+                junio 19, 2024
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              3 minutos de lectura.
+            </span>
+          </div>
+          
+          
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/tags/web-development/">Web Development</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/typescript/">Typescript</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <p>La creación de librerías compartidas en <strong>TypeScript</strong> permite a los desarrolladores encapsular funcionalidad reutilizable y mejorar la mantenibilidad del código. Este artículo explorará el proceso completo de desarrollo de librerías en <strong>TypeScript</strong>, desde la configuración inicial hasta el despliegue, con un enfoque moderno, ejemplos prácticos y consideraciones de seguridad.</p>
+<h2 id="por-qué-crear-librerías-compartidas-en-typescript">
+  ¿Por qué crear librerías compartidas en TypeScript?
+  <a class="heading-link" href="#por-qu%c3%a9-crear-librer%c3%adas-compartidas-en-typescript">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="beneficios-principales">
+  Beneficios principales
+  <a class="heading-link" href="#beneficios-principales">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li><strong>Reutilización de código</strong>: Evita la duplicación en diferentes proyectos.</li>
+<li><strong>Mantenibilidad</strong>: Centraliza la gestión de funcionalidades comunes.</li>
+<li><strong>Escalabilidad</strong>: Facilita la integración con nuevos proyectos.</li>
+<li><strong>Colaboración</strong>: Permite a los equipos trabajar en conjunto sobre componentes centrales.</li>
+</ol>
+<h2 id="configuración-inicial">
+  Configuración inicial
+  <a class="heading-link" href="#configuraci%c3%b3n-inicial">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="requisitos-previos">
+  Requisitos previos
+  <a class="heading-link" href="#requisitos-previos">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>Tener Node.js y npm instalados.</li>
+<li>Familiaridad con TypeScript.</li>
+</ul>
+<h3 id="crear-un-nuevo-proyecto-de-librería">
+  Crear un nuevo proyecto de librería
+  <a class="heading-link" href="#crear-un-nuevo-proyecto-de-librer%c3%ada">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>Crea un directorio para la librería:
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">mkdir my-shared-library
+</span></span><span class="line"><span class="cl">cd my-shared-library
+</span></span></code></pre></div></li>
+<li>Inicializa un proyecto Node.js:
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">npm init -y
+</span></span></code></pre></div></li>
+<li>Instala TypeScript y otras dependencias necesarias:
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">npm install typescript --save-dev
+</span></span><span class="line"><span class="cl">npm install tslib
+</span></span></code></pre></div></li>
+<li>Crea una configuración base de TypeScript:
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">npx tsc --init
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="configurar-tsconfigjson">
+  Configurar <code>tsconfig.json</code>
+  <a class="heading-link" href="#configurar-tsconfigjson">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Configura el archivo para soportar módulos comunes y optimizar la compilación:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">  &#34;compilerOptions&#34;: {
+</span></span><span class="line"><span class="cl">    &#34;outDir&#34;: &#34;dist&#34;,
+</span></span><span class="line"><span class="cl">    &#34;rootDir&#34;: &#34;src&#34;,
+</span></span><span class="line"><span class="cl">    &#34;target&#34;: &#34;ES2020&#34;,
+</span></span><span class="line"><span class="cl">    &#34;module&#34;: &#34;CommonJS&#34;,
+</span></span><span class="line"><span class="cl">    &#34;declaration&#34;: true,
+</span></span><span class="line"><span class="cl">    &#34;sourceMap&#34;: true,
+</span></span><span class="line"><span class="cl">    &#34;strict&#34;: true
+</span></span><span class="line"><span class="cl">  },
+</span></span><span class="line"><span class="cl">  &#34;include&#34;: [&#34;src/**/*&#34;],
+</span></span><span class="line"><span class="cl">  &#34;exclude&#34;: [&#34;node_modules&#34;, &#34;dist&#34;]
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></div><h2 id="estructura-del-proyecto">
+  Estructura del proyecto
+  <a class="heading-link" href="#estructura-del-proyecto">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Organiza los archivos de tu proyecto:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">my-shared-library/
+</span></span><span class="line"><span class="cl">├── src/
+</span></span><span class="line"><span class="cl">│   ├── index.ts
+</span></span><span class="line"><span class="cl">│   ├── utils/
+</span></span><span class="line"><span class="cl">│   │   └── math.ts
+</span></span><span class="line"><span class="cl">├── dist/
+</span></span><span class="line"><span class="cl">├── package.json
+</span></span><span class="line"><span class="cl">├── tsconfig.json
+</span></span><span class="line"><span class="cl">└── README.md
+</span></span></code></pre></div><h2 id="desarrollo-de-la-librería">
+  Desarrollo de la librería
+  <a class="heading-link" href="#desarrollo-de-la-librer%c3%ada">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="crear-funcionalidades">
+  Crear funcionalidades
+  <a class="heading-link" href="#crear-funcionalidades">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="ejemplo-operaciones-matemáticas">
+  Ejemplo: Operaciones matemáticas
+  <a class="heading-link" href="#ejemplo-operaciones-matem%c3%a1ticas">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>Archivo: <code>src/utils/math.ts</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">export</span> <span class="n">function</span> <span class="n">add</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="n">number</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="n">number</span><span class="p">):</span> <span class="n">number</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">export</span> <span class="n">function</span> <span class="n">subtract</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="n">number</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="n">number</span><span class="p">):</span> <span class="n">number</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="n">a</span> <span class="o">-</span> <span class="n">b</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h4 id="archivo-de-entrada-principal">
+  Archivo de entrada principal
+  <a class="heading-link" href="#archivo-de-entrada-principal">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>Archivo: <code>src/index.ts</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">export</span> <span class="o">*</span> <span class="n">from</span> <span class="s1">&#39;./utils/math&#39;</span><span class="p">;</span>
+</span></span></code></pre></div><h2 id="compilación-de-la-librería">
+  Compilación de la librería
+  <a class="heading-link" href="#compilaci%c3%b3n-de-la-librer%c3%ada">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ol>
+<li>Compila el código:
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">npx tsc
+</span></span></code></pre></div></li>
+<li>Verifica que los archivos se generaron en el directorio <code>dist/</code>.</li>
+</ol>
+<h2 id="publicación-de-la-librería">
+  Publicación de la librería
+  <a class="heading-link" href="#publicaci%c3%b3n-de-la-librer%c3%ada">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="configurar-packagejson">
+  Configurar <code>package.json</code>
+  <a class="heading-link" href="#configurar-packagejson">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Asegúrate de incluir los campos necesarios para npm:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">  &#34;name&#34;: &#34;my-shared-library&#34;,
+</span></span><span class="line"><span class="cl">  &#34;version&#34;: &#34;1.0.0&#34;,
+</span></span><span class="line"><span class="cl">  &#34;main&#34;: &#34;dist/index.js&#34;,
+</span></span><span class="line"><span class="cl">  &#34;types&#34;: &#34;dist/index.d.ts&#34;,
+</span></span><span class="line"><span class="cl">  &#34;files&#34;: [&#34;dist&#34;],
+</span></span><span class="line"><span class="cl">  &#34;scripts&#34;: {
+</span></span><span class="line"><span class="cl">    &#34;build&#34;: &#34;tsc&#34;,
+</span></span><span class="line"><span class="cl">    &#34;prepublishOnly&#34;: &#34;npm run build&#34;
+</span></span><span class="line"><span class="cl">  },
+</span></span><span class="line"><span class="cl">  &#34;dependencies&#34;: {
+</span></span><span class="line"><span class="cl">    &#34;tslib&#34;: &#34;^2.0.0&#34;
+</span></span><span class="line"><span class="cl">  },
+</span></span><span class="line"><span class="cl">  &#34;devDependencies&#34;: {
+</span></span><span class="line"><span class="cl">    &#34;typescript&#34;: &#34;^4.0.0&#34;
+</span></span><span class="line"><span class="cl">  }
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></div><h3 id="publicar-en-npm">
+  Publicar en npm
+  <a class="heading-link" href="#publicar-en-npm">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>Inicia sesión en npm:
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">npm login
+</span></span></code></pre></div></li>
+<li>Publica la librería:
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">npm publish
+</span></span></code></pre></div></li>
+</ol>
+<h2 id="uso-de-la-librería-en-otros-proyectos">
+  Uso de la librería en otros proyectos
+  <a class="heading-link" href="#uso-de-la-librer%c3%ada-en-otros-proyectos">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ol>
+<li>
+<p>Instala la librería:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">npm install my-shared-library
+</span></span></code></pre></div></li>
+<li>
+<p>Usa las funciones en tu código:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">import { add, subtract } from &#39;my-shared-library&#39;;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">console.log(add(2, 3)); // 5
+</span></span><span class="line"><span class="cl">console.log(subtract(5, 2)); // 3
+</span></span></code></pre></div></li>
+</ol>
+<h2 id="buenas-prácticas">
+  Buenas prácticas
+  <a class="heading-link" href="#buenas-pr%c3%a1cticas">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ol>
+<li><strong>Documentación</strong>:
+<ul>
+<li>Usa <code>README.md</code> para describir la instalación, uso y ejemplos.</li>
+</ul>
+</li>
+<li><strong>Pruebas unitarias</strong>:
+<ul>
+<li>Configura un framework como Jest para validar el comportamiento de la librería.</li>
+</ul>
+</li>
+<li><strong>Versionado semántico</strong>:
+<ul>
+<li>Sigue el esquema <code>MAJOR.MINOR.PATCH</code> para gestionar cambios.</li>
+</ul>
+</li>
+<li><strong>Optimizar el tamaño</strong>:
+<ul>
+<li>Excluye archivos innecesarios en el campo <code>files</code> de <code>package.json</code>.</li>
+</ul>
+</li>
+<li><strong>Seguridad</strong>:
+<ul>
+<li>Actualiza dependencias regularmente y realiza auditorías con:
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">npm audit
+</span></span></code></pre></div></li>
+</ul>
+</li>
+</ol>
+<h2 id="conclusión">
+  Conclusión
+  <a class="heading-link" href="#conclusi%c3%b3n">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Crear librerías compartidas en TypeScript es una estrategia efectiva para mejorar la reutilización de código y aumentar la productividad del equipo. Siguiendo las mejores prácticas y adoptando herramientas modernas, puedes garantizar que tus librerías sean seguras, eficientes y fáciles de usar. ¡Empieza a construir tu próxima librería hoy mismo!</p>
+      </div>
+
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script>
+  window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "cmasblog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    
+    document.addEventListener('themeChanged', function (e) { 
+        if (document.readyState == 'complete') {
+          DISQUS.reset({ reload: true, config: disqus_config });
+        }
+    });
+</script>
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2018 -
+    
+    2025
+     Christian Amado 
+    ·
+    
+    Desarrollado por <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+      <script async src="https://www.googletagmanager.com/gtag/js?id=356375808"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '356375808');
+        }
+      </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=013131931956450466198%3ablhmkdpweyq"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '013131931956450466198:blhmkdpweyq');
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

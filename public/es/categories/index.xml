@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Categories on Christian Amado</title>
+    <link>http://localhost:1313/es/categories/</link>
+    <description>Recent content in Categories on Christian Amado</description>
+    <generator>Hugo</generator>
+    <language>es</language>
+    <lastBuildDate>Wed, 10 Jul 2024 00:00:00 -0400</lastBuildDate>
+    <atom:link href="http://localhost:1313/es/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>General</title>
+      <link>http://localhost:1313/es/categories/general/</link>
+      <pubDate>Wed, 10 Jul 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/categories/general/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Aplicaciones De Negocio</title>
+      <link>http://localhost:1313/es/categories/aplicaciones-de-negocio/</link>
+      <pubDate>Wed, 07 Feb 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/categories/aplicaciones-de-negocio/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Desarrollo De Software</title>
+      <link>http://localhost:1313/es/categories/desarrollo-de-software/</link>
+      <pubDate>Sat, 19 Jun 2021 11:56:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/categories/desarrollo-de-software/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  Integración con Dynamics 365 for Sales · Christian Amado
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Christian Amado">
+<meta name="description" content="Como todo producto Microsoft existe integraciones entre ellos que nos facilitan la vida. En este caso veremos cómo se integra Dynamics 365 Business Central (On-Premise) con Dynamics 365 for Sales (Cloud).
+En un artículo anterior, ya hemos visto como realizar la mitad de la integración (sigamos hasta el paso 10 de ese tutorial para no repetir la historia). Donde cambia un poco el panorama es dentro de Dynamics 365 Business Central que reemplaza a Dynamics NAV 2018.">
+<meta name="keywords" content="blog,desarrollador,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Integración con Dynamics 365 for Sales">
+  <meta name="twitter:description" content="Como todo producto Microsoft existe integraciones entre ellos que nos facilitan la vida. En este caso veremos cómo se integra Dynamics 365 Business Central (On-Premise) con Dynamics 365 for Sales (Cloud).
+En un artículo anterior, ya hemos visto como realizar la mitad de la integración (sigamos hasta el paso 10 de ese tutorial para no repetir la historia). Donde cambia un poco el panorama es dentro de Dynamics 365 Business Central que reemplaza a Dynamics NAV 2018.">
+
+<meta property="og:url" content="http://localhost:1313/es/posts/2019-04-03-integracion-con-dynamics-365-for-sales/">
+  <meta property="og:site_name" content="Christian Amado">
+  <meta property="og:title" content="Integración con Dynamics 365 for Sales">
+  <meta property="og:description" content="Como todo producto Microsoft existe integraciones entre ellos que nos facilitan la vida. En este caso veremos cómo se integra Dynamics 365 Business Central (On-Premise) con Dynamics 365 for Sales (Cloud).
+En un artículo anterior, ya hemos visto como realizar la mitad de la integración (sigamos hasta el paso 10 de ese tutorial para no repetir la historia). Donde cambia un poco el panorama es dentro de Dynamics 365 Business Central que reemplaza a Dynamics NAV 2018.">
+  <meta property="og:locale" content="es">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2019-04-03T21:34:10-04:00">
+    <meta property="article:modified_time" content="2019-04-03T21:34:10-04:00">
+    <meta property="article:tag" content="CRM">
+    <meta property="article:tag" content="Dynamics 365">
+    <meta property="article:tag" content="Dynamics 365 Business Central">
+
+
+
+
+<link rel="canonical" href="http://localhost:1313/es/posts/2019-04-03-integracion-con-dynamics-365-for-sales/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/es/">
+      Christian Amado
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/about">Biografía</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/contact">Contacto</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/diabetes">Diabetes</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/tags">Etiquetas</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/en/">🇺🇸</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/es/posts/2019-04-03-integracion-con-dynamics-365-for-sales/">
+              Integración con Dynamics 365 for Sales
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2019-04-03T21:34:10-04:00">
+                abril 3, 2019
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              2 minutos de lectura.
+            </span>
+          </div>
+          
+          <div class="categories">
+  <i class="fa-solid fa-folder" aria-hidden="true"></i>
+    <a href="/es/categories/aplicaciones-de-negocio/">Aplicaciones De Negocio</a></div>
+
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/es/tags/crm/">CRM</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/es/tags/dynamics-365/">Dynamics 365</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/es/tags/dynamics-365-business-central/">Dynamics 365 Business Central</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <p>Como todo producto Microsoft existe integraciones entre ellos que nos facilitan la vida. En este caso veremos cómo se integra Dynamics 365 Business Central (On-Premise) con Dynamics 365 for Sales (Cloud).</p>
+<p>En un <a href="/2018/05/integracion-dynamics-nav-2018-con-dynamics-365-for-sales/" >artículo anterior</a>, ya hemos visto como realizar la mitad de la integración (sigamos hasta el paso 10 de ese tutorial para no repetir la historia). Donde cambia un poco el panorama es dentro de Dynamics 365 Business Central que reemplaza a Dynamics NAV 2018.</p>
+<p>También resulta importante ver <a href="/2018/10/roles-de-seguridad-para-integracion-con-d365-business-central/" >este artículo</a> sobre los roles de seguridad a ser aplicados para la integración.</p>
+<p>Primeramente, debemos enlazar el usuario Business Central con el usuario CRM (al que acabamos de asignar los permisos necesarios). Entonces, los datos del usuario quedarían de la siguiente manera: Debemos buscar la ruta con la Lupa<br>
+<img src="/img/posts/migrated/2019/04/1-2.png" alt=""></p>
+<ol>
+<li>
+<p>Obtener el usuario (email) de inicio de sesion del usuario en Dynamics 365 for Sales<br>
+<img src="/img/posts/migrated/2019/04/2-2.png" alt=""></p>
+</li>
+<li>
+<p>En Dynamics Business Central, colocar dicho correo en el campo usuario de Office 365:<br>
+<img src="/img/posts/migrated/2019/04/3-2.png" alt=""></p>
+</li>
+<li>
+<p>En la misma ventana, colocar los permisos necesarios para D365 (en este caso le damos FULL ACCESS):<br>
+<img src="/img/posts/migrated/2019/04/4-2.png" alt=""></p>
+</li>
+</ol>
+<p>Hemos culminado, con lo referente al usuario. Es decir, que el usuario de Dynamics Business Central esta enlazado con el usuario de Dynamics 365 for Sales.</p>
+<p>Ahora debemos configurar la conexión de Microsoft Dynamics Business Central con Microsoft Dynamics 365 for Sales. Para ello, seguimos estos pasos:</p>
+<ol>
+<li>
+<p>Ingresamos al modulo necesario, colocando en el buscador la palabra &ldquo;conexión&rdquo;<br>
+<img src="/img/posts/migrated/2019/04/5-2.png" alt=""></p>
+</li>
+<li>
+<p>Completamos los datos de conexión y le damos clic en &ldquo;Probar conexión&rdquo;<br>
+<img src="/img/posts/migrated/2019/04/6-2.png" alt=""></p>
+</li>
+<li>
+<p>Si la conexión fue exitosa, veremos un mensaje como este:<br>
+<img src="/img/posts/migrated/2019/04/7-2.png" alt=""></p>
+</li>
+<li>
+<p>Hacemos clic en la opción &ldquo;Activado&rdquo;. Si sale error debemos corregirlo:<br>
+<img src="/img/posts/migrated/2019/04/8-2.png" alt=""></p>
+</li>
+<li>
+<p>Si nos aceptan los cambios procedemos a completar los demás campos necesarios y listo.<br>
+<img src="/img/posts/migrated/2019/04/9-1.png" alt=""></p>
+</li>
+</ol>
+<p>De esta manera, logramos la integración en esta nueva plataforma.</p>
+      </div>
+
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script>
+  window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "cmasblog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    
+    document.addEventListener('themeChanged', function (e) { 
+        if (document.readyState == 'complete') {
+          DISQUS.reset({ reload: true, config: disqus_config });
+        }
+    });
+</script>
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2018 -
+    
+    2025
+     Christian Amado 
+    ·
+    
+    Desarrollado por <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+      <script async src="https://www.googletagmanager.com/gtag/js?id=356375808"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '356375808');
+        }
+      </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=013131931956450466198%3ablhmkdpweyq"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '013131931956450466198:blhmkdpweyq');
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

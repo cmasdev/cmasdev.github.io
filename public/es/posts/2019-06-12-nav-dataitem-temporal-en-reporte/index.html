@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  NAV: DataItem Temporal en Reporte · Christian Amado
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Christian Amado">
+<meta name="description" content="Dentro del mundo de desarrollo de Microsoft Dynamics NAV 2018 existen limitaciones, por ejemplo, sólo se pueden crear hasta 10 tablas (luego se deben comprar más tablas si se desea seguir desarrollando). Es por eso, que muchas veces necesitamos procesar el resultado de una tabla existente dentro de la misma tabla, pero haciéndola temporal sólo para emitir un reporte.
+En ese caso, debemos procesar lo necesario en un paso previo y pasar los datos temporales al reporte que posee como DataItem una tabla temporal. En este ejemplo intentaremos hacer un &ldquo;análisis de saldo por proveedor&rdquo;.">
+<meta name="keywords" content="blog,desarrollador,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="NAV: DataItem Temporal en Reporte">
+  <meta name="twitter:description" content="Dentro del mundo de desarrollo de Microsoft Dynamics NAV 2018 existen limitaciones, por ejemplo, sólo se pueden crear hasta 10 tablas (luego se deben comprar más tablas si se desea seguir desarrollando). Es por eso, que muchas veces necesitamos procesar el resultado de una tabla existente dentro de la misma tabla, pero haciéndola temporal sólo para emitir un reporte.
+En ese caso, debemos procesar lo necesario en un paso previo y pasar los datos temporales al reporte que posee como DataItem una tabla temporal. En este ejemplo intentaremos hacer un “análisis de saldo por proveedor”.">
+
+<meta property="og:url" content="http://localhost:1313/es/posts/2019-06-12-nav-dataitem-temporal-en-reporte/">
+  <meta property="og:site_name" content="Christian Amado">
+  <meta property="og:title" content="NAV: DataItem Temporal en Reporte">
+  <meta property="og:description" content="Dentro del mundo de desarrollo de Microsoft Dynamics NAV 2018 existen limitaciones, por ejemplo, sólo se pueden crear hasta 10 tablas (luego se deben comprar más tablas si se desea seguir desarrollando). Es por eso, que muchas veces necesitamos procesar el resultado de una tabla existente dentro de la misma tabla, pero haciéndola temporal sólo para emitir un reporte.
+En ese caso, debemos procesar lo necesario en un paso previo y pasar los datos temporales al reporte que posee como DataItem una tabla temporal. En este ejemplo intentaremos hacer un “análisis de saldo por proveedor”.">
+  <meta property="og:locale" content="es">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2019-06-12T22:44:30-04:00">
+    <meta property="article:modified_time" content="2019-06-12T22:44:30-04:00">
+    <meta property="article:tag" content="C/SIDE">
+    <meta property="article:tag" content="Dynamics NAV">
+
+
+
+
+<link rel="canonical" href="http://localhost:1313/es/posts/2019-06-12-nav-dataitem-temporal-en-reporte/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/es/">
+      Christian Amado
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/about">Biografía</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/contact">Contacto</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/diabetes">Diabetes</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/tags">Etiquetas</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/en/">🇺🇸</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/es/posts/2019-06-12-nav-dataitem-temporal-en-reporte/">
+              NAV: DataItem Temporal en Reporte
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2019-06-12T22:44:30-04:00">
+                junio 12, 2019
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              2 minutos de lectura.
+            </span>
+          </div>
+          
+          <div class="categories">
+  <i class="fa-solid fa-folder" aria-hidden="true"></i>
+    <a href="/es/categories/aplicaciones-de-negocio/">Aplicaciones De Negocio</a></div>
+
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/es/tags/c/side/">C/SIDE</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/es/tags/dynamics-nav/">Dynamics NAV</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <p>Dentro del mundo de desarrollo de Microsoft Dynamics NAV 2018 existen limitaciones, por ejemplo, sólo se pueden crear hasta 10 tablas (luego se deben comprar más tablas si se desea seguir desarrollando). Es por eso, que muchas veces necesitamos procesar el resultado de una tabla existente dentro de la misma tabla, pero haciéndola temporal sólo para emitir un reporte.</p>
+<p>En ese caso, debemos procesar lo necesario en un paso previo y pasar los datos temporales al reporte que posee como DataItem una tabla temporal. En este ejemplo intentaremos hacer un &ldquo;análisis de saldo por proveedor&rdquo;.</p>
+<p>Para lograr el objetivo de esta entrada, debemos seguir los siguientes pasos: Creamos un reporte cuyo DataItem debería ser de tipo <strong>Vendor</strong> (Proveedor):<br>
+<img src="/img/posts/migrated/2019/06/1.png" alt=""></p>
+<p>En las propiedades, colocamos lo siguiente:<br>
+<img src="/img/posts/migrated/2019/06/2.png" alt=""></p>
+<p>Ahora, es momento de crear el <strong>DataItem</strong> para el recorrido de la tabla temporal:<br>
+<img src="/img/posts/migrated/2019/06/3.png" alt=""></p>
+<p>Las mismas variables utilizadas en el primer DataItem <strong>Vendor</strong>, pueden usarse dentro del DataItem <strong>Integer</strong>. La diferencia está en que los campos dentro del DataItem <strong>Integer</strong> corresponden a datos de la tabla temporal.</p>
+<p>En las propiedades del DataItem <strong>Integer</strong>, colocamos los siguiente:<br>
+<img src="/img/posts/migrated/2019/06/4.png" alt=""></p>
+<p>En lo que refiere al diseño, está listo. En el código debemos tener en cuenta una cosa en la función <strong>Integer - OnAfterGetRecord()</strong>, donde se coloca el siguiente código:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">IF Number = 1 THEN
+</span></span><span class="line"><span class="cl">  //Esto hace que recorra los elementos de la tabla temporal
+</span></span><span class="line"><span class="cl">  TURECORD.FIND(&#39;-&#39;)
+</span></span><span class="line"><span class="cl">ELSE
+</span></span><span class="line"><span class="cl">  IF TURECORD.NEXT = 0 THEN
+</span></span><span class="line"><span class="cl">    //Esto hace que se detenga la ejecución del reporte porque llegó al final de la tabla temporal
+</span></span><span class="line"><span class="cl">    CurrReport.BREAK;
+</span></span></code></pre></div><p>Debemos tener en cuenta, que se asume que el <strong>Record</strong> que se está pasando al reporte es una tabla temporal. Para este caso, la tabla ya viene procesada con los datos filtrados según nuestras necesidades.</p>
+<p>¡Espero resulte útil!</p>
+      </div>
+
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script>
+  window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "cmasblog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    
+    document.addEventListener('themeChanged', function (e) { 
+        if (document.readyState == 'complete') {
+          DISQUS.reset({ reload: true, config: disqus_config });
+        }
+    });
+</script>
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2018 -
+    
+    2025
+     Christian Amado 
+    ·
+    
+    Desarrollado por <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+      <script async src="https://www.googletagmanager.com/gtag/js?id=356375808"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '356375808');
+        }
+      </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=013131931956450466198%3ablhmkdpweyq"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '013131931956450466198:blhmkdpweyq');
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

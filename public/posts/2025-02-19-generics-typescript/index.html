@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  Usando generics avanzados en TypeScript · Christian Amado
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Christian Amado">
+<meta name="description" content="TypeScript ofrece una potente funcionalidad llamada Generics que permite crear componentes y funciones altamente reutilizables y seguros en tiempo de compilación. Los Generics avanzados van más allá de lo básico y permiten escribir código flexible sin perder el tipado estricto.
+En este artículo, exploraremos:
+
+Cómo funcionan los Generics en TypeScript.
+Uso de restricciones (extends).
+Aplicación de múltiples tipos genéricos.
+Uso de tipos condicionales y mapped types.
+Casos prácticos en funciones, clases e interfaces.
+">
+<meta name="keywords" content="blog,desarrollador,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Usando generics avanzados en TypeScript">
+  <meta name="twitter:description" content="TypeScript ofrece una potente funcionalidad llamada Generics que permite crear componentes y funciones altamente reutilizables y seguros en tiempo de compilación. Los Generics avanzados van más allá de lo básico y permiten escribir código flexible sin perder el tipado estricto.
+En este artículo, exploraremos:
+Cómo funcionan los Generics en TypeScript. Uso de restricciones (extends). Aplicación de múltiples tipos genéricos. Uso de tipos condicionales y mapped types. Casos prácticos en funciones, clases e interfaces.">
+
+<meta property="og:url" content="http://localhost:1313/posts/2025-02-19-generics-typescript/">
+  <meta property="og:site_name" content="Christian Amado">
+  <meta property="og:title" content="Usando generics avanzados en TypeScript">
+  <meta property="og:description" content="TypeScript ofrece una potente funcionalidad llamada Generics que permite crear componentes y funciones altamente reutilizables y seguros en tiempo de compilación. Los Generics avanzados van más allá de lo básico y permiten escribir código flexible sin perder el tipado estricto.
+En este artículo, exploraremos:
+Cómo funcionan los Generics en TypeScript. Uso de restricciones (extends). Aplicación de múltiples tipos genéricos. Uso de tipos condicionales y mapped types. Casos prácticos en funciones, clases e interfaces.">
+  <meta property="og:locale" content="es">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-02-19T00:00:00-04:00">
+    <meta property="article:modified_time" content="2025-02-19T00:00:00-04:00">
+    <meta property="article:tag" content="Web Development">
+    <meta property="article:tag" content="Typescript">
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-V1ZRP82YFD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-V1ZRP82YFD');
+</script>
+
+
+
+<link rel="canonical" href="http://localhost:1313/posts/2025-02-19-generics-typescript/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="apple-touch-icon" sizes="57x57" href="/img/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/img/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/img/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/img/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/img/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/img/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/img/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/img/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/img/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="/img/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/img/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+<link rel="manifest" href="/img/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/img/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/">
+      Christian Amado
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/about">Biografía</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/contact">Contacto</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/diabetes">Diabetes</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/tags">Etiquetas</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/en/">🇺🇸</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/posts/2025-02-19-generics-typescript/">
+              Usando generics avanzados en TypeScript
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2025-02-19T00:00:00-04:00">
+                febrero 19, 2025
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              3 minutos de lectura.
+            </span>
+          </div>
+          
+          
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/tags/web-development/">Web Development</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/typescript/">Typescript</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <p><strong>TypeScript</strong> ofrece una potente funcionalidad llamada <strong>Generics</strong> que permite crear componentes y funciones altamente reutilizables y seguros en tiempo de compilación. Los <strong>Generics avanzados</strong> van más allá de lo básico y permiten escribir código flexible sin perder el tipado estricto.</p>
+<p>En este artículo, exploraremos:</p>
+<ul>
+<li>Cómo funcionan los <strong>Generics</strong> en TypeScript.</li>
+<li>Uso de <strong>restricciones (<code>extends</code>)</strong>.</li>
+<li>Aplicación de <strong>múltiples tipos genéricos</strong>.</li>
+<li>Uso de <strong>tipos condicionales y mapped types</strong>.</li>
+<li>Casos prácticos en <strong>funciones, clases e interfaces</strong>.</li>
+</ul>
+<h2 id="1-introducción-a-generics-en-typescript">
+  1. Introducción a Generics en TypeScript
+  <a class="heading-link" href="#1-introducci%c3%b3n-a-generics-en-typescript">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Los <strong>Generics</strong> permiten escribir código reutilizable sin perder seguridad en el tipado.</p>
+<p>Ejemplo básico de una función genérica:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">function</span> <span class="n">identidad</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">valor</span><span class="p">:</span> <span class="n">T</span><span class="p">):</span> <span class="n">T</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="n">valor</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">numero</span> <span class="o">=</span> <span class="n">identidad</span><span class="o">&lt;</span><span class="n">number</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">42</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">texto</span> <span class="o">=</span> <span class="n">identidad</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s2">&#34;Hola TypeScript&#34;</span><span class="p">);</span>
+</span></span></code></pre></div><p>Aquí, <code>T</code> representa un tipo genérico que será inferido por TypeScript en tiempo de ejecución.</p>
+<h2 id="2-uso-de-restricciones-con-extends">
+  2. Uso de Restricciones con <code>extends</code>
+  <a class="heading-link" href="#2-uso-de-restricciones-con-extends">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Podemos restringir los tipos que un <strong>Generic</strong> puede aceptar usando <code>extends</code>.</p>
+<p>Ejemplo con restricción de objeto:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">interface</span> <span class="n">Persona</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">nombre</span><span class="p">:</span> <span class="n">string</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">edad</span><span class="p">:</span> <span class="n">number</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">function</span> <span class="n">mostrarNombre</span><span class="o">&lt;</span><span class="n">T</span> <span class="k">extends</span> <span class="n">Persona</span><span class="o">&gt;</span><span class="p">(</span><span class="n">obj</span><span class="p">:</span> <span class="n">T</span><span class="p">):</span> <span class="n">string</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="n">obj</span><span class="o">.</span><span class="n">nombre</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">usuario</span> <span class="o">=</span> <span class="p">{</span> <span class="n">nombre</span><span class="p">:</span> <span class="s2">&#34;Carlos&#34;</span><span class="p">,</span> <span class="n">edad</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span> <span class="n">rol</span><span class="p">:</span> <span class="s2">&#34;Admin&#34;</span> <span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">mostrarNombre</span><span class="p">(</span><span class="n">usuario</span><span class="p">));</span> <span class="o">//</span> <span class="n">Carlos</span>
+</span></span></code></pre></div><p>Aquí, <code>T</code> debe cumplir con la estructura de <code>Persona</code>, lo que garantiza que el objeto pasado tenga un <code>nombre</code>.</p>
+<h2 id="3-uso-de-múltiples-tipos-genéricos">
+  3. Uso de Múltiples Tipos Genéricos
+  <a class="heading-link" href="#3-uso-de-m%c3%baltiples-tipos-gen%c3%a9ricos">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Podemos definir múltiples tipos genéricos en una función o clase:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">function</span> <span class="n">combinar</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span> <span class="n">U</span><span class="o">&gt;</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="n">T</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="n">U</span><span class="p">):</span> <span class="p">[</span><span class="n">T</span><span class="p">,</span> <span class="n">U</span><span class="p">]</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">resultado</span> <span class="o">=</span> <span class="n">combinar</span><span class="o">&lt;</span><span class="n">number</span><span class="p">,</span> <span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">42</span><span class="p">,</span> <span class="s2">&#34;Hola&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">resultado</span><span class="p">);</span> <span class="o">//</span> <span class="p">[</span><span class="mi">42</span><span class="p">,</span> <span class="s1">&#39;Hola&#39;</span><span class="p">]</span>
+</span></span></code></pre></div><p>Este método permite combinar distintos tipos en un solo resultado sin perder la inferencia de tipos.</p>
+<h2 id="4-uso-de-tipos-condicionales-conditional-types">
+  4. Uso de Tipos Condicionales (<code>Conditional Types</code>)
+  <a class="heading-link" href="#4-uso-de-tipos-condicionales-conditional-types">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Los tipos condicionales permiten definir un tipo basado en otro.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">type</span> <span class="n">EsString</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="n">T</span> <span class="k">extends</span> <span class="n">string</span> <span class="err">?</span> <span class="s2">&#34;Es una cadena&#34;</span> <span class="p">:</span> <span class="s2">&#34;No es una cadena&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">type</span> <span class="n">Caso1</span> <span class="o">=</span> <span class="n">EsString</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span><span class="p">;</span>  <span class="o">//</span> <span class="s2">&#34;Es una cadena&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">type</span> <span class="n">Caso2</span> <span class="o">=</span> <span class="n">EsString</span><span class="o">&lt;</span><span class="n">number</span><span class="o">&gt;</span><span class="p">;</span>  <span class="o">//</span> <span class="s2">&#34;No es una cadena&#34;</span>
+</span></span></code></pre></div><p>Esto es útil para definir tipos que dependen de otros de manera flexible.</p>
+<h2 id="5-uso-de-mapped-types-con-generics">
+  5. Uso de <strong>Mapped Types</strong> con Generics
+  <a class="heading-link" href="#5-uso-de-mapped-types-con-generics">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Los <strong>Mapped Types</strong> permiten transformar tipos basados en un tipo genérico.</p>
+<p>Ejemplo:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">type</span> <span class="n">Opcional</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="p">[</span><span class="n">K</span> <span class="ow">in</span> <span class="n">keyof</span> <span class="n">T</span><span class="p">]</span><span class="err">?</span><span class="p">:</span> <span class="n">T</span><span class="p">[</span><span class="n">K</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">interface</span> <span class="n">Usuario</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span><span class="p">:</span> <span class="n">number</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">nombre</span><span class="p">:</span> <span class="n">string</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">email</span><span class="p">:</span> <span class="n">string</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">type</span> <span class="n">UsuarioOpcional</span> <span class="o">=</span> <span class="n">Opcional</span><span class="o">&lt;</span><span class="n">Usuario</span><span class="o">&gt;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">user</span><span class="p">:</span> <span class="n">UsuarioOpcional</span> <span class="o">=</span> <span class="p">{</span> <span class="n">nombre</span><span class="p">:</span> <span class="s2">&#34;Carlos&#34;</span> <span class="p">};</span> <span class="o">//</span> <span class="n">Correcto</span>
+</span></span></code></pre></div><p>Este tipo genérico convierte todas las propiedades de <code>T</code> en opcionales.</p>
+<h2 id="6-aplicación-en-clases">
+  6. Aplicación en Clases
+  <a class="heading-link" href="#6-aplicaci%c3%b3n-en-clases">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Los Generics también son útiles en clases para manejar datos de forma estructurada.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">class</span> <span class="n">Caja</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">private</span> <span class="n">contenido</span><span class="p">:</span> <span class="n">T</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">constructor</span><span class="p">(</span><span class="n">valor</span><span class="p">:</span> <span class="n">T</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">this</span><span class="o">.</span><span class="n">contenido</span> <span class="o">=</span> <span class="n">valor</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">obtenerContenido</span><span class="p">():</span> <span class="n">T</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">this</span><span class="o">.</span><span class="n">contenido</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">cajaNumero</span> <span class="o">=</span> <span class="n">new</span> <span class="n">Caja</span><span class="o">&lt;</span><span class="n">number</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">cajaNumero</span><span class="o">.</span><span class="n">obtenerContenido</span><span class="p">());</span> <span class="o">//</span> <span class="mi">10</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">cajaTexto</span> <span class="o">=</span> <span class="n">new</span> <span class="n">Caja</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s2">&#34;Hola Mundo&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">cajaTexto</span><span class="o">.</span><span class="n">obtenerContenido</span><span class="p">());</span> <span class="o">//</span> <span class="n">Hola</span> <span class="n">Mundo</span>
+</span></span></code></pre></div><p>Aquí, la clase <code>Caja&lt;T&gt;</code> puede almacenar cualquier tipo sin perder seguridad en el tipado.</p>
+<h2 id="7-uso-avanzado-con-keyof-y-in">
+  7. Uso Avanzado con <code>keyof</code> y <code>in</code>
+  <a class="heading-link" href="#7-uso-avanzado-con-keyof-y-in">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p><code>keyof</code> nos permite trabajar con las claves de un objeto en TypeScript.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">function</span> <span class="n">obtenerValor</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span> <span class="n">K</span> <span class="k">extends</span> <span class="n">keyof</span> <span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">obj</span><span class="p">:</span> <span class="n">T</span><span class="p">,</span> <span class="n">clave</span><span class="p">:</span> <span class="n">K</span><span class="p">):</span> <span class="n">T</span><span class="p">[</span><span class="n">K</span><span class="p">]</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="n">obj</span><span class="p">[</span><span class="n">clave</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">usuario</span> <span class="o">=</span> <span class="p">{</span> <span class="n">id</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="n">nombre</span><span class="p">:</span> <span class="s2">&#34;Carlos&#34;</span> <span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">obtenerValor</span><span class="p">(</span><span class="n">usuario</span><span class="p">,</span> <span class="s2">&#34;nombre&#34;</span><span class="p">));</span> <span class="o">//</span> <span class="n">Carlos</span>
+</span></span></code></pre></div><p>Aquí <code>K</code> solo puede ser una clave existente dentro de <code>T</code>, evitando errores en tiempo de compilación.</p>
+<h2 id="8-conclusión">
+  8. Conclusión
+  <a class="heading-link" href="#8-conclusi%c3%b3n">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Los <strong>Generics avanzados</strong> en TypeScript permiten escribir código reutilizable, seguro y altamente flexible.</p>
+      </div>
+
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script>
+  window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "cmasblog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    
+    document.addEventListener('themeChanged', function (e) { 
+        if (document.readyState == 'complete') {
+          DISQUS.reset({ reload: true, config: disqus_config });
+        }
+    });
+</script>
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2018 -
+    
+    2025
+     Christian Amado 
+    ·
+    
+    Desarrollado por <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+      <script async src="https://www.googletagmanager.com/gtag/js?id=356375808"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '356375808');
+        }
+      </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=013131931956450466198%3ablhmkdpweyq"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '013131931956450466198:blhmkdpweyq');
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

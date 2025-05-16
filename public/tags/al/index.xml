@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>AL on Christian Amado</title>
+    <link>http://localhost:1313/tags/al/</link>
+    <description>Recent content in AL on Christian Amado</description>
+    <generator>Hugo</generator>
+    <language>es</language>
+    <lastBuildDate>Wed, 16 Feb 2022 09:12:07 -0400</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/al/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Business Central: Funciones recursivas en AL</title>
+      <link>http://localhost:1313/posts/2022-02-16-business-central-funciones-recursivas-en-al/</link>
+      <pubDate>Wed, 16 Feb 2022 09:12:07 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2022-02-16-business-central-funciones-recursivas-en-al/</guid>
+      <description>&lt;p&gt;En este artículo mostraré cómo se realizan funciones recursivas dentro de Microsoft Dynamics 365 Business Central con el lenguaje de programación AL.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Business Central: Dependencia en extensiones</title>
+      <link>http://localhost:1313/posts/2022-01-19-business-central-dependencia-extensiones/</link>
+      <pubDate>Wed, 19 Jan 2022 17:21:04 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2022-01-19-business-central-dependencia-extensiones/</guid>
+      <description>&lt;p&gt;En este artículo mostraré cómo indicar que un campo es requerido y realizar el control pertinente en Microsoft Dynamics 365 Business Central.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>BC Tips: Administrar tareas programadas</title>
+      <link>http://localhost:1313/posts/2022-01-13-business-central-administrar-tareas-programadas/</link>
+      <pubDate>Thu, 13 Jan 2022 18:43:21 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2022-01-13-business-central-administrar-tareas-programadas/</guid>
+      <description>&lt;p&gt;En este artículo mostraré cómo gestionar tareas programadas que pueden ser llamadas a CodeUnits y/o reportes en Microsoft Dynamics 365 Business Central.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Business Central: Localización con archivos XLIFF</title>
+      <link>http://localhost:1313/posts/2021-12-22-business-central-localizacion-archivos-xliff/</link>
+      <pubDate>Wed, 22 Dec 2021 13:27:04 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2021-12-22-business-central-localizacion-archivos-xliff/</guid>
+      <description>&lt;p&gt;En este artículo mostraré cómo gestionar las traducciones en un archivo de configuración dentro de Microsoft Dynamics 365 Business Central.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>BC Tips: Gestionar redondeos</title>
+      <link>http://localhost:1313/posts/2021-11-23-business-central-gestionar-redondeos/</link>
+      <pubDate>Tue, 23 Nov 2021 21:41:08 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2021-11-23-business-central-gestionar-redondeos/</guid>
+      <description>&lt;p&gt;En este artículo mostraré cómo se gestionan los redondeos en Microsoft Dynamics 365 Business Central.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Business Central: Mis notificaciones</title>
+      <link>http://localhost:1313/posts/2021-10-20-business-central-mis-notificaciones/</link>
+      <pubDate>Wed, 20 Oct 2021 22:28:48 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2021-10-20-business-central-mis-notificaciones/</guid>
+      <description>&lt;p&gt;En este artículo mostraré cómo enviar y mostrar notificaciones (la campana que aparece en ángulo superior derecho de la pantalla) en Microsoft Dynamics 365 Business Central.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Business Central: Mostrar números enteros como Requerido </title>
+      <link>http://localhost:1313/posts/2021-09-29-business-central-mostrar-numero-entero-requerido/</link>
+      <pubDate>Wed, 29 Sep 2021 23:53:10 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2021-09-29-business-central-mostrar-numero-entero-requerido/</guid>
+      <description>&lt;p&gt;En este artículo mostraré cómo indicar que un campo es requerido y realizar el control pertinente en Microsoft Dynamics 365 Business Central.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Business Central: Crear reporte de tipo ProcessingOnly</title>
+      <link>http://localhost:1313/posts/2021-09-22-business-central-crear-reporte-tipo-processing-only/</link>
+      <pubDate>Wed, 22 Sep 2021 13:48:03 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2021-09-22-business-central-crear-reporte-tipo-processing-only/</guid>
+      <description>&lt;p&gt;En este artículo mostraré cómo crear procesos dentro de Microsoft Dynamics 365 Business Central para poder realizar tareas de cualquier índole. Normalmente mente este tipo de procedimientos nos ayudar a realizar tareas masivas de algún tipo.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Business Central: Consumir servicios REST API con POSTMAN</title>
+      <link>http://localhost:1313/posts/2021-09-08-business-central-consumir-servicios-rest/</link>
+      <pubDate>Wed, 08 Sep 2021 20:04:39 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2021-09-08-business-central-consumir-servicios-rest/</guid>
+      <description>&lt;p&gt;En este artículo mostraré cómo consumir servicios ODATA desde Microsoft Dynamics 365 Business Central en POSTMAN.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Business Central: Descargar simbolos desde Sandbox</title>
+      <link>http://localhost:1313/posts/2021-09-07-business-central-download-symbols-cloud/</link>
+      <pubDate>Tue, 07 Sep 2021 23:55:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2021-09-07-business-central-download-symbols-cloud/</guid>
+      <description>&lt;p&gt;El día de hoy intenté hacer la descarga de los símbolos de Microsoft Dynamics 365 Business Central pero me encontraba con errores y no lograba hacerlo funcionar. Primeramente, tuve errores para descargar los símbolos como tal y luego para poder depurar la aplicación.&lt;/p&gt;&#xA;&lt;p&gt;Para evitar que otras personas tengan ese problema, les comparto mi experiencia solucionando el inconveniente en este pequeño manual al estilo How To? que es mi costumbre escribir.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Business Central: Depurar sin publicar</title>
+      <link>http://localhost:1313/posts/2021-09-01-business-central-depurar-sin-publicar/</link>
+      <pubDate>Wed, 01 Sep 2021 15:50:23 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2021-09-01-business-central-depurar-sin-publicar/</guid>
+      <description>&lt;p&gt;En este artículo mostraré cómo depurar en Microsoft Dynamics 365 Business Central sin la necesidad de publicar la extensión en cuestión.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Business Central: Exponer Servicios Web</title>
+      <link>http://localhost:1313/posts/2021-08-25-business-central-exponer-servicios-web/</link>
+      <pubDate>Wed, 25 Aug 2021 18:19:54 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2021-08-25-business-central-exponer-servicios-web/</guid>
+      <description>&lt;p&gt;En este artículo mostraré cómo exponer servicios web para ser consumidos por otras aplicaciones desde Microsoft Dynamics 365 Business Central.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Business Central: Personalizar el encabezado de la página principal</title>
+      <link>http://localhost:1313/posts/2021-08-12-business-central-personalizar-encabezado-pagina-principal/</link>
+      <pubDate>Thu, 12 Aug 2021 12:25:36 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2021-08-12-business-central-personalizar-encabezado-pagina-principal/</guid>
+      <description>&lt;p&gt;En este artículo mostraré cómo personalizar el título de la página principal dentro de Microsoft Dynamics 365 Business Central.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Business Central: No alterar datos en el método OnAfterGetRecord</title>
+      <link>http://localhost:1313/posts/2021-08-04-business-central-no-alterar-datos-onaftergetrecord/</link>
+      <pubDate>Wed, 04 Aug 2021 08:19:05 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2021-08-04-business-central-no-alterar-datos-onaftergetrecord/</guid>
+      <description>&lt;p&gt;En este artículo demuestro por qué no debemos alterar (insertar, modificar o eliminar) datos dentro del método de obtención de datos para una grilla en Microsoft Dynamics 365 Business Central.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Business Central: Locktable y Commit</title>
+      <link>http://localhost:1313/posts/2021-07-21-business-central-locktable-commit/</link>
+      <pubDate>Wed, 21 Jul 2021 07:29:48 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2021-07-21-business-central-locktable-commit/</guid>
+      <description>&lt;p&gt;En este artículo mostraré la utilidad de dos métodos muy importantes a la hroa de transaccionar con base de datos pero dentro de Microsoft Dynamics 365 Business Central.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Business Central: Transferencia de campos entre tablas</title>
+      <link>http://localhost:1313/posts/2021-07-14-business-central-transferencia-campos-entre-tablas/</link>
+      <pubDate>Wed, 14 Jul 2021 12:09:52 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2021-07-14-business-central-transferencia-campos-entre-tablas/</guid>
+      <description>&lt;p&gt;En este artículo mostraré cómo se realiza la trasnferencia de información de una tabla a otra para facilitarnos las vida. Recordemos que este tipo de sistemas no tiene tablas normalizadas en base de datos. Es por eso que deben tener algún método de manejo de información y protección de los mismos.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Business Central: Consumir API externa para integración</title>
+      <link>http://localhost:1313/posts/2021-06-23-business-central-consumir-api-externa/</link>
+      <pubDate>Wed, 23 Jun 2021 23:02:42 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2021-06-23-business-central-consumir-api-externa/</guid>
+      <description>&lt;p&gt;En este artículo muestro cómo consumir una API REST desde cualquier servicio hacia Microsoft Dynamics 365 Business Central con muy pocas líneas de código. Hagamos la prueba&amp;hellip;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Business Central: Añadir código JavaScript en una página</title>
+      <link>http://localhost:1313/posts/2021-06-09-business-central-anadir-codigo-javascript-en-una-pagina/</link>
+      <pubDate>Wed, 09 Jun 2021 15:12:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2021-06-09-business-central-anadir-codigo-javascript-en-una-pagina/</guid>
+      <description>&lt;p&gt;La &lt;a href=&#34;https://cmas.dev/posts/2021-06-02-business-central-anadir-html-en-una-pagina/&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;semana pasada vimos&lt;/a&gt; como inyectar HTML en una página dentro de Microsoft Dynamics 365 Business Central. Hoy veremos cómo agregar código Javascript que muestre una ventana de confirmación y luego muestre una alerta. Ya dá para empezar&amp;hellip;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Business Central: Añadir HTML en una página</title>
+      <link>http://localhost:1313/posts/2021-06-02-business-central-anadir-html-en-una-pagina/</link>
+      <pubDate>Wed, 02 Jun 2021 18:17:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2021-06-02-business-central-anadir-html-en-una-pagina/</guid>
+      <description>&lt;p&gt;En este artículo deseo mostrar cómo inyectar HTML en una página dentro de Microsoft Dynamics 365 Business Central. No es muy complejo realizar la tarea necesaria pero debemos entender su utilidad y qué podemos lograr haciéndolo. Así que espero lo disfruten&amp;hellip;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>BC Tip: Deshabilitar servicios de desarrollo</title>
+      <link>http://localhost:1313/posts/2021-05-26-business-central-deshabilitar-servicios-de-desarrollo/</link>
+      <pubDate>Wed, 26 May 2021 12:54:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2021-05-26-business-central-deshabilitar-servicios-de-desarrollo/</guid>
+      <description>&lt;p&gt;En este sencillo artículo explico cómo deshabilitar los servicios de desarrollo, normalmente en un ambiente &lt;strong&gt;PROD&lt;/strong&gt; o &lt;strong&gt;QA&lt;/strong&gt;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Business Central: Mostrar página en el buscador</title>
+      <link>http://localhost:1313/posts/2021-05-20-business-central-mostrar-pagina-en-buscador/</link>
+      <pubDate>Thu, 20 May 2021 20:07:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2021-05-20-business-central-mostrar-pagina-en-buscador/</guid>
+      <description>&lt;p&gt;En esta ocasion quisiera mostrar cómo agregar una página en el buscador para que sea más sencillo encontrarlo. En un &lt;a href=&#34;https://cmas.dev/posts/2021-04-28-business-central-mostrar-reporte-en-buscador/&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;artículo anterior&lt;/a&gt; vimos cómo mostrar un reporte en dicho buscador.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Business Central: Localización de Columnas</title>
+      <link>http://localhost:1313/posts/2021-05-12-business-central-localizacion-de-columnas/</link>
+      <pubDate>Wed, 12 May 2021 09:34:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2021-05-12-business-central-localizacion-de-columnas/</guid>
+      <description>&lt;p&gt;En este artículo quiero mostrar como aplicar traducciones de textos en los títulos, en este caso, utilizaremos la página que ya hemos visto anteriormente con el buscador. Resumiendo, localizaremos el término de búsqueda y el título de la página.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Business Central: Mostrar reporte en el buscador</title>
+      <link>http://localhost:1313/posts/2021-04-28-business-central-mostrar-reporte-en-buscador/</link>
+      <pubDate>Wed, 28 Apr 2021 14:15:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2021-04-28-business-central-mostrar-reporte-en-buscador/</guid>
+      <description>&lt;p&gt;En esta ocasion quisiera mostrar cómo agregar un reporte en el buscador para que sea más sencillo encontrarlo. En un &lt;a href=&#34;https://cmas.dev/posts/2019-02-20-bcdev-tips-crear-un-reporte-nuevo&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;artículo anterior&lt;/a&gt; vimos cómo crear un reporte nuevo (se me ocurre trabajar sobre ese mismo reporte).&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Business Central: Cargar licencia en servidor productivo</title>
+      <link>http://localhost:1313/posts/2021-04-21-business-central-carga-licencia-servidor-productivo/</link>
+      <pubDate>Wed, 21 Apr 2021 16:03:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2021-04-21-business-central-carga-licencia-servidor-productivo/</guid>
+      <description>&lt;p&gt;Este proceso es sencillo y necesitamos la línea de comandos para poder ejecutarla. Una vez realizado procedemos a reiniciar el servicio de Microsoft Dynamics 365 Business Central.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Business Central: Tablas según licencias</title>
+      <link>http://localhost:1313/posts/2021-04-14-business-central-tablas-segun-licencias/</link>
+      <pubDate>Wed, 14 Apr 2021 17:14:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2021-04-14-business-central-tablas-segun-licencias/</guid>
+      <description>&lt;p&gt;Este es un caso muy particular, porque se dá en Microsoft Dynamics 365 Business Central en su modalidad On-Premise (quiere decir en un servidor local no en la nube) porque en dicha opción tenemos limitadas cantidades de tablas.&lt;/p&gt;&#xA;&lt;p&gt;Esto es un tema de licenciamiento para versiones On-Premise.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Business Central: Tipos de sincronización en extensiones</title>
+      <link>http://localhost:1313/posts/2021-04-07-business-central-tipos-sincronizacion-extensiones/</link>
+      <pubDate>Wed, 07 Apr 2021 22:47:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2021-04-07-business-central-tipos-sincronizacion-extensiones/</guid>
+      <description>&lt;p&gt;Este artículo lo escribo porque en mi equipo de trabajo surgieron dudas en cuanto a esto debido a que se han borrado datos de un cliente (obviamente en su espacio Sandbox) pero esto consume tiempo y el motivo es muy sencillo.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Business Central: Obtener versión de extensión</title>
+      <link>http://localhost:1313/posts/2021-04-02-business-central-obtener-version-extension/</link>
+      <pubDate>Fri, 02 Apr 2021 10:28:14 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2021-04-02-business-central-obtener-version-extension/</guid>
+      <description>&lt;p&gt;En este artículo explico cómo se puede obtener la versión de la extensión que desarrollamos de manera a poder mostrarlo en algún lugar.&lt;/p&gt;&#xA;&lt;p&gt;El código es muy simple (y no es mío)&amp;hellip;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Business Central: Revertir versiones de extensiones</title>
+      <link>http://localhost:1313/posts/2021-04-03-business-central-revertir-versiones-extensiones/</link>
+      <pubDate>Thu, 01 Apr 2021 16:38:12 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2021-04-03-business-central-revertir-versiones-extensiones/</guid>
+      <description>&lt;p&gt;En este articulo deseo mostrar cómo revertir las versiones de las extensiones que creamos y cómo poder utilizarlas sin afectar las siguientes. Resulta que BC almacena todas las versiones, es decir, deshabilita las versiones anteriores pero no las elimina. eso permite volver a utilizarlas, aunque no es un proceso común.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Business Central: Error descargando símbolos</title>
+      <link>http://localhost:1313/posts/2021-04-01-business-central-error-descargando-simbolos/</link>
+      <pubDate>Thu, 01 Apr 2021 15:15:35 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2021-04-01-business-central-error-descargando-simbolos/</guid>
+      <description>&lt;p&gt;Procedí a instalar un nuevo CU (Cumulative Update) para Microsoft Dynamics 365 Business Central 2020 Wave 2 y al crear un nuevo proyecto AL lanzó un error de descarga de símbolos. Es un problema muy común pero la solución muchas veces es simple.&lt;/p&gt;&#xA;&lt;p&gt;En este caso, debemos cambiar algo en el archivo de configuración y listo.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Business Central: Manejo de versiones publicadas</title>
+      <link>http://localhost:1313/posts/2020-04-30-business-central-manejo-de-versiones-publicadas/</link>
+      <pubDate>Thu, 30 Apr 2020 20:31:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2020-04-30-business-central-manejo-de-versiones-publicadas/</guid>
+      <description>&lt;p&gt;En versiones anteriores de Microsoft Dynamics, NAV específicamente se hacía complicado el versionado. De hecho no lo tenía, pero ahora el manejo de versiones publicadas en Business Central permite tener varias y utilizar la que estamos necesitando.&lt;/p&gt;&#xA;&lt;p&gt;En este punto estoy hablando de versiones en cuanto a extensiones, no a control de código fuente y sus beneficios. Eso es tema para otro artículo.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Business Central: Sustituir reportes</title>
+      <link>http://localhost:1313/posts/2020-04-28-business-central-sustituir-reportes/</link>
+      <pubDate>Tue, 28 Apr 2020 22:53:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2020-04-28-business-central-sustituir-reportes/</guid>
+      <description>&lt;p&gt;En el &lt;a href=&#34;http://cmas.dev/2020/04/business-central-utilizar-manejador-de-eventos-en-reportes/&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;artículo anterior&lt;/a&gt;, vimos cómo suscribirnos a eventos de un reporte sin poder modificar diseño. En este artículo, veremos cómo sustituir reportes en Business Central.&lt;/p&gt;&#xA;&lt;p&gt;Por ejemplo, necesitamos hacer cambios en el diseño del reporte y también en la funcionalidad para satisfacer las necesidades que pueda tener nuestro cliente. Entonces, procedemos a sustituir el reporte nativo por el reporte personalizado. Lo hacemos suscribiéndonos al evento &lt;strong&gt;OnAfterSubstituteReport&lt;/strong&gt; del CodeUnit &lt;strong&gt;ReportManagement&lt;/strong&gt;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Business Central: Utilizar manejador de eventos en reportes</title>
+      <link>http://localhost:1313/posts/2020-04-23-business-central-utilizar-manejador-de-eventos-en-reportes/</link>
+      <pubDate>Thu, 23 Apr 2020 21:12:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2020-04-23-business-central-utilizar-manejador-de-eventos-en-reportes/</guid>
+      <description>&lt;p&gt;En el &lt;a href=&#34;http://cmas.dev/2020/04/business-central-utilizar-manejador-de-eventos/&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;artículo anterior&lt;/a&gt;, hemos visto los conceptos relacionados a eventos dentro del Business Central. En esta ocasión veremos cómo utilizar manejador de eventos en reportes en Business Central. Este artículo es más rápido que el anterior porque sólo se deben tener en cuenta ciertas cosas.&lt;/p&gt;&#xA;&lt;p&gt;Hemos visto en una &lt;a href=&#34;http://cmas.dev/2019/02/bc-dev-tips-crear-extension-de-reporte-con-visual-studio-code/&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;entrada anterior&lt;/a&gt;, que los reportes no pueden ser extendidos. De esta manera quedamos limitados a la hora de generar reportes dentro del Business Central. Pero debemos tener en cuenta algunos puntos:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Business Central: Utilizar manejador de eventos</title>
+      <link>http://localhost:1313/posts/2020-04-21-business-central-utilizar-manejador-de-eventos/</link>
+      <pubDate>Tue, 21 Apr 2020 20:13:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2020-04-21-business-central-utilizar-manejador-de-eventos/</guid>
+      <description>&lt;p&gt;En Microsoft Business Central también encontraremos algo básico a la hora de programar y/o usar un sistema que consiste en los eventos, de hecho, los eventos están presentes durante la ejecución de cualquier programa informático sea Web, escritorio y/o móvil. Un evento básicamente se produce cuando realizamos una acción en particular dentro de dicho programa. Por ejemplo, hacer clic en un botón.&lt;/p&gt;&#xA;&lt;p&gt;La información se encuentra disponible en la documentación de Business Central y se puede encontrar &lt;a href=&#34;https://docs.microsoft.com/en-us/dynamics365/business-central/dev-itpro/developer/devenv-events-in-al?source=docs&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;aquí&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;p&gt;En esta ocasión haré una introducción copiando la información del sitio mencionado en el párrafo anterior (de modo a hacer una ontroducción y que el documento no está en español). Permiso Microsoft ;)&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Business Central: Utilizar formatos de fechas no predeterminados</title>
+      <link>http://localhost:1313/posts/2020-04-16-business-central-utilizar-formatos-de-fechas-no-predeterminados/</link>
+      <pubDate>Thu, 16 Apr 2020 19:43:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2020-04-16-business-central-utilizar-formatos-de-fechas-no-predeterminados/</guid>
+      <description>&lt;p&gt;En cualquier lenguaje de programación el tipo de dato más complejo es justamente la fecha. ¿Por qué? Porque las configuraciones regionales hacen que varíe el formato y ahí se presten a confusiones o errores. En este artículo veremos cómo utilizar formatos de fechas no predeterminados.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Business Central: Deshabilitar descarga de código fuente en Extensiones</title>
+      <link>http://localhost:1313/posts/2020-04-14-deshabilitar-descarga-origen-extensiones/</link>
+      <pubDate>Tue, 14 Apr 2020 19:06:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2020-04-14-deshabilitar-descarga-origen-extensiones/</guid>
+      <description>&lt;p&gt;Mi equipo y yo nos encontramos desarrollando algunas funcionalidades extra para el &lt;strong&gt;Microsoft Dynamics 365 Business Central&lt;/strong&gt;, luego de realizar las pruebas nos dirigimos a Extensiones y vimos que se podía descargar el código fuente de todo el proyecto (código AL, reportes, etc).&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Business Central: Wave 2 Txt2AL no existe</title>
+      <link>http://localhost:1313/posts/2020-04-08-business-central-wave-2-txt2al-no-existe/</link>
+      <pubDate>Wed, 08 Apr 2020 17:06:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2020-04-08-business-central-wave-2-txt2al-no-existe/</guid>
+      <description>&lt;p&gt;En la &lt;a href=&#34;http://localhost:1313/2020/04/business-central-convertir-c-side-a-codigo-al/&#34; &gt;entrada anterior&lt;/a&gt; hemos visto cómo convertir código &lt;strong&gt;C/SIDE&lt;/strong&gt; y código &lt;strong&gt;AL&lt;/strong&gt;. Ahora veremos cómo disponibilizar esta herramienta en &lt;strong&gt;Dynamics 365 Business Central Wave 2&lt;/strong&gt;, pues ya no está disponible directamente como antes.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Business Central: Convertir C/SIDE a código AL</title>
+      <link>http://localhost:1313/posts/2020-04-07-business-central-convertir-c-side-a-codigo-al/</link>
+      <pubDate>Tue, 07 Apr 2020 12:24:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2020-04-07-business-central-convertir-c-side-a-codigo-al/</guid>
+      <description>&lt;p&gt;La semana pasada me tocó realizar migración de Dynamics NAV 2018 a Dynamics 365 Business Central Wave 2 y me encontré con que debía hacerlo tabla por tabla. Va ser un proceso muy largo, cuanto más objetos tengas más código escribiremos. Es por eso que el propio &lt;strong&gt;Dynamics 365 Business Central&lt;/strong&gt; trae una herramienta que hace ese trabajo por nosotros. Se llama &lt;strong&gt;Txt2AL.exe&lt;/strong&gt; y es muy útil.&lt;/p&gt;&#xA;&lt;p&gt;Primeramente, debemos crear dos carpetas:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>BCDEV Tips: AL Extension Pack para Visual Studio Code</title>
+      <link>http://localhost:1313/posts/2020-03-29-bcdev-tips-al-extension-pack-para-visual-studio-code/</link>
+      <pubDate>Sun, 29 Mar 2020 16:03:22 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2020-03-29-bcdev-tips-al-extension-pack-para-visual-studio-code/</guid>
+      <description>&lt;p&gt;El desarrollo de Dynmaics 365 Business Central sigue avanzando, las herramientas aún están en fase de desarrollo y es por eso que depende en gran medida de la comunidad de desarrolladores.&lt;/p&gt;&#xA;&lt;p&gt;En esta ocasión les traigo una extensión para Visual Studio Code que me resulta demasiado útil. Se llama AL Extension Pack y básicamente es un conjunto de extensiones que se relacionan entre sí para ayudar al desarrollador AL a ser más productivo y rápido. Está más orientado a &lt;strong&gt;Cloud&lt;/strong&gt; que a &lt;strong&gt;On Premise&lt;/strong&gt; pero es demasiado útil.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>BCDEV Tips: Modificar campos y disparadores</title>
+      <link>http://localhost:1313/posts/2020-03-28-bcdev-tips-modificar-campos-y-disparadores/</link>
+      <pubDate>Sat, 28 Mar 2020 14:54:57 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2020-03-28-bcdev-tips-modificar-campos-y-disparadores/</guid>
+      <description>&lt;p&gt;Dynamics 365 Business Central trajo consigo muchos cambios novedosos. En la empresa donde trabajo estamos implementando uno y nos encontramos con un tema no menor: ¡No podemos modificar el trigger de una tabla!&lt;/p&gt;&#xA;&lt;p&gt;Es decir, no podemos modificar el código nativo de un objeto en Dynamics 365 Business Central ¿Por qué? Porque Microsoft quiere que utilicemos extensiones, no que modifiquemos el código nativo a placer poniendo en riesgo la seguridad y/o integridad del producto.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>BCDEV Tips: Modificar funciones base</title>
+      <link>http://localhost:1313/posts/2020-03-27-bcdev-tips-modificar-funciones-base/</link>
+      <pubDate>Fri, 27 Mar 2020 19:49:50 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2020-03-27-bcdev-tips-modificar-funciones-base/</guid>
+      <description>&lt;p&gt;Supongamos que deseamos validar que un cheque no pueda ser anulado por algún motivo. Nativamente Business Central no tiene esta funcionalidad, entonces lo más lógico es agregar código al CodeUnit 367 &amp;ldquo;Check Management&amp;rdquo; para agregar toda la funcionalidad requerido.&lt;/p&gt;&#xA;&lt;h2 id=&#34;el-problema&#34;&gt;&#xD;&#xA;  ¿El problema?&#xD;&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#el-problema&#34;&gt;&#xD;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xD;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xD;&#xA;  &lt;/a&gt;&#xD;&#xA;&lt;/h2&gt;&#xD;&#xA;&lt;p&gt;En Dynamics 365 Business Central no se pueden modificar los CodeUnits de la aplicación base ni se pueden crear extensiones de CodeUnits.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>BCDEV Tips: Configurar entorno de desarrollo - Parte 3</title>
+      <link>http://localhost:1313/posts/2020-03-25-bcdev-tips-configurar-entorno-de-desarrollo-parte-3/</link>
+      <pubDate>Wed, 25 Mar 2020 20:44:03 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2020-03-25-bcdev-tips-configurar-entorno-de-desarrollo-parte-3/</guid>
+      <description>&lt;p&gt;En esta última parte del artículo veremos cómo clonar el repositorio y unirlo con Visual Studio Code. Por último publicaremos la extensión en Dynamics 365 Business Central Wave 2.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>BCDEV Tips: Configurar entorno de desarrollo - Parte 2</title>
+      <link>http://localhost:1313/posts/2020-03-24-bcdev-tips-configurar-entorno-de-desarrollo-parte-2/</link>
+      <pubDate>Tue, 24 Mar 2020 12:41:47 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2020-03-24-bcdev-tips-configurar-entorno-de-desarrollo-parte-2/</guid>
+      <description>&lt;p&gt;En la &lt;a href=&#34;http://localhost:1313/2020/03/bcdev-tips-configurar-entorno-de-desarrollo-parte-1/&#34; &gt;entrada anterior&lt;/a&gt;, vimos cómo crear un repositorio con Azure DevOps Services y cómo instalar Git en nuestro Windows.&lt;/p&gt;&#xA;&lt;p&gt;Ahora procederemos a instalar Visual Studio Code en nuestro Windows.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>BCDEV Tips: Configurar entorno de desarrollo - Parte 1</title>
+      <link>http://localhost:1313/posts/2020-03-22-bcdev-tips-configurar-entorno-de-desarrollo-parte-1/</link>
+      <pubDate>Sun, 22 Mar 2020 10:39:53 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2020-03-22-bcdev-tips-configurar-entorno-de-desarrollo-parte-1/</guid>
+      <description>&lt;p&gt;En esta serie de entradas quisiera detallar el proceso de configuración del entorno de desarrollo Visual Studio Code para Dynamics 365 Business Central. Las tres partes de esta serie contemplan:&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;Parte 1 - Configuración de Azure DevOps e instalación de Git: Como estos proyectos involucran a muchas personas es ideal tener un repositorio de archivos con control de código fuente para fácil manejo y adminsitración de los mismos.&lt;/li&gt;&#xA;&lt;li&gt;Parte 2 - Instalación de Visual Studio Code y extensiones básicas para AL: Esta entrada se refiere más a recomendaciones que doy para la instalación y para las extensiones más básicas para el trabajo en equipo.&lt;/li&gt;&#xA;&lt;li&gt;Parte 3 - Configuración de Azure Repos y publicación de una extensión: Aquí explicaré cómo terminar de configurar el entorno y dejarlo listo para la primera publicación de nuestra extensión de prueba.&lt;/li&gt;&#xA;&lt;/ol&gt;</description>
+    </item>
+  </channel>
+</rss>

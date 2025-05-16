@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Deno on Christian Amado</title>
+    <link>http://localhost:1313/tags/deno/</link>
+    <description>Recent content in Deno on Christian Amado</description>
+    <generator>Hugo</generator>
+    <language>es</language>
+    <lastBuildDate>Fri, 02 May 2025 00:00:00 -0300</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/deno/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Mocks, cobertura y pruebas por capas en proyectos escalables</title>
+      <link>http://localhost:1313/posts/2025-05-02-advanced-testing-deno/</link>
+      <pubDate>Fri, 02 May 2025 00:00:00 -0300</pubDate>
+      <guid>http://localhost:1313/posts/2025-05-02-advanced-testing-deno/</guid>
+      <description>&lt;p&gt;En el ecosistema moderno del desarrollo backend, el testing no es opcional: es esencial. En proyectos colaborativos y escalables, contar con pruebas automatizadas bien estructuradas marca la diferencia entre un código confiable y uno frágil. Deno 2 ofrece herramientas nativas poderosas para testear, pero muchas veces su uso avanzado no está del todo documentado. Este artículo muestra cómo implementar un enfoque de testing avanzado en Deno 2, incluyendo mocks manuales, cobertura de código y organización por capas.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Arquitectura limpia con Deno: estructuras escalables para proyectos open source</title>
+      <link>http://localhost:1313/posts/2025-04-24-deno-clean-architecture/</link>
+      <pubDate>Thu, 24 Apr 2025 00:00:00 -0300</pubDate>
+      <guid>http://localhost:1313/posts/2025-04-24-deno-clean-architecture/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;Deno 2&lt;/strong&gt; ha consolidado su lugar como una plataforma moderna para el desarrollo backend, enfocada en seguridad, rendimiento y simplicidad. Sin embargo, aún existe el desafío de estructurar proyectos de forma escalable y mantenible, especialmente cuando se busca colaborar en comunidad. Este artículo explora cómo aplicar los principios de &lt;strong&gt;Clean Architecture&lt;/strong&gt; en proyectos con &lt;strong&gt;Deno 2&lt;/strong&gt;, creando un código desacoplado, testable y abierto a contribuciones.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Migración de aplicaciones legacy a Deno</title>
+      <link>http://localhost:1313/posts/2025-03-05-migrate-legacy-apps-deno2/</link>
+      <pubDate>Wed, 05 Mar 2025 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2025-03-05-migrate-legacy-apps-deno2/</guid>
+      <description>&lt;p&gt;La evolución de &lt;strong&gt;Deno&lt;/strong&gt; hacia su versión 2 representa un paso firme hacia una experiencia de desarrollo más coherente, segura y moderna en el ecosistema &lt;strong&gt;JavaScript&lt;/strong&gt; y &lt;strong&gt;TypeScript&lt;/strong&gt;. Si bien Deno 1 ya ofrecía ventajas importantes frente a &lt;strong&gt;Node.js&lt;/strong&gt;, &lt;strong&gt;Deno 2&lt;/strong&gt; consolida su propuesta con cambios significativos en la gestión de módulos, configuración del entorno y compatibilidad con estándares web. Este artículo describe cómo migrar una aplicación legacy —ya sea desarrollada en Node.js o en Deno 1— hacia Deno 2, abordando los desafíos técnicos y proponiendo una estrategia ordenada de transición.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Deploy automatizado de APIs Deno en Azure Functions</title>
+      <link>http://localhost:1313/posts/2025-02-05-automatized-deploy-api-deno/</link>
+      <pubDate>Wed, 05 Feb 2025 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2025-02-05-automatized-deploy-api-deno/</guid>
+      <description>&lt;p&gt;El despliegue automatizado de APIs en la nube es una práctica esencial en el desarrollo moderno. &lt;strong&gt;Deno&lt;/strong&gt;, con su seguridad integrada y soporte nativo para TypeScript, es una excelente opción para construir APIs escalables y eficientes. &lt;strong&gt;Azure Functions&lt;/strong&gt;, por otro lado, permite ejecutar código sin preocuparse por la infraestructura subyacente.&lt;/p&gt;&#xA;&lt;p&gt;En este artículo, aprenderás cómo &lt;strong&gt;desplegar automáticamente una API de Deno en Azure Functions&lt;/strong&gt; usando GitHub Actions.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Diseño de APIs escalables con Deno y TypeScript</title>
+      <link>http://localhost:1313/posts/2025-01-15-scalable-design-apis/</link>
+      <pubDate>Wed, 15 Jan 2025 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2025-01-15-scalable-design-apis/</guid>
+      <description>&lt;p&gt;El desarrollo de APIs escalables es un aspecto clave en la construcción de aplicaciones modernas. &lt;strong&gt;Deno&lt;/strong&gt;, un runtime moderno para JavaScript y TypeScript, ofrece una serie de características que lo convierten en una excelente alternativa para la creación de APIs seguras y eficientes. En este artículo, exploraremos cómo diseñar una API REST escalable utilizando &lt;strong&gt;Deno y TypeScript&lt;/strong&gt;, aplicando las mejores prácticas y optimizaciones.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Creación de aplicaciones serverless con Deno y Azure</title>
+      <link>http://localhost:1313/posts/2024-11-20-serverless-apps-deno-azure/</link>
+      <pubDate>Wed, 20 Nov 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2024-11-20-serverless-apps-deno-azure/</guid>
+      <description>&lt;p&gt;El paradigma serverless permite construir aplicaciones sin necesidad de gestionar servidores, proporcionando escalabilidad automática y optimización de costos. En este artículo, exploraremos cómo crear aplicaciones serverless utilizando Deno y Azure Functions, combinando la eficiencia de Deno con la potencia de la nube de Azure.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Testing en Deno: Estrategias para Aplicaciones Grandes</title>
+      <link>http://localhost:1313/posts/2024-11-13-testing-strategies-in-deno/</link>
+      <pubDate>Wed, 13 Nov 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2024-11-13-testing-strategies-in-deno/</guid>
+      <description>&lt;p&gt;El desarrollo de aplicaciones grandes con &lt;strong&gt;Deno&lt;/strong&gt; requiere un enfoque sólido en &lt;strong&gt;pruebas automatizadas&lt;/strong&gt; para garantizar su estabilidad y escalabilidad. Deno ofrece un sistema de testing integrado con herramientas modernas que facilitan la escritura y ejecución de pruebas unitarias, de integración y funcionales.&lt;/p&gt;&#xA;&lt;p&gt;En este artículo, exploraremos las &lt;strong&gt;estrategias para testing en Deno&lt;/strong&gt;, incluyendo fundamentos teóricos, mejores prácticas y ejemplos de código para aplicaciones a gran escala.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Integración de Angular con APIs RESTful en Deno</title>
+      <link>http://localhost:1313/posts/2024-10-30-angular-integration-with-api-rest-in-deno/</link>
+      <pubDate>Wed, 30 Oct 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2024-10-30-angular-integration-with-api-rest-in-deno/</guid>
+      <description>&lt;p&gt;La integración entre &lt;strong&gt;Angular&lt;/strong&gt; y &lt;strong&gt;APIs RESTful&lt;/strong&gt; creadas con &lt;strong&gt;Deno&lt;/strong&gt; permite desarrollar aplicaciones modernas y escalables con una arquitectura limpia y basada en &lt;strong&gt;TypeScript&lt;/strong&gt;. En este artículo, exploraremos cómo conectar una aplicación Angular con un backend RESTful en Deno paso a paso, incluyendo fundamentos teóricos, ejemplos prácticos y buenas prácticas.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Desarrollo full-stack con Angular y Deno</title>
+      <link>http://localhost:1313/posts/2024-10-23-fullstack-development-with-angular-and-deno/</link>
+      <pubDate>Wed, 23 Oct 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2024-10-23-fullstack-development-with-angular-and-deno/</guid>
+      <description>&lt;p&gt;El desarrollo full-stack ha evolucionado con nuevas tecnologías que permiten construir aplicaciones modernas, escalables y seguras. En este artículo, exploraremos cómo combinar Angular en el frontend y Deno en el backend para crear aplicaciones full-stack eficientes y bien estructuradas.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Mejores prácticas de modularidad con Deno 2</title>
+      <link>http://localhost:1313/posts/2024-09-11-best-practices-modularity-deno2/</link>
+      <pubDate>Wed, 11 Sep 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2024-09-11-best-practices-modularity-deno2/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;Deno 2&lt;/strong&gt; ha revolucionado el desarrollo con &lt;strong&gt;JavaScript&lt;/strong&gt; y &lt;strong&gt;TypeScript&lt;/strong&gt; al proporcionar un entorno moderno, seguro y modular. Su sistema de importación basado en URL y su soporte nativo para &lt;strong&gt;TypeScript&lt;/strong&gt; facilitan la creación de aplicaciones bien estructuradas y mantenibles. En este artículo, exploraremos las mejores prácticas para lograr modularidad en proyectos con &lt;strong&gt;Deno 2&lt;/strong&gt;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Migración de Node.js a Deno: Caso práctico</title>
+      <link>http://localhost:1313/posts/2024-08-21-nodejs-migration-to-deno/</link>
+      <pubDate>Wed, 21 Aug 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2024-08-21-nodejs-migration-to-deno/</guid>
+      <description>&lt;p&gt;En los últimos años, &lt;strong&gt;Deno&lt;/strong&gt; ha emergido como una alternativa moderna a &lt;strong&gt;Node.js&lt;/strong&gt;. Desarrollado por el mismo creador de &lt;strong&gt;Node.js&lt;/strong&gt;, &lt;strong&gt;Deno&lt;/strong&gt; busca abordar algunas de las limitaciones y problemas de diseño que han surgido con &lt;strong&gt;Node.js&lt;/strong&gt; a lo largo del tiempo. Este artículo presenta un caso práctico detallado sobre cómo migrar una aplicación existente de &lt;strong&gt;Node.js&lt;/strong&gt; a &lt;strong&gt;Deno&lt;/strong&gt;, destacando las diferencias clave, los desafíos y las soluciones.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Creación de microservicios con Deno y Azure Functions</title>
+      <link>http://localhost:1313/posts/2024-07-24-microservices-deno-azure/</link>
+      <pubDate>Wed, 24 Jul 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2024-07-24-microservices-deno-azure/</guid>
+      <description>&lt;p&gt;En el mundo moderno del desarrollo de software, los microservicios han revolucionado la forma de construir y desplegar aplicaciones escalables. Al combinar &lt;strong&gt;Deno&lt;/strong&gt;, una plataforma de runtime moderna basada en &lt;strong&gt;JavaScript&lt;/strong&gt; y &lt;strong&gt;TypeScript&lt;/strong&gt;, con &lt;strong&gt;Azure Functions&lt;/strong&gt;, una solución serverless flexible de &lt;strong&gt;Microsoft&lt;/strong&gt;, los desarrolladores pueden crear microservicios rápidos, seguros y eficientes. Este artículo te guiará paso a paso en el proceso de crear microservicios utilizando estas tecnologías, destacando buenas prácticas, ejemplos prácticos y el uso de &lt;strong&gt;Visual Studio Code&lt;/strong&gt; como herramienta principal.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Deno, Go y Python en WSL2 para flujos mixtos de backend &#43; AI</title>
+      <link>http://localhost:1313/posts/2024-06-14-wsl2-backend-ai/</link>
+      <pubDate>Fri, 14 Jun 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2024-06-14-wsl2-backend-ai/</guid>
+      <description>&lt;p&gt;Combinar lenguajes modernos como &lt;strong&gt;Deno&lt;/strong&gt;, &lt;strong&gt;Go&lt;/strong&gt; y &lt;strong&gt;Python&lt;/strong&gt; permite crear soluciones backend de alto rendimiento con componentes de inteligencia artificial de forma modular y eficiente. Gracias a &lt;strong&gt;WSL2&lt;/strong&gt;, es posible configurar este stack en Linux desde Windows, integrando herramientas, librerías y entornos de ejecución en un mismo flujo de trabajo.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>API RESTful con TypeScript y Deno: Guía completa</title>
+      <link>http://localhost:1313/posts/2024-05-29-api-restful-typescript-deno/</link>
+      <pubDate>Wed, 29 May 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2024-05-29-api-restful-typescript-deno/</guid>
+      <description>&lt;p&gt;Deno, el moderno entorno de ejecución para JavaScript y TypeScript creado por Ryan Dahl, está transformando la manera en que se desarrollan aplicaciones backend. A diferencia de Node.js, Deno se centra en la seguridad, el rendimiento y una experiencia de desarrollo simplificada. En este artículo, exploraremos cómo construir una API RESTful utilizando &lt;strong&gt;TypeScript&lt;/strong&gt; y &lt;strong&gt;Deno&lt;/strong&gt; desde cero, cubriendo todas las operaciones CRUD (&lt;strong&gt;POST, GET, PUT, DELETE&lt;/strong&gt;) junto con buenas prácticas, seguridad y optimización&amp;hellip;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Seguridad en aplicaciones Deno: Autenticación y autorización</title>
+      <link>http://localhost:1313/posts/2024-05-08-deno-apps-security/</link>
+      <pubDate>Wed, 08 May 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2024-05-08-deno-apps-security/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;Deno&lt;/strong&gt;, como entorno de ejecución moderno para &lt;strong&gt;JavaScript&lt;/strong&gt; y &lt;strong&gt;TypeScript&lt;/strong&gt;, ofrece varias ventajas en términos de seguridad. Su enfoque en la seguridad por diseño incluye la gestión de permisos granular y un runtime sin acceso implícito al sistema. Sin embargo, la seguridad en aplicaciones Deno no solo depende del entorno, sino también de cómo se implementan funcionalidades clave como la autenticación y autorización. Este artículo explora cómo construir aplicaciones seguras en Deno con ejemplos prácticos y buenas prácticas.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>¿Cómo configurar un proyecto TypeScript moderno con Deno?</title>
+      <link>http://localhost:1313/posts/2024-05-01-typescript-project-with-deno/</link>
+      <pubDate>Wed, 01 May 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2024-05-01-typescript-project-with-deno/</guid>
+      <description>&lt;h2 id=&#34;introducción&#34;&gt;&#xD;&#xA;  Introducción&#xD;&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#introducci%c3%b3n&#34;&gt;&#xD;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xD;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xD;&#xA;  &lt;/a&gt;&#xD;&#xA;&lt;/h2&gt;&#xD;&#xA;&lt;p&gt;Configurar un proyecto moderno en &lt;strong&gt;TypeScript&lt;/strong&gt; con &lt;strong&gt;Deno&lt;/strong&gt; permitirá aprovechar un entorno de desarrollo optimizado, seguro y compatible con los estándares más recientes, como &lt;strong&gt;ES2024&lt;/strong&gt;. Este artículo mostrará cómo realizar esta configuración tanto en &lt;strong&gt;Visual Studio Code&lt;/strong&gt; como en &lt;strong&gt;JetBrains Rider&lt;/strong&gt;, destacando buenas prácticas, incluyendo &lt;strong&gt;testing&lt;/strong&gt; con TypeScript, y proporcionando ejemplos prácticos de código.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

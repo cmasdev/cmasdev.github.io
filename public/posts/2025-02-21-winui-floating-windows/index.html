@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  Creación de ventanas flotantes estilo Widget con posicionamiento persistente en pantalla · Christian Amado
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Christian Amado">
+<meta name="description" content="Las ventanas flotantes (overlay) son una técnica poderosa para presentar información contextual o utilitaria en una aplicación de escritorio. En el ecosistema moderno de Windows, se pueden implementar como “ventanas tipo Widget” que permanecen siempre visibles, no aparecen en la barra de tareas y mantienen su posición de forma persistente. Este tipo de UI es ideal para herramientas de monitoreo, asistentes, controles rápidos o paneles interactivos.
+Este artículo explica cómo crear este tipo de ventana en una app moderna usando WinUI 3 y Windows App SDK, controlando su estilo, posición y comportamiento sin interferir con el foco de otras ventanas del sistema.">
+<meta name="keywords" content="blog,desarrollador,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Creación de ventanas flotantes estilo Widget con posicionamiento persistente en pantalla">
+  <meta name="twitter:description" content="Las ventanas flotantes (overlay) son una técnica poderosa para presentar información contextual o utilitaria en una aplicación de escritorio. En el ecosistema moderno de Windows, se pueden implementar como “ventanas tipo Widget” que permanecen siempre visibles, no aparecen en la barra de tareas y mantienen su posición de forma persistente. Este tipo de UI es ideal para herramientas de monitoreo, asistentes, controles rápidos o paneles interactivos.
+Este artículo explica cómo crear este tipo de ventana en una app moderna usando WinUI 3 y Windows App SDK, controlando su estilo, posición y comportamiento sin interferir con el foco de otras ventanas del sistema.">
+
+<meta property="og:url" content="http://localhost:1313/posts/2025-02-21-winui-floating-windows/">
+  <meta property="og:site_name" content="Christian Amado">
+  <meta property="og:title" content="Creación de ventanas flotantes estilo Widget con posicionamiento persistente en pantalla">
+  <meta property="og:description" content="Las ventanas flotantes (overlay) son una técnica poderosa para presentar información contextual o utilitaria en una aplicación de escritorio. En el ecosistema moderno de Windows, se pueden implementar como “ventanas tipo Widget” que permanecen siempre visibles, no aparecen en la barra de tareas y mantienen su posición de forma persistente. Este tipo de UI es ideal para herramientas de monitoreo, asistentes, controles rápidos o paneles interactivos.
+Este artículo explica cómo crear este tipo de ventana en una app moderna usando WinUI 3 y Windows App SDK, controlando su estilo, posición y comportamiento sin interferir con el foco de otras ventanas del sistema.">
+  <meta property="og:locale" content="es">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-02-21T00:00:00-04:00">
+    <meta property="article:modified_time" content="2025-02-21T00:00:00-04:00">
+    <meta property="article:tag" content="WinDev">
+    <meta property="article:tag" content="Windows 11">
+    <meta property="article:tag" content="WinUI 3">
+    <meta property="article:tag" content="Windows App SDK">
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-V1ZRP82YFD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-V1ZRP82YFD');
+</script>
+
+
+
+<link rel="canonical" href="http://localhost:1313/posts/2025-02-21-winui-floating-windows/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="apple-touch-icon" sizes="57x57" href="/img/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/img/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/img/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/img/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/img/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/img/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/img/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/img/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/img/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="/img/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/img/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+<link rel="manifest" href="/img/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/img/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/">
+      Christian Amado
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/about">Biografía</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/contact">Contacto</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/diabetes">Diabetes</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/tags">Etiquetas</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/en/">🇺🇸</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/posts/2025-02-21-winui-floating-windows/">
+              Creación de ventanas flotantes estilo Widget con posicionamiento persistente en pantalla
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2025-02-21T00:00:00-04:00">
+                febrero 21, 2025
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              3 minutos de lectura.
+            </span>
+          </div>
+          
+          
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/tags/windev/">WinDev</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/windows-11/">Windows 11</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/winui-3/">WinUI 3</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/windows-app-sdk/">Windows App SDK</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <p>Las ventanas flotantes (overlay) son una técnica poderosa para presentar información contextual o utilitaria en una aplicación de escritorio. En el ecosistema moderno de <strong>Windows</strong>, se pueden implementar como “ventanas tipo Widget” que permanecen siempre visibles, no aparecen en la barra de tareas y mantienen su posición de forma persistente. Este tipo de UI es ideal para herramientas de monitoreo, asistentes, controles rápidos o paneles interactivos.</p>
+<p>Este artículo explica cómo crear este tipo de ventana en una app moderna usando <strong>WinUI 3</strong> y <strong>Windows App SDK</strong>, controlando su estilo, posición y comportamiento sin interferir con el foco de otras ventanas del sistema.</p>
+<h2 id="requisitos">
+  Requisitos
+  <a class="heading-link" href="#requisitos">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ul>
+<li>Windows 11</li>
+<li>Visual Studio 2022</li>
+<li>Windows App SDK 1.3 o superior</li>
+<li>Proyecto WinUI 3 (Packaged)</li>
+</ul>
+<h2 id="paso-1-crear-una-nueva-ventana-tipo-overlay">
+  Paso 1: Crear una nueva ventana tipo overlay
+  <a class="heading-link" href="#paso-1-crear-una-nueva-ventana-tipo-overlay">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Definir una nueva clase de ventana:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">sealed</span> <span class="kd">partial</span> <span class="k">class</span> <span class="nc">WidgetWindow</span> <span class="p">:</span> <span class="n">Window</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="n">WidgetWindow</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="p">.</span><span class="n">InitializeComponent</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="p">.</span><span class="n">ExtendsContentIntoTitleBar</span> <span class="p">=</span> <span class="kc">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="p">.</span><span class="n">SetWidgetStyle</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="k">void</span> <span class="n">SetWidgetStyle</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">var</span> <span class="n">hwnd</span> <span class="p">=</span> <span class="n">WinRT</span><span class="p">.</span><span class="n">Interop</span><span class="p">.</span><span class="n">WindowNative</span><span class="p">.</span><span class="n">GetWindowHandle</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">var</span> <span class="n">hwndId</span> <span class="p">=</span> <span class="n">Microsoft</span><span class="p">.</span><span class="n">UI</span><span class="p">.</span><span class="n">Win32Interop</span><span class="p">.</span><span class="n">GetWindowIdFromWindow</span><span class="p">(</span><span class="n">hwnd</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">var</span> <span class="n">appWindow</span> <span class="p">=</span> <span class="n">Microsoft</span><span class="p">.</span><span class="n">UI</span><span class="p">.</span><span class="n">Windowing</span><span class="p">.</span><span class="n">AppWindow</span><span class="p">.</span><span class="n">GetFromWindowId</span><span class="p">(</span><span class="n">hwndId</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">appWindow</span><span class="p">.</span><span class="n">SetPresenter</span><span class="p">(</span><span class="n">AppWindowPresenterKind</span><span class="p">.</span><span class="n">CompactOverlay</span><span class="p">);</span> <span class="c1">// modo PiP</span>
+</span></span><span class="line"><span class="cl">        <span class="n">appWindow</span><span class="p">.</span><span class="n">IsShownInSwitchers</span> <span class="p">=</span> <span class="kc">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Esto crea una ventana pequeña, sin ícono en barra de tareas ni Alt+Tab.</p>
+<h2 id="paso-2-configurar-tamaño-posición-y-transparencia">
+  Paso 2: Configurar tamaño, posición y transparencia
+  <a class="heading-link" href="#paso-2-configurar-tama%c3%b1o-posici%c3%b3n-y-transparencia">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>En el constructor:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="n">appWindow</span><span class="p">.</span><span class="n">Resize</span><span class="p">(</span><span class="k">new</span> <span class="n">Windows</span><span class="p">.</span><span class="n">Graphics</span><span class="p">.</span><span class="n">SizeInt32</span> <span class="p">{</span> <span class="n">Width</span> <span class="p">=</span> <span class="m">320</span><span class="p">,</span> <span class="n">Height</span> <span class="p">=</span> <span class="m">200</span> <span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="n">appWindow</span><span class="p">.</span><span class="n">Move</span><span class="p">(</span><span class="k">new</span> <span class="n">Windows</span><span class="p">.</span><span class="n">Graphics</span><span class="p">.</span><span class="n">PointInt32</span> <span class="p">{</span> <span class="n">X</span> <span class="p">=</span> <span class="m">1000</span><span class="p">,</span> <span class="n">Y</span> <span class="p">=</span> <span class="m">60</span> <span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="n">appWindow</span><span class="p">.</span><span class="n">Changed</span> <span class="p">+=</span> <span class="n">AppWindow_Changed</span><span class="p">;</span>
+</span></span></code></pre></div><p>Persistir posición en <code>AppWindow_Changed</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kd">private</span> <span class="k">void</span> <span class="n">AppWindow_Changed</span><span class="p">(</span><span class="n">AppWindow</span> <span class="n">sender</span><span class="p">,</span> <span class="kt">object</span> <span class="n">args</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">var</span> <span class="n">bounds</span> <span class="p">=</span> <span class="n">sender</span><span class="p">.</span><span class="n">Position</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Settings</span><span class="p">.</span><span class="n">Default</span><span class="p">.</span><span class="n">WidgetX</span> <span class="p">=</span> <span class="n">bounds</span><span class="p">.</span><span class="n">X</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Settings</span><span class="p">.</span><span class="n">Default</span><span class="p">.</span><span class="n">WidgetY</span> <span class="p">=</span> <span class="n">bounds</span><span class="p">.</span><span class="n">Y</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Settings</span><span class="p">.</span><span class="n">Default</span><span class="p">.</span><span class="n">Save</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Leer posición previa al iniciar:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">posX</span> <span class="p">=</span> <span class="n">Settings</span><span class="p">.</span><span class="n">Default</span><span class="p">.</span><span class="n">WidgetX</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">posY</span> <span class="p">=</span> <span class="n">Settings</span><span class="p">.</span><span class="n">Default</span><span class="p">.</span><span class="n">WidgetY</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">appWindow</span><span class="p">.</span><span class="n">Move</span><span class="p">(</span><span class="k">new</span> <span class="n">Windows</span><span class="p">.</span><span class="n">Graphics</span><span class="p">.</span><span class="n">PointInt32</span> <span class="p">{</span> <span class="n">X</span> <span class="p">=</span> <span class="n">posX</span><span class="p">,</span> <span class="n">Y</span> <span class="p">=</span> <span class="n">posY</span> <span class="p">});</span>
+</span></span></code></pre></div><h2 id="paso-3-eliminar-marco-y-ajustar-diseño">
+  Paso 3: Eliminar marco y ajustar diseño
+  <a class="heading-link" href="#paso-3-eliminar-marco-y-ajustar-dise%c3%b1o">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>En XAML:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;Border</span> <span class="na">Background=</span><span class="s">&#34;White&#34;</span> <span class="na">CornerRadius=</span><span class="s">&#34;10&#34;</span> <span class="na">Padding=</span><span class="s">&#34;10&#34;</span> <span class="na">BorderBrush=</span><span class="s">&#34;Gray&#34;</span> <span class="na">BorderThickness=</span><span class="s">&#34;1&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&lt;StackPanel&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;TextBlock</span> <span class="na">Text=</span><span class="s">&#34;Estado del sistema&#34;</span><span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;ProgressBar</span> <span class="na">Value=</span><span class="s">&#34;70&#34;</span> <span class="na">Width=</span><span class="s">&#34;200&#34;</span><span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&lt;/StackPanel&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/Border&gt;</span>
+</span></span></code></pre></div><p>Eliminar barra de título:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="n">appWindow</span><span class="p">.</span><span class="n">TitleBar</span><span class="p">.</span><span class="n">ExtendsContentIntoTitleBar</span> <span class="p">=</span> <span class="kc">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">appWindow</span><span class="p">.</span><span class="n">TitleBar</span><span class="p">.</span><span class="n">SetPreferredHeight</span><span class="p">(</span><span class="m">0</span><span class="p">);</span>
+</span></span></code></pre></div><h2 id="paso-4-mostrar-la-ventana-desde-la-app-principal">
+  Paso 4: Mostrar la ventana desde la app principal
+  <a class="heading-link" href="#paso-4-mostrar-la-ventana-desde-la-app-principal">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kd">private</span> <span class="k">void</span> <span class="n">MostrarWidget_Click</span><span class="p">(</span><span class="kt">object</span> <span class="n">sender</span><span class="p">,</span> <span class="n">RoutedEventArgs</span> <span class="n">e</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">var</span> <span class="n">widget</span> <span class="p">=</span> <span class="k">new</span> <span class="n">WidgetWindow</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="n">widget</span><span class="p">.</span><span class="n">Activate</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h2 id="paso-5-mantener-siempre-visible-topmost">
+  Paso 5: Mantener siempre visible (topmost)
+  <a class="heading-link" href="#paso-5-mantener-siempre-visible-topmost">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Windows App SDK no expone directamente <code>Topmost</code>. Usar Win32 interop:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="na">[DllImport(&#34;user32.dll&#34;)]</span>
+</span></span><span class="line"><span class="cl"><span class="kd">static</span> <span class="kd">extern</span> <span class="kt">bool</span> <span class="n">SetWindowPos</span><span class="p">(</span><span class="n">IntPtr</span> <span class="n">hWnd</span><span class="p">,</span> <span class="n">IntPtr</span> <span class="n">hWndInsertAfter</span><span class="p">,</span> <span class="kt">int</span> <span class="n">X</span><span class="p">,</span> <span class="kt">int</span> <span class="n">Y</span><span class="p">,</span> <span class="kt">int</span> <span class="n">cx</span><span class="p">,</span> <span class="kt">int</span> <span class="n">cy</span><span class="p">,</span> <span class="kt">uint</span> <span class="n">uFlags</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">const</span> <span class="kt">int</span> <span class="n">SWP_NOSIZE</span> <span class="p">=</span> <span class="m">0x0001</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kd">const</span> <span class="kt">int</span> <span class="n">SWP_NOMOVE</span> <span class="p">=</span> <span class="m">0x0002</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kd">const</span> <span class="kt">uint</span> <span class="n">TOPMOST_FLAGS</span> <span class="p">=</span> <span class="n">SWP_NOMOVE</span> <span class="p">|</span> <span class="n">SWP_NOSIZE</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">SetWindowPos</span><span class="p">(</span><span class="n">hwnd</span><span class="p">,</span> <span class="k">new</span> <span class="n">IntPtr</span><span class="p">(-</span><span class="m">1</span><span class="p">),</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="n">TOPMOST_FLAGS</span><span class="p">);</span> <span class="c1">// HWND_TOPMOST</span>
+</span></span></code></pre></div><p>Esto asegura que el widget flote sobre el resto.</p>
+<h2 id="casos-de-uso-reales">
+  Casos de uso reales
+  <a class="heading-link" href="#casos-de-uso-reales">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ul>
+<li>Visualizadores de estado de sistema o recursos</li>
+<li>Paneles de control rápido (audio, energía, VPN)</li>
+<li>Asistentes flotantes de accesibilidad o IA</li>
+<li>Lectores de transcripción, traductores o anotadores</li>
+<li>Herramientas para streamers o grabación de pantalla</li>
+</ul>
+<h2 id="buenas-prácticas">
+  Buenas prácticas
+  <a class="heading-link" href="#buenas-pr%c3%a1cticas">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ul>
+<li>Permitir al usuario mover y cerrar la ventana fácilmente</li>
+<li>Guardar posición y tamaño de forma persistente</li>
+<li>No interferir con el foco de otras apps</li>
+<li>Proveer configuración de visibilidad (autoocultar, minimizar)</li>
+<li>No mostrar por defecto sin consentimiento del usuario</li>
+</ul>
+<h2 id="conclusión">
+  Conclusión
+  <a class="heading-link" href="#conclusi%c3%b3n">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Con <strong>WinUI 3</strong> y <strong>Windows App SDK</strong> es posible crear ventanas flotantes al estilo Widget que extienden la funcionalidad de la app más allá de la ventana principal. Este patrón de UI permite construir experiencias utilitarias, persistentes y altamente accesibles para los usuarios de <strong>Windows 11</strong>, aprovechando al máximo las capacidades del sistema operativo moderno.</p>
+      </div>
+
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script>
+  window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "cmasblog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    
+    document.addEventListener('themeChanged', function (e) { 
+        if (document.readyState == 'complete') {
+          DISQUS.reset({ reload: true, config: disqus_config });
+        }
+    });
+</script>
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2018 -
+    
+    2025
+     Christian Amado 
+    ·
+    
+    Desarrollado por <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+      <script async src="https://www.googletagmanager.com/gtag/js?id=356375808"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '356375808');
+        }
+      </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=013131931956450466198%3ablhmkdpweyq"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '013131931956450466198:blhmkdpweyq');
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

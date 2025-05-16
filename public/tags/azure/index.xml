@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Azure on Christian Amado</title>
+    <link>http://localhost:1313/tags/azure/</link>
+    <description>Recent content in Azure on Christian Amado</description>
+    <generator>Hugo</generator>
+    <language>es</language>
+    <lastBuildDate>Wed, 05 Feb 2025 00:00:00 -0400</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/azure/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Deploy automatizado de APIs Deno en Azure Functions</title>
+      <link>http://localhost:1313/posts/2025-02-05-automatized-deploy-api-deno/</link>
+      <pubDate>Wed, 05 Feb 2025 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2025-02-05-automatized-deploy-api-deno/</guid>
+      <description>&lt;p&gt;El despliegue automatizado de APIs en la nube es una práctica esencial en el desarrollo moderno. &lt;strong&gt;Deno&lt;/strong&gt;, con su seguridad integrada y soporte nativo para TypeScript, es una excelente opción para construir APIs escalables y eficientes. &lt;strong&gt;Azure Functions&lt;/strong&gt;, por otro lado, permite ejecutar código sin preocuparse por la infraestructura subyacente.&lt;/p&gt;&#xA;&lt;p&gt;En este artículo, aprenderás cómo &lt;strong&gt;desplegar automáticamente una API de Deno en Azure Functions&lt;/strong&gt; usando GitHub Actions.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Blazor y Microsoft Entra ID: Implementación de autenticación</title>
+      <link>http://localhost:1313/posts/2024-12-18-blazor-and-microsoft-entra/</link>
+      <pubDate>Wed, 18 Dec 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2024-12-18-blazor-and-microsoft-entra/</guid>
+      <description>&lt;p&gt;La integración de &lt;strong&gt;Microsoft Entra ID (anteriormente Azure AD)&lt;/strong&gt; con &lt;strong&gt;Blazor&lt;/strong&gt; permite implementar autenticación segura en aplicaciones web y mejorar la gestión de identidades. En este artículo, exploraremos cómo integrar &lt;strong&gt;Microsoft Entra ID&lt;/strong&gt; en una aplicación &lt;strong&gt;Blazor&lt;/strong&gt;, proporcionando un flujo de autenticación robusto y seguro.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Creación de aplicaciones serverless con Deno y Azure</title>
+      <link>http://localhost:1313/posts/2024-11-20-serverless-apps-deno-azure/</link>
+      <pubDate>Wed, 20 Nov 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2024-11-20-serverless-apps-deno-azure/</guid>
+      <description>&lt;p&gt;El paradigma serverless permite construir aplicaciones sin necesidad de gestionar servidores, proporcionando escalabilidad automática y optimización de costos. En este artículo, exploraremos cómo crear aplicaciones serverless utilizando Deno y Azure Functions, combinando la eficiencia de Deno con la potencia de la nube de Azure.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Creación de microservicios con Deno y Azure Functions</title>
+      <link>http://localhost:1313/posts/2024-07-24-microservices-deno-azure/</link>
+      <pubDate>Wed, 24 Jul 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2024-07-24-microservices-deno-azure/</guid>
+      <description>&lt;p&gt;En el mundo moderno del desarrollo de software, los microservicios han revolucionado la forma de construir y desplegar aplicaciones escalables. Al combinar &lt;strong&gt;Deno&lt;/strong&gt;, una plataforma de runtime moderna basada en &lt;strong&gt;JavaScript&lt;/strong&gt; y &lt;strong&gt;TypeScript&lt;/strong&gt;, con &lt;strong&gt;Azure Functions&lt;/strong&gt;, una solución serverless flexible de &lt;strong&gt;Microsoft&lt;/strong&gt;, los desarrolladores pueden crear microservicios rápidos, seguros y eficientes. Este artículo te guiará paso a paso en el proceso de crear microservicios utilizando estas tecnologías, destacando buenas prácticas, ejemplos prácticos y el uso de &lt;strong&gt;Visual Studio Code&lt;/strong&gt; como herramienta principal.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Integración de Angular con Azure Static Web Apps: Un caso práctico</title>
+      <link>http://localhost:1313/posts/2024-06-05-angular-integration-azure-static-web/</link>
+      <pubDate>Wed, 05 Jun 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2024-06-05-angular-integration-azure-static-web/</guid>
+      <description>&lt;p&gt;En la era moderna del desarrollo web, la combinación de frameworks frontend como &lt;strong&gt;Angular&lt;/strong&gt; y servicios en la nube como &lt;strong&gt;Azure Static Web Apps&lt;/strong&gt; proporciona una solución eficiente y escalable para crear y desplegar aplicaciones. Este artículo explora cómo integrar &lt;strong&gt;Angular&lt;/strong&gt; con &lt;strong&gt;Azure Static Web Apps&lt;/strong&gt;, mostrando ejemplos prácticos, buenas prácticas y enfoques modernos y seguros para garantizar el éxito en tus proyectos.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Despliegue de aplicaciones Blazor en Azure App Services</title>
+      <link>http://localhost:1313/posts/2024-04-17-deploy-blazor-apps-azure/</link>
+      <pubDate>Wed, 17 Apr 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2024-04-17-deploy-blazor-apps-azure/</guid>
+      <description>&lt;p&gt;El despliegue de aplicaciones Blazor en Azure App Services ofrece una forma rápida y eficiente de llevar tus proyectos al entorno de producción. Azure proporciona escalabilidad, seguridad y opciones flexibles para automatizar el flujo de trabajo de despliegue. En este artículo, exploramos tres métodos clave: usando Visual Studio, la CLI de Azure, y GitHub Actions, con pasos prácticos y ejemplos detallados. Con las mejoras de .NET 8, las aplicaciones Blazor ahora son más rápidas y optimizadas para la nube, lo que facilita la entrega de soluciones web escalables y modernas.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Integración de Azure DevOps con GitHub</title>
+      <link>http://localhost:1313/posts/2022-04-18-azure-devops-integration-with-github/</link>
+      <pubDate>Mon, 18 Apr 2022 23:24:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2022-04-18-azure-devops-integration-with-github/</guid>
+      <description>&lt;p&gt;En este artículo mostraré cómo integrar un repositorio GitHub, que lo hemos visto en &lt;a href=&#34;http://localhost:1313/posts/2022-04-04-create-repository-github&#34; &gt;este artículo&lt;/a&gt;, con Azure DevOps que lo hemos visto &lt;a href=&#34;http://localhost:1313/posts/2022-04-11-create-project-azure-devops/&#34; &gt;aquí&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Windows 11 Insider Preview Build 22598&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Crear un proyecto en Azure DevOps</title>
+      <link>http://localhost:1313/posts/2022-04-11-create-project-azure-devops/</link>
+      <pubDate>Mon, 11 Apr 2022 18:01:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2022-04-11-create-project-azure-devops/</guid>
+      <description>&lt;p&gt;En este artículo mostraré cómo crear un proyecto en Microsoft Azure DevOps para realizar todas las tareas relacionadas a CI/CD (Integración Contínua/Entrega Contíuna) con la plataforma Windows, sobre todo con UWP (Universal Windows Platform).&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Windows 11 Insider Preview Build 22593&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Crear un repositorio en GitHub</title>
+      <link>http://localhost:1313/posts/2022-04-04-create-repository-github/</link>
+      <pubDate>Mon, 04 Apr 2022 22:13:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2022-04-04-create-repository-github/</guid>
+      <description>&lt;p&gt;En este artículo mostraré cómo crear un repositorio en GitHub para poder integrarlo en el futuro con Azure DevOps.&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Windows 11 Insider Preview Build 22581&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>BC: Crear una instancia de prueba en la nube</title>
+      <link>http://localhost:1313/posts/2018-12-26-bc-instance-cloud/</link>
+      <pubDate>Wed, 26 Dec 2018 19:01:04 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2018-12-26-bc-instance-cloud/</guid>
+      <description>&lt;p&gt;La idea central de esta entrada consistía en mostrar como crear una instancia de prueba de este excelente productoservicio, pero lastimosamente me encuentro en un país (Paraguay) donde el servicio (para las pruebas) no esta disponible. Sí esta disponible para su aprovisionamiento, es decir, para la venta a cualquier cliente que lo necesite.&lt;/p&gt;&#xA;&lt;p&gt;Estos son los pasos a seguir para intentar crear dicha instancia:&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

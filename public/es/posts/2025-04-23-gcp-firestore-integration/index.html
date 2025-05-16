@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  Firestore como base NoSQL para apps Go · Christian Amado
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Christian Amado">
+<meta name="description" content="Firestore, la base de datos NoSQL de Google Cloud, ofrece una solución escalable y de baja latencia ideal para aplicaciones modernas. En este artículo se explora cómo integrar Firestore con aplicaciones desarrolladas en Go, aprovechando el SDK oficial de Google Cloud. A lo largo del artículo se muestra un enfoque práctico para conectar, leer, escribir y actualizar documentos en Firestore desde una aplicación escrita en Go.">
+<meta name="keywords" content="blog,desarrollador,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Firestore como base NoSQL para apps Go">
+  <meta name="twitter:description" content="Firestore, la base de datos NoSQL de Google Cloud, ofrece una solución escalable y de baja latencia ideal para aplicaciones modernas. En este artículo se explora cómo integrar Firestore con aplicaciones desarrolladas en Go, aprovechando el SDK oficial de Google Cloud. A lo largo del artículo se muestra un enfoque práctico para conectar, leer, escribir y actualizar documentos en Firestore desde una aplicación escrita en Go.">
+
+<meta property="og:url" content="http://localhost:1313/es/posts/2025-04-23-gcp-firestore-integration/">
+  <meta property="og:site_name" content="Christian Amado">
+  <meta property="og:title" content="Firestore como base NoSQL para apps Go">
+  <meta property="og:description" content="Firestore, la base de datos NoSQL de Google Cloud, ofrece una solución escalable y de baja latencia ideal para aplicaciones modernas. En este artículo se explora cómo integrar Firestore con aplicaciones desarrolladas en Go, aprovechando el SDK oficial de Google Cloud. A lo largo del artículo se muestra un enfoque práctico para conectar, leer, escribir y actualizar documentos en Firestore desde una aplicación escrita en Go.">
+  <meta property="og:locale" content="es">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-04-23T00:00:00-03:00">
+    <meta property="article:modified_time" content="2025-04-23T00:00:00-03:00">
+    <meta property="article:tag" content="Google">
+    <meta property="article:tag" content="Google Cloud">
+    <meta property="article:tag" content="Go">
+    <meta property="article:tag" content="Firestore">
+
+
+
+
+<link rel="canonical" href="http://localhost:1313/es/posts/2025-04-23-gcp-firestore-integration/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/es/">
+      Christian Amado
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/about">Biografía</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/contact">Contacto</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/diabetes">Diabetes</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/tags">Etiquetas</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/en/">🇺🇸</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/es/posts/2025-04-23-gcp-firestore-integration/">
+              Firestore como base NoSQL para apps Go
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2025-04-23T00:00:00-03:00">
+                abril 23, 2025
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              3 minutos de lectura.
+            </span>
+          </div>
+          
+          
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/es/tags/google/">Google</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/es/tags/google-cloud/">Google Cloud</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/es/tags/go/">Go</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/es/tags/firestore/">Firestore</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <p><strong>Firestore</strong>, la base de datos <strong>NoSQL</strong> de <strong>Google Cloud</strong>, ofrece una solución escalable y de baja latencia ideal para aplicaciones modernas. En este artículo se explora cómo integrar <strong>Firestore</strong> con aplicaciones desarrolladas en <strong>Go</strong>, aprovechando el <strong>SDK</strong> oficial de <strong>Google Cloud</strong>. A lo largo del artículo se muestra un enfoque práctico para conectar, leer, escribir y actualizar documentos en <strong>Firestore</strong> desde una aplicación escrita en <strong>Go</strong>.</p>
+<h2 id="por-qué-firestore-con-go">
+  ¿Por qué Firestore con Go?
+  <a class="heading-link" href="#por-qu%c3%a9-firestore-con-go">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Go es un lenguaje compilado, concurrente y eficiente, ideal para aplicaciones de backend. Firestore, por su parte, ofrece sincronización en tiempo real, una estructura basada en documentos y una integración nativa con GCP. Combinarlos resulta natural si se desea:</p>
+<ul>
+<li>Escalabilidad automática sin configurar instancias manualmente.</li>
+<li>Un esquema flexible sin necesidad de migraciones.</li>
+<li>Baja latencia para operaciones de lectura/escritura.</li>
+<li>Seguridad granular con reglas basadas en usuarios.</li>
+</ul>
+<h2 id="requisitos-previos">
+  Requisitos previos
+  <a class="heading-link" href="#requisitos-previos">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Antes de comenzar, se debe tener:</p>
+<ul>
+<li>Una cuenta de Google Cloud (puede ser gratuita).</li>
+<li>Un proyecto de GCP con Firestore habilitado.</li>
+<li>El SDK de Google Cloud instalado (<code>gcloud</code>).</li>
+<li>Go instalado (recomendado Go 1.20 o superior).</li>
+<li>Una carpeta de proyecto Go con módulos habilitados (<code>go mod init</code>).</li>
+</ul>
+<h2 id="paso-1-crear-el-proyecto-en-gcp-y-habilitar-firestore">
+  Paso 1: Crear el proyecto en GCP y habilitar Firestore
+  <a class="heading-link" href="#paso-1-crear-el-proyecto-en-gcp-y-habilitar-firestore">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Desde la consola de Google Cloud:</p>
+<ol>
+<li>
+<p>Crear un nuevo proyecto:<br>
+Navegar a <a href="https://console.cloud.google.com"  class="external-link" target="_blank" rel="noopener">console.cloud.google.com</a>, ir a &ldquo;IAM y administración&rdquo; &gt; &ldquo;Proyectos&rdquo; &gt; &ldquo;Nuevo Proyecto&rdquo;.</p>
+</li>
+<li>
+<p>Habilitar Firestore:<br>
+En el menú lateral, ir a &ldquo;Firestore&rdquo;, seleccionar &ldquo;Modo nativo&rdquo; y elegir una región.</p>
+</li>
+<li>
+<p>Crear una cuenta de servicio:</p>
+<ul>
+<li>Ir a &ldquo;IAM y administración&rdquo; &gt; &ldquo;Cuentas de servicio&rdquo;.</li>
+<li>Crear una nueva con permisos <code>Cloud Datastore User</code>.</li>
+<li>Descargar la clave en formato JSON.</li>
+</ul>
+</li>
+</ol>
+<h2 id="paso-2-configurar-el-entorno-de-desarrollo-go">
+  Paso 2: Configurar el entorno de desarrollo Go
+  <a class="heading-link" href="#paso-2-configurar-el-entorno-de-desarrollo-go">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>En la terminal:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">GOOGLE_APPLICATION_CREDENTIALS</span><span class="o">=</span><span class="s2">&#34;/ruta/a/tu/clave.json&#34;</span>
+</span></span></code></pre></div><p>En tu proyecto Go, instala las dependencias necesarias:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">go mod init firego
+</span></span><span class="line"><span class="cl">go get cloud.google.com/go/firestore
+</span></span><span class="line"><span class="cl">go get google.golang.org/api/option
+</span></span></code></pre></div><h2 id="paso-3-conectar-a-firestore">
+  Paso 3: Conectar a Firestore
+  <a class="heading-link" href="#paso-3-conectar-a-firestore">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">main</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;context&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;fmt&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;log&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;cloud.google.com/go/firestore&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;google.golang.org/api/option&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">ctx</span> <span class="o">:=</span> <span class="nx">context</span><span class="p">.</span><span class="nf">Background</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">sa</span> <span class="o">:=</span> <span class="nx">option</span><span class="p">.</span><span class="nf">WithCredentialsFile</span><span class="p">(</span><span class="s">&#34;ruta/a/tu/clave.json&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">client</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">firestore</span><span class="p">.</span><span class="nf">NewClient</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="s">&#34;ID_DEL_PROYECTO&#34;</span><span class="p">,</span> <span class="nx">sa</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">log</span><span class="p">.</span><span class="nf">Fatalf</span><span class="p">(</span><span class="s">&#34;Error al conectar con Firestore: %v&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="k">defer</span> <span class="nx">client</span><span class="p">.</span><span class="nf">Close</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Conexión establecida con Firestore&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h2 id="paso-4-agregar-documentos">
+  Paso 4: Agregar documentos
+  <a class="heading-link" href="#paso-4-agregar-documentos">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">Usuario</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">Nombre</span>  <span class="kt">string</span> <span class="s">`firestore:&#34;nombre&#34;`</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">Correo</span>  <span class="kt">string</span> <span class="s">`firestore:&#34;correo&#34;`</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">Activo</span>  <span class="kt">bool</span>   <span class="s">`firestore:&#34;activo&#34;`</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">agregarUsuario</span><span class="p">(</span><span class="nx">client</span> <span class="o">*</span><span class="nx">firestore</span><span class="p">.</span><span class="nx">Client</span><span class="p">,</span> <span class="nx">ctx</span> <span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span> <span class="kt">error</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">u</span> <span class="o">:=</span> <span class="nx">Usuario</span><span class="p">{</span><span class="s">&#34;Christian&#34;</span><span class="p">,</span> <span class="s">&#34;cmas@example.com&#34;</span><span class="p">,</span> <span class="kc">true</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">_</span><span class="p">,</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">client</span><span class="p">.</span><span class="nf">Collection</span><span class="p">(</span><span class="s">&#34;usuarios&#34;</span><span class="p">).</span><span class="nf">Add</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="nx">u</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nx">err</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h2 id="paso-5-leer-documentos">
+  Paso 5: Leer documentos
+  <a class="heading-link" href="#paso-5-leer-documentos">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">obtenerUsuarios</span><span class="p">(</span><span class="nx">client</span> <span class="o">*</span><span class="nx">firestore</span><span class="p">.</span><span class="nx">Client</span><span class="p">,</span> <span class="nx">ctx</span> <span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span> <span class="kt">error</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">iter</span> <span class="o">:=</span> <span class="nx">client</span><span class="p">.</span><span class="nf">Collection</span><span class="p">(</span><span class="s">&#34;usuarios&#34;</span><span class="p">).</span><span class="nf">Documents</span><span class="p">(</span><span class="nx">ctx</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">doc</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">iter</span><span class="p">.</span><span class="nf">Next</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="k">break</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="kd">var</span> <span class="nx">u</span> <span class="nx">Usuario</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">doc</span><span class="p">.</span><span class="nf">DataTo</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">u</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;Usuario: %+v\n&#34;</span><span class="p">,</span> <span class="nx">u</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h2 id="paso-6-actualizar-documentos">
+  Paso 6: Actualizar documentos
+  <a class="heading-link" href="#paso-6-actualizar-documentos">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">actualizarCorreo</span><span class="p">(</span><span class="nx">client</span> <span class="o">*</span><span class="nx">firestore</span><span class="p">.</span><span class="nx">Client</span><span class="p">,</span> <span class="nx">ctx</span> <span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span> <span class="nx">docID</span> <span class="kt">string</span><span class="p">)</span> <span class="kt">error</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">_</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">client</span><span class="p">.</span><span class="nf">Collection</span><span class="p">(</span><span class="s">&#34;usuarios&#34;</span><span class="p">).</span><span class="nf">Doc</span><span class="p">(</span><span class="nx">docID</span><span class="p">).</span><span class="nf">Update</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="p">[]</span><span class="nx">firestore</span><span class="p">.</span><span class="nx">Update</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="p">{</span><span class="nx">Path</span><span class="p">:</span> <span class="s">&#34;correo&#34;</span><span class="p">,</span> <span class="nx">Value</span><span class="p">:</span> <span class="s">&#34;nuevo@email.com&#34;</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">	<span class="p">})</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nx">err</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h2 id="paso-7-eliminar-documentos">
+  Paso 7: Eliminar documentos
+  <a class="heading-link" href="#paso-7-eliminar-documentos">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">eliminarUsuario</span><span class="p">(</span><span class="nx">client</span> <span class="o">*</span><span class="nx">firestore</span><span class="p">.</span><span class="nx">Client</span><span class="p">,</span> <span class="nx">ctx</span> <span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span> <span class="nx">docID</span> <span class="kt">string</span><span class="p">)</span> <span class="kt">error</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">_</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">client</span><span class="p">.</span><span class="nf">Collection</span><span class="p">(</span><span class="s">&#34;usuarios&#34;</span><span class="p">).</span><span class="nf">Doc</span><span class="p">(</span><span class="nx">docID</span><span class="p">).</span><span class="nf">Delete</span><span class="p">(</span><span class="nx">ctx</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nx">err</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h2 id="buenas-prácticas">
+  Buenas prácticas
+  <a class="heading-link" href="#buenas-pr%c3%a1cticas">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ul>
+<li><strong>Evitar operaciones dentro de loops</strong> sin control de errores.</li>
+<li><strong>Usar <code>context.WithTimeout</code></strong> para prevenir bloqueos indefinidos.</li>
+<li><strong>Cerrar el cliente correctamente</strong> con <code>defer client.Close()</code>.</li>
+<li><strong>Aplicar reglas de seguridad</strong> desde la consola para limitar accesos.</li>
+<li><strong>Monitorear el uso y costos</strong> desde el panel de GCP.</li>
+</ul>
+<h2 id="conclusión">
+  Conclusión
+  <a class="heading-link" href="#conclusi%c3%b3n">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Integrar <strong>Firestore</strong> en una aplicación <strong>Go</strong> es un proceso directo gracias al <strong>SDK</strong> oficial de <strong>Google Cloud</strong>. Este enfoque permite desarrollar aplicaciones backend escalables, eficientes y seguras. Con <strong>Firestore</strong> se elimina la necesidad de gestionar servidores o configurar réplicas manuales, y se gana un modelo de datos flexible ideal para apps modernas.</p>
+<p>Este artículo mostró paso a paso cómo conectar, crear, leer, actualizar y borrar documentos. A partir de aquí, se puede escalar a funcionalidades más avanzadas como búsquedas compuestas, seguridad basada en usuarios, y sincronización en tiempo real mediante <strong>Firebase Authentication</strong> y <strong>Firestore listeners</strong>.</p>
+      </div>
+
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script>
+  window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "cmasblog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    
+    document.addEventListener('themeChanged', function (e) { 
+        if (document.readyState == 'complete') {
+          DISQUS.reset({ reload: true, config: disqus_config });
+        }
+    });
+</script>
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2018 -
+    
+    2025
+     Christian Amado 
+    ·
+    
+    Desarrollado por <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+      <script async src="https://www.googletagmanager.com/gtag/js?id=356375808"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '356375808');
+        }
+      </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=013131931956450466198%3ablhmkdpweyq"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '013131931956450466198:blhmkdpweyq');
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

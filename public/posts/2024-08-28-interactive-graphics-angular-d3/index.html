@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  Gráficos interactivos con Angular y D3.js · Christian Amado
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Christian Amado">
+<meta name="description" content="Los gráficos interactivos son esenciales para visualizar datos de manera efectiva en aplicaciones modernas. Angular, combinado con D3.js, ofrece una solución poderosa para crear visualizaciones dinámicas y altamente interactivas. Este artículo explora cómo integrar D3.js en una aplicación Angular para construir gráficos interactivos desde cero, proporcionando ejemplos prácticos y consejos clave.">
+<meta name="keywords" content="blog,desarrollador,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Gráficos interactivos con Angular y D3.js">
+  <meta name="twitter:description" content="Los gráficos interactivos son esenciales para visualizar datos de manera efectiva en aplicaciones modernas. Angular, combinado con D3.js, ofrece una solución poderosa para crear visualizaciones dinámicas y altamente interactivas. Este artículo explora cómo integrar D3.js en una aplicación Angular para construir gráficos interactivos desde cero, proporcionando ejemplos prácticos y consejos clave.">
+
+<meta property="og:url" content="http://localhost:1313/posts/2024-08-28-interactive-graphics-angular-d3/">
+  <meta property="og:site_name" content="Christian Amado">
+  <meta property="og:title" content="Gráficos interactivos con Angular y D3.js">
+  <meta property="og:description" content="Los gráficos interactivos son esenciales para visualizar datos de manera efectiva en aplicaciones modernas. Angular, combinado con D3.js, ofrece una solución poderosa para crear visualizaciones dinámicas y altamente interactivas. Este artículo explora cómo integrar D3.js en una aplicación Angular para construir gráficos interactivos desde cero, proporcionando ejemplos prácticos y consejos clave.">
+  <meta property="og:locale" content="es">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-08-28T00:00:00-04:00">
+    <meta property="article:modified_time" content="2024-08-28T00:00:00-04:00">
+    <meta property="article:tag" content="Web Development">
+    <meta property="article:tag" content="Angular">
+    <meta property="article:tag" content="Javascript">
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-V1ZRP82YFD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-V1ZRP82YFD');
+</script>
+
+
+
+<link rel="canonical" href="http://localhost:1313/posts/2024-08-28-interactive-graphics-angular-d3/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="apple-touch-icon" sizes="57x57" href="/img/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/img/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/img/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/img/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/img/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/img/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/img/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/img/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/img/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="/img/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/img/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+<link rel="manifest" href="/img/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/img/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/">
+      Christian Amado
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/about">Biografía</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/contact">Contacto</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/diabetes">Diabetes</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/tags">Etiquetas</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/en/">🇺🇸</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/posts/2024-08-28-interactive-graphics-angular-d3/">
+              Gráficos interactivos con Angular y D3.js
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2024-08-28T00:00:00-04:00">
+                agosto 28, 2024
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              4 minutos de lectura.
+            </span>
+          </div>
+          
+          
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/tags/web-development/">Web Development</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/angular/">Angular</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/javascript/">Javascript</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <p>Los gráficos interactivos son esenciales para visualizar datos de manera efectiva en aplicaciones modernas. <strong>Angular</strong>, combinado con <strong>D3.js</strong>, ofrece una solución poderosa para crear visualizaciones dinámicas y altamente interactivas. Este artículo explora cómo integrar <strong>D3.js</strong> en una aplicación <strong>Angular</strong> para construir gráficos interactivos desde cero, proporcionando ejemplos prácticos y consejos clave.</p>
+<h2 id="1-introducción-a-angular-y-d3js">
+  1. Introducción a Angular y D3.js
+  <a class="heading-link" href="#1-introducci%c3%b3n-a-angular-y-d3js">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="angular">
+  Angular
+  <a class="heading-link" href="#angular">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Angular es un framework de desarrollo frontend mantenido por Google que permite construir aplicaciones web robustas y escalables. Con su arquitectura basada en componentes y herramientas modernas como TypeScript y RxJS, Angular es ideal para proyectos grandes.</p>
+<h3 id="d3js">
+  D3.js
+  <a class="heading-link" href="#d3js">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>D3.js (Data-Driven Documents) es una biblioteca de JavaScript para crear visualizaciones de datos utilizando SVG, HTML y CSS. Es conocido por su flexibilidad y capacidad para manipular el DOM en función de los datos.</p>
+<h3 id="por-qué-combinar-angular-y-d3js">
+  ¿Por qué combinar Angular y D3.js?
+  <a class="heading-link" href="#por-qu%c3%a9-combinar-angular-y-d3js">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>La combinación de Angular y D3.js permite:</p>
+<ul>
+<li><strong>Reactividad:</strong> Sincronizar datos y gráficos con cambios en tiempo real.</li>
+<li><strong>Modularidad:</strong> Organizar código de visualización en componentes reutilizables.</li>
+<li><strong>Interactividad:</strong> Crear experiencias de usuario enriquecedoras.</li>
+</ul>
+<h2 id="2-configuración-del-proyecto-angular">
+  2. Configuración del proyecto Angular
+  <a class="heading-link" href="#2-configuraci%c3%b3n-del-proyecto-angular">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="creación-del-proyecto-angular">
+  Creación del proyecto Angular
+  <a class="heading-link" href="#creaci%c3%b3n-del-proyecto-angular">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p>Asegúrate de tener Angular CLI instalado:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">npm install -g @angular/cli
+</span></span></code></pre></div></li>
+<li>
+<p>Crea un nuevo proyecto Angular:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">ng new graficos-angular-d3
+</span></span><span class="line"><span class="cl">cd graficos-angular-d3
+</span></span></code></pre></div></li>
+<li>
+<p>Instala D3.js:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">npm install d3
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="estructura-del-proyecto">
+  Estructura del proyecto
+  <a class="heading-link" href="#estructura-del-proyecto">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Crea un nuevo componente para los gráficos:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ng generate component components/bar-chart
+</span></span></code></pre></div><h2 id="3-fundamentos-de-d3js-en-angular">
+  3. Fundamentos de D3.js en Angular
+  <a class="heading-link" href="#3-fundamentos-de-d3js-en-angular">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>D3.js utiliza selectores para manipular elementos del DOM y vincularlos a datos. Al trabajar con Angular, es importante integrar estas funcionalidades en el ciclo de vida de los componentes.</p>
+<h3 id="seleccionar-un-elemento">
+  Seleccionar un elemento
+  <a class="heading-link" href="#seleccionar-un-elemento">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">import * as d3 from &#39;d3&#39;;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">d3.select(&#39;svg&#39;)
+</span></span><span class="line"><span class="cl">  .append(&#39;rect&#39;)
+</span></span><span class="line"><span class="cl">  .attr(&#39;width&#39;, 100)
+</span></span><span class="line"><span class="cl">  .attr(&#39;height&#39;, 50)
+</span></span><span class="line"><span class="cl">  .attr(&#39;fill&#39;, &#39;blue&#39;);
+</span></span></code></pre></div><h3 id="ciclo-de-vida-de-angular">
+  Ciclo de vida de Angular
+  <a class="heading-link" href="#ciclo-de-vida-de-angular">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Usa <code>ngOnInit</code> para inicializar gráficos:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">import</span> <span class="p">{</span> <span class="n">Component</span><span class="p">,</span> <span class="n">OnInit</span> <span class="p">}</span> <span class="n">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">@</span><span class="n">Component</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">  <span class="n">selector</span><span class="p">:</span> <span class="s1">&#39;app-bar-chart&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="n">template</span><span class="p">:</span> <span class="s1">&#39;&lt;svg&gt;&lt;/svg&gt;&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="n">styleUrls</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;./bar-chart.component.css&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="k">export</span> <span class="k">class</span> <span class="n">BarChartComponent</span> <span class="n">implements</span> <span class="n">OnInit</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">ngOnInit</span><span class="p">():</span> <span class="n">void</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">this</span><span class="o">.</span><span class="n">createChart</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">createChart</span><span class="p">():</span> <span class="n">void</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="n">svg</span> <span class="o">=</span> <span class="n">d3</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;svg&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;width&#39;</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;height&#39;</span><span class="p">,</span> <span class="mi">300</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">svg</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;rect&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;width&#39;</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;height&#39;</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;fill&#39;</span><span class="p">,</span> <span class="s1">&#39;steelblue&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h2 id="4-creando-un-gráfico-de-barras-interactivo">
+  4. Creando un gráfico de barras interactivo
+  <a class="heading-link" href="#4-creando-un-gr%c3%a1fico-de-barras-interactivo">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="configuración-inicial">
+  Configuración inicial
+  <a class="heading-link" href="#configuraci%c3%b3n-inicial">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Define los datos y el espacio de trabajo:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">const</span> <span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">50</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">width</span> <span class="o">=</span> <span class="mi">500</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">height</span> <span class="o">=</span> <span class="mi">300</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">margin</span> <span class="o">=</span> <span class="p">{</span> <span class="n">top</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span> <span class="n">right</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span> <span class="n">bottom</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span> <span class="n">left</span><span class="p">:</span> <span class="mi">40</span> <span class="p">};</span>
+</span></span></code></pre></div><h3 id="renderizado-del-gráfico">
+  Renderizado del gráfico
+  <a class="heading-link" href="#renderizado-del-gr%c3%a1fico">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Crea las escalas y ejes:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">const</span> <span class="n">x</span> <span class="o">=</span> <span class="n">d3</span><span class="o">.</span><span class="n">scaleBand</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="o">.</span><span class="n">domain</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">map</span><span class="p">((</span><span class="n">d</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">i</span><span class="o">.</span><span class="n">toString</span><span class="p">()))</span>
+</span></span><span class="line"><span class="cl">  <span class="o">.</span><span class="n">range</span><span class="p">([</span><span class="n">margin</span><span class="o">.</span><span class="n">left</span><span class="p">,</span> <span class="n">width</span> <span class="o">-</span> <span class="n">margin</span><span class="o">.</span><span class="n">right</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">  <span class="o">.</span><span class="n">padding</span><span class="p">(</span><span class="mf">0.1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">y</span> <span class="o">=</span> <span class="n">d3</span><span class="o">.</span><span class="n">scaleLinear</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="o">.</span><span class="n">domain</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="n">d3</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="n">as</span> <span class="n">number</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">  <span class="o">.</span><span class="n">nice</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="o">.</span><span class="n">range</span><span class="p">([</span><span class="n">height</span> <span class="o">-</span> <span class="n">margin</span><span class="o">.</span><span class="n">bottom</span><span class="p">,</span> <span class="n">margin</span><span class="o">.</span><span class="n">top</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">svg</span> <span class="o">=</span> <span class="n">d3</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;svg&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;width&#39;</span><span class="p">,</span> <span class="n">width</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;height&#39;</span><span class="p">,</span> <span class="n">height</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">svg</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;g&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="o">.</span><span class="n">selectAll</span><span class="p">(</span><span class="s1">&#39;rect&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="o">.</span><span class="n">enter</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;rect&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">x</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">toString</span><span class="p">())</span> <span class="n">as</span> <span class="n">number</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">d</span> <span class="o">=&gt;</span> <span class="n">y</span><span class="p">(</span><span class="n">d</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">  <span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;height&#39;</span><span class="p">,</span> <span class="n">d</span> <span class="o">=&gt;</span> <span class="n">y</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="n">y</span><span class="p">(</span><span class="n">d</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">  <span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;width&#39;</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">bandwidth</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">  <span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;fill&#39;</span><span class="p">,</span> <span class="s1">&#39;steelblue&#39;</span><span class="p">);</span>
+</span></span></code></pre></div><h3 id="agregando-interactividad">
+  Agregando interactividad
+  <a class="heading-link" href="#agregando-interactividad">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Agrega eventos de hover:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">svg.selectAll(&#39;rect&#39;)
+</span></span><span class="line"><span class="cl">  .on(&#39;mouseover&#39;, function () {
+</span></span><span class="line"><span class="cl">    d3.select(this).attr(&#39;fill&#39;, &#39;orange&#39;);
+</span></span><span class="line"><span class="cl">  })
+</span></span><span class="line"><span class="cl">  .on(&#39;mouseout&#39;, function () {
+</span></span><span class="line"><span class="cl">    d3.select(this).attr(&#39;fill&#39;, &#39;steelblue&#39;);
+</span></span><span class="line"><span class="cl">  });
+</span></span></code></pre></div><h2 id="5-creando-un-gráfico-de-líneas">
+  5. Creando un gráfico de líneas
+  <a class="heading-link" href="#5-creando-un-gr%c3%a1fico-de-l%c3%adneas">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Define datos y escalas:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">const</span> <span class="n">lineData</span> <span class="o">=</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span> <span class="n">x</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="mi">30</span> <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span> <span class="n">x</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="mi">80</span> <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span> <span class="n">x</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="mi">45</span> <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span> <span class="n">x</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="mi">60</span> <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span> <span class="n">x</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="mi">20</span> <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span> <span class="n">x</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="mi">90</span> <span class="p">},</span>
+</span></span><span class="line"><span class="cl"><span class="p">];</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">line</span> <span class="o">=</span> <span class="n">d3</span><span class="o">.</span><span class="n">line</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="n">d</span> <span class="o">=&gt;</span> <span class="n">x</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">x</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">  <span class="o">.</span><span class="n">y</span><span class="p">(</span><span class="n">d</span> <span class="o">=&gt;</span> <span class="n">y</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">y</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">svg</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;path&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="o">.</span><span class="n">datum</span><span class="p">(</span><span class="n">lineData</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;fill&#39;</span><span class="p">,</span> <span class="s1">&#39;none&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;stroke&#39;</span><span class="p">,</span> <span class="s1">&#39;steelblue&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="n">line</span><span class="p">);</span>
+</span></span></code></pre></div><h2 id="6-buenas-prácticas-para-trabajar-con-d3js-en-angular">
+  6. Buenas prácticas para trabajar con D3.js en Angular
+  <a class="heading-link" href="#6-buenas-pr%c3%a1cticas-para-trabajar-con-d3js-en-angular">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ol>
+<li>
+<p><strong>Encapsular lógica en servicios:</strong></p>
+<ul>
+<li>Centraliza el código D3.js para evitar redundancia.</li>
+</ul>
+</li>
+<li>
+<p><strong>Utilizar ChangeDetectionStrategy.OnPush:</strong></p>
+<ul>
+<li>Mejora el rendimiento al minimizar detecciones de cambios innecesarias.</li>
+</ul>
+</li>
+<li>
+<p><strong>Evitar manipulaciones directas del DOM:</strong></p>
+<ul>
+<li>Usa ViewChild para seleccionar elementos del DOM en lugar de usar selectores globales.</li>
+</ul>
+</li>
+</ol>
+<h2 id="7-conclusión">
+  7. Conclusión
+  <a class="heading-link" href="#7-conclusi%c3%b3n">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p><strong>Angular</strong> y <strong>D3.js</strong> forman una combinación poderosa para crear visualizaciones interactivas y reactivas. Aunque la integración puede requerir algunos ajustes iniciales, el resultado ofrece flexibilidad y modularidad en aplicaciones modernas. Al seguir las mejores prácticas y estructurar correctamente tu proyecto, puedes aprovechar al máximo estas herramientas.</p>
+      </div>
+
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script>
+  window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "cmasblog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    
+    document.addEventListener('themeChanged', function (e) { 
+        if (document.readyState == 'complete') {
+          DISQUS.reset({ reload: true, config: disqus_config });
+        }
+    });
+</script>
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2018 -
+    
+    2025
+     Christian Amado 
+    ·
+    
+    Desarrollado por <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+      <script async src="https://www.googletagmanager.com/gtag/js?id=356375808"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '356375808');
+        }
+      </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=013131931956450466198%3ablhmkdpweyq"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '013131931956450466198:blhmkdpweyq');
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

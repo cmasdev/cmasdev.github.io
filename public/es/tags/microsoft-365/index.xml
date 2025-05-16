@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Microsoft 365 on Christian Amado</title>
+    <link>http://localhost:1313/es/tags/microsoft-365/</link>
+    <description>Recent content in Microsoft 365 on Christian Amado</description>
+    <generator>Hugo</generator>
+    <language>es</language>
+    <lastBuildDate>Wed, 17 May 2023 00:00:00 -0400</lastBuildDate>
+    <atom:link href="http://localhost:1313/es/tags/microsoft-365/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Mostrar foto de perfil desde Microsoft 365 en Power Apps</title>
+      <link>http://localhost:1313/es/posts/2023-05-17-display-profile-photo-from-m365-in-power-apps/</link>
+      <pubDate>Wed, 17 May 2023 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2023-05-17-display-profile-photo-from-m365-in-power-apps/</guid>
+      <description>&lt;p&gt;En este artículo veremos cómo agregar una foto de perfil desde &lt;strong&gt;Microsoft 365&lt;/strong&gt; en &lt;strong&gt;Microsoft Power Apps&lt;/strong&gt; de modo a reutilizarlo y manejar un mismo perfil dentro de las aplicaciones.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

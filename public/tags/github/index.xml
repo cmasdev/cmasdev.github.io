@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>GitHub on Christian Amado</title>
+    <link>http://localhost:1313/tags/github/</link>
+    <description>Recent content in GitHub on Christian Amado</description>
+    <generator>Hugo</generator>
+    <language>es</language>
+    <lastBuildDate>Wed, 11 Sep 2024 00:00:00 -0400</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/github/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Mejores prácticas de modularidad con Deno 2</title>
+      <link>http://localhost:1313/posts/2024-09-11-best-practices-modularity-deno2/</link>
+      <pubDate>Wed, 11 Sep 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2024-09-11-best-practices-modularity-deno2/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;Deno 2&lt;/strong&gt; ha revolucionado el desarrollo con &lt;strong&gt;JavaScript&lt;/strong&gt; y &lt;strong&gt;TypeScript&lt;/strong&gt; al proporcionar un entorno moderno, seguro y modular. Su sistema de importación basado en URL y su soporte nativo para &lt;strong&gt;TypeScript&lt;/strong&gt; facilitan la creación de aplicaciones bien estructuradas y mantenibles. En este artículo, exploraremos las mejores prácticas para lograr modularidad en proyectos con &lt;strong&gt;Deno 2&lt;/strong&gt;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Configuración de CI/CD para proyectos Angular con GitHub Actions</title>
+      <link>http://localhost:1313/posts/2024-09-04-config-ci-cd-angular-github/</link>
+      <pubDate>Wed, 04 Sep 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2024-09-04-config-ci-cd-angular-github/</guid>
+      <description>&lt;p&gt;La integración continua (CI) y la entrega continua (CD) son pilares fundamentales en el desarrollo de software moderno. &lt;strong&gt;GitHub Actions&lt;/strong&gt; proporciona una solución poderosa y flexible para automatizar procesos de &lt;strong&gt;CI/CD&lt;/strong&gt; directamente en repositorios de &lt;strong&gt;GitHub&lt;/strong&gt;. En este artículo, aprenderemos a configurar &lt;strong&gt;CI/CD&lt;/strong&gt; para un proyecto Angular utilizando &lt;strong&gt;GitHub Actions&lt;/strong&gt;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Git y WSL</title>
+      <link>http://localhost:1313/posts/2022-05-04-git-and-wsl/</link>
+      <pubDate>Wed, 04 May 2022 13:48:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2022-05-04-git-and-wsl/</guid>
+      <description>&lt;p&gt;En este artículo mostraré cómo instalar o actualizar git dentro de &lt;strong&gt;Windows Subsystem for Linux&lt;/strong&gt; de modo a poder clonar repositorio desde y hacia &lt;strong&gt;GitHub&lt;/strong&gt;. En un &lt;a href=&#34;http://localhost:1313/posts/2022-04-26-configuring-my-wsl-environment/&#34; &gt;artículo anterior&lt;/a&gt; hemos visto cómo habilitar la plataforma &lt;strong&gt;Windows Subsystem for Linux&lt;/strong&gt;.&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Windows 11 Insider Preview Build 22610&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Integración de Azure DevOps con GitHub</title>
+      <link>http://localhost:1313/posts/2022-04-18-azure-devops-integration-with-github/</link>
+      <pubDate>Mon, 18 Apr 2022 23:24:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2022-04-18-azure-devops-integration-with-github/</guid>
+      <description>&lt;p&gt;En este artículo mostraré cómo integrar un repositorio GitHub, que lo hemos visto en &lt;a href=&#34;http://localhost:1313/posts/2022-04-04-create-repository-github&#34; &gt;este artículo&lt;/a&gt;, con Azure DevOps que lo hemos visto &lt;a href=&#34;http://localhost:1313/posts/2022-04-11-create-project-azure-devops/&#34; &gt;aquí&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Windows 11 Insider Preview Build 22598&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Crear un repositorio en GitHub</title>
+      <link>http://localhost:1313/posts/2022-04-04-create-repository-github/</link>
+      <pubDate>Mon, 04 Apr 2022 22:13:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2022-04-04-create-repository-github/</guid>
+      <description>&lt;p&gt;En este artículo mostraré cómo crear un repositorio en GitHub para poder integrarlo en el futuro con Azure DevOps.&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Windows 11 Insider Preview Build 22581&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

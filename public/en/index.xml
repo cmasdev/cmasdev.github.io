@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Christian Amado</title>
+    <link>http://localhost:1313/en/</link>
+    <description>Recent content on Christian Amado</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 17 Jul 2024 00:00:00 -0400</lastBuildDate>
+    <atom:link href="http://localhost:1313/en/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>.NET Web API with Project IDX</title>
+      <link>http://localhost:1313/en/posts/2024-07-17-dotnet-project-idx/</link>
+      <pubDate>Wed, 17 Jul 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/en/posts/2024-07-17-dotnet-project-idx/</guid>
+      <description>&lt;p&gt;In this article we will see how to create a basic Web API with the new &lt;strong&gt;IDX Project&lt;/strong&gt; from &lt;strong&gt;Google&lt;/strong&gt;, completely from the browser without the need to install anything at all in it.&lt;/p&gt;&#xA;&lt;p&gt;The &lt;strong&gt;IDX Project&lt;/strong&gt;, according to &lt;strong&gt;Google&lt;/strong&gt; is:&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;PProject IDX is an AI-assisted workspace for full-stack, multiplatform app development in the cloud.&#xA;With support for a broad range of frameworks, languages, and services, alongside integrations with your favorite Google products, IDX streamlines your development workflow so you can build and ship apps across platforms with speed, ease, and quality.&lt;/p&gt;&lt;/blockquote&gt;&#xA;&lt;p&gt;More info &lt;a href=&#34;https://idx.dev/&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Microsoft Most Valuable Professional 2024/2025</title>
+      <link>http://localhost:1313/en/posts/2024-07-10-microsoft-most-valuable-professional-2024-2025/</link>
+      <pubDate>Wed, 10 Jul 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/en/posts/2024-07-10-microsoft-most-valuable-professional-2024-2025/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://mvp.microsoft.com/en-US/MVP/profile/079507f9-3c9a-e411-93f2-9cb65495d3c4&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;The renewal has arrived for another year(10 in a row)&lt;/a&gt;:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Microsoft Most Valuable Professional 2023/2024</title>
+      <link>http://localhost:1313/en/posts/2023-07-01-microsoft-most-valuable-professional-2023-2024/</link>
+      <pubDate>Thu, 06 Jul 2023 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/en/posts/2023-07-01-microsoft-most-valuable-professional-2023-2024/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://mvp.microsoft.com/en-us/PublicProfile/5001273&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;The renewal has arrived for another year(9 in a row)&lt;/a&gt;:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Microsoft Most Valuable Professional 2022/2023</title>
+      <link>http://localhost:1313/en/posts/2022-07-01-microsoft-most-valuable-professional-2022-2023/</link>
+      <pubDate>Tue, 05 Jul 2022 11:28:00 -0400</pubDate>
+      <guid>http://localhost:1313/en/posts/2022-07-01-microsoft-most-valuable-professional-2022-2023/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://mvp.microsoft.com/en-us/PublicProfile/5001273&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;The renewal has arrived for another year(8 in a row)&lt;/a&gt;:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Install Android Apps from APK in Windows 11</title>
+      <link>http://localhost:1313/en/posts/2022-04-20-install-android-apps-from-apk/</link>
+      <pubDate>Wed, 20 Apr 2022 13:01:14 -0400</pubDate>
+      <guid>http://localhost:1313/en/posts/2022-04-20-install-android-apps-from-apk/</guid>
+      <description>&lt;p&gt;In this article I will show how to install Android applications on Windows 11 thanks to &lt;strong&gt;Windows Subsystem for Android&lt;/strong&gt; using Android tools and enabling certain options. In a &lt;a href=&#34;http://localhost:1313/posts/2022-04-13-enable-wsa/&#34; &gt;previous article&lt;/a&gt; we have seen how to enable the platform from the &lt;strong&gt;Microsoft Store&lt;/strong&gt;.&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Windows 11 Insider Preview Build 22598&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Enable Windows Subsystem for Android™️</title>
+      <link>http://localhost:1313/en/posts/2022-04-13-enable-wsa/</link>
+      <pubDate>Wed, 13 Apr 2022 13:41:27 -0400</pubDate>
+      <guid>http://localhost:1313/en/posts/2022-04-13-enable-wsa/</guid>
+      <description>&lt;p&gt;In this article I will show step by step how to enable the &lt;strong&gt;Windows Subsystem for Android&lt;/strong&gt; in our favorite operating system. Please note that at the time of writing this article it is not available outside of the US.&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Windows 11 Insider Preview Build 22598&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Create shortcut to virtual machine</title>
+      <link>http://localhost:1313/en/posts/2022-04-06-windows-11-shortcut-vm/</link>
+      <pubDate>Wed, 06 Apr 2022 19:21:43 -0400</pubDate>
+      <guid>http://localhost:1313/en/posts/2022-04-06-windows-11-shortcut-vm/</guid>
+      <description>&lt;p&gt;The most practical and useful thing for a user is to find what they are looking for quickly and easily. That is why I will show the steps to create a shortcut to a virtual machine in Hyper-V.&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Windows 11 Insider Preview Build 22593&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Business Central: Download symbols from Sandbox</title>
+      <link>http://localhost:1313/en/posts/2021-09-07-business-central-download-symbols-cloud/</link>
+      <pubDate>Tue, 07 Sep 2021 23:55:00 -0400</pubDate>
+      <guid>http://localhost:1313/en/posts/2021-09-07-business-central-download-symbols-cloud/</guid>
+      <description>&lt;p&gt;Today I tried to download the Microsoft Dynamics 365 Business Central symbols but ran into errors and couldn&amp;rsquo;t get it to work. First, I had errors to download the symbols in order to be able to debug the application.&lt;/p&gt;&#xA;&lt;p&gt;To prevent other people from having this problem, I share my experience solving the problem in this small How To? manual. which is my habit to write.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Microsoft Most Valuable Professional 2021/2022</title>
+      <link>http://localhost:1313/en/posts/2021-07-01-microsoft-most-valuable-professional-2021-2022/</link>
+      <pubDate>Thu, 01 Jul 2021 22:35:00 -0400</pubDate>
+      <guid>http://localhost:1313/en/posts/2021-07-01-microsoft-most-valuable-professional-2021-2022/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://mvp.microsoft.com/en-us/PublicProfile/5001273&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;The renewal has arrived for another year(7 in a row)&lt;/a&gt;:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>About</title>
+      <link>http://localhost:1313/en/about/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/en/about/</guid>
+      <description>&lt;p&gt;Professional software developer, computer engineer, teacher, entrepreneur, and &lt;a href=&#34;https://mvp.microsoft.com/en-US/mvp/profile/079507f9-3c9a-e411-93f2-9cb65495d3c4&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Microsoft MVP&lt;/a&gt; (Most Valuable Professional) in Business Applications. I don&amp;rsquo;t work for Microsoft, I don&amp;rsquo;t depend directly or indirectly on them, but they have graciously recognized my contributions to the community with the MVP award since 2015.&lt;/p&gt;&#xA;&lt;p&gt;I also hold many international certifications including Microsoft Certified Professional Developer (MCPD), Microsoft Certified IT Professional (MCITP), Microsoft Certified Technology Specialist (MCTS), and Microsoft Office Specialist (MOS).&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Contact</title>
+      <link>http://localhost:1313/en/contact/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/en/contact/</guid>
+      <description>&lt;h1 id=&#34;contact&#34;&gt;&#xD;&#xA;  Contact&#xD;&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#contact&#34;&gt;&#xD;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xD;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xD;&#xA;  &lt;/a&gt;&#xD;&#xA;&lt;/h1&gt;&#xD;&#xA;&lt;p&gt;Email address is biz (at) this domain. Alternatively use one of the methods below:&lt;/p&gt;&#xA;&lt;h1 id=&#34;on-the-web&#34;&gt;&#xD;&#xA;  On the web&amp;hellip;&#xD;&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#on-the-web&#34;&gt;&#xD;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xD;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xD;&#xA;  &lt;/a&gt;&#xD;&#xA;&lt;/h1&gt;&#xD;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://x.com/christianamado/&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt; X &lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://mastodon.social/@cmasdev&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Mastodon&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://www.linkedin.com/in/christianamado/&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;LinkedIn&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://github.com/cmasdev/&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;GitHub&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://www.youtube.com/@cmasdev&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;YouTube&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
+    </item>
+    <item>
+      <title>Diabetes</title>
+      <link>http://localhost:1313/en/diabetes/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/en/diabetes/</guid>
+      <description>&lt;p&gt;On this page I will be explaining details about my diabetes treatment since 2003.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Projects</title>
+      <link>http://localhost:1313/en/projects/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/en/projects/</guid>
+      <description>&lt;p&gt;Nothing here yet&amp;hellip; Coming Soon!&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  Enviar correo luego de completar formulario · Christian Amado
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Christian Amado">
+<meta name="description" content="En esta ocasión, quiero compartir con ustedes una funcionalidad muy buena de Power Automate. Imaginemos que necesitamos completar un formulario y que la respuesta sea enviada por correo electrónica a dicho usuario.">
+<meta name="keywords" content="blog,desarrollador,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Enviar correo luego de completar formulario">
+  <meta name="twitter:description" content="En esta ocasión, quiero compartir con ustedes una funcionalidad muy buena de Power Automate. Imaginemos que necesitamos completar un formulario y que la respuesta sea enviada por correo electrónica a dicho usuario.">
+
+<meta property="og:url" content="http://localhost:1313/posts/2020-04-02-enviar-correo-luego-de-completar-formulario/">
+  <meta property="og:site_name" content="Christian Amado">
+  <meta property="og:title" content="Enviar correo luego de completar formulario">
+  <meta property="og:description" content="En esta ocasión, quiero compartir con ustedes una funcionalidad muy buena de Power Automate. Imaginemos que necesitamos completar un formulario y que la respuesta sea enviada por correo electrónica a dicho usuario.">
+  <meta property="og:locale" content="es">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2020-04-02T17:00:00-04:00">
+    <meta property="article:modified_time" content="2020-04-02T17:00:00-04:00">
+    <meta property="article:tag" content="Flow">
+    <meta property="article:tag" content="Power Automate">
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-V1ZRP82YFD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-V1ZRP82YFD');
+</script>
+
+
+
+<link rel="canonical" href="http://localhost:1313/posts/2020-04-02-enviar-correo-luego-de-completar-formulario/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="apple-touch-icon" sizes="57x57" href="/img/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/img/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/img/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/img/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/img/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/img/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/img/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/img/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/img/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="/img/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/img/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+<link rel="manifest" href="/img/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/img/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/">
+      Christian Amado
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/about">Biografía</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/contact">Contacto</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/diabetes">Diabetes</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/tags">Etiquetas</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/en/">🇺🇸</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/posts/2020-04-02-enviar-correo-luego-de-completar-formulario/">
+              Enviar correo luego de completar formulario
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2020-04-02T17:00:00-04:00">
+                abril 2, 2020
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              2 minutos de lectura.
+            </span>
+          </div>
+          
+          
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/tags/flow/">Flow</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/power-automate/">Power Automate</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <p>En esta ocasión, quiero compartir con ustedes una funcionalidad muy buena de Power Automate. Imaginemos que necesitamos completar un formulario y que la respuesta sea enviada por correo electrónica a dicho usuario.</p>
+<h2 id="microsoft-forms">
+  Microsoft Forms
+  <a class="heading-link" href="#microsoft-forms">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Primero, debemos ingresar a la aplicación en cuestión: <img src="/img/posts/powerautomate/1.png" alt=""></p>
+<p>Cerramos la ventana de bienvenida: <img src="/img/posts/powerautomate/2.png" alt=""></p>
+<p>Empezamos a crear el formulario colando un título y descripción (opcional): <img src="/img/posts/powerautomate/3.png" alt=""></p>
+<p>Agregamos el primer campo, en este caso, de tipo <strong>Opción</strong>: <img src="/img/posts/powerautomate/4.png" alt=""></p>
+<p><img src="/img/posts/powerautomate/5.png" alt=""></p>
+<p>Adicionamos un campo <strong>Texto</strong> (que será el Correo): <img src="/img/posts/powerautomate/6.png" alt=""></p>
+<p><img src="/img/posts/powerautomate/7.png" alt=""></p>
+<p>Compartimos el formulario para que todos lo completen: <img src="/img/posts/powerautomate/8.png" alt=""></p>
+<p>El formulario funcionando se encuentra <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=oyz5wYqX-k2vzGA7tMRPtifqEP96lF1FjwTx_PmlcGZUMlVJOE1TNzczVlNBRkxON0pITVM2OFdFQy4u"  class="external-link" target="_blank" rel="noopener">AQUÍ</a>.</p>
+<h2 id="microsoft-power-automate">
+  Microsoft Power Automate
+  <a class="heading-link" href="#microsoft-power-automate">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Aquí es donde manejaremos el flujo de envío de correo. Debemos de tener en cuenta que Power Automate maneja Desencadenadores y Acciones, es decir, a cada desencadenador una o varias acciones asociadas a él.</p>
+<p>Ingresam a la aplicación en cuestión: <img src="/img/posts/powerautomate/9.png" alt=""></p>
+<p>Se crea un nuevo flujo y se elige una plantilla vacía: <img src="/img/posts/powerautomate/10.png" alt=""></p>
+<p><img src="/img/posts/powerautomate/11.png" alt=""></p>
+<p>Se completan los datos descriptivos y se selecciona la plantilla predeterminada para nuestra acción: <img src="/img/posts/powerautomate/12.png" alt=""></p>
+<p>Armamos el flujo siguiendo los siguientes pasos: <img src="/img/posts/powerautomate/13.png" alt=""></p>
+<p><img src="/img/posts/powerautomate/14.png" alt=""></p>
+<p><img src="/img/posts/powerautomate/15.png" alt=""></p>
+<p><img src="/img/posts/powerautomate/16.png" alt=""></p>
+<p><img src="/img/posts/powerautomate/17.png" alt=""></p>
+<p><img src="/img/posts/powerautomate/18.png" alt=""></p>
+<p><img src="/img/posts/powerautomate/19.png" alt=""></p>
+<p><img src="/img/posts/powerautomate/20.png" alt=""></p>
+<p><img src="/img/posts/powerautomate/21.png" alt=""></p>
+<p>¡Hemos terminado las tareas! Es hora de completar el formulario y ver si nos llega el correo:</p>
+<p><img src="/img/posts/powerautomate/22.png" alt=""></p>
+<p><img src="/img/posts/powerautomate/23.png" alt=""></p>
+<p>De esta manera hemos automatizado una tarea que no es muy sencilla en el día a día, pero con esta herramienta logramos que sí lo sea.</p>
+<p>¡Espero les resulte de utilidad!</p>
+      </div>
+
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script>
+  window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "cmasblog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    
+    document.addEventListener('themeChanged', function (e) { 
+        if (document.readyState == 'complete') {
+          DISQUS.reset({ reload: true, config: disqus_config });
+        }
+    });
+</script>
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2018 -
+    
+    2025
+     Christian Amado 
+    ·
+    
+    Desarrollado por <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+      <script async src="https://www.googletagmanager.com/gtag/js?id=356375808"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '356375808');
+        }
+      </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=013131931956450466198%3ablhmkdpweyq"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '013131931956450466198:blhmkdpweyq');
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

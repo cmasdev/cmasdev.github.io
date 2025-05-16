@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Git on Christian Amado</title>
+    <link>http://localhost:1313/tags/git/</link>
+    <description>Recent content in Git on Christian Amado</description>
+    <generator>Hugo</generator>
+    <language>es</language>
+    <lastBuildDate>Wed, 04 May 2022 13:48:00 -0400</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/git/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Git y WSL</title>
+      <link>http://localhost:1313/posts/2022-05-04-git-and-wsl/</link>
+      <pubDate>Wed, 04 May 2022 13:48:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2022-05-04-git-and-wsl/</guid>
+      <description>&lt;p&gt;En este artículo mostraré cómo instalar o actualizar git dentro de &lt;strong&gt;Windows Subsystem for Linux&lt;/strong&gt; de modo a poder clonar repositorio desde y hacia &lt;strong&gt;GitHub&lt;/strong&gt;. En un &lt;a href=&#34;http://localhost:1313/posts/2022-04-26-configuring-my-wsl-environment/&#34; &gt;artículo anterior&lt;/a&gt; hemos visto cómo habilitar la plataforma &lt;strong&gt;Windows Subsystem for Linux&lt;/strong&gt;.&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Windows 11 Insider Preview Build 22610&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

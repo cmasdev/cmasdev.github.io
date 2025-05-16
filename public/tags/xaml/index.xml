@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>XAML on Christian Amado</title>
+    <link>http://localhost:1313/tags/xaml/</link>
+    <description>Recent content in XAML on Christian Amado</description>
+    <generator>Hugo</generator>
+    <language>es</language>
+    <lastBuildDate>Fri, 15 Dec 2023 18:30:00 -0400</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/xaml/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>XAML para cambio de orientación de pantalla</title>
+      <link>http://localhost:1313/posts/2023-12-15-maui-xaml-orientation-screen/</link>
+      <pubDate>Fri, 15 Dec 2023 18:30:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2023-12-15-maui-xaml-orientation-screen/</guid>
+      <description>&lt;p&gt;En este artículo veremos la posibilidad de crear un diseño que se adapte a la orientación de pantalla en &lt;strong&gt;.NET MAUI&lt;/strong&gt;.&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Windows 11 Insider Preview Build 22635.2915&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Novedades en .NET MAUI con .NET 8</title>
+      <link>http://localhost:1313/posts/2023-12-01-whats-new-in-maui-net-8/</link>
+      <pubDate>Fri, 01 Dec 2023 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2023-12-01-whats-new-in-maui-net-8/</guid>
+      <description>&lt;p&gt;En este artículo mostraré algunas novedades de .NET 8 en &lt;strong&gt;.NET MAUI&lt;/strong&gt;.&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Windows 11 Insider Preview Build 22635.2776&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Primeros pasos con XAML en MAUI</title>
+      <link>http://localhost:1313/posts/2022-09-14-first-step-xaml-in-maui/</link>
+      <pubDate>Wed, 14 Sep 2022 23:18:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2022-09-14-first-step-xaml-in-maui/</guid>
+      <description>&lt;p&gt;En este artículo mostraré cómo iniciar los pasos con el lenguaje &lt;strong&gt;XAML&lt;/strong&gt; en &lt;strong&gt;.NET MAUI&lt;/strong&gt;.&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Windows 11 Insider Preview Build 25201&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  Optimización de Angular Universal para SEO y rendimiento · Christian Amado
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Christian Amado">
+<meta name="description" content="Angular Universal es una herramienta poderosa que permite realizar el renderizado del lado del servidor (SSR, por sus siglas en inglés) en aplicaciones Angular. Esto no solo mejora la experiencia del usuario, sino que también optimiza la aplicación para motores de búsqueda (SEO) y mejora significativamente el rendimiento. Este artículo explora cómo optimizar Angular Universal para SEO y rendimiento con ejemplos prácticos y buenas prácticas.">
+<meta name="keywords" content="blog,desarrollador,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Optimización de Angular Universal para SEO y rendimiento">
+  <meta name="twitter:description" content="Angular Universal es una herramienta poderosa que permite realizar el renderizado del lado del servidor (SSR, por sus siglas en inglés) en aplicaciones Angular. Esto no solo mejora la experiencia del usuario, sino que también optimiza la aplicación para motores de búsqueda (SEO) y mejora significativamente el rendimiento. Este artículo explora cómo optimizar Angular Universal para SEO y rendimiento con ejemplos prácticos y buenas prácticas.">
+
+<meta property="og:url" content="http://localhost:1313/posts/2024-07-31-angular-seo/">
+  <meta property="og:site_name" content="Christian Amado">
+  <meta property="og:title" content="Optimización de Angular Universal para SEO y rendimiento">
+  <meta property="og:description" content="Angular Universal es una herramienta poderosa que permite realizar el renderizado del lado del servidor (SSR, por sus siglas en inglés) en aplicaciones Angular. Esto no solo mejora la experiencia del usuario, sino que también optimiza la aplicación para motores de búsqueda (SEO) y mejora significativamente el rendimiento. Este artículo explora cómo optimizar Angular Universal para SEO y rendimiento con ejemplos prácticos y buenas prácticas.">
+  <meta property="og:locale" content="es">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-07-31T00:00:00-04:00">
+    <meta property="article:modified_time" content="2024-07-31T00:00:00-04:00">
+    <meta property="article:tag" content="Web Development">
+    <meta property="article:tag" content="Angular">
+    <meta property="article:tag" content="Google">
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-V1ZRP82YFD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-V1ZRP82YFD');
+</script>
+
+
+
+<link rel="canonical" href="http://localhost:1313/posts/2024-07-31-angular-seo/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="apple-touch-icon" sizes="57x57" href="/img/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/img/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/img/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/img/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/img/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/img/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/img/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/img/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/img/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="/img/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/img/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+<link rel="manifest" href="/img/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/img/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/">
+      Christian Amado
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/about">Biografía</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/contact">Contacto</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/diabetes">Diabetes</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/tags">Etiquetas</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/en/">🇺🇸</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/posts/2024-07-31-angular-seo/">
+              Optimización de Angular Universal para SEO y rendimiento
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2024-07-31T00:00:00-04:00">
+                julio 31, 2024
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              4 minutos de lectura.
+            </span>
+          </div>
+          
+          
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/tags/web-development/">Web Development</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/angular/">Angular</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/google/">Google</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <p><strong>Angular Universal</strong> es una herramienta poderosa que permite realizar el renderizado del lado del servidor (SSR, por sus siglas en inglés) en aplicaciones <strong>Angular</strong>. Esto no solo mejora la experiencia del usuario, sino que también optimiza la aplicación para motores de búsqueda (SEO) y mejora significativamente el rendimiento. Este artículo explora cómo optimizar <strong>Angular Universal</strong> para <strong>SEO</strong> y rendimiento con ejemplos prácticos y buenas prácticas.</p>
+<h2 id="qué-es-angular-universal">
+  ¿Qué es Angular Universal?
+  <a class="heading-link" href="#qu%c3%a9-es-angular-universal">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p><strong>Angular Universal</strong> es una tecnología que permite renderizar aplicaciones <strong>Angular</strong> en el servidor antes de enviarlas al cliente. Esto ayuda a los motores de búsqueda y a las redes sociales a indexar correctamente las páginas y a mejorar el tiempo de carga inicial de la aplicación.</p>
+<h3 id="beneficios-de-angular-universal">
+  Beneficios de Angular Universal
+  <a class="heading-link" href="#beneficios-de-angular-universal">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li><strong>Mejoras en SEO</strong>: Permite que los motores de búsqueda indexen contenido dinámico.</li>
+<li><strong>Rendimiento mejorado</strong>: Reduce el tiempo hasta el primer renderizado.</li>
+<li><strong>Compartibilidad social</strong>: Genera metadatos dinámicos para compartir en redes sociales.</li>
+<li><strong>Compatibilidad</strong>: Funciona en navegadores sin soporte para JavaScript habilitado.</li>
+</ol>
+<h2 id="configuración-de-angular-universal">
+  Configuración de Angular Universal
+  <a class="heading-link" href="#configuraci%c3%b3n-de-angular-universal">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="requisitos-previos">
+  Requisitos previos
+  <a class="heading-link" href="#requisitos-previos">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>Tener Angular CLI instalado:
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">npm install -g @angular/cli
+</span></span></code></pre></div></li>
+<li>Crear o tener un proyecto Angular existente.</li>
+</ol>
+<h3 id="agregar-angular-universal-a-tu-proyecto">
+  Agregar Angular Universal a tu proyecto
+  <a class="heading-link" href="#agregar-angular-universal-a-tu-proyecto">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p>Ejecuta el siguiente comando para agregar Angular Universal:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">ng add @nguniversal/express-engine
+</span></span></code></pre></div><p>Esto configura automáticamente los archivos necesarios y agrega soporte para SSR.</p>
+</li>
+<li>
+<p>Verifica que se hayan creado los siguientes archivos:</p>
+<ul>
+<li><code>server.ts</code>: El punto de entrada para el servidor.</li>
+<li><code>angular.json</code>: Actualizado con las configuraciones de SSR.</li>
+<li><code>main.server.ts</code>: El módulo principal para la ejecución del servidor.</li>
+</ul>
+</li>
+</ol>
+<h3 id="ejecutar-la-aplicación-en-modo-ssr">
+  Ejecutar la aplicación en modo SSR
+  <a class="heading-link" href="#ejecutar-la-aplicaci%c3%b3n-en-modo-ssr">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p>Construye la aplicación para SSR:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">npm run build:ssr
+</span></span></code></pre></div></li>
+<li>
+<p>Sirve la aplicación:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">npm run serve:ssr
+</span></span></code></pre></div><p>Visita <code>http://localhost:4000</code> para verificar que la aplicación se renderice del lado del servidor.</p>
+</li>
+</ol>
+<h2 id="optimización-para-seo">
+  Optimización para SEO
+  <a class="heading-link" href="#optimizaci%c3%b3n-para-seo">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="implementar-metadatos-dinámicos">
+  Implementar metadatos dinámicos
+  <a class="heading-link" href="#implementar-metadatos-din%c3%a1micos">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p>Usa el servicio <code>Meta</code> para actualizar los metadatos de la página:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">import</span> <span class="p">{</span> <span class="n">Component</span> <span class="p">}</span> <span class="n">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">import</span> <span class="p">{</span> <span class="n">Meta</span><span class="p">,</span> <span class="n">Title</span> <span class="p">}</span> <span class="n">from</span> <span class="s1">&#39;@angular/platform-browser&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">@</span><span class="n">Component</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">  <span class="n">selector</span><span class="p">:</span> <span class="s1">&#39;app-home&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="n">templateUrl</span><span class="p">:</span> <span class="s1">&#39;./home.component.html&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="k">export</span> <span class="k">class</span> <span class="n">HomeComponent</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">constructor</span><span class="p">(</span><span class="n">private</span> <span class="n">meta</span><span class="p">:</span> <span class="n">Meta</span><span class="p">,</span> <span class="n">private</span> <span class="n">title</span><span class="p">:</span> <span class="n">Title</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">this</span><span class="o">.</span><span class="n">title</span><span class="o">.</span><span class="n">setTitle</span><span class="p">(</span><span class="s1">&#39;Página de inicio - Mi Aplicación&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">this</span><span class="o">.</span><span class="n">meta</span><span class="o">.</span><span class="n">addTags</span><span class="p">([</span>
+</span></span><span class="line"><span class="cl">      <span class="p">{</span> <span class="n">name</span><span class="p">:</span> <span class="s1">&#39;description&#39;</span><span class="p">,</span> <span class="n">content</span><span class="p">:</span> <span class="s1">&#39;Bienvenido a nuestra aplicación optimizada para SEO.&#39;</span> <span class="p">},</span>
+</span></span><span class="line"><span class="cl">      <span class="p">{</span> <span class="n">name</span><span class="p">:</span> <span class="s1">&#39;keywords&#39;</span><span class="p">,</span> <span class="n">content</span><span class="p">:</span> <span class="s1">&#39;Angular, SEO, Universal&#39;</span> <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="p">]);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div></li>
+<li>
+<p>Asegúrate de que cada página tenga un título único y metadatos relevantes.</p>
+</li>
+</ol>
+<h3 id="crear-un-archivo-robotstxt">
+  Crear un archivo <code>robots.txt</code>
+  <a class="heading-link" href="#crear-un-archivo-robotstxt">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p>Crea un archivo <code>src/assets/robots.txt</code> con las siguientes líneas:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">User-agent: *
+</span></span><span class="line"><span class="cl">Allow: /
+</span></span></code></pre></div></li>
+<li>
+<p>Incluye el archivo en el proceso de construcción:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">  &#34;assets&#34;: [
+</span></span><span class="line"><span class="cl">    &#34;src/assets&#34;,
+</span></span><span class="line"><span class="cl">    &#34;src/robots.txt&#34;
+</span></span><span class="line"><span class="cl">  ]
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="agregar-un-sitemapxml">
+  Agregar un <code>sitemap.xml</code>
+  <a class="heading-link" href="#agregar-un-sitemapxml">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>Usa herramientas como <a href="https://www.xml-sitemaps.com/"  class="external-link" target="_blank" rel="noopener">Sitemap Generator</a> para crear un archivo <code>sitemap.xml</code>.</li>
+<li>Inclúyelo en la carpeta <code>src/assets</code> y asegúrate de que esté accesible desde el servidor.</li>
+</ol>
+<h2 id="optimización-para-rendimiento">
+  Optimización para rendimiento
+  <a class="heading-link" href="#optimizaci%c3%b3n-para-rendimiento">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="lazy-loading">
+  Lazy Loading
+  <a class="heading-link" href="#lazy-loading">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Divide tu aplicación en módulos cargados bajo demanda:</p>
+<ol>
+<li>
+<p>Configura módulos con lazy loading:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">const</span> <span class="n">routes</span><span class="p">:</span> <span class="n">Routes</span> <span class="o">=</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">path</span><span class="p">:</span> <span class="s1">&#39;feature&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">loadChildren</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="n">import</span><span class="p">(</span><span class="s1">&#39;./feature/feature.module&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">then</span><span class="p">(</span><span class="n">m</span> <span class="o">=&gt;</span> <span class="n">m</span><span class="o">.</span><span class="n">FeatureModule</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">  <span class="p">},</span>
+</span></span><span class="line"><span class="cl"><span class="p">];</span>
+</span></span></code></pre></div></li>
+<li>
+<p>Verifica que cada módulo solo se cargue cuando sea necesario.</p>
+</li>
+</ol>
+<h3 id="implementar-precarga">
+  Implementar precarga
+  <a class="heading-link" href="#implementar-precarga">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p>Usa el servicio de precarga predeterminado de Angular:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">RouterModule</span><span class="o">.</span><span class="n">forRoot</span><span class="p">(</span><span class="n">routes</span><span class="p">,</span> <span class="p">{</span> <span class="n">preloadingStrategy</span><span class="p">:</span> <span class="n">PreloadAllModules</span> <span class="p">});</span>
+</span></span></code></pre></div></li>
+<li>
+<p>Asegúrate de que los módulos importantes se carguen rápidamente.</p>
+</li>
+</ol>
+<h3 id="compresión-de-archivos">
+  Compresión de archivos
+  <a class="heading-link" href="#compresi%c3%b3n-de-archivos">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>Configura el servidor para servir archivos comprimidos con Gzip o Brotli.</li>
+<li>Usa herramientas como <code>webpack-bundle-analyzer</code> para reducir el tamaño de los paquetes.</li>
+</ol>
+<h3 id="caché-en-el-servidor">
+  Caché en el servidor
+  <a class="heading-link" href="#cach%c3%a9-en-el-servidor">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p>Configura el caché para recursos estáticos y dinámicos:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">server.use(express.static(&#39;dist/browser&#39;, { maxAge: &#39;1y&#39; }));
+</span></span></code></pre></div></li>
+<li>
+<p>Usa Service Workers para manejar la caché del lado del cliente.</p>
+</li>
+</ol>
+<h2 id="buenas-prácticas">
+  Buenas prácticas
+  <a class="heading-link" href="#buenas-pr%c3%a1cticas">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ol>
+<li>
+<p><strong>Mantener URLs amigables</strong>:</p>
+<ul>
+<li>Usa URLs descriptivas y evita parámetros innecesarios.</li>
+</ul>
+</li>
+<li>
+<p><strong>Evitar contenido duplicado</strong>:</p>
+<ul>
+<li>Configura etiquetas <code>canonical</code> para páginas duplicadas.</li>
+</ul>
+</li>
+<li>
+<p><strong>Supervisar el rendimiento</strong>:</p>
+<ul>
+<li>Usa herramientas como Lighthouse y PageSpeed Insights para identificar áreas de mejora.</li>
+</ul>
+</li>
+<li>
+<p><strong>Pruebas regulares</strong>:</p>
+<ul>
+<li>Verifica que los motores de búsqueda indexen correctamente tu aplicación.</li>
+</ul>
+</li>
+<li>
+<p><strong>Minimizar recursos</strong>:</p>
+<ul>
+<li>Usa imágenes optimizadas y minimiza los archivos CSS y JavaScript.</li>
+</ul>
+</li>
+</ol>
+<h2 id="conclusión">
+  Conclusión
+  <a class="heading-link" href="#conclusi%c3%b3n">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Optimizar <strong>Angular Universal</strong> para <strong>SEO</strong> y rendimiento no solo mejora la experiencia del usuario, sino que también garantiza que tu aplicación sea accesible y visible para los motores de búsqueda. Siguiendo las buenas prácticas y utilizando las herramientas adecuadas, puedes maximizar el potencial de tu aplicación y destacarte en un entorno web competitivo. ¡Comienza hoy mismo y lleva tu aplicación Angular al siguiente nivel!</p>
+      </div>
+
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script>
+  window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "cmasblog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    
+    document.addEventListener('themeChanged', function (e) { 
+        if (document.readyState == 'complete') {
+          DISQUS.reset({ reload: true, config: disqus_config });
+        }
+    });
+</script>
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2018 -
+    
+    2025
+     Christian Amado 
+    ·
+    
+    Desarrollado por <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+      <script async src="https://www.googletagmanager.com/gtag/js?id=356375808"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '356375808');
+        }
+      </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=013131931956450466198%3ablhmkdpweyq"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '013131931956450466198:blhmkdpweyq');
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  Uso de la nueva API de Shared Window Mode para apps multi-ventana en Windows 11 · Christian Amado
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Christian Amado">
+<meta name="description" content="Windows 11 introduce nuevas capacidades para la gestión de ventanas, entre ellas el Shared Window Mode, que permite que las aplicaciones modernas compartan múltiples ventanas como parte de una misma experiencia multitarea. Esta característica mejora el soporte nativo para escenarios como edición paralela, múltiples vistas, comparaciones en paralelo y workflows de aplicaciones productivas.
+En este artículo se explora cómo utilizar esta API desde una aplicación moderna WinUI 3 utilizando Windows App SDK, gestionando múltiples ventanas, compartiéndolas dentro de un contexto común y habilitando integración visual con Snap Layouts y Alt&#43;Tab de forma coherente.">
+<meta name="keywords" content="blog,desarrollador,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Uso de la nueva API de Shared Window Mode para apps multi-ventana en Windows 11">
+  <meta name="twitter:description" content="Windows 11 introduce nuevas capacidades para la gestión de ventanas, entre ellas el Shared Window Mode, que permite que las aplicaciones modernas compartan múltiples ventanas como parte de una misma experiencia multitarea. Esta característica mejora el soporte nativo para escenarios como edición paralela, múltiples vistas, comparaciones en paralelo y workflows de aplicaciones productivas.
+En este artículo se explora cómo utilizar esta API desde una aplicación moderna WinUI 3 utilizando Windows App SDK, gestionando múltiples ventanas, compartiéndolas dentro de un contexto común y habilitando integración visual con Snap Layouts y Alt&#43;Tab de forma coherente.">
+
+<meta property="og:url" content="http://localhost:1313/posts/2025-02-14-winui-shared-window-multi-windows/">
+  <meta property="og:site_name" content="Christian Amado">
+  <meta property="og:title" content="Uso de la nueva API de Shared Window Mode para apps multi-ventana en Windows 11">
+  <meta property="og:description" content="Windows 11 introduce nuevas capacidades para la gestión de ventanas, entre ellas el Shared Window Mode, que permite que las aplicaciones modernas compartan múltiples ventanas como parte de una misma experiencia multitarea. Esta característica mejora el soporte nativo para escenarios como edición paralela, múltiples vistas, comparaciones en paralelo y workflows de aplicaciones productivas.
+En este artículo se explora cómo utilizar esta API desde una aplicación moderna WinUI 3 utilizando Windows App SDK, gestionando múltiples ventanas, compartiéndolas dentro de un contexto común y habilitando integración visual con Snap Layouts y Alt&#43;Tab de forma coherente.">
+  <meta property="og:locale" content="es">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-02-14T00:00:00-04:00">
+    <meta property="article:modified_time" content="2025-02-14T00:00:00-04:00">
+    <meta property="article:tag" content="WinDev">
+    <meta property="article:tag" content="Windows 11">
+    <meta property="article:tag" content="WinUI 3">
+    <meta property="article:tag" content="Windows App SDK">
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-V1ZRP82YFD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-V1ZRP82YFD');
+</script>
+
+
+
+<link rel="canonical" href="http://localhost:1313/posts/2025-02-14-winui-shared-window-multi-windows/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="apple-touch-icon" sizes="57x57" href="/img/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/img/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/img/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/img/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/img/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/img/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/img/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/img/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/img/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="/img/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/img/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+<link rel="manifest" href="/img/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/img/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/">
+      Christian Amado
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/about">Biografía</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/contact">Contacto</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/diabetes">Diabetes</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/tags">Etiquetas</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/en/">🇺🇸</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/posts/2025-02-14-winui-shared-window-multi-windows/">
+              Uso de la nueva API de Shared Window Mode para apps multi-ventana en Windows 11
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2025-02-14T00:00:00-04:00">
+                febrero 14, 2025
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              3 minutos de lectura.
+            </span>
+          </div>
+          
+          
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/tags/windev/">WinDev</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/windows-11/">Windows 11</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/winui-3/">WinUI 3</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/windows-app-sdk/">Windows App SDK</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <p><strong>Windows 11</strong> introduce nuevas capacidades para la gestión de ventanas, entre ellas el <strong>Shared Window Mode</strong>, que permite que las aplicaciones modernas compartan múltiples ventanas como parte de una misma experiencia multitarea. Esta característica mejora el soporte nativo para escenarios como edición paralela, múltiples vistas, comparaciones en paralelo y workflows de aplicaciones productivas.</p>
+<p>En este artículo se explora cómo utilizar esta API desde una aplicación moderna WinUI 3 utilizando <strong>Windows App SDK</strong>, gestionando múltiples ventanas, compartiéndolas dentro de un contexto común y habilitando integración visual con Snap Layouts y Alt+Tab de forma coherente.</p>
+<h2 id="requisitos">
+  Requisitos
+  <a class="heading-link" href="#requisitos">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ul>
+<li>Windows 11 build 22621 o superior</li>
+<li>Visual Studio 2022</li>
+<li>Windows App SDK 1.3+ (preferido 1.4+)</li>
+<li>Proyecto empaquetado (MSIX) con soporte multi-ventana</li>
+</ul>
+<h2 id="fundamento-qué-es-shared-window-mode">
+  Fundamento: ¿qué es Shared Window Mode?
+  <a class="heading-link" href="#fundamento-qu%c3%a9-es-shared-window-mode">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Es un modo de presentación que permite agrupar múltiples ventanas dentro del mismo conjunto lógico del sistema operativo. A efectos del usuario, todas las ventanas se tratan como una única aplicación, tanto visualmente como en el sistema de tareas, Snap Layouts y la barra de tareas.</p>
+<h2 id="paso-1-crear-una-ventana-secundaria-en-winui-3">
+  Paso 1: Crear una ventana secundaria en WinUI 3
+  <a class="heading-link" href="#paso-1-crear-una-ventana-secundaria-en-winui-3">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">sealed</span> <span class="kd">partial</span> <span class="k">class</span> <span class="nc">EditorWindow</span> <span class="p">:</span> <span class="n">Window</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="n">EditorWindow</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="p">.</span><span class="n">InitializeComponent</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="p">.</span><span class="n">Title</span> <span class="p">=</span> <span class="s">&#34;Editor Avanzado&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Desde <code>MainWindow.xaml.cs</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kd">private</span> <span class="k">void</span> <span class="n">AbrirNuevaVentana_Click</span><span class="p">(</span><span class="kt">object</span> <span class="n">sender</span><span class="p">,</span> <span class="n">RoutedEventArgs</span> <span class="n">e</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">var</span> <span class="n">ventana</span> <span class="p">=</span> <span class="k">new</span> <span class="n">EditorWindow</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ventana</span><span class="p">.</span><span class="n">Activate</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Esto crea una segunda ventana independiente.</p>
+<h2 id="paso-2-declarar-el-grupo-de-presentación-compartida">
+  Paso 2: Declarar el grupo de presentación compartida
+  <a class="heading-link" href="#paso-2-declarar-el-grupo-de-presentaci%c3%b3n-compartida">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Importar:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">Microsoft.UI.Windowing</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">Windows.UI.WindowManagement</span><span class="p">;</span>
+</span></span></code></pre></div><p>Crear el grupo de ventana compartida:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kt">var</span> <span class="n">presenter</span> <span class="p">=</span> <span class="n">AppWindowPresenter</span><span class="p">.</span><span class="n">CreateForContext</span><span class="p">(</span><span class="s">&#34;edicion&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">presenter</span><span class="p">.</span><span class="n">GroupMode</span> <span class="p">=</span> <span class="n">AppWindowGroupMode</span><span class="p">.</span><span class="n">Shared</span><span class="p">;</span>
+</span></span></code></pre></div><p>A partir de Windows App SDK 1.4, se puede usar:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="n">AppWindowGroup</span> <span class="k">group</span> <span class="p">=</span> <span class="k">await</span> <span class="n">AppWindowGroup</span><span class="p">.</span><span class="n">TryCreateAsync</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="k">group</span><span class="p">.</span><span class="n">AddWindow</span><span class="p">(</span><span class="n">AppWindow</span><span class="p">.</span><span class="n">GetFromWindowId</span><span class="p">(</span><span class="n">windowId</span><span class="p">));</span>
+</span></span></code></pre></div><p>Esto agrupa ambas ventanas visualmente.</p>
+<h2 id="paso-3-activar-snap-layouts-compartidos">
+  Paso 3: Activar Snap Layouts compartidos
+  <a class="heading-link" href="#paso-3-activar-snap-layouts-compartidos">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>El sistema operativo permite agrupar estas ventanas en Snap Layouts como si fueran parte de una sola app.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kt">var</span> <span class="n">mainAppWindow</span> <span class="p">=</span> <span class="n">AppWindow</span><span class="p">.</span><span class="n">GetFromWindowId</span><span class="p">(</span><span class="n">GetWindowIdForWindow</span><span class="p">(</span><span class="n">MainWindow</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl"><span class="kt">var</span> <span class="n">secondaryAppWindow</span> <span class="p">=</span> <span class="n">AppWindow</span><span class="p">.</span><span class="n">GetFromWindowId</span><span class="p">(</span><span class="n">GetWindowIdForWindow</span><span class="p">(</span><span class="n">EditorWindow</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">await</span> <span class="n">AppWindowGroup</span><span class="p">.</span><span class="n">CreateFromAppWindowsAsync</span><span class="p">(</span><span class="k">new</span><span class="p">[]</span> <span class="p">{</span> <span class="n">mainAppWindow</span><span class="p">,</span> <span class="n">secondaryAppWindow</span> <span class="p">});</span>
+</span></span></code></pre></div><p>Esto las unifica para minimizar, cerrar, agrupar en la barra de tareas y cambiar con Alt+Tab.</p>
+<h2 id="paso-4-controlar-comportamiento-individual">
+  Paso 4: Controlar comportamiento individual
+  <a class="heading-link" href="#paso-4-controlar-comportamiento-individual">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Cada ventana puede mantener sus controles independientes. Por ejemplo:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="n">EditorWindow</span> <span class="n">editor</span> <span class="p">=</span> <span class="k">new</span> <span class="n">EditorWindow</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="n">editor</span><span class="p">.</span><span class="n">ExtendsContentIntoTitleBar</span> <span class="p">=</span> <span class="kc">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">editor</span><span class="p">.</span><span class="n">AppWindow</span><span class="p">.</span><span class="n">SetIcon</span><span class="p">(</span><span class="s">&#34;Assets/editor.png&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">editor</span><span class="p">.</span><span class="n">AppWindow</span><span class="p">.</span><span class="n">Resize</span><span class="p">(</span><span class="k">new</span> <span class="n">Windows</span><span class="p">.</span><span class="n">Graphics</span><span class="p">.</span><span class="n">SizeInt32</span> <span class="p">{</span> <span class="n">Width</span> <span class="p">=</span> <span class="m">800</span><span class="p">,</span> <span class="n">Height</span> <span class="p">=</span> <span class="m">600</span> <span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="n">editor</span><span class="p">.</span><span class="n">Activate</span><span class="p">();</span>
+</span></span></code></pre></div><h2 id="paso-5-comunicación-entre-ventanas">
+  Paso 5: Comunicación entre ventanas
+  <a class="heading-link" href="#paso-5-comunicaci%c3%b3n-entre-ventanas">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Usar <code>static</code> o eventos para intercambio de datos:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">static</span> <span class="n">Action</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;?</span> <span class="n">OnGuardarNota</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">private</span> <span class="k">void</span> <span class="n">Guardar_Click</span><span class="p">(</span><span class="kt">object</span> <span class="n">sender</span><span class="p">,</span> <span class="n">RoutedEventArgs</span> <span class="n">e</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">OnGuardarNota</span><span class="p">?.</span><span class="n">Invoke</span><span class="p">(</span><span class="n">txtNota</span><span class="p">.</span><span class="n">Text</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>En <code>MainWindow</code>, suscribirse:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="n">EditorWindow</span><span class="p">.</span><span class="n">OnGuardarNota</span> <span class="p">=</span> <span class="p">(</span><span class="n">nota</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="n">NotasList</span><span class="p">.</span><span class="n">Items</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">nota</span><span class="p">);</span>
+</span></span></code></pre></div><h2 id="casos-de-uso-reales">
+  Casos de uso reales
+  <a class="heading-link" href="#casos-de-uso-reales">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ul>
+<li>Aplicaciones con vista de edición y vista previa paralela</li>
+<li>Múltiples documentos (MDI) con organización automática</li>
+<li>Comparación de versiones, código o texto</li>
+<li>Edición por secciones o pestañas separadas</li>
+</ul>
+<h2 id="buenas-prácticas">
+  Buenas prácticas
+  <a class="heading-link" href="#buenas-pr%c3%a1cticas">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ul>
+<li>No sobrecargar al usuario con muchas ventanas simultáneas</li>
+<li>Dar control claro para cerrar o reabrir ventanas</li>
+<li>Persistir tamaño y posición si es relevante</li>
+<li>Usar iconos y títulos descriptivos para distinguir roles</li>
+<li>Evitar bloquear el hilo principal con la creación de ventanas</li>
+</ul>
+<h2 id="conclusión">
+  Conclusión
+  <a class="heading-link" href="#conclusi%c3%b3n">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>El <strong>Shared Window Mode</strong> en <strong>Windows 11</strong> permite ofrecer una experiencia de usuario verdaderamente multitarea y flexible en apps modernas. Esta capacidad, combinada con <strong>WinUI 3</strong> y <strong>Windows App SDK</strong>, habilita escenarios productivos, colaborativos y visuales que antes requerían soluciones complejas. Gracias a su integración con <em>AppWindowGroup</em> y <em>Snap Layouts</em>, las apps modernas pueden comportarse como verdaderos entornos profesionales de trabajo múltiple.</p>
+      </div>
+
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script>
+  window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "cmasblog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    
+    document.addEventListener('themeChanged', function (e) { 
+        if (document.readyState == 'complete') {
+          DISQUS.reset({ reload: true, config: disqus_config });
+        }
+    });
+</script>
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2018 -
+    
+    2025
+     Christian Amado 
+    ·
+    
+    Desarrollado por <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+      <script async src="https://www.googletagmanager.com/gtag/js?id=356375808"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '356375808');
+        }
+      </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=013131931956450466198%3ablhmkdpweyq"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '013131931956450466198:blhmkdpweyq');
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

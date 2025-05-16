@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Python on Christian Amado</title>
+    <link>http://localhost:1313/es/tags/python/</link>
+    <description>Recent content in Python on Christian Amado</description>
+    <generator>Hugo</generator>
+    <language>es</language>
+    <lastBuildDate>Fri, 14 Jun 2024 00:00:00 -0400</lastBuildDate>
+    <atom:link href="http://localhost:1313/es/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Deno, Go y Python en WSL2 para flujos mixtos de backend &#43; AI</title>
+      <link>http://localhost:1313/es/posts/2024-06-14-wsl2-backend-ai/</link>
+      <pubDate>Fri, 14 Jun 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2024-06-14-wsl2-backend-ai/</guid>
+      <description>&lt;p&gt;Combinar lenguajes modernos como &lt;strong&gt;Deno&lt;/strong&gt;, &lt;strong&gt;Go&lt;/strong&gt; y &lt;strong&gt;Python&lt;/strong&gt; permite crear soluciones backend de alto rendimiento con componentes de inteligencia artificial de forma modular y eficiente. Gracias a &lt;strong&gt;WSL2&lt;/strong&gt;, es posible configurar este stack en Linux desde Windows, integrando herramientas, librerías y entornos de ejecución en un mismo flujo de trabajo.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Django sobre WSL</title>
+      <link>http://localhost:1313/es/posts/2022-12-21-django-on-wsl/</link>
+      <pubDate>Wed, 21 Dec 2022 19:39:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2022-12-21-django-on-wsl/</guid>
+      <description>&lt;p&gt;En este corto artículo veremos cómo desarrollar sobre &lt;strong&gt;WSL (Windows Subsystem for Linux)&lt;/strong&gt; con &lt;strong&gt;Python&lt;/strong&gt; y &lt;strong&gt;Django&lt;/strong&gt;. Ya hemos visto que lo podemos hacer con &lt;a href=&#34;http://localhost:1313/posts/2022-06-29-java-with-wsl-part-2/&#34; &gt;Java&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Windows 11 Insider Preview Build 25267&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Desarrollo con Python sobre WSL</title>
+      <link>http://localhost:1313/es/posts/2022-12-14-developing-python-on-wsl/</link>
+      <pubDate>Wed, 14 Dec 2022 21:12:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2022-12-14-developing-python-on-wsl/</guid>
+      <description>&lt;p&gt;En este corto artículo veremos cómo desarrollar sobre &lt;strong&gt;WSL (Windows Subsystem for Linux)&lt;/strong&gt; con &lt;strong&gt;Python&lt;/strong&gt;. Ya hemos visto que lo podemos hacer con &lt;a href=&#34;http://localhost:1313/posts/2022-06-29-java-with-wsl-part-2/&#34; &gt;Java&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Windows 11 Insider Preview Build 25267&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Python: Instalando en Visual Studio Code</title>
+      <link>http://localhost:1313/es/posts/2019-04-04-python-instalando-en-visual-studio-code/</link>
+      <pubDate>Thu, 04 Apr 2019 20:19:30 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2019-04-04-python-instalando-en-visual-studio-code/</guid>
+      <description>&lt;p&gt;En esta entrada veremos cómo instalar Python para utilizarlo con nuestro IDE favorito, el Visual Studio Code. En una &lt;a href=&#34;http://localhost:1313/2019/04/python-instalacion/&#34; &gt;entrada anterior&lt;/a&gt;, hemos visto cómo instalar Python en uestro Windows.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Python: Instalación</title>
+      <link>http://localhost:1313/es/posts/2019-04-02-python-instalacion/</link>
+      <pubDate>Tue, 02 Apr 2019 19:13:52 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2019-04-02-python-instalacion/</guid>
+      <description>&lt;p&gt;A partir de hoy, volveré a escribir artículos referentes a desarrollo de software. Además de aplicaciones de negocios me apasiona lo referente al mundo del desarrollo. ¡Así que manos a la obra!&lt;/p&gt;&#xA;&lt;p&gt;Primeramente, debemos conocer lo que es Python y para tal motivio podemos &lt;a href=&#34;https://wiki.python.org/moin/BeginnersGuide&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;ver la documentación oficial del lenguaje&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;p&gt;En esta entrada veremos cómo instalar Python y realizar una pequeña prueba.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  Configuración de servicios persistentes en background en WSL2 · Christian Amado
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Christian Amado">
+<meta name="description" content="Aunque WSL2 no ofrece un sistema de init tradicional como systemd por defecto, es totalmente posible configurar y ejecutar servicios persistentes como nginx o PostgreSQL desde WSL2. Esto permite simular entornos de producción, realizar pruebas completas o levantar microservicios sin contenedores ni VMs adicionales.
+Este artículo explica cómo instalar, configurar, automatizar y mantener servicios en segundo plano en WSL2 con enfoque práctico y seguro.">
+<meta name="keywords" content="blog,desarrollador,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Configuración de servicios persistentes en background en WSL2">
+  <meta name="twitter:description" content="Aunque WSL2 no ofrece un sistema de init tradicional como systemd por defecto, es totalmente posible configurar y ejecutar servicios persistentes como nginx o PostgreSQL desde WSL2. Esto permite simular entornos de producción, realizar pruebas completas o levantar microservicios sin contenedores ni VMs adicionales.
+Este artículo explica cómo instalar, configurar, automatizar y mantener servicios en segundo plano en WSL2 con enfoque práctico y seguro.">
+
+<meta property="og:url" content="http://localhost:1313/es/posts/2024-09-20-wsl2-background-services/">
+  <meta property="og:site_name" content="Christian Amado">
+  <meta property="og:title" content="Configuración de servicios persistentes en background en WSL2">
+  <meta property="og:description" content="Aunque WSL2 no ofrece un sistema de init tradicional como systemd por defecto, es totalmente posible configurar y ejecutar servicios persistentes como nginx o PostgreSQL desde WSL2. Esto permite simular entornos de producción, realizar pruebas completas o levantar microservicios sin contenedores ni VMs adicionales.
+Este artículo explica cómo instalar, configurar, automatizar y mantener servicios en segundo plano en WSL2 con enfoque práctico y seguro.">
+  <meta property="og:locale" content="es">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-09-20T00:00:00-04:00">
+    <meta property="article:modified_time" content="2024-09-20T00:00:00-04:00">
+    <meta property="article:tag" content="WinDev">
+    <meta property="article:tag" content="Windows 11">
+    <meta property="article:tag" content="WSL">
+
+
+
+
+<link rel="canonical" href="http://localhost:1313/es/posts/2024-09-20-wsl2-background-services/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/es/">
+      Christian Amado
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/about">Biografía</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/contact">Contacto</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/diabetes">Diabetes</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/tags">Etiquetas</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/en/">🇺🇸</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/es/posts/2024-09-20-wsl2-background-services/">
+              Configuración de servicios persistentes en background en WSL2
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2024-09-20T00:00:00-04:00">
+                septiembre 20, 2024
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              3 minutos de lectura.
+            </span>
+          </div>
+          
+          
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/es/tags/windev/">WinDev</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/es/tags/windows-11/">Windows 11</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/es/tags/wsl/">WSL</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <p>Aunque <strong>WSL2</strong> no ofrece un sistema de init tradicional como <code>systemd</code> por defecto, es totalmente posible configurar y ejecutar servicios persistentes como <strong>nginx</strong> o <strong>PostgreSQL</strong> desde <strong>WSL2</strong>. Esto permite simular entornos de producción, realizar pruebas completas o levantar microservicios sin contenedores ni VMs adicionales.</p>
+<p>Este artículo explica cómo instalar, configurar, automatizar y mantener servicios en segundo plano en WSL2 con enfoque práctico y seguro.</p>
+<h2 id="requisitos">
+  Requisitos
+  <a class="heading-link" href="#requisitos">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ul>
+<li>Windows 10/11 con WSL2 habilitado</li>
+<li>Distro Ubuntu 22.04 (u otra basada en Debian)</li>
+<li>Acceso a <code>sudo</code></li>
+<li>Persistencia del sistema de archivos dentro de <code>~</code> (no usar <code>/mnt/c/</code>)</li>
+</ul>
+<h2 id="paso-1-instalar-nginx-y-postgresql">
+  Paso 1: Instalar nginx y PostgreSQL
+  <a class="heading-link" href="#paso-1-instalar-nginx-y-postgresql">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt update
+</span></span><span class="line"><span class="cl">sudo apt install -y nginx postgresql
+</span></span></code></pre></div><p>Verificar que los servicios estén disponibles:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">nginx -v
+</span></span><span class="line"><span class="cl">psql --version
+</span></span></code></pre></div><h2 id="paso-2-iniciar-servicios-manualmente">
+  Paso 2: Iniciar servicios manualmente
+  <a class="heading-link" href="#paso-2-iniciar-servicios-manualmente">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Como no hay <code>systemd</code>, se inician desde la terminal:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo service nginx start
+</span></span><span class="line"><span class="cl">sudo service postgresql start
+</span></span></code></pre></div><p>Verificar estado:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ps -ef <span class="p">|</span> grep nginx
+</span></span><span class="line"><span class="cl">ps -ef <span class="p">|</span> grep postgres
+</span></span></code></pre></div><p>Ver puertos activos:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ss -tuln
+</span></span></code></pre></div><h2 id="paso-3-hacer-que-los-servicios-se-inicien-automáticamente">
+  Paso 3: Hacer que los servicios se inicien automáticamente
+  <a class="heading-link" href="#paso-3-hacer-que-los-servicios-se-inicien-autom%c3%a1ticamente">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="opción-1-script-de-inicio-en-bashrc">
+  Opción 1: Script de inicio en <code>.bashrc</code>
+  <a class="heading-link" href="#opci%c3%b3n-1-script-de-inicio-en-bashrc">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Agregar al final de <code>~/.bashrc</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Iniciar servicios al abrir WSL</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> ! pgrep nginx &gt; /dev/null<span class="p">;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">    sudo service nginx start
+</span></span><span class="line"><span class="cl"><span class="k">fi</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> ! pgrep postgres &gt; /dev/null<span class="p">;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">    sudo service postgresql start
+</span></span><span class="line"><span class="cl"><span class="k">fi</span>
+</span></span></code></pre></div><p>⚠️ Esto pedirá contraseña a menos que se configure <code>sudo</code> sin contraseña para estos comandos.</p>
+<h3 id="opción-2-crear-alias-o-comandos-rápidos">
+  Opción 2: Crear alias o comandos rápidos
+  <a class="heading-link" href="#opci%c3%b3n-2-crear-alias-o-comandos-r%c3%a1pidos">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">alias</span> start-services<span class="o">=</span><span class="s1">&#39;sudo service nginx start &amp;&amp; sudo service postgresql start&#39;</span>
+</span></span></code></pre></div><p>Guardar en <code>.bash_aliases</code> o directamente en <code>.bashrc</code>.</p>
+<h2 id="paso-4-configuración-básica-de-nginx">
+  Paso 4: Configuración básica de nginx
+  <a class="heading-link" href="#paso-4-configuraci%c3%b3n-b%c3%a1sica-de-nginx">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Editar archivo principal:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo nano /etc/nginx/sites-available/default
+</span></span></code></pre></div><p>Configurar un servidor local:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-nginx" data-lang="nginx"><span class="line"><span class="cl"><span class="k">server</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">listen</span> <span class="mi">80</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">server_name</span> <span class="s">localhost</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kn">location</span> <span class="s">/</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kn">root</span> <span class="s">/var/www/html</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kn">index</span> <span class="s">index.html</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Reiniciar para aplicar cambios:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo service nginx restart
+</span></span></code></pre></div><p>Probar en navegador: <code>http://localhost</code></p>
+<h2 id="paso-5-configurar-postgresql">
+  Paso 5: Configurar PostgreSQL
+  <a class="heading-link" href="#paso-5-configurar-postgresql">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Cambiar contraseña del usuario por defecto:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo -u postgres psql
+</span></span><span class="line"><span class="cl"><span class="se">\p</span>assword postgres
+</span></span></code></pre></div><p>Crear base de datos y usuario:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">CREATE</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">testdb</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">CREATE</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="n">dev</span><span class="w"> </span><span class="k">WITH</span><span class="w"> </span><span class="k">ENCRYPTED</span><span class="w"> </span><span class="n">PASSWORD</span><span class="w"> </span><span class="s1">&#39;clave123&#39;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">GRANT</span><span class="w"> </span><span class="k">ALL</span><span class="w"> </span><span class="k">PRIVILEGES</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">testdb</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">dev</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></div><p>Conectarse:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">psql -U dev -d testdb -h localhost
+</span></span></code></pre></div><h2 id="paso-6-acceso-desde-el-host-windows">
+  Paso 6: Acceso desde el host (Windows)
+  <a class="heading-link" href="#paso-6-acceso-desde-el-host-windows">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Por defecto, los servicios expuestos en <code>127.0.0.1</code> dentro de WSL2 son accesibles desde Windows como <code>localhost</code>.</p>
+<p>Probar:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">curl </span><span class="n">http</span><span class="err">:</span><span class="p">//</span><span class="n">localhost</span>
+</span></span><span class="line"><span class="cl"><span class="n">psql</span> <span class="n">-h</span> <span class="n">localhost</span> <span class="n">-U</span> <span class="n">dev</span> <span class="n">-d</span> <span class="n">testdb</span>
+</span></span></code></pre></div><h2 id="buenas-prácticas">
+  Buenas prácticas
+  <a class="heading-link" href="#buenas-pr%c3%a1cticas">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ul>
+<li>Ejecutar servicios en <code>~/</code> o <code>/etc</code> dentro del FS Linux, nunca desde <code>/mnt/c/</code></li>
+<li>Automatizar con scripts <code>start-services.sh</code></li>
+<li>Usar <code>pgAdmin</code>, <code>DBeaver</code> o VS Code para conexión visual a PostgreSQL</li>
+<li>Para múltiples distros, considerar nginx reverse proxy o Docker</li>
+<li>Evitar usar <code>nohup</code> o <code>&amp;</code> sin monitoreo de procesos (usar <code>tmux</code> si es necesario)</li>
+</ul>
+<h2 id="conclusión">
+  Conclusión
+  <a class="heading-link" href="#conclusi%c3%b3n">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Con unos pocos ajustes, es completamente posible ejecutar servicios persistentes como nginx y PostgreSQL en WSL2 sin contenedores. Esta configuración es ideal para desarrolladores que necesitan replicar entornos de servidor localmente con flexibilidad, rendimiento y compatibilidad total con Linux desde Windows.</p>
+      </div>
+
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script>
+  window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "cmasblog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    
+    document.addEventListener('themeChanged', function (e) { 
+        if (document.readyState == 'complete') {
+          DISQUS.reset({ reload: true, config: disqus_config });
+        }
+    });
+</script>
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2018 -
+    
+    2025
+     Christian Amado 
+    ·
+    
+    Desarrollado por <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+      <script async src="https://www.googletagmanager.com/gtag/js?id=356375808"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '356375808');
+        }
+      </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=013131931956450466198%3ablhmkdpweyq"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '013131931956450466198:blhmkdpweyq');
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

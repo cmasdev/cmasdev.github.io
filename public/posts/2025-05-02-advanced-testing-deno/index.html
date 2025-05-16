@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  Mocks, cobertura y pruebas por capas en proyectos escalables · Christian Amado
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Christian Amado">
+<meta name="description" content="En el ecosistema moderno del desarrollo backend, el testing no es opcional: es esencial. En proyectos colaborativos y escalables, contar con pruebas automatizadas bien estructuradas marca la diferencia entre un código confiable y uno frágil. Deno 2 ofrece herramientas nativas poderosas para testear, pero muchas veces su uso avanzado no está del todo documentado. Este artículo muestra cómo implementar un enfoque de testing avanzado en Deno 2, incluyendo mocks manuales, cobertura de código y organización por capas.">
+<meta name="keywords" content="blog,desarrollador,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Mocks, cobertura y pruebas por capas en proyectos escalables">
+  <meta name="twitter:description" content="En el ecosistema moderno del desarrollo backend, el testing no es opcional: es esencial. En proyectos colaborativos y escalables, contar con pruebas automatizadas bien estructuradas marca la diferencia entre un código confiable y uno frágil. Deno 2 ofrece herramientas nativas poderosas para testear, pero muchas veces su uso avanzado no está del todo documentado. Este artículo muestra cómo implementar un enfoque de testing avanzado en Deno 2, incluyendo mocks manuales, cobertura de código y organización por capas.">
+
+<meta property="og:url" content="http://localhost:1313/posts/2025-05-02-advanced-testing-deno/">
+  <meta property="og:site_name" content="Christian Amado">
+  <meta property="og:title" content="Mocks, cobertura y pruebas por capas en proyectos escalables">
+  <meta property="og:description" content="En el ecosistema moderno del desarrollo backend, el testing no es opcional: es esencial. En proyectos colaborativos y escalables, contar con pruebas automatizadas bien estructuradas marca la diferencia entre un código confiable y uno frágil. Deno 2 ofrece herramientas nativas poderosas para testear, pero muchas veces su uso avanzado no está del todo documentado. Este artículo muestra cómo implementar un enfoque de testing avanzado en Deno 2, incluyendo mocks manuales, cobertura de código y organización por capas.">
+  <meta property="og:locale" content="es">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-05-02T00:00:00-03:00">
+    <meta property="article:modified_time" content="2025-05-02T00:00:00-03:00">
+    <meta property="article:tag" content="Deno">
+    <meta property="article:tag" content="GitHub Star">
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-V1ZRP82YFD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-V1ZRP82YFD');
+</script>
+
+
+
+<link rel="canonical" href="http://localhost:1313/posts/2025-05-02-advanced-testing-deno/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="apple-touch-icon" sizes="57x57" href="/img/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/img/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/img/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/img/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/img/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/img/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/img/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/img/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/img/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="/img/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/img/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+<link rel="manifest" href="/img/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/img/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/">
+      Christian Amado
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/about">Biografía</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/contact">Contacto</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/diabetes">Diabetes</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/tags">Etiquetas</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/en/">🇺🇸</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/posts/2025-05-02-advanced-testing-deno/">
+              Mocks, cobertura y pruebas por capas en proyectos escalables
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2025-05-02T00:00:00-03:00">
+                mayo 2, 2025
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              3 minutos de lectura.
+            </span>
+          </div>
+          
+          
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/tags/deno/">Deno</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/github-star/">GitHub Star</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <p>En el ecosistema moderno del desarrollo backend, el testing no es opcional: es esencial. En proyectos colaborativos y escalables, contar con pruebas automatizadas bien estructuradas marca la diferencia entre un código confiable y uno frágil. Deno 2 ofrece herramientas nativas poderosas para testear, pero muchas veces su uso avanzado no está del todo documentado. Este artículo muestra cómo implementar un enfoque de testing avanzado en Deno 2, incluyendo mocks manuales, cobertura de código y organización por capas.</p>
+<h2 id="por-qué-testear-en-deno-2">
+  ¿Por qué testear en Deno 2?
+  <a class="heading-link" href="#por-qu%c3%a9-testear-en-deno-2">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Deno 2 cuenta con un sistema de testing nativo muy sólido:</p>
+<ul>
+<li>Sintaxis clara para definir y ejecutar tests.</li>
+<li>Aislamiento automático de cada test.</li>
+<li>Herramientas para cobertura de código (<code>deno coverage</code>).</li>
+<li>Posibilidad de testear sin librerías externas.</li>
+</ul>
+<p>Esto permite aplicar testing por capas y simular distintos escenarios sin introducir dependencias innecesarias.</p>
+<h2 id="tipos-de-pruebas-por-capa">
+  Tipos de pruebas por capa
+  <a class="heading-link" href="#tipos-de-pruebas-por-capa">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="-pruebas-unitarias">
+  ✅ Pruebas unitarias
+  <a class="heading-link" href="#-pruebas-unitarias">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Se enfocan en una función o clase específica, con dependencias simuladas.</p>
+<h3 id="-pruebas-de-integración">
+  🔄 Pruebas de integración
+  <a class="heading-link" href="#-pruebas-de-integraci%c3%b3n">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Verifican cómo interactúan varios componentes entre sí, sin tocar la capa HTTP.</p>
+<h3 id="-pruebas-end-to-end-e2e">
+  🌐 Pruebas end-to-end (E2E)
+  <a class="heading-link" href="#-pruebas-end-to-end-e2e">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Simulan una petición real, verificando el comportamiento de la aplicación de punta a punta.</p>
+<h2 id="organización-recomendada-de-carpetas">
+  Organización recomendada de carpetas
+  <a class="heading-link" href="#organizaci%c3%b3n-recomendada-de-carpetas">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">tests/
+</span></span><span class="line"><span class="cl">├── unit/
+</span></span><span class="line"><span class="cl">│   └── get_all_tasks_test.ts
+</span></span><span class="line"><span class="cl">├── integration/
+</span></span><span class="line"><span class="cl">│   └── task_repository_test.ts
+</span></span><span class="line"><span class="cl">└── e2e/
+</span></span><span class="line"><span class="cl">    └── api_tasks_test.ts
+</span></span></code></pre></div><p>Esto permite escalar los tests de forma ordenada y mantener una separación lógica.</p>
+<h2 id="mocks-en-deno-2-sin-librerías-externas">
+  Mocks en Deno 2 sin librerías externas
+  <a class="heading-link" href="#mocks-en-deno-2-sin-librer%c3%adas-externas">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Deno permite crear mocks fácilmente utilizando clases o funciones anónimas. Ejemplo:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="c1">// Mock de TaskRepository
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">class</span> <span class="nx">MockTaskRepo</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="nx">tasks</span> <span class="o">=</span> <span class="p">[{</span> <span class="nx">id</span><span class="o">:</span> <span class="s2">&#34;1&#34;</span><span class="p">,</span> <span class="nx">title</span><span class="o">:</span> <span class="s2">&#34;Test&#34;</span><span class="p">,</span> <span class="nx">completed</span>: <span class="kt">false</span> <span class="p">}];</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="nx">findAll() {</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">Promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">tasks</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Uso en el test:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">assertEquals</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">&#34;https://deno.land/std@0.224.0/assert/mod.ts&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">GetAllTasks</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">&#34;@app/use_cases/get_all_tasks.ts&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">Deno</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="s2">&#34;Devuelve tareas del repositorio mockeado&#34;</span><span class="p">,</span> <span class="kr">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="nx">repo</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MockTaskRepo</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="nx">useCase</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">GetAllTasks</span><span class="p">(</span><span class="nx">repo</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">useCase</span><span class="p">.</span><span class="nx">execute</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">assertEquals</span><span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">length</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span></code></pre></div><h2 id="simulación-de-errores">
+  Simulación de errores
+  <a class="heading-link" href="#simulaci%c3%b3n-de-errores">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>También podés simular excepciones:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">class</span> <span class="nx">FailingRepo</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">findAll() {</span>
+</span></span><span class="line"><span class="cl">    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s2">&#34;DB unavailable&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">Deno</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="s2">&#34;Manejo de error en repositorio&#34;</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="nx">useCase</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">GetAllTasks</span><span class="p">(</span><span class="k">new</span> <span class="nx">FailingRepo</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">  <span class="k">try</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">useCase</span><span class="p">.</span><span class="nx">execute</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">assertEquals</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">message</span><span class="p">,</span> <span class="s2">&#34;DB unavailable&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span></code></pre></div><h2 id="cobertura-de-código-en-deno-2">
+  Cobertura de código en Deno 2
+  <a class="heading-link" href="#cobertura-de-c%c3%b3digo-en-deno-2">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="1-ejecutar-tests-con-cobertura">
+  1. Ejecutar tests con cobertura:
+  <a class="heading-link" href="#1-ejecutar-tests-con-cobertura">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">deno <span class="nb">test</span> --coverage<span class="o">=</span>coverage/
+</span></span></code></pre></div><h3 id="2-generar-informe-legible">
+  2. Generar informe legible:
+  <a class="heading-link" href="#2-generar-informe-legible">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">deno coverage coverage/ --lcov &gt; coverage.lcov
+</span></span></code></pre></div><h3 id="3-ver-informe-html">
+  3. Ver informe HTML:
+  <a class="heading-link" href="#3-ver-informe-html">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">genhtml coverage.lcov -o coverage_html
+</span></span></code></pre></div><p>Podés usar <a href="https://manpages.debian.org/testing/lcov/genhtml.1.en.html"  class="external-link" target="_blank" rel="noopener">genhtml</a> desde <code>lcov</code> (requiere instalación externa).</p>
+<h2 id="automatización-con-github-actions">
+  Automatización con GitHub Actions
+  <a class="heading-link" href="#automatizaci%c3%b3n-con-github-actions">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Un flujo simple para ejecutar los tests y verificar la cobertura:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">test</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">on</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="l">push, pull_request]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">jobs</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">test</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l">ubuntu-latest</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">steps</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l">actions/checkout@v3</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Setup Deno</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l">denoland/setup-deno@v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">with</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">deno-version</span><span class="p">:</span><span class="w"> </span><span class="l">v2.x</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Run Tests</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l">deno test --coverage=coverage/</span><span class="w">
+</span></span></span></code></pre></div><p>También podés subir la cobertura a <a href="https://coveralls.io/"  class="external-link" target="_blank" rel="noopener">coveralls.io</a> o <a href="https://about.codecov.io/"  class="external-link" target="_blank" rel="noopener">codecov.io</a> si querés seguimiento continuo.</p>
+<h2 id="buenas-prácticas">
+  Buenas prácticas
+  <a class="heading-link" href="#buenas-pr%c3%a1cticas">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ul>
+<li>✅ Nombrar tests descriptivamente.</li>
+<li>✅ Mantener las dependencias mínimas.</li>
+<li>✅ Testear cada capa por separado.</li>
+<li>✅ Usar import maps para simplificar imports.</li>
+<li>✅ Evitar testear implementaciones internas.</li>
+</ul>
+<h2 id="conclusión">
+  Conclusión
+  <a class="heading-link" href="#conclusi%c3%b3n">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Con <strong>Deno 2</strong>, tenés todo lo necesario para aplicar pruebas por capas, cobertura de código y mocks sin dependencias externas. Adoptar estas prácticas no solo mejora la calidad de tu software, sino que también facilita la colaboración en proyectos open source.</p>
+      </div>
+
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script>
+  window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "cmasblog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    
+    document.addEventListener('themeChanged', function (e) { 
+        if (document.readyState == 'complete') {
+          DISQUS.reset({ reload: true, config: disqus_config });
+        }
+    });
+</script>
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2018 -
+    
+    2025
+     Christian Amado 
+    ·
+    
+    Desarrollado por <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+      <script async src="https://www.googletagmanager.com/gtag/js?id=356375808"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '356375808');
+        }
+      </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=013131931956450466198%3ablhmkdpweyq"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '013131931956450466198:blhmkdpweyq');
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

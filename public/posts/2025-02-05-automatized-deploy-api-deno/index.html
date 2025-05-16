@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  Deploy automatizado de APIs Deno en Azure Functions · Christian Amado
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Christian Amado">
+<meta name="description" content="El despliegue automatizado de APIs en la nube es una práctica esencial en el desarrollo moderno. Deno, con su seguridad integrada y soporte nativo para TypeScript, es una excelente opción para construir APIs escalables y eficientes. Azure Functions, por otro lado, permite ejecutar código sin preocuparse por la infraestructura subyacente.
+En este artículo, aprenderás cómo desplegar automáticamente una API de Deno en Azure Functions usando GitHub Actions.">
+<meta name="keywords" content="blog,desarrollador,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Deploy automatizado de APIs Deno en Azure Functions">
+  <meta name="twitter:description" content="El despliegue automatizado de APIs en la nube es una práctica esencial en el desarrollo moderno. Deno, con su seguridad integrada y soporte nativo para TypeScript, es una excelente opción para construir APIs escalables y eficientes. Azure Functions, por otro lado, permite ejecutar código sin preocuparse por la infraestructura subyacente.
+En este artículo, aprenderás cómo desplegar automáticamente una API de Deno en Azure Functions usando GitHub Actions.">
+
+<meta property="og:url" content="http://localhost:1313/posts/2025-02-05-automatized-deploy-api-deno/">
+  <meta property="og:site_name" content="Christian Amado">
+  <meta property="og:title" content="Deploy automatizado de APIs Deno en Azure Functions">
+  <meta property="og:description" content="El despliegue automatizado de APIs en la nube es una práctica esencial en el desarrollo moderno. Deno, con su seguridad integrada y soporte nativo para TypeScript, es una excelente opción para construir APIs escalables y eficientes. Azure Functions, por otro lado, permite ejecutar código sin preocuparse por la infraestructura subyacente.
+En este artículo, aprenderás cómo desplegar automáticamente una API de Deno en Azure Functions usando GitHub Actions.">
+  <meta property="og:locale" content="es">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-02-05T00:00:00-04:00">
+    <meta property="article:modified_time" content="2025-02-05T00:00:00-04:00">
+    <meta property="article:tag" content="Web Development">
+    <meta property="article:tag" content="Deno">
+    <meta property="article:tag" content="Azure">
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-V1ZRP82YFD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-V1ZRP82YFD');
+</script>
+
+
+
+<link rel="canonical" href="http://localhost:1313/posts/2025-02-05-automatized-deploy-api-deno/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="apple-touch-icon" sizes="57x57" href="/img/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/img/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/img/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/img/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/img/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/img/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/img/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/img/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/img/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="/img/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/img/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+<link rel="manifest" href="/img/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/img/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/">
+      Christian Amado
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/about">Biografía</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/contact">Contacto</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/diabetes">Diabetes</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/tags">Etiquetas</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/en/">🇺🇸</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/posts/2025-02-05-automatized-deploy-api-deno/">
+              Deploy automatizado de APIs Deno en Azure Functions
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2025-02-05T00:00:00-04:00">
+                febrero 5, 2025
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              4 minutos de lectura.
+            </span>
+          </div>
+          
+          
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/tags/web-development/">Web Development</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/deno/">Deno</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/azure/">Azure</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <p>El despliegue automatizado de APIs en la nube es una práctica esencial en el desarrollo moderno. <strong>Deno</strong>, con su seguridad integrada y soporte nativo para TypeScript, es una excelente opción para construir APIs escalables y eficientes. <strong>Azure Functions</strong>, por otro lado, permite ejecutar código sin preocuparse por la infraestructura subyacente.</p>
+<p>En este artículo, aprenderás cómo <strong>desplegar automáticamente una API de Deno en Azure Functions</strong> usando GitHub Actions.</p>
+<h2 id="1-por-qué-usar-deno-con-azure-functions">
+  1. ¿Por qué Usar Deno con Azure Functions?
+  <a class="heading-link" href="#1-por-qu%c3%a9-usar-deno-con-azure-functions">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Las ventajas de utilizar Deno con <strong>Azure Functions</strong> incluyen:</p>
+<p>✅ <strong>Ejecuta código sin servidores</strong>: Solo pagas por las ejecuciones realizadas.<br>
+✅ <strong>Compatibilidad con TypeScript</strong>: No requiere configuración adicional.<br>
+✅ <strong>Seguridad mejorada</strong>: Deno requiere permisos explícitos.<br>
+✅ <strong>Escalabilidad automática</strong>: Azure Functions escala dinámicamente según la carga.<br>
+✅ <strong>Despliegue automatizado</strong>: Se puede integrar con GitHub Actions para CI/CD.</p>
+<h2 id="2-configuración-del-proyecto-deno">
+  2. Configuración del Proyecto Deno
+  <a class="heading-link" href="#2-configuraci%c3%b3n-del-proyecto-deno">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="21-instalación-de-deno">
+  <strong>2.1 Instalación de Deno</strong>
+  <a class="heading-link" href="#21-instalaci%c3%b3n-de-deno">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Si no tienes Deno instalado, usa el siguiente comando:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">curl -fsSL https://deno.land/x/install/install.sh | sh
+</span></span><span class="line"><span class="cl">deno --version
+</span></span></code></pre></div><h3 id="22-creación-de-una-api-en-deno">
+  <strong>2.2 Creación de una API en Deno</strong>
+  <a class="heading-link" href="#22-creaci%c3%b3n-de-una-api-en-deno">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Primero, creamos una API REST básica usando el framework Oak:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">mkdir deno-api &amp;&amp; cd deno-api
+</span></span><span class="line"><span class="cl">echo &#34;{}&#34; &gt; deps.ts
+</span></span><span class="line"><span class="cl">echo &#34;{}&#34; &gt; server.ts
+</span></span><span class="line"><span class="cl">echo &#34;{}&#34; &gt; routes.ts
+</span></span><span class="line"><span class="cl">echo &#34;{}&#34; &gt; controllers.ts
+</span></span></code></pre></div><h4 id="depsts">
+  <strong><code>deps.ts</code> (Dependencias)</strong>
+  <a class="heading-link" href="#depsts">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">export</span> <span class="p">{</span> <span class="n">Application</span><span class="p">,</span> <span class="n">Router</span> <span class="p">}</span> <span class="n">from</span> <span class="s2">&#34;https://deno.land/x/oak/mod.ts&#34;</span><span class="p">;</span>
+</span></span></code></pre></div><h4 id="serverts">
+  <strong><code>server.ts</code> (Servidor Principal)</strong>
+  <a class="heading-link" href="#serverts">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">import</span> <span class="p">{</span> <span class="n">Application</span> <span class="p">}</span> <span class="n">from</span> <span class="s2">&#34;./deps.ts&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">import</span> <span class="n">router</span> <span class="n">from</span> <span class="s2">&#34;./routes.ts&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">app</span> <span class="o">=</span> <span class="n">new</span> <span class="n">Application</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="n">app</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="n">router</span><span class="o">.</span><span class="n">routes</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl"><span class="n">app</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="n">router</span><span class="o">.</span><span class="n">allowedMethods</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s2">&#34;API Deno corriendo en http://localhost:8080&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">await</span> <span class="n">app</span><span class="o">.</span><span class="n">listen</span><span class="p">({</span> <span class="n">port</span><span class="p">:</span> <span class="mi">8080</span> <span class="p">});</span>
+</span></span></code></pre></div><h4 id="routests">
+  <strong><code>routes.ts</code> (Definición de Rutas)</strong>
+  <a class="heading-link" href="#routests">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">import</span> <span class="p">{</span> <span class="n">Router</span> <span class="p">}</span> <span class="n">from</span> <span class="s2">&#34;./deps.ts&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">import</span> <span class="p">{</span> <span class="n">getHello</span> <span class="p">}</span> <span class="n">from</span> <span class="s2">&#34;./controllers.ts&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">router</span> <span class="o">=</span> <span class="n">new</span> <span class="n">Router</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="n">router</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&#34;/hello&#34;</span><span class="p">,</span> <span class="n">getHello</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">export</span> <span class="n">default</span> <span class="n">router</span><span class="p">;</span>
+</span></span></code></pre></div><h4 id="controllersts">
+  <strong><code>controllers.ts</code> (Controlador de Rutas)</strong>
+  <a class="heading-link" href="#controllersts">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">import</span> <span class="p">{</span> <span class="n">Context</span> <span class="p">}</span> <span class="n">from</span> <span class="s2">&#34;https://deno.land/x/oak/mod.ts&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">export</span> <span class="k">const</span> <span class="n">getHello</span> <span class="o">=</span> <span class="p">(</span><span class="n">ctx</span><span class="p">:</span> <span class="n">Context</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ctx</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">body</span> <span class="o">=</span> <span class="p">{</span> <span class="n">message</span><span class="p">:</span> <span class="s2">&#34;Hola desde Deno y Azure!&#34;</span> <span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><h2 id="3-configuración-de-azure-functions">
+  3. Configuración de Azure Functions
+  <a class="heading-link" href="#3-configuraci%c3%b3n-de-azure-functions">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="31-crear-un-azure-function-app">
+  <strong>3.1 Crear un Azure Function App</strong>
+  <a class="heading-link" href="#31-crear-un-azure-function-app">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>Ingresa a <a href="https://portal.azure.com/"  class="external-link" target="_blank" rel="noopener">Azure Portal</a>.</li>
+<li>Dirígete a <strong>Azure Functions</strong> y selecciona <strong>Crear Función</strong>.</li>
+<li>Configura los siguientes parámetros:
+<ul>
+<li><strong>Nombre de la función</strong>: <code>deno-api-func</code></li>
+<li><strong>Lenguaje</strong>: <strong>Custom Handler</strong></li>
+<li><strong>Plan de ejecución</strong>: <strong>Consumo (Pay-as-you-go)</strong></li>
+<li><strong>Sistema Operativo</strong>: <strong>Linux</strong></li>
+<li><strong>Región</strong>: La más cercana a tu ubicación.</li>
+</ul>
+</li>
+<li>Presiona <strong>Crear y Desplegar</strong>.</li>
+</ol>
+<h3 id="32-configurar-variables-de-entorno">
+  <strong>3.2 Configurar Variables de Entorno</strong>
+  <a class="heading-link" href="#32-configurar-variables-de-entorno">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>En el portal de Azure, dirígete a <strong>Configuración &gt; Variables de Entorno</strong> y añade:</p>
+<ul>
+<li><code>DENO_VERSION=1.38.0</code></li>
+<li><code>PORT=8080</code></li>
+</ul>
+<h2 id="4-creación-de-hostjson-y-functionjson">
+  4. Creación de <code>host.json</code> y <code>function.json</code>
+  <a class="heading-link" href="#4-creaci%c3%b3n-de-hostjson-y-functionjson">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Para que Azure Functions entienda nuestra API, debemos crear archivos de configuración.</p>
+<h4 id="hostjson">
+  <strong><code>host.json</code></strong>
+  <a class="heading-link" href="#hostjson">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">  &#34;version&#34;: &#34;2.0&#34;,
+</span></span><span class="line"><span class="cl">  &#34;extensionBundle&#34;: {
+</span></span><span class="line"><span class="cl">    &#34;id&#34;: &#34;Microsoft.Azure.Functions.ExtensionBundle&#34;,
+</span></span><span class="line"><span class="cl">    &#34;version&#34;: &#34;[3.*, 4.0.0)&#34;
+</span></span><span class="line"><span class="cl">  }
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></div><h4 id="functionjson">
+  <strong><code>function.json</code></strong>
+  <a class="heading-link" href="#functionjson">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">  &#34;bindings&#34;: [
+</span></span><span class="line"><span class="cl">    {
+</span></span><span class="line"><span class="cl">      &#34;authLevel&#34;: &#34;anonymous&#34;,
+</span></span><span class="line"><span class="cl">      &#34;type&#34;: &#34;httpTrigger&#34;,
+</span></span><span class="line"><span class="cl">      &#34;direction&#34;: &#34;in&#34;,
+</span></span><span class="line"><span class="cl">      &#34;name&#34;: &#34;req&#34;,
+</span></span><span class="line"><span class="cl">      &#34;methods&#34;: [&#34;get&#34;]
+</span></span><span class="line"><span class="cl">    },
+</span></span><span class="line"><span class="cl">    {
+</span></span><span class="line"><span class="cl">      &#34;type&#34;: &#34;http&#34;,
+</span></span><span class="line"><span class="cl">      &#34;direction&#34;: &#34;out&#34;,
+</span></span><span class="line"><span class="cl">      &#34;name&#34;: &#34;res&#34;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">  ]
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></div><h2 id="5-automatización-con-github-actions">
+  5. Automatización con GitHub Actions
+  <a class="heading-link" href="#5-automatizaci%c3%b3n-con-github-actions">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Para desplegar automáticamente nuestra API Deno en <strong>Azure Functions</strong>, usaremos GitHub Actions.</p>
+<h3 id="51-crear-un-archivo-de-workflow">
+  <strong>5.1 Crear un archivo de Workflow</strong>
+  <a class="heading-link" href="#51-crear-un-archivo-de-workflow">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>En el repositorio de GitHub, crea la ruta <code>.github/workflows/deploy.yml</code> y agrega lo siguiente:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">name: Deploy Deno API to Azure Functions
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">on:
+</span></span><span class="line"><span class="cl">  push:
+</span></span><span class="line"><span class="cl">    branches:
+</span></span><span class="line"><span class="cl">      - main
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">jobs:
+</span></span><span class="line"><span class="cl">  build-and-deploy:
+</span></span><span class="line"><span class="cl">    runs-on: ubuntu-latest
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    steps:
+</span></span><span class="line"><span class="cl">      - name: Checkout repository
+</span></span><span class="line"><span class="cl">        uses: actions/checkout@v3
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      - name: Setup Deno
+</span></span><span class="line"><span class="cl">        uses: denoland/setup-deno@v1
+</span></span><span class="line"><span class="cl">        with:
+</span></span><span class="line"><span class="cl">          deno-version: v1.x
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      - name: Deploy to Azure Functions
+</span></span><span class="line"><span class="cl">        uses: Azure/functions-action@v1
+</span></span><span class="line"><span class="cl">        with:
+</span></span><span class="line"><span class="cl">          app-name: &#34;deno-api-func&#34;
+</span></span><span class="line"><span class="cl">          package: &#34;.&#34;
+</span></span><span class="line"><span class="cl">          publish-profile: ${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE }}
+</span></span></code></pre></div><h3 id="52-configurar-secretos-en-github">
+  <strong>5.2 Configurar Secretos en GitHub</strong>
+  <a class="heading-link" href="#52-configurar-secretos-en-github">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>Entra a tu repositorio en GitHub.</li>
+<li>Ve a <strong>Settings &gt; Secrets and Variables &gt; Actions</strong>.</li>
+<li>Agrega un secreto llamado <code>AZURE_FUNCTIONAPP_PUBLISH_PROFILE</code> con el contenido del perfil de publicación de Azure.</li>
+</ol>
+<h2 id="6-despliegue-y-prueba">
+  6. Despliegue y Prueba
+  <a class="heading-link" href="#6-despliegue-y-prueba">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="61-ejecutar-el-despliegue">
+  <strong>6.1 Ejecutar el Despliegue</strong>
+  <a class="heading-link" href="#61-ejecutar-el-despliegue">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Cada vez que hagas <code>git push</code> a la rama <code>main</code>, GitHub Actions ejecutará el despliegue automáticamente.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">git add .
+</span></span><span class="line"><span class="cl">git commit -m &#34;Deploy API Deno en Azure Functions&#34;
+</span></span><span class="line"><span class="cl">git push origin main
+</span></span></code></pre></div><h3 id="62-probar-la-api-en-azure">
+  <strong>6.2 Probar la API en Azure</strong>
+  <a class="heading-link" href="#62-probar-la-api-en-azure">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Cuando el despliegue finalice, podrás acceder a la API con:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">curl https://deno-api-func.azurewebsites.net/api/hello
+</span></span></code></pre></div><p>Debería responder:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">{ &#34;message&#34;: &#34;Hola desde Deno y Azure!&#34; }
+</span></span></code></pre></div><h2 id="7-conclusión">
+  7. Conclusión
+  <a class="heading-link" href="#7-conclusi%c3%b3n">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>El <strong>deploy automatizado de APIs Deno en Azure Functions</strong> ofrece una solución escalable y eficiente sin preocuparse por la infraestructura. <strong>GitHub Actions</strong> facilita la automatización del proceso CI/CD.</p>
+      </div>
+
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script>
+  window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "cmasblog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    
+    document.addEventListener('themeChanged', function (e) { 
+        if (document.readyState == 'complete') {
+          DISQUS.reset({ reload: true, config: disqus_config });
+        }
+    });
+</script>
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2018 -
+    
+    2025
+     Christian Amado 
+    ·
+    
+    Desarrollado por <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+      <script async src="https://www.googletagmanager.com/gtag/js?id=356375808"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '356375808');
+        }
+      </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=013131931956450466198%3ablhmkdpweyq"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '013131931956450466198:blhmkdpweyq');
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

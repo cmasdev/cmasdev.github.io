@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Microsoft Edge on Christian Amado</title>
+    <link>http://localhost:1313/es/tags/microsoft-edge/</link>
+    <description>Recent content in Microsoft Edge on Christian Amado</description>
+    <generator>Hugo</generator>
+    <language>es</language>
+    <lastBuildDate>Wed, 02 Mar 2022 18:55:04 -0400</lastBuildDate>
+    <atom:link href="http://localhost:1313/es/tags/microsoft-edge/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Business Central: Cambiarse a Microsoft Edge</title>
+      <link>http://localhost:1313/es/posts/2022-03-02-business-central-cambiarse-a-microsoft-edge/</link>
+      <pubDate>Wed, 02 Mar 2022 18:55:04 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2022-03-02-business-central-cambiarse-a-microsoft-edge/</guid>
+      <description>&lt;p&gt;En este artículo explicaré que podemos hacer con Microsoft Dynamics 365 Business Central con el navegador Microsoft Edge.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>BC Tips: Instalar App Business Central</title>
+      <link>http://localhost:1313/es/posts/2022-02-02-business-central-instalar-app/</link>
+      <pubDate>Wed, 02 Feb 2022 08:16:53 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2022-02-02-business-central-instalar-app/</guid>
+      <description>&lt;p&gt;En este artículo mostraré cómo instalar Microsoft Dynamics 365 Business Central como una App desde Microsoft Edge..&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

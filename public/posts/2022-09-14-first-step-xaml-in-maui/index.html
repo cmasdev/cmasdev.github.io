@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  Primeros pasos con XAML en MAUI · Christian Amado
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Christian Amado">
+<meta name="description" content="En este artículo mostraré cómo iniciar los pasos con el lenguaje XAML en .NET MAUI.
+Windows 11 Insider Preview Build 25201">
+<meta name="keywords" content="blog,desarrollador,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Primeros pasos con XAML en MAUI">
+  <meta name="twitter:description" content="En este artículo mostraré cómo iniciar los pasos con el lenguaje XAML en .NET MAUI.
+Windows 11 Insider Preview Build 25201">
+
+<meta property="og:url" content="http://localhost:1313/posts/2022-09-14-first-step-xaml-in-maui/">
+  <meta property="og:site_name" content="Christian Amado">
+  <meta property="og:title" content="Primeros pasos con XAML en MAUI">
+  <meta property="og:description" content="En este artículo mostraré cómo iniciar los pasos con el lenguaje XAML en .NET MAUI.
+Windows 11 Insider Preview Build 25201">
+  <meta property="og:locale" content="es">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2022-09-14T23:18:00-04:00">
+    <meta property="article:modified_time" content="2022-09-14T23:18:00-04:00">
+    <meta property="article:tag" content="WinDev">
+    <meta property="article:tag" content="MAUI">
+    <meta property="article:tag" content="Windows 11">
+    <meta property="article:tag" content="Telerik">
+    <meta property="article:tag" content="XAML">
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-V1ZRP82YFD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-V1ZRP82YFD');
+</script>
+
+
+
+<link rel="canonical" href="http://localhost:1313/posts/2022-09-14-first-step-xaml-in-maui/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="apple-touch-icon" sizes="57x57" href="/img/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/img/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/img/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/img/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/img/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/img/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/img/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/img/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/img/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="/img/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/img/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+<link rel="manifest" href="/img/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/img/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/">
+      Christian Amado
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/about">Biografía</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/contact">Contacto</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/diabetes">Diabetes</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/tags">Etiquetas</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/en/">🇺🇸</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/posts/2022-09-14-first-step-xaml-in-maui/">
+              Primeros pasos con XAML en MAUI
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2022-09-14T23:18:00-04:00">
+                septiembre 14, 2022
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              2 minutos de lectura.
+            </span>
+          </div>
+          
+          
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/tags/windev/">WinDev</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/maui/">MAUI</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/windows-11/">Windows 11</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/telerik/">Telerik</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/xaml/">XAML</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <p>En este artículo mostraré cómo iniciar los pasos con el lenguaje <strong>XAML</strong> en <strong>.NET MAUI</strong>.</p>
+<p><em><strong>Windows 11 Insider Preview Build 25201</strong></em></p>
+<p>En este pequeño artículo vamos a utilizar controles de Telerik para <strong>.NET MAUI</strong>. En un <a href="" >artículo anterior</a> vimos cómo crear una aplicación <strong>.NET MAUI</strong> y aquí haremos otra basada en otra plantilla (<a href="https://www.telerik.com/support/whats-new/maui-ui/release-history/telerik-ui-for-net-maui-%28version-3-0-0%29"  class="external-link" target="_blank" rel="noopener">Telerik</a>).
+<img src="/img/posts/2022/09/14/1.png" alt=""></p>
+<h2 id="telerik-sidedrawer">
+  Telerik SideDrawer
+  <a class="heading-link" href="#telerik-sidedrawer">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Este control (conocido como Menú Hamburguesa) se utiliza para hacer la navegación muy amigable debido a que el menú queda al costado de nuestro diseño y permite una visualización completa del mismo. En Windows 11 se refiere a <a href="https://learn.microsoft.com/en-us/windows/apps/design/controls/navigationview"  class="external-link" target="_blank" rel="noopener">NavigationView</a>.</p>
+<p>La definición del control, en lenguaje <strong>XAML</strong>, sería:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&lt;ContentPage xmlns=&#34;http://schemas.microsoft.com/dotnet/2021/maui&#34;
+</span></span><span class="line"><span class="cl">             xmlns:x=&#34;http://schemas.microsoft.com/winfx/2009/xaml&#34;
+</span></span><span class="line"><span class="cl">             xmlns:telerik=&#34;http://schemas.telerik.com/2022/xaml/maui&#34;
+</span></span><span class="line"><span class="cl">             x:Class=&#34;TelerikMauiApp1.MainPage&#34;&gt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    &lt;ScrollView&gt;
+</span></span><span class="line"><span class="cl">        &lt;telerik:RadSideDrawer x:Name=&#34;drawer&#34; 
+</span></span><span class="line"><span class="cl">                       DrawerLength=&#34;200&#34;&gt;
+</span></span><span class="line"><span class="cl">            &lt;telerik:RadSideDrawer.MainContent&gt;
+</span></span><span class="line"><span class="cl">                &lt;Grid&gt;
+</span></span><span class="line"><span class="cl">                    &lt;Label Text=&#34;Main content on CMASDEV BLOG&#34; /&gt;
+</span></span><span class="line"><span class="cl">                &lt;/Grid&gt;
+</span></span><span class="line"><span class="cl">            &lt;/telerik:RadSideDrawer.MainContent&gt;
+</span></span><span class="line"><span class="cl">            &lt;telerik:RadSideDrawer.DrawerContent&gt;
+</span></span><span class="line"><span class="cl">                &lt;VerticalStackLayout Spacing=&#34;10&#34;
+</span></span><span class="line"><span class="cl">                             Padding=&#34;10, 10, 0, 0&#34;&gt;
+</span></span><span class="line"><span class="cl">                    &lt;VerticalStackLayout.Resources&gt;
+</span></span><span class="line"><span class="cl">                        &lt;Style x:Key=&#34;DefaultButtonStyle&#34; TargetType=&#34;Button&#34;&gt;
+</span></span><span class="line"><span class="cl">                            &lt;Setter Property=&#34;WidthRequest&#34; Value=&#34;180&#34; /&gt;
+</span></span><span class="line"><span class="cl">                            &lt;Setter Property=&#34;HeightRequest&#34; Value=&#34;40&#34; /&gt;
+</span></span><span class="line"><span class="cl">                            &lt;Setter Property=&#34;BackgroundColor&#34; Value=&#34;#b1b1b1&#34; /&gt;
+</span></span><span class="line"><span class="cl">                            &lt;Setter Property=&#34;TextColor&#34; Value=&#34;Black&#34; /&gt;
+</span></span><span class="line"><span class="cl">                        &lt;/Style&gt;
+</span></span><span class="line"><span class="cl">                    &lt;/VerticalStackLayout.Resources&gt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                    &lt;Button Text=&#34;Mail&#34;
+</span></span><span class="line"><span class="cl">                    Style=&#34;{StaticResource DefaultButtonStyle}&#34; /&gt;
+</span></span><span class="line"><span class="cl">                    &lt;Button Text=&#34;Calendar&#34;
+</span></span><span class="line"><span class="cl">                    Style=&#34;{StaticResource DefaultButtonStyle}&#34; /&gt;
+</span></span><span class="line"><span class="cl">                    &lt;Button Text=&#34;People&#34;
+</span></span><span class="line"><span class="cl">                    Style=&#34;{StaticResource DefaultButtonStyle}&#34; /&gt;
+</span></span><span class="line"><span class="cl">                    &lt;Button Text=&#34;Tasks&#34;
+</span></span><span class="line"><span class="cl">                    Style=&#34;{StaticResource DefaultButtonStyle}&#34; /&gt;
+</span></span><span class="line"><span class="cl">                &lt;/VerticalStackLayout&gt;
+</span></span><span class="line"><span class="cl">            &lt;/telerik:RadSideDrawer.DrawerContent&gt;
+</span></span><span class="line"><span class="cl">        &lt;/telerik:RadSideDrawer&gt;
+</span></span><span class="line"><span class="cl">    &lt;/ScrollView&gt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">&lt;/ContentPage&gt;
+</span></span></code></pre></div><p>Con esta definición declarativa logramos que el control tenga todos los detalles necesarios para su funcionamiento.</p>
+<p>Visualmente, el resultado del código XAML es:
+<img src="/img/posts/2022/09/14/2.png" alt=""><br>
+<img src="/img/posts/2022/09/14/3.png" alt=""></p>
+<p>Si realmente necesitas aprender <strong>XAML</strong>, la documentación de Microsft <a href="https://learn.microsoft.com/es-es/dotnet/maui/xaml/fundamentals/get-started?view=net-maui-7.0"  class="external-link" target="_blank" rel="noopener">aquí</a> está muy completa.</p>
+<p>¡Espero resulte útil!</p>
+      </div>
+
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script>
+  window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "cmasblog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    
+    document.addEventListener('themeChanged', function (e) { 
+        if (document.readyState == 'complete') {
+          DISQUS.reset({ reload: true, config: disqus_config });
+        }
+    });
+</script>
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2018 -
+    
+    2025
+     Christian Amado 
+    ·
+    
+    Desarrollado por <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+      <script async src="https://www.googletagmanager.com/gtag/js?id=356375808"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '356375808');
+        }
+      </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=013131931956450466198%3ablhmkdpweyq"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '013131931956450466198:blhmkdpweyq');
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

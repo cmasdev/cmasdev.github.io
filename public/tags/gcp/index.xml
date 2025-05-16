@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>GCP on Christian Amado</title>
+    <link>http://localhost:1313/tags/gcp/</link>
+    <description>Recent content in GCP on Christian Amado</description>
+    <generator>Hugo</generator>
+    <language>es</language>
+    <lastBuildDate>Wed, 30 Apr 2025 00:00:00 -0300</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/gcp/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Uso seguro de variables y secretos en GCP con Go</title>
+      <link>http://localhost:1313/posts/2025-04-30-secure-variables-go/</link>
+      <pubDate>Wed, 30 Apr 2025 00:00:00 -0300</pubDate>
+      <guid>http://localhost:1313/posts/2025-04-30-secure-variables-go/</guid>
+      <description>&lt;p&gt;Manejar secretos —como claves API, tokens y credenciales— de forma segura es esencial en cualquier aplicación moderna. &lt;strong&gt;Google Cloud Platform (GCP)&lt;/strong&gt; ofrece una solución robusta para este desafío a través de &lt;strong&gt;Secret Manager&lt;/strong&gt;, que permite almacenar, acceder y auditar secretos de manera segura y centralizada.&lt;/p&gt;&#xA;&lt;p&gt;Este artículo muestra cómo acceder y gestionar secretos en &lt;strong&gt;GCP&lt;/strong&gt; desde aplicaciones desarrolladas en &lt;strong&gt;Go&lt;/strong&gt;, asegurando que tus variables sensibles estén protegidas sin necesidad de hardcodearlas o exponerlas en entornos inseguros.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

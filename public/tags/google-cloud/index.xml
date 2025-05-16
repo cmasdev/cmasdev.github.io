@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Google Cloud on Christian Amado</title>
+    <link>http://localhost:1313/tags/google-cloud/</link>
+    <description>Recent content in Google Cloud on Christian Amado</description>
+    <generator>Hugo</generator>
+    <language>es</language>
+    <lastBuildDate>Wed, 30 Apr 2025 00:00:00 -0300</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/google-cloud/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Uso seguro de variables y secretos en GCP con Go</title>
+      <link>http://localhost:1313/posts/2025-04-30-secure-variables-go/</link>
+      <pubDate>Wed, 30 Apr 2025 00:00:00 -0300</pubDate>
+      <guid>http://localhost:1313/posts/2025-04-30-secure-variables-go/</guid>
+      <description>&lt;p&gt;Manejar secretos —como claves API, tokens y credenciales— de forma segura es esencial en cualquier aplicación moderna. &lt;strong&gt;Google Cloud Platform (GCP)&lt;/strong&gt; ofrece una solución robusta para este desafío a través de &lt;strong&gt;Secret Manager&lt;/strong&gt;, que permite almacenar, acceder y auditar secretos de manera segura y centralizada.&lt;/p&gt;&#xA;&lt;p&gt;Este artículo muestra cómo acceder y gestionar secretos en &lt;strong&gt;GCP&lt;/strong&gt; desde aplicaciones desarrolladas en &lt;strong&gt;Go&lt;/strong&gt;, asegurando que tus variables sensibles estén protegidas sin necesidad de hardcodearlas o exponerlas en entornos inseguros.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Firestore como base NoSQL para apps Go</title>
+      <link>http://localhost:1313/posts/2025-04-23-gcp-firestore-integration/</link>
+      <pubDate>Wed, 23 Apr 2025 00:00:00 -0300</pubDate>
+      <guid>http://localhost:1313/posts/2025-04-23-gcp-firestore-integration/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;Firestore&lt;/strong&gt;, la base de datos &lt;strong&gt;NoSQL&lt;/strong&gt; de &lt;strong&gt;Google Cloud&lt;/strong&gt;, ofrece una solución escalable y de baja latencia ideal para aplicaciones modernas. En este artículo se explora cómo integrar &lt;strong&gt;Firestore&lt;/strong&gt; con aplicaciones desarrolladas en &lt;strong&gt;Go&lt;/strong&gt;, aprovechando el &lt;strong&gt;SDK&lt;/strong&gt; oficial de &lt;strong&gt;Google Cloud&lt;/strong&gt;. A lo largo del artículo se muestra un enfoque práctico para conectar, leer, escribir y actualizar documentos en &lt;strong&gt;Firestore&lt;/strong&gt; desde una aplicación escrita en &lt;strong&gt;Go&lt;/strong&gt;.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

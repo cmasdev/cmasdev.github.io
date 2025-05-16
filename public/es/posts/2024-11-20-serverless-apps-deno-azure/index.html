@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  Creación de aplicaciones serverless con Deno y Azure · Christian Amado
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Christian Amado">
+<meta name="description" content="El paradigma serverless permite construir aplicaciones sin necesidad de gestionar servidores, proporcionando escalabilidad automática y optimización de costos. En este artículo, exploraremos cómo crear aplicaciones serverless utilizando Deno y Azure Functions, combinando la eficiencia de Deno con la potencia de la nube de Azure.">
+<meta name="keywords" content="blog,desarrollador,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Creación de aplicaciones serverless con Deno y Azure">
+  <meta name="twitter:description" content="El paradigma serverless permite construir aplicaciones sin necesidad de gestionar servidores, proporcionando escalabilidad automática y optimización de costos. En este artículo, exploraremos cómo crear aplicaciones serverless utilizando Deno y Azure Functions, combinando la eficiencia de Deno con la potencia de la nube de Azure.">
+
+<meta property="og:url" content="http://localhost:1313/es/posts/2024-11-20-serverless-apps-deno-azure/">
+  <meta property="og:site_name" content="Christian Amado">
+  <meta property="og:title" content="Creación de aplicaciones serverless con Deno y Azure">
+  <meta property="og:description" content="El paradigma serverless permite construir aplicaciones sin necesidad de gestionar servidores, proporcionando escalabilidad automática y optimización de costos. En este artículo, exploraremos cómo crear aplicaciones serverless utilizando Deno y Azure Functions, combinando la eficiencia de Deno con la potencia de la nube de Azure.">
+  <meta property="og:locale" content="es">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-11-20T00:00:00-04:00">
+    <meta property="article:modified_time" content="2024-11-20T00:00:00-04:00">
+    <meta property="article:tag" content="Web Development">
+    <meta property="article:tag" content="Deno">
+    <meta property="article:tag" content="Azure">
+
+
+
+
+<link rel="canonical" href="http://localhost:1313/es/posts/2024-11-20-serverless-apps-deno-azure/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/es/">
+      Christian Amado
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/about">Biografía</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/contact">Contacto</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/diabetes">Diabetes</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/tags">Etiquetas</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/en/">🇺🇸</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/es/posts/2024-11-20-serverless-apps-deno-azure/">
+              Creación de aplicaciones serverless con Deno y Azure
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2024-11-20T00:00:00-04:00">
+                noviembre 20, 2024
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              4 minutos de lectura.
+            </span>
+          </div>
+          
+          
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/es/tags/web-development/">Web Development</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/es/tags/deno/">Deno</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/es/tags/azure/">Azure</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <p>El paradigma serverless permite construir aplicaciones sin necesidad de gestionar servidores, proporcionando escalabilidad automática y optimización de costos. En este artículo, exploraremos cómo crear aplicaciones serverless utilizando Deno y Azure Functions, combinando la eficiencia de Deno con la potencia de la nube de Azure.</p>
+<h2 id="por-qué-usar-deno-y-azure-functions">
+  ¿Por qué usar Deno y Azure Functions?
+  <a class="heading-link" href="#por-qu%c3%a9-usar-deno-y-azure-functions">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="beneficios-de-deno">
+  <strong>Beneficios de Deno</strong>
+  <a class="heading-link" href="#beneficios-de-deno">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Deno es un runtime moderno para JavaScript y TypeScript con varias características que lo hacen ideal para aplicaciones serverless:</p>
+<ul>
+<li><strong>Seguridad integrada</strong>: Requiere permisos explícitos para acceder a archivos, red y entorno.</li>
+<li><strong>Soporte nativo para TypeScript</strong>: No necesita configuración adicional.</li>
+<li><strong>Gestión de dependencias simplificada</strong>: Se utilizan URLs en lugar de <code>node_modules</code>.</li>
+<li><strong>Rápido y eficiente</strong>: Basado en V8 y Rust, ofrece un excelente rendimiento.</li>
+</ul>
+<h3 id="beneficios-de-azure-functions">
+  <strong>Beneficios de Azure Functions</strong>
+  <a class="heading-link" href="#beneficios-de-azure-functions">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Azure Functions es una plataforma serverless que permite ejecutar código en la nube sin administrar infraestructura:</p>
+<ul>
+<li><strong>Escalabilidad automática</strong>: Se adapta a la demanda sin intervención manual.</li>
+<li><strong>Modelo de pago por uso</strong>: Solo se cobra por el tiempo de ejecución.</li>
+<li><strong>Integración con otros servicios de Azure</strong>: Como bases de datos, colas y almacenamiento.</li>
+</ul>
+<h2 id="configuración-del-entorno">
+  Configuración del Entorno
+  <a class="heading-link" href="#configuraci%c3%b3n-del-entorno">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="1-instalar-deno">
+  <strong>1. Instalar Deno</strong>
+  <a class="heading-link" href="#1-instalar-deno">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Para instalar Deno en tu máquina local, ejecuta:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">curl -fsSL https://deno.land/x/install/install.sh | sh
+</span></span></code></pre></div><p>Verifica la instalación con:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">deno --version
+</span></span></code></pre></div><h3 id="2-configurar-azure-functions">
+  <strong>2. Configurar Azure Functions</strong>
+  <a class="heading-link" href="#2-configurar-azure-functions">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Para trabajar con Azure Functions, necesitamos la <strong>Azure Functions Core Tools</strong> y una suscripción activa en Azure.</p>
+<ol>
+<li>
+<p><strong>Instalar las herramientas de Azure Functions</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">npm</span> <span class="n">install</span> <span class="o">-</span><span class="n">g</span> <span class="n">azure</span><span class="o">-</span><span class="n">functions</span><span class="o">-</span><span class="n">core</span><span class="o">-</span><span class="n">tools</span><span class="err">@</span><span class="mi">4</span> <span class="o">--</span><span class="n">unsafe</span><span class="o">-</span><span class="n">perm</span> <span class="bp">true</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Iniciar sesión en Azure</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">az login
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Crear un nuevo proyecto de Azure Functions</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">func</span> <span class="n">init</span> <span class="n">my</span><span class="o">-</span><span class="n">deno</span><span class="o">-</span><span class="n">function</span> <span class="o">--</span><span class="n">worker</span><span class="o">-</span><span class="n">runtime</span> <span class="n">custom</span>
+</span></span><span class="line"><span class="cl"><span class="n">cd</span> <span class="n">my</span><span class="o">-</span><span class="n">deno</span><span class="o">-</span><span class="n">function</span>
+</span></span></code></pre></div></li>
+</ol>
+<h2 id="creación-de-una-función-serverless-con-deno">
+  Creación de una Función Serverless con Deno
+  <a class="heading-link" href="#creaci%c3%b3n-de-una-funci%c3%b3n-serverless-con-deno">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Vamos a crear una función HTTP que reciba una solicitud y devuelva una respuesta utilizando Deno.</p>
+<h3 id="1-crear-la-función-http">
+  <strong>1. Crear la Función HTTP</strong>
+  <a class="heading-link" href="#1-crear-la-funci%c3%b3n-http">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Ejecuta el siguiente comando para generar la función:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">func</span> <span class="n">new</span> <span class="o">--</span><span class="n">name</span> <span class="n">helloDeno</span> <span class="o">--</span><span class="n">template</span> <span class="s2">&#34;HTTP trigger&#34;</span> <span class="o">--</span><span class="n">language</span> <span class="n">JavaScript</span>
+</span></span></code></pre></div><p>Esto generará una carpeta <code>helloDeno</code> con los archivos necesarios. Ahora, modificamos <code>helloDeno/index.ts</code> para usar Deno:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">export</span> <span class="n">default</span> <span class="n">async</span> <span class="n">function</span> <span class="p">(</span><span class="n">context</span><span class="p">:</span> <span class="n">any</span><span class="p">,</span> <span class="n">req</span><span class="p">:</span> <span class="n">Request</span><span class="p">):</span> <span class="n">Promise</span><span class="o">&lt;</span><span class="n">void</span><span class="o">&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">context</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s2">&#34;Deno Serverless Function ejecutada&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="n">name</span> <span class="o">=</span> <span class="n">req</span><span class="o">.</span><span class="n">url</span><span class="o">.</span><span class="n">searchParams</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&#34;name&#34;</span><span class="p">)</span> <span class="o">||</span> <span class="s2">&#34;Mundo&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="n">context</span><span class="o">.</span><span class="n">res</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">body</span><span class="p">:</span> <span class="err">`</span><span class="n">Hola</span><span class="p">,</span> <span class="o">$</span><span class="p">{</span><span class="n">name</span><span class="p">}</span> <span class="n">desde</span> <span class="n">Deno</span> <span class="n">y</span> <span class="n">Azure</span> <span class="n">Functions</span><span class="o">!</span><span class="err">`</span>
+</span></span><span class="line"><span class="cl">    <span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h3 id="2-modificar-el-archivo">
+  <strong>2. Modificar el archivo <code>function.json</code></strong>
+  <a class="heading-link" href="#2-modificar-el-archivo">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Editamos <code>helloDeno/function.json</code> para definir los métodos HTTP permitidos:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">  &#34;bindings&#34;: [
+</span></span><span class="line"><span class="cl">    {
+</span></span><span class="line"><span class="cl">      &#34;authLevel&#34;: &#34;anonymous&#34;,
+</span></span><span class="line"><span class="cl">      &#34;type&#34;: &#34;httpTrigger&#34;,
+</span></span><span class="line"><span class="cl">      &#34;direction&#34;: &#34;in&#34;,
+</span></span><span class="line"><span class="cl">      &#34;name&#34;: &#34;req&#34;,
+</span></span><span class="line"><span class="cl">      &#34;methods&#34;: [&#34;get&#34;, &#34;post&#34;]
+</span></span><span class="line"><span class="cl">    },
+</span></span><span class="line"><span class="cl">    {
+</span></span><span class="line"><span class="cl">      &#34;type&#34;: &#34;http&#34;,
+</span></span><span class="line"><span class="cl">      &#34;direction&#34;: &#34;out&#34;,
+</span></span><span class="line"><span class="cl">      &#34;name&#34;: &#34;res&#34;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">  ]
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></div><h2 id="despliegue-en-azure">
+  Despliegue en Azure
+  <a class="heading-link" href="#despliegue-en-azure">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="1-crear-un-recurso-de-azure-functions">
+  <strong>1. Crear un recurso de Azure Functions</strong>
+  <a class="heading-link" href="#1-crear-un-recurso-de-azure-functions">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Antes de desplegar, necesitamos un grupo de recursos y una cuenta de almacenamiento:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">az group create --name deno-serverless --location eastus
+</span></span><span class="line"><span class="cl">az storage account create --name denostorage --location eastus --resource-group deno-serverless --sku Standard_LRS
+</span></span></code></pre></div><p>Luego, creamos una instancia de Azure Functions:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">az functionapp create --resource-group deno-serverless --consumption-plan-location eastus --runtime custom --functions-version 4 --name myDenoFunctionApp --storage-account denostorage
+</span></span></code></pre></div><h3 id="2-desplegar-la-función-en-azure">
+  <strong>2. Desplegar la función en Azure</strong>
+  <a class="heading-link" href="#2-desplegar-la-funci%c3%b3n-en-azure">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Ahora podemos desplegar nuestra función con:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">func</span> <span class="n">azure</span> <span class="n">functionapp</span> <span class="n">publish</span> <span class="n">myDenoFunctionApp</span>
+</span></span></code></pre></div><p>Si el despliegue es exitoso, obtendremos una URL donde la función está disponible:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">https://myDenoFunctionApp.azurewebsites.net/api/helloDeno
+</span></span></code></pre></div><p>Podemos probarla enviando una solicitud HTTP:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">curl &#34;https://myDenoFunctionApp.azurewebsites.net/api/helloDeno?name=Juan&#34;
+</span></span></code></pre></div><h2 id="integración-con-una-base-de-datos">
+  Integración con una Base de Datos
+  <a class="heading-link" href="#integraci%c3%b3n-con-una-base-de-datos">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Para conectar nuestra función con una base de datos, podemos usar Azure Cosmos DB.</p>
+<ol>
+<li>
+<p><strong>Crear una cuenta de Cosmos DB:</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">az cosmosdb create --resource-group deno-serverless --name denoCosmosDB
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Obtener la cadena de conexión:</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">az cosmosdb keys list --resource-group deno-serverless --name denoCosmosDB --type connection-strings
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Modificar la función para leer datos de Cosmos DB:</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">import</span> <span class="p">{</span> <span class="n">Client</span> <span class="p">}</span> <span class="n">from</span> <span class="s2">&#34;https://deno.land/x/postgres/mod.ts&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">client</span> <span class="o">=</span> <span class="n">new</span> <span class="n">Client</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">    <span class="n">user</span><span class="p">:</span> <span class="s2">&#34;usuario&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">database</span><span class="p">:</span> <span class="s2">&#34;denoDB&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">hostname</span><span class="p">:</span> <span class="s2">&#34;tu-host&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">password</span><span class="p">:</span> <span class="s2">&#34;tu-password&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">port</span><span class="p">:</span> <span class="mi">5432</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">export</span> <span class="n">default</span> <span class="n">async</span> <span class="n">function</span> <span class="p">(</span><span class="n">context</span><span class="p">:</span> <span class="n">any</span><span class="p">,</span> <span class="n">req</span><span class="p">:</span> <span class="n">Request</span><span class="p">):</span> <span class="n">Promise</span><span class="o">&lt;</span><span class="n">void</span><span class="o">&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">await</span> <span class="n">client</span><span class="o">.</span><span class="n">connect</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="n">result</span> <span class="o">=</span> <span class="n">await</span> <span class="n">client</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&#34;SELECT * FROM usuarios&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">await</span> <span class="n">client</span><span class="o">.</span><span class="n">end</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">context</span><span class="o">.</span><span class="n">res</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">body</span><span class="p">:</span> <span class="n">JSON</span><span class="o">.</span><span class="n">stringify</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">rows</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div></li>
+</ol>
+<h2 id="conclusión">
+  Conclusión
+  <a class="heading-link" href="#conclusi%c3%b3n">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Desarrollar aplicaciones serverless con <strong>Deno y Azure Functions</strong> nos permite crear aplicaciones altamente escalables y eficientes sin preocuparnos por la infraestructura. <strong>Deno</strong>, con su seguridad y rendimiento, y <strong>Azure Functions</strong>, con su escalabilidad automática, forman una combinación poderosa para aplicaciones modernas.</p>
+<p>¡Explora estas tecnologías y crea tus propias soluciones serverless con Deno y Azure!</p>
+      </div>
+
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script>
+  window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "cmasblog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    
+    document.addEventListener('themeChanged', function (e) { 
+        if (document.readyState == 'complete') {
+          DISQUS.reset({ reload: true, config: disqus_config });
+        }
+    });
+</script>
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2018 -
+    
+    2025
+     Christian Amado 
+    ·
+    
+    Desarrollado por <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+      <script async src="https://www.googletagmanager.com/gtag/js?id=356375808"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '356375808');
+        }
+      </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=013131931956450466198%3ablhmkdpweyq"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '013131931956450466198:blhmkdpweyq');
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

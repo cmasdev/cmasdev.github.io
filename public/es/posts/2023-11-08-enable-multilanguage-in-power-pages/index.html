@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  Habilitar soporte multi-idioma en Power Pages · Christian Amado
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Christian Amado">
+<meta name="description" content="En este artículo, mostraré cómo habilitar un sitio multi idioma con Power Pages.">
+<meta name="keywords" content="blog,desarrollador,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Habilitar soporte multi-idioma en Power Pages">
+  <meta name="twitter:description" content="En este artículo, mostraré cómo habilitar un sitio multi idioma con Power Pages.">
+
+<meta property="og:url" content="http://localhost:1313/es/posts/2023-11-08-enable-multilanguage-in-power-pages/">
+  <meta property="og:site_name" content="Christian Amado">
+  <meta property="og:title" content="Habilitar soporte multi-idioma en Power Pages">
+  <meta property="og:description" content="En este artículo, mostraré cómo habilitar un sitio multi idioma con Power Pages.">
+  <meta property="og:locale" content="es">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2023-11-08T00:00:00-04:00">
+    <meta property="article:modified_time" content="2023-11-08T00:00:00-04:00">
+    <meta property="article:tag" content="Power Pages">
+
+
+
+
+<link rel="canonical" href="http://localhost:1313/es/posts/2023-11-08-enable-multilanguage-in-power-pages/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/es/">
+      Christian Amado
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/about">Biografía</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/contact">Contacto</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/diabetes">Diabetes</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/tags">Etiquetas</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/en/">🇺🇸</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/es/posts/2023-11-08-enable-multilanguage-in-power-pages/">
+              Habilitar soporte multi-idioma en Power Pages
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2023-11-08T00:00:00-04:00">
+                noviembre 8, 2023
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              2 minutos de lectura.
+            </span>
+          </div>
+          
+          <div class="categories">
+  <i class="fa-solid fa-folder" aria-hidden="true"></i>
+    <a href="/es/categories/aplicaciones-de-negocio/">Aplicaciones De Negocio</a></div>
+
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/es/tags/power-pages/">Power Pages</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <p>En este artículo, mostraré cómo habilitar un sitio multi idioma con <strong>Power Pages</strong>.</p>
+<p>Para realizar esto debemos configurar dos cosas que se agrupan a continuación:</p>
+<h1 id="configuración-microsoft-power-platform">
+  Configuración Microsoft Power Platform
+  <a class="heading-link" href="#configuraci%c3%b3n-microsoft-power-platform">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h1>
+<p>Primero, se deben habilitar los idiomas que se desean integrar con las soluciones, para ello debemos seguir los siguientes pasos:</p>
+<ol>
+<li>Ir al sitio de <a href="https://admin.powerplatform.microsoft.com/home"  class="external-link" target="_blank" rel="noopener">Microsoft Power Platform Admin Center</a>, seleccionar el <em>Entorno</em> que deseamos cambiar y seleccionar el menú <em>Configuración</em>:
+<img src="https://i.ibb.co/86CB1bz/multilanguaje-1.png" alt=""></li>
+</ol>
+<p><img src="https://i.ibb.co/gVNjhhv/multilanguaje-2.png" alt=""></p>
+<ol start="2">
+<li>
+<p>Luego, se debe ir al apartado <em>Producto</em> &gt; <em>Idiomas</em>:
+<img src="https://i.ibb.co/YffyTG3/multilanguaje-3.png" alt=""></p>
+</li>
+<li>
+<p>Habilitamos los idiomas que deseamos (en este caso Español):
+<img src="https://i.ibb.co/bKgnstB/multilanguaje-4.png" alt=""></p>
+</li>
+</ol>
+<p><img src="https://i.ibb.co/Xkngvtm/multilanguaje-5.png" alt=""></p>
+<ol start="4">
+<li>Aguardamos un tiempo para que las configuraciones surtan efecto (me funcionó en 10 minutos).</li>
+</ol>
+<h1 id="configuración-de-microsoft-power-pages">
+  Configuración de Microsoft Power Pages
+  <a class="heading-link" href="#configuraci%c3%b3n-de-microsoft-power-pages">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h1>
+<p>Ahora que tenemos los lenguajes que deseamos habilitados podemos utilziarlos dentro de nuestros sitios en la plataforma <strong>Microsoft Power Pages</strong>. Para eso, debemos seguir estos pasos:</p>
+<ol>
+<li>
+<p>Nos dirigimos a nuestro portal de <strong>Power Pages</strong>, sección <strong>Administración de Power Pages</strong>:
+<img src="https://i.ibb.co/MDJjY77/multilanguaje-6.png" alt=""></p>
+</li>
+<li>
+<p>Ingresamos a la sección <em>Sitio Web</em> &gt; <em>Sitios Web</em> &gt; <em>TU SITIO</em>:
+<img src="https://i.ibb.co/P96rZt1/multilanguaje-7.png" alt=""></p>
+</li>
+<li>
+<p>Se debe agregar una nueva sección a la vista:
+<img src="https://i.ibb.co/nRfyL84/multilanguaje-8.png" alt=""></p>
+</li>
+<li>
+<p>Buscamos la opción <em>Idiomas de Sitio Web</em>:
+<img src="https://i.ibb.co/KrnSNvY/multilanguaje-9.png" alt=""></p>
+</li>
+<li>
+<p>Seleccionamos la opción <em>Nuevo idioma de Sitio Web</em>:
+<img src="https://i.ibb.co/j5xk8DP/multilanguaje-10.png" alt=""></p>
+</li>
+<li>
+<p>Verificamos el sitio web y veremos en el menú principal las opciones de idioma seleccionados:
+<img src="https://i.ibb.co/bm9R1k6/multilanguaje-11.png" alt=""></p>
+</li>
+</ol>
+<p>De esta manera hemos aprendido cómo habilitar un sitio multi idioma con <strong>Microsoft Power Pages</strong>.</p>
+<p>¡Espero resulte útil!</p>
+      </div>
+
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script>
+  window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "cmasblog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    
+    document.addEventListener('themeChanged', function (e) { 
+        if (document.readyState == 'complete') {
+          DISQUS.reset({ reload: true, config: disqus_config });
+        }
+    });
+</script>
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2018 -
+    
+    2025
+     Christian Amado 
+    ·
+    
+    Desarrollado por <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+      <script async src="https://www.googletagmanager.com/gtag/js?id=356375808"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '356375808');
+        }
+      </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=013131931956450466198%3ablhmkdpweyq"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '013131931956450466198:blhmkdpweyq');
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

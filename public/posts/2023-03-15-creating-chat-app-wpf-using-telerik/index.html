@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  Creando una aplicación tipo Chat en WPF usando Telerik · Christian Amado
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Christian Amado">
+<meta name="description" content="En este artículo veremos cómo crear una aplicación de Chat en WPF con Telerik. (Antesala de todo el tema de ChatGPT)
+Windows 11 Insider Preview Build 25290">
+<meta name="keywords" content="blog,desarrollador,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Creando una aplicación tipo Chat en WPF usando Telerik">
+  <meta name="twitter:description" content="En este artículo veremos cómo crear una aplicación de Chat en WPF con Telerik. (Antesala de todo el tema de ChatGPT)
+Windows 11 Insider Preview Build 25290">
+
+<meta property="og:url" content="http://localhost:1313/posts/2023-03-15-creating-chat-app-wpf-using-telerik/">
+  <meta property="og:site_name" content="Christian Amado">
+  <meta property="og:title" content="Creando una aplicación tipo Chat en WPF usando Telerik">
+  <meta property="og:description" content="En este artículo veremos cómo crear una aplicación de Chat en WPF con Telerik. (Antesala de todo el tema de ChatGPT)
+Windows 11 Insider Preview Build 25290">
+  <meta property="og:locale" content="es">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2023-03-15T20:57:00-04:00">
+    <meta property="article:modified_time" content="2023-03-15T20:57:00-04:00">
+    <meta property="article:tag" content="WinDev">
+    <meta property="article:tag" content="Windows 11">
+    <meta property="article:tag" content="WPF">
+    <meta property="article:tag" content="C#">
+    <meta property="article:tag" content="Telerik">
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-V1ZRP82YFD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-V1ZRP82YFD');
+</script>
+
+
+
+<link rel="canonical" href="http://localhost:1313/posts/2023-03-15-creating-chat-app-wpf-using-telerik/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="apple-touch-icon" sizes="57x57" href="/img/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/img/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/img/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/img/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/img/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/img/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/img/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/img/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/img/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="/img/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/img/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+<link rel="manifest" href="/img/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/img/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/">
+      Christian Amado
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/about">Biografía</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/contact">Contacto</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/diabetes">Diabetes</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/tags">Etiquetas</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/en/">🇺🇸</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/posts/2023-03-15-creating-chat-app-wpf-using-telerik/">
+              Creando una aplicación tipo Chat en WPF usando Telerik
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2023-03-15T20:57:00-04:00">
+                marzo 15, 2023
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              2 minutos de lectura.
+            </span>
+          </div>
+          
+          
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/tags/windev/">WinDev</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/windows-11/">Windows 11</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/wpf/">WPF</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/c%23/">C#</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/telerik/">Telerik</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <p>En este artículo veremos cómo crear una aplicación de Chat en <strong>WPF</strong> con <strong>Telerik</strong>. (Antesala de todo el tema de <a href="https://openai.com/blog/chatgpt/"  class="external-link" target="_blank" rel="noopener">ChatGPT</a>)</p>
+<p><em><strong>Windows 11 Insider Preview Build 25290</strong></em></p>
+<p>Es raro, que después de tantos años vuelva a escribir un artículo sobre WPF (el último fue <a href="https://cmasdevnet.blogspot.com/2016/03/wpf-how-to-notificaciones-en-bandeja-de.html"  class="external-link" target="_blank" rel="noopener">este</a>) pero amerita hacerlo pues encontré un botón muy práctico para todo lo relacionado con este nuevo ¡BOOM! que es el ChatGPT.</p>
+<p>El control en cuestión es <a href="https://docs.telerik.com/devtools/wpf/controls/radchat/overview"  class="external-link" target="_blank" rel="noopener">RadChat</a> que es parte del <a href="https://www.telerik.com/conversational-ui"  class="external-link" target="_blank" rel="noopener"><strong>ConversationalUI</strong></a> de <strong>Telerik</strong>. Esto representa un Chat agnóstico para casi todas sus plataformas (aún no disponible para <strong>WinUI</strong> ni <strong>Blazor</strong> que me interesan muchísimo).</p>
+<h2 id="proyecto-wpf">
+  Proyecto WPF
+  <a class="heading-link" href="#proyecto-wpf">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ol>
+<li>
+<p>Vamos a crear un proyecto de tipo <strong>WPF</strong>:
+<img src="/img/posts/2023/03/15/1.png" alt=""></p>
+</li>
+<li>
+<p>Colocamos un nombre descriptivo:
+<img src="/img/posts/2023/03/15/2.png" alt=""></p>
+</li>
+<li>
+<p>Seguimos los pasos en pantalla.</p>
+</li>
+<li>
+<p>Agregamos las librerías necesarias:
+<img src="/img/posts/2023/03/15/3.png" alt=""></p>
+</li>
+<li>
+<p>Insertamos el control <strong>XAML</strong>:</p>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&lt;Window x:Class=&#34;TelerikWpfChat.MainWindow&#34;
+</span></span><span class="line"><span class="cl">                xmlns=&#34;http://schemas.microsoft.com/winfx/2006/xaml/presentation&#34;
+</span></span><span class="line"><span class="cl">                xmlns:x=&#34;http://schemas.microsoft.com/winfx/2006/xaml&#34;
+</span></span><span class="line"><span class="cl">                xmlns:telerik=&#34;http://schemas.telerik.com/2008/xaml/presentation&#34;
+</span></span><span class="line"><span class="cl">                Title=&#34;MainWindow&#34; Height=&#34;350&#34; Width=&#34;525&#34;&gt;
+</span></span><span class="line"><span class="cl">    &lt;Grid&gt;
+</span></span><span class="line"><span class="cl">        &lt;telerik:RadChat Name=&#34;chat&#34; SendMessage=&#34;chat_SendMessage&#34; &gt;&lt;/telerik:RadChat&gt;
+</span></span><span class="line"><span class="cl">    &lt;/Grid&gt;
+</span></span><span class="line"><span class="cl">&lt;/Window&gt;
+</span></span></code></pre></div><ol start="6">
+<li>
+<p>Probamos la aplicación:
+<img src="/img/posts/2023/03/15/4.png" alt=""></p>
+</li>
+<li>
+<p>Entonces, el código C# nos quedaría así:</p>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">using</span> <span class="n">System</span><span class="o">.</span><span class="n">Windows</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">using</span> <span class="n">Telerik</span><span class="o">.</span><span class="n">Windows</span><span class="o">.</span><span class="n">Controls</span><span class="o">.</span><span class="n">ConversationalUI</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">namespace</span> <span class="n">TelerikWpfChat</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="o">///</span> <span class="o">&lt;</span><span class="n">summary</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">///</span> <span class="n">Interaction</span> <span class="n">logic</span> <span class="k">for</span> <span class="n">MainWindow</span><span class="o">.</span><span class="n">xaml</span>
+</span></span><span class="line"><span class="cl">    <span class="o">///</span> <span class="o">&lt;/</span><span class="n">summary</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">public</span> <span class="n">partial</span> <span class="k">class</span> <span class="n">MainWindow</span> <span class="p">:</span> <span class="n">Window</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="o">//</span><span class="n">Creamos</span> <span class="n">los</span> <span class="n">objetos</span> <span class="n">que</span> <span class="n">interactúan</span> <span class="n">en</span> <span class="n">el</span> <span class="n">Chat</span>
+</span></span><span class="line"><span class="cl">        <span class="n">private</span> <span class="n">Author</span> <span class="n">currentAuthor</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">private</span> <span class="n">Author</span> <span class="n">externalAuthor</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">public</span> <span class="n">MainWindow</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">InitializeComponent</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="o">//</span><span class="n">Asignamos</span> <span class="n">nombres</span>
+</span></span><span class="line"><span class="cl">            <span class="n">currentAuthor</span> <span class="o">=</span> <span class="n">new</span> <span class="n">Author</span><span class="p">(</span><span class="s2">&#34;Christian&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">externalAuthor</span> <span class="o">=</span> <span class="n">new</span> <span class="n">Author</span><span class="p">(</span><span class="s2">&#34;External&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">this</span><span class="o">.</span><span class="n">chat</span><span class="o">.</span><span class="n">CurrentAuthor</span> <span class="o">=</span> <span class="n">currentAuthor</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">private</span> <span class="n">void</span> <span class="n">chat_SendMessage</span><span class="p">(</span><span class="n">object</span> <span class="n">sender</span><span class="p">,</span> <span class="n">SendMessageEventArgs</span> <span class="n">e</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">e</span><span class="o">.</span><span class="n">Handled</span> <span class="o">=</span> <span class="bp">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="o">//</span><span class="n">El</span> <span class="n">texto</span> <span class="n">que</span> <span class="n">escribimos</span> <span class="n">en</span> <span class="n">el</span> <span class="n">chat</span>
+</span></span><span class="line"><span class="cl">            <span class="k">var</span> <span class="n">updatedMessageText</span> <span class="o">=</span> <span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">Message</span> <span class="n">as</span> <span class="n">TextMessage</span><span class="p">)</span><span class="o">.</span><span class="n">Text</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">this</span><span class="o">.</span><span class="n">chat</span><span class="o">.</span><span class="n">AddMessage</span><span class="p">(</span><span class="n">this</span><span class="o">.</span><span class="n">chat</span><span class="o">.</span><span class="n">CurrentAuthor</span><span class="p">,</span> <span class="n">updatedMessageText</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="o">//</span><span class="n">La</span> <span class="n">respuesta</span> <span class="n">que</span> <span class="n">obtenemos</span> <span class="n">acada</span> <span class="n">interacción</span>
+</span></span><span class="line"><span class="cl">            <span class="n">this</span><span class="o">.</span><span class="n">chat</span><span class="o">.</span><span class="n">CurrentAuthor</span> <span class="o">=</span> <span class="n">externalAuthor</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">this</span><span class="o">.</span><span class="n">chat</span><span class="o">.</span><span class="n">AddMessage</span><span class="p">(</span><span class="n">this</span><span class="o">.</span><span class="n">chat</span><span class="o">.</span><span class="n">CurrentAuthor</span><span class="p">,</span> <span class="s2">&#34;¡No tengo respuestas aún!&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Listo, de esta forma logramos hacer un pequeño Chat (que puede convertirse en ChatBot). Y nos queda algo así:
+<img src="/img/posts/2023/03/15/5.png" alt=""></p>
+<p>¡Espero resulte útil!</p>
+      </div>
+
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script>
+  window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "cmasblog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    
+    document.addEventListener('themeChanged', function (e) { 
+        if (document.readyState == 'complete') {
+          DISQUS.reset({ reload: true, config: disqus_config });
+        }
+    });
+</script>
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2018 -
+    
+    2025
+     Christian Amado 
+    ·
+    
+    Desarrollado por <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+      <script async src="https://www.googletagmanager.com/gtag/js?id=356375808"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '356375808');
+        }
+      </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=013131931956450466198%3ablhmkdpweyq"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '013131931956450466198:blhmkdpweyq');
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

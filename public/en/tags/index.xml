@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on Christian Amado</title>
+    <link>http://localhost:1313/en/tags/</link>
+    <description>Recent content in Tags on Christian Amado</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 17 Jul 2024 00:00:00 -0400</lastBuildDate>
+    <atom:link href="http://localhost:1313/en/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>.NET</title>
+      <link>http://localhost:1313/en/tags/.net/</link>
+      <pubDate>Wed, 17 Jul 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/en/tags/.net/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Google</title>
+      <link>http://localhost:1313/en/tags/google/</link>
+      <pubDate>Wed, 17 Jul 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/en/tags/google/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>IDX</title>
+      <link>http://localhost:1313/en/tags/idx/</link>
+      <pubDate>Wed, 17 Jul 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/en/tags/idx/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Web Development</title>
+      <link>http://localhost:1313/en/tags/web-development/</link>
+      <pubDate>Wed, 17 Jul 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/en/tags/web-development/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Microsoft MVP</title>
+      <link>http://localhost:1313/en/tags/microsoft-mvp/</link>
+      <pubDate>Wed, 10 Jul 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/en/tags/microsoft-mvp/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Android</title>
+      <link>http://localhost:1313/en/tags/android/</link>
+      <pubDate>Wed, 20 Apr 2022 13:01:14 -0400</pubDate>
+      <guid>http://localhost:1313/en/tags/android/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Windows 11</title>
+      <link>http://localhost:1313/en/tags/windows-11/</link>
+      <pubDate>Wed, 20 Apr 2022 13:01:14 -0400</pubDate>
+      <guid>http://localhost:1313/en/tags/windows-11/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Windows Insider Preview</title>
+      <link>http://localhost:1313/en/tags/windows-insider-preview/</link>
+      <pubDate>Wed, 20 Apr 2022 13:01:14 -0400</pubDate>
+      <guid>http://localhost:1313/en/tags/windows-insider-preview/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Hyper-V</title>
+      <link>http://localhost:1313/en/tags/hyper-v/</link>
+      <pubDate>Wed, 06 Apr 2022 19:21:43 -0400</pubDate>
+      <guid>http://localhost:1313/en/tags/hyper-v/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>AL</title>
+      <link>http://localhost:1313/en/tags/al/</link>
+      <pubDate>Tue, 07 Sep 2021 23:55:00 -0400</pubDate>
+      <guid>http://localhost:1313/en/tags/al/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Dynamics 365 Business Central</title>
+      <link>http://localhost:1313/en/tags/dynamics-365-business-central/</link>
+      <pubDate>Tue, 07 Sep 2021 23:55:00 -0400</pubDate>
+      <guid>http://localhost:1313/en/tags/dynamics-365-business-central/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>

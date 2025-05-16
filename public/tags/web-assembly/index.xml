@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Web Assembly on Christian Amado</title>
+    <link>http://localhost:1313/tags/web-assembly/</link>
+    <description>Recent content in Web Assembly on Christian Amado</description>
+    <generator>Hugo</generator>
+    <language>es</language>
+    <lastBuildDate>Mon, 06 Jan 2025 00:00:00 -0400</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/web-assembly/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Optimización de rendimiento en Blazor WebAssembly</title>
+      <link>http://localhost:1313/posts/2025-01-06-performance-optimization-blazor-webassembly/</link>
+      <pubDate>Mon, 06 Jan 2025 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2025-01-06-performance-optimization-blazor-webassembly/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;Blazor WebAssembly&lt;/strong&gt; es una tecnología poderosa que permite a los desarrolladores crear aplicaciones web interactivas utilizando &lt;strong&gt;C#&lt;/strong&gt; y &lt;strong&gt;.NET&lt;/strong&gt; en lugar de &lt;strong&gt;JavaScript&lt;/strong&gt;. Sin embargo, debido a las características inherentes de su arquitectura, la optimización del rendimiento puede ser un desafío crítico. En este artículo, exploraremos técnicas, estrategias y mejores prácticas para optimizar el rendimiento en aplicaciones &lt;strong&gt;Blazor WebAssembly&lt;/strong&gt;.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

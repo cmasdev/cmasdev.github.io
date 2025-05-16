@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  Empaquetado de apps modernas con MSIX y configuración avanzada del manifiesto · Christian Amado
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Christian Amado">
+<meta name="description" content="MSIX es el formato de empaquetado moderno para aplicaciones Windows. Ofrece instalación limpia, actualización controlada, aislamiento seguro, y registro transparente de recursos y capacidades. Para aplicaciones desarrolladas con Windows App SDK y WinUI 3, el uso de MSIX no es opcional, es el estándar recomendado para integrarse completamente al ecosistema del sistema operativo moderno.
+Este artículo aborda cómo empaquetar una app moderna con MSIX desde Visual Studio, y cómo configurar el manifiesto del paquete (Package.appxmanifest) para habilitar capacidades avanzadas como protocolos personalizados, extensiones del sistema, iconografía personalizada y más.">
+<meta name="keywords" content="blog,desarrollador,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Empaquetado de apps modernas con MSIX y configuración avanzada del manifiesto">
+  <meta name="twitter:description" content="MSIX es el formato de empaquetado moderno para aplicaciones Windows. Ofrece instalación limpia, actualización controlada, aislamiento seguro, y registro transparente de recursos y capacidades. Para aplicaciones desarrolladas con Windows App SDK y WinUI 3, el uso de MSIX no es opcional, es el estándar recomendado para integrarse completamente al ecosistema del sistema operativo moderno.
+Este artículo aborda cómo empaquetar una app moderna con MSIX desde Visual Studio, y cómo configurar el manifiesto del paquete (Package.appxmanifest) para habilitar capacidades avanzadas como protocolos personalizados, extensiones del sistema, iconografía personalizada y más.">
+
+<meta property="og:url" content="http://localhost:1313/es/posts/2025-02-28-winui-packaging-msix/">
+  <meta property="og:site_name" content="Christian Amado">
+  <meta property="og:title" content="Empaquetado de apps modernas con MSIX y configuración avanzada del manifiesto">
+  <meta property="og:description" content="MSIX es el formato de empaquetado moderno para aplicaciones Windows. Ofrece instalación limpia, actualización controlada, aislamiento seguro, y registro transparente de recursos y capacidades. Para aplicaciones desarrolladas con Windows App SDK y WinUI 3, el uso de MSIX no es opcional, es el estándar recomendado para integrarse completamente al ecosistema del sistema operativo moderno.
+Este artículo aborda cómo empaquetar una app moderna con MSIX desde Visual Studio, y cómo configurar el manifiesto del paquete (Package.appxmanifest) para habilitar capacidades avanzadas como protocolos personalizados, extensiones del sistema, iconografía personalizada y más.">
+  <meta property="og:locale" content="es">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-02-28T00:00:00-04:00">
+    <meta property="article:modified_time" content="2025-02-28T00:00:00-04:00">
+    <meta property="article:tag" content="WinDev">
+    <meta property="article:tag" content="Windows 11">
+    <meta property="article:tag" content="WinUI 3">
+    <meta property="article:tag" content="Windows App SDK">
+
+
+
+
+<link rel="canonical" href="http://localhost:1313/es/posts/2025-02-28-winui-packaging-msix/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/es/">
+      Christian Amado
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/about">Biografía</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/contact">Contacto</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/diabetes">Diabetes</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/tags">Etiquetas</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/en/">🇺🇸</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/es/posts/2025-02-28-winui-packaging-msix/">
+              Empaquetado de apps modernas con MSIX y configuración avanzada del manifiesto
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2025-02-28T00:00:00-04:00">
+                febrero 28, 2025
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              3 minutos de lectura.
+            </span>
+          </div>
+          
+          
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/es/tags/windev/">WinDev</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/es/tags/windows-11/">Windows 11</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/es/tags/winui-3/">WinUI 3</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/es/tags/windows-app-sdk/">Windows App SDK</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <p><strong>MSIX</strong> es el formato de empaquetado moderno para aplicaciones <strong>Windows</strong>. Ofrece instalación limpia, actualización controlada, aislamiento seguro, y registro transparente de recursos y capacidades. Para aplicaciones desarrolladas con <strong>Windows App SDK</strong> y <strong>WinUI 3</strong>, el uso de <strong>MSIX</strong> no es opcional, es el estándar recomendado para integrarse completamente al ecosistema del sistema operativo moderno.</p>
+<p>Este artículo aborda cómo empaquetar una app moderna con <strong>MSIX</strong> desde <strong>Visual Studio</strong>, y cómo configurar el manifiesto del paquete (<code>Package.appxmanifest</code>) para habilitar capacidades avanzadas como protocolos personalizados, extensiones del sistema, iconografía personalizada y más.</p>
+<h2 id="requisitos">
+  Requisitos
+  <a class="heading-link" href="#requisitos">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ul>
+<li>Windows 11</li>
+<li>Visual Studio 2022 con workload “Desarrollo para escritorio con C++” y MSIX Packaging Tools</li>
+<li>Windows App SDK 1.3+</li>
+<li>Proyecto de tipo <strong>Blank App, Packaged (WinUI 3 in Desktop)</strong></li>
+</ul>
+<h2 id="paso-1-estructura-básica-de-un-paquete-msix">
+  Paso 1: Estructura básica de un paquete MSIX
+  <a class="heading-link" href="#paso-1-estructura-b%c3%a1sica-de-un-paquete-msix">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>El archivo clave es <code>Package.appxmanifest</code>, que contiene:</p>
+<ul>
+<li>Identidad de la app</li>
+<li>Declaraciones de capacidades</li>
+<li>Asociaciones de archivo, URI, tareas de fondo</li>
+<li>Iconos, entradas al menú inicio, y más</li>
+</ul>
+<p>Ejemplo básico:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;Identity</span> <span class="na">Name=</span><span class="s">&#34;com.empresa.miapp&#34;</span>
+</span></span><span class="line"><span class="cl">          <span class="na">Publisher=</span><span class="s">&#34;CN=Empresa&#34;</span>
+</span></span><span class="line"><span class="cl">          <span class="na">Version=</span><span class="s">&#34;1.0.0.0&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;Properties&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&lt;DisplayName&gt;</span>MiApp<span class="nt">&lt;/DisplayName&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&lt;PublisherDisplayName&gt;</span>Empresa S.A.<span class="nt">&lt;/PublisherDisplayName&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&lt;Logo&gt;</span>Assets/StoreLogo.png<span class="nt">&lt;/Logo&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/Properties&gt;</span>
+</span></span></code></pre></div><h2 id="paso-2-configurar-iconografía-y-recursos-visuales">
+  Paso 2: Configurar iconografía y recursos visuales
+  <a class="heading-link" href="#paso-2-configurar-iconograf%c3%ada-y-recursos-visuales">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Se pueden establecer logos personalizados para:</p>
+<ul>
+<li>Barra de tareas</li>
+<li>Menú inicio</li>
+<li>App list (Start Menu)</li>
+<li>Notificaciones toast</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;VisualElements</span>
+</span></span><span class="line"><span class="cl">  <span class="na">DisplayName=</span><span class="s">&#34;MiApp&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="na">Square44x44Logo=</span><span class="s">&#34;Assets/Icon44.png&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="na">Square150x150Logo=</span><span class="s">&#34;Assets/Icon150.png&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="na">Description=</span><span class="s">&#34;Aplicación moderna con MSIX&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="na">BackgroundColor=</span><span class="s">&#34;transparent&#34;</span> <span class="nt">/&gt;</span>
+</span></span></code></pre></div><p>Los iconos deben estar declarados en todos los tamaños requeridos por el sistema (44, 150, 310, etc.).</p>
+<h2 id="paso-3-agregar-protocolo-personalizado">
+  Paso 3: Agregar protocolo personalizado
+  <a class="heading-link" href="#paso-3-agregar-protocolo-personalizado">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;uap:Extension</span> <span class="na">Category=</span><span class="s">&#34;windows.protocol&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&lt;uap:Protocol</span> <span class="na">Name=</span><span class="s">&#34;miapp&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;uap:DisplayName&gt;</span>miapp Protocol<span class="nt">&lt;/uap:DisplayName&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&lt;/uap:Protocol&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/uap:Extension&gt;</span>
+</span></span></code></pre></div><p>Permite que la app responda a enlaces como <code>miapp://abrir</code>.</p>
+<h2 id="paso-4-asociar-tipos-de-archivo">
+  Paso 4: Asociar tipos de archivo
+  <a class="heading-link" href="#paso-4-asociar-tipos-de-archivo">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;uap:Extension</span> <span class="na">Category=</span><span class="s">&#34;windows.fileTypeAssociation&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&lt;uap:FileTypeAssociation</span> <span class="na">Name=</span><span class="s">&#34;MiExt&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;uap:SupportedFileTypes&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&lt;uap:FileType&gt;</span>.miapp<span class="nt">&lt;/uap:FileType&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/uap:SupportedFileTypes&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;uap:DisplayName&gt;</span>Archivo MiApp<span class="nt">&lt;/uap:DisplayName&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&lt;/uap:FileTypeAssociation&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/uap:Extension&gt;</span>
+</span></span></code></pre></div><p>Ahora la app podrá abrir estos archivos con doble clic.</p>
+<h2 id="paso-5-declarar-capacidades-del-sistema">
+  Paso 5: Declarar capacidades del sistema
+  <a class="heading-link" href="#paso-5-declarar-capacidades-del-sistema">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Para acceder a funcionalidades como ubicación, micrófono, red, etc.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;Capabilities&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&lt;Capability</span> <span class="na">Name=</span><span class="s">&#34;internetClient&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&lt;Capability</span> <span class="na">Name=</span><span class="s">&#34;location&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&lt;uap:Capability</span> <span class="na">Name=</span><span class="s">&#34;userAccountInformation&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/Capabilities&gt;</span>
+</span></span></code></pre></div><p>Siempre declarar solo lo necesario. La declaración excesiva puede generar advertencias o problemas de distribución.</p>
+<h2 id="paso-6-configurar-appexecutionalias">
+  Paso 6: Configurar AppExecutionAlias
+  <a class="heading-link" href="#paso-6-configurar-appexecutionalias">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Esto permite ejecutar la app desde consola:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;uap:Extension</span> <span class="na">Category=</span><span class="s">&#34;windows.appExecutionAlias&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&lt;uap:AppExecutionAlias&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;uap:ExecutionAlias</span> <span class="na">Alias=</span><span class="s">&#34;miapp.exe&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&lt;/uap:AppExecutionAlias&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/uap:Extension&gt;</span>
+</span></span></code></pre></div><p>Esto habilita <code>miapp.exe</code> en línea de comandos tras instalar la app.</p>
+<h2 id="paso-7-configurar-entrada-al-menú-inicio">
+  Paso 7: Configurar entrada al menú inicio
+  <a class="heading-link" href="#paso-7-configurar-entrada-al-men%c3%ba-inicio">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;Applications&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&lt;Application</span> <span class="na">Id=</span><span class="s">&#34;App&#34;</span>
+</span></span><span class="line"><span class="cl">               <span class="na">Executable=</span><span class="s">&#34;MiApp.exe&#34;</span>
+</span></span><span class="line"><span class="cl">               <span class="na">EntryPoint=</span><span class="s">&#34;MiApp.App&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;uap:VisualElements</span>
+</span></span><span class="line"><span class="cl">      <span class="na">DisplayName=</span><span class="s">&#34;MiApp&#34;</span>
+</span></span><span class="line"><span class="cl">      <span class="na">Square150x150Logo=</span><span class="s">&#34;Assets/Logo.png&#34;</span>
+</span></span><span class="line"><span class="cl">      <span class="na">BackgroundColor=</span><span class="s">&#34;transparent&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/uap:VisualElements&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&lt;/Application&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/Applications&gt;</span>
+</span></span></code></pre></div><p>Cada app (o extensión) debe tener su entrada bien declarada.</p>
+<h2 id="paso-8-empaquetar-desde-visual-studio">
+  Paso 8: Empaquetar desde Visual Studio
+  <a class="heading-link" href="#paso-8-empaquetar-desde-visual-studio">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ol>
+<li>Clic derecho sobre el proyecto empaquetado</li>
+<li>Publicar &gt; Crear paquete de la aplicación</li>
+<li>Elegir: &ldquo;Sí, quiero firmar el paquete&rdquo;</li>
+<li>Crear certificado local o usar uno comercial</li>
+<li>Elegir modo Sideloading (para pruebas) o Store</li>
+</ol>
+<p>Esto generará archivos <code>.msix</code> o <code>.msixbundle</code> junto con <code>AppInstaller</code>.</p>
+<h2 id="paso-9-instalar-y-probar-el-paquete">
+  Paso 9: Instalar y probar el paquete
+  <a class="heading-link" href="#paso-9-instalar-y-probar-el-paquete">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">Add-AppxPackage</span> <span class="n">-Path</span> <span class="s2">&#34;.\MiApp.msix&#34;</span>
+</span></span></code></pre></div><p>Verificar en menú inicio, buscar <code>MiApp</code> y validar comportamiento completo.</p>
+<h2 id="buenas-prácticas">
+  Buenas prácticas
+  <a class="heading-link" href="#buenas-pr%c3%a1cticas">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ul>
+<li>Usar GUID únicos para IDs internos si hay múltiples extensiones</li>
+<li>Revisar el manifiesto en modo XML y no solo visual</li>
+<li>Usar <code>capability declarations</code> mínimas y revisadas</li>
+<li>Probar el paquete con App Installer antes de distribución</li>
+<li>Mantener la versión del paquete actualizada en cada build</li>
+</ul>
+<h2 id="conclusión">
+  Conclusión
+  <a class="heading-link" href="#conclusi%c3%b3n">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>El empaquetado con <strong>MSIX</strong> es esencial para garantizar instalación fiable, comportamiento predecible y compatibilidad con el ecosistema moderno de <strong>Windows</strong>. El manifiesto ofrece un alto nivel de control sobre cómo se comporta y se expone la aplicación al sistema, permitiendo personalización avanzada, integración con el shell y soporte para flujos de deep linking, archivos, protocolos y más.</p>
+      </div>
+
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script>
+  window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "cmasblog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    
+    document.addEventListener('themeChanged', function (e) { 
+        if (document.readyState == 'complete') {
+          DISQUS.reset({ reload: true, config: disqus_config });
+        }
+    });
+</script>
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2018 -
+    
+    2025
+     Christian Amado 
+    ·
+    
+    Desarrollado por <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+      <script async src="https://www.googletagmanager.com/gtag/js?id=356375808"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '356375808');
+        }
+      </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=013131931956450466198%3ablhmkdpweyq"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '013131931956450466198:blhmkdpweyq');
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  Integración con la API de notificaciones nativas · Christian Amado
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Christian Amado">
+<meta name="description" content="Las notificaciones del sistema son uno de los mecanismos más eficaces para comunicar información al usuario sin interrumpir su flujo de trabajo. En Windows, estas notificaciones pueden ser enriquecidas mediante el sistema de notificaciones nativas, que incluye soporte para contenido visual dinámico con Adaptive Cards y la posibilidad de recibir notificaciones push incluso cuando la aplicación no está en ejecución.
+Con WinUI 3 y Windows App SDK, es posible crear y gestionar notificaciones enriquecidas, personalizadas y reactivas. Este artículo muestra cómo implementar notificaciones toast locales, cómo personalizarlas con Adaptive Cards, y cómo configurar notificaciones push para mantener al usuario informado en tiempo real.">
+<meta name="keywords" content="blog,desarrollador,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Integración con la API de notificaciones nativas">
+  <meta name="twitter:description" content="Las notificaciones del sistema son uno de los mecanismos más eficaces para comunicar información al usuario sin interrumpir su flujo de trabajo. En Windows, estas notificaciones pueden ser enriquecidas mediante el sistema de notificaciones nativas, que incluye soporte para contenido visual dinámico con Adaptive Cards y la posibilidad de recibir notificaciones push incluso cuando la aplicación no está en ejecución.
+Con WinUI 3 y Windows App SDK, es posible crear y gestionar notificaciones enriquecidas, personalizadas y reactivas. Este artículo muestra cómo implementar notificaciones toast locales, cómo personalizarlas con Adaptive Cards, y cómo configurar notificaciones push para mantener al usuario informado en tiempo real.">
+
+<meta property="og:url" content="http://localhost:1313/es/posts/2024-12-20-notification-api-integration/">
+  <meta property="og:site_name" content="Christian Amado">
+  <meta property="og:title" content="Integración con la API de notificaciones nativas">
+  <meta property="og:description" content="Las notificaciones del sistema son uno de los mecanismos más eficaces para comunicar información al usuario sin interrumpir su flujo de trabajo. En Windows, estas notificaciones pueden ser enriquecidas mediante el sistema de notificaciones nativas, que incluye soporte para contenido visual dinámico con Adaptive Cards y la posibilidad de recibir notificaciones push incluso cuando la aplicación no está en ejecución.
+Con WinUI 3 y Windows App SDK, es posible crear y gestionar notificaciones enriquecidas, personalizadas y reactivas. Este artículo muestra cómo implementar notificaciones toast locales, cómo personalizarlas con Adaptive Cards, y cómo configurar notificaciones push para mantener al usuario informado en tiempo real.">
+  <meta property="og:locale" content="es">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-12-20T00:00:00-04:00">
+    <meta property="article:modified_time" content="2024-12-20T00:00:00-04:00">
+    <meta property="article:tag" content="WinDev">
+    <meta property="article:tag" content="Windows 11">
+    <meta property="article:tag" content="WinUI 3">
+    <meta property="article:tag" content="Windows App SDK">
+
+
+
+
+<link rel="canonical" href="http://localhost:1313/es/posts/2024-12-20-notification-api-integration/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/es/">
+      Christian Amado
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/about">Biografía</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/contact">Contacto</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/diabetes">Diabetes</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/tags">Etiquetas</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/en/">🇺🇸</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/es/posts/2024-12-20-notification-api-integration/">
+              Integración con la API de notificaciones nativas
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2024-12-20T00:00:00-04:00">
+                diciembre 20, 2024
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              4 minutos de lectura.
+            </span>
+          </div>
+          
+          
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/es/tags/windev/">WinDev</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/es/tags/windows-11/">Windows 11</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/es/tags/winui-3/">WinUI 3</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/es/tags/windows-app-sdk/">Windows App SDK</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <p>Las notificaciones del sistema son uno de los mecanismos más eficaces para comunicar información al usuario sin interrumpir su flujo de trabajo. En <strong>Windows</strong>, estas notificaciones pueden ser enriquecidas mediante el sistema de notificaciones nativas, que incluye soporte para contenido visual dinámico con Adaptive Cards y la posibilidad de recibir notificaciones push incluso cuando la aplicación no está en ejecución.</p>
+<p>Con <strong>WinUI 3</strong> y <strong>Windows App SDK</strong>, es posible crear y gestionar notificaciones enriquecidas, personalizadas y reactivas. Este artículo muestra cómo implementar notificaciones toast locales, cómo personalizarlas con Adaptive Cards, y cómo configurar notificaciones push para mantener al usuario informado en tiempo real.</p>
+<h2 id="requisitos">
+  Requisitos
+  <a class="heading-link" href="#requisitos">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ul>
+<li>Windows 11</li>
+<li>Visual Studio 2022+</li>
+<li>Proyecto empaquetado con MSIX (WinUI 3)</li>
+<li>Windows App SDK 1.3 o superior</li>
+<li>Referencia a <code>Microsoft.WindowsAppSDK</code> y <code>Microsoft.Toolkit.Uwp.Notifications</code></li>
+</ul>
+<h2 id="paso-1-instalar-el-paquete-nuget-para-notificaciones">
+  Paso 1: Instalar el paquete NuGet para notificaciones
+  <a class="heading-link" href="#paso-1-instalar-el-paquete-nuget-para-notificaciones">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Agregar al proyecto el paquete:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">Install-Package Microsoft.Windows.SDK.Contracts
+</span></span><span class="line"><span class="cl">Install-Package Microsoft.Toolkit.Uwp.Notifications
+</span></span></code></pre></div><p>Esto habilita la construcción de notificaciones toast con contenido enriquecido.</p>
+<h2 id="paso-2-enviar-una-notificación-toast-simple">
+  Paso 2: Enviar una notificación toast simple
+  <a class="heading-link" href="#paso-2-enviar-una-notificaci%c3%b3n-toast-simple">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Agregar esta llamada en un evento de botón o al iniciar la app:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="k">new</span> <span class="n">ToastContentBuilder</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="n">AddText</span><span class="p">(</span><span class="s">&#34;Recordatorio&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="n">AddText</span><span class="p">(</span><span class="s">&#34;No olvides guardar tus cambios&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="n">Show</span><span class="p">();</span>
+</span></span></code></pre></div><p>Esto mostrará una notificación estándar en el Centro de Actividades.</p>
+<h2 id="paso-3-notificación-enriquecida-con-adaptive-card">
+  Paso 3: Notificación enriquecida con Adaptive Card
+  <a class="heading-link" href="#paso-3-notificaci%c3%b3n-enriquecida-con-adaptive-card">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Construir una tarjeta adaptativa (JSON):</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kt">string</span> <span class="n">adaptiveJson</span> <span class="p">=</span> <span class="s">@&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">{
+</span></span></span><span class="line"><span class="cl"><span class="s">  &#34;&#34;type&#34;&#34;: &#34;&#34;AdaptiveCard&#34;&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">  &#34;&#34;version&#34;&#34;: &#34;&#34;1.5&#34;&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">  &#34;&#34;body&#34;&#34;: [
+</span></span></span><span class="line"><span class="cl"><span class="s">    {
+</span></span></span><span class="line"><span class="cl"><span class="s">      &#34;&#34;type&#34;&#34;: &#34;&#34;TextBlock&#34;&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">      &#34;&#34;text&#34;&#34;: &#34;&#34;Actualización disponible&#34;&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">      &#34;&#34;weight&#34;&#34;: &#34;&#34;Bolder&#34;&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">      &#34;&#34;size&#34;&#34;: &#34;&#34;Medium&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">    },
+</span></span></span><span class="line"><span class="cl"><span class="s">    {
+</span></span></span><span class="line"><span class="cl"><span class="s">      &#34;&#34;type&#34;&#34;: &#34;&#34;TextBlock&#34;&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">      &#34;&#34;text&#34;&#34;: &#34;&#34;La versión 1.5 ya está lista para instalar.&#34;&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">      &#34;&#34;wrap&#34;&#34;: true
+</span></span></span><span class="line"><span class="cl"><span class="s">    }
+</span></span></span><span class="line"><span class="cl"><span class="s">  ],
+</span></span></span><span class="line"><span class="cl"><span class="s">  &#34;&#34;actions&#34;&#34;: [
+</span></span></span><span class="line"><span class="cl"><span class="s">    {
+</span></span></span><span class="line"><span class="cl"><span class="s">      &#34;&#34;type&#34;&#34;: &#34;&#34;Action.OpenUrl&#34;&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">      &#34;&#34;title&#34;&#34;: &#34;&#34;Actualizar&#34;&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">      &#34;&#34;url&#34;&#34;: &#34;&#34;https://miapp.com/update&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">    }
+</span></span></span><span class="line"><span class="cl"><span class="s">  ]
+</span></span></span><span class="line"><span class="cl"><span class="s">}&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">var</span> <span class="n">toastContent</span> <span class="p">=</span> <span class="k">new</span> <span class="n">ToastContent</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Visual</span> <span class="p">=</span> <span class="k">new</span> <span class="n">ToastVisual</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">BindingGeneric</span> <span class="p">=</span> <span class="k">new</span> <span class="n">ToastBindingGeneric</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Children</span> <span class="p">=</span>
+</span></span><span class="line"><span class="cl">            <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">new</span> <span class="n">AdaptiveCardJsonContent</span><span class="p">(</span><span class="n">adaptiveJson</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">ToastNotificationManagerCompat</span><span class="p">.</span><span class="n">CreateToastNotifier</span><span class="p">().</span><span class="n">Show</span><span class="p">(</span><span class="k">new</span> <span class="n">ToastNotification</span><span class="p">(</span><span class="n">toastContent</span><span class="p">.</span><span class="n">GetXml</span><span class="p">()));</span>
+</span></span></code></pre></div><p>Este código muestra una notificación visualmente rica y con botón de acción.</p>
+<h2 id="paso-4-manejar-la-activación-de-la-notificación">
+  Paso 4: Manejar la activación de la notificación
+  <a class="heading-link" href="#paso-4-manejar-la-activaci%c3%b3n-de-la-notificaci%c3%b3n">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Al pulsar sobre la notificación, se puede invocar código personalizado.</p>
+<p>Registrar manejador en <code>App.xaml.cs</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="n">ToastNotificationManagerCompat</span><span class="p">.</span><span class="n">OnActivated</span> <span class="p">+=</span> <span class="n">toastArgs</span> <span class="p">=&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ToastArguments</span> <span class="n">args</span> <span class="p">=</span> <span class="n">toastArgs</span><span class="p">.</span><span class="n">Argument</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// Lógica según argumentos</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">args</span><span class="p">.</span><span class="n">Contains</span><span class="p">(</span><span class="s">&#34;abrirPanel&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">DispatcherQueue</span><span class="p">.</span><span class="n">TryEnqueue</span><span class="p">(()</span> <span class="p">=&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">new</span> <span class="n">PanelWindow</span><span class="p">().</span><span class="n">Activate</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="p">});</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><p>Para enviar argumentos desde la notificación:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="p">.</span><span class="n">AddArgument</span><span class="p">(</span><span class="s">&#34;abrirPanel&#34;</span><span class="p">,</span> <span class="s">&#34;true&#34;</span><span class="p">)</span>
+</span></span></code></pre></div><h2 id="paso-5-notificaciones-push-via-canal-wns">
+  Paso 5: Notificaciones push (via canal WNS)
+  <a class="heading-link" href="#paso-5-notificaciones-push-via-canal-wns">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="crear-canal">
+  Crear canal
+  <a class="heading-link" href="#crear-canal">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kt">var</span> <span class="n">channel</span> <span class="p">=</span> <span class="k">await</span> <span class="n">PushNotificationChannelManager</span><span class="p">.</span><span class="n">CreatePushNotificationChannelForApplicationAsync</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="n">Debug</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&#34;URI canal: &#34;</span> <span class="p">+</span> <span class="n">channel</span><span class="p">.</span><span class="n">Uri</span><span class="p">);</span>
+</span></span></code></pre></div><p>Este URI se registra en el servidor para enviar push desde un backend.</p>
+<h3 id="recibir-notificaciones-push">
+  Recibir notificaciones push
+  <a class="heading-link" href="#recibir-notificaciones-push">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="n">channel</span><span class="p">.</span><span class="n">PushNotificationReceived</span> <span class="p">+=</span> <span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span> <span class="p">=&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// Mostrar notificación o actualizar UI</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">var</span> <span class="n">mensaje</span> <span class="p">=</span> <span class="n">e</span><span class="p">.</span><span class="n">RawNotification</span><span class="p">.</span><span class="n">Content</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><p>Esto permite recibir actualizaciones incluso si la app está suspendida (con restricciones).</p>
+<h2 id="paso-6-permisos-y-manifiesto">
+  Paso 6: Permisos y manifiesto
+  <a class="heading-link" href="#paso-6-permisos-y-manifiesto">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Asegurarse de declarar lo siguiente en el <code>Package.appxmanifest</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;Extensions&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&lt;uap:Extension</span> <span class="na">Category=</span><span class="s">&#34;windows.toastNotificationActivation&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;uap:ToastNotificationActivation</span> <span class="na">ToastActivatorCLSID=</span><span class="s">&#34;YOUR-CLSID-HERE&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&lt;/uap:Extension&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/Extensions&gt;</span>
+</span></span></code></pre></div><p>Y registrar el activador COM. Esto requiere el uso de un componente activador como <code>AppNotificationActivator</code>.</p>
+<h2 id="paso-7-ejemplo-completo-con-interacción">
+  Paso 7: Ejemplo completo con interacción
+  <a class="heading-link" href="#paso-7-ejemplo-completo-con-interacci%c3%b3n">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="k">new</span> <span class="n">ToastContentBuilder</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="n">AddArgument</span><span class="p">(</span><span class="s">&#34;action&#34;</span><span class="p">,</span> <span class="s">&#34;abrirPanel&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="n">AddText</span><span class="p">(</span><span class="s">&#34;Nuevo mensaje recibido&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="n">AddText</span><span class="p">(</span><span class="s">&#34;Haz clic para abrir el panel de control&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="n">AddButton</span><span class="p">(</span><span class="k">new</span> <span class="n">ToastButton</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="n">SetContent</span><span class="p">(</span><span class="s">&#34;Abrir ahora&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="n">AddArgument</span><span class="p">(</span><span class="s">&#34;action&#34;</span><span class="p">,</span> <span class="s">&#34;abrirPanel&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="n">Show</span><span class="p">();</span>
+</span></span></code></pre></div><p>Y en el manejador:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="s">&#34;action&#34;</span><span class="p">]</span> <span class="p">==</span> <span class="s">&#34;abrirPanel&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">DispatcherQueue</span><span class="p">.</span><span class="n">TryEnqueue</span><span class="p">(()</span> <span class="p">=&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">new</span> <span class="n">PanelWindow</span><span class="p">().</span><span class="n">Activate</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h2 id="buenas-prácticas">
+  Buenas prácticas
+  <a class="heading-link" href="#buenas-pr%c3%a1cticas">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ul>
+<li>No abusar de las notificaciones para evitar fatiga del usuario</li>
+<li>Personalizar con íconos, logos e identidad visual</li>
+<li>Combinar con lógica de actividad para mostrar solo cuando el usuario está inactivo</li>
+<li>Permitir al usuario desactivar ciertos tipos de notificaciones</li>
+<li>Usar telemetría para medir tasa de clics y efectividad</li>
+</ul>
+<h2 id="casos-de-uso">
+  Casos de uso
+  <a class="heading-link" href="#casos-de-uso">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ul>
+<li>Alertas de sistema o monitoreo en segundo plano</li>
+<li>Confirmaciones de procesos terminados</li>
+<li>Acciones rápidas desde el Centro de Actividades</li>
+<li>Integración con procesos push desde un backend o IoT</li>
+<li>UX reactiva sin abrir la ventana principal</li>
+</ul>
+<h2 id="conclusión">
+  Conclusión
+  <a class="heading-link" href="#conclusi%c3%b3n">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>La <strong>API</strong> de notificaciones nativas de <strong>Windows</strong>, junto con las Adaptive Cards y el soporte push, brinda una poderosa plataforma para interactuar con el usuario de manera contextual y no intrusiva. Usando <strong>WinUI 3</strong> y <strong>Windows App SDK</strong>, es posible ofrecer notificaciones enriquecidas, dinámicas y conectadas, reforzando el ciclo de comunicación entre la aplicación y el usuario.</p>
+<p>La integración adecuada de notificaciones no solo mejora la experiencia de usuario, sino que también posiciona a la aplicación como una parte activa del ecosistema Windows moderno.</p>
+      </div>
+
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script>
+  window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "cmasblog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    
+    document.addEventListener('themeChanged', function (e) { 
+        if (document.readyState == 'complete') {
+          DISQUS.reset({ reload: true, config: disqus_config });
+        }
+    });
+</script>
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2018 -
+    
+    2025
+     Christian Amado 
+    ·
+    
+    Desarrollado por <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+      <script async src="https://www.googletagmanager.com/gtag/js?id=356375808"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '356375808');
+        }
+      </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=013131931956450466198%3ablhmkdpweyq"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '013131931956450466198:blhmkdpweyq');
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

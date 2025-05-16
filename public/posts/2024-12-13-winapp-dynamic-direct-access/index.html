@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  Creación y gestión de accesos directos dinámicos en Start Menu y Taskbar · Christian Amado
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Christian Amado">
+<meta name="description" content="Una de las capacidades distintivas de las apps modernas en Windows es la posibilidad de integrarse dinámicamente con la experiencia del sistema operativo. Esto incluye la creación de accesos directos personalizados en el menú de inicio (Start Menu), así como la integración con la barra de tareas (Taskbar), ofreciendo accesos rápidos a funciones internas de la aplicación.
+Gracias a Windows App SDK, las apps desarrolladas con WinUI 3 pueden programáticamente crear y administrar accesos directos sin depender de métodos antiguos como acceso directo manual o scripts externos. Este artículo explora cómo crear accesos dinámicos con metadatos enriquecidos y cómo extender su funcionalidad mediante Jump Lists y pinning automático.">
+<meta name="keywords" content="blog,desarrollador,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Creación y gestión de accesos directos dinámicos en Start Menu y Taskbar">
+  <meta name="twitter:description" content="Una de las capacidades distintivas de las apps modernas en Windows es la posibilidad de integrarse dinámicamente con la experiencia del sistema operativo. Esto incluye la creación de accesos directos personalizados en el menú de inicio (Start Menu), así como la integración con la barra de tareas (Taskbar), ofreciendo accesos rápidos a funciones internas de la aplicación.
+Gracias a Windows App SDK, las apps desarrolladas con WinUI 3 pueden programáticamente crear y administrar accesos directos sin depender de métodos antiguos como acceso directo manual o scripts externos. Este artículo explora cómo crear accesos dinámicos con metadatos enriquecidos y cómo extender su funcionalidad mediante Jump Lists y pinning automático.">
+
+<meta property="og:url" content="http://localhost:1313/posts/2024-12-13-winapp-dynamic-direct-access/">
+  <meta property="og:site_name" content="Christian Amado">
+  <meta property="og:title" content="Creación y gestión de accesos directos dinámicos en Start Menu y Taskbar">
+  <meta property="og:description" content="Una de las capacidades distintivas de las apps modernas en Windows es la posibilidad de integrarse dinámicamente con la experiencia del sistema operativo. Esto incluye la creación de accesos directos personalizados en el menú de inicio (Start Menu), así como la integración con la barra de tareas (Taskbar), ofreciendo accesos rápidos a funciones internas de la aplicación.
+Gracias a Windows App SDK, las apps desarrolladas con WinUI 3 pueden programáticamente crear y administrar accesos directos sin depender de métodos antiguos como acceso directo manual o scripts externos. Este artículo explora cómo crear accesos dinámicos con metadatos enriquecidos y cómo extender su funcionalidad mediante Jump Lists y pinning automático.">
+  <meta property="og:locale" content="es">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-12-13T00:00:00-04:00">
+    <meta property="article:modified_time" content="2024-12-13T00:00:00-04:00">
+    <meta property="article:tag" content="WinDev">
+    <meta property="article:tag" content="Windows 11">
+    <meta property="article:tag" content="Windows App SDK">
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-V1ZRP82YFD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-V1ZRP82YFD');
+</script>
+
+
+
+<link rel="canonical" href="http://localhost:1313/posts/2024-12-13-winapp-dynamic-direct-access/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="apple-touch-icon" sizes="57x57" href="/img/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/img/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/img/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/img/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/img/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/img/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/img/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/img/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/img/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="/img/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/img/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+<link rel="manifest" href="/img/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/img/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/">
+      Christian Amado
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/about">Biografía</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/contact">Contacto</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/diabetes">Diabetes</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/tags">Etiquetas</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/en/">🇺🇸</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/posts/2024-12-13-winapp-dynamic-direct-access/">
+              Creación y gestión de accesos directos dinámicos en Start Menu y Taskbar
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2024-12-13T00:00:00-04:00">
+                diciembre 13, 2024
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              4 minutos de lectura.
+            </span>
+          </div>
+          
+          
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/tags/windev/">WinDev</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/windows-11/">Windows 11</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/windows-app-sdk/">Windows App SDK</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <p>Una de las capacidades distintivas de las apps modernas en <strong>Windows</strong> es la posibilidad de integrarse dinámicamente con la experiencia del sistema operativo. Esto incluye la creación de accesos directos personalizados en el menú de inicio (Start Menu), así como la integración con la barra de tareas (Taskbar), ofreciendo accesos rápidos a funciones internas de la aplicación.</p>
+<p>Gracias a <strong>Windows App SDK</strong>, las apps desarrolladas con <strong>WinUI 3</strong> pueden programáticamente crear y administrar accesos directos sin depender de métodos antiguos como acceso directo manual o scripts externos. Este artículo explora cómo crear accesos dinámicos con metadatos enriquecidos y cómo extender su funcionalidad mediante Jump Lists y pinning automático.</p>
+<h2 id="requisitos-previos">
+  Requisitos previos
+  <a class="heading-link" href="#requisitos-previos">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ul>
+<li>Windows 11</li>
+<li>Visual Studio 2022+</li>
+<li>Proyecto WinUI 3 empaquetado (MSIX) con Windows App SDK</li>
+<li>Conocimiento de archivos <code>.lnk</code>, URIs internos y asociaciones de comandos</li>
+</ul>
+<h2 id="escenario">
+  Escenario
+  <a class="heading-link" href="#escenario">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Una app de escritorio moderna llamada &ldquo;NoteBoard&rdquo; permite a los usuarios crear notas rápidas. El objetivo es ofrecer:</p>
+<ul>
+<li>Un acceso directo al menú inicio con el icono de la app</li>
+<li>Una opción adicional para crear una nueva nota desde la Jump List</li>
+<li>Pin automático a la barra de tareas al primer lanzamiento</li>
+</ul>
+<h2 id="paso-1-configuración-de-acceso-directo-en-el-manifiesto-msix">
+  Paso 1: Configuración de acceso directo en el manifiesto MSIX
+  <a class="heading-link" href="#paso-1-configuraci%c3%b3n-de-acceso-directo-en-el-manifiesto-msix">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Abrir el archivo <code>Package.appxmanifest</code> en modo de texto y agregar la siguiente declaración dentro de <code>&lt;Applications&gt;</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;Extensions&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&lt;uap:Extension</span> <span class="na">Category=</span><span class="s">&#34;windows.appExecutionAlias&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;uap:AppExecutionAlias&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&lt;uap:ExecutionAlias</span> <span class="na">Alias=</span><span class="s">&#34;noteboard.exe&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/uap:AppExecutionAlias&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&lt;/uap:Extension&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/Extensions&gt;</span>
+</span></span></code></pre></div><p>Esto crea un alias ejecutable que puede ser llamado desde consola (<code>noteboard.exe</code>) y ayuda en el pin dinámico.</p>
+<h2 id="paso-2-crear-uri-handlers-para-acciones-internas">
+  Paso 2: Crear URI handlers para acciones internas
+  <a class="heading-link" href="#paso-2-crear-uri-handlers-para-acciones-internas">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Declarar un protocolo personalizado en el manifiesto:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;uap:Extension</span> <span class="na">Category=</span><span class="s">&#34;windows.protocol&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&lt;uap:Protocol</span> <span class="na">Name=</span><span class="s">&#34;noteboard&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;uap:DisplayName&gt;</span>NoteBoard Protocol<span class="nt">&lt;/uap:DisplayName&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&lt;/uap:Protocol&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/uap:Extension&gt;</span>
+</span></span></code></pre></div><p>Y en código (ej. en <code>App.xaml.cs</code>), capturar el URI:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kd">protected</span> <span class="kd">override</span> <span class="k">void</span> <span class="n">OnActivated</span><span class="p">(</span><span class="n">IActivatedEventArgs</span> <span class="n">args</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">args</span> <span class="k">is</span> <span class="n">ProtocolActivatedEventArgs</span> <span class="n">protocolArgs</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">var</span> <span class="n">uri</span> <span class="p">=</span> <span class="n">protocolArgs</span><span class="p">.</span><span class="n">Uri</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">uri</span><span class="p">.</span><span class="n">Host</span> <span class="p">==</span> <span class="s">&#34;newnote&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// Abrir ventana para nueva nota</span>
+</span></span><span class="line"><span class="cl">            <span class="k">new</span> <span class="n">MainWindow</span><span class="p">().</span><span class="n">Activate</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Esto permite abrir la app con comandos como <code>noteboard://newnote</code>.</p>
+<h2 id="paso-3-añadir-accesos-rápidos-a-la-jump-list">
+  Paso 3: Añadir accesos rápidos a la Jump List
+  <a class="heading-link" href="#paso-3-a%c3%b1adir-accesos-r%c3%a1pidos-a-la-jump-list">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Usar la clase <code>JumpList</code> para registrar tareas adicionales:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">Windows.UI.StartScreen</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">async</span> <span class="n">Task</span> <span class="n">ConfigurarJumpListAsync</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="k">await</span> <span class="n">JumpList</span><span class="p">.</span><span class="n">IsSupportedAsync</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">var</span> <span class="n">jumpList</span> <span class="p">=</span> <span class="k">await</span> <span class="n">JumpList</span><span class="p">.</span><span class="n">LoadCurrentAsync</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">jumpList</span><span class="p">.</span><span class="n">Items</span><span class="p">.</span><span class="n">Clear</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="kt">var</span> <span class="n">item</span> <span class="p">=</span> <span class="n">JumpListItem</span><span class="p">.</span><span class="n">CreateWithArguments</span><span class="p">(</span><span class="s">&#34;noteboard://newnote&#34;</span><span class="p">,</span> <span class="s">&#34;Nueva Nota&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">item</span><span class="p">.</span><span class="n">Description</span> <span class="p">=</span> <span class="s">&#34;Crear una nueva nota rápida&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">item</span><span class="p">.</span><span class="n">Logo</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Uri</span><span class="p">(</span><span class="s">&#34;ms-appx:///Assets/plus-icon.png&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">item</span><span class="p">.</span><span class="n">GroupName</span> <span class="p">=</span> <span class="s">&#34;Accesos rápidos&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">jumpList</span><span class="p">.</span><span class="n">Items</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">item</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">await</span> <span class="n">jumpList</span><span class="p">.</span><span class="n">SaveAsync</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Invocar <code>ConfigurarJumpListAsync()</code> en el primer inicio o durante la inicialización de la app.</p>
+<h2 id="paso-4-pin-a-la-barra-de-tareas-taskbar">
+  Paso 4: Pin a la barra de tareas (Taskbar)
+  <a class="heading-link" href="#paso-4-pin-a-la-barra-de-tareas-taskbar">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Este paso es más delicado. El pinning automático no está oficialmente soportado por la API pública, pero se puede sugerir mediante atajos:</p>
+<ul>
+<li>Crear un archivo <code>.lnk</code> con destino a <code>noteboard.exe</code></li>
+<li>Usar <code>ShellLink</code> con interop para crear el acceso</li>
+<li>Invitar al usuario a &ldquo;Pin to taskbar&rdquo; mediante UI o notificación</li>
+</ul>
+<p>Ejemplo de creación del acceso directo vía <code>IShellLink</code> (requiere COM interop):</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="c1">// Usar Shell32 o empaquetar un ejecutable auxiliar que cree el pin</span>
+</span></span></code></pre></div><p>Alternativamente, al iniciar la app por primera vez, se puede mostrar una notificación:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="k">new</span> <span class="n">ToastContentBuilder</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="n">AddText</span><span class="p">(</span><span class="s">&#34;¿Usás NoteBoard frecuentemente?&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="n">AddText</span><span class="p">(</span><span class="s">&#34;Anclala a la barra de tareas para acceder más rápido.&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="n">AddButton</span><span class="p">(</span><span class="k">new</span> <span class="n">ToastButton</span><span class="p">(</span><span class="s">&#34;Anclar&#34;</span><span class="p">,</span> <span class="s">&#34;pin-taskbar&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="n">Show</span><span class="p">();</span>
+</span></span></code></pre></div><p>En el manejador de activación, abrir el menú contextual del acceso directo.</p>
+<h2 id="paso-5-verificar-resultado-en-sistema">
+  Paso 5: Verificar resultado en sistema
+  <a class="heading-link" href="#paso-5-verificar-resultado-en-sistema">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Después de correr la app:</p>
+<ul>
+<li>Presionar la tecla Windows y escribir &ldquo;NoteBoard&rdquo;</li>
+<li>El acceso directo aparecerá con el ícono personalizado</li>
+<li>Clic derecho mostrará la Jump List con &ldquo;Nueva Nota&rdquo;</li>
+<li>Ejecutar desde PowerShell: <code>Start-Process &quot;noteboard://newnote&quot;</code></li>
+</ul>
+<h2 id="buenas-prácticas">
+  Buenas prácticas
+  <a class="heading-link" href="#buenas-pr%c3%a1cticas">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ul>
+<li>Usar logos diferenciados para cada JumpListItem</li>
+<li>No exceder los 5 accesos rápidos recomendados por Microsoft</li>
+<li>Localizar títulos y descripciones si la app es multilenguaje</li>
+<li>Guardar estado de pinning para evitar duplicados o repeticiones</li>
+</ul>
+<h2 id="casos-de-uso">
+  Casos de uso
+  <a class="heading-link" href="#casos-de-uso">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ul>
+<li>Crear accesos directos para flujos frecuentes (crear nota, abrir calendario, iniciar reunión)</li>
+<li>Acciones rápidas en apps de productividad, CRM, helpdesk</li>
+<li>Activación de comandos por voz o scripts (via protocolo personalizado)</li>
+<li>Extensiones de UX sin necesidad de abrir UI completa</li>
+</ul>
+<h2 id="conclusión">
+  Conclusión
+  <a class="heading-link" href="#conclusi%c3%b3n">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Las apps modernas en <strong>Windows</strong> pueden integrarse profundamente con el sistema operativo a través de accesos directos dinámicos, Jump Lists, protocolos personalizados y atajos enriquecidos. Usando <strong>Windows App SDK</strong>, es posible ofrecer al usuario una experiencia nativa y fluida desde el inicio, mejorando la productividad y facilitando el acceso a las funcionalidades clave de la aplicación desde el menú de inicio o la barra de tareas.</p>
+<p>Esta integración es una forma efectiva de mejorar la adopción y visibilidad de una app, ofreciendo puntos de entrada estratégicos que van más allá de la simple ejecución principal.</p>
+      </div>
+
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script>
+  window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "cmasblog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    
+    document.addEventListener('themeChanged', function (e) { 
+        if (document.readyState == 'complete') {
+          DISQUS.reset({ reload: true, config: disqus_config });
+        }
+    });
+</script>
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2018 -
+    
+    2025
+     Christian Amado 
+    ·
+    
+    Desarrollado por <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+      <script async src="https://www.googletagmanager.com/gtag/js?id=356375808"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '356375808');
+        }
+      </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=013131931956450466198%3ablhmkdpweyq"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '013131931956450466198:blhmkdpweyq');
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

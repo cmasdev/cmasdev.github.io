@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  Telemetría y monitoreo de procesos WSL2 con herramientas como Prometheus · Christian Amado
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Christian Amado">
+<meta name="description" content="El monitoreo de recursos y procesos es clave en cualquier entorno de desarrollo o pruebas. Gracias a la compatibilidad de WSL2 con herramientas Linux estándar, es posible usar soluciones de observabilidad como Prometheus y Node Exporter para visualizar el rendimiento del entorno WSL2 de forma clara y eficiente.">
+<meta name="keywords" content="blog,desarrollador,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Telemetría y monitoreo de procesos WSL2 con herramientas como Prometheus">
+  <meta name="twitter:description" content="El monitoreo de recursos y procesos es clave en cualquier entorno de desarrollo o pruebas. Gracias a la compatibilidad de WSL2 con herramientas Linux estándar, es posible usar soluciones de observabilidad como Prometheus y Node Exporter para visualizar el rendimiento del entorno WSL2 de forma clara y eficiente.">
+
+<meta property="og:url" content="http://localhost:1313/es/posts/2024-06-07-wsl2-prometheus/">
+  <meta property="og:site_name" content="Christian Amado">
+  <meta property="og:title" content="Telemetría y monitoreo de procesos WSL2 con herramientas como Prometheus">
+  <meta property="og:description" content="El monitoreo de recursos y procesos es clave en cualquier entorno de desarrollo o pruebas. Gracias a la compatibilidad de WSL2 con herramientas Linux estándar, es posible usar soluciones de observabilidad como Prometheus y Node Exporter para visualizar el rendimiento del entorno WSL2 de forma clara y eficiente.">
+  <meta property="og:locale" content="es">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-06-07T00:00:00-04:00">
+    <meta property="article:modified_time" content="2024-06-07T00:00:00-04:00">
+    <meta property="article:tag" content="WinDev">
+    <meta property="article:tag" content="Windows 11">
+    <meta property="article:tag" content="WSL">
+
+
+
+
+<link rel="canonical" href="http://localhost:1313/es/posts/2024-06-07-wsl2-prometheus/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/es/">
+      Christian Amado
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/about">Biografía</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/contact">Contacto</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/diabetes">Diabetes</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/tags">Etiquetas</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/en/">🇺🇸</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/es/posts/2024-06-07-wsl2-prometheus/">
+              Telemetría y monitoreo de procesos WSL2 con herramientas como Prometheus
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2024-06-07T00:00:00-04:00">
+                junio 7, 2024
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              2 minutos de lectura.
+            </span>
+          </div>
+          
+          
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/es/tags/windev/">WinDev</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/es/tags/windows-11/">Windows 11</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/es/tags/wsl/">WSL</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <p>El monitoreo de recursos y procesos es clave en cualquier entorno de desarrollo o pruebas. Gracias a la compatibilidad de WSL2 con herramientas Linux estándar, es posible usar soluciones de <strong>observabilidad como Prometheus</strong> y <strong>Node Exporter</strong> para visualizar el rendimiento del entorno WSL2 de forma clara y eficiente.</p>
+<h2 id="-objetivo">
+  🎯 Objetivo
+  <a class="heading-link" href="#-objetivo">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ul>
+<li>Exponer métricas del entorno Linux en WSL2</li>
+<li>Instalar y configurar <strong>Node Exporter</strong></li>
+<li>Usar <strong>Prometheus</strong> para recolectar y visualizar métricas</li>
+<li>Explorar métricas útiles para desarrolladores y DevOps</li>
+</ul>
+<h2 id="-paso-1-preparar-entorno-wsl2">
+  ⚙️ Paso 1: Preparar entorno WSL2
+  <a class="heading-link" href="#-paso-1-preparar-entorno-wsl2">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Instalar paquetes esenciales:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt update <span class="o">&amp;&amp;</span> sudo apt install -y wget curl tar
+</span></span></code></pre></div><p>Crear carpeta de monitoreo:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">mkdir -p ~/monitoring <span class="o">&amp;&amp;</span> <span class="nb">cd</span> ~/monitoring
+</span></span></code></pre></div><h2 id="-paso-2-instalar-node-exporter">
+  📦 Paso 2: Instalar Node Exporter
+  <a class="heading-link" href="#-paso-2-instalar-node-exporter">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Descargar binarios oficiales:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">wget https://github.com/prometheus/node_exporter/releases/download/v1.7.0/node_exporter-1.7.0.linux-amd64.tar.gz
+</span></span><span class="line"><span class="cl">tar xvf node_exporter-1.7.0.linux-amd64.tar.gz
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> node_exporter-1.7.0.linux-amd64
+</span></span></code></pre></div><p>Ejecutar Node Exporter:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">./node_exporter
+</span></span></code></pre></div><p>Por defecto se expone en <code>http://localhost:9100/metrics</code></p>
+<h2 id="-paso-3-verificar-métricas">
+  🔍 Paso 3: Verificar métricas
+  <a class="heading-link" href="#-paso-3-verificar-m%c3%a9tricas">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Acceder desde el navegador o con <code>curl</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">curl http://localhost:9100/metrics <span class="p">|</span> grep cpu
+</span></span></code></pre></div><p>Métricas disponibles incluyen:</p>
+<ul>
+<li>CPU usage</li>
+<li>Memory</li>
+<li>Disk I/O</li>
+<li>Network stats</li>
+<li>Load average</li>
+</ul>
+<h2 id="-paso-4-configurar-prometheus-para-recolectar-datos">
+  📈 Paso 4: Configurar Prometheus para recolectar datos
+  <a class="heading-link" href="#-paso-4-configurar-prometheus-para-recolectar-datos">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Crear archivo <code>prometheus.yml</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">global</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">scrape_interval</span><span class="p">:</span><span class="w"> </span><span class="l">5s</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">scrape_configs</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">job_name</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;wsl2-node&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">static_configs</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">targets</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;localhost:9100&#39;</span><span class="p">]</span><span class="w">
+</span></span></span></code></pre></div><p>Descargar y ejecutar Prometheus:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">wget https://github.com/prometheus/prometheus/releases/download/v2.48.0/prometheus-2.48.0.linux-amd64.tar.gz
+</span></span><span class="line"><span class="cl">tar xvf prometheus-2.48.0.linux-amd64.tar.gz
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> prometheus-2.48.0.linux-amd64
+</span></span><span class="line"><span class="cl">./prometheus --config.file<span class="o">=</span>prometheus.yml
+</span></span></code></pre></div><p>Interfaz disponible en <code>http://localhost:9090</code></p>
+<h2 id="-integración-con-docker-opcional">
+  🛠️ Integración con Docker (opcional)
+  <a class="heading-link" href="#-integraci%c3%b3n-con-docker-opcional">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Se puede ejecutar <strong>Node Exporter</strong> y <strong>Prometheus</strong> como contenedores:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker run -d -p 9100:9100 --name node_exporter prom/node-exporter
+</span></span><span class="line"><span class="cl">docker run -d -p 9090:9090 -v <span class="nv">$PWD</span>/prometheus.yml:/etc/prometheus/prometheus.yml prom/prometheus
+</span></span></code></pre></div><h2 id="-conclusión">
+  ✅ Conclusión
+  <a class="heading-link" href="#-conclusi%c3%b3n">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>WSL2 permite monitorizar recursos de manera profesional usando herramientas estándar como <strong>Prometheus</strong>. Esto es ideal para desarrolladores que necesitan observar el uso de CPU, RAM y procesos intensivos sin salir de su entorno <strong>Windows</strong>, facilitando la implementación de prácticas <strong>DevOps</strong> y <strong>DataOps</strong>.</p>
+      </div>
+
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script>
+  window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "cmasblog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    
+    document.addEventListener('themeChanged', function (e) { 
+        if (document.readyState == 'complete') {
+          DISQUS.reset({ reload: true, config: disqus_config });
+        }
+    });
+</script>
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2018 -
+    
+    2025
+     Christian Amado 
+    ·
+    
+    Desarrollado por <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+      <script async src="https://www.googletagmanager.com/gtag/js?id=356375808"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '356375808');
+        }
+      </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=013131931956450466198%3ablhmkdpweyq"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '013131931956450466198:blhmkdpweyq');
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

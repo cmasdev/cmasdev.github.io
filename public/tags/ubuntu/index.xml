@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ubuntu on Christian Amado</title>
+    <link>http://localhost:1313/tags/ubuntu/</link>
+    <description>Recent content in Ubuntu on Christian Amado</description>
+    <generator>Hugo</generator>
+    <language>es</language>
+    <lastBuildDate>Wed, 29 Jun 2022 20:47:00 -0400</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/ubuntu/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Java con WSL parte 2</title>
+      <link>http://localhost:1313/posts/2022-06-29-java-with-wsl-part-2/</link>
+      <pubDate>Wed, 29 Jun 2022 20:47:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2022-06-29-java-with-wsl-part-2/</guid>
+      <description>&lt;p&gt;En este artículo mostraré cómo desarrollar una pequeña aplicación web en &lt;strong&gt;Java&lt;/strong&gt; corriendo sobre &lt;strong&gt;WSL (Windows Subsystem for Linux)&lt;/strong&gt;. En el &lt;a href=&#34;http://localhost:1313/posts/2022-06-22-java-with-wsl-part-1/&#34; &gt;artículo anterior&lt;/a&gt; hemos visto como preparar &lt;strong&gt;Visual Studio Code&lt;/strong&gt; para &lt;strong&gt;Java&lt;/strong&gt; sobre &lt;strong&gt;WSL (Windows Subsystem for Linux)&lt;/strong&gt;.&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Windows 11 Insider Preview Build 25151&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Java con WSL parte 1</title>
+      <link>http://localhost:1313/posts/2022-06-22-java-with-wsl-part-1/</link>
+      <pubDate>Wed, 22 Jun 2022 18:19:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2022-06-22-java-with-wsl-part-1/</guid>
+      <description>&lt;p&gt;En este artículo mostraré cómo instalar y preparar el entorno para el desarrollo de &lt;strong&gt;Java&lt;/strong&gt; sobre &lt;strong&gt;Windows Subsystem for Linux (WSL)&lt;/strong&gt;.&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Windows 11 Insider Preview Build 25145&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>ASP.NET Core en Ubuntu</title>
+      <link>http://localhost:1313/posts/2022-06-15-aspnet-core-on-ubuntu/</link>
+      <pubDate>Wed, 15 Jun 2022 12:08:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2022-06-15-aspnet-core-on-ubuntu/</guid>
+      <description>&lt;p&gt;En este artículo mostraré cómo ejecutar una aplicación &lt;strong&gt;ASP.NET Core&lt;/strong&gt; sobre &lt;strong&gt;Windows Subsystem for Linux&lt;/strong&gt;, es decir, alojar un servidor web en Ubuntu para ejecutar nuestra aplicación web.&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Windows 11 Insider Preview Build 25140&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Git y WSL</title>
+      <link>http://localhost:1313/posts/2022-05-04-git-and-wsl/</link>
+      <pubDate>Wed, 04 May 2022 13:48:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2022-05-04-git-and-wsl/</guid>
+      <description>&lt;p&gt;En este artículo mostraré cómo instalar o actualizar git dentro de &lt;strong&gt;Windows Subsystem for Linux&lt;/strong&gt; de modo a poder clonar repositorio desde y hacia &lt;strong&gt;GitHub&lt;/strong&gt;. En un &lt;a href=&#34;http://localhost:1313/posts/2022-04-26-configuring-my-wsl-environment/&#34; &gt;artículo anterior&lt;/a&gt; hemos visto cómo habilitar la plataforma &lt;strong&gt;Windows Subsystem for Linux&lt;/strong&gt;.&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Windows 11 Insider Preview Build 22610&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

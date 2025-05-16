@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  Implementación de Background Tasks persistentes en apps modernas · Christian Amado
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Christian Amado">
+<meta name="description" content="Las apps modernas no siempre necesitan estar en primer plano para ofrecer valor. Muchas tareas pueden ejecutarse en segundo plano: desde sincronizar datos, recibir notificaciones push, recolectar telemetría o mantener información actualizada. Windows App SDK, junto con el modelo de Background Tasks, permite que las aplicaciones WinUI 3 implementen lógica persistente y autónoma en segundo plano, sin requerir una ventana activa.
+Este artículo explica cómo crear y registrar tareas en segundo plano usando temporizadores, eventos del sistema o push notifications (RAW), y cómo integrarlas en una aplicación moderna empaquetada.">
+<meta name="keywords" content="blog,desarrollador,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Implementación de Background Tasks persistentes en apps modernas">
+  <meta name="twitter:description" content="Las apps modernas no siempre necesitan estar en primer plano para ofrecer valor. Muchas tareas pueden ejecutarse en segundo plano: desde sincronizar datos, recibir notificaciones push, recolectar telemetría o mantener información actualizada. Windows App SDK, junto con el modelo de Background Tasks, permite que las aplicaciones WinUI 3 implementen lógica persistente y autónoma en segundo plano, sin requerir una ventana activa.
+Este artículo explica cómo crear y registrar tareas en segundo plano usando temporizadores, eventos del sistema o push notifications (RAW), y cómo integrarlas en una aplicación moderna empaquetada.">
+
+<meta property="og:url" content="http://localhost:1313/posts/2025-03-07-winui-background-tasks/">
+  <meta property="og:site_name" content="Christian Amado">
+  <meta property="og:title" content="Implementación de Background Tasks persistentes en apps modernas">
+  <meta property="og:description" content="Las apps modernas no siempre necesitan estar en primer plano para ofrecer valor. Muchas tareas pueden ejecutarse en segundo plano: desde sincronizar datos, recibir notificaciones push, recolectar telemetría o mantener información actualizada. Windows App SDK, junto con el modelo de Background Tasks, permite que las aplicaciones WinUI 3 implementen lógica persistente y autónoma en segundo plano, sin requerir una ventana activa.
+Este artículo explica cómo crear y registrar tareas en segundo plano usando temporizadores, eventos del sistema o push notifications (RAW), y cómo integrarlas en una aplicación moderna empaquetada.">
+  <meta property="og:locale" content="es">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-03-07T00:00:00-04:00">
+    <meta property="article:modified_time" content="2025-03-07T00:00:00-04:00">
+    <meta property="article:tag" content="WinDev">
+    <meta property="article:tag" content="Windows 11">
+    <meta property="article:tag" content="WinUI 3">
+    <meta property="article:tag" content="Windows App SDK">
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-V1ZRP82YFD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-V1ZRP82YFD');
+</script>
+
+
+
+<link rel="canonical" href="http://localhost:1313/posts/2025-03-07-winui-background-tasks/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="apple-touch-icon" sizes="57x57" href="/img/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/img/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/img/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/img/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/img/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/img/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/img/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/img/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/img/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="/img/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/img/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+<link rel="manifest" href="/img/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/img/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/">
+      Christian Amado
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/about">Biografía</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/contact">Contacto</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/diabetes">Diabetes</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/tags">Etiquetas</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/en/">🇺🇸</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/posts/2025-03-07-winui-background-tasks/">
+              Implementación de Background Tasks persistentes en apps modernas
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2025-03-07T00:00:00-04:00">
+                marzo 7, 2025
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              3 minutos de lectura.
+            </span>
+          </div>
+          
+          
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/tags/windev/">WinDev</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/windows-11/">Windows 11</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/winui-3/">WinUI 3</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/windows-app-sdk/">Windows App SDK</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <p>Las apps modernas no siempre necesitan estar en primer plano para ofrecer valor. Muchas tareas pueden ejecutarse en segundo plano: desde sincronizar datos, recibir notificaciones push, recolectar telemetría o mantener información actualizada. <strong>Windows App SDK</strong>, junto con el modelo de <strong>Background Tasks</strong>, permite que las aplicaciones <strong>WinUI 3</strong> implementen lógica persistente y autónoma en segundo plano, sin requerir una ventana activa.</p>
+<p>Este artículo explica cómo crear y registrar tareas en segundo plano usando temporizadores, eventos del sistema o push notifications (RAW), y cómo integrarlas en una aplicación moderna empaquetada.</p>
+<h2 id="requisitos">
+  Requisitos
+  <a class="heading-link" href="#requisitos">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ul>
+<li>Windows 11</li>
+<li>Visual Studio 2022+</li>
+<li>Proyecto WinUI 3 empaquetado (MSIX)</li>
+<li>Windows App SDK 1.3+</li>
+<li>Conocimiento de manifiesto MSIX</li>
+</ul>
+<h2 id="tipos-de-background-tasks">
+  Tipos de Background Tasks
+  <a class="heading-link" href="#tipos-de-background-tasks">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ul>
+<li><strong>TimeTrigger</strong>: se ejecuta a intervalos (mínimo 15 min)</li>
+<li><strong>MaintenanceTrigger</strong>: cuando el sistema está inactivo</li>
+<li><strong>PushTrigger (Raw Push)</strong>: notificación sin UI</li>
+<li><strong>SystemTrigger</strong>: conectado a eventos del sistema</li>
+</ul>
+<h2 id="paso-1-crear-clase-de-tarea-en-segundo-plano">
+  Paso 1: Crear clase de tarea en segundo plano
+  <a class="heading-link" href="#paso-1-crear-clase-de-tarea-en-segundo-plano">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Agregar nuevo archivo:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">sealed</span> <span class="k">class</span> <span class="nc">MiBackgroundTask</span> <span class="p">:</span> <span class="n">IBackgroundTask</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="k">void</span> <span class="n">Run</span><span class="p">(</span><span class="n">IBackgroundTaskInstance</span> <span class="n">taskInstance</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// Lógica que se ejecuta en segundo plano</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">var</span> <span class="n">deferral</span> <span class="p">=</span> <span class="n">taskInstance</span><span class="p">.</span><span class="n">GetDeferral</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// Ejemplo: guardar log</span>
+</span></span><span class="line"><span class="cl">        <span class="n">File</span><span class="p">.</span><span class="n">AppendAllText</span><span class="p">(</span><span class="s">&#34;C:\Logs\tasklog.txt&#34;</span><span class="p">,</span> <span class="s">$&#34;Ejecutado {DateTime.Now}
+</span></span></span><span class="line"><span class="cl"><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">deferral</span><span class="p">.</span><span class="n">Complete</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h2 id="paso-2-registrar-la-tarea-desde-la-app-principal">
+  Paso 2: Registrar la tarea desde la app principal
+  <a class="heading-link" href="#paso-2-registrar-la-tarea-desde-la-app-principal">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>En <code>App.xaml.cs</code> o <code>MainWindow.xaml.cs</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kt">var</span> <span class="n">builder</span> <span class="p">=</span> <span class="k">new</span> <span class="n">BackgroundTaskBuilder</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Name</span> <span class="p">=</span> <span class="s">&#34;MiTareaTimer&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">TaskEntryPoint</span> <span class="p">=</span> <span class="s">&#34;NombreApp.MiBackgroundTask&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">builder</span><span class="p">.</span><span class="n">SetTrigger</span><span class="p">(</span><span class="k">new</span> <span class="n">TimeTrigger</span><span class="p">(</span><span class="m">15</span><span class="p">,</span> <span class="kc">false</span><span class="p">));</span> <span class="c1">// cada 15 min</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">BackgroundTaskRegistration</span> <span class="n">task</span> <span class="p">=</span> <span class="n">builder</span><span class="p">.</span><span class="n">Register</span><span class="p">();</span>
+</span></span></code></pre></div><p>Este código registra la tarea al iniciar la app.</p>
+<h2 id="paso-3-declarar-extensión-en-packageappxmanifest">
+  Paso 3: Declarar extensión en <code>Package.appxmanifest</code>
+  <a class="heading-link" href="#paso-3-declarar-extensi%c3%b3n-en-packageappxmanifest">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Abrir el manifiesto en modo texto y agregar:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;Extensions&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&lt;Extension</span> <span class="na">Category=</span><span class="s">&#34;windows.backgroundTasks&#34;</span> <span class="na">EntryPoint=</span><span class="s">&#34;NombreApp.MiBackgroundTask&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;BackgroundTasks&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&lt;Task</span> <span class="na">Type=</span><span class="s">&#34;timer&#34;</span><span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/BackgroundTasks&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&lt;/Extension&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/Extensions&gt;</span>
+</span></span></code></pre></div><p>Esto informa al sistema que la app ejecuta tareas temporizadas.</p>
+<h2 id="paso-4-usar-raw-push-notifications">
+  Paso 4: Usar Raw Push Notifications
+  <a class="heading-link" href="#paso-4-usar-raw-push-notifications">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Configurar canal:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kt">var</span> <span class="n">channel</span> <span class="p">=</span> <span class="k">await</span> <span class="n">PushNotificationChannelManager</span><span class="p">.</span><span class="n">CreatePushNotificationChannelForApplicationAsync</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="n">Debug</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&#34;URI canal push: &#34;</span> <span class="p">+</span> <span class="n">channel</span><span class="p">.</span><span class="n">Uri</span><span class="p">);</span>
+</span></span></code></pre></div><p>Registrar:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="n">builder</span><span class="p">.</span><span class="n">SetTrigger</span><span class="p">(</span><span class="k">new</span> <span class="n">PushNotificationTrigger</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl"><span class="n">builder</span><span class="p">.</span><span class="n">Name</span> <span class="p">=</span> <span class="s">&#34;PushTask&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">builder</span><span class="p">.</span><span class="n">TaskEntryPoint</span> <span class="p">=</span> <span class="s">&#34;NombreApp.MiPushTask&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">builder</span><span class="p">.</span><span class="n">Register</span><span class="p">();</span>
+</span></span></code></pre></div><p>Desde backend, enviar notificación RAW con cuerpo:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;toast&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&lt;visual&gt;&lt;binding</span> <span class="na">template=</span><span class="s">&#34;ToastText01&#34;</span><span class="nt">&gt;&lt;text&gt;</span>Push Recibido<span class="nt">&lt;/text&gt;&lt;/binding&gt;&lt;/visual&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/toast&gt;</span>
+</span></span></code></pre></div><h2 id="paso-5-ejecutar-tareas-en-mantenimiento">
+  Paso 5: Ejecutar tareas en mantenimiento
+  <a class="heading-link" href="#paso-5-ejecutar-tareas-en-mantenimiento">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="n">builder</span><span class="p">.</span><span class="n">SetTrigger</span><span class="p">(</span><span class="k">new</span> <span class="n">MaintenanceTrigger</span><span class="p">(</span><span class="m">15</span><span class="p">,</span> <span class="kc">false</span><span class="p">));</span> <span class="c1">// cada 15 mins cuando el sistema está idle</span>
+</span></span></code></pre></div><p>Usado para limpieza, archivado, backups, etc.</p>
+<h2 id="paso-6-monitorear-ejecución">
+  Paso 6: Monitorear ejecución
+  <a class="heading-link" href="#paso-6-monitorear-ejecuci%c3%b3n">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Registrar evento de monitoreo:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="n">task</span><span class="p">.</span><span class="n">Completed</span> <span class="p">+=</span> <span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span> <span class="p">=&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Debug</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&#34;Tarea completada: {s.Name}&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><p>Ver eventos del sistema en Visor de Eventos &gt; Aplicaciones y servicios &gt; Microsoft &gt; Windows &gt; BackgroundTaskInfrastructure</p>
+<h2 id="consideraciones-importantes">
+  Consideraciones importantes
+  <a class="heading-link" href="#consideraciones-importantes">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ul>
+<li>Las tareas en segundo plano no pueden mostrar UI</li>
+<li>Si el sistema está en ahorro de batería, pueden ser diferidas</li>
+<li>El <code>EntryPoint</code> debe estar bien definido y coincidir con el namespace</li>
+</ul>
+<h2 id="casos-de-uso-reales">
+  Casos de uso reales
+  <a class="heading-link" href="#casos-de-uso-reales">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ul>
+<li>Sincronización periódica con backend</li>
+<li>Recibir notificaciones silenciosas</li>
+<li>Reintentar envíos fallidos</li>
+<li>Registro de métricas, backups, auditorías</li>
+</ul>
+<h2 id="buenas-prácticas">
+  Buenas prácticas
+  <a class="heading-link" href="#buenas-pr%c3%a1cticas">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ul>
+<li>Siempre solicitar <code>GetDeferral()</code> si la tarea es async</li>
+<li>No hacer lógica intensiva que exceda el tiempo permitido (30 seg máx)</li>
+<li>Registrar tareas solo una vez y verificar si ya existen</li>
+<li>No abusar de intervalos mínimos (respetar consumo energético)</li>
+</ul>
+<h2 id="conclusión">
+  Conclusión
+  <a class="heading-link" href="#conclusi%c3%b3n">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>La implementación de <strong>Background Tasks</strong> en apps modernas permite extender su funcionalidad más allá del primer plano, ejecutando lógica útil, context-aware y controlada por el sistema. Usando <strong>Windows App SDK</strong>, es posible construir tareas eficientes, reactivas y persistentes que mejoran la autonomía y robustez de la aplicación.</p>
+      </div>
+
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script>
+  window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "cmasblog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    
+    document.addEventListener('themeChanged', function (e) { 
+        if (document.readyState == 'complete') {
+          DISQUS.reset({ reload: true, config: disqus_config });
+        }
+    });
+</script>
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2018 -
+    
+    2025
+     Christian Amado 
+    ·
+    
+    Desarrollado por <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+      <script async src="https://www.googletagmanager.com/gtag/js?id=356375808"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '356375808');
+        }
+      </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=013131931956450466198%3ablhmkdpweyq"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '013131931956450466198:blhmkdpweyq');
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  ChatGPT en WPF · Christian Amado
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Christian Amado">
+<meta name="description" content="En este artículo veremos cómo crear un Chat con la API de ChatGPT y WPF con controles Telerik.
+Windows 11 Insider Preview Build 25314">
+<meta name="keywords" content="blog,desarrollador,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="ChatGPT en WPF">
+  <meta name="twitter:description" content="En este artículo veremos cómo crear un Chat con la API de ChatGPT y WPF con controles Telerik.
+Windows 11 Insider Preview Build 25314">
+
+<meta property="og:url" content="http://localhost:1313/posts/2023-03-19-chatgpt-wpf/">
+  <meta property="og:site_name" content="Christian Amado">
+  <meta property="og:title" content="ChatGPT en WPF">
+  <meta property="og:description" content="En este artículo veremos cómo crear un Chat con la API de ChatGPT y WPF con controles Telerik.
+Windows 11 Insider Preview Build 25314">
+  <meta property="og:locale" content="es">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2023-03-19T09:01:00-04:00">
+    <meta property="article:modified_time" content="2023-03-19T09:01:00-04:00">
+    <meta property="article:tag" content="WinDev">
+    <meta property="article:tag" content="Windows 11">
+    <meta property="article:tag" content="WPF">
+    <meta property="article:tag" content="C#">
+    <meta property="article:tag" content="Telerik">
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-V1ZRP82YFD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-V1ZRP82YFD');
+</script>
+
+
+
+<link rel="canonical" href="http://localhost:1313/posts/2023-03-19-chatgpt-wpf/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="apple-touch-icon" sizes="57x57" href="/img/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/img/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/img/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/img/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/img/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/img/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/img/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/img/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/img/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="/img/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/img/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+<link rel="manifest" href="/img/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/img/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/">
+      Christian Amado
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/about">Biografía</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/contact">Contacto</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/diabetes">Diabetes</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/tags">Etiquetas</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/en/">🇺🇸</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/posts/2023-03-19-chatgpt-wpf/">
+              ChatGPT en WPF
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2023-03-19T09:01:00-04:00">
+                marzo 19, 2023
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              4 minutos de lectura.
+            </span>
+          </div>
+          
+          
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/tags/windev/">WinDev</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/windows-11/">Windows 11</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/wpf/">WPF</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/c%23/">C#</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/telerik/">Telerik</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <p>En este artículo veremos cómo crear un Chat con la API de <strong>ChatGPT</strong> y <strong>WPF</strong> con controles <strong>Telerik</strong>.</p>
+<p><em><strong>Windows 11 Insider Preview Build 25314</strong></em></p>
+<p>En el articulo de <a href="/posts/2023-03-15-creating-chat-app-wpf-using-telerik/" >la semana pasada</a> hemos visto cómo crear una pequeña aplicación tipo Chat con <strong>Telerik</strong>. El viernes, <a href="/posts/2023-03-17-chatgpt-from-paraguay/" >vimos cómo habilitar <strong>ChatGPT</strong></a> en Paraguay (teniendo en cuenta que no está habilitado oficialmente aún).</p>
+<h2 id="creando-una-aplicación">
+  Creando una aplicación
+  <a class="heading-link" href="#creando-una-aplicaci%c3%b3n">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ol>
+<li>
+<p>Abrimos <strong>Visual Studio Professional 2022</strong> (va servir la edición <strong>Community</strong>).</p>
+</li>
+<li>
+<p>Agregamos los paquetes <strong>NuGet</strong> necesarios para nuestro proyecto:
+<img src="https://i.ibb.co/H7GLDJk/1.png" alt=""></p>
+</li>
+<li>
+<p>Agregar configuraciones de la aplicación:
+<img src="https://i.ibb.co/F5pTW4J/2.png" alt=""></p>
+</li>
+<li>
+<p>Adicionar las configuraciones en el archivo creado:
+<img src="https://i.ibb.co/XCPVnmR/3.png" alt=""></p>
+</li>
+<li>
+<p>Vamos a trabajar con <strong>RadChat</strong> de <strong>Telerik for WPF</strong>, así que debemos agregar el modelo para <strong>TextMessage</strong>. Entonces, agregamos la clase en cuestión:</p>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">using System;
+</span></span><span class="line"><span class="cl">using Telerik.Windows.Controls.ConversationalUI;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">namespace TelerikWpfChat
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">    public class TextMessageModel
+</span></span><span class="line"><span class="cl">    {
+</span></span><span class="line"><span class="cl">        public string Text { get; set; }
+</span></span><span class="line"><span class="cl">        public Author Author { get; set; }
+</span></span><span class="line"><span class="cl">        public DateTime CreationDate { get; set; }
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></div><ol start="6">
+<li>Dentro del <em>Framework</em> que utiliza <strong>Telerik Conversational UI</strong> y <strong>WPF</strong> se hace muy común el uso de conversores para manipalutación de datos que se modifican a nivel visual. Entonces, aplicamos el conversor:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">using</span> <span class="n">Telerik</span><span class="o">.</span><span class="n">Windows</span><span class="o">.</span><span class="n">Controls</span><span class="o">.</span><span class="n">ConversationalUI</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">namespace</span> <span class="n">TelerikWpfChat</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">public</span> <span class="k">class</span> <span class="n">MessageConverter</span> <span class="p">:</span> <span class="n">IMessageConverter</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">public</span> <span class="n">MessageBase</span> <span class="n">ConvertItem</span><span class="p">(</span><span class="n">object</span> <span class="n">item</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">var</span> <span class="n">messageModel</span> <span class="o">=</span> <span class="p">(</span><span class="n">TextMessageModel</span><span class="p">)</span><span class="n">item</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">new</span> <span class="n">TextMessage</span><span class="p">(</span><span class="n">messageModel</span><span class="o">.</span><span class="n">Author</span><span class="p">,</span> <span class="n">messageModel</span><span class="o">.</span><span class="n">Text</span><span class="p">,</span> <span class="n">messageModel</span><span class="o">.</span><span class="n">CreationDate</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">public</span> <span class="n">object</span> <span class="n">ConvertMessage</span><span class="p">(</span><span class="n">MessageBase</span> <span class="n">message</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">var</span> <span class="n">textMessage</span> <span class="o">=</span> <span class="p">(</span><span class="n">TextMessage</span><span class="p">)</span><span class="n">message</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">new</span> <span class="n">TextMessageModel</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">            <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">Author</span> <span class="o">=</span> <span class="n">textMessage</span><span class="o">.</span><span class="n">Author</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="n">Text</span> <span class="o">=</span> <span class="n">textMessage</span><span class="o">.</span><span class="n">Text</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="n">CreationDate</span> <span class="o">=</span> <span class="n">textMessage</span><span class="o">.</span><span class="n">CreationDate</span>
+</span></span><span class="line"><span class="cl">            <span class="p">};</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><ol start="4">
+<li>Creamos el <em>ViewModel</em> que va interactuar entre el <strong>ChatGPT</strong> y <strong>WPF</strong>. Tener en cuenta que aquí se encuentra la llamada a la API de <strong>GPT</strong>:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">using</span> <span class="n">System</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">using</span> <span class="n">System</span><span class="o">.</span><span class="n">Collections</span><span class="o">.</span><span class="n">ObjectModel</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">using</span> <span class="n">Telerik</span><span class="o">.</span><span class="n">Windows</span><span class="o">.</span><span class="n">Controls</span><span class="o">.</span><span class="n">ConversationalUI</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">using</span> <span class="n">System</span><span class="o">.</span><span class="n">Threading</span><span class="o">.</span><span class="n">Tasks</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">using</span> <span class="n">System</span><span class="o">.</span><span class="n">Net</span><span class="o">.</span><span class="n">Http</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">using</span> <span class="n">System</span><span class="o">.</span><span class="n">Windows</span><span class="o">.</span><span class="n">Threading</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">using</span> <span class="n">System</span><span class="o">.</span><span class="n">Windows</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">using</span> <span class="n">Newtonsoft</span><span class="o">.</span><span class="n">Json</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">namespace</span> <span class="n">TelerikWpfChat</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">public</span> <span class="k">class</span> <span class="n">ChatViewModel</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">public</span> <span class="n">ObservableCollection</span><span class="o">&lt;</span><span class="n">TextMessageModel</span><span class="o">&gt;</span> <span class="n">Messages</span> <span class="p">{</span> <span class="n">get</span><span class="p">;</span> <span class="n">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="n">public</span> <span class="n">Author</span> <span class="n">CurrentAuthor</span> <span class="p">{</span> <span class="n">get</span><span class="p">;</span> <span class="n">private</span> <span class="n">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="n">public</span> <span class="n">Author</span> <span class="n">OtherAuthor</span> <span class="p">{</span> <span class="n">get</span><span class="p">;</span> <span class="n">private</span> <span class="n">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">public</span> <span class="n">ChatViewModel</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">this</span><span class="o">.</span><span class="n">CurrentAuthor</span> <span class="o">=</span> <span class="n">new</span> <span class="n">Author</span><span class="p">(</span><span class="s2">&#34;Christian&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">this</span><span class="o">.</span><span class="n">OtherAuthor</span> <span class="o">=</span> <span class="n">new</span> <span class="n">Author</span><span class="p">(</span><span class="s2">&#34;GPT&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">this</span><span class="o">.</span><span class="n">Messages</span> <span class="o">==</span> <span class="n">null</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="n">this</span><span class="o">.</span><span class="n">Messages</span> <span class="o">=</span> <span class="n">new</span> <span class="n">ObservableCollection</span><span class="o">&lt;</span><span class="n">TextMessageModel</span><span class="o">&gt;</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">internal</span> <span class="n">async</span> <span class="n">Task</span> <span class="n">SendCurrentMessage</span><span class="p">(</span><span class="n">string</span> <span class="n">prompt</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="o">//</span><span class="n">Agregamos</span> <span class="n">nuestra</span> <span class="n">interacción</span>
+</span></span><span class="line"><span class="cl">            <span class="n">this</span><span class="o">.</span><span class="n">Messages</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="n">new</span> <span class="n">TextMessageModel</span><span class="p">()</span> <span class="p">{</span> <span class="n">Text</span> <span class="o">=</span> <span class="n">prompt</span><span class="p">,</span> <span class="n">Author</span> <span class="o">=</span> <span class="n">CurrentAuthor</span><span class="p">,</span> <span class="n">CreationDate</span> <span class="o">=</span> <span class="n">DateTime</span><span class="o">.</span><span class="n">Now</span> <span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="o">//</span><span class="n">Llamamos</span> <span class="n">a</span> <span class="n">la</span> <span class="n">API</span> <span class="n">de</span> <span class="n">GPT</span>
+</span></span><span class="line"><span class="cl">            <span class="k">var</span> <span class="n">result</span> <span class="o">=</span> <span class="n">await</span> <span class="n">sendToGpt</span><span class="p">(</span><span class="n">prompt</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">result</span> <span class="o">==</span> <span class="n">null</span><span class="p">)</span> 
+</span></span><span class="line"><span class="cl">            <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">MessageBox</span><span class="o">.</span><span class="n">Show</span><span class="p">(</span><span class="s2">&#34;Error en la Matrix!&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="o">//</span><span class="n">Obtenemos</span> <span class="n">los</span> <span class="n">resultados</span> <span class="n">y</span> <span class="n">le</span> <span class="n">pasamos</span> <span class="n">a</span> <span class="n">la</span> <span class="n">interfaz</span> <span class="n">en</span> <span class="n">un</span> <span class="n">hilo</span> <span class="n">separado</span>
+</span></span><span class="line"><span class="cl">            <span class="n">await</span> <span class="n">Dispatcher</span><span class="o">.</span><span class="n">CurrentDispatcher</span><span class="o">.</span><span class="n">BeginInvoke</span><span class="p">((</span><span class="n">Action</span><span class="p">)(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">this</span><span class="o">.</span><span class="n">Messages</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="n">new</span> <span class="n">TextMessageModel</span><span class="p">()</span> <span class="p">{</span> <span class="n">Text</span> <span class="o">=</span> <span class="n">result</span><span class="p">,</span> <span class="n">Author</span> <span class="o">=</span> <span class="n">OtherAuthor</span><span class="p">,</span> <span class="n">CreationDate</span> <span class="o">=</span> <span class="n">DateTime</span><span class="o">.</span><span class="n">Now</span> <span class="p">});</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}));</span>        
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">private</span> <span class="n">async</span> <span class="n">Task</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">sendToGpt</span><span class="p">(</span><span class="n">string</span> <span class="n">prompt</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">var</span> <span class="n">apiKey</span> <span class="o">=</span> <span class="n">Properties</span><span class="o">.</span><span class="n">Settings</span><span class="o">.</span><span class="n">Default</span><span class="o">.</span><span class="n">ApiGPTChat</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">var</span> <span class="n">model</span> <span class="o">=</span> <span class="n">Properties</span><span class="o">.</span><span class="n">Settings</span><span class="o">.</span><span class="n">Default</span><span class="o">.</span><span class="n">Model</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">var</span> <span class="n">maxTokens</span> <span class="o">=</span> <span class="mi">500</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="n">using</span> <span class="k">var</span> <span class="n">client</span> <span class="o">=</span> <span class="n">new</span> <span class="n">HttpClient</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="n">client</span><span class="o">.</span><span class="n">DefaultRequestHeaders</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="s2">&#34;Authorization&#34;</span><span class="p">,</span> <span class="o">$</span><span class="s2">&#34;Bearer {apiKey}&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="k">var</span> <span class="n">url</span> <span class="o">=</span> <span class="s2">&#34;https://api.openai.com/v1/completions&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="k">var</span> <span class="n">requestBody</span> <span class="o">=</span> <span class="n">new</span>
+</span></span><span class="line"><span class="cl">            <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">prompt</span> <span class="o">=</span> <span class="n">prompt</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="n">model</span> <span class="o">=</span> <span class="n">model</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="n">temperature</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="n">max_tokens</span> <span class="o">=</span> <span class="n">maxTokens</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="n">n</span> <span class="o">=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">            <span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="k">var</span> <span class="n">postJson</span> <span class="o">=</span> <span class="n">System</span><span class="o">.</span><span class="n">Text</span><span class="o">.</span><span class="n">Json</span><span class="o">.</span><span class="n">JsonSerializer</span><span class="o">.</span><span class="n">Serialize</span><span class="p">(</span><span class="n">requestBody</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="k">var</span> <span class="n">response</span> <span class="o">=</span> <span class="n">await</span> <span class="n">client</span><span class="o">.</span><span class="n">PostAsync</span><span class="p">(</span><span class="n">url</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="n">new</span> <span class="n">StringContent</span><span class="p">(</span><span class="n">postJson</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="n">System</span><span class="o">.</span><span class="n">Text</span><span class="o">.</span><span class="n">Encoding</span><span class="o">.</span><span class="n">UTF8</span><span class="p">,</span> <span class="s2">&#34;application/json&#34;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">            <span class="k">var</span> <span class="n">responseBody</span> <span class="o">=</span> <span class="n">await</span> <span class="n">response</span><span class="o">.</span><span class="n">Content</span><span class="o">.</span><span class="n">ReadAsStringAsync</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="n">dynamic</span> <span class="n">responseData</span> <span class="o">=</span> <span class="n">JsonConvert</span><span class="o">.</span><span class="n">DeserializeObject</span><span class="o">&lt;</span><span class="n">dynamic</span><span class="o">&gt;</span><span class="p">(</span><span class="n">responseBody</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="ne">int</span> <span class="n">lastChoice</span> <span class="o">=</span> <span class="n">responseData</span><span class="o">.</span><span class="n">choices</span><span class="o">.</span><span class="n">Count</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">responseData</span><span class="o">.</span><span class="n">choices</span><span class="p">[</span><span class="n">lastChoice</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><ol start="5">
+<li>Creamos el diseño de nuestro Chat inteligente:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&lt;Window x:Class=&#34;TelerikWpfChat.MainWindow&#34;
+</span></span><span class="line"><span class="cl">                xmlns=&#34;http://schemas.microsoft.com/winfx/2006/xaml/presentation&#34;
+</span></span><span class="line"><span class="cl">                xmlns:x=&#34;http://schemas.microsoft.com/winfx/2006/xaml&#34;
+</span></span><span class="line"><span class="cl">                xmlns:telerik=&#34;http://schemas.telerik.com/2008/xaml/presentation&#34;
+</span></span><span class="line"><span class="cl">                xmlns:local=&#34;clr-namespace:TelerikWpfChat&#34;
+</span></span><span class="line"><span class="cl">                Title=&#34;ChatGPT on WPF&#34; Height=&#34;600&#34; Width=&#34;800&#34;&gt;
+</span></span><span class="line"><span class="cl">    &lt;Grid&gt;
+</span></span><span class="line"><span class="cl">            &lt;telerik:RadChat Margin=&#34;10&#34; CurrentAuthor=&#34;{Binding CurrentAuthor}&#34; 
+</span></span><span class="line"><span class="cl">                             DataSource=&#34;{Binding Messages}&#34; 
+</span></span><span class="line"><span class="cl">                             SendMessage=&#34;chat_SendMessage&#34;&gt;
+</span></span><span class="line"><span class="cl">                &lt;telerik:RadChat.DataContext&gt;
+</span></span><span class="line"><span class="cl">                    &lt;local:ChatViewModel /&gt;
+</span></span><span class="line"><span class="cl">                &lt;/telerik:RadChat.DataContext&gt;
+</span></span><span class="line"><span class="cl">                &lt;telerik:RadChat.MessageConverter&gt;
+</span></span><span class="line"><span class="cl">                    &lt;local:MessageConverter /&gt;
+</span></span><span class="line"><span class="cl">                &lt;/telerik:RadChat.MessageConverter&gt;
+</span></span><span class="line"><span class="cl">            &lt;/telerik:RadChat&gt;
+</span></span><span class="line"><span class="cl">    &lt;/Grid&gt;
+</span></span><span class="line"><span class="cl">&lt;/Window&gt;
+</span></span></code></pre></div><p><img src="https://i.ibb.co/HHMzpp3/4.png" alt=""></p>
+<ol start="6">
+<li>Agregamos la llamada al evento que envía mensaje en nuestra página <strong>WPF</strong> (incluye trabajo asíncronos y multihilo):</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">using</span> <span class="n">System</span><span class="o">.</span><span class="n">Windows</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">using</span> <span class="n">Telerik</span><span class="o">.</span><span class="n">Windows</span><span class="o">.</span><span class="n">Controls</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">using</span> <span class="n">Telerik</span><span class="o">.</span><span class="n">Windows</span><span class="o">.</span><span class="n">Controls</span><span class="o">.</span><span class="n">ConversationalUI</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">namespace</span> <span class="n">TelerikWpfChat</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">public</span> <span class="n">partial</span> <span class="k">class</span> <span class="n">MainWindow</span> <span class="p">:</span> <span class="n">Window</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">public</span> <span class="n">MainWindow</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">InitializeComponent</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">private</span> <span class="n">async</span> <span class="n">void</span> <span class="n">chat_SendMessage</span><span class="p">(</span><span class="n">object</span> <span class="n">sender</span><span class="p">,</span> <span class="n">SendMessageEventArgs</span> <span class="n">e</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">e</span><span class="o">.</span><span class="n">Handled</span> <span class="o">=</span> <span class="bp">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">var</span> <span class="n">chat</span> <span class="o">=</span> <span class="n">sender</span> <span class="n">as</span> <span class="n">RadChat</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">var</span> <span class="n">model</span> <span class="o">=</span> <span class="p">(</span><span class="n">ChatViewModel</span><span class="p">)</span><span class="n">chat</span><span class="o">.</span><span class="n">DataContext</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">var</span> <span class="n">mensaje</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">Message</span> <span class="n">as</span> <span class="n">TextMessage</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="n">chat</span><span class="o">.</span><span class="n">TypingIndicatorVisibility</span> <span class="o">=</span> <span class="n">Visibility</span><span class="o">.</span><span class="n">Visible</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">chat</span><span class="o">.</span><span class="n">TypingIndicatorText</span> <span class="o">=</span> <span class="s2">&#34;Esperando respuesta de &#34;</span> <span class="o">+</span> <span class="n">model</span><span class="o">.</span><span class="n">OtherAuthor</span><span class="o">.</span><span class="n">Name</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            <span class="n">await</span> <span class="n">model</span><span class="o">.</span><span class="n">SendCurrentMessage</span><span class="p">(</span><span class="n">mensaje</span><span class="o">.</span><span class="n">Text</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="n">chat</span><span class="o">.</span><span class="n">TypingIndicatorVisibility</span> <span class="o">=</span> <span class="n">Visibility</span><span class="o">.</span><span class="n">Collapsed</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">chat</span><span class="o">.</span><span class="n">TypingIndicatorText</span> <span class="o">=</span><span class="n">string</span><span class="o">.</span><span class="n">Empty</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><ol start="7">
+<li>Volvemos a ejecutar con <em>F5</em> y disfrutamos del chat.</li>
+</ol>
+<h2 id="cómo-interactúa">
+  ¿Cómo interactúa?
+  <a class="heading-link" href="#c%c3%b3mo-interact%c3%baa">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Jugando un poco con la <em>API</em> de <strong>ChatGPT</strong> logramos esta funcionalidad:</p>
+<iframe src="https://onedrive.live.com/embed?cid=07258C44AB872A89&resid=7258C44AB872A89%2191595&authkey=AI_DcH0T7mf6r-w" width="320" height="241" frameborder="0" scrolling="no" allowfullscreen></iframe>
+<p>El código fuente completo <a href="https://github.com/cmasdev/TelerikWpfChatGPT"  class="external-link" target="_blank" rel="noopener">se encuentra en GitHub</a>.</p>
+<p>¡Espero resulte útil!</p>
+      </div>
+
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script>
+  window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "cmasblog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    
+    document.addEventListener('themeChanged', function (e) { 
+        if (document.readyState == 'complete') {
+          DISQUS.reset({ reload: true, config: disqus_config });
+        }
+    });
+</script>
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2018 -
+    
+    2025
+     Christian Amado 
+    ·
+    
+    Desarrollado por <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+      <script async src="https://www.googletagmanager.com/gtag/js?id=356375808"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '356375808');
+        }
+      </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=013131931956450466198%3ablhmkdpweyq"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '013131931956450466198:blhmkdpweyq');
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

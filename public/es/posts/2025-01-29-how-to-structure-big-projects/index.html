@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  Cómo estructurar grandes proyectos en TypeScript · Christian Amado
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Christian Amado">
+<meta name="description" content="El desarrollo de grandes aplicaciones en TypeScript requiere una estructura de proyecto bien definida para mantener la escalabilidad, mantenibilidad y eficiencia del código. Una mala organización puede llevar a problemas de acoplamiento, dificultades en la depuración y una curva de aprendizaje elevada para nuevos desarrolladores en el equipo.
+En este artículo, exploraremos cómo organizar un proyecto grande en TypeScript utilizando buenas prácticas, patrones de diseño y herramientas avanzadas.">
+<meta name="keywords" content="blog,desarrollador,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Cómo estructurar grandes proyectos en TypeScript">
+  <meta name="twitter:description" content="El desarrollo de grandes aplicaciones en TypeScript requiere una estructura de proyecto bien definida para mantener la escalabilidad, mantenibilidad y eficiencia del código. Una mala organización puede llevar a problemas de acoplamiento, dificultades en la depuración y una curva de aprendizaje elevada para nuevos desarrolladores en el equipo.
+En este artículo, exploraremos cómo organizar un proyecto grande en TypeScript utilizando buenas prácticas, patrones de diseño y herramientas avanzadas.">
+
+<meta property="og:url" content="http://localhost:1313/es/posts/2025-01-29-how-to-structure-big-projects/">
+  <meta property="og:site_name" content="Christian Amado">
+  <meta property="og:title" content="Cómo estructurar grandes proyectos en TypeScript">
+  <meta property="og:description" content="El desarrollo de grandes aplicaciones en TypeScript requiere una estructura de proyecto bien definida para mantener la escalabilidad, mantenibilidad y eficiencia del código. Una mala organización puede llevar a problemas de acoplamiento, dificultades en la depuración y una curva de aprendizaje elevada para nuevos desarrolladores en el equipo.
+En este artículo, exploraremos cómo organizar un proyecto grande en TypeScript utilizando buenas prácticas, patrones de diseño y herramientas avanzadas.">
+  <meta property="og:locale" content="es">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-01-29T00:00:00-04:00">
+    <meta property="article:modified_time" content="2025-01-29T00:00:00-04:00">
+    <meta property="article:tag" content="Web Development">
+    <meta property="article:tag" content="Typescript">
+
+
+
+
+<link rel="canonical" href="http://localhost:1313/es/posts/2025-01-29-how-to-structure-big-projects/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/es/">
+      Christian Amado
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/about">Biografía</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/contact">Contacto</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/diabetes">Diabetes</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/tags">Etiquetas</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/en/">🇺🇸</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/es/posts/2025-01-29-how-to-structure-big-projects/">
+              Cómo estructurar grandes proyectos en TypeScript
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2025-01-29T00:00:00-04:00">
+                enero 29, 2025
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              4 minutos de lectura.
+            </span>
+          </div>
+          
+          
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/es/tags/web-development/">Web Development</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/es/tags/typescript/">Typescript</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <p>El desarrollo de grandes aplicaciones en <strong>TypeScript</strong> requiere una estructura de proyecto bien definida para mantener la escalabilidad, mantenibilidad y eficiencia del código. Una mala organización puede llevar a problemas de acoplamiento, dificultades en la depuración y una curva de aprendizaje elevada para nuevos desarrolladores en el equipo.</p>
+<p>En este artículo, exploraremos cómo organizar un proyecto grande en TypeScript utilizando <strong>buenas prácticas, patrones de diseño y herramientas avanzadas</strong>.</p>
+<h2 id="1-configuración-inicial-del-proyecto">
+  1. Configuración Inicial del Proyecto
+  <a class="heading-link" href="#1-configuraci%c3%b3n-inicial-del-proyecto">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Antes de estructurar el código, debemos preparar un entorno robusto en <strong>TypeScript</strong>.</p>
+<h3 id="11-crear-un-proyecto-typescript">
+  <strong>1.1 Crear un Proyecto TypeScript</strong>
+  <a class="heading-link" href="#11-crear-un-proyecto-typescript">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Ejecuta el siguiente comando para inicializar un nuevo proyecto:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">mkdir my-large-ts-project &amp;&amp; cd my-large-ts-project
+</span></span><span class="line"><span class="cl">npm init -y
+</span></span><span class="line"><span class="cl">npm install typescript --save-dev
+</span></span></code></pre></div><h3 id="12-configuración-de">
+  <strong>1.2 Configuración de <code>tsconfig.json</code></strong>
+  <a class="heading-link" href="#12-configuraci%c3%b3n-de">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Generamos un archivo de configuración:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">npx tsc --init
+</span></span></code></pre></div><p>Modificamos el archivo <code>tsconfig.json</code> con las siguientes opciones recomendadas:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">  &#34;compilerOptions&#34;: {
+</span></span><span class="line"><span class="cl">    &#34;target&#34;: &#34;ES2020&#34;,
+</span></span><span class="line"><span class="cl">    &#34;module&#34;: &#34;CommonJS&#34;,
+</span></span><span class="line"><span class="cl">    &#34;outDir&#34;: &#34;dist&#34;,
+</span></span><span class="line"><span class="cl">    &#34;rootDir&#34;: &#34;src&#34;,
+</span></span><span class="line"><span class="cl">    &#34;strict&#34;: true,
+</span></span><span class="line"><span class="cl">    &#34;esModuleInterop&#34;: true,
+</span></span><span class="line"><span class="cl">    &#34;forceConsistentCasingInFileNames&#34;: true
+</span></span><span class="line"><span class="cl">  },
+</span></span><span class="line"><span class="cl">  &#34;include&#34;: [&#34;src&#34;],
+</span></span><span class="line"><span class="cl">  &#34;exclude&#34;: [&#34;node_modules&#34;, &#34;dist&#34;]
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></div><h2 id="2-estructura-de-carpetas-para-grandes-proyectos">
+  2. Estructura de Carpetas para Grandes Proyectos
+  <a class="heading-link" href="#2-estructura-de-carpetas-para-grandes-proyectos">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Una estructura bien definida facilita la escalabilidad del proyecto. Un modelo recomendado es:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">/my-large-ts-project
+</span></span><span class="line"><span class="cl">│── /src
+</span></span><span class="line"><span class="cl">│   ├── /config
+</span></span><span class="line"><span class="cl">│   │   ├── appConfig.ts
+</span></span><span class="line"><span class="cl">│   │   ├── dbConfig.ts
+</span></span><span class="line"><span class="cl">│   ├── /models
+</span></span><span class="line"><span class="cl">│   │   ├── userModel.ts
+</span></span><span class="line"><span class="cl">│   │   ├── orderModel.ts
+</span></span><span class="line"><span class="cl">│   ├── /services
+</span></span><span class="line"><span class="cl">│   │   ├── userService.ts
+</span></span><span class="line"><span class="cl">│   │   ├── orderService.ts
+</span></span><span class="line"><span class="cl">│   ├── /controllers
+</span></span><span class="line"><span class="cl">│   │   ├── userController.ts
+</span></span><span class="line"><span class="cl">│   │   ├── orderController.ts
+</span></span><span class="line"><span class="cl">│   ├── /routes
+</span></span><span class="line"><span class="cl">│   │   ├── userRoutes.ts
+</span></span><span class="line"><span class="cl">│   │   ├── orderRoutes.ts
+</span></span><span class="line"><span class="cl">│   ├── /middlewares
+</span></span><span class="line"><span class="cl">│   │   ├── authMiddleware.ts
+</span></span><span class="line"><span class="cl">│   ├── /utils
+</span></span><span class="line"><span class="cl">│   │   ├── logger.ts
+</span></span><span class="line"><span class="cl">│   ├── /tests
+</span></span><span class="line"><span class="cl">│   │   ├── userService.test.ts
+</span></span><span class="line"><span class="cl">│   ├── app.ts
+</span></span><span class="line"><span class="cl">│── /dist
+</span></span><span class="line"><span class="cl">│── package.json
+</span></span><span class="line"><span class="cl">│── tsconfig.json
+</span></span><span class="line"><span class="cl">│── README.md
+</span></span></code></pre></div><h3 id="descripción-de-las-carpetas">
+  <strong>Descripción de las Carpetas</strong>
+  <a class="heading-link" href="#descripci%c3%b3n-de-las-carpetas">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong><code>/config</code></strong>: Configuración de base de datos, variables de entorno y opciones globales.</li>
+<li><strong><code>/models</code></strong>: Definiciones de modelos y entidades.</li>
+<li><strong><code>/services</code></strong>: Lógica de negocio (capa intermedia entre controladores y base de datos).</li>
+<li><strong><code>/controllers</code></strong>: Manejo de solicitudes HTTP.</li>
+<li><strong><code>/routes</code></strong>: Definición de rutas para cada entidad.</li>
+<li><strong><code>/middlewares</code></strong>: Middleware para autenticación, validaciones, etc.</li>
+<li><strong><code>/utils</code></strong>: Funciones auxiliares reutilizables.</li>
+<li><strong><code>/tests</code></strong>: Pruebas unitarias y de integración.</li>
+</ul>
+<h2 id="3-modularización-y-separación-de-responsabilidades">
+  3. Modularización y Separación de Responsabilidades
+  <a class="heading-link" href="#3-modularizaci%c3%b3n-y-separaci%c3%b3n-de-responsabilidades">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Dividir el código en <strong>módulos independientes</strong> mejora la reutilización y el mantenimiento.</p>
+<h3 id="ejemplo-modelo-de-usuario-">
+  <strong>Ejemplo: Modelo de Usuario (<code>models/userModel.ts</code>)</strong>
+  <a class="heading-link" href="#ejemplo-modelo-de-usuario-">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">export</span> <span class="n">interface</span> <span class="n">User</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span><span class="p">:</span> <span class="n">string</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">name</span><span class="p">:</span> <span class="n">string</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">email</span><span class="p">:</span> <span class="n">string</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h3 id="ejemplo-servicio-de-usuario-">
+  <strong>Ejemplo: Servicio de Usuario (<code>services/userService.ts</code>)</strong>
+  <a class="heading-link" href="#ejemplo-servicio-de-usuario-">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">import</span> <span class="p">{</span> <span class="n">User</span> <span class="p">}</span> <span class="n">from</span> <span class="s2">&#34;../models/userModel&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">users</span><span class="p">:</span> <span class="n">User</span><span class="p">[]</span> <span class="o">=</span> <span class="p">[];</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">export</span> <span class="k">class</span> <span class="n">UserService</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">static</span> <span class="n">getAllUsers</span><span class="p">():</span> <span class="n">User</span><span class="p">[]</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">users</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">static</span> <span class="n">addUser</span><span class="p">(</span><span class="n">user</span><span class="p">:</span> <span class="n">User</span><span class="p">):</span> <span class="n">void</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">users</span><span class="o">.</span><span class="n">push</span><span class="p">(</span><span class="n">user</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h3 id="ejemplo-controlador-de-usuario-">
+  <strong>Ejemplo: Controlador de Usuario (<code>controllers/userController.ts</code>)</strong>
+  <a class="heading-link" href="#ejemplo-controlador-de-usuario-">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">import</span> <span class="p">{</span> <span class="n">Request</span><span class="p">,</span> <span class="n">Response</span> <span class="p">}</span> <span class="n">from</span> <span class="s2">&#34;express&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">import</span> <span class="p">{</span> <span class="n">UserService</span> <span class="p">}</span> <span class="n">from</span> <span class="s2">&#34;../services/userService&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">export</span> <span class="k">const</span> <span class="n">getUsers</span> <span class="o">=</span> <span class="p">(</span><span class="n">req</span><span class="p">:</span> <span class="n">Request</span><span class="p">,</span> <span class="n">res</span><span class="p">:</span> <span class="n">Response</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">res</span><span class="o">.</span><span class="n">json</span><span class="p">(</span><span class="n">UserService</span><span class="o">.</span><span class="n">getAllUsers</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">export</span> <span class="k">const</span> <span class="n">addUser</span> <span class="o">=</span> <span class="p">(</span><span class="n">req</span><span class="p">:</span> <span class="n">Request</span><span class="p">,</span> <span class="n">res</span><span class="p">:</span> <span class="n">Response</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">const</span> <span class="n">user</span> <span class="o">=</span> <span class="n">req</span><span class="o">.</span><span class="n">body</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">UserService</span><span class="o">.</span><span class="n">addUser</span><span class="p">(</span><span class="n">user</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">res</span><span class="o">.</span><span class="n">status</span><span class="p">(</span><span class="mi">201</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">(</span><span class="n">user</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><h2 id="4-uso-de-typescript-con-expressjs">
+  4. Uso de TypeScript con Express.js
+  <a class="heading-link" href="#4-uso-de-typescript-con-expressjs">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="41-instalar-express-y-tipos">
+  <strong>4.1 Instalar Express y Tipos</strong>
+  <a class="heading-link" href="#41-instalar-express-y-tipos">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">npm install express
+</span></span><span class="line"><span class="cl">npm install @types/express --save-dev
+</span></span></code></pre></div><h3 id="42-definir-las-rutas-">
+  <strong>4.2 Definir las Rutas (<code>routes/userRoutes.ts</code>)</strong>
+  <a class="heading-link" href="#42-definir-las-rutas-">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">import</span> <span class="p">{</span> <span class="n">Router</span> <span class="p">}</span> <span class="n">from</span> <span class="s2">&#34;express&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">import</span> <span class="p">{</span> <span class="n">getUsers</span><span class="p">,</span> <span class="n">addUser</span> <span class="p">}</span> <span class="n">from</span> <span class="s2">&#34;../controllers/userController&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">router</span> <span class="o">=</span> <span class="n">Router</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">router</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&#34;/users&#34;</span><span class="p">,</span> <span class="n">getUsers</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">router</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&#34;/users&#34;</span><span class="p">,</span> <span class="n">addUser</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">export</span> <span class="n">default</span> <span class="n">router</span><span class="p">;</span>
+</span></span></code></pre></div><h3 id="43-configurar-el-servidor-">
+  <strong>4.3 Configurar el Servidor (<code>app.ts</code>)</strong>
+  <a class="heading-link" href="#43-configurar-el-servidor-">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">import</span> <span class="n">express</span> <span class="n">from</span> <span class="s2">&#34;express&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">import</span> <span class="n">userRoutes</span> <span class="n">from</span> <span class="s2">&#34;./routes/userRoutes&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">app</span> <span class="o">=</span> <span class="n">express</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="n">app</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="n">express</span><span class="o">.</span><span class="n">json</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl"><span class="n">app</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s2">&#34;/api&#34;</span><span class="p">,</span> <span class="n">userRoutes</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">app</span><span class="o">.</span><span class="n">listen</span><span class="p">(</span><span class="mi">3000</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s2">&#34;Servidor corriendo en http://localhost:3000&#34;</span><span class="p">));</span>
+</span></span></code></pre></div><h2 id="5-implementación-de-pruebas-con-jest">
+  5. Implementación de Pruebas con Jest
+  <a class="heading-link" href="#5-implementaci%c3%b3n-de-pruebas-con-jest">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Las pruebas garantizan la estabilidad del código en proyectos grandes.</p>
+<h3 id="51-instalar-jest">
+  <strong>5.1 Instalar Jest</strong>
+  <a class="heading-link" href="#51-instalar-jest">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">npm install --save-dev jest ts-jest @types/jest
+</span></span></code></pre></div><h3 id="52-configurar-jest-en">
+  <strong>5.2 Configurar Jest en <code>package.json</code></strong>
+  <a class="heading-link" href="#52-configurar-jest-en">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&#34;scripts&#34;: {
+</span></span><span class="line"><span class="cl">  &#34;test&#34;: &#34;jest --config jest.config.js&#34;
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></div><h3 id="53-ejemplo-de-prueba-">
+  <strong>5.3 Ejemplo de Prueba (<code>tests/userService.test.ts</code>)</strong>
+  <a class="heading-link" href="#53-ejemplo-de-prueba-">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">import { UserService } from &#34;../services/userService&#34;;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">test(&#34;Agregar un usuario&#34;, () =&gt; {
+</span></span><span class="line"><span class="cl">  UserService.addUser({ id: &#34;1&#34;, name: &#34;Juan&#34;, email: &#34;juan@example.com&#34; });
+</span></span><span class="line"><span class="cl">  expect(UserService.getAllUsers().length).toBe(1);
+</span></span><span class="line"><span class="cl">});
+</span></span></code></pre></div><h2 id="conclusión">
+  Conclusión
+  <a class="heading-link" href="#conclusi%c3%b3n">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Estructurar grandes proyectos en <strong>TypeScript</strong> requiere una organización clara y modular. Al seguir estas prácticas, logramos:</p>
+<p>✅ <strong>Código mantenible y escalable</strong>.
+✅ <strong>Separación clara de responsabilidades</strong>.
+✅ <strong>Reutilización y modularidad del código</strong>.
+✅ <strong>Facilidad para pruebas unitarias e integración</strong>.</p>
+      </div>
+
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script>
+  window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "cmasblog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    
+    document.addEventListener('themeChanged', function (e) { 
+        if (document.readyState == 'complete') {
+          DISQUS.reset({ reload: true, config: disqus_config });
+        }
+    });
+</script>
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2018 -
+    
+    2025
+     Christian Amado 
+    ·
+    
+    Desarrollado por <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+      <script async src="https://www.googletagmanager.com/gtag/js?id=356375808"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '356375808');
+        }
+      </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=013131931956450466198%3ablhmkdpweyq"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '013131931956450466198:blhmkdpweyq');
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

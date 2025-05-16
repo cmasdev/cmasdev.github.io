@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Dynamics 365 on Christian Amado</title>
+    <link>http://localhost:1313/tags/dynamics-365/</link>
+    <description>Recent content in Dynamics 365 on Christian Amado</description>
+    <generator>Hugo</generator>
+    <language>es</language>
+    <lastBuildDate>Thu, 26 Dec 2019 13:47:18 -0400</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/dynamics-365/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Integración con WhatsApp</title>
+      <link>http://localhost:1313/posts/2019-12-26-integracion-con-whatsapp/</link>
+      <pubDate>Thu, 26 Dec 2019 13:47:18 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2019-12-26-integracion-con-whatsapp/</guid>
+      <description>&lt;p&gt;Estamos cerrando el año y en casi todas las presentaciones de producto que hemos tenido en los últimos meses surgió una pregunta en común por parte de los potenciales clientes de mi empresa.&lt;/p&gt;&#xA;&lt;h2 id=&#34;cómo-puedo-integrar-dynamics-365-for-sales-con-whatsapp&#34;&gt;&#xD;&#xA;  ¿Cómo puedo integrar Dynamics 365 for Sales con WhatsApp?&#xD;&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#c%c3%b3mo-puedo-integrar-dynamics-365-for-sales-con-whatsapp&#34;&gt;&#xD;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xD;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xD;&#xA;  &lt;/a&gt;&#xD;&#xA;&lt;/h2&gt;</description>
+    </item>
+    <item>
+      <title>Creación de procesos en D365</title>
+      <link>http://localhost:1313/posts/2019-12-12-creacion-de-procesos-en-d365/</link>
+      <pubDate>Thu, 12 Dec 2019 20:43:07 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2019-12-12-creacion-de-procesos-en-d365/</guid>
+      <description>&lt;p&gt;En una &lt;a href=&#34;http://localhost:1313/2019/12/creacion-de-reglas-de-negocios/&#34; &gt;entrada anterior&lt;/a&gt;, vimos cómo crear reglas de negocios para una entidad. En esta entrada mostraré cómo crear o modificar procesos de negocios existentes. Para este caso, tomaremos como ejemplo una Oportunidad y modificaremos el proceso predeterminado de un proceso de ventas.&lt;/p&gt;&#xA;&lt;p&gt;¿Qué es un proceso de negocio? Según Microsoft Docs&amp;hellip;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Creación de reglas de negocios</title>
+      <link>http://localhost:1313/posts/2019-12-10-creacion-de-reglas-de-negocios/</link>
+      <pubDate>Tue, 10 Dec 2019 19:43:22 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2019-12-10-creacion-de-reglas-de-negocios/</guid>
+      <description>&lt;p&gt;En esta ocasión quiero comentarles cómo poder crear reglas de negocio dentro de Dynamics 365 for Sales (al fin y al cabo utilizamos PowerApps de fondo :P).&lt;/p&gt;&#xA;&lt;h2 id=&#34;qué-son-las-reglas-de-negocios&#34;&gt;&#xD;&#xA;  ¿Qué son las reglas de negocios?&#xD;&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#qu%c3%a9-son-las-reglas-de-negocios&#34;&gt;&#xD;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xD;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xD;&#xA;  &lt;/a&gt;&#xD;&#xA;&lt;/h2&gt;&#xD;&#xA;&lt;p&gt;Las reglas de negocios son pequeños flujos que se realizan en determinados campos cuando queremos que éstos realicen una determinada acción siguiendo algunas condiciones y variables que definamos.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Valores predeterminados para integración</title>
+      <link>http://localhost:1313/posts/2019-04-09-valores-predeterminados-para-integracion/</link>
+      <pubDate>Tue, 09 Apr 2019 20:35:15 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2019-04-09-valores-predeterminados-para-integracion/</guid>
+      <description>&lt;p&gt;Siguiendo con el tema de la integración entre Dynamics 365 Business Central y Dynamics 365 for Sales es bueno entender cuáles son los valores predeterminados en una integración. Para eso debemos ingresar en la página correspondiente y ver cuales son sus valores iniciales. A la primera, ya podemos tener algo integrado. en esta entrada veremos cómo integrar las cuentas entre ambos productos.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Integración con Dynamics 365 for Sales</title>
+      <link>http://localhost:1313/posts/2019-04-03-integracion-con-dynamics-365-for-sales/</link>
+      <pubDate>Wed, 03 Apr 2019 21:34:10 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2019-04-03-integracion-con-dynamics-365-for-sales/</guid>
+      <description>&lt;p&gt;Como todo producto Microsoft existe integraciones entre ellos que nos facilitan la vida. En este caso veremos cómo se integra Dynamics 365 Business Central (On-Premise) con Dynamics 365 for Sales (Cloud).&lt;/p&gt;&#xA;&lt;p&gt;En un &lt;a href=&#34;http://localhost:1313/2018/05/integracion-dynamics-nav-2018-con-dynamics-365-for-sales/&#34; &gt;artículo anterior&lt;/a&gt;, ya hemos visto como realizar la mitad de la integración (sigamos hasta el paso 10 de ese tutorial para no repetir la historia). Donde cambia un poco el panorama es dentro de Dynamics 365 Business Central que reemplaza a Dynamics NAV 2018.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  Integración de Blazor con bases de datos SQL en Azure · Christian Amado
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Christian Amado">
+<meta name="description" content="El desarrollo de aplicaciones web modernas con Blazor permite aprovechar el poder de .NET para construir interfaces interactivas del lado cliente utilizando C#. A su vez, las bases de datos SQL en Azure ofrecen una solución altamente escalable, segura y gestionada para el almacenamiento de datos. Integrar ambas tecnologías representa una solución robusta para proyectos empresariales que requieren rendimiento, fiabilidad y facilidad de mantenimiento.
+Este artículo detalla cómo conectar una aplicación Blazor Server con una base de datos SQL en Azure, utilizando Entity Framework Core como ORM (Object-Relational Mapping). Se cubre desde la creación de la base de datos hasta la implementación de operaciones CRUD básicas.">
+<meta name="keywords" content="blog,desarrollador,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Integración de Blazor con bases de datos SQL en Azure">
+  <meta name="twitter:description" content="El desarrollo de aplicaciones web modernas con Blazor permite aprovechar el poder de .NET para construir interfaces interactivas del lado cliente utilizando C#. A su vez, las bases de datos SQL en Azure ofrecen una solución altamente escalable, segura y gestionada para el almacenamiento de datos. Integrar ambas tecnologías representa una solución robusta para proyectos empresariales que requieren rendimiento, fiabilidad y facilidad de mantenimiento.
+Este artículo detalla cómo conectar una aplicación Blazor Server con una base de datos SQL en Azure, utilizando Entity Framework Core como ORM (Object-Relational Mapping). Se cubre desde la creación de la base de datos hasta la implementación de operaciones CRUD básicas.">
+
+<meta property="og:url" content="http://localhost:1313/posts/2025-03-12-blazor-sql-azure/">
+  <meta property="og:site_name" content="Christian Amado">
+  <meta property="og:title" content="Integración de Blazor con bases de datos SQL en Azure">
+  <meta property="og:description" content="El desarrollo de aplicaciones web modernas con Blazor permite aprovechar el poder de .NET para construir interfaces interactivas del lado cliente utilizando C#. A su vez, las bases de datos SQL en Azure ofrecen una solución altamente escalable, segura y gestionada para el almacenamiento de datos. Integrar ambas tecnologías representa una solución robusta para proyectos empresariales que requieren rendimiento, fiabilidad y facilidad de mantenimiento.
+Este artículo detalla cómo conectar una aplicación Blazor Server con una base de datos SQL en Azure, utilizando Entity Framework Core como ORM (Object-Relational Mapping). Se cubre desde la creación de la base de datos hasta la implementación de operaciones CRUD básicas.">
+  <meta property="og:locale" content="es">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-03-12T00:00:00-04:00">
+    <meta property="article:modified_time" content="2025-03-12T00:00:00-04:00">
+    <meta property="article:tag" content=".NET">
+    <meta property="article:tag" content="Blazor">
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-V1ZRP82YFD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-V1ZRP82YFD');
+</script>
+
+
+
+<link rel="canonical" href="http://localhost:1313/posts/2025-03-12-blazor-sql-azure/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="apple-touch-icon" sizes="57x57" href="/img/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/img/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/img/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/img/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/img/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/img/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/img/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/img/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/img/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="/img/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/img/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+<link rel="manifest" href="/img/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/img/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/">
+      Christian Amado
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/about">Biografía</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/contact">Contacto</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/diabetes">Diabetes</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/tags">Etiquetas</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/en/">🇺🇸</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/posts/2025-03-12-blazor-sql-azure/">
+              Integración de Blazor con bases de datos SQL en Azure
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2025-03-12T00:00:00-04:00">
+                marzo 12, 2025
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              5 minutos de lectura.
+            </span>
+          </div>
+          
+          
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/tags/.net/">.NET</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/blazor/">Blazor</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <p>El desarrollo de aplicaciones web modernas con <strong>Blazor</strong> permite aprovechar el poder de .NET para construir interfaces interactivas del lado cliente utilizando <strong>C#</strong>. A su vez, las bases de datos SQL en <strong>Azure</strong> ofrecen una solución altamente escalable, segura y gestionada para el almacenamiento de datos. Integrar ambas tecnologías representa una solución robusta para proyectos empresariales que requieren rendimiento, fiabilidad y facilidad de mantenimiento.</p>
+<p>Este artículo detalla cómo conectar una aplicación Blazor Server con una base de datos SQL en <strong>Azure</strong>, utilizando <strong>Entity Framework Core</strong> como ORM (Object-Relational Mapping). Se cubre desde la creación de la base de datos hasta la implementación de operaciones CRUD básicas.</p>
+<h2 id="requisitos-previos">
+  Requisitos previos
+  <a class="heading-link" href="#requisitos-previos">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Para seguir este tutorial, se requiere:</p>
+<ul>
+<li>Una cuenta activa en Microsoft Azure.</li>
+<li>Visual Studio 2022 o superior con soporte para ASP.NET y desarrollo Blazor.</li>
+<li>Conocimientos básicos en C#, Blazor Server y Entity Framework Core.</li>
+<li>SQL Server Management Studio (SSMS) opcional, para gestionar la base de datos en Azure.</li>
+</ul>
+<h2 id="crear-una-base-de-datos-sql-en-azure">
+  Crear una base de datos SQL en Azure
+  <a class="heading-link" href="#crear-una-base-de-datos-sql-en-azure">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ol>
+<li>
+<p>Iniciar sesión en <a href="https://portal.azure.com"  class="external-link" target="_blank" rel="noopener">https://portal.azure.com</a>.</p>
+</li>
+<li>
+<p>Seleccionar <strong>&ldquo;Crear un recurso&rdquo;</strong> &gt; <strong>&ldquo;Base de datos SQL&rdquo;</strong>.</p>
+</li>
+<li>
+<p>En el formulario de configuración, establecer:</p>
+<ul>
+<li><strong>Nombre de la base de datos:</strong> <code>BlazorAppDB</code></li>
+<li><strong>Servidor:</strong> Crear uno nuevo o seleccionar uno existente. Al crear uno nuevo, asignar un nombre como <code>blazor-sql-server</code>, seleccionar región, usuario administrador (por ejemplo <code>adminuser</code>) y contraseña.</li>
+<li><strong>Nivel de precio:</strong> Seleccionar el plan básico para propósitos de prueba.</li>
+<li><strong>Redes:</strong> Habilitar el acceso a través del cliente actual para permitir la conexión desde el entorno de desarrollo.</li>
+</ul>
+</li>
+<li>
+<p>Una vez creada, tomar nota del <strong>nombre del servidor</strong> (por ejemplo, <code>blazor-sql-server.database.windows.net</code>) y el <strong>nombre de la base de datos</strong>.</p>
+</li>
+</ol>
+<h2 id="crear-el-proyecto-blazor-server">
+  Crear el proyecto Blazor Server
+  <a class="heading-link" href="#crear-el-proyecto-blazor-server">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ol>
+<li>Abrir Visual Studio y seleccionar <strong>Crear nuevo proyecto</strong>.</li>
+<li>Elegir <strong>Blazor Server App</strong>.</li>
+<li>Asignar un nombre, por ejemplo, <code>BlazorAzureSqlApp</code>.</li>
+<li>Confirmar que la opción <strong>.NET 8 (o superior)</strong> esté seleccionada.</li>
+<li>Finalizar la creación del proyecto.</li>
+</ol>
+<h2 id="agregar-entity-framework-core">
+  Agregar Entity Framework Core
+  <a class="heading-link" href="#agregar-entity-framework-core">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ol>
+<li>Abrir la consola del administrador de paquetes (Package Manager Console).</li>
+<li>Ejecutar los siguientes comandos:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">Install-Package</span> <span class="n">Microsoft</span><span class="p">.</span><span class="py">EntityFrameworkCore</span><span class="p">.</span><span class="py">SqlServer</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Install-Package</span> <span class="n">Microsoft</span><span class="p">.</span><span class="py">EntityFrameworkCore</span><span class="p">.</span><span class="py">Tools</span>
+</span></span></code></pre></div><h2 id="definir-el-modelo-de-datos">
+  Definir el modelo de datos
+  <a class="heading-link" href="#definir-el-modelo-de-datos">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Crear una carpeta llamada <code>Models</code> y dentro, un archivo <code>Product.cs</code> con el siguiente contenido:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">System.ComponentModel.DataAnnotations</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">namespace</span> <span class="nn">BlazorAzureSqlApp.Models</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="k">class</span> <span class="nc">Product</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">public</span> <span class="kt">int</span> <span class="n">Id</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="na">
+</span></span></span><span class="line"><span class="cl"><span class="na">        [Required]</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">public</span> <span class="kt">string?</span> <span class="n">Name</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="na">
+</span></span></span><span class="line"><span class="cl"><span class="na">        [Range(0, double.MaxValue)]</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">public</span> <span class="kt">decimal</span> <span class="n">Price</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h2 id="crear-el-contexto-de-base-de-datos">
+  Crear el contexto de base de datos
+  <a class="heading-link" href="#crear-el-contexto-de-base-de-datos">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Crear una carpeta llamada <code>Data</code> y un archivo <code>AppDbContext.cs</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">Microsoft.EntityFrameworkCore</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">BlazorAzureSqlApp.Models</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">namespace</span> <span class="nn">BlazorAzureSqlApp.Data</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="k">class</span> <span class="nc">AppDbContext</span> <span class="p">:</span> <span class="n">DbContext</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">public</span> <span class="n">AppDbContext</span><span class="p">(</span><span class="n">DbContextOptions</span><span class="p">&lt;</span><span class="n">AppDbContext</span><span class="p">&gt;</span> <span class="n">options</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="p">:</span> <span class="k">base</span><span class="p">(</span><span class="n">options</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="kd">public</span> <span class="n">DbSet</span><span class="p">&lt;</span><span class="n">Product</span><span class="p">&gt;</span> <span class="n">Products</span> <span class="p">=&gt;</span> <span class="n">Set</span><span class="p">&lt;</span><span class="n">Product</span><span class="p">&gt;();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h2 id="configurar-la-cadena-de-conexión-a-azure-sql">
+  Configurar la cadena de conexión a Azure SQL
+  <a class="heading-link" href="#configurar-la-cadena-de-conexi%c3%b3n-a-azure-sql">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>En el archivo <code>appsettings.json</code>, agregar la cadena de conexión:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;ConnectionStrings&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;DefaultConnection&#34;</span><span class="p">:</span> <span class="s2">&#34;Server=tcp:blazor-sql-server.database.windows.net,1433;Initial Catalog=BlazorAppDB;Persist Security Info=False;User ID=adminuser;Password=TuPassword123!;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p><strong>Nota:</strong> Sustituir <code>adminuser</code> y <code>TuPassword123!</code> por las credenciales reales utilizadas al crear el servidor de Azure SQL.</p>
+<h2 id="registrar-el-contexto-en-el-contenedor-de-servicios">
+  Registrar el contexto en el contenedor de servicios
+  <a class="heading-link" href="#registrar-el-contexto-en-el-contenedor-de-servicios">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>En el archivo <code>Program.cs</code>, agregar la configuración del contexto justo antes de <code>builder.Build()</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="n">builder</span><span class="p">.</span><span class="n">Services</span><span class="p">.</span><span class="n">AddDbContext</span><span class="p">&lt;</span><span class="n">AppDbContext</span><span class="p">&gt;(</span><span class="n">options</span> <span class="p">=&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">options</span><span class="p">.</span><span class="n">UseSqlServer</span><span class="p">(</span><span class="n">builder</span><span class="p">.</span><span class="n">Configuration</span><span class="p">.</span><span class="n">GetConnectionString</span><span class="p">(</span><span class="s">&#34;DefaultConnection&#34;</span><span class="p">)));</span>
+</span></span></code></pre></div><h2 id="crear-la-migración-e-inicializar-la-base-de-datos">
+  Crear la migración e inicializar la base de datos
+  <a class="heading-link" href="#crear-la-migraci%c3%b3n-e-inicializar-la-base-de-datos">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Ejecutar en la consola del administrador de paquetes:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">Add-Migration</span> <span class="n">InitialCreate</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Update-Database</span>
+</span></span></code></pre></div><p>Esto creará las tablas necesarias directamente en la base de datos SQL de Azure.</p>
+<h2 id="crear-un-servicio-para-acceso-a-datos">
+  Crear un servicio para acceso a datos
+  <a class="heading-link" href="#crear-un-servicio-para-acceso-a-datos">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Dentro de la carpeta <code>Data</code>, crear el archivo <code>ProductService.cs</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">Microsoft.EntityFrameworkCore</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">BlazorAzureSqlApp.Models</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">namespace</span> <span class="nn">BlazorAzureSqlApp.Data</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="k">class</span> <span class="nc">ProductService</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">private</span> <span class="k">readonly</span> <span class="n">AppDbContext</span> <span class="n">_context</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="kd">public</span> <span class="n">ProductService</span><span class="p">(</span><span class="n">AppDbContext</span> <span class="n">context</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">_context</span> <span class="p">=</span> <span class="n">context</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="kd">public</span> <span class="kd">async</span> <span class="n">Task</span><span class="p">&lt;</span><span class="n">List</span><span class="p">&lt;</span><span class="n">Product</span><span class="p">&gt;&gt;</span> <span class="n">GetAllAsync</span><span class="p">()</span> <span class="p">=&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">await</span> <span class="n">_context</span><span class="p">.</span><span class="n">Products</span><span class="p">.</span><span class="n">ToListAsync</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="kd">public</span> <span class="kd">async</span> <span class="n">Task</span> <span class="n">AddAsync</span><span class="p">(</span><span class="n">Product</span> <span class="n">product</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">_context</span><span class="p">.</span><span class="n">Products</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">product</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">await</span> <span class="n">_context</span><span class="p">.</span><span class="n">SaveChangesAsync</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="kd">public</span> <span class="kd">async</span> <span class="n">Task</span> <span class="n">DeleteAsync</span><span class="p">(</span><span class="kt">int</span> <span class="n">id</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">var</span> <span class="n">product</span> <span class="p">=</span> <span class="k">await</span> <span class="n">_context</span><span class="p">.</span><span class="n">Products</span><span class="p">.</span><span class="n">FindAsync</span><span class="p">(</span><span class="n">id</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">product</span> <span class="p">!=</span> <span class="kc">null</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">_context</span><span class="p">.</span><span class="n">Products</span><span class="p">.</span><span class="n">Remove</span><span class="p">(</span><span class="n">product</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="k">await</span> <span class="n">_context</span><span class="p">.</span><span class="n">SaveChangesAsync</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Y registrar el servicio en <code>Program.cs</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="n">builder</span><span class="p">.</span><span class="n">Services</span><span class="p">.</span><span class="n">AddScoped</span><span class="p">&lt;</span><span class="n">ProductService</span><span class="p">&gt;();</span>
+</span></span></code></pre></div><h2 id="crear-una-interfaz-para-gestionar-productos">
+  Crear una interfaz para gestionar productos
+  <a class="heading-link" href="#crear-una-interfaz-para-gestionar-productos">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Agregar un nuevo componente Razor llamado <code>Pages/Products.razor</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="err">@</span><span class="n">page</span> <span class="s2">&#34;/products&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="err">@</span><span class="n">inject</span> <span class="n">ProductService</span> <span class="n">ProductService</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="n">h3</span><span class="o">&gt;</span><span class="n">Productos</span><span class="o">&lt;/</span><span class="n">h3</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="n">EditForm</span> <span class="n">Model</span><span class="o">=</span><span class="s2">&#34;@newProduct&#34;</span> <span class="n">OnValidSubmit</span><span class="o">=</span><span class="s2">&#34;AddProduct&#34;</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">&lt;</span><span class="n">DataAnnotationsValidator</span> <span class="o">/&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">&lt;</span><span class="n">ValidationSummary</span> <span class="o">/&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="o">&lt;</span><span class="n">InputText</span> <span class="err">@</span><span class="n">bind</span><span class="o">-</span><span class="n">Value</span><span class="o">=</span><span class="s2">&#34;newProduct.Name&#34;</span> <span class="n">placeholder</span><span class="o">=</span><span class="s2">&#34;Nombre&#34;</span> <span class="o">/&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">&lt;</span><span class="n">InputNumber</span> <span class="err">@</span><span class="n">bind</span><span class="o">-</span><span class="n">Value</span><span class="o">=</span><span class="s2">&#34;newProduct.Price&#34;</span> <span class="n">placeholder</span><span class="o">=</span><span class="s2">&#34;Precio&#34;</span> <span class="o">/&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">&lt;</span><span class="n">button</span> <span class="k">class</span><span class="o">=</span><span class="s2">&#34;btn btn-primary&#34;</span><span class="o">&gt;</span><span class="n">Agregar</span><span class="o">&lt;/</span><span class="n">button</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;/</span><span class="n">EditForm</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="n">hr</span> <span class="o">/&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="n">ul</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">@</span><span class="n">foreach</span> <span class="p">(</span><span class="k">var</span> <span class="n">product</span> <span class="ow">in</span> <span class="n">products</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="err">@</span><span class="n">product</span><span class="o">.</span><span class="n">Name</span> <span class="o">-</span> <span class="o">$</span><span class="err">@</span><span class="n">product</span><span class="o">.</span><span class="n">Price</span>
+</span></span><span class="line"><span class="cl">            <span class="o">&lt;</span><span class="n">button</span> <span class="k">class</span><span class="o">=</span><span class="s2">&#34;btn btn-sm btn-danger&#34;</span> <span class="err">@</span><span class="n">onclick</span><span class="o">=</span><span class="s2">&#34;() =&gt; DeleteProduct(product.Id)&#34;</span><span class="o">&gt;</span><span class="n">Eliminar</span><span class="o">&lt;/</span><span class="n">button</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="o">&lt;/</span><span class="n">li</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;/</span><span class="n">ul</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">@</span><span class="n">code</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">private</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Product</span><span class="o">&gt;</span> <span class="n">products</span> <span class="o">=</span> <span class="n">new</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="n">private</span> <span class="n">Product</span> <span class="n">newProduct</span> <span class="o">=</span> <span class="n">new</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">protected</span> <span class="n">override</span> <span class="n">async</span> <span class="n">Task</span> <span class="n">OnInitializedAsync</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">products</span> <span class="o">=</span> <span class="n">await</span> <span class="n">ProductService</span><span class="o">.</span><span class="n">GetAllAsync</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">private</span> <span class="n">async</span> <span class="n">Task</span> <span class="n">AddProduct</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">await</span> <span class="n">ProductService</span><span class="o">.</span><span class="n">AddAsync</span><span class="p">(</span><span class="n">newProduct</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">newProduct</span> <span class="o">=</span> <span class="n">new</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">products</span> <span class="o">=</span> <span class="n">await</span> <span class="n">ProductService</span><span class="o">.</span><span class="n">GetAllAsync</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">private</span> <span class="n">async</span> <span class="n">Task</span> <span class="n">DeleteProduct</span><span class="p">(</span><span class="ne">int</span> <span class="n">id</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">await</span> <span class="n">ProductService</span><span class="o">.</span><span class="n">DeleteAsync</span><span class="p">(</span><span class="n">id</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">products</span> <span class="o">=</span> <span class="n">await</span> <span class="n">ProductService</span><span class="o">.</span><span class="n">GetAllAsync</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Agregar esta ruta al menú en <code>Shared/NavMenu.razor</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&lt;NavLink class=&#34;nav-link&#34; href=&#34;products&#34;&gt;
+</span></span><span class="line"><span class="cl">    &lt;span class=&#34;oi oi-list-rich&#34; aria-hidden=&#34;true&#34;&gt;&lt;/span&gt; Productos
+</span></span><span class="line"><span class="cl">&lt;/NavLink&gt;
+</span></span></code></pre></div><h2 id="conclusión">
+  Conclusión
+  <a class="heading-link" href="#conclusi%c3%b3n">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Integrar <strong>Blazor</strong> con una base de datos SQL en <strong>Azure</strong> es un proceso directo cuando se utiliza <strong>Entity Framework Core</strong> como puente entre la aplicación y la capa de persistencia. Esta arquitectura permite desarrollar aplicaciones empresariales modernas, seguras y escalables que se ejecutan sobre infraestructura de nube gestionada. El modelo de desarrollo <strong>Blazor Server</strong>, combinado con una base de datos en <strong>Azure</strong>, permite reducir costos operativos, mejorar la experiencia de usuario en tiempo real y mantener una lógica de negocio robusta y centralizada en el servidor.</p>
+<p>A partir de esta base, es posible escalar la solución incorporando autenticación con <strong>Microsoft Entra ID</strong>, funciones más complejas como reportes dinámicos, paginación, integración con servicios externos y migración hacia una arquitectura Blazor WebAssembly si se desea delegar más carga al cliente. Además, se puede extender el modelo para trabajar con procedimientos almacenados o vistas, y aprovechar herramientas como Azure Key Vault para almacenar credenciales de forma segura.</p>
+<p>Este enfoque garantiza una solución moderna alineada con los estándares de desarrollo en la nube de <strong>Microsoft</strong>.**</p>
+      </div>
+
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script>
+  window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "cmasblog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    
+    document.addEventListener('themeChanged', function (e) { 
+        if (document.readyState == 'complete') {
+          DISQUS.reset({ reload: true, config: disqus_config });
+        }
+    });
+</script>
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2018 -
+    
+    2025
+     Christian Amado 
+    ·
+    
+    Desarrollado por <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+      <script async src="https://www.googletagmanager.com/gtag/js?id=356375808"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '356375808');
+        }
+      </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=013131931956450466198%3ablhmkdpweyq"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '013131931956450466198:blhmkdpweyq');
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

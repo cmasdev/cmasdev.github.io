@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  Uso seguro de variables y secretos en GCP con Go · Christian Amado
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Christian Amado">
+<meta name="description" content="Manejar secretos —como claves API, tokens y credenciales— de forma segura es esencial en cualquier aplicación moderna. Google Cloud Platform (GCP) ofrece una solución robusta para este desafío a través de Secret Manager, que permite almacenar, acceder y auditar secretos de manera segura y centralizada.
+Este artículo muestra cómo acceder y gestionar secretos en GCP desde aplicaciones desarrolladas en Go, asegurando que tus variables sensibles estén protegidas sin necesidad de hardcodearlas o exponerlas en entornos inseguros.">
+<meta name="keywords" content="blog,desarrollador,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Uso seguro de variables y secretos en GCP con Go">
+  <meta name="twitter:description" content="Manejar secretos —como claves API, tokens y credenciales— de forma segura es esencial en cualquier aplicación moderna. Google Cloud Platform (GCP) ofrece una solución robusta para este desafío a través de Secret Manager, que permite almacenar, acceder y auditar secretos de manera segura y centralizada.
+Este artículo muestra cómo acceder y gestionar secretos en GCP desde aplicaciones desarrolladas en Go, asegurando que tus variables sensibles estén protegidas sin necesidad de hardcodearlas o exponerlas en entornos inseguros.">
+
+<meta property="og:url" content="http://localhost:1313/posts/2025-04-30-secure-variables-go/">
+  <meta property="og:site_name" content="Christian Amado">
+  <meta property="og:title" content="Uso seguro de variables y secretos en GCP con Go">
+  <meta property="og:description" content="Manejar secretos —como claves API, tokens y credenciales— de forma segura es esencial en cualquier aplicación moderna. Google Cloud Platform (GCP) ofrece una solución robusta para este desafío a través de Secret Manager, que permite almacenar, acceder y auditar secretos de manera segura y centralizada.
+Este artículo muestra cómo acceder y gestionar secretos en GCP desde aplicaciones desarrolladas en Go, asegurando que tus variables sensibles estén protegidas sin necesidad de hardcodearlas o exponerlas en entornos inseguros.">
+  <meta property="og:locale" content="es">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-04-30T00:00:00-03:00">
+    <meta property="article:modified_time" content="2025-04-30T00:00:00-03:00">
+    <meta property="article:tag" content="Google">
+    <meta property="article:tag" content="Google Cloud">
+    <meta property="article:tag" content="GCP">
+    <meta property="article:tag" content="Go">
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-V1ZRP82YFD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-V1ZRP82YFD');
+</script>
+
+
+
+<link rel="canonical" href="http://localhost:1313/posts/2025-04-30-secure-variables-go/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="apple-touch-icon" sizes="57x57" href="/img/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/img/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/img/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/img/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/img/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/img/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/img/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/img/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/img/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="/img/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/img/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+<link rel="manifest" href="/img/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/img/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/">
+      Christian Amado
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/about">Biografía</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/contact">Contacto</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/diabetes">Diabetes</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/tags">Etiquetas</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/en/">🇺🇸</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/posts/2025-04-30-secure-variables-go/">
+              Uso seguro de variables y secretos en GCP con Go
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2025-04-30T00:00:00-03:00">
+                abril 30, 2025
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              3 minutos de lectura.
+            </span>
+          </div>
+          
+          
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/tags/google/">Google</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/google-cloud/">Google Cloud</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/gcp/">GCP</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/go/">Go</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <p>Manejar secretos —como claves API, tokens y credenciales— de forma segura es esencial en cualquier aplicación moderna. <strong>Google Cloud Platform (GCP)</strong> ofrece una solución robusta para este desafío a través de <strong>Secret Manager</strong>, que permite almacenar, acceder y auditar secretos de manera segura y centralizada.</p>
+<p>Este artículo muestra cómo acceder y gestionar secretos en <strong>GCP</strong> desde aplicaciones desarrolladas en <strong>Go</strong>, asegurando que tus variables sensibles estén protegidas sin necesidad de hardcodearlas o exponerlas en entornos inseguros.</p>
+<h2 id="por-qué-usar-secret-manager">
+  ¿Por qué usar Secret Manager?
+  <a class="heading-link" href="#por-qu%c3%a9-usar-secret-manager">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Secret Manager de GCP es un servicio completamente gestionado que ofrece:</p>
+<ul>
+<li><strong>Cifrado automático</strong> con claves de Google o personalizadas (CMEK).</li>
+<li><strong>Versionado de secretos</strong> para revertir fácilmente a estados anteriores.</li>
+<li><strong>Control de acceso granular</strong> vía IAM.</li>
+<li><strong>Registros de auditoría</strong> con Cloud Audit Logs.</li>
+<li><strong>Integración nativa con entornos serverless, Compute Engine y GKE</strong>.</li>
+</ul>
+<h2 id="requisitos-previos">
+  Requisitos previos
+  <a class="heading-link" href="#requisitos-previos">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Antes de comenzar, asegurate de tener:</p>
+<ul>
+<li>Un proyecto activo en Google Cloud.</li>
+<li>El API de Secret Manager habilitada.</li>
+<li>El SDK de Google Cloud (<code>gcloud</code>) configurado.</li>
+<li>Una cuenta de servicio con permisos <code>Secret Manager Accessor</code> (<code>roles/secretmanager.secretAccessor</code>).</li>
+<li>Go instalado (se recomienda Go 1.20+).</li>
+<li>Módulos habilitados (<code>go mod init</code> en tu proyecto).</li>
+</ul>
+<h2 id="paso-1-crear-y-almacenar-un-secreto-en-gcp">
+  Paso 1: Crear y almacenar un secreto en GCP
+  <a class="heading-link" href="#paso-1-crear-y-almacenar-un-secreto-en-gcp">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Desde la consola o terminal:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">gcloud secrets create DB_PASSWORD --replication-policy<span class="o">=</span>automatic
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> -n <span class="s2">&#34;super-clave-secreta&#34;</span> <span class="p">|</span> gcloud secrets versions add DB_PASSWORD --data-file<span class="o">=</span>-
+</span></span></code></pre></div><p>Esto crea el secreto <code>DB_PASSWORD</code> con una versión y lo almacena de forma segura.</p>
+<h2 id="paso-2-configurar-permisos-de-acceso">
+  Paso 2: Configurar permisos de acceso
+  <a class="heading-link" href="#paso-2-configurar-permisos-de-acceso">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Otorgá acceso a la cuenta de servicio usada por tu aplicación:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">gcloud secrets add-iam-policy-binding DB_PASSWORD <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  --member<span class="o">=</span><span class="s2">&#34;serviceAccount:mi-cuenta@mi-proyecto.iam.gserviceaccount.com&#34;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  --role<span class="o">=</span><span class="s2">&#34;roles/secretmanager.secretAccessor&#34;</span>
+</span></span></code></pre></div><h2 id="paso-3-instalar-dependencias-en-go">
+  Paso 3: Instalar dependencias en Go
+  <a class="heading-link" href="#paso-3-instalar-dependencias-en-go">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>En tu archivo <code>go.mod</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">go get cloud.google.com/go/secretmanager/apiv1
+</span></span><span class="line"><span class="cl">go get google.golang.org/api/option
+</span></span></code></pre></div><h2 id="paso-4-código-para-acceder-al-secreto-en-go">
+  Paso 4: Código para acceder al secreto en Go
+  <a class="heading-link" href="#paso-4-c%c3%b3digo-para-acceder-al-secreto-en-go">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">main</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;context&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;fmt&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;log&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">secretmanager</span> <span class="s">&#34;cloud.google.com/go/secretmanager/apiv1&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;google.golang.org/api/option&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">secretspb</span> <span class="s">&#34;google.golang.org/genproto/googleapis/cloud/secretmanager/v1&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">ctx</span> <span class="o">:=</span> <span class="nx">context</span><span class="p">.</span><span class="nf">Background</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">client</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">secretmanager</span><span class="p">.</span><span class="nf">NewClient</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="nx">option</span><span class="p">.</span><span class="nf">WithCredentialsFile</span><span class="p">(</span><span class="s">&#34;ruta/a/tu/clave.json&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">log</span><span class="p">.</span><span class="nf">Fatalf</span><span class="p">(</span><span class="s">&#34;Error creando cliente: %v&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="k">defer</span> <span class="nx">client</span><span class="p">.</span><span class="nf">Close</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">accessRequest</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">secretspb</span><span class="p">.</span><span class="nx">AccessSecretVersionRequest</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">Name</span><span class="p">:</span> <span class="s">&#34;projects/ID_PROYECTO/secrets/DB_PASSWORD/versions/latest&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">result</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">client</span><span class="p">.</span><span class="nf">AccessSecretVersion</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="nx">accessRequest</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">log</span><span class="p">.</span><span class="nf">Fatalf</span><span class="p">(</span><span class="s">&#34;Error accediendo al secreto: %v&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">secret</span> <span class="o">:=</span> <span class="nb">string</span><span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">Payload</span><span class="p">.</span><span class="nx">Data</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Secreto accedido:&#34;</span><span class="p">,</span> <span class="nx">secret</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><blockquote>
+<p>⚠️ <strong>Nunca imprimas el secreto en producción.</strong> Este ejemplo es solo para demostración.</p></blockquote>
+<h2 id="paso-5-uso-de-secretos-en-variables-de-entorno">
+  Paso 5: Uso de secretos en variables de entorno
+  <a class="heading-link" href="#paso-5-uso-de-secretos-en-variables-de-entorno">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;os&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">os</span><span class="p">.</span><span class="nf">Setenv</span><span class="p">(</span><span class="s">&#34;DB_PASSWORD&#34;</span><span class="p">,</span> <span class="nx">secret</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">os</span><span class="p">.</span><span class="nf">Getenv</span><span class="p">(</span><span class="s">&#34;DB_PASSWORD&#34;</span><span class="p">))</span>
+</span></span></code></pre></div><p>Esto es útil para usar librerías que esperan configuraciones vía <code>env</code>.</p>
+<h2 id="buenas-prácticas">
+  Buenas prácticas
+  <a class="heading-link" href="#buenas-pr%c3%a1cticas">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ul>
+<li><strong>Nunca hardcodees secretos</strong> en el código fuente.</li>
+<li><strong>Evitá guardar secretos en archivos de configuración planos</strong>.</li>
+<li><strong>Usá versionado de secretos</strong> para rotaciones sin downtime.</li>
+<li><strong>Controlá el acceso con políticas IAM específicas</strong> para minimizar el riesgo.</li>
+<li><strong>Usá registros de auditoría</strong> para detectar accesos indebidos.</li>
+<li><strong>No loguees secretos accidentalmente.</strong></li>
+</ul>
+<h2 id="alternativas-acceso-automático-desde-cloud-run-o-gke">
+  Alternativas: acceso automático desde Cloud Run o GKE
+  <a class="heading-link" href="#alternativas-acceso-autom%c3%a1tico-desde-cloud-run-o-gke">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Si desplegás en Cloud Run, App Engine o GKE, podés acceder a los secretos sin usar claves JSON, simplemente mediante la cuenta de servicio adjunta al entorno, lo que refuerza la seguridad y evita manejar archivos sensibles.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">client</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">secretmanager</span><span class="p">.</span><span class="nf">NewClient</span><span class="p">(</span><span class="nx">ctx</span><span class="p">)</span> <span class="c1">// sin option.WithCredentialsFile</span>
+</span></span></code></pre></div><p>Este enfoque se recomienda en producción.</p>
+<h2 id="conclusión">
+  Conclusión
+  <a class="heading-link" href="#conclusi%c3%b3n">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p><strong>Secret Manager</strong> permite gestionar variables sensibles de forma segura, eficiente y auditada. Su integración con <strong>Go</strong> es directa gracias al <em>SDK</em> oficial, lo que permite eliminar configuraciones inseguras y mejorar la postura de seguridad general de cualquier aplicación backend.</p>
+<p>Adoptar estas buenas prácticas desde el inicio mejora la seguridad, simplifica la gestión de configuración y garantiza que tus aplicaciones <strong>Go</strong> en <strong>GCP</strong> estén listas para producción desde el primer día.</p>
+      </div>
+
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script>
+  window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "cmasblog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    
+    document.addEventListener('themeChanged', function (e) { 
+        if (document.readyState == 'complete') {
+          DISQUS.reset({ reload: true, config: disqus_config });
+        }
+    });
+</script>
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2018 -
+    
+    2025
+     Christian Amado 
+    ·
+    
+    Desarrollado por <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+      <script async src="https://www.googletagmanager.com/gtag/js?id=356375808"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '356375808');
+        }
+      </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=013131931956450466198%3ablhmkdpweyq"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '013131931956450466198:blhmkdpweyq');
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

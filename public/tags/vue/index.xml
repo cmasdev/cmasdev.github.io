@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Vue on Christian Amado</title>
+    <link>http://localhost:1313/tags/vue/</link>
+    <description>Recent content in Vue on Christian Amado</description>
+    <generator>Hugo</generator>
+    <language>es</language>
+    <lastBuildDate>Wed, 04 Dec 2024 00:00:00 -0400</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/vue/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Comparativa de frameworks: Angular, React y Vue en 2024</title>
+      <link>http://localhost:1313/posts/2024-12-04-frameworks-comparatives/</link>
+      <pubDate>Wed, 04 Dec 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2024-12-04-frameworks-comparatives/</guid>
+      <description>&lt;p&gt;El desarrollo web ha evolucionado significativamente en los últimos años, y tres de los frameworks más populares continúan liderando el mercado: &lt;strong&gt;Angular, React y Vue&lt;/strong&gt;. En este artículo, compararemos estos frameworks en términos de rendimiento, facilidad de uso, casos de uso ideales y comunidad en 2024.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

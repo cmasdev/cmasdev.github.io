@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  Business Central: Manejo de versiones publicadas · Christian Amado
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Christian Amado">
+<meta name="description" content="En versiones anteriores de Microsoft Dynamics, NAV específicamente se hacía complicado el versionado. De hecho no lo tenía, pero ahora el manejo de versiones publicadas en Business Central permite tener varias y utilizar la que estamos necesitando.
+En este punto estoy hablando de versiones en cuanto a extensiones, no a control de código fuente y sus beneficios. Eso es tema para otro artículo.">
+<meta name="keywords" content="blog,desarrollador,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Business Central: Manejo de versiones publicadas">
+  <meta name="twitter:description" content="En versiones anteriores de Microsoft Dynamics, NAV específicamente se hacía complicado el versionado. De hecho no lo tenía, pero ahora el manejo de versiones publicadas en Business Central permite tener varias y utilizar la que estamos necesitando.
+En este punto estoy hablando de versiones en cuanto a extensiones, no a control de código fuente y sus beneficios. Eso es tema para otro artículo.">
+
+<meta property="og:url" content="http://localhost:1313/posts/2020-04-30-business-central-manejo-de-versiones-publicadas/">
+  <meta property="og:site_name" content="Christian Amado">
+  <meta property="og:title" content="Business Central: Manejo de versiones publicadas">
+  <meta property="og:description" content="En versiones anteriores de Microsoft Dynamics, NAV específicamente se hacía complicado el versionado. De hecho no lo tenía, pero ahora el manejo de versiones publicadas en Business Central permite tener varias y utilizar la que estamos necesitando.
+En este punto estoy hablando de versiones en cuanto a extensiones, no a control de código fuente y sus beneficios. Eso es tema para otro artículo.">
+  <meta property="og:locale" content="es">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2020-04-30T20:31:00-04:00">
+    <meta property="article:modified_time" content="2020-04-30T20:31:00-04:00">
+    <meta property="article:tag" content="AL">
+    <meta property="article:tag" content="Dynamics 365 Business Central">
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-V1ZRP82YFD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-V1ZRP82YFD');
+</script>
+
+
+
+<link rel="canonical" href="http://localhost:1313/posts/2020-04-30-business-central-manejo-de-versiones-publicadas/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="apple-touch-icon" sizes="57x57" href="/img/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/img/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/img/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/img/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/img/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/img/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/img/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/img/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/img/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="/img/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/img/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+<link rel="manifest" href="/img/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/img/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/">
+      Christian Amado
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/about">Biografía</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/contact">Contacto</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/diabetes">Diabetes</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/tags">Etiquetas</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/en/">🇺🇸</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/posts/2020-04-30-business-central-manejo-de-versiones-publicadas/">
+              Business Central: Manejo de versiones publicadas
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2020-04-30T20:31:00-04:00">
+                abril 30, 2020
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              2 minutos de lectura.
+            </span>
+          </div>
+          
+          
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/tags/al/">AL</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/dynamics-365-business-central/">Dynamics 365 Business Central</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <p>En versiones anteriores de Microsoft Dynamics, NAV específicamente se hacía complicado el versionado. De hecho no lo tenía, pero ahora el manejo de versiones publicadas en Business Central permite tener varias y utilizar la que estamos necesitando.</p>
+<p>En este punto estoy hablando de versiones en cuanto a extensiones, no a control de código fuente y sus beneficios. Eso es tema para otro artículo.</p>
+<h2 id="cómo-gestiono-las-versiones-de-mis-extensiones">
+  ¿Cómo gestiono las versiones de mis extensiones?
+  <a class="heading-link" href="#c%c3%b3mo-gestiono-las-versiones-de-mis-extensiones">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Primero, debemos tener en cuenta que debemos aumentar la versión que estamos usando en nuestro archivo <strong>app.json</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">  &#34;id&#34;: &#34;7c3c1ec4-addf-6fcf-b254-be50656e1bca&#34;,
+</span></span><span class="line"><span class="cl">  &#34;name&#34;: &#34;CMASDEV&#34;,
+</span></span><span class="line"><span class="cl">  &#34;publisher&#34;: &#34;Christian Amado&#34;,
+</span></span><span class="line"><span class="cl">  **&#34;version&#34;: &#34;1.0.0.1&#34;,**
+</span></span><span class="line"><span class="cl">  &#34;brief&#34;: &#34;Prueba de versiones&#34;,
+</span></span><span class="line"><span class="cl">  &#34;description&#34;: &#34;&#34;,
+</span></span><span class="line"><span class="cl">  &#34;privacyStatement&#34;: &#34;&#34;,
+</span></span><span class="line"><span class="cl">  &#34;EULA&#34;: &#34;&#34;,
+</span></span><span class="line"><span class="cl">  &#34;help&#34;: &#34;&#34;,
+</span></span><span class="line"><span class="cl">  &#34;url&#34;: &#34;https://cmas.dev&#34;,
+</span></span><span class="line"><span class="cl">  &#34;logo&#34;: &#34;./res/logo.png&#34;,
+</span></span><span class="line"><span class="cl">  &#34;dependencies&#34;: [
+</span></span><span class="line"><span class="cl">    {
+</span></span><span class="line"><span class="cl">      &#34;appId&#34;: &#34;63ca2fa4-4f03-4f2b-a480-172fef340d3f&#34;,
+</span></span><span class="line"><span class="cl">      &#34;publisher&#34;: &#34;Microsoft&#34;,
+</span></span><span class="line"><span class="cl">      &#34;name&#34;: &#34;System Application&#34;,
+</span></span><span class="line"><span class="cl">      &#34;version&#34;: &#34;1.0.0.0&#34;
+</span></span><span class="line"><span class="cl">    },
+</span></span><span class="line"><span class="cl">    {
+</span></span><span class="line"><span class="cl">      &#34;appId&#34;: &#34;437dbf0e-84ff-417a-965d-ed2bb9650972&#34;,
+</span></span><span class="line"><span class="cl">      &#34;publisher&#34;: &#34;Microsoft&#34;,
+</span></span><span class="line"><span class="cl">      &#34;name&#34;: &#34;Base Application&#34;,
+</span></span><span class="line"><span class="cl">      &#34;version&#34;: &#34;15.0.0.0&#34;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">  ],
+</span></span><span class="line"><span class="cl">  &#34;screenshots&#34;: [],
+</span></span><span class="line"><span class="cl">  &#34;platform&#34;: &#34;15.0.0.0&#34;,
+</span></span><span class="line"><span class="cl">  &#34;idRanges&#34;: [
+</span></span><span class="line"><span class="cl">    {
+</span></span><span class="line"><span class="cl">      &#34;from&#34;: 50000,
+</span></span><span class="line"><span class="cl">      &#34;to&#34;: 50099
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">  ],
+</span></span><span class="line"><span class="cl">  &#34;contextSensitiveHelpUrl&#34;: &#34;&#34;,
+</span></span><span class="line"><span class="cl">  &#34;showMyCode&#34;: true,
+</span></span><span class="line"><span class="cl">  &#34;runtime&#34;: &#34;4.0&#34;,
+</span></span><span class="line"><span class="cl">  &#34;target&#34;: &#34;OnPrem&#34;
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></div><p>Para nuestro ejemplo la versión es 1.0.0.1, pero ya tenemos instalada la versión 1.0.0.0 en nuestro Business Central. Entonces, ¿Qué ventaja tengo? Pues la ventaja es que puedo hacer pruebas y utilizar la versión que me convenga en ese momento para realizar comparaciones de funcionalidades. Únicamente necesitamos los permisos para administrar las <strong>Extensiones</strong> dentro de Business Central.</p>
+      </div>
+
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script>
+  window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "cmasblog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    
+    document.addEventListener('themeChanged', function (e) { 
+        if (document.readyState == 'complete') {
+          DISQUS.reset({ reload: true, config: disqus_config });
+        }
+    });
+</script>
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2018 -
+    
+    2025
+     Christian Amado 
+    ·
+    
+    Desarrollado por <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+      <script async src="https://www.googletagmanager.com/gtag/js?id=356375808"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '356375808');
+        }
+      </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=013131931956450466198%3ablhmkdpweyq"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '013131931956450466198:blhmkdpweyq');
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

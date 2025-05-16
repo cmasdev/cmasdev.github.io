@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  Seguridad avanzada en WSL2: sandboxing y seccomp · Christian Amado
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Christian Amado">
+<meta name="description" content="WSL2, al ejecutar un kernel Linux completo dentro de Windows, hereda capacidades de seguridad del subsistema Linux y del entorno de Windows. Esto permite aplicar técnicas avanzadas como sandboxing y control de llamadas al sistema mediante seccomp, protegiendo aplicaciones y conteniendo procesos potencialmente inseguros.">
+<meta name="keywords" content="blog,desarrollador,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Seguridad avanzada en WSL2: sandboxing y seccomp">
+  <meta name="twitter:description" content="WSL2, al ejecutar un kernel Linux completo dentro de Windows, hereda capacidades de seguridad del subsistema Linux y del entorno de Windows. Esto permite aplicar técnicas avanzadas como sandboxing y control de llamadas al sistema mediante seccomp, protegiendo aplicaciones y conteniendo procesos potencialmente inseguros.">
+
+<meta property="og:url" content="http://localhost:1313/posts/2024-07-19-wsl2-advanced-security/">
+  <meta property="og:site_name" content="Christian Amado">
+  <meta property="og:title" content="Seguridad avanzada en WSL2: sandboxing y seccomp">
+  <meta property="og:description" content="WSL2, al ejecutar un kernel Linux completo dentro de Windows, hereda capacidades de seguridad del subsistema Linux y del entorno de Windows. Esto permite aplicar técnicas avanzadas como sandboxing y control de llamadas al sistema mediante seccomp, protegiendo aplicaciones y conteniendo procesos potencialmente inseguros.">
+  <meta property="og:locale" content="es">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-07-19T00:00:00-04:00">
+    <meta property="article:modified_time" content="2024-07-19T00:00:00-04:00">
+    <meta property="article:tag" content="WinDev">
+    <meta property="article:tag" content="Windows 11">
+    <meta property="article:tag" content="WSL">
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-V1ZRP82YFD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-V1ZRP82YFD');
+</script>
+
+
+
+<link rel="canonical" href="http://localhost:1313/posts/2024-07-19-wsl2-advanced-security/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="apple-touch-icon" sizes="57x57" href="/img/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/img/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/img/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/img/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/img/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/img/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/img/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/img/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/img/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="/img/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/img/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+<link rel="manifest" href="/img/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/img/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/">
+      Christian Amado
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/about">Biografía</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/contact">Contacto</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/diabetes">Diabetes</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/tags">Etiquetas</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/en/">🇺🇸</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/posts/2024-07-19-wsl2-advanced-security/">
+              Seguridad avanzada en WSL2: sandboxing y seccomp
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2024-07-19T00:00:00-04:00">
+                julio 19, 2024
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              2 minutos de lectura.
+            </span>
+          </div>
+          
+          
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/tags/windev/">WinDev</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/windows-11/">Windows 11</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/wsl/">WSL</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <p>WSL2, al ejecutar un kernel Linux completo dentro de Windows, hereda capacidades de seguridad del subsistema Linux y del entorno de Windows. Esto permite aplicar técnicas avanzadas como sandboxing y control de llamadas al sistema mediante <code>seccomp</code>, protegiendo aplicaciones y conteniendo procesos potencialmente inseguros.</p>
+<h2 id="entendiendo-el-modelo-de-seguridad-de-wsl2">
+  Entendiendo el modelo de seguridad de WSL2
+  <a class="heading-link" href="#entendiendo-el-modelo-de-seguridad-de-wsl2">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ul>
+<li>WSL2 corre dentro de una VM ligera sobre Hyper-V</li>
+<li>Tiene su propio espacio de usuarios, red y sistema de archivos</li>
+<li>Puede acceder al sistema de archivos Windows, pero de forma controlada</li>
+<li>Hereda los permisos y restricciones del usuario de Windows anfitrión</li>
+</ul>
+<p>Aunque no es un contenedor, se puede aplicar aislamiento similar con herramientas del ecosistema Linux.</p>
+<h2 id="usar-seccomp-para-limitar-llamadas-al-sistema">
+  Usar seccomp para limitar llamadas al sistema
+  <a class="heading-link" href="#usar-seccomp-para-limitar-llamadas-al-sistema">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p><code>seccomp</code> permite definir qué llamadas al sistema (<code>syscalls</code>) puede hacer un proceso. Esto es útil para bloquear funcionalidades peligrosas o limitar comportamientos.</p>
+<p>Instalar herramientas necesarias:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt install -y seccomp libseccomp-dev strace
+</span></span></code></pre></div><p>Ejemplo de script bloqueando <code>execve</code> (ejecución de procesos):</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;linux/seccomp.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;linux/filter.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;linux/audit.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;sys/prctl.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;unistd.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">prctl</span><span class="p">(</span><span class="n">PR_SET_SECCOMP</span><span class="p">,</span> <span class="n">SECCOMP_MODE_STRICT</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;Hola, mundo seguro!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">execl</span><span class="p">(</span><span class="s">&#34;/bin/ls&#34;</span><span class="p">,</span> <span class="s">&#34;ls&#34;</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>  <span class="c1">// Esta llamada será bloqueada
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Compilar y ejecutar:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">gcc secure.c -o secure
+</span></span><span class="line"><span class="cl">./secure
+</span></span></code></pre></div><p>El intento de ejecutar <code>/bin/ls</code> fallará, mostrando que <code>execve</code> fue bloqueado.</p>
+<h2 id="usar-firejail-para-sandboxing-de-procesos">
+  Usar Firejail para sandboxing de procesos
+  <a class="heading-link" href="#usar-firejail-para-sandboxing-de-procesos">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p><strong>Firejail</strong> crea entornos aislados para correr procesos sin acceso a partes sensibles del sistema.</p>
+<p>Instalar:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt install -y firejail
+</span></span></code></pre></div><p>Ejecutar un programa con aislamiento:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">firejail --private gedit
+</span></span></code></pre></div><p>Esto corre <code>gedit</code> en un entorno aislado, sin acceso al home del usuario.</p>
+<p>Configurar perfiles personalizados para más control:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">firejail --profile<span class="o">=</span>mi_perfil.profile programa
+</span></span></code></pre></div><h2 id="reforzar-seguridad-con-permisos-de-archivo">
+  Reforzar seguridad con permisos de archivo
+  <a class="heading-link" href="#reforzar-seguridad-con-permisos-de-archivo">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Aplicar técnicas tradicionales:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">chmod -R go-rwx ~/proyecto_secreto
+</span></span><span class="line"><span class="cl">chattr +i archivo.conf  <span class="c1"># Evita que sea modificado</span>
+</span></span></code></pre></div><p>También se pueden usar <em>namespaces</em> y <em>cgroups</em> para limitar CPU, RAM y accesos.</p>
+<h2 id="buenas-prácticas">
+  Buenas prácticas
+  <a class="heading-link" href="#buenas-pr%c3%a1cticas">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ul>
+<li>Usar usuarios no privilegiados por defecto</li>
+<li>Aislar procesos críticos con <code>firejail</code> o seccomp</li>
+<li>Limitar accesos al sistema de archivos de Windows desde <code>/mnt/c/</code></li>
+<li>Auditar procesos con <code>strace</code> o <code>auditd</code></li>
+</ul>
+<h2 id="conclusión">
+  Conclusión
+  <a class="heading-link" href="#conclusi%c3%b3n">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>WSL2 no solo ofrece potencia para desarrollo, sino también mecanismos de seguridad avanzados para proteger datos y procesos. Con herramientas como seccomp, Firejail y permisos reforzados, se puede alcanzar un alto nivel de aislamiento sin perder flexibilidad, incluso en entornos compartidos o productivos.</p>
+      </div>
+
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script>
+  window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "cmasblog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    
+    document.addEventListener('themeChanged', function (e) { 
+        if (document.readyState == 'complete') {
+          DISQUS.reset({ reload: true, config: disqus_config });
+        }
+    });
+</script>
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2018 -
+    
+    2025
+     Christian Amado 
+    ·
+    
+    Desarrollado por <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+      <script async src="https://www.googletagmanager.com/gtag/js?id=356375808"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '356375808');
+        }
+      </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=013131931956450466198%3ablhmkdpweyq"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '013131931956450466198:blhmkdpweyq');
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

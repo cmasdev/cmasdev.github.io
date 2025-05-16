@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  Optimización de rendimiento en Blazor WebAssembly · Christian Amado
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Christian Amado">
+<meta name="description" content="Blazor WebAssembly es una tecnología poderosa que permite a los desarrolladores crear aplicaciones web interactivas utilizando C# y .NET en lugar de JavaScript. Sin embargo, debido a las características inherentes de su arquitectura, la optimización del rendimiento puede ser un desafío crítico. En este artículo, exploraremos técnicas, estrategias y mejores prácticas para optimizar el rendimiento en aplicaciones Blazor WebAssembly.">
+<meta name="keywords" content="blog,desarrollador,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Optimización de rendimiento en Blazor WebAssembly">
+  <meta name="twitter:description" content="Blazor WebAssembly es una tecnología poderosa que permite a los desarrolladores crear aplicaciones web interactivas utilizando C# y .NET en lugar de JavaScript. Sin embargo, debido a las características inherentes de su arquitectura, la optimización del rendimiento puede ser un desafío crítico. En este artículo, exploraremos técnicas, estrategias y mejores prácticas para optimizar el rendimiento en aplicaciones Blazor WebAssembly.">
+
+<meta property="og:url" content="http://localhost:1313/es/posts/2025-01-06-performance-optimization-blazor-webassembly/">
+  <meta property="og:site_name" content="Christian Amado">
+  <meta property="og:title" content="Optimización de rendimiento en Blazor WebAssembly">
+  <meta property="og:description" content="Blazor WebAssembly es una tecnología poderosa que permite a los desarrolladores crear aplicaciones web interactivas utilizando C# y .NET en lugar de JavaScript. Sin embargo, debido a las características inherentes de su arquitectura, la optimización del rendimiento puede ser un desafío crítico. En este artículo, exploraremos técnicas, estrategias y mejores prácticas para optimizar el rendimiento en aplicaciones Blazor WebAssembly.">
+  <meta property="og:locale" content="es">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-01-06T00:00:00-04:00">
+    <meta property="article:modified_time" content="2025-01-06T00:00:00-04:00">
+    <meta property="article:tag" content="Web Development">
+    <meta property="article:tag" content="Blazor">
+    <meta property="article:tag" content="Web Assembly">
+    <meta property="article:tag" content=".NET">
+
+
+
+
+<link rel="canonical" href="http://localhost:1313/es/posts/2025-01-06-performance-optimization-blazor-webassembly/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/es/">
+      Christian Amado
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/about">Biografía</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/contact">Contacto</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/diabetes">Diabetes</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/tags">Etiquetas</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/en/">🇺🇸</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/es/posts/2025-01-06-performance-optimization-blazor-webassembly/">
+              Optimización de rendimiento en Blazor WebAssembly
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2025-01-06T00:00:00-04:00">
+                enero 6, 2025
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              4 minutos de lectura.
+            </span>
+          </div>
+          
+          
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/es/tags/web-development/">Web Development</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/es/tags/blazor/">Blazor</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/es/tags/web-assembly/">Web Assembly</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/es/tags/.net/">.NET</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <p><strong>Blazor WebAssembly</strong> es una tecnología poderosa que permite a los desarrolladores crear aplicaciones web interactivas utilizando <strong>C#</strong> y <strong>.NET</strong> en lugar de <strong>JavaScript</strong>. Sin embargo, debido a las características inherentes de su arquitectura, la optimización del rendimiento puede ser un desafío crítico. En este artículo, exploraremos técnicas, estrategias y mejores prácticas para optimizar el rendimiento en aplicaciones <strong>Blazor WebAssembly</strong>.</p>
+<h2 id="1-introducción-a-blazor-webassembly">
+  1. Introducción a Blazor WebAssembly
+  <a class="heading-link" href="#1-introducci%c3%b3n-a-blazor-webassembly">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p><strong>Blazor WebAssembly</strong> es un modelo de alojamiento de <strong>Blazor</strong> que ejecuta aplicaciones directamente en el navegador utilizando <strong>WebAssembly</strong>. Esto permite que las aplicaciones sean ejecutadas en un entorno completamente independiente del servidor, lo que habilita experiencias sin interrupciones.</p>
+<h3 id="ventajas-de-blazor-webassembly">
+  Ventajas de Blazor WebAssembly
+  <a class="heading-link" href="#ventajas-de-blazor-webassembly">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>Ejecución en el cliente, reduciendo la carga en el servidor.</li>
+<li>Uso del ecosistema de .NET para compartir lógica entre el cliente y el servidor.</li>
+<li>Potencial de desarrollo sin dependencias directas de JavaScript.</li>
+</ul>
+<h3 id="limitaciones-de-rendimiento">
+  Limitaciones de rendimiento
+  <a class="heading-link" href="#limitaciones-de-rendimiento">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Tamaño inicial grande:</strong> Los archivos necesarios para ejecutar aplicaciones <strong>Blazor WebAssembly</strong> pueden ser significativamente grandes.</li>
+<li><strong>Capacidad de cómputo:</strong> La velocidad de ejecución está limitada por el rendimiento del navegador.</li>
+<li><strong>Latencia de red:</strong> Aunque el código se ejecuta en el cliente, el acceso a datos externos sigue dependiendo de la red.</li>
+</ul>
+<h2 id="2-entendiendo-los-problemas-comunes-de-rendimiento">
+  2. Entendiendo los problemas comunes de rendimiento
+  <a class="heading-link" href="#2-entendiendo-los-problemas-comunes-de-rendimiento">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="tamaño-del-payload-inicial">
+  Tamaño del payload inicial
+  <a class="heading-link" href="#tama%c3%b1o-del-payload-inicial">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>El tamaño de la aplicación <strong>Blazor WebAssembly</strong> afecta directamente el tiempo de carga inicial, ya que los navegadores necesitan descargar los binarios de <strong>WebAssembly</strong> antes de ejecutar la aplicación.</p>
+<h3 id="manejo-de-estado">
+  Manejo de estado
+  <a class="heading-link" href="#manejo-de-estado">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Mantener estados complejos puede consumir recursos significativos de memoria y tiempo de procesamiento.</p>
+<h3 id="renderizado-innecesario">
+  Renderizado innecesario
+  <a class="heading-link" href="#renderizado-innecesario">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>El renderizado excesivo de componentes afecta negativamente el rendimiento debido a operaciones DOM innecesarias.</p>
+<h2 id="3-estrategias-generales-de-optimización">
+  3. Estrategias generales de optimización
+  <a class="heading-link" href="#3-estrategias-generales-de-optimizaci%c3%b3n">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="reducción-del-tamaño-de-la-carga-inicial">
+  Reducción del tamaño de la carga inicial
+  <a class="heading-link" href="#reducci%c3%b3n-del-tama%c3%b1o-de-la-carga-inicial">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Habilitar la compresión Brotli:</strong> Los navegadores modernos admiten <strong>Brotli</strong>, un algoritmo de compresión que reduce drásticamente el tamaño de los archivos.</p>
+<p><strong>Configuración en ASP.NET Core:</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">app.UseResponseCompression();
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Eliminar dependencias innecesarias:</strong> Revisa y elimina bibliotecas que no estén en uso.</p>
+</li>
+<li>
+<p><strong>Lazy loading de ensamblados:</strong> Utiliza la carga diferida para ensamblados específicos.</p>
+<p><strong>Ejemplo:</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">@if (assemblyLoaded)
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">    &lt;Component /&gt;
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="uso-eficiente-de-memoria">
+  Uso eficiente de memoria
+  <a class="heading-link" href="#uso-eficiente-de-memoria">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li><strong>Liberar recursos no utilizados:</strong> Implementa <code>IDisposable</code> en componentes que utilizan recursos pesados.</li>
+<li><strong>Evitar grandes objetos en memoria:</strong> Descompone datos grandes en fragmentos más pequeños.</li>
+</ol>
+<h3 id="minimizar-la-cantidad-de-renderizados">
+  Minimizar la cantidad de renderizados
+  <a class="heading-link" href="#minimizar-la-cantidad-de-renderizados">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Evita operaciones innecesarias en el DOM:</strong> Utiliza <code>ShouldRender</code> para controlar el renderizado de componentes.</p>
+<p><strong>Ejemplo:</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">protected override bool ShouldRender()
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">    return StateHasChanged;
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Optimiza el enlace de datos:</strong> Evita vincular propiedades que cambian frecuentemente a componentes de renderizado intensivo.</p>
+</li>
+</ol>
+<h2 id="4-optimización-del-ciclo-de-vida-de-los-componentes">
+  4. Optimización del ciclo de vida de los componentes
+  <a class="heading-link" href="#4-optimizaci%c3%b3n-del-ciclo-de-vida-de-los-componentes">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>El ciclo de vida de los componentes de <strong>Blazor</strong> ofrece varios puntos para optimizar:</p>
+<ol>
+<li>
+<p><strong>OnInitializedAsync:</strong> Carga datos de forma diferida para evitar bloqueos iniciales.</p>
+<p><strong>Ejemplo:</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">protected override async Task OnInitializedAsync()
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">    Data = await LoadDataAsync();
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Dispose:</strong> Libera recursos o desconecta eventos para evitar fugas de memoria.</p>
+<p><strong>Ejemplo:</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">public void Dispose()
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">    MyEvent -= EventHandler;
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></div></li>
+</ol>
+<h2 id="5-optimizar-las-dependencias-externas">
+  5. Optimizar las dependencias externas
+  <a class="heading-link" href="#5-optimizar-las-dependencias-externas">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ol>
+<li>
+<p><strong>Interoperabilidad con JavaScript:</strong> Minimiza las llamadas JSInterop y agrúpalas cuando sea posible.</p>
+<p><strong>Ejemplo:</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">function batchedOperation(data) {
+</span></span><span class="line"><span class="cl">    // Procesa múltiples operaciones en una sola llamada
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Uso de bibliotecas ligeras:</strong> Prioriza bibliotecas específicamente diseñadas para <strong>WebAssembly</strong>.</p>
+</li>
+</ol>
+<h2 id="6-uso-de-almacenamiento-en-caché-y-almacenamiento-local">
+  6. Uso de almacenamiento en caché y almacenamiento local
+  <a class="heading-link" href="#6-uso-de-almacenamiento-en-cach%c3%a9-y-almacenamiento-local">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ol>
+<li>
+<p><strong>Persistencia en el cliente:</strong> Aprovecha el almacenamiento local para datos que no necesitan ser recargados frecuentemente.</p>
+<p><strong>Ejemplo:</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">localStorage</span><span class="o">.</span><span class="n">SetItem</span><span class="p">(</span><span class="s2">&#34;key&#34;</span><span class="p">,</span> <span class="n">value</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="k">var</span> <span class="n">value</span> <span class="o">=</span> <span class="n">localStorage</span><span class="o">.</span><span class="n">GetItem</span><span class="p">(</span><span class="s2">&#34;key&#34;</span><span class="p">);</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Service Workers:</strong> Implementa <strong>PWA</strong> para optimizar la caché y reducir la dependencia de la red.</p>
+</li>
+</ol>
+<h2 id="7-ejemplos-prácticos-y-patrones-de-código">
+  7. Ejemplos prácticos y patrones de código
+  <a class="heading-link" href="#7-ejemplos-pr%c3%a1cticos-y-patrones-de-c%c3%b3digo">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="ejemplo-1-lazy-loading">
+  Ejemplo 1: Lazy Loading
+  <a class="heading-link" href="#ejemplo-1-lazy-loading">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">@code {
+</span></span><span class="line"><span class="cl">   private bool assemblyLoaded;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">   protected override async Task OnAfterRenderAsync(bool firstRender)
+</span></span><span class="line"><span class="cl">   {
+</span></span><span class="line"><span class="cl">       if (firstRender)
+</span></span><span class="line"><span class="cl">       {
+</span></span><span class="line"><span class="cl">           assemblyLoaded = await LoadAssemblyAsync(&#34;Library.dll&#34;);
+</span></span><span class="line"><span class="cl">           StateHasChanged();
+</span></span><span class="line"><span class="cl">       }
+</span></span><span class="line"><span class="cl">   }
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></div><h3 id="ejemplo-2-optimizar-renderizado-condicional">
+  Ejemplo 2: Optimizar Renderizado Condicional
+  <a class="heading-link" href="#ejemplo-2-optimizar-renderizado-condicional">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">@code {
+</span></span><span class="line"><span class="cl">   private bool isVisible;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">   protected override bool ShouldRender()
+</span></span><span class="line"><span class="cl">   {
+</span></span><span class="line"><span class="cl">       return isVisible;
+</span></span><span class="line"><span class="cl">   }
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></div><h2 id="8-herramientas-para-medir-el-rendimiento">
+  8. Herramientas para medir el rendimiento
+  <a class="heading-link" href="#8-herramientas-para-medir-el-rendimiento">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ol>
+<li><strong>Browser Developer Tools:</strong> Analiza las solicitudes de red y tiempos de renderizado.</li>
+<li><strong>dotnet-trace:</strong> Herramienta para trazar el rendimiento de las aplicaciones <strong>.NET</strong>.</li>
+<li><strong>Blazor Performance Analyzer:</strong> Un complemento para inspeccionar cuellos de botella en aplicaciones <strong>Blazor</strong>.</li>
+</ol>
+<h2 id="9-conclusión">
+  9. Conclusión
+  <a class="heading-link" href="#9-conclusi%c3%b3n">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Optimizar el rendimiento en <strong>Blazor WebAssembly</strong> requiere un enfoque integral que combine estrategias de reducción de tamaño, uso eficiente de recursos y configuraciones inteligentes. Al implementar las técnicas descritas, puedes garantizar que tus aplicaciones sean rápidas, receptivas y eficientes.</p>
+<h2 id="10-recursos-adicionales">
+  10. Recursos adicionales
+  <a class="heading-link" href="#10-recursos-adicionales">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ul>
+<li><a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/"  class="external-link" target="_blank" rel="noopener">Documentación oficial de Blazor</a></li>
+<li><a href="https://webassembly.org/"  class="external-link" target="_blank" rel="noopener">Mejoras en WebAssembly</a></li>
+<li><a href="https://github.com/dotnet/diagnostics"  class="external-link" target="_blank" rel="noopener">Herramientas de depuración en .NET</a></li>
+</ul>
+      </div>
+
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script>
+  window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "cmasblog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    
+    document.addEventListener('themeChanged', function (e) { 
+        if (document.readyState == 'complete') {
+          DISQUS.reset({ reload: true, config: disqus_config });
+        }
+    });
+</script>
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2018 -
+    
+    2025
+     Christian Amado 
+    ·
+    
+    Desarrollado por <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+      <script async src="https://www.googletagmanager.com/gtag/js?id=356375808"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '356375808');
+        }
+      </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=013131931956450466198%3ablhmkdpweyq"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '013131931956450466198:blhmkdpweyq');
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

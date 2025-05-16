@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Power Pages on Christian Amado</title>
+    <link>http://localhost:1313/es/tags/power-pages/</link>
+    <description>Recent content in Power Pages on Christian Amado</description>
+    <generator>Hugo</generator>
+    <language>es</language>
+    <lastBuildDate>Wed, 29 Nov 2023 00:00:00 -0400</lastBuildDate>
+    <atom:link href="http://localhost:1313/es/tags/power-pages/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Integrar Power Pages con Power Automate</title>
+      <link>http://localhost:1313/es/posts/2023-11-29-integrate-power-pages-with-power-automate/</link>
+      <pubDate>Wed, 29 Nov 2023 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2023-11-29-integrate-power-pages-with-power-automate/</guid>
+      <description>&lt;p&gt;En este artículo mostraré cómo iniciar con la integración de &lt;strong&gt;Microsoft Power Pages&lt;/strong&gt; y &lt;strong&gt;Microsoft Power Automate&lt;/strong&gt; para el manejo de flujos.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Utilizando Visual Studio Code con Power Pages</title>
+      <link>http://localhost:1313/es/posts/2023-11-22-using-visual-studio-code-with-power-pages/</link>
+      <pubDate>Wed, 22 Nov 2023 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2023-11-22-using-visual-studio-code-with-power-pages/</guid>
+      <description>&lt;p&gt;En es artículo, mostraré como utilizar &lt;strong&gt;Visual Studio Code&lt;/strong&gt; con &lt;strong&gt;Microsoft Power Pages&lt;/strong&gt; para modificar ciertas funcionalidades.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Configuración de Búsqueda en Power Pages</title>
+      <link>http://localhost:1313/es/posts/2023-11-15-search-configuration-in-power-pages/</link>
+      <pubDate>Wed, 15 Nov 2023 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2023-11-15-search-configuration-in-power-pages/</guid>
+      <description>&lt;p&gt;En este artículo explicaré cómo habilitar búsquedas en &lt;strong&gt;Power Pages&lt;/strong&gt;, por ende, en &lt;strong&gt;Dataverse&lt;/strong&gt; para todos sus registros.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Habilitar soporte multi-idioma en Power Pages</title>
+      <link>http://localhost:1313/es/posts/2023-11-08-enable-multilanguage-in-power-pages/</link>
+      <pubDate>Wed, 08 Nov 2023 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2023-11-08-enable-multilanguage-in-power-pages/</guid>
+      <description>&lt;p&gt;En este artículo, mostraré cómo habilitar un sitio multi idioma con &lt;strong&gt;Power Pages&lt;/strong&gt;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Agregar JavaScript en Power Pages</title>
+      <link>http://localhost:1313/es/posts/2023-11-01-add-javascript-in-power-pages/</link>
+      <pubDate>Wed, 01 Nov 2023 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2023-11-01-add-javascript-in-power-pages/</guid>
+      <description>&lt;p&gt;En estos días me habían solicitado agregar un poco de &lt;strong&gt;Javascript&lt;/strong&gt; a un sitio desarrollado en &lt;strong&gt;Power Pages&lt;/strong&gt;, pero el generador de sitios no lo permite por seguridad. El único ámbito donde se puede utilizar &lt;strong&gt;Javascript&lt;/strong&gt; es dentro de un formulario, es una funcionalidad limitada de la herramienta para evitar ataques desde código &lt;strong&gt;Javascript&lt;/strong&gt;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Habilitar Usuarios Anónimos en Power Pages</title>
+      <link>http://localhost:1313/es/posts/2023-10-18-enable-anonymous-user-power-pages/</link>
+      <pubDate>Wed, 18 Oct 2023 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2023-10-18-enable-anonymous-user-power-pages/</guid>
+      <description>&lt;p&gt;En este artículo mostraré cómo habilitar un sitio de &lt;strong&gt;Power Pages&lt;/strong&gt; para usuarios anónimos, es decir, que cualquier usuario puedo ingresar al sitio que hemos creado. Normalmente, esto está relacionado con el entorno Productivo.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Primeros pasos en Power Pages</title>
+      <link>http://localhost:1313/es/posts/2023-10-11-power-pages-first-steps/</link>
+      <pubDate>Wed, 11 Oct 2023 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2023-10-11-power-pages-first-steps/</guid>
+      <description>&lt;p&gt;En este artículo, veremos cómo crear un primer sitio utilizando &lt;strong&gt;Power Pages&lt;/strong&gt; con una visión general de los distintos grupos de funcionalidades que posee la herramienta.&lt;/p&gt;&#xA;&lt;p&gt;En el &lt;a href=&#34;http://localhost:1313/posts/2023-10-11-power-pages-first-steps/&#34; &gt;artículo anterior&lt;/a&gt; hemos visto cómo se habilita el servicio, aquí veremos cómo utilizar ese servicio habilitado.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Habilitar Power Pages</title>
+      <link>http://localhost:1313/es/posts/2023-10-04-enable-power-pages/</link>
+      <pubDate>Wed, 04 Oct 2023 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/es/posts/2023-10-04-enable-power-pages/</guid>
+      <description>&lt;p&gt;En este artículo, veremos cómo habilitar &lt;strong&gt;Power Pages&lt;/strong&gt; en nuestro tenant de &lt;strong&gt;Microsoft 365&lt;/strong&gt; (esto sólo se realiza la primera vez que ingresamos). Me estoy dando cuenta que es volver al &lt;strong&gt;Microsoft FrontPage&lt;/strong&gt; o al &lt;strong&gt;Microsoft Expression Web&lt;/strong&gt; de hace algunos años ;)&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

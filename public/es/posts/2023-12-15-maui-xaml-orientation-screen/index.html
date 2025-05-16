@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  XAML para cambio de orientación de pantalla · Christian Amado
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Christian Amado">
+<meta name="description" content="En este artículo veremos la posibilidad de crear un diseño que se adapte a la orientación de pantalla en .NET MAUI.
+Windows 11 Insider Preview Build 22635.2915">
+<meta name="keywords" content="blog,desarrollador,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="XAML para cambio de orientación de pantalla">
+  <meta name="twitter:description" content="En este artículo veremos la posibilidad de crear un diseño que se adapte a la orientación de pantalla en .NET MAUI.
+Windows 11 Insider Preview Build 22635.2915">
+
+<meta property="og:url" content="http://localhost:1313/es/posts/2023-12-15-maui-xaml-orientation-screen/">
+  <meta property="og:site_name" content="Christian Amado">
+  <meta property="og:title" content="XAML para cambio de orientación de pantalla">
+  <meta property="og:description" content="En este artículo veremos la posibilidad de crear un diseño que se adapte a la orientación de pantalla en .NET MAUI.
+Windows 11 Insider Preview Build 22635.2915">
+  <meta property="og:locale" content="es">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2023-12-15T18:30:00-04:00">
+    <meta property="article:modified_time" content="2023-12-15T18:30:00-04:00">
+    <meta property="article:tag" content="WinDev">
+    <meta property="article:tag" content="MAUI">
+    <meta property="article:tag" content="Windows 11">
+    <meta property="article:tag" content="XAML">
+
+
+
+
+<link rel="canonical" href="http://localhost:1313/es/posts/2023-12-15-maui-xaml-orientation-screen/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/es/">
+      Christian Amado
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/about">Biografía</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/contact">Contacto</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/diabetes">Diabetes</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/tags">Etiquetas</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/en/">🇺🇸</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/es/posts/2023-12-15-maui-xaml-orientation-screen/">
+              XAML para cambio de orientación de pantalla
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2023-12-15T18:30:00-04:00">
+                diciembre 15, 2023
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              4 minutos de lectura.
+            </span>
+          </div>
+          
+          
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/es/tags/windev/">WinDev</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/es/tags/maui/">MAUI</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/es/tags/windows-11/">Windows 11</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/es/tags/xaml/">XAML</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <p>En este artículo veremos la posibilidad de crear un diseño que se adapte a la orientación de pantalla en <strong>.NET MAUI</strong>.</p>
+<p><em><strong>Windows 11 Insider Preview Build 22635.2915</strong></em></p>
+<p>La idea central aquí es aprender a crear un diseño responsivo para brindar la mejor experiencia de usuario con controles que se adapten a la orientación de la pantalla (anteriormente se lograba esto haciendo cambios por plataforma), para ellos adaptaremos una solución presentada por un desarrollador experto en la materia.</p>
+<h2 id="bloquear-orientación-de-pantalla">
+  Bloquear orientación de pantalla
+  <a class="heading-link" href="#bloquear-orientaci%c3%b3n-de-pantalla">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Primeramente, debemos mencionar que tenemos la opción de bloquear el cambio de orientación de pantalla. Esto se da cuando, por ejemplo, queremos que nuestro diseño sólo quede en posición vertical. Para ello, debemos preparar código para cada plataforma (aquí veremos <strong>Android</strong> y <strong>Windows</strong>):</p>
+<h3 id="windows">
+  Windows
+  <a class="heading-link" href="#windows">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Se realiza mediante el gestor de manifiesto <strong>Package.appxmanifest</strong>:
+<img src="https://i.ibb.co/0jQZXvN/Orientation1.png" alt=""></p>
+<h3 id="android">
+  Android
+  <a class="heading-link" href="#android">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>En la clase <strong>MainActivity</strong> de la plataforma <strong>Android</strong> se agrega el decorado:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">ScreenOrientation = ScreenOrientation.Portrait
+</span></span></code></pre></div><p>La clase quedaría así:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">using Android.App;
+</span></span><span class="line"><span class="cl">using Android.Content.PM;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">namespace MauiApp1
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">    [Activity(Theme = &#34;@style/Maui.SplashTheme&#34;, MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation | ConfigChanges.UiMode | ConfigChanges.ScreenLayout | ConfigChanges.SmallestScreenSize | ConfigChanges.Density, ScreenOrientation = ScreenOrientation.Portrait)]
+</span></span><span class="line"><span class="cl">    public class MainActivity : MauiAppCompatActivity
+</span></span><span class="line"><span class="cl">    {
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></div><h2 id="diseño-responsivo">
+  Diseño responsivo
+  <a class="heading-link" href="#dise%c3%b1o-responsivo">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>En <strong>.NET MAUI</strong> esto se logra utilziando de manera criteriosa alguno de los elementos (controles) <strong>Layout</strong> nativos que nos presenta la plataforma. En este caso nos enfocaremos en en control <strong>Grid</strong> (disculpen pero soy un fanático de este control).</p>
+<h3 id="opción-1">
+  Opción 1
+  <a class="heading-link" href="#opci%c3%b3n-1">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>En esta opción adaptaremos los controles utilizando el Grid y utilizando código <strong>C#</strong> para reorientar los objetos (básicamente se cambian filas por columnas, por describirlo de una manera). Entonces, el XAML quedaría así:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&lt;ContentPage xmlns=&#34;http://schemas.microsoft.com/dotnet/2021/maui&#34;
+</span></span><span class="line"><span class="cl">             xmlns:x=&#34;http://schemas.microsoft.com/winfx/2009/xaml&#34;
+</span></span><span class="line"><span class="cl">             x:Class=&#34;MauiApp1.MainPage&#34;&gt;
+</span></span><span class="line"><span class="cl">    &lt;ScrollView&gt;
+</span></span><span class="line"><span class="cl">        &lt;Grid x:Name=&#34;grillaCompleta&#34;&gt;
+</span></span><span class="line"><span class="cl">            &lt;Grid.RowDefinitions&gt;
+</span></span><span class="line"><span class="cl">                &lt;RowDefinition Height=&#34;*&#34; /&gt;
+</span></span><span class="line"><span class="cl">            &lt;/Grid.RowDefinitions&gt;
+</span></span><span class="line"><span class="cl">            &lt;Grid x:Name=&#34;grillaInterna&#34; Grid.Row=&#34;0&#34; Padding=&#34;10&#34;&gt;
+</span></span><span class="line"><span class="cl">                &lt;Grid.RowDefinitions&gt;
+</span></span><span class="line"><span class="cl">                    &lt;RowDefinition Height=&#34;*&#34; /&gt;
+</span></span><span class="line"><span class="cl">                &lt;/Grid.RowDefinitions&gt;
+</span></span><span class="line"><span class="cl">                &lt;Grid.ColumnDefinitions&gt;
+</span></span><span class="line"><span class="cl">                    &lt;ColumnDefinition Width=&#34;Auto&#34; /&gt;
+</span></span><span class="line"><span class="cl">                    &lt;ColumnDefinition Width=&#34;*&#34; /&gt;
+</span></span><span class="line"><span class="cl">                &lt;/Grid.ColumnDefinitions&gt;
+</span></span><span class="line"><span class="cl">                &lt;Image Source=&#34;dotnet_bot.png&#34; Grid.Row=&#34;0&#34; Grid.Column=&#34;0&#34; HeightRequest=&#34;100&#34; WidthRequest=&#34;100&#34; /&gt;
+</span></span><span class="line"><span class="cl">                &lt;Grid x:Name=&#34;grillaControles&#34; Grid.Row=&#34;0&#34; Grid.Column=&#34;1&#34; &gt;
+</span></span><span class="line"><span class="cl">                    &lt;Grid.RowDefinitions&gt;
+</span></span><span class="line"><span class="cl">                        &lt;RowDefinition Height=&#34;Auto&#34; /&gt;
+</span></span><span class="line"><span class="cl">                        &lt;RowDefinition Height=&#34;Auto&#34; /&gt;
+</span></span><span class="line"><span class="cl">                        &lt;RowDefinition Height=&#34;Auto&#34; /&gt;
+</span></span><span class="line"><span class="cl">                    &lt;/Grid.RowDefinitions&gt;
+</span></span><span class="line"><span class="cl">                    &lt;Grid.ColumnDefinitions&gt;
+</span></span><span class="line"><span class="cl">                        &lt;ColumnDefinition Width=&#34;Auto&#34; /&gt;
+</span></span><span class="line"><span class="cl">                        &lt;ColumnDefinition Width=&#34;*&#34; /&gt;
+</span></span><span class="line"><span class="cl">                    &lt;/Grid.ColumnDefinitions&gt;
+</span></span><span class="line"><span class="cl">                    &lt;Label Text=&#34;Nombre:&#34; Grid.Row=&#34;0&#34; Grid.Column=&#34;0&#34; /&gt;
+</span></span><span class="line"><span class="cl">                    &lt;Label Text=&#34;Fecha:&#34; Grid.Row=&#34;1&#34; Grid.Column=&#34;0&#34; /&gt;
+</span></span><span class="line"><span class="cl">                    &lt;Label Text=&#34;Etiquetas:&#34; Grid.Row=&#34;2&#34; Grid.Column=&#34;0&#34; /&gt;
+</span></span><span class="line"><span class="cl">                    &lt;Entry Grid.Row=&#34;0&#34; Grid.Column=&#34;1&#34; /&gt;
+</span></span><span class="line"><span class="cl">                    &lt;Entry Grid.Row=&#34;1&#34; Grid.Column=&#34;1&#34; /&gt;
+</span></span><span class="line"><span class="cl">                    &lt;Entry Grid.Row=&#34;2&#34; Grid.Column=&#34;1&#34; /&gt;
+</span></span><span class="line"><span class="cl">                &lt;/Grid&gt;
+</span></span><span class="line"><span class="cl">            &lt;/Grid&gt;
+</span></span><span class="line"><span class="cl">        &lt;/Grid&gt;
+</span></span><span class="line"><span class="cl">    &lt;/ScrollView&gt;
+</span></span><span class="line"><span class="cl">&lt;/ContentPage&gt;
+</span></span></code></pre></div><p>Sobre-escribimos el método <strong>OnSizeAllocated</strong> en el código C# que presta atención al cambio (de tamaño del contenedor de página, orientación, de alguna forma) quedaría así:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">protected override void OnSizeAllocated(double width, double height)
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">    base.OnSizeAllocated(width, height);
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    if (width != this.width || height != this.height)
+</span></span><span class="line"><span class="cl">    {
+</span></span><span class="line"><span class="cl">        this.width = width;
+</span></span><span class="line"><span class="cl">        this.height = height;
+</span></span><span class="line"><span class="cl">        if (width &gt; height)
+</span></span><span class="line"><span class="cl">        {
+</span></span><span class="line"><span class="cl">            grillaInterna.RowDefinitions.Clear();
+</span></span><span class="line"><span class="cl">            grillaInterna.ColumnDefinitions.Clear();
+</span></span><span class="line"><span class="cl">            grillaInterna.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
+</span></span><span class="line"><span class="cl">            grillaInterna.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+</span></span><span class="line"><span class="cl">            grillaInterna.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+</span></span><span class="line"><span class="cl">            grillaInterna.Children.Remove(grillaControles);
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            grillaInterna.Add(grillaControles, 1, 0);
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        else
+</span></span><span class="line"><span class="cl">        {
+</span></span><span class="line"><span class="cl">            grillaInterna.RowDefinitions.Clear();
+</span></span><span class="line"><span class="cl">            grillaInterna.ColumnDefinitions.Clear();
+</span></span><span class="line"><span class="cl">            grillaInterna.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+</span></span><span class="line"><span class="cl">            grillaInterna.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Auto) });
+</span></span><span class="line"><span class="cl">            grillaInterna.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
+</span></span><span class="line"><span class="cl">            grillaInterna.Children.Remove(grillaControles);
+</span></span><span class="line"><span class="cl">            grillaInterna.Add(grillaControles, 0, 1);
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></div><p>El resultado Horizontal es:
+<img src="https://i.ibb.co/bKnfKs6/Orientation2.png" alt=""></p>
+<p>El resultado Vertical es:
+<img src="https://i.ibb.co/3132hFy/Orientation3.png" alt=""></p>
+<p>Me ha funcionado este método, pero hay algunos problemas reportados en GitHub sobre el tema <a href="https://github.com/dotnet/maui/issues/9795"  class="external-link" target="_blank" rel="noopener">aquí</a></p>
+<h3 id="opción-2-extraída-de-otro-blog">
+  Opción 2 (extraída de otro Blog)
+  <a class="heading-link" href="#opci%c3%b3n-2-extra%c3%adda-de-otro-blog">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Definimos el <strong>XAML</strong> de la página agregando Manejadores de eventos visuales, en este caso, <strong>OrientationStateTrigger</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&lt;ContentPage.Resources&gt;
+</span></span><span class="line"><span class="cl">    &lt;ResourceDictionary&gt;
+</span></span><span class="line"><span class="cl">        &lt;Style TargetType=&#34;Grid&#34; x:Key=&#34;grillaInternaStyle&#34;&gt;
+</span></span><span class="line"><span class="cl">            &lt;Setter Property=&#34;VisualStateManager.VisualStateGroups&#34;&gt;
+</span></span><span class="line"><span class="cl">                &lt;VisualStateGroupList&gt;
+</span></span><span class="line"><span class="cl">                    &lt;VisualStateGroup&gt;
+</span></span><span class="line"><span class="cl">                        &lt;VisualState x:Name=&#34;Portrait&#34;&gt;
+</span></span><span class="line"><span class="cl">                            &lt;VisualState.StateTriggers&gt;
+</span></span><span class="line"><span class="cl">                                &lt;OrientationStateTrigger Orientation=&#34;Portrait&#34; /&gt;
+</span></span><span class="line"><span class="cl">                            &lt;/VisualState.StateTriggers&gt;
+</span></span><span class="line"><span class="cl">                            &lt;VisualState.Setters&gt;
+</span></span><span class="line"><span class="cl">                                &lt;Setter Property=&#34;RowDefinitions&#34; Value=&#34;*&#34; /&gt;
+</span></span><span class="line"><span class="cl">                                &lt;Setter Property=&#34;ColumnDefinitions&#34; Value=&#34;*,*&#34; /&gt;
+</span></span><span class="line"><span class="cl">                            &lt;/VisualState.Setters&gt;
+</span></span><span class="line"><span class="cl">                        &lt;/VisualState&gt;
+</span></span><span class="line"><span class="cl">                        &lt;VisualState x:Name=&#34;Landscape&#34;&gt;
+</span></span><span class="line"><span class="cl">                            &lt;VisualState.StateTriggers&gt;
+</span></span><span class="line"><span class="cl">                                &lt;OrientationStateTrigger Orientation=&#34;Landscape&#34; /&gt;
+</span></span><span class="line"><span class="cl">                            &lt;/VisualState.StateTriggers&gt;
+</span></span><span class="line"><span class="cl">                            &lt;VisualState.Setters&gt;
+</span></span><span class="line"><span class="cl">                                &lt;Setter Property=&#34;RowDefinitions&#34; Value=&#34;Auto,*&#34; /&gt;
+</span></span><span class="line"><span class="cl">                                &lt;Setter Property=&#34;ColumnDefinitions&#34; Value=&#34;*&#34; /&gt;
+</span></span><span class="line"><span class="cl">                            &lt;/VisualState.Setters&gt;
+</span></span><span class="line"><span class="cl">                        &lt;/VisualState&gt;
+</span></span><span class="line"><span class="cl">                    &lt;/VisualStateGroup&gt;
+</span></span><span class="line"><span class="cl">                &lt;/VisualStateGroupList&gt;
+</span></span><span class="line"><span class="cl">            &lt;/Setter&gt;
+</span></span><span class="line"><span class="cl">        &lt;/Style&gt;
+</span></span><span class="line"><span class="cl">    &lt;/ResourceDictionary&gt;
+</span></span><span class="line"><span class="cl">&lt;/ContentPage.Resources&gt;
+</span></span></code></pre></div><p>De esta manera, el código completo quedaría así:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&lt;ContentPage xmlns=&#34;http://schemas.microsoft.com/dotnet/2021/maui&#34;
+</span></span><span class="line"><span class="cl">             xmlns:x=&#34;http://schemas.microsoft.com/winfx/2009/xaml&#34;
+</span></span><span class="line"><span class="cl">             x:Class=&#34;MauiApp1.MainPage&#34;&gt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    &lt;ContentPage.Resources&gt;
+</span></span><span class="line"><span class="cl">        &lt;ResourceDictionary&gt;
+</span></span><span class="line"><span class="cl">            &lt;Style TargetType=&#34;Grid&#34; x:Key=&#34;grillaInternaStyle&#34;&gt;
+</span></span><span class="line"><span class="cl">                &lt;Setter Property=&#34;VisualStateManager.VisualStateGroups&#34;&gt;
+</span></span><span class="line"><span class="cl">                    &lt;VisualStateGroupList&gt;
+</span></span><span class="line"><span class="cl">                        &lt;VisualStateGroup&gt;
+</span></span><span class="line"><span class="cl">                            &lt;VisualState x:Name=&#34;Portrait&#34;&gt;
+</span></span><span class="line"><span class="cl">                                &lt;VisualState.StateTriggers&gt;
+</span></span><span class="line"><span class="cl">                                    &lt;OrientationStateTrigger Orientation=&#34;Portrait&#34; /&gt;
+</span></span><span class="line"><span class="cl">                                &lt;/VisualState.StateTriggers&gt;
+</span></span><span class="line"><span class="cl">                                &lt;VisualState.Setters&gt;
+</span></span><span class="line"><span class="cl">                                    &lt;Setter Property=&#34;RowDefinitions&#34; Value=&#34;*&#34; /&gt;
+</span></span><span class="line"><span class="cl">                                    &lt;Setter Property=&#34;ColumnDefinitions&#34; Value=&#34;*,*&#34; /&gt;
+</span></span><span class="line"><span class="cl">                                &lt;/VisualState.Setters&gt;
+</span></span><span class="line"><span class="cl">                            &lt;/VisualState&gt;
+</span></span><span class="line"><span class="cl">                            &lt;VisualState x:Name=&#34;Landscape&#34;&gt;
+</span></span><span class="line"><span class="cl">                                &lt;VisualState.StateTriggers&gt;
+</span></span><span class="line"><span class="cl">                                    &lt;OrientationStateTrigger Orientation=&#34;Landscape&#34; /&gt;
+</span></span><span class="line"><span class="cl">                                &lt;/VisualState.StateTriggers&gt;
+</span></span><span class="line"><span class="cl">                                &lt;VisualState.Setters&gt;
+</span></span><span class="line"><span class="cl">                                    &lt;Setter Property=&#34;RowDefinitions&#34; Value=&#34;Auto,*&#34; /&gt;
+</span></span><span class="line"><span class="cl">                                    &lt;Setter Property=&#34;ColumnDefinitions&#34; Value=&#34;*&#34; /&gt;
+</span></span><span class="line"><span class="cl">                                &lt;/VisualState.Setters&gt;
+</span></span><span class="line"><span class="cl">                            &lt;/VisualState&gt;
+</span></span><span class="line"><span class="cl">                        &lt;/VisualStateGroup&gt;
+</span></span><span class="line"><span class="cl">                    &lt;/VisualStateGroupList&gt;
+</span></span><span class="line"><span class="cl">                &lt;/Setter&gt;
+</span></span><span class="line"><span class="cl">            &lt;/Style&gt;
+</span></span><span class="line"><span class="cl">        &lt;/ResourceDictionary&gt;
+</span></span><span class="line"><span class="cl">    &lt;/ContentPage.Resources&gt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    &lt;Grid x:Name=&#34;grillaCompleta&#34;&gt;
+</span></span><span class="line"><span class="cl">        &lt;Grid.RowDefinitions&gt;
+</span></span><span class="line"><span class="cl">            &lt;RowDefinition Height=&#34;*&#34; /&gt;
+</span></span><span class="line"><span class="cl">        &lt;/Grid.RowDefinitions&gt;
+</span></span><span class="line"><span class="cl">        &lt;Grid x:Name=&#34;grillaInterna&#34; Grid.Row=&#34;0&#34; Padding=&#34;10&#34; Style=&#34;{StaticResource grillaInternaStyle}&#34;&gt;                
+</span></span><span class="line"><span class="cl">            &lt;Image Source=&#34;dotnet_bot.png&#34; Grid.Row=&#34;0&#34; Grid.Column=&#34;0&#34; HeightRequest=&#34;100&#34; WidthRequest=&#34;100&#34; /&gt;
+</span></span><span class="line"><span class="cl">            &lt;Grid x:Name=&#34;grillaControles&#34; Grid.Row=&#34;0&#34; Grid.Column=&#34;1&#34; &gt;
+</span></span><span class="line"><span class="cl">                &lt;Grid.RowDefinitions&gt;
+</span></span><span class="line"><span class="cl">                    &lt;RowDefinition Height=&#34;Auto&#34; /&gt;
+</span></span><span class="line"><span class="cl">                    &lt;RowDefinition Height=&#34;Auto&#34; /&gt;
+</span></span><span class="line"><span class="cl">                    &lt;RowDefinition Height=&#34;Auto&#34; /&gt;
+</span></span><span class="line"><span class="cl">                &lt;/Grid.RowDefinitions&gt;
+</span></span><span class="line"><span class="cl">                &lt;Grid.ColumnDefinitions&gt;
+</span></span><span class="line"><span class="cl">                    &lt;ColumnDefinition Width=&#34;Auto&#34; /&gt;
+</span></span><span class="line"><span class="cl">                    &lt;ColumnDefinition Width=&#34;*&#34; /&gt;
+</span></span><span class="line"><span class="cl">                &lt;/Grid.ColumnDefinitions&gt;
+</span></span><span class="line"><span class="cl">                &lt;Label Text=&#34;Nombre:&#34; Grid.Row=&#34;0&#34; Grid.Column=&#34;0&#34; /&gt;
+</span></span><span class="line"><span class="cl">                &lt;Label Text=&#34;Fecha:&#34; Grid.Row=&#34;1&#34; Grid.Column=&#34;0&#34; /&gt;
+</span></span><span class="line"><span class="cl">                &lt;Label Text=&#34;Etiquetas:&#34; Grid.Row=&#34;2&#34; Grid.Column=&#34;0&#34; /&gt;
+</span></span><span class="line"><span class="cl">                &lt;Entry Grid.Row=&#34;0&#34; Grid.Column=&#34;1&#34; /&gt;
+</span></span><span class="line"><span class="cl">                &lt;Entry Grid.Row=&#34;1&#34; Grid.Column=&#34;1&#34; /&gt;
+</span></span><span class="line"><span class="cl">                &lt;Entry Grid.Row=&#34;2&#34; Grid.Column=&#34;1&#34; /&gt;
+</span></span><span class="line"><span class="cl">            &lt;/Grid&gt;
+</span></span><span class="line"><span class="cl">        &lt;/Grid&gt;
+</span></span><span class="line"><span class="cl">    &lt;/Grid&gt;
+</span></span><span class="line"><span class="cl">&lt;/ContentPage&gt;
+</span></span></code></pre></div><p>Logrando así el mismo efecto que la Opción 1 (con la diferencia que esta solución me funcionó en <strong>Android</strong> y <strong>Windows</strong>).</p>
+<p>La opción 2 se encuentra perfectamente explicada en <a href="https://blog.ewers-peters.de/add-responsive-layouts-to-your-maui-app"  class="external-link" target="_blank" rel="noopener">este blog</a> gracias a <a href="https://github.com/ewerspej"  class="external-link" target="_blank" rel="noopener">Julian Ewers-Peters</a></p>
+<p>Recuerden que durante todo este mes de Diciembre estamos en el <strong><a href="https://elcamino.dev/calendario-adviento-net-maui-espanol-23"  class="external-link" target="_blank" rel="noopener">Calendario de Adviento .NET MAUI</a></strong></p>
+<p>¡Espero resulte útil!</p>
+      </div>
+
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script>
+  window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "cmasblog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    
+    document.addEventListener('themeChanged', function (e) { 
+        if (document.readyState == 'complete') {
+          DISQUS.reset({ reload: true, config: disqus_config });
+        }
+    });
+</script>
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2018 -
+    
+    2025
+     Christian Amado 
+    ·
+    
+    Desarrollado por <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+      <script async src="https://www.googletagmanager.com/gtag/js?id=356375808"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '356375808');
+        }
+      </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=013131931956450466198%3ablhmkdpweyq"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '013131931956450466198:blhmkdpweyq');
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

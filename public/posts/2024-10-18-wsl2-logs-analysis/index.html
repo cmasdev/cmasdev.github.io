@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  Análisis de logs y observabilidad con herramientas Linux · Christian Amado
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Christian Amado">
+<meta name="description" content="Una ventaja clave de usar WSL2 es tener acceso completo al ecosistema de herramientas de Linux, incluyendo aquellas utilizadas para análisis de logs, monitoreo y observabilidad. Esto permite replicar entornos de producción o staging de forma local, validar configuraciones, depurar servicios y construir flujos completos de análisis desde la línea de comandos.
+Este artículo explora cómo aprovechar herramientas como journalctl, logrotate, grep, htop, iftop, bmon, dstat, atop, goaccess y más, directamente desde una terminal en WSL2 para tener visibilidad del sistema, servicios y tráfico de red.">
+<meta name="keywords" content="blog,desarrollador,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Análisis de logs y observabilidad con herramientas Linux">
+  <meta name="twitter:description" content="Una ventaja clave de usar WSL2 es tener acceso completo al ecosistema de herramientas de Linux, incluyendo aquellas utilizadas para análisis de logs, monitoreo y observabilidad. Esto permite replicar entornos de producción o staging de forma local, validar configuraciones, depurar servicios y construir flujos completos de análisis desde la línea de comandos.
+Este artículo explora cómo aprovechar herramientas como journalctl, logrotate, grep, htop, iftop, bmon, dstat, atop, goaccess y más, directamente desde una terminal en WSL2 para tener visibilidad del sistema, servicios y tráfico de red.">
+
+<meta property="og:url" content="http://localhost:1313/posts/2024-10-18-wsl2-logs-analysis/">
+  <meta property="og:site_name" content="Christian Amado">
+  <meta property="og:title" content="Análisis de logs y observabilidad con herramientas Linux">
+  <meta property="og:description" content="Una ventaja clave de usar WSL2 es tener acceso completo al ecosistema de herramientas de Linux, incluyendo aquellas utilizadas para análisis de logs, monitoreo y observabilidad. Esto permite replicar entornos de producción o staging de forma local, validar configuraciones, depurar servicios y construir flujos completos de análisis desde la línea de comandos.
+Este artículo explora cómo aprovechar herramientas como journalctl, logrotate, grep, htop, iftop, bmon, dstat, atop, goaccess y más, directamente desde una terminal en WSL2 para tener visibilidad del sistema, servicios y tráfico de red.">
+  <meta property="og:locale" content="es">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-10-18T00:00:00-04:00">
+    <meta property="article:modified_time" content="2024-10-18T00:00:00-04:00">
+    <meta property="article:tag" content="WinDev">
+    <meta property="article:tag" content="Windows 11">
+    <meta property="article:tag" content="WSL">
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-V1ZRP82YFD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-V1ZRP82YFD');
+</script>
+
+
+
+<link rel="canonical" href="http://localhost:1313/posts/2024-10-18-wsl2-logs-analysis/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="apple-touch-icon" sizes="57x57" href="/img/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/img/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/img/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/img/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/img/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/img/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/img/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/img/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/img/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="/img/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/img/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+<link rel="manifest" href="/img/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/img/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/">
+      Christian Amado
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/about">Biografía</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/contact">Contacto</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/diabetes">Diabetes</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/tags">Etiquetas</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/en/">🇺🇸</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/posts/2024-10-18-wsl2-logs-analysis/">
+              Análisis de logs y observabilidad con herramientas Linux
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2024-10-18T00:00:00-04:00">
+                octubre 18, 2024
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              3 minutos de lectura.
+            </span>
+          </div>
+          
+          
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/tags/windev/">WinDev</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/windows-11/">Windows 11</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/wsl/">WSL</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <p>Una ventaja clave de usar WSL2 es tener acceso completo al ecosistema de herramientas de Linux, incluyendo aquellas utilizadas para análisis de logs, monitoreo y observabilidad. Esto permite replicar entornos de producción o staging de forma local, validar configuraciones, depurar servicios y construir flujos completos de análisis desde la línea de comandos.</p>
+<p>Este artículo explora cómo aprovechar herramientas como <code>journalctl</code>, <code>logrotate</code>, <code>grep</code>, <code>htop</code>, <code>iftop</code>, <code>bmon</code>, <code>dstat</code>, <code>atop</code>, <code>goaccess</code> y más, directamente desde una terminal en WSL2 para tener visibilidad del sistema, servicios y tráfico de red.</p>
+<h2 id="requisitos">
+  Requisitos
+  <a class="heading-link" href="#requisitos">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ul>
+<li>WSL2 con distribución Ubuntu 20.04 o 22.04</li>
+<li>Acceso <code>sudo</code> para instalar herramientas</li>
+<li>Servicios activos (nginx, PostgreSQL, Python web server, etc.)</li>
+</ul>
+<h2 id="análisis-de-logs-clásicos-con-grep-awk-less">
+  Análisis de logs clásicos con <code>grep</code>, <code>awk</code>, <code>less</code>
+  <a class="heading-link" href="#an%c3%a1lisis-de-logs-cl%c3%a1sicos-con-grep-awk-less">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">cd</span> /var/log
+</span></span><span class="line"><span class="cl">sudo less syslog
+</span></span><span class="line"><span class="cl">sudo tail -f nginx/access.log
+</span></span><span class="line"><span class="cl">sudo grep <span class="s2">&#34;error&#34;</span> nginx/error.log
+</span></span></code></pre></div><p>Buscar patrones o errores:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">grep -i <span class="s2">&#34;fail&#34;</span> auth.log
+</span></span><span class="line"><span class="cl">awk <span class="s1">&#39;{print $1, $2, $3, $5}&#39;</span> nginx/access.log <span class="p">|</span> sort <span class="p">|</span> uniq -c <span class="p">|</span> sort -nr
+</span></span></code></pre></div><h2 id="observabilidad-del-sistema">
+  Observabilidad del sistema
+  <a class="heading-link" href="#observabilidad-del-sistema">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="procesos-en-tiempo-real">
+  Procesos en tiempo real
+  <a class="heading-link" href="#procesos-en-tiempo-real">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">htop
+</span></span></code></pre></div><p>Filtrar por nombre, CPU o RAM. Permite ordenar e identificar cuellos de botella.</p>
+<h3 id="uso-de-red-por-proceso">
+  Uso de red por proceso
+  <a class="heading-link" href="#uso-de-red-por-proceso">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo iftop
+</span></span><span class="line"><span class="cl">sudo bmon
+</span></span></code></pre></div><p>Monitorean el tráfico entrante y saliente en <code>eth0</code> (interfaz de WSL).</p>
+<h2 id="uso-de-dstat-y-atop-para-análisis-extendido">
+  Uso de <code>dstat</code> y <code>atop</code> para análisis extendido
+  <a class="heading-link" href="#uso-de-dstat-y-atop-para-an%c3%a1lisis-extendido">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt install -y dstat atop
+</span></span></code></pre></div><p>Visualizar métricas combinadas:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">dstat -cdnm
+</span></span></code></pre></div><p>Para monitoreo prolongado:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo atop
+</span></span></code></pre></div><h2 id="manejo-y-rotación-de-logs">
+  Manejo y rotación de logs
+  <a class="heading-link" href="#manejo-y-rotaci%c3%b3n-de-logs">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Instalar <code>logrotate</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt install -y logrotate
+</span></span></code></pre></div><p>Configurar rotación para logs personalizados:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo nano /etc/logrotate.d/custom
+</span></span></code></pre></div><p>Ejemplo:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">/home/usuario/proyecto/logs/*.log {
+</span></span><span class="line"><span class="cl">    weekly
+</span></span><span class="line"><span class="cl">    rotate 4
+</span></span><span class="line"><span class="cl">    compress
+</span></span><span class="line"><span class="cl">    missingok
+</span></span><span class="line"><span class="cl">    notifempty
+</span></span><span class="line"><span class="cl">    create 640 usuario usuario
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></div><p>Ejecutar rotación manual:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo logrotate -f /etc/logrotate.d/custom
+</span></span></code></pre></div><h2 id="visualización-de-logs-web-con-goaccess">
+  Visualización de logs web con GoAccess
+  <a class="heading-link" href="#visualizaci%c3%b3n-de-logs-web-con-goaccess">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Instalar:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt install -y goaccess
+</span></span></code></pre></div><p>Analizar logs de nginx:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo goaccess /var/log/nginx/access.log -o report.html --log-format<span class="o">=</span>COMBINED
+</span></span></code></pre></div><p>Abrir <code>report.html</code> en navegador para ver estadísticas de tráfico, IPs, status codes y más.</p>
+<h2 id="automatizar-análisis-con-scripts">
+  Automatizar análisis con scripts
+  <a class="heading-link" href="#automatizar-an%c3%a1lisis-con-scripts">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Ejemplo de script <code>log-insights.sh</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="cp">#!/bin/bash
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="nb">echo</span> <span class="s2">&#34;Errores recientes:&#34;</span>
+</span></span><span class="line"><span class="cl">tail -n <span class="m">50</span> /var/log/nginx/error.log <span class="p">|</span> grep -i <span class="s2">&#34;error&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;IPs más frecuentes:&#34;</span>
+</span></span><span class="line"><span class="cl">awk <span class="s1">&#39;{print $1}&#39;</span> /var/log/nginx/access.log <span class="p">|</span> sort <span class="p">|</span> uniq -c <span class="p">|</span> sort -nr <span class="p">|</span> head -10
+</span></span></code></pre></div><p>Dar permisos:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">chmod +x log-insights.sh
+</span></span></code></pre></div><p>Ejecutar periódicamente o como parte de debugging.</p>
+<h2 id="buenas-prácticas">
+  Buenas prácticas
+  <a class="heading-link" href="#buenas-pr%c3%a1cticas">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ul>
+<li>Evitar usar <code>journalctl</code> (no disponible sin systemd en WSL2)</li>
+<li>Usar <code>nohup</code> o <code>tee</code> para guardar logs de procesos manuales</li>
+<li>Monitorear tráfico entre servicios con <code>netstat</code>, <code>ss</code> o <code>lsof</code></li>
+<li>Limitar permisos de lectura en logs sensibles (<code>chmod 640</code>)</li>
+<li>Automatizar análisis postmortem con scripts por proyecto</li>
+</ul>
+<h2 id="conclusión">
+  Conclusión
+  <a class="heading-link" href="#conclusi%c3%b3n">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Con WSL2 es posible construir flujos completos de observabilidad y análisis de logs utilizando herramientas estándar de Linux. Esto permite a los equipos depurar localmente, simular entornos productivos, y aplicar técnicas profesionales de monitoreo sin salir de Windows. Un entorno ideal para desarrollo, QA, seguridad y debugging distribuido.</p>
+      </div>
+
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script>
+  window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "cmasblog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    
+    document.addEventListener('themeChanged', function (e) { 
+        if (document.readyState == 'complete') {
+          DISQUS.reset({ reload: true, config: disqus_config });
+        }
+    });
+</script>
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2018 -
+    
+    2025
+     Christian Amado 
+    ·
+    
+    Desarrollado por <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+      <script async src="https://www.googletagmanager.com/gtag/js?id=356375808"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '356375808');
+        }
+      </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=013131931956450466198%3ablhmkdpweyq"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '013131931956450466198:blhmkdpweyq');
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

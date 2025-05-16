@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  Consumo de información del sistema desde WinUI 3 · Christian Amado
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Christian Amado">
+<meta name="description" content="Una aplicación moderna que corre sobre Windows no tiene por qué operar de manera aislada. Gracias a las APIs del sistema operativo disponibles en Windows App SDK, es posible acceder a múltiples fuentes de información contextual del sistema como el estado de la batería, conectividad de red, nivel de volumen y hasta el estado de energía. Esto permite que una app se adapte dinámicamente al entorno del usuario, optimizando la experiencia, reduciendo consumo o informando condiciones especiales.
+En este artículo se muestra cómo consumir información clave del sistema desde una app WinUI 3 usando C#, incluyendo suscriptores a eventos para obtener actualizaciones en tiempo real.">
+<meta name="keywords" content="blog,desarrollador,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Consumo de información del sistema desde WinUI 3">
+  <meta name="twitter:description" content="Una aplicación moderna que corre sobre Windows no tiene por qué operar de manera aislada. Gracias a las APIs del sistema operativo disponibles en Windows App SDK, es posible acceder a múltiples fuentes de información contextual del sistema como el estado de la batería, conectividad de red, nivel de volumen y hasta el estado de energía. Esto permite que una app se adapte dinámicamente al entorno del usuario, optimizando la experiencia, reduciendo consumo o informando condiciones especiales.
+En este artículo se muestra cómo consumir información clave del sistema desde una app WinUI 3 usando C#, incluyendo suscriptores a eventos para obtener actualizaciones en tiempo real.">
+
+<meta property="og:url" content="http://localhost:1313/es/posts/2025-01-17-winui-system-information/">
+  <meta property="og:site_name" content="Christian Amado">
+  <meta property="og:title" content="Consumo de información del sistema desde WinUI 3">
+  <meta property="og:description" content="Una aplicación moderna que corre sobre Windows no tiene por qué operar de manera aislada. Gracias a las APIs del sistema operativo disponibles en Windows App SDK, es posible acceder a múltiples fuentes de información contextual del sistema como el estado de la batería, conectividad de red, nivel de volumen y hasta el estado de energía. Esto permite que una app se adapte dinámicamente al entorno del usuario, optimizando la experiencia, reduciendo consumo o informando condiciones especiales.
+En este artículo se muestra cómo consumir información clave del sistema desde una app WinUI 3 usando C#, incluyendo suscriptores a eventos para obtener actualizaciones en tiempo real.">
+  <meta property="og:locale" content="es">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-01-17T00:00:00-04:00">
+    <meta property="article:modified_time" content="2025-01-17T00:00:00-04:00">
+    <meta property="article:tag" content="WinDev">
+    <meta property="article:tag" content="Windows 11">
+    <meta property="article:tag" content="WinUI 3">
+    <meta property="article:tag" content="Windows App SDK">
+
+
+
+
+<link rel="canonical" href="http://localhost:1313/es/posts/2025-01-17-winui-system-information/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/es/">
+      Christian Amado
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/about">Biografía</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/contact">Contacto</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/diabetes">Diabetes</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/es/tags">Etiquetas</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/en/">🇺🇸</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/es/posts/2025-01-17-winui-system-information/">
+              Consumo de información del sistema desde WinUI 3
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2025-01-17T00:00:00-04:00">
+                enero 17, 2025
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              3 minutos de lectura.
+            </span>
+          </div>
+          
+          
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/es/tags/windev/">WinDev</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/es/tags/windows-11/">Windows 11</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/es/tags/winui-3/">WinUI 3</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/es/tags/windows-app-sdk/">Windows App SDK</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <p>Una aplicación moderna que corre sobre Windows no tiene por qué operar de manera aislada. Gracias a las APIs del sistema operativo disponibles en <strong>Windows App SDK</strong>, es posible acceder a múltiples fuentes de información contextual del sistema como el estado de la batería, conectividad de red, nivel de volumen y hasta el estado de energía. Esto permite que una app se adapte dinámicamente al entorno del usuario, optimizando la experiencia, reduciendo consumo o informando condiciones especiales.</p>
+<p>En este artículo se muestra cómo consumir información clave del sistema desde una app <strong>WinUI 3</strong> usando C#, incluyendo suscriptores a eventos para obtener actualizaciones en tiempo real.</p>
+<h2 id="requisitos">
+  Requisitos
+  <a class="heading-link" href="#requisitos">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ul>
+<li>Proyecto WinUI 3 Packaged con Windows App SDK</li>
+<li>Visual Studio 2022+</li>
+<li>SDK mínimo 10.0.18362</li>
+<li>Namespaces usados:
+<ul>
+<li><code>Windows.System.Power</code></li>
+<li><code>Windows.Networking.Connectivity</code></li>
+<li><code>Windows.Media.Devices</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="batería-estado-y-nivel-de-carga">
+  Batería: estado y nivel de carga
+  <a class="heading-link" href="#bater%c3%ada-estado-y-nivel-de-carga">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Primero, importar el espacio de nombres:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">Windows.System.Power</span><span class="p">;</span>
+</span></span></code></pre></div><p>Obtener el estado actual:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kt">var</span> <span class="n">level</span> <span class="p">=</span> <span class="n">PowerManager</span><span class="p">.</span><span class="n">RemainingChargePercent</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">var</span> <span class="n">state</span> <span class="p">=</span> <span class="n">PowerManager</span><span class="p">.</span><span class="n">EnergySaverStatus</span><span class="p">;</span>
+</span></span></code></pre></div><p>Suscribirse a cambios:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="n">PowerManager</span><span class="p">.</span><span class="n">RemainingChargePercentChanged</span> <span class="p">+=</span> <span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span> <span class="p">=&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">var</span> <span class="n">updatedLevel</span> <span class="p">=</span> <span class="n">PowerManager</span><span class="p">.</span><span class="n">RemainingChargePercent</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">DispatcherQueue</span><span class="p">.</span><span class="n">TryEnqueue</span><span class="p">(()</span> <span class="p">=&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">BatteryText</span><span class="p">.</span><span class="n">Text</span> <span class="p">=</span> <span class="s">$&#34;Batería: {updatedLevel}%&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><h2 id="red-conectividad-y-tipo-de-conexión">
+  Red: conectividad y tipo de conexión
+  <a class="heading-link" href="#red-conectividad-y-tipo-de-conexi%c3%b3n">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Importar:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">Windows.Networking.Connectivity</span><span class="p">;</span>
+</span></span></code></pre></div><p>Obtener el perfil actual:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kt">var</span> <span class="n">profile</span> <span class="p">=</span> <span class="n">NetworkInformation</span><span class="p">.</span><span class="n">GetInternetConnectionProfile</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="kt">bool</span> <span class="n">isConnected</span> <span class="p">=</span> <span class="n">profile</span><span class="p">?.</span><span class="n">GetNetworkConnectivityLevel</span><span class="p">()</span> <span class="p">==</span> <span class="n">NetworkConnectivityLevel</span><span class="p">.</span><span class="n">InternetAccess</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">string</span> <span class="n">interfaceType</span> <span class="p">=</span> <span class="n">profile</span><span class="p">?.</span><span class="n">NetworkAdapter</span><span class="p">?.</span><span class="n">IanaInterfaceType</span><span class="p">.</span><span class="n">ToString</span><span class="p">();</span>
+</span></span></code></pre></div><p>Ejemplo de monitoreo:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="n">NetworkInformation</span><span class="p">.</span><span class="n">NetworkStatusChanged</span> <span class="p">+=</span> <span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="p">=&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">var</span> <span class="n">current</span> <span class="p">=</span> <span class="n">NetworkInformation</span><span class="p">.</span><span class="n">GetInternetConnectionProfile</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">var</span> <span class="n">status</span> <span class="p">=</span> <span class="n">current</span><span class="p">?.</span><span class="n">GetNetworkConnectivityLevel</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="n">DispatcherQueue</span><span class="p">.</span><span class="n">TryEnqueue</span><span class="p">(()</span> <span class="p">=&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">NetworkText</span><span class="p">.</span><span class="n">Text</span> <span class="p">=</span> <span class="s">$&#34;Conectado: {status}&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><h2 id="volumen-nivel-actual-del-sistema">
+  Volumen: nivel actual del sistema
+  <a class="heading-link" href="#volumen-nivel-actual-del-sistema">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Importar:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">Windows.Media.Devices</span><span class="p">;</span>
+</span></span></code></pre></div><p>Obtener el volumen de salida:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kt">var</span> <span class="n">volumeLevel</span> <span class="p">=</span> <span class="n">AudioEndpointVolume</span><span class="p">.</span><span class="n">GetVolume</span><span class="p">();</span>
+</span></span></code></pre></div><p>Nota: el acceso directo al volumen del sistema puede requerir componentes COM o APIs Win32 mediante <code>CoreAudioAPI</code>. Alternativa:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kt">var</span> <span class="n">audioManager</span> <span class="p">=</span> <span class="n">MediaDevice</span><span class="p">.</span><span class="n">GetAudioRenderSelector</span><span class="p">();</span>
+</span></span></code></pre></div><p>Para actualizaciones en tiempo real, usar WinRT interop o bibliotecas externas como NAudio.</p>
+<h2 id="estado-de-energía-enchufado-o-batería">
+  Estado de energía: enchufado o batería
+  <a class="heading-link" href="#estado-de-energ%c3%ada-enchufado-o-bater%c3%ada">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kt">var</span> <span class="n">status</span> <span class="p">=</span> <span class="n">PowerManager</span><span class="p">.</span><span class="n">PowerSupplyStatus</span><span class="p">;</span>
+</span></span></code></pre></div><p>Opciones posibles:</p>
+<ul>
+<li><code>PowerSupplyStatus.Inadequate</code></li>
+<li><code>PowerSupplyStatus.Adequate</code></li>
+<li><code>PowerSupplyStatus.NotPresent</code></li>
+<li><code>PowerSupplyStatus.Unknown</code></li>
+</ul>
+<p>Ejemplo:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="n">PowerManager</span><span class="p">.</span><span class="n">PowerSupplyStatusChanged</span> <span class="p">+=</span> <span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span> <span class="p">=&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">var</span> <span class="n">pluggedIn</span> <span class="p">=</span> <span class="n">PowerManager</span><span class="p">.</span><span class="n">PowerSupplyStatus</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">DispatcherQueue</span><span class="p">.</span><span class="n">TryEnqueue</span><span class="p">(()</span> <span class="p">=&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">StatusText</span><span class="p">.</span><span class="n">Text</span> <span class="p">=</span> <span class="s">$&#34;Fuente de energía: {pluggedIn}&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><h2 id="integración-ui">
+  Integración UI
+  <a class="heading-link" href="#integraci%c3%b3n-ui">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>En <code>MainWindow.xaml</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;StackPanel</span> <span class="na">Spacing=</span><span class="s">&#34;10&#34;</span> <span class="na">Padding=</span><span class="s">&#34;20&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;TextBlock</span> <span class="na">x:Name=</span><span class="s">&#34;BatteryText&#34;</span><span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;TextBlock</span> <span class="na">x:Name=</span><span class="s">&#34;NetworkText&#34;</span><span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;TextBlock</span> <span class="na">x:Name=</span><span class="s">&#34;StatusText&#34;</span><span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/StackPanel&gt;</span>
+</span></span></code></pre></div><p>En el constructor, inicializar datos actuales + suscripciones.</p>
+<h2 id="casos-de-uso-reales">
+  Casos de uso reales
+  <a class="heading-link" href="#casos-de-uso-reales">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ul>
+<li>Modo ahorro de batería automático cuando baja del 20%</li>
+<li>Advertencia de red metered o limitada (para evitar descargas)</li>
+<li>Reducción de recursos gráficos cuando no hay energía alterna</li>
+<li>Silenciar notificaciones o sonidos si el volumen es 0</li>
+</ul>
+<h2 id="conclusión">
+  Conclusión
+  <a class="heading-link" href="#conclusi%c3%b3n">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Las apps modernas en <strong>Windows</strong> pueden y deben responder al contexto del sistema operativo. Acceder a información como batería, conectividad, energía o audio permite desarrollar aplicaciones adaptativas, eficientes y conscientes del entorno. <strong>WinUI 3</strong> permite hacerlo de forma natural, segura y en tiempo real gracias a los eventos y APIs disponibles a través de <strong>Windows App SDK</strong>.</p>
+      </div>
+
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script>
+  window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "cmasblog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    
+    document.addEventListener('themeChanged', function (e) { 
+        if (document.readyState == 'complete') {
+          DISQUS.reset({ reload: true, config: disqus_config });
+        }
+    });
+</script>
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2018 -
+    
+    2025
+     Christian Amado 
+    ·
+    
+    Desarrollado por <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+      <script async src="https://www.googletagmanager.com/gtag/js?id=356375808"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '356375808');
+        }
+      </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=013131931956450466198%3ablhmkdpweyq"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '013131931956450466198:blhmkdpweyq');
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  Install Android Apps from APK in Windows 11 · Christian Amado
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Christian Amado">
+<meta name="description" content="In this article I will show how to install Android applications on Windows 11 thanks to Windows Subsystem for Android using Android tools and enabling certain options. In a previous article we have seen how to enable the platform from the Microsoft Store.
+Windows 11 Insider Preview Build 22598">
+<meta name="keywords" content="blog,developer,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Install Android Apps from APK in Windows 11">
+  <meta name="twitter:description" content="In this article I will show how to install Android applications on Windows 11 thanks to Windows Subsystem for Android using Android tools and enabling certain options. In a previous article we have seen how to enable the platform from the Microsoft Store.
+Windows 11 Insider Preview Build 22598">
+
+<meta property="og:url" content="http://localhost:1313/en/posts/2022-04-20-install-android-apps-from-apk/">
+  <meta property="og:site_name" content="Christian Amado">
+  <meta property="og:title" content="Install Android Apps from APK in Windows 11">
+  <meta property="og:description" content="In this article I will show how to install Android applications on Windows 11 thanks to Windows Subsystem for Android using Android tools and enabling certain options. In a previous article we have seen how to enable the platform from the Microsoft Store.
+Windows 11 Insider Preview Build 22598">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2022-04-20T13:01:14-04:00">
+    <meta property="article:modified_time" content="2022-04-20T13:01:14-04:00">
+    <meta property="article:tag" content="Windows 11">
+    <meta property="article:tag" content="Windows Insider Preview">
+    <meta property="article:tag" content="Android">
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-V1ZRP82YFD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-V1ZRP82YFD');
+</script>
+
+
+
+<link rel="canonical" href="http://localhost:1313/en/posts/2022-04-20-install-android-apps-from-apk/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="apple-touch-icon" sizes="57x57" href="/img/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/img/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/img/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/img/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/img/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/img/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/img/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/img/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/img/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="/img/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/img/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+<link rel="manifest" href="/img/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/img/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/en/">
+      Christian Amado
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/en/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/en/about">About</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/en/contact">Contact</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/en/diabetes">Diabetes</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/en/tags">Tags</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/posts/2022-04-20-install-android-apps-from-apk/">🇪🇸</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/en/posts/2022-04-20-install-android-apps-from-apk/">
+              Install Android Apps from APK in Windows 11
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2022-04-20T13:01:14-04:00">
+                April 20, 2022
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              3-minute read
+            </span>
+          </div>
+          
+          
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/en/tags/windows-11/">Windows 11</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/en/tags/windows-insider-preview/">Windows Insider Preview</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/en/tags/android/">Android</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <p>In this article I will show how to install Android applications on Windows 11 thanks to <strong>Windows Subsystem for Android</strong> using Android tools and enabling certain options. In a <a href="/posts/2022-04-13-enable-wsa/" >previous article</a> we have seen how to enable the platform from the <strong>Microsoft Store</strong>.</p>
+<p><em><strong>Windows 11 Insider Preview Build 22598</strong></em></p>
+<p>We must follow some steps to be able to have any Android application directly in Windows 11, remembering that to enable this we must have the region indicated as the United States.</p>
+<h2 id="prepare-windows-subsystem-for-android">
+  Prepare Windows Subsystem for Android
+  <a class="heading-link" href="#prepare-windows-subsystem-for-android">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>To prepare the platform we must follow these steps:</p>
+<ol>
+<li>Start the application <strong>Windows Subsystem for Android</strong></li>
+<li>Set the <strong>Developer Mode</strong>:
+<img src="/img/posts/2022/04/20/adb1.png" alt=""></li>
+<li>Click on the option <strong>Manage developr Settings</strong>:
+<img src="/img/posts/2022/04/20/adb2.png" alt=""></li>
+<li>Enable the option <strong>USB Debugging</strong>:
+<img src="/img/posts/2022/04/20/adb3.png" alt=""></li>
+</ol>
+<h2 id="prepare-the-android-sdk-tools">
+  Prepare the Android SDK tools
+  <a class="heading-link" href="#prepare-the-android-sdk-tools">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="prepare-android-sdk-platform-tools">
+  Prepare Android SDk Platform Tools
+  <a class="heading-link" href="#prepare-android-sdk-platform-tools">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<blockquote>
+<p>Android SDK Platform-Tools is a component for the Android SDK. It includes tools that interface with the Android platform, primarily <strong>adb</strong> and <strong>fastboot</strong>. Although adb is required for Android app development, app developers will normally just use the copy Studio installs. This download is useful if you want to use adb directly from the command-line and don&rsquo;t have Studio installed. (If you do have Studio installed, you might want to just use the copy it installed because Studio will automatically update it.) fastboot is needed if you want to unlock your device bootloader and flash it with a new system image. This package used to contain <strong>systrace</strong>, but that has been obsoleted in favor of Studio Profiler, <strong>gpuinspector.dev</strong>, or <strong>Perfetto</strong>.</p></blockquote>
+<p>For this we must download the latest version available for Windows from <a href="https://dl.google.com/android/repository/platform-tools-latest-windows.zip"  class="external-link" target="_blank" rel="noopener">here</a></p>
+<h3 id="locate-the-files">
+  Locate the files
+  <a class="heading-link" href="#locate-the-files">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>We must create a new folder in the main Windows directory and copy the unzipped folder. it would look like this:
+<img src="/img/posts/2022/04/20/adb4.png" alt=""></li>
+<li>Right click on the Windows icon on the taskbar or <strong>Win</strong>+<strong>i</strong>:
+<img src="/img/posts/2022/04/20/adb5.png" alt=""></li>
+<li>Select <strong>Environment variables</strong>:
+<img src="/img/posts/2022/04/20/adb6.png" alt=""></li>
+<li>Select <strong>Path</strong> variable and add a new record:
+<img src="/img/posts/2022/04/20/adb7.png" alt=""></li>
+<li>We add the location of the executable that we want to add to the variable:
+<img src="/img/posts/2022/04/20/adb8.png" alt=""></li>
+<li>We open the Windows command <strong>CMD</strong> or <strong>PowerShell</strong> and test <strong>adb</strong> command:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">adb devices
+</span></span></code></pre></div><p><img src="/img/posts/2022/04/20/adb9.png" alt=""></p>
+<h3 id="connection-to-the-device">
+  Connection to the device
+  <a class="heading-link" href="#connection-to-the-device">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>We verify the IP of the device (in the settings of <strong>Windows Subsystem for Android</strong>):
+<img src="/img/posts/2022/04/20/adb10.png" alt=""></li>
+<li>We connect to the IP and the corresponding port:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">adb connect 172.18.136.138:5555
+</span></span></code></pre></div><h3 id="installation-on-the-device">
+  Installation on the device
+  <a class="heading-link" href="#installation-on-the-device">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>We download an apk file, in this case the latest version of Angry Birds Dream Blast <a href="https://www.apkmirror.com/apk/rovio-entertainment-corporation/angry-birds-dream-blast/angry-birds-dream-blast-1-40-1-release/angry-birds-dream-blast-1-40-1-android-apk-download/"  class="external-link" target="_blank" rel="noopener">here</a></li>
+<li>We install the downloaded package:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">adb</span> <span class="n">install</span> <span class="s2">&#34;C:\Users\chris\Downloads</span><span class="se">\a</span><span class="s2">ndry.apk&#34;</span>
+</span></span></code></pre></div><ol start="3">
+<li>We will see the icon attached to the start menu:
+<img src="/img/posts/2022/04/20/adb11.png" alt=""></li>
+<li>The app will look like this:
+<img src="/img/posts/2022/04/20/adb12.png" alt=""></li>
+</ol>
+<p>For every application that works for Android we must repeat these 4 previous steps. I&rsquo;ll take advantage of <em>HBO Max</em> to see the new Batman&hellip;</p>
+<p>¡Enjoy it!</p>
+      </div>
+
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script>
+  window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "cmasblog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    
+    document.addEventListener('themeChanged', function (e) { 
+        if (document.readyState == 'complete') {
+          DISQUS.reset({ reload: true, config: disqus_config });
+        }
+    });
+</script>
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2018 -
+    
+    2025
+     Christian Amado 
+    ·
+    
+    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+      <script async src="https://www.googletagmanager.com/gtag/js?id=356375808"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '356375808');
+        }
+      </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=013131931956450466198%3ablhmkdpweyq"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '013131931956450466198:blhmkdpweyq');
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

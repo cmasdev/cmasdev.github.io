@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Flow on Christian Amado</title>
+    <link>http://localhost:1313/tags/flow/</link>
+    <description>Recent content in Flow on Christian Amado</description>
+    <generator>Hugo</generator>
+    <language>es</language>
+    <lastBuildDate>Thu, 02 Apr 2020 17:00:00 -0400</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/flow/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Enviar correo luego de completar formulario</title>
+      <link>http://localhost:1313/posts/2020-04-02-enviar-correo-luego-de-completar-formulario/</link>
+      <pubDate>Thu, 02 Apr 2020 17:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2020-04-02-enviar-correo-luego-de-completar-formulario/</guid>
+      <description>&lt;p&gt;En esta ocasión, quiero compartir con ustedes una funcionalidad muy buena de Power Automate. Imaginemos que necesitamos completar un formulario y que la respuesta sea enviada por correo electrónica a dicho usuario.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Creación de flujos desde plantillas</title>
+      <link>http://localhost:1313/posts/2019-12-03-creacion-de-flujos-desde-plantillas/</link>
+      <pubDate>Tue, 03 Dec 2019 13:50:53 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2019-12-03-creacion-de-flujos-desde-plantillas/</guid>
+      <description>&lt;p&gt;Alguna vez en el pasado &lt;a href=&#34;http://localhost:1313/2018/08/primeros-pasos-con-microsoft-flow/&#34; &gt;había escrito algo sobre los primeros pasos con Microsoft Flow&lt;/a&gt;. Microsoft ha cambiado el nombre del producto y ahora se llama Microsoft Power Automate que tiene las mismas funcionalidades agregándoles nuevas.&lt;/p&gt;&#xA;&lt;p&gt;Así que aquí empezaremos el camino de &lt;strong&gt;Power Automate&lt;/strong&gt; (me gustan sus bondades e integración con otros productos de Microsoft).&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Business Central: Integración Flow</title>
+      <link>http://localhost:1313/posts/2018-12-05-business-central-integracion-flow/</link>
+      <pubDate>Wed, 05 Dec 2018 21:46:13 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2018-12-05-business-central-integracion-flow/</guid>
+      <description>&lt;p&gt;En esta entrada, veremos como integrar Microsoft Flow con Dynamics 365 Business Central. De manera muy sencilla y rápida se puede lograr el objetivo. Si deseamos tener la versión On-Premise, necesitamos tener salida de Internet desde el servidor donde tenemos instalado el Dynamics 365 Business Central.&lt;/p&gt;&#xA;&lt;p&gt;Estos pasos deben seguirse para lograr la integración:&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
