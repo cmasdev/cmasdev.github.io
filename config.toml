@@ -81,7 +81,7 @@ url = "https://twitter.com/christianamado/"
 name = "LinkedIn"
 icon = "fa-brands fa-linkedin fa-2x"
 weight = 4
-url = "https://www.linkedin.com/in/cmasdev/"
+url = "https://www.linkedin.com/in/christianamado/"
 
 [[params.social]]
 name = "RSS"
