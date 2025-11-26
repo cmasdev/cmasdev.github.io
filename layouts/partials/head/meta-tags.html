@@ -6,11 +6,18 @@
 {{ partial "csp.html" . }}
 {{ end }}
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+  integrity="sha512-3vBp1IRqmoYr6XkNGpDQmnXgK438W29S5MISl+4icSgXpTtS988XqQdXpG6rD1qM4v4r0X4Wg==" crossorigin="anonymous"
+  referrerpolicy="no-referrer" />
+
+
 {{ with .Site.Params.author }}
 <meta name="author" content="{{ . }}">{{ end }}
 <meta name="description" content="{{ .Description | default (.Summary | default .Site.Params.description ) }}">
-<meta name="keywords" content="{{ (delimit .Keywords ", ") | default .Site.Params.keywords }}">
-{{ if or .Params.fediverseCreator .Site.Params.fediverseCreator }}<meta name="fediverse:creator" content="{{ .Params.fediverseCreator | default .Site.Params.fediverseCreator }}" />{{end}}
+<meta name="keywords" content="{{ (delimit .Keywords " , ") | default .Site.Params.keywords }}">
+{{ if or .Params.fediverseCreator .Site.Params.fediverseCreator }}
+<meta name="fediverse:creator" content="{{ .Params.fediverseCreator | default .Site.Params.fediverseCreator }}" />
+{{end}}
 
 {{ template "_internal/twitter_cards.html" . }}
 {{ template "_internal/opengraph.html" . }}
@@ -19,7 +26,7 @@
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-V1ZRP82YFD"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
+  function gtag() { dataLayer.push(arguments); }
   gtag('js', new Date());
 
   gtag('config', 'G-V1ZRP82YFD');
