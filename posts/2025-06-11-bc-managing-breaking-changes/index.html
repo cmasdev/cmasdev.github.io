@@ -1,0 +1,94 @@
+<!doctype html><html lang=es><head><title>BC: Gestión de cambios importantes en distintas versiones · Christian Amado
+</title><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=color-scheme content="light dark"><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin=anonymous referrerpolicy=no-referrer><meta name=author content="Christian Amado"><meta name=description content="En Business Central SaaS, uno de los mayores desafíos para ISVs y
+equipos de desarrollo no es simplemente agregar nuevas funcionalidades,
+sino gestionar correctamente la evolución del sistema sin romper lo que
+ya funciona. A diferencia de aplicaciones internas donde los cambios
+pueden controlarse completamente, en SaaS las extensiones conviven con
+múltiples versiones del sistema base y, en muchos casos, con otras
+extensiones de terceros.
+Microsoft introduce cambios frecuentes en cada release: nuevos campos,
+eventos, modificaciones en objetos estándar e incluso eliminación de
+comportamientos antiguos. Esto obliga a los desarrolladores a diseñar
+extensiones que no solo funcionen hoy, sino que puedan evolucionar sin
+generar fallos en producción."><meta name=keywords content="blog,desarrollador,personal"><meta name=twitter:card content="summary"><meta name=twitter:title content="BC: Gestión de cambios importantes en distintas versiones"><meta name=twitter:description content="En Business Central SaaS, uno de los mayores desafíos para ISVs y equipos de desarrollo no es simplemente agregar nuevas funcionalidades, sino gestionar correctamente la evolución del sistema sin romper lo que ya funciona. A diferencia de aplicaciones internas donde los cambios pueden controlarse completamente, en SaaS las extensiones conviven con múltiples versiones del sistema base y, en muchos casos, con otras extensiones de terceros.
+Microsoft introduce cambios frecuentes en cada release: nuevos campos, eventos, modificaciones en objetos estándar e incluso eliminación de comportamientos antiguos. Esto obliga a los desarrolladores a diseñar extensiones que no solo funcionen hoy, sino que puedan evolucionar sin generar fallos en producción."><meta property="og:url" content="https://cmas.dev/posts/2025-06-11-bc-managing-breaking-changes/"><meta property="og:site_name" content="Christian Amado"><meta property="og:title" content="BC: Gestión de cambios importantes en distintas versiones"><meta property="og:description" content="En Business Central SaaS, uno de los mayores desafíos para ISVs y equipos de desarrollo no es simplemente agregar nuevas funcionalidades, sino gestionar correctamente la evolución del sistema sin romper lo que ya funciona. A diferencia de aplicaciones internas donde los cambios pueden controlarse completamente, en SaaS las extensiones conviven con múltiples versiones del sistema base y, en muchos casos, con otras extensiones de terceros.
+Microsoft introduce cambios frecuentes en cada release: nuevos campos, eventos, modificaciones en objetos estándar e incluso eliminación de comportamientos antiguos. Esto obliga a los desarrolladores a diseñar extensiones que no solo funcionen hoy, sino que puedan evolucionar sin generar fallos en producción."><meta property="og:locale" content="es"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2025-06-11T00:00:00-03:00"><meta property="article:modified_time" content="2025-06-11T00:00:00-03:00"><meta property="article:tag" content="AL"><meta property="article:tag" content="Dynamics 365 Business Central"><script async src="https://www.googletagmanager.com/gtag/js?id=G-V1ZRP82YFD"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-V1ZRP82YFD")</script><link rel=canonical href=https://cmas.dev/posts/2025-06-11-bc-managing-breaking-changes/><link rel=preload href=/fonts/fa-brands-400.woff2 as=font type=font/woff2 crossorigin><link rel=preload href=/fonts/fa-regular-400.woff2 as=font type=font/woff2 crossorigin><link rel=preload href=/fonts/fa-solid-900.woff2 as=font type=font/woff2 crossorigin><link rel=stylesheet href=/css/coder.min.7763f8bc6341ecf82378e867c285e1549abb063a899be313ccd25dbfcd24fa7d.css integrity="sha256-d2P4vGNB7PgjeOhnwoXhVJq7BjqJm+MTzNJdv80k+n0=" crossorigin=anonymous media=screen><link rel=stylesheet href=/css/coder-dark.min.a00e6364bacbc8266ad1cc81230774a1397198f8cfb7bcba29b7d6fcb54ce57f.css integrity="sha256-oA5jZLrLyCZq0cyBIwd0oTlxmPjPt7y6KbfW/LVM5X8=" crossorigin=anonymous media=screen><link rel=apple-touch-icon sizes=57x57 href=/img/apple-icon-57x57.png><link rel=apple-touch-icon sizes=60x60 href=/img/apple-icon-60x60.png><link rel=apple-touch-icon sizes=72x72 href=/img/apple-icon-72x72.png><link rel=apple-touch-icon sizes=76x76 href=/img/apple-icon-76x76.png><link rel=apple-touch-icon sizes=114x114 href=/img/apple-icon-114x114.png><link rel=apple-touch-icon sizes=120x120 href=/img/apple-icon-120x120.png><link rel=apple-touch-icon sizes=144x144 href=/img/apple-icon-144x144.png><link rel=apple-touch-icon sizes=152x152 href=/img/apple-icon-152x152.png><link rel=apple-touch-icon sizes=180x180 href=/img/apple-icon-180x180.png><link rel=icon type=image/png sizes=192x192 href=/img/android-icon-192x192.png><link rel=icon type=image/png sizes=32x32 href=/img/favicon-32x32.png><link rel=icon type=image/png sizes=96x96 href=/img/favicon-96x96.png><link rel=icon type=image/png sizes=16x16 href=/img/favicon-16x16.png><link rel=manifest href=/img/manifest.json><meta name=msapplication-TileColor content="#ffffff"><meta name=msapplication-TileImage content="/img/ms-icon-144x144.png"><meta name=theme-color content="#ffffff"><link rel=mask-icon href=/img/safari-pinned-tab.svg color=#5bbad5></head><body class="preload-transitions colorscheme-auto"><div class=float-container><a id=dark-mode-toggle class=colorscheme-toggle><i class="fa-solid fa-adjust fa-fw" aria-hidden=true></i></a></div><main class=wrapper><nav class=navigation><section class=container><a class=navigation-title href=https://cmas.dev/>Christian Amado
+</a><input type=checkbox id=menu-toggle>
+<label class="menu-button float-right" for=menu-toggle><i class="fa-solid fa-bars fa-fw" aria-hidden=true></i></label><ul class=navigation-list><li class=navigation-item><a class=navigation-link href=/posts/>Blog</a></li><li class=navigation-item><a class=navigation-link href=/about>Biografía</a></li><li class=navigation-item><a class=navigation-link href=/contact>Contacto</a></li><li class=navigation-item><a class=navigation-link href=/diabetes>Diabetes</a></li><li class=navigation-item><a class=navigation-link href=/tags>Etiquetas</a></li><li class="navigation-item menu-separator"><span>|</span></li><li class=navigation-item><a href=/en/>🇺🇸</a></li></ul></section></nav><div class=content><section class="container post"><article><header><div class=post-title><h1 class=title><a class=title-link href=https://cmas.dev/posts/2025-06-11-bc-managing-breaking-changes/>BC: Gestión de cambios importantes en distintas versiones</a></h1></div><div class=post-meta><div class=date><span class=posted-on><i class="fa-solid fa-calendar" aria-hidden=true></i>
+<time datetime=2025-06-11T00:00:00-03:00>junio 11, 2025
+</time></span><span class=reading-time><i class="fa-solid fa-clock" aria-hidden=true></i>
+3 minutos de lectura.</span></div><div class=tags><i class="fa-solid fa-tag" aria-hidden=true></i>
+<span class=tag><a href=/tags/al/>AL</a>
+</span><span class=separator>•</span>
+<span class=tag><a href=/tags/dynamics-365-business-central/>Dynamics 365 Business Central</a></span></div></div></header><div class=post-content><p>En Business Central SaaS, uno de los mayores desafíos para ISVs y
+equipos de desarrollo no es simplemente agregar nuevas funcionalidades,
+sino gestionar correctamente la evolución del sistema sin romper lo que
+ya funciona. A diferencia de aplicaciones internas donde los cambios
+pueden controlarse completamente, en SaaS las extensiones conviven con
+múltiples versiones del sistema base y, en muchos casos, con otras
+extensiones de terceros.</p><p>Microsoft introduce cambios frecuentes en cada release: nuevos campos,
+eventos, modificaciones en objetos estándar e incluso eliminación de
+comportamientos antiguos. Esto obliga a los desarrolladores a diseñar
+extensiones que no solo funcionen hoy, sino que puedan evolucionar sin
+generar fallos en producción.</p><p>En este contexto, los <strong>breaking changes</strong> se convierten en un problema
+central de arquitectura. Un breaking change no es solo un cambio
+técnico: es un cambio que rompe contratos existentes, afecta
+integraciones o invalida lógica previamente implementada.</p><h2 id=el-problema>El problema
+<a class=heading-link href=#el-problema><i class="fa-solid fa-link" aria-hidden=true title="Link to heading"></i>
+<span class=sr-only>Link to heading</span></a></h2><p>El problema más crítico ocurre cuando se introducen cambios
+incompatibles sin una estrategia clara. Algunos ejemplos reales
+incluyen:</p><ul><li>eliminación de campos utilizados por otras extensiones\</li><li>cambio en firmas de métodos o eventos\</li><li>modificación del comportamiento de procesos críticos\</li><li>cambios en estructuras de tablas sin migración de datos</li></ul><p>Estos cambios pueden provocar:</p><ul><li>errores en runtime difíciles de detectar\</li><li>fallos en integraciones externas\</li><li>pérdida de datos\</li><li>imposibilidad de actualizar clientes existentes</li></ul><p>En escenarios ISV, el impacto es aún mayor. Un cambio incorrecto puede
+afectar a múltiples clientes simultáneamente, generando incidentes en
+producción y pérdida de confianza en el producto.</p><h2 id=diseño-de-la-solución>Diseño de la solución
+<a class=heading-link href=#dise%c3%b1o-de-la-soluci%c3%b3n><i class="fa-solid fa-link" aria-hidden=true title="Link to heading"></i>
+<span class=sr-only>Link to heading</span></a></h2><p>Gestionar breaking changes correctamente requiere una estrategia basada
+en tres pilares:</p><p><strong>1. Backward compatibility</strong>
+Siempre que sea posible, los cambios deben ser compatibles hacia atrás.
+Esto implica:</p><ul><li>mantener interfaces existentes\</li><li>evitar eliminar funcionalidades directamente\</li><li>introducir nuevas versiones de métodos en lugar de modificar los
+existentes</li></ul><p><strong>2. Deprecación progresiva</strong>
+Antes de eliminar una funcionalidad, debe marcarse como obsoleta:</p><ul><li>informar a los consumidores\</li><li>mantener compatibilidad temporal\</li><li>eliminar en versiones futuras</li></ul><p>Esto permite migraciones controladas.</p><p><strong>3. Migración de datos y schema evolution</strong>
+Cuando los cambios afectan estructuras de datos, es necesario
+implementar procesos de migración. Esto incluye:</p><ul><li>trasladar datos entre campos\</li><li>mantener consistencia histórica\</li><li>evitar pérdida de información</li></ul><p>Además, es importante versionar correctamente estos cambios para poder
+gestionarlos en distintos clientes.</p><h2 id=implementación-en-al>Implementación en AL
+<a class=heading-link href=#implementaci%c3%b3n-en-al><i class="fa-solid fa-link" aria-hidden=true title="Link to heading"></i>
+<span class=sr-only>Link to heading</span></a></h2><p>Ejemplo de deprecación:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-al data-lang=al><span class=line><span class=cl>[Obsolete<span class=o>(</span><span class=s>&#39;Use NewCalculate method&#39;</span><span class=p>,</span><span class=w> </span><span class=s>&#39;2.0&#39;</span><span class=o>)</span>]<span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=k>procedure</span><span class=w> </span>OldCalculate<span class=o>()
+</span></span></span><span class=line><span class=cl><span class=o></span><span class=k>begin</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=k>end</span><span class=p>;</span><span class=w>
+</span></span></span></code></pre></div><p>Nueva implementación:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-al data-lang=al><span class=line><span class=cl><span class=k>procedure</span><span class=w> </span>NewCalculate<span class=o>()
+</span></span></span><span class=line><span class=cl><span class=o></span><span class=k>begin</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=c1>// nueva lógica
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=k>end</span><span class=p>;</span><span class=w>
+</span></span></span></code></pre></div><p>Ejemplo de migración de datos en upgrade codeunit:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-al data-lang=al><span class=line><span class=cl><span class=k>codeunit</span><span class=w> </span><span class=m>50150</span><span class=w> </span>UpgradeHandler<span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span>{<span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span>Subtype<span class=w> </span>=<span class=w> </span>Upgrade<span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=k>trigger</span><span class=w> </span>OnUpgradePerCompany<span class=o>()
+</span></span></span><span class=line><span class=cl><span class=o>    </span><span class=k>var</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span>OldRec<span class=p>:</span><span class=w> </span><span class=k>Record</span><span class=w> </span>Customer<span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=k>begin</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=k>if</span><span class=w> </span>OldRec<span class=o>.</span>FindSet<span class=o>() </span><span class=k>then</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=k>repeat</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                </span><span class=c1>// lógica de migración
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=w>            </span><span class=k>until</span><span class=w> </span>OldRec<span class=o>.</span>Next<span class=o>() </span>=<span class=w> </span><span class=m>0</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=k>end</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span>}<span class=w>
+</span></span></span></code></pre></div><p>Este patrón permite adaptar datos existentes a nuevas estructuras.</p><h2 id=buenas-prácticas>Buenas prácticas
+<a class=heading-link href=#buenas-pr%c3%a1cticas><i class="fa-solid fa-link" aria-hidden=true title="Link to heading"></i>
+<span class=sr-only>Link to heading</span></a></h2><ul><li>evitar eliminar funcionalidades directamente\</li><li>usar <code>Obsolete</code> antes de remover código\</li><li>mantener compatibilidad hacia atrás\</li><li>implementar upgrade codeunits para migraciones\</li><li>probar upgrades en sandbox con datos reales\</li><li>documentar breaking changes claramente</li></ul><h2 id=conclusiones>Conclusiones
+<a class=heading-link href=#conclusiones><i class="fa-solid fa-link" aria-hidden=true title="Link to heading"></i>
+<span class=sr-only>Link to heading</span></a></h2><p>Gestionar breaking changes en Business Central SaaS es uno de los
+desafíos más complejos del desarrollo de extensiones. No se trata solo
+de escribir código nuevo, sino de garantizar que el sistema pueda
+evolucionar sin romper lo existente.</p><p>Las soluciones que ignoran este aspecto terminan generando sistemas
+inestables, difíciles de actualizar y con alto riesgo en producción. Por
+el contrario, una estrategia basada en backward compatibility,
+deprecación progresiva y migración controlada permite construir
+aplicaciones robustas y sostenibles.</p><p>Para ISVs, dominar este aspecto es clave: es la diferencia entre un
+producto que escala correctamente y uno que se vuelve inmanejable con el
+tiempo.</p></div><footer><div id=disqus_thread></div><script>window.disqus_config=function(){},function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById("disqus_thread").innerHTML="Disqus comments not available by default when the website is previewed locally.";return}var t=document,e=t.createElement("script");e.async=!0,e.src="//cmasblog.disqus.com/embed.js",e.setAttribute("data-timestamp",+new Date),(t.head||t.body).appendChild(e)}(),document.addEventListener("themeChanged",function(){document.readyState=="complete"&&DISQUS.reset({reload:!0,config:disqus_config})})</script></footer></article></section></div><footer class=footer><section class=container>©
+2018 -
+2026
+Christian Amado
+·
+Desarrollado por <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a> & <a href=https://github.com/luizdepra/hugo-coder/ target=_blank rel=noopener>Coder</a>.</section></footer></main><script src=/js/coder.min.6ae284be93d2d19dad1f02b0039508d9aab3180a12a06dcc71b0b0ef7825a317.js integrity="sha256-auKEvpPS0Z2tHwKwA5UI2aqzGAoSoG3McbCw73gloxc="></script><script async src="https://www.googletagmanager.com/gtag/js?id=356375808"></script><script>var dnt,doNotTrack=!1;if(!1&&(dnt=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack,doNotTrack=dnt=="1"||dnt=="yes"),!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","356375808")}</script><script async src="https://www.googletagmanager.com/gtag/js?id=013131931956450466198%3ablhmkdpweyq"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","013131931956450466198:blhmkdpweyq")</script></body></html>

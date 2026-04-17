@@ -1,0 +1,92 @@
+<!doctype html><html lang=es><head><title>BC: Estrategias de gestión de dependencias en extensiones de AL · Christian Amado
+</title><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=color-scheme content="light dark"><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin=anonymous referrerpolicy=no-referrer><meta name=author content="Christian Amado"><meta name=description content="En Business Central SaaS, la gestión de dependencias entre extensiones
+no es simplemente un detalle de configuración en app.json, sino un
+aspecto crítico de la arquitectura de la solución. A medida que una
+implementación crece, es común que múltiples extensiones interactúen
+entre sí: módulos de dominio, integraciones, frameworks internos y
+soluciones de terceros conviven dentro del mismo tenant.
+A diferencia de otros ecosistemas donde las dependencias son gestionadas
+en runtime o mediante contenedores aislados, en Business Central todas
+las extensiones comparten el mismo entorno lógico. Esto significa que
+cualquier dependencia mal diseñada puede afectar directamente la
+estabilidad, el despliegue y la evolución del sistema completo."><meta name=keywords content="blog,desarrollador,personal"><meta name=twitter:card content="summary"><meta name=twitter:title content="BC: Estrategias de gestión de dependencias en extensiones de AL"><meta name=twitter:description content="En Business Central SaaS, la gestión de dependencias entre extensiones no es simplemente un detalle de configuración en app.json, sino un aspecto crítico de la arquitectura de la solución. A medida que una implementación crece, es común que múltiples extensiones interactúen entre sí: módulos de dominio, integraciones, frameworks internos y soluciones de terceros conviven dentro del mismo tenant.
+A diferencia de otros ecosistemas donde las dependencias son gestionadas en runtime o mediante contenedores aislados, en Business Central todas las extensiones comparten el mismo entorno lógico. Esto significa que cualquier dependencia mal diseñada puede afectar directamente la estabilidad, el despliegue y la evolución del sistema completo."><meta property="og:url" content="https://cmas.dev/posts/2025-05-07-bc-dependency-management-strategies/"><meta property="og:site_name" content="Christian Amado"><meta property="og:title" content="BC: Estrategias de gestión de dependencias en extensiones de AL"><meta property="og:description" content="En Business Central SaaS, la gestión de dependencias entre extensiones no es simplemente un detalle de configuración en app.json, sino un aspecto crítico de la arquitectura de la solución. A medida que una implementación crece, es común que múltiples extensiones interactúen entre sí: módulos de dominio, integraciones, frameworks internos y soluciones de terceros conviven dentro del mismo tenant.
+A diferencia de otros ecosistemas donde las dependencias son gestionadas en runtime o mediante contenedores aislados, en Business Central todas las extensiones comparten el mismo entorno lógico. Esto significa que cualquier dependencia mal diseñada puede afectar directamente la estabilidad, el despliegue y la evolución del sistema completo."><meta property="og:locale" content="es"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2025-05-07T00:00:00-03:00"><meta property="article:modified_time" content="2025-05-07T00:00:00-03:00"><meta property="article:tag" content="AL"><meta property="article:tag" content="Dynamics 365 Business Central"><script async src="https://www.googletagmanager.com/gtag/js?id=G-V1ZRP82YFD"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-V1ZRP82YFD")</script><link rel=canonical href=https://cmas.dev/posts/2025-05-07-bc-dependency-management-strategies/><link rel=preload href=/fonts/fa-brands-400.woff2 as=font type=font/woff2 crossorigin><link rel=preload href=/fonts/fa-regular-400.woff2 as=font type=font/woff2 crossorigin><link rel=preload href=/fonts/fa-solid-900.woff2 as=font type=font/woff2 crossorigin><link rel=stylesheet href=/css/coder.min.7763f8bc6341ecf82378e867c285e1549abb063a899be313ccd25dbfcd24fa7d.css integrity="sha256-d2P4vGNB7PgjeOhnwoXhVJq7BjqJm+MTzNJdv80k+n0=" crossorigin=anonymous media=screen><link rel=stylesheet href=/css/coder-dark.min.a00e6364bacbc8266ad1cc81230774a1397198f8cfb7bcba29b7d6fcb54ce57f.css integrity="sha256-oA5jZLrLyCZq0cyBIwd0oTlxmPjPt7y6KbfW/LVM5X8=" crossorigin=anonymous media=screen><link rel=apple-touch-icon sizes=57x57 href=/img/apple-icon-57x57.png><link rel=apple-touch-icon sizes=60x60 href=/img/apple-icon-60x60.png><link rel=apple-touch-icon sizes=72x72 href=/img/apple-icon-72x72.png><link rel=apple-touch-icon sizes=76x76 href=/img/apple-icon-76x76.png><link rel=apple-touch-icon sizes=114x114 href=/img/apple-icon-114x114.png><link rel=apple-touch-icon sizes=120x120 href=/img/apple-icon-120x120.png><link rel=apple-touch-icon sizes=144x144 href=/img/apple-icon-144x144.png><link rel=apple-touch-icon sizes=152x152 href=/img/apple-icon-152x152.png><link rel=apple-touch-icon sizes=180x180 href=/img/apple-icon-180x180.png><link rel=icon type=image/png sizes=192x192 href=/img/android-icon-192x192.png><link rel=icon type=image/png sizes=32x32 href=/img/favicon-32x32.png><link rel=icon type=image/png sizes=96x96 href=/img/favicon-96x96.png><link rel=icon type=image/png sizes=16x16 href=/img/favicon-16x16.png><link rel=manifest href=/img/manifest.json><meta name=msapplication-TileColor content="#ffffff"><meta name=msapplication-TileImage content="/img/ms-icon-144x144.png"><meta name=theme-color content="#ffffff"><link rel=mask-icon href=/img/safari-pinned-tab.svg color=#5bbad5></head><body class="preload-transitions colorscheme-auto"><div class=float-container><a id=dark-mode-toggle class=colorscheme-toggle><i class="fa-solid fa-adjust fa-fw" aria-hidden=true></i></a></div><main class=wrapper><nav class=navigation><section class=container><a class=navigation-title href=https://cmas.dev/>Christian Amado
+</a><input type=checkbox id=menu-toggle>
+<label class="menu-button float-right" for=menu-toggle><i class="fa-solid fa-bars fa-fw" aria-hidden=true></i></label><ul class=navigation-list><li class=navigation-item><a class=navigation-link href=/posts/>Blog</a></li><li class=navigation-item><a class=navigation-link href=/about>Biografía</a></li><li class=navigation-item><a class=navigation-link href=/contact>Contacto</a></li><li class=navigation-item><a class=navigation-link href=/diabetes>Diabetes</a></li><li class=navigation-item><a class=navigation-link href=/tags>Etiquetas</a></li><li class="navigation-item menu-separator"><span>|</span></li><li class=navigation-item><a href=/en/>🇺🇸</a></li></ul></section></nav><div class=content><section class="container post"><article><header><div class=post-title><h1 class=title><a class=title-link href=https://cmas.dev/posts/2025-05-07-bc-dependency-management-strategies/>BC: Estrategias de gestión de dependencias en extensiones de AL</a></h1></div><div class=post-meta><div class=date><span class=posted-on><i class="fa-solid fa-calendar" aria-hidden=true></i>
+<time datetime=2025-05-07T00:00:00-03:00>mayo 7, 2025
+</time></span><span class=reading-time><i class="fa-solid fa-clock" aria-hidden=true></i>
+3 minutos de lectura.</span></div><div class=tags><i class="fa-solid fa-tag" aria-hidden=true></i>
+<span class=tag><a href=/tags/al/>AL</a>
+</span><span class=separator>•</span>
+<span class=tag><a href=/tags/dynamics-365-business-central/>Dynamics 365 Business Central</a></span></div></div></header><div class=post-content><p>En Business Central SaaS, la gestión de dependencias entre extensiones
+no es simplemente un detalle de configuración en <code>app.json</code>, sino un
+aspecto crítico de la arquitectura de la solución. A medida que una
+implementación crece, es común que múltiples extensiones interactúen
+entre sí: módulos de dominio, integraciones, frameworks internos y
+soluciones de terceros conviven dentro del mismo tenant.</p><p>A diferencia de otros ecosistemas donde las dependencias son gestionadas
+en runtime o mediante contenedores aislados, en Business Central todas
+las extensiones comparten el mismo entorno lógico. Esto significa que
+cualquier dependencia mal diseñada puede afectar directamente la
+estabilidad, el despliegue y la evolución del sistema completo.</p><p>Para ISVs y equipos que desarrollan soluciones empresariales complejas,
+entender cómo gestionar dependencias correctamente es fundamental. No se
+trata solo de declarar referencias, sino de diseñar una arquitectura que
+evite acoplamientos innecesarios y permita evolución independiente de
+los módulos.</p><h2 id=el-problema>El problema
+<a class=heading-link href=#el-problema><i class="fa-solid fa-link" aria-hidden=true title="Link to heading"></i>
+<span class=sr-only>Link to heading</span></a></h2><p>Uno de los problemas más críticos en proyectos reales es el
+<strong>acoplamiento excesivo entre extensiones</strong>. Esto suele manifestarse
+cuando una extensión depende directamente de otra para acceder a lógica
+interna, tablas o procesos.</p><p>Los síntomas típicos incluyen:</p><ul><li>errores de compilación por cambios mínimos en otra extensión\</li><li>necesidad de desplegar múltiples apps en conjunto\</li><li>incompatibilidad entre versiones\</li><li>dificultad para aislar errores en producción</li></ul><p>Un caso particularmente problemático ocurre cuando una extensión A
+depende de B, y B depende indirectamente de A. Aunque Business Central
+no permite dependencias circulares explícitas, estas pueden aparecer de
+forma implícita a través de múltiples capas.</p><p>Otro problema frecuente es el versionado incorrecto. Muchas extensiones
+fijan versiones rígidas de dependencias, lo que impide evolucionar el
+sistema sin romper compatibilidad.</p><p>En escenarios de ISVs, esto puede volverse crítico: una mala estrategia
+de dependencias puede impedir actualizar clientes o distribuir nuevas
+versiones de la aplicación.</p><h2 id=diseño-de-la-solución>Diseño de la solución
+<a class=heading-link href=#dise%c3%b1o-de-la-soluci%c3%b3n><i class="fa-solid fa-link" aria-hidden=true title="Link to heading"></i>
+<span class=sr-only>Link to heading</span></a></h2><p>Una estrategia sólida de gestión de dependencias debe basarse en tres
+principios:</p><p><strong>1. Dependency minimization</strong><br>Cada extensión debe depender de la menor cantidad posible de otras
+aplicaciones. Esto reduce el impacto de cambios externos.</p><p><strong>2. Contract-based design</strong><br>En lugar de depender de implementaciones concretas, las extensiones
+deben interactuar mediante contratos (interfaces o eventos). Esto
+permite cambiar implementaciones sin romper dependencias.</p><p><strong>3. Layered architecture</strong><br>Las dependencias deben seguir una dirección clara. Por ejemplo:</p><ul><li>Core (dominio)</li><li>Application (servicios)</li><li>Integration (APIs externas)</li></ul><p>Nunca al revés.</p><p>Además, es clave diferenciar entre:</p><ul><li>dependencias técnicas (frameworks internos)</li><li>dependencias funcionales (módulos de negocio)</li></ul><p>Mezclar ambas suele ser una fuente importante de problemas.</p><h2 id=implementación-en-al>Implementación en AL
+<a class=heading-link href=#implementaci%c3%b3n-en-al><i class="fa-solid fa-link" aria-hidden=true title="Link to heading"></i>
+<span class=sr-only>Link to heading</span></a></h2><p>Ejemplo de dependencia en <code>app.json</code>:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-json data-lang=json><span class=line><span class=cl><span class=s2>&#34;dependencies&#34;</span><span class=err>:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>  <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nt>&#34;appId&#34;</span><span class=p>:</span> <span class=s2>&#34;437dbf0e-84ff-417a-965d-ed2bb9650972&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=nt>&#34;name&#34;</span><span class=p>:</span> <span class=s2>&#34;Base Application&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=nt>&#34;publisher&#34;</span><span class=p>:</span> <span class=s2>&#34;Microsoft&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=nt>&#34;version&#34;</span><span class=p>:</span> <span class=s2>&#34;26.0.0.0&#34;</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>]</span>
+</span></span></code></pre></div><p>Ejemplo de desacoplamiento mediante interfaz:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-al data-lang=al><span class=line><span class=cl><span class=k>interface</span><span class=w> </span>IIntegrationService<span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span>{<span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=k>procedure</span><span class=w> </span>SendData<span class=o>(</span>Payload<span class=p>:</span><span class=w> </span><span class=k>Text</span><span class=o>)</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span>}<span class=w>
+</span></span></span></code></pre></div><p>Implementación concreta:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-al data-lang=al><span class=line><span class=cl><span class=k>codeunit</span><span class=w> </span><span class=m>50110</span><span class=w> </span>ApiIntegrationService<span class=w> </span><span class=k>implements</span><span class=w> </span>IIntegrationService<span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span>{<span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=k>procedure</span><span class=w> </span>SendData<span class=o>(</span>Payload<span class=p>:</span><span class=w> </span><span class=k>Text</span><span class=o>)
+</span></span></span><span class=line><span class=cl><span class=o>    </span><span class=k>begin</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=c1>// lógica de integración
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=w>    </span><span class=k>end</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span>}<span class=w>
+</span></span></span></code></pre></div><p>De esta forma, otros módulos dependen del contrato, no de la
+implementación.</p><h2 id=buenas-prácticas>Buenas prácticas
+<a class=heading-link href=#buenas-pr%c3%a1cticas><i class="fa-solid fa-link" aria-hidden=true title="Link to heading"></i>
+<span class=sr-only>Link to heading</span></a></h2><ul><li>evitar dependencias directas entre módulos funcionales\</li><li>utilizar interfaces para desacoplar lógica\</li><li>no exponer tablas innecesariamente entre extensiones\</li><li>mantener dependencias unidireccionales\</li><li>aplicar versionado semántico flexible (no rígido)\</li><li>separar claramente capas de arquitectura</li></ul><h2 id=conclusiones>Conclusiones
+<a class=heading-link href=#conclusiones><i class="fa-solid fa-link" aria-hidden=true title="Link to heading"></i>
+<span class=sr-only>Link to heading</span></a></h2><p>La gestión de dependencias en Business Central SaaS es uno de los
+factores más subestimados y, al mismo tiempo, más críticos en
+arquitecturas empresariales. No es un problema de configuración, sino de
+diseño.</p><p>Las soluciones que no controlan correctamente sus dependencias terminan
+generando sistemas frágiles, difíciles de actualizar y con alta deuda
+técnica. Por el contrario, una arquitectura basada en contratos, capas
+bien definidas y bajo acoplamiento permite construir aplicaciones
+resilientes y evolutivas.</p><p>Para ISVs, esto no es opcional: es la diferencia entre una solución
+escalable y un producto que se rompe en cada release.</p></div><footer><div id=disqus_thread></div><script>window.disqus_config=function(){},function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById("disqus_thread").innerHTML="Disqus comments not available by default when the website is previewed locally.";return}var t=document,e=t.createElement("script");e.async=!0,e.src="//cmasblog.disqus.com/embed.js",e.setAttribute("data-timestamp",+new Date),(t.head||t.body).appendChild(e)}(),document.addEventListener("themeChanged",function(){document.readyState=="complete"&&DISQUS.reset({reload:!0,config:disqus_config})})</script></footer></article></section></div><footer class=footer><section class=container>©
+2018 -
+2026
+Christian Amado
+·
+Desarrollado por <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a> & <a href=https://github.com/luizdepra/hugo-coder/ target=_blank rel=noopener>Coder</a>.</section></footer></main><script src=/js/coder.min.6ae284be93d2d19dad1f02b0039508d9aab3180a12a06dcc71b0b0ef7825a317.js integrity="sha256-auKEvpPS0Z2tHwKwA5UI2aqzGAoSoG3McbCw73gloxc="></script><script async src="https://www.googletagmanager.com/gtag/js?id=356375808"></script><script>var dnt,doNotTrack=!1;if(!1&&(dnt=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack,doNotTrack=dnt=="1"||dnt=="yes"),!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","356375808")}</script><script async src="https://www.googletagmanager.com/gtag/js?id=013131931956450466198%3ablhmkdpweyq"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","013131931956450466198:blhmkdpweyq")</script></body></html>

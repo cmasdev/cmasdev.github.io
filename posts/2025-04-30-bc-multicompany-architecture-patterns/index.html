@@ -1,0 +1,90 @@
+<!doctype html><html lang=es><head><title>BC: Patrones de arquitectura multiempresa · Christian Amado
+</title><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=color-scheme content="light dark"><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin=anonymous referrerpolicy=no-referrer><meta name=author content="Christian Amado"><meta name=description content="En Microsoft Dynamics 365 Business Central SaaS, el soporte nativo para
+múltiples empresas dentro de un mismo entorno es una de las
+características más poderosas del sistema. Muchas organizaciones operan
+bajo estructuras complejas que incluyen múltiples entidades legales,
+unidades de negocio o subsidiarias distribuidas en distintos países.
+Business Central permite gestionar estas estructuras dentro de un único
+tenant, manteniendo separación lógica entre compañías.
+Sin embargo, esta capacidad introduce desafíos importantes desde el
+punto de vista arquitectónico. A diferencia de sistemas diseñados
+específicamente como multi-tenant a nivel de aplicación, Business
+Central implementa un modelo donde cada compañía tiene su propio
+conjunto de datos, pero comparte la misma aplicación y extensiones."><meta name=keywords content="blog,desarrollador,personal"><meta name=twitter:card content="summary"><meta name=twitter:title content="BC: Patrones de arquitectura multiempresa"><meta name=twitter:description content="En Microsoft Dynamics 365 Business Central SaaS, el soporte nativo para múltiples empresas dentro de un mismo entorno es una de las características más poderosas del sistema. Muchas organizaciones operan bajo estructuras complejas que incluyen múltiples entidades legales, unidades de negocio o subsidiarias distribuidas en distintos países. Business Central permite gestionar estas estructuras dentro de un único tenant, manteniendo separación lógica entre compañías.
+Sin embargo, esta capacidad introduce desafíos importantes desde el punto de vista arquitectónico. A diferencia de sistemas diseñados específicamente como multi-tenant a nivel de aplicación, Business Central implementa un modelo donde cada compañía tiene su propio conjunto de datos, pero comparte la misma aplicación y extensiones."><meta property="og:url" content="https://cmas.dev/posts/2025-04-30-bc-multicompany-architecture-patterns/"><meta property="og:site_name" content="Christian Amado"><meta property="og:title" content="BC: Patrones de arquitectura multiempresa"><meta property="og:description" content="En Microsoft Dynamics 365 Business Central SaaS, el soporte nativo para múltiples empresas dentro de un mismo entorno es una de las características más poderosas del sistema. Muchas organizaciones operan bajo estructuras complejas que incluyen múltiples entidades legales, unidades de negocio o subsidiarias distribuidas en distintos países. Business Central permite gestionar estas estructuras dentro de un único tenant, manteniendo separación lógica entre compañías.
+Sin embargo, esta capacidad introduce desafíos importantes desde el punto de vista arquitectónico. A diferencia de sistemas diseñados específicamente como multi-tenant a nivel de aplicación, Business Central implementa un modelo donde cada compañía tiene su propio conjunto de datos, pero comparte la misma aplicación y extensiones."><meta property="og:locale" content="es"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2025-04-30T00:00:00-03:00"><meta property="article:modified_time" content="2025-04-30T00:00:00-03:00"><meta property="article:tag" content="AL"><meta property="article:tag" content="Dynamics 365 Business Central"><script async src="https://www.googletagmanager.com/gtag/js?id=G-V1ZRP82YFD"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-V1ZRP82YFD")</script><link rel=canonical href=https://cmas.dev/posts/2025-04-30-bc-multicompany-architecture-patterns/><link rel=preload href=/fonts/fa-brands-400.woff2 as=font type=font/woff2 crossorigin><link rel=preload href=/fonts/fa-regular-400.woff2 as=font type=font/woff2 crossorigin><link rel=preload href=/fonts/fa-solid-900.woff2 as=font type=font/woff2 crossorigin><link rel=stylesheet href=/css/coder.min.7763f8bc6341ecf82378e867c285e1549abb063a899be313ccd25dbfcd24fa7d.css integrity="sha256-d2P4vGNB7PgjeOhnwoXhVJq7BjqJm+MTzNJdv80k+n0=" crossorigin=anonymous media=screen><link rel=stylesheet href=/css/coder-dark.min.a00e6364bacbc8266ad1cc81230774a1397198f8cfb7bcba29b7d6fcb54ce57f.css integrity="sha256-oA5jZLrLyCZq0cyBIwd0oTlxmPjPt7y6KbfW/LVM5X8=" crossorigin=anonymous media=screen><link rel=apple-touch-icon sizes=57x57 href=/img/apple-icon-57x57.png><link rel=apple-touch-icon sizes=60x60 href=/img/apple-icon-60x60.png><link rel=apple-touch-icon sizes=72x72 href=/img/apple-icon-72x72.png><link rel=apple-touch-icon sizes=76x76 href=/img/apple-icon-76x76.png><link rel=apple-touch-icon sizes=114x114 href=/img/apple-icon-114x114.png><link rel=apple-touch-icon sizes=120x120 href=/img/apple-icon-120x120.png><link rel=apple-touch-icon sizes=144x144 href=/img/apple-icon-144x144.png><link rel=apple-touch-icon sizes=152x152 href=/img/apple-icon-152x152.png><link rel=apple-touch-icon sizes=180x180 href=/img/apple-icon-180x180.png><link rel=icon type=image/png sizes=192x192 href=/img/android-icon-192x192.png><link rel=icon type=image/png sizes=32x32 href=/img/favicon-32x32.png><link rel=icon type=image/png sizes=96x96 href=/img/favicon-96x96.png><link rel=icon type=image/png sizes=16x16 href=/img/favicon-16x16.png><link rel=manifest href=/img/manifest.json><meta name=msapplication-TileColor content="#ffffff"><meta name=msapplication-TileImage content="/img/ms-icon-144x144.png"><meta name=theme-color content="#ffffff"><link rel=mask-icon href=/img/safari-pinned-tab.svg color=#5bbad5></head><body class="preload-transitions colorscheme-auto"><div class=float-container><a id=dark-mode-toggle class=colorscheme-toggle><i class="fa-solid fa-adjust fa-fw" aria-hidden=true></i></a></div><main class=wrapper><nav class=navigation><section class=container><a class=navigation-title href=https://cmas.dev/>Christian Amado
+</a><input type=checkbox id=menu-toggle>
+<label class="menu-button float-right" for=menu-toggle><i class="fa-solid fa-bars fa-fw" aria-hidden=true></i></label><ul class=navigation-list><li class=navigation-item><a class=navigation-link href=/posts/>Blog</a></li><li class=navigation-item><a class=navigation-link href=/about>Biografía</a></li><li class=navigation-item><a class=navigation-link href=/contact>Contacto</a></li><li class=navigation-item><a class=navigation-link href=/diabetes>Diabetes</a></li><li class=navigation-item><a class=navigation-link href=/tags>Etiquetas</a></li><li class="navigation-item menu-separator"><span>|</span></li><li class=navigation-item><a href=/en/>🇺🇸</a></li></ul></section></nav><div class=content><section class="container post"><article><header><div class=post-title><h1 class=title><a class=title-link href=https://cmas.dev/posts/2025-04-30-bc-multicompany-architecture-patterns/>BC: Patrones de arquitectura multiempresa</a></h1></div><div class=post-meta><div class=date><span class=posted-on><i class="fa-solid fa-calendar" aria-hidden=true></i>
+<time datetime=2025-04-30T00:00:00-03:00>abril 30, 2025
+</time></span><span class=reading-time><i class="fa-solid fa-clock" aria-hidden=true></i>
+4 minutos de lectura.</span></div><div class=tags><i class="fa-solid fa-tag" aria-hidden=true></i>
+<span class=tag><a href=/tags/al/>AL</a>
+</span><span class=separator>•</span>
+<span class=tag><a href=/tags/dynamics-365-business-central/>Dynamics 365 Business Central</a></span></div></div></header><div class=post-content><p>En Microsoft Dynamics 365 Business Central SaaS, el soporte nativo para
+múltiples empresas dentro de un mismo entorno es una de las
+características más poderosas del sistema. Muchas organizaciones operan
+bajo estructuras complejas que incluyen múltiples entidades legales,
+unidades de negocio o subsidiarias distribuidas en distintos países.
+Business Central permite gestionar estas estructuras dentro de un único
+tenant, manteniendo separación lógica entre compañías.</p><p>Sin embargo, esta capacidad introduce desafíos importantes desde el
+punto de vista arquitectónico. A diferencia de sistemas diseñados
+específicamente como multi-tenant a nivel de aplicación, Business
+Central implementa un modelo donde cada compañía tiene su propio
+conjunto de datos, pero comparte la misma aplicación y extensiones.</p><p>Para los desarrolladores, esto implica diseñar extensiones que sean
+conscientes del contexto de empresa en el que se ejecutan, evitando
+suposiciones incorrectas sobre los datos o el comportamiento del
+sistema. Además, en escenarios empresariales reales, es común que exista
+la necesidad de sincronizar información entre compañías o consolidar
+datos a nivel corporativo.</p><p>Comprender los patrones de arquitectura multiempresa es fundamental para
+construir soluciones que funcionen correctamente en este tipo de
+escenarios.</p><h2 id=el-problema>El problema
+<a class=heading-link href=#el-problema><i class="fa-solid fa-link" aria-hidden=true title="Link to heading"></i>
+<span class=sr-only>Link to heading</span></a></h2><p>Uno de los errores más frecuentes en implementaciones multiempresa es
+asumir que la lógica desarrollada para una sola compañía funcionará sin
+cambios en un entorno con múltiples empresas. Esto rara vez es cierto.</p><p>Los problemas típicos incluyen:</p><ul><li>duplicación de datos entre compañías\</li><li>inconsistencias en la lógica de negocio\</li><li>integraciones que no respetan el contexto de empresa\</li><li>errores al utilizar registros sin considerar el Company context</li></ul><p>Un caso común ocurre cuando una extensión intenta acceder a datos de
+otra empresa sin utilizar correctamente los mecanismos del sistema. Esto
+puede generar resultados incorrectos o incluso fallos en ejecución.</p><p>Otro problema frecuente es la sincronización de datos. Muchas
+organizaciones necesitan compartir información entre empresas (por
+ejemplo, catálogos de productos o clientes), pero Business Central no
+sincroniza estos datos automáticamente fuera de los mecanismos
+intercompany estándar.</p><p>Si no se define una estrategia clara, los desarrolladores terminan
+implementando soluciones ad-hoc que son difíciles de mantener.</p><h2 id=diseño-de-la-solución>Diseño de la solución
+<a class=heading-link href=#dise%c3%b1o-de-la-soluci%c3%b3n><i class="fa-solid fa-link" aria-hidden=true title="Link to heading"></i>
+<span class=sr-only>Link to heading</span></a></h2><p>El diseño de soluciones multiempresa en Business Central debe basarse en
+tres enfoques principales:</p><p><strong>1. Context awareness</strong><br>Toda extensión debe ser consciente de la empresa en la que se está
+ejecutando. Esto implica evitar asumir que los datos son globales y
+siempre trabajar con el contexto actual.</p><p><strong>2. Acceso controlado entre compañías</strong><br>Cuando sea necesario acceder a datos de otra empresa, debe utilizarse el
+método <code>CHANGECOMPANY</code>, que permite operar sobre registros en otro
+contexto de forma controlada.</p><p><strong>3. Estrategias de sincronización</strong><br>Para compartir datos entre compañías, es necesario implementar
+mecanismos explícitos como procesos batch, integraciones o tablas de
+replicación.</p><p>En escenarios más avanzados, puede ser útil implementar una capa de
+orquestación que gestione la comunicación entre compañías, evitando que
+la lógica de negocio dependa directamente de múltiples contextos.</p><h2 id=implementación-en-al>Implementación en AL
+<a class=heading-link href=#implementaci%c3%b3n-en-al><i class="fa-solid fa-link" aria-hidden=true title="Link to heading"></i>
+<span class=sr-only>Link to heading</span></a></h2><div class=highlight><pre tabindex=0 class=chroma><code class=language-al data-lang=al><span class=line><span class=cl><span class=k>var</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span>Customer<span class=p>:</span><span class=w> </span><span class=k>Record</span><span class=w> </span>Customer<span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=k>begin</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span>Customer<span class=o>.</span>ChangeCompany<span class=o>(</span><span class=s>&#39;Company B&#39;</span><span class=o>)</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=k>if</span><span class=w> </span>Customer<span class=o>.</span>FindFirst<span class=o>() </span><span class=k>then</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span>Message<span class=o>(</span><span class=s>&#39;Cliente en Company B: %1&#39;</span><span class=p>,</span><span class=w> </span>Customer<span class=o>.</span>&#34;No.&#34;<span class=o>)</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=k>end</span><span class=p>;</span><span class=w>
+</span></span></span></code></pre></div><p>Este patrón permite consultar información de otra empresa sin cambiar el
+contexto global de ejecución.</p><p>Sin embargo, debe utilizarse con cuidado, ya que puede impactar el
+rendimiento si se utiliza en loops o procesos masivos.</p><h2 id=buenas-prácticas>Buenas prácticas
+<a class=heading-link href=#buenas-pr%c3%a1cticas><i class="fa-solid fa-link" aria-hidden=true title="Link to heading"></i>
+<span class=sr-only>Link to heading</span></a></h2><ul><li>evitar asumir que los datos son compartidos entre compañías\</li><li>usar CHANGECOMPANY solo cuando sea necesario\</li><li>diseñar procesos de sincronización explícitos\</li><li>separar lógica multiempresa de la lógica de dominio\</li><li>considerar performance en accesos cross-company</li></ul><h2 id=conclusiones>Conclusiones
+<a class=heading-link href=#conclusiones><i class="fa-solid fa-link" aria-hidden=true title="Link to heading"></i>
+<span class=sr-only>Link to heading</span></a></h2><p>El soporte multiempresa de Business Central es una herramienta poderosa,
+pero requiere un enfoque arquitectónico cuidadoso. Las extensiones deben
+diseñarse teniendo en cuenta el contexto de empresa y las limitaciones
+del modelo de datos.</p><p>Implementar correctamente patrones como acceso controlado entre
+compañías y sincronización explícita permite construir soluciones
+robustas para organizaciones complejas. En entornos SaaS, donde la
+escalabilidad y la mantenibilidad son fundamentales, una arquitectura
+multiempresa bien diseñada es clave para evitar problemas a largo plazo.</p></div><footer><div id=disqus_thread></div><script>window.disqus_config=function(){},function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById("disqus_thread").innerHTML="Disqus comments not available by default when the website is previewed locally.";return}var t=document,e=t.createElement("script");e.async=!0,e.src="//cmasblog.disqus.com/embed.js",e.setAttribute("data-timestamp",+new Date),(t.head||t.body).appendChild(e)}(),document.addEventListener("themeChanged",function(){document.readyState=="complete"&&DISQUS.reset({reload:!0,config:disqus_config})})</script></footer></article></section></div><footer class=footer><section class=container>©
+2018 -
+2026
+Christian Amado
+·
+Desarrollado por <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a> & <a href=https://github.com/luizdepra/hugo-coder/ target=_blank rel=noopener>Coder</a>.</section></footer></main><script src=/js/coder.min.6ae284be93d2d19dad1f02b0039508d9aab3180a12a06dcc71b0b0ef7825a317.js integrity="sha256-auKEvpPS0Z2tHwKwA5UI2aqzGAoSoG3McbCw73gloxc="></script><script async src="https://www.googletagmanager.com/gtag/js?id=356375808"></script><script>var dnt,doNotTrack=!1;if(!1&&(dnt=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack,doNotTrack=dnt=="1"||dnt=="yes"),!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","356375808")}</script><script async src="https://www.googletagmanager.com/gtag/js?id=013131931956450466198%3ablhmkdpweyq"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","013131931956450466198:blhmkdpweyq")</script></body></html>
