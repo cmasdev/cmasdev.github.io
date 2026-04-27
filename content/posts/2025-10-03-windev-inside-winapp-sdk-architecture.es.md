@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Windows App SDK en profundidad: arquitectura y cómo impacta en aplicaciones reales
+title: "Windows App SDK en profundidad: arquitectura y cómo impacta en aplicaciones reales"
 author: Christian Amado
 date: 2025-10-03 00:00:00 -0400
 category: [Desarrollo de software]
