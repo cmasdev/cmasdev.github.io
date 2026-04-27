@@ -2,7 +2,7 @@
 layout: post
 title: "BC: Patrones de integración segura para sistemas externos"
 author: Christian Amado
-date: 2025-11-28 00:00:00 -0300
+date: 2025-11-26 00:00:00 -0300
 category: [Aplicaciones de negocio]
 tags: [AL, Dynamics 365 Business Central]
 thumbnail-img: /img/posts/thumbnails/businesscentral.png

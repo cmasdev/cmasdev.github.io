@@ -4,7 +4,7 @@ title: "Creando un menú contextual personalizado con WinUI 3 y XAML Islands"
 author: Christian Amado
 date: 2025-05-07 00:00:00 -0300
 category: [Desarrollo de software]
-tags: [WinDev,Windows 11,WinUI 3]
+tags: [WinDev,Windows 11,WinUI 3,XAML]
 thumbnail-img: /img/posts/thumbnails/win11.png
 cover-img: /img/posts/cover/win11.png
 share_img: /img/posts/shared/windows.jpg
