@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Reducción del tiempo de arranque en aplicaciones de escritorio en escenarios reales
+title: "Reducción del tiempo de arranque en aplicaciones de escritorio en escenarios reales"
 author: Christian Amado
 date: 2026-02-20 00:00:00 -0400
 category: [Desarrollo de software]
