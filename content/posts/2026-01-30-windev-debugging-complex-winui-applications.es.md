@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Depuración de aplicaciones WinUI complejas en escenarios reales
+title: "Depuración de aplicaciones WinUI complejas en escenarios reales"
 author: Christian Amado
 date: 2026-01-30 00:00:00 -0400
 category: [Desarrollo de software]

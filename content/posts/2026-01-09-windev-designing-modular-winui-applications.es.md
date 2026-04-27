@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Diseño de aplicaciones modulares en WinUI 3 en escenarios reales
+title: "Diseño de aplicaciones modulares en WinUI 3 en escenarios reales"
 author: Christian Amado
 date: 2026-01-09 00:00:00 -0400
 category: [Desarrollo de software]

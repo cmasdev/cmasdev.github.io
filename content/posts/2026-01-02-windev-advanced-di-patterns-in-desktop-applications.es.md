@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Patrones avanzados de Dependency Injection en aplicaciones de escritorio
+title: "Patrones avanzados de Dependency Injection en aplicaciones de escritorio"
 author: Christian Amado
 date: 2026-01-02 00:00:00 -0400
 category: [Desarrollo de software]

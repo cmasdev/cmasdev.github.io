@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Observabilidad en aplicaciones de escritorio: logging y monitoreo en WinUI 3
+title: "Observabilidad en aplicaciones de escritorio: logging y monitoreo en WinUI 3"
 author: Christian Amado
 date: 2025-12-19 00:00:00 -0400
 category: [Desarrollo de software]

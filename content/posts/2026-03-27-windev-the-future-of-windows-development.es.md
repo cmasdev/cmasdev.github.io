@@ -1,6 +1,6 @@
 ---
 layout: post
-title: El futuro del desarrollo en Windows para profesionales
+title: "El futuro del desarrollo en Windows para profesionales"
 author: Christian Amado
 date: 2026-03-27 00:00:00 -0400
 category: [Desarrollo de software]

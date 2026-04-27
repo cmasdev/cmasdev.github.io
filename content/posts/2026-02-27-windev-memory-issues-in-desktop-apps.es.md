@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Problemas de memoria en aplicaciones de escritorio y cómo solucionarlos
+title: "Problemas de memoria en aplicaciones de escritorio y cómo solucionarlos"
 author: Christian Amado
 date: 2026-02-27 00:00:00 -0400
 category: [Desarrollo de software]

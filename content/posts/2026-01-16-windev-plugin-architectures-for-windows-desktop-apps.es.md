@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Arquitecturas de plugins en aplicaciones de escritorio Windows en escenarios reales
+title: "Arquitecturas de plugins en aplicaciones de escritorio Windows en escenarios reales"
 author: Christian Amado
 date: 2026-01-16 00:00:00 -0400
 category: [Desarrollo de software]

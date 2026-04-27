@@ -1,6 +1,6 @@
 ---
 layout: post
-title: IA local vs IA en la nube en aplicaciones de escritorio: decisiones arquitectónicas avanzadas
+title: "IA local vs IA en la nube en aplicaciones de escritorio: decisiones arquitectónicas avanzadas"
 author: Christian Amado
 date: 2026-03-20 00:00:00 -0400
 category: [Desarrollo de software]

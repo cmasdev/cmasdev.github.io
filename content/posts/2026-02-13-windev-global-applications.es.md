@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Aplicaciones globales: localización correctamente implementada en WinUI 3
+title: "Aplicaciones globales: localización correctamente implementada en WinUI 3"
 author: Christian Amado
 date: 2026-02-13 00:00:00 -0400
 category: [Desarrollo de software]

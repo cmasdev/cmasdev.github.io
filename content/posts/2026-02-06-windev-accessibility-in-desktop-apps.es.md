@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Accesibilidad en aplicaciones de escritorio: más allá del cumplimiento
+title: "Accesibilidad en aplicaciones de escritorio: más allá del cumplimiento"
 author: Christian Amado
 date: 2026-02-06 00:00:00 -0400
 category: [Desarrollo de software]

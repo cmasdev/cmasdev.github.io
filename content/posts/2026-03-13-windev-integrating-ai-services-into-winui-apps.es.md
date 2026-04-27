@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Integración de servicios de Inteligencia Artificial en aplicaciones WinUI 3
+title: "Integración de servicios de Inteligencia Artificial en aplicaciones WinUI 3"
 author: Christian Amado
 date: 2026-03-13 00:00:00 -0400
 category: [Desarrollo de software]

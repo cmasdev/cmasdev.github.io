@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Diseño de aplicaciones Windows con capacidad offline en escenarios reales
+title: "Diseño de aplicaciones Windows con capacidad offline en escenarios reales"
 author: Christian Amado
 date: 2025-12-26 00:00:00 -0400
 category: [Desarrollo de software]

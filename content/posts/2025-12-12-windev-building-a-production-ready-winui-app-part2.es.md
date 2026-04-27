@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Construyendo una aplicación WinUI 3 + Azure + AI end-to-end en escenarios reales
+title: "Construyendo una aplicación WinUI 3 + Azure + AI end-to-end en escenarios reales"
 author: Christian Amado
 date: 2025-12-12 00:00:00 -0400
 category: [Desarrollo de software]

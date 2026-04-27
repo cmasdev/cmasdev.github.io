@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Integración de capacidades de Inteligencia Artificial en aplicaciones de escritorio: guía práctica avanzada
+title: "Integración de capacidades de Inteligencia Artificial en aplicaciones de escritorio: guía práctica avanzada"
 author: Christian Amado
 date: 2026-03-06 00:00:00 -0400
 category: [Desarrollo de software]
