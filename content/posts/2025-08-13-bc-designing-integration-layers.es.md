@@ -2,7 +2,7 @@
 layout: post
 title: "BC: Diseño de integraciones en capas"
 author: Christian Amado
-date: 2025-07-30 00:00:00 -0300
+date: 2025-08-13 00:00:00 -0300
 category: [Aplicaciones de negocio]
 tags: [AL, Dynamics 365 Business Central]
 thumbnail-img: /img/posts/thumbnails/businesscentral.png
