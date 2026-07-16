@@ -20,7 +20,7 @@ pagerSize = 12
 
 [services]
 [services.disqus]
-shortname = "cmasblog"
+# shortname =
 
 [markup]
 [markup.highlight]
@@ -96,6 +96,20 @@ weight = 6
 url = "https://cmas.dev/index.xml"
 rel = "alternate"
 type = "application/rss+xml"
+
+[params.giscus]
+repo = "cmasdev/cmasdev.github.io"
+repoID = "MDEwOlJlcG9zaXRvcnk0MDM0NDkwMDk="
+category = "Blog Comments"
+categoryID = "DIC_kwDOGAwksc4DBU8N"
+mapping = "pathname"
+term = ""
+strict = "1"
+reactionsEnabled = "1"
+emitMetadata = "0"
+inputPosition = "top"
+theme = "preferred_color_scheme"
+loading = "lazy"
 
 [Permalinks]
     post = "/:year/:month/:day/:contentbasename/"
