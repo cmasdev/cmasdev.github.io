@@ -10,7 +10,7 @@ cover-img: /img/posts/thumbnails/mvp.png
 share-img: /img/posts/thumbnails/mvp.png
 ---
 
-[Llegó la renovación por otro año más (van 9)](https://mvp.microsoft.com/en-us/PublicProfile/5001273):  
+[Llegó la renovación por otro año más (van 10)](https://mvp.microsoft.com/en-us/PublicProfile/5001273):  
 
 <!--more-->
 

@@ -10,7 +10,7 @@ cover-img: /img/posts/thumbnails/mvp.png
 share-img: /img/posts/thumbnails/mvp.png
 ---
 
-[The renewal has arrived for another year(8 in a row)](https://mvp.microsoft.com/en-us/PublicProfile/5001273):  
+[The renewal has arrived for another year(9 in a row)](https://mvp.microsoft.com/en-us/PublicProfile/5001273):  
 
 <!--more-->
 

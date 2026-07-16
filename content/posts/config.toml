@@ -1,0 +1,200 @@
+baseurl = "https://cmas.dev"
+title = "Christian Amado"
+subtitle = "Software Engineering & Business Solutions"
+theme = "hugo-coder"
+languageCode = "es"
+defaultContentLanguage = "es"
+defaultContentLanguageInSubdir = false
+metaDataFormat = "yaml"
+pygmentsStyle = "github-dark"
+pygmentsUseClasses = true
+pygmentsCodeFences = true
+pygmentsCodefencesGuessSyntax = true
+enableGitInfo = false
+googleAnalytics = "356375808"
+timeZone = "America/Asuncion"
+enableEmoji = true
+
+[pagination]
+pagerSize = 12
+
+[services]
+[services.disqus]
+# shortname =
+
+[markup]
+[markup.highlight]
+noClasses = false
+
+[markup.goldmark]
+[markup.goldmark.renderer]
+unsafe = true
+
+[params]
+author = "Christian Amado"
+# license = '<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA-4.0</a>'
+description = "Software Engineering & Business Solutions"
+keywords = "blog,developer,personal"
+info = ["Software Engineering", ".NET Developer"]
+avatarURL = "img/avatar.png"
+#gravatar = "john.doe@example.com"
+dateFormat = "January 2, 2006"
+since = 2018
+# Git Commit in Footer, uncomment the line below to enable it
+commit = "https://github.com/cmasdev/cmasdev.github.io/tree/"
+# Right To Left, shift content direction for languages such as Arabic
+rtl = false
+# Specify light/dark colorscheme
+# Supported values:
+# "auto" (use preference set by browser)
+# "dark" (dark background, light foreground)
+# "light" (light background, dark foreground) (default)
+colorScheme = "auto"
+# Hide the toggle button, along with the associated vertical divider
+hideColorSchemeToggle = false
+# Series see also post count
+maxSeeAlsoItems = 12
+
+# If you want to use Google Tag Manager(https://analytics.google.com/) for analytics, add this section
+[params.googleTagManager]
+id = "013131931956450466198:blhmkdpweyq"
+
+[taxonomies]
+category = "categories"
+series = "series"
+tag = "tags"
+author = "authors"
+
+[[params.social]]
+name = "Github"
+icon = "fa-brands fa-github fa-2x"
+weight = 1
+url = "https://github.com/cmasdev/"
+
+[[params.social]]
+name = "Twitter"
+icon = "fa-brands fa-x-twitter fa-2x"
+weight = 2
+url = "https://twitter.com/christianamado/"
+
+[[params.social]]
+name = "Bluesky"
+icon = "fa-brands fa-bluesky fa-2x"
+weight = 3
+url = "https://bsky.app/profile/cmas.dev"
+
+[[params.social]]
+name = "LinkedIn"
+icon = "fa-brands fa-linkedin fa-2x"
+weight = 4
+url = "https://www.linkedin.com/in/christianamado/"
+
+[[params.social]]
+name = "RSS"
+icon = "fa-solid fa-rss fa-2x"
+weight = 6
+url = "https://cmas.dev/index.xml"
+rel = "alternate"
+type = "application/rss+xml"
+
+[params.giscus]
+repo = "cmasdev/cmasdev.github.io"
+repoID = "MDEwOlJlcG9zaXRvcnk0MDM0NDkwMDk="
+category = "Blog Comments"
+categoryID = "DIC_kwDOGAwksc4DBU8N"
+mapping = "pathname"
+term = ""
+strict = "1"
+reactionsEnabled = "1"
+emitMetadata = "0"
+inputPosition = "top"
+theme = "preferred_color_scheme"
+loading = "lazy"
+
+[Permalinks]
+    post = "/:year/:month/:day/:contentbasename/"
+
+[languages.es]
+languageName = ":es:"
+
+[[languages.es.menu.main]]
+    url = "posts/"
+    name = "Blog"
+    weight = 1
+
+[[languages.es.menu.main]]
+    url = "about"
+    name = "Biografía"
+    weight = 2
+
+#[[languages.es.menu.main]]
+    #url = "projects"
+    #name = "Proyectos"
+    #weight = 3
+
+[[languages.es.menu.main]]
+    url = "contact"
+    name = "Contacto"
+    weight = 4
+
+[[languages.es.menu.main]]
+    url = "diabetes"
+    name = "Diabetes"
+    weight = 5
+
+[[languages.es.menu.main]]
+    url = "tags"
+    name = "Etiquetas"
+    weight = 6
+
+[languages.es.params]
+        author = "Christian Amado"
+        info = ["Ingeniero de Software", "Desarrollador .NET"]
+        description = "Un blog dedicado a la ingeniería de software, programación y soluciones de negocios principalmente para tecnologías Microsoft"
+        keywords = "blog,desarrollador,personal"
+        weight = 2
+
+[languages.en]
+languageName = ":us:"
+
+[[languages.en.menu.main]]
+    url = "posts/"
+    name = "Blog"
+    weight = 1
+
+[[languages.en.menu.main]]
+    url = "about"
+    name = "About"
+    weight = 2
+
+#[[languages.en.menu.main]]
+    #url = "projects"
+    #name = "Projects"
+    #weight = 3
+
+[[languages.en.menu.main]]
+    url = "contact"
+    name = "Contact"
+    weight = 4
+
+[[languages.en.menu.main]]
+    url = "diabetes"
+    name = "Diabetes"
+    weight = 5
+
+[[languages.en.menu.main]]
+    url = "tags"
+    name = "Tags"
+    weight = 6
+
+#[[languages.en.menu.main]]
+    #url = "index.xml"
+    #name = "RSS"
+    #weight = 8
+
+[languages.en.params]
+    author = "Christian Amado"  
+    info = ["Software Engineering", ".NET Developer"]
+    description = "A blog dedicated to software engineering, programming and business applications mainly based on Microsoft technologies"
+    keyword = "blog,developer,personal"
+        
