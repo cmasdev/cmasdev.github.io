@@ -78,12 +78,6 @@ weight = 2
 url = "https://twitter.com/christianamado/"
 
 [[params.social]]
-name = "Bluesky"
-icon = "fa-brands fa-bluesky fa-2x"
-weight = 3
-url = "https://bsky.app/profile/cmas.dev"
-
-[[params.social]]
 name = "LinkedIn"
 icon = "fa-brands fa-linkedin fa-2x"
 weight = 4
